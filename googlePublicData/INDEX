@@ -1,0 +1,13 @@
+checkTimeFormat         DSPL time format verification
+countries               World countries example data set
+country_slice           Some countries statistics
+dspl                    Builds DSPL metadata file
+genMoreInfo             Generates a dataframe used to complement a DSPL
+                        bundle
+gender_country_slice    Some Countries statistics at Gender level
+genders                 Genders example data set
+googlePublicData        Working with Google Public Data Explorer DSPL
+                        Metadata Files
+print.dspl              Print and summarize dspl objects
+state_slice             Some US States statistics
+states                  US states example data set
