@@ -1,0 +1,86 @@
+Changes in Version 1.0-5
+
+  o CRAN checks turned up problems in C++ code oldrel Windows.
+    These are fixed now.
+
+
+Changes in Version 1.0-4
+
+  o CRAN checks turned up problems in C++ code on Solaris.
+    These are fixed now.
+
+	
+Changes in Version 1.0-3
+
+  o Replaced deprecated Rmath.h functions 'floorf', 'imax2', 'imin2', 
+    'fmax2', 'fmin2' with the appropriate functions from C++11.  
+	
+  o Added registration of native routines using 'R_registerRoutines' 
+    and 'R_useDynamicSymbols'. 	
+	
+
+Changes in Version 1.0-2
+
+  o Fixed the setup for the model.frame which did not work if all variables
+    (including the response) were continuous and contained no ties.
+	
+  o Fixed incorrect factor level for "status" variable in the GermanCredit 
+	data. "... < 100 DM" should be "... < 0 DM".
+
+	
+Changes in Version 1.0-1
+
+  o Replaced math.h functions 'max', 'min' and 'round' with the appropriate
+    Rmath.h functions ('imax2', 'imin2', 'fmax2', 'fmin2' and 'fround').
+	
+  o Added importFrom("stats", "model.weights", "runif", "var") in NAMESPACE.
+
+
+Changes in Version 1.0-0
+
+  o New release accompanying the paper about evtree in the Journal of
+    Statistical Software, see citation("evtree").
+
+  o Replaced C level random number generator rand() with R random number
+    handing and the unif_rand() function.
+
+
+Changes in Version 0.1-5
+
+  o Updated contact data.
+
+  o CRAN checks showed memory access errors. These are fixed now.
+
+
+Changes in Version 0.1-4
+
+  o Updated contact data.
+
+  o Updated test output for examples and vignette for improved package checks.
+
+
+Changes in Version 0.1-3
+
+  o Improvements in package vignette.
+
+
+Changes in Version 0.1-2
+
+  o Added test output for examples and vignette for improved package checks.
+
+  o Improvements in package vignette.
+  
+  o Added CITATION: working paper on evtree.
+
+
+Changes in Version 0.1-1
+
+  o CRAN checks turned up problems in C++ code on Fedora and Solaris.
+    These are fixed now.
+
+
+Changes in Version 0.1-0
+
+  o First CRAN release.
+  
+  o See vignette("evtree", package = "evtree") for an introduction.
