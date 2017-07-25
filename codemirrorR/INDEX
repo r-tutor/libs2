@@ -1,0 +1,4 @@
+cm_foldcode             Code Folding for CodeMirror
+codemirror              CodeMirror htmlwidget
+codemirror-shiny        Shiny bindings for codemirror
+{{ name }}              title

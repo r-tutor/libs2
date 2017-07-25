@@ -1,0 +1,7 @@
+{{ name }}-package	open-curly-open-curly-name-close-close
+cm_foldcode	cm_foldcode
+codemirror	codemirror
+codemirror-shiny	codemirror-shiny
+codemirrorOutput	codemirror-shiny
+renderCodemirror	codemirror-shiny
+{{ name }}	open-curly-open-curly-name-close-close
