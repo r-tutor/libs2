@@ -1,0 +1,83 @@
+%>%                     Pipe graphics
+add_axis                Add a vega axis specification to a ggvis plot
+add_data                Add dataset to a visualisation
+add_guide_axis          Defunct function for adding an axis
+add_guide_legend        Defunct function for adding a legend
+add_legend              Add a vega legend specification to a ggvis plot
+add_props               Add visual properties to a visualisation
+add_relative_scales     Add x_rel and y_rel scales
+add_tooltip             Add tooltips to a plot.
+auto_group              Automatically group data by grouping variables
+axis_props              Create an axis_props object for controlling
+                        axis properties.
+band                    A band
+cocaine                 Cocaine seizures in the US.
+compute_align           Align positions using length.
+compute_bin             Bin data along a continuous variable
+compute_boxplot         Calculate boxplot values
+compute_count           Count data at each location
+compute_density         Compute density of data.
+compute_model_prediction
+                        Create a model of a data set and compute
+                        predictions.
+compute_stack           Stack overlapping data.
+compute_tabulate        Count data at each location of a categorical
+                        variable
+explain                 Explain details of an object
+explain.ggvis           Print out the structure of a ggvis object in a
+                        friendly format
+export_png              Export a PNG or SVG from a ggvis object
+get_data                Get data from a ggvis object
+ggvis                   Visualise a data set with a ggvis graphic.
+ggvisControlOutput      Create a ggvis control output element in UI
+ggvis_message           Send a message to ggvis running on client
+group_by                Divide data into groups.
+handle_brush            Handle brush events on a visualisation.
+handle_click            Handle mouse actions on marks.
+handle_resize           Handlers and interactive inputs for plot
+                        sizing.
+input_checkbox          Create an interactive checkbox.
+input_select            Create interactive control to select one (or
+                        more options) from a list.
+input_slider            Create an interactive slider.
+input_text              Create an interactive text or numeric input
+                        box.
+is.broker               Determine if an object is a broker object
+layer_bars              Display data with bars (a barchart).
+layer_boxplots          Display data with a boxplot.
+layer_densities         Transformation: density estimate
+layer_guess             Guess the right type of layer based on current
+                        properties.
+layer_histograms        Display binned data
+layer_lines             Layer lines on a plot.
+layer_model_predictions
+                        Overlay model predictions or a smooth curve.
+left_right              Interactive inputs bound to arrow keys.
+legend_props            Create an axis_props object for controlling
+                        legend properties.
+linked_brush            Create a linked brush object.
+marks                   Vega marks.
+padding                 Define padding.
+prop                    Create a property.
+prop_domain             Property domain.
+props                   Manage a list of properties.
+resolution              Compute the "resolution" of a data vector.
+scale_datetime          Add a date-time scale to a ggvis object.
+scale_numeric           Add a numeric scale to a ggvis object.
+scale_ordinal           Add a ordinal, nominal, or logical scale to a
+                        ggvis object.
+scaled_value            Create a scaled_value object
+scales                  Add a scale to a ggvis plot
+set_options             Set options for a ggvis plot
+set_scale_label         Set the label for a scale
+shiny-ggvis             Connect a ggvis graphic to a shiny app.
+show_spec               Print out the vega plot specification
+show_tooltip            Send a message to the client to show or hide a
+                        tooltip
+sidebarBottomPage       Create a page with a sidebar
+singular                singular.
+vector_type             Determine the "type" of a vector
+vega_data_parser        Determine the vega data type for a vector
+waggle                  Waggle back and forth between two numbers
+zero_range              Determine if range of vector is close to zero,
+                        with a specified tolerance
