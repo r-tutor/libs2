@@ -1,0 +1,14 @@
+country.map             A world map
+country.regions         Names of all regions on the country.map
+                        data.frame. A data.frame that includes both
+                        English names and their iso2c equivalents.
+county.map              Map of the counties of each of the 50 US states
+                        plus the district of columbia.
+county.regions          A data.frame consisting of the name of each
+                        region in the map county.map as well as their
+                        FIPS codes and state names.
+state.map               Map of the 50 US states plus the district of
+                        columbia.
+state.regions           A data.frame consisting of each region on the
+                        map state.map plus their postal code
+                        abbreviations and FIPS codes.
