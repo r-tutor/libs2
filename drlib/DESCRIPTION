@@ -1,0 +1,27 @@
+Package: drlib
+Type: Package
+Title: Personal R package of David Robinson
+Version: 0.1.0
+Date: 2017-01-10
+Authors@R: c(person("David", "Robinson", email = "admiral.david@gmail.com", role = c("aut", "cre")))
+Description: Personal R functions used by David Robinson.
+License: MIT + file LICENSE
+LazyData: TRUE
+Maintainer: David Robinson <admiral.david@gmail.com>
+VignetteBuilder: knitr
+Imports: dplyr, ggplot2, Matrix, stringr, reshape2, jsonlite,
+        countrycode, purrr, scales
+Suggests: tidyr, testthat, knitr
+RoxygenNote: 5.0.1
+Author: David Robinson [aut, cre]
+Built: R 3.3.3; ; 2017-03-15 02:09:03 UTC; windows
+RemoteType: github
+RemoteHost: https://api.github.com
+RemoteRepo: drlib
+RemoteUsername: dgrtwo
+RemoteRef: master
+RemoteSha: 2be33ab67d4e6928fb8e9516db4dda8c9242cef6
+GithubRepo: drlib
+GithubUsername: dgrtwo
+GithubRef: master
+GithubSHA1: 2be33ab67d4e6928fb8e9516db4dda8c9242cef6

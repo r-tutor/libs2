@@ -1,0 +1,34 @@
+%<*>%                   Multiplies matrices after matching the rows of
+                        one to the columns of the other
+accumulate_while        Accumulate a list by iteratively performing a
+                        function
+add_counts              Add counts in parentheses to a factor or
+                        character vector
+convert_country         Wrap the countrycode package to convert back
+                        and forth between country code and country name
+decode_base_62          Decode a string in base 62 into a number
+expand_grid             Wrapper around expand.grid more suited to
+                        factorial experiments
+json_vec_to_df          Turn a character vector of JSON dictionaries
+                        into a data frame
+melt_multiple           Melt multiple matrices of the same dimension
+                        into multiple columns
+relibrary               Detach and then reload a package based on a
+                        character string of its name
+reorder_col             Reorder a column of a tbl based on another
+reorder_within          Reorder an x or y axis within facets
+rotate_x_labels         Rotate the labels on the x-axis of a graph
+scale_percent           Percentage scales
+scale_xy_log10          Log scale for both x & y axes
+sparse_cast             Create a sparse matrix from row names, column
+                        names, and values in a table.
+sparse_cast_            Standard-evaluation version of sparse_cast
+theme_blank             Blank theme: used to come with ggplot2
+vectorized_t_test       Note that this comes from functions I
+                        previously wrote here:
+                        https://github.com/dgrtwo/GSEAMA/blob/master/R/TestAssociation.R
+                        Perform a Student's T-test comparing a metric
+                        to each column of a matrix
+vectorized_wilcoxon_test
+                        Perform a Wilcoxon rank-sum test comparing a
+                        metric to each column of a matrix
