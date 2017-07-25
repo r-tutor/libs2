@@ -1,0 +1,9 @@
+build_site	build_site
+html_page	html_page
+hugo_cmd	hugo_cmd
+install_hugo	install_hugo
+install_theme	install_theme
+new_content	hugo_cmd
+new_post	hugo_cmd
+new_site	hugo_cmd
+serve_site	serve_site

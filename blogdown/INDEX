@@ -1,0 +1,7 @@
+build_site              Build a website
+html_page               An R Markdown output format for 'blogdown' web
+                        pages
+hugo_cmd                Run Hugo commands
+install_hugo            Install Hugo
+install_theme           Install a Hugo theme from Github
+serve_site              Live preview a site
