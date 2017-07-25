@@ -1,0 +1,240 @@
+%>%                     The magrittr pipe
+DiagrammeR              R + mermaid.js
+DiagrammeROutput        Widget output function for use in Shiny
+add_balanced_tree       Add a balanced tree of nodes to the graph
+add_cycle               Add a cycle of nodes to the graph
+add_edge                Add an edge between nodes in a graph object
+add_edge_df             Add edges from an edge data frame to an
+                        existing graph object
+add_edges_from_table    Add edges and attributes to graph from a table
+add_edges_w_string      Add one or more edges using a text string
+add_full_graph          Add a fully connected graph
+add_global_graph_attrs
+                        Add one or more global graph attributes
+add_n_nodes             Add one or several unconnected nodes to the
+                        graph
+add_n_nodes_ws          Add a multiple of new nodes with edges to or
+                        from one or more selected nodes
+add_node                Add a node to an existing graph object
+add_node_df             Add nodes from a node data frame to an existing
+                        graph object
+add_nodes_from_df_cols
+                        Add nodes from distinct values in data frame
+                        columns
+add_nodes_from_table    Add nodes and attributes to graph from a table
+add_path                Add a path of nodes to the graph
+add_prism               Add a prism of nodes to the graph
+add_star                Add a star of nodes to the graph
+add_to_series           Add graph object to a graph series object
+cache_edge_attrs        Cache edge attributes in the graph
+cache_edge_attrs_ws     Cache edge attributes (based on a selection of
+                        edges) in the graph
+cache_edge_count_ws     Cache a count of edges (available in a
+                        selection) in the graph
+cache_node_attrs        Cache node attributes in the graph
+cache_node_attrs_ws     Cache node attributes (based on a selection of
+                        nodes) in the graph
+cache_node_count_ws     Cache a count of nodes (available in a
+                        selection) in the graph
+clear_global_graph_attrs
+                        Clear any global graph attributes that are set
+clear_selection         Clear a selection of nodes or edges in a graph
+colorize_edge_attrs     Apply colors based on edge attribute values
+colorize_node_attrs     Apply colors based on node attribute values
+combine_edfs            Combine multiple edge data frames into a single
+                        edge data frame
+combine_graphs          Combine two graphs into a single graph
+combine_ndfs            Combine multiple node data frames
+copy_edge_attrs         Copy an edge attribute column and set the name
+copy_node_attrs         Copy a node attribute column and set the name
+create_complement_graph
+                        Create a complement of a graph
+create_edge_df          Create an edge data frame
+create_graph            Create a graph object
+create_node_df          Create a node data frame
+create_random_graph     Create a randomized graph
+create_series           Create a graph series object
+create_subgraph_ws      Create a subgraph based on a selection of nodes
+                        or edges
+delete_edge             Delete an edge from an existing graph object
+delete_edges_ws         Delete all selected edges in an edge selection
+delete_global_graph_attrs
+                        Delete one of the global graph attributes
+                        stored within a graph object
+delete_node             Delete a node from an existing graph object
+delete_nodes_ws         Delete all selected nodes in a node selection
+do_bfs                  Perform the breadth-first search (bfs)
+                        algorithm
+do_dfs                  Perform the depth-first search (dfs) algorithm
+drop_edge_attrs         Drop an edge attribute column
+drop_node_attrs         Drop a node attribute column
+edge_count              Get count of all edges or edges with distinct
+                        relationship types
+edge_info               Get detailed information on edges
+edge_present            Determine whether a specified edge is present
+                        in an existing graph object
+edge_rel                Create, read, update, delete, or report status
+                        of an edge relationship
+export_csv              Export a graph to CSV files
+export_graph            Export a graph to various file formats
+from_adj_matrix         Create a graph using an adjacency matrix
+from_igraph             Convert an igraph graph to a DiagrammeR one
+generate_dot            Generate DOT code using a graph object
+get_all_connected_nodes
+                        Get all nodes connected to a specified node
+get_articulation_points
+                        Get articulation points
+get_betweenness         Get betweenness centrality scores
+get_bridging            Get bridging scores
+get_cache               Get a cached vector from a graph object
+get_closeness           Get closeness centrality values
+get_cmty_edge_btwns     Get community membership by edge betweenness
+get_cmty_fast_greedy    Get community membership by modularity
+                        optimization
+get_cmty_l_eigenvec     Get community membership by leading eigenvector
+get_cmty_louvain        Get community membership by Louvain
+                        optimization
+get_cmty_walktrap       Get community membership using the Walktrap
+                        method
+get_common_nbrs         Get all common neighbors between two or more
+                        nodes
+get_constraint          Get constraint scores for one or more graph
+                        nodes
+get_degree_distribution
+                        Get degree distribution data for a graph
+get_degree_histogram    Get histogram data for a graph's degree
+                        frequency
+get_dice_similarity     Get Dice similarity coefficient scores
+get_eccentricity        Get node eccentricities
+get_edge_attrs          Get edge attribute values
+get_edge_df             Get an edge data frame from a graph
+get_edge_ids            Get a vector of edge ID values
+get_edges               Get node IDs associated with edges
+get_global_graph_attrs
+                        Get global graph attributes
+get_graph_diameter      Get the graph diameter
+get_graph_from_series   Get a graph available in a series
+get_graph_name          Get graph name
+get_graph_time          Get the graph date-time or timezone
+get_jaccard_similarity
+                        Get Jaccard similarity coefficient scores
+get_min_spanning_tree   Get a minimum spanning tree subgraph
+get_nbrs                Get all neighbors of one or more nodes
+get_node_attrs          Get node attribute values
+get_node_df             Get a node data frame from a graph
+get_node_ids            Get a vector of node ID values
+get_non_nbrs            Get non-neighbors of a node in a graph
+get_paths               Get paths from a specified node in a directed
+                        graph
+get_periphery           Get nodes that form the graph periphery
+get_predecessors        Get node IDs for predecessor nodes to the
+                        specified node
+get_s_connected_cmpts   Get nodes within strongly connected components
+get_selection           Get the current selection available in a graph
+                        object
+get_similar_nbrs        Get neighboring nodes based on node attribute
+                        similarity
+get_successors          Get node IDs for successor nodes to the
+                        specified node
+get_w_connected_cmpts   Get all nodes associated with connected
+                        components
+grViz                   R + viz.js
+grVizOutput             Widget output function for use in Shiny
+graph_count             Count graphs in a graph series object
+graph_info              Get metrics for a graph
+image_icon              Icons and their download locations
+import_graph            Import a graph from various graph formats
+invert_selection        Invert selection of nodes or edges in a graph
+is_graph_connected      Is the graph a connected graph?
+is_graph_directed       Is the graph a directed graph?
+is_graph_empty          Is the graph empty?
+join_edge_attrs         Join new edge attribute values using a data
+                        frame
+join_node_attrs         Join new node attribute values using a data
+                        frame
+layout_nodes_w_string   Layout nodes using a text-based schematic
+mermaid                 R + mermaid.js
+mk_cond                 Helper for making conditions for some functions
+mutate_edge_attrs       Mutate a set of edge attribute values
+mutate_node_attrs       Mutate a set of node attribute values
+node_count              Get count of all nodes or certain types of
+                        nodes
+node_info               Get detailed information on nodes
+node_present            Determine whether a specified node is present
+                        in an existing graph object
+node_type               Create, read, update, delete, or report status
+                        of a node type definition
+nudge_node_positions_ws
+                        Move layout positions of a selection of nodes
+recode_edge_attrs       Recode a set of edge attribute values
+recode_node_attrs       Recode a set of node attribute values
+remove_from_series      Remove a graph from a graph series
+rename_edge_attrs       Rename an edge attribute
+rename_node_attrs       Rename a node attribute
+renderDiagrammeR        Widget render function for use in Shiny
+renderGrViz             Widget render function for use in Shiny
+render_graph            Render the graph in various formats
+render_graph_from_series
+                        Render a graph available in a series
+replace_in_spec         Razor-like template for diagram specification
+rescale_edge_attrs      Rescale numeric edge attribute values
+rescale_node_attrs      Rescale numeric node attribute values
+rev_edge_dir            Reverse the direction of all edges in a graph
+rev_edge_dir_ws         Reverse the direction of selected edges in a
+                        graph
+select_edges            Select edges in a graph
+select_edges_by_edge_id
+                        Select edges in a graph using edge ID values
+select_edges_by_node_id
+                        Select edges in a graph using node ID values
+select_last_edge        Select last edge in a series of edges defined
+                        in a graph
+select_last_node        Select last node in a series of node IDs in a
+                        graph
+select_nodes            Select nodes in a graph
+select_nodes_by_degree
+                        Select nodes in the graph based on their degree
+                        values
+select_nodes_by_id      Select nodes in a graph by ID values
+select_nodes_in_neighborhood
+                        Select nodes based on a walk distance from a
+                        specified node
+select_rev_edges_ws     Select any reverse edges from a selection of
+                        edges
+series_info             Get information on a graph series
+set_cache               Cache a vector in the graph
+set_edge_attrs          Set edge attributes
+set_edge_attrs_ws       Set edge attributes with an edge selection
+set_global_graph_attrs
+                        Set global graph attributes
+set_graph_name          Set graph name
+set_graph_time          Set graph date-time and timezone
+set_graph_undirected    Convert graph to an undirected graph
+set_node_attr_to_display
+                        Set the node attribute values to be rendered
+set_node_attrs          Set node attributes
+set_node_attrs_ws       Set node attributes with a node selection
+set_node_position       Apply a layout position to a single node
+subset_series           Subset a graph series object
+to_igraph               Convert a DiagrammeR graph to an igraph one
+trav_both               Traverse from one or more selected nodes onto
+                        neighboring nodes
+trav_both_edge          Traverse from one or more selected nodes onto
+                        adjacent edges
+trav_in                 Traverse from one or more selected nodes onto
+                        adjacent, inward nodes
+trav_in_edge            Traverse from one or more selected nodes onto
+                        adjacent, inward edges
+trav_in_node            Traverse from one or more selected edges onto
+                        adjacent, inward nodes
+trav_out                Traverse from one or more selected nodes onto
+                        adjacent, outward nodes
+trav_out_edge           Traverse from one or more selected nodes onto
+                        adjacent, outward edges
+trav_out_node           Traverse from one or more selected edges onto
+                        adjacent, outward nodes
+trigger_script          Trigger a script embedded in a graph series
+                        object
+visnetwork              Render graph with visNetwork
+vivagraph               Render graph with VivaGraphJS
+x11_hex                 X11 colors and hexadecimal color values
