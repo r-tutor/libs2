@@ -1,0 +1,55 @@
+Package: explodingboxplotR
+Title: d3.js Exploding Boxplots
+Version: 0.0.1
+Date: 2016-01-07
+Authors@R: c(
+      person(
+        "Mike", "Bostock"
+        , role = c("aut", "cph")
+        , comment = "d3.js library in htmlwidgets/lib, http://d3js.org"
+      ),
+      person(
+        "Justin", "Palmer"
+        , role = c("aut", "cph")
+        , comment = "d3-tip library in htmlwidgets/lib, https://github.com/Caged/d3-tip"
+      ),
+      person(
+        "Matthieu", "Caule"
+        , role = c("aut", "cph")
+        , comment = "d3_exploding_boxplot library in htmlwidgets/lib, https://github.com/mcaule/d3_exploding_boxplot"
+      ),
+      person(
+        "Kent", "Russell"
+        , role = c("aut", "cre")
+        , comment = "R interface"
+        , email = "kent.russell@timelyportfolio.com"
+      )
+    )
+Maintainer: Kenton Russell <kent.russell@timelyportfolio.com>
+Description: d3.js Exploding Boxplots
+License: MIT + file LICENSE
+LazyData: true
+URL: https://github.com/timelyportfolio/exploding_boxplotR
+BugReports:
+        https://github.com/timelyportfolio/exploding_boxplotR/issues
+Imports: htmlwidgets
+Suggests: testthat
+RoxygenNote: 4.1.1.9001
+Author: Mike Bostock [aut, cph] (d3.js library in htmlwidgets/lib,
+    http://d3js.org),
+  Justin Palmer [aut, cph] (d3-tip library in htmlwidgets/lib,
+    https://github.com/Caged/d3-tip),
+  Matthieu Caule [aut, cph] (d3_exploding_boxplot library in
+    htmlwidgets/lib, https://github.com/mcaule/d3_exploding_boxplot),
+  Kent Russell [aut, cre] (R interface)
+Built: R 3.2.3; ; 2016-01-29 22:34:07 UTC; windows
+RemoteType: github
+RemoteHost: api.github.com
+RemoteRepo: explodingboxplotR
+RemoteUsername: timelyportfolio
+RemoteRef: master
+RemoteSha: 5650d4eb776cabd1c5db7dff116aeef132164ec6
+GithubRepo: explodingboxplotR
+GithubUsername: timelyportfolio
+GithubRef: master
+GithubSHA1: 5650d4eb776cabd1c5db7dff116aeef132164ec6
