@@ -1,0 +1,14 @@
+%>%	pipe
+bd_row	bd_row
+factor_analysis	factor_analysis
+factor_analysis_results	factor_analysis_results
+get_all_factors	get_all_factors
+horns_curve	horns_curve
+inspect_block	inspect_block
+kaisers_index	kaisers_index
+mahalanobis_distance	mahalanobis_distance
+mc_adjust	mc_adjust
+principal_components	principal_components
+principal_components_result	principal_components_result
+security_logs	security_logs
+tabulate_state_vector	tabulate_state_vector

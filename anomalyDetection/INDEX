@@ -1,0 +1,17 @@
+%>%                     Pipe functions
+bd_row                  Breakdown for Mahalanobis Distance
+factor_analysis         Factor Analysis with Varimax Rotation
+factor_analysis_results
+                        Easy Access to Factor Analysis Results
+get_all_factors         Find All Factors
+horns_curve             Horn's Parallel Analysis
+inspect_block           Block Inspection
+kaisers_index           Kaiser's Index of Factorial Simplicity
+mahalanobis_distance    Mahalanobis Distance
+mc_adjust               Multi-Collinearity Adjustment
+principal_components    Principal Component Analysis
+principal_components_result
+                        Easy Access to Principal Component Analysis
+                        Results
+security_logs           Security Log Data
+tabulate_state_vector   Tabulate State Vector
