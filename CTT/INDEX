@@ -1,0 +1,16 @@
+CTT-package             Classical Test Theory Functions
+CTTdata                 Example Multiple-Choice Data
+CTTkey                  Example Multiple-Choice Key
+cttICC                  Function for producing theoretical and
+                        empirical item characteristic curves.
+disattenuated.cor       Function for disattentuated correlation
+distractor.analysis     Function for item distractor analysis
+polyserial              Function for calculating polyserial
+                        correlations
+reliability             Function for item reliability analysis
+score                   Function to score the response files
+score.transform         Function for transforming scores onto different
+                        scales
+spearman.brown          Functions for Spearman-Brown "Prophecy" Formula
+subscales               Function to create subscales based on a design
+                        matrix

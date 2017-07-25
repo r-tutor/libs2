@@ -1,0 +1,2 @@
+export(subscales, spearman.brown,score.transform,score,reliability,distractor.analysis,disattenuated.cor,polyserial, cttICC)
+S3method(print,reliability)
