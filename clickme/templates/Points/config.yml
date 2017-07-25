@@ -1,0 +1,41 @@
+info: |-
+    A zoomable scatterplot
+
+    Based on ideas from:
+    http://bl.ocks.org/mbostock/3680957
+    http://bl.ocks.org/stepheneb/1182434
+    http://www.nytimes.com/interactive/2013/05/25/sunday-review/corporate-taxes.html
+
+original_url:
+
+demo: |-
+    clickme("points")
+    cm(rnorm(100))
+
+    cm(x = c(rbeta(100, 1, 10), y = rbeta(100, 1, 10)),
+            names = sample(letters, 100, r = T),
+            color_groups = sample(LETTERS[1:3], 100, r = T),
+            title = "Zoom Search Hover Click")
+
+    data(microarray)
+    cm(x = microarray$significance, y = microarray$logFC,
+            color_groups = ifelse(microarray$adj.P.Val < 1e-4, "Significant", "Noise"),
+            names = microarray$gene_name,
+            x_title = "Significance (-log10)", y_title = "Fold-change (log2)",
+            extra = list(Probe = microarray$probe_name))
+
+
+
+scripts:
+    - $shared/d3.v3.4.3.js
+    - $shared/clickme.js
+    - $shared/d3_tip.js
+
+styles:
+    - $shared/clickme.css
+    - $shared/d3_tip.css
+    - $shared/chart.css
+
+require_packages:
+
+require_server: no

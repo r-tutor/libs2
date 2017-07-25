@@ -1,0 +1,41 @@
+%notin%                 Inverse Value Matching
+%or%                    Set default value
+camel_case              Convert to CamelCase
+clickme                 Clickme: use R to create interactive
+                        visualizations
+default_colors          Default colors
+demo_mode               Run a template demo
+disjoint_sets           Split up two vectors into their intersecting
+                        sets
+enumerate               Return the elements of a character vector
+                        separated by newlines
+get_sourced_objects     Traverse a list of paths and determine what
+                        objects are defined in the source files that
+                        appear in the "translator" folder of each path
+                        It returns a list of sourced objects. We do
+                        this to control what objects get added to the
+                        global namespace
+get_unique_elements     Return the levels of a factor, or the unique
+                        elements of a character vector
+get_xy_rownames         Generate appropriate rownames for an object
+json2df                 Convert a JSON string into a data frame
+list_templates          Show which templates are available
+match_to_groups         Match elements to groups
+microarray              500 genes with the highest fold-change between
+                        two conditions
+new_template            Creates a new template
+no_whitespace           Remove whitespace from a string
+null_if_empty           Returns NULL if the list is empty
+open_html               Open an HTML file in the browser
+quote_escaped           Surround with escaped quotes
+reload_translators      Load the translator files in each template
+sample_r                Sample with replacement
+scale_type              Type of scale
+server                  Run a local server
+snake_case              Convert to snake_case
+test_template           Test the translator of a given template
+title_case              Title Case
+to_json                 Convert a string to JSON
+vennize                 Classify the elements of a vector into Venn
+                        categories
+yaml2df                 Convert a YAML string into a data frame
