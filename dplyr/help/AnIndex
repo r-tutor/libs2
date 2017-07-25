@@ -88,6 +88,7 @@ distinct_	se-deprecated
 do	do
 do_	se-deprecated
 dplyr	dplyr-package
+dr_dplyr	dr_dplyr
 ends_with	select_helpers
 enquo	reexports
 eval_tbls	bench_compare

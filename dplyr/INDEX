@@ -20,6 +20,8 @@ desc                    Descending order
 distinct                Select distinct/unique rows
 do                      Do anything
 dplyr-package           dplyr: a grammar of data manipulation
+dr_dplyr                Dr Dplyr checks your installation for common
+                        problems.
 explain                 Explain details of a tbl
 filter                  Return rows with matching conditions
 filter_all              Filter within a selection of variables
