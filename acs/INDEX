@@ -1,0 +1,58 @@
+acs-class               Class '"acs"'
+acs-package             Download, Manipulate, and Present American
+                        Community Survey and Decennial Data from the US
+                        Census
+acs.fetch               Downloads demographic data (ACS, SF1, SF3) via
+                        the Census API and converts to a proper acs
+                        object with estimates, standard errors, and
+                        associated metadata.
+acs.lookup              Search for relevant demographic variables and
+                        tables from the US Census.
+acs.lookup-class        Class '"acs.lookup"'
+acs.tables.install      Downloads and stores XML tables used to lookup
+                        variable codes, table names, and other metadata
+                        associated with acs package.
+api.key.install         Installs an API key from the US Census to use
+                        with calls to 'acs.fetch'.
+api.key.migrate         After updating the acs package, installs an
+                        archived API key from a previous installation.
+cbind.acs               Combine acs Objects by Columns
+confint.acs             Return upper and lower bounds of given
+                        confidence intervals for acs objects.
+cpi                     Consumer Price Index data (1913-2015).
+currency.convert        Convert dollar values of acs object to a new
+                        base year.
+currency.year           Return (or change) currency.year value from the
+                        metadata of an acs object.
+divide.acs              Divide one acs object or variable by another.
+endyear                 Return or replace endyear value from the
+                        metadata of an acs object.
+fips.state              FIPS codes and geographic names for use in
+                        searching and creating geographies in the acs
+                        package.
+flatten.geo.set         Convenience function to "flatten" a nested
+                        geo.set object.
+geo.lookup              Search Census geographies
+geo.make                Create a new geo.set object for use with the
+                        acs package.
+geo.set-class           Class '"geo.set"'
+geography               Return or replace geography metadata of an acs
+                        object.
+kansas07                County-level data from the 2007 American
+                        Community Survey for Kansas for use in examples
+                        of acs package.
+kansas09                County-level data from the 2005-2009 American
+                        Community Survey for Kansas for use in examples
+                        of acs package.
+lawrence10              Tract-level data from the 2006-2010 American
+                        Community Survey for Lawrence, MA for use in
+                        examples of acs package.
+plot-methods            acs Methods for Function 'plot'
+prompt.acs              Prompt for new values for metadata in an acs
+                        object.
+rbind.acs               Combine acs Objects by Rows
+read.acs                Reads a comma-delimited file from the American
+                        Community Survey and creates an acs object with
+                        estimates, standard errors, and associated
+                        metadata.
+sum-methods             acs Methods for Function 'sum'

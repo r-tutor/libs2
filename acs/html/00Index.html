@@ -1,0 +1,366 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>R: Download, Manipulate, and Present American Community Survey and
+Decennial Data from the US Census</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+<h1> Download, Manipulate, and Present American Community Survey and
+Decennial Data from the US Census
+<img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
+</h1>
+<hr/>
+<div style="text-align: center;">
+<a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
+<a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
+</div><h2>Documentation for package &lsquo;acs&rsquo; version 2.1.0</h2>
+
+<ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
+</ul>
+
+<h2>Help Pages</h2>
+
+
+<p style="text-align: center;">
+<a href="# "> </a>
+<a href="#A">A</a>
+<a href="#C">C</a>
+<a href="#D">D</a>
+<a href="#E">E</a>
+<a href="#F">F</a>
+<a href="#G">G</a>
+<a href="#I">I</a>
+<a href="#K">K</a>
+<a href="#L">L</a>
+<a href="#M">M</a>
+<a href="#N">N</a>
+<a href="#P">P</a>
+<a href="#R">R</a>
+<a href="#S">S</a>
+<a href="#misc">misc</a>
+</p>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="acs-package.html">acs-package</a></td>
+<td>Download, Manipulate, and Present American Community Survey and Decennial Data from the US Census</td></tr>
+</table>
+
+<h2><a name="A">-- A --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="acs-package.html">acs</a></td>
+<td>Download, Manipulate, and Present American Community Survey and Decennial Data from the US Census</td></tr>
+<tr><td style="width: 25%;"><a href="acs-class.html">acs-class</a></td>
+<td>Class '"acs"'</td></tr>
+<tr><td style="width: 25%;"><a href="acs-class.html">acs.colnames</a></td>
+<td>Class '"acs"'</td></tr>
+<tr><td style="width: 25%;"><a href="acs-class.html">acs.colnames-method</a></td>
+<td>Class '"acs"'</td></tr>
+<tr><td style="width: 25%;"><a href="acs-class.html">acs.colnames&lt;-</a></td>
+<td>Class '"acs"'</td></tr>
+<tr><td style="width: 25%;"><a href="acs-class.html">acs.colnames&lt;--method</a></td>
+<td>Class '"acs"'</td></tr>
+<tr><td style="width: 25%;"><a href="acs.fetch.html">acs.fetch</a></td>
+<td>Downloads demographic data (ACS, SF1, SF3) via the Census API and converts to a proper acs object with estimates, standard errors, and associated metadata.</td></tr>
+<tr><td style="width: 25%;"><a href="acs.lookup.html">acs.lookup</a></td>
+<td>Search for relevant demographic variables and tables from the US Census.</td></tr>
+<tr><td style="width: 25%;"><a href="acs.lookup-class.html">acs.lookup-class</a></td>
+<td>Class '"acs.lookup"'</td></tr>
+<tr><td style="width: 25%;"><a href="acs.tables.install.html">acs.tables.install</a></td>
+<td>Downloads and stores XML tables used to lookup variable codes, table names, and other metadata associated with acs package.</td></tr>
+<tr><td style="width: 25%;"><a href="acs-class.html">acs.units</a></td>
+<td>Class '"acs"'</td></tr>
+<tr><td style="width: 25%;"><a href="acs-class.html">acs.units-method</a></td>
+<td>Class '"acs"'</td></tr>
+<tr><td style="width: 25%;"><a href="acs-class.html">acs.units&lt;-</a></td>
+<td>Class '"acs"'</td></tr>
+<tr><td style="width: 25%;"><a href="acs-class.html">acs.units&lt;--method</a></td>
+<td>Class '"acs"'</td></tr>
+<tr><td style="width: 25%;"><a href="geo.set-class.html">api.for</a></td>
+<td>Class '"geo.set"'</td></tr>
+<tr><td style="width: 25%;"><a href="geo.set-class.html">api.for-method</a></td>
+<td>Class '"geo.set"'</td></tr>
+<tr><td style="width: 25%;"><a href="geo.set-class.html">api.in</a></td>
+<td>Class '"geo.set"'</td></tr>
+<tr><td style="width: 25%;"><a href="geo.set-class.html">api.in-method</a></td>
+<td>Class '"geo.set"'</td></tr>
+<tr><td style="width: 25%;"><a href="api.key.install.html">api.key.install</a></td>
+<td>Installs an API key from the US Census to use with calls to 'acs.fetch'.</td></tr>
+<tr><td style="width: 25%;"><a href="api.key.migrate.html">api.key.migrate</a></td>
+<td>After updating the acs package, installs an archived API key from a previous installation.</td></tr>
+<tr><td style="width: 25%;"><a href="acs.fetch.html">api.url.maker</a></td>
+<td>Downloads demographic data (ACS, SF1, SF3) via the Census API and converts to a proper acs object with estimates, standard errors, and associated metadata.</td></tr>
+<tr><td style="width: 25%;"><a href="acs-class.html">apply</a></td>
+<td>Class '"acs"'</td></tr>
+<tr><td style="width: 25%;"><a href="acs-class.html">apply-method</a></td>
+<td>Class '"acs"'</td></tr>
+</table>
+
+<h2><a name="C">-- C --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="acs.lookup-class.html">c-method</a></td>
+<td>Class '"acs.lookup"'</td></tr>
+<tr><td style="width: 25%;"><a href="geo.set-class.html">c-method</a></td>
+<td>Class '"geo.set"'</td></tr>
+<tr><td style="width: 25%;"><a href="cbind.acs.html">cbind</a></td>
+<td>Combine acs Objects by Columns</td></tr>
+<tr><td style="width: 25%;"><a href="cbind.acs.html">cbind.acs</a></td>
+<td>Combine acs Objects by Columns</td></tr>
+<tr><td style="width: 25%;"><a href="geo.set-class.html">combine</a></td>
+<td>Class '"geo.set"'</td></tr>
+<tr><td style="width: 25%;"><a href="geo.set-class.html">combine-method</a></td>
+<td>Class '"geo.set"'</td></tr>
+<tr><td style="width: 25%;"><a href="geo.set-class.html">combine.term</a></td>
+<td>Class '"geo.set"'</td></tr>
+<tr><td style="width: 25%;"><a href="geo.set-class.html">combine.term-method</a></td>
+<td>Class '"geo.set"'</td></tr>
+<tr><td style="width: 25%;"><a href="geo.set-class.html">combine.term&lt;-</a></td>
+<td>Class '"geo.set"'</td></tr>
+<tr><td style="width: 25%;"><a href="geo.set-class.html">combine.term&lt;--method</a></td>
+<td>Class '"geo.set"'</td></tr>
+<tr><td style="width: 25%;"><a href="geo.set-class.html">combine&lt;-</a></td>
+<td>Class '"geo.set"'</td></tr>
+<tr><td style="width: 25%;"><a href="geo.set-class.html">combine&lt;--method</a></td>
+<td>Class '"geo.set"'</td></tr>
+<tr><td style="width: 25%;"><a href="confint.acs.html">confint</a></td>
+<td>Return upper and lower bounds of given confidence intervals for acs objects.</td></tr>
+<tr><td style="width: 25%;"><a href="confint.acs.html">confint.acs</a></td>
+<td>Return upper and lower bounds of given confidence intervals for acs objects.</td></tr>
+<tr><td style="width: 25%;"><a href="cpi.html">cpi</a></td>
+<td>Consumer Price Index data (1913-2015).</td></tr>
+<tr><td style="width: 25%;"><a href="currency.convert.html">currency.convert</a></td>
+<td>Convert dollar values of acs object to a new base year.</td></tr>
+<tr><td style="width: 25%;"><a href="currency.convert.html">currency.convert-method</a></td>
+<td>Convert dollar values of acs object to a new base year.</td></tr>
+<tr><td style="width: 25%;"><a href="currency.year.html">currency.year</a></td>
+<td>Return (or change) currency.year value from the metadata of an acs object.</td></tr>
+<tr><td style="width: 25%;"><a href="currency.year.html">currency.year-method</a></td>
+<td>Return (or change) currency.year value from the metadata of an acs object.</td></tr>
+<tr><td style="width: 25%;"><a href="currency.year.html">currency.year&lt;-</a></td>
+<td>Return (or change) currency.year value from the metadata of an acs object.</td></tr>
+<tr><td style="width: 25%;"><a href="currency.year.html">currency.year&lt;--method</a></td>
+<td>Return (or change) currency.year value from the metadata of an acs object.</td></tr>
+</table>
+
+<h2><a name="D">-- D --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="acs-class.html">dim.acs</a></td>
+<td>Class '"acs"'</td></tr>
+<tr><td style="width: 25%;"><a href="divide.acs.html">divide.acs</a></td>
+<td>Divide one acs object or variable by another.</td></tr>
+</table>
+
+<h2><a name="E">-- E --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="endyear.html">endyear</a></td>
+<td>Return or replace endyear value from the metadata of an acs object.</td></tr>
+<tr><td style="width: 25%;"><a href="acs.lookup-class.html">endyear-method</a></td>
+<td>Class '"acs.lookup"'</td></tr>
+<tr><td style="width: 25%;"><a href="endyear.html">endyear-method</a></td>
+<td>Return or replace endyear value from the metadata of an acs object.</td></tr>
+<tr><td style="width: 25%;"><a href="endyear.html">endyear&lt;-</a></td>
+<td>Return or replace endyear value from the metadata of an acs object.</td></tr>
+<tr><td style="width: 25%;"><a href="endyear.html">endyear&lt;--method</a></td>
+<td>Return or replace endyear value from the metadata of an acs object.</td></tr>
+<tr><td style="width: 25%;"><a href="acs-class.html">estimate</a></td>
+<td>Class '"acs"'</td></tr>
+<tr><td style="width: 25%;"><a href="acs-class.html">estimate-method</a></td>
+<td>Class '"acs"'</td></tr>
+</table>
+
+<h2><a name="F">-- F --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="fips.state.html">fips.american.indian.area</a></td>
+<td>FIPS codes and geographic names for use in searching and creating geographies in the acs package.</td></tr>
+<tr><td style="width: 25%;"><a href="fips.state.html">fips.county</a></td>
+<td>FIPS codes and geographic names for use in searching and creating geographies in the acs package.</td></tr>
+<tr><td style="width: 25%;"><a href="fips.state.html">fips.county.subdivision</a></td>
+<td>FIPS codes and geographic names for use in searching and creating geographies in the acs package.</td></tr>
+<tr><td style="width: 25%;"><a href="fips.state.html">fips.place</a></td>
+<td>FIPS codes and geographic names for use in searching and creating geographies in the acs package.</td></tr>
+<tr><td style="width: 25%;"><a href="fips.state.html">fips.school</a></td>
+<td>FIPS codes and geographic names for use in searching and creating geographies in the acs package.</td></tr>
+<tr><td style="width: 25%;"><a href="fips.state.html">fips.state</a></td>
+<td>FIPS codes and geographic names for use in searching and creating geographies in the acs package.</td></tr>
+<tr><td style="width: 25%;"><a href="flatten.geo.set.html">flatten.geo.set</a></td>
+<td>Convenience function to "flatten" a nested geo.set object.</td></tr>
+</table>
+
+<h2><a name="G">-- G --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="geo.set-class.html">geo-class</a></td>
+<td>Class '"geo.set"'</td></tr>
+<tr><td style="width: 25%;"><a href="geo.set-class.html">geo.list</a></td>
+<td>Class '"geo.set"'</td></tr>
+<tr><td style="width: 25%;"><a href="geo.set-class.html">geo.list-method</a></td>
+<td>Class '"geo.set"'</td></tr>
+<tr><td style="width: 25%;"><a href="geo.lookup.html">geo.lookup</a></td>
+<td>Search Census geographies</td></tr>
+<tr><td style="width: 25%;"><a href="geo.make.html">geo.make</a></td>
+<td>Create a new geo.set object for use with the acs package.</td></tr>
+<tr><td style="width: 25%;"><a href="geo.set-class.html">geo.set-class</a></td>
+<td>Class '"geo.set"'</td></tr>
+<tr><td style="width: 25%;"><a href="geography.html">geography</a></td>
+<td>Return or replace geography metadata of an acs object.</td></tr>
+<tr><td style="width: 25%;"><a href="geography.html">geography-method</a></td>
+<td>Return or replace geography metadata of an acs object.</td></tr>
+<tr><td style="width: 25%;"><a href="geography.html">geography&lt;-</a></td>
+<td>Return or replace geography metadata of an acs object.</td></tr>
+<tr><td style="width: 25%;"><a href="geography.html">geography&lt;--method</a></td>
+<td>Return or replace geography metadata of an acs object.</td></tr>
+</table>
+
+<h2><a name="I">-- I --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="acs-class.html">is.acs</a></td>
+<td>Class '"acs"'</td></tr>
+<tr><td style="width: 25%;"><a href="acs.lookup-class.html">is.acs.lookup</a></td>
+<td>Class '"acs.lookup"'</td></tr>
+<tr><td style="width: 25%;"><a href="geo.set-class.html">is.geo</a></td>
+<td>Class '"geo.set"'</td></tr>
+<tr><td style="width: 25%;"><a href="geo.set-class.html">is.geo.set</a></td>
+<td>Class '"geo.set"'</td></tr>
+</table>
+
+<h2><a name="K">-- K --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="kansas07.html">kansas07</a></td>
+<td>County-level data from the 2007 American Community Survey for Kansas for use in examples of acs package.</td></tr>
+<tr><td style="width: 25%;"><a href="kansas09.html">kansas09</a></td>
+<td>County-level data from the 2005-2009 American Community Survey for Kansas for use in examples of acs package.</td></tr>
+</table>
+
+<h2><a name="L">-- L --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="lawrence10.html">lawrence10</a></td>
+<td>Tract-level data from the 2006-2010 American Community Survey for Lawrence, MA for use in examples of acs package.</td></tr>
+<tr><td style="width: 25%;"><a href="geo.set-class.html">length-method</a></td>
+<td>Class '"geo.set"'</td></tr>
+<tr><td style="width: 25%;"><a href="acs-class.html">length.acs</a></td>
+<td>Class '"acs"'</td></tr>
+</table>
+
+<h2><a name="M">-- M --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="acs-class.html">modified</a></td>
+<td>Class '"acs"'</td></tr>
+<tr><td style="width: 25%;"><a href="acs-class.html">modified-method</a></td>
+<td>Class '"acs"'</td></tr>
+</table>
+
+<h2><a name="N">-- N --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="geo.set-class.html">name</a></td>
+<td>Class '"geo.set"'</td></tr>
+<tr><td style="width: 25%;"><a href="geo.set-class.html">name-method</a></td>
+<td>Class '"geo.set"'</td></tr>
+</table>
+
+<h2><a name="P">-- P --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="plot-methods.html">plot</a></td>
+<td>acs Methods for Function 'plot'</td></tr>
+<tr><td style="width: 25%;"><a href="plot-methods.html">plot-method</a></td>
+<td>acs Methods for Function 'plot'</td></tr>
+<tr><td style="width: 25%;"><a href="plot-methods.html">plot-methods</a></td>
+<td>acs Methods for Function 'plot'</td></tr>
+<tr><td style="width: 25%;"><a href="prompt.acs.html">prompt</a></td>
+<td>Prompt for new values for metadata in an acs object.</td></tr>
+<tr><td style="width: 25%;"><a href="prompt.acs.html">prompt.acs</a></td>
+<td>Prompt for new values for metadata in an acs object.</td></tr>
+</table>
+
+<h2><a name="R">-- R --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="rbind.acs.html">rbind</a></td>
+<td>Combine acs Objects by Rows</td></tr>
+<tr><td style="width: 25%;"><a href="rbind.acs.html">rbind.acs</a></td>
+<td>Combine acs Objects by Rows</td></tr>
+<tr><td style="width: 25%;"><a href="read.acs.html">read.acs</a></td>
+<td>Reads a comma-delimited file from the American Community Survey and creates an acs object with estimates, standard errors, and associated metadata.</td></tr>
+<tr><td style="width: 25%;"><a href="acs.lookup-class.html">results</a></td>
+<td>Class '"acs.lookup"'</td></tr>
+<tr><td style="width: 25%;"><a href="acs.lookup-class.html">results-method</a></td>
+<td>Class '"acs.lookup"'</td></tr>
+</table>
+
+<h2><a name="S">-- S --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="acs-class.html">show-method</a></td>
+<td>Class '"acs"'</td></tr>
+<tr><td style="width: 25%;"><a href="acs.lookup-class.html">show-method</a></td>
+<td>Class '"acs.lookup"'</td></tr>
+<tr><td style="width: 25%;"><a href="geo.set-class.html">show-method</a></td>
+<td>Class '"geo.set"'</td></tr>
+<tr><td style="width: 25%;"><a href="acs-class.html">span</a></td>
+<td>Class '"acs"'</td></tr>
+<tr><td style="width: 25%;"><a href="acs-class.html">span-method</a></td>
+<td>Class '"acs"'</td></tr>
+<tr><td style="width: 25%;"><a href="acs.lookup-class.html">span-method</a></td>
+<td>Class '"acs.lookup"'</td></tr>
+<tr><td style="width: 25%;"><a href="acs-class.html">span&lt;-</a></td>
+<td>Class '"acs"'</td></tr>
+<tr><td style="width: 25%;"><a href="acs-class.html">span&lt;--method</a></td>
+<td>Class '"acs"'</td></tr>
+<tr><td style="width: 25%;"><a href="acs-class.html">standard.error</a></td>
+<td>Class '"acs"'</td></tr>
+<tr><td style="width: 25%;"><a href="acs-class.html">standard.error-method</a></td>
+<td>Class '"acs"'</td></tr>
+<tr><td style="width: 25%;"><a href="sum-methods.html">sum</a></td>
+<td>acs Methods for Function 'sum'</td></tr>
+<tr><td style="width: 25%;"><a href="sum-methods.html">sum-method</a></td>
+<td>acs Methods for Function 'sum'</td></tr>
+<tr><td style="width: 25%;"><a href="sum-methods.html">sum-methods</a></td>
+<td>acs Methods for Function 'sum'</td></tr>
+<tr><td style="width: 25%;"><a href="geo.set-class.html">sumlev</a></td>
+<td>Class '"geo.set"'</td></tr>
+<tr><td style="width: 25%;"><a href="geo.set-class.html">sumlev-method</a></td>
+<td>Class '"geo.set"'</td></tr>
+<tr><td style="width: 25%;"><a href="acs-class.html">summary-method</a></td>
+<td>Class '"acs"'</td></tr>
+</table>
+
+<h2><a name="misc">-- misc --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="acs-class.html">*-method</a></td>
+<td>Class '"acs"'</td></tr>
+<tr><td style="width: 25%;"><a href="acs-class.html">+-method</a></td>
+<td>Class '"acs"'</td></tr>
+<tr><td style="width: 25%;"><a href="acs.lookup-class.html">+-method</a></td>
+<td>Class '"acs.lookup"'</td></tr>
+<tr><td style="width: 25%;"><a href="geo.set-class.html">+-method</a></td>
+<td>Class '"geo.set"'</td></tr>
+<tr><td style="width: 25%;"><a href="acs-class.html">--method</a></td>
+<td>Class '"acs"'</td></tr>
+<tr><td style="width: 25%;"><a href="acs-class.html">/-method</a></td>
+<td>Class '"acs"'</td></tr>
+<tr><td style="width: 25%;"><a href="acs-class.html">[-method</a></td>
+<td>Class '"acs"'</td></tr>
+<tr><td style="width: 25%;"><a href="acs.lookup-class.html">[-method</a></td>
+<td>Class '"acs.lookup"'</td></tr>
+<tr><td style="width: 25%;"><a href="geo.set-class.html">[-method</a></td>
+<td>Class '"geo.set"'</td></tr>
+<tr><td style="width: 25%;"><a href="acs-class.html">[&lt;--method</a></td>
+<td>Class '"acs"'</td></tr>
+<tr><td style="width: 25%;"><a href="geo.set-class.html">[&lt;--method</a></td>
+<td>Class '"geo.set"'</td></tr>
+<tr><td style="width: 25%;"><a href="geo.set-class.html">[[-method</a></td>
+<td>Class '"geo.set"'</td></tr>
+<tr><td style="width: 25%;"><a href="geo.set-class.html">[[&lt;--method</a></td>
+<td>Class '"geo.set"'</td></tr>
+</table>
+</body></html>
