@@ -1,0 +1,30 @@
+# Export all names that don't start with "."
+exportPattern("^[^\\.]")
+
+useDynLib(gbm)
+
+importFrom(survival, Surv)
+
+# ns from splines is used in one of the examples
+importFrom(splines, ns, splineDesign)
+
+# xyplot is used, which means several functions internal
+# to lattice will also be used. Import the lot.
+import(lattice)
+
+import(parallel)
+
+importFrom("grDevices", "rainbow")
+importFrom("graphics", "abline", "axis", "barplot", "lines", "mtext",
+           "par", "plot", "polygon", "rug", "segments", "title")
+importFrom("stats", "approx", "binomial", "delete.response",
+           "gaussian", "glm", "loess", "model.extract", "model.frame",
+           "model.offset", "model.response", "model.weights",
+           "na.pass", "poisson", "predict", "quantile", "rbinom",
+           "reformulate", "rexp", "rnorm", "runif", "sd", "supsmu",
+           "terms", "var", "weighted.mean")
+
+S3method(plot, gbm)
+S3method(predict, gbm)
+S3method(print, gbm)
+S3method(summary, gbm)
