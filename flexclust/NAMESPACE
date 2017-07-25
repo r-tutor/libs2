@@ -1,0 +1,92 @@
+useDynLib(flexclust)
+
+import(methods)
+import(graphics)
+import(grid)
+import(lattice)
+import(modeltools)
+
+importFrom(parallel, mclapply, parLapply)
+importFrom(stats, fitted, predict)
+importFrom(stats4, summary)
+
+exportPattern("^cent[A-Z].+", "^dist[A-Z].+", "^exp[A-Z].+",
+              "^panelShadow.+", ".+[a-z]Family$")
+
+export(
+       as.kcca,
+       bootFlexclust,
+       bundestag,
+       cclust,
+       clusterSim,
+       dist2,
+       flxColors,
+       groupBWplot,
+       kcca,
+       kcca2df,
+#       paraBoot,
+       priceFeature,
+       projAxes,
+       propBarchart,
+       qtclust,
+       randIndex,
+       randomTour,
+       randomTourMatrix,
+#       resampleFlexclust,
+       shadow,
+       shadowStars,
+       Silhouette,
+       stepcclust,
+       stepFlexclust,
+       stripes
+#       transitions
+       )
+
+
+exportClasses(
+              bootFlexclust,
+              cclustControl,
+              flexclust,
+              flexclustControl,
+              kcca,
+              kccasimple,
+              kccaFamily,
+              projAxes,
+              propBarchart,
+              stepFlexclust
+              ) 
+
+exportMethods(
+              "[[",
+              barchart,
+              barplot,
+              boxplot,
+              bwplot,
+              clusters,
+              clusterSim,
+              coerce,
+              comPart,
+              densityplot,
+              getModel,
+              image,
+              info,
+              pairs,
+              parameters,
+              placeLabels,
+              plot,
+              predict,
+              randIndex,
+              randomTour,
+              relabel,
+              shadow,
+              Silhouette,
+              show,
+              summary
+              )
+
+
+S3method(as.kcca, hclust)
+S3method(as.kcca, kmeans)
+S3method(as.kcca, partition)
+S3method(as.kcca, skmeans)
+S3method(plot, priceFeature)
