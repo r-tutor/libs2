@@ -1,0 +1,11 @@
+EMbssn                  EM Algorithm Birnbaum-Saunders model based on
+                        Skew-Normal distribution
+bssn                    Birnbaum-Saunders model based on Skew-Normal
+                        distribution
+bssn-package            Birnbaum-Saunders model based on Skew-Normal
+                        distribution
+momentsbssn             Moments for the Birnbaum-Saunders model based
+                        on Skew-Normal distribution
+ozone                   Daily ozone level measurements
+reliabilitybssn         Reliability Function for the Birnbaum-Saunders
+                        model based on Skew-Normal distribution
