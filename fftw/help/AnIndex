@@ -1,0 +1,6 @@
+DCT	FFT
+FFT	FFT
+IDCT	FFT
+IFFT	FFT
+planDCT	planFFT
+planFFT	planFFT
