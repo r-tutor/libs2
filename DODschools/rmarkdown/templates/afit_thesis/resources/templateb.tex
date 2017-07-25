@@ -1,0 +1,671 @@
+\documentclass[12pt,letterpaper,toc=flat,oneside]{report}
+\def\code{}
+\usepackage[top=1in,bottom=1.25in,hmargin=1.25in]{geometry}
+\usepackage{setspace}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[pdftex]{graphicx}
+\DeclareGraphicsExtensions{.jpg, .pdf, .png}
+\usepackage{hyperref}
+\hypersetup{%
+    pdfborder = {0 0 0}
+}
+\usepackage{scripts/tex/eforms}
+\usepackage{bigstrut, multirow}
+\usepackage{ifthen}
+\usepackage[scaled=.8]{helvet}
+\newenvironment{myfont}{\fontfamily{phv}\selectfont}{\par}
+\usepackage[font={bf,footnotesize},labelsep=period]{caption}
+\usepackage{indentfirst}
+\usepackage{float}
+\usepackage{flafter}
+\usepackage{amssymb,amsmath,amsfonts}
+\usepackage{theorem}
+\usepackage[square,numbers]{natbib}
+\bibliographystyle{abbrvnat}
+\usepackage{varioref} 
+%\usepackage{tocbibind} 
+\usepackage{xspace}
+% \usepackage{fixltx2e}
+\usepackage{threeparttable}
+\usepackage{booktabs}
+\usepackage{url}
+\usepackage[raggedright]{titlesec}
+\usepackage{titletoc}
+\usepackage{ifpdf}
+\usepackage{lastpage}
+\providecommand{\tightlist}{%
+\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\let\proglang=\textsf
+\newcommand{\pkg}[1]{{\fontseries{b}\selectfont #1}}
+\def\code{}
+\usepackage{color}
+\definecolor{myblue}{rgb}{0,0,0.6}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+$if(listings)$
+\usepackage{listings}
+\lstset{ %
+  backgroundcolor=\color{mygray},  % choose the background color
+  basicstyle=\bf\normalsize,        % size of fonts used for the code
+  breaklines=true,                 % automatic line breaking only at whitespace
+  captionpos=b,                   % sets the caption-position to bottom
+  commentstyle=\color{myblue},    % comment style
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  lineskip=-.5pt,
+  keywordstyle=\color{Green},       % keyword style
+  stringstyle=\color{mymauve},     % string literal style
+  aboveskip=\medskipamount,
+  belowskip=\medskipamount,
+  frame=single,
+  frameround=tttt,
+}
+$endif$
+\def\afittocfootskip{0.41in}      %if above margins change, routines 
+                                  %using this command may require 
+                                  %retuning (alm)
+\def\tocSpace{0.0em}
+\def\lofSpace{1.0em plus 1pt}
+\def\tocStart{1.0em plus 1pt}
+\def\lofStart{0.0in}
+
+%==================================================================
+%    	Set LEVEL, NUMBERING, and HEADING defaults              
+%==================================================================
+% LEVELS
+\renewcommand\thechapter       {\Roman{chapter}}
+\renewcommand\thesection       {\arabic{chapter}.\arabic{section}}
+\renewcommand\thesubsection    {\thesection.\arabic{subsection}}
+\renewcommand\thesubsubsection {\thesubsection.\arabic{subsubsection}}
+\renewcommand\theparagraph     {\thesubsubsection.\arabic{paragraph}}
+\renewcommand\thesubparagraph  {\theparagraph.\arabic{subparagraph}}
+\renewcommand\thefigure        {\arabic{chapter}.\arabic{figure}} 
+\renewcommand\thetable         {\arabic{chapter}.\arabic{table}}
+%==================================================================
+%    		Customizing Chapter Titles               
+%==================================================================
+\titleformat
+{\chapter}                                % command
+[block]                                   % shape
+{\bfseries\Large\centering\singlespace}   % format
+{\ifnum\value{chapter}=1
+\vspace{-30pt}
+	  \begin{spacing}{1.5}
+	  \MakeUppercase{\large{$if(title)$$title$$else$My title$endif$}}
+	  \end{spacing}
+	  \vspace{35pt}
+	\thechapter.
+	\else
+	\thechapter.
+	\fi}                           % label
+{0pt}                                     % sep
+{}                                        % before-code
+[]                                        % after-code
+\titlespacing{\chapter}{0pt}{0pt}{1.5cm}
+\titlecontents{chapter}
+[0.0cm]                                   % left margin
+{\vspace{4pt}}                            % above code
+{\bfseries\contentslabel{2.0em}}          % numbered format
+{}                                        % unnumbered format
+{\titlerule*[0.5pc]{.}\contentspage}      % filler-page-format, e.g dot
+[\vspace{4pt}]                            % below code
+%==================================================================
+%    		Customizing Section Titles               
+%==================================================================
+\titleformat
+{\section}                              % command
+[block]                                 % shape
+{\singlespace\bfseries\large}           % format
+{\thesection\quad}                           % label
+{0pt}                                  % sep
+{}                                      % before-code
+[]                                      % after-code
+\titlespacing{\section}{0pt}{0.75cm}{0.75cm}  % Spacing within the document
+\titlecontents{section}
+[1cm]                                   % left margin in toc
+{\vspace{1pt}}                            % above code
+{\contentslabel{2.5em}}                   % numbered format
+{}                                        % unnumbered format
+{\titlerule*[0.5pc]{.}\contentspage}      % filler-page-format, e.g dot
+[\vspace{1pt}]                            % below code
+%==================================================================
+%    		Customizing Subsection Titles               
+%==================================================================
+\titleformat
+{\subsection}                             % command
+[block]                                   % shape
+{\bfseries\normalsize\em}          % format
+{\thesubsection\quad}                          % label
+{0pt}                                     % sep
+{}                                        % before-code
+[]                                        % after-code
+\titlespacing{\subsection}{0pt}{0.5cm}{0.5cm}
+\titlecontents{subsection}
+[1cm]                                   % left margin in toc
+{\vspace{1pt}}                            % above code
+{}                                        % numbered format
+{\contentslabel}                          % unnumbered format
+{\titlerule*[0.5pc]{.}\contentspage}      % filler-page-format, e.g dot
+[\vspace{1pt}]                            % below code 
+
+\begin{document}
+
+% \setlength{\abovedisplayskip}{0pt}
+% \setlength{\belowdisplayskip}{0pt}
+% \setlength{\abovedisplayshortskip}{0pt}
+% \setlength{\belowdisplayshortskip}{0pt}
+% \setlength{\intextsep}{40pt} % Vertical space above & below [h] floats
+% \setlength{\textfloatsep}{40pt} % Vertical space below (above) [t] ([b]) floats
+% \setlength{\floatsep}{20pt} % Vertical distance between two floats
+% \setlength{\abovecaptionskip}{10pt}
+% \setlength{\belowcaptionskip}{5pt}
+%\input{Front/myFigures}
+%\input{Front/nomenclature}
+%
+%==================================================================
+%    		Flyleaf              
+%==================================================================
+\begin{titlepage}
+ 	\vfill
+ 	\begin{center}
+ 	    \includegraphics[width=2.8in]{images/afitlogo}~\\[15pt]
+ 	    \centerline{
+ 	      \begin{minipage}[t]{5.0in}\singlespace
+ 		\begin{center} 
+ 		   \bf{$if(title)$\MakeUppercase{$title$}$else$TITLE NOT SPECIFIED$endif$}
+ 		\end{center}
+ 	      \end{minipage}
+ 	     }
+ 	     \vspace{30pt}
+ 	    $if(doctype)$\MakeUppercase{$doctype$}$else$DOCTYPE NOT SPECIFIED$endif$\\[25pt]
+ 	    $if(author.name)$$author.name$$else$AUTHOR NAME NOT SPECIFIED$endif$$if(author.rank)$, $author.rank$$endif$\\[15pt]
+ 	    $if(designator)$$designator$$else$DESIGNATOR NOT SPECIFIED$endif$\\[15pt]
+ 	    \begin{bfseries}
+ 		\textsf{\large\fontfamily{phv}DEPARTMENT OF THE AIR FORCE}\\[-2pt]
+ 		\textsf{\large\fontfamily{phv}AIR UNIVERSITY}\\[20pt]
+ 		\textsl{\Large AIR FORCE INSTITUTE OF TECHNOLOGY}\\[-8pt]
+ 		\rule{5.8in}{1mm}\\[-12pt]
+ 		\rule{5.8in}{0.3mm}\\[8pt]
+ 		\textsf{Wright-Patterson Air Force Base, Ohio}\\[15pt]
+ 	    \end{bfseries}
+ 	    \vspace{10pt}
+ 	    \MakeUppercase{\textbf{distribution statement $if(distro1)$$distro1$$else$A$endif$.}}\\[-1pt]
+ 	    \MakeUppercase{$if(distro2)$$distro2$$else$approved for public release; distribution unlimited$endif$.}
+ 	\end{center}%
+ 	\vfill
+ 	\newpage 
+ 	\pagestyle{plain}
+    \end{titlepage}
+%==================================================================	  
+%    		 Disclaimer Page              
+%==================================================================
+	\thispagestyle{empty}
+	\singlespacing
+	\null	
+	\vfill 
+	\noindent The views expressed in this document are those of the
+author and do not reflect the official policy or position of the
+United States Air Force, the United States Department of Defense or
+the United States Government.  This material is declared a work of the
+U.S. Government and is not subject to copyright protection in the
+United States
+	\vfill 
+	\doublespacing
+	\newpage
+	\pagestyle{plain}
+%==================================================================
+%    		Title Page              
+%==================================================================
+    \begin{titlepage}
+	\thispagestyle{empty}
+	\noindent $if(designator)$$designator$$else$DESIGNATOR NOT SPECIFIED$endif$  
+	\vfill
+	\begin{center}
+	    \MakeUppercase{$if(title)$$title$$else$TITLE NOT SPECIFIED$endif$}\par
+	    \vskip 1cm
+	    \MakeUppercase{$if(doctype)$$doctype$$else$DOCTYPE NOT SPECIFIED$endif$}\par
+	    \vskip 1cm
+	    Presented to the Faculty\\
+	    $if(author.dept)$$author.dept$$else$AUTHOR DEPARTMENT NOT SPECIFIED$endif$\\
+	    Graduate School of Engineering and Management~\\
+	    Air Force Institute of Technology~\\
+	    Air University~\\
+	    Air Education and Training Command~\\
+	    in Partial Fulfillment of the Requirements for the~\\
+	    Degree of $if(degree)$$degree$$else$Master of Science$endif$ in $if(program)$$program$$else$Systems Engineering$endif$\\
+	    \vskip 1cm
+	    {$if(author.name)$$author.name$$else$AUTHOR NAME NOT SPECIFIED$endif$$if(author.prevdegree)$, $author.prevdegree$$endif$\par}
+	    {$if(author.rank)$$author.rank$$endif$$if(author.service)$, \MakeUppercase{$author.service$}$else$USAF$endif$}
+	    \vskip 1cm
+	    $if(graddate)$$graddate$$else$GRAD DATE NOT SPECIFIED$endif$
+	    \vskip 1cm
+	    \MakeUppercase{\textbf{distribution statement $if(distro1)$$distro1$$else$A$endif$.}}\\[-8pt]
+	    \MakeUppercase{$if(distro2)$$distro2$$else$approved for public release; distribution unlimited$endif$.}
+	    \vfill
+	\end{center}
+	\newpage 
+	\pagestyle{plain}
+    \end{titlepage}
+%==================================================================
+%    		 Committee Membership Page              
+%==================================================================
+	\thispagestyle{empty}
+	\setcounter{page}{3}
+	\noindent $if(designator)$$designator$$else$DESIGNATOR NOT SPECIFIED$endif$
+	\vfill
+	\begin{center}
+	    \MakeUppercase{$if(title)$$title$$else$TITLE NOT SPECIFIED$endif$}\\[10pt]
+	    \MakeUppercase{$if(doctype)$$doctype$$else$DOCTYPE NOT SPECIFIED$endif$}\\*[10pt]
+	    
+	    \begingroup
+  \singlespace
+    $if(author.name)$$author.name$$else$AUTHOR NAME NOT SPECIFIED$endif$$if(author.prevdegree)$, $author.prevdegree$$endif$\\ 
+    $if(author.rank)$$author.rank$$else$Provide Rank or 'Civilian'$endif$$if(author.service)$, \MakeUppercase{$author.service$}$endif$
+    \par
+  \endgroup
+  
+	\bigskip\medskip
+	Committee Membership:
+	\bigskip\medskip
+	
+	\begingroup
+  \singlespace
+    $if(advisor.rank)$$advisor.rank$ $endif$$if(advisor.name)$$advisor.name$$else$Provide Advisor Name$endif$$if(author.prevdegree)$, $advisor.prevdegree$$endif$\\ 
+    Chairman
+    \par
+  \endgroup
+  \bigskip\bigskip
+  
+  \begingroup
+  \singlespace
+    $if(reader1.rank)$$reader1.rank$ $endif$$if(reader1.name)$$reader1.name$$else$Committee Member 1 Name$endif$$if(reader1.prevdegree)$, $reader1.prevdegree$$endif$\\ 
+    Member
+    \par
+  \endgroup
+  \bigskip\bigskip
+  
+  \begingroup
+  \singlespace
+    $if(reader2.rank)$$reader2.rank$ $endif$$if(reader2.name)$$reader2.name$$else$Committee Member 2 Name$endif$$if(reader2.prevdegree)$, $reader2.prevdegree$$endif$\\ 
+    Member
+    \par
+  \endgroup
+  \bigskip\bigskip
+  
+  $if(reader3.name)$
+  \begingroup
+  \singlespace
+    $if(reader3.rank)$$reader3.rank$ $endif$$if(reader3.name)$$reader3.name$$else$Committee Member 3 Name$endif$$if(reader3.prevdegree)$, $reader3.prevdegree$$endif$\\ 
+    Member
+    \par
+  \endgroup
+  \bigskip\bigskip
+  $endif$
+  
+  $if(reader4.name)$
+  \begingroup
+  \singlespace
+    $if(reader4.rank)$$reader4.rank$ $endif$$if(reader4.name)$$reader4.name$$else$Committee Member 4 Name$endif$$if(reader4.prevdegree)$, $reader4.prevdegree$$endif$\\ 
+    Member
+    \par
+  \endgroup
+  \bigskip\bigskip
+  $endif$
+  
+  $if(dissertation)$
+  \bigskip
+  \begingroup
+  \singlespace
+    ADEDEJI B. BADIRU, Ph.D.\\ 
+    Dean, Graduate School of Engineering and Management
+    \par
+  \endgroup
+  $endif$
+	\end{center}
+	\vfill
+	\newpage
+	\setcounter{page}{4}
+	\renewcommand{\thepage}{\roman{page}}
+%==================================================================
+%    		Dedication Environment              
+%==================================================================
+$if(dedication)$
+       \noindent 
+       $if(designator)$$designator$$else$DESIGNATOR NOT SPECIFIED$endif$
+       \vfill
+       \begin{center}
+	   \em{$dedication$}
+	   \end{center}
+	   \vfill
+      \newpage
+$endif$
+%==================================================================
+%    	        ACKNOWLEDGEMENTS           
+%==================================================================
+$if(acknowledge)$
+\thispagestyle{plain}
+    \begin{center}
+	\Large\bfseries Acknowledgements
+    \end{center}
+    \vspace{3em}
+    $acknowledge$
+ \newpage
+$endif$
+%==================================================================
+%    	        PREFACE           
+%==================================================================
+$if(preface)$
+\newenvironment{preface}{
+\chapter*{Preface}     
+\addcontentsline{toc}{chapter}{Preface}
+}{$preface$}
+$endif$
+%==================================================================
+%    		ABSTRACT Environment              
+%==================================================================
+    \thispagestyle{plain}
+    \addtocontents{toc}{~\hfill\textbf{Page}\par}
+    \addcontentsline{toc}{chapter}{\bfseries Abstract}
+    \noindent $designator$
+    \begin{center}
+	\Large\bfseries Abstract
+    \end{center}
+    \vspace{2em}
+    $abstract$
+%==================================================================
+%    		Table of Contents              
+%==================================================================
+\renewcommand\contentsname{\centering \Large Table of Contents}
+\singlespace
+\tableofcontents
+\newpage
+%==================================================================
+%    		List of Tables              
+%==================================================================
+\renewcommand\listtablename{\centering \Large List of Tables}
+\addtocontents{lot}{\textbf{Table}\hfill\textbf{Page}\par}
+\addcontentsline{toc}{chapter}{\bfseries List of Tables}
+\listoftables
+\newpage
+%==================================================================
+%    		List of Figures              
+%==================================================================
+\renewcommand\listfigurename{\centering \Large List of Figures}
+\addtocontents{lof}{\textbf{Figure}\hfill\textbf{Page}\par}
+\addcontentsline{toc}{chapter}{\bfseries List of Figures}
+\listoffigures
+\newpage
+%==================================================================
+%    		Document Body              
+%==================================================================
+\setcounter{chapter}{0}
+\newgeometry{vmargin=1in,hmargin=1in}
+\doublespacing
+\setcounter{page}{1}
+	\renewcommand{\thepage}{\arabic{page}}
+$body$
+\newpage
+%==================================================================
+%    		Bibliography              
+%==================================================================
+\addcontentsline{toc}{chapter}{\bfseries Bibliography}
+\singlespace
+\bibliography{bibtex/final_bib}
+%==================================================================
+%    		Vita              
+%==================================================================
+$if(vita)$
+    \newpage
+    \addcontentsline{toc}{chapter}{\bfseries Vita}
+    \begin{center}
+	\Large\bfseries Vita
+    \end{center}
+    \vspace{2em}
+    \doublespacing
+    $vita$
+    \newpage
+$endif$
+%==================================================================
+%    		SF298             
+%==================================================================
+\pagestyle{empty}
+\newgeometry{vmargin=0.2in,hmargin=0.4in}
+\singlespace
+\everyTextField{
+            \BC{0.98 0.92 0.73} \BG{1 1 1}
+            \textColor{0 0 0}   \textFont{helv}     \textSize{10} 
+            \Q{0}               \W{0}
+            } 
+\everySigField{
+            \BC{0.98 0.92 0.73} \BG{0.98 0.92 0.73}
+            \textColor{0 0 0}   \textFont{helv}     \textSize{10} 
+            \Q{1}               \W{0}
+            } 
+\newdimen\rhI       \rhI=0.04\textheight
+\newdimen\rhII      \rhII=0.08\textheight
+\newdimen\rhIII     \rhIII=0.04\textheight
+\newdimen\rhIV      \rhIV=0.12\textheight
+\newdimen\rhV       \rhV=\rhIV
+\newdimen\rhVI      \rhVI=.09\textheight
+\newdimen\rhVII     \rhVII=0.09\textheight
+\newdimen\rhVIII    \rhVIII=0.07\textheight
+\newdimen\rhIX      \rhIX=0.05\textheight
+\newdimen\rhX       \rhX=0.16\textheight
+\newdimen\rhXI      \rhXI=0.04\textheight
+\newdimen\rhXII     \rhXII=0.01\textheight
+\begin{myfont}
+\noindent\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|}
+\hline
+%==================================================================
+%    		Page 1 - Row 1              
+%==================================================================
+\parbox[][\rhI][c]{0.70\textwidth}{
+\centering
+\textbf{REPORT DOCUMENTATION PAGE}
+} \vrule\hspace{1pt}
+
+\parbox[][\rhI][c]{0.30\textwidth}{
+\centering
+\small Form Approved\\[-1pt]
+\small OMB No. 0704-0188
+}\\\hline
+%==================================================================
+%    		Page 1 - Row 2
+%==================================================================
+\parbox[][\rhII][t]{\textwidth}{
+\vspace{2pt}
+\begin{spacing}{0.7}
+\footnotesize\raggedright The public reporting burden for this collection of information is estimated to average 1 hour per response, including the time for reviewing instructions, searching existing data sources, gathering and maintaining the data needed, and completing and reviewing the collection of information. Send comments regarding this burden estimate or any other aspect of this collection of information, including suggestions for reducing the burden, to Department of Defense, Washington Headquarters Services, Directorate for Information Operations and Reports (0704-0188), 1215 Jefferson Davis Highway, Suite 1204, Arlington, VA 22202-4302. Respondents should be aware that notwithstanding any other provision of law, no person shall be subject to any penalty for failing to comply with a collection of information if it does not display a currently valid OMB control number.\linebreak \textbf{PLEASE DO NOT RETURN YOUR FORM TO THE ABOVE ADDRESS.}
+\end{spacing}
+}\\\hline
+%==================================================================
+%    		Page 1 - Row 3
+%==================================================================
+\parbox[][\rhIII][c]{.25\textwidth}{
+\vspace{0pt}
+\small 1. REPORT DATE (DD-MM-YYYY)\\[2pt]
+\textField[\TU{ }\V{$if(sf298_date)$$sf298_date$$else$00-00-0000$endif$}]{sf1}{.24\textwidth}{0.4cm}
+}\vrule\hspace{1pt}
+
+\parbox[][\rhIII][c]{.45\textwidth}{
+\vspace{1pt}
+\small 2. REPORT TYPE\\[2pt]
+\textField[\TU{ }\V{$if(doctype)$$doctype$$else$Master's Thesis$endif$}]{sf2}{.44\textwidth}{0.4cm}
+}\vrule\hspace{1pt}
+
+\parbox[][\rhIII][c]{0.30\textwidth}{
+\vspace{0pt}
+\small 3. DATES COVERED (From - To)\\[2pt]
+\textField[\TU{ }\V{}]{sf3}{.29\textwidth}{0.4cm}
+}\\\hline
+\end{tabular}}\\
+%==================================================================
+%    		Page 1 - Row 4
+%==================================================================
+\noindent\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|}
+\multirow{3}*{
+\parbox[][\rhIV][c]{0.65\textwidth}{
+\vspace{-25pt}
+\small 4. TITLE AND SUBTITLE\\[2pt]
+\textField[\Ff{\FfMultiline}\textSize{11}\TU{ }\V{$if(title)$\uppercase{$title$}$else$A GREAT TITLE$endif$}]{sf4}{.64\textwidth}{2.4cm}
+}} &
+
+\parbox[][0.33\rhIV][c]{0.35\textwidth}{
+\small 5a. CONTRACT NUMBER\\[2pt]
+\textField[\TU{ }\V{$if(contractnum)$$contractnum$$endif$}]{sf5a}{.34\textwidth}{0.4cm}
+}\bigstrut\\\cline{2-2}
+&
+
+\parbox[][0.33\rhIV][c]{0.35\textwidth}{
+\small 5b. GRANT NUMBER\\[2pt]
+\textField[\TU{ }\V{$if(grantnum)$$grantnum$$endif$}]{sf5b}{.34\textwidth}{0.4cm}
+}\bigstrut\\\cline{2-2}
+&
+
+\parbox[][0.33\rhIV][c]{0.35\textwidth}{
+\small 5c. PROGRAM ELEMENT NUMBER\\[2pt]
+\textField[\TU{ }\V{$if(prognum)$$prognum$$endif$}]{sf5c}{.34\textwidth}{0.4cm}
+}\bigstrut\\\hline
+\end{tabular}}
+%==================================================================
+%    		Page 1 - Row 5
+%==================================================================
+\noindent\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|}
+\multirow{3}*{
+\parbox[][\rhV][c]{0.65\textwidth}{
+\vspace{-25pt}
+\small 6. AUTHOR(S)\\[2pt]
+\textField[\textSize{11}\Ff{\FfMultiline}\TU{ }\V{$if(sf298.name)$$sf298.name$$else$Smart, Ima, B. Supreme Allied Commander, USAF$endif$}]{sf6}{.64\textwidth}{2.4cm}
+}} & 
+
+\parbox[][0.33\rhIV][c]{0.35\textwidth}{
+\small 5d. PROJECT NUMBER\\[2pt]
+\textField[\TU{ }\V{$if(projnum)$$projnum$$endif$}]{sf5d}{.34\textwidth}{0.4cm}
+}\bigstrut\\\cline{2-2}
+&
+
+\parbox[][0.33\rhIV][c]{0.35\textwidth}{
+\small 5e. TASK NUMBER\\[2pt]
+\textField[\TU{ }\V{$if(tasknum)$$tasknum$$endif$}]{sf5e}{.34\textwidth}{0.4cm}
+}\bigstrut\\\cline{2-2}
+&
+
+\parbox[][0.33\rhIV][c]{0.35\textwidth}{
+\small 5f. WORK UNIT NUMBER\\[2pt]
+\textField[\TU{ }\V{$if(worknum)$$worknum$$endif$}]{sf5f}{.34\textwidth}{0.4cm}
+}\bigstrut\\\hline
+\end{tabular}}
+%==================================================================
+%    		Page 1 - Row 6
+%==================================================================
+\noindent\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|}
+\parbox[][\rhVI][c]{0.70\textwidth}{
+\small 7. PERFORMING ORGANIZATION NAMES(S) AND ADDRESS(ES)\\[2pt]
+\textField[\Ff{\FfMultiline}\TU{ }\V{
+Air Force Institute of Technology\n
+Graduate School of Engineering and Management (AFIT/$if(author.dept)$$author.dept$$else$EN$endif$)\n
+2950 Hobson Way, Building 640\n
+WPAFB OH 45433-7301}]{sf7}{.69\textwidth}{1.8cm}
+} \vrule\hspace{1pt}
+
+\parbox[][\rhVI][c]{0.30\textwidth}{\vspace{-10pt}
+\small \begin{spacing}{0.75}\begin{tabbing}8. \=PERFORMING ORGANIZATION \\ \>REPORT NUMBER\end{tabbing}\end{spacing}\vspace{10pt}
+\textField[\TU{ }\V{$if(designator)$$designator$$else$My Designator$endif$}]{sf5f}{.29\textwidth}{.5cm}
+}\\\hline
+\end{tabular}}
+%==================================================================
+%    		Page 1 - Row 7
+%==================================================================
+\noindent\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|}
+\multirow{2}*{
+\parbox[][\rhVII][c]{0.70\textwidth}{\vspace{-20pt}
+\small 9. SPONSORING/MONITORING AGENCY NAME(S) AND ADDRESS(ES)\\[2pt]
+\textField[\Ff{\FfMultiline}\TU{ }\V{$if(sponsor.title)$$sponsor.title$$endif$\n
+$if(sponsor.subtitle)$$sponsor.subtitle$$endif$\n
+$if(sponsor.address1)$$sponsor.address1$$endif$\n
+$if(sponsor.address2)$$sponsor.address2$$endif$\n
+$if(sponsor.phone)$$sponsor.phone$$endif$$if(sponsor.email1)$, $sponsor.email1$$endif$$if(sponsor.email2)$@$sponsor.email2$$endif$}]{sf9}{.69\textwidth}{1.8cm}
+}} & 
+
+\parbox[][0.425\rhVII][c]{0.30\textwidth}{
+\small 10. SPONSOR/MONITOR ACRONYM(S)\\[2pt]
+\textField[\TU{ }\V{$if(sponsor.acronym)$\uppercase{$sponsor.acronym$}$endif$}]{sf10}{.29\textwidth}{0.4cm}
+}\bigstrut\\\cline{2-2}
+&
+
+\parbox[][0.575\rhVII][c]{0.30\textwidth}{\vspace{-10pt}
+\small \begin{spacing}{0.75}\begin{tabbing}11. \=SPONSOR/MONITOR REPORT \\\> NUMBER(S)\end{tabbing}\end{spacing}\vspace{-10pt}
+\textField[\TU{ }\V{$if(sponsor.rptnum)$$sponsor.rptnum$$endif$}]{sf11}{.29\textwidth}{0.4cm}
+}\bigstrut\\\hline
+\end{tabular}}
+%==================================================================
+%    		Page 1 - Row 8
+%==================================================================
+ \noindent\resizebox{\textwidth}{!}{%
+ \begin{tabular}{|l|}
+\parbox[][\rhVIII][c]{\textwidth}{
+\small 12. DISTRIBUTION/AVAILABILITY STATEMENT\\[2pt]
+\textField[\Ff{\FfMultiline}\TU{ }\V{}]{sf12}{\textwidth}{1.2cm}
+}\bigstrut\\\hline
+
+\parbox[][\rhIX][c]{\textwidth}{
+\small 13. SUPPLEMENTARY NOTES\\[2pt]
+\textField[\Ff{\FfMultiline}\TU{ }\V{ }]{sf13}{\textwidth}{.8cm}
+}\bigstrut\\\hline
+
+\parbox[][\rhX][c]{\textwidth}{
+\small 14. ABSTRACT\\[2pt]
+\textField[\Ff{\FfMultiline}\TU{ }\V{$if(abstract)$$abstract$$else$This is my abstract$endif$}]{sf14}{\textwidth}{3.8cm}
+}\bigstrut\\\hline
+
+\parbox[][\rhXI][c]{\textwidth}{
+\small 15. SUBJECT TERMS\\[2pt]
+\textField[\TU{ }\V{$if(keywords)$$keywords$$endif$}]{sf15}{\textwidth}{0.4cm}
+}\bigstrut\\\hline
+ \end{tabular}}
+%==================================================================
+%    		Page 1 - Row 8
+%==================================================================
+\noindent\resizebox{\textwidth}{!}{
+
+\begin{tabular}{|l|l|l|l|l|l|}
+\multicolumn{3}{|l|}{\parbox[][0.2\rhXII][c]{0.30\textwidth}{\small 16. SECURITY CLASSIFICATION OF:}} &
+\multirow{6}{0.15\textwidth}{\parbox[][\rhXII][t]{0.15\textwidth}{\vspace{-35pt}
+\small \begin{spacing}{0.75}\begin{tabbing}17. \=LIMITATION OF \\\> ABSTRACT\end{tabbing}\end{spacing}
+\vspace{4pt}
+\textField[\Q{1}\TU{ }\V{}]{sf17}{.15\textwidth}{0.4cm}}} &
+
+\multirow{6}{0.09\textwidth}{\parbox[][\rhXII][t]{0.09\textwidth}{\vspace{-35pt}
+\small \begin{spacing}{0.75}\begin{tabbing} 18. \=NUMBER \\\>OF\\\> PAGES \end{tabbing}\end{spacing}
+\vspace{-5pt}
+\textField[\Q{1}\TU{ }\V{$if(pages)$$pages$$endif$}]{sf18}{.09\textwidth}{0.4cm}}} &
+
+\multirow{3}{0.4\textwidth}{\parbox[][0.5\rhXII][t]{0.4\textwidth}{\vspace{-12pt}
+\small 19a. NAME OF RESPONSIBLE PERSON\\[4pt]
+\textField[\textSize{11}\TU{ }\V{}]{sf19a}{.40\textwidth}{0.4cm}}}\\\cline{1-3}
+
+\multirow{5}{0.12\textwidth}{\parbox[][0.8\rhXII][t]{0.12\textwidth}{\vspace{-20pt}
+\small a. REPORT\\[15pt]
+\textField[\Q{1}\TU{ }\V{}]{sf16a}{.12\textwidth}{0.4cm}}} & 
+
+\multirow{5}{0.12\textwidth}{\parbox[][0.8\rhXII][t]{0.12\textwidth}{\vspace{-20pt}
+\small b. ABSTRACT\\[15pt]
+\textField[\Q{1}\TU{ }\V{}]{sf16b}{.12\textwidth}{0.4cm}}} & 
+
+\multirow{5}{0.12\textwidth}{\parbox[][0.8\rhXII][t]{0.12\textwidth}{\vspace{-20pt}
+\small c. THIS PAGE\\[15pt]
+\textField[\Q{1}\TU{ }\V{}]{sf16c}{.12\textwidth}{0.4cm}}} & & & \\ 
+& & & & & \\ \cline{6-6}
+& & & & & \multirow{3}{0.4\textwidth}{\parbox[][0.5\rhXII][t]{0.4\textwidth}{\vspace{-10pt}
+\small 19b. PHONE NUMBER (Include area code)\\[4pt]
+\textField[\textSize{10}\TU{ }\V{$if(advisor.phone)$$advisor.phone$$else$937-255-3636 x5555$endif$$if(advisor.email1)$$advisor.email1$$else$advisor$endif$@$if(advisor.email2)$$advisor.email2$$else$afit.edu$endif$}]{sf19b}{.4\textwidth}{0.4cm}}} \\
+& & & & & \\
+& & & & & \\ \cline{1-6}
+\end{tabular}}
+\end{myfont}
+\end{document}

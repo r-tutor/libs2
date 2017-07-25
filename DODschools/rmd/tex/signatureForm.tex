@@ -1,0 +1,197 @@
+\documentclass{article}
+\usepackage{hyperref}
+\usepackage{../tex/eforms}
+\usepackage[font={bf,footnotesize},labelsep=period]{caption}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{color}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{wasysym}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{ifthen}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+%==================================================================
+%    Header
+%==================================================================
+\renewcommand{\headrulewidth}{0pt}
+\chead{%
+\footnotesize{
+\MakeUppercase{AFIT Graduate School of Engineering and Management}}\\[1pt]
+\footnotesize{
+\MakeUppercase{Thesis / Dissertation Committee Approval Signature Page}}
+      }%
+\lhead{%
+\hspace{-30pt}
+\vspace{-5pt}
+\includegraphics[width=1in]{afit-atom.jpg}
+      }%
+\addtolength{\voffset}{5pt}
+\setlength{\headsep}{45pt}
+\setlength{\textheight}{600pt}
+\begin{document}
+\everyTextField{%
+            \BC{0.98 0.92 0.73}
+            \BG{0.98 0.92 0.73}
+            \textColor{0 0 0}
+            \textFont{helv}
+            \textSize{12}
+            \Q{1}
+            \W{0}
+               }%
+\everySigField{%
+            \BC{0.98 0.92 0.73}
+            \BG{0.98 0.92 0.73}
+            \textColor{0 0 0}
+            \textFont{helv}
+            \textSize{10}
+            \Q{1}
+            \W{0}
+              }%
+\pagenumbering{gobble}
+%==================================================================
+%    Designator Field
+%==================================================================
+\begin{tabularx}{0.6\textwidth}{ll}
+Designator Number &
+\textField[\TU{ }\V{$if(designator)$$designator$$else$Designator$endif$ }]{designator}{0.3\textwidth}{0.5cm}
+\end{tabularx}\\[10pt]
+%==================================================================
+%    Title Field
+%==================================================================
+
+{%
+\centering
+\begin{tabularx}{0.9\textwidth}{Xc}
+Title &
+\textField[\Ff{\FfMultiline}\Q{1}\TU{ }\V{\n\n\n\textbf{$if(title)$$title$$else$A Great Title Goes Here$endif$}}\textSize{14}]{title}{0.75\textwidth}{4cm}
+\end{tabularx}\par
+}\vspace{20pt}
+%==================================================================
+%    Student Name Field
+%==================================================================
+
+{%
+\centering
+\begin{tabularx}{0.75\textwidth}{Xc}
+Student Name \& Rank &
+\textField[\Ff{\FfMultiline}\Q{1}\TU{ }\V{\n\textbf{$if(author.name)$$author.name$$else$Ima B. Smart$endif$\n
+$if(author.rank)$$author.rank$$else$Supreme Allied Commander$endif$}}\textSize{14}]{author}{0.4\textwidth}{2cm}\\[10pt]
+\end{tabularx}\par
+}
+\vspace{20pt}
+%==================================================================
+%   Committee Chair Sign & Date
+%==================================================================
+
+{%
+\begin{tabularx}{\textwidth}{lclc}
+Approved: & & & \\[15pt]
+%==================================================================
+%    Committee Chair Sign & Date
+%==================================================================
+Committee Chair Signature &
+\sigField{chrsig}{7cm}{1cm} &
+Date &
+\textField[
+  \Q{1}
+  \TU{Enter the date as mm/dd/yy or select a date from the calendar}
+  \V{ 07/15/16 }
+  \AA{%
+    \AAKeystroke{AFDate_KeystrokeEx("mm/dd/yy")}
+    \AAFormat{AFDate_FormatEx("mm/dd/yy")}}]
+{chrdate}{1.0in}{1cm}\\[30pt]
+%==================================================================
+%    Committee Member 1 Sign & Date
+%==================================================================
+Committee Member Signature &
+\sigField{mbr1sig}{7cm}{1cm} & 
+Date &
+\textField[
+  \Q{1}
+  \TU{Enter the date as mm/dd/yy or select a date from the calendar}
+  \V{ 07/15/16 }
+  \AA{%
+    \AAKeystroke{AFDate_KeystrokeEx("mm/dd/yy")}
+    \AAFormat{AFDate_FormatEx("mm/dd/yy")}}]
+{mbr1date}{1in}{1cm}\\[30pt]
+%==================================================================
+%    Committee Member 2 Sign & Date
+%==================================================================
+Committee Member Signature &
+\sigField{mbr2sig}{7cm}{1cm} & 
+Date &
+\textField[
+  \Q{1}
+  \TU{Enter the date as mm/dd/yy or select a date from the calendar}
+  \V{ 07/15/16 }
+  \AA{%
+    \AAKeystroke{AFDate_KeystrokeEx("mm/dd/yy")}
+    \AAFormat{AFDate_FormatEx("mm/dd/yy")}}]
+{mbr2date}{1in}{1cm}\\[30pt]
+%==================================================================
+%   Committee Member 3 Sign & Date
+%==================================================================
+$if(reader3)$
+Committee Member Signature &
+\sigField{mbr3sig}{7cm}{1cm} &
+Date &
+\textField[
+  \Q{1}
+  \TU{Enter the date as mm/dd/yy or select a date from the calendar}
+  \V{ 07/15/16 }
+  \AA{%
+    \AAKeystroke{AFDate_KeystrokeEx("mm/dd/yy")}
+    \AAFormat{AFDate_FormatEx("mm/dd/yy")}}]
+{mbr3date}{1in}{1cm}\\[30pt]
+$endif$
+%==================================================================
+%    Committee Member 4 Sign & Date
+%==================================================================
+$if(reader4)$
+Committee Member Signature &
+\sigField{mbr4sig}{7cm}{1cm} &
+Date &
+\textField[
+  \Q{1}
+  \TU{Enter the date as mm/dd/yy or select a date from the calendar}
+  \V{ 07/15/16 }
+  \AA{%
+    \AAKeystroke{AFDate_KeystrokeEx("mm/dd/yy")}
+    \AAFormat{AFDate_FormatEx("mm/dd/yy")}}]
+{mbr4date}{1in}{1cm}\\[30pt]
+$endif$
+\end{tabularx}\par
+}
+\rule{\textwidth}{0.5pt}\\[10pt]
+
+For Dissertations Only: \\[20pt]
+
+{%
+\centering
+\begin{tabularx}{\linewidth}{lllc}
+%==================================================================
+%    Dean Sign & Date
+%==================================================================
+Dean Acceptance &
+\sigField{deansig}{9.4cm}{1cm} &
+Date &
+\textField[
+  \Q{1}
+  \TU{Enter the date as mm/dd/yy or select a date from the calendar}
+  \V{ 07/15/16 }
+  \AA{%
+    \AAKeystroke{AFDate_KeystrokeEx("mm/dd/yy")}
+    \AAFormat{AFDate_FormatEx("mm/dd/yy")}}]
+{deandate}{1in}{1cm}\\[8pt]
+& \small{ADEDEJI B. BADIRU}, Ph.D. & &\\[-3pt]
+& \scriptsize{Dean, Graduate School of Engineering and Management} & &
+\end{tabularx}\par
+}
+\end{document}

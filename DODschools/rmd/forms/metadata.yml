@@ -1,0 +1,97 @@
+author:
+  firstname: 'Jason'
+  lastname: 'Freels'
+  middle: 'K'
+  department: 'ENV'
+  service: 'USAF' # Use abbreviation - leave blank if NA
+  rank: 'Major'
+  afsc: '62E3A'
+  currentDegree: 'BS'
+  phone: 800-555-5555
+  email: 'jason.freels@afit.edu'
+program: 'Systems Engineering'
+degree: 'Master of Science'
+grad_date: '16 June 2016'
+advisor:
+  name: 'Joseph J. Pignatiello'
+  department: 'ENS' # Use three-letter designator
+  rank: 'Civilian'
+  service: 'usaf' # Use abbreviation - leave blank if NA
+  currentDegree: 'PhD'
+  phone: '937-255-3636 x4676'
+  email: 'joseph.pignatiello@afit.edu'
+reader1:
+  name: 'Raymond R. Hill'  # First Reader
+  department: 'ENS' # Use three-letter designator
+  rank: 'Civilian'
+  service: 'usaf' # Use abbreviation - leave blank if NA
+  currentDegree: 'PhD'
+reader2:
+  name: 'Richard L. Warr'  # Second Reader
+  department: 'ENC' # Use three-letter designator
+  rank: 'Lieutenant Colonel'
+  service: 'usaf' # Use abbreviation - leave blank if NA
+  currentDegree: 'PhD'
+reader3:
+  name: 'Robert Wirthlin'  # Third Reader
+  department: 'ENV' # Use three-letter designator
+  rank: 'Lieutenant Colonel'
+  service: 'usaf' # Use abbreviation - leave blank if NA
+  currentDegree: 'PhD'
+document:
+  title: 'A Capitalized Title: Something about a Package'
+  designator: 'AFIT-ENG-DS-16-J-009'
+  pages: 30
+  keywords: 'LaTeX,Thesis,typesetting'
+  type: 'Thesis'
+abstract: >
+  The abstract of the thesis.
+dedication: >
+  The dedication.
+acknowledgement: >
+  The acknowledgement.
+vita: >
+  The vita.
+distribution_statement:
+  A: no        # distribution unlimited
+  B: yes       # U.S. Government agencies only
+  C: no        # U.S. Government agencies and their Contractors
+  D: no        # DOD and DOD contractors only
+  E: no        # DOD components only
+  F: no        # Further dissemination only as directed
+distribution_reason:  # WHY NOT DISTRIBUTION A?
+  dms: no       # Direct Military Support
+  swd: no       # Software Documentation
+  fgi: no       # Foreign Government Info
+  cpe: no       # Contractor Performance Evaluation
+  pri: no       # Proprietary Information
+  crt: no       # Critical Technology
+  pre: no       # Premature Dissemination
+  aou: no       # Administrative Operational Use
+  tne: yes      # Test And Evaluation
+  aut: no       # Specific Authority
+  exp: yes      # Export Controlled
+  vul: no       # Vulnerability Information
+  ops: no       # Operations Security
+distribution_rationale: >
+  'Add some stuff here'
+release_authority: 'Org name'
+release_condition: >
+  'Under what conditions would you release this'
+sf298:
+  contractnum: 'DACA99-99-C-9999'
+  grantnum: ''
+  programnum: ''
+  projectnum: ''
+  tasknum: ''
+  workunitnum: ''
+sponsor:
+  title: 'Air Force Institute of Technology'
+  subtitle: 'Department of Systems Engineering and Management'
+  address1: '2950 Hobson Way'
+  address2: 'WPAFB OH 45433-7765'
+  phone: 'DSN 271-0690, COMM 937-255-3636'
+  email: 'first.last@afit.edu'
+  acronym: 'AFIT'
+  report_number: ''
+

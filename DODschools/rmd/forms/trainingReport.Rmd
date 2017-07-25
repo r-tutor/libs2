@@ -1,0 +1,20 @@
+---
+author:
+  name:       "`r DODschools:::noTouch('metadata.yml')$author$trname`"
+  department: "`r DODschools:::noTouch('metadata.yml')$author$department`"
+  rank:       "`r DODschools:::noTouch('metadata.yml')$author$rank`"
+  service:    "`r DODschools:::noTouch('metadata.yml')$author$service`"
+  degree:     "`r DODschools:::noTouch('metadata.yml')$author$currentDegree`"
+  afsc:       "`r DODschools:::noTouch('metadata.yml')$author$afsc`"
+keywords:     "`r DODschools:::noTouch('metadata.yml')$document$keywords`"
+program:      "`r DODschools:::noTouch('metadata.yml')$program`"
+degree:       "`r DODschools:::noTouch('metadata.yml')$degree`"
+title:        "`r DODschools:::noTouch('metadata.yml')$document$title`"
+sponsor_org:
+  title:      "`r DODschools:::noTouch('metadata.yml')$sponsor_org$title`"
+  subtitle:   "`r DODschools:::noTouch('metadata.yml')$sponsor_org$subtitle`"
+grad_date:    "`r DODschools:::noTouch('metadata.yml')$grad_date`"
+date:         "`r format(Sys.Date(), '%d %b %Y')`"
+dept_head:    "`r DODschools:::noTouch('metadata.yml')$dept_head`"
+output: DODschools:::training_report
+---

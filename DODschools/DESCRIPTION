@@ -1,0 +1,39 @@
+Package: DODschools
+Type: Package
+Title: Academic Document Templates for Department of Defense Schools
+Version: 1.0.1
+Date: 2017-07-02
+Authors@R: c(
+    person("Jason", "Freels" , , "auburngrads@live.edu"  , role = c("aut", "cre")),
+    person("Corey", "Degroot", , "corey.degroot@us.af.mil", role = "ctb"),
+    person("Diane", "Schultz", , "diane.schultz@us.af.mil", role = "ctb"),
+    person("Joseph", "Buyer", , "joseph.buyer@us.af.mil",   role = "ctb"),
+    person("James", "Daniels", , "jim.daniels@us.af.mil", role = "ctb"),
+    person("Christopher", "Twigg", , "christopher.twigg@us.af.mil", role = "ctb"))
+Description: 
+    'Rmarkdown' templates comforming to the style guides for Department of Defense (DoD) academic institutions.
+    As of Verison 1.0.0, templates have been developed for the DoD graduate schools: the Air Force Institute of Technology 
+    (AFIT) and the Naval Postgraduate School (NPS).  Subsequent versions will include templates for the United States Military 
+    Academy (USMA), the United States Naval Academy (USNA), and the United States Air Force
+    Academy (USAFA).  In addition, functions are provided to simplify tasks such as generating required forms,
+    parsing metadata to fill forms, importing reference metadata from works published to the Defense Technical Information Center (DTIC).
+    Finally, 'Rmarkdown' templates are included for creating HTML presentations. 
+License: MIT + file LICENSE
+Archs: i386, x64
+Depends: R (>= 3.1.0)
+Imports: utils, yaml, rmarkdown, knitr, RCurl, RefManageR, XML,
+        knitcitations, shiny, xtable
+VignetteBuilder: knitr
+RoxygenNote: 6.0.1
+NeedsCompilation: no
+URL: https://github.com/Auburngrads/DODschools
+BugReports: https://github.com/Auburngrads/DODschools/issues
+Encoding: UTF-8
+Author: Jason Freels [aut, cre],
+  Corey Degroot [ctb],
+  Diane Schultz [ctb],
+  Joseph Buyer [ctb],
+  James Daniels [ctb],
+  Christopher Twigg [ctb]
+Maintainer: Jason Freels <auburngrads@live.edu>
+Built: R 3.4.1; ; 2017-07-19 14:45:00 UTC; windows

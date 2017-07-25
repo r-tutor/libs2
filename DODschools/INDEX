@@ -1,0 +1,45 @@
+afit_dissertation       Air Force Institute of Technology Prospectus
+                        Template
+afit_far                Air Force Institute of Technology Thesis
+                        Template
+afit_presentation       Create an AFIT Presentation
+afit_prospectus         Air Force Institute of Technology Prospectus
+                        Template
+afit_report             Air Force Institute of Technology Prospectus
+                        Template
+afit_thesis             Air Force Institute of Technology Thesis
+                        Template
+buildForms              Build one or more forms
+citeDTIC                Create a BibEntry from an international
+                        standard book number (ISBN)
+citeISBN                Create a BibEntry from an international
+                        standard book number (ISBN)
+distro_form             Air Force Institute of Technology Prospectus
+                        Template
+dontTouch               Extract YAML data from metadata.yml
+find_file               Helper function to find a file for a named
+                        template
+find_resource           Helper function to find a resource for a named
+                        template
+getYAML                 Extract YAML metadata from an Rmarkdown file
+ieee_article            Air Force Institute of Technology Thesis
+                        Template
+inherit_pdf_document    Inherits properties from an existing pdf
+                        document
+noTouch                 Extract YAML metadata from metadata.yml
+pdf_document_format     Create a custom format derived from
+                        pdf_document
+publicRelease           Open AFIT-Specific forms in a browser
+public_affairs          Air Force Institute of Technology Prospectus
+                        Template
+runExample              Run examples in packages
+sf298                   Air Force Institute of Technology Prospectus
+                        Template
+signature_form          Air Force Institute of Technology Prospectus
+                        Template
+spie_article            Air Force Institute of Technology Thesis
+                        Template
+style_guide             Open AFIT-Specific forms in a browser
+template_pandoc         Render a pandoc template.
+training_report         Air Force Institute of Technology Prospectus
+                        Template

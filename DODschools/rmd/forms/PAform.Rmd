@@ -1,0 +1,27 @@
+---
+title:        "`r DODschools:::noTouch('metadata.yml')$document$title`"
+designator:   "`r DODschools:::noTouch('metadata.yml')$document$designator`"
+pages:        "`r DODschools:::noTouch('metadata.yml')$document$pages`"
+abstract:     "`r DODschools:::noTouch('metadata.yml')$abstract`"
+degree:       "`r DODschools:::noTouch('metadata.yml')$author$gettingDegree`"
+author:
+  name:       "`r DODschools:::noTouch('metadata.yml')$author$fullname`"
+  department: "`r DODschools:::noTouch('metadata.yml')$author$department`"
+  rank:       "`r DODschools:::noTouch('metadata.yml')$author$rank`"
+  service:    "`r DODschools:::noTouch('metadata.yml')$author$service`"
+  degree:     "`r DODschools:::noTouch('metadata.yml')$author$currentDegree`"
+  phone:      "`r DODschools:::noTouch('metadata.yml')$author$phone`"
+  email1:     "`r DODschools:::noTouch('metadata.yml')$author$email1`"
+  email2:     "`r DODschools:::noTouch('metadata.yml')$author$email2`"
+advisor:
+  name:       "`r DODschools:::noTouch('metadata.yml')$advisor$name`"
+  department: "`r DODschools:::noTouch('metadata.yml')$advisor$ofcsymbol`"
+  rank:       "`r DODschools:::noTouch('metadata.yml')$advisor$rank`"
+  service:    "`r DODschools:::noTouch('metadata.yml')$advisor$service`"
+  degree:     "`r DODschools:::noTouch('metadata.yml')$advisor$currentDegree`"
+  phone:      "`r DODschools:::noTouch('metadata.yml')$advisor$phone`"
+  email1:     "`r DODschools:::noTouch('metadata.yml')$advisor$email1`"
+  email2:     "`r DODschools:::noTouch('metadata.yml')$advisor$email2`"
+date: "`r format(Sys.Date(), '%d %B %Y')`"
+output: DODschools:::public_affairs
+---

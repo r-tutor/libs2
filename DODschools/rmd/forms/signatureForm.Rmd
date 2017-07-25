@@ -1,0 +1,21 @@
+---
+title:        "`r DODschools:::noTouch('metadata.yml')$document$title`"
+designator:   "`r DODschools:::noTouch('metadata.yml')$document$designator`"
+pages:        "`r DODschools:::noTouch('metadata.yml')$document$pages`"
+abstract:     "`r DODschools:::noTouch('metadata.yml')$abstract`"
+degree:       "`r DODschools:::noTouch('metadata.yml')$author$gettingDegree`"
+author:
+  name:       "`r DODschools:::noTouch('metadata.yml')$author$fullname`"
+  department: "`r DODschools:::noTouch('metadata.yml')$author$department`"
+  rank:       "`r DODschools:::noTouch('metadata.yml')$author$rank`"
+  service:    "`r DODschools:::noTouch('metadata.yml')$author$service`"
+  degree:     "`r DODschools:::noTouch('metadata.yml')$author$currentDegree`"
+advisor:      "`r DODschools:::noTouch('metadata.yml')$advisor$name`"
+reader1:      "`r DODschools:::noTouch('metadata.yml')$reader1$name`"
+reader2:      "`r DODschools:::noTouch('metadata.yml')$reader2$name`"
+reader3:      "`r DODschools:::noTouch('metadata.yml')$reader3$name`"
+reader4:      "`r DODschools:::noTouch('metadata.yml')$reader4$name`"
+dept_head:    "`r DODschools:::noTouch('metadata.yml')$dept_head`"
+date: "`r format(Sys.Date(), '%d %b %Y')`"
+output: DODschools:::signature_form
+---

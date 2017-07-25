@@ -1,0 +1,324 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[vmargin = .15in, hmargin = .15in]{geometry}
+\usepackage[font={bf,footnotesize},labelsep=period]{caption}
+\usepackage{setspace}
+\usepackage[T1]{fontenc}
+\usepackage{wasysym}
+\usepackage{../tex/eforms}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{ifthen}
+\usepackage{calc}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\begin{document}
+\everyTextField{
+            \BC{0.98 0.92 0.73}
+            \BG{0.98 0.92 0.73}
+            \textColor{0 0 0}
+            \textFont{helv} 
+            \textSize{12} 
+            \Q{0}
+            \W{0}
+            } % 0.25 0.41 0.878
+\everySigField{
+            \BC{0.98 0.92 0.73}
+            \BG{0.98 0.92 0.73}
+            \textColor{0 0 0}
+            \textFont{helv} 
+            \textSize{10} 
+            \Q{1}
+            \W{0}
+            } % 0.25 0.41 0.878
+\newdimen\rhI       \rhI=0.015\textheight
+\newdimen\rhII      \rhII=0.0075\textheight
+\newdimen\rhIII     \rhIII=0.10\textheight
+\newdimen\rhIV      \rhIV=\rhI
+\newdimen\rhV       \rhV=0.04\textheight
+\newdimen\rhVI      \rhVI=\rhV
+\newdimen\rhVII     \rhVII=0.05\textheight
+\newdimen\rhVIII    \rhVIII=\rhV
+\newdimen\rhIX      \rhIX=\rhV
+\newdimen\rhX       \rhX=\rhI
+\newdimen\rhXI      \rhXI=0.04\textheight
+\newdimen\rhXII     \rhXII=0.02\textheight
+\newdimen\rhXIII    \rhXIII=0.055\textheight
+\newdimen\rhXIV     \rhXIV=\rhI
+\newdimen\rhXV      \rhXV=0.25\textheight
+\newdimen\rhXVI     \rhXVI=0.125\textheight
+\newdimen\rhXVII    \rhXVII=0.1\textheight
+\newdimen\rhXVIII   \rhXVIII=\rhI
+\newdimen\rhXIX     \rhXIX=0.075\textheight
+\noindent\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|}
+    \hline
+%==================================================================
+%    Row 1              
+%==================================================================
+\parbox[][\rhI][c]{\textwidth}{
+\centering
+\textbf{EDUCATION/TRAINING REPORT}}\\
+\hline
+%==================================================================
+%    Row 2              
+%==================================================================
+\parbox[][\rhII][c]{\textwidth}{
+
+\centering
+\small\textbf{PRIVACY ACT STATEMENT}
+}\\
+%==================================================================
+%    Row 3              
+%==================================================================
+\parbox[][\rhIII][c]{\textwidth}{
+\footnotesize\textbf{AUTHORITY:} 10 U.S.C., Section 8013, Secretary of the Air Force; AFI 36-2406, Officer and Enlisted Eval Systems, and EOs 9397 and 13478 (SSN).\\[1pt]
+\textbf{PURPOSE:} To Document effectiveness/duty performance history, promotion selection, reduction-in-force and other appropriate personnel actions.\\[1pt]
+\textbf{ROUTINE USES:} Disclosures generally permitter under 5 U.S.C 552a(b) of the Privay Act may specifically be disclosed outside the DOD as a routine use pursuant to 5 U.S.C., Section 552a(b)(3) and may be disclosed to other federal agencies.  The "Blanket Routine Uses" apply.\\[1pt]
+\textbf{DISCLOSURE:} VOLUNTARY. However, nondisclosure may result in missing and/or inaccurate documents in the individuals master personnel records which may result in negative career impacting consequences.\\[1pt]
+\textbf{SORN:} F036 AF PC A, Effectiveness/Performance Reporting Records
+}\\
+\hline
+%==================================================================
+%    Row 4              
+%==================================================================
+\parbox[][\rhIV][c]{\textwidth}{
+
+\textbf{I. IDENTIFICATION DATA} (Read AFI 36-2406 carefully before filling in any item)
+}\\
+\hline
+%==================================================================
+%    Row 5            
+%==================================================================
+\parbox[][\rhV][c]{0.4\textwidth}{
+
+1. NAME (Last, First, Middle Initial)\\[-0.5pt]
+\textField[\TU{ }\V{$if(author.name)$$author.name$$else$Smart, Ima, B$endif$}]{name}{0.39\textwidth}{0.5cm}
+}\vrule\hspace{1pt}
+
+\parbox[][\rhV][c]{0.2\textwidth}{
+
+2. SSN\\[1pt]
+\textField[\TU{ }\V{$if(author.ssn)$$author.ssn$$else$123-45-6789$endif$}]{ssn}{0.19\textwidth}{0.5cm}
+}\vrule\hspace{1pt}
+
+\parbox[][\rhV][c]{0.2\textwidth}{
+
+3. RANK\\[1pt]
+\textField[\TU{ }\V{$if(author.rank)$$author.rank$$endif$}]{rank}{0.19\textwidth}{0.5cm}
+}\vrule\hspace{1pt}
+
+\parbox[][\rhV][c]{0.2\textwidth}{
+
+4. DUTY AFSC\\[1pt]
+\textField[\TU{ }
+           \V{$if(author.afsc)$$author.afsc$$endif$}]{afsc}{0.19\textwidth}{0.5cm}
+}\\
+\hline
+% %==================================================================
+% %    Row 6            
+% %==================================================================
+\parbox[][\rhVI][c]{\textwidth}{
+
+5. ORGANIZATION, COMMAND, AND LOCATION\\[1pt]
+\textField[\TU{ }\V{Air Force Institute of Technology (AETC), Wright-Patterson AFB OH}]{org}{0.99\textwidth}{.5cm}
+}\\
+\hline
+% %==================================================================
+% %    Row 7           
+% %==================================================================
+\parbox[][\rhVII][c]{0.24\textwidth}{
+
+\small 6. PERIOD OF REPORT\\[5pt]
+\small FROM: \textField[\TU{ }\V{ }]{from}{0.17\textwidth}{0.5cm}
+}\vrule\hspace{1pt}
+
+\parbox[][\rhVII][c]{0.24\textwidth}{
+\vspace{10pt}
+\small THRU: \textField[\TU{ }\V{$if(grad_date)$$grad_date$$else$16 Jul 2016$endif$ }]{thru}{0.17\textwidth}{0.5cm}
+}\vrule\hspace{1pt}
+
+\parbox[][\rhVII][c]{0.2\textwidth}{
+
+\small 7. LENGTH OF COURSE\\[5pt]
+\hspace{25pt}\textField[\TU{ }\V{ }]{length}{0.075\textwidth}{0.5cm} week(s)
+}\vrule\hspace{1pt}
+
+\parbox[][\rhVII][c]{0.3\textwidth}{
+
+8. REASON FOR REPORT\\[5pt]
+\hspace{5pt}
+\radioButton{reason}{10bp}{10bp}{ann}\hspace{5pt}\small ANNUAL \hspace{5pt}
+\radioButton{reason}{10bp}{10bp}{fin}\hspace{5pt}\small FINAL \hspace{5pt}
+\radioButton{reason}{10bp}{10bp}{dir}\hspace{5pt}\small DIRECTED
+}\\
+\hline
+% %==================================================================
+% %    Row 8            
+% %==================================================================
+\parbox[][\rhVIII][c]{\textwidth}{
+
+9. NAME AND LOCATION OF SCHOOL OR INSTITUTION\\[1pt]
+\textField[\TU{ }\V{Graduate School of Engineering and Management, Wright-Patterson AFB, OH }]{school}{0.99\textwidth}{0.6cm}
+}\\
+\hline
+% %==================================================================
+% %    Row 9            
+% %==================================================================
+\parbox[][\rhIX][c]{\textwidth}{
+
+10. NAME OR TITLE OF COURSE\\[1pt]
+\textField[\TU{ }\V{Graduate, $if(program)$$program$$else$Aeronautical Engineering$endif$}]{course}{0.99\textwidth}{0.5cm}
+}\\
+ \hline
+% %==================================================================
+% %    Row 10              
+% %==================================================================
+\parbox[][\rhX][c]{\textwidth}{
+
+\textbf{II. REPORT DATA} (Complete as applicable for final report)
+}\\
+\hline
+% %==================================================================
+% %    Row 11            
+% %==================================================================
+\parbox[][\rhXI][c]{0.5\textwidth}{
+
+1. AFSC/AERO RATING/DEGREE AWARDED\\[5pt]
+\textField[\TU{ }\V{$if(degree)$$degree$$else$Master of Science$endif$ in  $if(program)$$program$$else$Aeronautical Engineering$endif$ }]{degree}{0.49\textwidth}{0.5cm}
+}\vrule\hspace{5pt}
+
+\parbox[][\rhXI][c]{0.5\textwidth}{
+
+2. \\[5pt]
+\hspace{20pt}\checkBox{noncomp}{10bp}{10bp}{On}\hspace{25pt} \small COURSE NOT COMPLETED (list reason in item 4 below)
+}\\
+\hline
+% %==================================================================
+% %    Row 12              
+% %==================================================================
+\parbox[][\rhXII][c]{\textwidth}{
+
+3. \hspace{20pt} \textbf{DISTINGUISHED GRADUATE}\hspace{20pt}
+\radioButton{dg}{10bp}{10bp}{yes}\hspace{20pt} \small YES \hspace{20pt} (list criteria in item 4 below)\hspace{20pt}
+\radioButton{dg}{10bp}{10bp}{no}\hspace{20pt} \small NO DG PROGRAM
+}\\
+\hline
+% %==================================================================
+% %    Row 13            
+% %==================================================================
+\parbox[][\rhXIII][c]{\textwidth}{
+
+4. DG AWARD CRITERIA/COURSE NONCOMPLETION REASON\\[1pt]
+\textField[\Ff{\FfMultiline}\TU{ }\V{ }]{criteria}{0.99\textwidth}{1cm}
+}\\
+\hline
+% %==================================================================
+% %    Row 14              
+% %==================================================================
+\parbox[][\rhXIV][c]{\textwidth}{
+
+\textbf{III. COMMENTS} (\textit{Mandatory})
+}\\
+\hline
+% %==================================================================
+% %    Row 15            
+% %==================================================================
+\parbox[][\rhXV][c]{\textwidth}{
+ACADEMIC/TRAINING ACCOMPLISHMENTS\\[1pt]
+\textField[\Ff{\FfMultiline}\Ff{\FfRichText}\TU{ }\V{- AFIT GRADUATE PROGRAM: $if(degree)$$degree$$else$Master of Science$endif$ in $if(program)$$program$$else$Aeronautical Engineering$endif$\n
+- FOCUS AREAS:$if(keywords)$$keywords$$else$R programming, \LaTeX typesetting, Other good stuff$endif$\n
+- GPA: on a 4.0 scale\n\n
+- \uppercase{$if(document.type)$\MakeUppercase{$document.type$}$else$THESIS$endif$}: "$if(document.title)$$document.title$$else$A Great Title$endif$"\n
+- RESEARCH SPONSOR: $if(sponsor_org.title)$$sponsor_org.title$$endif$$if(sponsor_org.subtitle)$; $sponsor_org.subtitle$$endif$\n
+- IMPACT:\n
+-\n
+-\n
+- HONORS/DISTINCTIONS:\n
+-\n
+-\n
+}\textSize{11}]{accomp}{0.99\textwidth}{6.25cm}
+}\\
+\hline
+% %==================================================================
+% %    Row 16            
+% %==================================================================
+\parbox[][\rhXVI][c]{\textwidth}{
+PROFESSIONAL QUALITIES\\[1pt]
+\textField[\Ff{\FfMultiline}\TU{ }\V{
+EXCEPTONAL LEADERSHIP AND/OR SERVICE:\n}]{qual}{0.99\textwidth}{2.75cm}
+}\\
+\hline
+% %==================================================================
+% %    Row 17            
+% %==================================================================
+\parbox[][\rhVI][c]{\textwidth}{
+
+OTHER COMMENTS\\[1pt]
+\textField[\Ff{\FfMultiline}\TU{ }\V{ }]{other}{0.99\textwidth}{0.5cm}
+}\\
+\hline
+% %==================================================================
+% %    Row 18              
+% %==================================================================
+\parbox[][\rhXVIII][c]{\textwidth}{
+
+\textbf{IV. EVALUATOR}
+}\\
+\hline
+% %==================================================================
+% %    Row 19            
+% %==================================================================
+\multicolumn{1}{|l|}{
+\parbox[][\rhXIX][c]{0.5\textwidth}{
+
+NAME, RANK BR OR SVC, ORGN, COMD LOCATION\\[1pt]
+\textField[\Ff{\FfMultiline}\TU{ }\V{
+$if(dept_head)$
+  $dept_head$
+$else$
+  Department Head
+$endif$\n
+%
+Air Force Institute of Technology (AETC)\n
+Wright-Patterson AFB OH
+}]{eval}{0.49\textwidth}{1.5cm}
+}\vrule
+
+\parbox[][\rhXIX][c]{0.5\textwidth}{
+\parbox[][0.5\rhXIX][c]{0.27\textwidth}{
+\hspace{5pt}\small DUTY TITLE\\[-9pt]
+
+\hspace{5pt} \textField[\TU{ }\V{Head, AFIT/\uppercase{$if(author.department)$$author.department$$else$EN$endif$}}]{evalduty}{0.25\textwidth}{0.5cm}
+}\vrule\hspace{5pt}
+\parbox[][0.5\rhXIX][c]{0.23\textwidth}{
+\small DATE\\[-9pt]
+
+\textField[\TU{ }\V{$if(date)$$date$$endif$ }]{evaldate}{0.22\textwidth}{0.5cm}
+}\\
+\rule{0.53\textwidth}{0.5pt}
+\parbox[][0.5\rhXIX][c]{0.1\textwidth}{
+\hspace{5pt}\small SSN\\[-10pt]
+
+\hspace{5pt}\textField[\TU{ }\V{ }]{evalssn}{0.075\textwidth}{0.55cm}
+}\vrule\hspace{5pt}
+\parbox[][0.5\rhXIX][c]{0.4\textwidth}{
+\small SIGNATURE\\[-10pt]
+
+\sigField[\Lock{/Action/All}]{evalsig}{0.39\textwidth}{0.55cm}
+}}}\\
+\hline
+\end{tabular}}
+%==================================================================
+%    Footer              
+%==================================================================
+\noindent\resizebox{\textwidth}{!}{%
+\begin{tabularx}{\textwidth}{lcX}
+\textbf{AF FORM 475, 20000601 V1} \hspace{20pt} &
+\scriptsize PREVIOUS EDITIONS ARE OBSOLETE \hspace{20pt} &
+\scriptsize\textbf{PRIVACY ACT INFORMATION: The information in this form is FOR OFFICIAL USE ONLY. Protect IAW the Privacy Act of 1974.}
+\end{tabularx}
+}
+\end{document}

@@ -1,0 +1,5 @@
+name: ieee_article
+description: >
+ Template for creating an IEEE Transactions Journal Article
+create_dir: true
+
