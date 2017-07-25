@@ -1,0 +1,32 @@
+MCMC-combos             Combination plots
+MCMC-diagnostics        General MCMC diagnostics
+MCMC-distributions      Histograms and kernel density plots of MCMC
+                        draws
+MCMC-intervals          Plot interval estimates from MCMC draws
+MCMC-nuts               Diagnostic plots for the No-U-Turn-Sampler
+                        (NUTS)
+MCMC-overview           Plots for Markov chain Monte Carlo simulations
+MCMC-recover            Compare MCMC estimates to "true" parameter
+                        values
+MCMC-scatterplots       Scatterplots of MCMC draws
+MCMC-traces             Traceplot (time series plot) of MCMC draws
+PPC-discrete            PPCs for discrete outcomes
+PPC-distributions       PPC distributions
+PPC-errors              PPC errors
+PPC-intervals           PPC intervals
+PPC-loo                 LOO predictive checks
+PPC-overview            Graphical posterior predictive checking
+PPC-scatterplots        PPC scatterplots
+PPC-test-statistics     PPC test statistics
+available_ppc           Get or view the names of available plotting
+                        functions
+bayesplot-colors        Set, get, or view color schemes
+bayesplot-extractors    Extract quantities needed for plotting from
+                        model objects
+bayesplot-helpers       Convenience functions for adding or changing
+                        plot details
+bayesplot-package       Plots for Bayesian Models
+bayesplot_grid          Arrange plots in a grid
+pp_check                Posterior predictive checks (S3 generic and
+                        default method)
+theme_default           Default plotting theme
