@@ -1,0 +1,33 @@
+ac_se                   Agresti-Coull Intervals
+age_breaks              Convert Ages or Dates, to a Factor Variable of
+                        Standard Age Groups
+blog_opts               Set some knitr chunk options which may work
+                        well for blogging
+blog_push               Push a blog post live (possibly)
+blog_serve              Serve or Compile a Jekyll Blog
+char_cols               Convert all columns in a data.frame to
+                        character
+consolidate_values      Attempt to Rationalise a Factor Variable (using
+                        simple rules)
+date_to_age             Convert Dates to Ages
+filenamise              Sanitise a String (URL/filename safe)
+gg_colour_hue           ggplot2 categorical colour hues
+html_tri                Format Numeric Data with HTML Arrows
+htmlwidgets_deps        Configure htmlwidgets dependencies for a
+                        knitr-jekyll blog
+kill_cols               Kill off non-informative columns in a
+                        data.frame
+lz                      Turn numbers to strings, with leading zeros
+misc_br_num_formats     Miscellaneous Number Formatting Functions
+new_post                File Structure for a Jekyll Blog Post
+refactor                Change Factor Levels Using List Lookups
+refactor_list           Produce a lookup for refactor()
+rep_char                Repeat a character a variable number of times
+rev_levs                Reverse Factor Levels
+scale_strip             Strip Scale Labels from Likert Data
+smx_watermark           Add a watermark to a plot
+sys_open                Open a file in the Operating System
+test_data               An idealised test data set, for demonstrating
+                        some of the functions
+theme_br                Brendan's ggplot2 theme
+vswitch                 A vectorized version of switch
