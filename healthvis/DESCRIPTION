@@ -1,0 +1,32 @@
+Package: healthvis
+Maintainer: Prasad Patil
+ <prpatil@jhsph.edu>
+Author: Jeffrey T. Leek <jtleek@gmail.com>, Prasad Patil<prpatil@jhsph.edu>
+Version: 1.2.1
+License: GPL-3
+Title: Interactive Health Visualizations
+Description: The healthvis package is designed to make it easy to create and
+    publish interactive visualizations, with a focus on health visualizations.
+    The functions in the healthvis package create HTML pages with embedded
+    interactive graphics built with the Javascript library D3.js
+    (http://d3js.org/). They can be directly plotted on your local machine,
+    published to healthvis.org, and embedded directly into other websites. To
+    see all currently available plots use the command listHealthVis().
+Suggests: testthat, roxygen2, survival, nnet, colorspace
+Depends: RCurl, rjson, httpuv
+Collate: 'AllClasses.R' 'healthvisMethods.R' 'accuracyTableVis.R'
+        'survivalVis.R' 'heatmapVis.R' 'iconArrayVis.R'
+        'listHealthVis.R' 'zzz.R' 'pairedVis.R' 'distVis.R' 'corVis.R'
+RemoteType: github
+RemoteHost: api.github.com
+RemoteRepo: healthvis
+RemoteUsername: hcorrada
+RemoteRef: master
+RemoteSha: 78b1e19ac5d72990aeca6a8c3689ab358b3fd195
+RemoteSubdir: pkg
+GithubRepo: healthvis
+GithubUsername: hcorrada
+GithubRef: master
+GithubSHA1: 78b1e19ac5d72990aeca6a8c3689ab358b3fd195
+GithubSubdir: pkg
+Built: R 3.2.2; ; 2015-11-14 03:21:35 UTC; windows

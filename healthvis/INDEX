@@ -1,0 +1,16 @@
+HVServer                healthvis socket class definition
+accuracyTableVis        Create an accuracy table visualization
+corVis                  Create a correlation matrix visualization
+distVis                 Create a distance matrix visualization
+healthvis               healthvis class definition
+healthvisOptions        Options list
+heatmapVis              Create a sortable heatmap.
+iconArrayVis            Create an icon array.
+initialize              Constructor for healthvis objects
+listHealthVis           This function lists all the currently available
+                        healthvis plots
+pairedVis               Create a paired scatterplot matrix
+                        visualization
+plot                    Plot a healthvis object
+survivalVis             Create a interactive plot of a cox proportional
+                        hazards model
