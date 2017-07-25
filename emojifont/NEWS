@@ -1,0 +1,52 @@
+CHANGES IN VERSION 0.4.1
+------------------------
+ o update emoji alias lookup table to Unicode 9 <2017-02-17, Fri>
+ o add EmojiOne font which supports Unicode 9 and use it by default <2017-02-17, Fri>
+   + https://github.com/eosrei/emojione-color-font
+ o auto load emoji and fontawesome fonts <2017-02-16, Thu>
+
+CHANGES IN VERSION 0.4.0
+------------------------
+ o update fontawesome to v4.7.0 <2017-12-15, Wed>
+ o geom_emoji & geom_fontawesome <2017-12-15, Wed>
+
+CHANGES IN VERSION 0.3.7
+------------------------
+ o add examples and sample_fontawesome function <2016-12-28, Wed>
+
+CHANGES IN VERSION 0.3.6
+------------------------
+ o fixed issue of returning long list of NA if emoji not found <2016-12-28, Wed>
+
+CHANGES IN VERSION 0.3.5
+------------------------
+ o sample_emoji <2016-10-17, Mon>
+
+CHANGES IN VERSION 0.3.4
+------------------------
+ o update vignette <2016-06-28, Tue>
+
+CHANGES IN VERSION 0.3.3
+------------------------
+ o update fontawesome lookup table <2016-04-21, Thu>
+
+CHANGES IN VERSION 0.3.2
+------------------------
+ o update README and vignette <2016-03-09, Wed>
+
+CHANGES IN VERSION 0.3.0
+------------------------
+ o add support of fontawesome <2016-02-26, Fri>
+
+CHANGES IN VERSION 0.2.1
+------------------------
+ o fixed R CMD check --as-cran issus <2016-02-25, Thu>
+
+CHANGES IN VERSION 0.2.0
+------------------------
+ o add vignette <2016-02-25, Thu>
+ o search_emoji and emoji functions
+
+CHANGES IN VERSION 0.1.0
+------------------------
+ o list.emojifonts and load.emojifont functions
