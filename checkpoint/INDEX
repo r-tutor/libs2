@@ -1,0 +1,18 @@
+checkpoint              Configures R session to use packages as they
+                        existed on CRAN at time of snapshot.
+checkpoint-package      Install packages from snapshots on the
+                        checkpoint server for reproducibility
+checkpointArchives      List checkpoint archives on disk.
+checkpointRemove        Remove checkpoint archive from disk.
+getAccessDate           Returns the date the snapshot was last
+                        accessed.
+getValidSnapshots       Read list of available snapshot dates from
+                        MRAN.
+mranUrl                 Returns MRAN URL by querying options and
+                        defaults.
+scanForPackages         Scans a project (or folder) for references to
+                        packages.
+setSnapshot             Set default CRAN repository to MRAN snapshot
+                        date.
+unCheckpoint            Undo the effect of checkpoint by resetting
+                        .libPath to user library location.
