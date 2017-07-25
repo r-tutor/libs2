@@ -1,0 +1,39 @@
+Package: datacomb
+Title: Visual Analysis Tool for Tabular Data
+Version: 1.0.0
+Description: 
+    Allows for visually combing through datasets with
+    filter, sort, and groupBy functions. The interface can also
+    be expanded to show histograms, scatter plots, and
+    summary statistics by column.
+Authors@R: 
+    c(
+      person(
+        "Chris", "Polis",
+        email = "cmpolis@gmail.com",
+        role = c("aut", "cre")
+      ),
+      person("Kenton", "Russell", role = "ctb")
+    )
+URL: https://github.com/cmpolis/datacomb
+BugReports: https://github.com/cmpolis/datacomb/issues
+Depends: R (>= 3.0.0)
+Imports: htmlwidgets (>= 0.3.2)
+License: MIT
+LazyData: true
+RemoteType: github
+RemoteHost: api.github.com
+RemoteRepo: datacomb
+RemoteUsername: cmpolis
+RemoteRef: master
+RemoteSha: 7909f3ecf2c6ebbd55ee1188234deeb0b8188321
+RemoteSubdir: pkg
+GithubRepo: datacomb
+GithubUsername: cmpolis
+GithubRef: master
+GithubSHA1: 7909f3ecf2c6ebbd55ee1188234deeb0b8188321
+GithubSubdir: pkg
+Author: Chris Polis [aut, cre],
+  Kenton Russell [ctb]
+Maintainer: Chris Polis <cmpolis@gmail.com>
+Built: R 3.2.2; ; 2015-11-15 03:07:20 UTC; windows
