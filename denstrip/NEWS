@@ -1,0 +1,80 @@
+-*- text -*-
+
+USER-VISIBLE CHANGES (for detailed changes see ChangeLog in the source package)
+--------------------
+
+Version 1.5.3 (2014-02-20)
+--------------------------
+
+o Added arguments "tcol" and "mcol" to denstrip to change the colours
+  of tick marks.
+
+o DESCRIPTION file fixed to satisfy CRAN check.
+
+
+Version 1.5.2 (2012-04-02)
+--------------------------
+
+o Fix for densregion with very small numbers of unique densities.
+
+o Package now depends on the new R 2.15 due to the use of
+.filled.contour in densregion.
+
+o Default value of 1 added to "max" argument in denstrip.legend,
+  fixing the problem revealed by the new R CMD check.
+
+
+Version 1.5.1 (2011-01-17) 
+--------------------------
+
+o "S3Method" corrected to "S3method" in NAMESPACE.
+
+
+Version 1.5 (2010-05-18)
+------------------------
+
+o "colmin" argument added to all functions which accept "colmax".  If
+  set to "transparent", this allows multiple density regions or strips
+  to be drawn on the same plot with smooth overlaps, as long as the
+  graphics device supports transparency.
+
+
+Version 1.4 (2009-09-24)
+------------------------
+
+o panel.denstrip can now be used with the lattice "bwplot" function. 
+  See the new example code in help(denstrip).
+
+
+Version 1.3 (2009-03-23)
+------------------------
+
+o Contour lines can now be added to density regions. 
+
+o Point sizes and plotting characters can be varied between "cistrip"
+  strips.
+
+
+Version 1.2 (2008-11-03)
+------------------------
+
+o Panel functions for all strips implemented for use with lattice
+  graphics.
+
+o Sectioned density plots can now point downwards or rightwards.
+
+
+Version 1.1 (2008-08-21)
+------------------------
+
+o Alpha channel supported in user-specified colours. 
+
+o Eliminated dependency on R.utils, through new function
+  seqToIntervals for finding sequences in a vector of integers. 
+
+
+Version 1.0 (2008-08-15)
+------------------------
+
+o New release 
+

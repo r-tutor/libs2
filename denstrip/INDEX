@@ -1,0 +1,17 @@
+bpstrip                 Box-percentile strips
+cistrip                 Line drawings of point and interval estimates
+densregion              Density regions
+densregion.normal       Density regions based on normal distributions
+densregion.survfit      Density regions for survival curves
+denstrip                Density strips
+denstrip-package        Overview of the denstrip package
+denstrip.legend         Add a legend to a density strip or shaded
+                        region
+denstrip.normal         Density strip for a normal or log-normal
+                        distribution
+sectioned.density       Sectioned density plots
+seqToIntervals          Find contiguous sequences in a vector of
+                        integers
+vwstrip                 Varying-width strips
+vwstrip.normal          Varying width strip for a normal or log-normal
+                        distribution
