@@ -1,0 +1,41 @@
+Package: d3hiveR
+Type: Package
+Title: htmlwidget for d3.js hive plots in R
+Version: 0.1
+Date: 2015-07-07
+Authors@R: c(
+      person(
+        "Mike", "Bostock"
+        , role = c("aut", "cph")
+        , comment = "d3.js and d3hive.js library in htmlwidgets/lib, http://d3js.org"
+      ),
+      person(
+        "Kent", "Russell"
+        , role = c("aut", "cre")
+        , comment = "R interface"
+        , email = "kent.russell@timelyportfolio.com"
+      )
+    )
+Maintainer: Kent Russell <kent.russell@timelyportfolio.com>
+Description: Make interactive d3.js hive plots in R with the convenience and infrastructure
+              of an htmlwidget.
+License: MIT + file LICENSE
+LazyData: TRUE
+Imports: dplyr, HiveR, htmlwidgets, htmltools, magrittr (>= 1.5),
+        markdown
+Suggests: knitr
+VignetteBuilder: knitr
+RemoteType: github
+RemoteHost: api.github.com
+RemoteRepo: d3hiveR
+RemoteUsername: timelyportfolio
+RemoteRef: master
+RemoteSha: 643886e3257254e761b0f574fe4ae623ad0bcf68
+GithubRepo: d3hiveR
+GithubUsername: timelyportfolio
+GithubRef: master
+GithubSHA1: 643886e3257254e761b0f574fe4ae623ad0bcf68
+Author: Mike Bostock [aut, cph] (d3.js and d3hive.js library in
+    htmlwidgets/lib, http://d3js.org),
+  Kent Russell [aut, cre] (R interface)
+Built: R 3.2.2; ; 2015-11-13 17:52:21 UTC; windows

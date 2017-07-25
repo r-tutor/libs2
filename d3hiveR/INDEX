@@ -1,0 +1,3 @@
+d3hive                  htmlwidget for d3.js hive plots
+d3hiveOutput            Widget output function for use in Shiny
+renderD3hive            Widget render function for use in Shiny
