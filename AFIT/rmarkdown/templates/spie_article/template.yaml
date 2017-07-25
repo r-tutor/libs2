@@ -1,0 +1,5 @@
+name: spie_article
+description: >
+ Template for creating an SPIE Journal article
+create_dir: true
+

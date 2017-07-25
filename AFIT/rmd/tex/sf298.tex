@@ -1,0 +1,253 @@
+\documentclass{article}
+\usepackage{hyperref}
+\usepackage{../tex/eforms}
+\usepackage[font={bf,footnotesize},labelsep=period]{caption}
+\usepackage[vmargin = .2in, hmargin = .4in]{geometry}
+\usepackage{setspace}
+\usepackage{color}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{wasysym}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{bigstrut}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{ifthen}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\begin{document}
+\everyTextField{
+            \BC{0.98 0.92 0.73} \BG{0.98 0.92 0.73}
+            \textColor{0 0 0}   \textFont{helv}     \textSize{10} 
+            \Q{0}               \W{0}
+            } 
+\everySigField{
+            \BC{0.98 0.92 0.73} \BG{0.98 0.92 0.73}
+            \textColor{0 0 0}   \textFont{helv}     \textSize{10} 
+            \Q{1}               \W{0}
+            } 
+\newdimen\rhI       \rhI=0.04\textheight
+\newdimen\rhII      \rhII=0.08\textheight
+\newdimen\rhIII     \rhIII=0.04\textheight
+\newdimen\rhIV      \rhIV=0.12\textheight
+\newdimen\rhV       \rhV=\rhIV
+\newdimen\rhVI      \rhVI=.09\textheight
+\newdimen\rhVII     \rhVII=0.09\textheight
+\newdimen\rhVIII    \rhVIII=0.07\textheight
+\newdimen\rhIX      \rhIX=0.05\textheight
+\newdimen\rhX       \rhX=0.16\textheight
+\newdimen\rhXI      \rhXI=0.04\textheight
+\newdimen\rhXII     \rhXII=0.01\textheight
+\noindent\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|}
+\hline
+%==================================================================
+%    		Page 1 - Row 1              
+%==================================================================
+\parbox[][\rhI][c]{0.70\textwidth}{
+\centering
+\textbf{REPORT DOCUMENTATION PAGE}
+} \vrule\hspace{1pt}
+
+\parbox[][\rhI][c]{0.30\textwidth}{
+\centering
+\small Form Approved\\[-1pt]
+\small OMB No. 0704-0188
+}\\\hline
+%==================================================================
+%    		Page 1 - Row 2
+%==================================================================
+\parbox[][\rhII][t]{\textwidth}{
+\vspace{2pt}
+\begin{spacing}{0.7}
+\footnotesize\raggedright The public reporting burden for this collection of information is estimated to average 1 hour per response, including the time for reviewing instructions, searching existing data sources, gathering and maintaining the data needed, and completing and reviewing the collection of information. Send comments regarding this burden estimate or any other aspect of this collection of information, including suggestions for reducing the burden, to Department of Defense, Washington Headquarters Services, Directorate for Information Operations and Reports (0704-0188), 1215 Jefferson Davis Highway, Suite 1204, Arlington, VA 22202-4302. Respondents should be aware that notwithstanding any other provision of law, no person shall be subject to any penalty for failing to comply with a collection of information if it does not display a currently valid OMB control number.\linebreak \textbf{PLEASE DO NOT RETURN YOUR FORM TO THE ABOVE ADDRESS.}
+\end{spacing}
+}\\\hline
+%==================================================================
+%    		Page 1 - Row 3
+%==================================================================
+\parbox[][\rhIII][c]{.25\textwidth}{
+\vspace{0pt}
+\small 1. REPORT DATE (DD-MM-YYYY)\\[2pt]
+\textField[\TU{ }\V{$if(date)$$date$$else$DD-MM-YYYY$endif$}]{sf1}{.24\textwidth}{0.4cm}
+}\vrule\hspace{1pt}
+
+\parbox[][\rhIII][c]{.45\textwidth}{
+\vspace{1pt}
+\small 2. REPORT TYPE\\[2pt]
+\textField[\TU{ }\V{$if(doctype)$$doctype$$else$Master's Thesis$endif$}]{sf2}{.44\textwidth}{0.4cm}
+}\vrule\hspace{1pt}
+
+\parbox[][\rhIII][c]{0.30\textwidth}{
+\vspace{0pt}
+\small 3. DATES COVERED (From - To)\\[2pt]
+\textField[\TU{ }\V{}]{sf3}{.29\textwidth}{0.4cm}
+}\\\hline
+\end{tabular}}\\
+%==================================================================
+%    		Page 1 - Row 4
+%==================================================================
+\noindent\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|}
+\multirow{3}*{
+\parbox[][\rhIV][c]{0.65\textwidth}{
+\vspace{-25pt}
+\small 4. TITLE AND SUBTITLE\\[2pt]
+\textField[\Ff{\FfMultiline}\textSize{11}\TU{ }\V{\n\n\textbf{$if(title)$$title$$else$A Great Title$endif$}}]{sf4}{.64\textwidth}{2.4cm}
+}} &
+
+\parbox[][0.33\rhIV][c]{0.35\textwidth}{
+\small 5a. CONTRACT NUMBER\\[2pt]
+\textField[\TU{ }\V{$if(contractnum)$$contractnum$$endif$}]{sf5a}{.34\textwidth}{0.4cm}
+}\bigstrut\\\cline{2-2}
+&
+
+\parbox[][0.33\rhIV][c]{0.35\textwidth}{
+\small 5b. GRANT NUMBER\\[2pt]
+\textField[\TU{ }\V{$if(grantnum)$$grantnum$$endif$}]{sf5b}{.34\textwidth}{0.4cm}
+}\bigstrut\\\cline{2-2}
+&
+
+\parbox[][0.33\rhIV][c]{0.35\textwidth}{
+\small 5c. PROGRAM ELEMENT NUMBER\\[2pt]
+\textField[\TU{ }\V{$if(programnum)$$programnum$$endif$}]{sf5c}{.34\textwidth}{0.4cm}
+}\bigstrut\\\hline
+\end{tabular}}
+%==================================================================
+%    		Page 1 - Row 5
+%==================================================================
+\noindent\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|}
+\multirow{3}*{
+\parbox[][\rhV][c]{0.65\textwidth}{
+\vspace{-25pt}
+\small 6. AUTHOR(S)\\[2pt]
+\textField[\textSize{11}\Ff{\FfMultiline}\TU{ }\V{$if(author)$$author$$else$Smart, Ima, B. Supreme Allied Commander, USAF$endif$}]{sf6}{.64\textwidth}{2.4cm}
+}} & 
+
+\parbox[][0.33\rhIV][c]{0.35\textwidth}{
+\small 5d. PROJECT NUMBER\\[2pt]
+\textField[\TU{ }\V{$if(projectnum)$$projectnum$$endif$}]{sf5d}{.34\textwidth}{0.4cm}
+}\bigstrut\\\cline{2-2}
+&
+
+\parbox[][0.33\rhIV][c]{0.35\textwidth}{
+\small 5e. TASK NUMBER\\[2pt]
+\textField[\TU{ }\V{$if(tasknum)$$tasknum$$endif$}]{sf5e}{.34\textwidth}{0.4cm}
+}\bigstrut\\\cline{2-2}
+&
+
+\parbox[][0.33\rhIV][c]{0.35\textwidth}{
+\small 5f. WORK UNIT NUMBER\\[2pt]
+\textField[\TU{ }\V{$if(workunitnum)$$workunitnum$$endif$}]{sf5f}{.34\textwidth}{0.4cm}
+}\bigstrut\\\hline
+\end{tabular}}
+%==================================================================
+%    		Page 1 - Row 6
+%==================================================================
+\noindent\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|}
+\parbox[][\rhVI][c]{0.70\textwidth}{
+\small 7. PERFORMING ORGANIZATION NAMES(S) AND ADDRESS(ES)\\[2pt]
+\textField[\Ff{\FfMultiline}\TU{ }\V{
+Air Force Institute of Technology\n
+Graduate School of Engineering and Management (AFIT/$if(department)$$department$$else$EN$endif$)\n
+2950 Hobson Way, Building 640\n
+WPAFB OH 45433-7301}]{sf7}{.69\textwidth}{1.8cm}
+} \vrule\hspace{1pt}
+
+\parbox[][\rhVI][c]{0.30\textwidth}{\vspace{-10pt}
+\small \begin{spacing}{0.75}\begin{tabbing}8. \=PERFORMING ORGANIZATION \\ \>REPORT NUMBER\end{tabbing}\end{spacing}\vspace{10pt}
+\textField[\TU{ }\V{$if(designator)$$designator$$else$My Designator$endif$}]{sf5f}{.29\textwidth}{.5cm}
+}\\\hline
+\end{tabular}}
+%==================================================================
+%    		Page 1 - Row 7
+%==================================================================
+\noindent\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|}
+\multirow{2}*{
+\parbox[][\rhVII][c]{0.70\textwidth}{\vspace{-20pt}
+\small 9. SPONSORING/MONITORING AGENCY NAME(S) AND ADDRESS(ES)\\[2pt]
+\textField[\Ff{\FfMultiline}\TU{ }\V{}]{sf9}{.69\textwidth}{1.8cm}
+}} & 
+
+\parbox[][0.425\rhVII][c]{0.30\textwidth}{
+\small 10. SPONSOR/MONITOR ACRONYM(S)\\[2pt]
+\textField[\TU{ }\V{$if(date)$\uppercase{$date$}$else$16-07-2016$endif$}]{sf10}{.29\textwidth}{0.4cm}
+}\bigstrut\\\cline{2-2}
+&
+
+\parbox[][0.575\rhVII][c]{0.30\textwidth}{\vspace{-10pt}
+\small \begin{spacing}{0.75}\begin{tabbing}11. \=SPONSOR/MONITOR REPORT \\\> NUMBER(S)\end{tabbing}\end{spacing}\vspace{-10pt}
+\textField[\TU{ }\V{$if(date)$\uppercase{$date$}$else$16-07-2016$endif$}]{sf11}{.29\textwidth}{0.4cm}
+}\bigstrut\\\hline
+\end{tabular}}
+%==================================================================
+%    		Page 1 - Row 8
+%==================================================================
+ \noindent\resizebox{\textwidth}{!}{%
+ \begin{tabular}{|l|}
+\parbox[][\rhVIII][c]{\textwidth}{
+\small 12. DISTRIBUTION/AVAILABILITY STATEMENT\\[2pt]
+\textField[\Ff{\FfMultiline}\TU{ }\V{$if(distro_state)$$distro_state$$endif$$if(distro_reason)$; $distro_reason$$endif$ (1 January 2016). $if(distro_extra)$$distro_extra$$endif$ the RELEASING ORGANIZATION, ORG ADDRESS}]{sf12}{\textwidth}{1.2cm}
+}\bigstrut\\\hline
+
+\parbox[][\rhIX][c]{\textwidth}{
+\small 13. SUPPLEMENTARY NOTES\\[2pt]
+\textField[\Ff{\FfMultiline}\TU{ }\V{This work is a declared work of the U.S. government and is not subject to copyright protection in the United States.}]{sf13}{\textwidth}{.8cm}
+}\bigstrut\\\hline
+
+\parbox[][\rhX][c]{\textwidth}{
+\small 14. ABSTRACT\\[2pt]
+\textField[\Ff{\FfMultiline}\TU{ }\V{$if(abstract)$$abstract$$else$This is my abstract$endif$}]{sf14}{\textwidth}{3.8cm}
+}\bigstrut\\\hline
+
+\parbox[][\rhXI][c]{\textwidth}{
+\small 15. SUBJECT TERMS\\[2pt]
+\textField[\TU{ }\V{$if(keywords)$$keywords$$endif$}]{sf15}{\textwidth}{0.4cm}
+}\bigstrut\\\hline
+ \end{tabular}}
+%==================================================================
+%    		Page 1 - Row 8
+%==================================================================
+\noindent\resizebox{\textwidth}{!}{
+ 
+\begin{tabular}{|l|l|l|l|l|l|}
+\multicolumn{3}{|l|}{\parbox[][0.2\rhXII][c]{0.30\textwidth}{\small 16. SECURITY CLASSIFICATION OF:}} &
+\multirow{6}{0.15\textwidth}{\parbox[][\rhXII][t]{0.15\textwidth}{\vspace{-35pt}
+\small \begin{spacing}{0.75}\begin{tabbing}17. \=LIMITATION OF \\\> ABSTRACT\end{tabbing}\end{spacing}
+\vspace{4pt}
+\textField[\Q{1}\TU{ }\V{}]{sf17}{.15\textwidth}{0.4cm}}} &
+
+\multirow{6}{0.09\textwidth}{\parbox[][\rhXII][t]{0.09\textwidth}{\vspace{-35pt}
+\small \begin{spacing}{0.75}\begin{tabbing} 18. \=NUMBER \\\>OF\\\> PAGES \end{tabbing}\end{spacing}
+\vspace{-5pt}
+\textField[\Q{1}\TU{ }\V{$if(pages)$$pages$$endif$}]{sf18}{.09\textwidth}{0.4cm}}} &
+
+\multirow{3}{0.4\textwidth}{\parbox[][0.5\rhXII][t]{0.4\textwidth}{\vspace{-12pt}
+\small 19a. NAME OF RESPONSIBLE PERSON\\[4pt]
+\textField[\textSize{11}\TU{ }\V{$if(advisor.rank)$$advisor.rank$$endif$ $if(advisor.name)$$advisor.name$$else$Ima B. Smart$endif$$if(advisor.degree)$, $advisor.degree$$else$, PhD$endif$, AFIT/$if(advisor.department)$$advisor.department$$else$EN$endif$}]{sf19a}{.40\textwidth}{0.4cm}}}\\\cline{1-3}
+
+\multirow{5}{0.12\textwidth}{\parbox[][0.8\rhXII][t]{0.12\textwidth}{\vspace{-20pt}
+\small a. REPORT\\[15pt]
+\textField[\Q{1}\TU{ }\V{}]{sf16a}{.12\textwidth}{0.4cm}}} &
+
+\multirow{5}{0.12\textwidth}{\parbox[][0.8\rhXII][t]{0.12\textwidth}{\vspace{-20pt}
+\small b. ABSTRACT\\[15pt]
+\textField[\Q{1}\TU{ }\V{}]{sf16b}{.12\textwidth}{0.4cm}}} &
+
+\multirow{5}{0.12\textwidth}{\parbox[][0.8\rhXII][t]{0.12\textwidth}{\vspace{-20pt}
+\small c. THIS PAGE\\[15pt]
+\textField[\Q{1}\TU{ }\V{}]{sf16c}{.12\textwidth}{0.4cm}}} & & & \\
+& & & & & \\ \cline{6-6}
+& & & & & \multirow{3}{0.4\textwidth}{\parbox[][0.5\rhXII][t]{0.4\textwidth}{\vspace{-10pt}
+ \small 19b. TELEPHONE NUMBER (Include area code)\\[4pt]
+ \textField[\textSize{10}\TU{ }\V{$if(advisor.phone)$$advisor.phone$$else$937-255-3636 x0000$endif$; $if(advisor.email1)$$advisor.email1$$else$email$endif$@$if(advisor.email2)$$advisor.email2$$else$afit.edu$endif$}]{sf19b}{.4\textwidth}{0.4cm}}}\\
+& & & & & \\
+& & & & & \\ \cline{1-6}
+ \end{tabular}}
+\end{document}

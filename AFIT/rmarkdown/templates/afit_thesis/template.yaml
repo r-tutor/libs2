@@ -1,0 +1,5 @@
+name: afit_thesis
+description: >
+ Template for creating an AFIT thesis document
+create_dir: true
+

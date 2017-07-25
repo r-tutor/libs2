@@ -1,0 +1,5 @@
+---
+output: pdf_document
+---
+
+\MakeUppercase{fIrSt ThInGs FiRsT} - \underline{this IS your thesis}.  As you write your document

@@ -1,0 +1,784 @@
+/* slidy.css
+
+   Copyright (c) 2005-2010 W3C (MIT, ERCIM, Keio), All Rights Reserved.
+   W3C liability, trademark, document use and software licensing
+   rules apply, see:
+
+   http://www.w3.org/Consortium/Legal/copyright-documents
+   http://www.w3.org/Consortium/Legal/copyright-software
+*/
+
+div.toolbar {
+  font-size: 18pt;
+  color: #FFF;
+  background-color: #2c3e50;
+  font-weight: normal;
+  text-transform: uppercase;
+  position: fixed; z-index: 200;
+  top: 100; bottom: 0; left: 0; right: 0;
+  line-height: 2em;
+  height: 2em; text-align: right;
+  padding-left: 1em;
+  padding-right: 1em;
+  border: solid 1px #2c3e50;
+   -webkit-transition: all 0.6s ease;
+   transition: all 0.6s ease;
+}
+
+div.toolbar.shrink {
+  font-size: 60%;
+  color: #FFF;
+  background-color: #2c3e50;
+  font-weight: normal;
+  text-transform: uppercase;
+  position: fixed; z-index: 200;
+  line-height: 1.5em;
+  height: 1.5em; 
+  text-align: right;
+  padding-left: 1em;
+  padding-right: 1em;
+  border-top: solid 1px #2c3e50;
+}
+
+div.toolbar span.copyright {
+  color: #FFF;
+  margin-left: 0.5em;
+  font-weight: normal;
+  padding-top: .55em;
+}
+
+div.initial_prompt {
+  position: absolute;
+  z-index: 1000;
+  bottom: 2em;
+  width: 100%;
+  background-color: rgb(200,200,200);
+  opacity: 0.35;
+  background-color: rgb(200,200,200, 0.35);
+  cursor: pointer;
+  color: #FFF;
+}
+
+div.initial_prompt p.help {
+  text-align: center;
+}
+
+div.initial_prompt p.close {
+  text-align: right;
+  font-style: italic;
+}
+
+div.slidy_toc {
+  position: absolute;
+  z-index: 300;
+  width: 80%;
+  max-width: 40em;
+  height: 30em;
+  overflow: auto;
+  top: auto;
+  right: auto;
+  left: 4em;
+  bottom: 4em;
+  padding: 1em;
+  background: rgb(240,240,240);
+  border-style: solid;
+  border-width: 2px;
+  font-size: 60%;
+}
+
+div.slidy_toc .toc_heading {
+  text-align: center;
+  width: 100%;
+  margin: 0;
+  margin-bottom: 1em;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(180,180,180);
+  border-bottom-width: 1px;
+}
+
+div.slide {
+  z-index: 20;
+  padding: 0 0 0 0;
+  margin-bottom: 0;
+  border-width: 0;
+  clear: both;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  line-height: 100%;
+  background-color: #FFF; 
+  background-size: 100%;
+  font-weight: bold;
+  color: #2c3e50;
+  font-size: 26pt;
+}
+
+div.slide h1 {
+  padding-left: 25px;
+  padding-right: 0;
+  margin-top: 0;
+  margin-left: 0;
+  margin-right: 0;
+  width: 100%;
+  display: block; 
+  font-size: 32pt;
+  line-height: 1.1em;
+  color: #FFF;
+  background-color: #2c3e50;
+  font-weight: normal;
+  top: 0;
+  text-transform: uppercase;
+  position: fixed;
+  transition: all 0.6s ease;
+  z-index: 10;
+}
+
+div.slide h1.shrink { 
+  font-size: 55%;
+    }
+
+div.slide h3 {
+  text-align: center;
+  padding: 0 0 0 0;
+  margin: 0.75em 0 0.75em 0;
+  width: 100%;
+  display: block; 
+  font-size: 34pt;
+  line-height: 1.3em;
+  background-color: #e6e6e6;
+  border-style: solid;
+  border-color: #2C3E50;
+  border-left-width: 0;
+  border-right-width: 0;
+  border-top-width: thin;
+  border-bottom-width: thin;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+div.slide h2 {
+  padding: 0 0.5em 5px 30px;
+  margin: 1.5em 0 0.75em 0;
+  width: 100%;
+  display: block; 
+  font-size: 32pt;
+  line-height: 1.3em;
+  border-color: #149C82;
+  border-style: solid;
+  border-left-width: 25px;
+  border-right-width: 0;
+  border-top-width: 0;
+  border-bottom-width: thin;
+  font-weight: bold;
+  font-style: italic;
+  text-transform: capitalize;
+}
+
+body
+{
+ margin: 0 0 0 0;
+  width: 100%;
+  height: 100%;
+  color: Black;
+  font-family: "lucida","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 44pt;
+}
+
+div.background {
+display: none;
+  
+}
+
+div.handout {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+div.slide.titlepage {
+  text-align: left;
+  font-weight: normal;
+  font-size: 24pt;
+  line-height: 150%;
+  color: #2c3e50;
+}
+
+div.slide.titlepage h1.title {
+  top: 55vh;
+  padding-top: 0;
+  color: #2c3e50;
+  padding-left: 35px;
+  margin-right: 0;
+  border-bottom: none;
+  background: none;
+  font-size: 48pt;
+  font-weight: bold;
+  text-transform: capitalize;
+  position: relative;
+  transition: none;
+}
+
+div.slide.titlepage h1.subtitle {
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 35px;
+  padding-top: 10px;
+  color: #2c3e50;
+  font-size: 30pt;
+  background: none;
+  text-transform: capitalize;
+  position: relative;
+  top: 55vh;
+  transition: none;
+}
+
+.author {
+  position: relative;
+  top: 55vh;
+}
+
+.date {
+  position: relative;
+  top: 55vh;
+}
+
+@media screen and (max-device-width: 1024px) {
+  div.slide { font-size: 100%; }
+}
+
+@media screen and (max-device-width: 800px)
+{
+  div.slide { font-size: 200%; }
+  div.slidy_toc {
+    top: 1em;
+    left: 1em;
+    right: auto;
+    width: 80%;
+    font-size: 180%;
+  }
+}
+
+div.toc-heading {
+  width: 100%;
+  border-bottom: solid 1px rgb(180,180,180);
+  margin-bottom: 1em;
+  text-align: center;
+}
+
+img {
+  image-rendering: optimize-quality;
+}
+
+pre {
+ padding: 15px 0 15px 75px;
+ border-style: solid;
+ border-top-width: 1.75px;
+ border-bottom-width: 1.75px;
+ border-right-width: 1.75px;
+ border-left-width: 0;
+ border-color: #00428C;
+ color: #00428C;
+ background-color: #FFF ;
+ margin: 30px 150px 30px 0px;
+ border-top-right-radius: 10px;
+ border-top-left-radius: 0;
+ border-bottom-right-radius: 10px;
+ border-bottom-left-radius: 0;
+ 
+}
+
+pre code {
+  font-size: 18pt;
+  font-weight: 550;
+  line-height: 120%;
+}
+
+li pre { 
+  margin-right: 0;
+  border: none;
+  font-family: "modern";
+}
+
+blockquote { font-size: 90%;
+             line-height: 1em;
+             font-weight: normal;
+             margin: 50px 10% 50px 10%;
+             padding: 30px;
+             border-bottom-width: thin;
+             border-right-width: 12px;
+             border-top-width: thin;
+             border-left-width: 12px;
+             border-radius: 10px;
+             border-color: #149C82;
+             border-style: solid;
+             font-family: "Century Gothic", "Optima", "Segoe UI", sans-serif;
+}
+
+img { background-color: transparent }
+
+p.copyright { font-size: smaller; color: #FFF; }
+
+.center { text-align: center }
+.footnote { font-size: smaller; 
+            margin-left: 2em; 
+            color: #FFF; 
+            margin-top: .25em;
+            margin-bottom: .25em;
+            line-height: 40%;
+  
+}
+
+a img { border-width: 0; border-style: none }
+
+a:visited { color: #149C82; font-weight: bold; }
+a:link { color: #149C82; font-weight: bold; }
+a:hover { color: red; text-decoration: underline }
+a:active { color: red; text-decoration: underline }
+
+a {text-decoration: none}
+.toolbar a:link {color: #149C82; font-weight: bold;}
+.toolbar a:visited {color: #149C82; font-weight: bold;}
+.toolbar a:active {color: red; font-weight: bold;}
+.toolbar a:hover {color: red; font-weight: bold;}
+
+ul { list-style-type: square; margin: 0.5em 1.5em 0.5em 1.5em;}
+ul ul { list-style-type: disc; margin: 0.25em 1.0em 0.25em 1.0em;}
+ul ul ul { list-style-type: circle; }
+ul ul ul ul { list-style-type: disc; }
+li { margin-left: 1.5em; margin-top: 50px; font-size:28pt;}
+li li { font-size: 24pt; margin-top: .5em; }
+li li li { font-size: 20pt; font-style: normal }
+
+
+ol { list-style-type: decimal; margin: 0.5em 1.5em 0.5em 1.5em;}
+ol ol { list-style-type: decimal; margin: 0.25em 1.0em 0.25em 1.0em;}
+ol ul ol { list-style-type: decimal; }
+ol ol ol ol { list-style-type: decimal; }
+li { margin-left: 1.5em; margin-top: 50px; font-size:28pt;}
+li li { font-size: 24pt; margin-top: .5em; }
+li li li { font-size: 20pt; font-style: normal }
+
+div dt
+{
+  margin-left: 1.5em;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  font-weight: bold;
+}
+div dd
+{
+  margin-left: 2em;
+  margin-bottom: 0.5em;
+  font-weight: bold;
+}
+
+ul,ol,h3,h4,h5,h6,dl,table {
+  margin-left: 0;
+  margin-right: 1em;
+}
+
+p {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.author {
+  margin-left: 1em;
+}
+
+.date {
+  margin-left: 1em;
+}
+
+.subhead { font-weight: bold; margin-top: 2em; }
+
+small    { font-size: 90% }
+smaller  { font-size: 80% }
+smallest { font-size: 70% }
+
+big     { font-size: 110% }
+bigger  { font-size: 120% }
+biggest { font-size: 130% }
+
+td,th { padding: 0.2em; }
+
+ul {
+  margin: 0.5em 1.5em 0.5em 1.75em;
+  padding: 0 0 0 0;
+  font-weight: normal;
+  color: #2C3E50;
+  text-shadow: none;
+  font-size: 20pt;
+}
+
+ol {
+  margin: 0.5em 1.5em 0.5em 1.75em;
+  padding: 0;
+  font-weight: normal;
+  color: #2C3E50;
+  text-shadow: none;
+  font-size: 20pt;
+}
+
+
+ul { list-style-type: square; }
+ul ul { list-style-type: disc; }
+ul ul ul { list-style-type: circle; }
+ul ul ul ul { list-style-type: disc; }
+
+
+ul li { 
+  list-style: square;
+  margin: 1em 0 1.5em 1em;
+  padding: 0 0 0 1em;
+  line-height: 140%;
+}
+
+blockquote ul li { 
+  list-style: square;
+  margin: 1em 0 1em 1em;
+  padding: 0 0 0 0;
+  line-height: 100%;
+  font-size: 24pt;
+}
+
+ol li { 
+  margin: 1em 0 1.5em 1em;
+  padding: 0 0 0 1em;
+  line-height: 140%;
+  list-style-type: decimal;
+}
+
+blockquote ol li { 
+  margin: 0.75em 0 0.75em 1.5em;
+  padding: 0 0 0 0;
+  line-height: 100%;
+  list-style-type: decimal;
+  font-size: 24pt;
+}
+
+li ul li { 
+  font-size: 24pt;
+  font-style: normal;
+  list-style-type: disc;
+  background: transparent;
+  padding: 0 0 0 1em;
+  margin: 1em 0 1em 0.25em;
+}
+
+blockquote li ul li { 
+  font-size: 20pt;
+  list-style-type: disc;
+  background: transparent;
+  padding: 0 0 0 0;
+  margin: 1em 0 1em 1.3em;
+}
+
+li li ul li { 
+  font-size: 85%; 
+  font-style: normal;
+  list-style-type: circle;
+  background: transparent;
+  padding: 0 0 0 0;
+}
+
+blockquote li li  ul li { 
+  font-size: 18pt; 
+  font-style: normal;
+  list-style-type: circle;
+  background: transparent;
+  padding: 0 0 0 0;
+}
+
+li li li ul li {
+  list-style-type: disc;
+  background: transparent;
+  padding: 0 0 0 0;
+}
+
+blockquote li li li ul li {
+  list-style-type: disc;
+  background: transparent;
+  padding: 0 0 0 0;
+  font-size: 70%;
+}
+
+li ol li {
+  list-style-type: decimal;
+  font-size: 24pt;
+  font-style: normal;
+  background: transparent;
+  padding: 0 0 0 1em;
+  margin: 1em 0 1em 0.25em;
+}
+
+ol li ul li {
+  margin-left: -0.4em;
+}
+
+ul li ol li {
+  margin-left: -0.4em;
+}
+
+li li ol li {
+  list-style-type: decimal;
+}
+
+/* for slides with class "title" in table of contents */
+a.titleslide { font-weight: bold; font-style: italic }
+
+/*
+ hide images for work around for save as bug
+ where browsers fail to save images used by CSS
+*/
+img.hidden { display: none; visibility: hidden }
+div.initial_prompt { display: none; visibility: hidden }
+
+  div.slide {
+     visibility: visible;
+     position: inherit;
+  }
+  div.handout {
+     border-top-style: solid;
+     border-top-width: thin;
+     border-top-color: black;
+  }
+
+@media screen {
+  .hidden { display: none; visibility: visible }
+
+  div.slide.hidden { display: block; visibility: visible }
+  div.handout.hidden { display: block; visibility: visible }
+  div.background { display: none; visibility: hidden }
+  body.single_slide div.initial_prompt { display: block; visibility: visible }
+  body.single_slide div.background { display: block; visibility: visible }
+  body.single_slide div.background.hidden { display: none; visibility: hidden }
+  body.single_slide .invisible { visibility: hidden }
+  body.single_slide .hidden { display: none; visibility: hidden }
+  body.single_slide div.slide { position: absolute }
+  body.single_slide div.handout { display: none; visibility: hidden }
+}
+
+@media print {
+  .hidden { display: block; visibility: visible }
+
+  div.slide pre { font-size: 10%; padding-left: 0; }
+  div.toolbar { display: none; visibility: hidden; }
+  div.slidy_toc { display: none; visibility: hidden; }
+  div.background { display: none; visibility: hidden; }
+  div.slide { page-break-before: always }
+  /* :first-child isn't reliable for print media */
+  div.slide.first-slide { page-break-before: avoid }
+}
+
+/* the below rules increase compatibility with Shiny and Bootstrap */
+
+/* remove margins that misalign sliders */
+.jslider table {
+   margin-left: 0em;
+   margin-right: 0em;
+}
+
+/* don't use very large fonts in datatables */
+table.dataTable, .shiny-datatable-output div {
+   font-size: 14pt;
+}
+
+/* adjust footer element size for DT package */
+.dataTables_info, .dataTables_paginate {
+  font-size: 19px;
+}
+
+/* allow R chunks to render in a large font */
+pre.sourceCode {
+   font-size: 70%;
+   background-color: #e6e6e6;
+   margin: 5px 150px 5px -5px;
+   line-height: 100%;
+   padding: 15px 0 15px 75px;
+   border-color: #e6e6e6;
+}
+
+code.sourceCode{
+  font-size: 18pt;
+   border: none;
+   font-weight: 550;
+}
+
+/* increase the input font size set by Bootstrap */
+label, button, input, select, textarea {
+   font-size: 14pt;
+}
+
+/* eliminate bullets in Bootstrap navigation lists */
+ul.nav, ul.nav li {
+   list-style-type: none;
+}
+
+#play {  opacity: 0.0 ; 
+	position: absolute ; 
+	    right: 25% ; 
+	  bottom: 3%; 
+     margin-left: auto;
+    margin-right: auto;
+    background: #149C82;
+    width: 60px;
+-webkit-transition: all 500ms ease-in-out  ;  
+ -moz-transition: all 500ms ease-in-out;
+  -ms-transition: all 500ms ease-in-out;
+   -o-transition: all 500ms ease-in-out;
+      transition: all 500ms ease-in-out;                                            }
+
+#play:hover {  opacity: 1.0; } 
+
+#fillpic { -moz-background-size: cover;
+-webkit-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+} 
+
+hr {
+  display: block;
+  margin-top: 1.6em;
+  margin-bottom: 1.6em;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+  height: 2px;
+  border: none;
+  background-color: #149C82;
+}
+
+
+@media {.navbar-static-top{border-radius: 20px;}}
+
+red    {  color: red;     font-weight: bold; }
+blue   {  color: blue;    font-weight: bold; }
+green  {  color: green;   font-weight: bold; }
+purple {  color: purple;  font-weight: bold; }
+orange {  color: orange;  font-weight: bold; }
+brown  {  color: brown;   font-weight: bold; }
+pink   {  color: pink;    font-weight: bold; }
+gray   {  color: gray;    font-weight: bold; }
+black  {  color: black;   font-weight: bold; }
+
+
+focus  {  background-color: #F39C12; 
+          border-color: orange;
+          border-radius: 10px;
+          padding: 4px 8px 5px 8px;
+          white-space: nowrap;
+}
+
+/* line 468, scss/default.scss */
+.columns-2 {
+  -webkit-column-count: 2;
+  -moz-column-count: 2;
+  -ms-column-count: 2;
+  -o-column-count: 2;
+  column-count: 2;
+}
+
+/* workaround for Safari 8 render bug with lists in columns */
+.columns-2 ul, .columns-2 ol {
+  -webkit-transform: translate3d(0, 0, 0);
+}
+
+code {
+  font-size: .8em;
+  font-family: 'Source Code Pro', 'Courier New', monospace;
+  color: red;
+  font-weight: normal;
+  background-color: #e6e6e6;
+  padding: .1em .3em .1em .3em;
+  border-radius: .3em;
+  white-space: nowrap;
+  vertical-align: 10%;
+}
+
+table {
+  width: 100% !important;
+  border-collapse: -moz-initial;
+  border-collapse: initial;
+  border-spacing: 2px;
+  border-bottom: 1px solid #797979;
+  margin-right: 10%;
+  margin-left: 10%;
+  margin-top: 60px; 
+  margin-bottom: 60px;
+}
+
+/* line 479, scss/default.scss */
+table tr > td:first-child, table th {
+  font-weight: bold;
+  font-size: 22;
+}
+/* line 484, scss/default.scss */
+table tr:nth-child(odd) {
+  background-color: #e6e6e6;
+}
+/* line 488, scss/default.scss */
+table th {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(40%, #4387fd), color-stop(80%, #2a7cdf)) no-repeat;
+  background: -webkit-linear-gradient(top, #4387fd 40%, #2a7cdf 80%) no-repeat;
+  background: -moz-linear-gradient(top, #4387fd 40%, #2a7cdf 80%) no-repeat;
+  background: -o-linear-gradient(top, #4387fd 40%, #2a7cdf 80%) no-repeat;
+  background: linear-gradient(top, #4387fd 40%, #2a7cdf 80%) no-repeat;
+  color: #FFF;
+  padding: 0.25em 0.25em;
+  font-weight: bold;
+  font-size: 18pt;
+}
+/* line 494, scss/default.scss */
+table td {
+  font-size: 22px;
+  font-weight: bold;
+  padding: 0.25em 0.25em;
+}
+/* line 499, scss/default.scss */
+table td.highlight {
+  color: #515151;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(40%, #ffd14d), color-stop(80%, #f6c000)) no-repeat;
+  background: -webkit-linear-gradient(top, #ffd14d 40%, #f6c000 80%) no-repeat;
+  background: -moz-linear-gradient(top, #ffd14d 40%, #f6c000 80%) no-repeat;
+  background: -o-linear-gradient(top, #ffd14d 40%, #f6c000 80%) no-repeat;
+  background: linear-gradient(top, #ffd14d 40%, #f6c000 80%) no-repeat;
+}
+/* line 504, scss/default.scss */
+table.rows {
+  border-bottom: none;
+  border-right: 1px solid #797979;
+}
+
+.example {
+  border-style: solid;
+  border-width: 0 15px 1px 15px;
+  border-color: #2C3E50;
+  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+  margin-bottom: 30px;
+  padding-bottom:30px;
+}
+
+table.example {
+  width: 80%;
+}
+
+/* Data Table CSS Settings */
+
+table.dataTable th.dt-right, table.dataTable td.dt-right {
+  
+  font-size: 16pt;
+}
+
+table.dataTable.row-border tbody th, table.dataTable.row-border tbody td, table.dataTable.display tbody th, table.dataTable.display tbody td {
+  
+  font-size: 16pt;
+}
+
+.slide.section.level1 {
+  
+  padding-top: 65px;
+}

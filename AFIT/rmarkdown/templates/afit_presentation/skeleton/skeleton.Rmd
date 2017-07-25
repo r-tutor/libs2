@@ -1,0 +1,41 @@
+---
+title: "AFIT Presentation Example"
+subtitle: "Built on the W3C Slidy Template"
+author: "Jason K. Freels"
+date: "`r format(Sys.Date(), '%d %B %Y')`"
+output: AFIT::afit_presentation
+logo: images/afit.jpg
+js: scripts/afit-slidy.js
+runtime: shiny
+---
+
+```{r echo=FALSE,message=FALSE, warning=FALSE}
+assign('dynamic', TRUE, envir = sys.frame(),immediate = TRUE)
+source('scripts/setup.R')
+library(knitcitations)
+library(AFIT)
+freels <- AFIT:::citeDTIC()
+```
+
+# Why Are We Here?
+
+- why `r citet(freels)`
+
+- why `r citet(freels)`
+
+- why `r citet(freels)`
+
+- why `r citet(freels)`
+
+# Shiny Example 1
+
+```{r}
+teachingApps:::offbase_libraries()
+```
+
+
+# Shiny Example 1
+
+```{r}
+teachingApps:::maximum_likelihood_full()
+```

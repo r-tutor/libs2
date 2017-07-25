@@ -1,0 +1,256 @@
+\documentclass[12pt,a4paper,oneside]{letter}
+\usepackage{hyperref}
+\usepackage{../tex/eforms}
+\usepackage[font={bf,footnotesize},labelsep=period]{caption}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{color}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{wasysym}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{ifthen}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{color}
+\renewcommand{\headrulewidth}{0pt}
+\chead{\ifthenelse{\value{page}=1}{\bf \large{\MakeUppercase{Department of the Air Force}}\\[3pt]
+\bf \normalsize{\MakeUppercase{Air University (AETC)}}}}
+\lhead{\ifthenelse{\value{page}=1}{\hspace{-30pt}\vspace{-15pt}\includegraphics[width=1in]{dodseal.jpg}}}
+\addtolength{\headheight}{\baselineskip}
+%\setlength{\topmargin}{1in}
+\addtolength{\voffset}{15pt}
+\setlength{\headsep}{75pt}
+\setlength{\textheight}{600pt}
+\pagenumbering{gobble}
+\begin{document}
+
+\everyRadioButton{%
+                  \BG{.941 .9 .941}
+                  \symbolchoice{square}
+                  }%
+\everyTextField{
+            \BC{0.98 0.92 0.73}
+            \BG{1 1 1}
+            \textColor{0 0 0}
+            \textFont{helv} 
+            \textSize{12} 
+            \Q{1}
+            \W{0}
+            } 
+\everySigField{
+            \BC{0.98 0.92 0.73}
+            \BG{0.98 0.92 0.73}
+            \textColor{0 0 0}
+            \textFont{helv} 
+            \textSize{10} 
+            \Q{1}
+            \W{0}
+            } 
+\begin{tabular}{r|l}
+\bf{TITLE}& $title$\\[2pt] 
+\bf{AUTHOR}& $if(author.name)$$author.name$$endif$$if(author.rank)$, $author.rank$$endif$\\[2pt]
+\bf{DESIGNATOR}& $if(designator)$$designator$$endif$\\[2pt]
+\bf{DEPARTMENT}& $if(author.department)$$author.department$$endif$\\[2pt]
+\bf{DATE}& $if(date)$$date$$endif$
+\end{tabular}
+
+\vspace{10pt}
+
+\textbf{PART I - To be completed by students requesting limited distribution}\\[-8pt]
+
+1.  I request my document be assigned the following Distribution Statement:
+
+\LARGE
+\begin{tabularx}{\linewidth}{ccX}
+\radioButton[$if(distribution_statement.B)$\Ff{\FfRadio}$endif$\Ff{\FfNoToggleToOff}]{distrob}{11bp}{11bp}{B} & 
+\small Distribution Statement B.& 
+\small Distribution authorized to U.S. Government agencies only\\
+\end{tabularx}\\[-25pt]
+
+{%
+\centering
+\begin{tabular}{rlrl}
+    \radioButton[$if(distribution_statement.B)$$if(distribution_reason.fgi)$\Ff{\FfRadio}$endif$$endif$]{bfgi}{11bp}{11bp}{Bfgi} & 
+    \small Foreign Govt. Info\hspace{75px} &   
+    \radioButton[$if(distribution_statement.B)$$if(distribution_reason.pre)$\Ff{\FfRadio}$endif$$endif$]{bpre}{11bp}{11bp}{Bpre} & 
+    \small Premature Dissemination\\[-10pt]
+    
+    \radioButton[$if(distribution_statement.B)$$if(distribution_reason.pri)$\Ff{\FfRadio}$endif$$endif$]{bpri}{11bp}{11bp}{Bpri} & 
+    \small Proprietary Info\quad\quad & 
+    \radioButton[$if(distribution_statement.B)$$if(distribution_reason.aou)$\Ff{\FfRadio}$endif$$endif$]{baou}{11bp}{11bp}{Baou} & 
+    \small Admin/Operational Use\\[-10pt]
+    
+    \radioButton[$if(distribution_statement.B)$$if(distribution_reason.crt)$\Ff{\FfRadio}$endif$$endif$]{bcrt}{11bp}{11bp}{Bcrt} & 
+    \small Critical Technology\quad\quad & 
+    \radioButton[$if(distribution_statement.B)$$if(distribution_reason.swd)$\Ff{\FfRadio}$endif$$endif$]{bswt}{11bp}{11bp}{Bswt} & 
+    \small Software Documentation\\[-10pt]
+    
+    \radioButton[$if(distribution_statement.B)$$if(distribution_reason.tne)$\Ff{\FfRadio}$endif$$endif$]{btne}{11bp}{11bp}{Btne} & 
+    \small Test \& Evaluation\quad\quad & 
+    \radioButton[$if(distribution_statement.B)$$if(distribution_reason.aut)$\Ff{\FfRadio}$endif$$endif$]{baut}{11bp}{11bp}{Baut} & 
+    \small Specific Authority\\[-10pt]
+    
+    \radioButton[$if(distribution_statement.B)$$if(distribution_reason.cpe)$\Ff{\FfRadio}$endif$$endif$]{bcpe}{11bp}{11bp}{Bcpe} & 
+    \small Contractor Perf Eval\quad\quad & 
+    \radioButton[$if(distribution_statement.B)$$if(distribution_reason.exp)$\Ff{\FfRadio}$endif$$endif$]{bexp}{11bp}{11bp}{Bexp} & 
+    \small Export Controlled
+\end{tabular}\par
+}
+\vspace{-10pt}
+
+\LARGE
+\begin{tabularx}{\linewidth}{ccX}
+\radioButton[$if(distribution_statement.C)$\Ff{\FfRadio}$endif$]{distroc}{11bp}{11bp}{C} &  \small Distribution Statement C.& \small Distribution authorized to U.S. Government agencies and their Contractors 
+\end{tabularx}\\[-25pt]
+
+{%
+\centering
+\begin{tabular}{rlrl}
+    \radioButton[$if(distribution_statement.C)$$if(distribution_reason.fgi)$\Ff{\FfRadio}$endif$$endif$]{cfgi}{11bp}{11bp}{Cfgi} & 
+    \small Foreign Govt. Info\hspace{75px} &   
+    \radioButton[$if(distribution_statement.C)$$if(distribution_reason.swd)$\Ff{\FfRadio}$endif$$endif$]{cswd}{11bp}{11bp}{Cswd} & 
+    \small Software Documentation \hspace{400sp} \\[-10pt]
+    
+    \radioButton[$if(distribution_statement.C)$$if(distribution_reason.crt)$\Ff{\FfRadio}$endif$$endif$]{ccrt}{11bp}{11bp}{Ccrt} & 
+    \small Critical Technology\quad\quad & 
+    \radioButton[$if(distribution_statement.C)$$if(distribution_reason.aut)$\Ff{\FfRadio}$endif$$endif$]{caut}{11bp}{11bp}{Caut} & 
+    \small Specific Authority\\[-10pt]
+    
+    \radioButton[$if(distribution_statement.C)$$if(distribution_reason.aou)$\Ff{\FfRadio}$endif$$endif$]{caou}{11bp}{11bp}{Caou} & 
+    \small Admin/Operational Use &
+    \radioButton[$if(distribution_statement.C)$$if(distribution_reason.exp)$\Ff{\FfRadio}$endif$$endif$]{cexp}{11bp}{11bp}{Cexp} & 
+    \small Export Controlled
+\end{tabular}\par
+}
+\vspace{-10pt}
+
+\LARGE
+\begin{tabularx}{\linewidth}{ccX}
+\radioButton[$if(distribution_statement.D)$\Ff{\FfRadio}$endif$]{distrod}{11bp}{11bp}{D} &  \small Distribution Statement D.& \small Distribution authorized to DOD and DOD contractors only 
+\end{tabularx}\\[-25pt]
+
+{%
+\centering
+\begin{tabular}{rlrl}
+    \radioButton[$if(distribution_statement.D)$$if(distribution_reason.fgi)$\Ff{\FfRadio}$endif$$endif$]{dfgi}{11bp}{11bp}{Dfgi} & 
+    \small Foreign Govt. Info\hspace{75px} &   
+    \radioButton[$if(distribution_statement.D)$$if(distribution_reason.swd)$\Ff{\FfRadio}$endif$$endif$]{dswd}{11bp}{11bp}{Dswd} & 
+    \small Software Documentation \hspace{400sp} \\[-10pt]
+    
+    \radioButton[$if(distribution_statement.D)$$if(distribution_reason.crt)$\Ff{\FfRadio}$endif$$endif$]{dcrt}{11bp}{11bp}{Dcrt} & 
+    \small Critical Technology &
+    \radioButton[$if(distribution_statement.D)$$if(distribution_reason.aut)$\Ff{\FfRadio}$endif$$endif$]{daut}{11bp}{11bp}{Daut} & 
+    \small Specific Authority\\[-10pt]
+    
+    \radioButton[$if(distribution_statement.D)$$if(distribution_reason.aou)$\Ff{\FfRadio}$endif$$endif$]{daou}{11bp}{11bp}{Daou} & 
+    \small Admin/Operational Use &
+    \radioButton[$if(distribution_statement.D)$$if(distribution_reason.exp)$\Ff{\FfRadio}$endif$$endif$]{dexp}{11bp}{11bp}{Dexp} & 
+    \small Export Controlled\\[-10pt]
+\end{tabular}\par
+}
+\vspace{-10pt}
+
+\LARGE
+\begin{tabularx}{\linewidth}{ccX}
+\radioButton[$if(distribution_statement.E)$\Ff{\FfRadio}$endif$]{distroe}{11bp}{11bp}{E} &  \small Distribution Statement E.& \small Distribution authorized to DOD components only 
+\end{tabularx}\\[-25pt]
+
+{%
+\centering
+\begin{tabular}{rlrl}
+    \radioButton[$if(distribution_statement.E)$$if(distribution_reason.fgi)$\Ff{\FfRadio}$endif$$endif$]{efgi}{11bp}{11bp}{Efgi} & 
+    \small Foreign Govt. Info\hspace{75px} &   
+    \radioButton[$if(distribution_statement.E)$$if(distribution_reason.pre)$\Ff{\FfRadio}$endif$$endif$]{epre}{11bp}{11bp}{Epre} & 
+    \small Premature Dissemination\\[-10pt]
+    
+    \radioButton[$if(distribution_statement.E)$$if(distribution_reason.pri)$\Ff{\FfRadio}$endif$$endif$]{epri}{11bp}{11bp}{Epri} & 
+    \small Proprietary Info\quad\quad & 
+    \radioButton[$if(distribution_statement.E)$$if(distribution_reason.aou)$\Ff{\FfRadio}$endif$$endif$]{eaou}{11bp}{11bp}{Eaou} & 
+    \small Admin/Operational Use\\[-10pt]
+    
+    \radioButton[$if(distribution_statement.E)$$if(distribution_reason.crt)$\Ff{\FfRadio}$endif$$endif$]{ecrt}{11bp}{11bp}{Ecrt} & 
+    \small Critical Technology\quad\quad & 
+    \radioButton[$if(distribution_statement.E)$$if(distribution_reason.swd)$\Ff{\FfRadio}$endif$$endif$]{eswd}{11bp}{11bp}{Eswd} & 
+    \small Software Documentation\\[-10pt]
+    
+    \radioButton[$if(distribution_statement.E)$$if(distribution_reason.tne)$\Ff{\FfRadio}$endif$$endif$]{etne}{11bp}{11bp}{Etne} & 
+    \small Test \& Evaluation\quad\quad & 
+    \radioButton[$if(distribution_statement.E)$$if(distribution_reason.aut)$\Ff{\FfRadio}$endif$$endif$]{eaut}{11bp}{11bp}{Eaut} & 
+    \small Specific Authority\\[-10pt]
+    
+    \radioButton[$if(distribution_statement.E)$$if(distribution_reason.cpe)$\Ff{\FfRadio}$endif$$endif$]{ecpe}{11bp}{11bp}{Ecpe} & 
+    \small Contractor Perf Eval\quad\quad & 
+    \radioButton[$if(distribution_statement.E)$$if(distribution_reason.exp)$\Ff{\FfRadio}$endif$$endif$]{eexp}{11bp}{11bp}{Eexp} & 
+    \small Export Controlled\\[-10pt]
+    
+    \radioButton[$if(distribution_statement.E)$$if(distribution_reason.dms)$\Ff{\FfRadio}$endif$$endif$]{edms}{11bp}{11bp}{Edms} & 
+    \small Direct Military Support &  &
+\end{tabular}\par
+}
+\vspace{-10pt}
+
+\LARGE
+\begin{tabularx}{\linewidth}{ccX}
+\radioButton[$if(distribution_statement.F)$\Ff{\FfRadio}$endif$]{distrof}{11bp}{11bp}{F} &  \small Distribution Statement F.& \small Further dissemination only as directed
+\end{tabularx}
+
+\newpage
+
+\normalsize
+2. Rationale for requesting distribution other than Statement A (Be specific e.g. data, citations, etc.)\\[5pt]
+\textField[\textSize{10}\Ff{\FfMultiline}\TU{ }\V{$if(rationale)$$rationale$$endif$ }\Q{0}]{rationale}{\textwidth}{2.5cm}
+
+3.  I have coordinated with \MakeUppercase{\textbf{$if(authority)$$authority$$else$org name$endif$}} and they will serve as the releasing authority for this thesis.  (Other than Statement A)\\
+
+4.  If known, please describe the date and/or condition under which this limited distribution may be changed and what the new distribution statement should be.\\[5pt]
+\textField[\textSize{10}\Ff{\FfMultiline}\TU{ }\V{$if(condition)$$condition$$endif$ }\Q{0}]{change}{\textwidth}{2.5cm}
+
+\vspace{20pt}
+
+{%
+\centering
+\begin{tabular}{lcc}
+Research Author & 
+\sigField{authsig}{0.35\textwidth}{1cm} &
+\textField[\TU{ }\V{$if(author.name)$$author.name$$else$Ima B. Smart$endif$}]{authname}{0.35\textwidth}{1cm}
+\end{tabular}\par
+}
+\vspace{15pt}
+
+\textbf{PART II - To be completed by the research advisor and department head}
+
+1st Ind, Research Advisor
+
+Concur.\\[7pt]
+
+{%
+\centering
+\begin{tabular}{lcc}
+Research Advisor & 
+\sigField[\Lock{/Action/All}]{advsig}{0.35\textwidth}{1cm} &
+\textField[\TU{ }\V{$if(advisor)$$advisor$$else$Ima B. Smart$endif$}]{advname}{0.35\textwidth}{1cm}
+\end{tabular}\par
+}
+\vspace{18pt}
+
+2nd Ind, Dept Head 
+
+Approved.\\[7pt]
+
+{%
+\centering
+\begin{tabular}{lcc}
+Department Head & 
+\sigField{headsig}{0.35\textwidth}{1cm} &
+\textField[\TU{ }\V{$if(dept_head)$$dept_head$$else$Ima B. Smart$endif$}]{headname}{0.35\textwidth}{1cm}
+\end{tabular}\par
+}
+
+
+\end{document}

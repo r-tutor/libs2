@@ -1,0 +1,408 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[vmargin = .05in, hmargin = .45in]{geometry}
+\usepackage{hyperref}
+\usepackage{../tex/eforms}
+\usepackage[font={bf,footnotesize},labelsep=period]{caption}
+\usepackage{setspace}
+\usepackage[T1]{fontenc}
+\usepackage{wasysym}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{ifthen}
+\usepackage{calc}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\begin{document}
+\everyTextField{
+            \BC{0.98 0.92 0.73}
+            \BG{0.98 0.92 0.73}
+            \textColor{0 0 0}
+            \textFont{helv}
+            \textSize{10}
+            \Q{0}
+            \W{0}
+            } %
+\everySigField{
+            \BC{0.98 0.92 0.73}
+            \BG{0.98 0.92 0.73}
+            \textColor{0 0 0}
+            \textFont{helv}
+            \textSize{10}
+            \Q{1}
+            \W{0}
+            } %
+\everyRadioButton{%
+                  \BG{.941 .9 .941}
+                  \symbolchoice{cross}
+                  }%
+\newdimen\rhI    \rhI=0.55in
+\newdimen\rhII   \rhII=0.3in
+\newdimen\rhIII  \rhIII=1.1in
+\newdimen\rhIV   \rhIV=.55in
+\newdimen\rhV    \rhV=0.4in
+\newdimen\rhVI   \rhVI=0.5in
+\newdimen\rhVII  \rhVII=2in
+\newdimen\rhVIII \rhVIII=0.75in
+\newdimen\rhIX   \rhIX=0.3in
+\newdimen\rhX    \rhX=1.76in
+\newdimen\rhXI   \rhXI=1.56in
+\newdimen\rhXII  \rhXII=0.4in
+\newdimen\rhXIII \rhXIII=1in
+\newdimen\rhXIV  \rhXIV=3.25in
+\newdimen\rhXV   \rhXV=7.25in
+\noindent\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|}
+    \hline
+%==================================================================
+%    		Page 1 - Row 1              
+%==================================================================
+\parbox[][\rhI][c]{0.59\textwidth}{
+\centering
+\textbf{PUBLIC AFFAIRS SECURITY AND POLICY}\\
+\textbf{REVIEW WORKSHEET}\\
+(See reverse for instructions)
+} \vrule\hspace{1pt}
+
+\parbox[][\rhI][c]{0.15\textwidth}{
+\small *1. DATE NEEDED\\[5pt]
+\textField[\Q{1}\TU{dd mmm yyyy}\V{15 Jul 2016}]{date}{.145\textwidth}{0.5cm}
+}\vrule \hspace{1pt}
+
+\parbox[][\rhI][c]{0.27\textwidth}{
+\small 2. SUBMITTER REFERENCE NO.\\[4pt]
+\textField[\TU{ }\V{ }]{srn}{.265\textwidth}{0.5cm}
+}\\
+\hline
+%==================================================================
+%    		Page 1 - Row 2              
+%==================================================================
+\parbox[][\rhII][c]{\textwidth}{
+\vspace{4pt}
+\footnotesize NOTE: Application to clear information for Public Release. Public release clearance is NOT required for material presented in a closed meeting and which will not be made available to the general public, on the Internet, in print or electronic media.
+\textbf{Items marked with an asterisk (*) and Blocks 12-14 are required.}
+}\\
+\hline
+%==================================================================
+%    		Page 1 - Row 3              
+%==================================================================
+\parbox[][\rhIII][c]{.6\textwidth}{
+\vspace{1pt}
+\small *3. SUBMITTER\\[2pt]
+\begin{tabular}{llll}
+\scriptsize *NAME &
+\multicolumn{3}{l}{
+\textField[\TU{ }\V{Annabelle Sharp}]{subname}{.472\textwidth}{.4cm}}\\[4pt]
+\scriptsize *PHONE & 
+\textField[\TU{ }\V{5-6565 x4658}]{subphone}{.175\textwidth}{.4cm} \hspace{1.43pt} &
+\scriptsize ORG/OFC SYMBOL &
+\textField[\TU{ }\V{AFIT/EN}]{pmofc}{.13\textwidth}{.4cm}\\[4pt]
+\scriptsize EMAIL &
+\multicolumn{3}{l}{\textField[\TU{ }\V{annabelle.sharp.ctr@afit.edu}]{subemail}{.472\textwidth}{.4cm}}\\[4pt]
+\scriptsize ORG EMAIL &
+\multicolumn{3}{l}{\textField[\TU{ }\V{thesis@afit.edu}]{suborgemail}{.472\textwidth}{.4cm}}
+\end{tabular}
+}\vrule\hspace{1pt}
+
+\parbox[][\rhIII][c]{.4\textwidth}{
+\vspace{1pt}
+\small *4. PRIMARY AUTHOR\\[2pt]
+\begin{tabular}{ll}
+\scriptsize *NAME & \textField[\TU{ }\V{$if(author.name)$$author.name$$else$Ima B. Smart$endif$}]{autname}{.265\textwidth}{.4cm}\\[4pt]
+\scriptsize *PHONE & \textField[\TU{ }\V{$if(author.phone)$$author.phone$$else$800-555-5555$endif$}]{autphone}{.265\textwidth}{.4cm}\\[4pt]
+\scriptsize ORG/OFC SYMBOL & \textField[\TU{ }\V{AFIT/$if(author.department)$$author.department$$else$EN$endif$}]{autorg}{.265\textwidth}{.4cm}\\[4pt]
+\scriptsize EMAIL & \textField[\TU{ }\V{$if(author.email1)$$author.email1$$else$ima.smart$endif$@$if(author.email2)$$author.email2$$else$us.af.mil$endif$}]{autemail}{.265\textwidth}{.4cm}
+\end{tabular}
+}\\
+\hline
+%==================================================================
+%    		Page 1 - Row 4              
+%==================================================================
+\parbox[][\rhIV][c]{\textwidth}{
+\vspace{1pt}
+\small *5. DOCUMENT TITLE\\[2pt]
+\textField[\Ff{\FfMultiline}\TU{ }\V{\n~$if(title)$\uppercase{$title$}$else$A GREAT TITLE GOES HERE$endif$}]{b5}{\textwidth}{0.8cm}
+}\\
+\hline
+%==================================================================
+%    		Page 1 - Row 5             
+%==================================================================
+\parbox[][\rhV][c]{.65\textwidth}{
+\vspace{1pt}
+\small *6. CONFERENCE/EVENT/PUBLICATION/WEBSITE/PUBLIC WEB URL\\[2pt]
+\textField[\TU{ }\V{AFIT GRADUATION}]{b6}{.64\textwidth}{0.4cm}
+}\vrule\hspace{1pt}
+
+\parbox[][\rhV][c]{.35\textwidth}{
+\vspace{1pt}
+\small *7. EVENT/PUBLICATION DATE\\[2pt] 
+\textField[\TU{ }\V{$if(date)$$date$$else$24 MAR 2016$endif$}]{b7}{.34\textwidth}{0.4cm}
+}\\
+\hline
+%==================================================================
+%   		Page 1 - Row 6
+%==================================================================
+\parbox[][\rhVI][c]{.55\textwidth}{
+\vspace{1pt}
+\small *8. DOCUMENT TYPE\\[2pt]
+\textField[\TU{ }\V{Thesis/Dissertation}]{cb8}{.3\textwidth}{0.5cm}
+\hspace{2pt}OTHER \textField[\TU{ }\V{ }]{b8}{.175\textwidth}{0.5cm}
+}\vrule\hspace{1pt}
+
+\parbox[][\rhVI][c]{.45\textwidth}{
+\vspace{1pt}
+\small *9. BUDGET CATEGORIES (Choose NA if not applicable)\\[1pt]
+\textField[\TU{ }\V{N/A}]{cb9}{.2\textwidth}{0.5cm}
+\hspace{2pt}OTHER \hspace{1pt}\textField[\TU{ }\V{ }]{b9}{.18\textwidth}{0.5cm}
+}\\
+\hline
+%==================================================================
+%    		Page 1 - Row 7             
+%==================================================================
+\parbox[][\rhVII][c]{.55\textwidth}{
+\vspace{1pt}
+\small 10. NATIONAL SECURITY STATUTES/TECHNOLOGY ISSUES\\[2pt]
+\begin{tabularx}{\textwidth}{XX}
+\scriptsize *a. Are any aspects of this technology included in: U.S. Munitions List; ITAR 22, CFR Part 121; CCL; Program Protection Plan, Security Classification Guide?\newline (If YES, please explain rationale for release in block 11) &
+
+\scriptsize *d. If this material results from an international agreement, is the DoD authorized to release program information?\newline (If NO, identify release authority organization in block 11)\\[-12pt]
+
+\begin{center}
+\radioButton{10a}{10bp}{10bp}{yes}\hspace{2pt} YES \hspace{40pt}
+\radioButton{10a}{10bp}{10bp}{no} \hspace{2pt} NO 
+\end{center} &
+
+\begin{center}
+\radioButton{10d}{10bp}{10bp}{yes}\hspace{2pt} YES \hspace{40pt}
+\radioButton{10d}{10bp}{10bp}{no} \hspace{2pt} NO \hspace{40pt}
+\radioButton{10d}{10bp}{10bp}{na} \hspace{2pt} N/A
+\end{center}\\[-5pt]
+
+\scriptsize *b. Does this information meet the criteria for Public Release - unclassified, unlimited distribution?\newline
+\vspace{-20pt}
+\small
+\begin{center}
+\radioButton{10b}{10bp}{10bp}{yes}\hspace{2pt} YES \hspace{40pt}
+\radioButton{10b}{10bp}{10bp}{no} \hspace{2pt} NO 
+\end{center} &
+
+\scriptsize *e. If this is a joint program, does your organization maintain primary management responsibility and authority to release all information?\newline (If NO, provide name of lead organization/POC [i.e. DARPA, NASA, Army, Navy, etc.] in block 11)\\[-17pt]
+
+&
+\begin{center}
+\radioButton{10e}{10bp}{10bp}{yes}\hspace{2pt} YES \hspace{40pt}
+\radioButton{10e}{10bp}{10bp}{no} \hspace{2pt} NO \hspace{40pt}
+\radioButton{10e}{10bp}{10bp}{na} \hspace{2pt} N/A
+\end{center}\\[-25pt]
+
+\scriptsize *c. Does this information meet the criteria for Public Release - unclassified, unlimited distribution?\\[-17pt]
+
+\begin{center}
+\radioButton{10c}{10bp}{10bp}{yes}\hspace{2pt} YES \hspace{40pt}
+\radioButton{10c}{10bp}{10bp}{no} \hspace{2pt} NO 
+\end{center} & \\[-5pt]
+\end{tabularx}
+}
+
+\parbox[][\rhVII][t]{.45\textwidth}{
+\vspace{4pt}
+\small ~\\[4pt]
+}\\
+\hline
+%==================================================================
+%    		Page 1 - Row 8              
+%==================================================================
+\parbox[][\rhVIII][c]{\textwidth}{
+\small 11. EXPLANATION \scriptsize (Additional comments, previous related cases [include case number], additional coordination accomplished/required. Instructions on reverse)\\[2pt]
+\textField[\Ff{\FfMultiline}\TU{ }\V{ }]{b11}{\textwidth}{1.2cm}
+}\\
+\hline
+%==================================================================
+%    		Page 1 - Row 9             
+%==================================================================
+\parbox[][\rhIX][c]{\textwidth}{
+\vspace{1pt}
+\centering
+\footnotesize CERTIFICATION AND COORDINATION SIGNATURES. SIGNATURES MAY NOT BE REPEATED IN MULTIPLE BLOCKS.\\
+NOTE: PER REGULATORY GUIDANCE, \textbf{\textcolor{red}{CONTRACTORS MAY NOT SIGN IN BLOCKS 12-15}}
+}\\
+\hline
+%==================================================================
+%    		Page 1 - Row 10              
+%==================================================================
+\parbox[][\rhX][c]{.5\textwidth}{
+\vspace{1pt}
+\small 12. DoD ORIGINATOR/PROGRAM MANAGER \textbf{(Required)}\\[2pt]
+\scriptsize I certify the attached material is unclassified, technically accurate, contains no critical military technology, is not subject to export controls and is suitable for public release.\\[20pt]
+*NAME \textField[\TU{ }\V{$if(author.name)$$author.name$$else$Ima B. Smart$endif$ }]{pmname}{.4475\textwidth}{.4cm}\\[4pt]
+*ORG \hspace{2.25pt} \textField[\TU{ }\V{AFIT}]{pmorg}{.225\textwidth}{.4cm} \hspace{1.43pt} OFC SYMBOL \textField[\TU{ }\V{$if(author.department)$$author.department$$else$EN$endif$}]{pmofc}{.1265\textwidth}{.4cm}\\[4pt]
+SIGNATURE \sigField{pmsig}{.4165\textwidth}{.8cm}\\[4pt]
+DUTY TITLE \textField[\TU{ }\V{ }]{pmduty}{.25\textwidth}{.4cm} \hspace{1.475pt} DATE \textField[\TU{ }\V{$if(date)$$date$$else$24 Mar 16$endif$}]{pmdate}{.1215\textwidth}{.4cm}
+}\vrule\hspace{1pt}
+
+\parbox[][\rhX][c]{.5\textwidth}{
+\vspace{2pt}
+\small 13. TECHNICAL REVIEW AND CERTIFICATION \textbf{(Required)}\\[2pt]
+\scriptsize I certify the information contained in the attached document is technically accurate; does not disclose classified, sensitive, or militarily critical technology; does not violate proprietary rights or copyright restrictions, and is not subject to export control regulations. I certify that this information is suitable for public release.\\[4pt]
+*NAME \textField[\TU{ }\V{ }]{trname}{.4475\textwidth}{.4cm}\\[4pt]
+*ORG \hspace{2.25pt} \textField[\TU{ }\V{AFIT}]{trorg}{.225\textwidth}{.4cm} \hspace{1.43pt} OFC SYMBOL \textField[\TU{ }\V{$if(author.department)$$author.department$$else$EN$endif$}]{trofc}{.1265\textwidth}{.5cm}\\[4pt]
+SIGNATURE \sigField{trsig}{.4165\textwidth}{.8cm}\\[4pt]
+DUTY TITLE \textField[\TU{ }\V{Deputy Department Head}]{trduty}{.25\textwidth}{.4cm} \hspace{1.475pt} DATE \textField[\TU{ }\V{ }]{trdate}{.1215\textwidth}{.4cm}
+}\\
+\hline
+%==================================================================
+%    		Page 1 - Row 11              
+%==================================================================
+\parbox[][\rhXI][c]{.5\textwidth}{
+\vspace{2pt}
+\small 14. SECURITY MANAGER REVIEW \textbf{(Required)}\\[2pt]
+\scriptsize I certify that the information has been reviewed and the information contains no Operational Security or foreign disclosure issues.\\[4pt]
+*NAME \textField[\TU{ }\V{ }]{smname}{.4475\textwidth}{.4cm}\\[4pt]
+*ORG \hspace{2.25pt} \textField[\TU{ }\V{AFIT}]{smorg}{.225\textwidth}{.4cm} \hspace{1.43pt} OFC SYMBOL \textField[\TU{ }\V{$if(author.department)$$author.department$$else$EN$endif$}]{smofc}{.1265\textwidth}{.4cm}\\[4pt]
+SIGNATURE \sigField{smsig}{.4165\textwidth}{.8cm}\\[4pt]
+DUTY TITLE \textField[\TU{ }\V{Assistant Professor}]{smduty}{.25\textwidth}{.4cm} \hspace{1.475pt} DATE \textField[\TU{ }\V{ }]{smdate}{.1215\textwidth}{.4cm}
+
+}\vrule\hspace{1pt}
+
+\parbox[][\rhXI][c]{.5\textwidth}{
+\vspace{2pt}
+\small 15. ADDITIONAL REVIEW (See reverse for instructions)\\[2pt]
+\scriptsize I certify that this information is suitable for public release.\\[12pt]
+*NAME \textField[\TU{ }\V{ }]{arname}{.4475\textwidth}{.4cm}\\[4pt]
+*ORG \hspace{2.25pt} \textField[\TU{ }\V{ }]{arorg}{.225\textwidth}{.4cm} \hspace{1.43pt} OFC SYMBOL \textField[\TU{ }\V{ }]{arofc}{.1265\textwidth}{.4cm}\\[4pt]
+SIGNATURE \sigField{arsig}{.4165\textwidth}{.8cm}\\[4pt]
+DUTY TITLE \textField[\TU{ }\V{ }]{arduty}{.25\textwidth}{.4cm} \hspace{1.475pt} DATE \textField[\TU{ }\V{ }]{ardate}{.1215\textwidth}{.4cm}
+
+}\\
+\hline
+%==================================================================
+%    		Page 1 - Row 12
+%==================================================================
+\parbox[][\rhXII][c]{.15\textwidth}{
+\vspace{1pt}
+\small 16. PA USE ONLY\\[4pt]
+\textField[\TU{ }\V{ }]{b16}{.14\textwidth}{0.4cm}
+}\vrule\hspace{1pt}
+
+\parbox[][\rhXII][t]{.85\textwidth}{
+\vspace{1pt}
+\begin{tabular}{ll}
+\small 17. NOTES: & \\[-9pt]
+ & \textField[\Ff{\FfMultiline}\TU{ }\V{ }]{b17}{0.75\textwidth}{0.8cm}
+\end{tabular}
+}\\
+\hline
+%==================================================================
+%    		Page 1 - Row 13
+%==================================================================
+\parbox[][\rhXIII][c]{0.4\textwidth}{
+\centering
+\begin{tabular}{ll}
+\radioButton{10a}{10bp}{10bp}{yes}\hspace{2pt} \scriptsize APPROVED &
+\radioButton{10a}{10bp}{10bp}{no} \hspace{2pt} \scriptsize NO OBJECTION\\[4pt]
+
+\radioButton{10a}{10bp}{10bp}{yes}\hspace{2pt} \scriptsize AS AMENDED &
+\radioButton{10a}{10bp}{10bp}{no} \hspace{2pt} \scriptsize RETURN NO ACTION\\[4pt]
+
+\radioButton{10a}{10bp}{10bp}{yes}\hspace{2pt} \scriptsize w/RECOMMENDATION &
+\radioButton{10a}{10bp}{10bp}{no} \hspace{2pt} \scriptsize NOT CLEARED\\[4pt]
+
+\radioButton{10a}{10bp}{10bp}{yes}\hspace{2pt} \scriptsize OTHER &
+\radioButton{10a}{10bp}{10bp}{no} \hspace{2pt} \scriptsize OBJECTION
+
+\end{tabular}
+} \vrule \hspace{1pt}
+
+\parbox[][\rhXIII][c]{0.4\textwidth}{
+\vspace{1pt}
+\small PUBLIC AFFAIRS OFFICER\\[4pt]
+\sigField{pasig}{.39\textwidth}{1.5cm}
+}\vrule \hspace{1pt}
+
+\parbox[][\rhXIII][t]{0.2\textwidth}{
+\vspace{2pt}
+\small CASE NUMBER\\[4pt]
+\textField[\TU{ }\V{ }]{case}{.18\textwidth}{.8cm}
+}\\
+\hline
+
+\end{tabular}
+}\\[2pt]
+\textbf{AFIMSC PUBLIC AFFAIRS SECURITY AND POLICY REVIEW WORKSHEET, 20160331}
+
+\newpage
+
+\noindent\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|}
+\hline
+%==================================================================
+%    		Page 2 - Row 1              
+%==================================================================
+\parbox[][3.25in][t]{\textwidth}{
+\vspace{4pt}
+\small Block 11 - Explanation (Continued):\\[3pt]
+\textField[\TU{ }\V{ }]{b11c}{.99\textwidth}{2.85in}
+}\\
+\hline
+%==================================================================
+%    		Page 2 - Row 2              
+%==================================================================
+\parbox[][7.25in][t]{\textwidth}{
+
+\begin{center}\textbf{INSTRUCTIONS FOR COMPLETING THE SECURITY AND POLICY REVIEW WORKSHEET}\end{center}
+
+\footnotesize \textbf{NOTE:
+  Items marked with an asterisk (*) and Blocks 12-14 are required.  If all required information is not provided, case will be returned with no action
+taken and must be resubmitted.}
+
+\begin{enumerate}
+\item Date Needed:  Allow at least 10 working days (not including day of submission) for local PA review.  If a submission requires higher level review or coordination, processing time could take up to 45 working days.
+\begin{description}
+  \item[-] Requests for less than 10 working days require a justification letter as to why the submission does not fall within the required time frame signed by a Directorate-Level Director or Commander.  More information including a justification letter template is available on the S\&PR SharePoint Site.
+  \item[-] Depending on complexity or requirements for other coordination, items can take longer to process (i.e. Theses)  You will be notified of any issues.
+  \item[-] Items already publicly presented will not be reviewed.
+\end{description}
+\item Include your organizational reference/tracking number (optional). Tracking numbers will not be added by PA.
+\item Submitter information:  Self explanatory. These e-mail addresses receive notification when case is assigned and completed.
+\item Author(s) information: List primary author’s name, if multiple authors.
+This e-mail address receives notification when case is assigned and completed.
+\item Document Title: Self-explanatory.
+\item Conference/Event/Publication Name/Website URL. Identify date of event/name of publication where submission will be published, or web site where
+cleared material will be posted.
+\item Event/Publication Date:  Identify date of event or date of publication/posting to web site.
+\item Document type:  Indicate the type of information to be reviewed from the pull down menu, or choose Other and fill in that blank.
+\item Identify the budget category or program element code associated with the weapon system from pull down menu, or choose NA.
+\item National Security Statutes/Technology Issues:
+\begin{enumerate}
+  \item References:
+  \begin{description}
+    \item[-] Electronic Code of Federal Regulations.
+    \item[-] Export Administration Regulations Database.
+    \item[-] U.S. Munitions List (Part 121) and International Traffic In Arms Regulations
+    \item[-] The Commerce Control List
+\end{description}
+  \item Materials that must be/are marked FOUO or Distribution B or higher will not be cleared.
+  \item Identify whether classified references are used.  Annotate in Block 11 (Explanation) exact references and why it is necessary to use them.
+\end{enumerate}
+\item Explanation.  Include additional comments from other blocks (list previous related cases), clearly identify coordination with agencies already
+accomplished.  If additional coordination with other command agencies is required, provide POC information (use back of form, as necessary).\\[4pt]
+CERTIFICATION AND COORDINATION SIGNATURES.  PER REGULATORY GUIDANCE,
+\textbf{\textcolor{red}{CONTRACTORS MAY NOT SIGN IN BLOCKS 12-15}}
+\item Originator/Program Manager/Author Certification.  Signature certifies that the U.S. Government originator, program manager, or author concurs that
+the information is appropriate for public release based on regulations, classification guides, and any other pertinent guidance.
+\item Technical Review and Certification Signature. Signature certifies that the information has been reviewed by a U.S. Government superior/authorized
+peer reviewer/subject matter expert and is appropriate for public release based on regulations, classification guides, and any other pertinent guidance.
+\item Security Manager Review.  Signature certifies that the information contains no Operational Security issues.  This can be signed by a U.S. Government
+OPSEC Officer, Security Manager (or Educational Department Head for theses, dissertations and abstracts).
+\item Additional review.  Used to document coordination with outside agencies/program offices, or organizations may have an internal process that requires
+an additional signature, such as director or commander.  Required only when external coordination needs to be documented, or internal processes dictate
+\end{enumerate}
+}\\
+\hline
+
+\end{tabular}
+}\\[2pt]
+\textbf{AFIMSC PUBLIC AFFAIRS SECURITY AND POLICY REVIEW WORKSHEET, 20160331}
+\end{document}
