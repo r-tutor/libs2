@@ -1,0 +1,30 @@
+Package: d3scatter
+Type: Package
+Title: Demo of d3 scatter plot; testbed for crosstalk library
+Version: 0.1.0
+Authors@R: c(
+    person("Joe", "Cheng", role = c("aut", "cre"), email = "joe@rstudio.com"),
+    person(family = "RStudio", role = "cph"),
+    person("Mike", "Bostock", role = c("ctb", "cph"), comment = "d3 library")
+    )
+Description: Simple d3 scatter plot htmlwidget, based on Mike Bostock's block that launched a thousand scatter plots: http://bl.ocks.org/mbostock/3887118
+License: GPL (>=3)
+LazyData: TRUE
+Imports: htmlwidgets, htmltools, crosstalk, lazyeval
+Remotes: hadley/lazyeval
+RoxygenNote: 5.0.1
+Author: Joe Cheng [aut, cre],
+  RStudio [cph],
+  Mike Bostock [ctb, cph] (d3 library)
+Maintainer: Joe Cheng <joe@rstudio.com>
+Built: R 3.3.2; ; 2017-02-07 16:08:24 UTC; windows
+RemoteType: github
+RemoteHost: https://api.github.com
+RemoteRepo: d3scatter
+RemoteUsername: jcheng5
+RemoteRef: master
+RemoteSha: aba6687f7af974a55ee07b52bea0ccbf110623e8
+GithubRepo: d3scatter
+GithubUsername: jcheng5
+GithubRef: master
+GithubSHA1: aba6687f7af974a55ee07b52bea0ccbf110623e8

@@ -1,0 +1,4 @@
+d3scatter	d3scatter
+d3scatter-shiny	d3scatter-shiny
+d3scatterOutput	d3scatter-shiny
+renderD3scatter	d3scatter-shiny
