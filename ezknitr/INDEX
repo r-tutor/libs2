@@ -1,0 +1,8 @@
+ezknitr                 ezknitr
+ezknitr_core            Knit Rmd or spin R files without the typical
+                        pain of working directories
+open_output_dir         Open the directory containing the output from
+                        the last ezknitr command
+set_default_params      Set default parameters
+setup_ezspin_test       Set up a test directory to experiment with
+                        'ezspin' or 'ezknit'

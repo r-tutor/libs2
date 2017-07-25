@@ -1,0 +1,10 @@
+ezknitr-package	ezknitr
+ezknit	ezknitr_core
+ezknitr	ezknitr
+ezknitr_core	ezknitr_core
+ezspin	ezknitr_core
+open_output_dir	open_output_dir
+setup_ezknit_test	setup_test
+setup_ezspin_test	setup_test
+setup_test	setup_test
+set_default_params	set_default_params
