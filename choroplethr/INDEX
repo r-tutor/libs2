@@ -1,0 +1,84 @@
+Admin1Choropleth        An R6 object for creating Administration Level
+                        1 choropleths.
+Admin1RegionChoropleth
+                        An R6 object for creating Administration Level
+                        1 choropleths based on regions.
+Choropleth              The base Choropleth object.
+CountryChoropleth       An R6 object for creating country-level
+                        choropleths.
+CountyChoropleth        Create a county-level choropleth
+CountyZoomChoropleth    Create a county-level choropleth that zooms on
+                        counties, not states.
+StateChoropleth         Create a state-level choropleth
+TractChoropleth         An R6 object for creating choropleths of Census
+                        Tracts.
+USAChoropleth           Normal choropleth that draws Alaska and Hawaii
+                        as insets.  In addition to a columns named
+                        "region" and "value", also requires a column
+                        named "state".
+admin1_choropleth       Create an admin1-level choropleth for a
+                        specified country
+admin1_region_choropleth
+                        Create a map of Administrative Level 1 regions
+calculate_percent_change
+                        Calculate the percentage change between two
+                        choroplethr dataframes.
+choroplethr             Create a choropleth
+choroplethr_acs         Create a choropleth from ACS data.
+choroplethr_animate     Animate a list of choropleths
+choroplethr_wdi         Create a country-level choropleth using data
+                        from the World Bank's World Development
+                        Indicators (WDI)
+continental_us_states   A vector of the names of US Continental US
+                        States.
+country_choropleth      Create a country-level choropleth
+county_choropleth       Create a choropleth of US Counties
+county_choropleth_acs   Create a US County choropleth from ACS data
+county_zoom_choropleth
+                        Create a choropleth of USA Counties, with
+                        sensible defaults, that zooms on counties.
+df_county_demographics
+                        A data.frame containing demographic statistics
+                        for each county in the United States.
+df_japan_census         A data.frame containing basic demographic
+                        information about Japan.
+df_pop_country          A data.frame containing population estimates
+                        for Countries in 2012.
+df_pop_county           A data.frame containing population estimates
+                        for US Counties in 2012.
+df_pop_state            A data.frame containing population estimates
+                        for US States in 2012.
+df_president            A data.frame containing election results from
+                        the 2012 US Presidential election.
+df_president_ts         A data.frame containing all US presdiential
+                        election results from 1789 to 2012
+df_state_age_2010       A data.frame containing median age estimates
+                        for US states in 2010
+df_state_age_2015       A data.frame containing median age estimates
+                        for US states in 2015
+df_state_demographics   A data.frame containing demographic statistics
+                        for each state plus the District of Columbia.
+double_map              Place two maps side by side
+get_acs_data            Returns a list representing American Community
+                        Survey (ACS) estimates
+get_acs_df              Returns a data.frame representing US Census
+                        American Community Survey (ACS) estimates.
+get_county_demographics
+                        Get a handful of demographic variables on US
+                        Counties from the US Census Bureau as a
+                        data.frame.
+get_state_demographics
+                        Get a handful of demographic variables on US
+                        States from the US Census Bureau as a
+                        data.frame.
+get_tract_demographics
+                        Get a handful of demographic variables on
+                        Census Tracts in a State from the US Census
+                        Bureau as a data.frame.
+get_tract_map           Get a map of tracts in a state, as a data.frame
+state_choropleth        Create a choropleth of US States
+state_choropleth_acs    Create a US State choropleth from ACS data
+tract_choropleth        Create a choropleth of Census Tracts in a
+                        particular state.
+zip_map                 Create a map visualizing US ZIP codes with
+                        sensible defaults
