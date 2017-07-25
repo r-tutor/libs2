@@ -1,0 +1,31 @@
+addbrush                Add brush to plot This adds a rectangle to a
+                        ggplot plot indicating the brush position.
+dd_load                 Load describe display Retrieve output of from
+                        describe display plugin
+describedisplayreshape
+                        R interface to DescribeDisplay (GGobi plugin).
+ggplot.barplot          Create a nice plot for Bar Plots Create a nice
+                        looking plot complete with axes using ggplot.
+ggplot.dd               Create a nice plot Create a nice looking plot
+                        complete with axes using ggplot.
+ggplot.ddplot           Create a nice plot Create a nice looking plot
+                        complete with axes using ggplot.
+ggplot.histogram        Create a nice plot for Histograms Create a nice
+                        looking plot complete with axes using ggplot.
+ggplot.parcoords        Create a nice plot for parallel coordinates
+                        plot Create a nice looking plot complete with
+                        axes using ggplot.
+ggplot.scatmat          Create a nice plots in a scatter plot matrix
+                        Create a nice looking plots in a matrix.  The
+                        1d sections along the diagonal have a smooth
+                        density while the values are compared to
+                        eachother within the matrix.
+ggplot.timeseries       Create nice plots for a time series Create nice
+                        looking plots complete with axes using ggplot.
+                        Produces graphics with a uniform x axis.
+plot.ddplot             Plot a dd plot Convenient method to draw a
+                        single panel.
+removehiddens           Remove hidden points Will remove all hidden
+                        points from the plot.
+zeeThemAll              Run All Examples Will run all examples within
+                        the package

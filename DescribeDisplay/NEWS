@@ -1,0 +1,21 @@
+DescribeDisplay 0.2.5
+---------------------
+
+Installation
+
+* fixed installation issues with ggplot2 v2.0.0 upgrade
+
+ggplot.scatmat
+
+* fixed underlying code to work with GGally v1.0.1 upgrade
+
+
+Version 0.2.4
+----------------------------------------------------------------
+
+* new examples and namespace fixes to be compatible with ggplot2 0.9.3.1
+
+Version 0.2.3
+----------------------------------------------------------------
+
+* example and namespace fixes to be compatible with ggplot2 0.9.
