@@ -1,0 +1,25 @@
+Package: dscoemarkdown
+Title: R Markdown for DSCOE Submissions
+Version: 0.0.0.9000
+Authors@R: person("Ian", "Kloo", email = "ian.p.kloo.civ@mail.mil", role = c("aut", "cre"))
+Description: Create R Markdown documents in the prefered format for the DSCOE
+    website.
+Depends: R (>= 2.0.0)
+License: None
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 5.0.1
+Imports: knitr, rmarkdown
+Author: Ian Kloo [aut, cre]
+Maintainer: Ian Kloo <ian.p.kloo.civ@mail.mil>
+Built: R 3.4.1; ; 2017-07-03 15:33:25 UTC; windows
+RemoteType: github
+RemoteHost: https://api.github.com
+RemoteRepo: dscoemarkdown
+RemoteUsername: iankloo
+RemoteRef: master
+RemoteSha: 2b6d0605c182f549283d0826e303c6ba5ee9ceab
+GithubRepo: dscoemarkdown
+GithubUsername: iankloo
+GithubRef: master
+GithubSHA1: 2b6d0605c182f549283d0826e303c6ba5ee9ceab
