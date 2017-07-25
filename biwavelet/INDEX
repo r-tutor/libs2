@@ -1,0 +1,37 @@
+MOTHERS                 Supported mother wavelets
+ar1.spectrum            Power spectrum of a random red noise process
+ar1_ma0_sim             Slightly faster arima.sim implementation which
+                        assumes AR(1) and ma=0.
+arrow                   Helper function for phase.plot
+biwavelet-package       Conduct Univariate and Bivariate Wavelet
+                        Analyses
+check.data              Check the format of time series
+check.datum             Helper function
+convolve2D              Fast column-wise convolution of a matrix
+convolve2D_typeopen     Speed-optimized version of convolve2D
+enviro.data             Multivariate ENSO (MEI), NPGO, and PDO indices
+get_minroots            Helper function
+phase.plot              Plot phases with arrows
+plot.biwavelet          Plot 'biwavelet' objects
+pwtc                    Compute partial wavelet coherence
+rcpp_row_quantile       Row-wise quantile of a matrix
+rcpp_wt_bases_dog       Optimized "wt.bases.dog" function.
+rcpp_wt_bases_morlet    Optimized "wt.bases.morlet" function.
+rcpp_wt_bases_paul      Optimized "wt.bases.paul" function.
+smooth.wavelet          Smooth wavelet in both the time and scale
+                        domains
+wclust                  Compute dissimilarity between multiple wavelet
+                        spectra
+wdist                   Compute dissimilarity between two wavelet
+                        spectra
+wt                      Compute wavelet transform
+wt.bases                Compute wavelet
+wt.bases.dog            Helper method (not exported)
+wt.bases.morlet         Helper method (not exported)
+wt.bases.paul           Helper method (not exported)
+wt.sig                  Determine significance of wavelet transform
+wtc                     Compute wavelet coherence
+wtc.sig                 Determine significance of wavelet coherence
+wtc_sig_parallel        Parallelized Monte Carlo simulation using
+                        'doParallel' package.
+xwt                     Compute cross-wavelet
