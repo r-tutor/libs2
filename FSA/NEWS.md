@@ -1,4 +1,12 @@
-# FSA 0.8.13 ongoing
+# FSA 0.8.15 ongoing
+
+# FSA 0.8.14 7-Jul-17
+* Moved `dunn.test` and `lmtest` to `imports` to help with portability for workshops.
+* `ageBias()`: Modified. Fixed bug in `plot()` so that the tick marks on the marginal histograms match the tick marks on the main plot. Changed the default `hist.panel.size=` in `plot()` so that it more reliably prints the values on the axes of the marginal histograms.
+* `removal()`: Modified. Added "warnings" for when all catches are zeroes (an object is still returned with all `NA`s). Thanks to Daniel Hanks for pointing out this issue.
+* `Summarize()`: Modified. Fixed bug when `percZero!="always"` and there are no valid values such that the calculated percent of zeroes is `NA`.
+
+# FSA 0.8.13 30-Apr-17
 * `ageBias()`: Modified. A complete rebuild of `plot`. Major changes are to add `plotAB()` which is primarily used to make the "legacy" age bias plots of Campana, removal of the "sunflower" plot option, new sets of defaults for many of the arguments that reflect my preferences for visualizing age comparisons (which includes defaulting to plotting differences in ages), addition of the ability to add marginal histograms (`xHist=`, `yHist=`, `col.hist=`, and `hist.panel.size=`), better handling of axis ticks and labels (primarily to show ticks at integers and make sure 0 is included for differences), and allowing the ability to add "summary layers" to the main plot (see `allowAdd=`). Many examples were added. Some functionality from previous versions will be broken.
 * `capFirst()`: Modified. Changed some `if()`s with `class()`es to `inherits()`.
 * `compIntercepts()`: Modified. Replaced two `dim()` calls with `nrow()`.
@@ -158,7 +166,7 @@
 
 # FSA 0.8.4 21-Dec-15
 * Now using Roxygen2 v5.0.1.
-* Removed some `requireNamespaces()` from some functions and moved those packages from `Suggests` to `Imports` so that those functions would work better with other packages.  The only `requireNamespaces()` that remain are related to functions that require the `relax` package (so tcltk is not installed until needed) and `knitr`, `dunn.test`, and `lmtest` as these are unlikedly to be used by other packages and will keep the packages that are loaded with `FSA` to a minimum.  Packages moved from `Suggests` to `Depends` are `Hmisc` (for use in `binCI`), `gdata` (for use in `filterD()` and `Subset()`), `dplyr` (for use in `filterD()`), `sciplot` (for use in `fitPlot()`), `car` (for use in `residPlot()`), and `gplots` (for use with colors).
+* Removed some `requireNamespaces()` from some functions and moved those packages from `Suggests` to `Imports` so that those functions would work better with other packages.  The only `requireNamespaces()` that remain are related to functions that require the `relax` package (so tcltk is not installed until needed) and `knitr`, `dunn.test`, and `lmtest` as these are unlikely to be used by other packages and will keep the packages that are loaded with `FSA` to a minimum.  Packages moved from `Suggests` to `Depends` are `Hmisc` (for use in `binCI`), `gdata` (for use in `filterD()` and `Subset()`), `dplyr` (for use in `filterD()`), `sciplot` (for use in `fitPlot()`), `car` (for use in `residPlot()`), and `gplots` (for use with colors).
 * `addZeroCatch()`: Modified tests (to reduce warnings that were not part of tests).
 * `geomean()`: Added.
 * `geosd()`: Added.
