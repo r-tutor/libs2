@@ -1,4 +1,5 @@
 add_sub                 Add annotation underneath a plot
+align_margin            Align multiple plots along a specified margin
 align_plots             Align multiple plots vertically and/or
                         horizontally
 background_grid         Add/modify/remove the background grid in a
