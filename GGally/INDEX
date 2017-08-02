@@ -42,7 +42,7 @@ ggally_nostic_std_resid
 ggally_points           Plots the Scatter Plot
 ggally_ratio            Plots a mosaic plot
 ggally_smooth           Plots the Scatter Plot with Smoothing
-ggally_text             GGplot Text
+ggally_text             Text Plot
 ggcoef                  ggcoef - Plot Model Coefficients with broom and
                         ggplot2
 ggcorr                  ggcorr - Plot a correlation matrix with ggplot2
