@@ -1,7 +1,7 @@
 Package: ggsignif
 Type: Package
 Title: Significance Brackets for 'ggplot2'
-Version: 0.3.0
+Version: 0.4.0
 Authors@R: person("Constantin", "Ahlmann-Eltze", email = "artjom31415@googlemail.com", role = c("aut", "cre"))
 Description: Enrich your 'ggplots' with group-wise comparisons.
   This package provides an easy way to indicate if two groups are significantly different.
@@ -17,9 +17,9 @@ Suggests: testthat, knitr, rmarkdown
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2017-06-25 11:51:49 UTC; constantin
+Packaged: 2017-08-03 09:46:19 UTC; constantin
 Author: Constantin Ahlmann-Eltze [aut, cre]
 Maintainer: Constantin Ahlmann-Eltze <artjom31415@googlemail.com>
 Repository: CRAN
-Date/Publication: 2017-06-25 15:24:01 UTC
-Built: R 3.4.0; ; 2017-06-27 22:07:20 UTC; windows
+Date/Publication: 2017-08-03 14:35:48 UTC
+Built: R 3.4.1; ; 2017-08-03 16:54:29 UTC; windows

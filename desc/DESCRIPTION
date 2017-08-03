@@ -1,6 +1,6 @@
 Package: desc
 Title: Manipulate DESCRIPTION Files
-Version: 1.1.0
+Version: 1.1.1
 Authors@R: c(
     person("Gábor", "Csárdi",, "csardi.gabor@gmail.com", role = c("aut", "cre")),
     person("Kirill", "Müller", role = c("aut")))
@@ -9,9 +9,9 @@ Description: Tools to read, write, create, and manipulate DESCRIPTION files.
     It is intended for packages that create or manipulate other packages.
 License: MIT + file LICENSE
 LazyData: true
-URL: https://github.com/r-pkgs/desc
-BugReports: https://github.com/r-pkgs/desc/issues
-Depends: R (>= 3.2.0)
+URL: https://github.com/r-lib/desc#readme
+BugReports: https://github.com/r-lib/desc/issues
+Depends: R (>= 3.1.0)
 Suggests: covr, testthat, whoami, withr
 Imports: assertthat, utils, R6, crayon, rprojroot
 Encoding: UTF-8
@@ -22,9 +22,9 @@ Collate: 'assertions.R' 'authors-at-r.R' 'classes.R' 'collate.R'
         'str.R' 'syntax_checks.R' 'urls.R' 'utils.R' 'validate.R'
         'version.R'
 NeedsCompilation: no
-Packaged: 2017-01-26 10:48:19 UTC; gaborcsardi
+Packaged: 2017-08-03 09:45:28 UTC; gaborcsardi
 Author: Gábor Csárdi [aut, cre],
   Kirill Müller [aut]
 Repository: CRAN
-Date/Publication: 2017-01-27 10:17:54
-Built: R 3.3.2; ; 2017-01-30 02:11:00 UTC; windows
+Date/Publication: 2017-08-03 15:22:33 UTC
+Built: R 3.4.1; ; 2017-08-03 16:54:27 UTC; windows
