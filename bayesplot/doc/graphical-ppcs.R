@@ -15,21 +15,44 @@ knitr::opts_chunk$set(
   eval = params$EVAL
 )
 
-## ---- roaches-model, results="hide", message=FALSE,warning=FALSE---------
+## ---- pkgs, include=FALSE------------------------------------------------
+library("ggplot2")
 library("rstanarm")
-head(roaches) # see help("rstanarm-datasets")
 
+## ---- eval=FALSE---------------------------------------------------------
+#  library("bayesplot")
+#  library("ggplot2")
+#  library("rstanarm")
+
+## ---- roaches-data-------------------------------------------------------
+head(roaches) # see help("rstanarm-datasets")
 roaches$roach1 <- roaches$roach1 / 100 # pre-treatment number of roaches (in 100s)
-fit_poisson <- stan_glm(y ~ roach1 + treatment + senior,
-                        offset = log(exposure2),
-                        family = poisson(link = "log"),
-                        data = roaches,
-                        seed = 1111)
+
+## ---- eval=FALSE---------------------------------------------------------
+#  fit_poisson <- stan_glm(
+#    y ~ roach1 + treatment + senior,
+#    offset = log(exposure2),
+#    family = poisson(link = "log"),
+#    data = roaches,
+#    seed = 1111
+#    )
+
+## ---- roaches-model, include=FALSE---------------------------------------
+fit_poisson <- stan_glm(
+  y ~ roach1 + treatment + senior,
+  offset = log(exposure2),
+  family = poisson(link = "log"),
+  data = roaches,
+  seed = 1111
+  )
 
 ## ---- print--------------------------------------------------------------
 print(fit_poisson)
 
-## ---- roaches-model-2, results="hide", message=FALSE,warning=FALSE-------
+## ---- eval=FALSE---------------------------------------------------------
+#  fit_nb <- update(fit_poisson, family = "neg_binomial_2")
+
+## ---- roaches-model-2, include=FALSE-------------------------------------
 fit_nb <- update(fit_poisson, family = "neg_binomial_2")
 
 ## ---- print-2------------------------------------------------------------
@@ -42,9 +65,6 @@ dim(yrep_poisson)
 dim(yrep_nb)
 
 ## ----ppc_dens_overlay----------------------------------------------------
-library("ggplot2")
-library("bayesplot")
-
 color_scheme_set("brightblue") # see help("bayesplot-colors")
 
 y <- roaches$y
@@ -86,13 +106,16 @@ ppc_stat_grouped(y, yrep_nb, group = roaches$treatment, stat = "prop_zero")
 available_ppc(pattern = "_grouped")
 
 ## ---- pp_check.foo-------------------------------------------------------
-pp_check.foo <- function(object, ..., type = c("multiple", "overlaid")) {
+# @param object An object of class "foo".
+# @param type The type of plot.
+# @param ... Optional arguments passed to the bayesplot plotting function.
+pp_check.foo <- function(object, type = c("multiple", "overlaid"), ...) {
   y <- object[["y"]]
   yrep <- object[["yrep"]]
   switch(
     match.arg(type),
-    multiple = ppc_hist(y, yrep[1:min(8, nrow(yrep)),, drop = FALSE]),
-    overlaid = ppc_dens_overlay(y, yrep)
+    multiple = ppc_hist(y, yrep[1:min(5, nrow(yrep)),, drop = FALSE], ...),
+    overlaid = ppc_dens_overlay(y, yrep, ...)
   )
 }
 
@@ -101,12 +124,15 @@ x <- list(y = rnorm(50), yrep = matrix(rnorm(5000), nrow = 100, ncol = 50))
 class(x) <- "foo"
 
 ## ---- pp_check-1, eval=FALSE---------------------------------------------
-#  pp_check(x)
+#  color_scheme_set("purple")
+#  pp_check(x, type = "multiple", binwidth = 0.25)
 
 ## ---- print-1, echo=FALSE------------------------------------------------
-gg <- pp_check(x)
+color_scheme_set("purple")
+gg <- pp_check(x, type = "multiple", binwidth = 0.25)
 suppressMessages(print(gg))
 
 ## ---- pp_check-2---------------------------------------------------------
+color_scheme_set("darkgray")
 pp_check(x, type = "overlaid")
 

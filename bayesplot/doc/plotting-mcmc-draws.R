@@ -15,26 +15,26 @@ knitr::opts_chunk$set(
   eval = params$EVAL
 )
 
-## ---- eval=FALSE, results='hide'-----------------------------------------
+## ---- pkgs, include=FALSE------------------------------------------------
+library("ggplot2")
+library("rstanarm")
+
+## ---- eval=FALSE---------------------------------------------------------
+#  library("bayesplot")
+#  library("ggplot2")
 #  library("rstanarm")
-#  fit <- stan_glm(
-#    mpg ~ ., # ~ . includes all other variables in dataset
-#    data = mtcars,
-#    chains = 4,
-#    iter = 2000,
-#    seed = 1111
-#  )
+
+## ---- mtcars-------------------------------------------------------------
+head(mtcars) # see help("mtcars")
+
+## ---- eval=FALSE---------------------------------------------------------
+#  fit <- stan_glm(mpg ~ .,  # '.' means includes all variables
+#                  data = mtcars,
+#                  seed = 1111)
 #  print(fit)
 
-## ----stan_glm, echo=FALSE, results='hide'--------------------------------
-suppressPackageStartupMessages(library("rstanarm"))
-fit <- stan_glm(
-  mpg ~ ., 
-  data = mtcars, 
-  chains = 4, 
-  iter = 2000,
-  seed = 1111
-)
+## ----stan_glm, include=FALSE---------------------------------------------
+fit <- stan_glm(mpg ~ ., data = mtcars, seed = 1111)
 
 ## ---- print-fit, echo=FALSE----------------------------------------------
 print(fit)
@@ -45,7 +45,6 @@ dim(posterior)
 dimnames(posterior)
 
 ## ---- mcmc_intervals-----------------------------------------------------
-library("bayesplot")
 color_scheme_set("red")
 mcmc_intervals(posterior, pars = c("cyl", "drat", "am", "sigma"))
 
@@ -60,20 +59,21 @@ mcmc_areas(
 
 ## ---- mcmc_hist, message=FALSE-------------------------------------------
 color_scheme_set("green")
-mcmc_hist(posterior, pars = c("wt", "am"))
-mcmc_dens(posterior, pars = c("wt", "am"))
+mcmc_hist(posterior, pars = c("wt", "sigma"))
+mcmc_dens(posterior, pars = c("wt", "sigma"))
 
 ## ---- mcmc_hist_by_chain, message=FALSE----------------------------------
 color_scheme_set("brightblue")
-mcmc_hist_by_chain(posterior, pars = c("wt", "am"))
-mcmc_dens_overlay(posterior, pars = c("wt", "am"))
+mcmc_hist_by_chain(posterior, pars = c("wt", "sigma"))
+mcmc_dens_overlay(posterior, pars = c("wt", "sigma"))
 
 ## ---- mcmc_violin--------------------------------------------------------
-mcmc_violin(posterior, pars = c("wt", "am"), probs = c(0.1, 0.5, 0.9))
+mcmc_violin(posterior, pars = c("wt", "sigma"), probs = c(0.1, 0.5, 0.9))
 
 ## ---- mcmc_scatter-------------------------------------------------------
 color_scheme_set("gray")
-mcmc_scatter(posterior, pars = c("(Intercept)", "wt"), size = 1.5, alpha = 0.5)
+mcmc_scatter(posterior, pars = c("(Intercept)", "wt"), 
+             size = 1.5, alpha = 0.5)
 
 ## ---- mcmc_hex-----------------------------------------------------------
 mcmc_hex(posterior, pars = c("(Intercept)", "wt"))

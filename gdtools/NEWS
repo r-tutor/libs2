@@ -1,6 +1,11 @@
+# gdtools 0.1.5
+
+* increase tolerance in font metrics unit-tests as new versions of fontconfig/freetype
+  are slightly changing returned extents.
+
 # gdtools 0.1.4
 
-* New file registerDynamicSymbol to correctly register provided routines
+* New file src/registerDynamicSymbol.c to correctly register provided routines
 * a cleanup file to delete src/Makevars when package has been built
 
 # gdtools 0.1.3
