@@ -47,6 +47,8 @@ iscube                  Functions to isolate cube points from 2-level
                         or star points
 lm                      lm and aov methods for class design objects
 oa.design               Function for accessing orthogonal arrays
+oa_feasible             Function to Check Whether an Array of Specified
+                        Strength Might Exist
 oacat                   Data Frames That List Available Orthogonal
                         Arrays
 param.design            Function to generate Taguchi style parameter
@@ -54,6 +56,8 @@ param.design            Function to generate Taguchi style parameter
 planor2design           Convert matrix, data frame or object of class
                         planordesign to object of class design
 plot.design             Plotting class design objects
+print.oa                Function to Print oa Objects with a Lot of
+                        Added Info
 qua.design              Function to switch between qualitative and
                         quantitative factors and different contrast
                         settings

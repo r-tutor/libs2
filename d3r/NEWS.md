@@ -1,8 +1,24 @@
+# d3r 0.6.8
+
+### Updates
+
+* `d3_dep_jetpack()` added. Essentially the same as d3_dep_v4(), but with a number of convenience functions added. Learn more by checking out the [d3-jetpack github page](https://github.com/gka/d3-jetpack). 
+
+* update d3v4 to [`4.10.0`](https://github.com/d3/d3/releases/tag/v4.10.0)
+
+# d3r 0.6.7
+
+### API Changes
+
+* **(BREAKING)** d3_table weight column is now named value to be consistent with the newest d3-sankey plugin [commit](https://github.com/timelyportfolio/d3r/commit/65b913322f1a6c71db21496f158bb0bed645a1f6).
+
+* Use unpkg.com for online dependencies
+
 # d3r 0.6.6
 
 ### Updates
 
-* add d3_table() function to convert R table into list of a nodes data.frame and a links data.frame modelled after [example](http://bl.ocks.org/timelyportfolio/raw/3616869996703d48a981/)
+* add d3_table() function to convert R table into list of a nodes data.frame and a links data.frame modelled after [example](https://gist.github.com/timelyportfolio/3616869996703d48a981)
 
 # d3r 0.6.5
 

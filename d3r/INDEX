@@ -1,4 +1,5 @@
 change_to_name          Change Column Name in Children to "name"
+d3_dep_jetpack          'd3.js' Dependency for Version 4 Jetpack
 d3_dep_v3               'd3.js' Dependency for Version 3
 d3_dep_v4               'd3.js' Dependency for Version 4
 d3_igraph               Convert 'igraph' to 'd3.js'

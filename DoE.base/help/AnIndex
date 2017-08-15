@@ -462,6 +462,7 @@ oa.minRelProjAberr	generalized.word.length
 oa2symb	genChild
 oacat	oacat
 oacat3	oacat
+oa_feasible	oa_feasible
 ord	class-design
 origin	oa.design
 orth.check	halfnormal
@@ -479,6 +480,7 @@ print.aov.design	lm.design
 print.design	class-design-methods
 print.GRind	GRind
 print.lm.design	lm.design
+print.oa	print.oa
 print.summary.aov.design	lm.design
 print.summary.lm.design	lm.design
 printBy	utilities
