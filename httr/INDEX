@@ -14,12 +14,12 @@ config                  Set curl options.
 content                 Extract content from a request.
 content_type            Set content-type and accept headers.
 cookies                 Access cookies in a response.
+get_callback            Install or uninstall a callback function
 handle                  Create a handle tied to a particular host.
 headers                 Extract the headers from a response
 http_error              Check for an http error.
 http_status             Give information on the status of a request.
 http_type               Extract the content type of a response
-httr                    'httr' makes http easy.
 httr_dr                 Diagnose common configuration problems
 httr_options            List available options.
 modify_url              Modify a url.
@@ -34,7 +34,6 @@ parse_url               Parse and build urls according to RFC1808.
 progress                Add a progress bar.
 response                The response object.
 revoke_all              Revoke all OAuth tokens in the cache.
-safe_callback           Generate a safe R callback.
 set_config              Set (and reset) global httr configuration.
 set_cookies             Set cookies.
 status_code             Extract status code from response.

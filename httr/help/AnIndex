@@ -1,4 +1,4 @@
-httr-package	httr
+httr-package	httr-package
 accept	content_type
 accept_json	content_type
 accept_xml	content_type
@@ -16,6 +16,7 @@ cookies	cookies
 curl_docs	httr_options
 DELETE	DELETE
 GET	GET
+get_callback	get_callback
 guess_media	guess_media
 handle	handle
 handle_find	handle_pool
@@ -30,7 +31,7 @@ http_date	parse_http_date
 http_error	http_error
 http_status	http_status
 http_type	http_type
-httr	httr
+httr	httr-package
 httr_dr	httr_dr
 httr_options	httr_options
 init_oauth1.0	init_oauth1.0
@@ -40,6 +41,8 @@ jwt_signature	jwt_signature
 message_for_status	stop_for_status
 modify_url	modify_url
 oauth1.0_token	oauth1.0_token
+oauth2.0_access_token	init_oauth2.0
+oauth2.0_authorize_url	init_oauth2.0
 oauth2.0_token	oauth2.0_token
 oauth_app	oauth_app
 oauth_callback	oauth_callback
@@ -63,7 +66,7 @@ reset_config	set_config
 response	response
 RETRY	RETRY
 revoke_all	revoke_all
-safe_callback	safe_callback
+set_callback	get_callback
 set_config	set_config
 set_cookies	set_cookies
 sha1_hash	sha1_hash
