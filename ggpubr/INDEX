@@ -1,6 +1,7 @@
 add_summary             Add Summary Statistics onto a ggplot.
 annotate_figure         Annotate Arranged Figure
 as_ggplot               Storing grid.arrange() arrangeGrob() and plots
+axis_scale              Change Axis Scale: log2, log10 and more
 background_image        Add Background Image to ggplot2
 bgcolor                 Change ggplot Panel Background Color
 border                  Set ggplot Panel Border Line
@@ -55,4 +56,3 @@ stat_stars              Add Stars to a Scatter Plot
 text_grob               Create a Text Graphical object
 theme_pubr              Publication ready theme
 theme_transparent       Create a ggplot with Transparent Background
-xscale                  Change Axis Scale: log2, log10 and more

@@ -1,4 +1,24 @@
-# CHANGES IN bookdown VERSION 0.4 (unreleased)
+# CHANGES IN bookdown VERSION 0.5
+
+## NEW FEATURES
+
+- Added support for two more environments: Exercises and Solutions (thanks, @dshuman1, #423).
+
+- If the Rmd file merged from all chapters exists and you are sure it can be safely deleted, you can set an option `delete_merged_file` to `true` in `_bookdown.yml` (thanks, @dmenne, #442).
+
+## BUG FIXES
+
+- The book cannot be properly rendered when the option `book_filename` in `_bookdown.yml` contains a dot (thanks, @pinusm, #410).
+
+- Proof and Remark blocks do not work well for EPUB output (thanks, @mamaciasq, #443).
+
+- When `split_by = 'section'` for the `gitbook` output format, navigation buttons are missing on the page before the appendix (thanks, @dataopt, #409).
+
+## MINOR CHANGES
+
+- The label prefix for Example blocks was changed from `ex:` to `exm:`.
+
+# CHANGES IN bookdown VERSION 0.4
 
 ## NEW FEATURES
 

@@ -1,6 +1,7 @@
 add_summary	add_summary
 annotate_figure	annotate_figure
 as_ggplot	as_ggplot
+axis_scale	axis_scale
 background_image	background_image
 bgcolor	bgcolor
 border	border
@@ -11,6 +12,7 @@ color_palette	set_palette
 compare_means	compare_means
 desc_statby	desc_statby
 diff_express	diff_express
+drawDetails.splitText	ggparagraph
 facet	facet
 fill_palette	set_palette
 font	font

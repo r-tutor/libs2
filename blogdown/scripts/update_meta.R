@@ -4,18 +4,18 @@ local({
   sel_input = function(...) shiny::selectizeInput(
     ..., width = '100%', multiple = TRUE, options = list(create = TRUE)
   )
-  meta = blogdown:::scan_meta()
+  meta = blogdown:::collect_yaml()
 
   ctxt = rstudioapi::getSourceEditorContext(); txt = ctxt$contents
-  res = blogdown:::split_yaml_body(txt); yml = res$yaml; rng = res$yaml_range
-  if ((n <- length(yml)) < 2) return(
+  res = blogdown:::split_yaml_body(txt); yml = res$yaml_list; rng = res$yaml_range
+  if (length(yml) == 0) return(
     warning("The current document does not seem to contain YAML metadata", call. = FALSE)
   )
   rstudioapi::setSelectionRanges(list(c(rng[1] + 1, 1, rng[2], 1)))
   slct = rstudioapi::getSourceEditorContext()$selection[[1]]
 
-  yml = if (n > 2) yaml::yaml.load(paste(yml[-c(1, n)], collapse = '\n'))
   if (length(yml) == 0) yml = list()
+  yml = blogdown:::filter_list(yml)
   if (is.null(yml[['title']])) yml$title = ''
   if (is.null(yml[['author']])) yml$author = getOption('blogdown.author', '')
   if (is.null(yml[['date']])) yml$date = Sys.Date()
@@ -29,25 +29,32 @@ local({
         height = '80px'
       ),
       sel_input(
-        'cat', 'Categories', sort(unique(c(yml[['categories']], meta$categories))),
+        'cat', 'Categories', blogdown:::sort2(unique(c(yml[['categories']], meta$categories))),
         selected = yml[['categories']]
       ),
       sel_input(
-        'tag', 'Tags', sort(unique(c(yml[['tags']], meta$tags))), selected = yml[['tags']]
+        'tag', 'Tags', blogdown:::sort2(unique(c(yml[['tags']], meta$tags))),
+        selected = yml[['tags']]
       ),
       shiny::fillRow(tags$div(), height = '20px'),
       miniUI::gadgetTitleBar(NULL)
     )),
     server = function(input, output) {
       shiny::observeEvent(input$done, {
+        seq_keys = Filter(function(key) {
+          identical(attr(yml[[key]], 'yml_type'), 'seq')
+        }, names(yml))
+        seq_keys = unique(c(seq_keys, 'categories', 'tags'))
+
         res = list(
           title = input$title, author = input$author, date = format(input$date),
           categories = input$cat, tags = input$tag
         )
         yml = c(res, yml[setdiff(names(yml), names(res))])
-        for (i in c('categories', 'tags')) yml[[i]] = if (length(yml[[i]]) > 0) as.list(yml[[i]])
+        for (i in seq_keys) yml[[i]] = if (length(yml[[i]]) > 0) as.list(yml[[i]])
+        if (!getOption('blogdown.yaml.empty', TRUE)) yml = blogdown:::filter_list(yml)
         rstudioapi::modifyRange(
-          slct$range, yaml::as.yaml(yml, indent.mapping.sequence = TRUE)
+          slct$range, blogdown:::as.yaml(yml, .trim_ws = FALSE)
         )
         shiny::stopApp()
       })
