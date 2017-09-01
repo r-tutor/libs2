@@ -19,6 +19,8 @@ plotProportions	plotProportions
 predict.BTglmmPQL	predict.BTglmmPQL
 predict.BTm	predict.BTm
 print.BTabilities	BTabilities
+qvcalc	reexports
+reexports	reexports
 residuals.BTm	residuals.BTm
 seeds	seeds
 sound.fields	sound.fields
