@@ -11,6 +11,8 @@ add_full_graph	add_full_graph
 add_global_graph_attrs	add_global_graph_attrs
 add_gnp_graph	add_gnp_graph
 add_graph_action	add_graph_action
+add_grid_2d	add_grid_2d
+add_grid_3d	add_grid_3d
 add_mathjax	add_mathjax
 add_node	add_node
 add_nodes_from_df_cols	add_nodes_from_df_cols
@@ -165,7 +167,9 @@ join_node_attrs	join_node_attrs
 layout_nodes_w_string	layout_nodes_w_string
 mermaid	mermaid
 mutate_edge_attrs	mutate_edge_attrs
+mutate_edge_attrs_ws	mutate_edge_attrs_ws
 mutate_node_attrs	mutate_node_attrs
+mutate_node_attrs_ws	mutate_node_attrs_ws
 node_count	node_count
 node_info	node_info
 node_present	node_present

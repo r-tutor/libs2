@@ -6,4 +6,5 @@ markdown_commonmark	commonmark
 markdown_html	commonmark
 markdown_latex	commonmark
 markdown_man	commonmark
+markdown_text	commonmark
 markdown_xml	commonmark

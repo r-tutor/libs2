@@ -1,4 +1,6 @@
 font_family_exists      Check if font family exists.
+glyphs_match            Validate glyph entries
+m_str_extents           Compute string extents for a vector of string.
 match_family            Find best family match with fontconfig
 raster_str              Draw/preview a raster into a string
 raster_write            Draw/preview a raster to a png file

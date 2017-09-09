@@ -19,6 +19,7 @@ confusionMatrix         Create a confusion matrix
 confusionMatrix.train   Estimate a Resampled Confusion Matrix
 cox2                    COX-2 Activity Data
 createDataPartition     Data Splitting functions
+defaultSummary          Calculates performance across resamples
 densityplot.rfe         Lattice functions for plotting resampling
                         results of recursive feature selection
 dhfr                    Dihydrofolate Reductase Inhibitors Data
@@ -73,7 +74,6 @@ plotObsVsPred           Plot Observed versus Predicted Results in
                         Regression and Classification Models
 plsda                   Partial Least Squares and Sparse Partial Least
                         Squares Discriminant Analysis
-postResample            Calculates performance across resamples
 pottery                 Pottery from Pre-Classical Sites in Italy
 prcomp.resamples        Principal Components Analysis of Resampling
                         Results
@@ -104,6 +104,7 @@ segmentationData        Cell Body Segmentation
 spatialSign             Compute the multivariate spatial sign
 summary.bagEarth        Summarize a bagged earth or FDA fit
 tecator                 Fat, Water and Protein Content of Meat Samples
+thresholder             Generate Data to Choose a Probability Threshold
 train                   Fit Predictive Models over Different Tuning
                         Parameters
 trainControl            Control parameters for train

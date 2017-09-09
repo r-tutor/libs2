@@ -6,6 +6,8 @@
 %in%,itemMatrix,itemMatrix-method	itemMatrix-class
 %in%,itemsets,character-method	match
 %in%,itemsets,itemsets-method	match
+%oin%	itemMatrix-class
+%oin%,itemMatrix,character-method	itemMatrix-class
 %pin%	itemMatrix-class
 %pin%,itemMatrix,character-method	itemMatrix-class
 abbreviate	abbreviate
@@ -105,6 +107,7 @@ dissimilarity	dissimilarity
 dissimilarity,associations-method	dissimilarity
 dissimilarity,itemMatrix-method	dissimilarity
 dissimilarity,matrix-method	dissimilarity
+dist	dissimilarity
 dist-class	proximity-classes
 duplicated	duplicated
 duplicated,itemMatrix-method	duplicated

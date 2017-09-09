@@ -111,6 +111,7 @@ getModelInfo	modelLookup
 getSamplingInfo	getSamplingInfo
 getTrainPerf	postResample
 ggplot.calibration	calibration
+ggplot.lift	lift
 ggplot.rfe	plot.rfe
 ggplot.train	plot.train
 ggplot.varImp.train	plot.varImp.train
@@ -148,6 +149,7 @@ logBBB	BloodBrain
 LPH07_1	twoClassSim
 LPH07_2	twoClassSim
 lrFuncs	caretFuncs
+MAE	postResample
 maxDissim	maxDissim
 mdrr	mdrr
 mdrrClass	mdrr
@@ -174,6 +176,7 @@ nzv	nearZeroVar
 oil	oil
 oilType	oil
 oneSE	oneSE
+outcome_conversion	caret-internal
 panel.calibration	calibration
 panel.lift	panel.lift2
 panel.lift2	panel.lift2
@@ -322,10 +325,12 @@ summary.diff.resamples	diff.resamples
 summary.resamples	resamples
 svmBag	bag
 tecator	tecator
+thresholder	thresholder
 tolerance	oneSE
 train	train
 train.default	train
 train.formula	train
+train.recipe	train
 trainControl	trainControl
 train_model_list	models
 treebagFuncs	caretFuncs

@@ -17,6 +17,8 @@ add_global_graph_attrs
 add_gnp_graph           Add a G(n, p) Erdos-Renyi graph
 add_graph_action        Add a graph action for execution at every
                         transform
+add_grid_2d             Add a 2D grid of nodes to the graph
+add_grid_3d             Add a 3D grid of nodes to the graph
 add_mathjax             Add MathJax-formatted equation text
 add_n_node_clones       Add one or several clones of an existing node
                         to the graph
@@ -223,7 +225,11 @@ join_node_attrs         Join new node attribute values using a data
 layout_nodes_w_string   Layout nodes using a text-based schematic
 mermaid                 R + mermaid.js
 mutate_edge_attrs       Mutate a set of edge attribute values
+mutate_edge_attrs_ws    Mutate edge attribute values for a selection of
+                        edges
 mutate_node_attrs       Mutate a set of node attribute values
+mutate_node_attrs_ws    Mutate node attribute values for a selection of
+                        nodes
 node_count              Get count of all nodes or certain types of
                         nodes
 node_info               Get detailed information on nodes
