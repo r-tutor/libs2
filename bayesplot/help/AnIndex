@@ -35,6 +35,7 @@ MCMC-distributions	MCMC-distributions
 MCMC-intervals	MCMC-intervals
 MCMC-nuts	MCMC-nuts
 MCMC-overview	MCMC-overview
+MCMC-parcoord	MCMC-parcoord
 MCMC-recover	MCMC-recover
 MCMC-scatterplots	MCMC-scatterplots
 MCMC-traces	MCMC-traces
@@ -49,6 +50,7 @@ mcmc_hist	MCMC-distributions
 mcmc_hist_by_chain	MCMC-distributions
 mcmc_intervals	MCMC-intervals
 mcmc_neff	MCMC-diagnostics
+mcmc_neff_data	MCMC-diagnostics
 mcmc_neff_hist	MCMC-diagnostics
 mcmc_nuts_acceptance	MCMC-nuts
 mcmc_nuts_divergence	MCMC-nuts
@@ -56,10 +58,13 @@ mcmc_nuts_energy	MCMC-nuts
 mcmc_nuts_stepsize	MCMC-nuts
 mcmc_nuts_treedepth	MCMC-nuts
 mcmc_pairs	MCMC-scatterplots
+mcmc_parcoord	MCMC-parcoord
+mcmc_parcoord_data	MCMC-parcoord
 mcmc_recover_hist	MCMC-recover
 mcmc_recover_intervals	MCMC-recover
 mcmc_recover_scatter	MCMC-recover
 mcmc_rhat	MCMC-diagnostics
+mcmc_rhat_data	MCMC-diagnostics
 mcmc_rhat_hist	MCMC-diagnostics
 mcmc_scatter	MCMC-scatterplots
 mcmc_trace	MCMC-traces
@@ -77,6 +82,7 @@ overlay_function	bayesplot-helpers
 pairs_condition	MCMC-scatterplots
 pairs_style_np	MCMC-scatterplots
 panel_bg	bayesplot-helpers
+parcoord_style_np	MCMC-parcoord
 plot_bg	bayesplot-helpers
 PPC	PPC-overview
 PPC-discrete	PPC-discrete
@@ -103,11 +109,13 @@ ppc_freqpoly	PPC-distributions
 ppc_freqpoly_grouped	PPC-distributions
 ppc_hist	PPC-distributions
 ppc_intervals	PPC-intervals
+ppc_intervals_data	PPC-intervals
 ppc_intervals_grouped	PPC-intervals
 ppc_loo_intervals	PPC-loo
 ppc_loo_pit	PPC-loo
 ppc_loo_ribbon	PPC-loo
 ppc_ribbon	PPC-intervals
+ppc_ribbon_data	PPC-intervals
 ppc_ribbon_grouped	PPC-intervals
 ppc_rootogram	PPC-discrete
 ppc_scatter	PPC-scatterplots
@@ -123,7 +131,9 @@ pp_check.default	pp_check
 rhat	bayesplot-extractors
 rhat.stanfit	bayesplot-extractors
 rhat.stanreg	bayesplot-extractors
+scatter_style_np	MCMC-scatterplots
 theme_default	theme_default
+trace_style_np	MCMC-traces
 vline_0	bayesplot-helpers
 vline_at	bayesplot-helpers
 xaxis_text	bayesplot-helpers

@@ -1,6 +1,3 @@
-params <-
-structure(list(EVAL = TRUE), .Names = "EVAL")
-
 ## ---- SETTINGS-knitr, include=FALSE--------------------------------------
 stopifnot(require("knitr"))
 library("bayesplot")
@@ -11,8 +8,7 @@ knitr::opts_chunk$set(
   fig.width = 5,
   out.width = "60%",
   fig.align = "center",
-  comment = NA,
-  eval = params$EVAL
+  comment = NA
 )
 
 ## ---- pkgs, include=FALSE------------------------------------------------
@@ -105,7 +101,7 @@ np_ncp <- nuts_params(fit_ncp)
 
 ## ---- mcmc_trace---------------------------------------------------------
 color_scheme_set("mix-brightblue-gray")
-mcmc_trace(posterior_cp, pars = "tau", divergences = np_cp) + 
+mcmc_trace(posterior_cp, pars = "tau", np = np_cp) + 
   xlab("Post-warmup iteration")
 
 ## ---- mcmc_nuts_divergence-----------------------------------------------
@@ -128,7 +124,20 @@ fit_ncp_2 <- sampling(schools_mod_ncp, data = schools_dat,
 mcmc_nuts_divergence(nuts_params(fit_cp_2), log_posterior(fit_cp_2))
 mcmc_nuts_divergence(nuts_params(fit_ncp_2), log_posterior(fit_ncp_2))
 
+## ---- mcmc_parcoord-1----------------------------------------------------
+color_scheme_set("darkgray")
+mcmc_parcoord(posterior_cp, np = np_cp)
+
+## ---- mcmc_scatter-1-----------------------------------------------------
+mcmc_scatter(
+  posterior_cp, 
+  pars = c("theta[1]", "tau"), 
+  transform = list(tau = "log"), # actually show log(tau)
+  np = np_cp
+)
+
 ## ---- mcmc_nuts_energy-1, message=FALSE----------------------------------
+color_scheme_set("red")
 mcmc_nuts_energy(np_cp)
 
 ## ---- mcmc_nuts_energy-3, message=FALSE, fig.width=8---------------------

@@ -6,10 +6,11 @@ MCMC-intervals          Plot interval estimates from MCMC draws
 MCMC-nuts               Diagnostic plots for the No-U-Turn-Sampler
                         (NUTS)
 MCMC-overview           Plots for Markov chain Monte Carlo simulations
+MCMC-parcoord           Parallel coordinates plot of MCMC draws
 MCMC-recover            Compare MCMC estimates to "true" parameter
                         values
 MCMC-scatterplots       Scatterplots of MCMC draws
-MCMC-traces             Traceplot (time series plot) of MCMC draws
+MCMC-traces             Trace plot (time series plot) of MCMC draws
 PPC-discrete            PPCs for discrete outcomes
 PPC-distributions       PPC distributions
 PPC-errors              PPC errors

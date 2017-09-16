@@ -1,6 +1,3 @@
-params <-
-structure(list(EVAL = TRUE), .Names = "EVAL")
-
 ## ---- SETTINGS-knitr, include=FALSE--------------------------------------
 stopifnot(require("knitr"))
 library("bayesplot")
@@ -11,8 +8,7 @@ knitr::opts_chunk$set(
   fig.width = 5,
   out.width = "60%",
   fig.align = "center",
-  comment = NA,
-  eval = params$EVAL
+  comment = NA
 )
 
 ## ---- pkgs, include=FALSE------------------------------------------------
@@ -28,13 +24,13 @@ library("rstanarm")
 head(mtcars) # see help("mtcars")
 
 ## ---- eval=FALSE---------------------------------------------------------
-#  fit <- stan_glm(mpg ~ .,  # '.' means includes all variables
-#                  data = mtcars,
-#                  seed = 1111)
+#  # linear regression model using stan_glm
+#  # using '~ .' to include all variables
+#  fit <- stan_glm(mpg ~ ., data = mtcars, seed = 1111)
 #  print(fit)
 
 ## ----stan_glm, include=FALSE---------------------------------------------
-fit <- stan_glm(mpg ~ ., data = mtcars, seed = 1111)
+fit <- stan_glm(mpg ~ ., data = mtcars, QR = TRUE, seed = 1111)
 
 ## ---- print-fit, echo=FALSE----------------------------------------------
 print(fit)
@@ -60,14 +56,25 @@ mcmc_areas(
 ## ---- mcmc_hist, message=FALSE-------------------------------------------
 color_scheme_set("green")
 mcmc_hist(posterior, pars = c("wt", "sigma"))
-mcmc_dens(posterior, pars = c("wt", "sigma"))
+
+## ---- mcmc_hist-transform, message=FALSE---------------------------------
+color_scheme_set("blue")
+mcmc_hist(posterior, pars = c("wt", "sigma"), 
+          transformations = list("sigma" = "log"))
 
 ## ---- mcmc_hist_by_chain, message=FALSE----------------------------------
 color_scheme_set("brightblue")
 mcmc_hist_by_chain(posterior, pars = c("wt", "sigma"))
+
+## ---- mcmc_dens, message=FALSE-------------------------------------------
+color_scheme_set("purple")
+mcmc_dens(posterior, pars = c("wt", "sigma"))
+
+## ---- mcmc_dens_overlay, message=FALSE-----------------------------------
 mcmc_dens_overlay(posterior, pars = c("wt", "sigma"))
 
 ## ---- mcmc_violin--------------------------------------------------------
+color_scheme_set("teal")
 mcmc_violin(posterior, pars = c("wt", "sigma"), probs = c(0.1, 0.5, 0.9))
 
 ## ---- mcmc_scatter-------------------------------------------------------
@@ -77,6 +84,11 @@ mcmc_scatter(posterior, pars = c("(Intercept)", "wt"),
 
 ## ---- mcmc_hex-----------------------------------------------------------
 mcmc_hex(posterior, pars = c("(Intercept)", "wt"))
+
+## ---- mcmc_pairs, message=FALSE------------------------------------------
+color_scheme_set("pink")
+mcmc_pairs(posterior, pars = c("(Intercept)", "wt", "sigma"),
+           off_diag_args = list(size = 1.5))
 
 ## ---- mcmc_trace---------------------------------------------------------
 color_scheme_set("blue")
