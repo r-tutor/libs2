@@ -1,3 +1,12 @@
+
+# 1.3.4
+
+* Style fucntions convert arguments to character now
+
+* Autodetect RStudio ANSI support
+
+* `col_align()` gains `type` argument, default `"width"` (#54).
+
 # 1.3.2
 
 * Removed dependency to `memoise` (@brodieG, #25)

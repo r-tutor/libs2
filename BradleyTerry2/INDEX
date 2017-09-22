@@ -27,6 +27,7 @@ plotProportions         Plot Proportions of Tied Matches and Non-tied
                         Matches Won
 predict.BTglmmPQL       Predict Method for BTglmmPQL Objects
 predict.BTm             Predict Method for Bradley-Terry Models
+qvcalc.BTabilities      Quasi Variances for Estimated Abilities
 residuals.BTm           Residuals from a Bradley-Terry Model
 seeds                   Seed Germination Data from Crowder (1978)
 sound.fields            Kousgaard (1984) Data on Pair Comparisons of

@@ -20,6 +20,7 @@ predict.BTglmmPQL	predict.BTglmmPQL
 predict.BTm	predict.BTm
 print.BTabilities	BTabilities
 qvcalc	reexports
+qvcalc.BTabilities	qvcalc.BTabilities
 reexports	reexports
 residuals.BTm	residuals.BTm
 seeds	seeds

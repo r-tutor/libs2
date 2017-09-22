@@ -1,8 +1,9 @@
 Package: BradleyTerry2
-Version: 1.0-7
+Version: 1.0-8
 Title: Bradley-Terry Models
-Author: Heather Turner and David Firth
-Maintainer: Heather Turner <ht@heatherturner.net>
+Authors@R: c(person("Heather", "Turner", role = c("aut", "cre"),
+                    email = "ht@heatherturner.net"),
+             person("David", "Firth", role = "aut"))
 URL: https://github.com/hturner/BradleyTerry2
 BugReports: https://github.com/hturner/BradleyTerry2/issues
 Description: Specify and fit the Bradley-Terry model, including structured versions in which the parameters are related to explanatory variables through a linear predictor and versions with contest-specific effects, such as a home advantage.
@@ -15,7 +16,10 @@ LazyData: yes
 Encoding: UTF-8
 RoxygenNote: 6.0.1
 NeedsCompilation: no
-Packaged: 2017-08-26 18:23:33 UTC; hturner
+Packaged: 2017-09-20 08:33:05 UTC; hturner
+Author: Heather Turner [aut, cre],
+  David Firth [aut]
+Maintainer: Heather Turner <ht@heatherturner.net>
 Repository: CRAN
-Date/Publication: 2017-08-26 18:46:35 UTC
-Built: R 3.4.1; ; 2017-08-30 18:05:03 UTC; windows
+Date/Publication: 2017-09-20 09:26:09 UTC
+Built: R 3.4.1; ; 2017-09-21 09:32:59 UTC; windows
