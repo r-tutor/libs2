@@ -30,13 +30,13 @@ InvChiSq                Inverse chi-squared and scaled chi-squared
 InvGamma                Inverse-gamma distribution
 Kumaraswamy             Kumaraswamy distribution
 Laplace                 Laplace distribution
+LocationScaleT          Location-scale version of the t-distribution
 LogSeries               Logarithmic series distribution
 Lomax                   Lomax distribution
 MultiHypergeometric     Multivariate hypergeometric distribution
 Multinomial             Multinomial distribution
 NSBeta                  Non-standard beta distribution
 NegHyper                Negative hypergeometric distribution
-NonStandardT            Non-standard t-distribution
 NormalMix               Mixture of normal distributions
 Pareto                  Pareto distribution
 PoissonMix              Mixture of Poisson distributions
@@ -58,3 +58,4 @@ ZINB                    Zero-inflated negative binomial distribution
 ZIP                     Zero-inflated Poisson distribution
 extraDistr              Additional univariate and multivariate
                         distributions
+extraDistr-deprecated   Deprecated functions
