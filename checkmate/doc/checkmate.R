@@ -1,6 +1,5 @@
 ## ----include=FALSE-------------------------------------------------------
 library(checkmate)
-do.eval = requireNamespace("microbenchmark", quietly = TRUE)
 
 ## ------------------------------------------------------------------------
 fact <- function(n, method = "stirling") {
@@ -65,7 +64,7 @@ f <- function(x) {
 #    qexpect(x, "N100[0,1]")
 #  })
 
-## ----dev="svg",fig.width=6,fig.height=4,eval=do.eval---------------------
+## ----dev="svg",fig.width=6,fig.height=4,dependson="init",eval=requireNamespace("microbenchmark", quietly = TRUE)----
 library(ggplot2)
 library(microbenchmark)
 
@@ -77,7 +76,7 @@ mb = microbenchmark(r(x), cm(x), cmq(x))
 print(mb)
 autoplot(mb)
 
-## ----dev="svg",fig.width=6,fig.height=4,eval=do.eval---------------------
+## ----dev="svg",fig.width=6,fig.height=4,eval=requireNamespace("microbenchmark", quietly = TRUE)----
 x = runif(1000)
 r = function(x) stopifnot(is.numeric(x) && length(x) == 1000 && all(!is.na(x) & x >= 0 & x <= 1))
 cm = function(x) assertNumeric(x, len = 1000, any.missing = FALSE, lower = 0, upper = 1)
@@ -86,7 +85,7 @@ mb = microbenchmark(r(x), cm(x), cmq(x))
 print(mb)
 autoplot(mb)
 
-## ----dev="svg",fig.width=6,fig.height=4,eval=do.eval---------------------
+## ----dev="svg",fig.width=6,fig.height=4,eval=requireNamespace("microbenchmark", quietly = TRUE)----
 x = sample(letters, 10000, replace = TRUE)
 r = function(x) stopifnot(is.character(x) && !any(is.na(x)) && all(nchar(x) > 0))
 cm = function(x) assertCharacter(x, any.missing = FALSE, min.chars = 1)
@@ -95,7 +94,7 @@ mb = microbenchmark(r(x), cm(x), cmq(x))
 print(mb)
 autoplot(mb)
 
-## ----dev="svg",fig.width=6,fig.height=4,eval=do.eval---------------------
+## ----dev="svg",fig.width=6,fig.height=4,eval=requireNamespace("microbenchmark", quietly = TRUE)----
 N = 10000
 x = data.frame(a = runif(N), b = sample(letters[1:5], N, replace = TRUE), c = sample(c(FALSE, TRUE), N, replace = TRUE))
 r = function(x) is.data.frame(x) && !any(sapply(x, function(x) any(is.na(x))))
