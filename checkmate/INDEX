@@ -9,6 +9,7 @@ checkAccess             Check file system access rights
 checkArray              Check if an argument is an array
 checkAtomic             Check that an argument is an atomic vector
 checkAtomicVector       Check that an argument is an atomic vector
+checkBit                Check if an argument is a bit vector
 checkCharacter          Check if an argument is a vector of type
                         character
 checkChoice             Check if an object is an element of a given set
@@ -44,6 +45,7 @@ checkNumeric            Check that an argument is a vector of type
 checkOS                 Check the operating system
 checkPathForOutput      Check if a path is suited for creating an
                         output file
+checkR6                 Check if an argument is a R6 class
 checkScalar             Check if an argument is a single atomic value
 checkScalarNA           Check if an argument is a single missing value
 checkSetEqual           Check if an argument is equal to a given set
