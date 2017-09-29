@@ -1,3 +1,5 @@
+...elt	dotsElt
+...length	dotsLength
 anyNA	anyNA
 dir.exists	dir.exists
 endsWith	endsWith
@@ -8,6 +10,7 @@ file.size	file.size
 get0	get0
 hasName	hasName
 import	import
+isFALSE	isFALSE
 lengths	lengths
 startsWith	startsWith
 strrep	strrep
