@@ -12,6 +12,7 @@ assertAccess	checkAccess
 assertArray	checkArray
 assertAtomic	checkAtomic
 assertAtomicVector	checkAtomicVector
+assertBit	checkBit
 assertCharacter	checkCharacter
 assertChoice	checkChoice
 assertClass	checkClass
@@ -43,6 +44,7 @@ assertNumber	checkNumber
 assertNumeric	checkNumeric
 assertOS	checkOS
 assertPathForOutput	checkPathForOutput
+assertR6	checkR6
 assertScalar	checkScalar
 assertScalarNA	checkScalarNA
 assertSetEqual	checkSetEqual
@@ -55,6 +57,7 @@ assert_access	checkAccess
 assert_array	checkArray
 assert_atomic	checkAtomic
 assert_atomic_vector	checkAtomicVector
+assert_bit	checkBit
 assert_character	checkCharacter
 assert_choice	checkChoice
 assert_class	checkClass
@@ -85,6 +88,7 @@ assert_number	checkNumber
 assert_numeric	checkNumeric
 assert_os	checkOS
 assert_path_for_output	checkPathForOutput
+assert_r6	checkR6
 assert_scalar	checkScalar
 assert_scalar_na	checkScalarNA
 assert_set_equal	checkSetEqual
@@ -97,6 +101,7 @@ checkAccess	checkAccess
 checkArray	checkArray
 checkAtomic	checkAtomic
 checkAtomicVector	checkAtomicVector
+checkBit	checkBit
 checkCharacter	checkCharacter
 checkChoice	checkChoice
 checkClass	checkClass
@@ -128,6 +133,7 @@ checkNumber	checkNumber
 checkNumeric	checkNumeric
 checkOS	checkOS
 checkPathForOutput	checkPathForOutput
+checkR6	checkR6
 checkScalar	checkScalar
 checkScalarNA	checkScalarNA
 checkSetEqual	checkSetEqual
@@ -140,6 +146,7 @@ check_access	checkAccess
 check_array	checkArray
 check_atomic	checkAtomic
 check_atomic_vector	checkAtomicVector
+check_bit	checkBit
 check_character	checkCharacter
 check_choice	checkChoice
 check_class	checkClass
@@ -168,6 +175,7 @@ check_number	checkNumber
 check_numeric	checkNumeric
 check_os	checkOS
 check_path_for_output	checkPathForOutput
+check_r6	checkR6
 check_scalar	checkScalar
 check_scalar_na	checkScalarNA
 check_set_equal	checkSetEqual
@@ -180,6 +188,7 @@ expect_access	checkAccess
 expect_array	checkArray
 expect_atomic	checkAtomic
 expect_atomic_vector	checkAtomicVector
+expect_bit	checkBit
 expect_character	checkCharacter
 expect_choice	checkChoice
 expect_class	checkClass
@@ -207,6 +216,7 @@ expect_number	checkNumber
 expect_numeric	checkNumeric
 expect_os	checkOS
 expect_path_for_output	checkPathForOutput
+expect_r6	checkR6
 expect_scalar	checkScalar
 expect_scalar_na	checkScalarNA
 expect_set_equal	checkSetEqual
@@ -233,6 +243,7 @@ testAccess	checkAccess
 testArray	checkArray
 testAtomic	checkAtomic
 testAtomicVector	checkAtomicVector
+testBit	checkBit
 testCharacter	checkCharacter
 testChoice	checkChoice
 testClass	checkClass
@@ -263,6 +274,7 @@ testNumber	checkNumber
 testNumeric	checkNumeric
 testOS	checkOS
 testPathForOutput	checkPathForOutput
+testR6	checkR6
 testScalar	checkScalar
 testScalarNA	checkScalarNA
 testSetEqual	checkSetEqual
@@ -275,6 +287,7 @@ test_access	checkAccess
 test_array	checkArray
 test_atomic	checkAtomic
 test_atomic_vector	checkAtomicVector
+test_bit	checkBit
 test_character	checkCharacter
 test_choice	checkChoice
 test_class	checkClass
@@ -304,6 +317,7 @@ test_number	checkNumber
 test_numeric	checkNumeric
 test_os	checkOS
 test_path_for_output	checkPathForOutput
+test_r6	checkR6
 test_scalar	checkScalar
 test_scalar_na	checkScalarNA
 test_set_equal	checkSetEqual
