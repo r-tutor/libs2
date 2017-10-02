@@ -66,9 +66,10 @@ heatmaply(percentize(mtcars), xlab = "Features", ylab = "Cars",
 
 library(heatmaply)
 
-heatmaply(is.na10(airquality), grid_gap = 1,
+heatmaply(is.na10(airquality), grid_gap = 1, 
+          showticklabels = c(T,F),
             k_col =3, k_row = 3,
-            margins = c(55, 30),
+            margins = c(55, 30), 
             colors = c("grey80", "grey20"))
 # Better to use:
 # heatmaply_na(airquality, k_col =3, k_row = 3,
@@ -104,9 +105,9 @@ heatmaply(cor(mtcars), margins = c(40, 40),
 #           k_col = 2, k_row = 2)
 
 
-## ------------------------------------------------------------------------
-heatmaply(percentize(mtcars), margins = c(40, 130),
-          colors = heat.colors(100))
+## ---- eval = FALSE-------------------------------------------------------
+#  heatmaply(percentize(mtcars), margins = c(40, 130),
+#            colors = heat.colors(100))
 
 ## ------------------------------------------------------------------------
 heatmaply(mtcars, margins = c(40, 130), 
@@ -157,9 +158,9 @@ heatmaply(percentize(x), Rowv = row_dend, Colv = col_dend)
 x  <- as.matrix(datasets::mtcars)
 gplots::heatmap.2(x, trace = "none", col = viridis(100), key = FALSE)
 
-## ------------------------------------------------------------------------
-library(heatmaply)
-heatmaply(x, seriate = "mean")
+## ---- eval = FALSE-------------------------------------------------------
+#  library(heatmaply)
+#  heatmaply(x, seriate = "mean")
 
 ## ------------------------------------------------------------------------
 library(heatmaply)
@@ -179,20 +180,62 @@ heatmap.2(x, trace = "none", col = viridis(100),
           RowSideColors=rc, key = FALSE)
 
 
-## ------------------------------------------------------------------------
-heatmaply(x, seriate = "mean",
-          RowSideColors=rc)
-
-# heatmaply(x, seriate = "mean",
-#           RowSideColors=factor(rc))
-
-
+## ---- eval = FALSE-------------------------------------------------------
+#  heatmaply(x, seriate = "mean",
+#            RowSideColors=rc)
+#  
+#  # heatmaply(x, seriate = "mean",
+#  #           RowSideColors=factor(rc))
+#  
+#  
 
 ## ------------------------------------------------------------------------
 heatmaply(x[,-c(8,9)], seriate = "mean",
           col_side_colors = c(rep(0,5), rep(1,4)),
           row_side_colors = x[,8:9])
 
+
+## ---- eval = FALSE-------------------------------------------------------
+#  
+#  # library(microbenchmark)
+#  #
+#  #
+#  # library(heatmaply)
+#  # x <- matrix(1:1000, 500, 2)
+#  #
+#  # microbenchmark(
+#  #   heatmaply(x, hclustfun = stats::hclust),
+#  #   heatmaply(x, hclustfun = fastcluster::hclust),
+#  #   times = 10
+#  # )
+#  #
+#  # x <- matrix(1:1000, 1000, 2)
+#  # microbenchmark(
+#  #   stats::hclust(dist(x)),
+#  #   fastcluster::hclust(dist(x)),
+#  #   times = 10
+#  # )
+#  
+#  
+
+## ---- eval = FALSE-------------------------------------------------------
+#  dir.create("folder")
+#  library(heatmaply)
+#  heatmaply(mtcars, file = "folder/heatmaply_plot.html")
+#  browseURL("folder/heatmaply_plot.html")
+
+## ---- eval = FALSE-------------------------------------------------------
+#  dir.create("folder")
+#  library(heatmaply)
+#  # Before the first time using this code you may need to first run:
+#  # webshot::install_phantomjs()
+#  heatmaply(mtcars, file = "folder/heatmaply_plot.png")
+#  browseURL("folder/heatmaply_plot.png")
+
+## ---- eval = FALSE-------------------------------------------------------
+#  # This saves the file, but does not plot it in the RStudio viewer
+#  tmp <- heatmaply(mtcars, file = "folder/heatmaply_plot.png")
+#  rm(tmp)
 
 ## ---- cache=FALSE--------------------------------------------------------
 sessionInfo()

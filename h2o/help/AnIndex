@@ -63,6 +63,7 @@ h2o.asnumeric	h2o.asnumeric
 h2o.assign	h2o.assign
 h2o.as_date	h2o.as_date
 h2o.auc	h2o.auc
+h2o.automl	h2o.automl
 h2o.betweenss	h2o.betweenss
 h2o.biases	h2o.biases
 h2o.bottomN	h2o.bottomN
@@ -102,6 +103,7 @@ h2o.day	h2o.day
 h2o.dayOfWeek	h2o.dayOfWeek
 h2o.dct	h2o.dct
 h2o.ddply	h2o.ddply
+h2o.decryptionSetup	h2o.decryptionSetup
 h2o.deepfeatures	h2o.deepfeatures
 h2o.deeplearning	h2o.deeplearning
 h2o.deepwater	h2o.deepwater
@@ -323,6 +325,7 @@ h2o.xgboost.available	h2o.xgboost.available
 h2o.year	h2o.year
 H2OAutoEncoderMetrics-class	H2OModelMetrics-class
 H2OAutoEncoderModel-class	H2OModel-class
+H2OAutoML-class	H2OAutoML-class
 H2OBinomialMetrics-class	H2OModelMetrics-class
 H2OBinomialModel-class	H2OModel-class
 H2OClusteringMetrics-class	H2OModelMetrics-class
@@ -380,6 +383,7 @@ nrow.H2OFrame	H2OFrame
 Ops.H2OFrame	H2OFrame
 plot.H2OModel	plot.H2OModel
 plot.H2OTabulate	plot.H2OTabulate
+predict.H2OAutoML	predict.H2OAutoML
 predict.H2OModel	predict.H2OModel
 predict_leaf_node_assignment.H2OModel	predict_leaf_node_assignment.H2OModel
 print.H2OFrame	print.H2OFrame

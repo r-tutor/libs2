@@ -1,4 +1,5 @@
 &&                      Logical and for H2OFrames
+H2OAutoML-class         The H2OAutoML class
 H2OClusteringModel-class
                         The H2OClusteringModel object.
 H2OConnection-class     The H2OConnection class.
@@ -41,7 +42,9 @@ h2o.any                 Given a set of logical vectors, is at least one
                         of the values true?
 h2o.anyFactor           Check H2OFrame columns for factors
 h2o.arrange             Sorts H2OFrame by the columns specified.
-                        Returns a new H2OFrame, like dplyr::arrange.
+                        H2OFrame should not contain any String columns.
+                        Otherwise, an error will be thrown.  Returns a
+                        new H2OFrame, like dplyr::arrange.
 h2o.as_date             Functions to convert between character
                         representations and objects of class "Date"
                         representing calendar dates.
@@ -50,6 +53,7 @@ h2o.asfactor            Convert H2O Data to Factors
 h2o.asnumeric           Convert H2O Data to Numerics
 h2o.assign              Rename an H2O object.
 h2o.auc                 Retrieve the AUC
+h2o.automl              Automatic Machine Learning
 h2o.betweenss           Get the between cluster sum of squares. If
                         "train", "valid", and "xval" parameters are
                         FALSE (default), then the training betweenss
@@ -125,6 +129,7 @@ h2o.dayOfWeek           Convert Milliseconds to Day of Week in H2O
 h2o.dct                 Compute DCT of an H2OFrame
 h2o.ddply               Split H2O Dataset, Apply Function, and Return
                         Results
+h2o.decryptionSetup     Setup a Decryption Tool
 h2o.deepfeatures        Feature Generation via H2O Deep Learning or
                         DeepWater Model
 h2o.deeplearning        Build a Deep Neural Network model using CPUs
@@ -448,6 +453,7 @@ is.numeric              Check if numeric
 names.H2OFrame          Column names of an H2OFrame
 plot.H2OModel           Plot an H2O Model
 plot.H2OTabulate        Plot an H2O Tabulate Heatmap
+predict.H2OAutoML       Predict on an AutoML object
 predict.H2OModel        Predict on an H2O Model
 predict_leaf_node_assignment.H2OModel
                         Predict the Leaf Node Assignment on an H2O

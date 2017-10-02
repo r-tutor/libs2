@@ -1,5 +1,6 @@
 RColorBrewer_colors     RColorBrewer color Ramp Palette
-col2plotlyrgb           Color to RGB Text
+ggplot_side_color_plot
+                        Side color plots for heatmaps
 heatmaply               Cluster heatmap based on plotly
 heatmapr                Creates a heatmapr object
 is.heatmapr             Is the object of class heatmapr
@@ -8,4 +9,3 @@ is.na10                 Indicates which elements are missing (either 1
 is.plotly               Checks if an object is of class plotly or not.
 normalize               Normalization transformation (0-1)
 percentize              Empirical Percentile Transformation
-side_color_plot         Side color plots for heatmaps

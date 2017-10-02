@@ -2,8 +2,8 @@ Blues	RColorBrewer_colors
 BrBG	RColorBrewer_colors
 BuGn	RColorBrewer_colors
 BuPu	RColorBrewer_colors
-col2plotlyrgb	col2plotlyrgb
 cool_warm	RColorBrewer_colors
+ggplot_side_color_plot	ggplot_side_color_plot
 GnBu	RColorBrewer_colors
 Greens	RColorBrewer_colors
 Greys	RColorBrewer_colors
@@ -40,7 +40,6 @@ RdPu	RColorBrewer_colors
 RdYlBu	RColorBrewer_colors
 RdYlGn	RColorBrewer_colors
 Reds	RColorBrewer_colors
-side_color_plot	side_color_plot
 Spectral	RColorBrewer_colors
 YlGn	RColorBrewer_colors
 YlGnBu	RColorBrewer_colors

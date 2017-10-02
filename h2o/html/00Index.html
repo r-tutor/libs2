@@ -11,7 +11,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;h2o&rsquo; version 3.10.5.3</h2>
+</div><h2>Documentation for package &lsquo;h2o&rsquo; version 3.14.0.3</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../demo">Code demos</a>.  Use <a href="../../utils/help/demo">demo()</a> to run them.</li>
@@ -178,7 +178,7 @@
 <tr><td style="width: 25%;"><a href="h2o.anyFactor.html">h2o.anyFactor</a></td>
 <td>Check H2OFrame columns for factors</td></tr>
 <tr><td style="width: 25%;"><a href="h2o.arrange.html">h2o.arrange</a></td>
-<td>Sorts H2OFrame by the columns specified. Returns a new H2OFrame, like dplyr::arrange.</td></tr>
+<td>Sorts H2OFrame by the columns specified. H2OFrame should not contain any String columns.  Otherwise, an error will be thrown.  Returns a new H2OFrame, like dplyr::arrange.</td></tr>
 <tr><td style="width: 25%;"><a href="h2o.ascharacter.html">h2o.ascharacter</a></td>
 <td>Convert H2O Data to Characters</td></tr>
 <tr><td style="width: 25%;"><a href="h2o.asfactor.html">h2o.asfactor</a></td>
@@ -191,6 +191,8 @@
 <td>Functions to convert between character representations and objects of class "Date" representing calendar dates.</td></tr>
 <tr><td style="width: 25%;"><a href="h2o.auc.html">h2o.auc</a></td>
 <td>Retrieve the AUC</td></tr>
+<tr><td style="width: 25%;"><a href="h2o.automl.html">h2o.automl</a></td>
+<td>Automatic Machine Learning</td></tr>
 <tr><td style="width: 25%;"><a href="h2o.betweenss.html">h2o.betweenss</a></td>
 <td>Get the between cluster sum of squares. If "train", "valid", and "xval" parameters are FALSE (default), then the training betweenss value is returned. If more than one parameter is set to TRUE, then a named vector of betweenss' are returned, where the names are "train", "valid" or "xval".</td></tr>
 <tr><td style="width: 25%;"><a href="h2o.biases.html">h2o.biases</a></td>
@@ -267,6 +269,8 @@
 <td>Compute DCT of an H2OFrame</td></tr>
 <tr><td style="width: 25%;"><a href="h2o.ddply.html">h2o.ddply</a></td>
 <td>Split H2O Dataset, Apply Function, and Return Results</td></tr>
+<tr><td style="width: 25%;"><a href="h2o.decryptionSetup.html">h2o.decryptionSetup</a></td>
+<td>Setup a Decryption Tool</td></tr>
 <tr><td style="width: 25%;"><a href="h2o.deepfeatures.html">h2o.deepfeatures</a></td>
 <td>Feature Generation via H2O Deep Learning or DeepWater Model</td></tr>
 <tr><td style="width: 25%;"><a href="h2o.deeplearning.html">h2o.deeplearning</a></td>
@@ -707,6 +711,8 @@
 <td>The H2OModelMetrics Object.</td></tr>
 <tr><td style="width: 25%;"><a href="H2OModel-class.html">H2OAutoEncoderModel-class</a></td>
 <td>The H2OModel object.</td></tr>
+<tr><td style="width: 25%;"><a href="H2OAutoML-class.html">H2OAutoML-class</a></td>
+<td>The H2OAutoML class</td></tr>
 <tr><td style="width: 25%;"><a href="H2OModelMetrics-class.html">H2OBinomialMetrics-class</a></td>
 <td>The H2OModelMetrics Object.</td></tr>
 <tr><td style="width: 25%;"><a href="H2OModel-class.html">H2OBinomialModel-class</a></td>
@@ -856,6 +862,8 @@
 <td>Plot an H2O Model</td></tr>
 <tr><td style="width: 25%;"><a href="plot.H2OTabulate.html">plot.H2OTabulate</a></td>
 <td>Plot an H2O Tabulate Heatmap</td></tr>
+<tr><td style="width: 25%;"><a href="predict.H2OAutoML.html">predict.H2OAutoML</a></td>
+<td>Predict on an AutoML object</td></tr>
 <tr><td style="width: 25%;"><a href="predict.H2OModel.html">predict.H2OModel</a></td>
 <td>Predict on an H2O Model</td></tr>
 <tr><td style="width: 25%;"><a href="predict_leaf_node_assignment.H2OModel.html">predict_leaf_node_assignment.H2OModel</a></td>
