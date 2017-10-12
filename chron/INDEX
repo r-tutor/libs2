@@ -12,5 +12,6 @@ hours                   Return Hours, Minutes, or Seconds from a Times
                         Object
 is.holiday              Find Weekends and Holidays in a Chron or Dates
                         Object
+origin                  Chron Origin
 seq.dates               Generate Chron or Dates Sequences
 trunc.times             Truncate times Objects

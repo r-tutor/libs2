@@ -13,6 +13,7 @@ export(".Holidays",
        "is.chron", "is.holiday", "is.weekend",
        "leap.year",
        "minutes", "month.day.year",
+       "origin", "origin<-",
        "seconds", "seq.dates",
        "times",
        "years")

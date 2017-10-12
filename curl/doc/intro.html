@@ -10,7 +10,7 @@
 
 
 
-<meta name="date" content="2017-07-20" />
+<meta name="date" content="2017-10-05" />
 
 <title>The curl package: a modern R interface to libcurl</title>
 
@@ -221,7 +221,7 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">The curl package: a modern R interface to libcurl</h1>
-<h4 class="date"><em>2017-07-20</em></h4>
+<h4 class="date"><em>2017-10-05</em></h4>
 
 </div>
 
@@ -245,17 +245,17 @@ str(req)</code></pre>
 <pre><code>List of 6
  $ url        : chr &quot;https://httpbin.org/get&quot;
  $ status_code: int 200
- $ headers    : raw [1:302] 48 54 54 50 ...
+ $ headers    : raw [1:303] 48 54 54 50 ...
  $ modified   : POSIXct[1:1], format: NA
- $ times      : Named num [1:6] 0 0.0228 0.1229 0.3557 2.822 ...
+ $ times      : Named num [1:6] 0 0.0317 0.1293 0.4425 0.5442 ...
   ..- attr(*, &quot;names&quot;)= chr [1:6] &quot;redirect&quot; &quot;namelookup&quot; &quot;connect&quot; &quot;pretransfer&quot; ...
  $ content    : raw [1:300] 7b 0a 20 20 ...</code></pre>
 <pre class="r"><code>parse_headers(req$headers)</code></pre>
 <pre><code> [1] &quot;HTTP/1.1 200 OK&quot;                        &quot;Connection: keep-alive&quot;                
- [3] &quot;Server: meinheld/0.6.1&quot;                 &quot;Date: Thu, 20 Jul 2017 10:47:02 GMT&quot;   
+ [3] &quot;Server: meinheld/0.6.1&quot;                 &quot;Date: Thu, 05 Oct 2017 11:21:50 GMT&quot;   
  [5] &quot;Content-Type: application/json&quot;         &quot;Access-Control-Allow-Origin: *&quot;        
  [7] &quot;Access-Control-Allow-Credentials: true&quot; &quot;X-Powered-By: Flask&quot;                   
- [9] &quot;X-Processed-Time: 0.00144004821777&quot;     &quot;Content-Length: 300&quot;                   
+ [9] &quot;X-Processed-Time: 0.000731945037842&quot;    &quot;Content-Length: 300&quot;                   
 [11] &quot;Via: 1.1 vegur&quot;                        </code></pre>
 <pre class="r"><code>cat(rawToChar(req$content))</code></pre>
 <pre><code>{
@@ -346,7 +346,7 @@ curl_fetch_multi('https://httpbin.org/blabla', done = cb, pool = pool)</code></p
 <p>When we call <code>multi_run()</code>, all scheduled requests are performed concurrently. The callback functions get triggered when each request completes.</p>
 <pre class="r"><code># This actually performs requests:
 out &lt;- multi_run(pool = pool)</code></pre>
-<pre><code>done: https://www.google.nl/?gfe_rd=cr&amp;ei=O4pwWdjyC4vc8AfipLq4Cg : HTTP: 200 
+<pre><code>done: https://www.google.nl/?gfe_rd=cr&amp;dcr=0&amp;ei=0BXWWa-SGqGk8wfAlo7YAw : HTTP: 200 
 done: https://httpbin.org/blabla : HTTP: 404 
 done: https://cloud.r-project.org/ : HTTP: 200 </code></pre>
 <pre class="r"><code>print(out)</code></pre>
@@ -539,7 +539,7 @@ req &lt;- curl_fetch_memory(&quot;http://httpbin.org/cookies/delete?foo&quot;, h
 handle_cookies(h)</code></pre>
 <pre><code>       domain  flag path secure          expiration name value
 1 httpbin.org FALSE    /  FALSE                &lt;NA&gt;  bar   ftw
-2 httpbin.org FALSE    /  FALSE 2017-07-20 12:47:30  foo  &lt;NA&gt;
+2 httpbin.org FALSE    /  FALSE 2017-10-05 11:21:55  foo  &lt;NA&gt;
 3 httpbin.org FALSE    /  FALSE                &lt;NA&gt;  baz moooo</code></pre>
 <p>The <code>handle_cookies</code> function returns a data frame with 7 columns as specified in the <a href="http://www.cookiecentral.com/faq/#3.5">netscape cookie file format</a>.</p>
 </div>
@@ -553,11 +553,11 @@ req2 &lt;- curl_fetch_memory(&quot;http://www.r-project.org&quot;)</code></pre>
 <pre class="r"><code>req &lt;- curl_fetch_memory(&quot;https://api.github.com/users/ropensci&quot;)
 req$times</code></pre>
 <pre><code>     redirect    namelookup       connect   pretransfer starttransfer         total 
-     0.000000      0.011790      0.102725      0.302215      0.419966      0.420094 </code></pre>
+     0.000000      0.011717      0.102780      0.303632      0.426000      0.426091 </code></pre>
 <pre class="r"><code>req2 &lt;- curl_fetch_memory(&quot;https://api.github.com/users/rstudio&quot;)
 req2$times</code></pre>
 <pre><code>     redirect    namelookup       connect   pretransfer starttransfer         total 
-     0.000000      0.000033      0.000035      0.000094      0.115455      0.115580 </code></pre>
+     0.000000      0.000042      0.000044      0.000138      0.117330      0.117430 </code></pre>
 <p>If you really need to re-use a handle, do note that that curl does not cleanup the handle after each request. All of the options and internal fields will linger around for all future request until explicitly reset or overwritten. This can sometimes leads to unexpected behavior.</p>
 <pre class="r"><code>handle_reset(h)</code></pre>
 <p>The <code>handle_reset</code> function will reset all curl options and request headers to the default values. It will <strong>not</strong> erase cookies and it will still keep alive the connections. Therefore it is good practice to call <code>handle_reset</code> after performing a request if you want to reuse the handle for a subsequent request. Still it is always safer to create a new fresh handle when possible, rather than recycling old ones.</p>
