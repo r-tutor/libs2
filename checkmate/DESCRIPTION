@@ -4,7 +4,7 @@ Title: Fast and Versatile Argument Checks
 Description: Tests and assertions to perform frequent argument checks. A
     substantial part of the package was written in C to minimize any worries
     about execution time overhead.
-Version: 1.8.4
+Version: 1.8.5
 Authors@R: c(
     person("Michel", "Lang", NULL, "michellang@gmail.com", role = c("cre", "aut")),
     person("Bernd", "Bischl", NULL, "bernd_bischl@gmx.de", role = "ctb")
@@ -17,9 +17,9 @@ ByteCompile: yes
 Encoding: UTF-8
 Depends: R (>= 3.0.0)
 Imports: backports (>= 1.1.0), utils
-Suggests: R6, bit, data.table (>= 1.9.8), devtools, ggplot2, knitr,
-        magrittr, microbenchmark, rmarkdown, testthat (>= 0.11.0),
-        tibble
+Suggests: R6, bit, fastmatch, data.table (>= 1.9.8), devtools, ggplot2,
+        knitr, magrittr, microbenchmark, rmarkdown, testthat (>=
+        0.11.0), tibble
 License: BSD_3_clause + file LICENSE
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
@@ -35,17 +35,17 @@ Collate: 'AssertCollection.R' 'allMissing.R' 'anyInfinite.R'
         'checkFunction.R' 'checkInt.R' 'checkInteger.R'
         'checkIntegerish.R' 'checkList.R' 'checkLogical.R'
         'checkMatrix.R' 'checkNamed.R' 'checkNames.R' 'checkNull.R'
-        'checkNumber.R' 'checkNumeric.R' 'checkOS.R'
+        'checkNumber.R' 'checkNumeric.R' 'checkOS.R' 'checkPOSIXct.R'
         'checkPathForOutput.R' 'checkR6.R' 'checkScalar.R'
         'checkScalarNA.R' 'checkSetEqual.R' 'checkString.R'
         'checkSubset.R' 'checkTRUE.R' 'checkTibble.R' 'checkVector.R'
         'coalesce.R' 'isIntegerish.R' 'matchArg.R' 'qassert.R'
         'qassertr.R' 'vname.R' 'wfwl.R' 'zzz.R'
-Packaged: 2017-09-25 19:52:36 UTC; michel
+Packaged: 2017-10-24 12:50:38 UTC; lang
 Author: Michel Lang [cre, aut],
   Bernd Bischl [ctb]
 Maintainer: Michel Lang <michellang@gmail.com>
 Repository: CRAN
-Date/Publication: 2017-09-25 22:36:45 UTC
-Built: R 3.4.1; x86_64-w64-mingw32; 2017-09-27 21:27:31 UTC; windows
+Date/Publication: 2017-10-24 13:28:31 UTC
+Built: R 3.4.2; x86_64-w64-mingw32; 2017-10-28 22:39:27 UTC; windows
 Archs: i386, x64

@@ -43,6 +43,8 @@ checkNumber             Check if an argument is a single numeric value
 checkNumeric            Check that an argument is a vector of type
                         numeric
 checkOS                 Check the operating system
+checkPOSIXct            Check that an argument is a date/time object in
+                        POSIXct format
 checkPathForOutput      Check if a path is suited for creating an
                         output file
 checkR6                 Check if an argument is a R6 class

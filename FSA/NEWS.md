@@ -1,4 +1,9 @@
-# FSA 0.8.16 ongoing
+# FSA 0.8.17 ongoing
+* `dunnTest()`: Modified. Adjusted code to handle the addition of `altp=` to and modified output from `dunn.test()` in `dunn.test`. Added additional tests and corrected some issues in the documentation.
+* `GompertzFuns()`: Modified. Fixed error in message (i.e., `msg=TRUE`) for `param="Ricker2"`.
+
+# FSA 0.8.16 7-Sep-17
+* Need to resubmit v0.8.15 to CRAN, so bumped the version.
 * `growthFunShow()`: Modified. Fixed error in expression for `type="Logistic"` and `param="CampanaJones1"`.
 
 # FSA 0.8.15 6-Sep-17

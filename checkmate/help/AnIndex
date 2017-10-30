@@ -44,6 +44,7 @@ assertNumber	checkNumber
 assertNumeric	checkNumeric
 assertOS	checkOS
 assertPathForOutput	checkPathForOutput
+assertPOSIXct	checkPOSIXct
 assertR6	checkR6
 assertScalar	checkScalar
 assertScalarNA	checkScalarNA
@@ -88,6 +89,7 @@ assert_number	checkNumber
 assert_numeric	checkNumeric
 assert_os	checkOS
 assert_path_for_output	checkPathForOutput
+assert_posixct	checkPOSIXct
 assert_r6	checkR6
 assert_scalar	checkScalar
 assert_scalar_na	checkScalarNA
@@ -133,6 +135,7 @@ checkNumber	checkNumber
 checkNumeric	checkNumeric
 checkOS	checkOS
 checkPathForOutput	checkPathForOutput
+checkPOSIXct	checkPOSIXct
 checkR6	checkR6
 checkScalar	checkScalar
 checkScalarNA	checkScalarNA
@@ -175,6 +178,7 @@ check_number	checkNumber
 check_numeric	checkNumeric
 check_os	checkOS
 check_path_for_output	checkPathForOutput
+check_posixct	checkPOSIXct
 check_r6	checkR6
 check_scalar	checkScalar
 check_scalar_na	checkScalarNA
@@ -216,6 +220,7 @@ expect_number	checkNumber
 expect_numeric	checkNumeric
 expect_os	checkOS
 expect_path_for_output	checkPathForOutput
+expect_posixct	checkPOSIXct
 expect_r6	checkR6
 expect_scalar	checkScalar
 expect_scalar_na	checkScalarNA
@@ -274,6 +279,7 @@ testNumber	checkNumber
 testNumeric	checkNumeric
 testOS	checkOS
 testPathForOutput	checkPathForOutput
+testPOSIXct	checkPOSIXct
 testR6	checkR6
 testScalar	checkScalar
 testScalarNA	checkScalarNA
@@ -317,6 +323,7 @@ test_number	checkNumber
 test_numeric	checkNumeric
 test_os	checkOS
 test_path_for_output	checkPathForOutput
+test_posixct	checkPOSIXct
 test_r6	checkR6
 test_scalar	checkScalar
 test_scalar_na	checkScalarNA

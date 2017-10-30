@@ -1,6 +1,6 @@
 Package: dunn.test
-Version: 1.3.4
-Date: 2017-04-01
+Version: 1.3.5
+Date: 2017-10-26
 Title: Dunn's Test of Multiple Comparisons Using Rank Sums
 Author: Alexis Dinno <alexis.dinno@pdx.edu>
 Maintainer: Alexis Dinno <alexis.dinno@pdx.edu>
@@ -9,7 +9,7 @@ License: GPL-2
 LazyData: no
 Encoding: UTF-8
 NeedsCompilation: no
-Packaged: 2017-04-02 19:49:07 UTC; Alexis
+Packaged: 2017-10-27 01:58:07 UTC; Alexis
 Repository: CRAN
-Date/Publication: 2017-04-02 20:51:09 UTC
-Built: R 3.4.0; ; 2017-04-22 14:46:29 UTC; windows
+Date/Publication: 2017-10-27 15:41:37 UTC
+Built: R 3.4.2; ; 2017-10-28 22:00:16 UTC; windows

@@ -15,6 +15,7 @@ BEZI                    The zero-inflated beta distribution for fitting
 BI                      Binomial distribution for fitting a GAMLSS
 BNB                     Beta Negative Binomial distribution for fitting
                         a GAMLSS
+DBI                     The Double binomial distribution
 DEL                     The Delaporte distribution for fitting a GAMLSS
                         model
 DPO                     The Double Poisson distribution
