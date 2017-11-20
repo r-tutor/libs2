@@ -32,6 +32,7 @@ geosphere-package       Geosphere
 greatCircle             Great circle
 greatCircleBearing      Great circle
 horizon                 Distance to the horizon
+lengthLine              Length of lines
 makePoly                Add vertices to a polygon or line
 mercator                Mercator projection
 midPoint                Mid-point

@@ -136,6 +136,7 @@ match_order_by_labels   Adjust the order of one dendrogram based on
 match_order_dendrogram_by_old_order
                         Adjust the order of one dendrogram based on
                         another (using order)
+min_depth               Find minimum/maximum depth of a dendrogram
 na_locf                 Last Observation Carried Forward
 nleaves                 Counts the number of leaves in a tree
 nnodes                  Counts the number of nodes (Vertices) in a tree
@@ -154,12 +155,15 @@ pvclust_show_signif     The significant branches in a dendrogram, based
 pvclust_show_signif_gradient
                         Significance gradient of branches in a
                         dendrogram (via pvclust)
+pvrect2                 Draw Rectangles Around a Dendrogram's Clusters
+                        with High/Low P-values
 raise.dendrogram        Raise the height of a dendrogram tree
 rank_branches           Rank branches' heights
 rank_order.dendrogram   Fix rank of leaves order values in a dendrogram
 rank_values_with_clusters
                         Rank a vector based on clusters
 rect.dendrogram         Draw Rectangles Around a Dendrogram's Clusters
+reindex_dend            Reindexing a pruned dendrogram
 remove_branches_edgePar
                         Remove all edgePar values from a dendrogram's
                         branches

@@ -22,6 +22,7 @@ get_legend	get_legend
 get_palette	get_palette
 ggadd	ggadd
 ggarrange	ggarrange
+ggballoonplot	ggballoonplot
 ggbarplot	ggbarplot
 ggboxplot	ggboxplot
 ggdensity	ggdensity
@@ -40,6 +41,7 @@ ggpie	ggpie
 ggpubr_args	ggpubr_args
 ggqqplot	ggqqplot
 ggscatter	ggscatter
+ggscatterhist	ggscatterhist
 ggstripchart	ggstripchart
 ggtext	ggtext
 ggtexttable	ggtexttable
@@ -70,10 +72,13 @@ stat_conf_ellipse	stat_conf_ellipse
 stat_cor	stat_cor
 stat_mean	stat_mean
 stat_stars	stat_stars
+table_cell_bg	ggtexttable
+table_cell_font	ggtexttable
 tbody_style	ggtexttable
 text_grob	text_grob
 theme_classic2	theme_pubr
 theme_cleveland	ggdotchart
+theme_pubclean	theme_pubr
 theme_pubr	theme_pubr
 theme_transparent	theme_transparent
 ttheme	ggtexttable

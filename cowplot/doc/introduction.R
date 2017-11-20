@@ -133,3 +133,14 @@ ggdraw() +
               theme(legend.justification = "top"), 0.5, 0.52, 0.5, 0.4) +
   draw_plot_label(c("A", "B"), c(0, 0.5), c(1, 0.92), size = 15)
 
+## ----message=FALSE-------------------------------------------------------
+p <- ggplot(iris, aes(x=Sepal.Length, fill=Species)) + geom_density(alpha = 0.7)
+ggdraw() +
+  draw_image("http://jeroen.github.io/images/tiger.svg") +
+  draw_plot(p)
+
+## ----message=FALSE, fig.width=7, fig.height=2.5--------------------------
+p <- ggplot(iris, aes(x = Sepal.Length, fill = Species)) + geom_density(alpha = 0.7)
+p2 <- ggdraw() + draw_image("http://jeroen.github.io/images/tiger.svg", scale = 0.9)
+plot_grid(p, p2, labels = "AUTO")
+

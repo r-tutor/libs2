@@ -5,6 +5,8 @@ cttICC	cttICC
 CTTkey	CTTkey
 disattenuated.cor	disattenuated.cor
 distractor.analysis	distractor.analysis
+distractorAnalysis	distractorAnalysis
+itemAnalysis	itemAnalysis
 polyserial	polyserial
 reliability	reliability
 score	score

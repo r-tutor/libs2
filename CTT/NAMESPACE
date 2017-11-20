@@ -1,2 +1,7 @@
-export(subscales, spearman.brown,score.transform,score,reliability,distractor.analysis,disattenuated.cor,polyserial, cttICC)
+import(stats)
+importFrom("grDevices", "dev.off", "jpeg", "png")
+importFrom("graphics", "plot", "points")
+importFrom("utils", "write.table")
+export(subscales, spearman.brown,score.transform,score,reliability,itemAnalysis,distractor.analysis,distractorAnalysis,disattenuated.cor,polyserial, cttICC)
 S3method(print,reliability)
+S3method(print,itemAnalysis)

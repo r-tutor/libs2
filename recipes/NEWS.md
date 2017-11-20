@@ -1,3 +1,23 @@
+# recipes 0.1.1
+
+* The default selectors for `bake` was changed from `all_predictors()` to `everything()`. 
+* The `verbose` option for `prep` is now defaulted to `FALSE`
+* [A bug in `step_dummy`](https://github.com/topepo/recipes/issues/83) was fixed that makes sure that the correct binary variables are generated despite the levels or values of the incoming factor. Also, `step_dummy` now requires factor inputs.
+* `step_dummy` also has a new default naming function that works better for factors. However, there is an extra argument (`ordinal`) now to the functions that can be passed to `step_dummy`.  
+* `step_interact` now allows for selectors (e.g. `all_predictors()` or `starts_with("prefix")` to be used in the interaction formula. 
+* `step_YeoJohnson` gained an `na.rm` option.
+* [`dplyr::one_of`](https://github.com/topepo/recipes/issues/85) was added to the list of selectors.
+* `step_bs` adds B-spline basis functions. 
+* `step_unorder` converts ordered factors to unordered factors. 
+* `step_count` counts the number of instances that a pattern exists in a string. 
+* `step_string2factor` and `step_factor2string` can be used to move between encodings. 
+* `step_lowerimpute` is for numeric data where the values cannot be measured below a specific value. For these cases, random uniform values are used for the truncated values.  
+* A step to remove simple zero-variance variables was added (`step_zv`).
+* A series of `tidy` methods were added for recipes and many (but not all) steps. 
+* In `bake.recipe`, the argument `newdata` is now without a default. 
+* `bake` and `juice` can now save the _final_ processed data set in [sparse format](https://github.com/topepo/recipes/issues/49). Note that, as the steps are processed, a non-sparse data frame is used to store the results. 
+* A formula method was added for recipes to get a formula with the outcome(s) and predictors based on the trained recipe. 
+
 # recipes 0.1.0
 
 First CRAN release. 

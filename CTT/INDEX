@@ -5,6 +5,8 @@ cttICC                  Function for producing theoretical and
                         empirical item characteristic curves.
 disattenuated.cor       Function for disattentuated correlation
 distractor.analysis     Function for item distractor analysis
+distractorAnalysis      Function for item distractor analysis
+itemAnalysis            Function for item reliability analysis
 polyserial              Function for calculating polyserial
                         correlations
 reliability             Function for item reliability analysis

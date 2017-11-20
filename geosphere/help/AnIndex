@@ -39,6 +39,7 @@ geosphere	geosphere-package
 greatCircle	greatCircle
 greatCircleBearing	greatCircleBearing
 horizon	horizon
+lengthLine	lengthLine
 makeLine	makepoly
 makePoly	makepoly
 merc	data

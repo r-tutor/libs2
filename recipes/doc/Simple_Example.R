@@ -53,7 +53,7 @@ trained_rec
 trained_rec <- prep(trained_rec, training = seg_train)
 
 ## ----pca_bake------------------------------------------------------------
-test_data  <- bake(trained_rec, newdata = seg_test)
+test_data  <- bake(trained_rec, newdata = seg_test, all_predictors())
 names(test_data)
 
 ## ----step_list-----------------------------------------------------------

@@ -1,7 +1,8 @@
 Package: hunspell
 Type: Package
 Title: High-Performance Stemmer, Tokenizer, and Spell Checker for R
-Version: 2.6
+Version: 2.7
+Depends: R (>= 3.0.2)
 Author: Jeroen Ooms
 Maintainer: Jeroen Ooms <jeroen@berkeley.edu>
 Description: A spell checker and morphological analyzer library designed for
@@ -14,14 +15,14 @@ URL: https://github.com/ropensci/hunspell#readme (devel)
         https://hunspell.github.io (upstream)
 BugReports: https://github.com/ropensci/hunspell/issues
 Imports: Rcpp, digest
-LinkingTo: Rcpp
+LinkingTo: Rcpp (>= 0.12.12)
 Suggests: testthat, devtools, pdftools, janeaustenr, wordcloud2, knitr,
         rmarkdown
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
 NeedsCompilation: yes
-Packaged: 2017-06-27 19:53:00 UTC; jeroen
+Packaged: 2017-11-01 12:36:33 UTC; jeroen
 Repository: CRAN
-Date/Publication: 2017-06-28 06:20:07 UTC
-Built: R 3.4.1; x86_64-w64-mingw32; 2017-06-30 22:32:21 UTC; windows
+Date/Publication: 2017-11-03 12:21:38 UTC
+Built: R 3.4.2; x86_64-w64-mingw32; 2017-11-19 10:05:47 UTC; windows
 Archs: i386, x64

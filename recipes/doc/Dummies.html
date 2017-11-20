@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+<title>How are categorical predictors handled in recipes?</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20800px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%2020px%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%200%3B%0Apadding%3A%204px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%3Anot%28%5Bclass%5D%29%20%7B%0Amargin%3A%20auto%3B%0Amin%2Dwidth%3A%2040%25%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%5Bsummary%3D%22R%20argblock%22%5D%20%7B%0Awidth%3A%20100%25%3B%0Aborder%3A%20none%3B%0A%7D%0Atable%3Anot%28%5Bclass%5D%29%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%3Anot%28%5Bclass%5D%29%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%3Anot%28%5Bclass%5D%29%2C%20table%3Anot%28%5Bclass%5D%29%20th%2C%20table%3Anot%28%5Bclass%5D%29%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%3Anot%28%5Bclass%5D%29%20tr%2Eodd%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%2013px%3B%0Apadding%2Dbottom%3A%201px%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f5f5f5%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0A%7D%0Apre%20%7B%0Aoverflow%2Dx%3A%20auto%3B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200%2010px%200%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20white%3B%0Aborder%3A%20%23f5f5f5%201px%20solid%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20code%20%7B%0Acolor%3A%20%23444%3B%0Abackground%2Dcolor%3A%20white%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20monospace%3B%0Afont%2Dsize%3A%2090%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%204px%3B%0Acolor%3A%20%23d14%3B%0Aborder%3A%201px%20solid%20%23e1e1e8%3B%0Awhite%2Dspace%3A%20inherit%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Atable%20%3E%20caption%2C%20div%2Efigure%20p%2Ecaption%20%7B%0Afont%2Dstyle%3A%20italic%3B%0A%7D%0Atable%20%3E%20caption%20span%2C%20div%2Efigure%20p%2Ecaption%20span%20%7B%0Afont%2Dstyle%3A%20normal%3B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%200%2010px%3B%0A%7D%0Atable%3Anot%28%5Bclass%5D%29%20%7B%0Amargin%3A%20auto%20auto%2010px%20auto%3B%0A%7D%0Aimg%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0Amax%2Dwidth%3A%20100%25%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f5f5f5%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f5f5f5%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f5f5f5%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Adiv%2Er%2Dhelp%2Dpage%20%7B%0Abackground%2Dcolor%3A%20%23f9f9f9%3B%0Aborder%2Dbottom%3A%20%23ddd%201px%20solid%3B%0Amargin%2Dbottom%3A%2010px%3B%0Apadding%3A%2010px%3B%0A%7D%0Adiv%2Er%2Dhelp%2Dpage%3Ahover%20%7B%0Abackground%2Dcolor%3A%20%23f4f4f4%3B%0A%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">How are categorical predictors handled in <code>recipes</code>?</h1>
+
+
+<div id="TOC">
+<ul>
+<li><a href="#creating-dummy-variables">Creating Dummy Variables</a></li>
+<li><a href="#interactions-with-dummy-variables">Interactions with Dummy Variables</a></li>
+<li><a href="#warning">Warning!</a></li>
+<li><a href="#other-steps-related-to-dummy-variables">Other Steps Related to Dummy Variables</a></li>
+</ul>
+</div>
+
+<p>Recipes can be different from their base R counterparts such as <code>model.matrix</code>. This vignette describes the different methods for encoding categorical predictors with special attention to interaction terms.</p>
+<div id="creating-dummy-variables" class="section level2">
+<h2>Creating Dummy Variables</h2>
+<p>Let’s start, of course, with <code>iris</code> data. This has four numeric columns and a single factor column with three levels: <code>'setosa'</code>, <code>'versicolor'</code>, and <code>'virginica'</code>. Our initial recipe will have no outcome:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(recipes)
+iris_rec &lt;-<span class="st"> </span><span class="kw">recipe</span>( <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> iris)
+<span class="kw">summary</span>(iris_rec)
+<span class="co">#&gt; # A tibble: 5 x 4</span>
+<span class="co">#&gt;       variable    type      role   source</span>
+<span class="co">#&gt;          &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;</span>
+<span class="co">#&gt; 1 Sepal.Length numeric predictor original</span>
+<span class="co">#&gt; 2  Sepal.Width numeric predictor original</span>
+<span class="co">#&gt; 3 Petal.Length numeric predictor original</span>
+<span class="co">#&gt; 4  Petal.Width numeric predictor original</span>
+<span class="co">#&gt; 5      Species nominal predictor original</span></code></pre></div>
+<p>A <a href="https://en.wikipedia.org/wiki/Contrast_(statistics)">contrast function</a> in R is a method for translating a column with categorical values into one or more numeric columns that take the place of the original. This can also be known as an encoding method or a parameterization function.</p>
+<p>The default approach is to create dummy variables using the “reference cell” parameterization. This means that, if there are <em>C</em> levels of the factor, there will be <em>C</em> - 1 dummy variables created and all but the first factor level are made into new columns:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ref_cell &lt;-<span class="st"> </span>iris_rec <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">step_dummy</span>(Species) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">prep</span>(<span class="dt">training =</span> iris, <span class="dt">retain =</span> <span class="ot">TRUE</span>)
+<span class="kw">summary</span>(ref_cell)
+<span class="co">#&gt; # A tibble: 6 x 4</span>
+<span class="co">#&gt;             variable    type      role   source</span>
+<span class="co">#&gt;                &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;</span>
+<span class="co">#&gt; 1       Sepal.Length numeric predictor original</span>
+<span class="co">#&gt; 2        Sepal.Width numeric predictor original</span>
+<span class="co">#&gt; 3       Petal.Length numeric predictor original</span>
+<span class="co">#&gt; 4        Petal.Width numeric predictor original</span>
+<span class="co">#&gt; 5 Species_versicolor numeric predictor  derived</span>
+<span class="co">#&gt; 6  Species_virginica numeric predictor  derived</span>
+
+<span class="co"># Get a row for each factor level</span>
+rows &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">51</span>, <span class="dv">101</span>)
+<span class="kw">juice</span>(ref_cell, <span class="kw">starts_with</span>(<span class="st">&quot;Species&quot;</span>))[rows,]
+<span class="co">#&gt; # A tibble: 3 x 2</span>
+<span class="co">#&gt;   Species_versicolor Species_virginica</span>
+<span class="co">#&gt;                &lt;dbl&gt;             &lt;dbl&gt;</span>
+<span class="co">#&gt; 1                  0                 0</span>
+<span class="co">#&gt; 2                  1                 0</span>
+<span class="co">#&gt; 3                  0                 1</span></code></pre></div>
+<p>Note that the original column (<code>Species</code>) is no longer there.</p>
+<p>There are different types of contrasts that can be used for different types of factors. The defaults are:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">param &lt;-<span class="st"> </span><span class="kw">getOption</span>(<span class="st">&quot;contrasts&quot;</span>)
+param
+<span class="co">#&gt;         unordered           ordered </span>
+<span class="co">#&gt; &quot;contr.treatment&quot;      &quot;contr.poly&quot;</span></code></pre></div>
+<p>Looking at <code>?contrast</code>, there are other options. One alternative is the little known Helmert contrast:</p>
+<blockquote>
+<p><code>contr.helmert</code> returns Helmert contrasts, which contrast the second level with the first, the third with the average of the first two, and so on.</p>
+</blockquote>
+<p>To get this encoding, the global option for the contrasts can be changed and saved. <a href="https://topepo.github.io/recipes/reference/step_dummy.html"><code>step_dummy</code></a> picks up on this and makes the correct calculations:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># change it:</span>
+new_cont &lt;-<span class="st"> </span>param
+new_cont[<span class="st">&quot;unordered&quot;</span>] &lt;-<span class="st"> &quot;contr.helmert&quot;</span>
+<span class="kw">options</span>(<span class="dt">contrasts =</span> new_cont)
+
+<span class="co"># now make dummy variables with new parameterization</span>
+helmert &lt;-<span class="st"> </span>iris_rec <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">step_dummy</span>(Species) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">prep</span>(<span class="dt">training =</span> iris, <span class="dt">retain =</span> <span class="ot">TRUE</span>)
+<span class="kw">summary</span>(helmert)
+<span class="co">#&gt; # A tibble: 6 x 4</span>
+<span class="co">#&gt;       variable    type      role   source</span>
+<span class="co">#&gt;          &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;</span>
+<span class="co">#&gt; 1 Sepal.Length numeric predictor original</span>
+<span class="co">#&gt; 2  Sepal.Width numeric predictor original</span>
+<span class="co">#&gt; 3 Petal.Length numeric predictor original</span>
+<span class="co">#&gt; 4  Petal.Width numeric predictor original</span>
+<span class="co">#&gt; 5   Species_X1 numeric predictor  derived</span>
+<span class="co">#&gt; 6   Species_X2 numeric predictor  derived</span>
+
+<span class="kw">juice</span>(helmert, <span class="kw">starts_with</span>(<span class="st">&quot;Species&quot;</span>))[rows,]
+<span class="co">#&gt; # A tibble: 3 x 2</span>
+<span class="co">#&gt;   Species_X1 Species_X2</span>
+<span class="co">#&gt;        &lt;dbl&gt;      &lt;dbl&gt;</span>
+<span class="co">#&gt; 1         -1         -1</span>
+<span class="co">#&gt; 2          1         -1</span>
+<span class="co">#&gt; 3          0          2</span>
+
+<span class="co"># Yuk; go back to the original method</span>
+<span class="kw">options</span>(<span class="dt">contrasts =</span> param)</code></pre></div>
+</div>
+<div id="interactions-with-dummy-variables" class="section level2">
+<h2>Interactions with Dummy Variables</h2>
+<p>Creating interactions with recipes requires the use of a model formula, such as</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_int &lt;-<span class="st"> </span>iris_rec <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">step_interact</span>( <span class="op">~</span><span class="st"> </span>Sepal.Width<span class="op">:</span>Sepal.Length) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">prep</span>(<span class="dt">training =</span> iris, <span class="dt">retain =</span> <span class="ot">TRUE</span>)
+<span class="kw">summary</span>(iris_int)
+<span class="co">#&gt; # A tibble: 6 x 4</span>
+<span class="co">#&gt;                     variable    type      role   source</span>
+<span class="co">#&gt;                        &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;</span>
+<span class="co">#&gt; 1               Sepal.Length numeric predictor original</span>
+<span class="co">#&gt; 2                Sepal.Width numeric predictor original</span>
+<span class="co">#&gt; 3               Petal.Length numeric predictor original</span>
+<span class="co">#&gt; 4                Petal.Width numeric predictor original</span>
+<span class="co">#&gt; 5                    Species nominal predictor original</span>
+<span class="co">#&gt; 6 Sepal.Width_x_Sepal.Length numeric predictor  derived</span></code></pre></div>
+<p>In <a href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/formula.html">R model formulae</a>, using a <code>*</code> between two variables would expand to <code>a*b = a + b + a:b</code> so that the main effects are included. In <a href="https://topepo.github.io/recipes/reference/step_interact.html"><code>step_interact</code></a>, you can do use <code>*</code>, but only the interactions are recorded as columns that needs to be created.</p>
+<p>One thing that <code>recipes</code> does differently than base R is to construct the design matrix in sequential iterations. This is relevant when thinking about interactions between continuous and categorical predictors.</p>
+<p>For example, if you were to use the standard formula interface, the creation of the dummy variables happens at the same time as the interactions are created:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">model.matrix</span>(<span class="op">~</span><span class="st"> </span>Species<span class="op">*</span>Sepal.Length, <span class="dt">data =</span> iris)[rows,]
+<span class="co">#&gt;     (Intercept) Speciesversicolor Speciesvirginica Sepal.Length</span>
+<span class="co">#&gt; 1             1                 0                0          5.1</span>
+<span class="co">#&gt; 51            1                 1                0          7.0</span>
+<span class="co">#&gt; 101           1                 0                1          6.3</span>
+<span class="co">#&gt;     Speciesversicolor:Sepal.Length Speciesvirginica:Sepal.Length</span>
+<span class="co">#&gt; 1                                0                           0.0</span>
+<span class="co">#&gt; 51                               7                           0.0</span>
+<span class="co">#&gt; 101                              0                           6.3</span></code></pre></div>
+<p>With recipes, you create them sequentially. This raises an issue: do I have to type out all of the interaction effects by their specific names when using dummy variable?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Must I do this?</span>
+iris_rec <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">step_interact</span>( <span class="op">~</span><span class="st"> </span>Species_versicolor<span class="op">:</span>Sepal.Length <span class="op">+</span><span class="st"> </span>
+<span class="st">                   </span>Species_virginica<span class="op">:</span>Sepal.Length) </code></pre></div>
+<p>Note only is this a pain, but it may not be obvious what dummy variables are available (especially when <a href="https://topepo.github.io/recipes/reference/step_other.html"><code>step_other</code></a> is used).</p>
+<p>The solution is to use a selector:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_int &lt;-<span class="st"> </span>iris_rec <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">step_dummy</span>(Species) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">step_interact</span>( <span class="op">~</span><span class="st"> </span><span class="kw">starts_with</span>(<span class="st">&quot;Species&quot;</span>)<span class="op">:</span>Sepal.Length) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">prep</span>(<span class="dt">training =</span> iris, <span class="dt">retain =</span> <span class="ot">TRUE</span>)
+<span class="kw">summary</span>(iris_int)
+<span class="co">#&gt; # A tibble: 8 x 4</span>
+<span class="co">#&gt;                            variable    type      role   source</span>
+<span class="co">#&gt;                               &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;</span>
+<span class="co">#&gt; 1                      Sepal.Length numeric predictor original</span>
+<span class="co">#&gt; 2                       Sepal.Width numeric predictor original</span>
+<span class="co">#&gt; 3                      Petal.Length numeric predictor original</span>
+<span class="co">#&gt; 4                       Petal.Width numeric predictor original</span>
+<span class="co">#&gt; 5                Species_versicolor numeric predictor  derived</span>
+<span class="co">#&gt; 6                 Species_virginica numeric predictor  derived</span>
+<span class="co">#&gt; 7 Species_versicolor_x_Sepal.Length numeric predictor  derived</span>
+<span class="co">#&gt; 8  Species_virginica_x_Sepal.Length numeric predictor  derived</span></code></pre></div>
+<p>What happens here is that <code>starts_with(&quot;Species&quot;)</code> is executed on the data that are available when the previous steps have been applied to the data. That means that the dummy variable columns are present. The results of this selectors are then translated to an additive function of the results. In this case, that means that</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">starts_with</span>(<span class="st">&quot;Species&quot;</span>)</code></pre></div>
+<p>becomes</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(Species_versicolor <span class="op">+</span><span class="st"> </span>Species_virginica)</code></pre></div>
+<p>The entire interaction formula is shown here:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_int
+<span class="co">#&gt; Data Recipe</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Inputs:</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;       role #variables</span>
+<span class="co">#&gt;  predictor          5</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Training data contained 150 data points and no missing data.</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Steps:</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Dummy variables from Species [trained]</span>
+<span class="co">#&gt; Interactions with (Species_versicolor + Species_virginica):Sepal.Length [trained]</span></code></pre></div>
+</div>
+<div id="warning" class="section level2">
+<h2>Warning!</h2>
+<p>Would it work if I didn’t convert species to a factor and used the interactions step?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_int &lt;-<span class="st"> </span>iris_rec <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">step_interact</span>( <span class="op">~</span><span class="st"> </span>Species<span class="op">:</span>Sepal.Length) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">prep</span>(<span class="dt">training =</span> iris, <span class="dt">retain =</span> <span class="ot">TRUE</span>)
+<span class="co">#&gt; Warning in prep.step_interact(x$steps[[i]], training = training, info = x</span>
+<span class="co">#&gt; $term_info): Categorical variables used in `step_interact` should probably</span>
+<span class="co">#&gt; be avoided; This can lead to differences in dummy variable values that are</span>
+<span class="co">#&gt; produced by `step_dummy`.</span>
+<span class="kw">summary</span>(iris_int)
+<span class="co">#&gt; # A tibble: 7 x 4</span>
+<span class="co">#&gt;                           variable    type      role   source</span>
+<span class="co">#&gt;                              &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;</span>
+<span class="co">#&gt; 1                     Sepal.Length numeric predictor original</span>
+<span class="co">#&gt; 2                      Sepal.Width numeric predictor original</span>
+<span class="co">#&gt; 3                     Petal.Length numeric predictor original</span>
+<span class="co">#&gt; 4                      Petal.Width numeric predictor original</span>
+<span class="co">#&gt; 5                          Species nominal predictor original</span>
+<span class="co">#&gt; 6 Speciesversicolor_x_Sepal.Length numeric predictor  derived</span>
+<span class="co">#&gt; 7  Speciesvirginica_x_Sepal.Length numeric predictor  derived</span></code></pre></div>
+<p>The columns <code>Species</code> isn’t affected and a warning is issued. Basically, you only get half of what <code>model.matrix</code> does and that could really be problematic in subsequent steps.</p>
+</div>
+<div id="other-steps-related-to-dummy-variables" class="section level2">
+<h2>Other Steps Related to Dummy Variables</h2>
+<p>There are a bunch of steps related to going in-between factors and dummy variables:</p>
+<ul>
+<li><a href="https://topepo.github.io/recipes/reference/step_other.html"><code>step_other</code></a> can collapse infrequently occurring levels into <code>'other'</code>.</li>
+<li><a href="https://topepo.github.io/recipes/reference/step_regex.html"><code>step_regex</code></a> will create a single dummy variable based on applying a regular expression to a text field. Similarly, <a href="https://topepo.github.io/recipes/reference/step_count.html"><code>step_count</code></a> does the same but counts the occurrences of the pattern in the string.</li>
+<li><a href="https://topepo.github.io/recipes/reference/step_holiday.html"><code>step_holiday</code></a> creates dummy variables from date fields to capture holidays.</li>
+<li><a href="https://topepo.github.io/recipes/reference/step_lincomb.html"><code>step_lincomb</code></a> can be useful if you <em>over-specify</em> interactions and need to remove linear dependencies.</li>
+<li><a href="https://topepo.github.io/recipes/reference/step_zv.html"><code>step_zv</code></a> can remove dummy variables that never show a 1 in the column (i.e. is zero-variance).</li>
+</ul>
+<p><a href="https://topepo.github.io/recipes/reference/step_dummy.html"><code>step_dummy</code></a> also works with <em>ordered factors</em>. As seen above, the default encoding is to create a series of polynomial variables. There are also a few steps for ordered factors:</p>
+<ul>
+<li><a href="https://topepo.github.io/recipes/reference/step_ordinalscore.html"><code>step_ordinalscore</code></a> can translate the levels to a single numeric score.</li>
+<li><a href="https://topepo.github.io/recipes/reference/step_unorder.html"><code>step_unorder</code></a> can convert to an unordered factor.</li>
+</ul>
+</div>
+
+<script type="text/javascript">
+window.onload = function() {
+  var i, fig = 1, caps = document.getElementsByClassName('caption');
+  for (i = 0; i < caps.length; i++) {
+    var cap = caps[i];
+    if (cap.parentElement.className !== 'figure' || cap.nodeName !== 'P')
+      continue;
+    cap.innerHTML = '<span>Figure ' + fig + ':</span> ' + cap.innerHTML;
+    fig++;
+  }
+  fig = 1;
+  caps = document.getElementsByTagName('caption');
+  for (i = 0; i < caps.length; i++) {
+    var cap = caps[i];
+    if (cap.parentElement.nodeName !== 'TABLE') continue;
+    cap.innerHTML = '<span>Table ' + fig + ':</span> ' + cap.innerHTML;
+    fig++;
+  }
+}
+</script>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -143,6 +143,8 @@ leaf_colors	leaf_Colors
 lowest_common_branch	lowest_common_branch
 match_order_by_labels	match_order_by_labels
 match_order_dendrogram_by_old_order	match_order_dendrogram_by_old_order
+max_depth	depth
+min_depth	depth
 na_locf	na_locf
 nleaves	nleaves
 nleaves.default	nleaves
@@ -164,6 +166,7 @@ plot.dendlist	dendlist
 plot.find_k	find_k
 plot_horiz.dendrogram	plot_horiz.dendrogram
 prepare.ggdend	ggdend
+print.ggdend	ggdend
 prune	prune
 prune.default	prune
 prune.dendrogram	prune
@@ -174,12 +177,14 @@ prune_common_subtrees.dendlist	prune_common_subtrees.dendlist
 prune_leaf	prune_leaf
 pvclust_show_signif	pvclust_show_signif
 pvclust_show_signif_gradient	pvclust_show_signif_gradient
+pvrect2	pvrect2
 raise.dendrogram	raise.dendrogram
 rank_branches	rank_branches
 rank_order.dendrogram	rank_order.dendrogram
 rank_values_with_clusters	rank_values_with_clusters
 rect.dendrogram	rect.dendrogram
 reexports	reexports
+reindex_dend	reindex_dend
 remove_branches_edgePar	remove_branches_edgePar
 remove_leaves_nodePar	remove_leaves_nodePar
 remove_nodes_nodePar	remove_nodes_nodePar

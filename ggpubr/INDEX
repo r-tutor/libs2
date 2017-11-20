@@ -16,6 +16,7 @@ get_legend              Extract Legends from a ggplot object
 get_palette             Generate Color Palettes
 ggadd                   Add Summary Statistics or a Geom onto a ggplot
 ggarrange               Arrange Multiple ggplots
+ggballoonplot           Ballon plot
 ggbarplot               Bar plot
 ggboxplot               Box plot
 ggdensity               Density plot
@@ -34,6 +35,7 @@ ggpie                   Pie chart
 ggpubr_args             ggpubr General Arguments Description
 ggqqplot                QQ Plots
 ggscatter               Scatter plot
+ggscatterhist           Scatter Plot with Marginal Histograms
 ggstripchart            Stripcharts
 ggtext                  Text
 ggtexttable             Draw a Textual Table
