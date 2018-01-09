@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Write a 'data.tree' structure to Newick notation</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for ToNewick {data.tree}"><tr><td>ToNewick {data.tree}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Write a <code>data.tree</code> structure to Newick notation</h2>
+
+<h3>Description</h3>
+
+<p>To read from Newick, you can use the <code>ape</code> package, and convert the resulting <code>phylo</code>
+object to a <code>data.tree</code> structure.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ToNewick(node, heightAttribute = DefaultPlotHeight, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>node</code></td>
+<td>
+<p>The root <code>Node</code> of a tree or sub-tree to be converted</p>
+</td></tr>
+<tr valign="top"><td><code>heightAttribute</code></td>
+<td>
+<p>The attribute (field name, method, or function) storing or calculating the height for each <code>Node</code></p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>parameters that will be passed on the the heightAttributeName, in case it is a function</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p>Other Conversions from Node: <code><a href="as.dendrogram.Node.html">as.dendrogram.Node</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(acme)
+ToNewick(acme)
+ToNewick(acme, heightAttribute = NULL)
+ToNewick(acme, heightAttribute = function(x) DefaultPlotHeight(x, 200))
+ToNewick(acme, rootHeight = 200)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>data.tree</em> version 0.7.4 <a href="00Index.html">Index</a>]</div>
+</body></html>

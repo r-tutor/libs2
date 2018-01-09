@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Traverse a Tree and Collect Values</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for Get {data.tree}"><tr><td>Get {data.tree}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Traverse a Tree and Collect Values</h2>
+
+<h3>Description</h3>
+
+<p>The <code>Get</code> method is one of the most important ones of the <code>data.tree</code> package. It lets you traverse a tree
+and collect values along the way. Alternatively, you can call a method or a function on each <code><a href="Node.html">Node</a></code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+# OO-style:
+#node$Get(attribute, 
+#        ..., 
+#        traversal = c("pre-order", "post-order", "in-order", "level", "ancestor"), 
+#        pruneFun = NULL, 
+#        filterFun = NULL, 
+#        format = FALSE, 
+#        inheritFromAncestors = FALSE)
+         
+# traditional:
+Get(nodes, 
+    attribute, 
+    ..., 
+    format = FALSE, 
+    inheritFromAncestors = FALSE, 
+    simplify = c(TRUE, FALSE, "array", "regular"))
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>nodes</code></td>
+<td>
+<p>The nodes on which to perform the Get (typically obtained via <code><a href="Traverse.html">Traverse</a></code>)</p>
+</td></tr>
+<tr valign="top"><td><code>attribute</code></td>
+<td>
+<p>determines what is collected. The <code>attribute</code> can be
+</p>
+
+<ul>
+<li><p> a.) the name of a <b>field</b> or a <b>property/active</b> of each <code>Node</code> in the tree, e.g. <code>acme$Get("p")</code> or <code>acme$Get("position")</code>
+</p>
+</li>
+<li><p> b.) the name of a <b>method</b> of each <code>Node</code> in the tree, e.g. <code>acme$Get("levelZeroBased")</code>, where e.g. <code>acme$levelZeroBased &lt;- function() acme$level - 1</code>
+</p>
+</li>
+<li><p> c.) a <b>function</b>, whose first argument must be a <code>Node</code> e.g. <code>acme$Get(function(node) node$cost * node$p)</code>
+</p>
+</li></ul>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>in case the <code>attribute</code> is a function or a method, the ellipsis is passed to it as additional arguments.</p>
+</td></tr>
+<tr valign="top"><td><code>format</code></td>
+<td>
+<p>if <code>FALSE</code> (the default), no formatting is being used. If <code>TRUE</code>, then the first formatter (if any) found along the ancestor path is being used for formatting 
+(see <code><a href="SetFormat.html">SetFormat</a></code>). If <code>format</code> is a function, then the collected value is passed to that function, and the result is returned.</p>
+</td></tr>
+<tr valign="top"><td><code>inheritFromAncestors</code></td>
+<td>
+<p>if <code>TRUE</code>, then the path above a <code>Node</code> is searched to get the <code>attribute</code> in case it is NULL.</p>
+</td></tr>
+<tr valign="top"><td><code>simplify</code></td>
+<td>
+<p>same as <code><a href="../../base/html/lapply.html">sapply</a></code>, i.e. TRUE, FALSE or &quot;array&quot;. Additionally, you can specify &quot;regular&quot; if
+each returned value is of length &gt; 1, and equally named. See below for an example.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a vector containing the <code>atrributes</code> collected during traversal, in traversal order. <code>NULL</code> is converted
+to NA, such that <code>length(Node$Get) == Node$totalCount</code>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="Node.html">Node</a></code>
+</p>
+<p><code><a href="Set.html">Set</a></code>
+</p>
+<p><code><a href="Do.html">Do</a></code>
+</p>
+<p><code><a href="Traverse.html">Traverse</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(acme)
+acme$Get("level")
+acme$Get("totalCount")
+ 
+
+acme$Get(function(node) node$cost * node$p,
+         filterFun = isLeaf)
+
+#This is equivalent:
+nodes &lt;- Traverse(acme, filterFun = isLeaf)
+Get(nodes, function(node) node$cost * node$p)
+
+   
+#simplify = "regular" will preserve names
+acme$Get(function(x) c(position = x$position, level = x$level), simplify = "regular")
+ 
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>data.tree</em> version 0.7.4 <a href="00Index.html">Index</a>]</div>
+</body></html>

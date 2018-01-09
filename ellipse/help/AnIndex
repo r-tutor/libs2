@@ -8,5 +8,8 @@ ellipse.nls	ellipse.nls
 ellipse.profile	ellipse.profile
 ellipse.profile.glm	ellipse.profile.glm
 ellipse.profile.nls	ellipse.profile.nls
+pairs	pairs
+pairs.default	pairs
+pairs.formula	pairs
 pairs.profile	pairs.profile
 plotcorr	plotcorr

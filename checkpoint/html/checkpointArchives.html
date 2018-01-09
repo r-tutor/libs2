@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: List checkpoint archives on disk.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for checkpointArchives {checkpoint}"><tr><td>checkpointArchives {checkpoint}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>List checkpoint archives on disk.</h2>
+
+<h3>Description</h3>
+
+<p>List checkpoint archives on disk.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+checkpointArchives(checkpointLocation = "~/", full.names = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>checkpointLocation</code></td>
+<td>
+<p>File path where the checkpoint library is stored.  Default is <code>"~/"</code>, i.e. the user's home directory. A use case for changing this is to create a checkpoint library on a portable drive (e.g. USB drive).</p>
+</td></tr>
+<tr valign="top"><td><code>full.names</code></td>
+<td>
+<p>passed to <code><a href="../../base/html/list.files.html">list.files()</a></code></p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p>Other checkpoint functions: <code><a href="checkpointRemove.html">checkpointRemove</a></code>,
+<code><a href="checkpoint.html">checkpoint</a></code>, <code><a href="getAccessDate.html">getAccessDate</a></code>,
+<code><a href="getValidSnapshots.html">getValidSnapshots</a></code>, <code><a href="mranUrl.html">mranUrl</a></code>,
+<code><a href="setSnapshot.html">setSnapshot</a></code>, <code><a href="unCheckpoint.html">unCheckpoint</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+checkpointArchives()
+## Not run: 
+checkpointRemove("2016-10-01")
+
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>checkpoint</em> version 0.4.3 <a href="00Index.html">Index</a>]</div>
+</body></html>

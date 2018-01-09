@@ -1,3 +1,10 @@
+webshot 0.5.0
+=============
+
+* Added support for R Markdown documents. ([#48](https://github.com/wch/webshot/pull/48))
+
+* Closed [#42](https://github.com/wch/webshot/issues/42): Converted some instances of `system2()` to use processx instead.
+
 webshot 0.4.2
 =============
 

@@ -51,11 +51,10 @@ Triangular              Triangular distribution
 TruncBinom              Truncated binomial distribution
 TruncNormal             Truncated normal distribution
 TruncPoisson            Truncated Poisson distribution
-TuckeyLambda            Tuckey lambda distribution
+TukeyLambda             Tukey lambda distribution
 Wald                    Wald (inverse Gaussian) distribution
 ZIB                     Zero-inflated binomial distribution
 ZINB                    Zero-inflated negative binomial distribution
 ZIP                     Zero-inflated Poisson distribution
 extraDistr              Additional univariate and multivariate
                         distributions
-extraDistr-deprecated   Deprecated functions

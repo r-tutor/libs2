@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Calculates the height of a 'Node' given the height of the...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for DefaultPlotHeight {data.tree}"><tr><td>DefaultPlotHeight {data.tree}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Calculates the height of a <code>Node</code> given the height of the root.</h2>
+
+<h3>Description</h3>
+
+<p>This function puts leafs at the bottom (not hanging), and makes edges equally long.
+Useful for easy plotting with third-party packages, e.g. if you have no specific height
+attribute, e.g. with <code><a href="as.dendrogram.Node.html">as.dendrogram.Node</a></code>, <code><a href="ToNewick.html">ToNewick</a></code>,
+and <code><a href="as.phylo.Node.html">as.phylo.Node</a></code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+DefaultPlotHeight(node, rootHeight = 100)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>node</code></td>
+<td>
+<p>The node</p>
+</td></tr>
+<tr valign="top"><td><code>rootHeight</code></td>
+<td>
+<p>The height of the root</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(acme)
+dacme &lt;- as.dendrogram(acme, heightAttribute = function(x) DefaultPlotHeight(x, 200))
+plot(dacme, center = TRUE)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>data.tree</em> version 0.7.4 <a href="00Index.html">Index</a>]</div>
+</body></html>

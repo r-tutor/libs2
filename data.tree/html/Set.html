@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Traverse a Tree and Assign Values</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for Set {data.tree}"><tr><td>Set {data.tree}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Traverse a Tree and Assign Values</h2>
+
+<h3>Description</h3>
+
+<p>The method takes one or more vectors as an argument. It traverses the tree, whereby the values are picked
+from the vector. Also available as OO-style method on <code><a href="Node.html">Node</a></code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+#OO-style:
+# node$Set(..., 
+#          traversal = c("pre-order", "post-order", "in-order", "level", "ancestor"),  
+#          pruneFun = NULL, 
+#          filterFun = NULL)
+#traditional:
+Set(nodes, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>nodes</code></td>
+<td>
+<p>The nodes on which to perform the Get (typically obtained via <code><a href="Traverse.html">Traverse</a></code>)</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>each argument can be a vector of values to be assigned. Recycled.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>invisibly returns the nodes (useful for chaining)
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="Node.html">Node</a></code>
+</p>
+<p><code><a href="Get.html">Get</a></code>
+</p>
+<p><code><a href="Do.html">Do</a></code>
+</p>
+<p><code><a href="Traverse.html">Traverse</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(acme)
+acme$Set(departmentId = 1:acme$totalCount, openingHours = NULL, traversal = "post-order")
+acme$Set(head = c("Jack Brown", 
+                  "Mona Moneyhead", 
+                  "Dr. Frank N. Stein", 
+                  "Eric Nerdahl"
+                  ),
+         filterFun = function(x) !x$isLeaf
+        )
+print(acme, "departmentId", "head")
+ 
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>data.tree</em> version 0.7.4 <a href="00Index.html">Index</a>]</div>
+</body></html>

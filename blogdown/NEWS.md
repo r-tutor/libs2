@@ -1,3 +1,13 @@
+# CHANGES IN blogdown VERSION 0.4
+
+## BUG FIXES
+
+- `install_theme()` may signal the error "The theme already exists" by mistake (thanks, @YizhouZheng, #230).
+
+- A warning will be issued if two versions of Hugo are found (thanks, @mingsnu, #235).
+
+- Plots are missing if a post filename contains multibyte characters (thanks, @dongzhuoer, #233).
+
 # CHANGES IN blogdown VERSION 0.3
 
 ## MAJOR CHANGES

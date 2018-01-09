@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create a 'data.tree' Structure With 'Nodes'</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for Node {data.tree}"><tr><td>Node {data.tree}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create a <code>data.tree</code> Structure With <code>Nodes</code></h2>
+
+<h3>Description</h3>
+
+<p><code>Node</code> is at the very heart of the <code>data.tree</code> package. All trees are constructed
+by tying together <code>Node</code> objects.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+# n1 &lt;- Node$new("Node 1")
+</pre>
+
+
+<h3>Format</h3>
+
+<p>An <code><a href="../../R6/html/R6Class.html">R6Class</a></code> generator object</p>
+
+
+<h3>Details</h3>
+
+<p>Assemble <code>Node</code> objects into a <code>data.tree</code>
+structure and use the traversal methods to set, get, and perform operations on it. Typically, you construct larger tree 
+structures by converting from <code>data.frame</code>, <code>list</code>, or other formats.
+</p>
+
+
+<h3>Fields</h3>
+
+
+<dl>
+<dt><code>children</code></dt><dd><p>A list of child <code>Nodes</code></p>
+</dd>
+<dt><code>parent</code></dt><dd><p>The node's parent <code>Node</code></p>
+</dd>
+</dl>
+
+
+<h3>Methods</h3>
+
+
+<dl>
+<dt><code>Node$new(name)</code></dt><dd><p>Creates a new <code>Node</code> called <code>name</code>. Often used to construct the root when creating trees programmatically.</p>
+</dd>
+<dt><code>AddChild(name)</code></dt><dd><p>Creates a new <code>Node</code> called <code>name</code> and adds it to this <code>Node</code> as a child.</p>
+</dd>
+<dt><code>AddChildNode(node)</code></dt><dd><p>Adds a <code>Node</code> as a child.</p>
+</dd>
+<dt><code>AddSibling(name)</code></dt><dd><p>Creates a new <code>Node</code> called <code>name</code> and adds it after this <code>Node</code> as a sibling.</p>
+</dd>
+<dt><code>AddSiblingNode(sibling)</code></dt><dd><p>Adds a new <code>Node</code> after this <code>Node</code>, as a sibling.</p>
+</dd>      
+<dt><code>RemoveChild(name)</code></dt><dd><p>Remove the child <code>Node</code> called <code>name</code> from a <code>Node</code> and returns it.</p>
+</dd>
+<dt><code>RemoveAttribute(name, stopIfNotAvailable)</code></dt><dd><p>Removes attribute called <code>name</code> from this <code>Node</code>. Gives an error if <code>stopIfNotAvailable</code> and the attribute does not exist.</p>
+</dd>
+<dt><code><a href="Climb.html">Climb</a>(...)</code></dt><dd><p>Find a node with path <code>...</code>, where the <code>...</code> arguments are the <code>name</code>s of the <code>Node</code>s, or other field values.</p>
+</dd>
+<dt><code><a href="Navigate.html">Navigate</a>(path)</code></dt><dd><p>Find a node by relative <code>path</code></p>
+</dd>
+<dt><code><a href="FindNode.html">FindNode</a>(name)</code></dt><dd><p>Find a node with name <code>name</code>. Especially useful if <code><a href="AreNamesUnique.html">AreNamesUnique</a></code> is <code>TRUE</code></p>
+</dd>
+<dt><code><a href="Get.html">Get</a>(attribute, ..., traversal = c("pre-order", "post-order", "in-order", "level", "ancestor"), pruneFun = NULL, filterFun = NULL, format = NULL, inheritFromAncestors = FALSE, simplify = c(TRUE, FALSE, "array", "regular"))</code></dt><dd><p>Traverses the tree and collects values along the way.</p>
+</dd>
+<dt><code><a href="Do.html">Do</a>(fun, ..., traversal = c("pre-order", "post-order", "in-order", "level", "ancestor"), pruneFun = NULL, filterFun = NUL)</code></dt><dd><p>Traverses the tree and call fun on each node.</p>
+</dd>
+<dt><code><a href="Set.html">Set</a>(..., traversal = c("pre-order", "post-order", "in-order", "level", "ancestor"), pruneFun = NULL, filterFun = NULL)</code></dt><dd><p>Traverses the tree and assigns the args along the way, recycling the args.</p>
+</dd>
+<dt><code><a href="Sort.html">Sort</a>(attribute, ..., decreasing = FALSE, recursive = TRUE</code></dt><dd><p>Sort children of a node with respect to an attribute (field, method, active, function)</p>
+</dd>
+<dt><code><a href="Revert.html">Revert</a>(recursive = TRUE)</code></dt><dd><p>Revert the sort order of a node</p>
+</dd>
+<dt><code><a href="Prune.html">Prune</a>(pruneFun)</code></dt><dd><p>Prune a tree. The pruneFun takes a node as its first argument, and returns TRUE if the node should be kept, FALSE otherwise</p>
+</dd>
+</dl>
+
+
+
+<h3>Actives (aka Properties)</h3>
+
+
+<dl>
+<dt><code>name</code></dt><dd><p>Gets or sets the name of a <code>Node</code>. For example <code>Node$name &lt;- "Acme"</code></p>
+</dd>
+<dt><code>parent</code></dt><dd><p>Gets or sets the parent <code>Node</code> of a <code>Node</code>. Only set this if you know what you are doing, as you might mess up the tree structure!</p>
+</dd>
+<dt><code>children</code></dt><dd><p>Gets or sets the children <code>list</code> of a <code>Node</code>. Only set this if you know what you are doing, as you might mess up the tree structure!</p>
+</dd>
+<dt><code>siblings</code></dt><dd><p>Returns a list of the siblings of this <code>Node</code></p>
+</dd>
+<dt><code>fields</code></dt><dd><p>Gets the names of the set properties of a <code>Node</code></p>
+</dd>
+<dt><code>fieldsAll</code></dt><dd><p>Gets the names of the set properties of a <code>Node</code> or any of its sub-Nodes</p>
+</dd>
+<dt><code>isLeaf</code></dt><dd><p>Returns <code>TRUE</code> if the <code>Node</code> is a leaf, <code>FALSE</code> otherwise</p>
+</dd>
+<dt><code>isRoot</code></dt><dd><p>Returns <code>TRUE</code> if the <code>Node</code> is the root, <code>FALSE</code> otherwise</p>
+</dd>
+<dt><code>count</code></dt><dd><p>Returns the number of children of a <code>Node</code></p>
+</dd>
+<dt><code>totalCount</code></dt><dd><p>Returns the total number of <code>Node</code>s in the tree</p>
+</dd>
+<dt><code>path</code></dt><dd><p>Returns a vector of mode <code>character</code> containing the names of the <code>Node</code>s in the path from the root to this <code>Node</code></p>
+</dd>
+<dt><code>pathString</code></dt><dd><p>Returns a string representing the path to this <code>Node</code>, separated by backslash</p>
+</dd>
+<dt><code>levelName</code></dt><dd><p>Returns the name of the <code>Node</code>, preceded by level times '*'. Useful for printing.</p>
+</dd>
+<dt><code>leafCount</code></dt><dd><p>Returns the number of leaves are below a <code>Node</code> </p>
+</dd>
+<dt><code>leaves</code></dt><dd><p>Returns a list containing all the leaf <code>Node</code>s </p>
+</dd>
+<dt><code>level</code></dt><dd><p>Returns an integer representing the level of a <code>Node</code>. For example, the root has level 1.</p>
+</dd>
+<dt><code>height</code></dt><dd><p>Returns max(level) of any of the <code>Nodes</code> of the tree</p>
+</dd>
+<dt><code>averageBranchingFactor</code></dt><dd><p>Returns the average number of crotches below this <code>Node</code></p>
+</dd>
+<dt><code>root</code></dt><dd><p>Returns the root <code>Node</code> of a <code>Node</code>'s tree</p>
+</dd>
+</dl>
+
+
+
+<h3>See Also</h3>
+
+<p>For more details see the <code><a href="data.tree.html">data.tree</a></code> documentations, or the <code>data.tree</code> vignette: <code>vignette("data.tree")</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(data.tree)
+acme &lt;- Node$new("Acme Inc.")
+accounting &lt;- acme$AddChild("Accounting")$
+              AddSibling("Research")$
+              AddChild("New Labs")$
+              parent$
+              AddSibling("IT")$
+              AddChild("Outsource")
+print(acme)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>data.tree</em> version 0.7.4 <a href="00Index.html">Index</a>]</div>
+</body></html>

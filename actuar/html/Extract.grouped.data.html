@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Extract or Replace Parts of a Grouped Data Object</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for Extract.grouped.data {actuar}"><tr><td>Extract.grouped.data {actuar}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Extract or Replace Parts of a Grouped Data Object</h2>
+
+<h3>Description</h3>
+
+<p>Extract or replace subsets of grouped data objects.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'grouped.data'
+x[i, j]
+## S3 replacement method for class 'grouped.data'
+x[i, j] &lt;- value
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>an object of class <code>grouped.data</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>i, j</code></td>
+<td>
+<p>elements to extract or replace. <code>i, j</code> are
+<code>numeric</code> or <code>character</code> or, for <code>[</code> only, empty.
+Numeric values are coerced to integer as if by
+<code><a href="../../base/html/as.integer.html">as.integer</a></code>. For replacement by <code>[</code>, a logical
+matrix is allowed, but not replacement in the group boundaries and
+group frequencies simultaneously.</p>
+</td></tr>
+<tr valign="top"><td><code>value</code></td>
+<td>
+<p>a suitable replacement value.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Objects of class <code>"grouped.data"</code> can mostly be indexed like data
+frames, with the following restrictions:
+</p>
+
+<ol>
+<li><p> For <code>[</code>, the extracted object must keep a group
+boundaries column and at least one group frequencies column to
+remain of class <code>"grouped.data"</code>;
+</p>
+</li>
+<li><p> For <code>[&lt;-</code>, it is not possible to replace group boundaries
+and group frequencies simultaneously;
+</p>
+</li>
+<li><p> When replacing group boundaries, <code>length(value) ==
+      length(i) + 1</code>.
+</p>
+</li></ol>
+
+<p><code>x[, 1]</code> will return the plain vector of group boundaries.
+</p>
+<p>Replacement of non adjacent group boundaries is not possible for
+obvious reasons.
+</p>
+<p>Otherwise, extraction and replacement should work just like for data
+frames.
+</p>
+
+
+<h3>Value</h3>
+
+<p>For <code>[</code> an object of class <code>"grouped.data"</code>, a data frame or a
+vector.
+</p>
+<p>For <code>[&lt;-</code> an object of class <code>"grouped.data"</code>.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Currently <code>[[</code>, <code>[[&lt;-</code>, <code>$</code> and <code>$&lt;-</code> are not 
+specifically supported, but should work as usual on group frequency
+columns.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Vincent Goulet <a href="mailto:vincent.goulet@act.ulaval.ca">vincent.goulet@act.ulaval.ca</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../base/html/[.data.frame.html">[.data.frame</a></code> for extraction and replacement
+methods of data frames, <code><a href="grouped.data.html">grouped.data</a></code> to create grouped
+data objects.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(gdental)
+
+(x &lt;- gdental[1])         # select column 1
+class(x)                  # no longer a grouped.data object
+class(gdental[2])         # same
+gdental[, 1]              # group boundaries
+gdental[, 2]              # group frequencies
+
+gdental[1:4,]             # a subset
+gdental[c(1, 3, 5),]      # avoid this
+
+gdental[1:2, 1] &lt;- c(0, 30, 60) # modified boundaries
+gdental[, 2] &lt;- 10              # modified frequencies
+## Not run: gdental[1, ] &lt;- 2   # not allowed
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>actuar</em> version 2.2-0 <a href="00Index.html">Index</a>]</div>
+</body></html>

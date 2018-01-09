@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Clone a tree (creates a deep copy)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for Clone {data.tree}"><tr><td>Clone {data.tree}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Clone a tree (creates a deep copy)</h2>
+
+<h3>Description</h3>
+
+<p>The method also clones object attributes (such as the formatters), if desired.
+If the method is called on a non-root, then the parent relationship is not cloned,
+and the resulting <code><a href="Node.html">Node</a></code> will be a root.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+Clone(node, pruneFun = NULL, attributes = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>node</code></td>
+<td>
+<p>the root node of the tree or sub-tree to clone</p>
+</td></tr>
+<tr valign="top"><td><code>pruneFun</code></td>
+<td>
+<p>allows providing a a prune criteria, i.e. a function taking a <code>Node</code> as an input, and returning <code>TRUE</code> or <code>FALSE</code>. 
+If the pruneFun returns FALSE for a Node, then the Node and its entire sub-tree will not be considered.</p>
+</td></tr>
+<tr valign="top"><td><code>attributes</code></td>
+<td>
+<p>if FALSE, then R class attributes (e.g. formatters and grViz styles)
+are not cloned. This makes the method faster.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>the clone of the tree or sub-tree
+</p>
+
+
+<h3>See Also</h3>
+
+<p>SetFormat
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(acme)
+acmeClone &lt;- Clone(acme)
+acmeClone$name &lt;- "New Acme"
+# acmeClone does not point to the same reference object anymore:
+acme$name
+
+#cloning a subtree
+data(acme)
+itClone &lt;- Clone(acme$IT)
+itClone$isRoot
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>data.tree</em> version 0.7.4 <a href="00Index.html">Index</a>]</div>
+</body></html>

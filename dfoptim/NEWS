@@ -2,6 +2,9 @@
   dfoptim                                                               NEWS
 ------------------------------------------------------------------------------
 
+Changes in version 2017.12-1 (2017-12-20)
+	o fixed a bug in the code, which impacts the "restarting" of Nelder-Mead due to stagnation (thanks to Simon Wessing)
+
 Changes in version 2016.7-1 (2011-07-08)
 
     o Used a slightly modified code for hjk() and hjkb()

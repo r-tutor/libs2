@@ -1,3 +1,16 @@
+2.9
+  - BREAKING: Bundled en_US / en_GB dictionaries now support apostrophe
+  - Parses now uses the dictionary WORDCHARS for tokenizing text
+  - Removed numbers from en_US / en_GB WORDCHARS to prevent false positives
+  - Fix regression inroduced in the caching fix in 2.8
+  - Refactored internal dictionary caching
+  - Add 'AUTHORS' file and update DESCRIPTION as requested by CRAN
+
+2.8
+  - Fix caching bug for 'ignore' argument in hunspell()
+  - Rename class 'dictionary' to 'hunspell_dictionary' to avoid collisions
+  - Remove setwd() from examples as requested by CRAN
+
 2.7
   - Update bundled en_US / en_GB dictionaries from libreoffice extensions
   - Use Rcpp symbol registration / visibility

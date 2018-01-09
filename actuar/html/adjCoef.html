@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Adjustment Coefficient</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for adjCoef {actuar}"><tr><td>adjCoef {actuar}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Adjustment Coefficient</h2>
+
+<h3>Description</h3>
+
+<p>Compute the adjustment coefficient in ruin theory, or return a
+function to compute the adjustment coefficient for various reinsurance
+retentions.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+adjCoef(mgf.claim, mgf.wait = mgfexp, premium.rate, upper.bound,
+        h, reinsurance = c("none", "proportional", "excess-of-loss"),
+        from, to, n = 101)
+
+## S3 method for class 'adjCoef'
+plot(x, xlab = "x", ylab = "R(x)",
+     main = "Adjustment Coefficient", sub = comment(x),
+     type = "l", add = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>mgf.claim</code></td>
+<td>
+<p>an expression written as a function of <code>x</code> or of
+<code>x</code> and <code>y</code>, or alternatively the name of a function,
+giving the moment generating function (mgf) of the claim severity
+distribution.</p>
+</td></tr>
+<tr valign="top"><td><code>mgf.wait</code></td>
+<td>
+<p>an expression written as a function of <code>x</code>, or
+alternatively the name of a function, giving the mgf of the
+claims interarrival time distribution. Defaults to an exponential
+distribution with mean 1.</p>
+</td></tr>
+<tr valign="top"><td><code>premium.rate</code></td>
+<td>
+<p>if <code>reinsurance = "none"</code>, a numeric value of
+the premium rate; otherwise, an expression written as a function of
+<code>y</code>, or alternatively the name of a function, giving the
+premium rate function.</p>
+</td></tr>
+<tr valign="top"><td><code>upper.bound</code></td>
+<td>
+<p>numeric; an upper bound for the coefficient,
+usually the upper bound of the support of the claim severity mgf.</p>
+</td></tr>
+<tr valign="top"><td><code>h</code></td>
+<td>
+<p>an expression written as a function of <code>x</code> or of
+<code>x</code> and <code>y</code>, or alternatively the name of a function,
+giving function <i>h</i> in the Lundberg equation (see below);
+ignored if <code>mgf.claim</code> is provided.</p>
+</td></tr>
+<tr valign="top"><td><code>reinsurance</code></td>
+<td>
+<p>the type of reinsurance for the portfolio; can
+be abbreviated.</p>
+</td></tr>
+<tr valign="top"><td><code>from, to</code></td>
+<td>
+<p>the range over which the adjustment coefficient will
+be calculated.</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>integer; the number of values at which to evaluate the
+adjustment coefficient.</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>an object of class <code>"adjCoef"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>xlab, ylab</code></td>
+<td>
+<p>label of the x and y axes, respectively.</p>
+</td></tr>
+<tr valign="top"><td><code>main</code></td>
+<td>
+<p>main title.</p>
+</td></tr>
+<tr valign="top"><td><code>sub</code></td>
+<td>
+<p>subtitle, defaulting to the type of reinsurance.</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>1-character string giving the type of plot desired; see
+<code><a href="../../graphics/html/plot.html">plot</a></code> for details.</p>
+</td></tr>
+<tr valign="top"><td><code>add</code></td>
+<td>
+<p>logical; if <code>TRUE</code> add to already existing plot.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>further graphical parameters accepted by
+<code><a href="../../graphics/html/plot.html">plot</a></code> or <code><a href="../../graphics/html/lines.html">lines</a></code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>In the typical case <code>reinsurance = "none"</code>, the coefficient of
+determination is the smallest (strictly) positive root of the Lundberg
+equation
+</p>
+<p style="text-align: center;"><i>h(x) = E[exp(x B - x c W)] = 1</i></p>
+
+<p>on <i>[0, m)</i>, where <i>m =</i> <code>upper.bound</code>, <i>B</i> is the
+claim severity random variable, <i>W</i> is the claim interarrival
+(or wait) time random variable and <i>c =</i> <code>premium.rate</code>. The
+premium rate must satisfy the positive safety loading constraint
+<i>E[B - c W] &lt; 0</i>.
+</p>
+<p>With <code>reinsurance = "proportional"</code>, the equation becomes
+</p>
+<p style="text-align: center;"><i>
+    h(x, y) = E[exp(x y B - x c(y) W)] = 1,</i></p>
+
+<p>where <i>y</i> is the retention rate and <i>c(y)</i> is the premium rate
+function.
+</p>
+<p>With <code>reinsurance = "excess-of-loss"</code>, the equation becomes
+</p>
+<p style="text-align: center;"><i>
+    h(x, y) = E[exp(x min(B, y) - x c(y) W)] = 1,</i></p>
+
+<p>where <i>y</i> is the retention limit and <i>c(y)</i> is the premium rate
+function.
+</p>
+<p>One can use argument <code>h</code> as an alternative way to provide
+function <i>h(x)</i> or <i>h(x, y)</i>. This is necessary in cases where
+random variables <i>B</i> and <i>W</i> are not independent.
+</p>
+<p>The root of <i>h(x) = 1</i> is found by minimizing <i>(h(x) - 1)^2</i>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>If <code>reinsurance = "none"</code>, a numeric vector of length one.
+Otherwise, a function of class <code>"adjCoef"</code> inheriting from the
+<code>"function"</code> class.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Christophe Dutang, Vincent Goulet <a href="mailto:vincent.goulet@act.ulaval.ca">vincent.goulet@act.ulaval.ca</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Bowers, N. J. J., Gerber, H. U., Hickman, J., Jones, D. and Nesbitt, C.
+(1986), <em>Actuarial Mathematics</em>, Society of Actuaries.
+</p>
+<p>Centeno, M. d. L. (2002), Measuring the effects of reinsurance by the
+adjustment coefficient in the Sparre-Anderson model, <em>Insurance:
+Mathematics and Economics</em> <b>30</b>, 37&ndash;49.
+</p>
+<p>Gerber, H. U. (1979), <em>An Introduction to Mathematical Risk
+Theory</em>, Huebner Foundation.
+</p>
+<p>Klugman, S. A., Panjer, H. H. and Willmot, G. E. (2008),
+<em>Loss Models, From Data to Decisions, Third Edition</em>, Wiley.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Basic example: no reinsurance, exponential claim severity and wait
+## times, premium rate computed with expected value principle and
+## safety loading of 20%.
+adjCoef(mgfexp, premium = 1.2, upper = 1)
+
+## Same thing, giving function h.
+h &lt;- function(x) 1/((1 - x) * (1 + 1.2 * x))
+adjCoef(h = h, upper = 1)
+
+## Example 11.4 of Klugman et al. (2008)
+mgfx &lt;- function(x) 0.6 * exp(x) + 0.4 * exp(2 * x)
+adjCoef(mgfx(x), mgfexp(x, 4), prem = 7, upper = 0.3182)
+
+## Proportional reinsurance, same assumptions as above, reinsurer's
+## safety loading of 30%.
+mgfx &lt;- function(x, y) mgfexp(x * y)
+p &lt;- function(x) 1.3 * x - 0.1
+h &lt;- function(x, a) 1/((1 - a * x) * (1 + x * p(a)))
+R1 &lt;- adjCoef(mgfx, premium = p, upper = 1, reins = "proportional",
+              from = 0, to = 1, n = 11)
+R2 &lt;- adjCoef(h = h, upper = 1, reins = "p",
+             from = 0, to = 1, n = 101)
+R1(seq(0, 1, length = 10))	# evaluation for various retention rates
+R2(seq(0, 1, length = 10))	# same
+plot(R1)		        # graphical representation
+plot(R2, col = "green", add = TRUE) # smoother function
+
+## Excess-of-loss reinsurance
+p &lt;- function(x) 1.3 * levgamma(x, 2, 2) - 0.1
+mgfx &lt;- function(x, l)
+    mgfgamma(x, 2, 2) * pgamma(l, 2, 2 - x) +
+    exp(x * l) * pgamma(l, 2, 2, lower = FALSE)
+h &lt;- function(x, l) mgfx(x, l) * mgfexp(-x * p(l))
+R1 &lt;- adjCoef(mgfx, upper = 1, premium = p, reins = "excess-of-loss",
+             from = 0, to = 10, n = 11)
+R2 &lt;- adjCoef(h = h, upper = 1, reins = "e",
+             from = 0, to = 10, n = 101)
+plot(R1)
+plot(R2, col = "green", add = TRUE)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>actuar</em> version 2.2-0 <a href="00Index.html">Index</a>]</div>
+</body></html>

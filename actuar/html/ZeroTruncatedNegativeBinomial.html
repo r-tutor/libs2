@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: The Zero-Truncated Negative Binomial Distribution</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for ZeroTruncatedNegativeBinomial {actuar}"><tr><td>ZeroTruncatedNegativeBinomial {actuar}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>The Zero-Truncated Negative Binomial Distribution</h2>
+
+<h3>Description</h3>
+
+<p>Density function, distribution function, quantile function and random
+generation for the Zero-Truncated Negative Binomial distribution with
+parameters <code>size</code> and <code>prob</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+dztnbinom(x, size, prob, log = FALSE)
+pztnbinom(q, size, prob, lower.tail = TRUE, log.p = FALSE)
+qztnbinom(p, size, prob, lower.tail = TRUE, log.p = FALSE)
+rztnbinom(n, size, prob)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>vector of (strictly positive integer) quantiles.</p>
+</td></tr>
+<tr valign="top"><td><code>q</code></td>
+<td>
+<p>vector of quantiles.</p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>vector of probabilities.</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>number of observations. If <code>length(n) &gt; 1</code>, the length is
+taken to be the number required.</p>
+</td></tr>
+<tr valign="top"><td><code>size</code></td>
+<td>
+<p>target for number of successful trials, or dispersion
+parameter. Must be positive, need not be integer.</p>
+</td></tr>
+<tr valign="top"><td><code>prob</code></td>
+<td>
+<p>parameter. <code>0 &lt; prob &lt;= 1</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>log, log.p</code></td>
+<td>
+<p>logical; if <code>TRUE</code>, probabilities
+<i>p</i> are returned as <i>log(p)</i>.</p>
+</td></tr>
+<tr valign="top"><td><code>lower.tail</code></td>
+<td>
+<p>logical; if <code>TRUE</code> (default), probabilities are
+<i>P[X &le; x]</i>, otherwise, <i>P[X &gt; x]</i>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The zero-truncated negative binomial distribution with <code>size</code>
+<i>= r</i> and <code>prob</code> <i>= p</i> has probability mass function
+</p>
+<p style="text-align: center;"><i>
+    p(x) = [&Gamma;(x+r) p^r (1-p)^x]/[&Gamma;(n) x! (1-p^r)]</i></p>
+
+<p>for <i>x = 1, 2, &hellip;</i>, <i>r &ge; 0</i> and <i>0 &lt; p &lt; 1</i>, and
+<i>p(1) = 1</i> when <i>p = 1</i>.
+The cumulative distribution function is
+</p>
+<p style="text-align: center;"><i>
+    P(x) = [F(x) - F(0)]/[1 - F(0)],</i></p>
+
+<p>where <i>F(x)</i> is the distribution function of the standard negative
+binomial.
+</p>
+<p>The mean is <i>r(1-p)/(p(1-p^r))</i> and the variance is
+<i>[r(1-p)(1 - p^r(1 + r(1-p))]/[p(1-p^r)^2]</i>.
+</p>
+<p>In the terminology of Klugman et al. (2012), the zero-truncated
+negative binomial is a member of the <i>(a, b, 1)</i> class of
+distributions with <i>a = 1-p</i> and <i>b = (r-1)(1-p)</i>.
+</p>
+<p>The limiting case <code>size == 0</code> is the
+<a href="Logarithmic.html">logarithmic</a> distribution with parameter <code>1 -
+  prob</code>.
+</p>
+<p>Unlike the standard negative binomial functions, parametrization
+through the mean <code>mu</code> is not supported to avoid ambiguity as
+to whether <code>mu</code> is the mean of the underlying negative binomial
+or the mean of the zero-truncated distribution.
+</p>
+<p>If an element of <code>x</code> is not integer, the result of
+<code>dztnbinom</code> is zero, with a warning.
+</p>
+<p>The quantile is defined as the smallest value <i>x</i> such that
+<i>P(x) &ge; p</i>, where <i>P</i> is the distribution function.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>dztnbinom</code> gives the (log) probability mass function,
+<code>pztnbinom</code> gives the (log) distribution function,
+<code>qztnbinom</code> gives the quantile function, and
+<code>rztnbinom</code> generates random deviates.
+</p>
+<p>Invalid <code>size</code> or <code>prob</code> will result in return value
+<code>NaN</code>, with a warning.
+</p>
+<p>The length of the result is determined by <code>n</code> for
+<code>rztnbinom</code>, and is the maximum of the lengths of the
+numerical arguments for the other functions.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Functions <code>{d,p,q}ztnbinom</code> use <code>{d,p,q}nbinom</code> for all
+but the trivial input values and <i>p(0)</i>.
+</p>
+<p><code>rztnbinom</code> uses the simple inversion algorithm suggested by
+Peter Dalgaard on the r-help mailing list on 1 May 2005 
+(<a href="https://stat.ethz.ch/pipermail/r-help/2005-May/070680.html">https://stat.ethz.ch/pipermail/r-help/2005-May/070680.html</a>).
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Vincent Goulet <a href="mailto:vincent.goulet@act.ulaval.ca">vincent.goulet@act.ulaval.ca</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Klugman, S. A., Panjer, H. H. and Willmot, G. E. (2012),
+<em>Loss Models, From Data to Decisions, Fourth Edition</em>, Wiley.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../stats/html/NegBinomial.html">dnbinom</a></code> for the negative binomial distribution.
+</p>
+<p><code><a href="ZeroTruncatedGeometric.html">dztgeom</a></code> for the zero-truncated geometric and
+<code><a href="Logarithmic.html">dlogarithmic</a></code> for the logarithmic, which are special
+cases of the zero-truncated negative binomial.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Example 6.3 of Klugman et al. (2012)
+p &lt;- 1/(1 + 0.5)
+dztnbinom(c(1, 2, 3), size = 2.5, prob = p)
+dnbinom(c(1, 2, 3), 2.5, p)/pnbinom(0, 2.5, p, lower = FALSE) # same
+
+pztnbinom(1, 2, prob = 1)        # point mass at 1
+dztnbinom(2, size = 1, 0.25)     # == dztgeom(2, 0.25)
+dztnbinom(2, size = 0, 0.25)     # == dlogarithmic(2, 0.75)
+
+qztnbinom(pztnbinom(1:10, 2.5, 0.3), 2.5, 0.3)
+
+x &lt;- rztnbinom(1000, size = 2.5, prob = 0.4)
+y &lt;- sort(unique(x))
+plot(y, table(x)/length(x), type = "h", lwd = 2,
+     pch = 19, col = "black", xlab = "x", ylab = "p(x)",
+     main = "Empirical vs theoretical probabilities")
+points(y, dztnbinom(y, size = 2.5, prob = 0.4),
+       pch = 19, col = "red")
+legend("topright", c("empirical", "theoretical"),
+       lty = c(1, NA), lwd = 2, pch = c(NA, 19), col = c("black", "red"))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>actuar</em> version 2.2-0 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Dimensionality Reduction via Regression</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for drr {DRR}"><tr><td>drr {DRR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Dimensionality Reduction via Regression</h2>
+
+<h3>Description</h3>
+
+<p><code>drr</code> Implements Dimensionality Reduction via Regression using
+Kernel Ridge Regression.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+drr(X, ndim = ncol(X), lambda = c(0, 10^(-3:2)), kernel = "rbfdot",
+  kernel.pars = list(sigma = 10^(-3:4)), pca = TRUE, pca.center = TRUE,
+  pca.scale = FALSE, fastcv = FALSE, cv.folds = 5, fastcv.test = NULL,
+  fastkrr.nblocks = 4, verbose = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>X</code></td>
+<td>
+<p>input data, a matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>ndim</code></td>
+<td>
+<p>the number of output dimensions and regression
+functions to be estimated, see details for inversion.</p>
+</td></tr>
+<tr valign="top"><td><code>lambda</code></td>
+<td>
+<p>the penalty term for the Kernel Ridge Regression.</p>
+</td></tr>
+<tr valign="top"><td><code>kernel</code></td>
+<td>
+<p>a kernel function or string, see
+<code><a href="../../kernlab/html/kernel-class.html">kernel-class</a></code> for details.</p>
+</td></tr>
+<tr valign="top"><td><code>kernel.pars</code></td>
+<td>
+<p>a list with parameters for the kernel. each
+parameter can be a vector, crossvalidation will choose the best
+combination.</p>
+</td></tr>
+<tr valign="top"><td><code>pca</code></td>
+<td>
+<p>logical, do a preprocessing using pca.</p>
+</td></tr>
+<tr valign="top"><td><code>pca.center</code></td>
+<td>
+<p>logical, center data before applying pca.</p>
+</td></tr>
+<tr valign="top"><td><code>pca.scale</code></td>
+<td>
+<p>logical, scale data before applying pca.</p>
+</td></tr>
+<tr valign="top"><td><code>fastcv</code></td>
+<td>
+<p>if <code>TRUE</code> uses <code><a href="../../CVST/html/fastCV.html">fastCV</a></code>, if
+<code>FALSE</code> uses <code><a href="../../CVST/html/CV.html">CV</a></code> for crossvalidation.</p>
+</td></tr>
+<tr valign="top"><td><code>cv.folds</code></td>
+<td>
+<p>if using normal crossvalidation, the number of
+folds to be used.</p>
+</td></tr>
+<tr valign="top"><td><code>fastcv.test</code></td>
+<td>
+<p>an optional separate test data set to be used
+for <code><a href="../../CVST/html/fastCV.html">fastCV</a></code>, handed over as option
+<code>test</code> to <code><a href="../../CVST/html/fastCV.html">fastCV</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>fastkrr.nblocks</code></td>
+<td>
+<p>the number of blocks used for fast KRR,
+higher numbers are faster to compute but may introduce
+numerical inaccurracies, see
+<code><a href="constructFastKRRLearner.html">constructFastKRRLearner</a></code> for details.</p>
+</td></tr>
+<tr valign="top"><td><code>verbose</code></td>
+<td>
+<p>logical, should the crossvalidation report back.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Parameter combination will be formed and cross-validation used to
+select the best combination. Cross-validation uses
+<code><a href="../../CVST/html/CV.html">CV</a></code> or <code><a href="../../CVST/html/fastCV.html">fastCV</a></code>.
+</p>
+<p>Pre-treatment of the data using a PCA and scaling is made
+<i>&alpha; = Vx</i>.  the representation in reduced dimensions is
+</p>
+<p style="text-align: center;"><i>y_i = &alpha; - f_i(&alpha;_1, &hellip;, &alpha;_{i-1})</i></p>
+
+<p>then the final DRR representation is:
+</p>
+<p style="text-align: center;"><i>r = (&alpha;_1, y_2, y_3, &hellip;,y_d)</i></p>
+
+<p>DRR is invertible by
+</p>
+<p style="text-align: center;"><i>&alpha;_i = y_i + f_i(&alpha;_1,&alpha;_2, &hellip;, alpha_{i-1})</i></p>
+
+<p>If less dimensions are estimated, there will be less inverse
+functions and calculating the inverse will be inaccurate.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list the following items:
+</p>
+
+<ul>
+<li> <p>&quot;fitted.data&quot; The data in reduced dimensions.
+</p>
+</li>
+<li> <p>&quot;pca.means&quot; The means used to center the original data.
+</p>
+</li>
+<li> <p>&quot;pca.scale&quot; The standard deviations used to scale the original data.
+</p>
+</li>
+<li> <p>&quot;pca.rotation&quot; The rotation matrix of the PCA.
+</p>
+</li>
+<li> <p>&quot;models&quot; A list of models used to estimate each dimension.
+</p>
+</li>
+<li> <p>&quot;apply&quot; A function to fit new data to the estimated model.
+</p>
+</li>
+<li> <p>&quot;inverse&quot; A function to untransform data.
+</p>
+</li></ul>
+
+
+
+<h3>References</h3>
+
+<p>Laparra, V., Malo, J., Camps-Valls, G., 2015. Dimensionality
+Reduction via Regression in Hyperspectral Imagery. IEEE Journal
+of Selected Topics in Signal Processing 9,
+1026-1036. doi:10.1109/JSTSP.2015.2417833
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+tt &lt;- seq(0,4*pi, length.out = 200)
+helix &lt;- cbind(
+  x = 3 * cos(tt) + rnorm(length(tt), sd = seq(0.1, 1.4, length.out = length(tt))),
+  y = 3 * sin(tt) + rnorm(length(tt), sd = seq(0.1, 1.4, length.out = length(tt))),
+  z = 2 * tt      + rnorm(length(tt), sd = seq(0.1, 1.4, length.out = length(tt)))
+)
+helix &lt;- helix[sample(nrow(helix)),] # shuffling data is important!!
+system.time(
+drr.fit  &lt;- drr(helix, ndim = 3, cv.folds = 4,
+                lambda = 10^(-2:1),
+                kernel.pars = list(sigma = 10^(0:3)),
+                fastkrr.nblocks = 2, verbose = TRUE,
+                fastcv = FALSE)
+)
+
+## Not run: 
+library(rgl)
+plot3d(helix)
+points3d(drr.fit$inverse(drr.fit$fitted.data[,1,drop = FALSE]), col = 'blue')
+points3d(drr.fit$inverse(drr.fit$fitted.data[,1:2]),             col = 'red')
+
+plot3d(drr.fit$fitted.data)
+pad &lt;- -3
+fd &lt;- drr.fit$fitted.data
+xx &lt;- seq(min(fd[,1]),       max(fd[,1]),       length.out = 25)
+yy &lt;- seq(min(fd[,2]) - pad, max(fd[,2]) + pad, length.out = 5)
+zz &lt;- seq(min(fd[,3]) - pad, max(fd[,3]) + pad, length.out = 5)
+
+dd &lt;- as.matrix(expand.grid(xx, yy, zz))
+plot3d(helix)
+for(y in yy) for(x in xx)
+  rgl.linestrips(drr.fit$inverse(cbind(x, y, zz)), col = 'blue')
+for(y in yy) for(z in zz)
+  rgl.linestrips(drr.fit$inverse(cbind(xx, y, z)), col = 'blue')
+for(x in xx) for(z in zz)
+  rgl.linestrips(drr.fit$inverse(cbind(x, yy, z)), col = 'blue')
+
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DRR</em> version 0.0.3 <a href="00Index.html">Index</a>]</div>
+</body></html>

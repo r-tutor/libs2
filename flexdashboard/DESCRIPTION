@@ -1,12 +1,13 @@
 Package: flexdashboard
 Type: Package
 Title: R Markdown Format for Flexible Dashboards
-Version: 0.5
+Version: 0.5.1
 Description: Format for converting an R Markdown document to a grid oriented
   dashboard. The dashboard flexibly adapts the size of it's components to the
   containing web page.
 Authors@R: c(
-  person("JJ", "Allaire", role = c("aut", "cre"), email = "jj@rstudio.com"),
+  person("Barbara", "Borges", role = c("aut", "cre"), email = "barbara@rstudio.com"),
+  person("JJ", "Allaire", role = "aut", email = "jj@rstudio.com"),
   person(family = "RStudio", role = "cph"),
   person(family = "Keen IO", role = c("ctb", "cph"), comment = "Dashboard CSS"),
   person("Abdullah", "Almsaeed", role = c("ctb", "cph"), comment = "Dashboard CSS"),
@@ -34,8 +35,9 @@ LazyData: TRUE
 License: MIT + file LICENSE
 RoxygenNote: 6.0.1
 NeedsCompilation: no
-Packaged: 2017-03-13 14:14:47 UTC; jjallaire
-Author: JJ Allaire [aut, cre],
+Packaged: 2017-11-29 20:27:50 UTC; barbaraborges
+Author: Barbara Borges [aut, cre],
+  JJ Allaire [aut],
   RStudio [cph],
   Keen IO [ctb, cph] (Dashboard CSS),
   Abdullah Almsaeed [ctb, cph] (Dashboard CSS),
@@ -52,7 +54,7 @@ Author: JJ Allaire [aut, cre],
   Ryan Hafen [ctb, cph] (Examples),
   Bob Rudis [ctb, cph] (Examples),
   Joe Cheng [ctb] (Examples)
-Maintainer: JJ Allaire <jj@rstudio.com>
+Maintainer: Barbara Borges <barbara@rstudio.com>
 Repository: CRAN
-Date/Publication: 2017-03-13 17:11:06
-Built: R 3.3.3; ; 2017-03-15 01:22:02 UTC; windows
+Date/Publication: 2017-11-30 00:02:29 UTC
+Built: R 3.4.3; ; 2018-01-06 20:04:20 UTC; windows

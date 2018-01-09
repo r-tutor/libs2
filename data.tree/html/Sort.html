@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Sort children of a 'Node' or an entire 'data.tree' structure</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for Sort {data.tree}"><tr><td>Sort {data.tree}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Sort children of a <code>Node</code> or an entire <code>data.tree</code> structure</h2>
+
+<h3>Description</h3>
+
+<p>You can sort with respect to any argument of the tree. But note that sorting has
+side-effects, meaning that you modify the underlying, original data.tree object structure.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+Sort(node, attribute, ..., decreasing = FALSE, recursive = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>node</code></td>
+<td>
+<p>The node whose children are to be sorted</p>
+</td></tr>
+<tr valign="top"><td><code>attribute</code></td>
+<td>
+<p>determines what is collected. The <code>attribute</code> can be
+</p>
+
+<ul>
+<li><p> a.) the name of a <b>field</b> or a <b>property/active</b> of each <code>Node</code> in the tree, e.g. <code>acme$Get("p")</code> or <code>acme$Get("position")</code>
+</p>
+</li>
+<li><p> b.) the name of a <b>method</b> of each <code>Node</code> in the tree, e.g. <code>acme$Get("levelZeroBased")</code>, where e.g. <code>acme$levelZeroBased &lt;- function() acme$level - 1</code>
+</p>
+</li>
+<li><p> c.) a <b>function</b>, whose first argument must be a <code>Node</code> e.g. <code>acme$Get(function(node) node$cost * node$p)</code>
+</p>
+</li></ul>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>any parameters to be passed on the the attribute (in case it's a method or a 
+function)</p>
+</td></tr>
+<tr valign="top"><td><code>decreasing</code></td>
+<td>
+<p>sort order</p>
+</td></tr>
+<tr valign="top"><td><code>recursive</code></td>
+<td>
+<p>if <code>TRUE</code>, Sort will be called recursively on the <code>Node</code>'s children. 
+This allows sorting an entire tree.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Returns the node on which Sort is called, invisibly. This can be useful to chain Node methods.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="Node.html">Node</a></code>
+</p>
+<p><code><a href="Revert.html">Revert</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(acme)
+acme$Do(function(x) x$totalCost &lt;- Aggregate(x, "cost", sum), traversal = "post-order")
+Sort(acme, "totalCost", decreasing = FALSE)
+print(acme, "totalCost")
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>data.tree</em> version 0.7.4 <a href="00Index.html">Index</a>]</div>
+</body></html>

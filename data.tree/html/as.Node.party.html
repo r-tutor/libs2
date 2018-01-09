@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Convert a a 'party' from the partykit package to a...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for as.Node.party {data.tree}"><tr><td>as.Node.party {data.tree}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Convert a a <code>party</code> from the partykit package to a <code>data.tree</code> structure.</h2>
+
+<h3>Description</h3>
+
+<p>Convert a a <code>party</code> from the partykit package to a <code>data.tree</code> structure.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'party'
+as.Node(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>The party object</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>other arguments (unused)</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(partykit)
+data("WeatherPlay", package = "partykit")
+### splits ###
+# split in overcast, humidity, and windy
+sp_o &lt;- partysplit(1L, index = 1:3)
+sp_h &lt;- partysplit(3L, breaks = 75)
+sp_w &lt;- partysplit(4L, index = 1:2)
+
+## query labels
+character_split(sp_o)
+
+### nodes ###
+## set up partynode structure
+pn &lt;- partynode(1L, split = sp_o, kids = list(
+  partynode(2L, split = sp_h, kids = list(
+      partynode(3L, info = "yes"),
+      partynode(4L, info = "no"))),
+  partynode(5L, info = "yes"),
+  partynode(6L, split = sp_w, kids = list(
+      partynode(7L, info = "yes"),
+      partynode(8L, info = "no")))))
+pn
+### tree ###
+## party: associate recursive partynode structure with data
+py &lt;- party(pn, WeatherPlay)
+tree &lt;- as.Node(py)
+
+print(tree, 
+      "splitname",
+      count = function(node) nrow(node$data), 
+      "splitLevel")
+
+SetNodeStyle(tree, 
+             label = function(node) paste0(node$name, ": ", node$splitname), 
+             tooltip = function(node) paste0(nrow(node$data), " observations"),
+             fontname = "helvetica")
+SetEdgeStyle(tree, 
+             arrowhead = "none", 
+             label = function(node) node$splitLevel,
+             fontname = "helvetica",
+             penwidth = function(node) 12 * nrow(node$data)/nrow(node$root$data),
+             color = function(node) {
+               paste0("grey", 
+                      100 - as.integer( 100 * nrow(node$data)/nrow(node$root$data))
+                      )
+             }
+             )
+Do(tree$leaves, 
+   function(node) {
+     SetNodeStyle(node, 
+                  shape = "box", 
+                  color = ifelse(node$splitname == "yes", "darkolivegreen4", "lightsalmon4"),
+                  fillcolor = ifelse(node$splitname == "yes", "darkolivegreen1", "lightsalmon"),
+                  style = "filled,rounded",
+                  penwidth = 2
+                  )
+   }
+   )
+
+plot(tree)
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>data.tree</em> version 0.7.4 <a href="00Index.html">Index</a>]</div>
+</body></html>

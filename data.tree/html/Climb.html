@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Climb a tree from parent to children, by provided criteria.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for Climb {data.tree}"><tr><td>Climb {data.tree}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Climb a tree from parent to children, by provided criteria.</h2>
+
+<h3>Description</h3>
+
+<p>This method lets you climb the tree, from crutch to crutch. On each <code>Node</code>, the
+<code>Climb</code> finds the first child having attribute value equal to the the provided argument.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+#node$Climb(...)
+Climb(node, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>node</code></td>
+<td>
+<p>The root <code><a href="Node.html">Node</a></code> of the tree or subtree to climb</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>an attribute name to searched value pairlist. For brevity, you can also provide a character vector.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>the <code>Node</code> having path <code>...</code>, or <code>NULL</code> if such a path does not exist
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="Node.html">Node</a></code>
+</p>
+<p><code><a href="Navigate.html">Navigate</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(acme)
+
+#the following are all equivalent
+Climb(acme, 'IT', 'Outsource')
+Climb(acme, name = 'IT', name = 'Outsource')
+Climb(acme, 'IT')$Climb('Outsource')
+Navigate(acme, path = "IT/Outsource")
+
+Climb(acme, name = 'IT')
+
+Climb(acme, position = c(2, 1))
+#or, equivalent:
+Climb(acme, position = 2, position = 1)
+Climb(acme, name = "IT", cost = 250000)
+
+tree &lt;- CreateRegularTree(5, 2)
+tree$Climb(c("1", "1"), position = c(2, 2))$path
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>data.tree</em> version 0.7.4 <a href="00Index.html">Index</a>]</div>
+</body></html>

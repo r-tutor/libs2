@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Convert a 'Node' to a phylo object from the ape package.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for as.phylo.Node {data.tree}"><tr><td>as.phylo.Node {data.tree}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Convert a <code>Node</code> to a phylo object from the ape package.</h2>
+
+<h3>Description</h3>
+
+<p>This method requires the ape package to be installed and loaded.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+as.phylo.Node(x, heightAttribute = DefaultPlotHeight, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>The root <code>Node</code> of the tree or sub-tree to be converted</p>
+</td></tr>
+<tr valign="top"><td><code>heightAttribute</code></td>
+<td>
+<p>The attribute (field name or function) storing the height</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>any other argument</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p>Other ape phylo conversions: <code><a href="GetPhyloNr.html">GetPhyloNr</a></code>,
+<code><a href="as.Node.phylo.html">as.Node.phylo</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(ape)
+data(acme)
+acmephylo &lt;- as.phylo(acme)
+#plot(acmephylo)
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>data.tree</em> version 0.7.4 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Scans a project (or folder) for references to packages.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for scanForPackages {checkpoint}"><tr><td>scanForPackages {checkpoint}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Scans a project (or folder) for references to packages.</h2>
+
+<h3>Description</h3>
+
+<p>Scans a project (or folder) for references to packages.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+scanForPackages(project = getwd(), verbose = TRUE, use.knitr = FALSE,
+  auto.install.knitr = FALSE, scan.rnw.with.knitr = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>project</code></td>
+<td>
+<p>A project path.  This is the path to the root of the project that references the packages to be installed from the MRAN snapshot for the date specified for <code>snapshotDate</code>.  Defaults to current working directory using <code><a href="../../base/html/getwd.html">getwd()</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>verbose</code></td>
+<td>
+<p>If <code>TRUE</code>, displays progress messages.</p>
+</td></tr>
+<tr valign="top"><td><code>use.knitr</code></td>
+<td>
+<p>If <code>TRUE</code>,  parses all <code>Rmarkdown</code> files using the <code>knitr</code> package.</p>
+</td></tr>
+<tr valign="top"><td><code>auto.install.knitr</code></td>
+<td>
+<p>If <code>TRUE</code> and the project contains rmarkdown files, then automatically included the packages <code>knitr</code> in packages to install.</p>
+</td></tr>
+<tr valign="top"><td><code>scan.rnw.with.knitr</code></td>
+<td>
+<p>If <code>TRUE</code>, uses <code><a href="../../knitr/html/knit.html">knitr::knit()</a></code> to parse <code>.Rnw</code> files, otherwise use <code><a href="../../utils/html/Sweave.html">utils::Sweave()</a></code></p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A list with two elements:
+</p>
+
+<ul>
+<li><p> pkgs: a character vector with the names of identified packages
+</p>
+</li>
+<li><p> error: a character vector with information about files that could not be parsed
+</p>
+</li></ul>
+
+
+<hr /><div style="text-align: center;">[Package <em>checkpoint</em> version 0.4.3 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -9,6 +9,8 @@ prConvertDfFactors      Convert all factors to characters to print them
                         as they expected
 tblNoLast               Gets the last table number
 tblNoNext               Gets the next table number
+tidyHtmlTable           Generate an htmlTable using a ggplot2-like
+                        interface
 txtInt                  SI or English formatting of an integer
 txtMergeLines           A merges lines while preserving the line break
                         for html/LaTeX

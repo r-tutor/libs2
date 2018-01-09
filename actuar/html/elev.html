@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Empirical Limited Expected Value</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for elev {actuar}"><tr><td>elev {actuar}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Empirical Limited Expected Value</h2>
+
+<h3>Description</h3>
+
+<p>Compute the empirical limited expected value for individual or grouped
+data.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+elev(x, ...)
+
+## Default S3 method:
+elev(x, ...)
+
+## S3 method for class 'grouped.data'
+elev(x, ...)
+
+## S3 method for class 'elev'
+print(x, digits = getOption("digits") - 2, ...)
+
+## S3 method for class 'elev'
+summary(object, ...)
+
+## S3 method for class 'elev'
+knots(Fn, ...)
+
+## S3 method for class 'elev'
+plot(x, ..., main = NULL, xlab = "x", ylab = "Empirical LEV")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a vector or an object of class <code>"grouped.data"</code> (in
+which case only the first column of frequencies is used); for the
+methods, an object of class <code>"elev"</code>, typically.</p>
+</td></tr>
+<tr valign="top"><td><code>digits</code></td>
+<td>
+<p>number of significant digits to use, see
+<code><a href="../../base/html/print.html">print</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>Fn, object</code></td>
+<td>
+<p>an <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> object inheriting from <code>"ogive"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>main</code></td>
+<td>
+<p>main title.</p>
+</td></tr>
+<tr valign="top"><td><code>xlab, ylab</code></td>
+<td>
+<p>labels of x and y axis.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>arguments to be passed to subsequent methods.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The limited expected value (LEV) at <i>u</i> of a random variable
+<i>X</i> is
+<i>E[X ^ u] = E[min(X, u)]</i>. For
+individual data <i>x[1], &hellip;, x[n]</i>, the
+empirical LEV <i>En[X ^ u]</i> is thus
+</p>
+<p style="text-align: center;"><i>
+    En[X ^ u] = (sum(x[j] &lt; u; 1) + sum(x[j] &gt;= u; u))/n.</i></p>
+
+<p>Methods of <code>elev</code> exist for individual data or for grouped data
+created with <code><a href="grouped.data.html">grouped.data</a></code>. The formula in this case is
+too long to show here. See the reference for details.
+</p>
+
+
+<h3>Value</h3>
+
+<p>For <code>elev</code>, a function of class <code>"elev"</code>, inheriting from the
+<code>"<a href="../../base/html/function.html">function</a>"</code> class.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Vincent Goulet <a href="mailto:vincent.goulet@act.ulaval.ca">vincent.goulet@act.ulaval.ca</a> and
+Mathieu Pigeon
+</p>
+
+
+<h3>References</h3>
+
+<p>Klugman, S. A., Panjer, H. H. and Willmot, G. E. (1998),
+<em>Loss Models, From Data to Decisions</em>, Wiley.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="grouped.data.html">grouped.data</a></code> to create grouped data objects;
+<code><a href="../../stats/html/stepfun.html">stepfun</a></code> for related documentation (even though the
+empirical LEV is not a step function).
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(gdental)
+lev &lt;- elev(gdental)
+lev
+summary(lev)
+knots(lev)            # the group boundaries
+
+lev(knots(lev))       # empirical lev at boundaries
+lev(c(80, 200, 2000)) # and at other limits
+
+plot(lev, type = "o", pch = 16)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>actuar</em> version 2.2-0 <a href="00Index.html">Index</a>]</div>
+</body></html>

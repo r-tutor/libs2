@@ -22,6 +22,7 @@ prGetStyle	prGetStyle
 prGetThead	prGetThead
 print.htmlTable	htmlTable
 print.interactiveTable	interactiveTable
+prIsNotebook	prIsNotebook
 prMergeClr	prMergeClr
 prPrepareAlign	prPrepareAlign
 prPrepareCgroup	prPrepareCgroup
@@ -35,6 +36,7 @@ SCB	SCB
 splitLines4Table	splitLines4Table
 tblNoLast	tblNoLast
 tblNoNext	tblNoNext
+tidyHtmlTable	tidyHtmlTable
 txtInt	txtInt
 txtMergeLines	txtMergeLines
 txtPval	txtPval
@@ -42,3 +44,4 @@ txtRound	txtRound
 txtRound.data.frame	txtRound
 txtRound.default	txtRound
 txtRound.matrix	txtRound
+txtRound.table	txtRound

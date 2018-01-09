@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: The Inverse Pareto Distribution</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for InversePareto {actuar}"><tr><td>InversePareto {actuar}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>The Inverse Pareto Distribution</h2>
+
+<h3>Description</h3>
+
+<p>Density function, distribution function, quantile function, random generation
+raw moments and limited moments for the Inverse Pareto distribution
+with parameters <code>shape</code> and <code>scale</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+dinvpareto(x, shape, scale, log = FALSE)
+pinvpareto(q, shape, scale, lower.tail = TRUE, log.p = FALSE)
+qinvpareto(p, shape, scale, lower.tail = TRUE, log.p = FALSE)
+rinvpareto(n, shape, scale)
+minvpareto(order, shape, scale)
+levinvpareto(limit, shape, scale, order = 1)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x, q</code></td>
+<td>
+<p>vector of quantiles.</p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>vector of probabilities.</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>number of observations. If <code>length(n) &gt; 1</code>, the length is
+taken to be the number required.</p>
+</td></tr>
+<tr valign="top"><td><code>shape, scale</code></td>
+<td>
+<p>parameters. Must be strictly positive.</p>
+</td></tr>
+<tr valign="top"><td><code>log, log.p</code></td>
+<td>
+<p>logical; if <code>TRUE</code>, probabilities/densities
+<i>p</i> are returned as <i>log(p)</i>.</p>
+</td></tr>
+<tr valign="top"><td><code>lower.tail</code></td>
+<td>
+<p>logical; if <code>TRUE</code> (default), probabilities are
+<i>P[X &lt;= x]</i>, otherwise, <i>P[X &gt; x]</i>.</p>
+</td></tr>
+<tr valign="top"><td><code>order</code></td>
+<td>
+<p>order of the moment.</p>
+</td></tr>
+<tr valign="top"><td><code>limit</code></td>
+<td>
+<p>limit of the loss variable.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The inverse Pareto distribution with parameters <code>shape</code> <i>= a</i> and <code>scale</code> <i>= s</i> has density:
+</p>
+<p style="text-align: center;"><i>
+    f(x) = a s x^(a - 1)/(x + s)^(a + 1)</i></p>
+
+<p>for <i>x &gt; 0</i>, <i>a &gt; 0</i> and <i>s &gt; 0</i>.
+</p>
+<p>The <i>k</i>th raw moment of the random variable <i>X</i> is
+<i>E[X^k]</i>, <i>-shape &lt; k &lt; 1</i>.
+</p>
+<p>The <i>k</i>th limited moment at some limit
+<i>d</i> is <i>E[min(X, d)^k]</i>,
+<i>k &gt; -shape</i>.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>dinvpareto</code> gives the density,
+<code>pinvpareto</code> gives the distribution function,
+<code>qinvpareto</code> gives the quantile function,
+<code>rinvpareto</code> generates random deviates,
+<code>minvpareto</code> gives the <i>k</i>th raw moment, and
+<code>levinvpareto</code> calculates the <i>k</i>th limited moment.
+</p>
+<p>Invalid arguments will result in return value <code>NaN</code>, with a warning.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Evaluation of <code>levinvpareto</code> is done using numerical integration.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Vincent Goulet <a href="mailto:vincent.goulet@act.ulaval.ca">vincent.goulet@act.ulaval.ca</a> and
+Mathieu Pigeon
+</p>
+
+
+<h3>References</h3>
+
+<p>Klugman, S. A., Panjer, H. H. and Willmot, G. E. (2012),
+<em>Loss Models, From Data to Decisions, Fourth Edition</em>, Wiley.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+exp(dinvpareto(2, 3, 4, log = TRUE))
+p &lt;- (1:10)/10
+pinvpareto(qinvpareto(p, 2, 3), 2, 3)
+minvpareto(0.5, 1, 2)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>actuar</em> version 2.2-0 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Moments and Moment generating function of the Normal...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for NormalSupp {actuar}"><tr><td>NormalSupp {actuar}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Moments and Moment generating function of the Normal Distribution</h2>
+
+<h3>Description</h3>
+
+<p>Raw moments and moment generating function for the normal distribution with
+mean equal to <code>mean</code> and standard deviation equal to <code>sd</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+mnorm(order, mean = 0, sd = 1)
+mgfnorm(t, mean = 0, sd = 1, log = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>order</code></td>
+<td>
+<p>vector of integers; order of the moment.</p>
+</td></tr>
+<tr valign="top"><td><code>mean</code></td>
+<td>
+<p>vector of means.</p>
+</td></tr>
+<tr valign="top"><td><code>sd</code></td>
+<td>
+<p>vector of standard deviations.</p>
+</td></tr>
+<tr valign="top"><td><code>t</code></td>
+<td>
+<p>numeric vector.</p>
+</td></tr>
+<tr valign="top"><td><code>log</code></td>
+<td>
+<p>logical; if <code>TRUE</code>, the cumulant generating function
+is returned.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The <i>k</i>th raw moment of the random variable <i>X</i> is
+<i>E[X^k]</i> and the moment generating function is
+<i>E[e^{tX}]</i>.
+</p>
+<p>Only integer moments are supported.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>mnorm</code> gives the <i>k</i>th raw moment and
+<code>mgfnorm</code> gives the moment generating function in <code>t</code>.
+</p>
+<p>Invalid arguments will result in return value <code>NaN</code>, with a warning.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Vincent Goulet <a href="mailto:vincent.goulet@act.ulaval.ca">vincent.goulet@act.ulaval.ca</a>,
+Christophe Dutang
+</p>
+
+
+<h3>References</h3>
+
+<p>Johnson, N. L. and Kotz, S. (1970), <em>Continuous Univariate
+Distributions, Volume 1</em>, Wiley.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../stats/html/Normal.html">Normal</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+mgfnorm(0:4,1,2)
+mnorm(3)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>actuar</em> version 2.2-0 <a href="00Index.html">Index</a>]</div>
+</body></html>

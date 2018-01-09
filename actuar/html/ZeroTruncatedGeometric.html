@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: The Zero-Truncated Geometric Distribution</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for ZeroTruncatedGeometric {actuar}"><tr><td>ZeroTruncatedGeometric {actuar}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>The Zero-Truncated Geometric Distribution</h2>
+
+<h3>Description</h3>
+
+<p>Density function, distribution function, quantile function and random
+generation for the Zero-Truncated Geometric distribution with
+parameter <code>prob</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+dztgeom(x, prob, log = FALSE)
+pztgeom(q, prob, lower.tail = TRUE, log.p = FALSE)
+qztgeom(p, prob, lower.tail = TRUE, log.p = FALSE)
+rztgeom(n, prob)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>vector of (strictly positive integer) quantiles.</p>
+</td></tr>
+<tr valign="top"><td><code>q</code></td>
+<td>
+<p>vector of quantiles.</p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>vector of probabilities.</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>number of observations. If <code>length(n) &gt; 1</code>, the length is
+taken to be the number required.</p>
+</td></tr>
+<tr valign="top"><td><code>prob</code></td>
+<td>
+<p>parameter. <code>0 &lt; prob &lt;= 1</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>log, log.p</code></td>
+<td>
+<p>logical; if <code>TRUE</code>, probabilities
+<i>p</i> are returned as <i>log(p)</i>.</p>
+</td></tr>
+<tr valign="top"><td><code>lower.tail</code></td>
+<td>
+<p>logical; if <code>TRUE</code> (default), probabilities are
+<i>P[X &le; x]</i>, otherwise, <i>P[X &gt; x]</i>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The zero-truncated geometric distribution with <code>prob</code> <i>= p</i>
+has probability mass function
+</p>
+<p style="text-align: center;"><i>
+    p(x) = p (1-p)^(x-1)</i></p>
+
+<p>for <i>x = 1, 2, &hellip;</i> and <i>0 &lt; p &lt; 1</i>, and
+<i>p(1) = 1</i> when <i>p = 1</i>.
+The cumulative distribution function is
+</p>
+<p style="text-align: center;"><i>
+    P(x) = [F(x) - F(0)]/[1 - F(0)],</i></p>
+
+<p>where <i>F(x)</i> is the distribution function of the standard geometric.
+</p>
+<p>The mean is <i>1/p</i> and the variance is <i>(1-p)/p^2</i>.
+</p>
+<p>In the terminology of Klugman et al. (2012), the zero-truncated
+geometric is a member of the <i>(a, b, 1)</i> class of
+distributions with <i>a = 1-p</i> and <i>b = 0</i>.
+</p>
+<p>If an element of <code>x</code> is not integer, the result of
+<code>dztgeom</code> is zero, with a warning.
+</p>
+<p>The quantile is defined as the smallest value <i>x</i> such that
+<i>P(x) &ge; p</i>, where <i>P</i> is the distribution function.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>dztgeom</code> gives the (log) probability mass function,
+<code>pztgeom</code> gives the (log) distribution function,
+<code>qztgeom</code> gives the quantile function, and
+<code>rztgeom</code> generates random deviates.
+</p>
+<p>Invalid <code>prob</code> will result in return value <code>NaN</code>, with a
+warning.
+</p>
+<p>The length of the result is determined by <code>n</code> for
+<code>rztgeom</code>, and is the maximum of the lengths of the
+numerical arguments for the other functions.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Functions <code>{d,p,q}ztgeom</code> use <code>{d,p,q}geom</code> for all but
+the trivial input values and <i>p(0)</i>.
+</p>
+<p><code>rztgeom</code> uses the simple inversion algorithm suggested by
+Peter Dalgaard on the r-help mailing list on 1 May 2005 
+(<a href="https://stat.ethz.ch/pipermail/r-help/2005-May/070680.html">https://stat.ethz.ch/pipermail/r-help/2005-May/070680.html</a>).
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Vincent Goulet <a href="mailto:vincent.goulet@act.ulaval.ca">vincent.goulet@act.ulaval.ca</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Klugman, S. A., Panjer, H. H. and Willmot, G. E. (2012),
+<em>Loss Models, From Data to Decisions, Fourth Edition</em>, Wiley.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../stats/html/Geometric.html">dgeom</a></code> for the geometric distribution.
+</p>
+<p><code><a href="ZeroTruncatedNegativeBinomial.html">dztnbinom</a></code> for the zero-truncated negative binomial, of
+which the zero-truncated geometric is a special case.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+p &lt;- 1/(1 + 0.5)
+dztgeom(c(1, 2, 3), prob = p)
+dgeom(c(1, 2, 3), p)/pgeom(0, p, lower = FALSE) # same
+dgeom(c(1, 2, 3) - 1, p)                        # same
+
+pztgeom(1, prob = 1)        # point mass at 1
+
+qztgeom(pztgeom(1:10, 0.3), 0.3)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>actuar</em> version 2.2-0 <a href="00Index.html">Index</a>]</div>
+</body></html>

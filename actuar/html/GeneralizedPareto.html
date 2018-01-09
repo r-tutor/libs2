@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: The Generalized Pareto Distribution</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for GeneralizedPareto {actuar}"><tr><td>GeneralizedPareto {actuar}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>The Generalized Pareto Distribution</h2>
+
+<h3>Description</h3>
+
+<p>Density function, distribution function, quantile function, random generation,
+raw moments and limited moments for the Generalized Pareto
+distribution with parameters <code>shape1</code>, <code>shape2</code> and
+<code>scale</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+dgenpareto(x, shape1, shape2, rate = 1, scale = 1/rate,
+           log = FALSE)
+pgenpareto(q, shape1, shape2, rate = 1, scale = 1/rate,
+           lower.tail = TRUE, log.p = FALSE)
+qgenpareto(p, shape1, shape2, rate = 1, scale = 1/rate,
+           lower.tail = TRUE, log.p = FALSE)
+rgenpareto(n, shape1, shape2, rate = 1, scale = 1/rate)
+mgenpareto(order, shape1, shape2, rate = 1, scale = 1/rate)
+levgenpareto(limit, shape1, shape2, rate = 1, scale = 1/rate,
+             order = 1)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x, q</code></td>
+<td>
+<p>vector of quantiles.</p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>vector of probabilities.</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>number of observations. If <code>length(n) &gt; 1</code>, the length is
+taken to be the number required.</p>
+</td></tr>
+<tr valign="top"><td><code>shape1, shape2, scale</code></td>
+<td>
+<p>parameters. Must be strictly positive.</p>
+</td></tr>
+<tr valign="top"><td><code>rate</code></td>
+<td>
+<p>an alternative way to specify the scale.</p>
+</td></tr>
+<tr valign="top"><td><code>log, log.p</code></td>
+<td>
+<p>logical; if <code>TRUE</code>, probabilities/densities
+<i>p</i> are returned as <i>log(p)</i>.</p>
+</td></tr>
+<tr valign="top"><td><code>lower.tail</code></td>
+<td>
+<p>logical; if <code>TRUE</code> (default), probabilities are
+<i>P[X &lt;= x]</i>, otherwise, <i>P[X &gt; x]</i>.</p>
+</td></tr>
+<tr valign="top"><td><code>order</code></td>
+<td>
+<p>order of the moment.</p>
+</td></tr>
+<tr valign="top"><td><code>limit</code></td>
+<td>
+<p>limit of the loss variable.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The Generalized Pareto distribution with parameters <code>shape1</code>
+<i>= a</i>, <code>shape2</code> <i>= b</i> and <code>scale</code>
+<i>= s</i> has density:
+</p>
+<p style="text-align: center;"><i>
+    f(x) = Gamma(a + b)/(Gamma(a) * Gamma(b)) *
+           (s^a x^(b - 1))/(x + s)^(a + b)</i></p>
+
+<p>for <i>x &gt; 0</i>, <i>a &gt; 0</i>, <i>b &gt; 0</i> and
+<i>s &gt; 0</i>.
+(Here <i>&Gamma;(&alpha;)</i> is the function implemented
+by <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>'s <code><a href="../../base/html/Special.html">gamma</a>()</code> and defined in its help.)
+</p>
+<p>The Generalized Pareto is the distribution of the random variable
+</p>
+<p style="text-align: center;"><i>&theta; (X/(1 - X)),</i></p>
+
+<p>where <i>X</i> has a beta distribution with parameters <i>&alpha;</i>
+and <i>&tau;</i>.
+</p>
+<p>The Generalized Pareto distribution has the following special cases:
+</p>
+
+<ul>
+<li><p> A <a href="Pareto.html">Pareto</a> distribution when <code>shape2 ==
+      1</code>;
+</p>
+</li>
+<li><p> An <a href="InversePareto.html">Inverse Pareto</a> distribution when
+<code>shape1 == 1</code>.
+</p>
+</li></ul>
+
+<p>The <i>k</i>th raw moment of the random variable <i>X</i> is
+<i>E[X^k]</i>, <i>-shape2 &lt; k &lt; shape1</i>.
+</p>
+<p>The <i>k</i>th limited moment at some limit
+<i>d</i> is <i>E[min(X, d)^k]</i>,
+<i>k &gt; -shape2</i> and <i>shape1 - k</i> not a
+negative integer.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>dgenpareto</code> gives the density,
+<code>pgenpareto</code> gives the distribution function,
+<code>qgenpareto</code> gives the quantile function,
+<code>rgenpareto</code> generates random deviates,
+<code>mgenpareto</code> gives the <i>k</i>th raw moment, and
+<code>levgenpareto</code> gives the <i>k</i>th moment of the limited loss
+variable.
+</p>
+<p>Invalid arguments will result in return value <code>NaN</code>, with a warning.
+</p>
+
+
+<h3>Note</h3>
+
+<p><code>levgenpareto</code> computes the limited expected value using
+<code><a href="betaint.html">betaint</a></code>.
+</p>
+<p>Distribution also known as the Beta of the Second Kind. See also
+Kleiber and Kotz (2003) for alternative names and parametrizations.
+</p>
+<p>The Generalized Pareto distribution defined here is different from the
+one in Embrechts et al. (1997) and in
+<a href="https://en.wikipedia.org/wiki/Generalized_Pareto_distribution">Wikipedia</a>;
+see also Kleiber and Kotz (2003, section 3.12). One may most likely
+compute quantities for the latter using functions for the
+<a href="Pareto.html">Pareto</a> distribution with the appropriate change of
+parametrization.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Vincent Goulet <a href="mailto:vincent.goulet@act.ulaval.ca">vincent.goulet@act.ulaval.ca</a> and
+Mathieu Pigeon
+</p>
+
+
+<h3>References</h3>
+
+<p>Embrechts, P., Klüppelberg, C. and Mikisch, T. (1997), <em>Modelling
+Extremal Events for Insurance and Finance</em>, Springer.
+</p>
+<p>Kleiber, C. and Kotz, S. (2003), <em>Statistical Size Distributions
+in Economics and Actuarial Sciences</em>, Wiley.
+</p>
+<p>Klugman, S. A., Panjer, H. H. and Willmot, G. E. (2012),
+<em>Loss Models, From Data to Decisions, Fourth Edition</em>, Wiley.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+exp(dgenpareto(3, 3, 4, 4, log = TRUE))
+p &lt;- (1:10)/10
+pgenpareto(qgenpareto(p, 3, 3, 1), 3, 3, 1)
+qgenpareto(.3, 3, 4, 4, lower.tail = FALSE)
+
+## variance
+mgenpareto(2, 3, 2, 1) - mgenpareto(1, 3, 2, 1)^2
+
+## case with shape1 - order &gt; 0
+levgenpareto(10, 3, 3, scale = 1, order = 2)
+
+## case with shape1 - order &lt; 0
+levgenpareto(10, 1.5, 3, scale = 1, order = 2)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>actuar</em> version 2.2-0 <a href="00Index.html">Index</a>]</div>
+</body></html>

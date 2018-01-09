@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Convert a 'data.tree' structure to a 'data.frame'</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for as.data.frame.Node {data.tree}"><tr><td>as.data.frame.Node {data.tree}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Convert a <code>data.tree</code> structure to a <code>data.frame</code></h2>
+
+<h3>Description</h3>
+
+<p>If a node field contains data of length &gt; 1, then that is converted into a string in the
+data.frame.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'Node'
+as.data.frame(x, row.names = NULL, optional = FALSE, ...,
+  traversal = c("pre-order", "post-order", "in-order", "level", "ancestor"),
+  pruneFun = NULL, filterFun = NULL, format = FALSE,
+  inheritFromAncestors = FALSE)
+
+ToDataFrameTree(x, ..., pruneFun = NULL)
+
+ToDataFrameTable(x, ..., pruneFun = NULL)
+
+ToDataFrameNetwork(x, ..., direction = c("climb", "descend"),
+  pruneFun = NULL, format = FALSE, inheritFromAncestors = FALSE)
+
+ToDataFrameTypeCol(x, ..., type = "level", prefix = type, pruneFun = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>The root <code>Node</code> of the tree or sub-tree to be convert to a data.frame</p>
+</td></tr>
+<tr valign="top"><td><code>row.names</code></td>
+<td>
+<p><code>NULL</code> or a character vector giving the row names for the data frame.
+Missing values are not allowed.</p>
+</td></tr>
+<tr valign="top"><td><code>optional</code></td>
+<td>
+<p>logical. If <code>TRUE</code>, setting row names and converting column names
+(to syntactic names: see make.names) is optional.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>the attributes to be added as columns of the data.frame. See <code><a href="Get.html">Get</a></code> for details.
+If a specific Node does not contain the attribute, <code>NA</code> is added to the data.frame.</p>
+</td></tr>
+<tr valign="top"><td><code>traversal</code></td>
+<td>
+<p>any of 'pre-order' (the default), 'post-order', 'in-order', 'level', or 'ancestor'. See <code><a href="Traverse.html">Traverse</a></code> for details.</p>
+</td></tr>
+<tr valign="top"><td><code>pruneFun</code></td>
+<td>
+<p>allows providing a a prune criteria, i.e. a function taking a <code>Node</code> as an input, and returning <code>TRUE</code> or <code>FALSE</code>. 
+If the pruneFun returns FALSE for a Node, then the Node and its entire sub-tree will not be considered.</p>
+</td></tr>
+<tr valign="top"><td><code>filterFun</code></td>
+<td>
+<p>a function taking a <code>Node</code> as an argument. See <code><a href="Traverse.html">Traverse</a></code> for details.</p>
+</td></tr>
+<tr valign="top"><td><code>format</code></td>
+<td>
+<p>if <code>FALSE</code> (the default), then no formatting will be applied. If <code>TRUE</code>, then the first formatter (if any) along the ancestor
+path is used for formatting.</p>
+</td></tr>
+<tr valign="top"><td><code>inheritFromAncestors</code></td>
+<td>
+<p>if FALSE, and if the attribute is a field or a method, then only a <code>Node</code> itself is
+searched for the field/method. If TRUE, and if the <code>Node</code> does not contain the attribute, then ancestors are also searched.</p>
+</td></tr>
+<tr valign="top"><td><code>direction</code></td>
+<td>
+<p>when converting to a network, should the edges point from root to children (&quot;climb&quot;) or from child to parent (&quot;descend&quot;)?</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>when converting type columns, the <code>type</code> is the discriminator, i.e. an attribute (e.g. field name) of each node</p>
+</td></tr>
+<tr valign="top"><td><code>prefix</code></td>
+<td>
+<p>when converting type columns, the prefix used for the column names. Can be NULL to omit prefixes.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>ToDataFrameTree: a <code>data.frame</code>, where each row represents a <code>Node</code> in the tree or sub-tree
+spanned by <code>x</code>, possibly pruned according to <code>pruneFun</code>.
+</p>
+<p>ToDataFrameTable: a <code>data.frame</code>, where each row represents a leaf <code>Node</code> in the tree or sub-tree
+spanned by <code>x</code>, possibly pruned according to <code>pruneFun</code>.
+</p>
+<p>ToDataFrameNetwork: a <code>data.frame</code>, where each row represents a <code>Node</code> in the tree or sub-tree
+spanned by <code>x</code>, possibly pruned according to <code>pruneFun</code>. The first column is called 'from', while the
+second is called 'to', describing the parent to child edge (for direction &quot;climb&quot;) or the child to parent edge (for direction &quot;descend&quot;).
+If <code><a href="AreNamesUnique.html">AreNamesUnique</a></code> is TRUE, then the Network is
+based on the <code>Node$name</code>, otherwise on the <code>Node$pathString</code>
+</p>
+<p>ToDataFrameTypeCol: a <code>data.frame</code> in table format (i.e. where each row represents a leaf in the tree or sub-tree
+spanned by <code>x</code>), possibly pruned according to <code>pruneFun</code>. In addition to <code>...</code>, each distinct
+<code>type</code> is output to a column.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(acme)
+acme$fieldsAll
+as.data.frame(acme, row.names = NULL, optional = FALSE, "cost", "p")
+
+ToDataFrameTree(acme, "cost", "p")
+ToDataFrameNetwork(acme, "cost", "p", direction = "climb")
+ToDataFrameTable(acme, "cost", "p")
+ToDataFrameTypeCol(acme)
+
+#use the pruneFun:
+acme$Do(function(x) x$totalCost &lt;- Aggregate(x, "cost", sum), traversal = "post-order")
+ToDataFrameTree(acme, "totalCost", pruneFun = function(x) x$totalCost &gt; 300000)
+
+#inherit
+acme$Set(floor = c(1, 2, 3), filterFun = function(x) x$level == 2)
+as.data.frame(acme, row.names = NULL, optional = FALSE, "floor", inheritFromAncestors = FALSE)
+as.data.frame(acme, row.names = NULL, optional = FALSE, "floor", inheritFromAncestors = TRUE)
+
+#using a function as an attribute:
+acme$Accounting$Head &lt;- "Mrs. Numright"
+acme$Research$Head &lt;- "Mr. Stein"
+acme$IT$Head &lt;- "Mr. Squarehead"
+ToDataFrameTable(acme, department = function(x) x$parent$name, "name", "Head", "cost")
+
+#complex TypeCol
+acme$IT$Outsource$AddChild("India")
+acme$IT$Outsource$AddChild("Poland")
+acme$Set(type = c('company', 'department', 'project', 'project', 'department',
+                  'project', 'project', 'department', 'program', 'project',
+                  'project', 'project', 'project'
+                  )
+        )
+print(acme, 'type')
+ToDataFrameTypeCol(acme, type = 'type')
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>data.tree</em> version 0.7.4 <a href="00Index.html">Index</a>]</div>
+</body></html>

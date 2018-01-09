@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: The Loglogistic Distribution</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for Loglogistic {actuar}"><tr><td>Loglogistic {actuar}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>The Loglogistic Distribution</h2>
+
+<h3>Description</h3>
+
+<p>Density function, distribution function, quantile function, random generation,
+raw moments and limited moments for the Loglogistic distribution with
+parameters <code>shape</code> and <code>scale</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+dllogis(x, shape, rate = 1, scale = 1/rate, log = FALSE)
+pllogis(q, shape, rate = 1, scale = 1/rate,
+        lower.tail = TRUE, log.p = FALSE)
+qllogis(p, shape, rate = 1, scale = 1/rate,
+        lower.tail = TRUE, log.p = FALSE)
+rllogis(n, shape, rate = 1, scale = 1/rate)
+mllogis(order, shape, rate = 1, scale = 1/rate)
+levllogis(limit, shape, rate = 1, scale = 1/rate,
+          order = 1)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x, q</code></td>
+<td>
+<p>vector of quantiles.</p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>vector of probabilities.</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>number of observations. If <code>length(n) &gt; 1</code>, the length is
+taken to be the number required.</p>
+</td></tr>
+<tr valign="top"><td><code>shape, scale</code></td>
+<td>
+<p>parameters. Must be strictly positive.</p>
+</td></tr>
+<tr valign="top"><td><code>rate</code></td>
+<td>
+<p>an alternative way to specify the scale.</p>
+</td></tr>
+<tr valign="top"><td><code>log, log.p</code></td>
+<td>
+<p>logical; if <code>TRUE</code>, probabilities/densities
+<i>p</i> are returned as <i>log(p)</i>.</p>
+</td></tr>
+<tr valign="top"><td><code>lower.tail</code></td>
+<td>
+<p>logical; if <code>TRUE</code> (default), probabilities are
+<i>P[X &lt;= x]</i>, otherwise, <i>P[X &gt; x]</i>.</p>
+</td></tr>
+<tr valign="top"><td><code>order</code></td>
+<td>
+<p>order of the moment.</p>
+</td></tr>
+<tr valign="top"><td><code>limit</code></td>
+<td>
+<p>limit of the loss variable.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The loglogistic distribution with parameters <code>shape</code> <i>= a</i> and <code>scale</code> <i>= s</i> has density:
+</p>
+<p style="text-align: center;"><i>
+    f(x) = a (x/s)^a / (x [1 + (x/s)^a]^2)</i></p>
+
+<p>for <i>x &gt; 0</i>, <i>a &gt; 0</i> and <i>b &gt; 0</i>.
+</p>
+<p>The <i>k</i>th raw moment of the random variable <i>X</i> is
+<i>E[X^k]</i>, <i>-shape &lt; k &lt; shape</i>.
+</p>
+<p>The <i>k</i>th limited moment at some limit <i>d</i> is <i>E[min(X, d)^k]</i>, <i>k &gt; -shape</i>
+and <i>1 - k/shape</i> not a negative integer.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>dllogis</code> gives the density,
+<code>pllogis</code> gives the distribution function,
+<code>qllogis</code> gives the quantile function,
+<code>rllogis</code> generates random deviates,
+<code>mllogis</code> gives the <i>k</i>th raw moment, and
+<code>levllogis</code> gives the <i>k</i>th moment of the limited loss
+variable.
+</p>
+<p>Invalid arguments will result in return value <code>NaN</code>, with a warning.
+</p>
+
+
+<h3>Note</h3>
+
+<p><code>levllogis</code> computes the limited expected value using
+<code><a href="betaint.html">betaint</a></code>.
+</p>
+<p>Also known as the Fisk distribution. See also Kleiber and Kotz (2003)
+for alternative names and parametrizations.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Vincent Goulet <a href="mailto:vincent.goulet@act.ulaval.ca">vincent.goulet@act.ulaval.ca</a> and
+Mathieu Pigeon
+</p>
+
+
+<h3>References</h3>
+
+<p>Kleiber, C. and Kotz, S. (2003), <em>Statistical Size Distributions
+in Economics and Actuarial Sciences</em>, Wiley.
+</p>
+<p>Klugman, S. A., Panjer, H. H. and Willmot, G. E. (2012),
+<em>Loss Models, From Data to Decisions, Fourth Edition</em>, Wiley.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+exp(dllogis(2, 3, 4, log = TRUE))
+p &lt;- (1:10)/10
+pllogis(qllogis(p, 2, 3), 2, 3)
+
+## mean
+mllogis(1, 2, 3)
+
+## case with 1 - order/shape &gt; 0
+levllogis(10, 2, 3, order = 1)
+
+## case with 1 - order/shape &lt; 0
+levllogis(10, 2/3, 3, order = 1)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>actuar</em> version 2.2-0 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Cumulate values among siblings</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for Cumulate {data.tree}"><tr><td>Cumulate {data.tree}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Cumulate values among siblings</h2>
+
+<h3>Description</h3>
+
+<p>For example, you can sum up values of siblings before
+this <code>Node</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+Cumulate(node, attribute, aggFun, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>node</code></td>
+<td>
+<p>The node on which we want to cumulate</p>
+</td></tr>
+<tr valign="top"><td><code>attribute</code></td>
+<td>
+<p>determines what is collected. The <code>attribute</code> can be
+</p>
+
+<ul>
+<li><p> a.) the name of a <b>field</b> or a <b>property/active</b> of each <code>Node</code> in the tree, e.g. <code>acme$Get("p")</code> or <code>acme$Get("position")</code>
+</p>
+</li>
+<li><p> b.) the name of a <b>method</b> of each <code>Node</code> in the tree, e.g. <code>acme$Get("levelZeroBased")</code>, where e.g. <code>acme$levelZeroBased &lt;- function() acme$level - 1</code>
+</p>
+</li>
+<li><p> c.) a <b>function</b>, whose first argument must be a <code>Node</code> e.g. <code>acme$Get(function(node) node$cost * node$p)</code>
+</p>
+</li></ul>
+</td></tr>
+<tr valign="top"><td><code>aggFun</code></td>
+<td>
+<p>the aggregation function to be applied to the children's <code>attributes</code></p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>any arguments to be passed on to attribute (in case it's a function)</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(acme)
+acme$Do(function(x) x$cost &lt;- Aggregate(x, "cost", sum), traversal = "post-order")
+acme$Do(function(x) x$cumCost &lt;- Cumulate(x, "cost", sum))
+print(acme, "cost", "cumCost")
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>data.tree</em> version 0.7.4 <a href="00Index.html">Index</a>]</div>
+</body></html>

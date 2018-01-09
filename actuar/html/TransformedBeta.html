@@ -1,0 +1,211 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: The Transformed Beta Distribution</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for TransformedBeta {actuar}"><tr><td>TransformedBeta {actuar}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>The Transformed Beta Distribution</h2>
+
+<h3>Description</h3>
+
+<p>Density function, distribution function, quantile function, random generation,
+raw moments and limited moments for the Transformed Beta distribution
+with parameters <code>shape1</code>, <code>shape2</code>, <code>shape3</code> and
+<code>scale</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+dtrbeta(x, shape1, shape2, shape3, rate = 1, scale = 1/rate,
+        log = FALSE)
+ptrbeta(q, shape1, shape2, shape3, rate = 1, scale = 1/rate,
+        lower.tail = TRUE, log.p = FALSE)
+qtrbeta(p, shape1, shape2, shape3, rate = 1, scale = 1/rate,
+        lower.tail = TRUE, log.p = FALSE)
+rtrbeta(n, shape1, shape2, shape3, rate = 1, scale = 1/rate)
+mtrbeta(order, shape1, shape2, shape3, rate = 1, scale = 1/rate)
+levtrbeta(limit, shape1, shape2, shape3, rate = 1, scale = 1/rate,
+          order = 1)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x, q</code></td>
+<td>
+<p>vector of quantiles.</p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>vector of probabilities.</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>number of observations. If <code>length(n) &gt; 1</code>, the length is
+taken to be the number required.</p>
+</td></tr>
+<tr valign="top"><td><code>shape1, shape2, shape3, scale</code></td>
+<td>
+<p>parameters. Must be strictly
+positive.</p>
+</td></tr>
+<tr valign="top"><td><code>rate</code></td>
+<td>
+<p>an alternative way to specify the scale.</p>
+</td></tr>
+<tr valign="top"><td><code>log, log.p</code></td>
+<td>
+<p>logical; if <code>TRUE</code>, probabilities/densities
+<i>p</i> are returned as <i>log(p)</i>.</p>
+</td></tr>
+<tr valign="top"><td><code>lower.tail</code></td>
+<td>
+<p>logical; if <code>TRUE</code> (default), probabilities are
+<i>P[X &lt;= x]</i>, otherwise, <i>P[X &gt; x]</i>.</p>
+</td></tr>
+<tr valign="top"><td><code>order</code></td>
+<td>
+<p>order of the moment.</p>
+</td></tr>
+<tr valign="top"><td><code>limit</code></td>
+<td>
+<p>limit of the loss variable.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The transformed beta distribution with parameters <code>shape1</code> <i>= a</i>, <code>shape2</code> <i>= b</i>, <code>shape3</code>
+<i>= c</i> and <code>scale</code> <i>= s</i>, has
+density:
+</p>
+<p style="text-align: center;"><i>
+    f(x) = Gamma(a + c)/(Gamma(a) * Gamma(c)) (b (x/s)^(bc))/
+    (x [1 + (x/s)^b]^(a + c))</i></p>
+
+<p>for <i>x &gt; 0</i>, <i>a &gt; 0</i>, <i>b &gt; 0</i>,
+<i>c &gt; 0</i> and <i>s &gt; 0</i>.
+(Here <i>Gamma(a)</i> is the function implemented
+by <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>'s <code><a href="../../base/html/Special.html">gamma</a>()</code> and defined in its help.)
+</p>
+<p>The transformed beta is the distribution of the random variable
+</p>
+<p style="text-align: center;"><i>
+    s (X/(1 - X))^(1/b),</i></p>
+
+<p>where <i>X</i> has a beta distribution with parameters <i>c</i>
+and <i>a</i>.
+</p>
+<p>The transformed beta distribution defines a family of distributions
+with the following special cases:
+</p>
+
+<ul>
+<li><p> A <a href="Burr.html">Burr</a> distribution when <code>shape3 == 1</code>;
+</p>
+</li>
+<li><p> A <a href="Loglogistic.html">loglogistic</a> distribution when <code>shape1
+      == shape3 == 1</code>;
+</p>
+</li>
+<li><p> A <a href="Paralogistic.html">paralogistic</a> distribution when
+<code>shape3 == 1</code> and <code>shape2 == shape1</code>;
+</p>
+</li>
+<li><p> A <a href="GeneralizedPareto.html">generalized Pareto</a> distribution when
+<code>shape2 == 1</code>;
+</p>
+</li>
+<li><p> A <a href="Pareto.html">Pareto</a> distribution when <code>shape2 ==
+      shape3 == 1</code>;
+</p>
+</li>
+<li><p> An <a href="InverseBurr.html">inverse Burr</a> distribution when
+<code>shape1 == 1</code>;
+</p>
+</li>
+<li><p> An <a href="InversePareto.html">inverse Pareto</a> distribution when
+<code>shape2 == shape1 == 1</code>;
+</p>
+</li>
+<li><p> An <a href="InverseParalogistic.html">inverse paralogistic</a> distribution
+when <code>shape1 == 1</code> and <code>shape3 == shape2</code>.
+</p>
+</li></ul>
+
+<p>The <i>k</i>th raw moment of the random variable <i>X</i> is
+<i>E[X^k]</i>, <i>-shape3 * shape2 &lt;
+  k &lt; shape1 * shape2</i>.
+</p>
+<p>The <i>k</i>th limited moment at some limit <i>d</i> is <i>E[min(X, d)^k]</i>, <i>k &gt; -shape3 * shape2</i>
+and <i>shape1 - k/shape2</i> not a negative integer.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>dtrbeta</code> gives the density,
+<code>ptrbeta</code> gives the distribution function,
+<code>qtrbeta</code> gives the quantile function,
+<code>rtrbeta</code> generates random deviates,
+<code>mtrbeta</code> gives the <i>k</i>th raw moment, and
+<code>levtrbeta</code> gives the <i>k</i>th moment of the limited loss
+variable.
+</p>
+<p>Invalid arguments will result in return value <code>NaN</code>, with a warning.
+</p>
+
+
+<h3>Note</h3>
+
+<p><code>levtrbeta</code> computes the limited expected value using
+<code><a href="betaint.html">betaint</a></code>.
+</p>
+<p>Distribution also known as the Generalized Beta of the Second
+Kind and Pearson Type VI. See also Kleiber and Kotz (2003) for
+alternative names and parametrizations.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Vincent Goulet <a href="mailto:vincent.goulet@act.ulaval.ca">vincent.goulet@act.ulaval.ca</a> and
+Mathieu Pigeon
+</p>
+
+
+<h3>References</h3>
+
+<p>Kleiber, C. and Kotz, S. (2003), <em>Statistical Size Distributions
+in Economics and Actuarial Sciences</em>, Wiley.
+</p>
+<p>Klugman, S. A., Panjer, H. H. and Willmot, G. E. (2012),
+<em>Loss Models, From Data to Decisions, Fourth Edition</em>, Wiley.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+exp(dtrbeta(2, 2, 3, 4, 5, log = TRUE))
+p &lt;- (1:10)/10
+ptrbeta(qtrbeta(p, 2, 3, 4, 5), 2, 3, 4, 5)
+qpearson6(0.3, 2, 3, 4, 5, lower.tail = FALSE)
+
+## variance
+mtrbeta(2, 2, 3, 4, 5) - mtrbeta(1, 2, 3, 4, 5)^2
+
+## case with shape1 - order/shape2 &gt; 0
+levtrbeta(10, 2, 3, 4, scale = 1, order = 2)
+
+## case with shape1 - order/shape2 &lt; 0
+levtrbeta(10, 1/3, 0.75, 4, scale = 0.5, order = 2)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>actuar</em> version 2.2-0 <a href="00Index.html">Index</a>]</div>
+</body></html>

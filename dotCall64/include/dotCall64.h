@@ -4,19 +4,19 @@
 #include <R.h>
 #include <Rdefines.h>
 
-// Defines DL_FUNC.
+// Definition of DL_FUNC.
 #include <R_ext/Rdynload.h>
 
-// Defines INTSXP and REALSXP to be used in the args_type array.
+// Definition of INTSXP and REALSXP.
 #include<Rinternals.h>
 
-// Defines int64_t on windows
+// Definition of int64_t
 #include <stdint.h>
 
 /*
- * Because R does not define an int64 type, this pseudo type should be used to
+ * Because R does not define an int64 type, this pseudo type is used to
  * indicate an int64_t argument type:
- * Currently, R only uses 4 bits for it's types. Therefore this value will not
+ * Currently, R only uses 4 bits for types. Therefore, this value will not
  * clash.
  */
 #define INT64_TYPE 9999
@@ -28,9 +28,6 @@
 #define INT64_STRING "int64"
 
 
-/*
- * TODO: Maybe, this should be defined as an enum?
- */
 #define INTENT_READ 0x1
 #define INTENT_WRITE 0x2
 #define INTENT_COPY 0x4
@@ -74,7 +71,7 @@ void dotCall64(DL_FUNC fun, int nargs, SEXP *args, int *args_type, int *args_int
 
 
 
-// The maximum number of arguments that a function may have:
+// The maximum number of arguments that a function can have.
 #define MAX_ARGS 65
 
 #endif

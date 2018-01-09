@@ -54,7 +54,6 @@ dmnom	Multinomial
 dmvhyper	MultiHypergeometric
 dnhyper	NegHyper
 dnsbeta	NSBeta
-dnst	extraDistr-deprecated
 dpareto	Pareto
 dpower	PowerDist
 dprop	PropBeta
@@ -71,7 +70,6 @@ dzib	ZIB
 dzinb	ZINB
 dzip	ZIP
 extraDistr	extraDistr
-extraDistr-deprecated	extraDistr-deprecated
 Frechet	Frechet
 GammaPoiss	GammaPoiss
 GEV	GEV
@@ -128,7 +126,6 @@ pmixnorm	NormalMix
 pmixpois	PoissonMix
 pnhyper	NegHyper
 pnsbeta	NSBeta
-pnst	extraDistr-deprecated
 PoissonMix	PoissonMix
 PowerDist	PowerDist
 ppareto	Pareto
@@ -170,13 +167,12 @@ qlomax	Lomax
 qlst	LocationScaleT
 qnhyper	NegHyper
 qnsbeta	NSBeta
-qnst	extraDistr-deprecated
 qpareto	Pareto
 qpower	PowerDist
 qprop	PropBeta
 qrayleigh	Rayleigh
 qtbinom	TruncBinom
-qtlambda	TuckeyLambda
+qtlambda	TukeyLambda
 qtnorm	TruncNormal
 qtpois	TruncPoisson
 qtriang	Triangular
@@ -225,7 +221,6 @@ rmnom	Multinomial
 rmvhyper	MultiHypergeometric
 rnhyper	NegHyper
 rnsbeta	NSBeta
-rnst	extraDistr-deprecated
 rpareto	Pareto
 rpower	PowerDist
 rprop	PropBeta
@@ -235,7 +230,7 @@ rsign	Rademacher
 rskellam	Skellam
 rslash	Slash
 rtbinom	TruncBinom
-rtlambda	TuckeyLambda
+rtlambda	TukeyLambda
 rtnorm	TruncNormal
 rtpois	TruncPoisson
 rtriang	Triangular
@@ -250,7 +245,7 @@ Triangular	Triangular
 TruncBinom	TruncBinom
 TruncNormal	TruncNormal
 TruncPoisson	TruncPoisson
-TuckeyLambda	TuckeyLambda
+TukeyLambda	TukeyLambda
 Wald	Wald
 ZIB	ZIB
 ZINB	ZINB
