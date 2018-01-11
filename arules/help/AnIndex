@@ -1,4 +1,4 @@
-%ain%	itemMatrix-class
+%ain%	match
 %ain%,itemMatrix,character-method	itemMatrix-class
 %in%	match
 %in%,associations,associations-method	associations-class
@@ -6,9 +6,9 @@
 %in%,itemMatrix,itemMatrix-method	itemMatrix-class
 %in%,itemsets,character-method	match
 %in%,itemsets,itemsets-method	match
-%oin%	itemMatrix-class
+%oin%	match
 %oin%,itemMatrix,character-method	itemMatrix-class
-%pin%	itemMatrix-class
+%pin%	match
 %pin%,itemMatrix,character-method	itemMatrix-class
 abbreviate	abbreviate
 abbreviate,itemMatrix-method	abbreviate
@@ -206,6 +206,8 @@ itemLabels,rules-method	rules-class
 itemLabels,tidLists-method	tidLists-class
 itemLabels<-	itemMatrix-class
 itemLabels<-,itemMatrix-method	itemMatrix-class
+itemLabels<-,itemsets-method	itemsets-class
+itemLabels<-,rules-method	rules-class
 itemMatrix	itemMatrix-class
 itemMatrix-class	itemMatrix-class
 items	itemsets-class
