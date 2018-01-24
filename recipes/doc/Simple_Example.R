@@ -56,7 +56,13 @@ trained_rec <- prep(trained_rec, training = seg_train)
 test_data  <- bake(trained_rec, newdata = seg_test, all_predictors())
 names(test_data)
 
-## ----step_list-----------------------------------------------------------
-steps <- apropos("^step_")
-steps[!grepl("new$", steps)]
+## ----step_list, echo = FALSE---------------------------------------------
+grep("^step_", ls("package:recipes"), value = TRUE)
+
+## ----check, eval = FALSE-------------------------------------------------
+#  trained_rec <- trained_rec %>%
+#    check_missing(contains("Inten"))
+
+## ----check_list, echo = FALSE--------------------------------------------
+grep("^check_", ls("package:recipes"), value = TRUE)
 

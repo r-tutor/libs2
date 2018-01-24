@@ -67,7 +67,7 @@ csplit	csplit
 curly	curly
 cv	cv
 decomp.specials	internal
-density.sim	density.sim
+density.sim	plot.sim
 deriv	internal
 descendants	children
 describecoef	internal
@@ -132,6 +132,7 @@ gof.lvmfit	gof
 Graph	Graph
 graph2lvm	internal
 Graph<-	Graph
+Grep	Grep
 heavytail	sim
 heavytail<-	sim
 hubble	hubble
@@ -162,6 +163,7 @@ kappa.multinomial	multinomial
 kappa.table	multinomial
 kill	rmvar
 kill<-	rmvar
+km	km
 ksmooth2	ksmooth2
 labels	labels-set
 labels.graphNEL	labels-set
@@ -199,6 +201,7 @@ Missing,	Missing
 Missing<-	Missing
 missingdata	missingdata
 missingModel	internal
+mixture	mixture
 Model	Model
 Model<-	Model
 modelPar	internal
@@ -208,6 +211,9 @@ moments	gof
 moments.lvm	gof
 multigroup	internal
 multinomial	multinomial
+mvnmix	mvnmix
+na.pass0	internal
+NA2x	NA2x
 nldata	nldata
 nodecolor	labels-set
 nodecolor<-	labels-set
@@ -223,8 +229,8 @@ offdiag<-	revdiag
 offdiags	internal
 ones.lvm	sim
 OR	diagtest
-ordinal	internal
-ordinal<-	internal
+ordinal	ordinal-set
+ordinal<-	ordinal-set
 ordreg	ordreg
 Org	Org
 p.correct	closed.testing
@@ -247,9 +253,10 @@ path.lvm	path
 pcor	pcor
 PD	PD
 pdfconvert	pdfconvert
+plot.estimate	plot.estimate
 plot.lvm	plot.lvm
 plot.lvmfit	plot.lvm
-plot.sim	density.sim
+plot.sim	plot.sim
 plotConf	plotConf
 poisson.lvm	sim
 predict.lvm	predict.lvm
@@ -281,6 +288,9 @@ rmvar	rmvar
 rmvar<-	rmvar
 rmvn	internal
 roots	children
+rot2D	rotate2
+rot3D	rotate2
+rotate2	rotate2
 rsq	internal
 scheffe	scheffe
 score	gof
@@ -311,7 +321,7 @@ student.lvm	sim
 subgraph	internal
 subset.lvm	subset.lvm
 summary.lvm	lvm
-summary.sim	sim.default
+summary.sim	summary.sim
 surface	ksmooth2
 survival	internal
 survival<-	internal
@@ -343,7 +353,10 @@ vars	vars
 vars.lvm	vars
 vars.lvmfit	vars
 vec	vec
+wait	wait
+waitclick	wait
 weibull.lvm	sim
 Weights	internal
 wrapvec	wrapvec
+x2NA	NA2x
 zibreg	zibreg

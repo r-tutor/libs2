@@ -1,10 +1,49 @@
-heatmaply 0.12.2 (2017-10-28)
+heatmaply 0.14.0 (2018-01-20)
 ================
+
+### NEW FEATURES
+* heatmaply
+  - Add `custom_hovertext` argument, adding custom hovertext option
+  - Add `label_format_fun` argument, which formats text before adding to
+    hovertext
+  - Row and column annotation legends are now ordered according to factor
+    levels, or by default, are sorted (the previous default behaviour).
+  - Add `node_type argument, which allows users to plot the heatmap with
+    discs rather than squares. See also the `point_size_mat` argument.
+  - Add `point_size_mat` argument, which is mapped to point size when
+    `node_type="scatter"`. Also adds `point_size_name` argument, which is the
+    name of this parameter in the heatmap hovertext.
+
+### BUGFIXES
+* heatmaply
+  - Fixed a bug where column/row annotation
+    legend labels would overlap when only two levels were present.
+
+### NOTES
+
+* USing stylr to improve the readability of the R code.
+* USing devtools::spell_check() to spell check the doc.
+
+
+
+heatmaply 0.13.0 (2017-11-11)
+================
+
+### NEW FEATURES
+* heatmaply
+  - Add File size arguments (#114) - width / height
+  - Allows use of Pearson, Spearman or Kendall correlation
+    coefficient as a distance measure, by specifying
+    `distfun="pearson"`, `distfun="spearman"` or `distfun="kendall"`.
+    This corresponds to the use of `distfun=function(x) as.dist(1 - cor(x)))`.
+
+
 
 ### BUG FIXES
 * heatmaply
   - Scale before clustering #112 (fixes: Allow the dendrogram to use scaled data #111 )
-
+  - stops heatmaply from crashing when using RGui (#121)
+  - draw_cellnote = TRUE fails for matrix with NA (#123)
 
 
 
@@ -13,17 +52,14 @@ heatmaply 0.12.2 (2017-10-28)
 
 heatmaply 0.12.1 (2017-10-25)
 ================
-
-
-### NEW FEATURES
-* heatmaply
-  - Add `cellnote_size` argument, controlling the font size of the cellnote.
-
 ### BUG FIXES
 * heatmaply
   - removing tick labels with `showticklabels` now removes the ticks as
     well as the tick labels.
   - Prevent grid_gap warning (#105)
+  - Add `cellnote_size` argument, controlling the font size of the cellnote.
+
+
 * ggplot_heatmap
   - now handles data.frame input
 

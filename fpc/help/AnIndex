@@ -9,6 +9,7 @@ bhattacharyya.matrix	bhattacharyya.matrix
 calinhara	calinhara
 can	can
 cat2bin	cat2bin
+cdbw	cdbw
 claraCBI	kmeansCBI
 classifdist	classifdist
 classifnp	classifdist
@@ -24,6 +25,7 @@ cmahal	cmahal
 con.comp	concomp
 confusion	confusion
 cov.wml	cov.wml
+cvnn	cvnn
 cweight	cweight
 dbscan	dbscan
 dbscanCBI	kmeansCBI
@@ -41,6 +43,7 @@ disttrimkmeansCBI	kmeansCBI
 dridgeline	dridgeline
 dudahart2	dudahart2
 extract.mixturepars	extract.mixturepars
+findrep	findrep
 fixmahal	fixmahal
 fixreg	fixreg
 flexmixedruns	flexmixedruns
@@ -69,10 +72,12 @@ mixdens	mixdens
 mixpredictive	mixpredictive
 mvdcoord	mvdcoord
 ncoord	ncoord
+neginc	neginc
 noisemclustCBI	kmeansCBI
 nselectboot	nselectboot
 pamk	pamk
 pamkCBI	kmeansCBI
+pdfclustCBI	kmeansCBI
 piridge	piridge
 piridge.zeroes	piridge.zeroes
 plot.clboot	clusterboot
@@ -106,10 +111,12 @@ sseg	sseg
 summary.mergenorm	mergenormals
 summary.mfpc	fixmahal
 summary.rfpc	fixreg
+tclustCBI	kmeansCBI
 tdecomp	tdecomp
 tonedata	tonedata
 trimkmeansCBI	kmeansCBI
 unimodal.ind	unimodal.ind
 weightplots	weightplots
 wfu	wfu
+xtable	xtable
 zmisclassification.matrix	zmisclassification.matrix

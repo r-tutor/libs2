@@ -11,7 +11,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;recipes&rsquo; version 0.1.1</h2>
+</div><h2>Documentation for package &lsquo;recipes&rsquo; version 0.1.2</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
@@ -46,10 +46,12 @@
 <h2><a name="A">-- A --</a></h2>
 
 <table width="100%">
+<tr><td style="width: 25%;"><a href="add_step.html">add_check</a></td>
+<td>Add a New Operation to the Current Recipe</td></tr>
 <tr><td style="width: 25%;"><a href="add_role.html">add_role</a></td>
 <td>Manually Add Roles</td></tr>
 <tr><td style="width: 25%;"><a href="add_step.html">add_step</a></td>
-<td>Add a New Step to Current Recipe</td></tr>
+<td>Add a New Operation to the Current Recipe</td></tr>
 <tr><td style="width: 25%;"><a href="has_role.html">all_nominal</a></td>
 <td>Role Selection</td></tr>
 <tr><td style="width: 25%;"><a href="has_role.html">all_numeric</a></td>
@@ -74,6 +76,10 @@
 <h2><a name="C">-- C --</a></h2>
 
 <table width="100%">
+<tr><td style="width: 25%;"><a href="check_cols.html">check_cols</a></td>
+<td>Check if all Columns are Present</td></tr>
+<tr><td style="width: 25%;"><a href="check_missing.html">check_missing</a></td>
+<td>Check for Missing Values</td></tr>
 <tr><td style="width: 25%;"><a href="covers.html">covers</a></td>
 <td>Raw Cover Type Data</td></tr>
 <tr><td style="width: 25%;"><a href="credit_data.html">credit_data</a></td>
@@ -176,8 +182,6 @@
 <table width="100%">
 <tr><td style="width: 25%;"><a href="selections.html">selections</a></td>
 <td>Methods for Select Variables in Step Functions</td></tr>
-<tr><td style="width: 25%;"><a href="step.html">step</a></td>
-<td>A General Step Wrapper</td></tr>
 <tr><td style="width: 25%;"><a href="step_bagimpute.html">step_bagimpute</a></td>
 <td>Imputation via Bagged Trees</td></tr>
 <tr><td style="width: 25%;"><a href="step_bin2factor.html">step_bin2factor</a></td>
@@ -198,8 +202,10 @@
 <td>Date Feature Generator</td></tr>
 <tr><td style="width: 25%;"><a href="step_depth.html">step_depth</a></td>
 <td>Data Depths</td></tr>
-<tr><td style="width: 25%;"><a href="discretize.html">step_discretize</a></td>
+<tr><td style="width: 25%;"><a href="step_discretize.html">step_discretize</a></td>
 <td>Discretize Numeric Variables</td></tr>
+<tr><td style="width: 25%;"><a href="step_downsample.html">step_downsample</a></td>
+<td>Down-Sample a Data Set Based on a Factor Variable</td></tr>
 <tr><td style="width: 25%;"><a href="step_dummy.html">step_dummy</a></td>
 <td>Dummy Variables Creation</td></tr>
 <tr><td style="width: 25%;"><a href="step_factor2string.html">step_factor2string</a></td>
@@ -234,8 +240,12 @@
 <td>Impute Numeric Data Using the Mean</td></tr>
 <tr><td style="width: 25%;"><a href="step_modeimpute.html">step_modeimpute</a></td>
 <td>Impute Nominal Data Using the Most Common Value</td></tr>
+<tr><td style="width: 25%;"><a href="step_novel.html">step_novel</a></td>
+<td>Simple Value Assignments for Novel Factor Levels</td></tr>
 <tr><td style="width: 25%;"><a href="step_ns.html">step_ns</a></td>
 <td>Nature Spline Basis Functions</td></tr>
+<tr><td style="width: 25%;"><a href="step_num2factor.html">step_num2factor</a></td>
+<td>Convert Numbers to Factors</td></tr>
 <tr><td style="width: 25%;"><a href="step_nzv.html">step_nzv</a></td>
 <td>Near-Zero Variance Filter</td></tr>
 <tr><td style="width: 25%;"><a href="step_ordinalscore.html">step_ordinalscore</a></td>
@@ -246,6 +256,8 @@
 <td>PCA Signal Extraction</td></tr>
 <tr><td style="width: 25%;"><a href="step_poly.html">step_poly</a></td>
 <td>Orthogonal Polynomial Basis Functions</td></tr>
+<tr><td style="width: 25%;"><a href="step_profile.html">step_profile</a></td>
+<td>Create a Profiling Version of a Data Set</td></tr>
 <tr><td style="width: 25%;"><a href="step_range.html">step_range</a></td>
 <td>Scaling Numeric Data to a Specific Range</td></tr>
 <tr><td style="width: 25%;"><a href="step_ratio.html">step_ratio</a></td>
@@ -268,6 +280,8 @@
 <td>Convert Strings to Factors</td></tr>
 <tr><td style="width: 25%;"><a href="step_unorder.html">step_unorder</a></td>
 <td>Convert Ordered Factors to Unordered Factors</td></tr>
+<tr><td style="width: 25%;"><a href="step_upsample.html">step_upsample</a></td>
+<td>Up-Sample a Data Set Based on a Factor Variable</td></tr>
 <tr><td style="width: 25%;"><a href="step_window.html">step_window</a></td>
 <td>Moving Window Functions</td></tr>
 <tr><td style="width: 25%;"><a href="step_YeoJohnson.html">step_YeoJohnson</a></td>
@@ -283,6 +297,10 @@
 <table width="100%">
 <tr><td style="width: 25%;"><a href="terms_select.html">terms_select</a></td>
 <td>Select Terms in a Step Function.</td></tr>
+<tr><td style="width: 25%;"><a href="check_cols.html">tidy.check_cols</a></td>
+<td>Check if all Columns are Present</td></tr>
+<tr><td style="width: 25%;"><a href="check_missing.html">tidy.check_missing</a></td>
+<td>Check for Missing Values</td></tr>
 <tr><td style="width: 25%;"><a href="tidy.recipe.html">tidy.recipe</a></td>
 <td>Tidy the Result of a Recipe</td></tr>
 <tr><td style="width: 25%;"><a href="step_bagimpute.html">tidy.step_bagimpute</a></td>
@@ -305,6 +323,10 @@
 <td>Date Feature Generator</td></tr>
 <tr><td style="width: 25%;"><a href="step_depth.html">tidy.step_depth</a></td>
 <td>Data Depths</td></tr>
+<tr><td style="width: 25%;"><a href="step_discretize.html">tidy.step_discretize</a></td>
+<td>Discretize Numeric Variables</td></tr>
+<tr><td style="width: 25%;"><a href="step_downsample.html">tidy.step_downsample</a></td>
+<td>Down-Sample a Data Set Based on a Factor Variable</td></tr>
 <tr><td style="width: 25%;"><a href="step_dummy.html">tidy.step_dummy</a></td>
 <td>Dummy Variables Creation</td></tr>
 <tr><td style="width: 25%;"><a href="step_factor2string.html">tidy.step_factor2string</a></td>
@@ -337,8 +359,12 @@
 <td>Impute Numeric Data Using the Mean</td></tr>
 <tr><td style="width: 25%;"><a href="step_modeimpute.html">tidy.step_modeimpute</a></td>
 <td>Impute Nominal Data Using the Most Common Value</td></tr>
+<tr><td style="width: 25%;"><a href="step_novel.html">tidy.step_novel</a></td>
+<td>Simple Value Assignments for Novel Factor Levels</td></tr>
 <tr><td style="width: 25%;"><a href="step_ns.html">tidy.step_ns</a></td>
 <td>Nature Spline Basis Functions</td></tr>
+<tr><td style="width: 25%;"><a href="step_num2factor.html">tidy.step_num2factor</a></td>
+<td>Convert Numbers to Factors</td></tr>
 <tr><td style="width: 25%;"><a href="step_nzv.html">tidy.step_nzv</a></td>
 <td>Near-Zero Variance Filter</td></tr>
 <tr><td style="width: 25%;"><a href="step_ordinalscore.html">tidy.step_ordinalscore</a></td>
@@ -349,6 +375,8 @@
 <td>PCA Signal Extraction</td></tr>
 <tr><td style="width: 25%;"><a href="step_poly.html">tidy.step_poly</a></td>
 <td>Orthogonal Polynomial Basis Functions</td></tr>
+<tr><td style="width: 25%;"><a href="step_profile.html">tidy.step_profile</a></td>
+<td>Create a Profiling Version of a Data Set</td></tr>
 <tr><td style="width: 25%;"><a href="step_range.html">tidy.step_range</a></td>
 <td>Scaling Numeric Data to a Specific Range</td></tr>
 <tr><td style="width: 25%;"><a href="step_ratio.html">tidy.step_ratio</a></td>
@@ -369,6 +397,8 @@
 <td>Convert Strings to Factors</td></tr>
 <tr><td style="width: 25%;"><a href="step_unorder.html">tidy.step_unorder</a></td>
 <td>Convert Ordered Factors to Unordered Factors</td></tr>
+<tr><td style="width: 25%;"><a href="step_upsample.html">tidy.step_upsample</a></td>
+<td>Up-Sample a Data Set Based on a Factor Variable</td></tr>
 <tr><td style="width: 25%;"><a href="step_window.html">tidy.step_window</a></td>
 <td>Moving Window Functions</td></tr>
 <tr><td style="width: 25%;"><a href="step_YeoJohnson.html">tidy.step_YeoJohnson</a></td>

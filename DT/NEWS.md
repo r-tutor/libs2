@@ -1,3 +1,43 @@
+# CHANGES IN DT VERSION 0.3
+
+## NEW FEATURES
+
+- It is possible to double-click to edit values in table cells now. See https://github.com/rstudio/DT/pull/480 for examples.
+
+- Added functions `DTOutput()` and `renderDT()` as aliases of `dataTableOutput()` and `renderDataTable()`, respectively. This is because the latter often collide with functions of the same names in **shiny**. You are recommended to use `DTOutput()` and `renderDT()` in Shiny apps (unless you always use the `DT::` qualifier).
+
+- Support using `Shift + Click` to select multiple rows (thanks, @shrektan, #475 #305 #481).
+
+- Added an argument `params` to the `formatDate()` function so you can pass a list of parameters to the specific date conversion method (http://stackoverflow.com/q/38875173/559676).
+
+- The arguments `interval`, `mark`, and `dec.mark` also work for functions `formatPercentage()`, `formatRound()`, and `formatSignif()` now (thanks, @paulofelipe, #128).
+
+- Added the `RowGroup` extension (thanks, @ecortens, #466 #442).
+
+## MAJOR CHANGES
+
+- Searching in the server-side processing mode has enabled the "smart" mode by default (https://datatables.net/reference/option/search.smart). Previously this only works in the client-side processing mode. If you want to disable the smart filtering, you can set the initialization options in `datatable()` (e.g., `options = list(search = list(smart = FALSE))`). The smart filtering means spaces in the global search keyword in the table will have a special meaning: each returned record in the table should match _all_ of the words separated by spaces (thanks, @carlganz, #453; @keshavramaswamy, #391).
+
+- For client-side tables in Shiny, the indices of selected rows (`input$tableId_rows_selected`) will include the rows that are not visible in the current view after filtering is applied. If you want to exclude the indices of such rows, you can take the intersection of `input$tableId_rows_selected` and `input$tableId_rows_all` (the latter is the indices of all rows after filtering is applied).
+
+## MINOR CHANGES
+
+- Upgraded DataTables from 1.10.12 to 1.10.16.
+
+## BUG FIXES
+
+- When the DataTables option `language.url` is used, the table cannot be successfully initialized (thanks, @lubomirskirka, #344)
+
+- `styleEqual()` accepts `NA` in the `levels` argument now (thanks, @MalditoBarbudo, #355).
+
+- `dataTableProxy()` does not work with Shiny modules (thanks, @fbreitwieser, #357).
+
+- `replaceData()` does not work with Shiny modules (thanks, @ykeuter, @ssayols, @fbreitwieser, @carlganz, #359).
+
+- `formatDate()` may display dates off by one day (thanks, @jdthorpe, #198).
+
+- When a table is destroyed, all Shiny input values associated with the table should be emptied (thanks, @dracodoc, #457).
+
 # CHANGES IN DT VERSION 0.2
 
 ## NEW FEATURES

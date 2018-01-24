@@ -1,4 +1,6 @@
 JS                      Objects imported from other packages
+coerceValue             Coerce a character string to the same type as a
+                        target value
 dataTableAjax           Register a data object in a shiny session for
                         DataTables
 dataTableOutput         Helper functions for using DT in Shiny

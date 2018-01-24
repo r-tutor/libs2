@@ -9,8 +9,7 @@ options(digits = 3)
 
 ## ----step_list-----------------------------------------------------------
 library(recipes)
-steps <- apropos("^step_")
-steps[!grepl("new$", steps)]
+ls("package:recipes", pattern = "^step_")
 
 ## ----initial-------------------------------------------------------------
 data(biomass)
@@ -27,11 +26,16 @@ ggplot(biomass_tr, aes(x = carbon)) +
   geom_vline(xintercept = biomass_te$carbon[1], lty = 2)
 
 ## ----initial_def---------------------------------------------------------
-step_percentile <- function(recipe, ..., role = NA, 
-                            trained = FALSE, ref_dist = NULL,
-                            approx = FALSE, 
-                            options = list(probs = (0:100)/100, names = TRUE)) {
-## bake but do not evaluate the variable selectors with
+step_percentile <- function(
+  recipe, ..., 
+  role = NA, 
+  trained = FALSE, 
+  ref_dist = NULL,
+  approx = FALSE, 
+  options = list(probs = (0:100)/100, names = TRUE),
+  skip = FALSE
+  ) {
+## The variable selectors are not immediately evaluated by using
 ## the `quos` function in `rlang`
   terms <- rlang::quos(...) 
   if(length(terms) == 0)
@@ -44,12 +48,20 @@ step_percentile <- function(recipe, ..., role = NA,
       role = role, 
       ref_dist = ref_dist,
       approx = approx,
-      options = options))
+      options = options,
+      skip = skip))
 }
 
 ## ----initialize----------------------------------------------------------
-step_percentile_new <- function(terms = NULL, role = NA, trained = FALSE, 
-                                ref_dist = NULL, approx = NULL, options = NULL) {
+step_percentile_new <- function(
+  terms = NULL, 
+  role = NA, 
+  trained = FALSE, 
+  ref_dist = NULL, 
+  approx = NULL, 
+  options = NULL,
+  skip = FALSE
+) {
   step(
     subclass = "percentile", 
     terms = terms,
@@ -57,7 +69,8 @@ step_percentile_new <- function(terms = NULL, role = NA, trained = FALSE,
     trained = trained,
     ref_dist = ref_dist,
     approx = approx,
-    options = options
+    options = options,
+    skip = skip
   )
 }
 
@@ -77,7 +90,7 @@ prep.step_percentile <- function(x, training, info = NULL, ...) {
   ## You can add error trapping for non-numeric data here and so on.
   ## We'll use the names later so
   if(x$options$names == FALSE)
-    stop("`names` should be set to TRUE")
+    stop("`names` should be set to TRUE", call. = FALSE)
   
   if(!x$approx) {
     x$ref_dist <- training[, col_names]

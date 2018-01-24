@@ -1,8 +1,8 @@
 Package: lava
 Type: Package
 Title: Latent Variable Models
-Version: 1.5.1
-Date: 2017-09-25
+Version: 1.6
+Date: 2018-01-11
 Authors@R: c(person("Klaus K.", "Holst", email="klaus@holst.it", role=c("aut", "cre")),
              person("Brice", "Ozenne", role = "ctb"),
              person("Thomas", "Gerds", role = "ctb"))
@@ -24,15 +24,16 @@ BugReports: https://github.com/kkholst/lava/issues
 License: GPL-3
 LazyLoad: yes
 Depends: R (>= 3.0)
-Imports: grDevices, graphics, methods, numDeriv, stats, survival, utils
-Suggests: KernSmooth, Matrix, Rgraphviz, ascii, data.table, fields,
-        foreach, geepack, gof (>= 0.9), graph, igraph (>= 0.6),
+Imports: grDevices, graphics, methods, numDeriv, stats, survival,
+        SQUAREM, utils
+Suggests: KernSmooth, Matrix, Rgraphviz, ascii, data.table, ellipse,
+        fields, foreach, geepack, gof (>= 0.9), graph, igraph (>= 0.6),
         lava.tobit, lme4, mets (>= 1.1), optimx, quantreg, rgl,
         testthat (>= 0.11), visNetwork, zoo
 ByteCompile: yes
 RoxygenNote: 6.0.1
 NeedsCompilation: no
-Packaged: 2017-09-27 20:46:26 UTC; klaus
+Packaged: 2018-01-11 19:32:53 UTC; klaus
 Repository: CRAN
-Date/Publication: 2017-09-27 21:25:09 UTC
-Built: R 3.4.2; ; 2017-09-29 11:49:11 UTC; windows
+Date/Publication: 2018-01-13 00:39:38 UTC
+Built: R 3.4.3; ; 2018-01-21 19:42:55 UTC; windows

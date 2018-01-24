@@ -1,3 +1,34 @@
+# -*- mode: org -*-
+
+* Version 1.6.0 <2018-01-11 Thu>
+  - Mixture Latent variable models (mixture). Fast version
+    requires 'mets' packages; Gaussian mixture models (mvnmix);
+    weighted k-means (km)
+  - estimate.default: 'keep', 'use' arguments can be specified as
+    regular expressions (with argument regex=TRUE).
+    Summary method now returns Wald test (null: all parameters being zero).
+  - makemissing: seed argument added.
+  - Global change: 'silent' argument renamed to 'messages'
+  - New utility functions: Grep, Na2x, x2NA, wait, waitclick,
+    rotation, Rot2d, Rot3d
+  - Condition numbers calculated via SVD
+  - na.pass0: returns data.frame with original number of rows but with
+    zeros (or first level of factors) in the rows with missing data.
+  - stack: 'weights' argument renamed to 'propensity'. If
+    propensity=TRUE, the first argument (model) will be treated as
+    propensity score model (glm) and 'predict' method will be
+    used for the predictions. 
+  - estimate.formula now by default wraps glm such that 'iid' method
+    return matrix of same size as full data (with zero rows where data
+    are missing).
+  - Updated output functions for class 'sim' (print method and
+    plot).. Plot method: density.alpha is applied to each standard
+    error ('se') level.
+  - composite likelihood (complik) refactored + new example. 'ordinal' method now
+    cleans up properly when variables are removed (rmvar, subset).
+  - twostage: fixed for mixture model (class 'lvm.mixture'). New help
+    page + examples.  Predict function updated (newdata argument where
+    covariate levels can be specified).
 
 * Version 1.5.1 <2017-09-25 Mon>
   - conformal predictions: confpred
@@ -261,3 +292,6 @@
   - New distributions: Gamma.lvm, coxWeibull.lvm, coxExponential.lvm,
     coxGompertz.lvm. New method 'eventTime' (for simulation of
     competing risks data)
+
+
+

@@ -1,10 +1,12 @@
 %>%	DT-imports
 addRow	proxy
 clearSearch	proxy
+coerceValue	coerceValue
 datatable	datatable
 dataTableAjax	dataTableAjax
 dataTableOutput	dataTableOutput
 dataTableProxy	proxy
+DTOutput	dataTableOutput
 formatCurrency	formatCurrency
 formatDate	formatCurrency
 formatPercentage	formatCurrency
@@ -15,6 +17,7 @@ formatStyle	formatCurrency
 JS	DT-imports
 reloadData	proxy
 renderDataTable	dataTableOutput
+renderDT	dataTableOutput
 replaceData	replaceData
 saveWidget	DT-imports
 selectCells	proxy
