@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Calculate Depth Space using Spatial Depth</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for depth.space.spatial {ddalpha}"><tr><td>depth.space.spatial {ddalpha}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+Calculate Depth Space using Spatial Depth
+</h2>
+
+<h3>Description</h3>
+
+<p>Calculates the representation of the training classes in depth space using spatial depth.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+depth.space.spatial(data, cardinalities, mah.estimate = "moment", mah.parMcd = 0.75)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+
+<p>Matrix containing training sample where each row is a <i>d</i>-dimensional object, and objects of each class are kept together so that the matrix can be thought of as containing blocks of objects representing classes.
+</p>
+</td></tr>
+<tr valign="top"><td><code>cardinalities</code></td>
+<td>
+
+<p>Numerical vector of cardinalities of each class in <code>data</code>, each entry corresponds to one class.
+</p>
+</td></tr>
+<tr valign="top"><td><code>mah.estimate</code></td>
+<td>
+<p> is a character string specifying which estimates to use when calculating sample covariance matrix; can be <code>"none"</code>, <code>"moment"</code> or <code>"MCD"</code>, determining whether traditional moment or Minimum Covariance Determinant (MCD) (see <code><a href="../../robustbase/html/covMcd.html">covMcd</a></code>) estimates for mean and covariance are used. By default <code>"moment"</code> is used. With <code>"none"</code> the non-affine invariant version of Spatial depth is calculated
+</p>
+</td></tr>
+<tr valign="top"><td><code>mah.parMcd</code></td>
+<td>
+
+<p>is the value of the argument <code>alpha</code> for the function <code><a href="../../robustbase/html/covMcd.html">covMcd</a></code>; is used when <code>mah.estimate =</code> <code>"MCD"</code>.
+</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The depth representation is calculated in the same way as in <code><a href="depth.spatial.html">depth.spatial</a></code>, see 'References' for more information and details.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Matrix of objects, each object (row) is represented via its depths (columns) w.r.t. each of the classes of the training sample; order of the classes in columns corresponds to the one in the argument <code>cardinalities</code>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Chaudhuri, P. (1996). On a geometric notion of quantiles for multivariate data. <em>Journal of the Americal Statistical Association</em> <b>91</b> 862&ndash;872.
+</p>
+<p>Koltchinskii, V.I. (1997). M-estimation, convexity and quantiles. <em>The Annals of Statistics</em> <b>25</b> 435&ndash;477.
+</p>
+<p>Serfling, R. (2006). Depth functions in nonparametric multivariate inference. In: Liu, R., Serfling, R., Souvaine, D. (eds.), <em>Data Depth: Robust Multivariate Analysis, Computational Geometry and Applications</em>, American Mathematical Society, 1&ndash;16.
+</p>
+<p>Vardi, Y. and Zhang, C.H. (2000). The multivariate L1-median and associated data depth. <em>Proceedings of the National Academy of Sciences, U.S.A.</em> <b>97</b> 1423&ndash;1426.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="ddalpha.train.html">ddalpha.train</a></code> and <code><a href="ddalpha.classify.html">ddalpha.classify</a></code> for application, <code><a href="depth.spatial.html">depth.spatial</a></code> for calculation of spatial depth.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Generate a bivariate normal location-shift classification task
+# containing 20 training objects
+class1 &lt;- mvrnorm(10, c(0,0), 
+                  matrix(c(1,1,1,4), nrow = 2, ncol = 2, byrow = TRUE))
+class2 &lt;- mvrnorm(10, c(2,2), 
+                  matrix(c(1,1,1,4), nrow = 2, ncol = 2, byrow = TRUE))
+data &lt;- rbind(class1, class2)
+# Get depth space using spatial depth
+depth.space.spatial(data, c(10, 10))
+
+data &lt;- getdata("hemophilia")
+cardinalities = c(sum(data$gr == "normal"), sum(data$gr == "carrier"))
+depth.space.spatial(data[,1:2], cardinalities)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ddalpha</em> version 1.3.1.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

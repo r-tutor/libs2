@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Calculate Depth</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for depth. {ddalpha}"><tr><td>depth. {ddalpha}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+Calculate Depth
+</h2>
+
+<h3>Description</h3>
+
+<p>Calculates the depth of points w.r.t. a multivariate data set.
+</p>
+<p>The detailed descriptions are found in the corresponding topics.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+depth.(x, data, notion, ...)
+
+## Tukey depth
+# depth.halfspace(x, data, exact, method, num.directions = 1000, seed = 0)
+
+## Mahalanobis depth
+# depth.Mahalanobis(x, data, mah.estimate = "moment", mah.parMcd = 0.75)
+
+## projection depth
+# depth.projection(x, data, method = "random", num.directions = 1000)
+
+## simplicial depth
+# depth.simplicial(x, data, exact = F, k = 0.05, seed = 0)
+
+## simplicial volume depth
+# depth.simplicialVolume(x, data, exact = F, k = 0.05, seed = 0)
+
+## spatial depth
+# depth.spatial(x, data)
+
+## zonoid depth
+# depth.zonoid(x, data)
+
+# Potential
+# depth.potential (x, data, pretransform = "1Mom", 
+#            kernel = "GKernel", kernel.bandwidth = NULL, mah.parMcd = 0.75)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+
+<p>Matrix of objects (numerical vector as one object) whose depth is to be calculated; each row contains a <i>d</i>-variate point. Should have the same dimension as <code>data</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+
+<p>Matrix of data where each row contains a <i>d</i>-variate point, w.r.t. which the depth is to be calculated.
+</p>
+</td></tr>
+<tr valign="top"><td><code>notion</code></td>
+<td>
+
+<p>The name of the depth notion (shall also work with a user-defined depth function named <code>"depth.&lt;name&gt;"</code>).
+</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+
+<p>Additional parameters passed to the depth functions.
+</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Numerical vector of depths, one for each row in <code>x</code>; or one depth value if <code>x</code> is a numerical vector.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="depth.halfspace.html">depth.halfspace</a></code>
+</p>
+<p><code><a href="depth.Mahalanobis.html">depth.Mahalanobis</a></code>
+</p>
+<p><code><a href="depth.projection.html">depth.projection</a></code>
+</p>
+<p><code><a href="depth.simplicial.html">depth.simplicial</a></code>
+</p>
+<p><code><a href="depth.simplicialVolume.html">depth.simplicialVolume</a></code>
+</p>
+<p><code><a href="depth.spatial.html">depth.spatial</a></code>
+</p>
+<p><code><a href="depth.zonoid.html">depth.zonoid</a></code>
+</p>
+<p><code><a href="depth.potential.html">depth.potential</a></code>
+</p>
+<p><code><a href="depth.graph.html">depth.graph</a></code> for building the depth surfaces of the two dimensional data.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# 5-dimensional normal distribution
+data &lt;- mvrnorm(1000, rep(0, 5), 
+                matrix(c(1, 0, 0, 0, 0, 
+                         0, 2, 0, 0, 0, 
+                         0, 0, 3, 0, 0, 
+                         0, 0, 0, 2, 0, 
+                         0, 0, 0, 0, 1),
+                nrow = 5))
+x &lt;- mvrnorm(10, rep(1, 5), 
+             matrix(c(1, 0, 0, 0, 0, 
+                      0, 1, 0, 0, 0, 
+                      0, 0, 1, 0, 0, 
+                      0, 0, 0, 1, 0, 
+                      0, 0, 0, 0, 1),
+             nrow = 5))
+                
+depths &lt;- depth.(x, data, notion = "zonoid")
+cat("Depths: ", depths, "\n")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ddalpha</em> version 1.3.1.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

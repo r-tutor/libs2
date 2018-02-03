@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Calculate Potential Space</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for depth.space.potential {ddalpha}"><tr><td>depth.space.potential {ddalpha}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+Calculate Potential Space
+</h2>
+
+<h3>Description</h3>
+
+<p>Calculates the representation of the training classes in potential space.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+depth.space.potential(data, cardinalities, pretransform = "NMom", 
+            kernel = "GKernel", kernel.bandwidth = NULL, mah.parMcd = 0.75)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+
+<p>Matrix containing training sample where each row is a <i>d</i>-dimensional object, and objects of each class are kept together so that the matrix can be thought of as containing blocks of objects representing classes.
+</p>
+</td></tr>
+<tr valign="top"><td><code>cardinalities</code></td>
+<td>
+
+<p>Numerical vector of cardinalities of each class in <code>data</code>, each entry corresponds to one class.
+</p>
+</td></tr>
+<tr valign="top"><td><code>pretransform</code></td>
+<td>
+
+<p>The method of data scaling. 
+</p>
+<p><code>NULL</code> to use the original data, 
+</p>
+<p>The data may be scaled jointly or separately:
+</p>
+<p><code>1Mom</code> or <code>1MCD</code> for joint scaling of the classes, 
+</p>
+<p><code>NMom</code> or <code>NMCD</code> for separate scaling of the classes.
+</p>
+<p>You may use traditional moments or Minimum Covariance Determinant (MCD) estimates for mean and covariance:
+</p>
+<p><code>1Mom</code> or <code>NMom</code> for scaling using traditional data moments, 
+</p>
+<p><code>1MCD</code> or <code>NMCD</code> for scaling using robust MCD data moments.
+</p>
+</td></tr>
+<tr valign="top"><td><code>kernel</code></td>
+<td>
+
+<p><code>"EDKernel"</code> for the kernel of type 1/(1+kernel.bandwidth*EuclidianDistance2(x, y)), 
+</p>
+<p><code>"GKernel"</code> [default and recommended] for the simple Gaussian kernel, 
+</p>
+<p><code>"EKernel"</code> exponential kernel: exp(-kernel.bandwidth*EuclidianDistance(x, y)), 
+</p>
+
+<p><code>"VarGKernel"</code> variable Gaussian kernel, where <code>kernel.bandwidth</code> is proportional to the <code>depth.zonoid</code> of a point.
+</p>
+</td></tr>
+<tr valign="top"><td><code>kernel.bandwidth</code></td>
+<td>
+
+<p>the bandwidth parameter of the kernel. If <code>NULL</code> - the Scott's rule of thumb is used.
+May be a single value for all classes, or a vector of values for each of the classes.
+</p>
+</td></tr>
+<tr valign="top"><td><code>mah.parMcd</code></td>
+<td>
+
+<p>is the value of the argument <code>alpha</code> for the function <code><a href="../../robustbase/html/covMcd.html">covMcd</a></code>; is used when <code>pretransform = "*MCD"</code>.
+</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The potential representation is calculated in the same way as in <code><a href="depth.potential.html">depth.potential</a></code>, see References below for more information and details.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Matrix of objects, each object (row) is represented via its potentials (columns) w.r.t. each of the classes of the training sample; order of the classes in columns corresponds to the one in the argument <code>cardinalities</code>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Aizerman, M.A., Braverman, E.M., and Rozonoer, L.I. (1970). <em>The Method of Potential Functions in the Theory of Machine Learning</em>. Nauka (Moscow).
+</p>
+<p>Pokotylo, O. and Mosler, K. (2015). Classification with the pot-pot plot. <em>Mimeo</em>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="ddalpha.train.html">ddalpha.train</a></code> and <code><a href="ddalpha.classify.html">ddalpha.classify</a></code> for application, <code><a href="depth.potential.html">depth.potential</a></code> for calculation of the potential.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+# Generate a bivariate normal location-shift classification task
+# containing 20 training objects
+class1 &lt;- mvrnorm(50, c(0,0), 
+                  matrix(c(1,1,1,4), nrow = 2, ncol = 2, byrow = TRUE))
+class2 &lt;- mvrnorm(50, c(1,1), 
+                  matrix(c(1,1,1,4), nrow = 2, ncol = 2, byrow = TRUE))
+data &lt;- rbind(class1, class2)
+plot(data, col = c(rep(1,50), rep(2,50)))
+# potential with rule of thumb bandwidth
+ds = depth.space.potential(data, c(50, 50))
+# draw.ddplot(depth.space = ds, cardinalities = c(50, 50))
+
+# potential with bandwidth = 0.5 and joint scaling
+ds = depth.space.potential(data, c(50, 50), kernel.bandwidth = 0.5,
+                           pretransform = "1Mom")
+# draw.ddplot(depth.space = ds, cardinalities = c(50, 50))
+
+# potential with bandwidth = 0.5 and separate scaling
+ds = depth.space.potential(data, c(50, 50), kernel.bandwidth = 0.5, 
+                           pretransform = "NahMom") # or without pretransform
+# draw.ddplot(depth.space = ds, cardinalities = c(50, 50))
+
+data &lt;- getdata("hemophilia")
+cardinalities = c(sum(data$gr == "normal"), sum(data$gr == "carrier"))
+ds = depth.space.potential(data[,1:2], cardinalities)
+# draw.ddplot(depth.space = ds, cardinalities = cardinalities)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ddalpha</em> version 1.3.1.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

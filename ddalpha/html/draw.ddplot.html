@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Draw _DD_-Plot</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for draw.ddplot {ddalpha}"><tr><td>draw.ddplot {ddalpha}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+Draw <em>DD</em>-Plot
+</h2>
+
+<h3>Description</h3>
+
+<p>The function draws the <em>DD</em>-plot either of the existing DD<i>&alpha;</i>-classifier of the depth space.
+Also accessible from <code><a href="plot.ddalpha.html">plot.ddalpha</a></code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+draw.ddplot(ddalpha, depth.space, cardinalities, 
+            main = "DD plot", xlab = "C1", ylab = "C2", 
+            classes = c(1, 2), colors = c("red", "blue", "green"), drawsep = T)
+
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>ddalpha</code></td>
+<td>
+
+<p>DD<i>&alpha;</i>-classifier (obtained by <code><a href="ddalpha.train.html">ddalpha.train</a></code>).
+</p>
+</td></tr>
+<tr valign="top"><td><code>depth.space</code></td>
+<td>
+
+<p>The ready depth space obtained by <code><a href="depth.space..html">depth.space.</a></code></p>
+</td></tr>
+<tr valign="top"><td><code>cardinalities</code></td>
+<td>
+
+<p>Numerical vector of cardinalities of each class in <code>data</code>, each entry corresponds to one class.
+</p>
+</td></tr>
+<tr valign="top"><td><code>main</code></td>
+<td>
+
+<p>an overall title for the plot: see <code><a href="../../graphics/html/title.html">title</a></code>
+</p>
+</td></tr>
+<tr valign="top"><td><code>xlab, ylab</code></td>
+<td>
+
+<p>class labels
+</p>
+</td></tr>
+<tr valign="top"><td><code>classes</code></td>
+<td>
+
+<p>vector of numbers of two classes used for depth calculation
+</p>
+</td></tr>
+<tr valign="top"><td><code>colors</code></td>
+<td>
+
+<p>vector of the classes' colors
+</p>
+</td></tr>
+<tr valign="top"><td><code>drawsep</code></td>
+<td>
+
+<p>draws the separation on the DD-plot (currently for 2 classes and not for knn)
+</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="ddalpha.train.html">ddalpha.train</a></code>
+</p>
+<p><code><a href="depth.space..html">depth.space.</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  data = getdata("kidney")
+  
+  #1. using the existing ddalpha classifier
+  ddalpha = ddalpha.train(data, depth = "spatial")
+  draw.ddplot(ddalpha, main = "DD-plot")
+  
+  #2. using depth.space.
+  # Sort the data w.r.t. classes
+  data = rbind(data[data$C == 1,], data[data$C == 2,])
+  cardinalities = c(sum(data$C == 1), sum(data$C == 2))
+  
+  dspace = depth.space.spatial(data[,-6], cardinalities = cardinalities)
+  draw.ddplot(depth.space = dspace, cardinalities = cardinalities, 
+              main = "DD-plot", xlab = 1, ylab = 2)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ddalpha</em> version 1.3.1.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

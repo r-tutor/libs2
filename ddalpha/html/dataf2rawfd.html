@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Transform a 'dataf' Object to Raw Functional Data</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for dataf2rawfd {ddalpha}"><tr><td>dataf2rawfd {ddalpha}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Transform a <code>dataf</code> Object to Raw Functional Data</h2>
+
+<h3>Description</h3>
+
+<p>From a (possibly multivariate) functional data object <code>dataf</code> constructs an array of the functional values
+evaluated at an equi-distant grid of points.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+dataf2rawfd(dataf, range = NULL, d = 101)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>dataf</code></td>
+<td>
+<p>Functions to be transformed, represented by a (possibly multivariate) <code>dataf</code> object of their arguments
+and functional values. <code>m</code> stands for the number of functions. The grid of observation points for the 
+functions in <code>dataf</code> may not be the same.</p>
+</td></tr>
+<tr valign="top"><td><code>range</code></td>
+<td>
+<p>The common range of the domain where the functions <code>dataf</code> are observed.
+Vector of length 2 with the left and the right end of the interval. Must contain all arguments given in 
+<code>dataf</code>. If the range is not provided, the smallest interval in which all the arguments from the data functions
+are contained is chosen as the domain.</p>
+</td></tr>
+<tr valign="top"><td><code>d</code></td>
+<td>
+<p>Grid size to which all the functional data are transformed. All functional observations are 
+transformed into vectors of their functional values of length <code>d</code>
+corresponding to equi-spaced points in the domain given by the interval <code>range</code>. Functional values in these
+points are reconstructed using linear interpolation, and extrapolation, see Nagy et al. (2016).</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>If the functional data are univariate (scalar-valued), a matrix of size <code>m*d</code> is given, with each row
+corresponding to one function. If the functional data are <code>k</code>-variate with k&gt;1, an array of size <code>m*d*k</code>
+of the functional values is given.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Stanislav Nagy, <a href="mailto:nagy at karlin.mff.cuni.cz">nagy at karlin.mff.cuni.cz</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="rawfd2dataf.html">rawfd2dataf</a></code>
+</p>
+<p><code><a href="depthf.fd1.html">depthf.fd1</a></code>
+</p>
+<p><code><a href="depthf.fd2.html">depthf.fd2</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## transform a matrix into a functional data set and back
+n = 5
+d = 21
+X = matrix(rnorm(n*d),ncol=d)
+R = rawfd2dataf(X,range=c(0,1))
+R2 = dataf2rawfd(R,range=c(0,1),d=d)
+all.equal(X,R2)
+
+## transform a functional dataset into a raw matrix of functional values
+dataf = dataf.population()$dataf
+dataf2rawfd(dataf,range=c(1950,2015),d=66)
+
+## transform an array into a multivariate functional data set and back
+k = 3
+X = array(rnorm(n*d*k),dim=c(n,d,k))
+R = rawfd2dataf(X,range=c(-1,1))
+dataf2rawfd(R,range=c(-1,1),d=50)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ddalpha</em> version 1.3.1.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

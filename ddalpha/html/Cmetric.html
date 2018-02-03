@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Fast Computation of the Uniform Metric for Sets of Functional...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for Cmetric {ddalpha}"><tr><td>Cmetric {ddalpha}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Fast Computation of the Uniform Metric for Sets of Functional Data</h2>
+
+<h3>Description</h3>
+
+<p>Returns the matrix of <i>C</i> (uniform) distances between two sets of functional data.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+Cmetric(A, B)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>A</code></td>
+<td>
+<p>Functions of the first set, represented by a matrix of their functional values of 
+size <code>m*d</code>. <code>m</code> stands for the number of functions, <code>d</code>
+is the number of the equi-distant points in the domain of the data at which the functional
+values of the <code>m</code> functions are evaluated.</p>
+</td></tr>
+<tr valign="top"><td><code>B</code></td>
+<td>
+<p>Functions of the second set, represented by a matrix of their functional values of 
+size <code>n*d</code>. <code>n</code> stands for the number of functions, <code>d</code>
+is the number of the equi-distant points in the domain of the data at which the functional
+values of the <code>n</code> functions are evaluated. The grid of observation points for the 
+functions <code>A</code> and <code>B</code> must be the same.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>For two sets of functional data of sizes <code>m</code> and <code>n</code>
+represented by matrices of their functional values, 
+this function returns the symmetric matrix of size <code>m*n</code> whose entry in the
+<code>i</code>-th row and <code>j</code>-th column is the approximated <i>C</i> (uniform) distance of the 
+<code>i</code>-th function from the first set, and the <code>j</code>-th function from the second set.
+This function is utilized in the computation of the h-mode depth.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A symmetric matrix of the distances of the functions of size <code>m*n</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Stanislav Nagy, <a href="mailto:nagy at karlin.mff.cuni.cz">nagy at karlin.mff.cuni.cz</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="depthf.hM.html">depthf.hM</a></code>
+</p>
+<p><code><a href="dataf2rawfd.html">dataf2rawfd</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+datapop = dataf2rawfd(dataf.population()$dataf,range=c(1950,2015),d=66)
+A = datapop[1:20,]
+B = datapop[21:50,]
+Cmetric(A,B)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ddalpha</em> version 1.3.1.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

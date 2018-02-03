@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Adjusted Band Depth for Functional Data</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for depthf.ABD {ddalpha}"><tr><td>depthf.ABD {ddalpha}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Adjusted Band Depth for Functional Data</h2>
+
+<h3>Description</h3>
+
+<p>The adjusted band depth 
+of functional real-valued data based on either the
+<i>C</i> (uniform) norm, or on the <i>L^2</i> norm of functions.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+depthf.ABD(datafA, datafB, range = NULL, d = 101, norm = c("C", "L2"),
+  J = 2, K = 1)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>datafA</code></td>
+<td>
+<p>Functions whose depth is computed, represented by a <code>dataf</code> object of their arguments
+and functional values. <code>m</code> stands for the number of functions.</p>
+</td></tr>
+<tr valign="top"><td><code>datafB</code></td>
+<td>
+<p>Random sample functions with respect to which the depth of <code>datafA</code> is computed. 
+<code>datafB</code> is represented by a <code>dataf</code> object of their arguments
+and functional values. <code>n</code> is the sample size. The grid of observation points for the 
+functions <code>datafA</code> and <code>datafB</code> may not be the same.</p>
+</td></tr>
+<tr valign="top"><td><code>range</code></td>
+<td>
+<p>The common range of the domain where the functions <code>datafA</code> and <code>datafB</code> are observed.
+Vector of length 2 with the left and the right end of the interval. Must contain all arguments given in 
+<code>datafA</code> and <code>datafB</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>d</code></td>
+<td>
+<p>Grid size to which all the functional data are transformed. For depth computation, 
+all functional observations are first transformed into vectors of their functional values of length <code>d</code>
+corresponding to equi-spaced points in the domain given by the interval <code>range</code>. Functional values in these
+points are reconstructed using linear interpolation, and extrapolation, see Nagy et al. (2016).</p>
+</td></tr>
+<tr valign="top"><td><code>norm</code></td>
+<td>
+<p>The norm used for the computation of the depth. Two possible 
+choices are implemented: <code>C</code> for the uniform norm of continuous functions, 
+and <code>L2</code> for the <i>L^2</i> norm of integrable functions.</p>
+</td></tr>
+<tr valign="top"><td><code>J</code></td>
+<td>
+<p>The order of the adjusted band depth, that is the maximal number of functions
+taken in a band. Acceptable values are <code>2</code>, <code>3</code>,... By default this value is set to <code>2</code>. 
+Note that this is NOT the order as
+defined in the order-extended version of adjusted band depths in Nagy et al. (2016), used
+for the detection of shape outlying curves.</p>
+</td></tr>
+<tr valign="top"><td><code>K</code></td>
+<td>
+<p>Number of sub-samples of the functions from <code>B</code> taken to speed up the
+computation. By default, sub-sampling is not performed. Values of <code>K</code> larger than <code>1</code>
+result in an approximation of the adjusted band depth.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The function returns the vector of the sample adjusted band depth values. The kernel 
+used in the evaluation is the function <i>K(u) = exp(-u)</i>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A vectors of length <code>m</code> of the adjusted band depths.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Stanislav Nagy, <a href="mailto:nagy at karlin.mff.cuni.cz">nagy at karlin.mff.cuni.cz</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Gijbels, I., Nagy, S. (2015).
+Consistency of non-integrated depths for functional data.
+<em>Journal of Multivariate Analysis</em> <b>140</b>, 259&ndash;282.
+</p>
+<p>Nagy, S., Gijbels, I. and Hlubinka, D. (2016). 
+Weak convergence of discretely observed functional data with applications. 
+<em>Journal of Multivariate Analysis</em>, <b>146</b>, 46&ndash;62.
+</p>
+<p>Nagy, S., Gijbels, I. and Hlubinka, D.  (2017).
+Depth-based recognition of shape outlying functions. 
+<em>Journal of Computational and Graphical Statistics</em>. To appear.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="depthf.BD.html">depthf.BD</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+datafA = dataf.population()$dataf[1:20]
+datafB = dataf.population()$dataf[21:50]
+depthf.ABD(datafA,datafB)
+depthf.ABD(datafA,datafB,norm="L2")
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ddalpha</em> version 1.3.1.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

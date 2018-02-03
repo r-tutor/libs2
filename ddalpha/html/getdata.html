@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Data for Classification</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for getdata {ddalpha}"><tr><td>getdata {ddalpha}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+Data for Classification
+</h2>
+
+<h3>Description</h3>
+
+<p>50 multivariate data sets for binary classification. For more details refer <a href="http://www.wisostat.uni-koeln.de/de/forschung/software-und-daten/data-for-classification/">http://www.wisostat.uni-koeln.de/de/forschung/software-und-daten/data-for-classification/</a>
+</p>
+<p>The <code>getdata</code> function gets the data set from the package, and returns it. The dataset itself does not appear in the global environment and the existing variables with the same name remain unchanged.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+# load the data set
+# data(name)
+
+# load the data set by name
+# data(list = "name")
+
+# load the data set by name to a variable
+# getdata("name")
+
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>name</code></td>
+<td>
+
+<p>the data set name. 
+</p>
+</td></tr>
+</table>
+
+
+<h3>Format</h3>
+
+<p>A data frame with <code>n</code> observations on the <code>d</code> variables. The last <code>d+1</code> column is the class label.
+</p>
+
+<dl>
+<dt><code>x[,1:d]</code></dt><dd><p>numeric values</p>
+</dd>
+<dt><code>x[,d+1]</code></dt><dd><p>the numeric class label (0 or 1) or (1 or 2)</p>
+</dd>
+</dl>
+
+
+
+<h3>Details</h3>
+
+<p>The package contains data sets used in the joint project of the University of Cologne and the Hochschule Merseburg &quot;Classifying real-world data with the DDalpha-procedure&quot;. Comprehensive description of the methodology, and experimental settings and results of the study are presented in the work:
+</p>
+<p>Mozharovskyi, P., Mosler, K., and Lange, T. (2015). Classifying real-world data with the DD<i>&alpha;</i>-procedure. <em>Advances in Data Analysis and Classification</em> <b>9</b> 287&ndash;314.
+</p>
+<p>For a more complete explanation of the technique and further experiments see:
+Lange, T., Mosler, K., and Mozharovskyi, P. (2014). Fast nonparametric classification based on data depth. <em>Statistical Papers</em> <b>55</b> 49&ndash;69.
+</p>
+<p>50 binary classification tasks have been obtained from partitioning 33 freely accessible data sets. Multiclass problems were reasonably split into binary classification problems, some of the data set were slightly processed by removing objects or attributes and selecting prevailing classes. Each data set is provided with a (short) description and brief descriptive statistics. The name reflects the origination of the data. A letter after the name is a property filter, letters (also their combinations) in brackets separated by &quot;vs&quot; are the classes opposed. The letters (combinations or words) stand for labels of classes (names of properties) and are intuitive. Each description contains a link to the original data.
+</p>
+<p>The data have been collected as open source data in January 2013. Owners of the package decline any responsibility regarding their correctness or consequences of their usage. If you publish material based on these data, please quote the original source. Special requests regarding citations are found on data set's web page.
+</p>
+
+
+<h3>Note</h3>
+
+<p>List of the datasets:
+</p>
+<p>baby<br />
+banknoten<br />
+biomed<br />
+bloodtransfusion<br />
+breast_cancer_wisconsin<br />
+bupa<br />
+chemdiab_1vs2<br />
+chemdiab_1vs3<br />
+chemdiab_2vs3<br />
+cloud<br />
+crabB_MvsF<br />
+crabF_BvsO<br />
+crabM_BvsO<br />
+crabO_MvsF<br />
+crab_BvsO<br />
+crab_MvsF<br />
+cricket_CvsP<br />
+diabetes<br />
+ecoli_cpvsim<br />
+ecoli_cpvspp<br />
+ecoli_imvspp<br />
+gemsen_MvsF<br />
+glass<br />
+groessen_MvsF<br />
+haberman<br />
+heart<br />
+hemophilia<br />
+indian_liver_patient_1vs2<br />
+indian_liver_patient_FvsM<br />
+iris_setosavsversicolor<br />
+iris_setosavsvirginica<br />
+iris_versicolorvsvirginica<br />
+irish_ed_MvsF<br />
+kidney<br />
+pima<br />
+plasma_retinol_MvsF<br />
+segmentation<br />
+socmob_IvsNI<br />
+socmob_WvsB<br />
+tae<br />
+tennis_MvsF<br />
+tips_DvsN<br />
+tips_MvsF<br />
+uscrime_SvsN<br />
+vertebral_column<br />
+veteran_lung_cancer<br />
+vowel_MvsF<br />
+wine_1vs2<br />
+wine_1vs3<br />
+wine_2vs3
+</p>
+
+
+<h3>References</h3>
+
+<p>Lange, T., Mosler, K., and Mozharovskyi, P. (2014). Fast nonparametric classification based on data depth. <em>Statistical Papers</em> <b>55</b> 49&ndash;69.
+</p>
+<p>Mozharovskyi, P., Mosler, K., and Lange, T. (2015). Classifying real-world data with the DD<i>&alpha;</i>-procedure. <em>Advances in Data Analysis and Classification</em> <b>9</b> 287&ndash;314.
+</p>
+<p>The general list of sources consists of:
+</p>
+<p>UCI Machine Learning Repository <a href="http://archive.ics.uci.edu/ml">http://archive.ics.uci.edu/ml</a><br />
+R-packages <a href="https://CRAN.R-project.org/">https://CRAN.R-project.org/</a> <br />
+<a href="http://stat.cmu.edu">http://stat.cmu.edu</a> <br />
+<a href="http://stat.ethz.ch/Teaching/Datasets">http://stat.ethz.ch/Teaching/Datasets</a> <br />
+<a href="http://www.stats.ox.ac.uk/pub/PRNN">http://www.stats.ox.ac.uk/pub/PRNN</a> 
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../utils/html/data.html">utils:data</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# load a dataset using data()
+data(hemophilia)
+data(list = "hemophilia")
+rm(hemophilia)
+
+# load data set using getdata()
+hemophilia = "This is some existing object called 'hemophilia'. It remains unchanged"
+d = getdata("hemophilia")
+head(d)
+print(hemophilia)
+
+#get the list of all data sets
+names = data(package = "ddalpha")$results[,3]
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ddalpha</em> version 1.3.1.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Test Functional DD-Classifier</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for ddalphaf.getErrorRatePart {ddalpha}"><tr><td>ddalphaf.getErrorRatePart {ddalpha}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+Test Functional DD-Classifier
+</h2>
+
+<h3>Description</h3>
+
+<p>Performs a benchmark procedure by partitioning the given data. 
+On each of <code>times</code> steps <code>size</code> observations are removed from the data, the functional DD-classifier is trained on these data and tested on the removed observations.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ddalphaf.getErrorRatePart(dataf, labels, size = 0.3, times = 10, 
+                          disc.type = c("LS", "comp"),  ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>dataf</code></td>
+<td>
+
+<p>list containing lists (functions) of two vectors of equal length, named &quot;args&quot; and &quot;vals&quot;: arguments sorted in ascending order and corresponding them values respectively
+</p>
+</td></tr>
+<tr valign="top"><td><code>labels</code></td>
+<td>
+
+<p>list of output labels of the functional observations
+</p>
+</td></tr>
+<tr valign="top"><td><code>size</code></td>
+<td>
+
+<p>the excluded sequences size. Either an integer between <i>1</i> and <i>n</i>, or a fraction of data between <i>0</i> and <i>1</i>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>times</code></td>
+<td>
+
+<p>the number of times the classifier is trained.
+</p>
+</td></tr>
+<tr valign="top"><td><code>disc.type</code></td>
+<td>
+
+<p>type of the used discretization scheme. &quot;LS&quot; for <code><a href="ddalphaf.train.html">ddalphaf.train</a></code>, &quot;comp&quot; for  for <code><a href="compclassf.train.html">compclassf.train</a></code>
+</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+
+<p>additional parameters passed to <code><a href="ddalphaf.train.html">ddalphaf.train</a></code>
+</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<table summary="R valueblock">
+<tr valign="top"><td><code>errors</code></td>
+<td>
+
+<p>the part of incorrectly classified data (mean)
+</p>
+</td></tr>
+<tr valign="top"><td><code>errors_sd</code></td>
+<td>
+
+<p>the standard deviation of errors
+</p>
+</td></tr>
+<tr valign="top"><td><code>errors_vec</code></td>
+<td>
+
+<p>vector of errors
+</p>
+</td></tr>
+<tr valign="top"><td><code>time</code></td>
+<td>
+
+<p>the mean training time
+</p>
+</td></tr>
+<tr valign="top"><td><code>time_sd</code></td>
+<td>
+
+<p>the standard deviation of training time
+</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="ddalphaf.train.html">ddalphaf.train</a></code> to train the functional DD<i>&alpha;</i>-classifier, 
+<code><a href="ddalphaf.classify.html">ddalphaf.classify</a></code> for classification using functional DD<i>&alpha;</i>-classifier, 
+<code><a href="ddalphaf.test.html">ddalphaf.test</a></code> to test the functional DD-classifier on particular learning and testing data,
+<code><a href="ddalphaf.getErrorRateCV.html">ddalphaf.getErrorRateCV</a></code> to get error rate of the functional DD-classifier on particular data.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# load the fdata
+df = dataf.growth()
+
+stat &lt;- ddalphaf.getErrorRatePart(dataf = df$dataf, labels = df$labels, 
+                          size = 0.3, times = 5,
+                          adc.args = list(instance = "avr", 
+                                         numFcn = 2, 
+                                         numDer = 2))
+
+cat("Classification error rate: ", stat$errors, ".\n", sep = "")
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ddalpha</em> version 1.3.1.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

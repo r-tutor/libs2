@@ -1,0 +1,527 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Using Custom Depth Functions and Classifiers</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for Custom Methods {ddalpha}"><tr><td>Custom Methods {ddalpha}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+Using Custom Depth Functions and Classifiers
+</h2>
+
+<h3>Description</h3>
+
+<p>To use a custom depth function or classifier one has to implement three functions: parameters validator, learning and calculating functions.
+</p>
+
+
+<h3>Details</h3>
+
+<p><b>To define a depth function:</b>
+</p>
+
+<dl>
+<dt>.&lt;NAME&gt;_validate</dt><dd>
+<p>validates parameters passed to <code><a href="ddalpha.train.html">ddalpha.train</a></code> and passes them to the <code>ddalpha</code> object.
+</p>
+
+<table summary="Rd table">
+<tr>
+ <td style="text-align: left;">IN:</td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+    <code>ddalpha</code> </td><td style="text-align: left;"> the ddalpha object, containing the data and settings (mandatory)</td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+    <code>&lt;custom parameters&gt;</code> </td><td style="text-align: left;">  parameters that are passed to the user-defined method</td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+    <code>...</code> </td><td style="text-align: left;"> other parameters (mandatory)
+    
+    </td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+    OUT:</td>
+</tr>
+<tr>
+ <td style="text-align: left;"> 
+    <code>list()</code> </td><td style="text-align: left;"> list of output parameters, after the validation is finished, these parameters are stored in the <code>ddalpha</code> object
+    </td>
+</tr>
+
+</table>
+
+</dd>
+<dt>.&lt;NAME&gt;_learn</dt><dd>
+<p>trains the depth
+</p>
+
+<table summary="Rd table">
+<tr>
+ <td style="text-align: left;">IN:</td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+    <code>ddalpha</code> </td><td style="text-align: left;"> the ddalpha object, containing the data and settings
+    
+    </td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+  MODIFIES:</td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+  <code>ddalpha</code> </td><td style="text-align: left;"> store the calculated statistics in the <code>ddalpha</code> object </td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+  depths </td><td style="text-align: left;"> calculate the depths of each pattern, e.g. </td>
+</tr>
+<tr>
+ <td style="text-align: left;"> </td><td style="text-align: left;"> <code>for (i in 1:ddalpha$numPatterns) ddalpha$patterns[[i]]$depths = .&lt;NAME&gt;_depths(ddalpha, ddalpha$patterns[[i]]$points)</code>
+  
+  </td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+  OUT:</td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+    <code>ddalpha</code> </td><td style="text-align: left;"> the updated <code>ddalpha</code> object
+    </td>
+</tr>
+
+</table>
+
+</dd>
+<dt>.&lt;NAME&gt;_depths</dt><dd>
+<p>calculates the depths
+</p>
+
+<table summary="Rd table">
+<tr>
+ <td style="text-align: left;">IN:</td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+    <code>ddalpha</code> </td><td style="text-align: left;"> the ddalpha object, containing the data and settings </td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+    <code>objects</code> </td><td style="text-align: left;"> the objects for which the depths are calculated </td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+    </td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+    OUT:</td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+      <code>depths</code> </td><td style="text-align: left;"> the calculated depths for each object (rows), with respect to each class (cols)
+      </td>
+</tr>
+
+</table>
+
+</dd>
+</dl>
+
+<p>Usage: <code>ddalpha.train(data, depth = "&lt;NAME&gt;", &lt;custom parameters&gt;, ...)</code>
+</p>
+<p><code style="white-space: pre;">
+#### Custom depths ####
+
+.MyDepth_validate  &lt;- function(ddalpha, mydepth.parameter = "value", ...){ 
+  print("MyDepth validating")
+  # validate the parameters
+  if (!is.valid(mydepth.parameter)){
+    warning("Argument \"mydepth.parameter\" not specified correctly. Default value is used")
+    mydepth.parameter = "value"
+    # or stop("Argument \"mydepth.parameter\" not specified correctly.")
+  }
+  
+  # the values from the return list will be stored in the ddalpha object
+  return (list(mydepthpar = mydepth.parameter))
+}
+
+.MyDepth_learn &lt;- function(ddalpha){
+  print("MyDepth learning")
+  
+  #1. Calculate any statistics based on data that .MyDepth_depths needs
+  #   and store them to the ddalpha object: 
+  ddalpha$mydepth.statistic = "some value"
+  
+  #2. Calculate depths for each pattern
+  for (i in 1:ddalpha$numPatterns){
+    ddalpha$patterns[[i]]$depths = .MyDepth_depths(ddalpha, ddalpha$patterns[[i]]$points)
+  }
+  
+  return(ddalpha)
+}
+
+.MyDepth_depths &lt;- function(ddalpha, objects){
+  print("MyDepth calculating")
+  depths &lt;- NULL
+  
+  # The depth parameters are accessible in the ddalpha object:
+  mydepth.parameter = ddalpha$mydepth.parameter
+  mydepth.statistic = ddalpha$mydepth.statistic
+  
+  #calculate the depths of the objects w.r.t. each pattern
+  for (i in 1:ddalpha$numPatterns){
+    depth_wrt_i = #calculate depths of the objects, as vector
+    
+    depths &lt;- cbind(depths, depth_wrt_i)
+  }
+    
+  return (depths)
+}
+
+ddalpha.train(data, depth = "MyDepth", ...)
+</code>
+</p>
+<p><b>To define a classifier:</b>
+</p>
+
+<dl>
+<dt>.&lt;NAME&gt;_validate</dt><dd>
+<p>validates parameters passed to <code><a href="ddalpha.train.html">ddalpha.train</a></code> and passes them to the <code>ddalpha</code> object
+</p>
+
+<table summary="Rd table">
+<tr>
+ <td style="text-align: left;">IN:</td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+    <code>ddalpha</code> </td><td style="text-align: left;"> the ddalpha object, containing the data and settings (mandatory)</td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+    <code>&lt;custom parameters&gt;</code> </td><td style="text-align: left;">  parameters that are passed to the user-defined method</td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+    <code>...</code> </td><td style="text-align: left;"> other parameters (mandatory)
+    </td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+    OUT:</td>
+</tr>
+<tr>
+ <td style="text-align: left;"> 
+    <code>list()</code> </td><td style="text-align: left;"> list of output parameters, after the validation is finished, these parameters are stored in the <code>ddalpha</code> object. 
+In case of a multiclass classifier the validator must return <code>methodSeparatorBinary = F</code> and/or pass <code>aggregation.method = "none"</code> to <code>ddalpha.train</code>
+    </td>
+</tr>
+
+</table>
+
+</dd>
+<dt>.&lt;NAME&gt;_learn</dt><dd>
+<p>trains the classifier. Is different for binnary and mylticlass classifiers.
+</p>
+
+<table summary="Rd table">
+<tr>
+ <td style="text-align: left;">IN:</td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+    <code>ddalpha</code> </td><td style="text-align: left;"> the ddalpha object, containing the data and settings</td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+    <code>index1</code> </td><td style="text-align: left;"> (only for binary) index of the first class</td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+    <code>index2</code> </td><td style="text-align: left;"> (only for binary) index of the second class</td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+    <code>depths1</code> </td><td style="text-align: left;"> (only for binary) depths of the first class w.r.t. all classes</td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+    <code>depths2</code> </td><td style="text-align: left;"> (only for binary) depths of the second class w.r.t. all classes</td>
+</tr>
+<tr>
+ <td style="text-align: left;"></td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+    </td><td style="text-align: left;"> depths w.r.t. only given classes are received by <code>depths1[,c(index1, index2)]</code></td>
+</tr>
+<tr>
+ <td style="text-align: left;"></td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+    </td><td style="text-align: left;"> for the multiclass classifiers the depths are accessible via <code>ddalpha$patterns[[i]]$depths</code>
+    </td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+    OUT:</td>
+</tr>
+<tr>
+ <td style="text-align: left;"> 
+    <code>classifier</code> </td><td style="text-align: left;">  the trained <code>classifier</code> object
+    </td>
+</tr>
+
+</table>
+
+</dd>
+<dt>.&lt;NAME&gt;_classify</dt><dd>
+<p>classifies the objects
+</p>
+
+<table summary="Rd table">
+<tr>
+ <td style="text-align: left;">IN:</td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+    <code>ddalpha</code> </td><td style="text-align: left;"> the ddalpha object, containing the data and global settings </td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+    <code>classifier</code> </td><td style="text-align: left;"> the previously trained classifier</td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+    <code>objects</code> </td><td style="text-align: left;"> the objects (depths) that are classified </td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+    </td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+    OUT:</td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+      <code>result</code> </td><td style="text-align: left;">  a vector with classification results</td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+        </td><td style="text-align: left;"> (binary) the objects from class <code>"classifier$index1"</code> get positive values </td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+        </td><td style="text-align: left;"> (multiclass) the objects get the numbers of patterns in <code>ddalpha</code>
+    </td>
+</tr>
+
+</table>
+
+</dd>
+</dl>
+
+<p>Usage: <code>ddalpha.train(data, separator = "&lt;NAME&gt;", ...)</code>
+</p>
+<p><code style="white-space: pre;">
+#### Custom classifiers ####
+
+
+.MyClassifier_validate  &lt;- function(ddalpha, my.parameter = "value", ...){
+  print("MyClassifier validating")
+  # validate the parameters
+  ...
+  
+  # always include methodSeparatorBinary. 
+  # TRUE for the binary classifier, FALSE otherwise
+  return(list(methodSeparatorBinary = T, 
+              my.parameter = my.parameter
+              ))
+}
+
+# a binary classifier 
+# the package takes care of the voting procedures. Just train it as if there are only two classes
+.MyClassifier_learn &lt;- function(ddalpha, index1, index2, depths1, depths2){
+  print("MyClassifier (binary) learning")
+  
+  # The parameters are accessible in the ddalpha object:
+  my.parameter = ddalpha$my.parameter
+  
+  #depths w.r.t. only given classes are received by
+  depths1[,c(index1, index2)]
+  depths2[,c(index1, index2)]
+  
+  # train the classifier
+  classifier &lt;-  ...
+  
+  #return the needed values in a list, e.g.
+  return(list(
+    coefficients  = classifier$coefficients,
+    ... ))
+}
+
+# a multiclass classifier 
+.MyClassifier_learn &lt;- function(ddalpha){
+  print("MyClassifier (multiclass) learning")
+  
+  # access the data through the ddalpha object, e.g.
+  for (i in 1:ddalpha$numPatterns){
+    depth  &lt;- ddalpha$patterns[[i]]$depths
+    number &lt;- ddalpha$patterns[[i]]$cardinality
+    ...
+  }
+  
+  # train the classifier
+  classifier &lt;-  ...
+  
+  # return the classifier
+  return(classifier)
+}
+
+# the interface of the classify function is equal for binary and multiclass classifiers
+.MyClassifier_classify &lt;- function(ddalpha, classifier, depths){
+  print("MyClassifier classifying")
+  
+  # The global parameters are accessible in the ddalpha object:
+  my.parameter = ddalpha$my.parameter
+  # The parameters generated by .MyClassifier_learn are accessible in the classifier object:
+  classifier$coefficients
+  
+  # here are the depths w.r.t. the first class
+  depths[,classifier$index1]
+  # here are the depths w.r.t. the second class
+  depths[,classifier$index2]
+  
+  # fill results in a vector, so that:
+  # (binary) the objects from class "classifier$index1" get positive values
+  # (multiclass) the objects get the numbers of patterns in ddalpha
+  result &lt;- ...
+  
+  return(result)
+}
+
+ddalpha.train(data, separator = "MyClassifier", ...)
+</code>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="ddalpha.train.html">ddalpha.train</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+## Not run: 
+
+#### example:  Euclidean depth ####
+
+#.Euclidean_validate is basically not needed
+
+.Euclidean_learn &lt;- function(ddalpha){
+  print("Euclidean depth learning")
+  
+  #1. Calculate any statistics based on data that .MyDepth_depths needs
+  #   and store them to the ddalpha object: 
+  for (i in 1:ddalpha$numPatterns){
+    ddalpha$patterns[[i]]$center &lt;- colMeans(ddalpha$patterns[[i]]$points)
+  }
+  
+  #2. Calculate depths for each pattern
+  for (i in 1:ddalpha$numPatterns){
+    ddalpha$patterns[[i]]$depths = .Euclidian_depths(ddalpha, ddalpha$patterns[[i]]$points)
+  }
+  
+  return(ddalpha)
+}
+
+.Euclidean_depths &lt;- function(ddalpha, objects){
+  print("Euclidean depth calculating")
+  depths &lt;- NULL
+  
+  #calculate the depths of the objects w.r.t. each pattern
+  for (i in 1:ddalpha$numPatterns){
+    # The depth parameters are accessible in the ddalpha object:
+    center = ddalpha$patterns[[i]]$center
+    
+    depth_wrt_i &lt;- 1/(1 + colSums((t(objects) - center)^2))
+    depths &lt;- cbind(depths, depth_wrt_i)
+  }
+  
+  return (depths)
+}
+
+#### example:  binary decision tree ####
+
+library(rpart)
+
+.tree_validate  &lt;- function(ddalpha, ...){
+  print("tree validating")
+  return(list(methodSeparatorBinary = T))
+}
+
+# a binary classifier 
+# the package takes care of the voting procedures. Just train it as if there are only two classes
+.tree_learn &lt;- function(ddalpha, index1, index2, depths1, depths2){
+  print("tree learning")
+  
+  # prepare the data
+  data = as.data.frame(cbind( (rbind(depths1, depths2)), 
+                              c(rep(1, times = nrow(depths1)), rep(-1, times = nrow(depths1)))))
+  names(data) &lt;- paste0("V",seq_len(ncol(data)))
+  names(data)[ncol(data)] &lt;- "O"
+  # train the classifier
+  classifier &lt;- rpart(O~., data = data)
+  
+  #return the needed values in a list, e.g.
+  return(classifier)
+}
+
+# the interface of the classify function is equal for binary and multiclass classifiers
+.tree_classify &lt;- function(ddalpha, classifier, depths){
+  print("tree classifying")
+  
+  # fill results in a vector, so that the objects from class "classifier$index1" get positive values
+  data = as.data.frame(depths)
+  names(data) &lt;- paste0("V",seq_len(ncol(data)))
+  result &lt;- predict(classifier, as.data.frame(depths), type = "vector")
+  
+  return(result)
+}
+
+
+
+
+#### checking ####
+
+library(ddalpha)
+data = getdata("hemophilia")
+
+ddalpha = ddalpha.train(data = data, depth = "Euclidean", separator = "tree")
+c = ddalpha.classify(ddalpha, data[,1:2])
+errors = sum(unlist(c) != data[,3])/nrow(data)
+print(paste("Error rate: ",errors))
+
+# building the depth contours using the custom depth
+depth.contours.ddalpha(ddalpha, asp = T, levels = seq(0.5, 1, length.out = 10))
+
+
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ddalpha</em> version 1.3.1.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

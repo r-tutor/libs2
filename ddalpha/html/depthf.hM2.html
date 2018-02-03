@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Bivariate h-Mode Depth for Functional Data Based on the L^2...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for depthf.hM2 {ddalpha}"><tr><td>depthf.hM2 {ddalpha}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Bivariate h-Mode Depth for Functional Data Based on the <i>L^2</i> Metric</h2>
+
+<h3>Description</h3>
+
+<p>The h-mode depth 
+of functional bivariate data (that is, data of the form <i>X:[a,b] \to R^2</i>,
+or <i>X:[a,b] \to R</i> and the derivative of <i>X</i>) based on the
+<i>L^2</i> metric of functions.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+depthf.hM2(datafA, datafB, range = NULL, d = 101, q = 0.2)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>datafA</code></td>
+<td>
+<p>Bivariate functions whose depth is computed, represented by a multivariate <code>dataf</code> object of 
+their arguments (vector), and a matrix with two columns of the corresponding bivariate functional values. 
+<code>m</code> stands for the number of functions.</p>
+</td></tr>
+<tr valign="top"><td><code>datafB</code></td>
+<td>
+<p>Bivariate random sample functions with respect to which the depth of <code>datafA</code> is computed. 
+<code>datafB</code> is represented by a multivariate <code>dataf</code> object of their arguments
+(vector), and a matrix with two columns of the corresponding bivariate functional values.
+<code>n</code> is the sample size. The grid of observation points for the 
+functions <code>datafA</code> and <code>datafB</code> may not be the same.</p>
+</td></tr>
+<tr valign="top"><td><code>range</code></td>
+<td>
+<p>The common range of the domain where the functions <code>datafA</code> and <code>datafB</code> are observed.
+Vector of length 2 with the left and the right end of the interval. Must contain all arguments given in 
+<code>datafA</code> and <code>datafB</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>d</code></td>
+<td>
+<p>Grid size to which all the functional data are transformed. For depth computation, 
+all functional observations are first transformed into vectors of their functional values of length <code>d</code>
+corresponding to equi-spaced points in the domain given by the interval <code>range</code>. Functional values in these
+points are reconstructed using linear interpolation, and extrapolation.</p>
+</td></tr>
+<tr valign="top"><td><code>q</code></td>
+<td>
+<p>The quantile used to determine the value of the bandwidth <i>h</i>
+in the computation of the h-mode depth. <i>h</i> is taken as the <code>q</code>-quantile of
+all non-zero distances between the functions <code>B</code>. By default, this value is set
+to <code>q=0.2</code>, in accordance with the choice of Cuevas et al. (2007).</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The function returns the vectors of sample h-mode depth values. The kernel 
+used in the evaluation is the standard Gaussian kernel, the bandwidth value is chosen
+as a quantile of the non-zero distances between the random sample curves.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Three vectors of length <code>m</code> of h-mode depth values are returned:
+</p>
+
+<ul>
+<li> <p><code>hM</code> the unscaled h-mode depth,
+</p>
+</li>
+<li> <p><code>hM_norm</code> the h-mode depth <code>hM</code> linearly transformed so that its range is [0,1],
+</p>
+</li>
+<li> <p><code>hM_norm2</code> the h-mode depth <code>FD</code> linearly transformed by a transformation such that 
+the range of the h-mode depth of <code>B</code> with respect to <code>B</code> is [0,1]. This depth may give negative values.
+</p>
+</li></ul>
+
+
+
+<h3>Author(s)</h3>
+
+<p>Stanislav Nagy, <a href="mailto:nagy at karlin.mff.cuni.cz">nagy at karlin.mff.cuni.cz</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Cuevas, A., Febrero, M. and Fraiman, R.  (2007). 
+Robust estimation and classification for functional data via projection-based depth notions. 
+<em>Computational Statistics</em> <b>22</b> (3), 481&ndash;496.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="depthf.hM.html">depthf.hM</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+datafA = dataf.population()$dataf[1:20]
+datafB = dataf.population()$dataf[21:50]
+
+datafA2 = derivatives.est(datafA,deriv=c(0,1))
+datafB2 = derivatives.est(datafB,deriv=c(0,1))
+
+depthf.hM2(datafA2,datafB2)
+
+depthf.hM2(datafA2,datafB2)$hM
+# depthf.hM2(cbind(A2[,,1],A2[,,2]),cbind(B2[,,1],B2[,,2]))$hM
+# the two expressions above should give the same result
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ddalpha</em> version 1.3.1.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

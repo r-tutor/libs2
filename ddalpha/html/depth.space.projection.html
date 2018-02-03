@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Calculate Depth Space using Projection Depth</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for depth.space.projection {ddalpha}"><tr><td>depth.space.projection {ddalpha}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+Calculate Depth Space using Projection Depth
+</h2>
+
+<h3>Description</h3>
+
+<p>Calculates the representation of the training classes in depth space using projection depth.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+depth.space.projection(data, cardinalities, 
+                       method = "random", num.directions = 1000, seed = 0)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+
+<p>Matrix containing training sample where each row is a <i>d</i>-dimensional object, and objects of each class are kept together so that the matrix can be thought of as containing blocks of objects representing classes.
+</p>
+</td></tr>
+<tr valign="top"><td><code>cardinalities</code></td>
+<td>
+
+<p>Numerical vector of cardinalities of each class in <code>data</code>, each entry corresponds to one class.
+</p>
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+
+<p>to be used in calculations.
+</p>
+<p><code>"random"</code> Here the depth is determined as the minimum univariate depth of the data projected on lines in several directions. The directions are distributed uniformly on the <i>(d-1)</i>-sphere; the same direction set is used for all points.
+</p>
+<p><code>"linearize"</code> The Nelder-Mead method for function minimization, taken from Olsson, Journal of Quality Technology, 1974, 6, 56. R-codes of this function were written by Subhajit Dutta.
+</p>
+</td></tr>
+<tr valign="top"><td><code>num.directions</code></td>
+<td>
+
+<p>Number of random directions to be generated for <code>method = "random"</code>. With the growth of n the complexity grows linearly for the same number of directions. 
+</p>
+</td></tr>
+<tr valign="top"><td><code>seed</code></td>
+<td>
+
+<p>the random seed. The default value <code>seed=0</code> makes no changes.
+</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The depth representation is calculated in the same way as in <code><a href="depth.projection.html">depth.projection</a></code>, see 'References' for more information and details.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Matrix of objects, each object (row) is represented via its depths (columns) w.r.t. each of the classes of the training sample; order of the classes in columns corresponds to the one in the argument <code>cardinalities</code>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Donoho, D.L. (1982). <em>Breakdown properties of multivariate location estimators</em>. Ph.D. qualifying paper. Department of Statistics, Harvard University.
+</p>
+<p>Liu, R.Y. (1992). Data depth and multivariate rank tests. In: Dodge, Y. (ed.), L1-Statistics and Related Methods, North-Holland (Amsterdam), 279&ndash;294.
+</p>
+<p>Liu, X. and Zuo, Y. (2014). Computing projection depth and its associated estimators. <em>Statistics and Computing</em> <b>24</b> 51&ndash;63.
+</p>
+<p>Stahel, W.A. (1981). <em>Robust estimation: infinitesimal optimality and covariance matrix estimators</em>. Ph.D. thesis (in German). Eidgenossische Technische Hochschule Zurich.
+</p>
+<p>Zuo, Y.J. and Lai, S.Y. (2011). Exact computation of bivariate projection depth and the Stahel-Donoho estimator. <em>Computational Statistics and Data Analysis</em> <b>55</b> 1173&ndash;1179.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="ddalpha.train.html">ddalpha.train</a></code> and <code><a href="ddalpha.classify.html">ddalpha.classify</a></code> for application, <code><a href="depth.projection.html">depth.projection</a></code> for calculation of projection depth.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Generate a bivariate normal location-shift classification task
+# containing 20 training objects
+class1 &lt;- mvrnorm(10, c(0,0), 
+                  matrix(c(1,1,1,4), nrow = 2, ncol = 2, byrow = TRUE))
+class2 &lt;- mvrnorm(10, c(2,2), 
+                  matrix(c(1,1,1,4), nrow = 2, ncol = 2, byrow = TRUE))
+data &lt;- rbind(class1, class2)
+# Get depth space using projection depth
+depth.space.projection(data, c(10, 10), method = "random", num.directions = 1000)
+depth.space.projection(data, c(10, 10), method = "linearize")
+
+data &lt;- getdata("hemophilia")
+cardinalities = c(sum(data$gr == "normal"), sum(data$gr == "carrier"))
+depth.space.projection(data[,1:2], cardinalities)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ddalpha</em> version 1.3.1.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

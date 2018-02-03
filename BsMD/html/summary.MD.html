@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Summary of Best MD Follow-Up Experiments</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for summary.MD {BsMD}"><tr><td>summary.MD {BsMD}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Summary of Best MD Follow-Up Experiments</h2>
+
+<h3>Description</h3>
+
+<p>Reduced printing method for lists of class <code>MD</code>. Displays the
+best MD criterion set of runs and their MD for follow-up experiments.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+    ## S3 method for class 'MD'
+summary(object, digits = 3, verbose=FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>list of <code>MD</code> class. Output list of <code><a href="MD.html">MD</a></code> function.</p>
+</td></tr>
+<tr valign="top"><td><code>digits</code></td>
+<td>
+<p>integer. Significant digits to use in the print out.</p>
+</td></tr>
+<tr valign="top"><td><code>verbose</code></td>
+<td>
+<p>logical. If <code>TRUE</code>, the <code>unclass</code>-ed <code>object</code> is displayed.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>additional arguments passed to <code>summary</code> generic function.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>It prints out the marginal factors and models posterior probabilities and
+the top MD follow-up experiments with their corresponding MD statistic.</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Ernesto Barrios.</p>
+
+
+<h3>References</h3>
+
+<p>Meyer, R. D., Steinberg, D. M. and Box, G. E. P. (1996). &quot;Follow-Up Designs
+to Resolve Confounding in Multifactor Experiments (with discussion)&quot;.
+<em>Technometrics</em>, Vol. 38, No. 4, pp. 303&ndash;332.
+</p>
+<p>Box, G. E. P and R. D. Meyer (1993). &quot;Finding the Active Factors
+in Fractionated Screening Experiments&quot;.
+<em>Journal of Quality Technology.</em> Vol. 25. No. 2. pp. 94&ndash;105.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="print.MD.html">print.MD</a></code> and <code><a href="MD.html">MD</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+### Reactor Experiment. Meyer et al. 1996, example 3.
+library(BsMD)
+data(Reactor.data,package="BsMD")
+
+# Posterior probabilities based on first 8 runs
+X &lt;- as.matrix(cbind(blk = rep(-1,8), Reactor.data[c(25,2,19,12,13,22,7,32), 1:5]))
+y &lt;- Reactor.data[c(25,2,19,12,13,22,7,32), 6]
+reactor.BsProb &lt;- BsProb(X = X, y = y, blk = 1, mFac = 5, mInt = 3,
+        p =0.25, g =0.40, ng = 1, nMod = 32)
+
+# MD optimal 4-run design
+p &lt;- reactor.BsProb$ptop
+s2 &lt;- reactor.BsProb$sigtop
+nf &lt;- reactor.BsProb$nftop
+facs &lt;- reactor.BsProb$jtop
+nFDes &lt;- 4
+Xcand &lt;- as.matrix(cbind(blk = rep(+1,32), Reactor.data[,1:5]))
+reactor.MD &lt;- MD(X = X, y = y, nFac = 5, nBlk = 1, mInt = 3, g =0.40, nMod = 32,
+        p = p,s2 = s2, nf = nf, facs = facs, nFDes = 4, Xcand = Xcand,
+        mIter = 20, nStart = 25, top = 5)
+print(reactor.MD)
+summary(reactor.MD)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>BsMD</em> version 2013.0718-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

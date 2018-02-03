@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Depth-Based kNN</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for dknn.train {ddalpha}"><tr><td>dknn.train {ddalpha}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+Depth-Based kNN
+</h2>
+
+<h3>Description</h3>
+
+<p>The implementation of the affine-invariant depht-based kNN of Paindaveine and Van Bever (2015). 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+dknn.train(data, kMax = -1, depth = "halfspace", seed = 0)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+
+<p>Matrix containing training sample where each of <i>n</i> rows is one object of the training sample where first <i>d</i> entries are inputs and the last entry is output (class label).
+</p>
+</td></tr>
+<tr valign="top"><td><code>kMax</code></td>
+<td>
+
+<p>the maximal value for the number of neighbours. If the value is set to -1, the default value is calculated as n/2, but at least 2, at most n-1.
+</p>
+</td></tr>
+<tr valign="top"><td><code>depth</code></td>
+<td>
+
+<p>Character string determining which depth notion to use; the default value is <code>"halfspace"</code>. 
+Currently the method supports the following depths: &quot;halfspace&quot;, &quot;Mahalanobis&quot;, &quot;simplicial&quot;.
+</p>
+</td></tr>
+<tr valign="top"><td><code>seed</code></td>
+<td>
+
+<p>the random seed. The default value <code>seed=0</code> makes no changes.
+</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>The returned object contains technical information for classification, including the found optimal value <code>k</code>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Paindaveine, D. and Van Bever, G. (2015). Nonparametrically consistent depth-based classifiers. <em>Bernoulli</em> <b>21</b> 62&ndash;82.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="dknn.classify.html">dknn.classify</a></code> and <code><a href="dknn.classify.trained.html">dknn.classify.trained</a></code> to classify with the Dknn-classifier.
+</p>
+<p><code><a href="ddalpha.train.html">ddalpha.train</a></code> to train the DD<i>&alpha;</i>-classifier.
+</p>
+<p><code><a href="ddalpha.getErrorRateCV.html">ddalpha.getErrorRateCV</a></code> and <code><a href="ddalpha.getErrorRatePart.html">ddalpha.getErrorRatePart</a></code> to get error rate of the Dknn-classifier on particular data (set <code>separator = "Dknn"</code>).
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+# Generate a bivariate normal location-shift classification task
+# containing 200 training objects and 200 to test with
+class1 &lt;- mvrnorm(200, c(0,0), 
+                  matrix(c(1,1,1,4), nrow = 2, ncol = 2, byrow = TRUE))
+class2 &lt;- mvrnorm(200, c(2,2), 
+                  matrix(c(1,1,1,4), nrow = 2, ncol = 2, byrow = TRUE))
+trainIndices &lt;- c(1:100)
+testIndices &lt;- c(101:200)
+propertyVars &lt;- c(1:2)
+classVar &lt;- 3
+trainData &lt;- rbind(cbind(class1[trainIndices,], rep(1, 100)), 
+                   cbind(class2[trainIndices,], rep(2, 100)))
+testData &lt;- rbind(cbind(class1[testIndices,], rep(1, 100)), 
+                  cbind(class2[testIndices,], rep(2, 100)))
+data &lt;- list(train = trainData, test = testData)
+
+# Train the classifier
+# and get the classification error rate
+cls &lt;- dknn.train(data$train, kMax = 20, depth = "Mahalanobis")
+cls$k
+classes1 &lt;- dknn.classify.trained(data$test[,propertyVars], cls)
+cat("Classification error rate: ", 
+    sum(unlist(classes1) != data$test[,classVar])/200)
+
+# Classify the new data based on the old ones in one step
+classes2 &lt;- dknn.classify(data$test[,propertyVars], data$train, k = cls$k, depth = "Mahalanobis")
+cat("Classification error rate: ", 
+    sum(unlist(classes2) != data$test[,classVar])/200)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ddalpha</em> version 1.3.1.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

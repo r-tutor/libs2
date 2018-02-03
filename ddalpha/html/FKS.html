@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Fast Kernel Smoothing</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for FKS {ddalpha}"><tr><td>FKS {ddalpha}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Fast Kernel Smoothing</h2>
+
+<h3>Description</h3>
+
+<p>Produces a kernel smoothed version of a function based on
+the vectors given in the input. Bandwidth is selected using cross-validation.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+FKS(dataf, Tout, kernel = c("uniform", "triangular", "Epanechnikov",
+  "biweight", "triweight", "Gaussian"), m = 51, K = 20)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>dataf</code></td>
+<td>
+<p>A set of functional data given by a <code>dataf</code> object that are to be smoothed.</p>
+</td></tr>
+<tr valign="top"><td><code>Tout</code></td>
+<td>
+<p>vector of values in the domain of the functions at which the
+resulting smoothed function is evaluated</p>
+</td></tr>
+<tr valign="top"><td><code>kernel</code></td>
+<td>
+<p>Kernel used for smoothing. Admissible values are <code>uniform</code>, 
+<code>triangular</code>, <code>Epanechnikov</code>, <code>biweight</code>, <code>triweight</code> and <code>Gaussian</code>.
+By default, <code>uniform</code> is used.</p>
+</td></tr>
+<tr valign="top"><td><code>m</code></td>
+<td>
+<p>Number of points in the grid for choosing the cross-validated bandwidth.</p>
+</td></tr>
+<tr valign="top"><td><code>K</code></td>
+<td>
+<p>Performs <code>K</code>-fold cross-validation based on randomly shuffled data.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>A vector of the same length as <code>Tout</code>
+corresponding to the values of the
+function produced using kernel smoothing, is provided. Bandwidth is selected using the
+<code>K</code>-fold cross-validation of randomly shuffled input values.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A <code>dataf</code> object corresponding to <code>Tout</code> of smoothed functional values.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Stanislav Nagy, <a href="mailto:nagy at karlin.mff.cuni.cz">nagy at karlin.mff.cuni.cz</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+d = 10
+T = sort(runif(d))
+X = T^2+ rnorm(d,sd=.1)
+Tout = seq(0,1,length=101)
+
+plot(T,X)
+dataf = list(list(args=T,vals=X))
+data.sm = FKS(dataf,Tout,kernel="Epan")
+lines(data.sm[[1]]$args,data.sm[[1]]$vals,col=2)
+
+datafs = structure(list(dataf=dataf,labels=1:length(dataf)),class="functional")
+plot(datafs)
+points(T,X)
+data.sms = structure(list(dataf=data.sm,labels=1:length(data.sm)),class="functional")
+plot(data.sms)
+
+n = 6
+dataf = list()
+for(i in 1:n) dataf[[i]] = list(args = T&lt;-sort(runif(d)), vals = T^2 + rnorm(d,sd=.1))
+data.sm = FKS(dataf,Tout,kernel="triweight")
+data.sms = structure(list(dataf=data.sm,labels=1:length(data.sm)),class="functional")
+plot(data.sms)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ddalpha</em> version 1.3.1.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

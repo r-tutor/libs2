@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Calculate Projection Depth</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for depth.projection {ddalpha}"><tr><td>depth.projection {ddalpha}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+Calculate Projection Depth
+</h2>
+
+<h3>Description</h3>
+
+<p>Calculates the projection depth of points w.r.t. a multivariate data set.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+  depth.projection(x, data, method = "random", num.directions = 1000, seed = 0)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+
+<p>Matrix of objects (numerical vector as one object) whose depth is to be calculated; each row contains a <i>d</i>-variate point. Should have the same dimension as <code>data</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+
+<p>Matrix of data where each row contains a <i>d</i>-variate point, w.r.t. which the depth is to be calculated.
+</p>
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+
+<p>to be used in calculations.
+</p>
+<p><code>"random"</code> Here the depth is determined as the minimum univariate depth of the data projected on lines in several directions. The directions are distributed uniformly on the <i>(d-1)</i>-sphere; the same direction set is used for all points.
+</p>
+<p><code>"linearize"</code> The Nelder-Mead method for function minimization, taken from Olsson, Journal of Quality Technology, 1974, 6, 56.
+</p>
+</td></tr>
+<tr valign="top"><td><code>num.directions</code></td>
+<td>
+
+<p>Number of random directions to be generated for <code>method = "random"</code>. With the growth of n the complexity grows linearly for the same number of directions. 
+</p>
+</td></tr>
+<tr valign="top"><td><code>seed</code></td>
+<td>
+
+<p>the random seed. The default value <code>seed=0</code> makes no changes.
+</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Calculates projection depth. Projection depth, similar to Mahalanobis depth, is based on a measure of outlyingness,
+used by Stahel (1981) and Donoho (1982), and has been first formulated by Liu (1992). The
+worst case outlyingness is obtained by maximizing an outlyingness measure over all univariate
+projections. In practice most
+often <em>median</em>, and <em>median absolute deviation from the median </em>(MAD), are used as they are robust measures.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Numerical vector of depths, one for each row in <code>x</code>; or one depth value if <code>x</code> is a numerical vector.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>R-codes for the &quot;linearize&quot; method were written by Subhajit Dutta.
+</p>
+
+
+<h3>References</h3>
+
+<p>Donoho, D.L. (1982). <em>Breakdown properties of multivariate location estimators</em>. Ph.D. qualifying paper. Department of Statistics, Harvard University.
+</p>
+<p>Liu, R.Y. (1992). Data depth and multivariate rank tests. In: Dodge, Y. (ed.), L1-Statistics and Related Methods, North-Holland (Amsterdam), 279&ndash;294.
+</p>
+<p>Liu, X. and Zuo, Y. (2014). Computing projection depth and its associated estimators. <em>Statistics and Computing</em> <b>24</b> 51&ndash;63.
+</p>
+<p>Stahel, W.A. (1981). <em>Robust estimation: infinitesimal optimality and covariance matrix estimators</em>. Ph.D. thesis (in German). Eidgenossische Technische Hochschule Zurich.
+</p>
+<p>Zuo, Y.J. and Lai, S.Y. (2011). Exact computation of bivariate projection depth and the Stahel-Donoho estimator. <em>Computational Statistics and Data Analysis</em> <b>55</b> 1173&ndash;1179.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="depth.halfspace.html">depth.halfspace</a></code> for calculation of the Tukey depth.
+</p>
+<p><code><a href="depth.Mahalanobis.html">depth.Mahalanobis</a></code> for calculation of Mahalanobis depth.
+</p>
+<p><code><a href="depth.simplicial.html">depth.simplicial</a></code> for calculation of simplicial depth.
+</p>
+<p><code><a href="depth.simplicialVolume.html">depth.simplicialVolume</a></code> for calculation of simplicial volume depth.
+</p>
+<p><code><a href="depth.spatial.html">depth.spatial</a></code> for calculation of spatial depth.
+</p>
+<p><code><a href="depth.zonoid.html">depth.zonoid</a></code> for calculation of zonoid depth.
+</p>
+<p><code><a href="depth.potential.html">depth.potential</a></code> for calculation of data potential.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  # 5-dimensional normal distribution
+  data &lt;- mvrnorm(100, rep(0, 5), 
+                  matrix(c(1, 0, 0, 0, 0, 
+                           0, 2, 0, 0, 0, 
+                           0, 0, 3, 0, 0, 
+                           0, 0, 0, 2, 0, 
+                           0, 0, 0, 0, 1),
+                         nrow = 5))
+  x &lt;- mvrnorm(10, rep(1, 5), 
+               matrix(c(1, 0, 0, 0, 0, 
+                        0, 1, 0, 0, 0, 
+                        0, 0, 1, 0, 0, 
+                        0, 0, 0, 1, 0, 
+                        0, 0, 0, 0, 1),
+                      nrow = 5))
+  
+  depths &lt;- depth.projection(x, data, method = "random", num.directions = 1000)
+  cat("Depths random: ", depths, "\n")
+  depths &lt;- depth.projection(x, data, method = "linearize")
+  cat("Depths linearize: ", depths, "\n")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ddalpha</em> version 1.3.1.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

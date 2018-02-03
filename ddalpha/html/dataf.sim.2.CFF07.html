@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Model 2 from Cuevas et al. (2007)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for dataf.sim.2.CFF07 {ddalpha}"><tr><td>dataf.sim.2.CFF07 {ddalpha}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+Model 2 from Cuevas et al. (2007)
+</h2>
+
+<h3>Description</h3>
+
+<p>Model 2 from Cuevas et al. (2007)
+</p>
+<p>Processes: <br />
+X(t) = m_0(t) + e(t), m_0(t) = 30*(1-t)*t^2 + 0.5*abs(sin(20*pi*t)) <br />
+Y(t) = an 8-knot spline approximation of X <br />
+e(t): Gaussian with mean = 0, cov(X(s), X(t)) = 0.2*exp(-abs(s - t)/0.3)<br />
+the processes are discretized at <code>numDiscrets</code> equally distant points on [0, 1].
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+dataf.sim.2.CFF07(numTrain = 100, numTest = 50, numDiscrets = 51, plot = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>numTrain</code></td>
+<td>
+
+<p>number of objects in the training sample
+</p>
+</td></tr>
+<tr valign="top"><td><code>numTest</code></td>
+<td>
+
+<p>number of objects in the test sample
+</p>
+</td></tr>
+<tr valign="top"><td><code>numDiscrets</code></td>
+<td>
+
+<p>number of points for each object
+</p>
+</td></tr>
+<tr valign="top"><td><code>plot</code></td>
+<td>
+
+<p>if TRUE the training sample is plotted
+</p>
+</td></tr>
+</table>
+
+
+<h3>Format</h3>
+
+<p>A data strusture containing <code>$learn</code> and <code>$test</code> functional data.
+The functional data are given as data structures.
+</p>
+
+<dl>
+<dt><code>dataf</code></dt><dd>
+<p>The functional data as a list of objects. Each object is characterized by two coordinates.
+</p>
+
+<dl>
+<dt><code>args</code></dt><dd><p>a numeric vector</p>
+</dd>
+<dt><code>vals</code></dt><dd><p>a numeric vector</p>
+</dd>
+</dl>
+
+</dd>
+<dt><code>labels</code></dt><dd><p>The classes of the objects: 0 for X(t), 1 for Y(t)</p>
+</dd>
+</dl>
+
+
+
+<h3>Source</h3>
+
+<p>Cuevas, A., Febrero, M. and Fraiman, R. (2007). Robust estimation and classification for functional data via projection-based depth notions. Computational Statistics 22 481-496.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="dataf..html">dataf.*</a></code> for other functional data sets
+</p>
+<p><code><a href="plot.functional.html">plot.functional</a></code> for building plots of functional data
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## load the dataset
+dataf = dataf.sim.2.CFF07(numTrain = 100, numTest = 50, numDiscrets = 51)
+learn = dataf$learn
+test = dataf$test
+
+## view the classes
+unique(learn$labels)
+
+## access the 5th point of the 2nd object
+learn$dataf[[2]]$args[5]
+learn$dataf[[2]]$vals[5]
+
+## Not run: 
+## plot the data
+plot(learn)
+plot(test)
+
+## or
+dataf = dataf.sim.2.CFF07(numTrain = 100, numTest = 50, numDiscrets = 51, plot = TRUE)
+
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ddalpha</em> version 1.3.1.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

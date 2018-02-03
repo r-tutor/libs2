@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Plots for the &quot;ddalpha&quot; Class</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for plot.ddalpha {ddalpha}"><tr><td>plot.ddalpha {ddalpha}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+Plots for the &quot;ddalpha&quot; Class
+</h2>
+
+<h3>Description</h3>
+
+<p><code><a href="depth.contours.ddalpha.html">depth.contours.ddalpha</a></code> &ndash; builds the data depth contours for multiclass 2-dimensional data using the trained classifier.
+<code><a href="draw.ddplot.html">draw.ddplot</a></code> &ndash; draws the <em>DD</em>-plot of the existing DD<i>&alpha;</i>-classifier.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'ddalpha'
+plot(x, type = c("ddplot", "depth.contours"), ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+
+<p>DD<i>&alpha;</i>-classifier (obtained by <code><a href="ddalpha.train.html">ddalpha.train</a></code>).
+</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+
+<p>type of the plot for <code><a href="draw.ddplot.html">draw.ddplot</a></code> or <code><a href="depth.contours.ddalpha.html">depth.contours.ddalpha</a></code>
+</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+
+<p>additional parameters passed to the depth functions and to <code><a href="../../graphics/html/plot.html">plot</a></code>
+</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="depth..html">depth.</a></code>
+</p>
+<p><code><a href="depth.contours.html">depth.contours</a></code>
+</p>
+<p><code><a href="depth.graph.html">depth.graph</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+## Not run: 
+
+
+par(mfrow = c(2,2))
+data(hemophilia)
+
+ddalpha = ddalpha.train(hemophilia, depth = "none")
+plot(ddalpha, type = "depth.contours", main = "data")
+plot(ddalpha, type = "ddplot", main = "data", drawsep = F)
+
+for (depth in c("zonoid", "Mahalanobis", "projection", "spatial")){
+  ddalpha = ddalpha.train(hemophilia, depth = depth)
+  plot(ddalpha, type = "depth.contours", main = depth, drawsep = T)
+  plot(ddalpha, type = "ddplot", main = depth)
+}
+
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ddalpha</em> version 1.3.1.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

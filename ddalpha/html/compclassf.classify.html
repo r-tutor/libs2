@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Classify using Functional Componentwise Classifier</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for compclassf.classify {ddalpha}"><tr><td>compclassf.classify {ddalpha}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+Classify using Functional Componentwise Classifier
+</h2>
+
+<h3>Description</h3>
+
+<p>Classifies data using the functional componentwise classifier.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+compclassf.classify(compclassf, objectsf, subset, ...)
+
+## S3 method for class 'compclassf'
+predict(object, objectsf, subset, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>compclassf, object</code></td>
+<td>
+
+<p>Functional componentwise classifier (obtained by <code><a href="compclassf.train.html">compclassf.train</a></code>).
+</p>
+</td></tr>
+<tr valign="top"><td><code>objectsf</code></td>
+<td>
+<p>list containing lists (functions) of two vectors of equal length, named &quot;args&quot; and &quot;vals&quot;: arguments sorted in ascending order and corresponding them values respectively
+</p>
+</td></tr>
+<tr valign="top"><td><code>subset</code></td>
+<td>
+
+<p>an optional vector specifying a subset of observations to be classified.
+</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+
+<p>additional parameters, passed to the classifier, selected with parameter <code>classifier.type</code> in <code><a href="compclassf.train.html">compclassf.train</a></code>.
+</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>List containing class labels.
+</p>
+
+
+<h3>References</h3>
+
+<p>Delaigle, A., Hall, P., and Bathia, N. (2012). Componentwise classification and clustering of functional data. <em>Biometrika</em> <b>99</b> 299&ndash;313.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="compclassf.train.html">compclassf.train</a></code> to train the functional componentwise classifier.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+## Not run: 
+## load the Growth dataset
+dataf = dataf.growth()
+
+learn = c(head(dataf$dataf, 49), tail(dataf$dataf, 34))
+labels =c(head(dataf$labels, 49), tail(dataf$labels, 34)) 
+test = tail(head(dataf$dataf, 59), 10)    # elements 50:59. 5 girls, 5 boys
+
+c = compclassf.train (learn, labels, classifier.type = "ddalpha")
+
+classified = compclassf.classify(c, test)
+
+print(unlist(classified))
+
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ddalpha</em> version 1.3.1.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

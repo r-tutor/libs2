@@ -1,15 +1,18 @@
 Package: BsMD
-Version: 2013.0718
-Date: 2013/07/18
+Version: 2013.0718-1
+Date: 2013-07-18
 Title: Bayes Screening and Model Discrimination
 Author: Ernesto Barrios based on Daniel Meyer's code.
-Maintainer: Ernesto Barrios <ebarrios@itam.mx>
+Maintainer: ORPHANED
 Description: Bayes screening and model discrimination follow-up designs.
 Depends: R(>= 2.14.0)
 License: GPL (>= 2)
-Packaged: 2013-07-19 17:38:27 UTC; ebarrios
+Packaged: 2018-01-30 19:16:47 UTC; ripley
 NeedsCompilation: yes
 Repository: CRAN
-Date/Publication: 2013-07-19 22:17:05
-Built: R 3.2.3; x86_64-w64-mingw32; 2015-12-11 01:32:21 UTC; windows
+Date/Publication: 2018-02-01 07:01:22 UTC
+X-CRAN-Original-Maintainer: Ernesto Barrios <ebarrios@itam.mx>
+X-CRAN-Comment: Orphaned and corrected on 2018-02-01 as invalid use of
+        Fortran I/O was not corrected.
+Built: R 3.4.3; x86_64-w64-mingw32; 2018-02-03 23:50:11 UTC; windows
 Archs: i386, x64

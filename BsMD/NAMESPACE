@@ -1,6 +1,7 @@
 useDynLib(BsMD)
 
 import(stats,graphics)
+importFrom("grDevices", "grey")
 
 export("DanielPlot", "LenthPlot", "BsProb","MD") 
 

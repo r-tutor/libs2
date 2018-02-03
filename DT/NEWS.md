@@ -1,3 +1,11 @@
+# CHANGES IN DT VERSION 0.4
+
+## BUG FIXES
+
+- A table will never appear again after `renderDT(NULL)` once (thanks, @jcheng5, #488).
+
+- `updateSearch()` does not respect the search options `regex` and `caseInsensitive` (thanks, @mgirlich, #487).
+
 # CHANGES IN DT VERSION 0.3
 
 ## NEW FEATURES

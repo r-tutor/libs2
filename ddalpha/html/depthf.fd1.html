@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Univariate Integrated and Infimal Depth for Functional Data</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for depthf.fd1 {ddalpha}"><tr><td>depthf.fd1 {ddalpha}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Univariate Integrated and Infimal Depth for Functional Data</h2>
+
+<h3>Description</h3>
+
+<p>Usual, and order extended integrated and infimal depths for real-valued functional data based on the
+halfspace and simplicial depth.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+depthf.fd1(datafA, datafB, range = NULL, d = 101, order = 1, approx = 0)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>datafA</code></td>
+<td>
+<p>Functions whose depth is computed, represented by a <code>dataf</code> object of their arguments
+and functional values. <code>m</code> stands for the number of functions.</p>
+</td></tr>
+<tr valign="top"><td><code>datafB</code></td>
+<td>
+<p>Random sample functions with respect to which the depth of <code>datafA</code> is computed. 
+<code>datafB</code> is represented by a <code>dataf</code> object of their arguments
+and functional values. <code>n</code> is the sample size. The grid of observation points for the 
+functions <code>datafA</code> and <code>datafB</code> may not be the same.</p>
+</td></tr>
+<tr valign="top"><td><code>range</code></td>
+<td>
+<p>The common range of the domain where the functions <code>datafA</code> and <code>datafB</code> are observed.
+Vector of length 2 with the left and the right end of the interval. Must contain all arguments given in 
+<code>datafA</code> and <code>datafB</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>d</code></td>
+<td>
+<p>Grid size to which all the functional data are transformed. For depth computation, 
+all functional observations are first transformed into vectors of their functional values of length <code>d</code>
+corresponding to equi-spaced points in the domain given by the interval <code>range</code>. Functional values in these
+points are reconstructed using linear interpolation, and extrapolation, see Nagy et al. (2016).</p>
+</td></tr>
+<tr valign="top"><td><code>order</code></td>
+<td>
+<p>The order of the order extended integrated and infimal depths.
+By default, this is set to <code>1</code>, meaning that the usual univariate depths of 
+the functional values are computed. For <code>order=2</code> or <code>3</code>, the second
+and the third order extended integrated and infimal depths are computed, 
+respectively.</p>
+</td></tr>
+<tr valign="top"><td><code>approx</code></td>
+<td>
+<p>Number of approximations used in the computation of the order extended depth
+for <code>order</code> greater than <code>1</code>. For <code>order=2</code>, the default
+value is set to <code>0</code>, meaning that the depth is computed at all possible <code>d^order</code>
+combinations of the points in the domain. For <code>order=3</code>, 
+the default value is set to <code>101</code>. When <code>approx</code> is a positive integer, <code>approx</code>
+points are randomly sampled in <code>[0,1]^order</code> and at these points the <code>order</code>-variate depths of the
+corresponding functional values are computed.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The function returns vectors of sample integrated and infimal depth values.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Four vectors of length <code>m</code> of depth values are returned:
+</p>
+
+<ul>
+<li> <p><code>Simpl_FD</code> the integrated depth based on the simplicial depth,
+</p>
+</li>
+<li> <p><code>Half_FD</code> the integrated depth based on the halfspace depth,
+</p>
+</li>
+<li> <p><code>Simpl_ID</code> the infimal depth based on the simplicial depth,
+</p>
+</li>
+<li> <p><code>Half_ID</code> the infimal depth based on the halfspace depth.
+</p>
+</li></ul>
+
+<p>In addition, two vectors of length <code>m</code> of the relative area of smallest depth values is returned:
+</p>
+
+<ul>
+<li> <p><code>Simpl_IA</code> the proportions of points at which the depth <code>Simpl_ID</code> was attained,
+</p>
+</li>
+<li> <p><code>Half_IA</code> the proportions of points at which the depth <code>Half_ID</code> was attained.
+</p>
+</li></ul>
+
+<p>The values <code>Simpl_IA</code> and <code>Half_IA</code> are always in the interval [0,1]. 
+They introduce ranking also among functions having the same
+infimal depth value - if two functions have the same infimal depth, the one with larger infimal area
+<code>IA</code> is said to be less central. 	
+For <code>order=2</code> and <code>m=1</code>, two additional matrices of pointwise depths are also returned:
+</p>
+
+<ul>
+<li> <p><code>PSD</code> the matrix of size <code>d*d</code> containing the computed 
+pointwise bivariate simplicial depths used for the computation of <code>Simpl_FD</code> and <code>Simpl_ID</code>,
+</p>
+</li>
+<li> <p><code>PHD</code> the matrix of size <code>d*d</code> containing the computed 
+pointwise bivariate halfspace depths used for the computation of <code>Half_FD</code> and <code>Half_ID</code>.
+</p>
+</li></ul>
+
+<p>For <code>order=3</code>, only <code>Half_FD</code> and <code>Half_ID</code> are provided.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Stanislav Nagy, <a href="mailto:nagy at karlin.mff.cuni.cz">nagy at karlin.mff.cuni.cz</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Nagy, S., Gijbels, I. and Hlubinka, D. (2016). 
+Weak convergence of discretely observed functional data with applications. 
+<em>Journal of Multivariate Analysis</em>, <b>146</b>, 46&ndash;62.
+</p>
+<p>Nagy, S., Gijbels, I. and Hlubinka, D.  (2017).
+Depth-based recognition of shape outlying functions. 
+<em>Journal of Computational and Graphical Statistics</em>. To appear.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="depthf.fd2.html">depthf.fd2</a></code>, <code><a href="infimalRank.html">infimalRank</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+datafA = dataf.population()$dataf[1:20]
+datafB = dataf.population()$dataf[21:50]
+depthf.fd1(datafA,datafB)
+depthf.fd1(datafA,datafB,order=2)
+depthf.fd1(datafA,datafB,order=3,approx=51)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ddalpha</em> version 1.3.1.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

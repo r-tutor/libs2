@@ -1,0 +1,253 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Posterior Probabilities from Bayesian Screening Experiments</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for BsProb {BsMD}"><tr><td>BsProb {BsMD}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Posterior Probabilities from Bayesian Screening Experiments</h2>
+
+<h3>Description</h3>
+
+<p>Marginal factor posterior probabilities and model posterior probabilities
+from designed screening experiments are calculated according to Box and Meyer's
+Bayesian procedure.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+    BsProb(X, y, blk, mFac, mInt = 2, p = 0.25, g = 2, ng = 1, nMod = 10)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>X</code></td>
+<td>
+<p>Matrix. The design matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>vector. The response vector.</p>
+</td></tr>
+<tr valign="top"><td><code>blk</code></td>
+<td>
+<p>integer. Number of blocking factors (&gt;=0). These factors are
+accommodated in the first columns of matrix <code>X</code>. There are
+<code>ncol(X)-blk</code> design factors.</p>
+</td></tr>
+<tr valign="top"><td><code>mFac</code></td>
+<td>
+<p>integer. Maximum number of factors included in the models.</p>
+</td></tr>
+<tr valign="top"><td><code>mInt</code></td>
+<td>
+<p>integer &lt;= 3. Maximum order of interactions considered in the models.</p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>numeric. Prior probability assigned to active factors.</p>
+</td></tr>
+<tr valign="top"><td><code>g</code></td>
+<td>
+<p>vector. Variance inflation factor(s) <i>&gamma;</i>associated to active and interaction factors.</p>
+</td></tr>
+<tr valign="top"><td><code>ng</code></td>
+<td>
+<p>integer &lt;=20. Number of different variance inflation factors (<code>g</code>) used in calculations.</p>
+</td></tr>
+<tr valign="top"><td><code>nMod</code></td>
+<td>
+<p>integer &lt;=100. Number of models to keep with the highest posterior probability.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Factor and model posterior probabilities are computed by Box and Meyer's Bayesian
+procedure. The design factors are accommodated in the matrix <code>X</code> after
+<code>blk</code> columns of the blocking factors. So, <code>ncol(X)-blk</code> design factors
+are considered. If <code>g</code>, the variance inflation factor (VIF) <i>&gamma;</i>,
+is a vector of length 1, the same VIF is used for factor main effects and interactions.
+If the length of <code>g</code> is 2 and <code>ng</code> is 1, <code>g[1]</code> is used for factor
+main effects and <code>g[2]</code> for the interaction effects. If <code>ng</code> greater than 1,
+then <code>ng</code> values of VIFs between <code>g[1]</code> and <code>g[2]</code> are used for
+calculations with the same <i>gamma</i> value for main effects and interactions.
+The function calls the <acronym><span class="acronym">FORTRAN</span></acronym> subroutine &lsquo;<span class="file">bm</span>&rsquo; and captures summary results.
+The output is a list of class <code>BsProb</code> for which
+<code>print</code>, <code>plot</code> and <code>summary</code> methods are available.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list with all output parameters of the <acronym><span class="acronym">FORTRAN</span></acronym> subroutine &lsquo;<span class="file">bm</span>&rsquo;.
+The names of the list components are such that they match the original <acronym><span class="acronym">FORTRAN</span></acronym>
+code. Small letters used for capturing program's output.
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>X</code></td>
+<td>
+<p>matrix. The design matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>Y</code></td>
+<td>
+<p>vector. The response vector.</p>
+</td></tr>
+<tr valign="top"><td><code>N</code></td>
+<td>
+<p>integer. The number of runs.</p>
+</td></tr>
+<tr valign="top"><td><code>COLS</code></td>
+<td>
+<p>integer. The number of design factors.</p>
+</td></tr>
+<tr valign="top"><td><code>BLKS</code></td>
+<td>
+<p>integer. The number of blocking factors accommodated in the first
+columns of matrix <code>X</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>MXFAC</code></td>
+<td>
+<p>integer. Maximum number of factors considered in the models.</p>
+</td></tr>
+<tr valign="top"><td><code>MXINT</code></td>
+<td>
+<p>integer. Maximum interaction order considered in the models.</p>
+</td></tr>
+<tr valign="top"><td><code>PI</code></td>
+<td>
+<p>numeric. Prior probability assigned to the active factors.</p>
+</td></tr>
+<tr valign="top"><td><code>INDGAM</code></td>
+<td>
+<p>integer. If 0, the same variance inflation factor (<code>GAMMA</code>)
+is used for main and interactions effects.
+If <code>INDGAM ==1</code>, then <code>NGAM</code> different values
+of <code>GAMMA</code> were used.</p>
+</td></tr>
+<tr valign="top"><td><code>INDG2</code></td>
+<td>
+<p>integer. If 1, the variance inflation factor <code>GAM2</code> was used for
+the interaction effects.</p>
+</td></tr>
+<tr valign="top"><td><code>NGAM</code></td>
+<td>
+<p>integer. Number of different VIFs used for computations.</p>
+</td></tr>
+<tr valign="top"><td><code>GAMMA</code></td>
+<td>
+<p>vector. Vector of variance inflation factors of length 1 or 2.</p>
+</td></tr>
+<tr valign="top"><td><code>NTOP</code></td>
+<td>
+<p>integer. Number of models with the highest posterior probability</p>
+</td></tr></table>
+<p>.
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>mdcnt</code></td>
+<td>
+<p>integer. Total number of models evaluated.</p>
+</td></tr>
+<tr valign="top"><td><code>ptop</code></td>
+<td>
+<p>vector. Vector of probabilities of the top <code>ntop</code> models.</p>
+</td></tr>
+<tr valign="top"><td><code>sigtop</code></td>
+<td>
+<p>vector.  Vector of sigma-squared of the top <code>ntop</code> models.</p>
+</td></tr>
+<tr valign="top"><td><code>nftop</code></td>
+<td>
+<p>integer.  Number of factors in each of the <code>ntop</code> models.</p>
+</td></tr>
+<tr valign="top"><td><code>jtop</code></td>
+<td>
+<p>matrix. Matrix of the number of factors and their labels
+of the top <code>ntop</code> models.</p>
+</td></tr>
+<tr valign="top"><td><code>del</code></td>
+<td>
+<p>numeric. Interval width of the <code>GAMMA</code> partition.</p>
+</td></tr>
+<tr valign="top"><td><code>sprob</code></td>
+<td>
+<p>vector. Vector of posterior probabilities. If <code>ng&gt;1</code> the
+probabilities are weighted averaged over <code>GAMMA</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>pgam</code></td>
+<td>
+<p>vector. Vector of values of the unscaled posterior density of <code>GAMMA</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>prob</code></td>
+<td>
+<p>matrix. Matrix of marginal factor posterior probabilities for each of
+the different values of <code>GAMMA</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>ind</code></td>
+<td>
+<p>integer. Indicator variable. <code>ind</code> is 1 if the &lsquo;<span class="file">bm</span>&rsquo;
+subroutine exited properly. Any other number correspond to
+the format label number in the <acronym><span class="acronym">FORTRAN</span></acronym> subroutine script.</p>
+</td></tr>
+</table>
+
+
+<h3>Note</h3>
+
+<p>The function is a wrapper to call the <acronym><span class="acronym">FORTRAN</span></acronym> subroutine &lsquo;<span class="file">bm</span>&rsquo;,
+modification of Daniel Meyer's original program, &lsquo;<span class="file">mbcqp5.f</span>&rsquo;, for the
+application of Bayesian design and analysis of fractional factorial experiments,
+part of the <span class="pkg">mdopt</span> bundle, available at <em>StatLib</em>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>R. Daniel Meyer. Adapted for <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> by Ernesto Barrios.</p>
+
+
+<h3>References</h3>
+
+<p>Box, G. E. P and R. D. Meyer (1986).
+&quot;An Analysis for Unreplicated Fractional Factorials&quot;.
+<em>Technometrics.</em> Vol. 28. No. 1. pp. 11&ndash;18.
+</p>
+<p>Box, G. E. P and R. D. Meyer (1993). &quot;Finding the Active Factors
+in Fractionated Screening Experiments&quot;.
+<em>Journal of Quality Technology.</em> Vol. 25. No. 2. pp. 94&ndash;105.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="print.BsProb.html">print.BsProb</a></code>, <code><a href="print.BsProb.html">print.BsProb</a></code>, <code><a href="summary.BsProb.html">summary.BsProb</a></code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(BsMD)
+data(BM86.data,package="BsMD")
+X &lt;- as.matrix(BM86.data[,1:15])
+y &lt;- BM86.data["y1"]
+# Using prior probability of p = 0.20, and k = 10 (gamma = 2.49)
+drillAdvance.BsProb &lt;- BsProb(X = X, y = y, blk = 0, mFac = 15, mInt = 1,
+            p = 0.20, g = 2.49, ng = 1, nMod = 10)
+plot(drillAdvance.BsProb)
+summary(drillAdvance.BsProb)
+
+# Using prior probability of p = 0.20, and a 5 &lt;= k &lt;= 15 (1.22 &lt;= gamma &lt;= 3.74)
+drillAdvance.BsProbG &lt;- BsProb(X = X, y = y, blk = 0, mFac = 15, mInt = 1,
+            p = 0.25, g = c(1.22, 3.74), ng = 3, nMod = 10)
+plot(drillAdvance.BsProbG, code = FALSE, prt = TRUE)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>BsMD</em> version 2013.0718-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

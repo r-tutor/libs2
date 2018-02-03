@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Depth Graph</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for depth.graph {ddalpha}"><tr><td>depth.graph {ddalpha}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+Depth Graph
+</h2>
+
+<h3>Description</h3>
+
+<p>Builds the data depth graphs for 2-dimensional data. The graph is built using <code><a href="../../graphics/html/persp.html">persp</a></code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+depth.graph(data, 
+  depth_f = c("halfspace", "Mahalanobis", "projection", "simplicial", 
+              "simplicialVolume", "spatial", "zonoid", "none"), 
+  apoint = NULL, 
+  main = depth_f,  
+  xlim = c(min(data[, 1]), max(data[, 1])), 
+  ylim = c(min(data[, 2]), max(data[, 2])), 
+  zlim = c(0, max(z)), 
+  xnum = 250, 
+  ynum = 250, 
+  theta=15, phi=60,
+  bold = F,
+  ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+
+<p>2-dimensional numeric data frame or matrix
+</p>
+</td></tr>
+<tr valign="top"><td><code>depth_f</code></td>
+<td>
+
+<p>the name of the depth function. The list of the supported depths and described in the topic <code><a href="depth..html">depth.</a></code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>apoint</code></td>
+<td>
+
+<p>a 2-dimensional point which is shown in black color.
+</p>
+</td></tr>
+<tr valign="top"><td><code>main</code></td>
+<td>
+
+<p>an overall title for the plot: see <code><a href="../../graphics/html/title.html">title</a></code>
+</p>
+</td></tr>
+<tr valign="top"><td><code>xlim, ylim, zlim</code></td>
+<td>
+
+<p>numeric vectors of length 2, giving the x, y and z coordinates ranges: see <code><a href="../../graphics/html/plot.window.html">plot.window</a></code>
+</p>
+</td></tr>
+<tr valign="top"><td><code>xnum, ynum</code></td>
+<td>
+
+<p>number of points on each direction, x and y. Impacts the smoothness of the surface. 
+</p>
+</td></tr>
+<tr valign="top"><td><code>theta, phi</code></td>
+<td>
+
+<p>rotation angles
+</p>
+</td></tr>
+<tr valign="top"><td><code>bold</code></td>
+<td>
+
+<p>draws bold points
+</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+
+<p>additional parameters passed to <code><a href="../../graphics/html/persp.html">persp</a></code>
+</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="depth..html">depth.</a></code>
+</p>
+<p><code><a href="../../graphics/html/persp.html">persp</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+## Not run: 
+
+par(mfrow = c(2,3), mar = c(0,0,0,0), mai = c(0,0,0.2,0))
+data(hemophilia)
+depth.graph(hemophilia, "none", xnum = 100, ynum = 100)
+depth.graph(hemophilia, "Mahalanobis", xnum = 100, ynum = 100)
+depth.graph(hemophilia, "halfspace", xnum = 100, ynum = 100)
+depth.graph(hemophilia, "projection", xnum = 100, ynum = 100)
+depth.graph(hemophilia, "zonoid", xnum = 100, ynum = 100)
+depth.graph(hemophilia, "spatial", xnum = 100, ynum = 100)
+
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ddalpha</em> version 1.3.1.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

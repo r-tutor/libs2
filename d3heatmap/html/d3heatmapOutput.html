@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Wrapper functions for using d3heatmap in shiny</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for d3heatmapOutput {d3heatmap}"><tr><td>d3heatmapOutput {d3heatmap}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Wrapper functions for using d3heatmap in shiny</h2>
+
+<h3>Description</h3>
+
+<p>Use <code>d3heatmapOutput</code> to create a UI element, and <code>renderD3heatmap</code>
+to render the heatmap.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+d3heatmapOutput(outputId, width = "100%", height = "400px")
+
+renderD3heatmap(expr, env = parent.frame(), quoted = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>outputId</code></td>
+<td>
+<p>Output variable to read from</p>
+</td></tr>
+<tr valign="top"><td><code>width, height</code></td>
+<td>
+<p>The width and height of the map (see
+<a href="../../htmlwidgets/html/shinyWidgetOutput.html">shinyWidgetOutput</a>)</p>
+</td></tr>
+<tr valign="top"><td><code>expr</code></td>
+<td>
+<p>An expression that generates a <code><a href="d3heatmap.html">d3heatmap</a></code> object</p>
+</td></tr>
+<tr valign="top"><td><code>env</code></td>
+<td>
+<p>The environment in which to evaluate <code>expr</code></p>
+</td></tr>
+<tr valign="top"><td><code>quoted</code></td>
+<td>
+<p>Is <code>expr</code> a quoted expression (with <code>quote()</code>)? This
+is useful if you want to save an expression in a variable.</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+library(d3heatmap)
+library(shiny)
+
+ui &lt;- fluidPage(
+  h1("A heatmap demo"),
+  selectInput("palette", "Palette", c("YlOrRd", "RdYlBu", "Greens", "Blues")),
+  checkboxInput("cluster", "Apply clustering"),
+  d3heatmapOutput("heatmap")
+)
+
+server &lt;- function(input, output, session) {
+  output$heatmap &lt;- renderD3heatmap({
+    d3heatmap(
+      scale(mtcars),
+      colors = input$palette,
+      dendrogram = if (input$cluster) "both" else "none"
+    )
+  })
+}
+
+shinyApp(ui, server)
+
+  
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>d3heatmap</em> version 0.6.1.2 <a href="00Index.html">Index</a>]</div>
+</body></html>
