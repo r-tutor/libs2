@@ -1,14 +1,14 @@
 Package: CTT
 Type: Package
 Title: Classical Test Theory Functions
-Version: 2.3
-Date: 2017-11-03
+Version: 2.3.2
+Date: 2018-02-02
 Author: John T. Willse
 Maintainer: John T. Willse <willse@uncg.edu>
 Description: A collection of common test and item analyses from a classical test theory (CTT) framework. Analyses can be applied to both dichotomous and polytomous data. Functions provide reliability analyses (alpha), item statistics, disctractor analyses, disattenuated correlations, scoring routines, and empirical ICCs.
 License: GPL (>= 2)
 NeedsCompilation: no
-Packaged: 2017-11-03 19:40:21 UTC; jtwillse
+Packaged: 2018-02-04 21:47:56 UTC; John Willse
 Repository: CRAN
-Date/Publication: 2017-11-03 23:42:45 UTC
-Built: R 3.4.2; ; 2017-11-04 22:45:43 UTC; windows
+Date/Publication: 2018-02-04 22:44:11 UTC
+Built: R 3.4.3; ; 2018-02-05 23:20:09 UTC; windows
