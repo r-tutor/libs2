@@ -30,9 +30,6 @@ template <> inline std::string VectorVisitorType<CPLXSXP>() {
 template <> inline std::string VectorVisitorType<VECSXP>() {
   return "list";
 }
-template <> inline std::string VectorVisitorType<RAWSXP>() {
-  return "raw";
-}
 
 /**
  * Implementations
@@ -135,6 +132,7 @@ private:
   CharacterVector levels;
   SEXP* levels_ptr;
 };
+
 
 template <>
 class VectorVisitorImpl<STRSXP> : public VectorVisitor {

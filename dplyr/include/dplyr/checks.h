@@ -12,8 +12,7 @@ enum SupportedType {
   DPLYR_REALSXP = REALSXP,
   DPLYR_CPLXSXP = CPLXSXP,
   DPLYR_STRSXP = STRSXP,
-  DPLYR_VECSXP = VECSXP,
-  DPLYR_RAWSXP = RAWSXP
+  DPLYR_VECSXP = VECSXP
 };
 
 inline std::string type_name(SEXP x) {
@@ -70,8 +69,6 @@ inline SupportedType check_supported_type(SEXP x, const SymbolString& name = Str
     return DPLYR_STRSXP;
   case VECSXP:
     return DPLYR_VECSXP;
-  case RAWSXP:
-    return DPLYR_RAWSXP;
   default:
     if (name.is_empty()) {
       Rcpp::stop("is of unsupported type %s", type_name(x));

@@ -252,6 +252,7 @@ qztnbinom	ZeroTruncatedNegativeBinomial
 qztpois	ZeroTruncatedPoisson
 rburr	Burr
 rcomphierarc	simul
+rcomphierarc.summaries	simul.summaries
 rcompound	rcompound
 rcomppois	rcompound
 rgenbeta	GeneralizedBeta

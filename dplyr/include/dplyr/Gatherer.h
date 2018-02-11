@@ -236,8 +236,6 @@ inline Gatherer* constant_gatherer(SEXP x, int n, const SymbolString& name) {
     return new ConstantGathererImpl<CPLXSXP>(x, n);
   case VECSXP:
     return new ConstantGathererImpl<VECSXP>(x, n);
-  case RAWSXP:
-    return new ConstantGathererImpl<RAWSXP>(x, n);
   default:
     break;
   }

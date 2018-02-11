@@ -79,8 +79,6 @@ inline RowwiseSubset* rowwise_subset(SEXP x) {
     return new RowwiseSubsetTemplate<CPLXSXP>(x);
   case DPLYR_VECSXP:
     return new RowwiseSubsetTemplate<VECSXP>(x);
-  case DPLYR_RAWSXP:
-    return new RowwiseSubsetTemplate<RAWSXP>(x);
   }
 
   stop("Unreachable");

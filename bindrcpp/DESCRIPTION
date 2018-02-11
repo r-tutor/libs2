@@ -1,37 +1,29 @@
 Package: bindrcpp
 Title: An 'Rcpp' Interface to Active Bindings
-Version: 0.2.0.9000
-Date: 2018-02-05
-Authors@R: c(
-    person("Kirill", "Müller", role = c("aut", "cre"), email = "krlmlr+r@mailbox.org"),
-    person("RStudio", role = "cph")
-    )
 Description: Provides an easy way to fill an environment with active bindings
     that call a C++ function.
-License: MIT + file LICENSE
+Authors@R: c(
+    person("Kirill", "MÃ¼ller", role = c("aut", "cre"), email = "krlmlr+r@mailbox.org"),
+    person("RStudio", role = "cph")
+    )
+Version: 0.2
+Date: 2017-06-15
 URL: https://github.com/krlmlr/bindrcpp,
         https://krlmlr.github.io/bindrcpp
 BugReports: https://github.com/krlmlr/bindrcpp/issues
-Imports: bindr (>= 0.1.0.9000), Rcpp
+Imports: Rcpp, bindr
 Suggests: testthat
-LinkingTo: plogr, Rcpp
-Remotes: krlmlr/bindr
-Encoding: UTF-8
-LazyData: true
-Roxygen: list(markdown = TRUE)
+LinkingTo: Rcpp, plogr
 RoxygenNote: 6.0.1
-Author: Kirill Müller [aut, cre],
+LazyData: true
+License: MIT + file LICENSE
+Encoding: UTF-8
+NeedsCompilation: yes
+Packaged: 2017-06-15 20:53:22 UTC; muelleki
+Author: Kirill MÃ¼ller [aut, cre],
   RStudio [cph]
-Maintainer: Kirill Müller <krlmlr+r@mailbox.org>
-Built: R 3.4.3; x86_64-w64-mingw32; 2018-02-06 00:45:09 UTC; windows
+Maintainer: Kirill MÃ¼ller <krlmlr+r@mailbox.org>
+Repository: CRAN
+Date/Publication: 2017-06-17 23:52:40 UTC
+Built: R 3.4.3; x86_64-w64-mingw32; 2018-02-06 00:59:48 UTC; windows
 Archs: i386, x64
-RemoteType: github
-RemoteHost: https://api.github.com
-RemoteRepo: bindrcpp
-RemoteUsername: krlmlr
-RemoteRef: master
-RemoteSha: 7553d4f07eb4adbf39af7fb1d1874091971f8043
-GithubRepo: bindrcpp
-GithubUsername: krlmlr
-GithubRef: master
-GithubSHA1: 7553d4f07eb4adbf39af7fb1d1874091971f8043

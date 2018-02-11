@@ -9,7 +9,6 @@ public:
 
   typedef typename Rcpp::traits::storage_type<RTYPE>::type STORAGE;
   typedef typename Matrix<RTYPE>::Column Column;
-  typedef typename Matrix<RTYPE>::ConstColumn ConstColumn;
 
   MatrixColumnSubsetVisitor(const Matrix<RTYPE>& data_) : data(data_) {}
 
@@ -32,7 +31,7 @@ public:
     for (int h = 0; h < nc; h++) {
       ChunkIndexMap::const_iterator it = index.begin();
       Column column = res.column(h);
-      ConstColumn source_column = data.column(h);
+      Column source_column = const_cast<Matrix<RTYPE>&>(data).column(h);
 
       for (int i = 0; i < n; i++, ++it) {
         column[i] = source_column[ it->first ];
@@ -65,7 +64,7 @@ private:
     Matrix<RTYPE> res(n, nc);
     for (int h = 0; h < nc; h++) {
       Column column = res.column(h);
-      ConstColumn source_column = data.column(h);
+      Column source_column = const_cast<Matrix<RTYPE>&>(data).column(h);
       for (int k = 0; k < n; k++) {
         int idx = index[k];
         if (idx < 0) {
@@ -80,28 +79,6 @@ private:
 
   Matrix<RTYPE> data;
 };
-
-// because RAWSXP does not have the NA concept
-template <>
-template <typename Container>
-inline SEXP MatrixColumnSubsetVisitor<RAWSXP>::subset_int(const Container& index) const {
-  int n = index.size(), nc = data.ncol();
-  Matrix<RAWSXP> res(n, nc);
-  for (int h = 0; h < nc; h++) {
-    Column column = res.column(h);
-    ConstColumn source_column = data.column(h);
-    for (int k = 0; k < n; k++) {
-      int idx = index[k];
-      if (idx < 0) {
-        column[k] = (Rbyte)0;
-      } else {
-        column[k] = source_column[ index[k] ];
-      }
-    }
-  }
-  return res;
-}
-
 
 }
 

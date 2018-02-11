@@ -16,7 +16,7 @@ public:
   Lag(SEXP data_, int n_, const RObject& def_, bool is_summary_) :
     data(data_),
     n(n_),
-    def(default_value<RTYPE>()),
+    def(Vector<RTYPE>::get_na()),
     is_summary(is_summary_)
   {
     if (!Rf_isNull(def_)) {
