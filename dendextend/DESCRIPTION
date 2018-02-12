@@ -1,8 +1,8 @@
 Package: dendextend
 Type: Package
-Title: Extending 'Dendrogram' Functionality in R
-Version: 1.6.0
-Date: 2017-11-13
+Title: Extending 'dendrogram' Functionality in R
+Version: 1.7.0
+Date: 2018-02-10
 Authors@R: c(person("Tal", "Galili", role = c("aut", "cre", "cph"), email =
     "tal.galili@gmail.com", comment = "https://www.r-statistics.com"),
     person("Gavin", "Simpson", role = "ctb"), person("Gregory","Jefferis", role
@@ -28,7 +28,9 @@ Authors@R: c(person("Tal", "Galili", role = c("aut", "cre", "cph"), email =
     person("Cath", comment =
     "https://github.com/CathG", role = "ctb"), person("John",
     "Ma", comment =
-    "https://github.com/JohnMCMa", role = "ctb"),  person("Yoav", "Benjamini", email = "ybenja@tau.ac.il",role = "ths"))
+    "https://github.com/JohnMCMa", role = "ctb"), person("Krzysiek",
+    "G", comment =
+    "https://github.com/storaged", role = "ctb"), person("Yoav", "Benjamini", email = "ybenja@tau.ac.il",role = "ths"))
 Description: Offers a set of functions for extending
     'dendrogram' objects in R, letting you visualize and compare trees of
     'hierarchical clusterings'. You can (1) Adjust a tree's graphical parameters
@@ -38,11 +40,10 @@ Depends: R (>= 3.0.0)
 Imports: utils, stats, datasets, magrittr (>= 1.0.1), ggplot2, fpc,
         whisker, viridis
 Suggests: knitr, rmarkdown, testthat, seriation, colorspace, plyr, ape,
-        profdpm, microbenchmark, gplots, NMF, heatmaply, d3heatmap,
+        profdpm, microbenchmark, gplots, heatmaply, d3heatmap,
         dynamicTreeCut, pvclust, corrplot, DendSer, MASS, cluster,
         circlize (>= 0.2.5), covr
-Enhances: ggdendro, labeltodendro,dendroextras, Hmisc, data.table,
-        rpart
+Enhances: ggdendro, dendroextras, Hmisc, data.table, rpart
 VignetteBuilder: knitr
 LazyData: true
 License: GPL-2 | GPL-3
@@ -53,7 +54,7 @@ URL: https://github.com/talgalili/dendextend/,
 BugReports: https://github.com/talgalili/dendextend/issues
 RoxygenNote: 6.0.1
 NeedsCompilation: no
-Packaged: 2017-11-13 10:54:16 UTC; junior
+Packaged: 2018-02-10 11:19:52 UTC; junior
 Author: Tal Galili [aut, cre, cph] (https://www.r-statistics.com),
   Gavin Simpson [ctb],
   Gregory Jefferis [aut, ctb] (imported code from his dendroextras
@@ -73,8 +74,9 @@ Author: Tal Galili [aut, cre, cph] (https://www.r-statistics.com),
   Zuguang Gu [ctb] (circlize author),
   Cath [ctb] (https://github.com/CathG),
   John Ma [ctb] (https://github.com/JohnMCMa),
+  Krzysiek G [ctb] (https://github.com/storaged),
   Yoav Benjamini [ths]
 Maintainer: Tal Galili <tal.galili@gmail.com>
 Repository: CRAN
-Date/Publication: 2017-11-13 11:54:10 UTC
-Built: R 3.4.2; ; 2017-11-19 13:11:53 UTC; windows
+Date/Publication: 2018-02-11 14:39:22 UTC
+Built: R 3.4.3; ; 2018-02-12 15:33:55 UTC; windows

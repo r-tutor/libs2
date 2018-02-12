@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Convert a spline basis to a tibble</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for as_tibble.basis {ggfortify}"><tr><td>as_tibble.basis {ggfortify}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Convert a spline basis to a tibble</h2>
+
+<h3>Description</h3>
+
+<p>Convert a spline basis to a tibble
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'basis'
+as_tibble(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>object of class &quot;basis&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Ignored.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This function is needed because the default method for
+converting a matrix object with an additional class attribute
+to a tibble causes issues because each column of the resulting
+tibble has the attributes, including the matrix class, copied
+from the source. Having matrices as columns in a tibble causes
+dplyr to throw errors, so a special method is needed to avoid
+copying the class attribute.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A tibble constructed from the underlying matrix of the
+basis object. Each column will possess all the attributes from
+the source object, except that the &quot;class&quot; attribute will be
+renamed to &quot;basis.class&quot; to avoid interfering with dplyr
+operations.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(splines)
+library(tibble)
+x &lt;- seq(0, 1, by=0.001)
+spl &lt;- bs(x, df=6)
+as_tibble(spl)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggfortify</em> version 0.4.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

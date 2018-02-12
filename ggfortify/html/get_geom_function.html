@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Factory function to control 'ggplot2::geom_xxx' functions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for get_geom_function {ggfortify}"><tr><td>get_geom_function {ggfortify}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Factory function to control <code>ggplot2::geom_xxx</code> functions</h2>
+
+<h3>Description</h3>
+
+<p>Factory function to control <code>ggplot2::geom_xxx</code> functions
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+get_geom_function(geom, allowed = c("line", "bar", "point"))
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>geom</code></td>
+<td>
+<p>string representation of <code>ggplot2::geom_xxx</code> function</p>
+</td></tr>
+<tr valign="top"><td><code>allowed</code></td>
+<td>
+<p>character vector contains allowed values</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>function
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+ggfortify:::get_geom_function('point')
+ggfortify:::get_geom_function('line', allowed = c('line'))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggfortify</em> version 0.4.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Convert 'forecast::forecast' to 'data.frame'</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for fortify.forecast {ggfortify}"><tr><td>fortify.forecast {ggfortify}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Convert <code>forecast::forecast</code> to <code>data.frame</code></h2>
+
+<h3>Description</h3>
+
+<p>Convert <code>forecast::forecast</code> to <code>data.frame</code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'forecast'
+fortify(model, data = NULL, is.date = NULL,
+  ts.connect = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>model</code></td>
+<td>
+<p><code>forecast::forecast</code> instance</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>original dataset, if needed</p>
+</td></tr>
+<tr valign="top"><td><code>is.date</code></td>
+<td>
+<p>Logical frag indicates whether the <code>stats::ts</code> is date or not.
+If not provided, regard the input as date when the frequency is 4 or 12.</p>
+</td></tr>
+<tr valign="top"><td><code>ts.connect</code></td>
+<td>
+<p>Logical frag indicates whether connects original time-series and predicted values</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>other arguments passed to methods</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>data.frame
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+d.arima &lt;- forecast::auto.arima(AirPassengers)
+d.forecast &lt;- forecast::forecast(d.arima, level = c(95), h = 50)
+fortify(d.forecast)
+fortify(d.forecast, ts.connect = TRUE)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggfortify</em> version 0.4.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Rbind original and predicted time-series-like instances as...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for rbind_ts {ggfortify}"><tr><td>rbind_ts {ggfortify}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Rbind original and predicted time-series-like instances as fortified <code>data.frame</code></h2>
+
+<h3>Description</h3>
+
+<p>Rbind original and predicted time-series-like instances as fortified <code>data.frame</code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+rbind_ts(data, original, ts.connect = TRUE, index.name = "Index",
+  data.name = "Data")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>Predicted/forecasted <code>ts</code> instance</p>
+</td></tr>
+<tr valign="top"><td><code>original</code></td>
+<td>
+<p>Original <code>ts</code> instance</p>
+</td></tr>
+<tr valign="top"><td><code>ts.connect</code></td>
+<td>
+<p>Logical frag indicates whether connects original time-series and predicted values</p>
+</td></tr>
+<tr valign="top"><td><code>index.name</code></td>
+<td>
+<p>Specify column name for time series index</p>
+</td></tr>
+<tr valign="top"><td><code>data.name</code></td>
+<td>
+<p>Specify column name for univariate time series data. Ignored in multivariate time series.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>data.frame
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+predicted &lt;- predict(stats::HoltWinters(UKgas), n.ahead = 5, prediction.interval = TRUE)
+rbind_ts(predicted, UKgas, ts.connect = TRUE)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggfortify</em> version 0.4.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

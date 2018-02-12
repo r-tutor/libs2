@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Autoplot spline basis instances</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for autoplot.basis {ggfortify}"><tr><td>autoplot.basis {ggfortify}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Autoplot spline basis instances</h2>
+
+<h3>Description</h3>
+
+<p>Autoplot spline basis instances
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'basis'
+autoplot(object, data, n = 256, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>spline basis object</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>x-values at which to evaluate the splines. Optional. By
+default, an evenly spaced sequence of 256 values covering the
+range of the splines will be used.</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>If data is not provided, instead use an evenly-spaced
+sequence of x-values of this length (plus one, since both
+endpoints are included). If data is provided, this argument is
+ignored.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Ignored.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>ggplot
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(splines)
+x &lt;- seq(0, 1, by=0.001)
+spl &lt;- bs(x, df=6)
+autoplot(spl)
+autoplot(spl, n=5)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggfortify</em> version 0.4.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

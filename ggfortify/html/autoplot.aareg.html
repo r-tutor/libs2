@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Autoplot 'survival::aareg'</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for autoplot.aareg {ggfortify}"><tr><td>autoplot.aareg {ggfortify}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Autoplot <code>survival::aareg</code></h2>
+
+<h3>Description</h3>
+
+<p>Autoplot <code>survival::aareg</code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'aareg'
+autoplot(object, maxtime = NULL, surv.connect = TRUE,
+  facets = TRUE, ncol = NULL, xlab = "", ylab = "", ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p><code>survival::aareg</code> instance</p>
+</td></tr>
+<tr valign="top"><td><code>maxtime</code></td>
+<td>
+<p>truncate the input to the model at time &quot;maxtime&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>surv.connect</code></td>
+<td>
+<p>logical frag indicates whether connects survival curve to the origin</p>
+</td></tr>
+<tr valign="top"><td><code>facets</code></td>
+<td>
+<p>Logical value to specify use facets</p>
+</td></tr>
+<tr valign="top"><td><code>ncol</code></td>
+<td>
+<p>Number of facet/subplot columns</p>
+</td></tr>
+<tr valign="top"><td><code>xlab</code></td>
+<td>
+<p>character vector or expression for x axis label</p>
+</td></tr>
+<tr valign="top"><td><code>ylab</code></td>
+<td>
+<p>character vector or expression for y axis label</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>other arguments passed to <code>autoplot.survfit</code></p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>ggplot
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(survival)
+autoplot(aareg(Surv(time, status) ~ age + sex + ph.ecog, data = lung, nmin = 1))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggfortify</em> version 0.4.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

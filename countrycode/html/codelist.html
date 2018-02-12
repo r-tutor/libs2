@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Country Code Translation Data Frame (Cross-Sectional)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for codelist {countrycode}"><tr><td>codelist {countrycode}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Country Code Translation Data Frame (Cross-Sectional)</h2>
+
+<h3>Description</h3>
+
+<p>A data frame used internally by the <code>countrycode()</code> function. 'countrycode' can use any valid code as destination, but only some codes can be used as origin.
+</p>
+
+
+<h3>Format</h3>
+
+<p>data frame with codes as columns</p>
+
+
+<h3>Details</h3>
+
+<p>Origin and Destination:
+</p>
+
+<ul>
+<li><p> country.name: country name (English)
+</p>
+</li>
+<li><p> country.name.de: country name (German)
+</p>
+</li>
+<li><p> cowc: Correlates of War character
+</p>
+</li>
+<li><p> cown: Correlates of War numeric
+</p>
+</li>
+<li><p> ecb: European Central Bank
+</p>
+</li>
+<li><p> eurostat:  Eurostat
+</p>
+</li>
+<li><p> fao: Food and Agriculture Organization of the United Nations numerical code
+</p>
+</li>
+<li><p> fips: FIPS 10-4 (Federal Information Processing Standard)
+</p>
+</li>
+<li><p> gaul: Global Administrative Unit Layers
+</p>
+</li>
+<li><p> genc2c: GENC 2-letter code
+</p>
+</li>
+<li><p> genc3c: GENC 3-letter code
+</p>
+</li>
+<li><p> genc3n: GENC numeric code
+</p>
+</li>
+<li><p> imf: International Monetary Fund
+</p>
+</li>
+<li><p> ioc: International Olympic Committee
+</p>
+</li>
+<li><p> iso2c: ISO-2 character
+</p>
+</li>
+<li><p> iso3c: ISO-3 character
+</p>
+</li>
+<li><p> iso2n: ISO-2 numeric
+</p>
+</li>
+<li><p> iso3n: ISO-3 numeric
+</p>
+</li>
+<li><p> p4n: Polity IV numeric country code
+</p>
+</li>
+<li><p> p4c: Polity IV character country code
+</p>
+</li>
+<li><p> un: United Nations numerical code
+</p>
+</li>
+<li><p> unpd: United Nations Procurement Division
+</p>
+</li>
+<li><p> wb: World Bank (very similar but not identical to iso3c)
+</p>
+</li>
+<li><p> wvs: World Values Survey numeric code
+</p>
+</li></ul>
+
+<p>Destination only:
+</p>
+
+<ul>
+<li><p> ar5: IPCC's regional mapping used both in the Fifth Assessment Report
+(AR5) and for the Reference Concentration Pathways (RCP)
+</p>
+</li>
+<li><p> continent: Continent as defined in the World Bank Development Indicators
+</p>
+</li>
+<li><p> cow.name: Correlates of War country name
+</p>
+</li>
+<li><p> ecb.name: European Central Bank country name
+</p>
+</li>
+<li><p> eurocontrol_pru:  European Organisation for the Safety of Air Navigation
+</p>
+</li>
+<li><p> eurocontrol_statfor:  European Organisation for the Safety of Air Navigation
+</p>
+</li>
+<li><p> eurostat.name:  Eurostat country name
+</p>
+</li>
+<li><p> eu28: Member states of the European Union (as of December 2015),
+without special territories
+</p>
+</li>
+<li><p> fao.name: Food and Agriculture Organization of the United Nations country name
+</p>
+</li>
+<li><p> fips.name: FIPS 10-4 Country name
+</p>
+</li>
+<li><p> genc.name: Geopolitical Entities, Names and Codes standard country names
+</p>
+</li>
+<li><p> icao: International Civil Aviation Organization
+</p>
+</li>
+<li><p> icao_region: International Civil Aviation Organization (Region)
+</p>
+</li>
+<li><p> ioc.name: International Olympic Committee country name
+</p>
+</li>
+<li><p> iso.name.en: ISO English short name
+</p>
+</li>
+<li><p> iso.name.fr: ISO French short name
+</p>
+</li>
+<li><p> p4.name: Polity IV country name
+</p>
+</li>
+<li><p> region: Regions as defined in the World Bank Development Indicators
+</p>
+</li>
+<li><p> un.name.ar: United Nations Arabic country name
+</p>
+</li>
+<li><p> un.name.en: United Nations English country name
+</p>
+</li>
+<li><p> un.name.es: United Nations Spanish country name
+</p>
+</li>
+<li><p> un.name.fr: United Nations French country name
+</p>
+</li>
+<li><p> un.name.ru: United Nations Russian country name
+</p>
+</li>
+<li><p> un.name.zh: United Nations Chinese country name
+</p>
+</li>
+<li><p> unpd.name: United Nations Procurement Division country name
+</p>
+</li>
+<li><p> wvs.name: World Values Survey numeric code country name
+</p>
+</li>
+<li><p> cldr.*: 622 country name variants from the UNICODE CLDR project.
+Inspect the 'countrycode::cldr_examples' data.frame for a full list of
+available country names and examples.
+</p>
+</li></ul>
+
+
+
+<h3>Note</h3>
+
+<p>The Correlates of War (cow) and Polity 4 (p4) project produce codes in
+country year format. Some countries go through political transitions that
+justify changing codes over time. When building a purely cross-sectional
+conversion dictionary, this forces us to make arbitrary choices with respect
+to some entities (e.g., Western Germany, Vietnam, Serbia). 'countrycode'
+includes a reconciled dataset in panel format:
+'countrycode::countrycode_panel'. Instead of converting code, we recommend
+that users dealing with panel data &quot;left-merge&quot; their data into this panel
+dictionary.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>countrycode</em> version 1.00.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Convert time-series-like to data.frame</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for fortify.ts {ggfortify}"><tr><td>fortify.ts {ggfortify}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Convert time-series-like to data.frame</h2>
+
+<h3>Description</h3>
+
+<p>Convert time-series-like to data.frame
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'ts'
+fortify(model, data = NULL, columns = NULL, is.date = NULL,
+  index.name = "Index", data.name = "Data", scale = FALSE, melt = FALSE,
+  ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>model</code></td>
+<td>
+<p>time-series-like instance</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>original dataset, if needed</p>
+</td></tr>
+<tr valign="top"><td><code>columns</code></td>
+<td>
+<p>character vector specifies target column name(s)</p>
+</td></tr>
+<tr valign="top"><td><code>is.date</code></td>
+<td>
+<p>logical frag indicates whether the <code>stats::ts</code> is date or not
+If not provided, regard the input as date when the frequency is 4 or 12</p>
+</td></tr>
+<tr valign="top"><td><code>index.name</code></td>
+<td>
+<p>specify column name for time series index</p>
+</td></tr>
+<tr valign="top"><td><code>data.name</code></td>
+<td>
+<p>specify column name for univariate time series data. Ignored in multivariate time series.</p>
+</td></tr>
+<tr valign="top"><td><code>scale</code></td>
+<td>
+<p>logical flag indicating whether to perform scaling each timeseries</p>
+</td></tr>
+<tr valign="top"><td><code>melt</code></td>
+<td>
+<p>logical flag indicating whether to melt each timeseries as variable</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>other arguments passed to methods</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>data.frame
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+fortify(AirPassengers)
+fortify(timeSeries::as.timeSeries(AirPassengers))
+fortify(tseries::irts(cumsum(rexp(10, rate = 0.1)), matrix(rnorm(20), ncol=2)))
+fortify(stats::stl(UKgas, s.window = 'periodic'))
+fortify(stats::decompose(UKgas))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggfortify</em> version 0.4.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

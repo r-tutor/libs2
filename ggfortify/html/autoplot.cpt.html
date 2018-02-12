@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Autoplot 'changepoint::cpt'</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for autoplot.cpt {ggfortify}"><tr><td>autoplot.cpt {ggfortify}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Autoplot <code>changepoint::cpt</code></h2>
+
+<h3>Description</h3>
+
+<p>Autoplot <code>changepoint::cpt</code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'cpt'
+autoplot(object, is.date = NULL, cpt.colour = "#FF0000",
+  cpt.linetype = "dashed", ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p><code>changepoint::cpt</code> instance</p>
+</td></tr>
+<tr valign="top"><td><code>is.date</code></td>
+<td>
+<p>Logical frag indicates whether the <code>stats::ts</code> is date or not.
+If not provided, regard the input as date when the frequency is 4 or 12.</p>
+</td></tr>
+<tr valign="top"><td><code>cpt.colour</code></td>
+<td>
+<p>Line colour for changepoints</p>
+</td></tr>
+<tr valign="top"><td><code>cpt.linetype</code></td>
+<td>
+<p>Line type for changepoints</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>other arguments passed <code>autoplot.ts</code></p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>ggplot
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(changepoint)
+autoplot(cpt.mean(AirPassengers))
+autoplot(cpt.meanvar(AirPassengers))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggfortify</em> version 0.4.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

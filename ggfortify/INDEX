@@ -1,6 +1,7 @@
 +,ggmultiplot,ANY-method
                         Generic add operator for 'ggmultiplot'
 apply_facets            Apply facets to to 'ggplot2::ggplot'
+apply_grid              Apply grid to to 'ggplot2::ggplot'
 as_tibble.basis         Convert a spline basis to a tibble
 autoplot.MSM.lm         Autoplot 'MSwM::MSM.lm'
 autoplot.RasterCommon   Autoplot 'raster::raster'
@@ -90,8 +91,6 @@ ggdistribution          Plot distribution
 ggfortify               ggfortify
 ggfreqplot              Plot seasonal subseries of time series,
                         generalization of 'stats::monthplot'
-gglagplot               Plot time series against lagged versions of
-                        themselves
 ggmultiplot-class       An S4 class to hold multiple 'ggplot2::ggplot'
                         instances
 ggtsdiag                Plots time-series diagnostics

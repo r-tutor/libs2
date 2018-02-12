@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Autoplot PCA-likes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for autoplot.pca_common {ggfortify}"><tr><td>autoplot.pca_common {ggfortify}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Autoplot PCA-likes</h2>
+
+<h3>Description</h3>
+
+<p>Autoplot PCA-likes
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'pca_common'
+autoplot(object, data = NULL, scale = 1, x = 1,
+  y = 2, variance_percentage = TRUE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>PCA-like instance</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>Joined to fitting result if provided.</p>
+</td></tr>
+<tr valign="top"><td><code>scale</code></td>
+<td>
+<p>scaling parameter, disabled by 0</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>principal component number used in x axis</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>principal component number used in y axis</p>
+</td></tr>
+<tr valign="top"><td><code>variance_percentage</code></td>
+<td>
+<p>show the variance explained by the principal component?</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>other arguments passed to <code>ggbiplot</code></p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+autoplot(stats::prcomp(iris[-5]))
+autoplot(stats::prcomp(iris[-5]), data = iris)
+autoplot(stats::prcomp(iris[-5]), data = iris, colour = 'Species')
+autoplot(stats::prcomp(iris[-5]), label = TRUE, loadings = TRUE, loadings.label = TRUE)
+autoplot(stats::prcomp(iris[-5]), frame = TRUE)
+autoplot(stats::prcomp(iris[-5]), data = iris, frame = TRUE,
+         frame.colour = 'Species')
+autoplot(stats::prcomp(iris[-5]), data = iris, frame = TRUE,
+         frame.type = 't', frame.colour = 'Species')
+
+autoplot(stats::princomp(iris[-5]))
+autoplot(stats::princomp(iris[-5]), data = iris)
+autoplot(stats::princomp(iris[-5]), data = iris, colour = 'Species')
+autoplot(stats::princomp(iris[-5]), label = TRUE, loadings = TRUE, loadings.label = TRUE)
+
+#Plot PC 2 and 3
+autoplot(stats::princomp(iris[-5]), x = 2, y = 3)
+
+#Don't show the variance explained
+autoplot(stats::princomp(iris[-5]), variance_percentage = FALSE)
+
+d.factanal &lt;- stats::factanal(state.x77, factors = 3, scores = 'regression')
+autoplot(d.factanal)
+autoplot(d.factanal, data = state.x77, colour = 'Income')
+autoplot(d.factanal, label = TRUE, loadings = TRUE, loadings.label = TRUE)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggfortify</em> version 0.4.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

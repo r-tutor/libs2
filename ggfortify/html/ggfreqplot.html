@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Plot seasonal subseries of time series, generalization of...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for ggfreqplot {ggfortify}"><tr><td>ggfreqplot {ggfortify}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Plot seasonal subseries of time series, generalization of <code>stats::monthplot</code></h2>
+
+<h3>Description</h3>
+
+<p>Plot seasonal subseries of time series, generalization of <code>stats::monthplot</code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ggfreqplot(data, freq = NULL, nrow = NULL, ncol = NULL,
+  conf.int = FALSE, conf.int.colour = "#0000FF",
+  conf.int.linetype = "dashed", conf.int.fill = NULL,
+  conf.int.alpha = 0.3, conf.int.value = 0.95, facet.labeller = NULL, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p><code>stats::ts</code> instance</p>
+</td></tr>
+<tr valign="top"><td><code>freq</code></td>
+<td>
+<p>Length of frequency. If not provided, use time-series frequency</p>
+</td></tr>
+<tr valign="top"><td><code>nrow</code></td>
+<td>
+<p>Number of plot rows</p>
+</td></tr>
+<tr valign="top"><td><code>ncol</code></td>
+<td>
+<p>Number of plot columns</p>
+</td></tr>
+<tr valign="top"><td><code>conf.int</code></td>
+<td>
+<p>Logical flag indicating whether to plot confidence intervals</p>
+</td></tr>
+<tr valign="top"><td><code>conf.int.colour</code></td>
+<td>
+<p>line colour for confidence intervals</p>
+</td></tr>
+<tr valign="top"><td><code>conf.int.linetype</code></td>
+<td>
+<p>line type for confidence intervals</p>
+</td></tr>
+<tr valign="top"><td><code>conf.int.fill</code></td>
+<td>
+<p>fill colour for confidence intervals</p>
+</td></tr>
+<tr valign="top"><td><code>conf.int.alpha</code></td>
+<td>
+<p>alpha for confidence intervals</p>
+</td></tr>
+<tr valign="top"><td><code>conf.int.value</code></td>
+<td>
+<p>Coverage probability for confidence interval</p>
+</td></tr>
+<tr valign="top"><td><code>facet.labeller</code></td>
+<td>
+<p>A vector used as facet labels</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Keywords passed to autoplot.ts</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>ggplot
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+ggfreqplot(AirPassengers)
+ggfreqplot(AirPassengers, freq = 4)
+ggfreqplot(AirPassengers, conf.int = TRUE)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggfortify</em> version 0.4.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

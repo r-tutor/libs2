@@ -79,6 +79,7 @@ entanglement.hclust	entanglement
 entanglement.phylo	entanglement
 fac2num	fac2num
 find_dend	find_dend
+find_dendrogram	find_dendrogram
 find_k	find_k
 fix_members_attr.dendrogram	fix_members_attr.dendrogram
 flatten.dendrogram	flatten.dendrogram
@@ -97,6 +98,7 @@ get_leaves_nodePar	get_leaves_nodePar
 get_nodes_attr	get_nodes_attr
 get_nodes_xy	get_nodes_xy
 get_root_branches_attr	get_root_branches_attr
+get_subdendrograms	get_subdendrograms
 ggdend	ggdend
 ggplot.dendrogram	ggdend
 ggplot.ggdend	ggdend

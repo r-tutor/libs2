@@ -473,22 +473,26 @@ Colv  <- x %>% t %>% dist %>% hclust %>% as.dendrogram %>%
 
 heatmap.2(x, Rowv = Rowv, Colv = Colv)
 
-## ---- message=FALSE------------------------------------------------------
-library(NMF)
-
-x  <- as.matrix(datasets::mtcars)
-
-# now let's spice up the dendrograms a bit:
-Rowv  <- x %>% dist %>% hclust %>% as.dendrogram %>%
-   set("branches_k_color", k = 3) %>% set("branches_lwd", 4) %>%
-   ladderize
-#    rotate_DendSer(ser_weight = dist(x))
-Colv  <- x %>% t %>% dist %>% hclust %>% as.dendrogram %>%
-   set("branches_k_color", k = 2) %>% set("branches_lwd", 4) %>%
-   ladderize
-#    rotate_DendSer(ser_weight = dist(t(x)))
-
-aheatmap(x, Rowv = Rowv, Colv = Colv)
+## ---- message=FALSE, eval = FALSE----------------------------------------
+#  
+#  # library(NMF)
+#  #
+#  # x  <- as.matrix(datasets::mtcars)
+#  #
+#  # # now let's spice up the dendrograms a bit:
+#  # Rowv  <- x %>% dist %>% hclust %>% as.dendrogram %>%
+#  #    set("branches_k_color", k = 3) %>% set("branches_lwd", 4) %>%
+#  #    ladderize
+#  # #    rotate_DendSer(ser_weight = dist(x))
+#  # Colv  <- x %>% t %>% dist %>% hclust %>% as.dendrogram %>%
+#  #    set("branches_k_color", k = 2) %>% set("branches_lwd", 4) %>%
+#  #    ladderize
+#  # #    rotate_DendSer(ser_weight = dist(t(x)))
+#  #
+#  # aheatmap(x, Rowv = Rowv, Colv = Colv)
+#  
+#  
+#  
 
 ## ------------------------------------------------------------------------
 x  <- as.matrix(datasets::mtcars)

@@ -1,6 +1,7 @@
 ggfortify-package	ggfortify
 +,ggmultiplot,ANY-method	plus-ggmultiplot-ANY-method
 apply_facets	apply_facets
+apply_grid	apply_grid
 as_tibble.basis	as_tibble.basis
 autoplot.aareg	autoplot.aareg
 autoplot.acf	autoplot.acf
@@ -100,7 +101,6 @@ ggcpgram	ggcpgram
 ggdistribution	ggdistribution
 ggfortify	ggfortify
 ggfreqplot	ggfreqplot
-gglagplot	gglagplot
 ggmultiplot-class	ggmultiplot-class
 ggtsdiag	ggtsdiag
 grid.draw.ggmultiplot	grid.draw.ggmultiplot
@@ -118,6 +118,7 @@ residuals.ar	residuals.ar
 show,ggmultiplot-method	show-ggmultiplot-method
 support_autoplot	support_autoplot
 unscale	unscale
+[,ggmultiplot,ANY,ANY-method	ggmultiplot-class
 [,ggmultiplot-method	ggmultiplot-class
 [<-,ggmultiplot-method	ggmultiplot-class
 [[,ggmultiplot-method	ggmultiplot-class

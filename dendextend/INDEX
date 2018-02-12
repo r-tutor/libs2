@@ -78,6 +78,8 @@ distinct_edges          Finds distinct edges in one tree compared to
 duplicate_leaf          Duplicate a leaf X times
 entanglement            Measures entanglement between two trees
 fac2num                 Turns a factor into a number
+find_dendrogram         Search for the subdendrogram structure composed
+                        of indicated labels
 find_k                  Find the (estimated) number of clusters for a
                         dendrogram using average silhouette width
 fix_members_attr.dendrogram
@@ -101,6 +103,8 @@ get_nodes_xy            Get the x-y coordinates of a dendrogram's nodes
 get_root_branches_attr
                         get attributes from the dendrogram's root(!)
                         branches
+get_subdendrograms      Extract a list of _k_ subdendrograms from a
+                        given dendrogram object
 ggdend                  Creates dendrogram plot using ggplot.
 hang.dendrogram         Hang dendrogram leaves
 has_component_in_attribute

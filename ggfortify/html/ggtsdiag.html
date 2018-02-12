@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Plots time-series diagnostics</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for ggtsdiag {ggfortify}"><tr><td>ggtsdiag {ggfortify}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Plots time-series diagnostics</h2>
+
+<h3>Description</h3>
+
+<p>Plots time-series diagnostics
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ggtsdiag(object, gof.lag = 10, conf.int = TRUE,
+  conf.int.colour = "#0000FF", conf.int.linetype = "dashed",
+  conf.int.fill = NULL, conf.int.alpha = 0.3, ad.colour = "#888888",
+  ad.linetype = "dashed", ad.size = 0.2, nrow = NULL, ncol = 1, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>A fitted time-series model</p>
+</td></tr>
+<tr valign="top"><td><code>gof.lag</code></td>
+<td>
+<p>The maximum number of lags for a Portmanteau goodness-of-fit test</p>
+</td></tr>
+<tr valign="top"><td><code>conf.int</code></td>
+<td>
+<p>Logical flag indicating whether to plot confidence intervals</p>
+</td></tr>
+<tr valign="top"><td><code>conf.int.colour</code></td>
+<td>
+<p>line colour for confidence intervals</p>
+</td></tr>
+<tr valign="top"><td><code>conf.int.linetype</code></td>
+<td>
+<p>line type for confidence intervals</p>
+</td></tr>
+<tr valign="top"><td><code>conf.int.fill</code></td>
+<td>
+<p>fill colour for confidence intervals</p>
+</td></tr>
+<tr valign="top"><td><code>conf.int.alpha</code></td>
+<td>
+<p>alpha for confidence intervals</p>
+</td></tr>
+<tr valign="top"><td><code>ad.colour</code></td>
+<td>
+<p>Line colour for additional lines</p>
+</td></tr>
+<tr valign="top"><td><code>ad.linetype</code></td>
+<td>
+<p>Line type for additional lines</p>
+</td></tr>
+<tr valign="top"><td><code>ad.size</code></td>
+<td>
+<p>Fill colour for additional lines</p>
+</td></tr>
+<tr valign="top"><td><code>nrow</code></td>
+<td>
+<p>Number of facet/subplot rows</p>
+</td></tr>
+<tr valign="top"><td><code>ncol</code></td>
+<td>
+<p>Number of facet/subplot columns</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>other keywords</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>ggplot
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+ggtsdiag(arima(AirPassengers))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggfortify</em> version 0.4.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

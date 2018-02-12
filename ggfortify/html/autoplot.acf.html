@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Autoplot 'stats::acf'. Note to pass 'plot = FALSE' to...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for autoplot.acf {ggfortify}"><tr><td>autoplot.acf {ggfortify}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Autoplot <code>stats::acf</code>. Note to pass 'plot = FALSE' to original function to suppress
+standard plot output</h2>
+
+<h3>Description</h3>
+
+<p>Autoplot <code>stats::acf</code>. Note to pass 'plot = FALSE' to original function to suppress
+standard plot output
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'acf'
+autoplot(object, colour = "#000000", linetype = "solid",
+  conf.int = TRUE, conf.int.colour = "#0000FF",
+  conf.int.linetype = "dashed", conf.int.fill = NULL,
+  conf.int.alpha = 0.3, conf.int.value = 0.95, conf.int.type = "white",
+  xlim = c(NA, NA), ylim = c(NA, NA), log = "", main = NULL,
+  xlab = NULL, ylab = "ACF", asp = NULL, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p><code>stats::acf</code> instance</p>
+</td></tr>
+<tr valign="top"><td><code>colour</code></td>
+<td>
+<p>Line colour</p>
+</td></tr>
+<tr valign="top"><td><code>linetype</code></td>
+<td>
+<p>Line type</p>
+</td></tr>
+<tr valign="top"><td><code>conf.int</code></td>
+<td>
+<p>Logical flag indicating whether to plot confidence intervals</p>
+</td></tr>
+<tr valign="top"><td><code>conf.int.colour</code></td>
+<td>
+<p>line colour for confidence intervals</p>
+</td></tr>
+<tr valign="top"><td><code>conf.int.linetype</code></td>
+<td>
+<p>line type for confidence intervals</p>
+</td></tr>
+<tr valign="top"><td><code>conf.int.fill</code></td>
+<td>
+<p>fill colour for confidence intervals</p>
+</td></tr>
+<tr valign="top"><td><code>conf.int.alpha</code></td>
+<td>
+<p>alpha for confidence intervals</p>
+</td></tr>
+<tr valign="top"><td><code>conf.int.value</code></td>
+<td>
+<p>Coverage probability for confidence interval</p>
+</td></tr>
+<tr valign="top"><td><code>conf.int.type</code></td>
+<td>
+<p>Type of confidence interval, 'white' for white noise or 'ma' MA(k-1) model</p>
+</td></tr>
+<tr valign="top"><td><code>xlim</code></td>
+<td>
+<p>limits for x axis</p>
+</td></tr>
+<tr valign="top"><td><code>ylim</code></td>
+<td>
+<p>limits for y axis</p>
+</td></tr>
+<tr valign="top"><td><code>log</code></td>
+<td>
+<p>which variables to log transform (&quot;x&quot;, &quot;y&quot;, or &quot;xy&quot;)</p>
+</td></tr>
+<tr valign="top"><td><code>main</code></td>
+<td>
+<p>character vector or expression for plot title</p>
+</td></tr>
+<tr valign="top"><td><code>xlab</code></td>
+<td>
+<p>character vector or expression for x axis label</p>
+</td></tr>
+<tr valign="top"><td><code>ylab</code></td>
+<td>
+<p>character vector or expression for y axis label</p>
+</td></tr>
+<tr valign="top"><td><code>asp</code></td>
+<td>
+<p>the y/x aspect ratio</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>other arguments passed to methods</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>ggplot
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+autoplot(stats::acf(AirPassengers, plot = FALSE))
+autoplot(stats::pacf(AirPassengers, plot = FALSE))
+autoplot(stats::ccf(AirPassengers, AirPassengers, plot = FALSE))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggfortify</em> version 0.4.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

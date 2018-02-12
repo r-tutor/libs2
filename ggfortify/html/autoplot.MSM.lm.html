@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Autoplot 'MSwM::MSM.lm'</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for autoplot.MSM.lm {ggfortify}"><tr><td>autoplot.MSM.lm {ggfortify}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Autoplot <code>MSwM::MSM.lm</code></h2>
+
+<h3>Description</h3>
+
+<p>Autoplot <code>MSwM::MSM.lm</code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'MSM.lm'
+autoplot(object, prob.colour = "#FF0000",
+  prob.linetype = "dashed", ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p><code>MSwM::MSM.lm</code> instance</p>
+</td></tr>
+<tr valign="top"><td><code>prob.colour</code></td>
+<td>
+<p>Line colour for probabilities</p>
+</td></tr>
+<tr valign="top"><td><code>prob.linetype</code></td>
+<td>
+<p>Line type for probabilities</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>other arguments passed to <code>autoplot.ts</code></p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>ggplot
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+library(MSwM)
+d &lt;- data.frame(Data = c(rnorm(50, mean = -10), rnorm(50, mean = 10)),
+                exog = cos(seq(-pi/2, pi/2, length.out = 100)))
+d.mswm &lt;- MSwM::msmFit(lm(Data ~.-1, data = d), k=2, sw=rep(TRUE, 2),
+                       control = list(parallelization = FALSE))
+autoplot(d.mswm)
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggfortify</em> version 0.4.2 <a href="00Index.html">Index</a>]</div>
+</body></html>
