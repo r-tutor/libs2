@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Methods for Function pairs in Package 'flexclust'</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for pairs-methods {flexclust}"><tr><td>pairs-methods {flexclust}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Methods for Function pairs in Package &lsquo;flexclust&rsquo;</h2>
+
+<h3>Description</h3>
+
+<p>Plot a matrix of neighbourhood graphs.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+  ## S4 method for signature 'kcca'
+pairs(x, which=NULL, project=NULL, oma=NULL, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>an object of class <code>"kcca"</code></p>
+</td></tr>
+<tr valign="top"><td><code>which</code></td>
+<td>
+<p>Index numbers of dimensions of (projected) input space
+to plot, default is to plot all dimensions.</p>
+</td></tr>
+<tr valign="top"><td><code>project</code></td>
+<td>
+<p>Projection object for which a <code>predict</code> method
+exists, e.g., the result of <code><a href="../../stats/html/prcomp.html">prcomp</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>oma</code></td>
+<td>
+<p>Outer margin.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Passed to the <code>plot</code> method.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This works only for <code>"kcca"</code> objects, no method is available for
+&quot;kccasimple&quot; objects.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Friedrich Leisch</p>
+
+<hr /><div style="text-align: center;">[Package <em>flexclust</em> version 1.3-5 <a href="00Index.html">Index</a>]</div>
+</body></html>

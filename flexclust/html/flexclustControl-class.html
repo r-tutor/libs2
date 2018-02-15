@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Classes &quot;flexclustControl&quot; and &quot;cclustControl&quot;</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for flexclustControl-class {flexclust}"><tr><td>flexclustControl-class {flexclust}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Classes &quot;flexclustControl&quot; and &quot;cclustControl&quot;</h2>
+
+<h3>Description</h3>
+
+<p>Hyperparameters for cluster algorithms.</p>
+
+
+<h3>Objects from the Class</h3>
+
+<p>Objects can be created by calls of the form
+<code>new("flexclustControl", ...)</code>. In addition, named lists can be
+coerced to <code>flexclustControl</code>
+objects, names are completed if unique (see examples).
+</p>
+
+
+<h3>Slots</h3>
+
+<p>Objects of class <code>flexclustControl</code> have the following slots:
+</p>
+
+<dl>
+<dt><code>iter.max</code>:</dt><dd><p>Maximum number of iterations.</p>
+</dd>
+<dt><code>tolerance</code>:</dt><dd><p>The algorithm is stopped when the
+(relative) change of the optimization criterion is smaller than
+<code>tolerance</code>.</p>
+</dd>
+<dt><code>verbose</code>:</dt><dd><p>If a positive integer, then progress is
+reported every <code>verbose</code> iterations. If 0,
+no output is generated during model fitting.</p>
+</dd>
+<dt><code>classify</code>:</dt><dd><p>Character string, one of <code>"auto"</code>,
+<code>"weighted"</code>, <code>"hard"</code> or <code>"simann"</code>.</p>
+</dd>
+<dt><code>initcent</code>:</dt><dd><p>Character string, name of function for
+initial centroids, currently <code>"randomcent"</code> (the default) and
+<code>"kmeanspp"</code> are available.</p>
+</dd>
+<dt><code>gamma</code>:</dt><dd><p>Gamma value for weighted hard competitive
+learning.</p>
+</dd>
+<dt><code>simann</code>:</dt><dd><p>Parameters for simulated annealing
+optimization (only used when <code>classify="simann"</code>).</p>
+</dd>
+<dt><code>ntry</code>:</dt><dd><p>Number of trials per iteration for QT clustering.</p>
+</dd>
+<dt><code>min.size</code>:</dt><dd><p>Clusters smaller than this value are treated
+as outliers.</p>
+</dd>
+</dl>
+
+<p>Objects of class <code>cclustControl</code> inherit from
+<code>flexclustControl</code> and have the following additional slots:
+</p>
+
+<dl>
+<dt><code>method</code>:</dt><dd><p>Learning rate for hard competitive learning,
+one of <code>"polynomial"</code> or <code>"exponential"</code>.</p>
+</dd>
+<dt><code>pol.rate</code>:</dt><dd><p>Positive number for polynomial learning rate
+of form <i>1/iter^par</i>.</p>
+</dd>
+<dt><code>exp.rate</code></dt><dd><p>Vector of length 2 with parameters for
+exponential learning rate of form
+<i>par1*(par2/par1)^(iter/iter.max)</i></p>
+</dd></dl>
+<p>.
+</p>
+<dl>
+<dt><code>ng.rate</code>:</dt><dd><p>Vector of length 4 with parameters for neural
+gas, see details below.</p>
+</dd>
+</dl>
+
+
+
+<h3>Learning Rate of Neural Gas</h3>
+
+<p>The neural gas algorithm uses updates of form
+</p>
+<p style="text-align: center;"><i>cnew = cold + e*exp(-m/l)*(x - cold)</i></p>
+
+<p>for every centroid, where <i>m</i> is the order (minus 1) of the
+centroid with
+respect to distance to data point <i>x</i> (0=closest, 1=second,
+...). The parameters <i>e</i> and <i>l</i> are given by
+</p>
+<p style="text-align: center;"><i>e = par1*(par2/par1)^(iter/iter.max),</i></p>
+
+<p style="text-align: center;"><i>l = par3*(par4/par3)^(iter/iter.max).</i></p>
+
+<p>See Martinetz et al (1993) for details of the algorithm, and the
+examples section on how to obtain default values.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Friedrich Leisch</p>
+
+
+<h3>References</h3>
+
+<p>Martinetz T., Berkovich S., and Schulten K. (1993). &quot;Neural-Gas
+Network for Vector Quantization and its Application to Time-Series
+Prediction.&quot; IEEE Transactions on Neural Networks, 4 (4), pp. 558&ndash;569.
+</p>
+<p>Arthur D. and Vassilvitskii S. (2007). &quot;k-means++: the advantages of
+careful seeding&quot;. Proceedings of the 18th annual ACM-SIAM symposium on
+Discrete algorithms. pp. 1027-1035.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="kcca.html">kcca</a></code>, <code><a href="cclust.html">cclust</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## have a look at the defaults
+new("flexclustControl")
+
+## corce a list
+mycont = list(iter=500, tol=0.001, class="w")
+as(mycont, "flexclustControl")
+
+## some additional slots
+as(mycont, "cclustControl")
+
+## default values for ng.rate
+new("cclustControl")@ng.rate
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>flexclust</em> version 1.3-5 <a href="00Index.html">Index</a>]</div>
+</body></html>

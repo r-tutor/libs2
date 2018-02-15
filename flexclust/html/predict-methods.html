@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Predict Cluster Membership</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for predict-methods {flexclust}"><tr><td>predict-methods {flexclust}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Predict Cluster Membership</h2>
+
+<h3>Description</h3>
+
+<p>Return either the cluster membership of training data or predict for
+new data.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S4 method for signature 'kccasimple'
+predict(object, newdata, ...)
+## S4 method for signature 'flexclust,ANY'
+clusters(object, newdata, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>Object of class inheriting from <code>"flexclust"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>newdata</code></td>
+<td>
+<p>An optional data matrix with the same number of columns
+as the cluster centers. If omitted, the fitted values are used.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Currently not used.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>clusters</code> can be used on any object of class <code>"flexclust"</code>
+and returns the cluster memberships of the training data.
+</p>
+<p><code>predict</code> can be used only on objects of class <code>"kcca"</code>
+(which inherit from <code>"flexclust"</code>). If no <code>newdata</code> argument
+is specified, the function is identical to <code>clusters</code>, if
+<code>newdata</code> is specified, then cluster memberships for the new data
+are predicted. <code>clusters(object, newdata, ...)</code> is an alias for
+<code>predict(object, newdata, ...)</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Friedrich Leisch</p>
+
+<hr /><div style="text-align: center;">[Package <em>flexclust</em> version 1.3-5 <a href="00Index.html">Index</a>]</div>
+</body></html>

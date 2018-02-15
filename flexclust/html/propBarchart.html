@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Barcharts and Boxplots for Columns of a Data Matrix Split by...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for propBarchart {flexclust}"><tr><td>propBarchart {flexclust}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Barcharts and Boxplots for Columns of a Data Matrix Split by Groups</h2>
+
+<h3>Description</h3>
+
+<p>Split a binary or numeric matrix by a grouping variable,
+run a series of tests on all variables, adjust for multiple testing
+and graphically represent results.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+propBarchart(x, g, alpha=0.05, correct="holm", test="prop.test",
+             sort=FALSE, strip.prefix="", strip.labels=NULL,
+             which=NULL, ...)
+
+## S4 method for signature 'propBarchart'
+summary(object, ...)
+
+groupBWplot(x, g, alpha=0.05, correct="holm", col=NULL,
+            shade=!is.null(shadefun), shadefun=NULL,
+            strip.prefix="", strip.labels=NULL, which=NULL, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A binary data matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>g</code></td>
+<td>
+<p>A factor specifying the groups.</p>
+</td></tr>
+<tr valign="top"><td><code>alpha</code></td>
+<td>
+<p>Significance level for test of differences in
+proportions.</p>
+</td></tr>
+<tr valign="top"><td><code>correct</code></td>
+<td>
+<p>Correction method for multiple testing, passed to
+<code><a href="../../stats/html/p.adjust.html">p.adjust</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>test</code></td>
+<td>
+<p>Test to use for detecting significant differences in
+proportions.</p>
+</td></tr>
+<tr valign="top"><td><code>sort</code></td>
+<td>
+<p>Logical, sort variables by total sample mean?</p>
+</td></tr>
+<tr valign="top"><td><code>strip.prefix</code></td>
+<td>
+<p>Character string prepended to strips of the
+<code><a href="../../lattice/html/barchart.html">barchart</a></code> (the remainder of the strip are group
+levels and group sizes). Ignored if <code>strip.labels</code> is specified.</p>
+</td></tr>
+<tr valign="top"><td><code>strip.labels</code></td>
+<td>
+<p>Character vector of labels to use for strips of
+<code><a href="../../lattice/html/barchart.html">barchart</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>which</code></td>
+<td>
+<p>Index numbers or names of variables to plot.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Passed on to <code><a href="../../lattice/html/barchart.html">barchart</a></code>
+or <code><a href="../../lattice/html/bwplot.html">bwplot</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>Return value of <code>propBarchart</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>col</code></td>
+<td>
+<p>Vector of colors for the panels.</p>
+</td></tr>
+<tr valign="top"><td><code>shade</code></td>
+<td>
+<p>If <code>TRUE</code>, only variables with significant 
+differences in median are filled with color.</p>
+</td></tr>
+<tr valign="top"><td><code>shadefun</code></td>
+<td>
+<p>A function or name of a function to compute which
+boxes are shaded, e.g. <code>"kruskalTest"</code> (default),
+<code>"medianInside"</code> or <code>"boxOverlap"</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Function <code>propBarchart</code> splits a binary data matrix into
+subgroups, computes the percentage of ones in each column and compares
+the proportions in the groups using <code><a href="../../stats/html/prop.test.html">prop.test</a></code>. The
+p-values for all variables are adjusted for multiple testing and a
+barchart of group percentages is drawn highlighting variables with
+significant differences in proportion. The <code>summary</code> method can
+be used to create a corresponding table for publications.
+</p>
+<p>Function <code>groupBWplot</code> takes a general numeric matrix, also
+splits into subgroups and uses boxes instead of bars. By default
+<code><a href="../../stats/html/kruskal.test.html">kruskal.test</a></code> is used to compute significant differences
+in location, in addition the heuristics from
+<code><a href="bwplot-methods.html">bwplot,kcca-method</a></code> can be used. Boxes of the complete sample
+are used as reference in the background.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Friedrich Leisch</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="barplot-methods.html">barplot-methods</a></code>,
+<code><a href="bwplot,kcca-method.html">bwplot,kcca-method</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+ ## create a binary matrix from the iris data plus a random noise column
+ x &lt;- apply(iris[,-5], 2, function(z) z&gt;median(z))
+ x &lt;- cbind(x, Noise=sample(0:1, 150, replace=TRUE))
+
+ ## There are significant differences in all 4 original variables, Noise
+ ## has most likely no significant difference (of course the difference
+ ## will be significant in alpha percent of all random samples).
+ p &lt;- propBarchart(x, iris$Species)
+ p
+ summary(p)
+ 
+ x &lt;- iris[,-5]
+ x &lt;- cbind(x, Noise=rnorm(150, mean=3))
+ groupBWplot(x, iris$Species)
+ groupBWplot(x, iris$Species, shade=TRUE)
+ groupBWplot(x, iris$Species, shadefun="medianInside")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>flexclust</em> version 1.3-5 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Run Flexclust Algorithms Repeatedly</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for stepFlexclust {flexclust}"><tr><td>stepFlexclust {flexclust}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Run Flexclust Algorithms Repeatedly</h2>
+
+<h3>Description</h3>
+
+<p>Runs clustering algorithms repeatedly for different numbers of
+clusters and returns the minimum within cluster distance solution for
+each.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+stepFlexclust(x, k, nrep=3, verbose=TRUE, FUN = kcca, drop=TRUE,
+              group=NULL, simple=FALSE, save.data=FALSE, seed=NULL,
+              multicore=TRUE, ...)
+
+stepcclust(...)
+
+## S4 method for signature 'stepFlexclust,missing'
+plot(x, y,
+  type=c("barplot", "lines"), totaldist=NULL,
+  xlab=NULL, ylab=NULL, ...)
+
+## S4 method for signature 'stepFlexclust'
+getModel(object, which=1)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x, ...</code></td>
+<td>
+<p>passed to <code><a href="kcca.html">kcca</a></code> or <code><a href="cclust.html">cclust</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>k</code></td>
+<td>
+<p>A vector of integers passed in turn to the <code>k</code> argument
+of <code><a href="kcca.html">kcca</a></code></p>
+</td></tr>
+<tr valign="top"><td><code>nrep</code></td>
+<td>
+<p>For each value of <code>k</code> run <code><a href="kcca.html">kcca</a></code>
+<code>nrep</code> times and keep only the best solution.</p>
+</td></tr>
+<tr valign="top"><td><code>FUN</code></td>
+<td>
+<p>Cluster function to use, typically <code>kcca</code> or
+<code><a href="cclust.html">cclust</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>verbose</code></td>
+<td>
+<p>If <code>TRUE</code>, show progress information during
+computations.</p>
+</td></tr>
+<tr valign="top"><td><code>drop</code></td>
+<td>
+<p>If <code>TRUE</code> and <code>K</code> is of length 1, then a single
+cluster object is returned instead of a <code>"stepFlexclust"</code>
+object.</p>
+</td></tr>
+<tr valign="top"><td><code>group</code></td>
+<td>
+<p>An optional grouping vector for the data, see
+<code><a href="kcca.html">kcca</a></code> for details.</p>
+</td></tr>
+<tr valign="top"><td><code>simple</code></td>
+<td>
+<p>Return an object of class <code>kccasimple</code>?</p>
+</td></tr>
+<tr valign="top"><td><code>save.data</code></td>
+<td>
+<p>Save a copy of <code>x</code> in the return object?</p>
+</td></tr>
+<tr valign="top"><td><code>seed</code></td>
+<td>
+<p>If not <code>NULL</code>, a call to <code>set.seed()</code> is made
+before any clustering is done.</p>
+</td></tr>
+<tr valign="top"><td><code>multicore</code></td>
+<td>
+<p>If <code>TRUE</code>, use <code>mclapply()</code> from package
+<span class="pkg">parallel</span> for parallel processing.</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>Not used.</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>Create a barplot or lines plot.</p>
+</td></tr>
+<tr valign="top"><td><code>totaldist</code></td>
+<td>
+<p>Include value for 1-cluster solution in plot? Default
+is <code>TRUE</code> if <code>K</code> contains <code>2</code>, else <code>FALSE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>xlab, ylab</code></td>
+<td>
+<p>Graphical parameters.</p>
+</td></tr>
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>Object of class <code>"stepFlexclust"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>which</code></td>
+<td>
+<p>Number of model to get. If character, interpreted as
+number of clusters.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>stepcclust</code> is a simple wrapper for
+<code>stepFlexclust(...,FUN=cclust)</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Friedrich Leisch</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data("Nclus")
+plot(Nclus)
+
+## multicore off for CRAN checks
+cl1 = stepFlexclust(Nclus, k=2:7, FUN=cclust, multicore=FALSE)
+cl1
+
+plot(cl1)
+
+# two ways to do the same:
+getModel(cl1, 4)
+cl1[[4]]
+
+opar=par("mfrow")
+par(mfrow=c(2,2))
+for(k in 3:6){
+  image(getModel(cl1, as.character(k)), data=Nclus)
+  title(main=paste(k, "clusters"))
+}
+par(opar)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>flexclust</em> version 1.3-5 <a href="00Index.html">Index</a>]</div>
+</body></html>

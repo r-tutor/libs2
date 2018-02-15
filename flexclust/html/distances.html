@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Distance and Centroid Computation</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for distances {flexclust}"><tr><td>distances {flexclust}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Distance and Centroid Computation</h2>
+
+<h3>Description</h3>
+
+<p>Helper functions to create <code><a href="kcca.html">kccaFamily</a></code> objects.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+distAngle(x, centers)
+distCanberra(x, centers)
+distCor(x, centers)
+distEuclidean(x, centers)
+distJaccard(x, centers)
+distManhattan(x, centers)
+distMax(x, centers)
+distMinkowski(x, centers, p=2)
+
+centAngle(x)
+centMean(x)
+centMedian(x)
+
+centOptim(x, dist)
+centOptim01(x, dist)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A data matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>centers</code></td>
+<td>
+<p>A matrix of centroids.</p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>The power of the Minkowski distance.</p>
+</td></tr>
+<tr valign="top"><td><code>dist</code></td>
+<td>
+<p>A distance function.</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Friedrich Leisch</p>
+
+<hr /><div style="text-align: center;">[Package <em>flexclust</em> version 1.3-5 <a href="00Index.html">Index</a>]</div>
+</body></html>

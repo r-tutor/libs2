@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: German Parliament Election Data</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for bundestag {flexclust}"><tr><td>bundestag {flexclust}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>German Parliament Election Data</h2>
+
+<h3>Description</h3>
+
+<p>Results of the elections 2002, 2005 or 2009 for the German Bundestag, the
+first chamber of the German parliament.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+data(btw2002)
+data(btw2005)
+data(btw2009)
+bundestag(year, second=TRUE, percent=TRUE, nazero=TRUE, state=FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>year</code></td>
+<td>
+<p>numeric or character, year of the election.</p>
+</td></tr>
+<tr valign="top"><td><code>second</code></td>
+<td>
+<p>logical, return second or first votes?</p>
+</td></tr>
+<tr valign="top"><td><code>percent</code></td>
+<td>
+<p>logical, return percentages or absolute numbers?</p>
+</td></tr>
+<tr valign="top"><td><code>nazero</code></td>
+<td>
+<p>logical, convert <code>NA</code>s to 0?</p>
+</td></tr>
+<tr valign="top"><td><code>state</code></td>
+<td>
+<p>logical or character. If <code>TRUE</code> then only column <code>state</code>
+from the corresponding data frame is returned, and all other
+arguments are ignored. If character, then it is used as pattern to
+<code><a href="../../base/html/grep.html">grep</a></code> for the corresponding state(s), see examples.</p>
+</td></tr>
+</table>
+
+
+<h3>Format</h3>
+
+<p><code>btw200x</code> are data frames with 299 rows
+(corresponding to constituencies) and 17 columns. All columns except
+<code>state</code> are numeric.
+</p>
+
+<dl>
+<dt>state:</dt><dd><p>factor, the 16 German federal states.</p>
+</dd>
+<dt>eligible:</dt><dd><p>number of citizens eligible to vote.</p>
+</dd>
+<dt>votes:</dt><dd><p>number of eligible citizens who did vote.</p>
+</dd>
+<dt>invalid1, invalid2:</dt><dd><p>number of invalid first and second votes (see
+details below).</p>
+</dd>
+<dt>valid1, valid2:</dt><dd><p>number of valid first and second votes.</p>
+</dd>
+<dt>SPD1, SPD2:</dt><dd><p>number of first and second votes for the Social Democrats.</p>
+</dd>
+<dt>UNION1, UNION2:</dt><dd><p>number of first and second votes for CDU/CSU,
+the conservative Christian Democrats.</p>
+</dd>
+<dt>GRUENE1, GRUENE2:</dt><dd><p>number of first and second votes for the
+Green Party.</p>
+</dd>
+<dt>FDP1, FDP2:</dt><dd><p>number of first and second votes for the Liberal Party.</p>
+</dd>
+<dt>LINKE1, LINKE2:</dt><dd><p>number of first and second votes for the Left
+Party (PDS in 2002).</p>
+</dd>
+</dl>
+
+<p>Missing values indicate that a party did not candidate in the
+corresponding constituency.
+</p>
+
+
+<h3>Details</h3>
+
+<p><code>btw200x</code> are the original data sets.
+<code>bundestag()</code> is a helper function which extracts first
+or second votes, calculates percentages (number of votes for a party divided by
+number of valid votes), replaces missing values by zero, and converts
+the result from a data frame to a matrix.  By default
+it returns the percentage of second votes for each party, which
+determines the number of seats each party gets in parliament.
+</p>
+
+
+<h3>German Federal Elections</h3>
+
+<p> Half of the Members of the German
+Bundestag are elected directly from Germany's 299 constituencies, the
+other half on the parties' state lists.  Accordingly, each voter has
+two votes in the elections to the German Bundestag. The first vote,
+allowing voters to elect their local representatives to the Bundestag,
+decides which candidates are sent to Parliament from the
+constituencies.
+</p>
+<p>The second vote is cast for a party list. And it is this second vote
+that determines the relative strengths of the parties represented in
+the Bundestag.  At least 598 Members of the German Bundestag are
+elected in this way. In addition to this, there are certain
+circumstances in which some candidates win what
+are known as &ldquo;overhang mandates&rdquo; when the seats are being
+distributed.
+</p>
+
+
+<h3>References</h3>
+
+<p>Homepage of the Bundestag:
+<a href="http://www.bundestag.de">http://www.bundestag.de</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+p02 &lt;- bundestag(2002)
+pairs(p02)
+p05 &lt;- bundestag(2005)
+pairs(p05)
+p09 &lt;- bundestag(2009)
+pairs(p09)
+
+state &lt;- bundestag(2002, state=TRUE)
+table(state)
+
+start.with.b &lt;- bundestag(2002, state="^B")
+table(start.with.b)
+
+pairs(p09, col=2-(state=="Bayern"))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>flexclust</em> version 1.3-5 <a href="00Index.html">Index</a>]</div>
+</body></html>

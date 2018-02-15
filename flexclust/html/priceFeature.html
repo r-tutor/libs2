@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Artificial 2d Market Segment Data</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for priceFeature {flexclust}"><tr><td>priceFeature {flexclust}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Artificial 2d Market Segment Data</h2>
+
+<h3>Description</h3>
+
+<p>Simple artificial 2-dimensional data to demonstrate clustering for market
+segmentation. One dimension is the hypothetical feature
+sophistication (or performance or quality, etc) of a product, the
+second dimension the price customers are willing to pay for the
+product.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+priceFeature(n, which=c("2clust", "3clust", "5clust",
+                        "ellipse", "triangle", "circle", "square",
+                        "largesmall"))
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>sample size</p>
+</td></tr>
+<tr valign="top"><td><code>which</code></td>
+<td>
+<p>shape of data set</p>
+</td></tr>
+</table>
+
+
+<h3>References</h3>
+
+<p>Sara Dolnicar and Friedrich Leisch. Evaluation of structure and
+reproducibility of cluster solutions using the bootstrap. Marketing
+Letters, 21:83-101, 2010.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+plot(priceFeature(200, "2clust"))
+plot(priceFeature(200, "3clust"))
+plot(priceFeature(200, "5clust"))
+plot(priceFeature(200, "ell"))
+plot(priceFeature(200, "tri"))
+plot(priceFeature(200, "circ"))
+plot(priceFeature(200, "square"))
+plot(priceFeature(200, "largesmall"))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>flexclust</em> version 1.3-5 <a href="00Index.html">Index</a>]</div>
+</body></html>

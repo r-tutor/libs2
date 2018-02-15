@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Add Arrows for Projected Axes to a Plot</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for projAxes {flexclust}"><tr><td>projAxes {flexclust}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Add Arrows for Projected Axes to a Plot</h2>
+
+<h3>Description</h3>
+
+<p>Adds arrows for original coordinate axes to a projection
+plot.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+projAxes(object, which=1:2, center=NULL,
+                     col="red", radius=NULL,
+                     minradius=0.1, textargs=list(col=col),
+                     col.names=getColnames(object),
+                     which.names="", group = NULL, groupFun = colMeans,
+                     plot=TRUE, ...)
+
+placeLabels(object)
+## S4 method for signature 'projAxes'
+placeLabels(object)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>Return value of a projection method like
+<code><a href="../../stats/html/prcomp.html">prcomp</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>which</code></td>
+<td>
+<p>Index number of dimensions of (projected) input space
+that have been plotted.</p>
+</td></tr>
+<tr valign="top"><td><code>center</code></td>
+<td>
+<p>Center of the coordinate system to use in projected
+space. Default is the center of the plotting region.</p>
+</td></tr>
+<tr valign="top"><td><code>col</code></td>
+<td>
+<p>Color of arrows.</p>
+</td></tr>
+<tr valign="top"><td><code>radius</code></td>
+<td>
+<p>Relative size of the arrows.</p>
+</td></tr>
+<tr valign="top"><td><code>minradius</code></td>
+<td>
+<p>Minimum radius of arrows to include (relative to
+arrow size).</p>
+</td></tr>
+<tr valign="top"><td><code>textargs</code></td>
+<td>
+<p>List of arguments for <code><a href="../../graphics/html/text.html">text</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>col.names</code></td>
+<td>
+<p>Variable names of the original data.</p>
+</td></tr>
+<tr valign="top"><td><code>which.names</code></td>
+<td>
+<p>A regular expression which variable names to
+include in the plot.</p>
+</td></tr>
+<tr valign="top"><td><code>group</code></td>
+<td>
+<p>An optional grouping variable for the original
+coordinates. Coordinates with group <code>NA</code> are omitted.</p>
+</td></tr>
+<tr valign="top"><td><code>groupFun</code></td>
+<td>
+<p>Function used to aggregate the projected coordinates
+if <code>group</code> is specified.</p>
+</td></tr>
+<tr valign="top"><td><code>plot</code></td>
+<td>
+<p>Logical,if <code>TRUE</code> the axes are added to the current plot.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Passed to  <code><a href="../../graphics/html/arrows.html">arrows</a></code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p><code>projAxes</code> invisibly returns an object of class
+<code>"projAxes"</code>, which can be
+added to an existing plot by its <code>plot</code>
+method.</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Friedrich Leisch</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(milk)
+milk.pca &lt;- prcomp(milk, scale=TRUE)
+
+## create a biplot step by step
+plot(predict(milk.pca), type="n")
+text(predict(milk.pca), rownames(milk), col="green", cex=0.8)
+projAxes(milk.pca)
+
+## the same, but arrows are blue, centered at origin and all arrows are
+## plotted 
+plot(predict(milk.pca), type="n")
+text(predict(milk.pca), rownames(milk), col="green", cex=0.8)
+projAxes(milk.pca, col="blue", center=0, minradius=0)
+
+## use points instead of text, plot PC2 and PC3, manual radius
+## specification, store result
+plot(predict(milk.pca)[,c(2,3)])
+arr &lt;- projAxes(milk.pca, which=c(2,3), radius=1.2, plot=FALSE)
+plot(arr)
+
+## Not run: 
+
+## manually try to find new places for the labels: each arrow is marked
+## active in turn, use the left mouse button to find a better location
+## for the label. Use the right mouse button to go on to the next
+## variable.
+
+arr1 &lt;- placeLabels(arr)
+
+## now do the plot again:
+plot(predict(milk.pca)[,c(2,3)])
+plot(arr1)
+
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>flexclust</em> version 1.3-5 <a href="00Index.html">Index</a>]</div>
+</body></html>

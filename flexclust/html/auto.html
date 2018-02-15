@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Automobile Customer Survey Data</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for auto {flexclust}"><tr><td>auto {flexclust}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+Automobile Customer Survey Data
+</h2>
+
+<h3>Description</h3>
+
+<p>A German manufacturer of premium cars asked customers approximately 3
+months after a car purchase which characteristics of the car were most
+important for the decision to buy the car. The survey was done in 1983
+and the data set contains all responses without missing values.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>data(auto)</pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 793 observations on the following 46 variables.
+</p>
+
+<dl>
+<dt><code>model</code></dt><dd><p>a factor with levels <code>A</code> <code>B</code> <code>C</code>
+<code>D</code>, model bought by the customer.</p>
+</dd>
+<dt><code>gear</code></dt><dd><p>a factor with levels <code>4 gears</code>, <code>5
+	econo</code>, <code>5 sport</code>, or <code>automatic</code>.</p>
+</dd>
+<dt><code>leasing</code></dt><dd><p>a logical vector, was leasing used to finance
+the car?</p>
+</dd>
+<dt><code>usage</code></dt><dd><p>a factor with levels <code>private</code>, <code>both</code>, <code>business</code>.</p>
+</dd>
+<dt><code>previous_model</code></dt><dd><p>a factor describing which type of car
+was owned directly before the purchase.</p>
+</dd>
+<dt><code>other_consider</code></dt><dd><p>a factor with levels <code>same manuf</code>,
+<code>other manuf</code>, <code>both</code>, or <code>none</code></p>
+</dd>
+<dt><code>test_drive</code></dt><dd><p>a logical vector, did you do a test drive?</p>
+</dd>
+<dt><code>info_adv</code></dt><dd><p>a logical vector, was advertising an
+important source of information?</p>
+</dd>
+<dt><code>info_exp</code></dt><dd><p>a logical vector, was experience an
+important source of information?</p>
+</dd>
+<dt><code>info_rec</code></dt><dd><p>a logical vector, were recommendations an
+important source of information?</p>
+</dd>
+<dt><code>ch_clarity</code></dt><dd><p>a logical vector</p>
+</dd>
+<dt><code>ch_economy</code></dt><dd><p>a logical vector</p>
+</dd>
+<dt><code>ch_driving_properties</code></dt><dd><p>a logical vector</p>
+</dd>
+<dt><code>ch_service</code></dt><dd><p>a logical vector</p>
+</dd>
+<dt><code>ch_interior</code></dt><dd><p>a logical vector</p>
+</dd>
+<dt><code>ch_quality</code></dt><dd><p>a logical vector</p>
+</dd>
+<dt><code>ch_technology</code></dt><dd><p>a logical vector</p>
+</dd>
+<dt><code>ch_model_continuity</code></dt><dd><p>a logical vector</p>
+</dd>
+<dt><code>ch_comfort</code></dt><dd><p>a logical vector</p>
+</dd>
+<dt><code>ch_reliability</code></dt><dd><p>a logical vector</p>
+</dd>
+<dt><code>ch_handling</code></dt><dd><p>a logical vector</p>
+</dd>
+<dt><code>ch_reputation</code></dt><dd><p>a logical vector</p>
+</dd>
+<dt><code>ch_concept</code></dt><dd><p>a logical vector</p>
+</dd>
+<dt><code>ch_character</code></dt><dd><p>a logical vector</p>
+</dd>
+<dt><code>ch_power</code></dt><dd><p>a logical vector</p>
+</dd>
+<dt><code>ch_resale_value</code></dt><dd><p>a logical vector</p>
+</dd>
+<dt><code>ch_styling</code></dt><dd><p>a logical vector</p>
+</dd>
+<dt><code>ch_safety</code></dt><dd><p>a logical vector</p>
+</dd>
+<dt><code>ch_sporty</code></dt><dd><p>a logical vector</p>
+</dd>
+<dt><code>ch_consumption</code></dt><dd><p>a logical vector</p>
+</dd>
+<dt><code>ch_space</code></dt><dd><p>a logical vector</p>
+</dd>
+<dt><code>satisfaction</code></dt><dd><p>a numeric vector describing overall
+satisfaction (1=very good, 10=very bad).</p>
+</dd>
+<dt><code>good1</code></dt><dd><p>conception, styling, dimensions.</p>
+</dd>
+<dt><code>good2</code></dt><dd><p>auto body.</p>
+</dd>
+<dt><code>good3</code></dt><dd><p>driving and coupled axles.</p>
+</dd>
+<dt><code>good4</code></dt><dd><p>engine.</p>
+</dd>
+<dt><code>good5</code></dt><dd><p>electronics.</p>
+</dd>
+<dt><code>good6</code></dt><dd><p>financing and customer service.</p>
+</dd>
+<dt><code>good7</code></dt><dd><p>other.</p>
+</dd>
+<dt><code>sporty</code></dt><dd><p>What do you think about the balance of
+sportiness and comfort? (<code>good</code> <code>more sport</code> <code>more comfort</code>).</p>
+</dd>
+<dt><code>drive_char</code></dt><dd><p>driving characteristis (<code>gentle</code> &lt; <code>speedy</code> &lt; <code>powerfull</code> &lt; <code>extreme</code>).</p>
+</dd>
+<dt><code>tempo</code></dt><dd><p>Which average speed do you prefer on German
+Autobahn in km/h? (<code>&lt; 130</code> &lt; <code>130-150</code> &lt; <code>150-180</code> &lt; <code>&gt; 180</code>)</p>
+</dd>
+<dt><code>consumption</code></dt><dd><p>an ordered factor with levels <code>low</code> &lt; <code>ok</code> &lt; <code>high</code> &lt; <code>too high</code>.</p>
+</dd>
+<dt><code>gender</code></dt><dd><p>a factor with levels <code>male</code> <code>female</code></p>
+</dd>
+<dt><code>occupation</code></dt><dd><p>a factor with levels <code>self-employed</code>,
+<code>freelance</code>, and <code>employee</code>.</p>
+</dd>
+<dt><code>household</code></dt><dd><p>size of household, an ordered factor with levels <code>1-2</code> &lt; <code>&gt;=3</code></p>
+</dd>
+</dl>
+
+
+
+<h3>Source</h3>
+
+<p>The original German data are in the public domain and available at
+<a href="http://dx.doi.org/10.5282/ubm/data.14">http://dx.doi.org/10.5282/ubm/data.14</a> from LMU Munich. The
+variable names and help page were translated to English and converted
+into Rd format by Friedrich Leisch.
+</p>
+
+
+<h3>References</h3>
+
+<p>Open Data LMU (1983): Umfrage unter Kunden einer Automobilfirma,
+doi:10.5282/ubm/data.14
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(auto)
+summary(auto)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>flexclust</em> version 1.3-5 <a href="00Index.html">Index</a>]</div>
+</body></html>
