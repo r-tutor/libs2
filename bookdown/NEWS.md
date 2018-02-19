@@ -1,3 +1,11 @@
+# CHANGES IN bookdown VERSION 0.7
+
+## MINOR CHANGES
+
+- Added a new dependency **tinytex** to build PDF, and **xfun** for some utility functions.
+
+- Added the ability to share documents on LinkedIn with the `gitbook` output format (thanks, @WeeBeasties, #523, https://stackoverflow.com/q/48494097/559676).
+
 # CHANGES IN bookdown VERSION 0.6
 
 ## NEW FEATURES
@@ -10,7 +18,7 @@
 
 - Various compatibility issues with Pandoc 2.0 (thanks, @maxheld83 #479, @jerrythomas #481, @Hantabaru #483, @dataopt #504, and #478).
 
-- `split_by = 'section'` does not work completely correctly for the HTML output formats like `gitbook` (thanks, @dataopt, @502).
+- `split_by = 'section'` does not work completely correctly for the HTML output formats like `gitbook` (thanks, @dataopt, #502).
 
 # CHANGES IN bookdown VERSION 0.5
 
