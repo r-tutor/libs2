@@ -1,7 +1,7 @@
 Type: Package
 Package: dbplyr
 Title: A 'dplyr' Back End for Databases
-Version: 1.2.0
+Version: 1.2.1
 Authors@R: c(
     person("Hadley", "Wickham", , "hadley@rstudio.com", c("aut", "cre")),
     person("Edgar", "Ruiz", role = "aut"),
@@ -40,11 +40,11 @@ Collate: 'cache.r' 'compat-purrr.R' 'data-lahman.r'
         'translate-sql-odbc.R' 'translate-sql-paste.R'
         'translate-sql.r' 'utils-format.r' 'window.R' 'zzz.R'
 NeedsCompilation: no
-Packaged: 2017-12-29 18:11:29 UTC; hadley
+Packaged: 2018-02-19 15:55:28 UTC; hadley
 Author: Hadley Wickham [aut, cre],
   Edgar Ruiz [aut],
   RStudio [cph, fnd]
 Maintainer: Hadley Wickham <hadley@rstudio.com>
 Repository: CRAN
-Date/Publication: 2018-01-03 13:35:30 UTC
-Built: R 3.4.3; ; 2018-01-06 21:02:54 UTC; windows
+Date/Publication: 2018-02-19 19:40:06 UTC
+Built: R 3.4.3; ; 2018-02-22 03:46:19 UTC; windows
