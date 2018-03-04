@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Convenience function to &quot;flatten&quot; a nested geo.set object.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for flatten.geo.set {acs}"><tr><td>flatten.geo.set {acs}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+Convenience function to &quot;flatten&quot; a nested geo.set object.
+</h2>
+
+<h3>Description</h3>
+
+<p>In the acs package, geo.set objects may contain nested levels of geo.set
+objects, which is often desired (to organize complex sets and subsets of
+geography).  Sometimes, however, when combining these sets, users may
+prefer to remove the nesting levels.  This convenience function will
+recursively prowl through a geo.set and return a single flat geo.set
+(one level deep) containing of the composite geographies.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+flatten.geo.set(x)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p> the geo.set to be flattened
+</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Returns a new geo.set object.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Ezra Haber Glenn <a href="mailto:eglenn@mit.edu">eglenn@mit.edu</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="geo.set-class.html">geo.set-class</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+# a multiple-county geo.set
+psrc=geo.make(state="WA", county=c(33,35,53,61))
+
+# combine geo.sets
+north.mercer.island=geo.make(state=53, county=33, tract=c(24300,24400))
+optional.tract=geo.make(state=53, county=33, tract=24500)
+# add in one more tract to create new, larger geo
+north.mercer.island.plus=north.mercer.island + optional.tract
+
+# created a nested geo.set
+ my.nested.geo.set=c(north.mercer.island.plus, psrc)
+str(my.nested.geo.set)
+length(my.nested.geo.set)
+
+# .. and flatten in out
+#    note difference in structure and length
+my.flat.geo.set=flatten.geo.set(my.nested.geo.set)
+str(my.flat.geo.set)
+length(my.flat.geo.set)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>acs</em> version 2.1.3 <a href="00Index.html">Index</a>]</div>
+</body></html>

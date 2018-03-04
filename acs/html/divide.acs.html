@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Divide one acs object or variable by another.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for divide.acs {acs}"><tr><td>divide.acs {acs}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Divide one acs object or variable by another.
+</h2>
+
+<h3>Description</h3>
+
+<p>The <code>acs</code> package provides a new S4 method for
+standard division operations using &quot;/&quot; notation.  However, due to the
+nature of estimates and errors, there are actually two types of
+division, with slightly different meanings: depending on which
+variables are being divided, the process may be either a
+&quot;proportion&quot;-type division (in which the numerator is a subset of the
+denominator) or a &quot;ratio&quot;-type division (in which this is not the
+case).  When dividing with standard &quot;a/b&quot; notation, the package will
+always use the more conservative ratio-type procedure.  
+</p>
+<p>When appropriate, &quot;proportion&quot;-type division may be desirable, as it
+results in lower standarard errors.  To allow users to specify which
+type of division to use for acs objects, the package includes a new
+<code>"divide.acs"</code> function.  (See details.)</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+divide.acs(numerator, denominator, method="ratio", verbose=T, output="result")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>numerator</code></td>
+<td>
+<p> an acs object to divide </p>
+</td></tr>
+<tr valign="top"><td><code>denominator</code></td>
+<td>
+<p> an acs object to divide by </p>
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+<p> either &quot;ratio&quot; (the default) or &quot;proportion&quot;, to
+indicate what kind of division is desired </p>
+</td></tr>
+<tr valign="top"><td><code>verbose</code></td>
+<td>
+<p> whether to provide additional warnings or just shut up </p>
+</td></tr>
+<tr valign="top"><td><code>output</code></td>
+<td>
+<p>either &quot;result&quot; (the default), &quot;div.method&quot;, or &quot;both&quot;</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>In certain cases, &quot;proportion-style&quot; division will fail, due
+to the creation of a negative number under a square root when
+calculating new standard errors.  To address this problem and prevent
+unnecessary NaN values in the standard.errors, the package implements
+the recommended Census practice of simply using &quot;ratio-style&quot; division in
+those cases.
+</p>
+<p>If method=&quot;proportion&quot; (not the default) and verbose=T (the default),
+<code>division.acs</code> will provide a warning to indicate when
+&quot;ratio-style&quot; division has been used, including the number of standard
+error cells so affected.  Users wishing to examine a detailed,
+cell-by-cell report may run <code>divide.acs</code> with the
+output=&quot;div.method&quot; of output=&quot;both&quot; to get additional diagnostic
+information.
+</p>
+<p>See
+&quot;A Compass for Understanding and Using American Community Survey Data&quot;
+below for details on when this substitution is recommended.</p>
+
+
+<h3>Value</h3>
+
+<p>Returns a new acs object with the results of the division (the
+default), or (when result=&quot;div.method&quot;) a martix with diagnostic
+information, or (when result=&quot;both&quot;), a list with both of these
+objects (the first name $result and the second $div.method).
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Ezra Haber Glenn <a href="mailto:eglenn@mit.edu">eglenn@mit.edu</a>
+</p>
+
+
+<h3>References</h3>
+
+
+<ol>
+<li><p>&quot;A Compass for Understanding and Using American Community Survey
+Data: What State and Local Governments Need to Know.&quot; Washington, DC:
+U.S. Census Bureau.
+2009. <a href="http://www.census.gov/library/publications/2009/acs/state-and-local.html">http://www.census.gov/library/publications/2009/acs/state-and-local.html</a>.
+</p>
+</li></ol>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="acs-class.html">acs-class</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>acs</em> version 2.1.3 <a href="00Index.html">Index</a>]</div>
+</body></html>

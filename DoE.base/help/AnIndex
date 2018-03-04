@@ -445,6 +445,9 @@ levels.no	GWLP
 lm	lm.design
 lm.default	lm.design
 lm.design	lm.design
+lowerbounds	lowerbound_AR
+lowerbound_AR	lowerbound_AR
+lowerbound_chi2	lowerbound_AR
 make.formulas	utilities
 make.generators	utilities
 matrix.fromPFTs	utilities
@@ -458,6 +461,7 @@ oa.max4	generalized.word.length
 oa.maxGR	generalized.word.length
 oa.min3	generalized.word.length
 oa.min34	generalized.word.length
+oa.min4	generalized.word.length
 oa.minRelProjAberr	generalized.word.length
 oa2symb	genChild
 oacat	oacat

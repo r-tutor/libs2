@@ -3,9 +3,9 @@ DBIConnection-class     DBIConnection class
 DBIDriver-class         DBIDriver class
 DBIObject-class         DBIObject class
 DBIResult-class         DBIResult class
-SQL                     SQL quoting
-Table-class             Refer to a table nested in a hierarchy (e.g.
+Id-class                Refer to a table nested in a hierarchy (e.g.
                         within a schema)
+SQL                     SQL quoting
 dbBind                  Bind values to a parameterized/prepared
                         statement
 dbClearResult           Clear a result set
@@ -29,15 +29,18 @@ dbHasCompleted          Completion status
 dbIsValid               Is this DBMS object still valid?
 dbListConnections       List currently open connections
 dbListFields            List field names of a remote table
+dbListObjects           List remote objects
 dbListResults           A list of all pending results
 dbListTables            List remote tables
 dbQuoteIdentifier       Quote identifiers
+dbQuoteLiteral          Quote literal values
 dbQuoteString           Quote literal strings
 dbReadTable             Copy data frames from database tables
 dbRemoveTable           Remove a table from the database
 dbSendQuery             Execute a query on a given database connection
 dbSendStatement         Execute a data manipulation statement on a
                         given database connection
+dbUnquoteIdentifier     Unquote identifiers
 dbWithTransaction       Self-contained SQL transactions
 dbWriteTable            Copy data frames to database tables
 make.db.names           Make R identifiers into legal SQL identifiers

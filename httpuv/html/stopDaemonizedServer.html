@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Stop a running daemonized server in Unix environments</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for stopDaemonizedServer {httpuv}"><tr><td>stopDaemonizedServer {httpuv}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Stop a running daemonized server in Unix environments</h2>
+
+<h3>Description</h3>
+
+<p>Given a handle that was returned from a previous invocation of 
+<code><a href="startDaemonizedServer.html">startDaemonizedServer</a></code>, closes all open connections for that server,
+removes listeners in the R event loop and 
+unbinds the port. <strong>Be careful not to call <code>stopDaemonizedServer</code> more than 
+once on a handle, as this will cause the R process to crash!</strong>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+stopDaemonizedServer(server)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>server</code></td>
+<td>
+<p>A handle that was previously returned from
+<code><a href="startDaemonizedServer.html">startDaemonizedServer</a></code>.</p>
+</td></tr>
+</table>
+
+<hr /><div style="text-align: center;">[Package <em>httpuv</em> version 1.3.6.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Search Census geographies</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for geo.lookup {acs}"><tr><td>geo.lookup {acs}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+Search Census geographies 
+</h2>
+
+<h3>Description</h3>
+
+<p>When working with the acs package and the <code>acs.fetch</code> and
+<code>geo.make</code> functions, it can be difficult to find exactly the right
+geographic units: <code>geo.make</code> expects single matches to the groups
+of arguments it is given, which can be problematic when trying to find
+names for places or county subdivisions, which are unfamiliar to many
+users (and often seem very close or redundant: e.g., knowing whether to
+look for &quot;Moses Lake city&quot; vs. &quot;Moses Lake CDP&quot;).  To help, the
+<code>geo.lookup</code> function will search on the same arguments as
+<code>geo.make</code>, but outputs all the matches for your inspection.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+geo.lookup(state, county, county.subdivision, place,
+  american.indian.area, school.district, school.district.elementary,
+  school.district.secondary, school.district.unified)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>state</code></td>
+<td>
+<p>either the two-digit numeric FIPS code for the state, the
+two-letter postal abbreviation, or a character string to match in
+the state name</p>
+</td></tr>
+<tr valign="top"><td><code>county</code></td>
+<td>
+<p>either the numeric FIPS code for the county or a character
+string to match in the county name </p>
+</td></tr>
+<tr valign="top"><td><code>county.subdivision</code></td>
+<td>
+<p>either the numeric FIPS code for the county
+subdivision or a character string to match in the county subdivision
+name</p>
+</td></tr>
+<tr valign="top"><td><code>place</code></td>
+<td>
+<p>either the numeric FIPS code for the place or a character
+string to match in the place name</p>
+</td></tr>
+<tr valign="top"><td><code>american.indian.area</code></td>
+<td>
+<p>either the numeric FIPS code for the
+American Indian Area/Alaska Native Area/Hawaiian Home Land, or a
+character string to match in the names of these Census areas</p>
+</td></tr>
+<tr valign="top"><td><code>school.district</code></td>
+<td>
+<p>either the numeric FIPS code for the state
+school district (any type), or a character string to search for in
+the names of the school districts.</p>
+</td></tr>
+<tr valign="top"><td><code>school.district.elementary</code></td>
+<td>
+<p>either the numeric FIPS code for
+the state school district (elementary), or a character string to
+search for in the names of these elementary school districts.</p>
+</td></tr>
+<tr valign="top"><td><code>school.district.secondary</code></td>
+<td>
+<p>either the numeric FIPS code for the
+state school district (secondary), or a character string to search
+for in the names of these secondary school districts.</p>
+</td></tr>
+<tr valign="top"><td><code>school.district.unified</code></td>
+<td>
+<p>either the numeric FIPS code for the
+state school district (unified), or a character string to search for
+in the names of these unified school districts.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p> Unlike <code>geo.make</code>, <code>geo.lookup</code> searches for
+matches anywhere in geographic names (except when dealing with state
+names), and will output a dataframe showing candidates that match some
+or all of the arguments.  (When multiple arguments are provided, the
+logic is a little complicated: basically, with the exception of American
+Indian Areas, to be included all geographies must match the given state
+name; when a county and a subdivision are both given, both must match;
+otherwise, geographies are included that match any &mdash; but not
+necessarily all &mdash; of the other arguments.)  </p>
+
+
+<h3>Value</h3>
+
+<p> Returns a
+dataframe of the matching geographies, with one column for each of the
+given search terms.  </p>
+
+
+<h3>Author(s)</h3>
+
+<p>Ezra Haber Glenn <a href="mailto:eglenn@mit.edu">eglenn@mit.edu</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="geo.make.html">geo.make</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+geo.lookup(state="WA", county="Ska", county.subdivision="oo")
+geo.lookup(state="WA", county="Kit", place="Ra")
+
+# find all counties in WA or OR with capital M or B in name
+geo.lookup(state=c("WA", "OR"), county=c("M","B"))
+
+# find all unified school districts in Kansas with "Ma" in name
+geo.lookup(state="KS", school.district.unified="Ma")
+
+# find all american indian areas with "Hop" in name
+geo.lookup(american.indian.area="Hop")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>acs</em> version 2.1.3 <a href="00Index.html">Index</a>]</div>
+</body></html>

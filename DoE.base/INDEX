@@ -46,6 +46,8 @@ iscube                  Functions to isolate cube points from 2-level
                         fractional factorial design with center and /
                         or star points
 lm                      lm and aov methods for class design objects
+lowerbound_AR           Function to Calculate a Lower Bound for A_R and
+                        Internal Auxiliary Functions
 oa.design               Function for accessing orthogonal arrays
 oa_feasible             Function to Check Whether an Array of Specified
                         Strength Might Exist

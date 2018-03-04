@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Search for relevant demographic variables and tables from the...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for acs.lookup {acs}"><tr><td>acs.lookup {acs}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2> Search for relevant demographic variables and tables from the US
+Census.  </h2>
+
+<h3>Description</h3>
+
+<p> The <code>acs.fetch</code> function is used to download data
+from the US Census American Community Survey.  The <code>acs.lookup</code>
+function provides a convenience function to use in advance to locate
+tables and variables that may be of interest.
+</p>
+<p><code>acs.lookup</code> takes arguments similar to <code>acs.fetch</code> &mdash; in
+particular, &quot;table.number&quot;, &quot;table.name&quot;, and &quot;keyword&quot;, as well as
+&quot;endyear&quot;,&quot;span&quot;, and &quot;dataset&quot; &mdash; and searches for matches in the
+meta-data of the Census tables.  When multiple search terms are passed
+to a given argument (e.g., <code>keyword=c("Female", "GED")</code>), the
+tool returns matches where ALL of the terms are found; similarly, when
+more than one lookup argument is used (e.g.,
+<code>table.number="B01001", keyword="Female"</code>), the tool searches for
+matches that include all of the terms (i.e., terms are combined with a
+logical &quot;AND&quot;, not a logical &quot;OR&quot;).
+</p>
+<p>Results from acs.lookup &mdash; which are acs.lookup class objects &mdash; can
+then be inspected, subsetted (with [square brackets]), and combined
+(with <code>c</code> or <code>+</code>) to create custom acs.lookup objects to
+store and later pass to <code>acs.fetch</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+acs.lookup(endyear, span = 5, dataset = "acs", keyword,
+     table.name, table.number, case.sensitive = T)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>endyear</code></td>
+<td>
+<p>an integer indicating the latest year of the data in
+the survey (e.g., for data from the 2007-2011 5-year ACS data,
+endyear would be 2011; limited by acceptable values currently
+provided by the Census API); for 2016 and later, the 2015 lookup
+tables are used (see details).</p>
+</td></tr>
+<tr valign="top"><td><code>span</code></td>
+<td>
+<p>an integer indicating the span (in years) of the desired
+ACS data (should be 1, 3, or 5); defaults to 5.  Ignored and reset
+to 0 if dataset=&quot;sf1&quot; or &quot;sf3&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>dataset</code></td>
+<td>
+<p>either &quot;acs&quot; (the default), &quot;sf1&quot;, or &quot;sf3&quot;, indicating
+whether to look for tables and variables in the American Community
+Survey, the SF1 dataset (decennial/&quot;short-form&quot;), or the SF3 dataset
+(decennial/&quot;long-form&quot;).</p>
+</td></tr>
+<tr valign="top"><td><code>keyword</code></td>
+<td>
+<p> a string or vector of strings giving the search
+term(s) to find in the name of the ACS census variable (for
+example, &quot;Male&quot; or &quot;Haiti&quot;); accepts multiple words, which must
+all be found in the returned variable names.  </p>
+</td></tr>
+<tr valign="top"><td><code>table.name</code></td>
+<td>
+<p>a string giving the search term(s) to find in the
+name of the ACS census table (for example, &quot;Sex&quot; or &quot;Age&quot; or &quot;Age
+by Sex&quot;); accepts multiple words, which must all be found in the
+returned table names.  </p>
+</td></tr>
+<tr valign="top"><td><code>table.number</code></td>
+<td>
+<p>a string (not a number) indicating the desired
+table from the Census to fetch; examples: &quot;B01003&quot; or &quot;B23013&quot;;
+always case-sensitive. Used to identify all variables for a given
+table number. </p>
+</td></tr>
+<tr valign="top"><td><code>case.sensitive</code></td>
+<td>
+<p>a logical flag indicating whether searching is
+case-sensitive (the default) or not.  Note that the Census is not
+entirely consistent in capitalization in table and variable names,
+so setting <code>case.sensitive=F</code> may be useful in finding all
+possible matches.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>In many cases, <code>acs.lookup</code> is called internally by
+<code>acs.fetch</code>, to determine the variable codes to use for a given
+table.name or table.number.  Since each lookup involves a search of
+static XML tables (provided by the census for each endyear/span
+combination, and included by the acs package in /extdata), searches
+involving more recent years (e.g., for version 2.0, endyears &gt; 2014) may
+fail.  In such situations, users may wish to call <code>acs.fetch</code> with
+the &quot;variable=&quot; option, perhaps reusing variables from a saved
+<code>acs.lookup</code> search for a previous year.
+</p>
+<p>For example, once the 2011-2015 5-year ACS data is available via the
+API, users can attempt the following to access Table B01003, even before
+the new version of the package is installed with the correct variable
+lookup tables: <code>acs.fetch(endyear=2015, span=5,
+  variable=acs.lookup(endyear=2014, span=5, table.number="B01003"))</code>.
+</p>
+<p>Note: version 2.1.3 of the package implements a &quot;workaround&quot; to address a
+problem accessing data from 2016, when the Census Bureau seems to have
+changed the format for their XML variable lookup tables, causing calls
+to acs.lookup (and acs.fetch) to fail for &quot;endyear=2016&quot;.  The
+(hopefully) temporary solution was to simply use the 2015 lookup tables
+for these requests, which should be safe in most situations, since table
+numbers and variable codes generally do not change from year to year.
+In certain situations, this may not be true: see
+<a href="https://www.census.gov/programs-surveys/acs/technical-documentation/table-and-geography-changes/2016/5-year.html">https://www.census.gov/programs-surveys/acs/technical-documentation/table-and-geography-changes/2016/5-year.html</a>.</p>
+
+
+<h3>Value</h3>
+
+<p> Returns an acs.lookup class object with the results of the
+query.  acs.lookup objects can be subsetted and combined, and passed
+to the &quot;variable&quot; argument of <code>acs.fetch</code>.  </p>
+
+
+<h3>Author(s)</h3>
+
+<p>Ezra Haber Glenn <a href="mailto:eglenn@mit.edu">eglenn@mit.edu</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="acs.lookup-class.html">acs.lookup-class</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: acs.lookup(endyear=2014, span=5, table.number="B01001")
+acs.lookup(endyear=2012, span=1, table.number="B01001", keyword="Female")
+acs.lookup(endyear=2012, span=1, keyword=c("Female", "GED"))
+acs.lookup(endyear=2000, dataset="sf3", table.number="P56")
+acs.lookup(endyear=1990, dataset="sf3", table.number="H058")
+age.by.sex=acs.lookup(endyear=2014, span=5, table.name="Age by Sex")
+age.by.sex
+workers.age.by.sex=age.by.sex[4:6]
+workers.age.by.sex
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>acs</em> version 2.1.3 <a href="00Index.html">Index</a>]</div>
+</body></html>

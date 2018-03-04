@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: County-level data from the 2005-2009 American Community...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for kansas09 {acs}"><tr><td>kansas09 {acs}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+County-level data from the 2005-2009 American Community Survey for Kansas for
+use in examples of acs package.
+</h2>
+
+<h3>Description</h3>
+
+<p>County-level data from the 2005-2009 American Community Survey for Kansas.
+Contains demographic data on sex, age, and citizenship.  Used for
+examples in acs package.  <code>kansas09</code>, and the corresponding
+one-year survey data in <code>kansas07</code>, provide acs objects to test
+and demonstrate various functions in the package.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>data(kansas09)</pre>
+
+
+<h3>Format</h3>
+
+<p>An acs-class object with 105 rows/geographies and 55 demographic
+variables, representing county-level ACS data for the state of Kansas.  Also includes
+geographic and other metadata.</p>
+
+
+<h3>Source</h3>
+
+<p>U.S. Census American Community Survey, 2009; <a href="http://www.census.gov/">http://www.census.gov/</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(kansas09)
+str(kansas09)
+class(kansas09)
+
+geography(kansas09)
+
+# subsetting
+kansas09[1:3,2:4]
+
+# row-wise addition
+kansas09[1,6]+kansas09[2,6]
+
+# column-wise addition
+kansas09[1:4,3]+kansas09[1:4,27]
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>acs</em> version 2.1.3 <a href="00Index.html">Index</a>]</div>
+</body></html>
