@@ -18,7 +18,7 @@
 <pre>
 ## S3 method for class 'phylo'
 as.Node(x, heightName = "plotHeight",
-  replaceUnderscores = TRUE, ...)
+  replaceUnderscores = TRUE, namesNotUnique = FALSE, ...)
 </pre>
 
 
@@ -37,6 +37,11 @@ to a height and stored in a field named according to this parameter (the default
 <tr valign="top"><td><code>replaceUnderscores</code></td>
 <td>
 <p>if TRUE (the default), then underscores in names are replaced with spaces</p>
+</td></tr>
+<tr valign="top"><td><code>namesNotUnique</code></td>
+<td>
+<p>if TRUE, then the <code>name</code> of the <code>Node</code>s will be prefixed with a unique id.
+This is useful if the children of a parent have non-unique names.</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
@@ -69,5 +74,5 @@ Get(t, "name")
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>data.tree</em> version 0.7.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>data.tree</em> version 0.7.5 <a href="00Index.html">Index</a>]</div>
 </body></html>

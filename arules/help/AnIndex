@@ -103,6 +103,7 @@ dimnames<-,itemMatrix,list-method	itemMatrix-class
 dimnames<-,tidLists,list-method	tidLists-class
 dimnames<-,transactions,list-method	transactions-class
 discretize	discretize
+discretizeDF	discretize
 dissimilarity	dissimilarity
 dissimilarity,associations-method	dissimilarity
 dissimilarity,itemMatrix-method	dissimilarity
@@ -214,6 +215,7 @@ items	itemsets-class
 items,associations-method	associations-class
 items,itemsets-method	itemsets-class
 items,rules-method	rules-class
+items,transactions-method	transactions-class
 items<-	itemsets-class
 items<-,itemsets-method	itemsets-class
 itemSetdiff	setsItemwise
@@ -273,6 +275,7 @@ read.PMML	pmml
 read.transactions	read.transactions
 recode	itemCoding
 recode,itemMatrix-method	itemCoding
+redundant	is.redundant
 rhs	rules-class
 rhs,rules-method	rules-class
 rhs<-	rules-class

@@ -1,8 +1,8 @@
 Package: data.tree
 Type: Package
 Title: General Purpose Hierarchical Data Structure
-Version: 0.7.4
-Date: 2018-01-06
+Version: 0.7.5
+Date: 2018-03-06
 Authors@R: c(
       person(
         "Facundo", "Munoz",
@@ -57,7 +57,7 @@ BugReports: http://github.com/gluc/data.tree/issues
 Depends: R (>= 3.0)
 RoxygenNote: 6.0.1
 NeedsCompilation: no
-Packaged: 2018-01-06 16:43:46 UTC; rstudio
+Packaged: 2018-03-06 21:06:56 UTC; rstudio
 Author: Facundo Munoz [ctb] (improve list conversion),
   Markus Wamser [ctb] (fixed some typos),
   Pierre Formont [ctb] (additional features),
@@ -67,5 +67,5 @@ Author: Facundo Munoz [ctb] (improve list conversion),
   Christoph Glur [aut, cre] (R interface)
 Maintainer: Christoph Glur <christoph.glur@ipub.com>
 Repository: CRAN
-Date/Publication: 2018-01-06 22:35:19 UTC
-Built: R 3.4.3; ; 2018-01-09 18:53:12 UTC; windows
+Date/Publication: 2018-03-06 22:42:34 UTC
+Built: R 3.4.3; ; 2018-03-10 04:59:14 UTC; windows
