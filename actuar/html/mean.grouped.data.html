@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Arithmetic Mean</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for mean.grouped.data {actuar}"><tr><td>mean.grouped.data {actuar}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Arithmetic Mean</h2>
+
+<h3>Description</h3>
+
+<p>Mean of grouped data objects.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'grouped.data'
+mean(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>an object of class <code>"grouped.data"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>further arguments passed to or from other methods.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The mean of grouped data with group boundaries <i>c[1], &hellip;, c[r]</i> and group frequencies <i>n[1], &hellip;, n[r]</i> is
+</p>
+<p style="text-align: center;"><i>
+    sum(j; (c[j - 1] + c[j])/2 * n[j]).</i></p>
+
+
+
+<h3>Value</h3>
+
+<p>A named vector of means.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Vincent Goulet <a href="mailto:vincent.goulet@act.ulaval.ca">vincent.goulet@act.ulaval.ca</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Klugman, S. A., Panjer, H. H. and Willmot, G. E. (1998),
+<em>Loss Models, From Data to Decisions</em>, Wiley.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="grouped.data.html">grouped.data</a></code> to create grouped data objects;
+<code><a href="emm.html">emm</a></code> to compute higher moments.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(gdental)
+mean(gdental)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>actuar</em> version 2.3-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,7 +1,7 @@
 Package: hms
 Title: Pretty Time of Day
-Date: 2018-01-23
-Version: 0.4.1
+Date: 2018-03-10
+Version: 0.4.2
 Authors@R: c(
     person("Kirill", "Müller", role = c("aut", "cre"), email = "krlmlr+r@mailbox.org"),
     person("The R Consortium", role = "fnd")
@@ -15,12 +15,12 @@ Encoding: UTF-8
 LazyData: true
 URL: https://github.com/tidyverse/hms
 BugReports: https://github.com/tidyverse/hms/issues
-RoxygenNote: 6.0.1
+RoxygenNote: 6.0.1.9000
 NeedsCompilation: no
-Packaged: 2018-01-24 15:53:20 UTC; muelleki
+Packaged: 2018-03-10 15:21:11 UTC; muelleki
 Author: Kirill Müller [aut, cre],
   The R Consortium [fnd]
 Maintainer: Kirill Müller <krlmlr+r@mailbox.org>
 Repository: CRAN
-Date/Publication: 2018-01-24 17:56:47 UTC
-Built: R 3.4.3; ; 2018-01-26 04:20:56 UTC; windows
+Date/Publication: 2018-03-10 21:33:37 UTC
+Built: R 3.4.4; ; 2018-03-18 16:13:05 UTC; windows

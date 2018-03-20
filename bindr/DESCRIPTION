@@ -1,32 +1,25 @@
 Package: bindr
 Title: Parametrized Active Bindings
-Version: 0.1.0.9000
+Version: 0.1.1
 Authors@R: c(
-    person("Kirill", "Müller", role = c("aut", "cre"), email = "krlmlr+r@mailbox.org"),
-    person("RStudio", role = "cph")
+    person("Kirill", "M\u00fcller", role = c("aut", "cre"), email = "krlmlr+r@mailbox.org", comment = c(ORCID = "0000-0002-1416-3412")),
+    person("RStudio", role = c("cph", "fnd"))
     )
 Description: Provides a simple interface for creating active bindings where the
     bound function accepts additional arguments.
 Suggests: testthat
 LazyData: true
-Date: 2018-02-05
+Date: 2018-03-13
 BugReports: https://github.com/krlmlr/bindr/issues
 URL: https://github.com/krlmlr/bindr, https://krlmlr.github.io/bindr
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.0.1
+RoxygenNote: 6.0.1.9000
 License: MIT + file LICENSE
 Encoding: UTF-8
-Author: Kirill Müller [aut, cre],
-  RStudio [cph]
-Maintainer: Kirill Müller <krlmlr+r@mailbox.org>
-Built: R 3.4.3; ; 2018-02-06 00:45:08 UTC; windows
-RemoteType: github
-RemoteHost: https://api.github.com
-RemoteRepo: bindr
-RemoteUsername: krlmlr
-RemoteRef: master
-RemoteSha: 4b20179833b3ed23fa34f305bf9cf5a170fe214a
-GithubRepo: bindr
-GithubUsername: krlmlr
-GithubRef: master
-GithubSHA1: 4b20179833b3ed23fa34f305bf9cf5a170fe214a
+NeedsCompilation: no
+Packaged: 2018-03-13 00:31:30 UTC; muelleki
+Author: Kirill MÃ¼ller [aut, cre] (<https://orcid.org/0000-0002-1416-3412>),
+  RStudio [cph, fnd]
+Maintainer: Kirill MÃ¼ller <krlmlr+r@mailbox.org>
+Repository: CRAN
+Date/Publication: 2018-03-13 08:21:23 UTC
+Built: R 3.4.4; ; 2018-03-18 15:19:33 UTC; windows

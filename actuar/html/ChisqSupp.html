@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Moments and Moment Generating Function of the (non-central)...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for ChisqSupp {actuar}"><tr><td>ChisqSupp {actuar}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Moments and Moment Generating Function of the (non-central) Chi-Squared Distribution</h2>
+
+<h3>Description</h3>
+
+<p>Raw moments, limited moments and moment generating function for the
+chi-squared (<i>chi^2</i>) distribution with <code>df</code> degrees
+of freedom and optional non-centrality parameter <code>ncp</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+mchisq(order, df, ncp = 0)
+levchisq(limit, df, ncp = 0, order = 1)
+mgfchisq(t, df, ncp = 0, log= FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>order</code></td>
+<td>
+<p>order of the moment.</p>
+</td></tr>
+<tr valign="top"><td><code>limit</code></td>
+<td>
+<p>limit of the loss variable.</p>
+</td></tr>
+<tr valign="top"><td><code>df</code></td>
+<td>
+<p>degrees of freedom (non-negative, but can be non-integer).</p>
+</td></tr>
+<tr valign="top"><td><code>ncp</code></td>
+<td>
+<p>non-centrality parameter (non-negative).</p>
+</td></tr>
+<tr valign="top"><td><code>t</code></td>
+<td>
+<p>numeric vector.</p>
+</td></tr>
+<tr valign="top"><td><code>log</code></td>
+<td>
+<p>logical; if <code>TRUE</code>, the cumulant generating function
+is returned.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The <i>k</i>th raw moment of the random variable <i>X</i> is
+<i>E[X^k]</i>, the <i>k</i>th limited moment at some limit
+<i>d</i> is <i>E[min(X, d)]</i> and the moment generating
+function is <i>E[e^{tX}]</i>.
+</p>
+<p>Only integer moments are supported for the non central Chi-square
+distribution (<code>ncp &gt; 0</code>).
+</p>
+<p>The limited expected value is supported for the centered Chi-square
+distribution (<code>ncp = 0</code>).
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>mchisq</code> gives the <i>k</i>th raw moment,
+<code>levchisq</code> gives the <i>k</i>th moment of the limited loss
+variable, and
+<code>mgfchisq</code> gives the moment generating function in <code>t</code>.
+</p>
+<p>Invalid arguments will result in return value <code>NaN</code>, with a warning.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Christophe Dutang, Vincent Goulet <a href="mailto:vincent.goulet@act.ulaval.ca">vincent.goulet@act.ulaval.ca</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Klugman, S. A., Panjer, H. H. and Willmot, G. E. (2012),
+<em>Loss Models, From Data to Decisions, Fourth Edition</em>, Wiley.
+</p>
+<p>Johnson, N. L. and Kotz, S. (1970), <em>Continuous Univariate
+Distributions, Volume 1</em>, Wiley.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../stats/html/Chisquare.html">Chisquare</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+mchisq(2, 3, 4)
+levchisq(10, 3, order = 2)
+mgfchisq(0.25, 3, 2)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>actuar</em> version 2.3-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

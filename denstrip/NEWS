@@ -3,6 +3,12 @@
 USER-VISIBLE CHANGES (for detailed changes see ChangeLog in the source package)
 --------------------
 
+Version 1.5.4 (2018-03-17)
+--------------------------
+
+o Minor update to satisfy CRAN checks.
+
+
 Version 1.5.3 (2014-02-20)
 --------------------------
 

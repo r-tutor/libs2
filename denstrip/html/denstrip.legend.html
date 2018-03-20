@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Add a legend to a density strip or shaded region</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for denstrip.legend {denstrip}"><tr><td>denstrip.legend {denstrip}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2> Add a legend to a density strip or shaded region </h2>
+
+<h3>Description</h3>
+
+<p>Add a legend to an existing plot with a density strip or shaded
+region, indicating the mapping of colours to densities.  
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+denstrip.legend(x, y, width, len, colmax, colmin="white", gamma=1,
+                horiz=FALSE, max=1, nticks = 5, ticks, value.adj = 0,
+                cex, main = "Density", lattice=FALSE)
+panel.denstrip.legend(...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p> Central x position of the legend. </p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p> Central y position of the legend. </p>
+</td></tr>
+<tr valign="top"><td><code>width</code></td>
+<td>
+<p> Width of the legend strip, that is, the length of its
+shorter dimension. Defaults to 1/30 of the axis range.</p>
+</td></tr>
+<tr valign="top"><td><code>len</code></td>
+<td>
+<p> Length of the legend strip, that is, the length of its
+longer dimension. Defaults to 1/4 of the axis range.</p>
+</td></tr>
+<tr valign="top"><td><code>colmax</code></td>
+<td>
+<p> Colour at the maximum density, either as a built-in R
+colour name (one of <code>colors()</code>) or an RGB hex value.  Defaults
+to <code>par("fg")</code> or its <span class="pkg">lattice</span> equivalent, which is
+<code>"black"</code> by default.</p>
+</td></tr>
+<tr valign="top"><td><code>colmin</code></td>
+<td>
+<p> Colour to shade the minimum density, likewise. 
+Defaults to &quot;white&quot;.  If this is set to <code>"transparent"</code>,
+and the current graphics device supports transparency (see <code><a href="../../grDevices/html/rgb.html">rgb</a></code>), then
+overlapping strips will merge smoothly. </p>
+</td></tr>
+<tr valign="top"><td><code>gamma</code></td>
+<td>
+<p>Gamma correction to apply to the colour palette, see <code><a href="denstrip.html">denstrip</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>horiz</code></td>
+<td>
+<p> Legend strip drawn vertically (<code>FALSE</code>) or
+horizontally (<code>TRUE</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>max</code></td>
+<td>
+<p> Maximum density on the legend, which is represented by
+<code>colmax</code>.  With the default of 1, the legend indicates the
+mapping of colours to proportions of the maximum density.
+</p>
+</td></tr>
+<tr valign="top"><td><code>nticks</code></td>
+<td>
+<p> Number of tick marks on the axis adjacent to the
+legend, if <code>ticks</code> not supplied. </p>
+</td></tr>
+<tr valign="top"><td><code>ticks</code></td>
+<td>
+<p>Positions of numbered ticks on the axis adjacent to the
+legend. Defaults to <code>nticks</code> equally spaced ticks between 0 and
+the maximum density.</p>
+</td></tr>
+<tr valign="top"><td><code>value.adj</code></td>
+<td>
+<p> Extra adjustment for the axis labels to the right
+(if <code>horiz=FALSE</code>) or downwards (if <code>horiz=TRUE</code>). </p>
+</td></tr>
+<tr valign="top"><td><code>cex</code></td>
+<td>
+<p>Text expansion.  Defaults to <code><a href="../../graphics/html/par.html">par</a>("cex") * 0.75</code> or
+<code><a href="../../lattice/html/trellis.par.get.html">trellis.par.get</a>("axis.text")$cex * 0.75</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>main</code></td>
+<td>
+<p> Text to place above the legend. </p>
+</td></tr>
+<tr valign="top"><td><code>lattice</code></td>
+<td>
+<p>Set this to <code>TRUE</code> to make <code><a href="denstrip.legend.html">denstrip.legend</a></code>
+a <span class="pkg">lattice</span> panel function instead of a base graphics function. <br />
+<code>panel.denstrip.legend(x,...)</code> is equivalent to
+<code>denstrip.legend(x, lattice=TRUE, ...)</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Other arguments passed to <code>panel.denstrip.legend</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p> Christopher Jackson &lt;chris.jackson@mrc-bsu.cam.ac.uk&gt; </p>
+
+
+<h3>See Also</h3>
+
+ <p><code><a href="denstrip.html">denstrip</a></code>, <code><a href="densregion.html">densregion</a></code> </p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+if (requireNamespace("survival", quietly=TRUE)){
+
+library(survival)
+fit &lt;- survfit(Surv(time, status) ~ 1, data=aml, conf.type="log-log")
+plot(fit, col=0)
+densregion(fit)
+denstrip.legend(100, 0.8)
+
+    ### TODO if max not supplied - ticks are not meaningful.
+    ### In help example, find actual max dens used for densregion
+
+denstrip.legend(120, 0.8, width=3, len=0.4, value.adj=5)
+denstrip.legend(40, 0.9, horiz=TRUE)
+denstrip.legend(60, 0.7, horiz=TRUE, width=0.02, len=50, value.adj=0.04)
+
+
+}
+
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>denstrip</em> version 1.5.4 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Density and Cumulative Distribution Function for Modified...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for coverage {actuar}"><tr><td>coverage {actuar}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Density and Cumulative Distribution Function for Modified Data</h2>
+
+<h3>Description</h3>
+
+<p>Compute probability density function or cumulative distribution
+function of the payment per payment or payment per loss random
+variable under any combination of the following coverage
+modifications: deductible, limit, coinsurance, inflation.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+coverage(pdf, cdf, deductible = 0, franchise = FALSE,
+         limit = Inf, coinsurance = 1, inflation = 0,
+         per.loss = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>pdf, cdf</code></td>
+<td>
+<p>function object or character string naming a function
+to compute, respectively, the probability density function and cumulative
+distribution function of a probability law.</p>
+</td></tr>
+<tr valign="top"><td><code>deductible</code></td>
+<td>
+<p>a unique positive numeric value.</p>
+</td></tr>
+<tr valign="top"><td><code>franchise</code></td>
+<td>
+<p>logical; <code>TRUE</code> for a franchise deductible,
+<code>FALSE</code> (default) for an ordinary deductible.</p>
+</td></tr>
+<tr valign="top"><td><code>limit</code></td>
+<td>
+<p>a unique positive numeric value larger than
+<code>deductible</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>coinsurance</code></td>
+<td>
+<p>a unique value between 0 and 1; the proportion of
+coinsurance.</p>
+</td></tr>
+<tr valign="top"><td><code>inflation</code></td>
+<td>
+<p>a unique value between 0 and 1; the rate of
+inflation.</p>
+</td></tr>
+<tr valign="top"><td><code>per.loss</code></td>
+<td>
+<p>logical; <code>TRUE</code> for the per loss distribution,
+<code>FALSE</code> (default) for the per payment distribution.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>coverage</code> returns a function to compute the probability
+density function (pdf) or the cumulative distribution function (cdf)
+of the distribution of losses under coverage modifications. The pdf
+and cdf of unmodified losses are <code>pdf</code> and <code>cdf</code>,
+respectively.
+</p>
+<p>If <code>pdf</code> is specified, the pdf is returned; if <code>pdf</code> is
+missing or <code>NULL</code>, the cdf is returned. Note that <code>cdf</code> is
+needed if there is a deductible or a limit.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of mode <code>"function"</code> with the same arguments as
+<code>pdf</code> or <code>cdf</code>, except <code>"lower.tail"</code>,
+<code>"log.p"</code> and <code>"log"</code>, which are not supported.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Setting arguments of the function returned by <code>coverage</code> using
+<code><a href="../../base/html/formals.html">formals</a></code> may very well not work as expected.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Vincent Goulet <a href="mailto:vincent.goulet@act.ulaval.ca">vincent.goulet@act.ulaval.ca</a> and
+Mathieu Pigeon
+</p>
+
+
+<h3>References</h3>
+
+<p>Klugman, S. A., Panjer, H. H. and Willmot, G. E. (2012),
+<em>Loss Models, From Data to Decisions, Fourth Edition</em>, Wiley.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>vignette("coverage")</code> for the exact definitions of the
+per payment and per loss random variables under an ordinary or
+franchise deductible.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Default case: pdf of the per payment random variable with
+## an ordinary deductible
+coverage(dgamma, pgamma, deductible = 1)
+
+## Add a limit
+f &lt;- coverage(dgamma, pgamma, deductible = 1, limit = 7)
+f &lt;- coverage("dgamma", "pgamma", deductible = 1, limit = 7) # same
+f(0, shape = 3, rate = 1)
+f(2, shape = 3, rate = 1)
+f(6, shape = 3, rate = 1)
+f(8, shape = 3, rate = 1)
+curve(dgamma(x, 3, 1), xlim = c(0, 10), ylim = c(0, 0.3))    # original
+curve(f(x, 3, 1), xlim = c(0.01, 5.99), col = 4, add = TRUE) # modified
+points(6, f(6, 3, 1), pch = 21, bg = 4)
+
+## Cumulative distribution function
+F &lt;- coverage(cdf = pgamma, deductible = 1, limit = 7)
+F(0, shape = 3, rate = 1)
+F(2, shape = 3, rate = 1)
+F(6, shape = 3, rate = 1)
+F(8, shape = 3, rate = 1)
+curve(pgamma(x, 3, 1), xlim = c(0, 10), ylim = c(0, 1))    # original
+curve(F(x, 3, 1), xlim = c(0, 5.99), col = 4, add = TRUE)  # modified
+curve(F(x, 3, 1), xlim = c(6, 10), col = 4, add = TRUE)    # modified
+
+## With no deductible, all distributions below are identical
+coverage(dweibull, pweibull, limit = 5)
+coverage(dweibull, pweibull, per.loss = TRUE, limit = 5)
+coverage(dweibull, pweibull, franchise = TRUE, limit = 5)
+coverage(dweibull, pweibull, per.loss = TRUE, franchise = TRUE,
+         limit = 5)
+
+## Coinsurance alone; only case that does not require the cdf
+coverage(dgamma, coinsurance = 0.8)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>actuar</em> version 2.3-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

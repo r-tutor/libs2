@@ -1,0 +1,540 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Credibility Models</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for cm {actuar}"><tr><td>cm {actuar}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Credibility Models</h2>
+
+<h3>Description</h3>
+
+<p>Fit the following credibility models: Bühlmann,
+Bühlmann-Straub, hierarchical, regression
+(Hachemeister) or linear Bayes.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+cm(formula, data, ratios, weights, subset,
+   regformula = NULL, regdata, adj.intercept = FALSE,
+   method = c("Buhlmann-Gisler", "Ohlsson", "iterative"),
+   likelihood, ...,
+   tol = sqrt(.Machine$double.eps), maxit = 100, echo = FALSE)
+
+## S3 method for class 'cm'
+print(x, ...)
+
+## S3 method for class 'cm'
+predict(object, levels = NULL, newdata, ...)
+
+## S3 method for class 'cm'
+summary(object, levels = NULL, newdata, ...)
+
+## S3 method for class 'summary.cm'
+print(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>formula</code></td>
+<td>
+<p>character string <code>"bayes"</code> or an object of
+class <code>"<a href="../../stats/html/formula.html">formula</a>"</code>: a symbolic description of the
+model to be fit. The details of model specification are given
+below.</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a matrix or a data frame containing the portfolio
+structure, the ratios or claim amounts and their associated weights,
+if any.</p>
+</td></tr>
+<tr valign="top"><td><code>ratios</code></td>
+<td>
+<p>expression indicating the columns of <code>data</code>
+containing the ratios or claim amounts.</p>
+</td></tr>
+<tr valign="top"><td><code>weights</code></td>
+<td>
+<p>expression indicating the columns of <code>data</code>
+containing the weights associated with <code>ratios</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>subset</code></td>
+<td>
+<p>an optional logical expression indicating a subset of
+observations to be used in the modeling process. All observations
+are included by default.</p>
+</td></tr>
+<tr valign="top"><td><code>regformula</code></td>
+<td>
+<p>an object of class <code>"<a href="../../stats/html/formula.html">formula</a>"</code>:
+symbolic description of the regression component (see
+<code><a href="../../stats/html/lm.html">lm</a></code> for details). No left hand side is needed
+in the formula; if present it is ignored. If <code>NULL</code>, no
+regression is done on the data.</p>
+</td></tr>
+<tr valign="top"><td><code>regdata</code></td>
+<td>
+<p>an optional data frame, list or environment (or object
+coercible by <code><a href="../../base/html/as.data.frame.html">as.data.frame</a></code> to a data frame)
+containing the variables in the regression model.</p>
+</td></tr>
+<tr valign="top"><td><code>adj.intercept</code></td>
+<td>
+<p>if <code>TRUE</code>, the intercept of the regression
+model is located at the barycenter of the regressor instead of the
+origin.</p>
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+<p>estimation method for the variance components of the
+model; see details below.</p>
+</td></tr>
+<tr valign="top"><td><code>likelihood</code></td>
+<td>
+<p>a character string giving the name of the likelihood
+function in one of the supported linear Bayes cases; see details
+below.</p>
+</td></tr>
+<tr valign="top"><td><code>tol</code></td>
+<td>
+<p>tolerance level for the stopping criteria for iterative
+estimation method.</p>
+</td></tr>
+<tr valign="top"><td><code>maxit</code></td>
+<td>
+<p>maximum number of iterations in iterative estimation
+method.</p>
+</td></tr>
+<tr valign="top"><td><code>echo</code></td>
+<td>
+<p>logical; whether to echo the iterative procedure or not.</p>
+</td></tr>
+<tr valign="top"><td><code>x, object</code></td>
+<td>
+<p>an object of class <code>"cm"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>levels</code></td>
+<td>
+<p>character vector indicating the levels to predict or to
+include in the summary; if <code>NULL</code> all levels are included.</p>
+</td></tr>
+<tr valign="top"><td><code>newdata</code></td>
+<td>
+<p>data frame containing the variables used to predict
+credibility regression models.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>parameters of the prior distribution for <code>cm</code>;
+additional attributes to attach to the result for the
+<code>predict</code> and <code>summary</code> methods; further arguments to
+<code><a href="../../base/html/format.html">format</a></code> for the <code>print.summary</code> method;
+unused for the <code>print</code> method.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>cm</code> is the unified front end for credibility models fitting. The
+function supports hierarchical models with any number of levels (with
+Bühlmann and Bühlmann-Straub models as
+special cases) and the regression model of Hachemeister. Usage of
+<code>cm</code> is similar to <code><a href="../../stats/html/lm.html">lm</a></code> for these cases.
+<code>cm</code> can also fit linear Bayes models, in which case usage is
+much simplified; see the section on linear Bayes below.
+</p>
+<p>When not <code>"bayes"</code>, the <code>formula</code> argument symbolically
+describes the structure of the portfolio in the form <i>~ terms</i>.
+Each term is an interaction between risk factors contributing to the
+total variance of the portfolio data. Terms are separated by <code>+</code>
+operators and interactions within each term by <code>:</code>. For a
+portfolio divided first into sectors, then units and finally
+contracts, <code>formula</code> would be <code>~ sector + sector:unit +
+  sector:unit:contract</code>, where <code>sector</code>, <code>unit</code> and
+<code>contract</code> are column names in <code>data</code>. In general, the
+formula should be of the form <code>~ a + a:b + a:b:c + a:b:c:d +
+  ...</code>.
+</p>
+<p>If argument <code>regformula</code> is not <code>NULL</code>, the regression model
+of Hachemeister is fit to the data. The response is usually time. By
+default, the intercept of the model is located at time origin. If
+argument <code>adj.intercept</code> is <code>TRUE</code>, the intercept is moved
+to the (collective) barycenter of time, by orthogonalization of the
+design matrix. Note that the regression coefficients may be difficult
+to interpret in this case.
+</p>
+<p>Arguments <code>ratios</code>, <code>weights</code> and <code>subset</code> are used
+like arguments <code>select</code>, <code>select</code> and <code>subset</code>,
+respectively, of function <code><a href="../../base/html/subset.html">subset</a></code>.
+</p>
+<p>Data does not have to be sorted by level. Nodes with no data (complete
+lines of <code>NA</code> except for the portfolio structure) are allowed,
+with the restriction mentioned above.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Function <code>cm</code> computes the structure parameters estimators of the
+model specified in <code>formula</code>. The value returned is an object of
+class <code>cm</code>.
+</p>
+<p>An object of class <code>"cm"</code> is a list with at least the following
+components:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>means</code></td>
+<td>
+<p>a list containing, for each level, the vector of linearly
+sufficient statistics.</p>
+</td></tr>
+<tr valign="top"><td><code>weights</code></td>
+<td>
+<p>a list containing, for each level, the vector of total
+weights.</p>
+</td></tr>
+<tr valign="top"><td><code>unbiased</code></td>
+<td>
+<p>a vector containing the unbiased variance components
+estimators, or <code>NULL</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>iterative</code></td>
+<td>
+<p>a vector containing the iterative variance components
+estimators, or <code>NULL</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>cred</code></td>
+<td>
+<p>for multi-level hierarchical models: a list containing,
+the vector of credibility factors for each level. For one-level
+models: an array or vector of credibility factors.</p>
+</td></tr>
+<tr valign="top"><td><code>nodes</code></td>
+<td>
+<p>a list containing, for each level, the vector of the
+number of nodes in the level.</p>
+</td></tr>
+<tr valign="top"><td><code>classification</code></td>
+<td>
+<p>the columns of <code>data</code> containing the
+portfolio classification structure.</p>
+</td></tr>
+<tr valign="top"><td><code>ordering</code></td>
+<td>
+<p>a list containing, for each level, the affiliation of
+a node to the node of the level above.</p>
+</td></tr>
+</table>
+<p>Regression fits have in addition the following components:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>adj.models</code></td>
+<td>
+<p>a list containing, for each node, the credibility
+adjusted regression model as obtained with
+<code><a href="../../stats/html/lm.fit.html">lm.fit</a></code> or <code><a href="../../stats/html/lm.wfit.html">lm.wfit</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>transition</code></td>
+<td>
+<p>if <code>adj.intercept</code> is <code>TRUE</code>, a transition
+matrix from the basis of the orthogonal design matrix to the basis
+of the original design matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>terms</code></td>
+<td>
+<p>the <code><a href="../../stats/html/terms.html">terms</a></code> object used.</p>
+</td></tr>
+</table>
+<p>The method of <code>predict</code> for objects of class <code>"cm"</code> computes
+the credibility premiums for the nodes of every level included in
+argument <code>levels</code> (all by default). Result is a list the same
+length as <code>levels</code> or the number of levels in <code>formula</code>, or
+an atomic vector for one-level models.
+</p>
+
+
+<h3>Hierarchical models</h3>
+
+<p>The credibility premium at one level is a convex combination between
+the linearly sufficient statistic of a node and the credibility
+premium of the level above. (For the first level, the complement of
+credibility is given to the collective premium.) The linearly
+sufficient statistic of a node is the credibility weighted average of
+the data of the node, except at the last level, where natural weights
+are used. The credibility factor of node <i>i</i> is equal to
+</p>
+<p style="text-align: center;"><i>w[i]/(w[i] + a/b),</i></p>
+
+<p>where <i>w[i]</i> is the weight of the node used in the linearly
+sufficient statistic, <i>a</i> is the average within node variance and
+<i>b</i> is the average between node variance.
+</p>
+
+
+<h3>Regression models</h3>
+
+<p>The credibility premium of node <i>i</i> is equal to
+</p>
+<p style="text-align: center;"><i>y' ba[i],</i></p>
+
+<p>where <i>y</i> is a matrix created from <code>newdata</code> and
+<i>ba[i]</i> is the vector of credibility adjusted regression
+coefficients of node <i>i</i>. The latter is given by
+</p>
+<p style="text-align: center;"><i>
+    ba[i] = Z[i] b[i] + (I - Z[i]) m,</i></p>
+
+<p>where <i>b[i]</i> is the vector of regression coefficients based
+on data of node <i>i</i> only, <i>m</i> is the vector of collective
+regression coefficients, <i>Z[i]</i> is the credibility matrix and
+<i>I</i> is the identity matrix. The credibility matrix of node <i>i</i>
+is equal to
+</p>
+<p style="text-align: center;"><i>A^(-1) (A + s2 S[i]),</i></p>
+
+<p>where <i>S[i]</i> is the unscaled regression covariance matrix of
+the node, <i>s2</i> is the average within node variance and
+<i>A</i> is the within node covariance matrix.
+</p>
+<p>If the intercept is positioned at the barycenter of time, matrices
+<i>S[i]</i> and <i>A</i> (and hence <i>Z[i]</i>) are diagonal.
+This amounts to use Bühlmann-Straub models for each
+regression coefficient.
+</p>
+<p>Argument <code>newdata</code> provides the &ldquo;future&rdquo; value of the
+regressors for prediction purposes. It should be given as specified in
+<code><a href="../../stats/html/predict.lm.html">predict.lm</a></code>.
+</p>
+
+
+<h3>Variance components estimation</h3>
+
+<p>For hierarchical models, two sets of estimators of the variance
+components (other than the within node variance) are available:
+unbiased estimators and iterative estimators.
+</p>
+<p>Unbiased estimators are based on sums of squares of the form
+</p>
+<p style="text-align: center;"><i>
+    B[i] =  sum(j; w[ij] (X[ij] - Xb[i])^2 - (J - 1) a)</i></p>
+
+<p>and constants of the form
+</p>
+<p style="text-align: center;"><i>
+    c[i] = w[i] - sum(j; w[ij]^2)/w[i],</i></p>
+
+<p>where <i>X[ij]</i> is the linearly sufficient statistic of
+level <i>(ij)</i>; <i>Xb[i]</i> is the weighted average of
+the latter using weights <i>w[ij]</i>; <i>w[i] = sum(j; w[ij])</i>; <i>J</i> is the effective number of
+nodes at level <i>(ij)</i>; <i>a</i> is the within variance of this
+level. Weights <i>w[ij]</i> are the natural weights at the
+lowest level, the sum of the natural weights the next level and the
+sum of the credibility factors for all upper levels.
+</p>
+<p>The Bühlmann-Gisler estimators (<code>method =
+    "Buhlmann-Gisler"</code>) are given by
+</p>
+<p style="text-align: center;"><i>
+    b = mean(max(B[i]/c[i], 0)),</i></p>
+
+<p>that is the average of the per node variance estimators truncated at
+0.
+</p>
+<p>The Ohlsson estimators (<code>method = "Ohlsson"</code>) are given by
+</p>
+<p style="text-align: center;"><i>
+    b = sum(i; B[i]) / sum(i; c[i]),</i></p>
+
+<p>that is the weighted average of the per node variance estimators
+without any truncation. Note that negative estimates will be truncated
+to zero for credibility factor calculations.
+</p>
+<p>In the Bühlmann-Straub model, these estimators are
+equivalent.
+</p>
+<p>Iterative estimators <code>method = "iterative"</code> are pseudo-estimators
+of the form
+</p>
+<p style="text-align: center;"><i>
+    b = sum(i; w[i] * (X[i] - Xb)^2)/d,</i></p>
+
+<p>where <i>X[i]</i> is the linearly sufficient statistic of one
+level, <i>Xb</i> is the linearly sufficient statistic of
+the level above and <i>d</i> is the effective number of nodes at one
+level minus the effective number of nodes of the level above. The
+Ohlsson estimators are used as starting values.
+</p>
+<p>For regression models, with the intercept at time origin, only
+iterative estimators are available. If <code>method</code> is different from
+<code>"iterative"</code>, a warning is issued. With the intercept at the
+barycenter of time, the choice of estimators is the same as in the
+Bühlmann-Straub model.
+</p>
+
+
+<h3>Linear Bayes</h3>
+
+<p>When <code>formula</code> is <code>"bayes"</code>, the function computes pure
+Bayesian premiums for the following combinations of distributions
+where they are linear credibility premiums:
+</p>
+
+<ul>
+<li><p><i>X|&Theta; ~ Poisson(&Theta;)</i> and
+<i>&Theta; ~ Gamma(&alpha;, &lambda;)</i>;
+</p>
+</li>
+<li><p><i>X|&Theta; ~ Exponential(&Theta;)</i> and
+<i>&Theta; ~ Gamma(&alpha;, &lambda;)</i>;
+</p>
+</li>
+<li><p><i>X|&Theta; ~ Gamma(&tau;, &Theta;)</i> and
+<i>&Theta; ~ Gamma(&alpha;, &lambda;)</i>;
+</p>
+</li>
+<li><p><i>X|&Theta; ~ Normal(&Theta;, &sigma;_2^2)</i> and
+<i>&Theta; ~ Normal(&mu;, &sigma;_1^2)</i>;
+</p>
+</li>
+<li><p><i>X|&Theta; ~ Bernoulli(&Theta;)</i> and
+<i>&Theta; ~ Beta(a, b)</i>;
+</p>
+</li>
+<li><p><i>X|&Theta; ~ Binomial(&nu;, &Theta;)</i> and
+<i>&Theta; ~ Beta(a, b)</i>;
+</p>
+</li>
+<li><p><i>X|&Theta; = &theta; ~ Geometric(&theta;)</i> and
+<i>&Theta; ~ Beta(a, b)</i>.
+</p>
+</li>
+<li><p><i>X|&Theta; ~ Negative Binomial(r, &Theta;)</i> and
+<i>&Theta; ~ Beta(a, b)</i>.</p>
+</li></ul>
+
+<p>The following combination is also supported:
+<i>X|&Theta; ~ Single Parameter Pareto(&Theta;)</i>
+and <i>&Theta; ~
+  Gamma(&alpha;, &lambda;)</i>. In this case, the Bayesian estimator not of
+the risk premium, but rather of parameter <i>&theta;</i> is linear with
+a &ldquo;credibility&rdquo; factor that is not restricted to <i>(0, 1)</i>.  
+</p>
+<p>Argument <code>likelihood</code> identifies the distribution of <i>X|&Theta;
+    = &theta;</i> as one of
+<code>"poisson"</code>,
+<code>"exponential"</code>,
+<code>"gamma"</code>,
+<code>"normal"</code>,
+<code>"bernoulli"</code>,
+<code>"binomial"</code>,
+<code>"geometric"</code>,
+<code>"negative binomial"</code> or
+<code>"pareto"</code>.
+</p>
+<p>The parameters of the distributions of <i>X|&Theta; = &theta;</i> (when
+needed) and <i>&Theta;</i> are set in <code>...</code> using the argument
+names (and default values) of <code><a href="../../stats/html/dgamma.html">dgamma</a></code>,
+<code><a href="../../stats/html/dnorm.html">dnorm</a></code>, <code><a href="../../stats/html/dbeta.html">dbeta</a></code>,
+<code><a href="../../stats/html/dbinom.html">dbinom</a></code>, <code><a href="../../stats/html/dnbinom.html">dnbinom</a></code> or
+<code>dpareto1</code>, as appropriate. For the Gamma/Gamma case, use
+<code>shape.lik</code> for the shape parameter <i>&tau;</i> of the Gamma
+likelihood. For the Normal/Normal case, use <code>sd.lik</code> for the
+standard error <i>&sigma;_2</i> of the Normal likelihood.
+</p>
+<p>Data for the linear Bayes case may be a matrix or data frame as usual;
+an atomic vector to fit the model to a single contract; missing or
+<code>NULL</code> to fit the prior model. Arguments <code>ratios</code>,
+<code>weights</code> and <code>subset</code> are ignored.  
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Vincent Goulet <a href="mailto:vincent.goulet@act.ulaval.ca">vincent.goulet@act.ulaval.ca</a>,
+Xavier Milhaud, Tommy Ouellet, Louis-Philippe Pouliot
+</p>
+
+
+<h3>References</h3>
+
+<p>Bühlmann, H. and Gisler, A. (2005), <em>A Course in
+Credibility Theory and its Applications</em>, Springer.
+</p>
+<p>Belhadj, H., Goulet, V. and Ouellet, T. (2009), On parameter
+estimation in hierarchical credibility, <em>Astin Bulletin</em> <b>39</b>.
+</p>
+<p>Goulet, V. (1998), Principles and application of credibility
+theory, <em>Journal of Actuarial Practice</em> <b>6</b>, ISSN
+1064-6647.
+</p>
+<p>Goovaerts, M. J. and Hoogstad, W. J. (1987), <em>Credibility Theory</em>,
+Surveys of Actuarial Studies, No. 4, Nationale-Nederlanden N.V.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../base/html/subset.html">subset</a></code>, <code><a href="../../stats/html/formula.html">formula</a></code>,
+<code><a href="../../stats/html/lm.html">lm</a></code>, <code><a href="../../stats/html/predict.lm.html">predict.lm</a></code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(hachemeister)
+
+## Buhlmann-Straub model
+fit &lt;- cm(~state, hachemeister,
+          ratios = ratio.1:ratio.12, weights = weight.1:weight.12)
+fit				# print method
+predict(fit)			# credibility premiums
+summary(fit)			# more details
+
+## Two-level hierarchical model. Notice that data does not have
+## to be sorted by level
+X &lt;- data.frame(unit = c("A", "B", "A", "B", "B"), hachemeister)
+fit &lt;- cm(~unit + unit:state, X, ratio.1:ratio.12, weight.1:weight.12)
+predict(fit)
+predict(fit, levels = "unit")	# unit credibility premiums only
+summary(fit)
+summary(fit, levels = "unit")	# unit summaries only
+
+## Regression model with intercept at time origin
+fit &lt;- cm(~state, hachemeister,
+          regformula = ~time, regdata = data.frame(time = 12:1),
+          ratios = ratio.1:ratio.12, weights = weight.1:weight.12)
+fit
+predict(fit, newdata = data.frame(time = 0))
+summary(fit, newdata = data.frame(time = 0))
+
+## Same regression model, with intercept at barycenter of time
+fit &lt;- cm(~state, hachemeister, adj.intercept = TRUE,
+          regformula = ~time, regdata = data.frame(time = 12:1),
+          ratios = ratio.1:ratio.12, weights = weight.1:weight.12)
+fit
+predict(fit, newdata = data.frame(time = 0))
+summary(fit, newdata = data.frame(time = 0))
+
+## Poisson/Gamma pure Bayesian model
+fit &lt;- cm("bayes", data = c(5, 3, 0, 1, 1),
+          likelihood = "poisson", shape = 3, rate = 3)
+fit
+predict(fit)
+summary(fit)
+
+## Normal/Normal pure Bayesian model
+cm("bayes", data = c(5, 3, 0, 1, 1),
+   likelihood = "normal", sd.lik = 2,
+   mean = 2, sd = 1)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>actuar</em> version 2.3-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Grouped data</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for grouped.data {actuar}"><tr><td>grouped.data {actuar}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Grouped data</h2>
+
+<h3>Description</h3>
+
+<p>Creation of grouped data objects, from either a provided set of group
+boundaries and group frequencies, or from individual data using
+automatic or specified breakpoints.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+grouped.data(..., breaks = "Sturges", include.lowest = TRUE,
+             right = TRUE, nclass = NULL, group = FALSE,
+             row.names = NULL, check.rows = FALSE,
+             check.names = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>these arguments are either of the form <code>value</code> or
+<code>tag = value</code>. See Details.</p>
+</td></tr>
+<tr valign="top"><td><code>breaks</code></td>
+<td>
+<p>same as for <code><a href="../../graphics/html/hist.html">hist</a></code>, namely one of:
+</p>
+
+<ul>
+<li><p>a vector giving the breakpoints between groups;
+</p>
+</li>
+<li><p>a function to compute the vector of breakpoints;
+</p>
+</li>
+<li><p>a single number giving the number of groups;
+</p>
+</li>
+<li><p>a character string naming an algorithm to compute the
+number of groups (see <code><a href="../../graphics/html/hist.html">hist</a></code>);
+</p>
+</li>
+<li><p>a function to compute the number of groups.
+</p>
+</li></ul>
+
+<p>In the last three cases the number is a suggestion only; the
+breakpoints will be set to <code><a href="../../base/html/pretty.html">pretty</a></code> values.  If
+<code>breaks</code> is a function, the first element in <code>...</code>
+is supplied to it as the only argument.
+</p>
+</td></tr>
+<tr valign="top"><td><code>include.lowest</code></td>
+<td>
+<p>logical; if <code>TRUE</code>, a data point equal to
+the <code>breaks</code> value will be included in the first (or last, for
+<code>right = FALSE</code>) group. Used only for individual data; see
+Details.</p>
+</td></tr>
+<tr valign="top"><td><code>right</code></td>
+<td>
+<p>logical; indicating if the intervals should be closed on
+the right (and open on the left) or vice versa.</p>
+</td></tr>
+<tr valign="top"><td><code>nclass</code></td>
+<td>
+<p>numeric (integer); equivalent to <code>breaks</code> for a
+scalar or character argument.</p>
+</td></tr>
+<tr valign="top"><td><code>group</code></td>
+<td>
+<p>logical; an alternative way to force grouping of
+individual data.</p>
+</td></tr>
+<tr valign="top"><td><code>row.names, check.rows, check.names</code></td>
+<td>
+<p>arguments identical to those
+of <code><a href="../../base/html/data.frame.html">data.frame</a></code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>A grouped data object is a special form of data frame consisting of
+one column of contiguous group boundaries and one or more columns of
+frequencies within each group.
+</p>
+<p>The function can create a grouped data object from two types of
+arguments.
+</p>
+
+<ol>
+<li><p>Group boundaries and frequencies. This is the default mode of
+operation if the call has at least two elements in <code>...</code>.
+</p>
+<p>The first argument will then be taken as the vector of group
+boundaries. This vector must be exactly one element longer than
+the other arguments, which will be taken as vectors of group
+frequencies. All arguments are coerced to data frames.
+</p>
+</li>
+<li><p>Individual data. This mode of operation is active if there
+is a single argument in <code>...</code>, or if either <code>breaks</code>
+or <code>nclass</code> is specified or <code>group</code> is <code>TRUE</code>.
+</p>
+<p>Arguments of <code>...</code> are first grouped using
+<code><a href="../../graphics/html/hist.html">hist</a></code>. If needed, breakpoints are set using the first
+argument.
+</p>
+</li></ol>
+
+<p>Missing (<code>NA</code>) frequencies are replaced by zeros, with a
+warning.
+</p>
+<p>Extraction and replacement methods exist for <code>grouped.data</code>
+objects, but working on non adjacent groups will most likely yield
+useless results.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of <code>class</code> <code>c("grouped.data", "data.frame")</code> with
+an environment containing the vector <code>cj</code> of group boundaries.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Vincent Goulet <a href="mailto:vincent.goulet@act.ulaval.ca">vincent.goulet@act.ulaval.ca</a>,
+Mathieu Pigeon and Louis-Philippe Pouliot
+</p>
+
+
+<h3>References</h3>
+
+<p>Klugman, S. A., Panjer, H. H. and Willmot, G. E. (1998),
+<em>Loss Models, From Data to Decisions</em>, Wiley.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="Extract.grouped.data.html">[.grouped.data</a></code> for extraction and replacement methods.
+</p>
+<p><code><a href="../../base/html/data.frame.html">data.frame</a></code> for usual data frame creation and
+manipulation.
+</p>
+<p><code><a href="../../graphics/html/hist.html">hist</a></code> for details on the calculation of breakpoints.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Most common usage using a predetermined set of group
+## boundaries and group frequencies.
+cj &lt;- c(0, 25, 50, 100, 250, 500, 1000)
+nj &lt;- c(30, 31, 57, 42, 45, 10)
+(x &lt;- grouped.data(Group = cj, Frequency = nj))
+class(x)
+
+x[, 1] # group boundaries
+x[, 2] # group frequencies
+
+## Multiple frequency columns are supported
+x &lt;- sample(1:100, 9)
+y &lt;- sample(1:100, 9)
+grouped.data(cj = 1:10, nj.1 = x, nj.2 = y)
+
+## Alternative usage with grouping of individual data.
+grouped.data(x)                         # automatic breakpoints
+grouped.data(x, breaks = 7)             # forced number of groups
+grouped.data(x, breaks = c(0,25,75,100))    # specified groups
+grouped.data(x, y, breaks = c(0,25,75,100)) # multiple data sets
+
+## Not run: ## Providing two or more data sets and automatic breakpoints is
+## very error-prone since the range of the first data set has to
+## include the ranges of all the other data sets.
+range(x)
+range(y)
+grouped.data(x, y, group = TRUE)
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>actuar</em> version 2.3-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

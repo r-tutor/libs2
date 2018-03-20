@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Discretization of a Continuous Distribution</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for discretize {actuar}"><tr><td>discretize {actuar}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Discretization of a Continuous Distribution</h2>
+
+<h3>Description</h3>
+
+<p>Compute a discrete probability mass function from a continuous
+cumulative distribution function (cdf) with various methods.
+</p>
+<p><code>discretise</code> is an alias for <code>discretize</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+discretize(cdf, from, to, step = 1,
+           method = c("upper", "lower", "rounding", "unbiased"),
+           lev, by = step, xlim = NULL)
+
+discretise(cdf, from, to, step = 1,
+           method = c("upper", "lower", "rounding", "unbiased"),
+           lev, by = step, xlim = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>cdf</code></td>
+<td>
+<p>an expression written as a function of <code>x</code>, or
+alternatively the name of a function, giving the cdf to discretize.</p>
+</td></tr>
+<tr valign="top"><td><code>from, to</code></td>
+<td>
+<p>the range over which the function will be discretized.</p>
+</td></tr>
+<tr valign="top"><td><code>step</code></td>
+<td>
+<p>numeric; the discretization step (or span, or lag).</p>
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+<p>discretization method to use.</p>
+</td></tr>
+<tr valign="top"><td><code>lev</code></td>
+<td>
+<p>an expression written as a function of <code>x</code>, or
+alternatively the name of a function, to compute the limited
+expected value of the distribution corresponding to
+<code>cdf</code>. Used only with the <code>"unbiased"</code> method.</p>
+</td></tr>
+<tr valign="top"><td><code>by</code></td>
+<td>
+<p>an alias for <code>step</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>xlim</code></td>
+<td>
+<p>numeric of length 2; if specified, it serves as default
+for <code>c(from, to)</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Usage is similar to <code><a href="../../graphics/html/curve.html">curve</a></code>.
+</p>
+<p><code>discretize</code> returns the probability mass function (pmf) of the
+random variable obtained by discretization of the cdf specified in
+<code>cdf</code>.
+</p>
+<p>Let <i>F(x)</i> denote the cdf, <i>E[min(X, x)]]</i> the
+limited expected value at <i>x</i>, <i>h</i> the step, <i>p[x]</i>
+the probability mass at <i>x</i> in the discretized distribution and
+set <i>a =</i> <code>from</code> and <i>b =</i> <code>to</code>.
+</p>
+<p>Method <code>"upper"</code> is the forward difference of the cdf <i>F</i>:
+</p>
+<p style="text-align: center;"><i>p[x] = F(x + h) - F(x)</i></p>
+
+<p>for <i>x = a, a + h, &hellip;, b - step</i>.
+</p>
+<p>Method <code>"lower"</code> is the backward difference of the cdf <i>F</i>:
+</p>
+<p style="text-align: center;"><i>p[x] = F(x) - F(x - h)</i></p>
+<p> for <i>x = a +
+    h, &hellip;, b</i> and <i>p[a] = F(a)</i>.
+</p>
+<p>Method <code>"rounding"</code> has the true cdf pass through the
+midpoints of the intervals <i>[x - h/2, x + h/2)</i>:
+</p>
+<p style="text-align: center;"><i>p[x] = F(x + h/2) - F(x - h/2)</i></p>
+
+<p>for <i>x = a + h, &hellip;, b - step</i> and <i>p[a] =
+  F(a + h/2)</i>. The function assumes the cdf is continuous. Any
+adjusment necessary for discrete distributions can be done via
+<code>cdf</code>.
+</p>
+<p>Method <code>"unbiased"</code> matches the first moment of the discretized
+and the true distributions. The probabilities are as follows:
+</p>
+<p style="text-align: center;"><i>
+    p[a] = (E[min(X, a)] - E[min(X, a + h)])/h + 1 - F(a)</i></p>
+
+<p style="text-align: center;"><i>
+    p[x] = (2 E[min(X, x)] - E[min(X, x - h)] - E[min(X, x + h)])/h, a &lt; x &lt; b</i></p>
+
+<p style="text-align: center;"><i>
+    p[b] = (E[min(X, b)] - E[min(X, b - h)])/h - 1 + F(b).</i></p>
+
+
+
+<h3>Value</h3>
+
+<p>A numeric vector of probabilities suitable for use in
+<code><a href="aggregateDist.html">aggregateDist</a></code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Vincent Goulet <a href="mailto:vincent.goulet@act.ulaval.ca">vincent.goulet@act.ulaval.ca</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Klugman, S. A., Panjer, H. H. and Willmot, G. E. (2012),
+<em>Loss Models, From Data to Decisions, Fourth Edition</em>, Wiley.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="aggregateDist.html">aggregateDist</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+x &lt;- seq(0, 5, 0.5)
+
+op &lt;- par(mfrow = c(1, 1), col = "black")
+
+## Upper and lower discretization
+fu &lt;- discretize(pgamma(x, 1), method = "upper",
+                 from = 0, to = 5, step = 0.5)
+fl &lt;- discretize(pgamma(x, 1), method = "lower",
+                 from = 0, to = 5, step = 0.5)
+curve(pgamma(x, 1), xlim = c(0, 5))
+par(col = "blue")
+plot(stepfun(head(x, -1), diffinv(fu)), pch = 19, add = TRUE)
+par(col = "green")
+plot(stepfun(x, diffinv(fl)), pch = 19, add = TRUE)
+par(col = "black")
+
+## Rounding (or midpoint) discretization
+fr &lt;- discretize(pgamma(x, 1), method = "rounding",
+                 from = 0, to = 5, step = 0.5)
+curve(pgamma(x, 1), xlim = c(0, 5))
+par(col = "blue")
+plot(stepfun(head(x, -1), diffinv(fr)), pch = 19, add = TRUE)
+par(col = "black")
+
+## First moment matching
+fb &lt;- discretize(pgamma(x, 1), method = "unbiased",
+                 lev = levgamma(x, 1), from = 0, to = 5, step = 0.5)
+curve(pgamma(x, 1), xlim = c(0, 5))
+par(col = "blue")
+plot(stepfun(x, diffinv(fb)), pch = 19, add = TRUE)
+
+par(op)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>actuar</em> version 2.3-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

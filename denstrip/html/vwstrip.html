@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Varying-width strips</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for vwstrip {denstrip}"><tr><td>vwstrip {denstrip}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Varying-width strips</h2>
+
+<h3>Description</h3>
+
+<p>Varying-width strips give a compact illustration of a distribution. 
+The width of the strip is proportional to the density.  This function 
+adds a varying-width strip to an exising plot.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+vwstrip(x, dens, at, width, horiz=TRUE, scale=1, limits=c(-Inf, Inf), 
+        col="gray", border=NULL, lwd, lty, ticks=NULL, tlen=1, twd, tty,
+        lattice=FALSE,...)
+panel.vwstrip(...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p> Either the vector of points at which the density is
+evaluated (if <code>dens</code> supplied), or a sample from the distribution
+(if <code>dens</code> not supplied). </p>
+</td></tr>
+<tr valign="top"><td><code>dens</code></td>
+<td>
+<p> Density at <code>x</code>. If <code>dens</code> is not supplied,
+the density of the sample <code>x</code> is estimated by kernel density
+estimation, using <code><a href="../../stats/html/density.html">density</a>(x,...)</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>at</code></td>
+<td>
+<p> Position of the centre of the strip on the y-axis (if
+<code>horiz=TRUE</code>) or the x-axis (if <code>horiz=FALSE</code>).  </p>
+</td></tr>
+<tr valign="top"><td><code>width</code></td>
+<td>
+<p> Thickness of the strip at the maximum density, that is, the length of its
+shorter dimension.  Defaults to 1/20 of the axis range. </p>
+</td></tr>
+<tr valign="top"><td><code>horiz</code></td>
+<td>
+<p> Draw the strip horizontally (<code>TRUE</code>) or vertically (<code>FALSE</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>scale</code></td>
+<td>
+<p> Alternative way of specifying the thickness of the
+strip, as a proportion of <code>width</code>. </p>
+</td></tr>
+<tr valign="top"><td><code>limits</code></td>
+<td>
+<p>Vector of minimum and maximum values, respectively, at which to terminate the strip.</p>
+</td></tr>
+<tr valign="top"><td><code>col</code></td>
+<td>
+<p>Colour to shade the strip, either as a built-in R
+colour name (one of <code><a href="../../grDevices/html/colors.html">colors</a>()</code>) or an RGB hex
+value, e.g. black is <code>"#000000"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>border</code></td>
+<td>
+<p>Colour of the border, see <code><a href="../../graphics/html/polygon.html">polygon</a></code>. Use
+<code>border=NA</code> to show no border.  The default, 'NULL', means to
+use 'par(&quot;fg&quot;)' or its <span class="pkg">lattice</span> equivalent</p>
+</td></tr>
+<tr valign="top"><td><code>lwd</code></td>
+<td>
+<p>Line width of the border (defaults to
+<code><a href="../../graphics/html/par.html">par</a>("lwd")</code> or its <span class="pkg">lattice</span> equivalent).</p>
+</td></tr>
+<tr valign="top"><td><code>lty</code></td>
+<td>
+<p>Line type of the border (defaults to
+<code><a href="../../graphics/html/par.html">par</a>("lty")</code> or its <span class="pkg">lattice</span> equivalent).</p>
+</td></tr>
+<tr valign="top"><td><code>ticks</code></td>
+<td>
+<p> Vector of <code>x</code>-positions on the strip to draw tick
+marks, or <code>NULL</code> for no ticks. </p>
+</td></tr>
+<tr valign="top"><td><code>tlen</code></td>
+<td>
+<p>Length of the ticks, relative to the thickness of the strip.</p>
+</td></tr>
+<tr valign="top"><td><code>twd</code></td>
+<td>
+<p> Line width of these marks (defaults to
+<code><a href="../../graphics/html/par.html">par</a>("lwd")</code> or its <span class="pkg">lattice</span> equivalent). </p>
+</td></tr>
+<tr valign="top"><td><code>tty</code></td>
+<td>
+<p> Line type of these marks (defaults to
+<code><a href="../../graphics/html/par.html">par</a>("lty")</code> or its <span class="pkg">lattice</span> equivalent). </p>
+</td></tr>
+<tr valign="top"><td><code>lattice</code></td>
+<td>
+<p>Set this to <code>TRUE</code> to make <code><a href="vwstrip.html">vwstrip</a></code>
+a <span class="pkg">lattice</span> panel function instead of a base graphics function. <br />
+<code>panel.vwstrip(x,...)</code> is equivalent to
+<code>vwstrip(x, lattice=TRUE, ...)</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments supplied to <code><a href="../../stats/html/density.html">density</a>(x,...)</code>, if
+the density is being estimated. </p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Varying-width strips look like <em>violin plots</em>.  The difference is that
+violin plots are intended to summarise data, while
+<code><a href="vwstrip.html">vwstrip</a></code> is
+intended to illustrate a distribution arising from parameter
+estimation or prediction.  Either the distribution is known
+analytically, or an arbitrarily large sample from the distribution is
+assumed to be available via a method such as MCMC or bootstrapping.
+</p>
+<p>Illustrating outliers is important for summarising data, therefore
+violin plots terminate at the sample minimum and maximum and superimpose
+a box plot (which appears like the bridge of a violin, hence the name). 
+Varying-width strips, however, are used to illustrate known
+distributions which may have unbounded support.  Therefore it is
+important to think about where the strips should terminate (the
+<code>limits</code> argument).  For example, the end points may illustrate 
+a particular pair of extreme quantiles of the distribution.
+</p>
+<p>The function <code>vioplot</code> in the <span class="pkg">vioplot</span>
+package and <code><a href="../../lattice/html/panel.violin.html">panel.violin</a></code> in the <span class="pkg">lattice</span>
+package can be used to draw violin plots of observed data.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p> Christopher Jackson &lt;chris.jackson@mrc-bsu.cam.ac.uk&gt; </p>
+
+
+<h3>References</h3>
+
+<p> Jackson, C. H.  (2008) Displaying uncertainty with
+shading. <em>The American Statistician</em>, 62(4):340-347. 
+</p>
+<p>Hintze, J.L. and Nelson, R.D. (1998) Violin plots: a box plot -
+density trace synergism. <em>The American Statistician</em>
+<b>52</b>(2),181&ndash;184. 
+</p>
+
+
+<h3>See Also</h3>
+
+ <p><code><a href="denstrip.html">denstrip</a></code>, <code><a href="bpstrip.html">bpstrip</a></code>, <code><a href="cistrip.html">cistrip</a></code>.  </p>
+
+
+<h3>Examples</h3>
+
+<pre>
+x &lt;- seq(-4, 4, length=10000)
+dens &lt;- dnorm(x)
+plot(x, xlim=c(-5, 5), ylim=c(-5, 5), xlab="x", ylab="x", type="n")
+vwstrip(x, dens, at=1, ticks=qnorm(c(0.025, 0.25,0.5, 0.75, 0.975)))
+
+## Terminate the strip at specific outer quantiles
+vwstrip(x, dens, at=2, limits=qnorm(c(0.025, 0.975)))
+vwstrip(x, dens, at=3, limits=qnorm(c(0.005, 0.995)))
+
+## Compare with density strip
+denstrip(x, dens, at=0)
+
+## Estimate the density from a large sample 
+x &lt;- rnorm(10000)
+vwstrip(x, at=4)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>denstrip</em> version 1.5.4 <a href="00Index.html">Index</a>]</div>
+</body></html>

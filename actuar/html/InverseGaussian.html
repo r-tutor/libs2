@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: The Inverse Gaussian Distribution</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for InverseGaussian {actuar}"><tr><td>InverseGaussian {actuar}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>The Inverse Gaussian Distribution</h2>
+
+<h3>Description</h3>
+
+<p>Density function, distribution function, quantile function, random
+generation, raw moments, limited moments and moment generating
+function for the Inverse Gaussian distribution with parameters
+<code>mean</code> and <code>shape</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+dinvgauss(x, mean, shape = 1, dispersion = 1/shape,
+          log = FALSE)
+pinvgauss(q, mean, shape = 1, dispersion = 1/shape,
+          lower.tail = TRUE, log.p = FALSE)
+qinvgauss(p, mean, shape = 1, dispersion = 1/shape,
+          lower.tail = TRUE, log.p = FALSE,
+          tol = 1e-14, maxit = 100, echo = FALSE, trace = echo)
+rinvgauss(n, mean, shape = 1, dispersion = 1/shape)
+minvgauss(order, mean, shape = 1, dispersion = 1/shape)
+levinvgauss(limit, mean, shape = 1, dispersion = 1/shape, order = 1)
+mgfinvgauss(t, mean, shape = 1, dispersion = 1/shape, log = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x, q</code></td>
+<td>
+<p>vector of quantiles.</p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>vector of probabilities.</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>number of observations. If <code>length(n) &gt; 1</code>, the length is
+taken to be the number required.</p>
+</td></tr>
+<tr valign="top"><td><code>mean, shape</code></td>
+<td>
+<p>parameters. Must be strictly positive. Infinite
+values are supported.</p>
+</td></tr>
+<tr valign="top"><td><code>dispersion</code></td>
+<td>
+<p>an alternative way to specify the shape.</p>
+</td></tr>
+<tr valign="top"><td><code>log, log.p</code></td>
+<td>
+<p>logical; if <code>TRUE</code>, probabilities/densities
+<i>p</i> are returned as <i>log(p)</i>.</p>
+</td></tr>
+<tr valign="top"><td><code>lower.tail</code></td>
+<td>
+<p>logical; if <code>TRUE</code> (default), probabilities are
+<i>P[X &lt;= x]</i>, otherwise, <i>P[X &gt; x]</i>.</p>
+</td></tr>
+<tr valign="top"><td><code>order</code></td>
+<td>
+<p>order of the moment. Only <code>order = 1</code> is
+supported by <code>levinvgauss</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>limit</code></td>
+<td>
+<p>limit of the loss variable.</p>
+</td></tr>
+<tr valign="top"><td><code>tol</code></td>
+<td>
+<p>small positive value. Tolerance to assess convergence in
+the Newton computation of quantiles.</p>
+</td></tr>
+<tr valign="top"><td><code>maxit</code></td>
+<td>
+<p>positive integer; maximum number of recursions in the
+Newton computation of quantiles.</p>
+</td></tr>
+<tr valign="top"><td><code>echo, trace</code></td>
+<td>
+<p>logical; echo the recursions to screen in the
+Newton computation of quantiles.</p>
+</td></tr>
+<tr valign="top"><td><code>t</code></td>
+<td>
+<p>numeric vector.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The inverse Gaussian distribution with parameters <code>mean</code> <i>=
+    &mu;</i> and <code>dispersion</code> <i>= &phi;</i> has density:
+</p>
+<p style="text-align: center;"><i>
+    f(x) = sqrt(1/(2 &pi; &phi; x^3)) *
+           exp(-((x - &mu;)^2)/(2 &mu;^2 &phi; x)),</i></p>
+
+<p>for <i>x &ge; 0</i>, <i>&mu; &gt; 0</i> and <i>&phi; &gt; 0</i>.
+</p>
+<p>The limiting case <i>&mu; = Inf</i> is an inverse
+chi-squared distribution (or inverse gamma with <code>shape</code> <i>=
+  1/2</i> and <code>rate</code> <i>= 2</i><code>phi</code>). This distribution has no
+finite strictly positive, integer moments.
+</p>
+<p>The limiting case <i>&phi; = 0</i> is an infinite spike in <i>x = 0</i>.
+</p>
+<p>If the random variable <i>X</i> is IG<i>(&mu;, &phi;)</i>, then
+<i>X/&mu;</i> is IG<i>(1, &phi; * &mu;)</i>.
+</p>
+<p>The <i>k</i>th raw moment of the random variable <i>X</i> is
+<i>E[X^k]</i>, <i>k = 1, 2, &hellip;</i>, the limited expected
+value at some limit <i>d</i> is <i>E[min(X, d)]</i> and
+the moment generating function is <i>E[e^{tX}]</i>.
+</p>
+<p>The moment generating function of the inverse guassian is defined for
+<code>t &lt;= 1/(2 * mean^2 * phi)</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>dinvgauss</code> gives the density,
+<code>pinvgauss</code> gives the distribution function,
+<code>qinvgauss</code> gives the quantile function,
+<code>rinvgauss</code> generates random deviates,
+<code>minvgauss</code> gives the <i>k</i>th raw moment,
+<code>levinvgauss</code> gives the limited expected value, and
+<code>mgfinvgauss</code> gives the moment generating function in <code>t</code>.
+</p>
+<p>Invalid arguments will result in return value <code>NaN</code>, with a warning.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Functions <code>dinvgauss</code>, <code>pinvgauss</code> and <code>qinvgauss</code> are
+C implementations of functions of the same name in package
+<span class="pkg">statmod</span>; see Giner and Smyth (2016).
+</p>
+<p>Devroye (1986, chapter 4) provides a nice presentation of the
+algorithm to generate random variates from an inverse Gaussian
+distribution.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Vincent Goulet <a href="mailto:vincent.goulet@act.ulaval.ca">vincent.goulet@act.ulaval.ca</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Giner, G. and Smyth, G. K. (2016), &ldquo;<span class="pkg">statmod</span>: Probability
+Calculations for the Inverse Gaussian Distribution&rdquo;, <em>R
+Journal</em>, vol. 8, no 1, p. 339-351.
+<a href="https://journal.r-project.org/archive/2016-1/giner-smyth.pdf">https://journal.r-project.org/archive/2016-1/giner-smyth.pdf</a>
+</p>
+<p>Chhikara, R. S. and Folk, T. L. (1989), <em>The Inverse Gaussian
+Distribution: Theory, Methodology and Applications</em>, Decker.
+</p>
+<p>Devroye, L. (1986), <em>Non-Uniform Random Variate Generation</em>,
+Springer-Verlag. <a href="http://luc.devroye.org/rnbookindex.html">http://luc.devroye.org/rnbookindex.html</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="InverseGamma.html">dinvgamma</a></code> for the inverse gamma distribution.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+dinvgauss(c(-1, 0, 1, 2, Inf), mean = 1.5, dis = 0.7)
+dinvgauss(c(-1, 0, 1, 2, Inf), mean = Inf, dis = 0.7)
+dinvgauss(c(-1, 0, 1, 2, Inf), mean = 1.5, dis = Inf) # spike at zero
+
+## Typical graphical representations of the inverse Gaussian
+## distribution. First fixed mean and varying shape; second
+## varying mean and fixed shape.
+col = c("red", "blue", "green", "cyan", "yellow", "black")
+par = c(0.125, 0.5, 1, 2, 8, 32)
+curve(dinvgauss(x, 1, par[1]), from = 0, to = 2, col = col[1])
+for (i in 2:6)
+    curve(dinvgauss(x, 1, par[i]), add = TRUE, col = col[i])
+
+curve(dinvgauss(x, par[1], 1), from = 0, to = 2, col = col[1])
+for (i in 2:6)
+    curve(dinvgauss(x, par[i], 1), add = TRUE, col = col[i])
+
+pinvgauss(qinvgauss((1:10)/10, 1.5, shape = 2), 1.5, 2)
+
+minvgauss(1:4, 1.5, 2)
+
+levinvgauss(c(0, 0.5, 1, 1.2, 10, Inf), 1.5, 2)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>actuar</em> version 2.3-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

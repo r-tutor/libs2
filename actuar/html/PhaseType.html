@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: The Phase-type Distribution</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for PhaseType {actuar}"><tr><td>PhaseType {actuar}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>The Phase-type Distribution</h2>
+
+<h3>Description</h3>
+
+<p>Density, distribution function, random generation, raw moments and
+moment generating function for the (continuous) Phase-type
+distribution with parameters <code>prob</code> and <code>rates</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+dphtype(x, prob, rates, log = FALSE)
+pphtype(q, prob, rates, lower.tail = TRUE, log.p = FALSE)
+rphtype(n, prob, rates)
+mphtype(order, prob, rates)
+mgfphtype(t, prob, rates, log = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x, q</code></td>
+<td>
+<p>vector of quantiles.</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>number of observations. If <code>length(n) &gt; 1</code>, the length is
+taken to be the number required.</p>
+</td></tr>
+<tr valign="top"><td><code>prob</code></td>
+<td>
+<p>vector of initial probabilities for each of the transient
+states of the underlying Markov chain. The initial probability of
+the absorbing state is <code>1 - sum(prob)</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>rates</code></td>
+<td>
+<p>square matrix of the rates of transition among the states
+of the underlying Markov chain.</p>
+</td></tr>
+<tr valign="top"><td><code>log, log.p</code></td>
+<td>
+<p>logical; if <code>TRUE</code>, probabilities/densities
+<i>p</i> are returned as <i>log(p)</i>.</p>
+</td></tr>
+<tr valign="top"><td><code>lower.tail</code></td>
+<td>
+<p>logical; if <code>TRUE</code> (default), probabilities are
+<i>P[X &lt;= x]</i>, otherwise, <i>P[X &gt; x]</i>.</p>
+</td></tr>
+<tr valign="top"><td><code>order</code></td>
+<td>
+<p>order of the moment.</p>
+</td></tr>
+<tr valign="top"><td><code>t</code></td>
+<td>
+<p>numeric vector.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The phase-type distribution with parameters <code>prob</code> <i>=
+    pi</i> and <code>rates</code> <i>= T</i> has density:
+</p>
+<p style="text-align: center;"><i>
+    f(x) = pi %*% exp(T * x) %*% t</i></p>
+
+<p>for <i>x &ge; 0</i> and <i>f(0) = 1 - pi
+    %*% e</i>, where 
+<i>e</i> 
+is a column vector with all components equal to one, 
+<i>
+    t = -T %*% e</i> 
+is the exit rates vector and 
+<i>exp(T * x)</i> 
+denotes the matrix exponential of <i>T * x</i>. The
+matrix exponential of a matrix <i>M</i> is defined as
+the Taylor series
+</p>
+<p style="text-align: center;"><i>
+    exp(M) = sum(n = 0:Inf; (M^n)/(n!)).</i></p>
+
+<p>The parameters of the distribution must satisfy
+<i>pi %*% e &lt;= 1</i>,
+<i>T[i, i] &lt; 0</i>,
+<i>T[i, j] &gt;= 0</i> and
+<i>T %*% e &lt;= 0</i>.
+</p>
+<p>The <i>k</i>th raw moment of the random variable <i>X</i> is
+<i>E[X^k]</i> and the moment generating function is
+<i>E[e^{tX}]</i>.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>dphasetype</code> gives the density,
+<code>pphasetype</code> gives the distribution function,
+<code>rphasetype</code> generates random deviates,
+<code>mphasetype</code> gives the <i>k</i>th raw moment, and
+<code>mgfphasetype</code> gives the moment generating function in <code>x</code>.
+</p>
+<p>Invalid arguments will result in return value <code>NaN</code>, with a warning.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Vincent Goulet <a href="mailto:vincent.goulet@act.ulaval.ca">vincent.goulet@act.ulaval.ca</a> and
+Christophe Dutang
+</p>
+
+
+<h3>References</h3>
+
+<p><a href="http://en.wikipedia.org/wiki/Phase-type_distribution">http://en.wikipedia.org/wiki/Phase-type_distribution</a>
+</p>
+<p>Neuts, M. F. (1981), <em>Generating random variates from a
+distribution of phase type</em>, WSC '81: Proceedings of the 13th
+conference on Winter simulation, IEEE Press.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Erlang(3, 2) distribution
+T &lt;- cbind(c(-2, 0, 0), c(2, -2, 0), c(0, 2, -2))
+pi &lt;- c(1,0,0)
+x &lt;- 0:10
+
+dphtype(x, pi, T)		# density
+dgamma(x, 3, 2)			# same
+pphtype(x, pi, T)		# cdf
+pgamma(x, 3, 2)			# same
+
+rphtype(10, pi, T)		# random values
+
+mphtype(1, pi, T)		# expected value
+
+curve(mgfphtype(x, pi, T), from = -10, to = 1)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>actuar</em> version 2.3-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

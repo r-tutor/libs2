@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Density regions for survival curves</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for densregion.survfit {denstrip}"><tr><td>densregion.survfit {denstrip}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Density regions for survival curves</h2>
+
+<h3>Description</h3>
+
+<p>Adds a density region to a survival plot.  The shading of the region
+has darkness proportional to the fiducial density of the point.  
+This distribution is assumed to be normal with standard deviation
+calculated using the lower confidence limit stored in the survival
+curve object.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'survfit'
+densregion(x, ny=20, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p> Survival curve object, returned by
+<code><a href="../../survival/html/survfit.html">survfit</a></code>.  Confidence intervals must have been
+calculated, using <code>conf.type</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>ny</code></td>
+<td>
+<p> Minimum number of points to calculate the density at for
+each event time.  The default of 20 should be sufficient to obtain
+smooth-looking plots. </p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Further arguments passed to <code><a href="densregion.html">densregion.default</a></code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The density is calculated at a grid of points, and interpolated using
+the method referred to in <code><a href="densregion.html">densregion</a></code>.
+</p>
+
+
+<h3>Note</h3>
+
+<p>In general, this approach can only illustrate one survival curve per
+plot.  Though if the graphics device supports transparency (e.g. PDF)
+multiple curves can be made to overlap smoothly - see the example
+below. 
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p> Christopher Jackson &lt;chris.jackson@mrc-bsu.cam.ac.uk&gt; </p>
+
+
+<h3>References</h3>
+
+<p> Jackson, C. H.  (2008) Displaying uncertainty with
+shading. <em>The American Statistician</em>, 62(4):340-347.
+</p>
+
+
+<h3>See Also</h3>
+
+ <p><code><a href="densregion.html">densregion</a></code>, <code><a href="densregion.normal.html">densregion.normal</a></code>, <code><a href="denstrip.html">denstrip</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+if (requireNamespace("survival", quietly=TRUE)){
+
+library(survival)
+fit &lt;- survfit(Surv(time, status) ~ 1, data=aml, conf.type="log-log")
+plot(fit, col=0)
+densregion(fit)
+lines(fit, lwd=3, conf.int=FALSE, lty=1)
+lines(fit, lwd=3, conf.int=TRUE, lty=2)
+
+## Wider CIs based on log survival
+fit &lt;- survfit(Surv(time, status) ~ 1, data=aml, conf.type="log")
+plot(fit, col=0) 
+densregion(fit) # Big variation in maximum density 
+plot(fit, col=0) 
+densregion(fit, pointwise=TRUE, colmax="maroon4")
+par(new=TRUE)
+plot(fit)
+
+## Narrower CIs based on untransformed survival.
+## Normal assumption probably unrealistic
+fit &lt;- survfit(Surv(time, status) ~ 1, data=aml, conf.type="plain")
+plot(fit, col=0) 
+densregion(fit, pointwise=TRUE, colmax="darkmagenta")
+par(new=TRUE)
+plot(fit)
+
+## Multiple survival curves on same axes
+## Should overlap smoothly on devices that allow transparency
+fit2 &lt;- survfit(Surv(time, status) ~ x, data=aml, conf.type="log-log")
+fit2x1 &lt;- survfit(Surv(time, status) ~ 1, data=aml,
+                  conf.type="log-log", subset=(x=="Maintained"))
+fit2x0 &lt;- survfit(Surv(time, status) ~ 1, data=aml,
+                  conf.type="log-log", subset=(x=="Nonmaintained"))
+plot(fit2, lwd=3, xlab="Weeks", ylab="Survival", xlim=c(0, 60),
+     lty=1:2, col=c("red", "blue"), conf.int=TRUE, mark.time=TRUE)
+densregion(fit2x1, colmax="red", gamma=2)
+densregion(fit2x0, colmax="blue", gamma=2)
+
+}
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>denstrip</em> version 1.5.4 <a href="00Index.html">Index</a>]</div>
+</body></html>

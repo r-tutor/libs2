@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Density regions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for densregion {denstrip}"><tr><td>densregion {denstrip}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2> Density regions </h2>
+
+<h3>Description</h3>
+
+<p>A density region uses shading to represent the uncertainty surrounding a
+continuously-varying quantity, such as a survival curve or
+a forecast from a time series.  The darkness of the shading is
+proportional to the (posterior, predictive or fiducial) density.
+This function adds a density region to an existing plot. 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+densregion(x, ...)
+## Default S3 method:
+densregion(x, y, z, pointwise=FALSE, nlevels=100, 
+                   colmax=par("fg"), colmin="white", scale=1, gamma=1,
+                   contour=FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p> Suppose the continuously-varying quantity varies over a
+space S.  <code>x</code> is a vector of the points in S at which the full
+posterior / predictive / fiducial distribution will be evaluated.  </p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p> Vector of ordinates at which the density of the distribution
+will be evaluated for every point in <code>x</code>. 
+</p>
+</td></tr>
+<tr valign="top"><td><code>z</code></td>
+<td>
+<p> Matrix of densities on the grid defined by <code>x</code> and
+<code>y</code>, with rows corresponding to elements of <code>x</code> and
+columns corresponding to elements of <code>y</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>pointwise</code></td>
+<td>
+<p> If <code>TRUE</code> then the maximum density at each
+<code>x</code>
+is shaded with <code>colmax</code> (default black), and the shading
+intensity is proportional to the density within each <code>x</code>.
+</p>
+<p>If <code>FALSE</code> then the maximum density <em>over all</em> <code>x</code> is shaded
+with <code>colmax</code>, and the shading is proportional to the density over
+all <code>x</code>. </p>
+</td></tr>
+<tr valign="top"><td><code>nlevels</code></td>
+<td>
+<p> Number of distinct shades to use to illustrate
+the varying densities.  The default of 100 should result in a plot with
+smoothly-varying shading.   </p>
+</td></tr>
+<tr valign="top"><td><code>colmax</code></td>
+<td>
+<p> Colour to shade the maximum density, either as a built-in R
+colour name (one of <code><a href="../../grDevices/html/colors.html">colors</a>()</code>) or an RGB hex
+value. Defaults to <code>par("fg")</code> which is normally     
+<code>"black"</code>, or <code>"#000000"</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>colmin</code></td>
+<td>
+<p> Colour to shade the minimum density, likewise. 
+Defaults to &quot;white&quot;.  If this is set to <code>"transparent"</code>,
+and the current graphics device supports transparency (see <code><a href="../../grDevices/html/rgb.html">rgb</a></code>), then
+multiple regions drawn on the same plot will merge smoothly. </p>
+</td></tr>
+<tr valign="top"><td><code>scale</code></td>
+<td>
+<p> Proportion of <code>colmax</code> to shade the maximum density, for example <code>scale=0.5</code> with <code>colmax="black"</code> for a mid-grey colour. </p>
+</td></tr>
+<tr valign="top"><td><code>gamma</code></td>
+<td>
+<p>Gamma correction to apply to the colour palette, see <code><a href="denstrip.html">denstrip</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>contour</code></td>
+<td>
+<p>If <code>TRUE</code> then contours are added to
+illustrate lines of constant density.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Further arguments passed to or from other methods, such
+as the <code><a href="../../graphics/html/contour.html">contour</a></code> function for drawing contours.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The plot is shaded by interpolating the value of the density
+between grid points, using the algorithm described by Cleveland (1993)
+as implemented in the <code><a href="../../graphics/html/filled.contour.html">filled.contour</a></code> function.
+</p>
+<p>With <span class="pkg">lattice</span> graphics, similar plots can be implemented using
+the <code><a href="../../lattice/html/levelplot.html">contourplot</a></code> or <code><a href="../../lattice/html/levelplot.html">levelplot</a></code> functions.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p> Christopher Jackson &lt;chris.jackson@mrc-bsu.cam.ac.uk&gt; </p>
+
+
+<h3>References</h3>
+
+<p>Jackson, C. H.  (2008) Displaying uncertainty with
+shading. <em>The American Statistician</em>, 62(4):340-347.
+</p>
+<p>Cleveland, W. S. (1993) <em>Visualizing Data</em>. Hobart Press, Summit,
+New Jersey. 
+</p>
+
+
+<h3>See Also</h3>
+
+ <p><code><a href="densregion.survfit.html">densregion.survfit</a></code>, <code><a href="densregion.normal.html">densregion.normal</a></code>, <code><a href="denstrip.html">denstrip</a></code> </p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Predictive uncertainty around a hypothetical regression line
+
+x &lt;- 1:10
+nx &lt;- length(x)
+est &lt;- seq(0, 1, length=nx)
+lcl &lt;- seq(-1, 0, length=nx)
+ucl &lt;- seq(1, 2, length=nx)
+se &lt;- (est - lcl)/qnorm(0.975)
+
+y &lt;- seq(-3, 3, length=100)
+z &lt;- matrix(nrow=nx, ncol=length(y))
+for(i in 1:nx)
+  z[i,] &lt;- dnorm(y, est[i], se[i])
+plot(x, type="n", ylim=c(-5.5, 2.5))
+densregion(x, y, z, colmax="darkgreen")
+lines(x, est)
+lines(x, lcl, lty=2)
+lines(x, ucl, lty=2)
+box()
+
+## On graphics devices that support transparency, specify
+## colmin="transparent" to allow adjacent regions to overlap smoothly
+densregion(x, y-1, z, colmax="magenta", colmin="transparent")
+
+
+## or automatically choose the y points to evaluate the density 
+
+plot(x, type="n", ylim=c(-1.5, 2.5))
+densregion.normal(x, est, se, ny=50, colmax="darkgreen")
+lines(x, est)
+lines(x, lcl, lty=2)
+lines(x, ucl, lty=2)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>denstrip</em> version 1.5.4 <a href="00Index.html">Index</a>]</div>
+</body></html>
