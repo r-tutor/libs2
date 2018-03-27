@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Server configurations</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for server_config {servr}"><tr><td>server_config {servr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Server configurations</h2>
+
+<h3>Description</h3>
+
+<p>The server functions in this package are configured through this function.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+server_config(dir = ".", host = "127.0.0.1", port, browser, daemon, interval = 1, 
+    baseurl = "", initpath = "")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>dir</code></td>
+<td>
+<p>the root directory to serve</p>
+</td></tr>
+<tr valign="top"><td><code>host</code></td>
+<td>
+<p>A string that is a valid IPv4 address that is owned by this 
+server, or <code>"0.0.0.0"</code> to listen on all IP addresses.</p>
+</td></tr>
+<tr valign="top"><td><code>port</code></td>
+<td>
+<p>the TCP port number; by default it is <code>4321</code> or a random
+port if <code>4321</code> is not available, unless a command line argument of the
+form <code>-pNNNN</code> (N is a digit from 0 to 9) was passed in when R was
+launched, in which case <code>NNNN</code> will be used as the port number</p>
+</td></tr>
+<tr valign="top"><td><code>browser</code></td>
+<td>
+<p>whether to launch the default web browser; by default, it is
+<code>TRUE</code> if the R session is <code><a href="../../base/html/interactive.html">interactive</a>()</code>, or when a
+command line argument <code>-b</code> was passed to R (see
+<code><a href="../../base/html/commandArgs.html">commandArgs</a>()</code>); N.B. the RStudio viewer is used as the web
+browser if available</p>
+</td></tr>
+<tr valign="top"><td><code>daemon</code></td>
+<td>
+<p>whether to launch a daemonized server (the server does not
+block the current R session) or a blocking server; by default, it is the
+global option <code>getOption('servr.daemon')</code> (e.g., you can set
+<code>options(servr.daemon = TRUE)</code>); if this option was not set,
+<code>daemon = TRUE</code> if a command line argument <code>-d</code> was passed to R
+(through <code>Rscript</code>); normally it should be <code>FALSE</code> by default</p>
+</td></tr>
+<tr valign="top"><td><code>interval</code></td>
+<td>
+<p>the time interval used to check if an HTML page needs to be
+rebuilt (by default, it is checked every second); at the moment, the
+smallest possible <code>interval</code> is set to be 1, and this may change in
+the future</p>
+</td></tr>
+<tr valign="top"><td><code>baseurl</code></td>
+<td>
+<p>the base URL (the full URL will be
+<code>http://host:port/baseurl</code>)</p>
+</td></tr>
+<tr valign="top"><td><code>initpath</code></td>
+<td>
+<p>the initial path in the URL (e.g. you can open a specific
+HTML file initially)</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A list of configuration information of the form <code>list(host,
+  port, start_server = function(app) {}, ...)</code>.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>servr</em> version 0.9 <a href="00Index.html">Index</a>]</div>
+</body></html>
