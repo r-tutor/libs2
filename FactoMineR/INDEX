@@ -95,6 +95,7 @@ print.MCA               Print the Multiple Correspondance Analysis
 print.MFA               Print the Multiple Factor Analysis results
 print.PCA               Print the Principal Component Analysis (PCA)
                         results
+print.catdes            Print the catdes results
 reconst                 Reconstruction of the data from the PCA, CA or
                         MFA results
 senso                   senso

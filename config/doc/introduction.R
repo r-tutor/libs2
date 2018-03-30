@@ -3,6 +3,9 @@ knitr::opts_chunk$set(eval = FALSE, results = 'hide')
 Sys.setenv(R_CONFIG_ACTIVE = "default")
 
 ## ------------------------------------------------------------------------
+#  install.packages("config")
+
+## ------------------------------------------------------------------------
 #  config <- config::get()
 #  config$trials
 #  config$dataset

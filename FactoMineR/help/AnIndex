@@ -56,6 +56,7 @@ prefpls	prefpls
 print.AovSum	print.AovSum
 print.CA	print.CA
 print.CaGalt	print.CaGalt
+print.catdes	print.catdes
 print.FAMD	print.FAMD
 print.GPA	print.GPA
 print.HCPC	print.HCPC

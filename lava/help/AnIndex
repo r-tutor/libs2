@@ -8,6 +8,7 @@ addvar	addvar
 addvar<-	addvar
 adjMat	children
 ancestors	children
+as.sim	sim.default
 backdoor	backdoor
 baptize	baptize
 beta.lvm	sim
@@ -323,8 +324,6 @@ subset.lvm	subset.lvm
 summary.lvm	lvm
 summary.sim	summary.sim
 surface	ksmooth2
-survival	internal
-survival<-	internal
 threshold.lvm	sim
 tigol	internal
 timedep	timedep
