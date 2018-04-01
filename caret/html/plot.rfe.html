@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Plot RFE Performance Profiles</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for ggplot.rfe {caret}"><tr><td>ggplot.rfe {caret}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Plot RFE Performance Profiles</h2>
+
+<h3>Description</h3>
+
+<p>These functions plot the resampling results for the candidate subset sizes
+evaluated during the recursive feature elimination (RFE) process
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'rfe'
+ggplot(data = NULL, mapping = NULL, metric = data$metric[1],
+  output = "layered", ..., environment = NULL)
+
+## S3 method for class 'rfe'
+plot(x, metric = x$metric, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>an object of class <code><a href="rfe.html">rfe</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>mapping, environment</code></td>
+<td>
+<p>unused arguments to make consistent with
+<span class="pkg">ggplot2</span> generic method</p>
+</td></tr>
+<tr valign="top"><td><code>metric</code></td>
+<td>
+<p>What measure of performance to plot. Examples of possible
+values are &quot;RMSE&quot;, &quot;Rsquared&quot;, &quot;Accuracy&quot; or &quot;Kappa&quot;. Other values can be
+used depending on what metrics have been calculated.</p>
+</td></tr>
+<tr valign="top"><td><code>output</code></td>
+<td>
+<p>either &quot;data&quot;, &quot;ggplot&quot; or &quot;layered&quot;. The first returns a data
+frame while the second returns a simple <code>ggplot</code> object with no layers.
+The third value returns a plot with a set of layers.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p><code>plot</code> only: specifications to be passed to
+<code><a href="../../lattice/html/xyplot.html">xyplot</a></code>. The function automatically sets some
+arguments (e.g. axis labels) but passing in values here will over-ride the
+defaults.</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>an object of class <code><a href="rfe.html">rfe</a></code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>These plots show the average performance versus the subset sizes.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a lattice or ggplot object
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Max Kuhn
+</p>
+
+
+<h3>References</h3>
+
+<p>Kuhn (2008), &ldquo;Building Predictive Models in R Using the caret&rdquo;
+(<a href="http://www.jstatsoft.org/article/view/v028i05/v28i05.pdf">http://www.jstatsoft.org/article/view/v028i05/v28i05.pdf</a>)
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="rfe.html">rfe</a></code>, <code><a href="../../lattice/html/xyplot.html">xyplot</a></code>,
+<code><a href="../../ggplot2/html/ggplot.html">ggplot</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+## Not run: 
+data(BloodBrain)
+
+x &lt;- scale(bbbDescr[,-nearZeroVar(bbbDescr)])
+x &lt;- x[, -findCorrelation(cor(x), .8)]
+x &lt;- as.data.frame(x)
+
+set.seed(1)
+lmProfile &lt;- rfe(x, logBBB,
+                 sizes = c(2:25, 30, 35, 40, 45, 50, 55, 60, 65),
+                 rfeControl = rfeControl(functions = lmFuncs,
+                                         number = 200))
+plot(lmProfile)
+plot(lmProfile, metric = "Rsquared")
+ggplot(lmProfile)
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>caret</em> version 6.0-79 <a href="00Index.html">Index</a>]</div>
+</body></html>

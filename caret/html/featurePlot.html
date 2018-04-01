@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Wrapper for Lattice Plotting of Predictor Variables</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for featurePlot {caret}"><tr><td>featurePlot {caret}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Wrapper for Lattice Plotting of Predictor Variables</h2>
+
+<h3>Description</h3>
+
+<p>A shortcut to produce lattice graphs
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+featurePlot(x, y, plot = if (is.factor(y)) "strip" else "scatter",
+  labels = c("Feature", ""), ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a matrix or data frame of continuous feature/probe/spectra data.</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>a factor indicating class membership.</p>
+</td></tr>
+<tr valign="top"><td><code>plot</code></td>
+<td>
+<p>the type of plot. For classification: <code>box</code>, <code>strip</code>,
+<code>density</code>, <code>pairs</code> or <code>ellipse</code>.  For regression,
+<code>pairs</code> or <code>scatter</code></p>
+</td></tr>
+<tr valign="top"><td><code>labels</code></td>
+<td>
+<p>a bad attempt at pre-defined axis labels</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>options passed to lattice calls.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This function &ldquo;stacks&rdquo; data to get it into a form compatible with lattice
+and creates the plots
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of class &ldquo;trellis&rdquo;. The &lsquo;update&rsquo; method can be used to
+update components of the object and the &lsquo;print&rsquo; method (usually called by
+default) will plot it on an appropriate plotting device.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Max Kuhn
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+x &lt;- matrix(rnorm(50*5),ncol=5)
+y &lt;- factor(rep(c("A", "B"),  25))
+
+trellis.par.set(theme = col.whitebg(), warn = FALSE)
+featurePlot(x, y, "ellipse")
+featurePlot(x, y, "strip", jitter = TRUE)
+featurePlot(x, y, "box")
+featurePlot(x, y, "pairs")
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>caret</em> version 6.0-79 <a href="00Index.html">Index</a>]</div>
+</body></html>

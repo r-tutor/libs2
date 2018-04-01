@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Plot Method for the train Class</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for ggplot.train {caret}"><tr><td>ggplot.train {caret}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Plot Method for the train Class</h2>
+
+<h3>Description</h3>
+
+<p>This function takes the output of a <code><a href="train.html">train</a></code> object and creates a
+line or level plot using the <span class="pkg">lattice</span> or <span class="pkg">ggplot2</span> libraries.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'train'
+ggplot(data = NULL, mapping = NULL,
+  metric = data$metric[1], plotType = "scatter", output = "layered",
+  nameInStrip = FALSE, highlight = FALSE, ..., environment = NULL)
+
+## S3 method for class 'train'
+plot(x, plotType = "scatter", metric = x$metric[1],
+  digits = getOption("digits") - 3, xTrans = NULL, nameInStrip = FALSE,
+  ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>an object of class <code><a href="train.html">train</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>mapping, environment</code></td>
+<td>
+<p>unused arguments to make consistent with
+<span class="pkg">ggplot2</span> generic method</p>
+</td></tr>
+<tr valign="top"><td><code>metric</code></td>
+<td>
+<p>What measure of performance to plot. Examples of possible
+values are &quot;RMSE&quot;, &quot;Rsquared&quot;, &quot;Accuracy&quot; or &quot;Kappa&quot;. Other values can be
+used depending on what metrics have been calculated.</p>
+</td></tr>
+<tr valign="top"><td><code>plotType</code></td>
+<td>
+<p>a string describing the type of plot (<code>"scatter"</code>,
+<code>"level"</code> or <code>"line"</code> (<code>plot</code> only))</p>
+</td></tr>
+<tr valign="top"><td><code>output</code></td>
+<td>
+<p>either &quot;data&quot;, &quot;ggplot&quot; or &quot;layered&quot;. The first returns a data
+frame while the second returns a simple <code>ggplot</code> object with no layers.
+The third value returns a plot with a set of layers.</p>
+</td></tr>
+<tr valign="top"><td><code>nameInStrip</code></td>
+<td>
+<p>a logical: if there are more than 2 tuning parameters,
+should the name and value be included in the panel title?</p>
+</td></tr>
+<tr valign="top"><td><code>highlight</code></td>
+<td>
+<p>a logical: if <code>TRUE</code>, a diamond is placed around the
+optimal parameter setting for models using grid search.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p><code>plot</code> only: specifications to be passed to
+<code><a href="../../lattice/html/levelplot.html">levelplot</a></code>, <code><a href="../../lattice/html/xyplot.html">xyplot</a></code>,
+<code><a href="../../lattice/html/xyplot.html">stripplot</a></code> (for line plots). The function
+automatically sets some arguments (e.g. axis labels) but passing in values
+here will over-ride the defaults</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>an object of class <code><a href="train.html">train</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>digits</code></td>
+<td>
+<p>an integer specifying the number of significant digits used to
+label the parameter value.</p>
+</td></tr>
+<tr valign="top"><td><code>xTrans</code></td>
+<td>
+<p>a function that will be used to scale the x-axis in scatter
+plots.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>If there are no tuning parameters, or none were varied, an error is
+produced.
+</p>
+<p>If the model has one tuning parameter with multiple candidate values, a plot
+is produced showing the profile of the results over the parameter. Also, a
+plot can be produced if there are multiple tuning parameters but only one is
+varied.
+</p>
+<p>If there are two tuning parameters with different values, a plot can be
+produced where a different line is shown for each value of of the other
+parameter. For three parameters, the same line plot is created within
+conditioning panels/facets of the other parameter.
+</p>
+<p>Also, with two tuning parameters (with different values), a levelplot (i.e.
+un-clustered heatmap) can be created. For more than two parameters, this
+plot is created inside conditioning panels/facets.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Max Kuhn
+</p>
+
+
+<h3>References</h3>
+
+<p>Kuhn (2008), &ldquo;Building Predictive Models in R Using the caret&rdquo;
+(<a href="http://www.jstatsoft.org/article/view/v028i05/v28i05.pdf">http://www.jstatsoft.org/article/view/v028i05/v28i05.pdf</a>)
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="train.html">train</a></code>, <code><a href="../../lattice/html/levelplot.html">levelplot</a></code>,
+<code><a href="../../lattice/html/xyplot.html">xyplot</a></code>, <code><a href="../../lattice/html/xyplot.html">stripplot</a></code>,
+<code><a href="../../ggplot2/html/ggplot.html">ggplot</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+
+## Not run: 
+library(klaR)
+rdaFit &lt;- train(Species ~ .,
+                data = iris, 
+                method = "rda", 
+                control = trainControl(method = "cv"))
+plot(rdaFit)
+plot(rdaFit, plotType = "level")
+
+ggplot(rdaFit) + theme_bw()
+
+
+## End(Not run)
+ 
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>caret</em> version 6.0-79 <a href="00Index.html">Index</a>]</div>
+</body></html>

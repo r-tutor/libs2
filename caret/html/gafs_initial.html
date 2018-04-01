@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Ancillary genetic algorithm functions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for gafs_initial {caret}"><tr><td>gafs_initial {caret}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Ancillary genetic algorithm functions</h2>
+
+<h3>Description</h3>
+
+<p>Built-in functions related to genetic algorithms
+</p>
+<p>These functions are used with the <code>functions</code> argument of the
+<code><a href="safsControl.html">gafsControl</a></code> function. More information on the details of these
+functions are at <a href="http://topepo.github.io/caret/feature-selection-using-genetic-algorithms.html">http://topepo.github.io/caret/feature-selection-using-genetic-algorithms.html</a>.
+</p>
+<p>Most of the <code>gafs_*</code> functions are based on those from the GA package
+by Luca Scrucca. These functions here are small re-writes to work outside of
+the GA package.
+</p>
+<p>The objects <code>caretGA</code>, <code>rfGA</code> and <code>treebagGA</code> are example
+lists that can be used with the <code>functions</code> argument of
+<code><a href="safsControl.html">gafsControl</a></code>.
+</p>
+<p>In the case of <code>caretGA</code>, the <code>...</code> structure of
+<code><a href="gafs.default.html">gafs</a></code> passes through to the model fitting routine. As a
+consequence, the <code><a href="train.html">train</a></code> function can easily be accessed by
+passing important arguments belonging to <code><a href="train.html">train</a></code> to
+<code><a href="gafs.default.html">gafs</a></code>. See the examples below. By default, using <code>caretGA</code>
+will used the resampled performance estimates produced by
+<code><a href="train.html">train</a></code> as the internal estimate of fitness.
+</p>
+<p>For <code>rfGA</code> and <code>treebagGA</code>, the <code>randomForest</code> and
+<code>bagging</code> functions are used directly (i.e. <code><a href="train.html">train</a></code> is not
+used). Arguments to either of these functions can also be passed to them
+though the <code><a href="gafs.default.html">gafs</a></code> call (see examples below). For these two
+functions, the internal fitness is estimated using the out-of-bag estimates
+naturally produced by those functions. While faster, this limits the user to
+accuracy or Kappa (for classification) and RMSE and R-squared (for
+regression).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+gafs_initial(vars, popSize, ...)
+
+gafs_lrSelection(population, fitness, r = NULL, q = NULL, ...)
+
+gafs_spCrossover(population, fitness, parents, ...)
+
+gafs_raMutation(population, parent, ...)
+
+gafs_nlrSelection(population, fitness, q = 0.25, ...)
+
+gafs_rwSelection(population, fitness, ...)
+
+gafs_tourSelection(population, fitness, k = 3, ...)
+
+gafs_uCrossover(population, parents, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>vars</code></td>
+<td>
+<p>number of possible predictors</p>
+</td></tr>
+<tr valign="top"><td><code>popSize</code></td>
+<td>
+<p>the population size passed into <code><a href="gafs.default.html">gafs</a></code></p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>not currently used</p>
+</td></tr>
+<tr valign="top"><td><code>population</code></td>
+<td>
+<p>a binary matrix of the current subsets with predictors in
+columns and individuals in rows</p>
+</td></tr>
+<tr valign="top"><td><code>fitness</code></td>
+<td>
+<p>a vector of fitness values</p>
+</td></tr>
+<tr valign="top"><td><code>r, q, k</code></td>
+<td>
+<p>tuning parameters for the specific selection operator</p>
+</td></tr>
+<tr valign="top"><td><code>parent, parents</code></td>
+<td>
+<p>integer(s) for which chromosomes are altered</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>The return value depends on the function.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Luca Scrucca, <code>gafs_initial</code>, <code>caretGA</code>, <code>rfGA</code> and
+<code>treebagGA</code> by Max Kuhn
+</p>
+
+
+<h3>References</h3>
+
+<p>Scrucca L (2013). GA: A Package for Genetic Algorithms in R.
+Journal of Statistical Software, 53(4), 1-37.
+</p>
+<p><a href="cran.r-project.org/web/packages/GA/">cran.r-project.org/web/packages/GA/</a>
+</p>
+<p><a href="http://topepo.github.io/caret/feature-selection-using-genetic-algorithms.html">http://topepo.github.io/caret/feature-selection-using-genetic-algorithms.html</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="gafs.default.html">gafs</a></code>, <code><a href="safsControl.html">gafsControl</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+pop &lt;- gafs_initial(vars = 10, popSize = 10)
+pop
+
+gafs_lrSelection(population = pop, fitness = 1:10)
+
+gafs_spCrossover(population = pop, fitness = 1:10, parents = 1:2)
+
+
+## Not run: 
+## Hypothetical examples
+lda_ga &lt;- gafs(x = predictors,
+               y = classes,
+               gafsControl = gafsControl(functions = caretGA),
+               ## now pass arguments to `train`
+               method = "lda",
+               metric = "Accuracy"
+               trControl = trainControl(method = "cv", classProbs = TRUE))
+
+rf_ga &lt;- gafs(x = predictors,
+              y = classes,
+              gafsControl = gafsControl(functions = rfGA),
+              ## these are arguments to `randomForest`
+              ntree = 1000,
+              importance = TRUE)
+	
+## End(Not run)
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>caret</em> version 6.0-79 <a href="00Index.html">Index</a>]</div>
+</body></html>

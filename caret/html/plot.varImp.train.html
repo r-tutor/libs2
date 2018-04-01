@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Plotting variable importance measures</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for plot.varImp.train {caret}"><tr><td>plot.varImp.train {caret}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Plotting variable importance measures</h2>
+
+<h3>Description</h3>
+
+<p>This function produces lattice and ggplot plots of objects with class
+&quot;varImp.train&quot;. More info will be forthcoming.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'varImp.train'
+plot(x, top = dim(x$importance)[1], ...)
+
+## S3 method for class 'varImp.train'
+ggplot(data, mapping = NULL,
+  top = dim(data$importance)[1], ..., environment = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x, data</code></td>
+<td>
+<p>an object with class <code>varImp</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>top</code></td>
+<td>
+<p>a scalar numeric that specifies the number of variables to be
+displayed (in order of importance)</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>arguments to pass to the lattice plot function
+(<code><a href="../../lattice/html/xyplot.html">dotplot</a></code> and <code><a href="panel.needle.html">panel.needle</a></code>)</p>
+</td></tr>
+<tr valign="top"><td><code>mapping, environment</code></td>
+<td>
+<p>unused arguments to make consistent with
+<span class="pkg">ggplot2</span> generic method</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>For models where there is only one importance value, such a regression
+models, a &quot;Pareto-type&quot; plot is produced where the variables are ranked by
+their importance and a needle-plot is used to show the top variables.
+Horizontal bar charts are used for <code>ggplot</code>.
+</p>
+<p>When there is more than one importance value per predictor, the same plot is
+produced within conditioning panels for each class. The top predictors are
+sorted by their average importance.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a lattice plot object
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Max Kuhn
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>caret</em> version 6.0-79 <a href="00Index.html">Index</a>]</div>
+</body></html>

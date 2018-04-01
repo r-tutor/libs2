@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Format 'bagEarth' objects</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for format.bagEarth {caret}"><tr><td>format.bagEarth {caret}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Format 'bagEarth' objects</h2>
+
+<h3>Description</h3>
+
+<p>Return a string representing the &lsquo;bagEarth&rsquo; expression.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'bagEarth'
+format(x, file = "", cat = TRUE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>An <code><a href="bagEarth.html">bagEarth</a></code> object.  This is the only required
+argument.</p>
+</td></tr>
+<tr valign="top"><td><code>file</code></td>
+<td>
+<p>A connection, or a character string naming the file to print to.
+If &quot;&quot; (the default), the output prints to the standard output connection.
+See <code><a href="../../base/html/cat.html">cat</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>cat</code></td>
+<td>
+<p>a logical; should the equation be printed?</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Arguments to <code><a href="../../earth/html/format.earth.html">format.earth</a></code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A character representation of the bagged earth object.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../earth/html/earth.html">earth</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+a &lt;- bagEarth(Volume ~ ., data = trees, B= 3)
+format(a)
+
+# yields:
+# (
+#   31.61075 
+#   +  6.587273 * pmax(0,  Girth -   14.2) 
+#   -  3.229363 * pmax(0,   14.2 -  Girth) 
+#   - 0.3167140 * pmax(0,     79 - Height) 
+#   +
+#    22.80225 
+#   +  5.309866 * pmax(0,  Girth -     12) 
+#   -  2.378658 * pmax(0,     12 -  Girth) 
+#   +  0.793045 * pmax(0, Height -     80) 
+#   - 0.3411915 * pmax(0,     80 - Height) 
+#   +
+#    31.39772 
+#   +   6.18193 * pmax(0,  Girth -   14.2) 
+#   -  3.660456 * pmax(0,   14.2 -  Girth) 
+#   + 0.6489774 * pmax(0, Height -     80) 
+# )/3
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>caret</em> version 6.0-79 <a href="00Index.html">Index</a>]</div>
+</body></html>

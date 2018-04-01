@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Neural Networks with a Principal Component Step</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for pcaNNet {caret}"><tr><td>pcaNNet {caret}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Neural Networks with a Principal Component Step</h2>
+
+<h3>Description</h3>
+
+<p>Run PCA on a dataset, then use it in a neural network model
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+pcaNNet(x, ...)
+
+## S3 method for class 'formula'
+pcaNNet(formula, data, weights, ..., thresh = 0.99, subset,
+  na.action, contrasts = NULL)
+
+## Default S3 method:
+pcaNNet(x, y, thresh = 0.99, ...)
+
+## S3 method for class 'pcaNNet'
+print(x, ...)
+
+## S3 method for class 'pcaNNet'
+predict(object, newdata, type = c("raw", "class", "prob"),
+  ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>matrix or data frame of <code>x</code> values for examples.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>arguments passed to <code><a href="../../nnet/html/nnet.html">nnet</a></code>, such as
+<code>size</code>, <code>decay</code>, etc.</p>
+</td></tr>
+<tr valign="top"><td><code>formula</code></td>
+<td>
+<p>A formula of the form <code>class ~ x1 + x2 + ...{}</code></p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>Data frame from which variables specified in <code>formula</code> are
+preferentially to be taken.</p>
+</td></tr>
+<tr valign="top"><td><code>weights</code></td>
+<td>
+<p>(case) weights for each example &ndash; if missing defaults to 1.</p>
+</td></tr>
+<tr valign="top"><td><code>thresh</code></td>
+<td>
+<p>a threshold for the cumulative proportion of variance to
+capture from the PCA analysis. For example, to retain enough PCA components
+to capture 95 percent of variation, set <code>thresh = .95</code></p>
+</td></tr>
+<tr valign="top"><td><code>subset</code></td>
+<td>
+<p>An index vector specifying the cases to be used in the
+training sample.  (NOTE: If given, this argument must be named.)</p>
+</td></tr>
+<tr valign="top"><td><code>na.action</code></td>
+<td>
+<p>A function to specify the action to be taken if <code>NA</code>s
+are found. The default action is for the procedure to fail.  An alternative
+is na.omit, which leads to rejection of cases with missing values on any
+required variable.  (NOTE: If given, this argument must be named.)</p>
+</td></tr>
+<tr valign="top"><td><code>contrasts</code></td>
+<td>
+<p>a list of contrasts to be used for some or all of the
+factors appearing as variables in the model formula.</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>matrix or data frame of target values for examples.</p>
+</td></tr>
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>an object of class <code>pcaNNet</code> as returned by
+<code>pcaNNet</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>newdata</code></td>
+<td>
+<p>matrix or data frame of test examples. A vector is considered
+to be a row vector comprising a single case.</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>Type of output</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The function first will run principal component analysis on the data. The
+cumulative percentage of variance is computed for each principal component.
+The function uses the <code>thresh</code> argument to determine how many
+components must be retained to capture this amount of variance in the
+predictors.
+</p>
+<p>The principal components are then used in a neural network model.
+</p>
+<p>When predicting samples, the new data are similarly transformed using the
+information from the PCA analysis on the training data and then predicted.
+</p>
+<p>Because the variance of each predictor is used in the PCA analysis, the code
+does a quick check to make sure that each predictor has at least two
+distinct values. If a predictor has one unique value, it is removed prior to
+the analysis.
+</p>
+
+
+<h3>Value</h3>
+
+<p>For <code>pcaNNet</code>, an object of <code>"pcaNNet"</code> or
+<code>"pcaNNet.formula"</code>. Items of interest in the output are: </p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>pc
+</code></td>
+<td>
+<p>the output from <code><a href="preProcess.html">preProcess</a></code></p>
+</td></tr> <tr valign="top"><td><code>model </code></td>
+<td>
+<p>the model
+generated from <code><a href="../../nnet/html/nnet.html">nnet</a></code></p>
+</td></tr> <tr valign="top"><td><code>names </code></td>
+<td>
+<p>if any predictors had
+only one distinct value, this is a character string of the remaining
+columns. Otherwise a value of <code>NULL</code></p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>These are heavily based on the <code>nnet</code> code from Brian Ripley.
+</p>
+
+
+<h3>References</h3>
+
+<p>Ripley, B. D. (1996) <em>Pattern Recognition and Neural
+Networks.</em> Cambridge.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../nnet/html/nnet.html">nnet</a></code>, <code><a href="preProcess.html">preProcess</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+data(BloodBrain)
+modelFit &lt;- pcaNNet(bbbDescr[, 1:10], logBBB, size = 5, linout = TRUE, trace = FALSE)
+modelFit
+
+predict(modelFit, bbbDescr[, 1:10])
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>caret</em> version 6.0-79 <a href="00Index.html">Index</a>]</div>
+</body></html>

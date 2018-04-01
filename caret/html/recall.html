@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Calculate recall, precision and F values</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for recall {caret}"><tr><td>recall {caret}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Calculate recall, precision and F values</h2>
+
+<h3>Description</h3>
+
+<p>These functions calculate the recall, precision or F values of a measurement
+system for finding/retrieving relevant documents compared to reference
+results (the truth regarding relevance). The measurement and &quot;truth&quot; data
+must have the same two possible outcomes and one of the outcomes must be
+thought of as a &quot;relevant&quot; results.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+recall(data, ...)
+
+## S3 method for class 'table'
+recall(data, relevant = rownames(data)[1], ...)
+
+## Default S3 method:
+recall(data, reference, relevant = levels(reference)[1],
+  na.rm = TRUE, ...)
+
+precision(data, ...)
+
+## Default S3 method:
+precision(data, reference, relevant = levels(reference)[1],
+  na.rm = TRUE, ...)
+
+## S3 method for class 'table'
+precision(data, relevant = rownames(data)[1], ...)
+
+F_meas(data, ...)
+
+## Default S3 method:
+F_meas(data, reference, relevant = levels(reference)[1],
+  beta = 1, na.rm = TRUE, ...)
+
+## S3 method for class 'table'
+F_meas(data, relevant = rownames(data)[1], beta = 1, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>for the default functions, a factor containing the discrete
+measurements. For the <code>table</code> function, a table.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>not currently used</p>
+</td></tr>
+<tr valign="top"><td><code>relevant</code></td>
+<td>
+<p>a character string that defines the factor level
+corresponding to the &quot;relevant&quot; results</p>
+</td></tr>
+<tr valign="top"><td><code>reference</code></td>
+<td>
+<p>a factor containing the reference values (i.e. truth)</p>
+</td></tr>
+<tr valign="top"><td><code>na.rm</code></td>
+<td>
+<p>a logical value indicating whether <code>NA</code> values should be
+stripped before the computation proceeds</p>
+</td></tr>
+<tr valign="top"><td><code>beta</code></td>
+<td>
+<p>a numeric value used to weight precision and recall. A value of
+1 is traditionally used and corresponds to the harmonic mean of the two
+values but other values weight recall beta times more important than
+precision.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The recall (aka specificity) is defined as the proportion of relevant
+results out of the number of samples which were actually relevant. When
+there are no relevant results, recall is not defined and a value of
+<code>NA</code> is returned.
+</p>
+<p>The precision is percentage of predicted truly relevant results of the total
+number of predicted relevant results and characterizes the &quot;purity in
+retrieval performance&quot; (Buckland and Gey, 1994)
+</p>
+<p>The measure &quot;F&quot; is a combination of precision and recall (see below).
+</p>
+<p>Suppose a 2x2 table with notation
+</p>
+
+<table summary="Rd table">
+<tr>
+ <td style="text-align: right;"> </td><td style="text-align: center;"> Reference </td><td style="text-align: center;"> </td>
+</tr>
+<tr>
+ <td style="text-align: right;"> Predicted </td><td style="text-align: center;"> relevant </td><td style="text-align: center;">
+Irrelevant </td>
+</tr>
+<tr>
+ <td style="text-align: right;"> relevant </td><td style="text-align: center;"> A </td><td style="text-align: center;"> B </td>
+</tr>
+<tr>
+ <td style="text-align: right;"> Irrelevant </td><td style="text-align: center;"> C </td><td style="text-align: center;"> D </td>
+</tr>
+<tr>
+ <td style="text-align: right;"> </td>
+</tr>
+
+</table>
+
+<p>The formulas used here are: </p>
+<p style="text-align: center;"><i>recall = A/(A+C)</i></p>
+ <p style="text-align: center;"><i>precision =
+A/(A+B)</i></p>
+ <p style="text-align: center;"><i>F_i = (1+i^2)*prec*recall/((i^2 * precision)+recall)</i></p>
+
+<p>See the references for discussions of the statistics.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A number between 0 and 1 (or NA).
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Max Kuhn
+</p>
+
+
+<h3>References</h3>
+
+<p>Kuhn, M. (2008), &ldquo;Building predictive models in R using the
+caret package, &rdquo; <em>Journal of Statistical Software</em>,
+(<a href="http://www.jstatsoft.org/article/view/v028i05/v28i05.pdf">http://www.jstatsoft.org/article/view/v028i05/v28i05.pdf</a>).
+</p>
+<p>Buckland, M., &amp; Gey, F. (1994). The relationship between Recall and
+Precision. <em>Journal of the American Society for Information Science</em>,
+45(1), 12-19.
+</p>
+<p>Powers, D. (2007). Evaluation: From Precision, Recall and F Factor to ROC,
+Informedness, Markedness and Correlation. Technical Report SIE-07-001,
+Flinders University
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="confusionMatrix.html">confusionMatrix</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+###################
+## Data in Table 2 of Powers (2007)
+
+lvs &lt;- c("Relevant", "Irrelevant")
+tbl_2_1_pred &lt;- factor(rep(lvs, times = c(42, 58)), levels = lvs)
+tbl_2_1_truth &lt;- factor(c(rep(lvs, times = c(30, 12)),
+                          rep(lvs, times = c(30, 28))),               
+                        levels = lvs)
+tbl_2_1 &lt;- table(tbl_2_1_pred, tbl_2_1_truth)
+
+precision(tbl_2_1)
+precision(data = tbl_2_1_pred, reference = tbl_2_1_truth, relevant = "Relevant")
+recall(tbl_2_1)
+recall(data = tbl_2_1_pred, reference = tbl_2_1_truth, relevant = "Relevant")
+
+
+tbl_2_2_pred &lt;- factor(rep(lvs, times = c(76, 24)), levels = lvs)
+tbl_2_2_truth &lt;- factor(c(rep(lvs, times = c(56, 20)),
+                          rep(lvs, times = c(12, 12))),               
+                        levels = lvs)
+tbl_2_2 &lt;- table(tbl_2_2_pred, tbl_2_2_truth)
+
+precision(tbl_2_2)
+precision(data = tbl_2_2_pred, reference = tbl_2_2_truth, relevant = "Relevant")
+recall(tbl_2_2)
+recall(data = tbl_2_2_pred, reference = tbl_2_2_truth, relevant = "Relevant")
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>caret</em> version 6.0-79 <a href="00Index.html">Index</a>]</div>
+</body></html>

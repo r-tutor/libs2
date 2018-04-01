@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Genetic algorithm feature selection</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for gafs.default {caret}"><tr><td>gafs.default {caret}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Genetic algorithm feature selection</h2>
+
+<h3>Description</h3>
+
+<p>Supervised feature selection using genetic algorithms
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## Default S3 method:
+gafs(x, y, iters = 10, popSize = 50, pcrossover = 0.8,
+  pmutation = 0.1, elite = 0, suggestions = NULL, differences = TRUE,
+  gafsControl = gafsControl(), ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>an object where samples are in rows and features are in columns.
+This could be a simple matrix, data frame or other type (e.g. sparse
+matrix). See Details below</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>a numeric or factor vector containing the outcome for each sample</p>
+</td></tr>
+<tr valign="top"><td><code>iters</code></td>
+<td>
+<p>number of search iterations</p>
+</td></tr>
+<tr valign="top"><td><code>popSize</code></td>
+<td>
+<p>number of subsets evaluated at each iteration</p>
+</td></tr>
+<tr valign="top"><td><code>pcrossover</code></td>
+<td>
+<p>the crossover probability</p>
+</td></tr>
+<tr valign="top"><td><code>pmutation</code></td>
+<td>
+<p>the mutation probability</p>
+</td></tr>
+<tr valign="top"><td><code>elite</code></td>
+<td>
+<p>the number of best subsets to survive at each generation</p>
+</td></tr>
+<tr valign="top"><td><code>suggestions</code></td>
+<td>
+<p>a binary matrix of subsets strings to be included in the
+initial population. If provided the number of columns must match the number
+of columns in <code>x</code></p>
+</td></tr>
+<tr valign="top"><td><code>differences</code></td>
+<td>
+<p>a logical: should the difference in fitness values with
+and without each predictor be calculated?</p>
+</td></tr>
+<tr valign="top"><td><code>gafsControl</code></td>
+<td>
+<p>a list of values that define how this function acts. See
+<code><a href="safsControl.html">gafsControl</a></code> and URL.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>additional arguments to be passed to other methods</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code><a href="gafs.default.html">gafs</a></code> conducts a supervised binary search of the predictor
+space using a genetic algorithm. See Mitchell (1996) and Scrucca (2013) for
+more details on genetic algorithms.
+</p>
+<p>This function conducts the search of the feature space repeatedly within
+resampling iterations. First, the training data are split be whatever
+resampling method was specified in the control function. For example, if
+10-fold cross-validation is selected, the entire genetic algorithm is
+conducted 10 separate times. For the first fold, nine tenths of the data are
+used in the search while the remaining tenth is used to estimate the
+external performance since these data points were not used in the search.
+</p>
+<p>During the genetic algorithm, a measure of fitness is needed to guide the
+search. This is the internal measure of performance. During the search, the
+data that are available are the instances selected by the top-level
+resampling (e.g. the nine tenths mentioned above). A common approach is to
+conduct another resampling procedure. Another option is to use a holdout set
+of samples to determine the internal estimate of performance (see the
+holdout argument of the control function). While this is faster, it is more
+likely to cause overfitting of the features and should only be used when a
+large amount of training data are available. Yet another idea is to use a
+penalized metric (such as the AIC statistic) but this may not exist for some
+metrics (e.g. the area under the ROC curve).
+</p>
+<p>The internal estimates of performance will eventually overfit the subsets to
+the data. However, since the external estimate is not used by the search, it
+is able to make better assessments of overfitting. After resampling, this
+function determines the optimal number of generations for the GA.
+</p>
+<p>Finally, the entire data set is used in the last execution of the genetic
+algorithm search and the final model is built on the predictor subset that
+is associated with the optimal number of generations determined by
+resampling (although the update function can be used to manually set the
+number of generations).
+</p>
+<p>This is an example of the output produced when <code>gafsControl(verbose =
+TRUE)</code> is used:
+</p>
+<pre>
+Fold2 1 0.715 (13) 
+Fold2 2 0.715-&gt;0.737 (13-&gt;17, 30.4%) *
+Fold2 3 0.737-&gt;0.732 (17-&gt;14, 24.0%) 
+Fold2 4 0.737-&gt;0.769 (17-&gt;23, 25.0%) *
+</pre>
+<p>For the second resample (e.g. fold 2), the best subset across all
+individuals tested in the first generation contained 13 predictors and was
+associated with a fitness value of 0.715. The second generation produced a
+better subset containing 17 samples with an associated fitness values of
+0.737 (and improvement is symbolized by the <code>*</code>. The percentage listed
+is the Jaccard similarity between the previous best individual (with 13
+predictors) and the new best. The third generation did not produce a better
+fitness value but the fourth generation did.
+</p>
+<p>The search algorithm can be parallelized in several places: </p>
+
+<ol>
+<li><p> each externally resampled GA can be run independently (controlled by
+the <code>allowParallel</code> option of <code><a href="safsControl.html">gafsControl</a></code>) </p>
+</li>
+<li><p> within a
+GA, the fitness calculations at a particular generation can be run in
+parallel over the current set of individuals (see the <code>genParallel</code>
+option in <code><a href="safsControl.html">gafsControl</a></code>) </p>
+</li>
+<li><p> if inner resampling is used,
+these can be run in parallel (controls depend on the function used. See, for
+example, <code><a href="trainControl.html">trainControl</a></code>) </p>
+</li>
+<li><p> any parallelization of the
+individual model fits. This is also specific to the modeling function.  </p>
+</li></ol>
+
+<p>It is probably best to pick one of these areas for parallelization and the
+first is likely to produces the largest decrease in run-time since it is the
+least likely to incur multiple re-starting of the worker processes. Keep in
+mind that if multiple levels of parallelization occur, this can effect the
+number of workers and the amount of memory required exponentially.
+</p>
+
+
+<h3>Value</h3>
+
+<p>an object of class <code>gafs</code>
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Max Kuhn, Luca Scrucca (for GA internals)
+</p>
+
+
+<h3>References</h3>
+
+<p>Kuhn M and Johnson K (2013), Applied Predictive Modeling,
+Springer, Chapter 19 <a href="http://appliedpredictivemodeling.com">http://appliedpredictivemodeling.com</a>
+</p>
+<p>Scrucca L (2013). GA: A Package for Genetic Algorithms in R. Journal of
+Statistical Software, 53(4), 1-37. <a href="www.jstatsoft.org/v53/i04">www.jstatsoft.org/v53/i04</a>
+</p>
+<p>Mitchell M (1996), An Introduction to Genetic Algorithms, MIT Press.
+</p>
+<p><a href="http://en.wikipedia.org/wiki/Jaccard_index">http://en.wikipedia.org/wiki/Jaccard_index</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="safsControl.html">gafsControl</a></code>, <code><a href="predict.gafs.html">predict.gafs</a></code>,
+<code><a href="gafs_initial.html">caretGA</a></code>, <code><a href="gafs_initial.html">rfGA</a></code> <code><a href="gafs_initial.html">treebagGA</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+## Not run: 
+set.seed(1)
+train_data &lt;- twoClassSim(100, noiseVars = 10)
+test_data  &lt;- twoClassSim(10,  noiseVars = 10)
+
+## A short example
+ctrl &lt;- gafsControl(functions = rfGA,
+                    method = "cv",
+                    number = 3)
+
+rf_search &lt;- gafs(x = train_data[, -ncol(train_data)],
+                  y = train_data$Class,
+                  iters = 3,
+                  gafsControl = ctrl)
+
+rf_search
+  
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>caret</em> version 6.0-79 <a href="00Index.html">Index</a>]</div>
+</body></html>

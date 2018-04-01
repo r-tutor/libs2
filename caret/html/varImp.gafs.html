@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Variable importances for GAs and SAs</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for varImp.gafs {caret}"><tr><td>varImp.gafs {caret}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Variable importances for GAs and SAs</h2>
+
+<h3>Description</h3>
+
+<p>Variable importance scores for <code><a href="safs.html">safs</a></code> and <code><a href="gafs.default.html">gafs</a></code>
+objects.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'gafs'
+varImp(object, metric = object$control$metric["external"],
+  maximize = object$control$maximize["external"], ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>an <code><a href="safs.html">safs</a></code> or <code><a href="gafs.default.html">gafs</a></code> object</p>
+</td></tr>
+<tr valign="top"><td><code>metric</code></td>
+<td>
+<p>a metric to compute importance (see Details below)</p>
+</td></tr>
+<tr valign="top"><td><code>maximize</code></td>
+<td>
+<p>are larger values of the metric better?</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>not currently uses</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>A crude measure of importance is computed for thee two search procedures. At
+the end of a search process, the difference in the fitness values is
+computed for models with and without each feature (based on the search
+history). If a predictor has at least two subsets that include and did not
+include the predictor, a t-statistic is computed (otherwise a value of
+<code>NA</code> is assigned to the predictor).
+</p>
+<p>This computation is done separately for each resample and the t-statistics
+are averaged (<code>NA</code> values are ignored) and this average is reported as
+the importance. If the fitness value should be minimized, the negative value
+of the t-statistic is used in the average.
+</p>
+<p>As such, the importance score reflects the standardized increase in fitness
+that occurs when the predict is included in the subset. Values near zero (or
+negative) indicate that the predictor may not be important to the model.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a data frame where the rownames are the predictor names and the
+column is the average t-statistic
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Max Kuhn
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="safs.html">safs</a></code>, <code><a href="gafs.default.html">gafs</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>caret</em> version 6.0-79 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -73,6 +73,7 @@ glance.data.frame	data.frame_tidiers
 glance.ergm	ergm_tidiers
 glance.felm	felm_tidiers
 glance.fitdistr	fitdistr_tidiers
+glance.Gam	gam_tidiers
 glance.gam	gam_tidiers
 glance.glm	glm_tidiers
 glance.glmnet	glmnet_tidiers
@@ -196,6 +197,7 @@ tidy.ergm	ergm_tidiers
 tidy.felm	felm_tidiers
 tidy.fitdistr	fitdistr_tidiers
 tidy.ftable	tidy.ftable
+tidy.Gam	gam_tidiers
 tidy.gam	gam_tidiers
 tidy.gamlss	gamlss_tidiers
 tidy.geeglm	geeglm_tidiers

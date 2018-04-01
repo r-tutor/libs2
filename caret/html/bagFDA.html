@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Bagged FDA</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for bagFDA {caret}"><tr><td>bagFDA {caret}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Bagged FDA</h2>
+
+<h3>Description</h3>
+
+<p>A bagging wrapper for flexible discriminant analysis (FDA) using multivariate adaptive regression splines (MARS) basis functions
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+bagFDA(x, ...)
+
+## Default S3 method:
+bagFDA(x, y, weights = NULL, B = 50, keepX = TRUE, ...)
+
+## S3 method for class 'formula'
+bagFDA(formula, data = NULL, B = 50, keepX = TRUE, ...,
+  subset, weights = NULL, na.action = na.omit)
+
+## S3 method for class 'bagFDA'
+print(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>matrix or data frame of 'x' values for examples.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>arguments passed to the <code>mars</code> function</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>matrix or data frame of numeric values outcomes.</p>
+</td></tr>
+<tr valign="top"><td><code>weights</code></td>
+<td>
+<p>(case) weights for each example - if missing defaults to 1.</p>
+</td></tr>
+<tr valign="top"><td><code>B</code></td>
+<td>
+<p>the number of bootstrap samples</p>
+</td></tr>
+<tr valign="top"><td><code>keepX</code></td>
+<td>
+<p>a logical: should the original training data be kept?</p>
+</td></tr>
+<tr valign="top"><td><code>formula</code></td>
+<td>
+<p>A formula of the form <code>y ~ x1 + x2 + ...</code></p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>Data frame from which variables specified in  'formula' are
+preferentially to be taken.</p>
+</td></tr>
+<tr valign="top"><td><code>subset</code></td>
+<td>
+<p>An index vector specifying the cases to be used in the
+training sample.  (NOTE: If given, this argument must be
+named.)</p>
+</td></tr>
+<tr valign="top"><td><code>na.action</code></td>
+<td>
+<p>A function to specify the action to be taken if 'NA's are
+found. The default action is for the procedure to fail.  An
+alternative is na.omit, which leads to rejection of cases
+with missing values on any required variable.  (NOTE: If
+given, this argument must be named.)</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The function computes a FDA model for each bootstap sample.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list with elements
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>fit </code></td>
+<td>
+<p>a list of <code>B</code> FDA fits</p>
+</td></tr>
+<tr valign="top"><td><code>B </code></td>
+<td>
+<p>the number of bootstrap samples</p>
+</td></tr>
+<tr valign="top"><td><code>call </code></td>
+<td>
+<p>the function call</p>
+</td></tr>
+<tr valign="top"><td><code>x </code></td>
+<td>
+<p>either <code>NULL</code> or the value of <code>x</code>, depending on the
+value of <code>keepX</code></p>
+</td></tr>
+<tr valign="top"><td><code>oob</code></td>
+<td>
+<p>a matrix of performance estimates for each bootstrap sample</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Max Kuhn (<code>bagFDA.formula</code> is based on Ripley's <code>nnet.formula</code>)
+</p>
+
+
+<h3>References</h3>
+
+<p>J. Friedman, &ldquo;Multivariate Adaptive Regression Splines&rdquo; (with discussion) (1991).  Annals of Statistics, 19/1, 1-141.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../mda/html/fda.html">fda</a></code>, <code><a href="predict.bagEarth.html">predict.bagFDA</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(mlbench)
+library(earth)
+data(Glass)
+
+set.seed(36)
+inTrain &lt;- sample(1:dim(Glass)[1], 150)
+
+trainData &lt;- Glass[ inTrain, ]
+testData  &lt;- Glass[-inTrain, ]
+
+
+set.seed(3577)
+baggedFit &lt;- bagFDA(Type ~ ., trainData)
+confusionMatrix(data = predict(baggedFit, testData[, -10]),
+                reference = testData[, 10])
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>caret</em> version 6.0-79 <a href="00Index.html">Index</a>]</div>
+</body></html>

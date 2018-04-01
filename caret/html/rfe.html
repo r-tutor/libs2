@@ -1,0 +1,264 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Backwards Feature Selection</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for rfe {caret}"><tr><td>rfe {caret}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Backwards Feature Selection</h2>
+
+<h3>Description</h3>
+
+<p>A simple backwards selection, a.k.a. recursive feature elimination (RFE),
+algorithm
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+rfe(x, ...)
+
+## Default S3 method:
+rfe(x, y, sizes = 2^(2:4), metric = ifelse(is.factor(y),
+  "Accuracy", "RMSE"), maximize = ifelse(metric == "RMSE", FALSE, TRUE),
+  rfeControl = rfeControl(), ...)
+
+rfeIter(x, y, testX, testY, sizes, rfeControl = rfeControl(), label = "",
+  seeds = NA, ...)
+
+## S3 method for class 'rfe'
+update(object, x, y, size, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a matrix or data frame of predictors for model training. This
+object must have unique column names.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>options to pass to the model fitting function (ignored in
+<code>predict.rfe</code>)</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>a vector of training set outcomes (either numeric or factor)</p>
+</td></tr>
+<tr valign="top"><td><code>sizes</code></td>
+<td>
+<p>a numeric vector of integers corresponding to the number of
+features that should be retained</p>
+</td></tr>
+<tr valign="top"><td><code>metric</code></td>
+<td>
+<p>a string that specifies what summary metric will be used to
+select the optimal model. By default, possible values are &quot;RMSE&quot; and
+&quot;Rsquared&quot; for regression and &quot;Accuracy&quot; and &quot;Kappa&quot; for classification. If
+custom performance metrics are used (via the <code>functions</code> argument in
+<code><a href="rfeControl.html">rfeControl</a></code>, the value of <code>metric</code> should match one of the
+arguments.</p>
+</td></tr>
+<tr valign="top"><td><code>maximize</code></td>
+<td>
+<p>a logical: should the metric be maximized or minimized?</p>
+</td></tr>
+<tr valign="top"><td><code>rfeControl</code></td>
+<td>
+<p>a list of options, including functions for fitting and
+prediction. The web page
+<a href="http://topepo.github.io/caret/recursive-feature-elimination.html#rfe">http://topepo.github.io/caret/recursive-feature-elimination.html#rfe</a> has more
+details and examples related to this function.</p>
+</td></tr>
+<tr valign="top"><td><code>testX</code></td>
+<td>
+<p>a matrix or data frame of test set predictors. This must have
+the same column names as <code>x</code></p>
+</td></tr>
+<tr valign="top"><td><code>testY</code></td>
+<td>
+<p>a vector of test set outcomes</p>
+</td></tr>
+<tr valign="top"><td><code>label</code></td>
+<td>
+<p>an optional character string to be printed when in verbose
+mode.</p>
+</td></tr>
+<tr valign="top"><td><code>seeds</code></td>
+<td>
+<p>an optional vector of integers for the size. The vector should
+have length of <code>length(sizes)+1</code></p>
+</td></tr>
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>an object of class <code>rfe</code></p>
+</td></tr>
+<tr valign="top"><td><code>size</code></td>
+<td>
+<p>a single integers corresponding to the number of features that
+should be retained in the updated model</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>More details on this function can be found at
+<a href="http://topepo.github.io/caret/recursive-feature-elimination.html">http://topepo.github.io/caret/recursive-feature-elimination.html</a>.
+</p>
+<p>This function implements backwards selection of predictors based on
+predictor importance ranking. The predictors are ranked and the less
+important ones are sequentially eliminated prior to modeling. The goal is to
+find a subset of predictors that can be used to produce an accurate model.
+The web page <a href="http://topepo.github.io/caret/recursive-feature-elimination.html#rfe">http://topepo.github.io/caret/recursive-feature-elimination.html#rfe</a>
+has more details and examples related to this function.
+</p>
+<p><code>rfe</code> can be used with &quot;explicit parallelism&quot;, where different
+resamples (e.g. cross-validation group) can be split up and run on multiple
+machines or processors. By default, <code>rfe</code> will use a single processor
+on the host machine. As of version 4.99 of this package, the framework used
+for parallel processing uses the <span class="pkg">foreach</span> package. To run the resamples
+in parallel, the code for <code>rfe</code> does not change; prior to the call to
+<code>rfe</code>, a parallel backend is registered with <span class="pkg">foreach</span> (see the
+examples below).
+</p>
+<p><code>rfeIter</code> is the basic algorithm while <code>rfe</code> wraps these
+operations inside of resampling. To avoid selection bias, it is better to
+use the function <code>rfe</code> than <code>rfeIter</code>.
+</p>
+<p>When updating a model, if the entire set of resamples were not saved using
+<code>rfeControl(returnResamp = "final")</code>, the existing resamples are
+removed with a warning.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list with elements </p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>finalVariables</code></td>
+<td>
+<p>a list of size
+<code>length(sizes) + 1</code> containing the column names of the &ldquo;surviving&rdquo;
+predictors at each stage of selection. The first element corresponds to all
+the predictors (i.e. <code>size = ncol(x)</code>)</p>
+</td></tr> <tr valign="top"><td><code>pred </code></td>
+<td>
+<p>a data frame with
+columns for the test set outcome, the predicted outcome and the subset
+size.</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Max Kuhn
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="rfeControl.html">rfeControl</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+## Not run: 
+data(BloodBrain)
+
+x &lt;- scale(bbbDescr[,-nearZeroVar(bbbDescr)])
+x &lt;- x[, -findCorrelation(cor(x), .8)]
+x &lt;- as.data.frame(x)
+
+set.seed(1)
+lmProfile &lt;- rfe(x, logBBB,
+                 sizes = c(2:25, 30, 35, 40, 45, 50, 55, 60, 65),
+                 rfeControl = rfeControl(functions = lmFuncs,
+                                         number = 200))
+set.seed(1)
+lmProfile2 &lt;- rfe(x, logBBB,
+                 sizes = c(2:25, 30, 35, 40, 45, 50, 55, 60, 65),
+                 rfeControl = rfeControl(functions = lmFuncs,
+                                         rerank = TRUE,
+                                         number = 200))
+
+xyplot(lmProfile$results$RMSE + lmProfile2$results$RMSE  ~
+       lmProfile$results$Variables,
+       type = c("g", "p", "l"),
+       auto.key = TRUE)
+
+rfProfile &lt;- rfe(x, logBBB,
+                 sizes = c(2, 5, 10, 20),
+                 rfeControl = rfeControl(functions = rfFuncs))
+
+bagProfile &lt;- rfe(x, logBBB,
+                  sizes = c(2, 5, 10, 20),
+                  rfeControl = rfeControl(functions = treebagFuncs))
+
+set.seed(1)
+svmProfile &lt;- rfe(x, logBBB,
+                  sizes = c(2, 5, 10, 20),
+                  rfeControl = rfeControl(functions = caretFuncs,
+                                          number = 200),
+                  ## pass options to train()
+                  method = "svmRadial")
+
+## classification
+
+data(mdrr)
+mdrrDescr &lt;- mdrrDescr[,-nearZeroVar(mdrrDescr)]
+mdrrDescr &lt;- mdrrDescr[, -findCorrelation(cor(mdrrDescr), .8)]
+
+set.seed(1)
+inTrain &lt;- createDataPartition(mdrrClass, p = .75, list = FALSE)[,1]
+
+train &lt;- mdrrDescr[ inTrain, ]
+test  &lt;- mdrrDescr[-inTrain, ]
+trainClass &lt;- mdrrClass[ inTrain]
+testClass  &lt;- mdrrClass[-inTrain]
+
+set.seed(2)
+ldaProfile &lt;- rfe(train, trainClass,
+                  sizes = c(1:10, 15, 30),
+                  rfeControl = rfeControl(functions = ldaFuncs, method = "cv"))
+plot(ldaProfile, type = c("o", "g"))
+
+postResample(predict(ldaProfile, test), testClass)
+
+
+## End(Not run)
+
+#######################################
+## Parallel Processing Example via multicore
+
+## Not run: 
+library(doMC)
+
+## Note: if the underlying model also uses foreach, the
+## number of cores specified above will double (along with
+## the memory requirements)
+registerDoMC(cores = 2)
+
+set.seed(1)
+lmProfile &lt;- rfe(x, logBBB,
+                 sizes = c(2:25, 30, 35, 40, 45, 50, 55, 60, 65),
+                 rfeControl = rfeControl(functions = lmFuncs,
+                                         number = 200))
+
+
+
+## End(Not run)
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>caret</em> version 6.0-79 <a href="00Index.html">Index</a>]</div>
+</body></html>

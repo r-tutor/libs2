@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Calculation of filter-based variable importance</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for filterVarImp {caret}"><tr><td>filterVarImp {caret}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Calculation of filter-based variable importance</h2>
+
+<h3>Description</h3>
+
+<p>Specific engines for variable importance on a model by model basis.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+filterVarImp(x, y, nonpara = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A matrix or data frame of predictor data</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>A vector (numeric or factor) of outcomes)</p>
+</td></tr>
+<tr valign="top"><td><code>nonpara</code></td>
+<td>
+<p>should nonparametric methods be used to assess the
+relationship between the features and response</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>options to pass to either <code><a href="../../stats/html/lm.html">lm</a></code> or
+<code><a href="../../stats/html/loess.html">loess</a></code></p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The importance of each predictor is evaluated individually using a
+&ldquo;filter&rdquo; approach.
+</p>
+<p>For classification, ROC curve analysis is conducted on each predictor. For
+two class problems, a series of cutoffs is applied to the predictor data to
+predict the class. The sensitivity and specificity are computed for each
+cutoff and the ROC curve is computed. The trapezoidal rule is used to
+compute the area under the ROC curve. This area is used as the measure of
+variable importance. For multi&ndash;class outcomes, the problem is decomposed
+into all pair-wise problems and the area under the curve is calculated for
+each class pair (i.e class 1 vs. class 2, class 2 vs. class 3 etc.). For a
+specific class, the maximum area under the curve across the relevant
+pair&ndash;wise AUC's is used as the variable importance measure.
+</p>
+<p>For regression, the relationship between each predictor and the outcome is
+evaluated. An argument, <code>nonpara</code>, is used to pick the model fitting
+technique. When <code>nonpara = FALSE</code>, a linear model is fit and the
+absolute value of the $t$&ndash;value for the slope of the predictor is used.
+Otherwise, a loess smoother is fit between the outcome and the predictor.
+The $R^2$ statistic is calculated for this model against the intercept only
+null model.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A data frame with variable importances. Column names depend on the
+problem type.  For regression, the data frame contains one column: &quot;Overall&quot;
+for the importance values.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Max Kuhn
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+data(mdrr)
+filterVarImp(mdrrDescr[, 1:5], mdrrClass)
+
+data(BloodBrain)
+
+filterVarImp(bbbDescr[, 1:5], logBBB, nonpara = FALSE)
+apply(bbbDescr[, 1:5],
+      2,
+      function(x, y) summary(lm(y~x))$coefficients[2,3],
+      y = logBBB)
+
+filterVarImp(bbbDescr[, 1:5], logBBB, nonpara = TRUE)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>caret</em> version 6.0-79 <a href="00Index.html">Index</a>]</div>
+</body></html>

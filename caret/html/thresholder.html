@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Generate Data to Choose a Probability Threshold</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for thresholder {caret}"><tr><td>thresholder {caret}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Generate Data to Choose a Probability Threshold</h2>
+
+<h3>Description</h3>
+
+<p>This function uses the resampling results from a <code><a href="train.html">train</a></code>
+object to generate performance statistics over a set of probability
+thresholds for two-class problems.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+thresholder(x, threshold, final = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A <code><a href="train.html">train</a></code> object where the values of
+<code>savePredictions</code> was either <code>TRUE</code>, <code>"all"</code>,
+or <code>"final"</code> in <code><a href="trainControl.html">trainControl</a></code>. Also, the 
+control argument <code>clasProbs</code> should have been <code>TRUE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>threshold</code></td>
+<td>
+<p>A numeric vector of candidate probability thresholds
+between [0,1]. If the class probability corresponding to the first
+level of the outcome is greater than the threshold, the data point
+is classified as that level.</p>
+</td></tr>
+<tr valign="top"><td><code>final</code></td>
+<td>
+<p>A logical: should only the final tuning parameters
+chosen by <code><a href="train.html">train</a></code> be used when 
+<code>savePredictions = 'all'</code>?</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A data frame with columns for each of the tuning parameters
+from the model along with an additional column called
+<code>prob_threshold</code> for the probability threshold. There are
+also columns for summary statistics averaged over resamples with
+column names <code>Sensitivity</code>, <code>Specificity</code>, <code>J</code>,
+<code>Dist</code>. The last two correspond to Youden's J statistic 
+and the distance to the best possible cutoff (i.e. perfect
+sensitivity and specificity).
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+set.seed(2444)
+dat &lt;- twoClassSim(500, intercept = -10)
+table(dat$Class)
+
+ctrl &lt;- trainControl(method = "cv", 
+                     classProbs = TRUE,
+                     savePredictions = "all",
+                     summaryFunction = twoClassSummary)
+
+set.seed(2863)
+mod &lt;- train(Class ~ ., data = dat, 
+             method = "rda",
+             tuneLength = 4,
+             metric = "ROC",
+             trControl = ctrl)
+
+resample_stats &lt;- thresholder(mod, 
+                              threshold = seq(.5, 1, by = 0.05), 
+                              final = TRUE)
+
+ggplot(resample_stats, aes(x = prob_threshold, y = J)) + 
+  geom_point()
+ggplot(resample_stats, aes(x = prob_threshold, y = Dist)) + 
+  geom_point()
+ggplot(resample_stats, aes(x = prob_threshold, y = Sensitivity)) + 
+  geom_point() + 
+  geom_point(aes(y = Specificity), col = "red")
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>caret</em> version 6.0-79 <a href="00Index.html">Index</a>]</div>
+</body></html>

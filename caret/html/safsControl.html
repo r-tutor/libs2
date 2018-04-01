@@ -1,0 +1,272 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Control parameters for GA and SA feature selection</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for gafsControl {caret}"><tr><td>gafsControl {caret}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Control parameters for GA and SA feature selection</h2>
+
+<h3>Description</h3>
+
+<p>Control the computational nuances of the <code><a href="gafs.default.html">gafs</a></code> and
+<code><a href="safs.html">safs</a></code> functions
+</p>
+<p>Many of these options are the same as those described for
+<code><a href="trainControl.html">trainControl</a></code>. More extensive documentation and examples
+can be found on the <span class="pkg">caret</span> website at
+<a href="http://topepo.github.io/caret/feature-selection-using-genetic-algorithms.html#syntax">http://topepo.github.io/caret/feature-selection-using-genetic-algorithms.html#syntax</a> and
+<a href="http://topepo.github.io/caret/feature-selection-using-simulated-annealing.html#syntax">http://topepo.github.io/caret/feature-selection-using-simulated-annealing.html#syntax</a>.
+</p>
+<p>The <code>functions</code> component contains the information about how the model
+should be fit and summarized. It also contains the elements needed for the
+GA and SA modules (e.g. cross-over, etc).
+</p>
+<p>The elements of <code>functions</code> that are the same for GAs and SAs are:
+</p>
+
+<ul>
+<li> <p><code>fit</code>, with arguments <code>x</code>, <code>y</code>, <code>lev</code>,
+<code>last</code>, and <code>...</code>, is used to fit the classification or regression
+model
+</p>
+</li>
+<li> <p><code>pred</code>, with arguments <code>object</code> and <code>x</code>, predicts
+new samples
+</p>
+</li>
+<li> <p><code>fitness_intern</code>, with arguments <code>object</code>,
+<code>x</code>, <code>y</code>, <code>maximize</code>, and <code>p</code>, summarizes performance
+for the internal estimates of fitness
+</p>
+</li>
+<li> <p><code>fitness_extern</code>, with
+arguments <code>data</code>, <code>lev</code>, and <code>model</code>, summarizes performance
+using the externally held-out samples
+</p>
+</li>
+<li> <p><code>selectIter</code>, with
+arguments <code>x</code>, <code>metric</code>, and <code>maximize</code>, determines the best
+search iteration for feature selection.
+</p>
+</li></ul>
+
+<p>The elements of <code>functions</code> specific to genetic algorithms are:
+</p>
+
+<ul>
+<li> <p><code>initial</code>, with arguments <code>vars</code>, <code>popSize</code>
+and <code>...</code>, creates an initial population.
+</p>
+</li>
+<li> <p><code>selection</code>, with
+arguments <code>population</code>, <code>fitness</code>, <code>r</code>, <code>q</code>, and
+<code>...</code>, conducts selection of individuals.
+</p>
+</li>
+<li> <p><code>crossover</code>, with
+arguments <code>population</code>, <code>fitness</code>, <code>parents</code> and <code>...</code>,
+control genetic reproduction.
+</p>
+</li>
+<li> <p><code>mutation</code>, with arguments
+<code>population</code>, <code>parent</code> and <code>...</code>, adds mutations.
+</p>
+</li></ul>
+
+<p>The elements of <code>functions</code> specific to simulated annealing are:
+</p>
+
+<ul>
+<li> <p><code>initial</code>, with arguments <code>vars</code>, <code>prob</code>, and
+<code>...</code>, creates the initial subset.
+</p>
+</li>
+<li> <p><code>perturb</code>, with
+arguments <code>x</code>, <code>vars</code>, and <code>number</code>, makes incremental
+changes to the subsets.
+</p>
+</li>
+<li> <p><code>prob</code>, with arguments <code>old</code>,
+<code>new</code>, and <code>iteration</code>, computes the acceptance probabilities
+</p>
+</li></ul>
+
+<p>The pages <a href="http://topepo.github.io/caret/feature-selection-using-genetic-algorithms.html">http://topepo.github.io/caret/feature-selection-using-genetic-algorithms.html</a> and
+<a href="http://topepo.github.io/caret/feature-selection-using-simulated-annealing.html">http://topepo.github.io/caret/feature-selection-using-simulated-annealing.html</a> have more details about each of
+these functions.
+</p>
+<p><code>holdout</code> can be used to hold out samples for computing the internal
+fitness value. Note that this is independent of the external resampling
+step. Suppose 10-fold CV is being used. Within a resampling iteration,
+<code>holdout</code> can be used to sample an additional proportion of the 90%
+resampled data to use for estimating fitness. This may not be a good idea
+unless you have a very large training set and want to avoid an internal
+resampling procedure to estimate fitness.
+</p>
+<p>The search algorithms can be parallelized in several places:
+</p>
+
+<ol>
+<li><p> each externally resampled GA or SA can be run independently
+(controlled by the <code>allowParallel</code> options)
+</p>
+</li>
+<li><p> within a GA, the
+fitness calculations at a particular generation can be run in parallel over
+the current set of individuals (see the <code>genParallel</code>)
+</p>
+</li>
+<li><p> if inner resampling is used, these can be run in parallel (controls depend on the
+function used. See, for example, <code><a href="trainControl.html">trainControl</a></code>)
+</p>
+</li>
+<li><p> any parallelization of the individual model fits. This is also specific to the modeling function.
+</p>
+</li></ol>
+
+<p>It is probably best to pick one of these areas for parallelization and the
+first is likely to produces the largest decrease in run-time since it is the
+least likely to incur multiple re-starting of the worker processes. Keep in
+mind that if multiple levels of parallelization occur, this can effect the
+number of workers and the amount of memory required exponentially.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+gafsControl(functions = NULL, method = "repeatedcv", metric = NULL,
+  maximize = NULL, number = ifelse(grepl("cv", method), 10, 25),
+  repeats = ifelse(grepl("cv", method), 1, 5), verbose = FALSE,
+  returnResamp = "final", p = 0.75, index = NULL, indexOut = NULL,
+  seeds = NULL, holdout = 0, genParallel = FALSE, allowParallel = TRUE)
+
+safsControl(functions = NULL, method = "repeatedcv", metric = NULL,
+  maximize = NULL, number = ifelse(grepl("cv", method), 10, 25),
+  repeats = ifelse(grepl("cv", method), 1, 5), verbose = FALSE,
+  returnResamp = "final", p = 0.75, index = NULL, indexOut = NULL,
+  seeds = NULL, holdout = 0, improve = Inf, allowParallel = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>functions</code></td>
+<td>
+<p>a list of functions for model fitting, prediction etc (see
+Details below)</p>
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+<p>The resampling method: <code>boot</code>, <code>boot632</code>, <code>cv</code>,
+<code>repeatedcv</code>, <code>LOOCV</code>, <code>LGOCV</code> (for repeated training/test
+splits)</p>
+</td></tr>
+<tr valign="top"><td><code>metric</code></td>
+<td>
+<p>a two-element string that specifies what summary metric will
+be used to select the optimal number of iterations from the external fitness
+value and which metric should guide subset selection. If specified, this
+vector should have names <code>"internal"</code> and <code>"external"</code>. See
+<code><a href="gafs.default.html">gafs</a></code> and/or <code><a href="safs.html">safs</a></code> for explanations of the
+difference.</p>
+</td></tr>
+<tr valign="top"><td><code>maximize</code></td>
+<td>
+<p>a two-element logical: should the metrics be maximized or
+minimized? Like the <code>metric</code> argument, this this vector should have
+names <code>"internal"</code> and <code>"external"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>number</code></td>
+<td>
+<p>Either the number of folds or number of resampling iterations</p>
+</td></tr>
+<tr valign="top"><td><code>repeats</code></td>
+<td>
+<p>For repeated k-fold cross-validation only: the number of
+complete sets of folds to compute</p>
+</td></tr>
+<tr valign="top"><td><code>verbose</code></td>
+<td>
+<p>a logical for printing results</p>
+</td></tr>
+<tr valign="top"><td><code>returnResamp</code></td>
+<td>
+<p>A character string indicating how much of the resampled
+summary metrics should be saved. Values can be &ldquo;all&rdquo; or &ldquo;none&rdquo;</p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>For leave-group out cross-validation: the training percentage</p>
+</td></tr>
+<tr valign="top"><td><code>index</code></td>
+<td>
+<p>a list with elements for each resampling iteration. Each list
+element is the sample rows used for training at that iteration.</p>
+</td></tr>
+<tr valign="top"><td><code>indexOut</code></td>
+<td>
+<p>a list (the same length as <code>index</code>) that dictates which
+sample are held-out for each resample. If <code>NULL</code>, then the unique set
+of samples not contained in <code>index</code> is used.</p>
+</td></tr>
+<tr valign="top"><td><code>seeds</code></td>
+<td>
+<p>a vector or integers that can be used to set the seed during
+each search. The number of seeds must be equal to the number of resamples
+plus one.</p>
+</td></tr>
+<tr valign="top"><td><code>holdout</code></td>
+<td>
+<p>the proportion of data in [0, 1) to be held-back from
+<code>x</code> and <code>y</code> to calculate the internal fitness values</p>
+</td></tr>
+<tr valign="top"><td><code>genParallel</code></td>
+<td>
+<p>if a parallel backend is loaded and available, should
+<code><a href="gafs.default.html">gafs</a></code> use it tp parallelize the fitness calculations within a
+generation within a resample?</p>
+</td></tr>
+<tr valign="top"><td><code>allowParallel</code></td>
+<td>
+<p>if a parallel backend is loaded and available, should
+the function use it?</p>
+</td></tr>
+<tr valign="top"><td><code>improve</code></td>
+<td>
+<p>the number of iterations without improvement before
+<code><a href="safs.html">safs</a></code> reverts back to the previous optimal subset</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>An echo of the parameters specified
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Max Kuhn
+</p>
+
+
+<h3>References</h3>
+
+<p><a href="http://topepo.github.io/caret/feature-selection-using-genetic-algorithms.html">http://topepo.github.io/caret/feature-selection-using-genetic-algorithms.html</a>,
+<a href="http://topepo.github.io/caret/feature-selection-using-simulated-annealing.html">http://topepo.github.io/caret/feature-selection-using-simulated-annealing.html</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="safs.html">safs</a></code>, <code><a href="safs.html">safs</a></code>, , <code><a href="gafs_initial.html">caretGA</a></code>,
+<code><a href="gafs_initial.html">rfGA</a></code>, <code><a href="gafs_initial.html">treebagGA</a></code>, <code><a href="safs_initial.html">caretSA</a></code>,
+<code><a href="safs_initial.html">rfSA</a></code>, <code><a href="safs_initial.html">treebagSA</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>caret</em> version 6.0-79 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Simulation Functions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for SLC14_1 {caret}"><tr><td>SLC14_1 {caret}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Simulation Functions</h2>
+
+<h3>Description</h3>
+
+<p>This function simulates regression and classification data with truly
+important predictors and irrelevant predictions.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+SLC14_1(n = 100, noiseVars = 0, corrVars = 0, corrType = "AR1",
+  corrValue = 0)
+
+SLC14_2(n = 100, noiseVars = 0, corrVars = 0, corrType = "AR1",
+  corrValue = 0)
+
+LPH07_1(n = 100, noiseVars = 0, corrVars = 0, corrType = "AR1",
+  corrValue = 0, factors = FALSE, class = FALSE)
+
+LPH07_2(n = 100, noiseVars = 0, corrVars = 0, corrType = "AR1",
+  corrValue = 0)
+
+twoClassSim(n = 100, intercept = -5, linearVars = 10, noiseVars = 0,
+  corrVars = 0, corrType = "AR1", corrValue = 0, mislabel = 0,
+  ordinal = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>The number of simulated data points</p>
+</td></tr>
+<tr valign="top"><td><code>noiseVars</code></td>
+<td>
+<p>The number of uncorrelated irrelevant predictors to be
+included.</p>
+</td></tr>
+<tr valign="top"><td><code>corrVars</code></td>
+<td>
+<p>The number of correlated irrelevant predictors to be
+included.</p>
+</td></tr>
+<tr valign="top"><td><code>corrType</code></td>
+<td>
+<p>The correlation structure of the correlated irrelevant
+predictors. Values of &quot;AR1&quot; and &quot;exch&quot; are available (see Details below)</p>
+</td></tr>
+<tr valign="top"><td><code>corrValue</code></td>
+<td>
+<p>The correlation value.</p>
+</td></tr>
+<tr valign="top"><td><code>factors</code></td>
+<td>
+<p>Should the binary predictors be converted to factors?</p>
+</td></tr>
+<tr valign="top"><td><code>class</code></td>
+<td>
+<p>Should the simulation produce class labels instead of numbers?</p>
+</td></tr>
+<tr valign="top"><td><code>intercept</code></td>
+<td>
+<p>The intercept, which controls the class balance. The
+default value produces a roughly balanced data set when the other defaults
+are used.</p>
+</td></tr>
+<tr valign="top"><td><code>linearVars</code></td>
+<td>
+<p>The number of linearly important effects. See Details
+below.</p>
+</td></tr>
+<tr valign="top"><td><code>mislabel</code></td>
+<td>
+<p>The proportion of data that is possibly mislabeled. Only
+used when <code>ordinal = FALSE</code>. See Details below.</p>
+</td></tr>
+<tr valign="top"><td><code>ordinal</code></td>
+<td>
+<p>Should an ordered factor be returned? See Details below.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The first function (<code>twoClassSim</code>) generates two class data. The data
+are simulated in different sets. First, two multivariate normal predictors
+(denoted here as <code>A</code> and <code>B</code>) are created with a correlation our
+about 0.65. They change the log-odds using main effects and an interaction:
+</p>
+<pre> intercept - 4A + 4B + 2AB </pre>
+<p>The intercept is a parameter for the simulation and can be used to control
+the amount of class imbalance.
+</p>
+<p>The second set of effects are linear with coefficients that alternate signs
+and have values between 2.5 and 0.025. For example, if there were six
+predictors in this set, their contribution to the log-odds would be
+</p>
+<pre> -2.50C + 2.05D -1.60E + 1.15F -0.70G + 0.25H </pre>
+<p>The third set is a nonlinear function of a single predictor ranging between
+[0, 1] called <code>J</code> here:
+</p>
+<pre> (J^3) + 2exp(-6(J-0.3)^2) </pre>
+<p>The fourth set of informative predictors are copied from one of Friedman's
+systems and use two more predictors (<code>K</code> and <code>L</code>):
+</p>
+<pre> 2sin(KL) </pre>
+<p>All of these effects are added up to model the log-odds.
+</p>
+<p>When <code>ordinal = FALSE</code>, this is used to calculate the probability of a
+sample being in the first class and a random uniform number is used to
+actually make the assignment of the actual class. To mislabel the data, the
+probability is reversed (i.e. <code>p = 1 - p</code>) before the random number
+generation.
+</p>
+<p>For <code>ordinal = TRUE</code>, random normal errors are added to the linear
+predictor (i.e. prior to computing the probability) and cut points (0.00,
+0.20, 0.75, and 1.00) are used to bin the probabilities into classes
+<code>"low"</code>, <code>"med"</code>, and <code>"high"</code> (despite the function's name).
+</p>
+<p>The remaining functions simulate regression data sets. <code>LPH07_1</code> and
+<code>LPH07_2</code> are from van der Laan et al. (2007). The first function uses
+random Bernoulli variables that have a 40% probability of being a value of
+1. The true regression equation is:
+</p>
+<pre> 2*w_1*w_10 + 4*w_2*w_7 + 3*w_4*w_5 - 5*w_6*w_10 + 3*w_8*w_9 +
+w_1*w_2*w_4 - 2*w_7*(1-w_6)*w_2*w_9 - 4*(1 - w_10)*w_1*(1-w_4) </pre>
+<p>The simulated error term is a standard normal (i.e. Gaussian). The noise
+variables are simulated in the same manner as described above but are made
+binary based on whether the normal random variable is above or below 0. If
+<code>factors = TRUE</code>, each of the predictors is coerced into a factor.
+This simulation can also be adapted for classification using the option
+<code>class = TRUE</code>. In this case, the outcome is converted to be a factor
+by first computing the logit transformation of the equation above and using
+uniform random numbers to assign the observed class.
+</p>
+<p>A second function (<code>LPH07_2</code>) uses 20 independent Gaussians with mean
+zero and variance 16. The functional form here is:
+</p>
+<pre> x_1*x_2 + x_10^2 - x_3*x_17 - x_15*x_4 + x_9*x_5 + x_19 -
+x_20^2 + x_9*x_8 </pre>
+<p>The error term is also Gaussian with mean zero and variance 16.
+</p>
+<p>The function <code>SLC14_1</code> simulates a system from Sapp et al. (2014). All
+informative predictors are independent Gaussian random variables with mean
+zero and a variance of 9. The prediction equation is:
+</p>
+<pre> x_1 + sin(x_2) + log(abs(x_3)) + x_4^2 + x_5*x_6 +
+I(x_7*x_8*x_9 &lt; 0) + I(x_10 &gt; 0) + x_11*I(x_11 &gt; 0) + sqrt(abs(x_12)) +
+cos(x_13) + 2*x_14 + abs(x_15) + I(x_16 &lt; -1) + x_17*I(x_17 &lt; -1) - 2 * x_18
+- x_19*x_20 </pre>
+<p>The random error here is also Gaussian with mean zero and a variance of 9.
+</p>
+<p><code>SLC14_2</code> is also from Sapp et al. (2014). Two hundred independent
+Gaussian variables are generated, each having mean zero and variance 16. The
+functional form is
+</p>
+<pre> -1 + log(abs(x_1)) + ... + log(abs(x_200)) </pre>
+<p>and the error term is Gaussian with mean zero and a variance of 25.
+</p>
+<p>For each simulation, the user can also add non-informative predictors to the
+data. These are random standard normal predictors and can be optionally
+added to the data in two ways: a specified number of independent predictors
+or a set number of predictors that follow a particular correlation
+structure. The only two correlation structure that have been implemented are
+</p>
+ <ul>
+<li><p> compound-symmetry (aka exchangeable) where there is a
+constant correlation between all the predictors
+</p>
+</li>
+<li><p> auto-regressive 1 [AR(1)]. While there is no time component to these
+data, this structure can be used to add predictors of varying levels of
+correlation. For example, if there were 4 predictors and <code>r</code> was the
+correlation parameter, the between predictor correlation matrix would be </p>
+</li></ul>
+
+<pre> | 1 sym | | r 1 | | r^2 r 1 | | r^3 r^2 r 1 | | r^4 r^3 r^2 r
+1 | </pre>
+
+
+<h3>Value</h3>
+
+<p>a data frame with columns: </p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>Class </code></td>
+<td>
+<p>A factor with levels
+&quot;Class1&quot; and &quot;Class2&quot;</p>
+</td></tr> <tr valign="top"><td><code>TwoFactor1, TwoFactor2 </code></td>
+<td>
+<p>Correlated
+multivariate normal predictors (denoted as <code>A</code> and <code>B</code> above)</p>
+</td></tr>
+<tr valign="top"><td><code>Nonlinear1, Nonlinear2, Nonlinear3</code></td>
+<td>
+<p>Uncorrelated random uniform
+predictors (<code>J</code>, <code>K</code> and <code>L</code> above).</p>
+</td></tr> <tr valign="top"><td><code>Linear1,
+</code></td>
+<td>
+<p>Optional uncorrelated standard normal predictors (<code>C</code> through
+<code>H</code> above)</p>
+</td></tr><tr valign="top"><td><code>list()</code></td>
+<td>
+<p>Optional uncorrelated standard normal
+predictors (<code>C</code> through <code>H</code> above)</p>
+</td></tr> <tr valign="top"><td><code>Noise1, </code></td>
+<td>
+<p>Optional
+uncorrelated standard normal predictions</p>
+</td></tr><tr valign="top"><td><code>list()</code></td>
+<td>
+<p>Optional uncorrelated
+standard normal predictions</p>
+</td></tr> <tr valign="top"><td><code>Corr1, </code></td>
+<td>
+<p>Optional correlated multivariate
+normal predictors (each with unit variances)</p>
+</td></tr><tr valign="top"><td><code>list()</code></td>
+<td>
+<p>Optional
+correlated multivariate normal predictors (each with unit variances)</p>
+</td></tr></table>
+<p>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Max Kuhn
+</p>
+
+
+<h3>References</h3>
+
+<p>van der Laan, M. J., &amp; Polley Eric, C. (2007). Super learner.
+Statistical Applications in Genetics and Molecular Biology, 6(1), 1-23.
+</p>
+<p>Sapp, S., van der Laan, M. J., &amp; Canny, J. (2014). Subsemble: an ensemble
+method for combining subset-specific algorithm fits. Journal of Applied
+Statistics, 41(6), 1247-1259.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+example &lt;- twoClassSim(100, linearVars = 1)
+splom(~example[, 1:6], groups = example$Class)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>caret</em> version 6.0-79 <a href="00Index.html">Index</a>]</div>
+</body></html>

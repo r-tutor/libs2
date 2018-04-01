@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Update or Re-fit a Model</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for update.train {caret}"><tr><td>update.train {caret}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Update or Re-fit a Model</h2>
+
+<h3>Description</h3>
+
+<p><code>update</code> allows a user to over-ride the tuning parameter selection
+process by specifying a set of tuning parameters or to update the model
+object to the latest version of this package.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'train'
+update(object, param = NULL, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>an object of class <code><a href="train.html">train</a></code></p>
+</td></tr>
+<tr valign="top"><td><code>param</code></td>
+<td>
+<p>a data frame or named list of all tuning parameters</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>not currently used</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>If the model object was created with version 5.17-7 or earlier, the
+underlying package structure was different. To make old <code><a href="train.html">train</a></code>
+objects consistent with the new structure, use <code>param = NULL</code> to get
+the same object back with updates.
+</p>
+<p>To update the model parameters, the training data must be stored in the
+model object (see the option <code>returnData</code> in
+<code><a href="trainControl.html">trainControl</a></code>. Also, all tuning parameters must be specified in
+the <code>param</code> slot. All other options are held constant, including the
+original pre-processing (if any), options passed in using code... and so on.
+When printing, the verbiage &quot;The tuning parameter was set manually.&quot; is used
+to describe how the tuning parameters were created.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a new <code><a href="train.html">train</a></code> object
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Max Kuhn
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="train.html">train</a></code>, <code><a href="trainControl.html">trainControl</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+## Not run: 
+data(iris)
+TrainData &lt;- iris[,1:4]
+TrainClasses &lt;- iris[,5]
+
+knnFit1 &lt;- train(TrainData, TrainClasses,
+                 method = "knn",
+                 preProcess = c("center", "scale"),
+                 tuneLength = 10,
+                 trControl = trainControl(method = "cv"))
+
+update(knnFit1, list(.k = 3))
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>caret</em> version 6.0-79 <a href="00Index.html">Index</a>]</div>
+</body></html>

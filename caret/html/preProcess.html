@@ -1,0 +1,328 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Pre-Processing of Predictors</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for preProcess {caret}"><tr><td>preProcess {caret}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Pre-Processing of Predictors</h2>
+
+<h3>Description</h3>
+
+<p>Pre-processing transformation (centering, scaling etc.) can be estimated
+from the training data and applied to any data set with the same variables.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+preProcess(x, ...)
+
+## Default S3 method:
+preProcess(x, method = c("center", "scale"),
+  thresh = 0.95, pcaComp = NULL, na.remove = TRUE, k = 5,
+  knnSummary = mean, outcome = NULL, fudge = 0.2, numUnique = 3,
+  verbose = FALSE, freqCut = 95/5, uniqueCut = 10, cutoff = 0.9,
+  rangeBounds = c(0, 1), ...)
+
+## S3 method for class 'preProcess'
+predict(object, newdata, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a matrix or data frame. Non-numeric predictors are allowed but will
+be ignored.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>additional arguments to pass to <code><a href="../../fastICA/html/fastICA.html">fastICA</a></code>,
+such as <code>n.comp</code></p>
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+<p>a character vector specifying the type of processing. Possible
+values are &quot;BoxCox&quot;, &quot;YeoJohnson&quot;, &quot;expoTrans&quot;, &quot;center&quot;, &quot;scale&quot;, &quot;range&quot;,
+&quot;knnImpute&quot;, &quot;bagImpute&quot;, &quot;medianImpute&quot;, &quot;pca&quot;, &quot;ica&quot;, &quot;spatialSign&quot;, &quot;corr&quot;, &quot;zv&quot;,
+&quot;nzv&quot;, and &quot;conditionalX&quot; (see Details below)</p>
+</td></tr>
+<tr valign="top"><td><code>thresh</code></td>
+<td>
+<p>a cutoff for the cumulative percent of variance to be retained
+by PCA</p>
+</td></tr>
+<tr valign="top"><td><code>pcaComp</code></td>
+<td>
+<p>the specific number of PCA components to keep. If specified,
+this over-rides <code>thresh</code></p>
+</td></tr>
+<tr valign="top"><td><code>na.remove</code></td>
+<td>
+<p>a logical; should missing values be removed from the
+calculations?</p>
+</td></tr>
+<tr valign="top"><td><code>k</code></td>
+<td>
+<p>the number of nearest neighbors from the training set to use for
+imputation</p>
+</td></tr>
+<tr valign="top"><td><code>knnSummary</code></td>
+<td>
+<p>function to average the neighbor values per column during
+imputation</p>
+</td></tr>
+<tr valign="top"><td><code>outcome</code></td>
+<td>
+<p>a numeric or factor vector for the training set outcomes.
+This can be used to help estimate the Box-Cox transformation of the
+predictor variables (see Details below)</p>
+</td></tr>
+<tr valign="top"><td><code>fudge</code></td>
+<td>
+<p>a tolerance value: Box-Cox transformation lambda values within
++/-fudge will be coerced to 0 and within 1+/-fudge will be coerced to 1.</p>
+</td></tr>
+<tr valign="top"><td><code>numUnique</code></td>
+<td>
+<p>how many unique values should <code>y</code> have to estimate the
+Box-Cox transformation?</p>
+</td></tr>
+<tr valign="top"><td><code>verbose</code></td>
+<td>
+<p>a logical: prints a log as the computations proceed</p>
+</td></tr>
+<tr valign="top"><td><code>freqCut</code></td>
+<td>
+<p>the cutoff for the ratio of the most common value to the 
+second most common value. See <code><a href="nearZeroVar.html">nearZeroVar</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>uniqueCut</code></td>
+<td>
+<p>the cutoff for the percentage of distinct values out of 
+the number of total samples. See <code><a href="nearZeroVar.html">nearZeroVar</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>cutoff</code></td>
+<td>
+<p>a numeric value for the pair-wise absolute correlation cutoff. 
+See <code><a href="findCorrelation.html">findCorrelation</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>rangeBounds</code></td>
+<td>
+<p>a two-element numeric vector specifying closed interval
+for range transformation</p>
+</td></tr>
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>an object of class <code>preProcess</code></p>
+</td></tr>
+<tr valign="top"><td><code>newdata</code></td>
+<td>
+<p>a matrix or data frame of new data to be pre-processed</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>In all cases, transformations and operations are estimated using the data in
+<code>x</code> and these operations are applied to new data using these values;
+nothing is recomputed when using the <code>predict</code> function.
+</p>
+<p>The Box-Cox (<code>method = "BoxCox"</code>), Yeo-Johnson (<code>method =
+"YeoJohnson"</code>), and exponential transformations (<code>method =
+"expoTrans"</code>)have been &quot;repurposed&quot; here: they are being used to transform
+the predictor variables. The Box-Cox transformation was developed for
+transforming the response variable while another method, the Box-Tidwell
+transformation, was created to estimate transformations of predictor data.
+However, the Box-Cox method is simpler, more computationally efficient and
+is equally effective for estimating power transformations. The Yeo-Johnson
+transformation is similar to the Box-Cox model but can accommodate
+predictors with zero and/or negative values (while the predictors values for
+the Box-Cox transformation must be strictly positive.) The exponential
+transformation of Manly (1976) can also be used for positive or negative
+data.
+</p>
+<p><code>method = "center"</code> subtracts the mean of the predictor's data (again
+from the data in <code>x</code>) from the predictor values while <code>method =
+"scale"</code> divides by the standard deviation.
+</p>
+<p>The &quot;range&quot; transformation scales the data to be within <code>rangeBounds</code>. If new
+samples have values larger or smaller than those in the training set, values
+will be outside of this range.
+</p>
+<p>Predictors that are not numeric are ignored in the calculations.
+</p>
+<p><code>method = "zv"</code> identifies numeric predictor columns with a single
+value (i.e. having zero variance) and excludes them from further
+calculations. Similarly, <code>method = "nzv"</code> does the same by applying
+<code><a href="nearZeroVar.html">nearZeroVar</a></code> exclude &quot;near zero-variance&quot; predictors. The options
+<code>freqCut</code> and <code>uniqueCut</code> can be used to modify the filter.
+</p>
+<p><code>method = "corr"</code> seeks to filter out highly correlated predictors. See
+<code><a href="findCorrelation.html">findCorrelation</a></code>.
+</p>
+<p>For classification, <code>method = "conditionalX"</code> examines the distribution
+of each predictor conditional on the outcome. If there is only one unique
+value within any class, the predictor is excluded from further calculations
+(see <code><a href="nearZeroVar.html">checkConditionalX</a></code> for an example). When <code>outcome</code> is
+not a factor, this calculation is not executed. This operation can be time
+consuming when used within resampling via <code><a href="train.html">train</a></code>.
+</p>
+<p>The operations are applied in this order: zero-variance filter, near-zero
+variance filter, correlation filter, Box-Cox/Yeo-Johnson/exponential transformation, centering,
+scaling, range, imputation, PCA, ICA then spatial sign. This is a departure
+from versions of <span class="pkg">caret</span> prior to version 4.76 (where imputation was
+done first) and is not backwards compatible if bagging was used for
+imputation.
+</p>
+<p>If PCA is requested but centering and scaling are not, the values will still
+be centered and scaled. Similarly, when ICA is requested, the data are
+automatically centered and scaled.
+</p>
+<p>k-nearest neighbor imputation is carried out by finding the k closest
+samples (Euclidian distance) in the training set. Imputation via bagging
+fits a bagged tree model for each predictor (as a function of all the
+others). This method is simple, accurate and accepts missing values, but it
+has much higher computational cost. Imputation via medians takes the median
+of each predictor in the training set, and uses them to fill missing values.
+This method is simple, fast, and accepts missing values, but treats each
+predictor independently, and may be inaccurate.
+</p>
+<p>A warning is thrown if both PCA and ICA are requested. ICA, as implemented
+by the <code><a href="../../fastICA/html/fastICA.html">fastICA</a></code> package automatically does a PCA
+decomposition prior to finding the ICA scores.
+</p>
+<p>The function will throw an error of any numeric variables in <code>x</code> has
+less than two unique values unless either <code>method = "zv"</code> or
+<code>method = "nzv"</code> are invoked.
+</p>
+<p>Non-numeric data will not be pre-processed and there values will be in the
+data frame produced by the <code>predict</code> function. Note that when PCA or
+ICA is used, the non-numeric columns may be in different positions when
+predicted.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>preProcess</code> results in a list with elements </p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>call</code></td>
+<td>
+<p>the
+function call</p>
+</td></tr> <tr valign="top"><td><code>method</code></td>
+<td>
+<p>a named list of operations and the variables
+used for each </p>
+</td></tr> <tr valign="top"><td><code>dim</code></td>
+<td>
+<p>the dimensions of <code>x</code></p>
+</td></tr> <tr valign="top"><td><code>bc</code></td>
+<td>
+<p>Box-Cox
+transformation values, see <code><a href="BoxCoxTrans.html">BoxCoxTrans</a></code></p>
+</td></tr> <tr valign="top"><td><code>mean</code></td>
+<td>
+<p>a vector
+of means (if centering was requested)</p>
+</td></tr> <tr valign="top"><td><code>std</code></td>
+<td>
+<p>a vector of standard
+deviations (if scaling or PCA was requested)</p>
+</td></tr> <tr valign="top"><td><code>rotation</code></td>
+<td>
+<p>a matrix of
+eigenvectors if PCA was requested</p>
+</td></tr> <tr valign="top"><td><code>method</code></td>
+<td>
+<p>the value of<code>method</code></p>
+</td></tr>
+<tr valign="top"><td><code>thresh</code></td>
+<td>
+<p>the value of<code>thresh</code></p>
+</td></tr> <tr valign="top"><td><code>ranges</code></td>
+<td>
+<p>a matrix of min and
+max values for each predictor when <code>method</code> includes &quot;range&quot; (and
+<code>NULL</code> otherwise)</p>
+</td></tr> <tr valign="top"><td><code>numComp</code></td>
+<td>
+<p>the number of principal components
+required of capture the specified amount of variance</p>
+</td></tr> <tr valign="top"><td><code>ica</code></td>
+<td>
+<p>contains
+values for the <code>W</code> and <code>K</code> matrix of the decomposition</p>
+</td></tr>
+<tr valign="top"><td><code>median</code></td>
+<td>
+<p>a vector of medians (if median imputation was requested)</p>
+</td></tr>
+</table>
+<p><code>predict.preProcess</code> will produce a data frame.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Max Kuhn, median imputation by Zachary Mayer
+</p>
+
+
+<h3>References</h3>
+
+<p><a href="http://topepo.github.io/caret/pre-processing.html">http://topepo.github.io/caret/pre-processing.html</a>
+</p>
+<p>Kuhn and Johnson (2013), Applied Predictive Modeling, Springer, New York
+(chapter 4)
+</p>
+<p>Kuhn (2008), Building predictive models in R using the caret
+(<a href="http://www.jstatsoft.org/article/view/v028i05/v28i05.pdf">http://www.jstatsoft.org/article/view/v028i05/v28i05.pdf</a>)
+</p>
+<p>Box, G. E. P. and Cox, D. R. (1964) An analysis of transformations (with
+discussion). Journal of the Royal Statistical Society B, 26, 211-252.
+</p>
+<p>Box, G. E. P. and Tidwell, P. W. (1962) Transformation of the independent
+variables. Technometrics 4, 531-550.
+</p>
+<p>Manly, B. L. (1976) Exponential data transformations. The Statistician, 25,
+37 - 42.
+</p>
+<p>Yeo, I-K. and Johnson, R. (2000). A new family of power transformations to
+improve normality or symmetry. Biometrika, 87, 954-959.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="BoxCoxTrans.html">BoxCoxTrans</a></code>, <code><a href="BoxCoxTrans.html">expoTrans</a></code>
+<code><a href="../../MASS/html/boxcox.html">boxcox</a></code>, <code><a href="../../stats/html/prcomp.html">prcomp</a></code>,
+<code><a href="../../fastICA/html/fastICA.html">fastICA</a></code>, <code><a href="spatialSign.html">spatialSign</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+data(BloodBrain)
+# one variable has one unique value
+## Not run: 
+preProc &lt;- preProcess(bbbDescr)
+
+preProc  &lt;- preProcess(bbbDescr[1:100,-3])
+training &lt;- predict(preProc, bbbDescr[1:100,-3])
+test     &lt;- predict(preProc, bbbDescr[101:208,-3])
+
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>caret</em> version 6.0-79 <a href="00Index.html">Index</a>]</div>
+</body></html>

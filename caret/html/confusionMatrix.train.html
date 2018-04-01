@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Estimate a Resampled Confusion Matrix</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for confusionMatrix.train {caret}"><tr><td>confusionMatrix.train {caret}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Estimate a Resampled Confusion Matrix</h2>
+
+<h3>Description</h3>
+
+<p>Using a <code><a href="train.html">train</a></code>, <code><a href="rfe.html">rfe</a></code>, <code><a href="sbf.html">sbf</a></code> object,
+determine a confusion matrix based on the resampling procedure
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'train'
+confusionMatrix(data, norm = "overall",
+  dnn = c("Prediction", "Reference"), ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>An object of class <code><a href="train.html">train</a></code>, <code><a href="rfe.html">rfe</a></code>,
+<code><a href="sbf.html">sbf</a></code> that did not use out-of-bag resampling or leave-one-out
+cross-validation.</p>
+</td></tr>
+<tr valign="top"><td><code>norm</code></td>
+<td>
+<p>A character string indicating how the table entries should be
+normalized. Valid values are &quot;none&quot;, &quot;overall&quot; or &quot;average&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>dnn</code></td>
+<td>
+<p>A character vector of dimnames for the table</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>not used here</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>When <code><a href="train.html">train</a></code> is used for tuning a model, it tracks the confusion
+matrix cell entries for the hold-out samples. These can be aggregated and
+used for diagnostic purposes. For <code><a href="train.html">train</a></code>, the matrix is
+estimated for the final model tuning parameters determined by
+<code><a href="train.html">train</a></code>. For <code><a href="rfe.html">rfe</a></code>, the matrix is associated with
+the optimal number of variables.
+</p>
+<p>There are several ways to show the table entries. Using <code>norm = "none"</code>
+will show the aggregated counts of samples on each of the cells (across all
+resamples). For <code>norm = "average"</code>, the average number of cell counts
+across resamples is computed (this can help evaluate how many holdout
+samples there were on average). The default is <code>norm = "overall"</code>,
+which is equivalento to <code>"average"</code> but in percentages.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a list of class <code>confusionMatrix.train</code>,
+<code>confusionMatrix.rfe</code> or <code>confusionMatrix.sbf</code> with elements
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>table</code></td>
+<td>
+<p>the normalized matrix</p>
+</td></tr> <tr valign="top"><td><code>norm</code></td>
+<td>
+<p>an echo fo the call</p>
+</td></tr>
+<tr valign="top"><td><code>text</code></td>
+<td>
+<p>a character string with details about the resampling procedure
+(e.g. &quot;Bootstrapped (25 reps) Confusion Matrix&quot;</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Max Kuhn
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="confusionMatrix.html">confusionMatrix</a></code>, <code><a href="train.html">train</a></code>,
+<code><a href="rfe.html">rfe</a></code>, <code><a href="sbf.html">sbf</a></code>, <code><a href="trainControl.html">trainControl</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+
+data(iris)
+TrainData &lt;- iris[,1:4]
+TrainClasses &lt;- iris[,5]
+
+knnFit &lt;- train(TrainData, TrainClasses,
+                method = "knn",
+                preProcess = c("center", "scale"),
+                tuneLength = 10,
+                trControl = trainControl(method = "cv"))
+confusionMatrix(knnFit)
+confusionMatrix(knnFit, "average")
+confusionMatrix(knnFit, "none")
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>caret</em> version 6.0-79 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Plot the resampling distribution of the model statistics</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for resampleHist {caret}"><tr><td>resampleHist {caret}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Plot the resampling distribution of the model statistics</h2>
+
+<h3>Description</h3>
+
+<p>Create a lattice histogram or densityplot from the resampled outcomes from a
+<code>train</code> object.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+resampleHist(object, type = "density", ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>an object resulting form a call to <code><a href="train.html">train</a></code></p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>a character string. Either &quot;hist&quot; or &quot;density&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>options to pass to histogram or densityplot</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>All the metrics from the object are plotted, but only for the final model.
+For more comprehensive plots functions, see <code><a href="histogram.train.html">histogram.train</a></code>,
+<code><a href="histogram.train.html">densityplot.train</a></code>, <code><a href="histogram.train.html">xyplot.train</a></code>,
+<code><a href="histogram.train.html">stripplot.train</a></code>.
+</p>
+<p>For the plot to be made, the <code>returnResamp</code> argument in
+<code><a href="trainControl.html">trainControl</a></code> should be either &quot;final&quot; or &quot;all&quot;.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a object of class <code>trellis</code>
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Max Kuhn
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="train.html">train</a></code>, <code><a href="../../lattice/html/histogram.html">histogram</a></code>,
+<code><a href="../../lattice/html/histogram.html">densityplot</a></code>, <code><a href="histogram.train.html">histogram.train</a></code>,
+<code><a href="histogram.train.html">densityplot.train</a></code>, <code><a href="histogram.train.html">xyplot.train</a></code>,
+<code><a href="histogram.train.html">stripplot.train</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+
+## Not run: 
+data(iris)
+TrainData &lt;- iris[,1:4]
+TrainClasses &lt;- iris[,5]
+
+knnFit &lt;- train(TrainData, TrainClasses, "knn")
+
+resampleHist(knnFit)
+
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>caret</em> version 6.0-79 <a href="00Index.html">Index</a>]</div>
+</body></html>

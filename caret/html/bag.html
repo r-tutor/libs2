@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: A General Framework For Bagging</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for bag {caret}"><tr><td>bag {caret}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>A General Framework For Bagging</h2>
+
+<h3>Description</h3>
+
+<p><code>bag</code> provides a framework for bagging classification or regression models. The user can provide their own functions for model building, prediction and aggregation of predictions (see Details below).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+bag(x, ...)
+
+bagControl(fit = NULL, predict = NULL, aggregate = NULL,
+  downSample = FALSE, oob = TRUE, allowParallel = TRUE)
+
+## Default S3 method:
+bag(x, y, B = 10, vars = ncol(x), bagControl = NULL,
+  ...)
+
+## S3 method for class 'bag'
+predict(object, newdata = NULL, ...)
+
+## S3 method for class 'bag'
+print(x, ...)
+
+## S3 method for class 'bag'
+summary(object, ...)
+
+## S3 method for class 'summary.bag'
+print(x, digits = max(3, getOption("digits") - 3), ...)
+
+ldaBag
+
+plsBag
+
+nbBag
+
+ctreeBag
+
+svmBag
+
+nnetBag
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a matrix or data frame of predictors</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>arguments to pass to the model function</p>
+</td></tr>
+<tr valign="top"><td><code>fit</code></td>
+<td>
+<p>a function that has arguments <code>x</code>, <code>y</code> and <code>...</code> and produces a model object #' that can later be used for prediction. Example functions are found in <code>ldaBag</code>, <code>plsBag</code>, #' <code>nbBag</code>, <code>svmBag</code> and <code>nnetBag</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>predict</code></td>
+<td>
+<p>a function that generates predictions for each sub-model. The function should have #' arguments <code>object</code> and <code>x</code>. The output of the function can be any type of object (see the #' example below where posterior probabilities are generated. Example functions are found in <code>ldaBag</code>#' , <code>plsBag</code>, <code>nbBag</code>, <code>svmBag</code> and <code>nnetBag</code>.)</p>
+</td></tr>
+<tr valign="top"><td><code>aggregate</code></td>
+<td>
+<p>a function with arguments <code>x</code> and <code>type</code>. The function that takes the output #' of the <code>predict</code> function and reduces the bagged predictions to a single prediction per sample. #' the <code>type</code> argument can be used to switch between predicting classes or class probabilities for #' classification models. Example functions are found in <code>ldaBag</code>, <code>plsBag</code>, <code>nbBag</code>, #' <code>svmBag</code> and <code>nnetBag</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>downSample</code></td>
+<td>
+<p>logical: for classification, should the data set be randomly sampled so that each #' class has the same number of samples as the smallest class?</p>
+</td></tr>
+<tr valign="top"><td><code>oob</code></td>
+<td>
+<p>logical: should out-of-bag statistics be computed and the predictions retained?</p>
+</td></tr>
+<tr valign="top"><td><code>allowParallel</code></td>
+<td>
+<p>a parallel backend is loaded and available, should the function use it?</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>a vector of outcomes</p>
+</td></tr>
+<tr valign="top"><td><code>B</code></td>
+<td>
+<p>the number of bootstrap samples to train over.</p>
+</td></tr>
+<tr valign="top"><td><code>vars</code></td>
+<td>
+<p>an integer. If this argument is not <code>NULL</code>, a random sample of size <code>vars</code> is taken of the predictors in each bagging iteration. If <code>NULL</code>, all predictors are used.</p>
+</td></tr>
+<tr valign="top"><td><code>bagControl</code></td>
+<td>
+<p>a list of options.</p>
+</td></tr>
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>an object of class <code>bag</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>newdata</code></td>
+<td>
+<p>a matrix or data frame of samples for prediction. Note that this argument must have a non-null value</p>
+</td></tr>
+<tr valign="top"><td><code>digits</code></td>
+<td>
+<p>minimal number of <em>significant digits</em>.</p>
+</td></tr>
+</table>
+
+
+<h3>Format</h3>
+
+<p>An object of class <code>list</code> of length 3.</p>
+
+
+<h3>Details</h3>
+
+<p>The function is basically a framework where users can plug in any model in to assess
+the effect of bagging. Examples functions can be found in <code>ldaBag</code>, <code>plsBag</code>
+, <code>nbBag</code>, <code>svmBag</code> and <code>nnetBag</code>.
+Each has elements <code>fit</code>, <code>pred</code> and <code>aggregate</code>.
+</p>
+<p>One note: when <code>vars</code> is not <code>NULL</code>, the sub-setting occurs prior to the <code>fit</code> and #' <code>predict</code> functions are called. In this way, the user probably does not need to account for the #' change in predictors in their functions.
+</p>
+<p>When using <code>bag</code> with <code><a href="train.html">train</a></code>, classification models should use <code>type = "prob"</code> #' inside of the <code>predict</code> function so that <code>predict.train(object, newdata, type = "prob")</code> will #' work.
+</p>
+<p>If a parallel backend is registered, the <span class="pkg">foreach</span> package is used to train the models in parallel.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>bag</code> produces an object of class <code>bag</code> with elements
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>fits </code></td>
+<td>
+<p>a list with two sub-objects: the <code>fit</code> object has the actual model fit for that #' bagged samples and the <code>vars</code> object is either <code>NULL</code> or a vector of integers corresponding to which predictors were sampled for that model</p>
+</td></tr>
+<tr valign="top"><td><code>control </code></td>
+<td>
+<p>a mirror of the arguments passed into <code>bagControl</code></p>
+</td></tr>
+<tr valign="top"><td><code>call </code></td>
+<td>
+<p>the call</p>
+</td></tr>
+<tr valign="top"><td><code>B </code></td>
+<td>
+<p>the number of bagging iterations</p>
+</td></tr>
+<tr valign="top"><td><code>dims </code></td>
+<td>
+<p>the dimensions of the training set</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Max Kuhn
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## A simple example of bagging conditional inference regression trees:
+data(BloodBrain)
+
+## treebag &lt;- bag(bbbDescr, logBBB, B = 10,
+##                bagControl = bagControl(fit = ctreeBag$fit,
+##                                        predict = ctreeBag$pred,
+##                                        aggregate = ctreeBag$aggregate))
+
+
+
+
+## An example of pooling posterior probabilities to generate class predictions
+data(mdrr)
+
+## remove some zero variance predictors and linear dependencies
+mdrrDescr &lt;- mdrrDescr[, -nearZeroVar(mdrrDescr)]
+mdrrDescr &lt;- mdrrDescr[, -findCorrelation(cor(mdrrDescr), .95)]
+
+## basicLDA &lt;- train(mdrrDescr, mdrrClass, "lda")
+
+## bagLDA2 &lt;- train(mdrrDescr, mdrrClass,
+##                  "bag",
+##                  B = 10,
+##                  bagControl = bagControl(fit = ldaBag$fit,
+##                                          predict = ldaBag$pred,
+##                                          aggregate = ldaBag$aggregate),
+##                  tuneGrid = data.frame(vars = c((1:10)*10 , ncol(mdrrDescr))))
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>caret</em> version 6.0-79 <a href="00Index.html">Index</a>]</div>
+</body></html>

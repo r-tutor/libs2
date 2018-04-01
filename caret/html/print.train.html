@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Print Method for the train Class</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for print.train {caret}"><tr><td>print.train {caret}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Print Method for the train Class</h2>
+
+<h3>Description</h3>
+
+<p>Print the results of a <code><a href="train.html">train</a></code> object.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'train'
+print(x, printCall = FALSE, details = FALSE,
+  selectCol = FALSE, showSD = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>an object of class <code><a href="train.html">train</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>printCall</code></td>
+<td>
+<p>a logical to print the call at the top of the output</p>
+</td></tr>
+<tr valign="top"><td><code>details</code></td>
+<td>
+<p>a logical to show print or summary methods for the final
+model. In some cases (such as <code>gbm</code>, <code>knn</code>, <code>lvq</code>, naive
+Bayes and bagged tree models), no information will be printed even if
+<code>details = TRUE</code></p>
+</td></tr>
+<tr valign="top"><td><code>selectCol</code></td>
+<td>
+<p>a logical whether to add a column with a star next to the
+selected parameters</p>
+</td></tr>
+<tr valign="top"><td><code>showSD</code></td>
+<td>
+<p>a logical whether to show the standard deviation of the
+resampling results within parentheses (e.g. &quot;4.24 (0.493)&quot;)</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>options passed to <code><a href="../../base/html/format.html">format</a></code></p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The table of complexity parameters used, their resampled performance and a
+flag for which rows are optimal.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A matrix with the complexity parameters and performance (invisibly).
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Max Kuhn
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="train.html">train</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+## Not run: 
+data(iris)
+TrainData &lt;- iris[,1:4]
+TrainClasses &lt;- iris[,5]
+
+options(digits = 3)
+
+library(klaR)
+rdaFit &lt;- train(TrainData, TrainClasses, method = "rda",
+                control = trainControl(method = "cv"))
+rdaFit
+print(rdaFit, showSD = TRUE)
+
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>caret</em> version 6.0-79 <a href="00Index.html">Index</a>]</div>
+</body></html>

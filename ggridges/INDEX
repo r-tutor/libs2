@@ -1,0 +1,20 @@
+Catalan_elections       Results from Catalan regional elections
+                        (1980-2015)
+geom_density_ridges     Create ridgeline plot
+geom_ridgeline          Plot a ridgeline (line with filled area
+                        underneath)
+geom_ridgeline_gradient
+                        Plot ridgelines and ridgeline plots with fill
+                        gradients along the x axis
+geom_vridgeline         Plot a vertical ridgeline (ridgeline rotated 90
+                        degrees)
+ggridges                ggridges.
+lincoln_weather         Weather in Lincoln, Nebraska in 2016.
+reduce                  Reduce a list to a single value by iteratively
+                        applying a binary function
+scale_colour_cyclical   Create a discrete scale that cycles between
+                        values
+stat_binline            Stat for histogram ridgeline plots
+stat_density_ridges     Stat for density ridgeline plots
+theme_ridges            A custom theme specifically for use with
+                        ridgeline plots

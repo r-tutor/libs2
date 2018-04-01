@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Independent Component Regression</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for icr.formula {caret}"><tr><td>icr.formula {caret}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Independent Component Regression</h2>
+
+<h3>Description</h3>
+
+<p>Fit a linear regression model using independent components
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'formula'
+icr(formula, data, weights, ..., subset, na.action,
+  contrasts = NULL)
+
+## Default S3 method:
+icr(x, y, ...)
+
+## S3 method for class 'icr'
+predict(object, newdata, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>formula</code></td>
+<td>
+<p>A formula of the form <code>class ~ x1 + x2 + ...{}</code></p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>Data frame from which variables specified in <code>formula</code> are
+preferentially to be taken.</p>
+</td></tr>
+<tr valign="top"><td><code>weights</code></td>
+<td>
+<p>(case) weights for each example &ndash; if missing defaults to 1.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>arguments passed to <code><a href="../../fastICA/html/fastICA.html">fastICA</a></code></p>
+</td></tr>
+<tr valign="top"><td><code>subset</code></td>
+<td>
+<p>An index vector specifying the cases to be used in the
+training sample.  (NOTE: If given, this argument must be named.)</p>
+</td></tr>
+<tr valign="top"><td><code>na.action</code></td>
+<td>
+<p>A function to specify the action to be taken if <code>NA</code>s
+are found. The default action is for the procedure to fail.  An alternative
+is na.omit, which leads to rejection of cases with missing values on any
+required variable.  (NOTE: If given, this argument must be named.)</p>
+</td></tr>
+<tr valign="top"><td><code>contrasts</code></td>
+<td>
+<p>a list of contrasts to be used for some or all of the
+factors appearing as variables in the model formula.</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>matrix or data frame of <code>x</code> values for examples.</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>matrix or data frame of target values for examples.</p>
+</td></tr>
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>an object of class <code>icr</code> as returned by <code>icr</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>newdata</code></td>
+<td>
+<p>matrix or data frame of test examples.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This produces a model analogous to Principal Components Regression (PCR) but
+uses Independent Component Analysis (ICA) to produce the scores. The user
+must specify a value of <code>n.comp</code> to pass to
+<code><a href="../../fastICA/html/fastICA.html">fastICA</a></code>.
+</p>
+<p>The function <code><a href="preProcess.html">preProcess</a></code> to produce the ICA scores for the
+original data and for <code>newdata</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>For <code>icr</code>, a list with elements </p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>model </code></td>
+<td>
+<p>the results of
+<code><a href="../../stats/html/lm.html">lm</a></code> after the ICA transformation</p>
+</td></tr> <tr valign="top"><td><code>ica
+</code></td>
+<td>
+<p>pre-processing information</p>
+</td></tr> <tr valign="top"><td><code>n.comp </code></td>
+<td>
+<p>number of ICA components</p>
+</td></tr>
+<tr valign="top"><td><code>names </code></td>
+<td>
+<p>column names of the original data</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Max Kuhn
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../fastICA/html/fastICA.html">fastICA</a></code>, <code><a href="preProcess.html">preProcess</a></code>,
+<code><a href="../../stats/html/lm.html">lm</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+data(BloodBrain)
+
+icrFit &lt;- icr(bbbDescr, logBBB, n.comp = 5)
+
+icrFit
+
+predict(icrFit, bbbDescr[1:5,])
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>caret</em> version 6.0-79 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -42,13 +42,19 @@ MCMC-traces	MCMC-traces
 mcmc_acf	MCMC-diagnostics
 mcmc_acf_bar	MCMC-diagnostics
 mcmc_areas	MCMC-intervals
+mcmc_areas_data	MCMC-intervals
+mcmc_areas_ridges	MCMC-intervals
+mcmc_areas_ridges_data	MCMC-intervals
 mcmc_combo	MCMC-combos
 mcmc_dens	MCMC-distributions
+mcmc_dens_chains	MCMC-distributions
+mcmc_dens_chains_data	MCMC-distributions
 mcmc_dens_overlay	MCMC-distributions
 mcmc_hex	MCMC-scatterplots
 mcmc_hist	MCMC-distributions
 mcmc_hist_by_chain	MCMC-distributions
 mcmc_intervals	MCMC-intervals
+mcmc_intervals_data	MCMC-intervals
 mcmc_neff	MCMC-diagnostics
 mcmc_neff_data	MCMC-diagnostics
 mcmc_neff_hist	MCMC-diagnostics
@@ -96,6 +102,7 @@ PPC-test-statistics	PPC-test-statistics
 ppc_bars	PPC-discrete
 ppc_bars_grouped	PPC-discrete
 ppc_boxplot	PPC-distributions
+ppc_data	PPC-distributions
 ppc_dens	PPC-distributions
 ppc_dens_overlay	PPC-distributions
 ppc_ecdf_overlay	PPC-distributions
@@ -113,6 +120,8 @@ ppc_intervals_data	PPC-intervals
 ppc_intervals_grouped	PPC-intervals
 ppc_loo_intervals	PPC-loo
 ppc_loo_pit	PPC-loo
+ppc_loo_pit_overlay	PPC-loo
+ppc_loo_pit_qq	PPC-loo
 ppc_loo_ribbon	PPC-loo
 ppc_ribbon	PPC-intervals
 ppc_ribbon_data	PPC-intervals

@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: k-Nearest Neighbour Classification</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for knn3 {caret}"><tr><td>knn3 {caret}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>k-Nearest Neighbour Classification</h2>
+
+<h3>Description</h3>
+
+<p>$k$-nearest neighbour classification that can return class votes for all
+classes.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+knn3(x, ...)
+
+## S3 method for class 'formula'
+knn3(formula, data, subset, na.action, k = 5, ...)
+
+## S3 method for class 'data.frame'
+knn3(x, y, k = 5, ...)
+
+## S3 method for class 'matrix'
+knn3(x, y, k = 5, ...)
+
+## S3 method for class 'knn3'
+print(x, ...)
+
+knn3Train(train, test, cl, k = 1, l = 0, prob = TRUE, use.all = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a matrix of training set predictors</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>additional parameters to pass to <code>knn3Train</code>. However,
+passing <code>prob = FALSE</code> will be over&ndash;ridden.</p>
+</td></tr>
+<tr valign="top"><td><code>formula</code></td>
+<td>
+<p>a formula of the form <code>lhs ~ rhs</code> where <code>lhs</code> is
+the response variable and <code>rhs</code> a set of predictors.</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>optional data frame containing the variables in the model
+formula.</p>
+</td></tr>
+<tr valign="top"><td><code>subset</code></td>
+<td>
+<p>optional vector specifying a subset of observations to be
+used.</p>
+</td></tr>
+<tr valign="top"><td><code>na.action</code></td>
+<td>
+<p>function which indicates what should happen when the data
+contain <code>NA</code>s.</p>
+</td></tr>
+<tr valign="top"><td><code>k</code></td>
+<td>
+<p>number of neighbours considered.</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>a factor vector of training set classes</p>
+</td></tr>
+<tr valign="top"><td><code>train</code></td>
+<td>
+<p>matrix or data frame of training set cases.</p>
+</td></tr>
+<tr valign="top"><td><code>test</code></td>
+<td>
+<p>matrix or data frame of test set cases. A vector will be
+interpreted as a row vector for a single case.</p>
+</td></tr>
+<tr valign="top"><td><code>cl</code></td>
+<td>
+<p>factor of true classifications of training set</p>
+</td></tr>
+<tr valign="top"><td><code>l</code></td>
+<td>
+<p>minimum vote for definite decision, otherwise <code>doubt</code>. (More
+precisely, less than <code>k-l</code> dissenting votes are allowed, even if
+<code>k</code> is increased by ties.)</p>
+</td></tr>
+<tr valign="top"><td><code>prob</code></td>
+<td>
+<p>If this is true, the proportion of the votes for each class are
+returned as attribute <code>prob</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>use.all</code></td>
+<td>
+<p>controls handling of ties. If true, all distances equal to
+the <code>k</code>th largest are included. If false, a random selection of
+distances equal to the <code>k</code>th is chosen to use exactly <code>k</code>
+neighbours.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>knn3</code> is essentially the same code as <code><a href="../../ipred/html/ipredknn.html">ipredknn</a></code>
+and <code>knn3Train</code> is a copy of <code><a href="../../class/html/knn.html">knn</a></code>. The underlying C
+code from the <code>class</code> package has been modified to return the vote
+percentages for each class (previously the percentage for the winning class
+was returned).
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of class <code>knn3</code>. See <code><a href="predict.knn3.html">predict.knn3</a></code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p><code><a href="../../class/html/knn.html">knn</a></code> by W. N. Venables and B. D. Ripley and
+<code><a href="../../ipred/html/ipredknn.html">ipredknn</a></code> by Torsten.Hothorn
+&lt;Torsten.Hothorn@rzmail.uni-erlangen.de&gt;, modifications by Max Kuhn and
+Andre Williams
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+irisFit1 &lt;- knn3(Species ~ ., iris)
+
+irisFit2 &lt;- knn3(as.matrix(iris[, -5]), iris[,5])
+
+data(iris3)
+train &lt;- rbind(iris3[1:25,,1], iris3[1:25,,2], iris3[1:25,,3])
+test &lt;- rbind(iris3[26:50,,1], iris3[26:50,,2], iris3[26:50,,3])
+cl &lt;- factor(c(rep("s",25), rep("c",25), rep("v",25)))
+knn3Train(train, test, cl, k = 5, prob = TRUE)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>caret</em> version 6.0-79 <a href="00Index.html">Index</a>]</div>
+</body></html>

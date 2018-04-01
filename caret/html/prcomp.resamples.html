@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Principal Components Analysis of Resampling Results</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for prcomp.resamples {caret}"><tr><td>prcomp.resamples {caret}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Principal Components Analysis of Resampling Results</h2>
+
+<h3>Description</h3>
+
+<p>Performs a principal components analysis on an object of class
+<code><a href="resamples.html">resamples</a></code> and returns the results as an object with classes
+<code>prcomp.resamples</code> and <code>prcomp</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'resamples'
+prcomp(x, metric = x$metrics[1], ...)
+
+## S3 method for class 'prcomp.resamples'
+plot(x, what = "scree", dims = max(2,
+  ncol(x$rotation)), ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>For <code>prcomp</code>, an object of class <code><a href="resamples.html">resamples</a></code> and
+for <code>plot.prcomp.resamples</code>, an object of class
+<code>plot.prcomp.resamples</code></p>
+</td></tr>
+<tr valign="top"><td><code>metric</code></td>
+<td>
+<p>a performance metric that was estimated for every resample</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>For <code>prcomp.resamples</code>, options to pass to
+<code><a href="../../stats/html/prcomp.html">prcomp</a></code>, for <code>plot.prcomp.resamples</code>, options to
+pass to Lattice objects (see Details below) and, for
+<code>cluster.resamples</code>, options to pass to <code>hclust</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>what</code></td>
+<td>
+<p>the type of plot: <code>"scree"</code> produces a bar chart of
+standard deviations, <code>"cumulative"</code> produces a bar chart of the
+cumulative percent of variance, <code>"loadings"</code> produces a scatterplot
+matrix of the loading values and <code>"components"</code> produces a scatterplot
+matrix of the PCA components</p>
+</td></tr>
+<tr valign="top"><td><code>dims</code></td>
+<td>
+<p>The number of dimensions to plot when <code>what = "loadings"</code>
+or <code>what = "components"</code></p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The principal components analysis treats the models as variables and the
+resamples are realizations of the variables. In this way, we can use PCA to
+&quot;cluster&quot; the assays and look for similarities. Most of the methods for
+<code><a href="../../stats/html/prcomp.html">prcomp</a></code> can be used, although custom <code>print</code> and
+<code>plot</code> methods are used.
+</p>
+<p>The plot method uses lattice graphics. When <code>what = "scree"</code> or
+<code>what = "cumulative"</code>, <code><a href="../../lattice/html/xyplot.html">barchart</a></code> is used.
+When <code>what = "loadings"</code> or <code>what = "components"</code>, either
+<code><a href="../../lattice/html/xyplot.html">xyplot</a></code> or <code><a href="../../lattice/html/splom.html">splom</a></code>
+are used (the latter when <code>dims</code> &gt; 2). Options can be passed to these
+methods using <code>...</code>.
+</p>
+<p>When <code>what = "loadings"</code> or <code>what = "components"</code>, the plots are
+put on a common scale so that later components are less likely to be
+over-interpreted. See Geladi et al. (2003) for examples of why this can be
+important.
+</p>
+<p>For clustering, <code><a href="../../stats/html/hclust.html">hclust</a></code> is used to determine clusters of
+models based on the resampled performance values.
+</p>
+
+
+<h3>Value</h3>
+
+<p>For <code>prcomp.resamples</code>, an object with classes
+<code>prcomp.resamples</code> and <code>prcomp</code>. This object is the same as the
+object produced by <code>prcomp</code>, but with additional elements: </p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>metric
+</code></td>
+<td>
+<p>the value for the <code>metric</code> argument</p>
+</td></tr> <tr valign="top"><td><code>call </code></td>
+<td>
+<p>the call</p>
+</td></tr>
+</table>
+<p>For <code>plot.prcomp.resamples</code>, a Lattice object (see Details above)
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Max Kuhn
+</p>
+
+
+<h3>References</h3>
+
+<p>Geladi, P.; Manley, M.; and Lestander, T. (2003), &quot;Scatter
+plotting in multivariate data analysis,&quot; J. Chemometrics, 17: 503-511
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="resamples.html">resamples</a></code>, <code><a href="../../lattice/html/xyplot.html">barchart</a></code>,
+<code><a href="../../lattice/html/xyplot.html">xyplot</a></code>, <code><a href="../../lattice/html/splom.html">splom</a></code>,
+<code><a href="../../stats/html/hclust.html">hclust</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+## Not run: 
+#load(url("http://topepo.github.io/caret/exampleModels.RData"))
+
+resamps &lt;- resamples(list(CART = rpartFit,
+                          CondInfTree = ctreeFit,
+                          MARS = earthFit))
+resampPCA &lt;- prcomp(resamps)
+
+resampPCA
+
+plot(resampPCA, what = "scree")
+
+plot(resampPCA, what = "components")
+
+plot(resampPCA, what = "components", dims = 2, auto.key = list(columns = 3))
+
+clustered &lt;- cluster(resamps)
+plot(clustered)
+
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>caret</em> version 6.0-79 <a href="00Index.html">Index</a>]</div>
+</body></html>

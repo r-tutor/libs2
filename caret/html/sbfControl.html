@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Control Object for Selection By Filtering (SBF)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for sbfControl {caret}"><tr><td>sbfControl {caret}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Control Object for Selection By Filtering (SBF)</h2>
+
+<h3>Description</h3>
+
+<p>Controls the execution of models with simple filters for feature selection
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+sbfControl(functions = NULL, method = "boot", saveDetails = FALSE,
+  number = ifelse(method %in% c("cv", "repeatedcv"), 10, 25),
+  repeats = ifelse(method %in% c("cv", "repeatedcv"), 1, number),
+  verbose = FALSE, returnResamp = "final", p = 0.75, index = NULL,
+  indexOut = NULL, timingSamps = 0, seeds = NA, allowParallel = TRUE,
+  multivariate = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>functions</code></td>
+<td>
+<p>a list of functions for model fitting, prediction and
+variable filtering (see Details below)</p>
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+<p>The external resampling method: <code>boot</code>, <code>cv</code>,
+<code>LOOCV</code> or <code>LGOCV</code> (for repeated training/test splits</p>
+</td></tr>
+<tr valign="top"><td><code>saveDetails</code></td>
+<td>
+<p>a logical to save the predictions and variable
+importances from the selection process</p>
+</td></tr>
+<tr valign="top"><td><code>number</code></td>
+<td>
+<p>Either the number of folds or number of resampling iterations</p>
+</td></tr>
+<tr valign="top"><td><code>repeats</code></td>
+<td>
+<p>For repeated k-fold cross-validation only: the number of
+complete sets of folds to compute</p>
+</td></tr>
+<tr valign="top"><td><code>verbose</code></td>
+<td>
+<p>a logical to print a log for each external resampling
+iteration</p>
+</td></tr>
+<tr valign="top"><td><code>returnResamp</code></td>
+<td>
+<p>A character string indicating how much of the resampled
+summary metrics should be saved. Values can be &ldquo;final&rdquo; or &ldquo;none&rdquo;</p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>For leave-group out cross-validation: the training percentage</p>
+</td></tr>
+<tr valign="top"><td><code>index</code></td>
+<td>
+<p>a list with elements for each external resampling iteration.
+Each list element is the sample rows used for training at that iteration.</p>
+</td></tr>
+<tr valign="top"><td><code>indexOut</code></td>
+<td>
+<p>a list (the same length as <code>index</code>) that dictates which
+sample are held-out for each resample. If <code>NULL</code>, then the unique set
+of samples not contained in <code>index</code> is used.</p>
+</td></tr>
+<tr valign="top"><td><code>timingSamps</code></td>
+<td>
+<p>the number of training set samples that will be used to
+measure the time for predicting samples (zero indicates that the prediction
+time should not be estimated).</p>
+</td></tr>
+<tr valign="top"><td><code>seeds</code></td>
+<td>
+<p>an optional set of integers that will be used to set the seed
+at each resampling iteration. This is useful when the models are run in
+parallel. A value of <code>NA</code> will stop the seed from being set within the
+worker processes while a value of <code>NULL</code> will set the seeds using a
+random set of integers. Alternatively, a vector of integers can be used. The
+vector should have <code>B+1</code> elements where <code>B</code> is the number of
+resamples. See the Examples section below.</p>
+</td></tr>
+<tr valign="top"><td><code>allowParallel</code></td>
+<td>
+<p>if a parallel backend is loaded and available, should
+the function use it?</p>
+</td></tr>
+<tr valign="top"><td><code>multivariate</code></td>
+<td>
+<p>a logical; should all the columns of <code>x</code> be exposed
+to the <code>score</code> function at once?</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>More details on this function can be found at
+<a href="http://topepo.github.io/caret/feature-selection-using-univariate-filters.html">http://topepo.github.io/caret/feature-selection-using-univariate-filters.html</a>.
+</p>
+<p>Simple filter-based feature selection requires function to be specified for
+some operations.
+</p>
+<p>The <code>fit</code> function builds the model based on the current data set. The
+arguments for the function must be: </p>
+ <ul>
+<li><p><code>x</code> the current
+training set of predictor data with the appropriate subset of variables
+(i.e. after filtering) </p>
+</li>
+<li><p><code>y</code> the current outcome data (either a
+numeric or factor vector) </p>
+</li>
+<li><p><code>...</code> optional arguments to pass to the
+fit function in the call to <code>sbf</code> </p>
+</li></ul>
+<p> The function should return a model
+object that can be used to generate predictions.
+</p>
+<p>The <code>pred</code> function returns a vector of predictions (numeric or
+factors) from the current model. The arguments are: </p>
+
+<ul>
+<li><p><code>object</code> the model generated by the <code>fit</code> function
+</p>
+</li>
+<li><p><code>x</code> the current set of predictor set for the held-back samples </p>
+</li></ul>
+
+<p>The <code>score</code> function is used to return scores with names for each
+predictor (such as a p-value). Inputs are: </p>
+ <ul>
+<li><p><code>x</code> the
+predictors for the training samples. If <code>sbfControl()$multivariate</code> is
+<code>TRUE</code>, this will be the full predictor matrix. Otherwise it is a
+vector for a specific predictor.  </p>
+</li>
+<li><p><code>y</code> the current training
+outcomes </p>
+</li></ul>
+<p> When <code>sbfControl()$multivariate</code> is <code>TRUE</code>, the
+<code>score</code> function should return a named vector where
+<code>length(scores) == ncol(x)</code>. Otherwise, the function's output should be
+a single value. Univariate examples are give by <code><a href="caretSBF.html">anovaScores</a></code>
+for classification and <code><a href="caretSBF.html">gamScores</a></code> for regression and the
+example below.
+</p>
+<p>The <code>filter</code> function is used to return a logical vector with names for
+each predictor (<code>TRUE</code> indicates that the prediction should be
+retained). Inputs are: </p>
+ <ul>
+<li><p><code>score</code> the output of the
+<code>score</code> function </p>
+</li>
+<li><p><code>x</code> the predictors for the training samples
+</p>
+</li>
+<li><p><code>y</code> the current training outcomes </p>
+</li></ul>
+<p> The function should return a
+named logical vector.
+</p>
+<p>Examples of these functions are included in the package:
+<code><a href="caretSBF.html">caretSBF</a></code>, <code><a href="caretSBF.html">lmSBF</a></code>, <code><a href="caretSBF.html">rfSBF</a></code>,
+<code><a href="caretSBF.html">treebagSBF</a></code>, <code><a href="caretSBF.html">ldaSBF</a></code> and <code><a href="caretSBF.html">nbSBF</a></code>.
+</p>
+<p>The web page <a href="http://topepo.github.io/caret/">http://topepo.github.io/caret/</a> has more details and
+examples related to this function.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a list that echos the specified arguments
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Max Kuhn
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="sbf.html">sbf</a></code>, <code><a href="caretSBF.html">caretSBF</a></code>, <code><a href="caretSBF.html">lmSBF</a></code>,
+<code><a href="caretSBF.html">rfSBF</a></code>, <code><a href="caretSBF.html">treebagSBF</a></code>, <code><a href="caretSBF.html">ldaSBF</a></code> and
+<code><a href="caretSBF.html">nbSBF</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+## Not run: 
+data(BloodBrain)
+
+## Use a GAM is the filter, then fit a random forest model
+set.seed(1)
+RFwithGAM &lt;- sbf(bbbDescr, logBBB,
+                 sbfControl = sbfControl(functions = rfSBF,
+                                         verbose = FALSE,
+                                         seeds = sample.int(100000, 11),
+                                         method = "cv"))
+RFwithGAM
+
+
+## A simple example for multivariate scoring
+rfSBF2 &lt;- rfSBF
+rfSBF2$score &lt;- function(x, y) apply(x, 2, rfSBF$score, y = y)
+
+set.seed(1)
+RFwithGAM2 &lt;- sbf(bbbDescr, logBBB,
+                  sbfControl = sbfControl(functions = rfSBF2,
+                                          verbose = FALSE,
+                                          seeds = sample.int(100000, 11),
+                                          method = "cv",
+                                          multivariate = TRUE))
+RFwithGAM2
+
+
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>caret</em> version 6.0-79 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -87,6 +87,8 @@ plots don't actually need the chains to be separate, but for a few of the
 plots we make in this vignette we'll want to show the chains individually.
 
 
+<br>
+
 ## Posterior uncertainty intervals
 
 For models fit using MCMC we can compute posterior uncertainty intervals
@@ -131,6 +133,8 @@ mcmc_areas(
 )
 ```
 
+
+<br>
 
 ## Univariate marginal posterior distributions
 
@@ -209,6 +213,10 @@ color_scheme_set("teal")
 mcmc_violin(posterior, pars = c("wt", "sigma"), probs = c(0.1, 0.5, 0.9))
 ```
 
+
+
+<br>
+
 ## Bivariate plots
 
 Various functions are available for plotting bivariate marginal posterior 
@@ -220,7 +228,7 @@ vignette.
 **Documentation:**
 
 * `help("MCMC-scatterplots")` 
-* [mc-stan.org/bayesplot/reference/MCMC-distributions](http://mc-stan.org/bayesplot/reference/MCMC-scatterplots.html)
+* [mc-stan.org/bayesplot/reference/MCMC-scatterplots](http://mc-stan.org/bayesplot/reference/MCMC-scatterplots.html)
 
 ------
 
@@ -266,6 +274,9 @@ useful when MCMC diagnostic information is included. This is discussed in the
 [_Visual MCMC diagnostics_](http://mc-stan.org/bayesplot/articles/visual-mcmc-diagnostics.html)
 vignette.
 
+
+<br>
+
 ## Trace plots 
 
 Trace plots are time series plots of Markov chains. In this vignette 
@@ -278,7 +289,7 @@ to trace plots.
 **Documentation:**
 
 * `help("MCMC-traces")` 
-* [mc-stan.org/bayesplot/reference/MCMC-distributions](http://mc-stan.org/bayesplot/reference/MCMC-traces.html)
+* [mc-stan.org/bayesplot/reference/MCMC-traces](http://mc-stan.org/bayesplot/reference/MCMC-traces.html)
 
 -------
 
@@ -325,14 +336,16 @@ mcmc_trace_highlight(posterior, pars = "sigma", highlight = 3)
 ```
 
 
+<br>
+
 ## References
 
 Gabry, J., and Goodrich, B. (2017). rstanarm: Bayesian Applied Regression 
 Modeling via Stan. R package version 2.15.3. 
 http://mc-stan.org/rstanarm, https://CRAN.R-project.org/package=rstanarm
 
-Gabry, J., Simpson, D., Vehtari, A., Betancourt, M., Gelman, A. (2017).
-Visualization in Bayesian workflow. arXiv preprint 
+Gabry, J., Simpson, D., Vehtari, A., Betancourt, M., Gelman, A. (2018).
+Visualization in Bayesian workflow. _Journal of the Royal Statistical Society Series A_, accepted for publication. arXiv preprint:
 https://arxiv.org/abs/1709.01449
 
 Gelman, A., Carlin, J. B., Stern, H. S., Dunson, D. B., Vehtari, A., and

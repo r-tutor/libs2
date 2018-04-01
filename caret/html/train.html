@@ -1,0 +1,456 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Fit Predictive Models over Different Tuning Parameters</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for train {caret}"><tr><td>train {caret}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Fit Predictive Models over Different Tuning Parameters</h2>
+
+<h3>Description</h3>
+
+<p>This function sets up a grid of tuning parameters for a number
+of classification and regression routines, fits each model and
+calculates a resampling based performance measure.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+train(x, ...)
+
+## Default S3 method:
+train(x, y, method = "rf", preProcess = NULL, ...,
+  weights = NULL, metric = ifelse(is.factor(y), "Accuracy", "RMSE"),
+  maximize = ifelse(metric %in% c("RMSE", "logLoss", "MAE"), FALSE, TRUE),
+  trControl = trainControl(), tuneGrid = NULL,
+  tuneLength = ifelse(trControl$method == "none", 1, 3))
+
+## S3 method for class 'formula'
+train(form, data, ..., weights, subset, na.action = na.fail,
+  contrasts = NULL)
+
+## S3 method for class 'recipe'
+train(x, data, method = "rf", ...,
+  metric = ifelse(is.factor(y_dat), "Accuracy", "RMSE"),
+  maximize = ifelse(metric %in% c("RMSE", "logLoss", "MAE"), FALSE, TRUE),
+  trControl = trainControl(), tuneGrid = NULL,
+  tuneLength = ifelse(trControl$method == "none", 1, 3))
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>For the default method, <code>x</code> is an object where
+samples are in rows and features are in columns. This could be a
+simple matrix, data frame or other type (e.g. sparse matrix) but
+must have column names (see Details below). Preprocessing using
+the <code>preProcess</code> argument only supports matrices or data
+frames. When using the recipe method, <code>x</code> should be an
+unprepared <code><a href="../../recipes/html/recipe.html">recipe</a></code> object that describes the model
+terms (i.e. outcome, predictors, etc.) as well as any
+pre-processing that should be done to the data. This is an
+alternative approach to specifying the model. Note that, when
+using the recipe method, any arguments passed to <code>preProcess</code>
+will be ignored. See the links and example below for more details
+using recipes.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Arguments passed to the classification or
+regression routine (such as
+<code><a href="../../randomForest/html/randomForest.html">randomForest</a></code>). Errors will occur if
+values for tuning parameters are passed here.</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>A numeric or factor vector containing the outcome for
+each sample.</p>
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+<p>A string specifying which classification or
+regression model to use. Possible values are found using
+<code>names(getModelInfo())</code>. See
+<a href="http://topepo.github.io/caret/train-models-by-tag.html">http://topepo.github.io/caret/train-models-by-tag.html</a>. A
+list of functions can also be passed for a custom model
+function. See
+<a href="http://topepo.github.io/caret/using-your-own-model-in-train.html">http://topepo.github.io/caret/using-your-own-model-in-train.html</a>
+for details.</p>
+</td></tr>
+<tr valign="top"><td><code>preProcess</code></td>
+<td>
+<p>A string vector that defines a pre-processing
+of the predictor data. Current possibilities are &quot;BoxCox&quot;,
+&quot;YeoJohnson&quot;, &quot;expoTrans&quot;, &quot;center&quot;, &quot;scale&quot;, &quot;range&quot;,
+&quot;knnImpute&quot;, &quot;bagImpute&quot;, &quot;medianImpute&quot;, &quot;pca&quot;, &quot;ica&quot; and
+&quot;spatialSign&quot;. The default is no pre-processing. See
+<code><a href="preProcess.html">preProcess</a></code> and <code><a href="trainControl.html">trainControl</a></code> on the
+procedures and how to adjust them. Pre-processing code is only
+designed to work when <code>x</code> is a simple matrix or data frame.</p>
+</td></tr>
+<tr valign="top"><td><code>weights</code></td>
+<td>
+<p>A numeric vector of case weights. This argument
+will only affect models that allow case weights.</p>
+</td></tr>
+<tr valign="top"><td><code>metric</code></td>
+<td>
+<p>A string that specifies what summary metric will
+be used to select the optimal model. By default, possible values
+are &quot;RMSE&quot; and &quot;Rsquared&quot; for regression and &quot;Accuracy&quot; and
+&quot;Kappa&quot; for classification. If custom performance metrics are
+used (via the <code>summaryFunction</code> argument in
+<code><a href="trainControl.html">trainControl</a></code>, the value of <code>metric</code> should
+match one of the arguments. If it does not, a warning is issued
+and the first metric given by the <code>summaryFunction</code> is
+used. (NOTE: If given, this argument must be named.)</p>
+</td></tr>
+<tr valign="top"><td><code>maximize</code></td>
+<td>
+<p>A logical: should the metric be maximized or
+minimized?</p>
+</td></tr>
+<tr valign="top"><td><code>trControl</code></td>
+<td>
+<p>A list of values that define how this function
+acts. See <code><a href="trainControl.html">trainControl</a></code> and
+<a href="http://topepo.github.io/caret/using-your-own-model-in-train.html">http://topepo.github.io/caret/using-your-own-model-in-train.html</a>.
+(NOTE: If given, this argument must be named.)</p>
+</td></tr>
+<tr valign="top"><td><code>tuneGrid</code></td>
+<td>
+<p>A data frame with possible tuning values. The
+columns are named the same as the tuning parameters. Use
+<code><a href="modelLookup.html">getModelInfo</a></code> to get a list of tuning parameters
+for each model or see
+<a href="http://topepo.github.io/caret/available-models.html">http://topepo.github.io/caret/available-models.html</a>.
+(NOTE: If given, this argument must be named.)</p>
+</td></tr>
+<tr valign="top"><td><code>tuneLength</code></td>
+<td>
+<p>An integer denoting the amount of granularity
+in the tuning parameter grid. By default, this argument is the
+number of levels for each tuning parameters that should be
+generated by <code><a href="train.html">train</a></code>. If <code><a href="trainControl.html">trainControl</a></code>
+has the option <code>search = "random"</code>, this is the maximum
+number of tuning parameter combinations that will be generated
+by the random search. (NOTE: If given, this argument must be
+named.)</p>
+</td></tr>
+<tr valign="top"><td><code>form</code></td>
+<td>
+<p>A formula of the form <code>y ~ x1 + x2 + ...</code></p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>Data frame from which variables specified in
+<code>formula</code> or <code>recipe</code> are preferentially to be taken.</p>
+</td></tr>
+<tr valign="top"><td><code>subset</code></td>
+<td>
+<p>An index vector specifying the cases to be used
+in the training sample. (NOTE: If given, this argument must be
+named.)</p>
+</td></tr>
+<tr valign="top"><td><code>na.action</code></td>
+<td>
+<p>A function to specify the action to be taken
+if NAs are found. The default action is for the procedure to
+fail. An alternative is <code>na.omit</code>, which leads to rejection
+of cases with missing values on any required variable. (NOTE: If
+given, this argument must be named.)</p>
+</td></tr>
+<tr valign="top"><td><code>contrasts</code></td>
+<td>
+<p>A list of contrasts to be used for some or all
+the factors appearing as variables in the model formula.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>train</code> can be used to tune models by picking the
+complexity parameters that are associated with the optimal
+resampling statistics. For particular model, a grid of
+parameters (if any) is created and the model is trained on
+slightly different data for each candidate combination of tuning
+parameters. Across each data set, the performance of held-out
+samples is calculated and the mean and standard deviation is
+summarized for each combination. The combination with the
+optimal resampling statistic is chosen as the final model and
+the entire training set is used to fit a final model.
+</p>
+<p>The predictors in <code>x</code> can be most any object as long as
+the underlying model fit function can deal with the object
+class. The function was designed to work with simple matrices
+and data frame inputs, so some functionality may not work (e.g.
+pre-processing). When using string kernels, the vector of
+character strings should be converted to a matrix with a single
+column.
+</p>
+<p>More details on this function can be found at
+<a href="http://topepo.github.io/caret/model-training-and-tuning.html">http://topepo.github.io/caret/model-training-and-tuning.html</a>.
+</p>
+<p>A variety of models are currently available and are enumerated
+by tag (i.e. their model characteristics) at
+<a href="http://topepo.github.io/caret/train-models-by-tag.html">http://topepo.github.io/caret/train-models-by-tag.html</a>.
+</p>
+<p>More details on using recipes can be found at
+<a href="http://topepo.github.io/caret/using-recipes-with-train.html">http://topepo.github.io/caret/using-recipes-with-train.html</a>.
+Note that case weights can be passed into <code>train</code> using a
+role of <code>"case weight"</code> for a single variable. Also, if
+there are non-predictor columns that should be used when
+determining the model's performance metrics, the role of
+<code>"performance var"</code> can be used with multiple columns and
+these will be made available during resampling to the
+<code>summaryFunction</code> function.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list is returned of class <code>train</code> containing:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>method </code></td>
+<td>
+<p>The chosen model.</p>
+</td></tr> <tr valign="top"><td><code>modelType </code></td>
+<td>
+<p>An
+identifier of the model type.</p>
+</td></tr> <tr valign="top"><td><code>results </code></td>
+<td>
+<p>A data frame the
+training error rate and values of the tuning parameters.</p>
+</td></tr>
+<tr valign="top"><td><code>bestTune </code></td>
+<td>
+<p>A data frame with the final parameters.</p>
+</td></tr>
+<tr valign="top"><td><code>call</code></td>
+<td>
+<p>The (matched) function call with dots expanded</p>
+</td></tr>
+<tr valign="top"><td><code>dots</code></td>
+<td>
+<p>A list containing any ... values passed to the
+original call</p>
+</td></tr> <tr valign="top"><td><code>metric</code></td>
+<td>
+<p>A string that specifies what
+summary metric will be used to select the optimal model.</p>
+</td></tr>
+<tr valign="top"><td><code>control</code></td>
+<td>
+<p>The list of control parameters.</p>
+</td></tr> <tr valign="top"><td><code>preProcess
+</code></td>
+<td>
+<p>Either <code>NULL</code> or an object of class
+<code><a href="preProcess.html">preProcess</a></code></p>
+</td></tr> <tr valign="top"><td><code>finalModel</code></td>
+<td>
+<p>A fit object using
+the best parameters</p>
+</td></tr> <tr valign="top"><td><code>trainingData</code></td>
+<td>
+<p>A data frame</p>
+</td></tr>
+<tr valign="top"><td><code>resample</code></td>
+<td>
+<p>A data frame with columns for each performance
+metric. Each row corresponds to each resample. If leave-one-out
+cross-validation or out-of-bag estimation methods are requested,
+this will be <code>NULL</code>. The <code>returnResamp</code> argument of
+<code><a href="trainControl.html">trainControl</a></code> controls how much of the resampled
+results are saved.</p>
+</td></tr> <tr valign="top"><td><code>perfNames</code></td>
+<td>
+<p>A character vector of
+performance metrics that are produced by the summary function</p>
+</td></tr>
+<tr valign="top"><td><code>maximize</code></td>
+<td>
+<p>A logical recycled from the function arguments.</p>
+</td></tr>
+<tr valign="top"><td><code>yLimits</code></td>
+<td>
+<p>The range of the training set outcomes.</p>
+</td></tr>
+<tr valign="top"><td><code>times</code></td>
+<td>
+<p>A list of execution times: <code>everything</code> is for
+the entire call to <code>train</code>, <code>final</code> for the final
+model fit and, optionally, <code>prediction</code> for the time to
+predict new samples (see <code><a href="trainControl.html">trainControl</a></code>)</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Max Kuhn (the guts of <code>train.formula</code> were based
+on Ripley's <code>nnet.formula</code>)
+</p>
+
+
+<h3>References</h3>
+
+<p><a href="http://topepo.github.io/caret/">http://topepo.github.io/caret/</a>
+</p>
+<p>Kuhn (2008), &ldquo;Building Predictive Models in R Using the caret&rdquo;
+(<a href="http://www.jstatsoft.org/article/view/v028i05/v28i05.pdf">http://www.jstatsoft.org/article/view/v028i05/v28i05.pdf</a>)
+</p>
+<p><a href="https://topepo.github.io/recipes/">https://topepo.github.io/recipes/</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="models.html">models</a></code>, <code><a href="trainControl.html">trainControl</a></code>,
+<code><a href="update.train.html">update.train</a></code>, <code><a href="modelLookup.html">modelLookup</a></code>,
+<code><a href="createDataPartition.html">createFolds</a></code>, <code><a href="../../recipes/html/recipe.html">recipe</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+## Not run: 
+
+#######################################
+## Classification Example
+
+data(iris)
+TrainData &lt;- iris[,1:4]
+TrainClasses &lt;- iris[,5]
+
+knnFit1 &lt;- train(TrainData, TrainClasses,
+                 method = "knn",
+                 preProcess = c("center", "scale"),
+                 tuneLength = 10,
+                 trControl = trainControl(method = "cv"))
+
+knnFit2 &lt;- train(TrainData, TrainClasses,
+                 method = "knn",
+                 preProcess = c("center", "scale"),
+                 tuneLength = 10,
+                 trControl = trainControl(method = "boot"))
+
+
+library(MASS)
+nnetFit &lt;- train(TrainData, TrainClasses,
+                 method = "nnet",
+                 preProcess = "range",
+                 tuneLength = 2,
+                 trace = FALSE,
+                 maxit = 100)
+
+#######################################
+## Regression Example
+
+library(mlbench)
+data(BostonHousing)
+
+lmFit &lt;- train(medv ~ . + rm:lstat,
+               data = BostonHousing,
+               method = "lm")
+
+library(rpart)
+rpartFit &lt;- train(medv ~ .,
+                  data = BostonHousing,
+                  method = "rpart",
+                  tuneLength = 9)
+
+#######################################
+## Example with a custom metric
+
+madSummary &lt;- function (data,
+                        lev = NULL,
+                        model = NULL) {
+  out &lt;- mad(data$obs - data$pred,
+             na.rm = TRUE)
+  names(out) &lt;- "MAD"
+  out
+}
+
+robustControl &lt;- trainControl(summaryFunction = madSummary)
+marsGrid &lt;- expand.grid(degree = 1, nprune = (1:10) * 2)
+
+earthFit &lt;- train(medv ~ .,
+                  data = BostonHousing,
+                  method = "earth",
+                  tuneGrid = marsGrid,
+                  metric = "MAD",
+                  maximize = FALSE,
+                  trControl = robustControl)
+
+
+#######################################
+## Example with a recipe
+
+data(cox2)
+
+cox2 &lt;- cox2Descr
+cox2$potency &lt;- cox2IC50
+
+library(recipes)
+
+cox2_recipe &lt;- recipe(potency ~ ., data = cox2) %&gt;%
+  ## Log the outcome
+  step_log(potency, base = 10) %&gt;%
+  ## Remove sparse and unbalanced predictors
+  step_nzv(all_predictors()) %&gt;%
+  ## Surface area predictors are highly correlated so
+  ## conduct PCA just on these. 
+  step_pca(contains("VSA"), prefix = "surf_area_", 
+           threshold = .95) %&gt;%
+  ## Remove other highly correlated predictors
+  step_corr(all_predictors(), -starts_with("surf_area_"), 
+            threshold = .90) %&gt;%
+  ## Center and scale all of the non-PCA predictors
+  step_center(all_predictors(), -starts_with("surf_area_")) %&gt;%
+  step_scale(all_predictors(), -starts_with("surf_area_"))
+
+set.seed(888)
+cox2_lm &lt;- train(cox2_recipe, 
+                 data = cox2,
+                 method = "lm", 
+                 trControl = trainControl(method = "cv"))
+
+#######################################
+## Parallel Processing Example via multicore package
+
+## library(doMC)
+## registerDoMC(2)
+
+## NOTE: don't run models form RWeka when using
+### multicore. The session will crash.
+
+## The code for train() does not change:
+set.seed(1)
+usingMC &lt;-  train(medv ~ .,
+                  data = BostonHousing,
+                  method = "glmboost")
+
+## or use:
+## library(doMPI) or
+## library(doParallel) or
+## library(doSMP) and so on
+
+
+## End(Not run)
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>caret</em> version 6.0-79 <a href="00Index.html">Index</a>]</div>
+</body></html>

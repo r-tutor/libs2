@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Compute the multivariate spatial sign</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for spatialSign {caret}"><tr><td>spatialSign {caret}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Compute the multivariate spatial sign</h2>
+
+<h3>Description</h3>
+
+<p>Compute the spatial sign (a projection of a data vector to a
+unit length circle). The spatial sign of a vector <code>w</code> is
+<code>w /norm(w)</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+spatialSign(x, ...)
+
+## Default S3 method:
+spatialSign(x, na.rm = TRUE, ...)
+
+## S3 method for class 'matrix'
+spatialSign(x, na.rm = TRUE, ...)
+
+## S3 method for class 'data.frame'
+spatialSign(x, na.rm = TRUE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>an object full of numeric data (which should probably
+be scaled). Factors are not allowed. This could be a vector,
+matrix or data frame.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Not currently used.</p>
+</td></tr>
+<tr valign="top"><td><code>na.rm</code></td>
+<td>
+<p>A logical; should missing data be removed when
+computing the norm of the vector?</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A vector, matrix or data frame with the same dim names
+of the original data.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Max Kuhn
+</p>
+
+
+<h3>References</h3>
+
+<p>Serneels et al. Spatial sign preprocessing: a
+simple way to impart moderate robustness to multivariate
+estimators. J. Chem. Inf. Model (2006) vol. 46 (3) pp. 1402-1409
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+spatialSign(rnorm(5))
+
+spatialSign(matrix(rnorm(12), ncol = 3))
+
+# should fail since the fifth column is a factor
+try(spatialSign(iris), silent = TRUE)
+
+spatialSign(iris[,-5])
+
+trellis.par.set(caretTheme())
+featurePlot(iris[,-5], iris[,5], "pairs")
+featurePlot(spatialSign(scale(iris[,-5])), iris[,5], "pairs")
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>caret</em> version 6.0-79 <a href="00Index.html">Index</a>]</div>
+</body></html>

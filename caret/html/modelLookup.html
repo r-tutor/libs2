@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Tools for Models Available in 'train'</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for modelLookup {caret}"><tr><td>modelLookup {caret}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Tools for Models Available in <code>train</code></h2>
+
+<h3>Description</h3>
+
+<p>These function show information about models and packages that are
+accessible via <code><a href="train.html">train</a></code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+modelLookup(model = NULL)
+
+checkInstall(pkg)
+
+getModelInfo(model = NULL, regex = TRUE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>model</code></td>
+<td>
+<p>a character string associated with the <code>method</code> argument
+of <code><a href="train.html">train</a></code>. If no value is passed, all models are returned. For
+<code>getModelInfo</code>, regular expressions can be used.</p>
+</td></tr>
+<tr valign="top"><td><code>pkg</code></td>
+<td>
+<p>a character string of package names.</p>
+</td></tr>
+<tr valign="top"><td><code>regex</code></td>
+<td>
+<p>a logical: should a regular expressions be used? If
+<code>FALSE</code>, a simple match is conducted against the whole name of the
+model.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>options to pass to <code><a href="../../base/html/grepl.html">grepl</a></code></p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>modelLookup</code> is good for getting information related to the tuning
+parameters for a model. <code>getModelInfo</code> will return all the functions
+and metadata associated with a model. Both of these functions will only
+search within the models bundled in this package.
+</p>
+<p><code>checkInstall</code> will check to see if packages are installed. If they are
+not and the session is interactive, an option is given to install the
+packages using <code><a href="../../utils/html/install.packages.html">install.packages</a></code> using that functions
+default arguments (the missing packages are listed if you would like to
+install them with other options). If the session is not interactive, an
+error is thrown.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>modelLookup</code> produces a data frame with columns </p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>model
+</code></td>
+<td>
+<p>a character string for the model code</p>
+</td></tr> <tr valign="top"><td><code>parameter </code></td>
+<td>
+<p>the tuning
+parameter name</p>
+</td></tr> <tr valign="top"><td><code>label </code></td>
+<td>
+<p>a tuning parameter label (used in plots)</p>
+</td></tr>
+<tr valign="top"><td><code>forReg </code></td>
+<td>
+<p>a logical; can the model be used for regression?</p>
+</td></tr>
+<tr valign="top"><td><code>forClass </code></td>
+<td>
+<p>a logical; can the model be used for classification?</p>
+</td></tr>
+<tr valign="top"><td><code>probModel </code></td>
+<td>
+<p>a logical; does the model produce class probabilities?</p>
+</td></tr>
+</table>
+<p><code>getModelInfo</code> returns a list containing one or more lists of the
+standard model information.
+</p>
+<p><code>checkInstall</code> returns not value.
+</p>
+
+
+<h3>Note</h3>
+
+<p>The column <code>seq</code> is no longer included in the output of
+<code>modelLookup</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Max Kuhn
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="train.html">train</a></code>, <code><a href="../../utils/html/install.packages.html">install.packages</a></code>,
+<code><a href="../../base/html/grepl.html">grepl</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+## Not run:  
+modelLookup()
+modelLookup("gbm")
+
+getModelInfo("pls")
+getModelInfo("^pls")
+getModelInfo("pls", regex = FALSE)
+
+checkInstall(getModelInfo("pls")$library)
+
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>caret</em> version 6.0-79 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Lift Plot</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for lift {caret}"><tr><td>lift {caret}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Lift Plot</h2>
+
+<h3>Description</h3>
+
+<p>For classification models, this function creates a 'lift plot' that
+describes how well a model ranks samples for one class
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+lift(x, ...)
+
+## Default S3 method:
+lift(x, ...)
+
+## S3 method for class 'formula'
+lift(x, data = NULL, class = NULL, subset = TRUE,
+  lattice.options = NULL, cuts = NULL, labels = NULL, ...)
+
+## S3 method for class 'lift'
+print(x, ...)
+
+## S3 method for class 'lift'
+xyplot(x, data = NULL, plot = "gain", values = NULL, ...)
+
+## S3 method for class 'lift'
+ggplot(data = NULL, mapping = NULL, plot = "gain",
+  values = NULL, ..., environment = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a <code>lattice</code> formula (see <code><a href="../../lattice/html/xyplot.html">xyplot</a></code>
+for syntax) where the left-hand side of the formula is a factor class
+variable of the observed outcome and the right-hand side specifies one or
+model columns corresponding to a numeric ranking variable for a model (e.g.
+class probabilities). The classification variable should have two levels.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>options to pass through to <code><a href="../../lattice/html/xyplot.html">xyplot</a></code>
+or the panel function (not used in <code>lift.formula</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>For <code>lift.formula</code>, a data frame (or more precisely,
+anything that is a valid <code>envir</code> argument in <code>eval</code>, e.g., a list
+or an environment) containing values for any variables in the formula, as
+well as <code>groups</code> and <code>subset</code> if applicable. If not found in
+<code>data</code>, or if <code>data</code> is unspecified, the variables are looked for
+in the environment of the formula. This argument is not used for
+<code>xyplot.lift</code> or <code>ggplot.lift</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>class</code></td>
+<td>
+<p>a character string for the class of interest</p>
+</td></tr>
+<tr valign="top"><td><code>subset</code></td>
+<td>
+<p>An expression that evaluates to a logical or integer indexing
+vector. It is evaluated in <code>data</code>. Only the resulting rows of
+<code>data</code> are used for the plot.</p>
+</td></tr>
+<tr valign="top"><td><code>lattice.options</code></td>
+<td>
+<p>A list that could be supplied to
+<code><a href="../../lattice/html/lattice.options.html">lattice.options</a></code></p>
+</td></tr>
+<tr valign="top"><td><code>cuts</code></td>
+<td>
+<p>If a single value is given, a sequence of values between 0 and 1
+are created with length <code>cuts</code>. If a vector, these values are used as
+the cuts. If <code>NULL</code>, each unique value of the model prediction is used.
+This is helpful when the data set is large.</p>
+</td></tr>
+<tr valign="top"><td><code>labels</code></td>
+<td>
+<p>A named list of labels for keys. The list should have an
+element for each term on the right-hand side of the formula and the names
+should match the names of the models.</p>
+</td></tr>
+<tr valign="top"><td><code>plot</code></td>
+<td>
+<p>Either &quot;gain&quot; (the default) or &quot;lift&quot;. The former plots the
+number of samples called events versus the event rate while the latter shows
+the event cut-off versus the lift statistic.</p>
+</td></tr>
+<tr valign="top"><td><code>values</code></td>
+<td>
+<p>A vector of numbers between 0 and 100 specifying reference
+values for the percentage of samples found (i.e. the y-axis). Corresponding
+points on the x-axis are found via interpolation and line segments are shown
+to indicate how many samples must be tested before these percentages are
+found. The lines use either the <code>plot.line</code> or <code>superpose.line</code>
+component of the current lattice theme to draw the lines (depending on
+whether groups were used. These values are only used when <code>type =
+"gain"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>mapping, environment</code></td>
+<td>
+<p>Not used (required for <code>ggplot</code> consistency).</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>lift.formula</code> is used to process the data and <code>xyplot.lift</code> is
+used to create the plot.
+</p>
+<p>To construct data for the the lift and gain plots, the following steps are
+used for each model:
+</p>
+ <ol>
+<li><p> The data are ordered by the numeric model prediction used
+on the right-hand side of the model formula </p>
+</li>
+<li><p> Each unique value of the
+score is treated as a cut point </p>
+</li>
+<li><p> The number of samples with true
+results equal to <code>class</code> are determined </p>
+</li>
+<li><p> The lift is calculated as
+the ratio of the percentage of samples in each split corresponding to
+<code>class</code> over the same percentage in the entire data set</p>
+</li></ol>
+ <p><code>lift</code>
+with <code>plot = "gain"</code> produces a plot of the cumulative lift values by
+the percentage of samples evaluated while <code>plot = "lift"</code> shows the cut
+point value versus the lift statistic.
+</p>
+<p>This implementation uses the <span class="pkg">lattice</span> function
+<code><a href="../../lattice/html/xyplot.html">xyplot</a></code>, so plot elements can be changed via
+panel functions, <code><a href="../../lattice/html/trellis.par.get.html">trellis.par.set</a></code> or
+other means. <code>lift</code> uses the panel function <code><a href="panel.lift2.html">panel.lift2</a></code>
+by default, but it can be changes using
+<code><a href="../../lattice/html/update.trellis.html">update.trellis</a></code> (see the examples in
+<code><a href="panel.lift2.html">panel.lift2</a></code>).
+</p>
+<p>The following elements are set by default in the plot but can be changed by
+passing new values into <code>xyplot.lift</code>: <code>xlab = "% Samples
+Tested"</code>, <code>ylab = "% Samples Found"</code>, <code>type = "S"</code>, <code>ylim =
+extendrange(c(0, 100))</code> and <code>xlim = extendrange(c(0, 100))</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>lift.formula</code> returns a list with elements: </p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>the
+data used for plotting</p>
+</td></tr> <tr valign="top"><td><code>cuts</code></td>
+<td>
+<p>the number of cuts</p>
+</td></tr> <tr valign="top"><td><code>class</code></td>
+<td>
+<p>the
+event class</p>
+</td></tr> <tr valign="top"><td><code>probNames</code></td>
+<td>
+<p>the names of the model probabilities</p>
+</td></tr>
+<tr valign="top"><td><code>pct</code></td>
+<td>
+<p>the baseline event rate</p>
+</td></tr>
+</table>
+<p><code>xyplot.lift</code> returns a <span class="pkg">lattice</span> object
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Max Kuhn, some <span class="pkg">lattice</span> code and documentation by Deepayan
+Sarkar
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../lattice/html/xyplot.html">xyplot</a></code>,
+<code><a href="../../lattice/html/trellis.par.get.html">trellis.par.set</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+set.seed(1)
+simulated &lt;- data.frame(obs = factor(rep(letters[1:2], each = 100)),
+                        perfect = sort(runif(200), decreasing = TRUE),
+                        random = runif(200))
+
+lift1 &lt;- lift(obs ~ random, data = simulated)
+lift1
+xyplot(lift1)
+
+lift2 &lt;- lift(obs ~ random + perfect, data = simulated)
+lift2
+xyplot(lift2, auto.key = list(columns = 2))
+
+xyplot(lift2, auto.key = list(columns = 2), value = c(10, 30))
+
+xyplot(lift2, plot = "lift", auto.key = list(columns = 2))
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>caret</em> version 6.0-79 <a href="00Index.html">Index</a>]</div>
+</body></html>

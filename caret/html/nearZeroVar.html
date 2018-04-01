@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Identification of near zero variance predictors</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for nearZeroVar {caret}"><tr><td>nearZeroVar {caret}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Identification of near zero variance predictors</h2>
+
+<h3>Description</h3>
+
+<p><code>nearZeroVar</code> diagnoses predictors that have one unique value (i.e. are
+zero variance predictors) or predictors that are have both of the following
+characteristics: they have very few unique values relative to the number of
+samples and the ratio of the frequency of the most common value to the
+frequency of the second most common value is large. <code>checkConditionalX</code>
+looks at the distribution of the columns of <code>x</code> conditioned on the
+levels of <code>y</code> and identifies columns of <code>x</code> that are sparse within
+groups of <code>y</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+nearZeroVar(x, freqCut = 95/5, uniqueCut = 10, saveMetrics = FALSE,
+  names = FALSE, foreach = FALSE, allowParallel = TRUE)
+
+checkConditionalX(x, y)
+
+checkResamples(index, x, y)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a numeric vector or matrix, or a data frame with all numeric data</p>
+</td></tr>
+<tr valign="top"><td><code>freqCut</code></td>
+<td>
+<p>the cutoff for the ratio of the most common value to the
+second most common value</p>
+</td></tr>
+<tr valign="top"><td><code>uniqueCut</code></td>
+<td>
+<p>the cutoff for the percentage of distinct values out of the
+number of total samples</p>
+</td></tr>
+<tr valign="top"><td><code>saveMetrics</code></td>
+<td>
+<p>a logical. If false, the positions of the zero- or
+near-zero predictors is returned. If true, a data frame with predictor
+information is returned.</p>
+</td></tr>
+<tr valign="top"><td><code>names</code></td>
+<td>
+<p>a logical. If false, column indexes are returned. If true,
+column names are returned.</p>
+</td></tr>
+<tr valign="top"><td><code>foreach</code></td>
+<td>
+<p>should the <span class="pkg">foreach</span> package be used for the
+computations? If <code>TRUE</code>, less memory should be used.</p>
+</td></tr>
+<tr valign="top"><td><code>allowParallel</code></td>
+<td>
+<p>should the parallel processing via the <span class="pkg">foreach</span>
+package be used for the computations? If <code>TRUE</code>, more memory will be
+used but execution time should be shorter.</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>a factor vector with at least two levels</p>
+</td></tr>
+<tr valign="top"><td><code>index</code></td>
+<td>
+<p>a list. Each element corresponds to the training set samples in
+<code>x</code> for a given resample</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>For example, an example of near zero variance predictor is one that, for
+1000 samples, has two distinct values and 999 of them are a single value.
+</p>
+<p>To be flagged, first the frequency of the most prevalent value over the
+second most frequent value (called the &ldquo;frequency ratio&rdquo;) must be above
+<code>freqCut</code>. Secondly, the &ldquo;percent of unique values,&rdquo; the number of
+unique values divided by the total number of samples (times 100), must also
+be below <code>uniqueCut</code>.
+</p>
+<p>In the above example, the frequency ratio is 999 and the unique value
+percentage is 0.0001.
+</p>
+<p>Checking the conditional distribution of <code>x</code> may be needed for some
+models, such as naive Bayes where the conditional distributions should have
+at least one data point within a class.
+</p>
+<p><code>nzv</code> is the original version of the function.
+</p>
+
+
+<h3>Value</h3>
+
+<p>For <code>nearZeroVar</code>: if <code>saveMetrics = FALSE</code>, a vector of
+integers corresponding to the column positions of the problematic
+predictors. If <code>saveMetrics = TRUE</code>, a data frame with columns:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>freqRatio </code></td>
+<td>
+<p>the ratio of frequencies for the most common value over
+the second most common value</p>
+</td></tr> <tr valign="top"><td><code>percentUnique </code></td>
+<td>
+<p>the percentage of unique
+data points out of the total number of data points</p>
+</td></tr> <tr valign="top"><td><code>zeroVar </code></td>
+<td>
+<p>a vector
+of logicals for whether the predictor has only one distinct value</p>
+</td></tr> <tr valign="top"><td><code>nzv
+</code></td>
+<td>
+<p>a vector of logicals for whether the predictor is a near zero variance
+predictor</p>
+</td></tr>
+</table>
+<p>For <code>checkResamples</code> or <code>checkConditionalX</code>, a vector of column
+indicators for predictors with empty conditional distributions in at least
+one class of <code>y</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Max Kuhn, with speed improvements to nearZeroVar by Allan Engelhardt
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+nearZeroVar(iris[, -5], saveMetrics = TRUE)
+
+data(BloodBrain)
+nearZeroVar(bbbDescr)
+nearZeroVar(bbbDescr, names = TRUE)
+
+
+set.seed(1)
+classes &lt;- factor(rep(letters[1:3], each = 30))
+x &lt;- data.frame(x1 = rep(c(0, 1), 45),
+                x2 = c(rep(0, 10), rep(1, 80)))
+
+lapply(x, table, y = classes)
+checkConditionalX(x, classes)
+
+folds &lt;- createFolds(classes, k = 3, returnTrain = TRUE)
+x$x3 &lt;- x$x1
+x$x3[folds[[1]]] &lt;- 0
+
+checkResamples(folds, x, classes)
+
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>caret</em> version 6.0-79 <a href="00Index.html">Index</a>]</div>
+</body></html>

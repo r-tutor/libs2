@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Partial Least Squares and Sparse Partial Least Squares...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for plsda {caret}"><tr><td>plsda {caret}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Partial Least Squares and Sparse Partial Least Squares Discriminant Analysis</h2>
+
+<h3>Description</h3>
+
+<p><code>plsda</code> is used to fit standard PLS models for classification while
+<code>splsda</code> performs sparse PLS that embeds feature selection and
+regularization for the same purpose.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+plsda(x, ...)
+
+## S3 method for class 'plsda'
+predict(object, newdata = NULL, ncomp = NULL,
+  type = "class", ...)
+
+## Default S3 method:
+plsda(x, y, ncomp = 2, probMethod = "softmax",
+  prior = NULL, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a matrix or data frame of predictors</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>arguments to pass to <code><a href="../../pls/html/mvr.html">plsr</a></code> or
+<code><a href="../../spls/html/spls.html">spls</a></code>. For <code>splsda</code>, this is the method for passing
+tuning parameters specifications (e.g. <code>K</code>, <code>eta</code> or <code>kappa</code>)</p>
+</td></tr>
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>an object produced by <code>plsda</code></p>
+</td></tr>
+<tr valign="top"><td><code>newdata</code></td>
+<td>
+<p>a matrix or data frame of predictors</p>
+</td></tr>
+<tr valign="top"><td><code>ncomp</code></td>
+<td>
+<p>the number of components to include in the model. Predictions
+can be made for models with values less than <code>ncomp</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>either <code>"class"</code>, <code>"prob"</code> or <code>"raw"</code> to produce
+the predicted class, class probabilities or the raw model scores,
+respectively.</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>a factor or indicator matrix for the discrete outcome. If a matrix,
+the entries must be either 0 or 1 and rows must sum to one</p>
+</td></tr>
+<tr valign="top"><td><code>probMethod</code></td>
+<td>
+<p>either &quot;softmax&quot; or &quot;Bayes&quot; (see Details)</p>
+</td></tr>
+<tr valign="top"><td><code>prior</code></td>
+<td>
+<p>a vector or prior probabilities for the classes (only used for
+<code>probeMethod = "Bayes"</code>)</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>If a factor is supplied, the appropriate indicator matrix is created.
+</p>
+<p>A multivariate PLS model is fit to the indicator matrix using the
+<code><a href="../../pls/html/mvr.html">plsr</a></code> or <code><a href="../../spls/html/spls.html">spls</a></code> function.
+</p>
+<p>Two prediction methods can be used.
+</p>
+<p>The <b>softmax function</b> transforms the model predictions to
+&quot;probability-like&quot; values (e.g. on [0, 1] and sum to 1). The class with the
+largest class probability is the predicted class.
+</p>
+<p>Also, <b>Bayes rule</b> can be applied to the model predictions to form
+posterior probabilities. Here, the model predictions for the training set
+are used along with the training set outcomes to create conditional
+distributions for each class. When new samples are predicted, the raw model
+predictions are run through these conditional distributions to produce a
+posterior probability for each class (along with the prior). This process is
+repeated <code>ncomp</code> times for every possible PLS model. The
+<code><a href="../../klaR/html/NaiveBayes.html">NaiveBayes</a></code> function is used with <code>usekernel = TRUE</code>
+for the posterior probability calculations.
+</p>
+
+
+<h3>Value</h3>
+
+<p>For <code>plsda</code>, an object of class &quot;plsda&quot; and &quot;mvr&quot;. For
+<code>splsda</code>, an object of class <code>splsda</code>.
+</p>
+<p>The predict methods produce either a vector, matrix or three-dimensional
+array, depending on the values of <code>type</code> of <code>ncomp</code>. For example,
+specifying more than one value of <code>ncomp</code> with <code>type = "class"</code>
+with produce a three dimensional array but the default specification would
+produce a factor vector.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../pls/html/mvr.html">plsr</a></code>, <code><a href="../../spls/html/spls.html">spls</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+## Not run: 
+data(mdrr)
+set.seed(1)
+inTrain &lt;- sample(seq(along = mdrrClass), 450)
+
+nzv &lt;- nearZeroVar(mdrrDescr)
+filteredDescr &lt;- mdrrDescr[, -nzv]
+
+training &lt;- filteredDescr[inTrain,]
+test &lt;- filteredDescr[-inTrain,]
+trainMDRR &lt;- mdrrClass[inTrain]
+testMDRR &lt;- mdrrClass[-inTrain]
+
+preProcValues &lt;- preProcess(training)
+
+trainDescr &lt;- predict(preProcValues, training)
+testDescr &lt;- predict(preProcValues, test)
+
+useBayes   &lt;- plsda(trainDescr, trainMDRR, ncomp = 5,
+                    probMethod = "Bayes")
+useSoftmax &lt;- plsda(trainDescr, trainMDRR, ncomp = 5)
+
+confusionMatrix(predict(useBayes, testDescr),
+                testMDRR)
+
+confusionMatrix(predict(useSoftmax, testDescr),
+                testMDRR)
+
+histogram(~predict(useBayes, testDescr, type = "prob")[,"Active",]
+          | testMDRR, xlab = "Active Prob", xlim = c(-.1,1.1))
+histogram(~predict(useSoftmax, testDescr, type = "prob")[,"Active",]
+          | testMDRR, xlab = "Active Prob", xlim = c(-.1,1.1))
+
+
+## different sized objects are returned
+length(predict(useBayes, testDescr))
+dim(predict(useBayes, testDescr, ncomp = 1:3))
+dim(predict(useBayes, testDescr, type = "prob"))
+dim(predict(useBayes, testDescr, type = "prob", ncomp = 1:3))
+
+## Using spls:
+## (As of 11/09, the spls package now has a similar function with
+## the same mane. To avoid conflicts, use caret:::splsda to
+## get this version)
+
+splsFit &lt;- caret:::splsda(trainDescr, trainMDRR,
+                          K = 5, eta = .9,
+                          probMethod = "Bayes")
+
+confusionMatrix(caret:::predict.splsda(splsFit, testDescr),
+                testMDRR)
+
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>caret</em> version 6.0-79 <a href="00Index.html">Index</a>]</div>
+</body></html>

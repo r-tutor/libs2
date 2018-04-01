@@ -1,0 +1,261 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Controlling the Feature Selection Algorithms</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for rfeControl {caret}"><tr><td>rfeControl {caret}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Controlling the Feature Selection Algorithms</h2>
+
+<h3>Description</h3>
+
+<p>This function generates a control object that can be used to specify the
+details of the feature selection algorithms used in this package.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+rfeControl(functions = NULL, rerank = FALSE, method = "boot",
+  saveDetails = FALSE, number = ifelse(method %in% c("cv", "repeatedcv"),
+  10, 25), repeats = ifelse(method %in% c("cv", "repeatedcv"), 1, number),
+  verbose = FALSE, returnResamp = "final", p = 0.75, index = NULL,
+  indexOut = NULL, timingSamps = 0, seeds = NA, allowParallel = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>functions</code></td>
+<td>
+<p>a list of functions for model fitting, prediction and
+variable importance (see Details below)</p>
+</td></tr>
+<tr valign="top"><td><code>rerank</code></td>
+<td>
+<p>a logical: should variable importance be re-calculated each
+time features are removed?</p>
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+<p>The external resampling method: <code>boot</code>, <code>cv</code>,
+<code>LOOCV</code> or <code>LGOCV</code> (for repeated training/test splits</p>
+</td></tr>
+<tr valign="top"><td><code>saveDetails</code></td>
+<td>
+<p>a logical to save the predictions and variable
+importances from the selection process</p>
+</td></tr>
+<tr valign="top"><td><code>number</code></td>
+<td>
+<p>Either the number of folds or number of resampling iterations</p>
+</td></tr>
+<tr valign="top"><td><code>repeats</code></td>
+<td>
+<p>For repeated k-fold cross-validation only: the number of
+complete sets of folds to compute</p>
+</td></tr>
+<tr valign="top"><td><code>verbose</code></td>
+<td>
+<p>a logical to print a log for each external resampling
+iteration</p>
+</td></tr>
+<tr valign="top"><td><code>returnResamp</code></td>
+<td>
+<p>A character string indicating how much of the resampled
+summary metrics should be saved. Values can be &ldquo;final&rdquo;, &ldquo;all&rdquo; or
+&ldquo;none&rdquo;</p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>For leave-group out cross-validation: the training percentage</p>
+</td></tr>
+<tr valign="top"><td><code>index</code></td>
+<td>
+<p>a list with elements for each external resampling iteration.
+Each list element is the sample rows used for training at that iteration.</p>
+</td></tr>
+<tr valign="top"><td><code>indexOut</code></td>
+<td>
+<p>a list (the same length as <code>index</code>) that dictates which
+sample are held-out for each resample. If <code>NULL</code>, then the unique set
+of samples not contained in <code>index</code> is used.</p>
+</td></tr>
+<tr valign="top"><td><code>timingSamps</code></td>
+<td>
+<p>the number of training set samples that will be used to
+measure the time for predicting samples (zero indicates that the prediction
+time should not be estimated).</p>
+</td></tr>
+<tr valign="top"><td><code>seeds</code></td>
+<td>
+<p>an optional set of integers that will be used to set the seed
+at each resampling iteration. This is useful when the models are run in
+parallel. A value of <code>NA</code> will stop the seed from being set within the
+worker processes while a value of <code>NULL</code> will set the seeds using a
+random set of integers. Alternatively, a list can be used. The list should
+have <code>B+1</code> elements where <code>B</code> is the number of resamples. The
+first <code>B</code> elements of the list should be vectors of integers of length
+<code>P</code> where <code>P</code> is the number of subsets being evaluated (including
+the full set). The last element of the list only needs to be a single
+integer (for the final model). See the Examples section below.</p>
+</td></tr>
+<tr valign="top"><td><code>allowParallel</code></td>
+<td>
+<p>if a parallel backend is loaded and available, should
+the function use it?</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>More details on this function can be found at
+<a href="http://topepo.github.io/caret/recursive-feature-elimination.html#rfe">http://topepo.github.io/caret/recursive-feature-elimination.html#rfe</a>.
+</p>
+<p>Backwards selection requires function to be specified for some operations.
+</p>
+<p>The <code>fit</code> function builds the model based on the current data set. The
+arguments for the function must be: </p>
+ <ul>
+<li><p><code>x</code> the current
+training set of predictor data with the appropriate subset of variables
+</p>
+</li>
+<li><p><code>y</code> the current outcome data (either a numeric or factor vector)
+</p>
+</li>
+<li><p><code>first</code> a single logical value for whether the current predictor
+set has all possible variables </p>
+</li>
+<li><p><code>last</code> similar to <code>first</code>, but
+<code>TRUE</code> when the last model is fit with the final subset size and
+predictors.  </p>
+</li>
+<li><p><code>...</code>optional arguments to pass to the fit function
+in the call to <code>rfe</code> </p>
+</li></ul>
+<p> The function should return a model object that
+can be used to generate predictions.
+</p>
+<p>The <code>pred</code> function returns a vector of predictions (numeric or
+factors) from the current model. The arguments are: </p>
+
+<ul>
+<li><p><code>object</code> the model generated by the <code>fit</code> function
+</p>
+</li>
+<li><p><code>x</code> the current set of predictor set for the held-back samples </p>
+</li></ul>
+
+<p>The <code>rank</code> function is used to return the predictors in the order of
+the most important to the least important. Inputs are: </p>
+
+<ul>
+<li><p><code>object</code> the model generated by the <code>fit</code> function
+</p>
+</li>
+<li><p><code>x</code> the current set of predictor set for the training samples
+</p>
+</li>
+<li><p><code>y</code> the current training outcomes </p>
+</li></ul>
+<p> The function should return a
+data frame with a column called <code>var</code> that has the current variable
+names. The first row should be the most important predictor etc. Other
+columns can be included in the output and will be returned in the final
+<code>rfe</code> object.
+</p>
+<p>The <code>selectSize</code> function determines the optimal number of predictors
+based on the resampling output. Inputs for the function are: </p>
+
+<ul>
+<li><p><code>x</code>a matrix with columns for the performance metrics and the
+number of variables, called &quot;<code>Variables</code>&quot; </p>
+</li>
+<li><p><code>metric</code>a character
+string of the performance measure to optimize (e.g. &quot;RMSE&quot;, &quot;Rsquared&quot;,
+&quot;Accuracy&quot; or &quot;Kappa&quot;) </p>
+</li>
+<li><p><code>maximize</code>a single logical for whether the
+metric should be maximized </p>
+</li></ul>
+<p> This function should return an integer
+corresponding to the optimal subset size. <span class="pkg">caret</span> comes with two
+examples functions for this purpose: <code><a href="caretFuncs.html">pickSizeBest</a></code> and
+<code><a href="caretFuncs.html">pickSizeTolerance</a></code>.
+</p>
+<p>After the optimal subset size is determined, the <code>selectVar</code> function
+will be used to calculate the best rankings for each variable across all the
+resampling iterations. Inputs for the function are: </p>
+ <ul>
+<li><p><code>y</code>
+a list of variables importance for each resampling iteration and each subset
+size (generated by the user&ndash;defined <code>rank</code> function). In the example,
+each each of the cross&ndash;validation groups the output of the <code>rank</code>
+function is saved for each of the subset sizes (including the original
+subset). If the rankings are not recomputed at each iteration, the values
+will be the same within each cross-validation iteration.  </p>
+</li>
+<li><p><code>size</code>
+the integer returned by the <code>selectSize</code> function </p>
+</li></ul>
+<p> This function
+should return a character string of predictor names (of length <code>size</code>)
+in the order of most important to least important
+</p>
+<p>Examples of these functions are included in the package:
+<code><a href="caretFuncs.html">lmFuncs</a></code>, <code><a href="caretFuncs.html">rfFuncs</a></code>, <code><a href="caretFuncs.html">treebagFuncs</a></code> and
+<code><a href="caretFuncs.html">nbFuncs</a></code>.
+</p>
+<p>Model details about these functions, including examples, are at
+<a href="http://topepo.github.io/caret/recursive-feature-elimination.html">http://topepo.github.io/caret/recursive-feature-elimination.html</a>. .
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Max Kuhn
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="rfe.html">rfe</a></code>, <code><a href="caretFuncs.html">lmFuncs</a></code>, <code><a href="caretFuncs.html">rfFuncs</a></code>,
+<code><a href="caretFuncs.html">treebagFuncs</a></code>, <code><a href="caretFuncs.html">nbFuncs</a></code>,
+<code><a href="caretFuncs.html">pickSizeBest</a></code>, <code><a href="caretFuncs.html">pickSizeTolerance</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+  ## Not run: 
+subsetSizes &lt;- c(2, 4, 6, 8)
+set.seed(123)
+seeds &lt;- vector(mode = "list", length = 51)
+for(i in 1:50) seeds[[i]] &lt;- sample.int(1000, length(subsetSizes) + 1)
+seeds[[51]] &lt;- sample.int(1000, 1)
+
+set.seed(1)
+rfMod &lt;- rfe(bbbDescr, logBBB,
+             sizes = subsetSizes,
+             rfeControl = rfeControl(functions = rfFuncs,
+                                     seeds = seeds,
+                                     number = 50))
+  
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>caret</em> version 6.0-79 <a href="00Index.html">Index</a>]</div>
+</body></html>

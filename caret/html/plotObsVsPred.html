@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Plot Observed versus Predicted Results in Regression and...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for plotObsVsPred {caret}"><tr><td>plotObsVsPred {caret}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Plot Observed versus Predicted Results in Regression and Classification
+Models</h2>
+
+<h3>Description</h3>
+
+<p>This function takes an object (preferably from the function
+<code><a href="predict.train.html">extractPrediction</a></code>) and creates a lattice plot. For numeric
+outcomes, the observed and predicted data are plotted with a 45 degree
+reference line and a smoothed fit. For factor outcomes, a dotplot plot is
+produced with the accuracies for the different models.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+plotObsVsPred(object, equalRanges = TRUE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>an object (preferably from the function
+<code><a href="predict.train.html">extractPrediction</a></code>. There should be columns named <code>obs</code>,
+<code>pred</code>, <code>model</code> (e.g. &quot;rpart&quot;, &quot;nnet&quot; etc.)  and <code>dataType</code>
+(e.g. &quot;Training&quot;, &quot;Test&quot; etc)</p>
+</td></tr>
+<tr valign="top"><td><code>equalRanges</code></td>
+<td>
+<p>a logical; should the x- and y-axis ranges be the same?</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>parameters to pass to <code><a href="../../lattice/html/xyplot.html">xyplot</a></code> or
+<code><a href="../../lattice/html/xyplot.html">dotplot</a></code>, such as <code>auto.key</code></p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>If the call to <code><a href="predict.train.html">extractPrediction</a></code> included test data, these
+data are shown, but if unknowns were also included, they are not plotted
+</p>
+
+
+<h3>Value</h3>
+
+<p>A lattice object. Note that the plot has to be printed to be
+displayed (especially in a loop).
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Max Kuhn
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+## Not run: 
+# regression example
+data(BostonHousing)
+rpartFit &lt;- train(BostonHousing[1:100, -c(4, 14)], 
+                  BostonHousing$medv[1:100], 
+                  "rpart", tuneLength = 9)
+plsFit &lt;- train(BostonHousing[1:100, -c(4, 14)], 
+                BostonHousing$medv[1:100], 
+                "pls")
+
+predVals &lt;- extractPrediction(list(rpartFit, plsFit), 
+                              testX = BostonHousing[101:200, -c(4, 14)], 
+                              testY = BostonHousing$medv[101:200], 
+                              unkX = BostonHousing[201:300, -c(4, 14)])
+
+plotObsVsPred(predVals)
+
+
+#classification example
+data(Satellite)
+numSamples &lt;- dim(Satellite)[1]
+set.seed(716)
+
+varIndex &lt;- 1:numSamples
+
+trainSamples &lt;- sample(varIndex, 150)
+
+varIndex &lt;- (1:numSamples)[-trainSamples]
+testSamples &lt;- sample(varIndex, 100)
+
+varIndex &lt;- (1:numSamples)[-c(testSamples, trainSamples)]
+unkSamples &lt;- sample(varIndex, 50)
+
+trainX &lt;- Satellite[trainSamples, -37]
+trainY &lt;- Satellite[trainSamples, 37]
+
+testX &lt;- Satellite[testSamples, -37]
+testY &lt;- Satellite[testSamples, 37]
+
+unkX &lt;- Satellite[unkSamples, -37]
+
+knnFit  &lt;- train(trainX, trainY, "knn")
+rpartFit &lt;- train(trainX, trainY, "rpart")
+
+predTargets &lt;- extractPrediction(list(knnFit, rpartFit), 
+                                 testX = testX, 
+                                 testY = testY, 
+                                 unkX = unkX)
+
+plotObsVsPred(predTargets)
+
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>caret</em> version 6.0-79 <a href="00Index.html">Index</a>]</div>
+</body></html>

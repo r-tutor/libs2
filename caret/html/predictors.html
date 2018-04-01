@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: List predictors used in the model</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for predictors {caret}"><tr><td>predictors {caret}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>List predictors used in the model</h2>
+
+<h3>Description</h3>
+
+<p>This class uses a model fit to determine which predictors were used in the
+final model.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+predictors(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a model object, list or terms</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>not currently used</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>For <code><a href="../../randomForest/html/randomForest.html">randomForest</a></code>, <code><a href="../../party/html/cforest.html">cforest</a></code>,
+<code><a href="../../party/html/ctree.html">ctree</a></code>, <code><a href="../../rpart/html/rpart.html">rpart</a></code>,
+<code><a href="../../ipred/html/bagging.html">ipredbagg</a></code>, <code><a href="../../ipred/html/bagging.html">bagging</a></code>,
+<code><a href="../../earth/html/earth.html">earth</a></code>, <code><a href="../../mda/html/fda.html">fda</a></code>,
+<code><a href="../../pamr/html/pamr.train.html">pamr.train</a></code>, <code><a href="../../superpc/html/superpc.train.html">superpc.train</a></code>,
+<code><a href="bagEarth.html">bagEarth</a></code> and <code><a href="bagFDA.html">bagFDA</a></code>, an attempt was made to
+report the predictors that were actually used in the final model.
+</p>
+<p>The <code>predictors</code> function can be called on the model object (as opposed
+to the <code><a href="train.html">train</a></code>) object) and the package will try to find the
+appropriate coed (if it exists).
+</p>
+<p>In cases where the predictors cannot be determined, <code>NA</code> is returned.
+For example, <code><a href="../../nnet/html/nnet.html">nnet</a></code> may return missing values from
+<code>predictors</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a character string of predictors or <code>NA</code>.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>caret</em> version 6.0-79 <a href="00Index.html">Index</a>]</div>
+</body></html>

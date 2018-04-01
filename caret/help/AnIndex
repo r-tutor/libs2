@@ -355,6 +355,7 @@ varImp.dsa	varImp
 varImp.earth	varImp
 varImp.fda	varImp
 varImp.gafs	varImp.gafs
+varImp.Gam	varImp
 varImp.gam	varImp
 varImp.gbm	varImp
 varImp.glm	varImp
