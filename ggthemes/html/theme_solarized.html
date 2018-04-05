@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: ggplot color themes based on the Solarized palette</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for theme_solarized {ggthemes}"><tr><td>theme_solarized {ggthemes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>ggplot color themes based on the Solarized palette</h2>
+
+<h3>Description</h3>
+
+<p>See <a href="http://ethanschoonover.com/solarized">http://ethanschoonover.com/solarized</a> for a
+description of the Solarized palette.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+theme_solarized(base_size = 12, base_family = "", light = TRUE)
+
+theme_solarized_2(base_size = 12, base_family = "", light = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>base_size</code></td>
+<td>
+<p>base font size</p>
+</td></tr>
+<tr valign="top"><td><code>base_family</code></td>
+<td>
+<p>base font family</p>
+</td></tr>
+<tr valign="top"><td><code>light</code></td>
+<td>
+<p><code>logical</code>. Light or dark theme?</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Plots made with this theme integrate seamlessly with the Solarized
+Beamer color theme.
+<a href="https://github.com/jrnold/beamercolorthemesolarized">https://github.com/jrnold/beamercolorthemesolarized</a>.
+There are two variations: <code>theme_solarized</code> is similar to
+to <code><a href="../../ggplot2/html/ggtheme.html">theme_bw</a></code>, while <code>theme_solarized_2</code> is similar to
+<code><a href="../../ggplot2/html/ggtheme.html">theme_gray</a></code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+
+library("ggplot2")
+p &lt;- ggplot(mtcars) +
+     geom_point(aes(x = wt, y = mpg, colour=factor(gear))) +
+     facet_wrap(~am)
+p + theme_solarized() + scale_colour_solarized('blue')
+
+## Dark version
+p + theme_solarized(light = FALSE) +
+    scale_colour_solarized('blue')
+
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggthemes</em> version 3.4.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

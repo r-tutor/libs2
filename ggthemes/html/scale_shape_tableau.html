@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Tableau shape scales</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for scale_shape_tableau {ggthemes}"><tr><td>scale_shape_tableau {ggthemes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Tableau shape scales</h2>
+
+<h3>Description</h3>
+
+<p>See <code><a href="tableau_shape_pal.html">tableau_shape_pal</a></code> for details.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+scale_shape_tableau(palette = "default", ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>palette</code></td>
+<td>
+<p>Palette name. See <code>ggthemes_data$tableau$shapes</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>common discrete scale parameters: <code>name</code>, <code>breaks</code>,
+<code>labels</code>, <code>na.value</code>, <code>limits</code> and <code>guide</code>.  See
+<code><a href="../../ggplot2/html/discrete_scale.html">discrete_scale</a></code> for more details</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p>Other shape tableau: <code><a href="tableau_shape_pal.html">tableau_shape_pal</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+
+library("ggplot2")
+p &lt;- ggplot(mtcars) +
+     geom_point(aes(x = wt, y = mpg, shape = factor(gear))) +
+     facet_wrap(~am)
+p + scale_shape_tableau()
+
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggthemes</em> version 3.4.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

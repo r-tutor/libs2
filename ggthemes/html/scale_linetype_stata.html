@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Stata linetype palette (discrete)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for scale_linetype_stata {ggthemes}"><tr><td>scale_linetype_stata {ggthemes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Stata linetype palette (discrete)</h2>
+
+<h3>Description</h3>
+
+<p>See <code><a href="stata_linetype_pal.html">stata_linetype_pal</a></code> for details.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+scale_linetype_stata(...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>common discrete scale parameters: <code>name</code>, <code>breaks</code>,
+<code>labels</code>, <code>na.value</code>, <code>limits</code> and <code>guide</code>.  See
+<code><a href="../../ggplot2/html/discrete_scale.html">discrete_scale</a></code> for more details</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p>Other linetype stata: <code><a href="stata_linetype_pal.html">stata_linetype_pal</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+
+require("dplyr")
+require("tidyr")
+require("ggplot2")
+rescale01 &lt;- function(x) {(x - min(x)) / diff(range(x))}
+gather(economics, variable, value, -date) %&gt;%
+  group_by(variable) %&gt;%
+  mutate(value = rescale01(value)) %&gt;%
+  ggplot(aes(x = date, y = value, linetype = variable)) +
+  geom_line() +
+  scale_linetype_stata()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggthemes</em> version 3.4.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

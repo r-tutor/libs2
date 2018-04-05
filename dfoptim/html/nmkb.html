@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Nelder-Mead optimziation algorithm for derivative-free...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for nmk {dfoptim}"><tr><td>nmk {dfoptim}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+Nelder-Mead optimziation algorithm for derivative-free optimization 
+</h2>
+
+<h3>Description</h3>
+
+<p>An implementation of the Nelder-Mead algorithm for derivative-free optimization.  This allows bounds to be placed on parameters. Bounds are enforced by means of a parameter transformation.</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+nmk(par, fn, control = list(), ...)
+
+nmkb(par, fn, lower=-Inf, upper=Inf, control = list(), ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>par</code></td>
+<td>
+<p>A starting vector of parameter values. Must be feasible, i.e. lie strictly between lower and upper bounds.</p>
+</td></tr>
+<tr valign="top"><td><code>fn</code></td>
+<td>
+
+<p>Nonlinear objective function that is to be optimized. 
+A scalar function that takes a real vector as argument and 
+returns a scalar that is the value of the function at that point 
+(see details).</p>
+</td></tr>
+<tr valign="top"><td><code>lower</code></td>
+<td>
+<p>Lower bounds on the parameters.  A vector of the same length as the parameters.  If a single value is specified, it is assumed that the same lower bound applies to all parameters.</p>
+</td></tr> 
+<tr valign="top"><td><code>upper</code></td>
+<td>
+<p>Upper bounds on the parameters.  A vector of the same length as the parameters.  If a single value is specified, it is assumed that the same upper bound applies to all parameters.</p>
+</td></tr> 
+<tr valign="top"><td><code>control</code></td>
+<td>
+<p>A list of control parameters.  See *Details* for more information.
+</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments passed to <code>fn</code>
+</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Argument <code>control</code> is a list specifing any changes to default values of algorithm control parameters for the outer loop.  Note that the names of these must be specified completely.  Partial matching will not work.  The list items are as follows:
+</p>
+<p><code>tol</code> Convergence tolerance.  Iteration is terminated when the absolute difference in function value between successive iteration is below <code>tol</code>.  Default is 1.e-06.
+</p>
+<p><code>maxfeval</code>: Maximum number of objective function evaluations allowed.  Default is min(5000, max(1500, 20*length(par)^2)).
+</p>
+<p><code>regsimp</code> A logical variable indicating whether the starting parameter configuration is a regular simplex.  Default is TRUE.
+</p>
+<p><code>maximize</code> A logical variable indicating whether the objective function should be maximized.  Default is FALSE.
+</p>
+<p><code>restarts.max</code> Maximum number of times the algorithm should be restarted before declaring failure. Default is 3.
+</p>
+<p><code>trace</code> A logical variable indicating whether the starting parameter configuration is a regular simplex.  Default is FALSE.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list with the following components:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>par</code></td>
+<td>
+<p>Best estimate of the parameter vector found by the algorithm.</p>
+</td></tr>
+<tr valign="top"><td><code>value</code></td>
+<td>
+<p>The value of the objective function at termination.</p>
+</td></tr>
+<tr valign="top"><td><code>feval</code></td>
+<td>
+<p>The number of times the objective <code>fn</code> was evaluated.
+</p>
+</td></tr>
+<tr valign="top"><td><code>restarts</code></td>
+<td>
+<p>The number of times the algorithm had to be restarted when it stagnated.
+</p>
+</td></tr>
+<tr valign="top"><td><code>convergence</code></td>
+<td>
+<p>An integer code indicating type of convergence.  <code>0</code> indicates successful convergence. Positive integer codes indicate failure to converge.    
+</p>
+</td></tr>
+<tr valign="top"><td><code>message</code></td>
+<td>
+<p>Text message indicating the type of convergence or failure.  
+</p>
+</td></tr>
+</table>
+
+
+<h3>Note</h3>
+
+<p>This algorithm is based on the Matlab code of Prof. C.T. Kelley, given in his book &quot;Iterative methods for optimization&quot;.
+It is implemented here with the permission of Prof. Kelley and SIAM.  However, there are some non-trivial modifications of the algorithm.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Ravi Varadhan &lt;rvaradhan@jhmi.edu&gt;, Johns Hopkins University
+URL:http://www.jhsph.edu/agingandhealth/People/Faculty_personal_pages/Varadhan.html
+</p>
+
+
+<h3>References</h3>
+
+<p>C.T. Kelley (1999), Iterative Methods for Optimization, SIAM.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../stats/html/optim.html">optim</a></code>, <code><a href="hookejeeves.html">hjk</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+ rosbkext &lt;- function(x){
+# Extended Rosenbrock function
+ n &lt;- length(x)
+ sum (100*(x[1:(n-1)]^2 - x[2:n])^2 + (x[1:(n-1)] - 1)^2)
+ }
+
+np &lt;- 10
+set.seed(123)
+
+p0 &lt;- rnorm(np)
+xm1 &lt;- nmk(fn=rosbkext, par=p0) # maximum `fevals' is not sufficient to find correct minimum
+xm1b &lt;- nmkb(fn=rosbkext, par=p0, lower=-2, upper=2)
+
+### A non-smooth problem
+hald &lt;- function(x) {
+#Hald J &amp; Madsen K (1981), Combined LP and quasi-Newton methods 
+#for minimax optimization, Mathematical Programming, 20, p.42-62.
+	i &lt;- 1:21
+	t &lt;- -1 + (i - 1)/10
+	f &lt;- (x[1] + x[2] * t) / ( 1 + x[3]*t + x[4]*t^2 + x[5]*t^3) - exp(t)
+	max(abs(f))
+	}
+
+p0 &lt;- runif(5)
+xm2 &lt;- nmk(fn=hald, par=p0)
+xm2b &lt;- nmkb(fn=hald, par=p0, lower=c(0,0,0,0,-2), upper=4)
+
+## Another non-smooth functions
+  nsf &lt;- function(x) {
+	f1 &lt;- x[1]^2 + x[2]^2
+	f2 &lt;- x[1]^2 + x[2]^2 + 10 * (-4*x[1] - x[2] + 4)
+	f3 &lt;- x[1]^2 + x[2]^2 + 10 * (-x[1] - 2*x[2] + 6)
+	max(f1, f2, f3)
+  }
+par0 &lt;- c(1, 1)                                 # true min 7.2 at (1.2, 2.4)
+nmk(par0, nsf) # fmin=8 at xmin=(2,2)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>dfoptim</em> version 2018.2-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

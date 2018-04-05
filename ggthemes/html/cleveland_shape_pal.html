@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Shape palette from Cleveland &quot;Elements of Graphing Data&quot;...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for cleveland_shape_pal {ggthemes}"><tr><td>cleveland_shape_pal {ggthemes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Shape palette from Cleveland &quot;Elements of Graphing Data&quot; (discrete).</h2>
+
+<h3>Description</h3>
+
+<p>Shape palettes for overlapping and non-overlapping points.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+cleveland_shape_pal(overlap = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>overlap</code></td>
+<td>
+<p><code>logical</code> Use the scale for overlapping points?</p>
+</td></tr>
+</table>
+
+
+<h3>Note</h3>
+
+<p>In the <em>Elements of Graphing Data</em>, W.S. Cleveland suggests
+two shape palettes for scatter plots: one for overlapping data and
+another for non-overlapping data. The symbols for overlapping data
+relies on pattern discrimination, while the symbols for
+non-overlapping data vary the amount of fill. This palatte
+attempts to create these palettes. However, I found that these
+were hard to replicate. Using the R shapes and unicode fonts: the
+symbols can vary in size, they are dependent of the fonts used,
+and there does not exist a unicode symbol for a circle with a
+vertical line. If someone can improve this palette, please let me
+know.
+</p>
+<p>Following Tremmel (1995), I replace the circle with a vertical
+line with an encircled plus sign.
+</p>
+
+
+<h3>References</h3>
+
+<p>Cleveland WS. <em>The Elements of Graphing Data</em>. Revised Edition. Hobart Press, Summit, NJ, 1994, pp. 154-164, 234-239.
+</p>
+<p>Tremmel, Lothar, (1995) &quot;The Visual Separability of Plotting Symbols in Scatterplots&quot;, <em>Journal of Computational and Graphical Statistics</em>,
+<a href="http://www.jstor.org/stable/1390760">http://www.jstor.org/stable/1390760</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other shapes: <code><a href="circlefill_shape_pal.html">circlefill_shape_pal</a></code>,
+<code><a href="scale_shape_circlefill.html">scale_shape_circlefill</a></code>,
+<code><a href="scale_shape_cleveland.html">scale_shape_cleveland</a></code>,
+<code><a href="scale_shape_tremmel.html">scale_shape_tremmel</a></code>,
+<code><a href="tremmel_shape_pal.html">tremmel_shape_pal</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+###   (discrete).
+
+
+library("ggplot2")
+p &lt;- ggplot(mtcars) +
+     geom_point(aes(x = wt, y = mpg, shape = factor(gear))) +
+     facet_wrap(~am) +
+     theme_bw()
+# overlapping symbol palette
+p + scale_shape_cleveland()
+# non-overlapping symbol palette
+p + scale_shape_cleveland(overlap=FALSE)
+
+
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggthemes</em> version 3.4.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Theme which takes its values from the current 'base' graphics...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for theme_par {ggthemes}"><tr><td>theme_par {ggthemes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Theme which takes its values from the current &lsquo;base&rsquo; graphics
+parameter values in <code><a href="../../graphics/html/par.html">par</a></code>.</h2>
+
+<h3>Description</h3>
+
+<p>Currently this theme uses the values of the parameters:
+<code>"code"</code>, &quot;<code>"ps"</code>&quot;, <code>"code"</code> <code>"family"</code>, <code>"fg"</code>,
+<code>"bg"</code>, <code>"adj"</code>, <code>"font"</code>, <code>"cex.axis"</code>,
+<code>"cex.lab"</code>, <code>"cex.main"</code>, <code>"cex.sub"</code>, <code>"col.axis"</code>,
+<code>"col.lab"</code>, <code>"col.main"</code>, <code>"col.sub"</code>, <code>"font"</code>,
+<code>"font.axis"</code>, <code>"font.lab"</code>, <code>"font.main"</code>,
+<code>"font.sub"</code>, <code>"las"</code>, <code>"lend"</code>,
+<code>"lheight"</code>, <code>"lty"</code>, <code>"mar"</code>, <code>"ps"</code>, <code>"tcl"</code>,
+<code>"tck"</code>, <code>"xaxt"</code>, <code>"yaxt"</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+theme_par(base_size = par()$ps, base_family = par()$family)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>base_size</code></td>
+<td>
+<p>base font size</p>
+</td></tr>
+<tr valign="top"><td><code>base_family</code></td>
+<td>
+<p>base font family</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This theme does not translate the base graphics perfectly, so the graphs
+produced by it will not be identical to those produced by base graphics,
+most notably in the spacing of the margins.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other themes: <code><a href="theme_base.html">theme_base</a></code>,
+<code><a href="theme_foundation.html">theme_foundation</a></code>,
+<code><a href="theme_igray.html">theme_igray</a></code>, <code><a href="theme_solid.html">theme_solid</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+###   parameter values in 'par'.
+
+
+library("ggplot2")
+p &lt;- ggplot(mtcars) + geom_point(aes(x = wt, y = mpg,
+     colour=factor(gear))) + facet_wrap(~am)
+par(font = 2, col.lab = "red", fg = "blue")
+p + theme_par()
+
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggthemes</em> version 3.4.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

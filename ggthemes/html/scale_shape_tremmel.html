@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Shape scales from Tremmel (1995)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for scale_shape_tremmel {ggthemes}"><tr><td>scale_shape_tremmel {ggthemes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Shape scales from Tremmel (1995)</h2>
+
+<h3>Description</h3>
+
+<p>Shape scales from Tremmel (1995)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+scale_shape_tremmel(overlap = FALSE, n3alt = TRUE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>overlap</code></td>
+<td>
+<p>use an empty circle instead of a solid circle when
+<code>n == 2</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>n3alt</code></td>
+<td>
+<p>If <code>TRUE</code> then use a solid circle, plus sign and
+empty triangle, else use a solid circle, empty circle, and empty
+triangle.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>common discrete scale parameters: <code>name</code>, <code>breaks</code>,
+<code>labels</code>, <code>na.value</code>, <code>limits</code> and <code>guide</code>.  See
+<code><a href="../../ggplot2/html/discrete_scale.html">discrete_scale</a></code> for more details</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="tremmel_shape_pal.html">tremmel_shape_pal</a></code> for a description of the palette.
+</p>
+<p>Other shapes: <code><a href="circlefill_shape_pal.html">circlefill_shape_pal</a></code>,
+<code><a href="cleveland_shape_pal.html">cleveland_shape_pal</a></code>,
+<code><a href="scale_shape_circlefill.html">scale_shape_circlefill</a></code>,
+<code><a href="scale_shape_cleveland.html">scale_shape_cleveland</a></code>,
+<code><a href="tremmel_shape_pal.html">tremmel_shape_pal</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+
+library("ggplot2")
+(ggplot(mtcars, aes(x=mpg, y=hp, shape=factor(cyl)))
+ + geom_point() + scale_shape_tremmel())
+(ggplot(mtcars, aes(x=mpg, y=hp, shape=factor(cyl)))
+ + geom_point() + scale_shape_tremmel(n3alt=FALSE))
+(ggplot(mtcars, aes(x=mpg, y=hp, shape=factor(am)))
+ + geom_point() + scale_shape_tremmel())
+(ggplot(mtcars, aes(x=mpg, y=hp, shape=factor(am)))
+ + geom_point() + scale_shape_tremmel(overlap=TRUE))
+
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggthemes</em> version 3.4.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

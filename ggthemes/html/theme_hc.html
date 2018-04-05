@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Highcharts JS theme</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for theme_hc {ggthemes}"><tr><td>theme_hc {ggthemes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Highcharts JS theme</h2>
+
+<h3>Description</h3>
+
+<p>Theme based on the plots in <em>Highcharts JS</em>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+theme_hc(base_size = 12, base_family = "sans", bgcolor = "default")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>base_size</code></td>
+<td>
+<p>base font size</p>
+</td></tr>
+<tr valign="top"><td><code>base_family</code></td>
+<td>
+<p>base font family</p>
+</td></tr>
+<tr valign="top"><td><code>bgcolor</code></td>
+<td>
+<p>The background color of plot. One of <code>'default',
+'darkunica'</code>, the names of values in
+<code>ggthemes_data$hc$bg</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>References</h3>
+
+<p><a href="http://www.highcharts.com/demo/line-basic">http://www.highcharts.com/demo/line-basic</a>
+</p>
+<p><a href="https://github.com/highslide-software/highcharts.com/tree/master/js/themes">https://github.com/highslide-software/highcharts.com/tree/master/js/themes</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+
+library("ggplot2")
+p &lt;- ggplot(mtcars) + geom_point(aes(x = wt, y = mpg,
+     colour=factor(gear))) + facet_wrap(~am)
+p + theme_hc() + scale_colour_hc()
+p + theme_hc(bgcolor = 'darkunica') + scale_colour_hc('darkunica')
+
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggthemes</em> version 3.4.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

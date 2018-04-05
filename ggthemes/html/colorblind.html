@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Colorblind Color Palette (Discrete) and Scales</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for colorblind_pal {ggthemes}"><tr><td>colorblind_pal {ggthemes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Colorblind Color Palette (Discrete) and Scales</h2>
+
+<h3>Description</h3>
+
+<p>An 8-color colorblind safe qualitative discrete palette.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+colorblind_pal()
+
+scale_colour_colorblind(...)
+
+scale_color_colorblind(...)
+
+scale_fill_colorblind(...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Other arguments passed on to <code><a href="../../ggplot2/html/discrete_scale.html">discrete_scale</a></code>
+to control name, limits, breaks, labels and so forth.</p>
+</td></tr>
+</table>
+
+
+<h3>References</h3>
+
+<p>Chang, W. &quot;<a href="http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/#a-colorblind-friendly-palette">Cookbook for R</a>&quot;
+</p>
+<p><a href="http://jfly.iam.u-tokyo.ac.jp/color">http://jfly.iam.u-tokyo.ac.jp/color</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>The <span class="pkg">dichromat</span> package, <code><a href="../../scales/html/dichromat_pal.html">dichromat_pal</a></code>,
+and <code><a href="scale_color_tableau.html">scale_color_tableau</a></code> for other colorblind palettes.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+###   scale_fill_colorblind
+
+
+library("ggplot2")
+library(scales)
+show_col(colorblind_pal()(8))
+p &lt;- ggplot(mtcars) + geom_point(aes(x = wt, y = mpg,
+     colour=factor(gear))) + facet_wrap(~am)
+p + theme_igray() + scale_colour_colorblind()
+
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggthemes</em> version 3.4.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

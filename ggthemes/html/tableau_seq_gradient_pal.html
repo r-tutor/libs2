@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Tableau sequential colour gradient palettes (continuous)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for tableau_seq_gradient_pal {ggthemes}"><tr><td>tableau_seq_gradient_pal {ggthemes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Tableau sequential colour gradient palettes (continuous)</h2>
+
+<h3>Description</h3>
+
+<p>Tableau sequential colour gradient palettes (continuous)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+tableau_seq_gradient_pal(palette = "Red", space = "Lab")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>palette</code></td>
+<td>
+<p>Palette name. See <code>ggthemes_data$tableau$sequential</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>space</code></td>
+<td>
+<p>Colour space in which to calculate gradient.</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p>Other colour tableau: <code><a href="scale_colour_gradient2_tableau.html">scale_colour_gradient2_tableau</a></code>,
+<code><a href="scale_colour_gradient_tableau.html">scale_colour_gradient_tableau</a></code>,
+<code><a href="scale_color_tableau.html">scale_colour_tableau</a></code>,
+<code><a href="tableau_color_pal.html">tableau_color_pal</a></code>,
+<code><a href="tableau_div_gradient_pal.html">tableau_div_gradient_pal</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+
+library("scales")
+x &lt;- seq(0, 1, length = 25)
+show_col(tableau_seq_gradient_pal('Red')(x))
+show_col(tableau_seq_gradient_pal('Blue')(x))
+show_col(tableau_seq_gradient_pal('Purple Sequential')(x))
+
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggthemes</em> version 3.4.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

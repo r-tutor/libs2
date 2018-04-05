@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Color Palettes based on Tableau (discrete)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for tableau_color_pal {ggthemes}"><tr><td>tableau_color_pal {ggthemes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Color Palettes based on Tableau (discrete)</h2>
+
+<h3>Description</h3>
+
+<p>Color palettes used in
+<a href="http://www.tableausoftware.com/">Tableau</a>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+tableau_color_pal(palette = "tableau10")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>palette</code></td>
+<td>
+<p>Palette name.</p>
+</td></tr>
+</table>
+
+
+<h3>References</h3>
+
+<p><a href="http://vis.stanford.edu/color-names/analyzer/">http://vis.stanford.edu/color-names/analyzer/</a>
+</p>
+<p>Maureen Stone, 'Designing Colors for Data' (slides), at the
+International Symposium on Computational Aesthetics in Graphics,
+Visualization, and Imaging, Banff, AB, Canada, June 22, 2007
+<a href="http://www.stonesc.com/slides/CompAe%202007.pdf">http://www.stonesc.com/slides/CompAe%202007.pdf</a>.
+</p>
+<p>Heer, Jeffrey and Maureen Stone, 2012 'Color Naming Models for
+Color Selection, Image Editing and Palette Design', ACM Human
+Factors in Computing Systems (CHI)
+<a href="http://vis.stanford.edu/files/2012-ColorNameModels-CHI.pdf">http://vis.stanford.edu/files/2012-ColorNameModels-CHI.pdf</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other colour tableau: <code><a href="scale_colour_gradient2_tableau.html">scale_colour_gradient2_tableau</a></code>,
+<code><a href="scale_colour_gradient_tableau.html">scale_colour_gradient_tableau</a></code>,
+<code><a href="scale_color_tableau.html">scale_colour_tableau</a></code>,
+<code><a href="tableau_div_gradient_pal.html">tableau_div_gradient_pal</a></code>,
+<code><a href="tableau_seq_gradient_pal.html">tableau_seq_gradient_pal</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+
+library("scales")
+show_col(tableau_color_pal('tableau20')(20))
+show_col(tableau_color_pal('tableau10')(10))
+show_col(tableau_color_pal('tableau10medium')(10))
+show_col(tableau_color_pal('tableau10light')(10))
+show_col(tableau_color_pal('colorblind10')(10))
+show_col(tableau_color_pal('trafficlight')(10))
+show_col(tableau_color_pal('purplegray12')(12))
+show_col(tableau_color_pal('bluered12')(12))
+show_col(tableau_color_pal('greenorange12')(12))
+show_col(tableau_color_pal('cyclic')(20))
+
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggthemes</em> version 3.4.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

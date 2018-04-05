@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Wall Street Journal theme</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for theme_wsj {ggthemes}"><tr><td>theme_wsj {ggthemes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Wall Street Journal theme</h2>
+
+<h3>Description</h3>
+
+<p>Theme based on the plots in <em>The Wall Street Journal</em>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+theme_wsj(base_size = 12, color = "brown", base_family = "sans",
+  title_family = "mono")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>base_size</code></td>
+<td>
+<p>base font size</p>
+</td></tr>
+<tr valign="top"><td><code>color</code></td>
+<td>
+<p>The background color of plot. One of <code>'brown',
+'gray', 'green', 'blue'</code>, the names of values in
+<code>ggthemes_data$wsj$bg</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>base_family</code></td>
+<td>
+<p>base font family</p>
+</td></tr>
+<tr valign="top"><td><code>title_family</code></td>
+<td>
+<p>Plot title font family.</p>
+</td></tr>
+</table>
+
+
+<h3>References</h3>
+
+<p><a href="https://twitter.com/WSJGraphics">https://twitter.com/WSJGraphics</a>
+</p>
+<p><a href="https://pinterest.com/wsjgraphics/wsj-graphics/">https://pinterest.com/wsjgraphics/wsj-graphics/</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+
+library("ggplot2")
+p &lt;- ggplot(mtcars) +
+     geom_point(aes(x = wt, y = mpg, colour=factor(gear))) +
+     facet_wrap(~am) +
+     ggtitle('Diamond Prices')
+p + scale_colour_wsj('colors6', '') + theme_wsj()
+# Use a gray background instead#'
+p + scale_colour_wsj('colors6', '') + theme_wsj(color = "gray")
+
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggthemes</em> version 3.4.2 <a href="00Index.html">Index</a>]</div>
+</body></html>
