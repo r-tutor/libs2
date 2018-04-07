@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Stat for histogram ridgeline plots</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for stat_binline {ggridges}"><tr><td>stat_binline {ggridges}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Stat for histogram ridgeline plots</h2>
+
+<h3>Description</h3>
+
+<p>Works like <code>stat_bin</code> except that the output is a ridgeline describing the histogram rather than
+a set of counts.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+stat_binline(mapping = NULL, data = NULL, geom = "density_ridges",
+  position = "identity", ..., binwidth = NULL, bins = NULL,
+  center = NULL, boundary = NULL, breaks = NULL, closed = c("right",
+  "left"), pad = TRUE, draw_baseline = TRUE, na.rm = FALSE,
+  show.legend = NA, inherit.aes = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>mapping</code></td>
+<td>
+<p>Set of aesthetic mappings created by <code><a href="../../ggplot2/html/aes.html">aes()</a></code> or
+<code><a href="../../ggplot2/html/aes_.html">aes_()</a></code>. If specified and <code>inherit.aes = TRUE</code> (the
+default), it is combined with the default mapping at the top level of the
+plot. You must supply <code>mapping</code> if there is no plot mapping.</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>The data to be displayed in this layer. There are three
+options:
+</p>
+<p>If <code>NULL</code>, the default, the data is inherited from the plot
+data as specified in the call to <code><a href="../../ggplot2/html/ggplot.html">ggplot()</a></code>.
+</p>
+<p>A <code>data.frame</code>, or other object, will override the plot
+data. All objects will be fortified to produce a data frame. See
+<code><a href="../../ggplot2/html/fortify.html">fortify()</a></code> for which variables will be created.
+</p>
+<p>A <code>function</code> will be called with a single argument,
+the plot data. The return value must be a <code>data.frame.</code>, and
+will be used as the layer data.</p>
+</td></tr>
+<tr valign="top"><td><code>geom</code></td>
+<td>
+<p>Use to override the default connection between
+<code>geom_histogram</code>/<code>geom_freqpoly</code> and <code>stat_bin</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>position</code></td>
+<td>
+<p>Position adjustment, either as a string, or the result of
+a call to a position adjustment function.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>other arguments passed on to <code><a href="../../ggplot2/html/layer.html">layer()</a></code>. These are
+often aesthetics, used to set an aesthetic to a fixed value, like
+<code>color = "red"</code> or <code>size = 3</code>. They may also be parameters
+to the paired geom/stat.</p>
+</td></tr>
+<tr valign="top"><td><code>binwidth</code></td>
+<td>
+<p>The width of the bins. Can be specified as a numeric value,
+or a function that calculates width from x.
+The default is to use <code>bins</code>
+bins that cover the range of the data. You should always override
+this value, exploring multiple widths to find the best to illustrate the
+stories in your data.
+</p>
+<p>The bin width of a date variable is the number of days in each time; the
+bin width of a time variable is the number of seconds.</p>
+</td></tr>
+<tr valign="top"><td><code>bins</code></td>
+<td>
+<p>Number of bins. Overridden by <code>binwidth</code>. Defaults to 30</p>
+</td></tr>
+<tr valign="top"><td><code>center</code></td>
+<td>
+<p>The center of one of the bins.  Note that if center is above or
+below the range of the data, things will be shifted by an appropriate
+number of <code>width</code>s. To center on integers, for example, use
+<code>width = 1</code> and <code>center = 0</code>, even if <code>0</code> is outside the range
+of the data.  At most one of <code>center</code> and <code>boundary</code> may be
+specified.</p>
+</td></tr>
+<tr valign="top"><td><code>boundary</code></td>
+<td>
+<p>A boundary between two bins. As with <code>center</code>, things
+are shifted when <code>boundary</code> is outside the range of the data. For
+example, to center on integers, use <code>width = 1</code> and <code>boundary =
+  0.5</code>, even if <code>0.5</code> is outside the range of the data.  At most one of
+<code>center</code> and <code>boundary</code> may be specified.</p>
+</td></tr>
+<tr valign="top"><td><code>breaks</code></td>
+<td>
+<p>Alternatively, you can supply a numeric vector giving
+the bin boundaries. Overrides <code>binwidth</code>, <code>bins</code>, <code>center</code>,
+and <code>boundary</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>closed</code></td>
+<td>
+<p>One of <code>"right"</code> or <code>"left"</code> indicating whether right
+or left edges of bins are included in the bin.</p>
+</td></tr>
+<tr valign="top"><td><code>pad</code></td>
+<td>
+<p>If <code>TRUE</code>, adds empty bins at either end of x. This ensures that the binline always goes
+back down to 0. Defaults to <code>TRUE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>draw_baseline</code></td>
+<td>
+<p>If <code>FALSE</code>, removes lines along 0 counts. Defaults to <code>TRUE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>na.rm</code></td>
+<td>
+<p>If <code>FALSE</code>, the default, missing values are removed with
+a warning. If <code>TRUE</code>, missing values are silently removed.</p>
+</td></tr>
+<tr valign="top"><td><code>show.legend</code></td>
+<td>
+<p>logical. Should this layer be included in the legends?
+<code>NA</code>, the default, includes if any aesthetics are mapped.
+<code>FALSE</code> never includes, and <code>TRUE</code> always includes.
+It can also be a named logical vector to finely select the aesthetics to
+display.</p>
+</td></tr>
+<tr valign="top"><td><code>inherit.aes</code></td>
+<td>
+<p>If <code>FALSE</code>, overrides the default aesthetics,
+rather than combining with them. This is most useful for helper functions
+that define both data and aesthetics and shouldn't inherit behaviour from
+the default plot specification, e.g. <code><a href="../../ggplot2/html/borders.html">borders()</a></code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(ggplot2)
+
+ggplot(iris, aes(x = Sepal.Length, y = Species, group = Species, fill = Species)) +
+  geom_density_ridges(stat = "binline", bins = 20, scale = 2.2) +
+  scale_y_discrete(expand = c(0.01, 0)) +
+  scale_x_continuous(expand = c(0.01, 0)) +
+  theme_ridges()
+
+ggplot(iris, aes(x = Sepal.Length, y = Species, group = Species, fill = Species)) +
+  stat_binline(bins = 20, scale = 2.2, draw_baseline = FALSE) +
+  scale_y_discrete(expand = c(0.01, 0)) +
+  scale_x_continuous(expand = c(0.01, 0)) +
+  scale_fill_grey() +
+  theme_ridges() + theme(legend.position = 'none')
+
+require(ggplot2movies)
+require(viridis)
+ggplot(movies[movies$year&gt;1989,], aes(x = length, y = year, fill = factor(year))) +
+   stat_binline(scale = 1.9, bins = 40) +
+   theme_ridges() + theme(legend.position = "none") +
+   scale_x_continuous(limits = c(1, 180), expand = c(0.01, 0)) +
+   scale_y_reverse(expand = c(0.01, 0)) +
+   scale_fill_viridis(begin = 0.3, discrete = TRUE, option = "B") +
+   labs(title = "Movie lengths 1990 - 2005")
+
+count_data &lt;- data.frame(group = rep(letters[1:5], each = 10),
+                         mean = rep(1:5, each = 10))
+count_data$group &lt;- factor(count_data$group, levels = letters[5:1])
+count_data$count &lt;- rpois(nrow(count_data), count_data$mean)
+ggplot(count_data, aes(x = count, y = group, group = group)) +
+  geom_density_ridges2(stat = "binline", aes(fill = group), binwidth = 1, scale = 0.95) +
+  geom_text(stat = "bin",
+          aes(y = group+0.9*..count../max(..count..),
+          label = ifelse(..count..&gt;0, ..count.., "")),
+          vjust = 1.2, size = 3, color = "white", binwidth = 1) +
+  theme_ridges(grid = FALSE) +
+  scale_x_continuous(breaks = c(0:12), limits = c(-.5, 13), expand = c(0, 0)) +
+  scale_y_discrete(expand = c(0.01, 0)) +
+  scale_fill_cyclical(values = c("#0000B0", "#7070D0")) +
+  guides(y = "none")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggridges</em> version 0.5.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

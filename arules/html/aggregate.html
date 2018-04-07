@@ -65,7 +65,7 @@ higher-level item.</p>
 itemInfo data.frame (<code>"labels"</code> is reserved for the item labels). 
 </p>
 <p><b>Aggregation:</b> To perform analysis at a group level of the item hierarchy,
-<code>agregate()</code> produces a new
+<code>aggregate()</code> produces a new
 object with items aggregated to a given group level. A group-level item
 is present if one or more of the items in the group are present in 
 the original object.
@@ -126,10 +126,12 @@ Groceries
 ## Groceries contains a hierarchy stored in itemInfo
 head(itemInfo(Groceries))
 
-## aggregate by level2
+## aggregate by level2: items will become labels at level2
+## Note that the number of items is therefore reduced to 55
 Groceries_level2 &lt;- aggregate(Groceries, by = "level2")
 Groceries_level2
 head(itemInfo(Groceries_level2)) ## labels are alphabetically sorted!
+
 
 ## compare orginal and aggregated transactions
 inspect(head(Groceries, 2))
@@ -153,17 +155,22 @@ inspect(rules[1])
 rules_level2 &lt;- aggregate(rules, by = "level2")
 inspect(rules_level2[1])
 
-## mine multi-level rules
+## mine multi-level rules:
+## (1) add aggregate items. These items are followed by a *
 Groceries_multilevel &lt;- addAggregate(Groceries, "level2")
 summary(Groceries_multilevel)
+inspect(head(Groceries_multilevel))
 
 rules &lt;- apriori(Groceries_multilevel, 
-  parameter = list(support = 0.01, conf =.9))
+  parameter = list(support = 0.01, conf = .9))
 inspect(head(rules, by = "lift"))
-## filter spurious rules 
+## this contains many spurous rules of type 'item X =&gt; aggregare of item X'
+## with a confidence of 1 and high lift.
+
+## filter spurious rules resulting from the aggregation 
 rules &lt;- filterAggregate(rules)
 inspect(head(rules, by = "lift"))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>arules</em> version 1.6-0 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>arules</em> version 1.6-1 <a href="00Index.html">Index</a>]</div>
 </body></html>

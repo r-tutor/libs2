@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Add marginal density/histogram to ggplot2 scatterplots</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for ggMarginal {ggExtra}"><tr><td>ggMarginal {ggExtra}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Add marginal density/histogram to ggplot2 scatterplots</h2>
+
+<h3>Description</h3>
+
+<p>Create a ggplot2 scatterplot with marginal density plots (default) or
+histograms, or add the marginal plots to an existing scatterplot.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ggMarginal(p, data, x, y, type = c("density", "histogram", "boxplot",
+  "violin"), margins = c("both", "x", "y"), size = 5, ...,
+  xparams = list(), yparams = list(), groupColour = FALSE,
+  groupFill = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>A ggplot2 scatterplot to add marginal plots to.  If <code>p</code> is
+not provided, then all of <code>data</code>, <code>x</code>, and <code>y</code> must be
+provided.</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>The data.frame to use for creating the marginal plots. Optional
+if <code>p</code> is provided and the marginal plots are reflecting the same data.</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>The name of the variable along the x axis. Optional if <code>p</code> is
+provided and the <code>x</code> aesthetic is set in the main plot.</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>The name of the variable along the y axis. Optional if <code>p</code> is
+provided and the <code>y</code> aesthetic is set in the main plot.</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>What type of marginal plot to show. One of: [density, histogram, boxplot, violin].</p>
+</td></tr>
+<tr valign="top"><td><code>margins</code></td>
+<td>
+<p>Along which margins to show the plots. One of: [both, x, y].</p>
+</td></tr>
+<tr valign="top"><td><code>size</code></td>
+<td>
+<p>Integer describing the relative size of the marginal plots
+compared to the main plot. A size of 5 means that the main plot is 5x wider
+and 5x taller than the marginal plots.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Extra parameters to pass to the marginal plots. Any parameter that
+<code>geom_line()</code>, <code>geom_histogram()</code>, <code>geom_boxplot()</code>, or <code>geom_violin()</code> accepts
+can be used. For example, <code>colour = "red"</code> can be used for any marginal plot type,
+and <code>binwidth = 10</code> can be used for histograms.</p>
+</td></tr>
+<tr valign="top"><td><code>xparams</code></td>
+<td>
+<p>List of extra parameters to use only for the marginal plot along
+the x axis.</p>
+</td></tr>
+<tr valign="top"><td><code>yparams</code></td>
+<td>
+<p>List of extra parameters to use only for the marginal plot along
+the y axis.</p>
+</td></tr>
+<tr valign="top"><td><code>groupColour</code></td>
+<td>
+<p>If <code>TRUE</code>, the colour (or outline) of the marginal
+plots will be grouped according to the variable mapped to <code>colour</code> in the
+scatter plot. The variable mapped to <code>colour</code> in the scatter plot must
+be a character or factor variable. See examples below.</p>
+</td></tr>
+<tr valign="top"><td><code>groupFill</code></td>
+<td>
+<p>If <code>TRUE</code>, the fill of the marginal
+plots will be grouped according to the variable mapped to <code>colour</code> in the
+scatter plot. The variable mapped to <code>colour</code> in the scatter plot must
+be a character or factor variable. See examples below.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>An object of class <code>ggExtraPlot</code>. This object can be printed to show the
+plots or saved using any of the typical image-saving functions (for example, using
+<code>png()</code> or <code>pdf()</code>).
+</p>
+
+
+<h3>Note</h3>
+
+<p>The <code>grid</code> and <code>gtable</code> packages are required for this
+function.
+</p>
+<p>Since the <code>size</code> parameter is used by <code>ggMarginal</code>, if you want
+to pass a size to the marginal plots, you cannot
+use the <code>...</code> parameter. Instead, you must pass <code>size</code> to
+both <code>xparams</code> and <code>yparams</code>. For example,
+<code>ggMarginal(p, size = 2)</code> will change the size of the main vs marginal plot,
+while <code>ggMarginal(p, xparams = list(size=2), yparams = list(size=2))</code>
+will make the density plot outline thicker.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><a href="http://daattali.com/shiny/ggExtra-ggMarginal-demo/">Demo Shiny app</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(ggplot2)
+
+# basic usage
+p &lt;- ggplot(mtcars, aes(wt, mpg)) + geom_point()
+ggMarginal(p)
+
+# using some parameters
+set.seed(30)
+df &lt;- data.frame(x = rnorm(500, 50, 10), y = runif(500, 0, 50))
+p2 &lt;- ggplot(df, aes(x, y)) + geom_point()
+ggMarginal(p2)
+ggMarginal(p2, type = "histogram")
+ggMarginal(p2, margins = "x")
+ggMarginal(p2, size = 2)
+ggMarginal(p2, colour = "red")
+ggMarginal(p2, colour = "red", xparams = list(colour = "blue", size = 3))
+ggMarginal(p2, type = "histogram", bins = 10)
+
+# Using violin plot
+ggMarginal(p2, type = "violin")
+
+# specifying the data directly instead of providing a plot
+ggMarginal(data = df, x = "x", y = "y")
+
+# more examples showing how the marginal plots are properly aligned even when
+# the main plot axis/margins/size/etc are changed
+set.seed(30)
+df2 &lt;- data.frame(x = c(rnorm(250, 50, 10), rnorm(250, 100, 10)),
+                  y = runif(500, 0, 50))
+p2 &lt;- ggplot(df2, aes(x, y)) + geom_point()
+ggMarginal(p2)
+
+p2 &lt;- p2 + ggtitle("Random data") + theme_bw(30)
+ggMarginal(p2)
+
+p3 &lt;- ggplot(df2, aes(log(x), y - 500)) + geom_point()
+ggMarginal(p3)
+
+p4 &lt;- p3 + scale_x_continuous(limits = c(2, 6)) + theme_bw(50)
+ggMarginal(p4)
+
+# Using groupColour and groupFill
+# In order to use either of these arguments, we must map 'colour' in the
+# scatter plot to a factor or character variable
+p &lt;- ggplot(mtcars, aes(x = wt, y = drat, colour = factor(vs))) +
+     geom_point()
+ggMarginal(p, groupColour = TRUE)
+ggMarginal(p, groupColour = TRUE, groupFill = TRUE)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggExtra</em> version 0.8 <a href="00Index.html">Index</a>]</div>
+</body></html>

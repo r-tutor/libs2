@@ -130,6 +130,7 @@ generatingItemsets,rules-method	rules-class
 Groceries	Groceries
 head	sort
 head,associations-method	sort
+hierarchy	aggregate
 hits	hits
 image	image
 image,itemMatrix-method	image
@@ -260,6 +261,8 @@ merge,transactions-method	merge
 Mushroom	Mushroom
 nitems	itemMatrix-class
 nitems,itemMatrix-method	itemMatrix-class
+nitems,itemsets-method	itemsets-class
+nitems,rules-method	rules-class
 plot.associations	associations-class
 plot.itemMatrix	itemMatrix-class
 predict	predict

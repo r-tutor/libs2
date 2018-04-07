@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Generic discrete manual scale</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for scale_discrete_manual {ggridges}"><tr><td>scale_discrete_manual {ggridges}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Generic discrete manual scale</h2>
+
+<h3>Description</h3>
+
+<p>Generic discrete manual scale. This scale can be used to manually set the values
+for any aesthetics, and it is equivalent to <code><a href="../../ggplot2/html/scale_manual.html">scale_colour_manual()</a></code>, <code><a href="../../ggplot2/html/scale_manual.html">scale_fill_manual()</a></code>,
+etc. For example, instead of writing <code>scale_colour_manual(values = c(...))</code>, we can
+write <code>scale_discrete_manual("colour", values = c(...))</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+scale_discrete_manual(aesthetics, values, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>aesthetics</code></td>
+<td>
+<p>The aesthetics for which this scale should be used</p>
+</td></tr>
+<tr valign="top"><td><code>values</code></td>
+<td>
+<p>List of values to be used as palette</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Other parameters handed off to <a href="../../ggplot2/html/discrete_scale.html">discrete_scale</a></p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p>See <code><a href="scale_point.html">scale_point_color_hue()</a></code> for specific scales for point aesthetics and
+<code><a href="scale_vline.html">scale_vline_color_hue()</a></code> for specific scales for vline aesthetics.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(ggplot2)
+
+ggplot(iris, aes(x=Sepal.Length, y=Species, fill = Species)) +
+  geom_density_ridges(aes(point_color = Species, point_fill = Species,
+                          point_shape = Species),
+                      alpha = .2, jittered_points = TRUE) +
+  scale_fill_manual( values = c("#0072b2", "#D55E00", "#009e73")) +
+  scale_discrete_manual("point_color", values = c("#0072b2", "#D55E00", "#009e73")) +
+  scale_discrete_manual("point_fill", values = c("#0072b280", "#D55E0080", "#009e7380")) +
+  scale_discrete_manual("point_shape", values = c(21, 22, 23)) +
+  theme_ridges()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggridges</em> version 0.5.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -21,7 +21,6 @@ abbreviate              Abbreviate function for item labels in
                         transactions, itemMatrix and associations
 addComplement           Add Complement-items to Transactions
 affinity                Computing Affinity Between Items
-aggregate               Support for Item Hierarchies
 apriori                 Mining Associations with Apriori
 ar_similarity-class     Classes dist, ar\_cross\_dissimilarity and
                         ar\_similarity - Proximity Matrices
@@ -35,6 +34,7 @@ discretize              Convert a Continuous Variable into a
 dissimilarity           Dissimilarity Computation
 duplicated              Find Duplicated Elements
 eclat                   Mining Associations with Eclat
+hierarchy               Support for Item Hierarchies
 hits                    Computing Transaction Weights With HITS
 image                   Visual Inspection of Binary Incidence Matrices
 inspect                 Display Associations and Transactions in
