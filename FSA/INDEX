@@ -19,10 +19,10 @@ Mmethods                Estimate natural mortality from a variety of
 PSDlit                  Gabelhouse five-cell length categories for
                         various species.
 PikeNY                  Summarized multiple mark-recapture data for all
-                        Northern Pike from Buckthorn Marsh, NY.
+                        Northern Pike from Buckhorn Marsh, NY.
 PikeNYPartial1          Capture histories (4 samples), in capture
                         history format, of a subset of Northern Pike
-                        from Buckthorn Marsh, NY.
+                        from Buckhorn Marsh, NY.
 SMBassLS                Catch-effort data for Little Silver Lake (Ont)
                         Smallmouth Bass.
 SMBassWB                Growth increment data for West Bearskin Lake,
@@ -44,7 +44,7 @@ addRadCap               Add a total radius-at-capture variable to a
                         increments data.
 addZeroCatch            Adds zeros for catches of species not collected
                         in some sampling events.
-ageBias                 Compute and view possible differnces between
+ageBias                 Compute and view possible differences between
                         paired sets of ages.
 agePrecision            Compute measures of precision among sets of
                         ages.
@@ -57,7 +57,7 @@ bcFuns                  Creates a function for a specific
                         back-calculation model.
 binCI                   Confidence intervals for binomial probability
                         of success.
-bootstrap               Associated S3 methods for bootCase from car.
+bootstrap               Case bootstrapping and associated S3 methods.
 capHistConvert          Convert between capture history data.frame
                         formats.
 capHistSum              Summarize capture histories in individual fish
@@ -143,6 +143,8 @@ psdPlot                 Length-frequency histogram with Gabelhouse
                         lengths highlighted.
 psdVal                  Finds Gabelhouse lengths (for PSD calculations)
                         for a species.
+rSquared                Extract the coefficient of determination from a
+                        linear model object.
 rcumsum                 Computes the prior to or reverse cumulative sum
                         of a vector.
 removal                 Population estimates for k-, 3-, or 2-pass

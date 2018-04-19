@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Marking product-limit plots at the censored times.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for markTime {prodlim}"><tr><td>markTime {prodlim}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Marking product-limit plots at the censored times.</h2>
+
+<h3>Description</h3>
+
+<p>This function is invoked and controlled by <code>plot.prodlim</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+markTime(x, times, nlost, pch, col, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>The values of the curves at <code>times</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>times</code></td>
+<td>
+<p>The times where there curves are plotted.</p>
+</td></tr>
+<tr valign="top"><td><code>nlost</code></td>
+<td>
+<p>The number of subjects lost to follow-up (censored) at
+<code>times</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>pch</code></td>
+<td>
+<p>The symbol used to mark the curves.</p>
+</td></tr>
+<tr valign="top"><td><code>col</code></td>
+<td>
+<p>The color of the symbols.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Arguments passed to <code>points</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This function should not be called directly. The arguments can be specified
+as <code>atRisk.arg</code> in the call to <code>plot.prodlim</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Nil
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Thomas Alexander Gerds &lt;tag@biostat.ku.dk&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="plot.prodlim.html">plot.prodlim</a></code>, <code><a href="confInt.html">confInt</a></code>,
+<code><a href="atRisk.html">atRisk</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>prodlim</em> version 2018.04.18 <a href="00Index.html">Index</a>]</div>
+</body></html>

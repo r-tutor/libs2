@@ -13,6 +13,7 @@ anova.depletion	depletion
 bcFuns	bcFuns
 binCI	binCI
 BluegillJL	BluegillJL
+bootCase	bootCase
 bootstrap	bootCase
 BrookTroutTH	BrookTroutTH
 capFirst	FSAUtils
@@ -88,6 +89,7 @@ hoCoef	hoCoef
 htest	nlsBoot
 htest.bootCase	bootCase
 htest.nlsBoot	nlsBoot
+htest.nlsboot	nlsBoot
 hyperCI	hyperCI
 iAddLoessLine	FSA-internals
 iCheckALK	FSA-internals
@@ -148,6 +150,7 @@ plotBinResp.default	plotBinResp
 plotBinResp.formula	plotBinResp
 poiCI	poiCI
 predict.bootCase	bootCase
+predict.nlsbooot	nlsBoot
 predict.nlsBoot	nlsBoot
 print.compIntercepts	compIntercepts
 print.compSlopes	compSlopes
@@ -176,6 +179,11 @@ residPlot.POLY	residPlot
 residPlot.SLR	residPlot
 residPlot.TWOWAY	residPlot
 RichardsFuns	growthModels
+rSquared	rSquared
+rSquared.catchCurve	catchCurve
+rSquared.default	rSquared
+rSquared.depletion	depletion
+rSquared.lm	rSquared
 Schnute	Schnute
 se	se
 SMBassLS	SMBassLS

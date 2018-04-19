@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Add point-wise confidence limits to the graphs of...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for confInt {prodlim}"><tr><td>confInt {prodlim}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Add point-wise confidence limits to the graphs of Kaplan-Meier and
+Aalen-Johansen estimates of survival and cumulative incidence.</h2>
+
+<h3>Description</h3>
+
+<p>This function is invoked and controlled by <code>plot.prodlim</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+confInt(x, times, newdata, type, citype, cause, col, lty, lwd, density = 55,
+  ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>an object of class &lsquo;prodlim&rsquo; as returned by the <code>prodlim</code>
+function.</p>
+</td></tr>
+<tr valign="top"><td><code>times</code></td>
+<td>
+<p>where to compute point-wise confidence limits</p>
+</td></tr>
+<tr valign="top"><td><code>newdata</code></td>
+<td>
+<p>see <code>plot.prodlim</code></p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>Either <code>"cuminc"</code> or <code>"survival"</code> passed to
+summary.prodlim as <code>surv=ifelse(type=="cuminc",FALSE,TRUE)</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>citype</code></td>
+<td>
+<p>If <code>"shadow"</code> then confidence limits are drawn as colored
+shadows.  Otherwise, dotted lines are used to show the upper and lower
+confidence limits.</p>
+</td></tr>
+<tr valign="top"><td><code>cause</code></td>
+<td>
+<p>see <code>plot.prodlim</code></p>
+</td></tr>
+<tr valign="top"><td><code>col</code></td>
+<td>
+<p>the colour of the lines.</p>
+</td></tr>
+<tr valign="top"><td><code>lty</code></td>
+<td>
+<p>the line type of the lines.</p>
+</td></tr>
+<tr valign="top"><td><code>lwd</code></td>
+<td>
+<p>the line thickness of the lines.</p>
+</td></tr>
+<tr valign="top"><td><code>density</code></td>
+<td>
+<p>For <code>citype="shadow"</code>, the density of the shade. Default
+is 55 percent.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Further arguments that are passed to the function
+<code>segments</code> if <code>type=="bars"</code> and to <code>lines</code> else.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This function should not be called directly. The arguments can be specified
+as <code>Confint.arg</code> in the call to <code>plot.prodlim</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Nil
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Thomas Alexander Gerds &lt;tag@biostat.ku.dk&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="plot.prodlim.html">plot.prodlim</a></code>, <code><a href="atRisk.html">atRisk</a></code>,
+<code><a href="markTime.html">markTime</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>prodlim</em> version 2018.04.18 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Stop the time of an event history object</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for stopTime {prodlim}"><tr><td>stopTime {prodlim}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Stop the time of an event history object</h2>
+
+<h3>Description</h3>
+
+<p>All event times are stopped at a given time point and
+corresponding events are censored
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+stopTime(object, stop.time)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>Event history object as obtained with <code>Hist</code></p>
+</td></tr>
+<tr valign="top"><td><code>stop.time</code></td>
+<td>
+<p>Time point at which to stop the event history object</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Stopped event history object where all times are censored 
+at <code>stop.time</code>. All observations with times greater than <code>stop.time</code>
+are set to <code>stop.time</code> and the event status is set to <code>attr(object,"cens.code")</code>.
+A new column <code>"stop.time"</code> is equal to <code>1</code> for stopped observations
+and equal to <code>0</code> for the other observations.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Thomas A. Gerds &lt;tag@biostat.ku.dk&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Hist
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+set.seed(29)
+d &lt;- SimSurv(10)
+h &lt;- with(d,Hist(time,status))
+h
+stopTime(h,8)
+stopTime(h,5)
+
+## works also with Surv objects
+library(survival)
+s &lt;- with(d,Surv(time,status))
+stopTime(s,5)
+
+## competing risks
+set.seed(29)
+dr &lt;- SimCompRisk(10)
+hr &lt;- with(dr,Hist(time,event))
+hr
+stopTime(hr,8)
+stopTime(hr,5)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>prodlim</em> version 2018.04.18 <a href="00Index.html">Index</a>]</div>
+</body></html>

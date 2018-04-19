@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Predicting event probabilities from product limit estimates</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for predict.prodlim {prodlim}"><tr><td>predict.prodlim {prodlim}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Predicting event probabilities from product limit estimates</h2>
+
+<h3>Description</h3>
+
+<p>Evaluation of estimated survival or event probabilities at given times and
+covariate constellations.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'prodlim'
+predict(object, times, newdata, level.chaos = 1,
+  type = c("surv", "cuminc", "list"), mode = "list", bytime = FALSE,
+  cause, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>A fitted object of class &quot;prodlim&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>times</code></td>
+<td>
+<p>Vector of times at which to return the estimated probabilities (survival or absolute event risks).</p>
+</td></tr>
+<tr valign="top"><td><code>newdata</code></td>
+<td>
+<p>A data frame with the same variable names as those that
+appear on the right hand side of the 'prodlim' formula.  If there are
+covariates this argument is required.</p>
+</td></tr>
+<tr valign="top"><td><code>level.chaos</code></td>
+<td>
+<p>Integer specifying the sorting of the output: &lsquo;0&rsquo; sort by
+time and newdata; &lsquo;1&rsquo; only by time; &lsquo;2&rsquo; no sorting at all</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>Choice between &quot;surv&quot;,&quot;cuminc&quot;,&quot;list&quot;:
+</p>
+<p>&quot;surv&quot;: predict survival probabilities only survival models
+</p>
+<p>&quot;cuminc&quot;: predict cumulative incidences only competing risk models
+</p>
+<p>&quot;list&quot;: find the indices corresponding to times and newdata. See value.
+</p>
+<p>Defaults to &quot;surv&quot; for two-state models and to &quot;cuminc&quot; for competing risk
+models.</p>
+</td></tr>
+<tr valign="top"><td><code>mode</code></td>
+<td>
+<p>Only for <code>type=="surv"</code> and <code>type=="cuminc"</code>. Can
+either be &quot;list&quot; or &quot;matrix&quot;. For &quot;matrix&quot; the predicted probabilities will
+be returned in matrix form.</p>
+</td></tr>
+<tr valign="top"><td><code>bytime</code></td>
+<td>
+<p>Logical. If TRUE and <code>mode=="matrix"</code> the matrix with
+predicted probabilities will have a column for each time and a row for each
+newdata. Only when <code>object$covariate.type&gt;1</code> and more than one time is
+given.</p>
+</td></tr>
+<tr valign="top"><td><code>cause</code></td>
+<td>
+<p>Character (other classes are converted with <code>as.character</code>).
+The cause for predicting the cause-specific cumulative
+incidence function in competing risk models, that is the absolute risk of 
+<code>cause</code> events between time zero and <code>times</code> .</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Only for compatibility reasons.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Predicted (survival) probabilities are returned that can be plotted,
+summarized and used for inverse of probability of censoring weighting.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>type=="surv"</code> A list or a matrix with survival probabilities
+for all times and all newdata.
+</p>
+<p><code>type=="cuminc"</code> A list or a matrix with cumulative incidences for all
+times and all newdata.
+</p>
+<p><code>type=="list"</code> A list with the following components:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>times</code></td>
+<td>
+<p>The argument <code>times</code> carried forward</p>
+</td></tr>
+<tr valign="top"><td><code>predictors</code></td>
+<td>
+<p>The relevant part of the argument <code>newdata</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>indices</code></td>
+<td>
+<p> A list with the following components
+</p>
+<p><code>time</code>: Where to find values corresponding to the requested times
+<code>strata</code>: Where to find values corresponding to the values of the
+variables in newdata.  Together time and strata show where to find the
+predicted probabilities.  </p>
+</td></tr> <tr valign="top"><td><code>dimensions</code></td>
+<td>
+<p> a list with the following
+components: <code>time</code> : The length of <code>times</code> <code>strata</code> : The
+number of rows in <code>newdata</code> <code>names.strata</code> : Labels for the
+covariate values.  </p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Thomas Alexander Gerds &lt;tag@biostat.ku.dk&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="predictSurvIndividual.html">predictSurvIndividual</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+
+dat &lt;- SimSurv(400)
+fit &lt;- prodlim(Hist(time,status)~1,data=dat)
+
+## predict the survival probs at selected times 
+predict(fit,times=c(3,5,10))
+
+## NA is returned when the time point is beyond the
+## range of definition of the Kaplan-Meier estimator:
+predict(fit,times=c(-1,0,10,100,1000,10000))
+
+## when there are strata, newdata is required 
+## or neighborhoods (i.e. overlapping strata)
+mfit &lt;- prodlim(Hist(time,status)~X1+X2,data=dat)
+predict(mfit,times=c(-1,0,10,100,1000,10000),newdata=dat[18:21,])
+
+## this can be requested in matrix form
+predict(mfit,times=c(-1,0,10,100,1000,10000),newdata=dat[18:21,],mode="matrix")
+
+## and even transposed
+predict(mfit,times=c(-1,0,10,100,1000,10000),newdata=dat[18:21,],mode="matrix",bytime=TRUE)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>prodlim</em> version 2018.04.18 <a href="00Index.html">Index</a>]</div>
+</body></html>

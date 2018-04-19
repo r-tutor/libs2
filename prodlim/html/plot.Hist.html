@@ -1,0 +1,259 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Box-arrow diagrams for multi-state models.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for plot.Hist {prodlim}"><tr><td>plot.Hist {prodlim}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Box-arrow diagrams for multi-state models.</h2>
+
+<h3>Description</h3>
+
+<p>Automated plotting of the states and transitions that characterize a multi
+states model.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'Hist'
+plot(x, nrow, ncol, stateLabels, arrowLabels,
+  arrowLabelStyle = "symbolic", arrowLabelSymbol = "lambda",
+  changeArrowLabelSide, tagBoxes = FALSE, startCountZero = TRUE, oneFitsAll,
+  margin, cex, verbose = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>An object of class <code>Hist</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>nrow</code></td>
+<td>
+<p>the number of graphic rows</p>
+</td></tr>
+<tr valign="top"><td><code>ncol</code></td>
+<td>
+<p>the number of graphic columns</p>
+</td></tr>
+<tr valign="top"><td><code>stateLabels</code></td>
+<td>
+<p>Vector of names to appear in the boxes (states).
+Defaults to attr(x,&quot;state.names&quot;).  The boxes can also be individually
+labeled by smart arguments of the form <code>box3.label="diseased"</code>, see
+examples.</p>
+</td></tr>
+<tr valign="top"><td><code>arrowLabels</code></td>
+<td>
+<p>Vector of labels to appear in the boxes (states). One for
+each arrow.  The arrows can also be individually labeled by smart arguments
+of the form <code>arrow1.label=paste(expression(eta(s,u)))</code>, see examples.</p>
+</td></tr>
+<tr valign="top"><td><code>arrowLabelStyle</code></td>
+<td>
+<p>Either &quot;symbolic&quot; for automated symbolic arrow
+labels, or &quot;count&quot; for arrow labels that reflect the number of transitions
+in the data.</p>
+</td></tr>
+<tr valign="top"><td><code>arrowLabelSymbol</code></td>
+<td>
+<p>Symbol for automated symbolic arrow labels. Defaults
+to &quot;lambda&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>changeArrowLabelSide</code></td>
+<td>
+<p>A vector of mode logical (TRUE,FALSE) one for
+each arrow to change the side of the arrow on which the label is placed.</p>
+</td></tr>
+<tr valign="top"><td><code>tagBoxes</code></td>
+<td>
+<p>Logical. If TRUE the boxes are numbered in the upper left
+corner. The size can be controlled with smart argument boxtags.cex. The
+default is boxtags.cex=1.28.</p>
+</td></tr>
+<tr valign="top"><td><code>startCountZero</code></td>
+<td>
+<p>Control states numbers for symbolic arrow labels and
+box tags.</p>
+</td></tr>
+<tr valign="top"><td><code>oneFitsAll</code></td>
+<td>
+<p>If <code>FALSE</code> then boxes have individual size, depending
+on the size of the label, otherwise all boxes have the same size dependent
+on the largest label.</p>
+</td></tr>
+<tr valign="top"><td><code>margin</code></td>
+<td>
+<p>Set the figure margin via <code>par(mar=margin)</code>. Less than 4
+values are repeated.</p>
+</td></tr>
+<tr valign="top"><td><code>cex</code></td>
+<td>
+<p>Initial cex value for the state and the arrow <code>labels</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>verbose</code></td>
+<td>
+<p>If TRUE echo various things.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Smart control of arguments for the subroutines text (box
+label), rect (box), arrows, text (arrow label). Thus the three dots can be
+used to draw individual boxes with individual labels, arrows and arrow
+labels. E.g. arrow2.label=&quot;any label&quot; changes the label of the second arrow.
+See examples.</p>
+</td></tr>
+</table>
+
+
+<h3>Note</h3>
+
+<p>Use the functionality of the unix program &lsquo;dot&rsquo;
+http://www.graphviz.org/About.php via R package Rgraphviz to obtain more
+complex graphs.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Thomas A Gerds <a href="mailto:tag@biostat.ku.dk">tag@biostat.ku.dk</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="Hist.html">Hist</a></code><code><a href="SmartControl.html">SmartControl</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+
+## A simple survival model
+
+SurvFrame &lt;- data.frame(time=1:10,status=c(0,1,1,0,0,1,0,0,1,0))
+SurvHist &lt;- with(SurvFrame,Hist(time,status))
+plot(SurvHist)
+plot(SurvHist,box2.col=2,box2.label="experienced\nR user")
+plot(SurvHist,
+     box2.col=2,
+     box1.label="newby",
+     box2.label="experienced\nR user",
+     oneFitsAll=FALSE,
+     arrow1.length=.5,
+     arrow1.label="",
+     arrow1.lwd=4)
+
+## change the cex of all box labels:
+plot(SurvHist,
+     box2.col=2,
+     box1.label="newby",
+     box2.label="experienced\nR user",
+     oneFitsAll=FALSE,
+     arrow1.length=.5,
+     arrow1.label="",
+     arrow1.lwd=4,
+     label.cex=1)
+
+## change the cex of single box labels:
+plot(SurvHist,
+     box2.col=2,
+     box1.label="newby",
+     box2.label="experienced\nR user",
+     oneFitsAll=FALSE,
+     arrow1.length=.5,
+     arrow1.label="",
+     arrow1.lwd=4,
+     label1.cex=1,
+     label2.cex=2)
+
+
+## The pbc data set from the survival package
+library(survival)
+data(pbc)
+plot(with(pbc,Hist(time,status)),
+     stateLabels=c("randomized","transplant","dead"),
+     arrowLabelStyle="count")
+
+## two competing risks
+comprisk.model &lt;- data.frame(time=1:3,status=1:3)
+CRHist &lt;- with(comprisk.model,Hist(time,status,cens.code=2))
+plot(CRHist)
+plot(CRHist,arrow1.label=paste(expression(eta(s,u))))
+
+plot(CRHist,box2.label="This\nis\nstate 2",arrow1.label=paste(expression(gamma[1](t))))
+plot(CRHist,box3.label="Any\nLabel",arrow2.label="any\nlabel")
+
+## change the layout
+plot(CRHist,
+     box1.label="Alive",
+     box2.label="Dead\n cause 1",
+     box3.label="Dead\n cause 2",
+     arrow1.label=paste(expression(gamma[1](t))),
+     arrow2.label=paste(expression(eta[2](t))),
+     box1.col=2,
+     box2.col=3,
+     box3.col=4,
+     nrow=2,
+     ncol=3,
+     box1.row=1,
+     box1.column=2,
+     box2.row=2,
+     box2.column=1,
+     box3.row=2,
+     box3.column=3)
+
+## more competing risks
+comprisk.model2 &lt;- data.frame(time=1:4,status=1:4)
+CRHist2 &lt;- with(comprisk.model2,Hist(time,status,cens.code=2))
+plot(CRHist2,box1.row=2)
+
+## illness-death models
+illness.death.frame &lt;- data.frame(time=1:4,
+				  from=c("Disease\nfree",
+                                      "Disease\nfree",
+                                      "Diseased",
+                                      "Disease\nfree"),
+				  to=c("0","Diseased","Dead","Dead"))
+IDHist &lt;- with(illness.death.frame,Hist(time,event=list(from,to)))
+plot(IDHist)
+
+## illness-death with recovery
+illness.death.frame2 &lt;- data.frame(time=1:5,
+from=c("Disease\nfree","Disease\nfree","Diseased","Diseased","Disease\nfree"),
+to=c("0","Diseased","Disease\nfree","Dead","Dead"))
+IDHist2 &lt;- with(illness.death.frame2,Hist(time,event=list(from,to)))
+plot(IDHist2)
+
+## 4 state models
+x=data.frame(from=c(1,2,1,3,4),to=c(2,1,3,4,1),time=1:5)
+y=with(x,Hist(time=time,event=list(from=from,to=to)))
+plot(y)
+
+## moving the label of some arrows
+
+d &lt;- data.frame(time=1:5,from=c(1,1,1,2,2),to=c(2,3,4,3,4))
+h &lt;- with(d,Hist(time,event=list(from,to)))
+plot(h,
+tagBoxes=TRUE,
+stateLabels=c("Remission\nwithout\nGvHD",
+    "Remission\nwith\nGvHD",
+    "Relapse",
+    "Death\nwithout\nrelapse"),
+arrowLabelSymbol='alpha',
+arrowlabel3.x=35,
+arrowlabel3.y=53,
+arrowlabel4.y=54,
+arrowlabel4.x=68)
+
+##'
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>prodlim</em> version 2018.04.18 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Extract a design matrix and specials from a model.frame</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for model.design {prodlim}"><tr><td>model.design {prodlim}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Extract a design matrix and specials from a model.frame</h2>
+
+<h3>Description</h3>
+
+<p>Extract design matrix and data specials from a model.frame
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+model.design(terms, data, xlev = NULL, dropIntercept = FALSE,
+  maxOrder = 1, unspecialsDesign = TRUE, specialsFactor = FALSE,
+  specialsDesign = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>terms</code></td>
+<td>
+<p>terms object as obtained either with function <code>terms</code> or <code>strip.terms</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>A data set in which terms are defined.</p>
+</td></tr>
+<tr valign="top"><td><code>xlev</code></td>
+<td>
+<p>a named list of character vectors giving the full set of levels to be assumed for the factors.
+Can have less elements, in which case the other levels are learned from the <code>data</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>dropIntercept</code></td>
+<td>
+<p>If TRUE drop intercept term from the design
+matrix</p>
+</td></tr>
+<tr valign="top"><td><code>maxOrder</code></td>
+<td>
+<p>An error is produced if special variables are
+involved in interaction terms of order higher than max.order.</p>
+</td></tr>
+<tr valign="top"><td><code>unspecialsDesign</code></td>
+<td>
+<p>A logical value: if <code>TRUE</code> apply
+<code><a href="../../stats/html/model.matrix.html">model.matrix</a></code> to unspecial covariates. If
+<code>FALSE</code> extract unspecial covariates from data.</p>
+</td></tr>
+<tr valign="top"><td><code>specialsFactor</code></td>
+<td>
+<p>A character vector containing special
+variables which should be coerced into a single factor. If
+<code>TRUE</code> all specials are treated in this way, if <code>FALSE</code>
+none of the specials is treated in this way.</p>
+</td></tr>
+<tr valign="top"><td><code>specialsDesign</code></td>
+<td>
+<p>A character vector containing special
+variables which should be transformed into a design matrix via
+<code><a href="../../stats/html/model.matrix.html">model.matrix</a></code>.  If <code>TRUE</code> all specials are
+treated in this way.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The function separates special terms from the unspecial terms and returns
+a list of design matrices, one for unspecial terms and one for each special.
+Some special specials cannot or should not be evaluated in
+data. E.g., <code>y~a+dummy(x)+strata(v)</code> the function strata can and should be evaluated,
+but in order to have <code>model.frame</code> also evaluate dummy(x) one would be to define
+and export the function <code>dummy</code>. Still the term <code>dummy(x)</code> can be used
+to identify a special treatment of the variable <code>x</code>. To deal with this case,
+one can specify <code>stripSpecials="dummy"</code>. In addition,  the data
+should include variables <code>strata(z)</code> and <code>x</code>, not <code>dummy(x)</code>.
+See examples.
+The function <code>untangle.specials</code> of the survival function does a similar job.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list which contains
+- the design matrix with the levels of the variables stored in attribute 'levels' 
+- separate data.frames which contain the values of the special variables.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Thomas A. Gerds &lt;tag@biostat.ku.dk&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="EventHistory.frame.html">EventHistory.frame</a></code> model.frame terms model.matrix .getXlevels
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# specials that are evaluated. here ID needs to be defined 
+set.seed(8)
+d &lt;- data.frame(y=rnorm(5),x=factor(c("a","b","b","a","c")),z=c(2,2,7,7,7),v=sample(letters)[1:5])
+d$z &lt;- factor(d$z,levels=c(1:8))
+ID &lt;- function(x)x
+f &lt;- formula(y~x+ID(z))
+t &lt;- terms(f,special="ID",data=d)
+mda &lt;- model.design(terms(t),data=d,specialsFactor=TRUE)
+mda$ID
+mda$design
+## 
+mdb &lt;- model.design(terms(t),data=d,specialsFactor=TRUE,unspecialsDesign=FALSE)
+mdb$ID
+mdb$design
+
+# set x-levels
+attr(mdb$ID,"levels")
+attr(model.design(terms(t),data=d,xlev=list("ID(z)"=1:10),
+     specialsFactor=TRUE)$ID,"levels")
+
+# special specials (avoid define function SP)
+f &lt;- formula(y~x+SP(z)+factor(v))
+t &lt;- terms(f,specials="SP",data=d)
+st &lt;- strip.terms(t,specials="SP",arguments=NULL)
+md2a &lt;- model.design(st,data=d,specialsFactor=TRUE,specialsDesign="SP")
+md2a$SP
+md2b &lt;- model.design(st,data=d,specialsFactor=TRUE,specialsDesign=FALSE)
+md2b$SP
+
+# special function with argument
+f2 &lt;- formula(y~x+treat(z,power=2)+treat(v,power=-1))
+t2 &lt;- terms(f2,special="treat")
+st2 &lt;- strip.terms(t2,specials="treat",arguments=list("treat"=list("power")))
+model.design(st2,data=d,specialsFactor=FALSE)
+model.design(st2,data=d,specialsFactor=TRUE)
+model.design(st2,data=d,specialsDesign=TRUE)
+
+library(survival)
+data(pbc)
+t3 &lt;- terms(Surv(time,status!=0)~factor(edema)*age+strata(I(log(bili)&gt;1))+strata(sex),
+            specials=c("strata","cluster"))
+st3 &lt;- strip.terms(t3,specials=c("strata"),arguments=NULL)
+md3 &lt;- model.design(terms=st3,data=pbc[1:4,])
+md3$strata
+md3$cluster
+
+f4 &lt;- Surv(time,status)~age+const(factor(edema))+strata(sex,test=0)+prop(bili,power=1)+tp(albumin)
+t4 &lt;- terms(f4,specials=c("prop","timevar","strata","tp","const"))
+st4 &lt;- strip.terms(t4,
+                   specials=c("prop","timevar"),
+                   unspecials="prop",
+                   alias.names=list("timevar"="strata","prop"=c("const","tp")),
+                   arguments=list("prop"=list("power"=0),"timevar"=list("test"=0)))
+formula(st4)
+md4 &lt;- model.design(st4,data=pbc[1:4,],specialsDesign=TRUE)
+md4$prop
+md4$timevar
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>prodlim</em> version 2018.04.18 <a href="00Index.html">Index</a>]</div>
+</body></html>

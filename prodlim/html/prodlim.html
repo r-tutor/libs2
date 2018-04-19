@@ -1,0 +1,332 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Functions for estimating probabilities from right censored...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for prodlim {prodlim}"><tr><td>prodlim {prodlim}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Functions for estimating probabilities from right censored data</h2>
+
+<h3>Description</h3>
+
+<p>Functions for estimating probabilities from right censored data
+</p>
+<p>Nonparametric estimation in event history analysis. Featuring fast
+algorithms and user friendly syntax adapted from the survival package.  The
+product limit algorithm is used for right censored data; the
+self-consistency algorithm for interval censored data.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+prodlim(formula, data = parent.frame(), subset, na.action = NULL,
+  reverse = FALSE, conf.int = 0.95, bandwidth = NULL, caseweights,
+  discrete.level = 3, x = TRUE, maxiter = 1000, grid, tol = 7,
+  method = c("npmle", "one.step", "impute.midpoint", "impute.right"),
+  exact = TRUE, type)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>formula</code></td>
+<td>
+<p>A formula whose left hand side is a <code>Hist</code>
+object. In some special cases it can also be a <code>Surv</code>
+response object, see the details section. The right hand side is
+as usual a linear combination of covariates which may contain at
+most one continuous factor. Whether or not a covariate is
+recognized as continuous or discrete depends on its class and on
+the argument <code>discrete.level</code>. The right hand side may also
+be used to specify clusters, see the details section.</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>A data.frame in which all the variables of
+<code>formula</code> can be interpreted.</p>
+</td></tr>
+<tr valign="top"><td><code>subset</code></td>
+<td>
+<p>Passed as argument <code>subset</code> to function
+<code>subset</code> which applied to <code>data</code> before the formula is
+processed.</p>
+</td></tr>
+<tr valign="top"><td><code>na.action</code></td>
+<td>
+<p>All lines in data with any missing values in the
+variables of formula are removed.</p>
+</td></tr>
+<tr valign="top"><td><code>reverse</code></td>
+<td>
+<p>For right censored data, if reverse=TRUE then the
+censoring distribution is estimated.</p>
+</td></tr>
+<tr valign="top"><td><code>conf.int</code></td>
+<td>
+<p>The level (between 0 and 1) for two-sided
+pointwise confidence intervals. Defaults to 0.95. Remark: only
+plain Wald-type confidence limits are available.</p>
+</td></tr>
+<tr valign="top"><td><code>bandwidth</code></td>
+<td>
+<p>Smoothing parameter for nearest neighborhoods
+based on the values of a continuous covariate. See function
+<code>neighborhood</code> for details.</p>
+</td></tr>
+<tr valign="top"><td><code>caseweights</code></td>
+<td>
+<p>Weights applied to the contribution of each
+subject to change the number of events and the number at
+risk. This can be used for bootstrap and survey analysis. Should
+be a vector of the same length and the same order as <code>data</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>discrete.level</code></td>
+<td>
+<p>Numeric covariates are treated as factors
+when their number of unique values exceeds not
+<code>discrete.level</code>. Otherwise the product limit method is
+applied, in overlapping neighborhoods according to the bandwidth.</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>logical value: if <code>TRUE</code>, the full covariate matrix
+with is returned in component <code>model.matrix</code>.  The reduced
+matrix contains unique rows of the full covariate matrix and is
+always returned in component <code>X</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>maxiter</code></td>
+<td>
+<p>For interval censored data only.  Maximal number of
+iterations to obtain the nonparametric maximum likelihood
+estimate.  Defaults to 1000.</p>
+</td></tr>
+<tr valign="top"><td><code>grid</code></td>
+<td>
+<p>For interval censored data only. When method=one.step
+grid for one-step product limit estimate. Defaults to sorted list
+of unique left and right endpoints of the observed intervals.</p>
+</td></tr>
+<tr valign="top"><td><code>tol</code></td>
+<td>
+<p>For interval censored data only. Numeric value whose
+negative exponential is used as convergence criterion for finding
+the nonparametric maximum likelihood estimate.  Defaults to 7
+meaning exp(-7).</p>
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+<p>For interval censored data only.  If equal to
+<code>"npmle"</code> (the default) use the usual Turnbull algorithm,
+else the product limit version of the self-consistent estimate.</p>
+</td></tr>
+<tr valign="top"><td><code>exact</code></td>
+<td>
+<p>If TRUE the grid of time points used for estimation
+includes all the L and R endpoints of the observed intervals.</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>In two state models either <code>"surv"</code> for the Kaplan-Meier estimate of the survival
+function or <code>"cuminc"</code> for 1-Kaplan-Meier. Default is <code>"surv"</code> when <code>reverse==FALSE</code> and <code>"cuminc"</code> when <code>reverse==TRUE</code>.
+In competing risks models it has to be <code>"cuminc"</code>
+Aalen-Johansen estimate of the cumulative incidence function.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The response of <code>formula</code> (ie the left hand side of the &lsquo;~&rsquo; operator)
+specifies the model.
+</p>
+<p>In two-state models &ndash; the classical survival case &ndash; the standard
+Kaplan-Meier method is applied.  For this the response can be specified as a
+<code><a href="../../survival/html/Surv.html">Surv</a></code> or as a <code><a href="Hist.html">Hist</a></code> object. The <code><a href="Hist.html">Hist</a></code>
+function allows you to change the code for censored observations, e.g.
+<code>Hist(time,status,cens.code="4")</code>.
+</p>
+<p>Besides a slight gain of computing efficiency, there are some extensions
+that are not included in the current version of the survival package:
+</p>
+<p>(0) The Kaplan-Meier estimator for the censoring times <code>reverse=TRUE</code>
+is correctly estimated when there are ties between event and censoring
+times.
+</p>
+<p>(1) A conditional version of the kernel smoothed Kaplan-Meier estimator for at most one
+continuous predictors using nearest neighborhoods (Beran 1981,
+Stute 1984, Akritas 1994).
+</p>
+<p>(2) For cluster-correlated data the right hand side of <code>formula</code> may
+identify a <code><a href="../../survival/html/cluster.html">cluster</a></code> variable. In that case Greenwood's variance
+formula is replaced by the formula of Ying \&amp; Wei (1994).
+</p>
+<p>(3) Competing risk models can be specified via <code><a href="Hist.html">Hist</a></code> response
+objects in <code>formula</code>.
+</p>
+<p>The Aalen-Johansen estimator is applied for estimating the cumulative
+incidence functions for all causes.  The advantage over the function
+<code>cuminc</code> of the cmprsk package are user-friendly model specification
+via <code><a href="Hist.html">Hist</a></code> and sophisticated print, summary, predict and plot
+methods.
+</p>
+<p>Under construction:
+</p>
+<p>(U0) Interval censored event times specified via <code><a href="Hist.html">Hist</a></code> are used
+to find the nonparametric maximum likelihood estimate. Currently this works
+only for two-state models and the results should match with those from the
+package &lsquo;Icens&rsquo;.
+</p>
+<p>(U1) Extensions to more complex multi-states models
+</p>
+<p>(U2) The nonparametric maximum likelihood estimate for interval censored
+observations of competing risks models.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Object of class &quot;prodlim&quot;. See <code><a href="print.prodlim.html">print.prodlim</a></code>, <code><a href="predict.prodlim.html">predict.prodlim</a></code>, predict,
+<code><a href="summary.prodlim.html">summary.prodlim</a></code>, <code><a href="plot.prodlim.html">plot.prodlim</a></code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Thomas A. Gerds <a href="mailto:tag@biostat.ku.dk">tag@biostat.ku.dk</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Andersen, Borgan, Gill, Keiding (1993) Springer 'Statistical
+Models Based on Counting Processes'
+</p>
+<p>Akritas (1994) The Annals of Statistics 22, 1299-1327 Nearest neighbor
+estimation of a bivariate distribution under random censoring.
+</p>
+<p>R Beran (1981) http://anson.ucdavis.edu/~beran/paper.html 'Nonparametric
+regression with randomly censored survival data'
+</p>
+<p>Stute (1984) The Annals of Statistics 12, 917&ndash;926 'Asymptotic Normality of
+Nearest Neighbor Regression Function Estimates'
+</p>
+<p>Ying, Wei (1994) Journal of Multivariate Analysis 50, 17-29 The Kaplan-Meier
+estimate for dependent failure time observations
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="predict.prodlim.html">predictSurv</a></code>, <code><a href="predictSurvIndividual.html">predictSurvIndividual</a></code>,
+<code><a href="predict.prodlim.html">predictCuminc</a></code>, <code><a href="Hist.html">Hist</a></code>, <code><a href="neighborhood.html">neighborhood</a></code>,
+<code><a href="../../survival/html/Surv.html">Surv</a></code>, <code><a href="../../survival/html/survfit.html">survfit</a></code>, <code><a href="../../survival/html/strata.html">strata</a></code>,
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+##---------------------two-state survival model------------
+dat &lt;- SimSurv(30)
+with(dat,plot(Hist(time,status)))
+fit &lt;- prodlim(Hist(time,status)~1,data=dat)
+print(fit)
+plot(fit)
+summary(fit)
+quantile(fit)
+
+## Subset
+fit1a &lt;- prodlim(Hist(time,status)~1,data=dat,subset=dat$X1==1)
+fit1b &lt;- prodlim(Hist(time,status)~1,data=dat,subset=dat$X1==1 &amp; dat$X2&gt;0)
+
+## --------------------clustered data---------------------
+library(survival)
+cdat &lt;- cbind(SimSurv(30),patnr=sample(1:5,size=30,replace=TRUE))
+fit &lt;- prodlim(Hist(time,status)~cluster(patnr),data=cdat)
+print(fit)
+plot(fit)
+summary(fit)
+
+
+##-----------compare Kaplan-Meier to survival package---------
+
+dat &lt;- SimSurv(30)
+pfit &lt;- prodlim(Surv(time,status)~1,data=dat)
+pfit &lt;- prodlim(Hist(time,status)~1,data=dat) ## same thing
+sfit &lt;- survfit(Surv(time,status)~1,data=dat,conf.type="plain")
+##  same result for the survival distribution function 
+all(round(pfit$surv,12)==round(sfit$surv,12))
+summary(pfit,digits=3)
+summary(sfit,times=quantile(unique(dat$time)))
+
+##-----------estimating the censoring survival function----------------
+
+rdat &lt;- data.frame(time=c(1,2,3,3,3,4,5,5,6,7),status=c(1,0,0,1,0,1,0,1,1,0))
+rpfit &lt;- prodlim(Hist(time,status)~1,data=rdat,reverse=TRUE)
+rsfit &lt;- survfit(Surv(time,1-status)~1,data=rdat,conf.type="plain")
+## When there are ties between times at which events are observed
+## times at which subjects are right censored, then the convention
+## is that events come first. This is not obeyed by the above call to survfit,
+## and hence only prodlim delivers the correct reverse Kaplan-Meier:
+cbind("Wrong:"=rsfit$surv,"Correct:"=rpfit$surv)
+
+##-------------------stratified Kaplan-Meier---------------------
+
+pfit.X2 &lt;- prodlim(Surv(time,status)~X2,data=dat)
+summary(pfit.X2)
+summary(pfit.X2,intervals=TRUE)
+plot(pfit.X2)
+
+##----------continuous covariate: Stone-Beran estimate------------
+
+prodlim(Surv(time,status)~X1,data=dat)
+
+##-------------both discrete and continuous covariates------------
+
+prodlim(Surv(time,status)~X2+X1,data=dat)
+
+##----------------------interval censored data----------------------
+
+dat &lt;- data.frame(L=1:10,R=c(2,3,12,8,9,10,7,12,12,12),status=c(1,1,0,1,1,1,1,0,0,0))
+with(dat,Hist(time=list(L,R),event=status))
+
+dat$event=1
+npmle.fitml &lt;- prodlim(Hist(time=list(L,R),event)~1,data=dat)
+
+##-------------competing risks-------------------
+
+CompRiskFrame &lt;- data.frame(time=1:100,event=rbinom(100,2,.5),X=rbinom(100,1,.5))
+crFit &lt;- prodlim(Hist(time,event)~X,data=CompRiskFrame)
+summary(crFit)
+plot(crFit)
+summary(crFit,cause=2)
+plot(crFit,cause=2)
+
+
+# Changing the cens.code:
+dat &lt;- data.frame(time=1:10,status=c(1,2,1,2,5,5,1,1,2,2))
+fit &lt;- prodlim(Hist(time,status)~1,data=dat)
+print(fit$model.response)
+fit &lt;- prodlim(Hist(time,status,cens.code="2")~1,data=dat)
+print(fit$model.response)
+plot(fit)
+plot(fit,cause="5")
+
+
+##------------delayed entry----------------------
+
+## left-truncated event times with competing risk endpoint 
+
+dat &lt;- data.frame(entry=c(7,3,11,12,11,2,1,7,15,17,3),time=10:20,status=c(1,0,2,2,0,0,1,2,0,2,0))
+fitd &lt;- prodlim(Hist(time=time,event=status,entry=entry)~1,data=dat)
+summary(fitd)
+plot(fitd)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>prodlim</em> version 2018.04.18 <a href="00Index.html">Index</a>]</div>
+</body></html>

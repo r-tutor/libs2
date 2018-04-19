@@ -1,14 +1,18 @@
 Package: blogdown
 Type: Package
 Title: Create Blogs and Websites with R Markdown
-Version: 0.5
+Version: 0.6
 Authors@R: c(
     person("Yihui", "Xie", role = c("aut", "cre"), email = "xie@yihui.name", comment = c(ORCID = "0000-0003-0645-5666")),
     person("Beilei", "Bian", role = "ctb"),
     person("Forest", "Fang", role = "ctb"),
+    person("Garrick", "Aden-Buie", role = "ctb"),
     person("Hiroaki", "Yutani", role = "ctb"),
+    person("Ian", "Lyttle", role = "ctb"),
     person("JJ", "Allaire", role = "ctb"),
     person("Kevin", "Ushey", role = "ctb"),
+    person("Leonardo", "Collado-Torres", role = "ctb"),
+    person("Xianying", "Tan", role = "ctb"),
     person(family = "RStudio Inc", role = "cph"),
     person()
     )
@@ -27,15 +31,19 @@ SystemRequirements: Hugo (<https://gohugo.io>) and Pandoc
         (<http://pandoc.org>)
 RoxygenNote: 6.0.1
 NeedsCompilation: no
-Packaged: 2018-01-24 17:18:47 UTC; yihui
-Author: Yihui Xie <https://orcid.org/0000-0003-0645-5666> [aut, cre],
+Packaged: 2018-04-18 21:49:34 UTC; yihui
+Author: Yihui Xie [aut, cre] (<https://orcid.org/0000-0003-0645-5666>),
   Beilei Bian [ctb],
   Forest Fang [ctb],
+  Garrick Aden-Buie [ctb],
   Hiroaki Yutani [ctb],
+  Ian Lyttle [ctb],
   JJ Allaire [ctb],
   Kevin Ushey [ctb],
+  Leonardo Collado-Torres [ctb],
+  Xianying Tan [ctb],
   RStudio Inc [cph]
 Maintainer: Yihui Xie <xie@yihui.name>
 Repository: CRAN
-Date/Publication: 2018-01-24 18:14:57 UTC
-Built: R 3.4.3; ; 2018-01-26 04:20:59 UTC; windows
+Date/Publication: 2018-04-18 23:19:44 UTC
+Built: R 3.4.4; ; 2018-04-19 20:25:19 UTC; windows

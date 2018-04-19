@@ -11,7 +11,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;forecast&rsquo; version 8.2</h2>
+</div><h2>Documentation for package &lsquo;forecast&rsquo; version 8.3</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
@@ -33,11 +33,13 @@
 <a href="#I">I</a>
 <a href="#M">M</a>
 <a href="#N">N</a>
+<a href="#O">O</a>
 <a href="#P">P</a>
 <a href="#R">R</a>
 <a href="#S">S</a>
 <a href="#T">T</a>
 <a href="#W">W</a>
+<a href="#misc">misc</a>
 </p>
 
 <table width="100%">
@@ -108,6 +110,8 @@
 <td>Multivariate forecast plot</td></tr>
 <tr><td style="width: 25%;"><a href="autoplot.acf.html">autoplot.mpacf</a></td>
 <td>ggplot (Partial) Autocorrelation and Cross-Correlation Function Estimation and Plotting</td></tr>
+<tr><td style="width: 25%;"><a href="autoplot.seas.html">autoplot.mstl</a></td>
+<td>Plot time series decomposition components using ggplot</td></tr>
 <tr><td style="width: 25%;"><a href="autoplot.ts.html">autoplot.msts</a></td>
 <td>Automatically create a ggplot for time series objects</td></tr>
 <tr><td style="width: 25%;"><a href="autoplot.ts.html">autoplot.mts</a></td>
@@ -129,8 +133,10 @@
 <h2><a name="B">-- B --</a></h2>
 
 <table width="100%">
-<tr><td style="width: 25%;"><a href="baggedETS.html">baggedETS</a></td>
-<td>Forecasting using the bagged ETS method</td></tr>
+<tr><td style="width: 25%;"><a href="baggedModel.html">baggedETS</a></td>
+<td>Forecasting using a bagged model</td></tr>
+<tr><td style="width: 25%;"><a href="baggedModel.html">baggedModel</a></td>
+<td>Forecasting using a bagged model</td></tr>
 <tr><td style="width: 25%;"><a href="bats.html">bats</a></td>
 <td>BATS model (Exponential smoothing state space model with Box-Cox transformation, ARMA errors, Trend and Seasonal components)</td></tr>
 <tr><td style="width: 25%;"><a href="bizdays.html">bizdays</a></td>
@@ -203,8 +209,8 @@
 <td>Forecasting using ARIMA or ARFIMA models</td></tr>
 <tr><td style="width: 25%;"><a href="forecast.Arima.html">forecast.Arima</a></td>
 <td>Forecasting using ARIMA or ARFIMA models</td></tr>
-<tr><td style="width: 25%;"><a href="forecast.baggedETS.html">forecast.baggedETS</a></td>
-<td>Forecasting using the bagged ETS method</td></tr>
+<tr><td style="width: 25%;"><a href="forecast.baggedModel.html">forecast.baggedModel</a></td>
+<td>Forecasting using a bagged model</td></tr>
 <tr><td style="width: 25%;"><a href="forecast.bats.html">forecast.bats</a></td>
 <td>Forecasting using BATS and TBATS models</td></tr>
 <tr><td style="width: 25%;"><a href="forecast.html">forecast.default</a></td>
@@ -255,6 +261,8 @@
 <tr><td style="width: 25%;"><a href="getResponse.html">getResponse.ar</a></td>
 <td>Get response variable from time series model.</td></tr>
 <tr><td style="width: 25%;"><a href="getResponse.html">getResponse.Arima</a></td>
+<td>Get response variable from time series model.</td></tr>
+<tr><td style="width: 25%;"><a href="getResponse.html">getResponse.baggedModel</a></td>
 <td>Get response variable from time series model.</td></tr>
 <tr><td style="width: 25%;"><a href="getResponse.html">getResponse.bats</a></td>
 <td>Get response variable from time series model.</td></tr>
@@ -314,7 +322,7 @@
 <td>Is an object a particular model type?</td></tr>
 <tr><td style="width: 25%;"><a href="is.ets.html">is.Arima</a></td>
 <td>Is an object a particular model type?</td></tr>
-<tr><td style="width: 25%;"><a href="is.ets.html">is.baggedETS</a></td>
+<tr><td style="width: 25%;"><a href="is.ets.html">is.baggedModel</a></td>
 <td>Is an object a particular model type?</td></tr>
 <tr><td style="width: 25%;"><a href="is.ets.html">is.bats</a></td>
 <td>Is an object a particular model type?</td></tr>
@@ -347,6 +355,8 @@
 <td>Forecasting time series</td></tr>
 <tr><td style="width: 25%;"><a href="monthdays.html">monthdays</a></td>
 <td>Number of days in each season</td></tr>
+<tr><td style="width: 25%;"><a href="mstl.html">mstl</a></td>
+<td>Multiple seasonal decomposition</td></tr>
 <tr><td style="width: 25%;"><a href="msts.html">msts</a></td>
 <td>Multi-Seasonal Time Series</td></tr>
 </table>
@@ -362,8 +372,15 @@
 <td>Number of differences required for a stationary series</td></tr>
 <tr><td style="width: 25%;"><a href="nnetar.html">nnetar</a></td>
 <td>Neural Network Time Series Forecasts</td></tr>
-<tr><td style="width: 25%;"><a href="ndiffs.html">nsdiffs</a></td>
-<td>Number of differences required for a stationary series</td></tr>
+<tr><td style="width: 25%;"><a href="nsdiffs.html">nsdiffs</a></td>
+<td>Number of differences required for a seasonally stationary series</td></tr>
+</table>
+
+<h2><a name="O">-- O --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="ocsb.test.html">ocsb.test</a></td>
+<td>Osborn, Chui, Smith, and Birchenhall Test for Seasonal Unit Roots</td></tr>
 </table>
 
 <h2><a name="P">-- P --</a></h2>
@@ -389,8 +406,8 @@
 <td>Plot components from BATS model</td></tr>
 <tr><td style="width: 25%;"><a href="Arima.html">print.ARIMA</a></td>
 <td>Fit ARIMA model to univariate time series</td></tr>
-<tr><td style="width: 25%;"><a href="baggedETS.html">print.baggedETS</a></td>
-<td>Forecasting using the bagged ETS method</td></tr>
+<tr><td style="width: 25%;"><a href="baggedModel.html">print.baggedModel</a></td>
+<td>Forecasting using a bagged model</td></tr>
 <tr><td style="width: 25%;"><a href="bats.html">print.bats</a></td>
 <td>BATS model (Exponential smoothing state space model with Box-Cox transformation, ARMA errors, Trend and Seasonal components)</td></tr>
 <tr><td style="width: 25%;"><a href="CVar.html">print.CVar</a></td>
@@ -409,6 +426,8 @@
 <td>Neural Network Time Series Forecasts</td></tr>
 <tr><td style="width: 25%;"><a href="nnetar.html">print.nnetarmodels</a></td>
 <td>Neural Network Time Series Forecasts</td></tr>
+<tr><td style="width: 25%;"><a href="ocsb.test.html">print.OCSBtest</a></td>
+<td>Osborn, Chui, Smith, and Birchenhall Test for Seasonal Unit Roots</td></tr>
 <tr><td style="width: 25%;"><a href="tbats.html">print.tbats</a></td>
 <td>TBATS model (Exponential smoothing state space model with Box-Cox transformation, ARMA errors, Trend and Seasonal components)</td></tr>
 </table>
@@ -448,6 +467,8 @@
 <tr><td style="width: 25%;"><a href="seasadj.html">seasadj</a></td>
 <td>Seasonal adjustment</td></tr>
 <tr><td style="width: 25%;"><a href="seasadj.html">seasadj.decomposed.ts</a></td>
+<td>Seasonal adjustment</td></tr>
+<tr><td style="width: 25%;"><a href="seasadj.html">seasadj.mstl</a></td>
 <td>Seasonal adjustment</td></tr>
 <tr><td style="width: 25%;"><a href="seasadj.html">seasadj.seas</a></td>
 <td>Seasonal adjustment</td></tr>
@@ -541,5 +562,12 @@
 <td>Australian total wine sales</td></tr>
 <tr><td style="width: 25%;"><a href="woolyrnq.html">woolyrnq</a></td>
 <td>Quarterly production of woollen yarn in Australia</td></tr>
+</table>
+
+<h2><a name="misc">-- misc --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="msts.html">`[.msts`</a></td>
+<td>Multi-Seasonal Time Series</td></tr>
 </table>
 </body></html>

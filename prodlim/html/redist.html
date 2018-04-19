@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Calculation of Efron's re-distribution to the right algorithm...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for redist {prodlim}"><tr><td>redist {prodlim}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Calculation of Efron's re-distribution to the right algorithm to obtain the
+Kaplan-Meier estimate.</h2>
+
+<h3>Description</h3>
+
+<p>Calculation of Efron's re-distribution to the right algorithm to obtain the
+Kaplan-Meier estimate.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+redist(time, status)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>time</code></td>
+<td>
+<p>A numeric vector of event times.</p>
+</td></tr>
+<tr valign="top"><td><code>status</code></td>
+<td>
+<p>The event status vector takes the value <code>1</code> for observed events and 
+the value <code>0</code> for right censored times.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Calculations needed to
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Thomas A. Gerds &lt;tag@biostat.ku.dk&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p>prodlim
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+redist(time=c(.35,0.4,.51,.51,.7,.73),status=c(0,1,1,0,0,1))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>prodlim</em> version 2018.04.18 <a href="00Index.html">Index</a>]</div>
+</body></html>

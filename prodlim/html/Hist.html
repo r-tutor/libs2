@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create an event history response variable</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for Hist {prodlim}"><tr><td>Hist {prodlim}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create an event history response variable</h2>
+
+<h3>Description</h3>
+
+<p>Functionality for managing censored event history response data. The
+function can be used as the left hand side of a formula: <code>Hist</code> serves
+<code><a href="prodlim.html">prodlim</a></code> in a similar way as <code><a href="../../survival/html/Surv.html">Surv</a></code> from the
+survival package serves &lsquo;survfit&rsquo;.  <code>Hist</code> provides the suitable
+extensions for dealing with right censored and interval censored data from
+competing risks and other multi state models. Objects generated with
+<code>Hist</code> have a print and a plot method.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+Hist(time, event, entry = NULL, id = NULL, cens.code = "0",
+  addInitialState = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>time</code></td>
+<td>
+<p>for right censored data a numeric vector of event times &ndash; for
+interval censored data a list or a data.frame providing two numeric vectors
+the left and right endpoints of the intervals.  See <code>Details</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>event</code></td>
+<td>
+<p>A vector or a factor that specifies the events that occurred at
+the corresponding value of <code>time</code>. Numeric, character and logical
+values are recognized.  It can also be a list or a data.frame for the
+longitudinal form of storing the data of a multi state model &ndash; see
+<code>Details</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>entry</code></td>
+<td>
+<p>Vector of delayed entry times (left-truncation) or list of two
+times when the entry time is interval censored.</p>
+</td></tr>
+<tr valign="top"><td><code>id</code></td>
+<td>
+<p>Identifies the subjects to which multiple events belong for the
+longitudinal form of storing the data of a multi state model &ndash; see
+<code>Details</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>cens.code</code></td>
+<td>
+<p>A character or numeric vector to identify the right
+censored observations in the values of <code>event</code>.  Defaults to &quot;0&quot; which
+is equivalent to 0.</p>
+</td></tr>
+<tr valign="top"><td><code>addInitialState</code></td>
+<td>
+<p>If TRUE, an initial state is added to all ids for the
+longitudinal input form of a multi-state model.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>*Specification of the event times*
+</p>
+<p>If <code>time</code> is a numeric vector then the values are interpreted as right
+censored event times, ie as the minimum of the event times and the censoring
+times.
+</p>
+<p>If <code>time</code> is a list with two elements or data frame with two numeric
+columns The first element (column) is used as the left endpoints of interval
+censored observations and the second as the corresponding right endpoints.
+When the two endpoints are equal, then this observation is treated as an
+exact uncensored observation of the event time.  If the value of the right
+interval endpoint is either <code>NA</code> or <code>Inf</code>, then this observation
+is treated as a right censored observation. Right censored observations can
+also be specified by setting the value of <code>event</code> to <code>cens.code</code>.
+This latter specification of right censored event times overwrites the
+former: if <code>event</code> equals <code>cens.code</code> the observation is treated
+as right censored no matter what the value of the right interval endpoint
+is.
+</p>
+<p>*Specification of the events*
+</p>
+<p>If <code>event</code> is a numeric, character or logical vector then the order of
+the attribute &quot;state&quot; given to the <code>value</code> of <code>Hist</code> is determined
+by the order in which the values appear.  If it is a factor then the order
+from the levels of the factor is used instead.
+</p>
+<p>**Normal form of a multi state model**
+</p>
+<p>If <code>event</code> is a list or a data.frame with exactly two elements, then
+these describe the transitions in a multi state model that occurred at the
+corresponding <code>time</code> as follows: The values of the first element are
+interpreted as the <code>from</code> states of the transition and values of the
+second as the corresponding <code>to</code> states.
+</p>
+<p>**Longitudinal form of a multi state model**
+</p>
+<p>If <code>id</code> is given then <code>event</code> must be a vector. In this case two
+subsequent values of <code>event</code> belonging to the same value of <code>id</code>
+are treated as the <code>from</code> and <code>to</code> states of the transitions.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of class <code>Hist</code> for which there are print and plot
+methods.  The object's internal is a matrix with some of the following
+columns: </p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>time</code></td>
+<td>
+<p> the right censored times</p>
+</td></tr> <tr valign="top"><td><code>L</code></td>
+<td>
+<p>the left endpoints
+of internal censored event times</p>
+</td></tr> <tr valign="top"><td><code>R</code></td>
+<td>
+<p>the right endpoints of internal
+censored event times</p>
+</td></tr> <tr valign="top"><td><code>status</code></td>
+<td>
+<p><code>0</code> for right censored, <code>1</code>
+for exact, and <code>2</code> for interval censored event times.</p>
+</td></tr> <tr valign="top"><td><code>event</code></td>
+<td>
+<p>an
+integer valued numeric vector that codes the events.</p>
+</td></tr> <tr valign="top"><td><code>from</code></td>
+<td>
+<p>an integer
+valued numeric vector that codes the <code>from</code> states of a transition in a
+multi state model.</p>
+</td></tr> <tr valign="top"><td><code>to</code></td>
+<td>
+<p>an integer valued numeric vector that codes
+the <code>to</code> states of a transition in a multi state model.</p>
+</td></tr>
+</table>
+<p>Further information is stored in <code><a href="../../base/html/attributes.html">attributes</a></code>.  The key to the
+official names given to the events and the from and to states is stored in
+an attribute &quot;states&quot;.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Thomas A. Gerds <a href="mailto:tag@biostat.ku.dk">tag@biostat.ku.dk</a>, Arthur Allignol
+<a href="mailto:arthur.allignol@fdm.uni-freiburg.de">arthur.allignol@fdm.uni-freiburg.de</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="plot.Hist.html">plot.Hist</a></code>, <code><a href="summary.Hist.html">summary.Hist</a></code>,
+<code><a href="prodlim.html">prodlim</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+
+## Right censored responses of a two state model
+## ---------------------------------------------
+
+Hist(time=1:10,event=c(0,1,0,0,0,1,0,1,0,0))
+
+## change the code for events and censored observations
+
+Hist(time=1:10,event=c(99,"event",99,99,99,"event",99,"event",99,99),cens.code=99)
+
+TwoStateFrame &lt;- SimSurv(10)
+SurvHist &lt;- with(TwoStateFrame,Hist(time,status))
+summary(SurvHist)
+plot(SurvHist)
+
+## Right censored data from a competing risk model
+## --------------------------------------------------
+
+CompRiskFrame &lt;- data.frame(time=1:10,event=c(1,2,0,3,0,1,2,1,2,1))
+CRHist &lt;- with(CompRiskFrame,Hist(time,event))
+summary(CRHist)
+plot(CRHist)
+
+## Interval censored data from a survival model
+icensFrame &lt;- data.frame(L=c(1,1,3,4,6),R=c(2,NA,3,6,9),event=c(1,1,1,2,2))
+with(icensFrame,Hist(time=list(L,R)))
+
+## Interval censored data from a competing risk model
+with(icensFrame,Hist(time=list(L,R),event))
+
+## Multi state model
+MultiStateFrame &lt;- data.frame(time=1:10,
+			      from=c(1,1,3,1,2,4,1,1,2,1),
+			      to=c(2,3,1,2,4,2,3,2,4,4))
+with(MultiStateFrame,Hist(time,event=list(from,to)))
+
+##  MultiState with right censored observations
+
+MultiStateFrame1 &lt;- data.frame(time=1:10,
+			      from=c(1,1,3,2,1,4,1,1,3,1),
+			      to=c(2,3,1,0,2,2,3,2,0,4))
+with(MultiStateFrame1,Hist(time,event=list(from,to)))
+
+## Using the longitudinal input method 
+MultiStateFrame2 &lt;- data.frame(time=c(0,1,2,3,4,0,1,2,0,1),
+			      event=c(1,2,3,0,1,2,4,2,1,2),
+			      id=c(1,1,1,1,2,2,2,2,3,3))
+ with(MultiStateFrame2,Hist(time,event=event,id=id))
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>prodlim</em> version 2018.04.18 <a href="00Index.html">Index</a>]</div>
+</body></html>

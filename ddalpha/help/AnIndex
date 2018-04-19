@@ -44,13 +44,16 @@ ddalphaf.getErrorRatePart	ddalphaf.getErrorRatePart
 ddalphaf.test	ddalphaf.test
 ddalphaf.train	ddalphaf.train
 depth.	depth.
+depth.betaSkeleton	depth.betaSkeleton
 depth.contours	depth.contours
 depth.contours.ddalpha	depth.contours.ddalpha
 depth.graph	depth.graph
 depth.halfspace	depth.halfspace
+depth.L2	depth.L2
 depth.Mahalanobis	depth.Mahalanobis
 depth.potential	depth.potential
 depth.projection	depth.projection
+depth.qhpeeling	depth.qhpeeling
 depth.sample	depth.sample
 depth.simplicial	depth.simplicial
 depth.simplicialVolume	depth.simplicialVolume

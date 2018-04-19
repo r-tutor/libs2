@@ -1,4 +1,47 @@
-# FSA 0.8.17 ongoing
+# FSA 0.8.19 2-Apr-18
+* `addZeroCatch`: Modified. Changed two `1:nrow()` structures to `seq_len(nrow())` (partially addressing [#36](https://github.com/droglenc/FSA/issues/36)).
+* `ageBias()`: Modified. Changed all `1:` structures to `seq_len()` (partially addressing [#36](https://github.com/droglenc/FSA/issues/36)).
+* `agePrecision()`: Modified. Changed all `1:` structures to `seq_len()` (partially addressing [#36](https://github.com/droglenc/FSA/issues/36)).
+* `bcFuns()`: Modified. Changed three `1:length()` structures to `seq_along()` (partially addressing [#36](https://github.com/droglenc/FSA/issues/36)).
+* `bootCase()` methods: Modified. Changed all `1:` structures to `seq_len()` (partially addressing [#36](https://github.com/droglenc/FSA/issues/36)).
+* `capHistConvert()`: Modified. Changed all `1:` structures to `seq_len()` or `seq_along()` (partially addressing [#36](https://github.com/droglenc/FSA/issues/36)).
+* `capHistSum()`: Modified. Changed all `1:` structures to `seq_len()` (partially addressing [#36](https://github.com/droglenc/FSA/issues/36)).
+* `chooseColors()`: Modified. Changed all `1:` structures to `seq_len()` (partially addressing [#36](https://github.com/droglenc/FSA/issues/36)).
+* `compSlopes()`: Modified. Changed all `1:` structures to `seq_len()` (partially addressing [#36](https://github.com/droglenc/FSA/issues/36)).
+* `compIntercepts()`: Modified. Changed all `1:` structures to `seq_len()` (partially addressing [#36](https://github.com/droglenc/FSA/issues/36)).
+* `extraSS()`: Modified. Changed all `1:` structures to `seq_len()` or `seq_along()` (partially addressing [#36](https://github.com/droglenc/FSA/issues/36)).
+* `headtail()`: Modified. Changed all `1:` structures to `seq_len()` (partially addressing [#36](https://github.com/droglenc/FSA/issues/36)).
+* `hist.formula()` methods: Modified. Changed all `1:` structures to `seq_len()` (partially addressing [#36](https://github.com/droglenc/FSA/issues/36)).
+* `htest.boot()`: Removed (added last version) until I can test more.
+* `iHndlFormula()`: Modified. Now categorizes a character variable as a factor variable. This addresses [#35](https://github.com/droglenc/FSA/issues/35)) for `hist.formula()` and `Summarize()`.
+* `lrt()`: Modified. Changed all `1:` structures to `seq_len()` or `seq_along()` (partially addressing [#36](https://github.com/droglenc/FSA/issues/36)).
+* `lwCompPreds()`: Modified. Changed all `1:` structures to `seq_len()` or `seq_along()` (partially addressing [#36](https://github.com/droglenc/FSA/issues/36)).
+* `mrClosed()`: Modified. Changed two `1:length()` structures to `seq_along()` (partially addressing [#36](https://github.com/droglenc/FSA/issues/36)).
+* `nlsBoot()` methods: Modified. Changed all `1:` structures to `seq_len()` (partially addressing [#36](https://github.com/droglenc/FSA/issues/36)).
+* `plot.boot()`: Removed (added last version) until I can test more.
+* `predict.boot()`: Removed (added last version) until I can test more.
+* `psdAdd()`: Modified. Changed three `1:` structures to `seq_len()` or `seq_along()` (partially addressing [#36](https://github.com/droglenc/FSA/issues/36)).
+* `residPlot()`: Modified. Changed three `1:length()` structures to `seq_along()` (partially addressing [#36](https://github.com/droglenc/FSA/issues/36)).
+* `Summarize()`: Modified. Changed one `1:length()` structure to `seq_along()` (partially addressing [#36](https://github.com/droglenc/FSA/issues/36)).
+* `wrAdd()`: Modified. Changed three `1:` structures to `seq_len()` or `seq_along()` (partially addressing [#36](https://github.com/droglenc/FSA/issues/36)).
+
+# FSA 0.8.18 31-Mar-18
+* Changed to depending on `R >=3.2.0`, because that is the latest version required by a package (i.e., `car`) that FSA imports or suggests. Used [this shiny app](https://ateucher.shinyapps.io/check_r_versions_of_package_dependencies/) to help determine this.
+* Using latest `testthat` package.
+* `bootCase()`: Added. This was added because `bootCase()` will soon be removed from the `car` package. It was added so that the code in the Introductory Fisheries Analyses with R book will still work. It is largely a wrapper to `Boot()` in `car` with `method="case"`. The documentation was updated somewhat.
+* `catchCurve()`: Modified. Changed the weighted regression method so that negative weights are set to zero rather than the minimum of the positive values (brought to my attention by Vaskar Nepal KC). Also added an `rSquared()` method (per request by Vaskar Nepal KC).
+* `depletion()`: Modified. Added an `rSquared()` method.
+* `expandCounts()`: Modified. Minor changes to documentation.
+* `hTest.boot()`: Added.
+* `plot.boot()`: Added.
+* `plotAB()`: Modified. Added `col.numbers=` to allow users to modify the color of the numbers when `what="numbers"` is used (addresses [#34](https://github.com/droglenc/FSA/issues/34)).
+* `predict.boot()`: Added.
+* `psdPlot()`: Modified. Minor changes to documentation and look of the function code.
+* `rSquared()`: Added from `NCStats`, but including a generic method so that it can be used for other models (e.g., `catchCurve()`).
+* `vbFuns()`: Modified. Switched `Fabens` and `Fabens2` parameterizations to better match `Wang` (i.e., increment model first). Added `Francis2` parameterization for tag-recapture data.
+* `vbStarts()`: Modified. Fixed some spacing issues with the warnings when starting values for Linf was poorly estimated. Added an argument to `ivbStarts.LinfK()` to suppress checking the value of Linf. This argument reduces the change of double-printing the warning message when there are bad estimates of starting values for Linf and K.
+
+# FSA 0.8.17 29-Oct-17
 * `dunnTest()`: Modified. Adjusted code to handle the addition of `altp=` to and modified output from `dunn.test()` in `dunn.test`. Added additional tests and corrected some issues in the documentation.
 * `GompertzFuns()`: Modified. Fixed error in message (i.e., `msg=TRUE`) for `param="Ricker2"`.
 

@@ -1,0 +1,424 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Plotting event probabilities over time</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for plot.prodlim {prodlim}"><tr><td>plot.prodlim {prodlim}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Plotting event probabilities over time</h2>
+
+<h3>Description</h3>
+
+<p>Function to plot survival and cumulative incidence curves against time.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'prodlim'
+plot(x, type, cause, select, newdata, add = FALSE, col, lty,
+  lwd, ylim, xlim, ylab, xlab = "Time", timeconverter, legend = TRUE,
+  logrank = FALSE, marktime = FALSE, confint = TRUE, automar,
+  atrisk = ifelse(add, FALSE, TRUE), timeOrigin = 0, axes = TRUE,
+  background = TRUE, percent = TRUE, minAtrisk = 0, limit = 10, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>an object of class &lsquo;prodlim&rsquo; as returned by the
+<code>prodlim</code> function.</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>Either <code>"surv"</code> or <code>"cuminc"</code> controls what</p>
+</td></tr>
+<tr valign="top"><td><code>cause</code></td>
+<td>
+<p>Character (other classes are converted with <code>as.character</code>).
+<code>cause</code> determines the cause of the cumulative incidence
+function.  Currently one cause is allowed at a time, but you can
+call the function again with <code>add=TRUE</code> to add the lines of the other
+causes.</p>
+</td></tr>
+<tr valign="top"><td><code>select</code></td>
+<td>
+<p>Select which lines to plot. This can be used when
+there are many strata or many competing risks to select a
+subset of the lines.  However, a more clean way to select
+covariate stratat is to use argument <code>newdata</code>.  Another
+application is when there are many competing risks and it is
+desired (for the stacked plot) to stack and show only a subset
+of the cumulative incidence functions.</p>
+</td></tr>
+<tr valign="top"><td><code>newdata</code></td>
+<td>
+<p>a data frame containing covariate strata for which
+to show curves. When omitted element <code>X</code> of object
+<code>x</code> is used.</p>
+</td></tr>
+<tr valign="top"><td><code>add</code></td>
+<td>
+<p>if <code>TRUE</code> curves are added to an existing plot.</p>
+</td></tr>
+<tr valign="top"><td><code>col</code></td>
+<td>
+<p>color for curves. Default is <code>1:number(curves)</code></p>
+</td></tr>
+<tr valign="top"><td><code>lty</code></td>
+<td>
+<p>line type for curves. Default is 1.</p>
+</td></tr>
+<tr valign="top"><td><code>lwd</code></td>
+<td>
+<p>line width for all curves. Default is 3.</p>
+</td></tr>
+<tr valign="top"><td><code>ylim</code></td>
+<td>
+<p>limits of the y-axis</p>
+</td></tr>
+<tr valign="top"><td><code>xlim</code></td>
+<td>
+<p>limits of the x-axis</p>
+</td></tr>
+<tr valign="top"><td><code>ylab</code></td>
+<td>
+<p>label for the y-axis</p>
+</td></tr>
+<tr valign="top"><td><code>xlab</code></td>
+<td>
+<p>label for the x-axis</p>
+</td></tr>
+<tr valign="top"><td><code>timeconverter</code></td>
+<td>
+<p>The strings are allowed:
+&quot;days2years&quot; (conversion factor: 1/365.25)
+&quot;months2years&quot; (conversion factor: 1/12)
+&quot;days2months&quot; (conversion factor 1/30.4368499)
+&quot;years2days&quot; (conversion factor 365.25)
+&quot;years2months&quot; (conversion factor 12)
+&quot;months2days&quot; (conversion factor 30.4368499)</p>
+</td></tr>
+<tr valign="top"><td><code>legend</code></td>
+<td>
+<p>if TRUE a legend is plotted by calling the function
+legend.  Optional arguments of the function <code>legend</code> can
+be given in the form <code>legend.x=val</code> where x is the name of
+the argument and val the desired value. See also Details.</p>
+</td></tr>
+<tr valign="top"><td><code>logrank</code></td>
+<td>
+<p>If TRUE, the logrank p-value will be extracted from
+a call to <code>survdiff</code> and added to the legend. This works
+only for survival models, i.e. Kaplan-Meier with discrete
+predictors.</p>
+</td></tr>
+<tr valign="top"><td><code>marktime</code></td>
+<td>
+<p>if TRUE the curves are tick-marked at right
+censoring times by invoking the function
+<code>markTime</code>. Optional arguments of the function
+<code>markTime</code> can be given in the form <code>confint.x=val</code>
+as with legend. See also Details.</p>
+</td></tr>
+<tr valign="top"><td><code>confint</code></td>
+<td>
+<p>if TRUE pointwise confidence intervals are plotted
+by invoking the function <code>confInt</code>. Optional arguments of
+the function <code>confInt</code> can be given in the form
+<code>confint.x=val</code> as with legend.  See also Details.</p>
+</td></tr>
+<tr valign="top"><td><code>automar</code></td>
+<td>
+<p>If TRUE the function trys to find suitable values
+for the figure margins around the main plotting region.</p>
+</td></tr>
+<tr valign="top"><td><code>atrisk</code></td>
+<td>
+<p>if TRUE display numbers of subjects at risk by
+invoking the function <code>atRisk</code>. Optional arguments of the
+function <code>atRisk</code> can be given in the form
+<code>atrisk.x=val</code> as with legend. See also Details.</p>
+</td></tr>
+<tr valign="top"><td><code>timeOrigin</code></td>
+<td>
+<p>Start of the time axis</p>
+</td></tr>
+<tr valign="top"><td><code>axes</code></td>
+<td>
+<p>If true axes are drawn. See details.</p>
+</td></tr>
+<tr valign="top"><td><code>background</code></td>
+<td>
+<p>If <code>TRUE</code> the background color and grid
+color can be controlled using smart arguments SmartControl,
+such as background.bg=&quot;yellow&quot; or
+background.bg=c(&quot;gray66&quot;,&quot;gray88&quot;).  The following defaults are
+passed to <code>background</code> by <code>plot.prodlim</code>:
+horizontal=seq(0,1,.25), vertical=NULL, bg=&quot;gray77&quot;,
+fg=&quot;white&quot;.  See <code>background</code> for all arguments, and the
+examples below.</p>
+</td></tr>
+<tr valign="top"><td><code>percent</code></td>
+<td>
+<p>If true the y-axis is labeled in percent.</p>
+</td></tr>
+<tr valign="top"><td><code>minAtrisk</code></td>
+<td>
+<p>Integer. Show the curve only until the number
+at-risk is at least <code>minAtrisk</code></p>
+</td></tr>
+<tr valign="top"><td><code>limit</code></td>
+<td>
+<p>When newdata is not specified and the number of lines
+in element <code>X</code> of object <code>x</code> exceeds limits, only the
+results for covariate constellations of the first, the middle
+and the last row in <code>X</code> are shown. Otherwise all lines of
+<code>X</code> are shown.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Parameters that are filtered by
+<code><a href="SmartControl.html">SmartControl</a></code> and then passed to the functions
+<code><a href="../../graphics/html/plot.html">plot</a></code>, <code><a href="../../graphics/html/legend.html">legend</a></code>, <code><a href="../../graphics/html/axis.html">axis</a></code>,
+<code><a href="atRisk.html">atRisk</a></code>, <code><a href="confInt.html">confInt</a></code>,
+<code><a href="markTime.html">markTime</a></code>, <code><a href="backGround.html">backGround</a></code></p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>From version 1.1.3 on the arguments legend.args, atrisk.args, confint.args
+are obsolete and only available for backward compatibility. Instead
+arguments for the invoked functions <code>atRisk</code>, <code>legend</code>,
+<code>confInt</code>, <code>markTime</code>, <code>axis</code> are simply specified as
+<code>atrisk.cex=2</code>. The specification is not case sensitive, thus
+<code>atRisk.cex=2</code> or <code>atRISK.cex=2</code> will have the same effect.  The
+function <code>axis</code> is called twice, and arguments of the form
+<code>axis1.labels</code>, <code>axis1.at</code> are used for the time axis whereas
+<code>axis2.pos</code>, <code>axis1.labels</code>, etc. are used for the y-axis.
+</p>
+<p>These arguments are processed via <code>...{}</code> of <code>plot.prodlim</code> and
+inside by using the function <code>SmartControl</code>.  Documentation of these
+arguments can be found in the help pages of the corresponding functions.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The (invisible) object.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Similar functionality is provided by the function
+<code><a href="../../survival/html/plot.survfit.html">plot.survfit</a></code> of the survival library
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Thomas Alexander Gerds &lt;tag@biostat.ku.dk&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../graphics/html/plot.html">plot</a></code>, <code><a href="../../graphics/html/legend.html">legend</a></code>,
+<code><a href="../../graphics/html/axis.html">axis</a></code>,
+<code><a href="prodlim.html">prodlim</a></code>,<code><a href="plot.Hist.html">plot.Hist</a></code>,<code><a href="summary.prodlim.html">summary.prodlim</a></code>,
+<code><a href="neighborhood.html">neighborhood</a></code>, <code><a href="atRisk.html">atRisk</a></code>,
+<code><a href="confInt.html">confInt</a></code>, <code><a href="markTime.html">markTime</a></code>,
+<code><a href="backGround.html">backGround</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## simulate right censored data from a two state model 
+set.seed(100)
+dat &lt;- SimSurv(100)
+# with(dat,plot(Hist(time,status)))
+
+### marginal Kaplan-Meier estimator
+kmfit &lt;- prodlim(Hist(time, status) ~ 1, data = dat)
+plot(kmfit)
+
+plot(kmfit,timeconverter="years2months")
+
+# change time range
+plot(kmfit,xlim=c(0,4))
+
+# change scale of y-axis
+plot(kmfit,percent=FALSE)
+
+# mortality instead of survival
+plot(kmfit,type="cuminc")
+
+# change axis label and position of ticks
+plot(kmfit,
+     xlim=c(0,10),
+     axis1.at=seq(0,10,1),
+     axis1.labels=0:10,
+     xlab="Years",
+     axis2.las=2,
+     atrisk.at=seq(0,10,2.5),
+     atrisk.title="")
+
+# change background color
+plot(kmfit,
+     xlim=c(0,10),
+     confint.citype="shadow",
+     col=1,
+     axis1.at=0:10,
+     axis1.labels=0:10,
+     xlab="Years",
+     axis2.las=2,
+     atrisk.at=seq(0,10,2.5),
+     atrisk.title="",
+     background=TRUE,
+     background.fg="white",
+     background.horizontal=seq(0,1,.25/2),
+     background.vertical=seq(0,10,2.5),
+     background.bg=c("gray88"))
+
+# change type of confidence limits
+plot(kmfit,
+     xlim=c(0,10),
+     confint.citype="dots",
+     col=4,
+     background=TRUE,
+     background.bg=c("white","gray88"),
+     background.fg="gray77",
+     background.horizontal=seq(0,1,.25/2),
+     background.vertical=seq(0,10,2))
+
+
+### Kaplan-Meier in discrete strata
+kmfitX &lt;- prodlim(Hist(time, status) ~ X1, data = dat)
+plot(kmfitX)
+# move legend
+plot(kmfitX,legend.x="bottomleft",atRisk.cex=1.3,
+     atrisk.title="No. subjects")
+
+## Control the order of strata
+## since version 1.5.1 prodlim does  obey the order of
+## factor levels
+dat$group &lt;- factor(cut(dat$X2,c(-Inf,0,0.5,Inf)),
+                    labels=c("High","Intermediate","Low"))
+kmfitG &lt;- prodlim(Hist(time, status) ~ group, data = dat)
+plot(kmfitG)
+
+## relevel 
+dat$group2 &lt;- factor(cut(dat$X2,c(-Inf,0,0.5,Inf)),
+                     levels=c("(0.5, Inf]","(0,0.5]","(-Inf,0]"),
+                     labels=c("Low","Intermediate","High"))
+kmfitG2 &lt;- prodlim(Hist(time, status) ~ group2, data = dat)
+plot(kmfitG2)
+
+# add log-rank test to legend
+plot(kmfitX,
+     atRisk.cex=1.3,
+     logrank=TRUE,
+     legend.x="topright",
+     atrisk.title="at-risk")
+
+# change atrisk labels
+plot(kmfitX,
+     legend.x="bottomleft",
+     atrisk.title="Patients",
+     atrisk.cex=0.9,
+     atrisk.labels=c("X1=0","X1=1"))
+
+# multiple categorical factors
+
+kmfitXG &lt;- prodlim(Hist(time,status)~X1+group2,data=dat)
+plot(kmfitXG,select=1:2)
+
+### Kaplan-Meier in continuous strata
+kmfitX2 &lt;- prodlim(Hist(time, status) ~ X2, data = dat)
+plot(kmfitX2,xlim=c(0,10))
+
+# specify values of X2 for which to show the curves 
+plot(kmfitX2,xlim=c(0,10),newdata=data.frame(X2=c(-1.8,0,1.2)))
+
+### Cluster-correlated data
+library(survival)
+cdat &lt;- cbind(SimSurv(20),patnr=sample(1:5,size=20,replace=TRUE))
+kmfitC &lt;- prodlim(Hist(time, status) ~ cluster(patnr), data = cdat)
+plot(kmfitC)
+plot(kmfitC,atrisk.labels=c("Units","Patients"))
+
+kmfitC2 &lt;- prodlim(Hist(time, status) ~ X1+cluster(patnr), data = cdat)
+plot(kmfitC2)
+plot(kmfitC2,atrisk.labels=c("Teeth","Patients","Teeth","Patients"),
+     atrisk.col=c(1,1,2,2))
+
+
+### Cluster-correlated data with strata
+n = 50
+foo = runif(n)
+bar = rexp(n)
+baz = rexp(n,1/2)
+d = stack(data.frame(foo,bar,baz))
+d$cl = sample(10, 3*n, replace=TRUE)
+fit = prodlim(Surv(values) ~ ind + cluster(cl), data=d)
+plot(fit)
+
+
+## simulate right censored data from a competing risk model 
+datCR &lt;- SimCompRisk(100)
+with(datCR,plot(Hist(time,event)))
+
+### marginal Aalen-Johansen estimator
+ajfit &lt;- prodlim(Hist(time, event) ~ 1, data = datCR)
+plot(ajfit) # same as plot(ajfit,cause=1)
+
+# cause 2
+plot(ajfit,cause=2)
+
+# both in one
+plot(ajfit,cause=1)
+plot(ajfit,cause=2,add=TRUE,col=2)
+
+### stacked plot
+
+plot(ajfit,cause="stacked",select=2)
+
+### stratified Aalen-Johansen estimator
+ajfitX1 &lt;- prodlim(Hist(time, event) ~ X1, data = datCR)
+plot(ajfitX1)
+
+## add total number at-risk to a stratified curve
+ttt = 1:10
+plot(ajfitX1,atrisk.at=ttt,col=2:3)
+plot(ajfit,add=TRUE,col=1)
+atRisk(ajfit,newdata=datCR,col=1,times=ttt,line=3,labels="Total")
+
+
+## stratified Aalen-Johansen estimator in nearest neighborhoods
+## of a continuous variable
+ajfitX &lt;- prodlim(Hist(time, event) ~ X1+X2, data = datCR)
+plot(ajfitX,newdata=data.frame(X1=c(1,1,0),X2=c(4,10,10)))
+plot(ajfitX,newdata=data.frame(X1=c(1,1,0),X2=c(4,10,10)),cause=2)
+
+## stacked plot
+
+plot(ajfitX,
+     newdata=data.frame(X1=0,X2=0.1),
+     cause="stacked",
+     legend.title="X1=0,X2=0.1",
+     legend.legend=paste("cause:",getStates(ajfitX$model.response)),
+     plot.main="Subject specific stacked plot")
+ 
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>prodlim</em> version 2018.04.18 <a href="00Index.html">Index</a>]</div>
+</body></html>

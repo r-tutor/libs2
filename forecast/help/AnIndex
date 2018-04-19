@@ -30,6 +30,7 @@ autoplot.ets	plot.ets
 autoplot.forecast	plot.forecast
 autoplot.mforecast	plot.mforecast
 autoplot.mpacf	autoplot.acf
+autoplot.mstl	autoplot.seas
 autoplot.msts	autoplot.ts
 autoplot.mts	autoplot.ts
 autoplot.seas	autoplot.seas
@@ -38,7 +39,8 @@ autoplot.stl	autoplot.seas
 autoplot.StructTS	autoplot.seas
 autoplot.tbats	plot.bats
 autoplot.ts	autoplot.ts
-baggedETS	baggedETS
+baggedETS	baggedModel
+baggedModel	baggedModel
 bats	bats
 bizdays	bizdays
 bld.mbb.bootstrap	bld.mbb.bootstrap
@@ -65,7 +67,7 @@ fitted.tbats	fitted.Arima
 forecast	forecast
 forecast.ar	forecast.Arima
 forecast.Arima	forecast.Arima
-forecast.baggedETS	forecast.baggedETS
+forecast.baggedModel	forecast.baggedModel
 forecast.bats	forecast.bats
 forecast.default	forecast
 forecast.ets	forecast.ets
@@ -89,6 +91,7 @@ geom_forecast	geom_forecast
 getResponse	getResponse
 getResponse.ar	getResponse
 getResponse.Arima	getResponse
+getResponse.baggedModel	getResponse
 getResponse.bats	getResponse
 getResponse.default	getResponse
 getResponse.fracdiff	getResponse
@@ -113,7 +116,7 @@ hw	ses
 InvBoxCox	BoxCox
 is.acf	is.ets
 is.Arima	is.ets
-is.baggedETS	is.ets
+is.baggedModel	is.ets
 is.bats	is.ets
 is.constant	is.constant
 is.ets	is.ets
@@ -127,12 +130,14 @@ ma	ma
 meanf	meanf
 mforecast	forecast.mts
 monthdays	monthdays
+mstl	mstl
 msts	msts
 na.interp	na.interp
 naive	naive
 ndiffs	ndiffs
 nnetar	nnetar
-nsdiffs	ndiffs
+nsdiffs	nsdiffs
+ocsb.test	ocsb.test
 Pacf	Acf
 plot.ar	plot.Arima
 plot.Arima	plot.Arima
@@ -143,7 +148,7 @@ plot.mforecast	plot.mforecast
 plot.splineforecast	plot.forecast
 plot.tbats	plot.bats
 print.ARIMA	Arima
-print.baggedETS	baggedETS
+print.baggedModel	baggedModel
 print.bats	bats
 print.CVar	CVar
 print.ets	ets
@@ -153,6 +158,7 @@ print.msts	msts
 print.naive	naive
 print.nnetar	nnetar
 print.nnetarmodels	nnetar
+print.OCSBtest	ocsb.test
 print.tbats	tbats
 reexports	reexports
 remainder	seasonal
@@ -169,6 +175,7 @@ residuals.tslm	residuals.forecast
 rwf	naive
 seasadj	seasadj
 seasadj.decomposed.ts	seasadj
+seasadj.mstl	seasadj
 seasadj.seas	seasadj
 seasadj.stl	seasadj
 seasadj.tbats	seasadj
@@ -210,3 +217,4 @@ tsoutliers	tsoutliers
 window.msts	msts
 wineind	wineind
 woolyrnq	woolyrnq
+`[.msts`	msts

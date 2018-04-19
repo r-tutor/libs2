@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Compute jackknife pseudo values.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for jackknife {prodlim}"><tr><td>jackknife {prodlim}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Compute jackknife pseudo values.</h2>
+
+<h3>Description</h3>
+
+<p>Compute jackknife pseudo values.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+jackknife(object, times, cause, keepResponse = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>Object of class <code>"prodlim"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>times</code></td>
+<td>
+<p>Time points at which to compute pseudo values.</p>
+</td></tr>
+<tr valign="top"><td><code>cause</code></td>
+<td>
+<p>Character (other classes are converted with <code>as.character</code>).
+For competing risks the cause of failure.</p>
+</td></tr>
+<tr valign="top"><td><code>keepResponse</code></td>
+<td>
+<p>If <code>TRUE</code> add the model response,
+i.e. event time, event status, etc. to the result.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>not used</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Compute jackknife pseudo values based on marginal Kaplan-Meier estimate of
+survival, or based on marginal Aalen-Johansen estimate of cumulative
+incidence.
+</p>
+
+
+<h3>Note</h3>
+
+<p>The R-package pseudo does a similar job, and appears to be a little faster in small samples, but much slower in large samples. See examples.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Thomas Alexander Gerds &lt;tag@biostat.ku.dk&gt;
+</p>
+
+
+<h3>References</h3>
+
+<p>Andersen PK &amp; Perme MP (2010). Pseudo-observations in survival
+analysis Statistical Methods in Medical Research, 19(1), 71-99.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="prodlim.html">prodlim</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+
+## pseudo-values for survival models
+
+d=SimSurv(20) 
+f=prodlim(Hist(time,status)~1,data=d) 
+jackknife(f,times=c(3,5))
+
+## in some situations it may be useful to attach the
+## the event time history to the result
+jackknife(f,times=c(3,5),keepResponse=TRUE)
+
+# pseudo-values for competing risk models
+d=SimCompRisk(10) 
+f=prodlim(Hist(time,event)~1,data=d) 
+jackknife(f,times=c(3,10),cause=1)
+jackknife(f,times=c(3,10,17),cause=2)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>prodlim</em> version 2018.04.18 <a href="00Index.html">Index</a>]</div>
+</body></html>

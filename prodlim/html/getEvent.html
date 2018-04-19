@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Extract a column from an event history object.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for getEvent {prodlim}"><tr><td>getEvent {prodlim}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Extract a column from an event history object.</h2>
+
+<h3>Description</h3>
+
+<p>Extract a column from an event history object, as obtained with the function
+<code><a href="Hist.html">Hist</a></code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+getEvent(object, mode = "factor", column = "event")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>Object of class <code>"Hist"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>mode</code></td>
+<td>
+<p>Return mode. One of <code>"numeric"</code>, <code>"character"</code>, or
+<code>"factor"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>column</code></td>
+<td>
+<p>Name of the column to extract from the object.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Since objects of class <code>"Hist"</code> are also matrices, all columns are
+numeric or integer valued. To extract a correctly labeled version, the
+attribute <code>states</code> of the object is used to generate factor levels.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Thomas Alexander Gerds &lt;tag@biostat.ku.dk&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="Hist.html">Hist</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+  dat= data.frame(time=1:5,event=letters[1:5])
+  x=with(dat,Hist(time,event))
+  ## inside integer
+  unclass(x)
+  ## extract event (the extra level "unknown" is for censored data)
+  getEvent(x)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>prodlim</em> version 2018.04.18 <a href="00Index.html">Index</a>]</div>
+</body></html>

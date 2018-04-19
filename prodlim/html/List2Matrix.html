@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Reduce list to a matrix or data.frame with names as new...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for List2Matrix {prodlim}"><tr><td>List2Matrix {prodlim}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Reduce list to a matrix or data.frame with names as new columns</h2>
+
+<h3>Description</h3>
+
+<p>This function is used by summary.prodlim to deal with results.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+List2Matrix(list, depth, names)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>list</code></td>
+<td>
+<p>A named list which contains nested lists</p>
+</td></tr>
+<tr valign="top"><td><code>depth</code></td>
+<td>
+<p>The depth in the list hierarchy until an rbindable object</p>
+</td></tr>
+<tr valign="top"><td><code>names</code></td>
+<td>
+<p>Names for the list variables</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Reduction is done with rbind.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Matrix or data.frame.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Thomas A. Gerds &lt;tag@biostat.ku.dk&gt;
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+x=list(a=data.frame(u=1,b=2,c=3),b=data.frame(u=3,b=4,c=6))
+List2Matrix(x,depth=1,"X")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>prodlim</em> version 2018.04.18 <a href="00Index.html">Index</a>]</div>
+</body></html>

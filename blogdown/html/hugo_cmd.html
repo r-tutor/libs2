@@ -24,16 +24,16 @@ hugo_version()
 hugo_build(local = FALSE)
 
 new_site(dir = ".", install_hugo = TRUE, format = "toml", 
-    sample = TRUE, theme = "yihui/hugo-lithium-theme", theme_example = TRUE, 
-    serve = interactive())
+    sample = TRUE, theme = "yihui/hugo-lithium", hostname = "github.com", 
+    theme_example = TRUE, serve = interactive())
 
 new_content(path, kind = "default", open = interactive())
 
 new_post(title, kind = "default", open = interactive(), 
     author = getOption("blogdown.author"), categories = NULL, 
     tags = NULL, date = Sys.Date(), file = NULL, slug = NULL, 
-    subdir = getOption("blogdown.subdir", "post"), ext = getOption("blogdown.ext", 
-        ".md"))
+    title_case = getOption("blogdown.title_case"), subdir = getOption("blogdown.subdir", 
+        "post"), ext = getOption("blogdown.ext", ".md"))
 
 hugo_convert(to = c("YAML", "TOML", "JSON"), unsafe = FALSE, 
     ...)
@@ -81,10 +81,17 @@ default, but this function adds sample content by default).</p>
 <tr valign="top"><td><code>theme</code></td>
 <td>
 <p>A Hugo theme on Github (a chararacter string of the form
-<code>user/repo</code>, and you can optionally sepecify a GIT branch or tag name
+<code>user/repo</code>, and you can optionally specify a GIT branch or tag name
 after <code>@</code>, i.e. <code>theme</code> can be of the form
-<code>user/repo@branch</code>). If <code>theme = NA</code>, no themes will be
-installed, and you have to manually install a theme.</p>
+<code>user/repo@branch</code>). You can also specify a full URL to the zip file of
+the theme. If <code>theme = NA</code>, no themes will be installed, and you have
+to manually install a theme.</p>
+</td></tr>
+<tr valign="top"><td><code>hostname</code></td>
+<td>
+<p>Where to find the theme. Defaults to <code>github.com</code>; specify
+if you wish to use an instance of GitHub Enterprise. You can also specify the
+full URL of the zip file in <code>theme</code>, in which case this argument is ignored.</p>
 </td></tr>
 <tr valign="top"><td><code>theme_example</code></td>
 <td>
@@ -143,6 +150,13 @@ date.</p>
 generated from the filename by removing the date and filename extension,
 e.g., if <code>file = 'post/2015-07-23-hi-there.md'</code>, <code>slug</code> will be
 <code>hi-there</code>. Set <code>slug = ''</code> if you do not want it.</p>
+</td></tr>
+<tr valign="top"><td><code>title_case</code></td>
+<td>
+<p>A function to convert the title to title case. If
+<code>TRUE</code>, the function is <code>tools::<a href="../../tools/html/toTitleCase.html">toTitleCase</a>()</code>).
+This argument is not limited to title case conversion. You can provide an
+arbitrary R function to convert the title.</p>
 </td></tr>
 <tr valign="top"><td><code>subdir</code></td>
 <td>
@@ -228,5 +242,5 @@ library(blogdown)
 if (interactive()) new_site()
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>blogdown</em> version 0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>blogdown</em> version 0.6 <a href="00Index.html">Index</a>]</div>
 </body></html>

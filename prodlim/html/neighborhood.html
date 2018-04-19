@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Nearest neighborhoods for kernel smoothing</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for neighborhood {prodlim}"><tr><td>neighborhood {prodlim}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Nearest neighborhoods for kernel smoothing</h2>
+
+<h3>Description</h3>
+
+<p>Nearest neighborhoods for the values of a continuous predictor. The result
+is used for the conditional Kaplan-Meier estimator and other conditional
+product limit estimators.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+neighborhood(x, bandwidth = NULL, kernel = "box")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>Numeric vector &ndash; typically the observations of a continuous random
+variate.</p>
+</td></tr>
+<tr valign="top"><td><code>bandwidth</code></td>
+<td>
+<p>Controls the distance between neighbors in a neighborhood.
+It can be a decimal, i.e.\ the bandwidth, or the string &lsquo;&quot;smooth&quot;&rsquo;, in which
+case <code>N^{-1/4}</code> is used, <code>N</code> being the sample size, or <code>NULL</code>
+in which case the <code><a href="../../KernSmooth/html/dpik.html">dpik</a></code> function of the package KernSmooth is
+used to find the optimal bandwidth.</p>
+</td></tr>
+<tr valign="top"><td><code>kernel</code></td>
+<td>
+<p>Only the rectangular kernel (&quot;box&quot;) is implemented.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>An object of class 'neighborhood'.  The value is a list that
+includes the unique values of &lsquo;x&rsquo; (<code>values</code>) for which a neighborhood,
+consisting of the nearest neighbors, is defined by the first neighbor
+(<code>first.nbh</code>) of the usually very long vector <code>neighbors</code> and the
+size of the neighborhood (<code>size.nbh</code>).
+</p>
+<p>Further values are the arguments <code>bandwidth</code>, <code>kernel</code>, the total
+sample size <code>n</code> and the number of unique values <code>nu</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Thomas Gerds
+</p>
+
+
+<h3>References</h3>
+
+<p>Stute, W. &quot;Asymptotic Normality of Nearest Neighbor Regression
+Function Estimates&quot;, <em>The Annals of Statistics</em>, 1984,12,917&ndash;926.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../KernSmooth/html/dpik.html">dpik</a></code>, <code><a href="prodlim.html">prodlim</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+d &lt;- SimSurv(20)
+neighborhood(d$X2)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>prodlim</em> version 2018.04.18 <a href="00Index.html">Index</a>]</div>
+</body></html>

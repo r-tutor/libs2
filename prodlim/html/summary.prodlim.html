@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Summary method for prodlim objects.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for summary.prodlim {prodlim}"><tr><td>summary.prodlim {prodlim}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Summary method for prodlim objects.</h2>
+
+<h3>Description</h3>
+
+<p>Summarizing the result of the product limit method in life-table format.
+Calculates the number of subjects at risk and counts events and censored
+observations at specified times or in specified time intervals.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'prodlim'
+summary(object, times, newdata, max.tables = 20,
+  surv = TRUE, cause, intervals = FALSE, percent = FALSE,
+  showTime = TRUE, asMatrix = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>An object with class &lsquo;prodlim&rsquo; derived with
+<code><a href="prodlim.html">prodlim</a></code></p>
+</td></tr>
+<tr valign="top"><td><code>times</code></td>
+<td>
+<p>Vector of times at which to return the estimated
+probabilities.</p>
+</td></tr>
+<tr valign="top"><td><code>newdata</code></td>
+<td>
+<p>A data frame with the same variable names as those
+that appear on the right hand side of the 'prodlim' formula.
+Defaults to <code>object$X</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>max.tables</code></td>
+<td>
+<p>Integer. If <code>newdata</code> is not given the value
+of <code>max.tables</code> decides about the maximal number of tables to
+be shown.  Defaults to 20.</p>
+</td></tr>
+<tr valign="top"><td><code>surv</code></td>
+<td>
+<p>Logical. If FALSE report event probabilities instead of
+survival probabilities. Only available for
+<code>object$model=="survival"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>cause</code></td>
+<td>
+<p>The cause for predicting the cause-specific cumulative
+incidence function in competing risk models.</p>
+</td></tr>
+<tr valign="top"><td><code>intervals</code></td>
+<td>
+<p>Logical. If TRUE count events and censored in
+intervals between the values of <code>times</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>percent</code></td>
+<td>
+<p>Logical. If TRUE all estimated values are multiplied
+by 100 and thus interpretable on a percent scale.</p>
+</td></tr>
+<tr valign="top"><td><code>showTime</code></td>
+<td>
+<p>If <code>TRUE</code> evaluation times are put into a
+column of the output table, otherwise evaluation times are shown as
+rownames.</p>
+</td></tr>
+<tr valign="top"><td><code>asMatrix</code></td>
+<td>
+<p>Control the output format when there are multiple
+life tables, either because of covariate strata or competing causes
+or both.  If not missing and not FALSE, reduce multiple life tables
+into a matrix with new columns <code>X</code> for covariate strata and
+<code>Event</code> for competing risks.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Further arguments that are passed to the print
+function.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>For cluster-correlated data the number of clusters at-risk are are also
+given. Confidence intervals are displayed when they are part of the fitted
+object.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A data.frame with the relevant information.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Thomas A. Gerds <a href="mailto:tag@biostat.ku.dk">tag@biostat.ku.dk</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="prodlim.html">prodlim</a></code>, <code><a href="summary.Hist.html">summary.Hist</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+library(lava)
+set.seed(17)
+m &lt;- survModel()
+distribution(m,~age) &lt;- uniform.lvm(30,80)
+distribution(m,~sex) &lt;- binomial.lvm()
+m &lt;- categorical(m,~z,K=3)
+regression(m,eventtime~age) &lt;- 0.01
+regression(m,eventtime~sex) &lt;- -0.4
+d &lt;- sim(m,50)
+d$sex &lt;- factor(d$sex,levels=c(0,1),labels=c("female","male"))
+d$Z &lt;- factor(d$z,levels=c(1,0,2),labels=c("B","A","C"))
+
+# Univariate Kaplan-Meier
+# -----------------------------------------------------------------------------------------
+fit0 &lt;- prodlim(Hist(time,event)~1,data=d)
+summary(fit0)
+
+## show survival probabilities as percentage and
+## count number of events within intervals of a
+## given time-grid:
+summary(fit0,times=c(1,5,10,12),percent=TRUE,intervals=TRUE)
+
+## the result of summary has a print function
+## which passes ... to print and print.listof
+sx &lt;- summary(fit0,times=c(1,5,10,12),percent=TRUE,intervals=TRUE)
+print(sx,digits=3)
+
+## show cumulative incidences (1-survival)
+summary(fit0,times=c(1,5,10,12),surv=FALSE,percent=TRUE,intervals=TRUE)
+
+# Stratified Kaplan-Meier
+# -----------------------------------------------------------------------------------------
+
+fit1 &lt;- prodlim(Hist(time,event)~sex,data=d)
+print(summary(fit1,times=c(1,5,10),intervals=TRUE,percent=TRUE),digits=3)
+
+summary(fit1,times=c(1,5,10),asMatrix=TRUE,intervals=TRUE,percent=TRUE)
+
+fit2 &lt;- prodlim(Hist(time,event)~Z,data=d)
+print(summary(fit2,times=c(1,5,10),intervals=TRUE,percent=TRUE),digits=3)
+
+## Continuous strata (Beran estimator)
+# -----------------------------------------------------------------------------------------
+fit3 &lt;- prodlim(Hist(time,event)~age,data=d)
+print(summary(fit3,
+              times=c(1,5,10),
+              newdata=data.frame(age=c(20,50,70)),
+              intervals=TRUE,
+              percent=TRUE),digits=3)
+
+## stratified Beran estimator
+# -----------------------------------------------------------------------------------------
+fit4 &lt;- prodlim(Hist(time,event)~age+sex,data=d)
+print(summary(fit4,
+              times=c(1,5,10),
+              newdata=data.frame(age=c(20,50,70),sex=c("female","male","male")),
+              intervals=TRUE,
+              percent=TRUE),digits=3)
+
+print(summary(fit4,
+              times=c(1,5,10),
+              newdata=data.frame(age=c(20,50,70),sex=c("female","male","male")),
+              intervals=TRUE,collapse=TRUE,
+              percent=TRUE),digits=3)
+
+## assess results from summary
+x &lt;- summary(fit4,times=10,newdata=expand.grid(age=c(60,40,50),sex=c("male","female")))
+cbind(names(x$table),do.call("rbind",lapply(x$table,round,2)))
+
+x &lt;- summary(fit4,times=10,newdata=expand.grid(age=c(60,40,50),sex=c("male","female")))
+
+## Competing risks: Aalen-Johansen
+# -----------------------------------------------------------------------------------------
+d &lt;- SimCompRisk(30)
+crfit &lt;- prodlim(Hist(time,event)~X1,data=d)
+summary(crfit,times=c(1,2,5))
+summary(crfit,times=c(1,2,5),cause=1,intervals=TRUE)
+summary(crfit,times=c(1,2,5),cause=1,asMatrix=TRUE)
+summary(crfit,times=c(1,2,5),cause=1:2,asMatrix=TRUE)
+
+
+# extract the actual tables from the summary 
+sumfit &lt;- summary(crfit,times=c(1,2,5),print=FALSE)
+sumfit$table[[1]] # cause 1
+sumfit$table[[2]] # cause 2
+
+
+# '
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>prodlim</em> version 2018.04.18 <a href="00Index.html">Index</a>]</div>
+</body></html>

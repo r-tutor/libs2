@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Background and grid color control.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for backGround {prodlim}"><tr><td>backGround {prodlim}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Background and grid color control.</h2>
+
+<h3>Description</h3>
+
+<p>Some users like background colors, and it may be helpful to have grid lines
+to read off e.g. probabilities from a Kaplan-Meier graph. Both things can be
+controlled with this function. However, it mainly serves
+<code><a href="plot.prodlim.html">plot.prodlim</a></code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+backGround(xlim, ylim, bg = "white", fg = "gray77", horizontal = NULL,
+  vertical = NULL, border = "black")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>xlim</code></td>
+<td>
+<p>Limits for the xaxis, defaults to par(&quot;usr&quot;)[1:2].</p>
+</td></tr>
+<tr valign="top"><td><code>ylim</code></td>
+<td>
+<p>Limits for the yaxis, defaults to par(&quot;usr&quot;)[3:4].</p>
+</td></tr>
+<tr valign="top"><td><code>bg</code></td>
+<td>
+<p>Background color. Can be multiple colors which are then switched
+at each horizontal line.</p>
+</td></tr>
+<tr valign="top"><td><code>fg</code></td>
+<td>
+<p>Grid line color.</p>
+</td></tr>
+<tr valign="top"><td><code>horizontal</code></td>
+<td>
+<p>Numerical values at which horizontal grid lines are
+plotted.</p>
+</td></tr>
+<tr valign="top"><td><code>vertical</code></td>
+<td>
+<p>Numerical values at which vertical grid lines are plotted.</p>
+</td></tr>
+<tr valign="top"><td><code>border</code></td>
+<td>
+<p>The color of the border around the background.</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Thomas Alexander Gerds &lt;tag@biostat.ku.dk&gt;
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+
+plot(0,0)
+backGround(bg="beige",fg="red",vertical=0,horizontal=0)
+
+plot(0,0)
+backGround(bg=c("yellow","green"),fg="red",xlim=c(-1,1),ylim=c(-1,1),horizontal=seq(0,1,.1))
+backGround(bg=c("yellow","green"),fg="red",horizontal=seq(0,1,.1))
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>prodlim</em> version 2018.04.18 <a href="00Index.html">Index</a>]</div>
+</body></html>

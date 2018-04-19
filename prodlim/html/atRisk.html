@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Drawing numbers of subjects at-risk of experiencing an event...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for atRisk {prodlim}"><tr><td>atRisk {prodlim}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Drawing numbers of subjects at-risk of experiencing an event below
+Kaplan-Meier and Aalen-Johansen plots.</h2>
+
+<h3>Description</h3>
+
+<p>This function is invoked and controlled by <code>plot.prodlim</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+atRisk(x, newdata, times, line, col, labelcol = NULL, interspace, cex, labels,
+  title = "", titlecol = NULL, pos, adj, dist, adjust.labels = TRUE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>an object of class &lsquo;prodlim&rsquo; as returned by the
+<code>prodlim</code> function.</p>
+</td></tr>
+<tr valign="top"><td><code>newdata</code></td>
+<td>
+<p>see <code>plot.prodlim</code></p>
+</td></tr>
+<tr valign="top"><td><code>times</code></td>
+<td>
+<p>Where to compute the atrisk numbers.</p>
+</td></tr>
+<tr valign="top"><td><code>line</code></td>
+<td>
+<p>Distance of the atrisk numbers from the inner plot.</p>
+</td></tr>
+<tr valign="top"><td><code>col</code></td>
+<td>
+<p>The color of the text.</p>
+</td></tr>
+<tr valign="top"><td><code>labelcol</code></td>
+<td>
+<p>The color for the labels. Defaults to col.</p>
+</td></tr>
+<tr valign="top"><td><code>interspace</code></td>
+<td>
+<p>Distance between rows of atrisk numbers.</p>
+</td></tr>
+<tr valign="top"><td><code>cex</code></td>
+<td>
+<p>Passed on to <code>mtext</code> for both atrisk numbers and
+labels.</p>
+</td></tr>
+<tr valign="top"><td><code>labels</code></td>
+<td>
+<p>Labels for the at-risk rows.</p>
+</td></tr>
+<tr valign="top"><td><code>title</code></td>
+<td>
+<p>Title for the at-risk labels</p>
+</td></tr>
+<tr valign="top"><td><code>titlecol</code></td>
+<td>
+<p>The color for the title. Defaults to 1 (black).</p>
+</td></tr>
+<tr valign="top"><td><code>pos</code></td>
+<td>
+<p>The value is passed on to the <code>mtext</code> argument
+<code>at</code> for the labels (not the atriks numbers).</p>
+</td></tr>
+<tr valign="top"><td><code>adj</code></td>
+<td>
+<p>Passed on to <code>mtext</code> for the labels (not the atriks
+numbers).</p>
+</td></tr>
+<tr valign="top"><td><code>dist</code></td>
+<td>
+<p>If <code>line</code> is missing, the distance of the upper
+most atrisk row from the inner plotting region: par()$mgp[2].</p>
+</td></tr>
+<tr valign="top"><td><code>adjust.labels</code></td>
+<td>
+<p>If <code>TRUE</code> the labels are left adjusted.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Further arguments that are passed to the function
+<code>mtext</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This function should not be called directly. The arguments can be specified
+as <code>atRisk.arg</code> in the call to <code>plot.prodlim</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Nil
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Thomas Alexander Gerds &lt;tag@biostat.ku.dk&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="plot.prodlim.html">plot.prodlim</a></code>, <code><a href="confInt.html">confInt</a></code>,
+<code><a href="markTime.html">markTime</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>prodlim</em> version 2018.04.18 <a href="00Index.html">Index</a>]</div>
+</body></html>

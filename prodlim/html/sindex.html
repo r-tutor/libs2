@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Index for evaluation of step functions.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for sindex {prodlim}"><tr><td>sindex {prodlim}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Index for evaluation of step functions.</h2>
+
+<h3>Description</h3>
+
+<p>Returns an index of positions. Intended for evaluating a step function at
+selected times. The function counts how many elements of a vector, e.g. the
+jump times of the step function, are smaller or equal to the elements in a
+second vector, e.g. the times where the step function should be evaluated.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+sindex(jump.times, eval.times, comp = "smaller", strict = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>jump.times</code></td>
+<td>
+<p>Numeric vector: e.g. the unique jump times of a step
+function.</p>
+</td></tr>
+<tr valign="top"><td><code>eval.times</code></td>
+<td>
+<p>Numeric vector: e.g. the times where the step function
+should be evaluated</p>
+</td></tr>
+<tr valign="top"><td><code>comp</code></td>
+<td>
+<p>If &quot;greater&quot; count the number of jump times that are greater
+(greater or equal when strict==FALSE) than the eval times</p>
+</td></tr>
+<tr valign="top"><td><code>strict</code></td>
+<td>
+<p>If TRUE make the comparison of jump times and eval times
+strict</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>If all <code>jump.times</code> are greater than a particular <code>eval.time</code> the
+sindex returns <code>0</code>. This must be considered when sindex is used for
+subsetting, see the Examples below.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Index of the same length as <code>eval.times</code> containing the numbers
+of the <code>jump.times</code> that are smaller than or equal to
+<code>eval.times</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Thomas A. Gerds <a href="mailto:tag@biostat.ku.dk">tag@biostat.ku.dk</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+
+test &lt;- list(time = c(1, 1,5,5,2,7,9),
+		status = c(1,0,1,0,1,1,0))
+fit &lt;- prodlim(Hist(time,status)~1,data=test)
+jtimes &lt;- fit$time
+etimes &lt;- c(0,.5,2,8,10)
+fit$surv
+c(1,fit$surv)[1+sindex(jtimes,etimes)]
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>prodlim</em> version 2018.04.18 <a href="00Index.html">Index</a>]</div>
+</body></html>

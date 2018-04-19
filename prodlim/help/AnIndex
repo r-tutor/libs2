@@ -1,6 +1,7 @@
 prodlim-package	prodlim
 atRisk	atRisk
 backGround	backGround
+checkCauses	checkCauses
 confInt	confInt
 crModel	crModel
 dimColor	dimColor

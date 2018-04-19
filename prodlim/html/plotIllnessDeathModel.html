@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Plotting an illness-death-model.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for plotIllnessDeathModel {prodlim}"><tr><td>plotIllnessDeathModel {prodlim}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Plotting an illness-death-model.</h2>
+
+<h3>Description</h3>
+
+<p>Plotting an illness-death-model using <code>plot.Hist</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+plotIllnessDeathModel(stateLabels, style = 1, recovery = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>stateLabels</code></td>
+<td>
+<p>Labels for the three boxes.</p>
+</td></tr>
+<tr valign="top"><td><code>style</code></td>
+<td>
+<p>Either <code>1</code> or anything else, switches the orientation of
+the graph. Hard to explain in words, see examples.</p>
+</td></tr>
+<tr valign="top"><td><code>recovery</code></td>
+<td>
+<p>Logical. If <code>TRUE</code> there will be an arrow from the
+illness state to the initial state.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Arguments passed to plot.Hist.</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Thomas Alexander Gerds &lt;tag@biostat.ku.dk&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="plotCompetingRiskModel.html">plotCompetingRiskModel</a></code>, <code><a href="plot.Hist.html">plot.Hist</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+plotIllnessDeathModel()
+plotIllnessDeathModel(style=2)
+plotIllnessDeathModel(style=2,
+                      stateLabels=c("a","b\nc","d"),
+                      box1.col="yellow",
+                      box2.col="green",
+                      box3.col="red")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>prodlim</em> version 2018.04.18 <a href="00Index.html">Index</a>]</div>
+</body></html>

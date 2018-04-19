@@ -38,7 +38,9 @@ ddalphaf.getErrorRatePart
 ddalphaf.test           Test Functional DD-Classifier
 ddalphaf.train          Functional DD-Classifier
 depth.                  Calculate Depth
+depth.L2                Calculate L2-Depth
 depth.Mahalanobis       Calculate Mahalanobis Depth
+depth.betaSkeleton      Calculate Beta-Skeleton Depth
 depth.contours          Depth Contours
 depth.contours.ddalpha
                         Depth Contours
@@ -46,6 +48,7 @@ depth.graph             Depth Graph
 depth.halfspace         Calculate Halfspace Depth
 depth.potential         Calculate Potential of the Data
 depth.projection        Calculate Projection Depth
+depth.qhpeeling         Calculate Convex Hull Peeling Depth
 depth.sample            Fast Depth Computation for Univariate and
                         Bivariate Random Samples
 depth.simplicial        Calculate Simplicial Depth

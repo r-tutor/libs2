@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Predict individual survival probabilities</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for predictSurvIndividual {prodlim}"><tr><td>predictSurvIndividual {prodlim}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Predict individual survival probabilities</h2>
+
+<h3>Description</h3>
+
+<p>Function to extract the predicted probabilities at the individual event
+times that have been used for fitting a prodlim object.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+predictSurvIndividual(object, lag = 1)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>A fitted object of class &quot;prodlim&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>lag</code></td>
+<td>
+<p>Integer. &lsquo;0&rsquo; means predictions at the individual times, 1 means
+just before the individual times, etc.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A vector of survival probabilities.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Thomas A. Gerds <a href="mailto:tag@biostat.ku.dk">tag@biostat.ku.dk</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="predict.prodlim.html">predict.prodlim</a></code>,<code><a href="predict.prodlim.html">predictSurv</a></code>,
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+ SurvFrame &lt;- data.frame(time=1:10,status=rbinom(10,1,.5))
+ x &lt;- prodlim(formula=Hist(time=time,status!=0)~1,data=SurvFrame)
+ predictSurvIndividual(x,lag=1)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>prodlim</em> version 2018.04.18 <a href="00Index.html">Index</a>]</div>
+</body></html>

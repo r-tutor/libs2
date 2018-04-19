@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Compute jackknife pseudo values.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for leaveOneOut {prodlim}"><tr><td>leaveOneOut {prodlim}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Compute jackknife pseudo values.</h2>
+
+<h3>Description</h3>
+
+<p>Compute leave-one-out estimates
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+leaveOneOut(object, times, cause, lag = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>Object of class <code>"prodlim"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>times</code></td>
+<td>
+<p>time points at which to compute leave-one-out
+event/survival probabilities.</p>
+</td></tr>
+<tr valign="top"><td><code>cause</code></td>
+<td>
+<p>Character (other classes are converted with <code>as.character</code>).
+For competing risks the cause of interest.</p>
+</td></tr>
+<tr valign="top"><td><code>lag</code></td>
+<td>
+<p>For survival models only. If <code>TRUE</code> lag the result, i.e. compute
+S(t-) instead of S(t).</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>not used</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This function is the work-horse for <code>jackknife</code>
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Thomas Alexander Gerds &lt;tag@biostat.ku.dk&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="jackknife.html">jackknife</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>prodlim</em> version 2018.04.18 <a href="00Index.html">Index</a>]</div>
+</body></html>

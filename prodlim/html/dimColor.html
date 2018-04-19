@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Dim a given color to a specified density</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for dimColor {prodlim}"><tr><td>dimColor {prodlim}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Dim a given color to a specified density</h2>
+
+<h3>Description</h3>
+
+<p>This function calls first <code><a href="../../grDevices/html/col2rgb.html">col2rgb</a></code> on a color name and then 
+uses <code><a href="../../grDevices/html/rgb.html">rgb</a></code> to adjust the intensity of the result.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+dimColor(col, density = 55)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>col</code></td>
+<td>
+<p>Color name or number passed to <code><a href="../../grDevices/html/col2rgb.html">col2rgb</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>density</code></td>
+<td>
+<p>Integer value passed as alpha coefficient to
+<code><a href="../../grDevices/html/rgb.html">rgb</a></code> between 0 and 255</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A character vector with the color code. See <code>rgb</code> for details.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Thomas A. Gerds &lt;tag@biostat.ku.dk&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p>rgb col2rgb
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+dimColor(2,33)
+dimColor("green",133)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>prodlim</em> version 2018.04.18 <a href="00Index.html">Index</a>]</div>
+</body></html>
