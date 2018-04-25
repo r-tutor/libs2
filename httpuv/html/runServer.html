@@ -19,8 +19,7 @@ interrupted or an error occurs.
 <h3>Usage</h3>
 
 <pre>
-runServer(host, port, app, interruptIntervalMs = ifelse(interactive(), 100,
-  1000))
+runServer(host, port, app, interruptIntervalMs = NULL)
 </pre>
 
 
@@ -45,8 +44,7 @@ X, port numbers smaller than 1025 require root privileges.</p>
 </td></tr>
 <tr valign="top"><td><code>interruptIntervalMs</code></td>
 <td>
-<p>How often to check for interrupt. The default 
-should be appropriate for most situations.</p>
+<p>Deprecated (last used in httpuv 1.3.5).</p>
 </td></tr>
 </table>
 
@@ -64,5 +62,5 @@ functions instead of <code>runServer</code>.
 <code><a href="stopServer.html">stopServer</a></code>
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>httpuv</em> version 1.3.6.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>httpuv</em> version 1.4.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

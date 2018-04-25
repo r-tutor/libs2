@@ -1,15 +1,16 @@
 Package: futile.options
 Type: Package
-Title: Futile options management
-Version: 1.0.0
-Date: 2010-04-05
+Title: Futile Options Management
+Version: 1.0.1
+Date: 2018-04-20
 Author: Brian Lee Yung Rowe
-Maintainer: Brian Lee Yung Rowe <r@nurometic.com>
+Maintainer: Brian Lee Yung Rowe <r@zatonovo.com>
 Depends: R (>= 2.8.0)
-Description: A scoped options management framework
+Description: A scoped options management framework. Used in other packages.
 License: LGPL-3
 LazyLoad: yes
-Packaged: Mon Apr 5 21:09:07 2010; brian
+NeedsCompilation: no
+Packaged: 2018-04-20 16:08:58 UTC; brian
 Repository: CRAN
-Date/Publication: 2010-04-06 08:57:40
-Built: R 3.2.3; ; 2015-12-11 01:40:35 UTC; windows
+Date/Publication: 2018-04-20 22:04:12 UTC
+Built: R 3.4.4; ; 2018-04-25 03:42:38 UTC; windows

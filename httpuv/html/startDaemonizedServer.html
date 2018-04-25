@@ -1,16 +1,19 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create an HTTP/WebSocket daemonized server (experimental)</title>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create an HTTP/WebSocket daemonized server (deprecated)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="R.css" />
 </head><body>
 
 <table width="100%" summary="page for startDaemonizedServer {httpuv}"><tr><td>startDaemonizedServer {httpuv}</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2>Create an HTTP/WebSocket daemonized server (experimental)</h2>
+<h2>Create an HTTP/WebSocket daemonized server (deprecated)</h2>
 
 <h3>Description</h3>
 
-<p>Creates an HTTP/WebSocket server on the specified host and port. The server is daemonized
-so R interactive sessions are not blocked to handle requests.
+<p>This function will be removed in a future release of httpuv. It is simply a
+wrapper for <code><a href="startServer.html">startServer</a></code>. In previous versions of httpuv (1.3.5
+and below), <code>startServer</code> ran applications in the foreground and
+<code>startDaemonizedServer</code> ran applications in the background, but now both
+of them run applications in the background.
 </p>
 
 
@@ -42,52 +45,5 @@ Details.</p>
 </td></tr>
 </table>
 
-
-<h3>Details</h3>
-
-<p>In contrast to servers created by <code><a href="startServer.html">startServer</a></code>, calls to <code><a href="service.html">service</a></code> 
-are not needed to accept and handle connections. If the port
-cannot be bound (most likely due to permissions or because it is already
-bound), an error is raised.
-</p>
-<p>The <code>app</code> parameter is where your application logic will be provided 
-to the server. This can be a list, environment, or reference class that 
-contains the following named functions/methods:
-</p>
-
-<dl>
-<dt><code>call(req)</code></dt><dd><p>Process the given HTTP request, and return an 
-HTTP response. This method should be implemented in accordance with the
-<a href="https://github.com/jeffreyhorner/Rook/blob/a5e45f751/README.md">Rook</a>
-specification.</p>
-</dd>
-<dt><code>onHeaders(req)</code></dt><dd><p>Optional. Similar to <code>call</code>, but occurs
-when headers are received. Return <code>NULL</code> to continue normal
-processing of the request, or a Rook response to send that response,
-stop processing the request, and ask the client to close the connection.
-(This can be used to implement upload size limits, for example.)</p>
-</dd>
-<dt><code>onWSOpen(ws)</code></dt><dd><p>Called back when a WebSocket connection is established.
-The given object can be used to be notified when a message is received from
-the client, to send messages to the client, etc. See <code><a href="WebSocket-class.html">WebSocket</a></code>.</p>
-</dd>
-</dl>
-
-<p>The <code>startPipeServer</code> variant is not supported yet.
-</p>
-
-
-<h3>Value</h3>
-
-<p>A handle for this server that can be passed to
-<code><a href="stopDaemonizedServer.html">stopDaemonizedServer</a></code> to shut the server down.
-</p>
-
-
-<h3>See Also</h3>
-
-<p><code><a href="startServer.html">startServer</a></code>
-</p>
-
-<hr /><div style="text-align: center;">[Package <em>httpuv</em> version 1.3.6.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>httpuv</em> version 1.4.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

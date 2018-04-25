@@ -9,8 +9,12 @@
 
 <h3>Description</h3>
 
-<p>Process HTTP requests and WebSocket messages. Even if a server exists, no
-requests are serviced unless and until <code>service</code> is called.
+<p>Process HTTP requests and WebSocket messages. If there is nothing on R's call
+stack &ndash; if R is sitting idle at the command prompt &ndash; it is not necessary to
+call this function, because requests will be handled automatically. However,
+if R is executing code, then requests will not be handled until either the
+call stack is empty, or this function is called (or alternatively,
+<code><a href="../../later/html/run_now.html">run_now</a></code> is called).
 </p>
 
 
@@ -26,19 +30,23 @@ service(timeoutMs = ifelse(interactive(), 100, 1000))
 <table summary="R argblock">
 <tr valign="top"><td><code>timeoutMs</code></td>
 <td>
-<p>Approximate number of milliseconds to run before returning. 
-If 0, then the function will continually process requests without returning
-unless an error occurs. If NA, performs a non-blocking run without waiting.</p>
+<p>Approximate number of milliseconds to run before returning.
+It will return this duration has elapsed. If 0 or Inf, then the function
+will continually process requests without returning unless an error occurs.
+If NA, performs a non-blocking run without waiting.</p>
 </td></tr>
 </table>
 
 
 <h3>Details</h3>
 
-<p>Note that while <code>service</code> is waiting for a new request, the process is
-not interruptible using normal R means (Esc, Ctrl+C, etc.). If being
-interruptible is a requirement, then call <code>service</code> in a while loop
-with a very short but non-zero <code><a href="../../base/html/Sys.sleep.html">Sys.sleep</a></code> during each iteration.
+<p>In previous versions of httpuv (1.3.5 and below), even if a server created by
+<code><a href="startServer.html">startServer</a></code> exists, no requests were serviced unless and until
+<code>service</code> was called.
+</p>
+<p>This function simply calls <code><a href="../../later/html/run_now.html">run_now</a>()</code>, so if your
+application schedules any <code><a href="../../later/html/later.html">later</a></code> callbacks, they will be
+invoked.
 </p>
 
 
@@ -48,12 +56,11 @@ with a very short but non-zero <code><a href="../../base/html/Sys.sleep.html">Sy
 ## Not run: 
 while (TRUE) {
   service()
-  Sys.sleep(0.001)
 }
 
 ## End(Not run)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>httpuv</em> version 1.3.6.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>httpuv</em> version 1.4.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

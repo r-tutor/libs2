@@ -1,8 +1,8 @@
 Package: d3r
 Type: Package
 Title: 'd3.js' Utilities for R
-Version: 0.8.0
-Date: 2018-03-17
+Version: 0.8.1
+Date: 2018-04-07
 Authors@R: c(
       person(
         "Mike", "Bostock"
@@ -42,7 +42,7 @@ Enhances: igraph, partykit, rpart, treemap, V8
 LazyData: true
 RoxygenNote: 6.0.1
 NeedsCompilation: no
-Packaged: 2018-03-17 13:37:39 UTC; kentr
+Packaged: 2018-04-24 01:24:59 UTC; kentr
 Author: Mike Bostock [aut, cph] (d3.js library in htmlwidgets/lib,
     http://d3js.org),
   Kent Russell [aut, cre] (R interface),
@@ -51,5 +51,5 @@ Author: Mike Bostock [aut, cph] (d3.js library in htmlwidgets/lib,
   Adam Pearce [aut] (core contributor to d3-jetpack),
   Ben Ortiz [ctb]
 Repository: CRAN
-Date/Publication: 2018-03-17 23:04:30 UTC
-Built: R 3.4.4; ; 2018-03-18 14:29:24 UTC; windows
+Date/Publication: 2018-04-24 03:33:09 UTC
+Built: R 3.4.4; ; 2018-04-25 03:42:22 UTC; windows
