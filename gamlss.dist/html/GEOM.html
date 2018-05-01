@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Geometric distribution for fitting a GAMLSS model</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for GEOM {gamlss.dist}"><tr><td>GEOM {gamlss.dist}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Geometric distribution for fitting a GAMLSS model</h2>
+
+<h3>Description</h3>
+
+<p>The functions  <code>GEOMo()</code> and  <code>GEOM()</code> define  two parametrizations of the geometric distribution. The geometric distribution is a  one parameter 
+distribution, for a <code>gamlss.family</code> object to be used in GAMLSS fitting 
+using the function <code>gamlss()</code>.  The  mean of <code>GEOM()</code> is equal to the parameter <code>mu</code>. 
+The functions <code>dGEOM</code>, <code>pGEOM</code>, <code>qGEOM</code> and <code>rGEOM</code> define 
+the density, distribution function, quantile function and random generation for 
+the <code>GEOM</code> parameterization of the Geometric distribution. 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+GEOM(mu.link = "log")
+dGEOM(x, mu = 2, log = FALSE)
+pGEOM(q, mu = 2, lower.tail = TRUE, log.p = FALSE)
+qGEOM(p, mu = 2, lower.tail = TRUE, log.p = FALSE)
+rGEOM(n, mu = 2)
+GEOMo(mu.link = "logit")
+dGEOMo(x, mu = 0.5, log = FALSE)
+pGEOMo(q, mu = 0.5, lower.tail = TRUE, log.p = FALSE)
+qGEOMo(p, mu = 0.5, lower.tail = TRUE, log.p = FALSE)
+rGEOMo(n, mu = 0.5)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>mu.link</code></td>
+<td>
+<p>Defines the <code>mu.link</code>, with <code>log</code> link as the default for the <code>mu</code> parameter</p>
+</td></tr>
+<tr valign="top"><td><code>x, q</code></td>
+<td>
+<p>vector of quantiles</p>
+</td></tr>
+<tr valign="top"><td><code>mu</code></td>
+<td>
+<p>vector of location parameter values</p>
+</td></tr>
+<tr valign="top"><td><code>log, log.p</code></td>
+<td>
+<p>logical; if TRUE, probabilities p are given as log(p)</p>
+</td></tr>
+<tr valign="top"><td><code>lower.tail</code></td>
+<td>
+<p>logical; if TRUE (default), probabilities are P[X &lt;= x], otherwise P[X &gt; x]</p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>vector of probabilities</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>number of observations. If <code>length(n) &gt; 1</code>, the length is taken to be the number required</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The parameterization of the original geometric distribution in the function <code>GE</code> is
+</p>
+<p style="text-align: center;"><i>f(y|&mu;) = (1-&mu;)^y &mu;</i></p>
+
+<p>for <i>y&gt;=0</i> and <i>&mu;&gt;0</i>.
+</p>
+<p>The parameterization of the geometric distribution in the function <code>GEOM</code> is
+</p>
+<p style="text-align: center;"><i>f(y|&mu;) = &mu;^y/(&mu;+1)^{y+1} </i></p>
+
+<p>where
+for <i>y&gt;=0</i> and <i>&mu;&gt;0</i>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>returns a <code>gamlss.family</code> object which can be used to fit a Geometric distribution in the <code>gamlss()</code> function.</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Fiona McElduff, Bob Rigby and Mikis Stasinopoulos.
+</p>
+
+
+<h3>References</h3>
+
+<p>Johnson, N. L., Kemp, A. W., and Kotz, S. (2005). <em>Univariate discrete distributions.</em>
+Wiley.
+</p>
+<p>Rigby, R. A. and Stasinopoulos D. M. (2005). Generalized additive models for location, scale and shape,(with discussion), <em>Appl. Statist.</em>, 54, part 3, pp 507-554. 
+</p>
+<p>Stasinopoulos D. M., Rigby R.A. and Akantziliotou C. (2006) Instructions on how to use the GAMLSS package in R. Accompanying documentation in the current GAMLSS help files, (see also <a href="http://www.gamlss.org/">http://www.gamlss.org/</a>). 
+</p>
+<p>Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location scale and shape (GAMLSS) in R. <em>Journal of Statistical Software</em>, Vol. 23, Issue 7, Dec 2007, <a href="http://www.jstatsoft.org/v23/i07">http://www.jstatsoft.org/v23/i07</a>. 
+</p>
+<p>Stasinopoulos D. M., Rigby R.A., Heller G., Voudouris V., and De Bastiani F., (2017)
+<em>Flexible Regression and Smoothing: Using GAMLSS in R</em>,  Chapman and Hall/CRC. 
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="gamlss.family.html">gamlss.family</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+par(mfrow=c(2,2))
+y&lt;-seq(0,20,1)
+plot(y, dGEOM(y), type="h")
+q &lt;- seq(0, 20, 1)
+plot(q, pGEOM(q), type="h")
+p&lt;-seq(0.0001,0.999,0.05)
+plot(p , qGEOM(p), type="s")
+dat &lt;- rGEOM(100)
+hist(dat)
+#summary(gamlss(dat~1, family=GEOM))
+par(mfrow=c(2,2))
+y&lt;-seq(0,20,1)
+plot(y, dGEOMo(y), type="h")
+q &lt;- seq(0, 20, 1)
+plot(q, pGEOMo(q), type="h")
+p&lt;-seq(0.0001,0.999,0.05)
+plot(p , qGEOMo(p), type="s")
+dat &lt;- rGEOMo(100)
+hist(dat)
+#summary(gamlss(dat~1, family="GE"))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>gamlss.dist</em> version 5.0-5 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: The beta inflated distribution for fitting a GAMLSS</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for BEINF {gamlss.dist}"><tr><td>BEINF {gamlss.dist}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>The beta inflated distribution for fitting a GAMLSS</h2>
+
+<h3>Description</h3>
+
+<p>The function <code>BEINF()</code> defines the beta inflated distribution, a four parameter distribution, for a 
+<code>gamlss.family</code> object to be used in GAMLSS fitting 
+using the function <code>gamlss()</code>. 
+The beta inflated is similar to the beta but allows zeros and ones as  values for the response variable. 
+The two extra parameters model the probabilities at zero and one.
+</p>
+<p>The functions <code>BEINF0()</code> and <code>BEINF1()</code> are three parameter beta inflated distributions allowing  
+zeros or ones only at the response respectively.  <code>BEINF0()</code> and <code>BEINF1()</code> are re-parameterize versions 
+of the distributions <code><a href="BEZI.html">BEZI</a></code> and <code><a href="BEOI.html">BEOI</a></code> contributed to gamlss by Raydonal Ospina 
+(see Ospina and Ferrari (2010)).
+</p>
+<p>The functions <code>dBEINF</code>, <code>pBEINF</code>, <code>qBEINF</code> and <code>rBEINF</code> define the density, distribution function, 
+quantile function and random
+generation for the <code>BEINF</code> parametrization of the beta inflated distribution. 
+</p>
+<p>The functions <code>dBEINF0</code>, <code>pBEINF0</code>, <code>qBEINF0</code> and <code>rBEINF0</code> define the density, distribution function, 
+quantile function and random
+generation for the <code>BEINF0</code> parametrization of the beta inflated at zero distribution.
+</p>
+<p>The functions <code>dBEINF1</code>, <code>pBEINF1</code>, <code>qBEINF1</code> and <code>rBEINF1</code> define the density, distribution function, 
+quantile function and random
+generation for the <code>BEINF1</code> parametrization of the beta inflated at one distribution.
+</p>
+<p><code>plotBEINF</code>, <code>plotBEINF0</code> and <code>plotBEINF1</code> can be used to plot the distributions. 
+<code>meanBEINF</code>, <code>meanBEINF0</code> and <code>meanBEINF1</code> calculates the expected value of the response for a fitted model. 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+BEINF(mu.link = "logit", sigma.link = "logit", nu.link = "log", 
+      tau.link = "log")
+BEINF0(mu.link = "logit", sigma.link = "logit", nu.link = "log")
+BEINF1(mu.link = "logit", sigma.link = "logit", nu.link = "log")
+      
+dBEINF(x, mu = 0.5, sigma = 0.1, nu = 0.1, tau = 0.1, 
+       log = FALSE)
+dBEINF0(x, mu = 0.5, sigma = 0.1, nu = 0.1, log = FALSE)
+dBEINF1(x, mu = 0.5, sigma = 0.1, nu = 0.1, log = FALSE)       
+
+pBEINF(q, mu = 0.5, sigma = 0.1, nu = 0.1, tau = 0.1, 
+       lower.tail = TRUE, log.p = FALSE)
+pBEINF0(q, mu = 0.5, sigma = 0.1, nu = 0.1, 
+       lower.tail = TRUE, log.p = FALSE)       
+pBEINF1(q, mu = 0.5, sigma = 0.1, nu = 0.1, 
+        lower.tail = TRUE, log.p = FALSE)
+
+qBEINF(p, mu = 0.5, sigma = 0.1, nu = 0.1, tau = 0.1, 
+       lower.tail = TRUE, log.p = FALSE)
+qBEINF0(p, mu = 0.5, sigma = 0.1, nu = 0.1, tau = 0.1, 
+        lower.tail = TRUE, log.p = FALSE)
+qBEINF1(p, mu = 0.5, sigma = 0.1, nu = 0.1, 
+        lower.tail = TRUE, log.p = FALSE)
+       
+rBEINF(n, mu = 0.5, sigma = 0.1, nu = 0.1, tau = 0.1)
+rBEINF0(n, mu = 0.5, sigma = 0.1, nu = 0.1)
+rBEINF1(n, mu = 0.5, sigma = 0.1, nu = 0.1)
+
+plotBEINF(mu = 0.5, sigma = 0.5, nu = 0.5, tau = 0.5, 
+          from = 0.001, to = 0.999, n = 101, ...)
+plotBEINF0(mu = 0.5, sigma = 0.5, nu = 0.5, 
+          from = 1e-04, to = 0.9999, n = 101, ...)
+plotBEINF1(mu = 0.5, sigma = 0.5, nu = 0.5, 
+          from = 1e-04, to = 0.9999, n = 101, ...)
+
+meanBEINF(obj)
+meanBEINF0(obj)
+meanBEINF1(obj)
+
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>mu.link</code></td>
+<td>
+<p>the <code>mu</code> link function with default <code>logit</code></p>
+</td></tr>
+<tr valign="top"><td><code>sigma.link</code></td>
+<td>
+<p>the <code>sigma</code> link function with default <code>logit</code></p>
+</td></tr>
+<tr valign="top"><td><code>nu.link</code></td>
+<td>
+<p>the <code>nu</code> link function with default <code>log</code></p>
+</td></tr>
+<tr valign="top"><td><code>tau.link</code></td>
+<td>
+<p>the <code>tau</code> link function with default <code>log</code></p>
+</td></tr>
+<tr valign="top"><td><code>x,q</code></td>
+<td>
+<p>vector of quantiles</p>
+</td></tr>
+<tr valign="top"><td><code>mu</code></td>
+<td>
+<p>vector of location parameter values</p>
+</td></tr> 
+<tr valign="top"><td><code>sigma</code></td>
+<td>
+<p>vector of scale parameter values</p>
+</td></tr>
+<tr valign="top"><td><code>nu</code></td>
+<td>
+<p>vector of parameter values modelling the probability at zero</p>
+</td></tr>
+<tr valign="top"><td><code>tau</code></td>
+<td>
+<p>vector of parameter values modelling the probability at one</p>
+</td></tr> 
+<tr valign="top"><td><code>log, log.p</code></td>
+<td>
+<p> logical; if TRUE, probabilities p are given as log(p).</p>
+</td></tr>   
+<tr valign="top"><td><code>lower.tail</code></td>
+<td>
+<p>logical; if TRUE (default), probabilities are P[X &lt;= x],
+otherwise, P[X &gt; x] </p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>vector of probabilities. </p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p> number of observations. If <code>length(n) &gt; 1</code>, the length is
+taken to be the number required</p>
+</td></tr>  
+<tr valign="top"><td><code>from</code></td>
+<td>
+<p>where to start plotting the distribution from</p>
+</td></tr>
+<tr valign="top"><td><code>to</code></td>
+<td>
+<p>up to  where to plot the distribution  </p>
+</td></tr>
+<tr valign="top"><td><code>obj</code></td>
+<td>
+<p> a fitted <code>BEINF</code> object</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p> other graphical parameters for plotting</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The beta inflated distribution is given as 
+</p>
+<p style="text-align: center;"><i>f(y)=p0</i></p>
+<p> if (y=0)
+</p>
+<p style="text-align: center;"><i>f(y)=p1</i></p>
+<p> if (y=1)
+</p>
+<p style="text-align: center;"><i>f(y|a,b)=(1/(Beta(a,b))) y^(a-1)(1-y)^(b-1)</i></p>
+ 
+<p>otherwise 
+</p>
+<p>for <i>y=(0,1)</i>, <i>&alpha;&gt;0</i> and <i>&beta;&gt;0</i>. The parametrization in the function <code>BEINF()</code> is 
+<i>mu=a/(a+b)</i> and  <i>sigma=1/(a+b+1)</i>
+for <i>mu=(0,1)</i> and <i>sigma=(0,1)</i> and  <i>nu=p0/p2</i>,
+<i>tau=p1/p2</i> where  <i>p2=1-p0-p1</i>. 
+</p>
+
+
+<h3>Value</h3>
+
+<p>returns a <code>gamlss.family</code> object which can be used to fit a beta inflated distribution in the <code>gamlss()</code> function. 
+...
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Bob Rigby and Mikis Stasinopoulos </p>
+
+
+<h3>References</h3>
+
+<p>Ospina R. and Ferrari S. L. P. (2010) Inflated beta distributions, <em>Statistical Papers</em>, 
+<b>23</b>,  111-126. 
+</p>
+<p>Rigby, R. A. and  Stasinopoulos D. M. (2005). Generalized additive models for location, scale and shape,(with discussion), 
+<em>Appl. Statist.</em>, <b>54</b>, part 3, pp 507-554.
+</p>
+<p>Stasinopoulos D. M., Rigby R.A. and Akantziliotou C. (2006) Instructions on how to use the GAMLSS package in R.
+Accompanying documentation in the current GAMLSS  help files, (see also  <a href="http://www.gamlss.org/">http://www.gamlss.org/</a>).
+</p>
+<p>Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location scale and shape (GAMLSS) in R.
+<em>Journal of Statistical Software</em>, Vol. <b>23</b>, Issue 7, Dec 2007, <a href="http://www.jstatsoft.org/v23/i07">http://www.jstatsoft.org/v23/i07</a>.
+</p>
+<p>Stasinopoulos D. M., Rigby R.A., Heller G., Voudouris V., and De Bastiani F., (2017)
+<em>Flexible Regression and Smoothing: Using GAMLSS in R</em>,  Chapman and Hall/CRC. 
+</p>
+
+
+<h3>See Also</h3>
+
+ <p><code><a href="gamlss.family.html">gamlss.family</a></code>, <code><a href="BE.html">BE</a></code>, <code><a href="BE.html">BEo</a></code>, <code><a href="BEZI.html">BEZI</a></code>, <code><a href="BEOI.html">BEOI</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+BEINF()# gives information about the default links for the beta inflated distribution
+BEINF0()
+BEINF1()
+# plotting the distributions
+op&lt;-par(mfrow=c(2,2)) 
+plotBEINF( mu =.5 , sigma=.5, nu = 0.5, tau = 0.5, from = 0, to=1, n = 101)
+plotBEINF0( mu =.5 , sigma=.5, nu = 0.5,  from = 0, to=1, n = 101)
+plotBEINF1( mu =.5 , sigma=.5, nu = 0.5,  from = 0.001, to=1, n = 101)
+curve(dBE(x, mu =.5, sigma=.5),  0.01, 0.999)
+par(op)
+# plotting the cdf
+op&lt;-par(mfrow=c(2,2)) 
+plotBEINF( mu =.5 , sigma=.5, nu = 0.5, tau = 0.5, from = 0, to=1, n = 101, main="BEINF")
+plotBEINF0( mu =.5 , sigma=.5, nu = 0.5,  from = 0, to=1, n = 101, main="BEINF0")
+plotBEINF1( mu =.5 , sigma=.5, nu = 0.5,  from = 0.001, to=1, n = 101, main="BEINF1")
+curve(dBE(x, mu =.5, sigma=.5),  0.01, 0.999, main="BE")
+par(op)
+#---------------------------------------------
+op&lt;-par(mfrow=c(2,2)) 
+plotBEINF( mu =.5 , sigma=.5, nu = 0.5, tau = 0.5, from = 0, to=1, n = 101, main="BEINF")
+plotBEINF0( mu =.5 , sigma=.5, nu = 0.5,  from = 0, to=1, n = 101, main="BEINF0")
+plotBEINF1( mu =.5 , sigma=.5, nu = 0.5,  from = 0.001, to=1, n = 101, main="BEINF1")
+curve(dBE(x, mu =.5, sigma=.5),  0.01, 0.999, main="BE")
+par(op)
+#---------------------------------------------
+op&lt;-par(mfrow=c(2,2)) 
+curve( pBEINF(x, mu=.5 ,sigma=.5, nu = 0.5, tau = 0.5,), 0, 1, ylim=c(0,1), main="BEINF" )
+curve(pBEINF0(x, mu=.5 ,sigma=.5, nu = 0.5), 0, 1, ylim=c(0,1), main="BEINF0")
+curve(pBEINF1(x, mu=.5 ,sigma=.5, nu = 0.5), 0, 1, ylim=c(0,1), main="BEINF1")
+curve(    pBE(x, mu=.5 ,sigma=.5), .001, .99, ylim=c(0,1), main="BE")
+par(op)
+#---------------------------------------------
+op&lt;-par(mfrow=c(2,2)) 
+curve(qBEINF(x, mu=.5 ,sigma=.5, nu = 0.5, tau = 0.5), .01, .99, main="BEINF" )
+curve(qBEINF0(x, mu=.5 ,sigma=.5, nu = 0.5), .01, .99, main="BEINF0" )
+curve(qBEINF1(x, mu=.5 ,sigma=.5, nu = 0.5), .01, .99, main="BEINF1" )
+curve(qBE(x, mu=.5 ,sigma=.5), .01, .99 , main="BE")
+par(op)
+
+#---------------------------------------------
+op&lt;-par(mfrow=c(2,2)) 
+hist(rBEINF(200, mu=.5 ,sigma=.5, nu = 0.5, tau = 0.5))
+hist(rBEINF0(200, mu=.5 ,sigma=.5, nu = 0.5))
+hist(rBEINF1(200, mu=.5 ,sigma=.5, nu = 0.5))
+hist(rBE(200, mu=.5 ,sigma=.5))
+par(op)
+# fit a model to the data 
+# library(gamlss)
+#m1&lt;-gamlss(dat~1,family=BEINF)
+#meanBEINF(m1)[1]
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>gamlss.dist</em> version 5.0-5 <a href="00Index.html">Index</a>]</div>
+</body></html>

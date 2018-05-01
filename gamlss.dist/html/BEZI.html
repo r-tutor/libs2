@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: The zero-inflated beta distribution for fitting a GAMLSS</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for BEZI {gamlss.dist}"><tr><td>BEZI {gamlss.dist}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>The zero-inflated beta distribution for fitting a GAMLSS</h2>
+
+<h3>Description</h3>
+
+<p>The function <code>BEZI()</code> defines the zero-inflated beta distribution, a
+three parameter distribution, for a 
+<code>gamlss.family</code> object to be used in GAMLSS fitting using the function <code>gamlss()</code>.
+The zero-inflated beta is similar to the beta distribution but allows zeros as y values. This distribution
+is an extension of the beta distribution using a parameterization of the beta law that is
+indexed by mean and precision parameters (Ferrari and Cribari-Neto, 2004).
+The extra parameter models the probability at zero.
+The functions <code>dBEZI</code>, <code>pBEZI</code>, <code>qBEZI</code> and <code>rBEZI</code> define the density,
+distribution function, quantile function and random
+generation for the <code>BEZI</code> parameterization of the zero-inflated beta distribution. 
+<code>plotBEZI</code> can be used to plot the distribution. <code>meanBEZI</code> calculates the expected value of the response for a fitted model. 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+BEZI(mu.link = "logit", sigma.link = "log", nu.link = "logit")
+
+dBEZI(x, mu = 0.5, sigma = 1, nu = 0.1, log = FALSE)
+
+pBEZI(q, mu = 0.5, sigma = 1, nu = 0.1, lower.tail = TRUE, log.p = FALSE)
+
+qBEZI(p, mu = 0.5, sigma = 1, nu = 0.1, lower.tail = TRUE,
+        log.p = FALSE)
+        
+rBEZI(n, mu = 0.5, sigma = 1, nu = 0.1)
+
+plotBEZI(mu = .5, sigma = 1, nu = 0.1, from = 0, to = 0.999, n = 101, 
+    ...)
+    
+meanBEZI(obj)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>mu.link</code></td>
+<td>
+<p>the <code>mu</code> link function with default <code>logit</code></p>
+</td></tr>
+<tr valign="top"><td><code>sigma.link</code></td>
+<td>
+<p>the <code>sigma</code> link function with default <code>log</code></p>
+</td></tr>
+<tr valign="top"><td><code>nu.link</code></td>
+<td>
+<p>the <code>nu</code> link function with default <code>logit</code></p>
+</td></tr>
+<tr valign="top"><td><code>x,q</code></td>
+<td>
+<p>vector of quantiles</p>
+</td></tr>
+<tr valign="top"><td><code>mu</code></td>
+<td>
+<p>vector of location parameter values</p>
+</td></tr> 
+<tr valign="top"><td><code>sigma</code></td>
+<td>
+<p>vector of precision parameter values</p>
+</td></tr>
+<tr valign="top"><td><code>nu</code></td>
+<td>
+<p>vector of parameter values modelling the probability at zero</p>
+</td></tr>
+<tr valign="top"><td><code>log, log.p</code></td>
+<td>
+<p> logical; if TRUE, probabilities p are given as log(p).</p>
+</td></tr>   
+<tr valign="top"><td><code>lower.tail</code></td>
+<td>
+<p>logical; if TRUE (default), probabilities are P[X &lt;= x],
+otherwise, P[X &gt; x] </p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>vector of probabilities. </p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p> number of observations. If <code>length(n) &gt; 1</code>, the length is
+taken to be the number required</p>
+</td></tr>  
+<tr valign="top"><td><code>from</code></td>
+<td>
+<p>where to start plotting the distribution from</p>
+</td></tr>
+<tr valign="top"><td><code>to</code></td>
+<td>
+<p>up to  where to plot the distribution  </p>
+</td></tr>
+<tr valign="top"><td><code>obj</code></td>
+<td>
+<p> a fitted <code>BEZI</code> object</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p> other graphical parameters for plotting</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p> The zero-inflated beta distribution is given as
+</p>
+<p style="text-align: center;"><i>f(y)=nu</i></p>
+<p> if <i>(y=0)</i>
+</p>
+<p style="text-align: center;"><i>f(y|mu,sigma)=(1-nu)*(Gamma(sigma)/Gamma(mu*sigma)*Gamma((1-mu)*sigma))*y^(mu*sigma-1)*(1-y)^(((1-mu)*sigma)-1)
+</i></p>
+
+<p>if <i>y=(0,1)</i>. The parameters satisfy <i>0&lt;mu&lt;1</i>, <i>sigma&gt;0</i> and <i>0&lt;nu&lt;1</i>.
+</p>
+<p>Here <i>E(y)=(1-nu)*mu</i> and 
+<i>Var(y)=(1-nu)*(mu*(1-mu))/(sigma+1) + nu*(1-nu)*mu^2</i>. 
+</p>
+
+
+<h3>Value</h3>
+
+<p>returns a <code>gamlss.family</code> object which can be used to fit a zero-inflated beta distribution in the <code>gamlss()</code> function. 
+</p>
+
+
+<h3>Note</h3>
+
+<p>This work is part of my PhD project at the University of Sao
+Paulo under the supervion of Professor Silvia Ferrari.
+My thesis is concerned with regression modelling of rates and
+proportions with excess of zeros and/or ones</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Raydonal Ospina, Department of Statistics, University of Sao Paulo, Brazil.
+</p>
+<p><a href="mailto:rospina@ime.usp.br">rospina@ime.usp.br</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Ferrari, S.L.P., Cribari-Neto, F. (2004). Beta regression for
+modelling rates and proportions. <em>Journal of Applied Statistics</em>,
+<b>31</b> (1), 799-815.
+</p>
+<p>Ospina R. and Ferrari S. L. P. (2010) Inflated beta distributions, <em>Statistical Papers</em>, 
+<b>23</b>,  111-126. 
+</p>
+<p>Rigby, R. A. and  Stasinopoulos D. M. (2005).
+Generalized additive models for location, scale and shape (with discussion). 
+<em>Applied Statistics</em>, <b>54</b> (3), 507-554.
+</p>
+<p>Stasinopoulos D. M., Rigby R.A. and Akantziliotou C. (2006).
+Instructions on how to use the GAMLSS package in R.
+Accompanying documentation in the current GAMLSS  help files
+(see also  <a href="http://www.gamlss.org/">http://www.gamlss.org/</a>).
+</p>
+<p>Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location scale and shape (GAMLSS) in R.
+<em>Journal of Statistical Software</em>, Vol. <b>23</b>, Issue 7, Dec 2007, <a href="http://www.jstatsoft.org/v23/i07">http://www.jstatsoft.org/v23/i07</a>.
+</p>
+<p>Stasinopoulos D. M., Rigby R.A., Heller G., Voudouris V., and De Bastiani F., (2017)
+<em>Flexible Regression and Smoothing: Using GAMLSS in R</em>,  Chapman and Hall/CRC. 
+</p>
+
+
+<h3>See Also</h3>
+
+ <p><code><a href="gamlss.family.html">gamlss.family</a></code>, <code><a href="BEZI.html">BEZI</a></code> </p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+ BEZI()# gives information about the default links for the BEZI distribution
+# plotting the distribution
+plotBEZI( mu =0.5 , sigma=5, nu = 0.1, from = 0, to=0.99, n = 101)
+# plotting the cdf
+plot(function(y) pBEZI(y, mu=.5 ,sigma=5, nu=0.1), 0, 0.999)
+# plotting the inverse cdf
+plot(function(y) qBEZI(y, mu=.5 ,sigma=5, nu=0.1), 0, 0.999)
+# generate random numbers
+dat&lt;-rBEZI(100, mu=.5, sigma=5, nu=0.1)
+# fit a model to the data. Tits a constant for mu, sigma and nu
+# library(gamlss)
+#mod1&lt;-gamlss(dat~1,sigma.formula=~1, nu.formula=~1, family=BEZI) 
+#fitted(mod1)[1]
+#summary(mod1)
+#fitted(mod1,"mu")[1]         #fitted mu   
+#fitted(mod1,"sigma")[1]      #fitted sigma 
+#fitted(mod1,"nu")[1]         #fitted nu  
+#meanBEZI(mod1)[1] # expected value of the response
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>gamlss.dist</em> version 5.0-5 <a href="00Index.html">Index</a>]</div>
+</body></html>

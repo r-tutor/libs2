@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Binomial distribution for fitting a GAMLSS</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for BI {gamlss.dist}"><tr><td>BI {gamlss.dist}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Binomial distribution for fitting a GAMLSS</h2>
+
+<h3>Description</h3>
+
+ 
+<p>The <code>BI()</code> function defines the binomial distribution, a one parameter family distribution, for a <code>gamlss.family</code> object to be used 
+in GAMLSS fitting using the function <code>gamlss()</code>.    
+The functions <code>dBI</code>, <code>pBI</code>, <code>qBI</code> and <code>rBI</code> define the density, distribution function, quantile function and random
+generation for the binomial, <code>BI()</code>, distribution. 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+BI(mu.link = "logit")
+dBI(x, bd = 1, mu = 0.5, log = FALSE)
+pBI(q, bd = 1, mu = 0.5, lower.tail = TRUE, log.p = FALSE)
+qBI(p, bd = 1, mu = 0.5, lower.tail = TRUE, log.p = FALSE)
+rBI(n, bd = 1, mu = 0.5)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>mu.link</code></td>
+<td>
+<p> Defines the <code>mu.link</code>, with &quot;logit&quot; link as the default for the <code>mu</code> parameter.  Other links are &quot;probit&quot; and &quot;cloglog&quot;'(complementary log-log)</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p> vector of (non-negative integer) quantiles</p>
+</td></tr>
+<tr valign="top"><td><code>mu</code></td>
+<td>
+<p>vector of positive probabilities</p>
+</td></tr>
+<tr valign="top"><td><code>bd</code></td>
+<td>
+<p>vector of binomial denominators</p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>vector of probabilities</p>
+</td></tr>
+<tr valign="top"><td><code>q</code></td>
+<td>
+<p>vector of quantiles</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>number of random values to return</p>
+</td></tr>
+<tr valign="top"><td><code>log, log.p</code></td>
+<td>
+<p>logical; if TRUE, probabilities p are given as log(p)</p>
+</td></tr>
+<tr valign="top"><td><code>lower.tail</code></td>
+<td>
+<p>logical; if TRUE (default), probabilities are P[X &lt;= x],
+otherwise, P[X &gt; x]</p>
+</td></tr>  
+</table>
+
+
+<h3>Details</h3>
+
+<p>Definition file for binomial distribution. 
+</p>
+<p style="text-align: center;"><i>f(y|mu)=(Gamma(n+1)*Gamma(y+1)/Gamma(n-y+1))* mu^y *(1-mu)^(n-y)</i></p>
+ 
+<p>for <i>y=0,1,2,...,n</i> and <i>0&lt;&mu;&lt; 1</i>. 
+</p>
+
+
+<h3>Value</h3>
+
+<p>returns a <code>gamlss.family</code> object which can be used to fit a binomial distribution in the <code>gamlss()</code> function.   
+</p>
+
+
+<h3>Note</h3>
+
+<p> The response variable should be a matrix containing two columns, the first with the count of successes and the second with the count of failures. 
+The parameter <code>mu</code> represents a probability parameter with limits <i>0 &lt; mu &lt;1</i>.
+<i>n*mu</i> is the mean of the distribution where n is the binomial denominator. </p>
+
+
+<h3>Author(s)</h3>
+
+<p>Mikis Stasinopoulos, Bob Rigby and Calliope Akantziliotou</p>
+
+
+<h3>References</h3>
+
+ 
+<p>Rigby, R. A. and  Stasinopoulos D. M. (2005). Generalized additive models for location, scale and shape,(with discussion), 
+<em>Appl. Statist.</em>, <b>54</b>, part 3, pp 507-554.
+</p>
+<p>Stasinopoulos D. M., Rigby R.A. and Akantziliotou C. (2006) Instructions on how to use the GAMLSS package in R.
+Accompanying documentation in the current GAMLSS  help files, (see also  <a href="http://www.gamlss.org/">http://www.gamlss.org/</a>).
+</p>
+<p>Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location scale and shape (GAMLSS) in R.
+<em>Journal of Statistical Software</em>, Vol. <b>23</b>, Issue 7, Dec 2007, <a href="http://www.jstatsoft.org/v23/i07">http://www.jstatsoft.org/v23/i07</a>.
+</p>
+<p>Stasinopoulos D. M., Rigby R.A., Heller G., Voudouris V., and De Bastiani F., (2017)
+<em>Flexible Regression and Smoothing: Using GAMLSS in R</em>,  Chapman and Hall/CRC. 
+</p>
+
+
+<h3>See Also</h3>
+
+ <p><code><a href="gamlss.family.html">gamlss.family</a></code>, <code><a href="ZABI.html">ZABI</a></code>,  <code><a href="ZABI.html">ZIBI</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+ BI()# gives information about the default links for the Binomial distribution 
+# data(aep)   
+# library(gamlss)
+# h&lt;-gamlss(y~ward+loglos+year, family=BI, data=aep)  
+# plot of the binomial distribution
+curve(dBI(x, mu = .5, bd=10), from=0, to=10, n=10+1, type="h")
+tN &lt;- table(Ni &lt;- rBI(1000, mu=.2, bd=10))
+r &lt;- barplot(tN, col='lightblue')
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>gamlss.dist</em> version 5.0-5 <a href="00Index.html">Index</a>]</div>
+</body></html>

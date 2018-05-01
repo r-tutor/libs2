@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Waring distribution for fitting a GAMLSS model</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for WARING {gamlss.dist}"><tr><td>WARING {gamlss.dist}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+Waring distribution for fitting a GAMLSS model
+</h2>
+
+<h3>Description</h3>
+
+<p>The function <code>WARING()</code> defines the Waring distribution, a two parameter 
+distribution, for a <code>gamlss.family</code> object to be used in GAMLSS fitting 
+using the function <code>gamlss()</code>, with mean equal to the parameter <code>mu</code> and scale parameter <code>sigma</code>. The functions <code>dWARING</code>, <code>pWARING</code>, <code>qWARING</code> and <code>rWARING</code> define the density, distribution function, quantile function and random generation for the <code>WARING</code> parameterization of the Waring distribution. 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+WARING(mu.link = "log", sigma.link = "log")
+dWARING(x, mu = 2, sigma = 2, log = FALSE)
+pWARING(q, mu = 2, sigma = 2, lower.tail = TRUE, log.p = FALSE) 
+qWARING(p, mu = 2, sigma = 2, lower.tail = TRUE, log.p = FALSE, 
+    max.value = 10000)
+rWARING(n, mu = 2, sigma = 2)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>mu.link</code></td>
+<td>
+<p>Defines the <code>mu.link</code>, with &quot;log&quot; link as the default for the mu parameter</p>
+</td></tr>
+<tr valign="top"><td><code>sigma.link</code></td>
+<td>
+<p>Defines the <code>sigma.link</code>, with &quot;log&quot; link as the default for the sigma parameter</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>vector of (non-negative integer) quantiles.</p>
+</td></tr>
+<tr valign="top"><td><code>q</code></td>
+<td>
+<p>vector of quantiles.</p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>vector of probabilities.</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>number of random values to return.</p>
+</td></tr>
+<tr valign="top"><td><code>mu</code></td>
+<td>
+<p>vector of positive <code>mu</code> values.</p>
+</td></tr>
+<tr valign="top"><td><code>sigma</code></td>
+<td>
+<p>vector of positive <code>sigma</code> values.</p>
+</td></tr>
+<tr valign="top"><td><code>lower.tail</code></td>
+<td>
+<p>logical; if <code>TRUE</code> (default) probabilities are <i>P[Y&le;q y]</i>, otherwise, <i>P[Y&gt;y]</i>.</p>
+</td></tr>
+<tr valign="top"><td><code>log, log.p</code></td>
+<td>
+<p>logical; if <code>TRUE</code> probabilities p are given as log(p).</p>
+</td></tr>
+<tr valign="top"><td><code>max.value</code></td>
+<td>
+<p>constant; generates a sequence of values for the cdf function.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The Waring distribution has density,
+</p>
+<p style="text-align: center;"><i>f(y|mu, sigma)= ((1+sigma) Gamma(y+mu/sigma) Gamma((mu+sigma+1)/sigma))/(sigma Gamma(y+(mu+1)/sigma+2) Gamma(mu/sigma))</i></p>
+
+<p>for <i>y=0,1,2,&hellip;</i>, <i>mu&gt;0</i> and <i>sigma&gt;0</i>.  
+</p>
+
+
+<h3>Value</h3>
+
+<p>Returns a <code>gamlss.family</code> object which can be used to fit a Waring distribution in the <code>gamlss()</code> function.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Fiona McElduff, Bob Rigby and Mikis Stasinopoulos.
+<a href="mailto:f.mcelduff@ich.ucl.ac.uk">f.mcelduff@ich.ucl.ac.uk</a>
+</p>
+
+
+<h3>References</h3>
+
+ 
+<p>Wimmer, G. and Altmann, G. (1999) <em>Thesaurus of univariate discrete probability distributions.</em> Stamm.
+</p>
+<p>Stasinopoulos D. M., Rigby R.A., Heller G., Voudouris V., and De Bastiani F., (2017)
+<em>Flexible Regression and Smoothing: Using GAMLSS in R</em>,  Chapman and Hall/CRC.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="gamlss.family.html">gamlss.family</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+par(mfrow=c(2,2))
+y&lt;-seq(0,20,1)
+plot(y, dWARING(y), type="h")
+q &lt;- seq(0, 20, 1)
+plot(q, pWARING(q), type="h")
+p&lt;-seq(0.0001,0.999,0.05)
+plot(p , qWARING(p), type="s")
+dat &lt;- rWARING(100)
+hist(dat)
+#summary(gamlss(dat~1, family=WARING))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>gamlss.dist</em> version 5.0-5 <a href="00Index.html">Index</a>]</div>
+</body></html>

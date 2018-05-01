@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Skew Normal Type 2 distribution for fitting a GAMLSS</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for SN2 {gamlss.dist}"><tr><td>SN2 {gamlss.dist}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+Skew Normal Type 2 distribution for fitting a GAMLSS
+</h2>
+
+<h3>Description</h3>
+
+<p>The function <code>SN2()</code> defines the Skew Normal Type 2 distribution, a three parameter distribution, for a <code>gamlss.family</code> object to be used in GAMLSS fitting using the function <code>gamlss()</code>, with parameters <code>mu</code>, <code>sigma</code> and <code>nu</code>. The functions <code>dSN2</code>, <code>pSN2</code>, <code>qSN2</code> and <code>rSN2</code> define the density, distribution function, quantile function and random generation for the <code>SN2</code> parameterization of the Skew Normal Type 2 distribution. 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+
+SN2(mu.link = "identity", sigma.link = "log", nu.link = "log")
+dSN2(x, mu = 0, sigma = 1, nu = 2, log = FALSE)
+pSN2(q, mu = 0, sigma = 1, nu = 2, lower.tail = TRUE, log.p = FALSE)
+qSN2(p, mu = 0, sigma = 1, nu = 2, lower.tail = TRUE, log.p = FALSE)
+rSN2(n, mu = 0, sigma = 1, nu = 2)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>mu.link</code></td>
+<td>
+<p>Defines the <code>mu.link</code>, with &quot;&lsquo;identity&quot;&rsquo; links the default for the mu parameter</p>
+</td></tr>
+<tr valign="top"><td><code>sigma.link</code></td>
+<td>
+<p>Defines the <code>sigma.link</code>, with &quot;&lsquo;log&quot;&rsquo; as the default for the sigma parameter</p>
+</td></tr>
+<tr valign="top"><td><code>nu.link</code></td>
+<td>
+<p>Defines the <code>nu.link</code>, with &quot;&lsquo;log&quot;&rsquo; as the default for the sigma parameter</p>
+</td></tr>
+<tr valign="top"><td><code>x, q</code></td>
+<td>
+<p>vector of quantiles</p>
+</td></tr>
+<tr valign="top"><td><code>mu</code></td>
+<td>
+<p>vector of location parameter values</p>
+</td></tr>
+<tr valign="top"><td><code>sigma</code></td>
+<td>
+<p>vector of scale parameter values</p>
+</td></tr>
+<tr valign="top"><td><code>nu</code></td>
+<td>
+<p>vector of scale parameter values</p>
+</td></tr>
+<tr valign="top"><td><code>log, log.p</code></td>
+<td>
+<p>logical; if TRUE, probabilities p are given as log(p)</p>
+</td></tr>
+<tr valign="top"><td><code>lower.tail</code></td>
+<td>
+<p>logical; if TRUE (default), probabilities are P[X &lt;= x], otherwise P[X &gt; x]</p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>vector of probabilities</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>number of observations. If <code>length(n) &gt; 1</code>, the length is taken to be the number required</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The parameterization of the Skew Normal Type 2 distribution in the function <code>SN2</code> is ...
+</p>
+
+
+<h3>Value</h3>
+
+<p>returns a gamlss.family object which can be used to fit a Skew Normal Type 2 distribution in the <code>gamlss()</code> function.</p>
+
+
+<h3>Note</h3>
+
+<p>This is a special case of the Skew Exponential Power type 3 distribution (<code>SEP3</code>)where <code>tau=2</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Mikis Stasinopoulos, Bob Rigby and Fiona McElduff.
+</p>
+
+
+<h3>References</h3>
+
+<p>Rigby, R. A. and  Stasinopoulos D. M. (2005). Generalized additive models for location, scale and shape,(with discussion), 
+<em>Appl. Statist.</em>, <b>54</b>, part 3, pp 507-554.
+</p>
+<p>Stasinopoulos D. M., Rigby R.A. and Akantziliotou C. (2006) Instructions on how to use the GAMLSS package in R.
+Accompanying documentation in the current GAMLSS  help files, (see also  <a href="http://www.gamlss.org/">http://www.gamlss.org/</a>).  
+</p>
+<p>Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location scale and shape (GAMLSS) in R.
+<em>Journal of Statistical Software</em>, Vol. <b>23</b>, Issue 7, Dec 2007, <a href="http://www.jstatsoft.org/v23/i07">http://www.jstatsoft.org/v23/i07</a>.
+</p>
+<p>Stasinopoulos D. M., Rigby R.A., Heller G., Voudouris V., and De Bastiani F., (2017)
+<em>Flexible Regression and Smoothing: Using GAMLSS in R</em>,  Chapman and Hall/CRC.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="gamlss.family.html">gamlss.family</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+par(mfrow=c(2,2))
+y&lt;-seq(-3,3,0.2)
+plot(y, dSN2(y), type="l" , lwd=2)
+q&lt;-seq(-3,3,0.2)
+plot(q, pSN2(q), ylim=c(0,1), type="l", lwd=2) 
+p&lt;-seq(0.0001,0.999,0.05)
+plot(p, qSN2(p), type="l", lwd=2)
+dat &lt;- rSN2(100)
+hist(rSN2(100), nclass=30)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>gamlss.dist</em> version 5.0-5 <a href="00Index.html">Index</a>]</div>
+</body></html>

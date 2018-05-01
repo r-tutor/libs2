@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Box-Cox Cole and Green distribution (or Box-Cox normal) for...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for BCCG {gamlss.dist}"><tr><td>BCCG {gamlss.dist}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Box-Cox Cole and Green distribution (or Box-Cox normal) for fitting a GAMLSS</h2>
+
+<h3>Description</h3>
+
+<p>The function <code>BCCG</code>  defines the Box-Cox Cole and Green distribution (Box-Cox normal), a three parameter distribution,
+for a <code>gamlss.family</code> object to be used in GAMLSS fitting using the function <code>gamlss()</code>. 
+The functions <code>dBCCG</code>, <code>pBCCG</code>, <code>qBCCG</code> and <code>rBCCG</code> define the density, distribution function, quantile function and random generation for the specific parameterization of the Box-Cox Cole and Green distribution.  
+[The function <code>BCCGuntr()</code> is the original version of the function suitable only for the untruncated Box-Cox Cole and Green distribution 
+See Cole and Green (1992) and Rigby and Stasinopoulos (2003a,2003b) for details.
+The function <code>BCCGo</code> is identical to <code>BCCG</code> but with log link for mu.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+BCCG(mu.link = "identity", sigma.link = "log", nu.link = "identity")
+BCCGo(mu.link = "log", sigma.link = "log", nu.link = "identity")
+BCCGuntr(mu.link = "identity", sigma.link = "log", nu.link = "identity")
+dBCCG(x, mu = 1, sigma = 0.1, nu = 1, log = FALSE)
+pBCCG(q, mu = 1, sigma = 0.1, nu = 1, lower.tail = TRUE, log.p = FALSE)
+qBCCG(p, mu = 1, sigma = 0.1, nu = 1, lower.tail = TRUE, log.p = FALSE)
+rBCCG(n, mu = 1, sigma = 0.1, nu = 1)
+dBCCGo(x, mu = 1, sigma = 0.1, nu = 1, log = FALSE)
+pBCCGo(q, mu = 1, sigma = 0.1, nu = 1, lower.tail = TRUE, log.p = FALSE)
+qBCCGo(p, mu = 1, sigma = 0.1, nu = 1, lower.tail = TRUE, log.p = FALSE)
+rBCCGo(n, mu = 1, sigma = 0.1, nu = 1)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>mu.link</code></td>
+<td>
+<p>Defines the <code>mu.link</code>, with &quot;identity&quot; link as the default for the mu parameter, other links are &quot;inverse&quot;, &quot;log&quot; and &quot;own&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>sigma.link</code></td>
+<td>
+<p>Defines the  <code>sigma.link</code>, with &quot;log&quot; link as the default for the sigma parameter, other links are &quot;inverse&quot;, &quot;identity&quot; and &quot;own&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>nu.link</code></td>
+<td>
+<p>Defines the <code>nu.link</code>, with &quot;identity&quot; link as the default for the nu parameter, other links are &quot;inverse&quot;, &quot;log&quot; and &quot;own&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>x,q</code></td>
+<td>
+<p>vector of quantiles</p>
+</td></tr>
+<tr valign="top"><td><code>mu</code></td>
+<td>
+<p>vector of location parameter values</p>
+</td></tr>
+<tr valign="top"><td><code>sigma</code></td>
+<td>
+<p>vector of scale parameter values</p>
+</td></tr>
+<tr valign="top"><td><code>nu</code></td>
+<td>
+<p>vector of skewness parameter values</p>
+</td></tr>
+<tr valign="top"><td><code>log, log.p</code></td>
+<td>
+<p> logical; if TRUE, probabilities p are given as log(p).</p>
+</td></tr>
+<tr valign="top"><td><code>lower.tail</code></td>
+<td>
+<p>logical; if TRUE (default), probabilities are P[X &lt;= x],
+otherwise, P[X &gt; x] </p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>vector of probabilities. </p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p> number of observations. If <code>length(n) &gt; 1</code>, the length is
+taken to be the number required</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The probability distribution function of the untrucated Box-Cox Cole and Green distribution, <code>BCCGuntr</code>, is defined as 
+</p>
+<p style="text-align: center;"><i>f(y|mu,sigma,nu)=(1/(sqrt(2*pi)*sigma))*(y^(nu-1)/mu^nu)*exp(-z^2/2)</i></p>
+
+<p>where if <i>&nu;!=0</i> then <i>z=[(y/mu)^(nu)-1]/(nu*sigma)</i> else 
+<i>z=log(y/mu)/sigma</i>, 
+for <i>y&gt;0</i>, <i>&mu;&gt;0</i>, <i>&sigma;&gt;0</i> and <i>&nu;=(-Inf,+Inf)</i>. 
+</p>
+<p>The Box-Cox Cole anf Green distribution,  <code>BCCG</code>, adjusts the above density <i>f(y|mu,sigma,nu</i> for the 
+truncation resulting from the condition <i>y&gt;0</i>. See Rigby and Stasinopoulos (2003a,2003b) for details.   
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>BCCG()</code> returns a <code>gamlss.family</code> object which can be used to fit a Cole and Green distribution in the <code>gamlss()</code> function.
+<code>dBCCG()</code> gives the density, <code>pBCCG()</code> gives the distribution
+function, <code>qBCCG()</code> gives the quantile function, and <code>rBCCG()</code>
+generates random deviates.
+</p>
+
+
+<h3>Warning </h3>
+
+<p>The <code>BCCGuntr</code> distribution may be unsuitable for some combinations of the parameters 
+(mainly for large <i>sigma</i>) 
+where the integrating constant is less than 0.99. A warning will be given if this is the case.
+The BCCG distribution is suitable for all combinations of the distributional parameters within
+their range [i.e. <i>mu&gt;0</i>, <i>sigma&gt;0</i>, <i>nu=(-Inf,+Inf)</i>]</p>
+
+
+<h3>Note</h3>
+
+<p><i>mu</i> is the median of the distribution <i>sigma</i> is approximately the coefficient of variation (for small values of <i>sigma</i>), 
+and <i>nu</i> controls the skewness.
+</p>
+<p>The <code>BCCG</code> distribution is suitable for all combinations of the parameters within their ranges 
+[i.e. <i>mu&gt;0, sigma&gt;0, and nu=(-Inf,+Inf)</i> ] 
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p> Mikis Stasinopoulos <a href="mailto:mikis.stasinopoulos@gamlss.org">mikis.stasinopoulos@gamlss.org</a>, Bob Rigby and Kalliope Akantziliotou</p>
+
+
+<h3>References</h3>
+
+ 
+<p>Cole,  T. J. and Green,  P. J. (1992) Smoothing reference centile curves: the LMS method and penalized likelihood, <em>Statist. Med.</em> <b>11</b>, 1305&ndash;1319
+</p>
+<p>Rigby, R. A. and Stasinopoulos, D. M. (2004). Smooth centile curves for skew and kurtotic data modelled using the Box-Cox Power
+Exponential distribution. <em>Statistics in Medicine</em>, <b>23</b>: 3053-3076.
+</p>
+<p>Rigby, R. A. and  Stasinopoulos D. M. (2005). Generalized additive models for location, scale and shape,(with discussion), 
+<em>Appl. Statist.</em>, <b>54</b>, part 3, pp 507-554.
+</p>
+<p>Rigby, R.A. Stasinopoulos, D.M. (2006).   Using the Box-Cox <em>t</em> distribution in GAMLSS to mode skewnees and  and kurtosis.
+to appear in <em>Statistical Modelling</em>.
+</p>
+<p>Stasinopoulos D. M., Rigby R.A. and Akantziliotou C. (2006) Instructions on how to use the GAMLSS package in R.
+Accompanying documentation in the current GAMLSS  help files, (see also  <a href="http://www.gamlss.org/">http://www.gamlss.org/</a>).
+</p>
+<p>Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location scale and shape (GAMLSS) in R.
+<em>Journal of Statistical Software</em>, Vol. <b>23</b>, Issue 7, Dec 2007, <a href="http://www.jstatsoft.org/v23/i07">http://www.jstatsoft.org/v23/i07</a>.
+</p>
+<p>Stasinopoulos D. M., Rigby R.A., Heller G., Voudouris V., and De Bastiani F., (2017)
+<em>Flexible Regression and Smoothing: Using GAMLSS in R</em>,  Chapman and Hall/CRC. 
+</p>
+
+
+<h3>See Also</h3>
+
+ <p><code><a href="gamlss.family.html">gamlss.family</a></code>, <code><a href="BCPE.html">BCPE</a></code>, <code><a href="BCt.html">BCT</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+BCCG()   # gives information about the default links for the Cole and Green distribution 
+# library(gamlss)
+#data(abdom)
+#h&lt;-gamlss(y~cs(x,df=3), sigma.formula=~cs(x,1), family=BCCG, data=abdom) 
+#plot(h)
+plot(function(x) dBCCG(x, mu=5,sigma=.5,nu=-1), 0.0, 20, 
+ main = "The BCCG  density mu=5,sigma=.5,nu=-1")
+plot(function(x) pBCCG(x, mu=5,sigma=.5,nu=-1), 0.0, 20, 
+ main = "The BCCG  cdf mu=5, sigma=.5, nu=-1")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>gamlss.dist</em> version 5.0-5 <a href="00Index.html">Index</a>]</div>
+</body></html>

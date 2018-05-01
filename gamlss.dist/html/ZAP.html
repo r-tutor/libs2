@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Zero adjusted poisson distribution for fitting a GAMLSS model</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for ZAP {gamlss.dist}"><tr><td>ZAP {gamlss.dist}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Zero adjusted poisson distribution for fitting a GAMLSS model</h2>
+
+<h3>Description</h3>
+
+<p>The function <code>ZAP</code> defines the zero adjusted Poisson distribution, a two parameter distribution, for a <code>gamlss.family</code> object to be 
+used in GAMLSS fitting  using the function <code>gamlss()</code>. The functions <code>dZAP</code>, <code>pZAP</code>, <code>qZAP</code> and <code>rZAP</code> define the 
+density, distribution function, quantile function 
+and random generation for the inflated poisson, <code>ZAP()</code>, distribution. 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ZAP(mu.link = "log", sigma.link = "logit")
+dZAP(x, mu = 5, sigma = 0.1, log = FALSE)
+pZAP(q, mu = 5, sigma = 0.1, lower.tail = TRUE, log.p = FALSE)
+qZAP(p, mu = 5, sigma = 0.1, lower.tail = TRUE, log.p = FALSE)
+rZAP(n, mu = 5, sigma = 0.1)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>mu.link</code></td>
+<td>
+<p>defines the <code>mu.link</code>, with &quot;log&quot; link as the default for the <code>mu</code> parameter</p>
+</td></tr>
+<tr valign="top"><td><code>sigma.link</code></td>
+<td>
+<p>defines the <code>sigma.link</code>, with &quot;logit&quot; link as the default for the sigma parameter which in this case is the probability at zero. 
+Other links are &quot;probit&quot; and &quot;cloglog&quot;'(complementary log-log)</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p> vector of (non-negative integer)</p>
+</td></tr>
+<tr valign="top"><td><code>mu</code></td>
+<td>
+<p>vector of positive means</p>
+</td></tr>
+<tr valign="top"><td><code>sigma</code></td>
+<td>
+<p>vector of probabilities at zero</p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>vector of probabilities</p>
+</td></tr>
+<tr valign="top"><td><code>q</code></td>
+<td>
+<p>vector of quantiles</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>number of random values to return</p>
+</td></tr>
+<tr valign="top"><td><code>log, log.p</code></td>
+<td>
+<p>logical; if TRUE, probabilities p are given as log(p)</p>
+</td></tr>
+<tr valign="top"><td><code>lower.tail</code></td>
+<td>
+<p>logical; if TRUE (default), probabilities are P[X &lt;= x],
+otherwise, P[X &gt; x]</p>
+</td></tr>  
+</table>
+
+
+<h3>Details</h3>
+
+<p>For the definition of the distribution see   Rigby and Stasinopoulos (2010) below.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The function <code>ZAP</code> returns a <code>gamlss.family</code> object which can be used to fit a zero inflated poisson distribution in the <code>gamlss()</code> function.  
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Mikis Stasinopoulos <a href="mailto:mikis.stasinopoulos@gamlss.org">mikis.stasinopoulos@gamlss.org</a>, Bob Rigby</p>
+
+
+<h3>References</h3>
+
+<p>Rigby, R. A. and  Stasinopoulos D. M. (2005). Generalized additive models for location, scale and shape,(with discussion), 
+<em>Appl. Statist.</em>, <b>54</b>, part 3, pp 507-554.
+</p>
+<p>Stasinopoulos D. M., Rigby R.A. and Akantziliotou C. (2006) Instructions on how to use the GAMLSS package in R.
+Accompanying documentation in the current GAMLSS  help files, (see also  <a href="http://www.gamlss.org/">http://www.gamlss.org/</a>).  
+</p>
+<p>Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location scale and shape (GAMLSS) in R.
+<em>Journal of Statistical Software</em>, Vol. <b>23</b>, Issue 7, Dec 2007, <a href="http://www.jstatsoft.org/v23/i07">http://www.jstatsoft.org/v23/i07</a>.
+</p>
+<p>Rigby, R. A.  and Stasinopoulos D. M. (2010) The gamlss.family distributions, (distributed with this package or see 
+<a href="http://www.gamlss.org/">http://www.gamlss.org/</a>) 
+</p>
+<p>Stasinopoulos D. M., Rigby R.A., Heller G., Voudouris V., and De Bastiani F., (2017)
+<em>Flexible Regression and Smoothing: Using GAMLSS in R</em>,  Chapman and Hall/CRC.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="gamlss.family.html">gamlss.family</a></code>, <code><a href="PO.html">PO</a></code>, <code><a href="ZIP.html">ZIP</a></code>, <code><a href="ZIP2.html">ZIP2</a></code>, <code><a href="LG.html">ZALG</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+ZAP()
+# creating data and plotting them 
+dat&lt;-rZAP(1000, mu=5, sigma=.1)
+r &lt;- barplot(table(dat), col='lightblue')
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>gamlss.dist</em> version 5.0-5 <a href="00Index.html">Index</a>]</div>
+</body></html>
