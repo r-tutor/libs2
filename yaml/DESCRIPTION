@@ -14,5 +14,5 @@ NeedsCompilation: yes
 Packaged: 2018-03-08 17:16:23 UTC; stephej1
 Repository: CRAN
 Date/Publication: 2018-03-08 22:39:53 UTC
-Built: R 3.4.3; x86_64-w64-mingw32; 2018-03-10 04:59:28 UTC; windows
+Built: R 3.5.0; x86_64-w64-mingw32; 2018-04-23 00:30:20 UTC; windows
 Archs: i386, x64
