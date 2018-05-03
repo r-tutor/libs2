@@ -39,12 +39,13 @@ desc_get                Get a field from a DESCRIPTION file
 desc_get_author         Query authors by role in Authors@R, in
                         DESCRIPTION
 desc_get_authors        Query all authors in Authors@R, in DESCRIPTION
+desc_get_built          Query the built field in DESCRIPTION
 desc_get_collate        Query the Collate field in DESCRIPTION
 desc_get_deps           List all package dependencies from a
                         DESCRIPTION file
+desc_get_field          Get a single field from a DESCRIPTION file,
+                        fail if not found
 desc_get_maintainer     Query the package maintainer in DESCRIPTION
-desc_get_or_fail        Get fields from a DESCRIPTION file, fail if not
-                        found
 desc_get_remotes        List the locations in the Remotes field in
                         DESCRIPTION
 desc_get_urls           Query the URL field in DESCRIPTION

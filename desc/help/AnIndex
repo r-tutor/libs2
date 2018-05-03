@@ -28,10 +28,12 @@ desc_fields	desc_fields
 desc_get	desc_get
 desc_get_author	desc_get_author
 desc_get_authors	desc_get_authors
+desc_get_built	desc_get_built
 desc_get_collate	desc_get_collate
 desc_get_deps	desc_get_deps
+desc_get_field	desc_get_field
 desc_get_maintainer	desc_get_maintainer
-desc_get_or_fail	desc_get_or_fail
+desc_get_or_fail	desc_get_field
 desc_get_remotes	desc_get_remotes
 desc_get_urls	desc_get_urls
 desc_get_version	desc_get_version
