@@ -1,7 +1,7 @@
 Package: httpuv
 Type: Package
 Title: HTTP and WebSocket Server Library
-Version: 1.4.1
+Version: 1.4.2
 Author: Joe Cheng, Hector Corrada Bravo [ctb], Jeroen Ooms [ctb],
     Winston Chang [ctb]
 Copyright: RStudio, Inc.; Joyent, Inc.; Nginx Inc.; Igor Sysoev; Niels
@@ -23,8 +23,8 @@ SystemRequirements: GNU make
 RoxygenNote: 6.0.1.9000
 Suggests: testthat, callr
 NeedsCompilation: yes
-Packaged: 2018-04-20 22:15:38 UTC; winston
+Packaged: 2018-05-03 15:29:00 UTC; winston
 Repository: CRAN
-Date/Publication: 2018-04-21 05:48:04 UTC
-Built: R 3.5.0; x86_64-w64-mingw32; 2018-04-22 23:41:34 UTC; windows
+Date/Publication: 2018-05-03 22:43:06 UTC
+Built: R 3.4.4; x86_64-w64-mingw32; 2018-05-05 04:19:40 UTC; windows
 Archs: i386, x64

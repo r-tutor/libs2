@@ -25,7 +25,8 @@ set(dend, what = c("labels", "labels_colors",
   "nodes_pch", "nodes_cex", "nodes_col", "hang_leaves", "rank_branches",
   "branches_k_color", "branches_k_lty", "branches_col", "branches_lwd",
   "branches_lty", "by_labels_branches_col", "by_labels_branches_lwd",
-  "by_labels_branches_lty", "highlight_branches_col", "highlight_branches_lwd",
+  "by_labels_branches_lty", "by_lists_branches_col", "by_lists_branches_lwd",
+  "by_lists_branches_lty", "highlight_branches_col", "highlight_branches_lwd",
   "clear_branches", "clear_leaves"), value, order_value = FALSE, ...)
 
 ## S3 method for class 'dendlist'
@@ -80,8 +81,9 @@ If missing - the change will be performed on all of dends in the dendlist.</p>
 might wish to perform on a dendrogram before plotting.
 </p>
 <p>The options of by_labels_branches_col, by_labels_branches_lwd, by_labels_branches_lty
-have extra parameters: type, attr, TF_value. You can read more about them here:
-<a href="branches_attr_by_labels.html">branches_attr_by_labels</a>
+have extra parameters: type, attr, TF_value, and by_lists_branches_col, by_lists_branches_lwd,
+by_lists_branches_lty have extra parameters: attr, TF_value. You can read more about them here:
+<a href="branches_attr_by_labels.html">branches_attr_by_labels</a> and <a href="branches_attr_by_lists.html">branches_attr_by_lists</a>
 </p>
 <p>The &quot;what&quot; parameter&quot; can accept the following options:
 </p>
@@ -144,6 +146,15 @@ have extra parameters: type, attr, TF_value. You can read more about them here:
 <li><p>by_labels_branches_lty - set the line type of branches with specific labels (<a href="branches_attr_by_labels.html">branches_attr_by_labels</a>) 
 </p>
 </li>
+<li><p>by_lists_branches_col - set the color of branches from the root of the tree down to (possibly inner) nodes with specified members (<a href="branches_attr_by_lists.html">branches_attr_by_lists</a>) 
+</p>
+</li>
+<li><p>by_lists_branches_lwd - set the line width of branches from the root of the tree down to (possibly inner) nodes with specified members (<a href="branches_attr_by_lists.html">branches_attr_by_lists</a>) 
+</p>
+</li>
+<li><p>by_lists_branches_lty - set the line type of branches from the root of the tree down to (possibly inner) nodes with specified members (<a href="branches_attr_by_lists.html">branches_attr_by_lists</a>) 
+</p>
+</li>
 <li><p>highlight_branches_col - highlight branches color based on branches' heights (<a href="highlight_branches.html">highlight_branches_col</a>) 
 </p>
 </li>
@@ -173,7 +184,7 @@ the parameters of it
 <a href="assign_values_to_leaves_nodePar.html">assign_values_to_leaves_nodePar</a>,
 <a href="assign_values_to_branches_edgePar.html">assign_values_to_branches_edgePar</a>,
 <a href="remove_branches_edgePar.html">remove_branches_edgePar</a>, <a href="remove_leaves_nodePar.html">remove_leaves_nodePar</a>,
-<a href="noded_with_condition.html">noded_with_condition</a>, <a href="branches_attr_by_labels.html">branches_attr_by_labels</a>,
+<a href="noded_with_condition.html">noded_with_condition</a>, <a href="branches_attr_by_labels.html">branches_attr_by_labels</a>, <a href="branches_attr_by_lists.html">branches_attr_by_lists</a>,
 <a href="../../stats/html/dendrogram.html">dendrogram</a>
 </p>
 
@@ -276,7 +287,15 @@ dend %&gt;% set("labels_colors", cutree(dend, k = 3)) %&gt;% plot
 dend %&gt;% set("labels_colors", cutree(dend, k = 3), order_value = TRUE) %&gt;% plot
 
 
+#----------------------------
+# Example for: by_lists_branches_col, by_lists_branches_lwd, by_lists_branches_lty
 
+L &lt;- list(c("109", "123", "126", "145"), "29", c("59", "67", "97"))
+dend %&gt;% 
+   set("by_lists_branches_col", L, TF_value = "blue") %&gt;%
+   set("by_lists_branches_lwd", L, TF_value = 4) %&gt;%
+   set("by_lists_branches_lty", L, TF_value = 3) %&gt;%
+   plot
 
 
 #----------------------------
@@ -323,5 +342,5 @@ heatmap.2(x, Rowv = Rowv_dend, Colv = Colv_dend)
 ## End(Not run)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>dendextend</em> version 1.7.0 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>dendextend</em> version 1.8.0 <a href="00Index.html">Index</a>]</div>
 </body></html>
