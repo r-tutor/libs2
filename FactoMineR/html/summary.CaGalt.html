@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Printing summaries of CaGalt objects</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for summary.CaGalt {FactoMineR}"><tr><td>summary.CaGalt {FactoMineR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Printing summaries of CaGalt objects</h2>
+
+<h3>Description</h3>
+
+<p>Printing summaries of Correspondence Analysis on Generalised Aggregated Lexical Table (CaGalt) objects
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'CaGalt'
+summary(object, nb.dec = 3, nbelements=10, nbind = nbelements, 
+  ncp = 3, align.names=TRUE, file="", ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>an object of class CaGalt</p>
+</td></tr>
+<tr valign="top"><td><code>nb.dec</code></td>
+<td>
+<p>number of printed decimals</p>
+</td></tr>
+<tr valign="top"><td><code>nbelements</code></td>
+<td>
+<p>number of written elements (variables, categories, frequencies); use nbelements = Inf if you want to have all the elements</p>
+</td></tr>
+<tr valign="top"><td><code>nbind</code></td>
+<td>
+<p>number of written elements; use nbind = Inf to have the results for all the individuals and nbind = 0 if you do not want the results for individuals</p>
+</td></tr>
+<tr valign="top"><td><code>ncp</code></td>
+<td>
+<p>number of printed dimensions</p>
+</td></tr>
+<tr valign="top"><td><code>align.names</code></td>
+<td>
+<p>boolean, if TRUE the names of the objects are written using the same number of characters</p>
+</td></tr>
+<tr valign="top"><td><code>file</code></td>
+<td>
+<p>a connection, or a character string naming the file to print to</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>further arguments passed to or from other methods, such as cex, cex.main, ...</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Belchin Kostov <a href="mailto:badriyan@clinic.ub.es">badriyan@clinic.ub.es</a>, Monica Becue-Bertaut, Francois Husson</p>
+
+
+<h3>See Also</h3>
+
+ <p><code><a href="CaGalt.html">CaGalt</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+## Not run: 
+data(health)
+res.cagalt&lt;-CaGalt(Y=health[,1:115],X=health[,116:118],type="n")
+summary(res.cagalt)
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FactoMineR</em> version 1.41 <a href="00Index.html">Index</a>]</div>
+</body></html>

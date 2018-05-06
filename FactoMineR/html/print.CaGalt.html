@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Print the Correspondence Analysis on Generalised Aggregated...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for print.CaGalt {FactoMineR}"><tr><td>print.CaGalt {FactoMineR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Print the Correspondence Analysis on Generalised Aggregated Lexical Table (CaGalt) results</h2>
+
+<h3>Description</h3>
+
+<p>Print the Correspondence Analysis on Generalised Aggregated Lexical Table (CaGalt) results
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'CaGalt'
+## S3 method for class 'CaGalt'
+print(x, file = NULL, sep = ";", ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>an object of class CaGalt</p>
+</td></tr>
+<tr valign="top"><td><code>file</code></td>
+<td>
+<p>A connection, or a character string naming the file to print to. If NULL (the default), the results are not printed in a file</p>
+</td></tr>
+<tr valign="top"><td><code>sep</code></td>
+<td>
+<p>character string to insert between the objects to print (if the argument file is not NULL)</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>further arguments passed to or from other methods</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Belchin Kostov <a href="mailto:badriyan@clinic.ub.es">badriyan@clinic.ub.es</a>, Monica Becue-Bertaut, Francois Husson</p>
+
+
+<h3>See Also</h3>
+
+ <p><code><a href="CaGalt.html">CaGalt</a></code>, <code><a href="write.infile.html">write.infile</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+## Not run: 
+data(health)
+res.cagalt&lt;-CaGalt(Y=health[,1:115],X=health[,116:118],type="n")
+print(res.cagalt)
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FactoMineR</em> version 1.41 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Generalised Procrustes Analysis</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for GPA {FactoMineR}"><tr><td>GPA {FactoMineR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Generalised Procrustes Analysis</h2>
+
+<h3>Description</h3>
+
+<p>Performs Generalised Procrustes Analysis (GPA) that takes into account missing values.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+GPA(df, tolerance=10^-10, nbiteration=200, scale=TRUE, 
+    group, name.group = NULL, graph = TRUE, axes = c(1,2))
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>df</code></td>
+<td>
+<p>a data frame with <em>n</em> rows (individuals) and <em>p</em> columns (quantitative varaibles)</p>
+</td></tr>
+<tr valign="top"><td><code>tolerance</code></td>
+<td>
+<p>a threshold with respect to which the algorithm stops, i.e. when the difference between 
+the GPA loss function at step <em>n</em> and <em>n+1</em> is less than <code>tolerance</code></p>
+</td></tr>
+<tr valign="top"><td><code>nbiteration</code></td>
+<td>
+<p>the maximum number of iterations until the algorithm stops</p>
+</td></tr>
+<tr valign="top"><td><code>scale</code></td>
+<td>
+<p>a boolean, if TRUE (which is the default value) scaling is required</p>
+</td></tr>
+<tr valign="top"><td><code>group</code></td>
+<td>
+<p>a vector indicating the number of variables in each group</p>
+</td></tr>
+<tr valign="top"><td><code>name.group</code></td>
+<td>
+<p>a vector indicating the name of the groups (the groups are successively named 
+group.1, group.2 and so on, by default)</p>
+</td></tr>
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>boolean, if TRUE a graph is displayed</p>
+</td></tr>
+<tr valign="top"><td><code>axes</code></td>
+<td>
+<p>a length 2 vector specifying the components to plot</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Performs a Generalised Procrustes Analysis (GPA) that takes into account missing values:
+some data frames of <code>df</code> may have non described or non evaluated rows, i.e. rows with missing 
+values only.<br />
+The algorithm used here is the one developed by Commandeur.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list containing the following components:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>RV</code></td>
+<td>
+<p>a matrix of RV coefficients between partial configurations</p>
+</td></tr>
+<tr valign="top"><td><code>RVs</code></td>
+<td>
+<p>a matrix of standardized RV coefficients between partial configurations</p>
+</td></tr>
+<tr valign="top"><td><code>simi</code></td>
+<td>
+<p>a matrix of Procrustes similarity indexes between partial configurations</p>
+</td></tr>
+<tr valign="top"><td><code>scaling</code></td>
+<td>
+<p>a vector of isotropic scaling factors</p>
+</td></tr>
+<tr valign="top"><td><code>dep</code></td>
+<td>
+<p>an array of initial partial configurations </p>
+</td></tr>
+<tr valign="top"><td><code>consensus</code></td>
+<td>
+<p>a matrix of consensus configuration</p>
+</td></tr>
+<tr valign="top"><td><code>Xfin</code></td>
+<td>
+<p>an array of partial configurations after transformations</p>
+</td></tr>
+<tr valign="top"><td><code>correlations</code></td>
+<td>
+<p>correlation matrix between initial partial configurations and consensus dimensions</p>
+</td></tr>
+<tr valign="top"><td><code>PANOVA</code></td>
+<td>
+<p>a list of &quot;Procrustes Analysis of Variance&quot; tables, per assesor (config), per product(objet), per dimension (dimension)</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Elisabeth Morand</p>
+
+
+<h3>References</h3>
+
+<p>Commandeur, J.J.F (1991) <em>Matching configurations</em>.DSWO press, Leiden University.<br />
+Dijksterhuis, G. &amp; Punter, P. (1990) Interpreting generalized procrustes analysis &quot;Analysis of Variance&quot; tables, 
+<em>Food Quality and Preference</em>, <b>2</b>, 255&ndash;265<br />
+Gower, J.C (1975) Generalized Procrustes analysis, <em>Psychometrika</em>, <b>40</b>, 33&ndash;50 <br />
+Kazi-Aoual, F., Hitier, S., Sabatier, R., Lebreton, J.-D., (1995) Refined approximations to permutations tests 
+for multivariate inference. Computational Statistics and Data Analysis, <b>20</b>, 643&ndash;656 <br />
+Qannari, E.M., MacFie, H.J.H, Courcoux, P. (1999) Performance indices
+and isotropic scaling factors in sensory profiling, <em>Food Quality and Preference</em>, <b>10</b>, 17&ndash;21
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+data(wine)
+res.gpa &lt;- GPA(wine[,-(1:2)], group=c(5,3,10,9,2),
+    name.group=c("olf","vis","olfag","gust","ens"))
+
+### If you want to construct the partial points for some individuals only
+plotGPApartial (res.gpa)
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FactoMineR</em> version 1.41 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Draw the Multiple Correspondence Analysis (MCA) graphs</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for plot.MCA {FactoMineR}"><tr><td>plot.MCA {FactoMineR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Draw the Multiple Correspondence Analysis (MCA) graphs</h2>
+
+<h3>Description</h3>
+
+<p>Draw the Multiple Correspondence Analysis (MCA) graphs.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'MCA'
+plot(x, axes = c(1, 2), choix=c("ind","var","quanti.sup"),
+    xlim = NULL, ylim = NULL, 
+    invisible = c("none","ind","var","ind.sup","quali.sup","quanti.sup"),
+    col.ind = "blue", col.var = "red", col.quali.sup = "darkgreen",
+    col.ind.sup = "darkblue", col.quanti.sup = "blue",
+    label = c("all","none","ind","var","ind.sup","quali.sup","quanti.sup"),
+    title = NULL, habillage = "none", 
+    palette = NULL, autoLab = c("auto","yes","no"), new.plot = FALSE, 
+    select = NULL, selectMod = NULL, unselect = 0.7, 
+	shadowtext = FALSE, legend = list(bty = "y", x = "topleft"), ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>an object of class MCA</p>
+</td></tr>
+<tr valign="top"><td><code>axes</code></td>
+<td>
+<p>a length 2 vector specifying the components to plot</p>
+</td></tr>
+<tr valign="top"><td><code>choix</code></td>
+<td>
+<p>the graph to plot (&quot;ind&quot; for the individuals and the categories, &quot;var&quot; for the variables, &quot;quanti.sup&quot; for the supplementary quantitative variables)</p>
+</td></tr>
+<tr valign="top"><td><code>xlim</code></td>
+<td>
+<p>range for the plotted 'x' values, defaulting to the range of the finite values of 'x'</p>
+</td></tr>
+<tr valign="top"><td><code>ylim</code></td>
+<td>
+<p>range for the plotted 'y' values, defaulting to the range of the finite values of 'y'</p>
+</td></tr>
+<tr valign="top"><td><code>invisible</code></td>
+<td>
+<p>string indicating if some points should not be drawn (&quot;ind&quot;, &quot;var&quot;, &quot;ind.sup&quot;, &quot;quali.sup&quot;, &quot;quanti.sup&quot;)</p>
+</td></tr>
+<tr valign="top"><td><code>col.ind</code></td>
+<td>
+<p>a color for the individuals, if color =&quot;none&quot; the label is not written</p>
+</td></tr>
+<tr valign="top"><td><code>col.var</code></td>
+<td>
+<p>a color for the categories of categorical variables, if color =&quot;none&quot; the label is not written</p>
+</td></tr>
+<tr valign="top"><td><code>col.quali.sup</code></td>
+<td>
+<p>a color for the categorical supplementary variables, if color =&quot;none&quot; the label is not written</p>
+</td></tr>
+<tr valign="top"><td><code>col.ind.sup</code></td>
+<td>
+<p>a color for the supplementary individuals only if there is not habillage, if color =&quot;none&quot; the label is not written</p>
+</td></tr>
+<tr valign="top"><td><code>col.quanti.sup</code></td>
+<td>
+<p>a color for the supplementary quantitative variables, if color =&quot;none&quot; the label is not written</p>
+</td></tr>
+<tr valign="top"><td><code>label</code></td>
+<td>
+<p>print the labels of the points; &quot;all&quot; print all the labels; may be a vector with &quot;ind&quot; (for the individuals),&quot;ind.sup&quot; (for the supplementary individuals),&quot;var&quot; (for the active categories), &quot;quali.sup&quot; &quot;var&quot; (for the supplementary categories)</p>
+</td></tr>
+<tr valign="top"><td><code>title</code></td>
+<td>
+<p>string corresponding to the title of the graph you draw (by default NULL and a title is chosen)</p>
+</td></tr>
+<tr valign="top"><td><code>habillage</code></td>
+<td>
+<p>string corresponding to the color which are used. If &quot;none&quot;, one color is used for the individual, another one for the categorical variables;
+if &quot;quali&quot;, one color is used for each categorical variables; else if it is the position of a categorical variable, it colors 
+according to the different categories of this variable</p>
+</td></tr>
+<tr valign="top"><td><code>palette</code></td>
+<td>
+<p>the color palette used to draw the points. By default colors are chosen. If you want to define the colors : palette=palette(c(&quot;black&quot;,&quot;red&quot;,&quot;blue&quot;)); or you can use: palette=palette(rainbow(30)), or in black and white for example: palette=palette(gray(seq(0,.9,len=25)))</p>
+</td></tr>
+<tr valign="top"><td><code>autoLab</code></td>
+<td>
+<p>if <code>autoLab="auto"</code>, <code>autoLab</code> is equal to &quot;yes&quot; if there are less than 50 elements and &quot;no&quot; otherwise; if &quot;yes&quot;, the labels of the drawn elements are placed in a &quot;good&quot; way (can be time-consuming if many elements), and if &quot;no&quot; the elements are placed quickly but may overlap</p>
+</td></tr>
+<tr valign="top"><td><code>new.plot</code></td>
+<td>
+<p>boolean, if TRUE, a new graphical device is created</p>
+</td></tr>
+<tr valign="top"><td><code>select</code></td>
+<td>
+<p>a selection of the elements that are drawn; see the details section</p>
+</td></tr>
+<tr valign="top"><td><code>selectMod</code></td>
+<td>
+<p>a selection of the categories that are drawn; see the details section</p>
+</td></tr>
+<tr valign="top"><td><code>unselect</code></td>
+<td>
+<p>may be either a value between 0 and 1 that gives the transparency of the unselected objects (if <code>unselect=1</code> the transparceny is total and the elements are not drawn, if <code>unselect=0</code> the elements are drawn as usual but without any label) or may be a color (for example <code>unselect="grey60"</code>)</p>
+</td></tr>
+<tr valign="top"><td><code>shadowtext</code></td>
+<td>
+<p>boolean; if true put a shadow on the labels (rectangles are written under the labels which may lead to difficulties to modify the graph with another program)</p>
+</td></tr>
+<tr valign="top"><td><code>legend</code></td>
+<td>
+<p>a list of arguments that defines the legend if needed (when individuals are drawn according to a variable); see the arguments of the function <code>legend</code></p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>further arguments passed to or from other methods, such as cex, cex.main, ...</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The argument <code>autoLab = "yes"</code> is time-consuming if there are many labels that overlap. In this case, you can modify the size of the characters in order to have less overlapping, using for example cex=0.7.<br />
+The <code>select</code> argument can be used in order to select a part of the elements (individuals if you draw the graph of individuals, or variables if you draw the graph of variabless) that are drawn.
+For example, you can use:<br />
+<code>select = 1:5</code> and then the elements 1:5 are drawn.<br /> 
+<code>select = c("name1","name5")</code> and then the elements that have the names name1 and name5 are drawn.<br /> 
+<code>select = "coord 10"</code> and then the 10 elements that have the highest (squared) coordinates on the 2 chosen dimensions are drawn.<br /> 
+<code>select = "contrib 10"</code> and then the 10 elements that have the highest contribution on the 2 dimensions of your plot are drawn.<br /> 
+<code>select = "cos2 5"</code> and then the 5 elements that have the highest cos2 on the 2 dimensions of your plot are drawn.<br /> 
+<code>select = "dist 8"</code> and then the 8 elements that have the highest distance to the center of gravity are drawn.<br /> 
+The <code>selectMod</code> argument can be used in order to select the categories that are drawn.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Returns the individuals factor map and the variables factor map.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Francois Husson <a href="mailto:husson@agrocampus-ouest.fr">husson@agrocampus-ouest.fr</a>, Jeremy Mazet</p>
+
+
+<h3>See Also</h3>
+
+ <p><code><a href="MCA.html">MCA</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data (poison)
+res.mca = MCA (poison, quali.sup = 3:4, quanti.sup = 1:2, graph=FALSE)
+plot(res.mca,invisible=c("var","quali.sup"))
+plot(res.mca,invisible="ind")
+plot(res.mca,choix="var")
+plot(res.mca,invisible=c("ind"),autoLab="yes", selectMod="cos2 10")
+plot(res.mca,autoLab="yes", selectMod="cos2 5", select="cos2 5")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FactoMineR</em> version 1.41 <a href="00Index.html">Index</a>]</div>
+</body></html>

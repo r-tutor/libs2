@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: senso</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for senso {FactoMineR}"><tr><td>senso {FactoMineR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>senso</h2>
+
+<h3>Description</h3>
+
+<p>Dataset to illustrate one-way and Two-way analysis of variance
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>data(senso)</pre>
+
+
+<h3>Format</h3>
+
+<p>Dataset with 45 rows and 3 columns:
+Score, Product and Day</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Example of 2-way analysis of variance
+data(senso)
+res &lt;- AovSum (Score~ Product + Day, data=senso)
+res
+
+## Example of 2-way analysis of variance with interaction
+data(senso)
+res2 &lt;- AovSum (Score~ Product + Day + Product : Day, data=senso)
+res2
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FactoMineR</em> version 1.41 <a href="00Index.html">Index</a>]</div>
+</body></html>

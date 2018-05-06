@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Plots for Hierarchical Classification on Principle Components...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for plot.HCPC {FactoMineR}"><tr><td>plot.HCPC {FactoMineR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Plots for Hierarchical Classification on Principle Components (HCPC) results</h2>
+
+<h3>Description</h3>
+
+<p>Plots graphs from a HCPC result: tree, barplot of inertia gains and
+first factor map with or without the tree, in 2 or 3 dimensions.</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'HCPC'
+plot(x, axes=c(1,2), choice="3D.map", rect=TRUE, 
+  draw.tree=TRUE, ind.names=TRUE, t.level="all", title=NULL,
+  new.plot=FALSE, max.plot=15, tree.barplot=TRUE,
+  centers.plot=FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A HCPC object, see <code><a href="HCPC.html">HCPC</a></code> for details.</p>
+</td></tr>
+<tr valign="top"><td><code>axes</code></td>
+<td>
+<p>a two integers vector.Defines the axes of the factor map
+to plot.</p>
+</td></tr>  
+<tr valign="top"><td><code>choice</code></td>
+<td>
+<p>A string. &quot;tree&quot; plots the tree. &quot;bar&quot; plots bars of
+inertia gains. &quot;map&quot; plots a factor map, individuals colored
+by cluster. &quot;3D.map&quot; plots the same factor map, individuals colored by cluster,
+the tree above.</p>
+</td></tr>
+<tr valign="top"><td><code>rect</code></td>
+<td>
+<p>a boolean. If TRUE, rectangles are drawn around clusters
+if choice =&quot;tree&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>tree.barplot</code></td>
+<td>
+<p>a boolean. If TRUE, the barplot of intra inertia
+losses is added on the tree graph.</p>
+</td></tr>
+<tr valign="top"><td><code>draw.tree</code></td>
+<td>
+<p>A boolean. If TRUE, the tree is projected on the
+factor map if choice =&quot;map&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>ind.names</code></td>
+<td>
+<p>A boolean. If TRUE, the individuals names are added
+on the factor map when choice=&quot;3D.map&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>t.level</code></td>
+<td>
+<p>Either a positive integer or a string. A positive
+integer indicates the starting level to plot the tree on the map when
+draw.tree=TRUE. If &quot;all&quot;, the whole tree is ploted. If &quot;centers&quot;, it
+draws the tree starting t the centers of the clusters.</p>
+</td></tr>
+<tr valign="top"><td><code>title</code></td>
+<td>
+<p>a string. Title of the graph. NULL by default and a title is automatically defined</p>
+</td></tr>
+<tr valign="top"><td><code>centers.plot</code></td>
+<td>
+<p>a boolean. If TRUE, the centers of clusters are
+drawn on the 3D factor maps.</p>
+</td></tr>
+<tr valign="top"><td><code>new.plot</code></td>
+<td>
+<p>a boolean. If TRUE, the plot is done in a new window.</p>
+</td></tr>
+<tr valign="top"><td><code>max.plot</code></td>
+<td>
+<p>The max for the bar plot</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Other arguments from other methods.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Returns the chosen plot.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Guillaume Le Ray, Quentin Molto, Francois Husson <a href="mailto:husson@agrocampus-ouest.fr">husson@agrocampus-ouest.fr</a></p>
+
+
+<h3>See Also</h3>
+
+ <p><code><a href="HCPC.html">HCPC</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(iris)
+# Clustering, auto nb of clusters:
+res.hcpc=HCPC(iris[1:4], nb.clust=3)
+# 3D graph from a different point of view:
+plot(res.hcpc, choice="3D.map", angle=60)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FactoMineR</em> version 1.41 <a href="00Index.html">Index</a>]</div>
+</body></html>

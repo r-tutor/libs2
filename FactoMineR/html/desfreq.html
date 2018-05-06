@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Description of frequencies</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for descfreq {FactoMineR}"><tr><td>descfreq {FactoMineR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Description of frequencies</h2>
+
+<h3>Description</h3>
+
+<p>Description of the rows of a contingency table or of groups of rows of a contingency table
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+descfreq(donnee, by.quali = NULL, proba = 0.05)</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>donnee</code></td>
+<td>
+<p>a data frame corresponding to a contingency table (quantitative data)</p>
+</td></tr>
+<tr valign="top"><td><code>by.quali</code></td>
+<td>
+<p>a factor used to merge the data from different rows of the contingency table; by default NULL and each row is characterized</p>
+</td></tr>
+<tr valign="top"><td><code>proba</code></td>
+<td>
+<p>the significance threshold considered to characterized the category (by default 0.05)</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Returns a list with the characterization of each rows or each group of the <code>by.quali</code>. A test corresponding to the hypergeometric distribution is performed and the probability to observe a more extreme value than the one observed is calculated. For each row (or category), each of the columns characterising the row are sorted in ascending order of p-value.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Francois Husson <a href="mailto:Francois.Husson@agrocampus-ouest.fr">Francois.Husson@agrocampus-ouest.fr</a></p>
+
+
+<h3>References</h3>
+
+<p>Lebart, L., Morineau, A. and Piron, M. (1995) Statistique exploratoire multidimensionnelle, <em>Dunod</em>.<br />
+</p>
+
+
+<h3>See Also</h3>
+
+ <p><code><a href="catdes.html">catdes</a></code>, <code><a href="condes.html">condes</a></code>, <code><a href="textual.html">textual</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(children)
+descfreq(children[1:14,1:5])    ## desc of rows
+descfreq(t(children[1:14,1:5])) ## desc of columns
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FactoMineR</em> version 1.41 <a href="00Index.html">Index</a>]</div>
+</body></html>

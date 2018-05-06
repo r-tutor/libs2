@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Draw the Correspondence Analysis on Generalised Aggregated...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for plot.CaGalt {FactoMineR}"><tr><td>plot.CaGalt {FactoMineR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Draw the Correspondence Analysis on Generalised Aggregated Lexical Table (CaGalt) graphs</h2>
+
+<h3>Description</h3>
+
+<p>Plot the graphs for a Correspondence Analysis on Generalised Aggregated Lexical Table (CaGalt). 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'CaGalt'
+plot(x, axes = c(1, 2), choix = c("ind", "freq", "quali.var", "quanti.var"), 
+  conf.ellip = FALSE, contr.ellipse = 3, xlim = NULL, ylim = NULL, col.ind = "black", 
+  col.freq = "darkred", col.quali = "blue", col.quanti = "blue", label = TRUE, 
+  lim.cos2.var = 0, title = NULL, palette = NULL, 
+  autoLab = c("auto", "yes", "no"), new.plot = FALSE, select = NULL, 
+  unselect = 0.7, shadowtext = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>an object of class CaGalt</p>
+</td></tr>
+<tr valign="top"><td><code>axes</code></td>
+<td>
+<p>a length 2 vector specifying the components to plot</p>
+</td></tr>
+<tr valign="top"><td><code>choix</code></td>
+<td>
+<p>the graph to plot (&quot;ind&quot; for the individuals, &quot;freq&quot; for the frequencies, &quot;quali.var&quot; for the categorical variables, &quot;quanti.var&quot; for the quantitative variables)</p>
+</td></tr>
+<tr valign="top"><td><code>conf.ellip</code></td>
+<td>
+<p>boolean (FALSE by default), if TRUE, draw ellipses around the frequencies and the variables</p>
+</td></tr>
+<tr valign="top"><td><code>contr.ellipse</code></td>
+<td>
+<p>the confidence ellipses were drawn for the frequencies with a contribution higher than X times of mean contribution on the 2 dimensions of your plot (by default 3)</p>
+</td></tr>
+<tr valign="top"><td><code>xlim</code></td>
+<td>
+<p>range for the plotted 'x' values, defaulting to the range of the finite values of 'x'</p>
+</td></tr>
+<tr valign="top"><td><code>ylim</code></td>
+<td>
+<p>range for the plotted 'y' values, defaulting to the range of the finite values of 'y'</p>
+</td></tr>
+<tr valign="top"><td><code>col.ind</code></td>
+<td>
+<p>a color for the individuals (by default &quot;black&quot;)</p>
+</td></tr>
+<tr valign="top"><td><code>col.freq</code></td>
+<td>
+<p>a color for the frequencies (by default &quot;darkred&quot;)</p>
+</td></tr>
+<tr valign="top"><td><code>col.quali</code></td>
+<td>
+<p>a color for the categories of categorical variables (by default &quot;blue&quot;)</p>
+</td></tr>
+<tr valign="top"><td><code>col.quanti</code></td>
+<td>
+<p>a color for the quantitative variables (by default &quot;blue&quot;)</p>
+</td></tr>
+<tr valign="top"><td><code>label</code></td>
+<td>
+<p>the labels are drawn (by default TRUE)</p>
+</td></tr>
+<tr valign="top"><td><code>lim.cos2.var</code></td>
+<td>
+<p>value of the square cosinus under the variables are not drawn</p>
+</td></tr>
+<tr valign="top"><td><code>title</code></td>
+<td>
+<p>string corresponding to the title of the graph you draw (by default NULL and a title is chosen)</p>
+</td></tr>
+<tr valign="top"><td><code>palette</code></td>
+<td>
+<p>the color palette used to draw the points. By default colors are chosen. If you want to define the colors : palette=palette(c(&quot;black&quot;,&quot;red&quot;,&quot;blue&quot;)); or you can use: palette=palette(rainbow(30)), or in black and white for example: palette=palette(gray(seq(0,.9,len=25)))</p>
+</td></tr>
+<tr valign="top"><td><code>autoLab</code></td>
+<td>
+<p>if autoLab=&quot;auto&quot;, autoLab is equal to &quot;yes&quot; if there are less than 50 elements and &quot;no&quot; otherwise; if &quot;yes&quot;, the labels of the drawn elements are placed in a &quot;good&quot; way (can be time-consuming if many elements), and if &quot;no&quot; the elements are placed quickly but may overlap</p>
+</td></tr>
+<tr valign="top"><td><code>new.plot</code></td>
+<td>
+<p>boolean, if TRUE, a new graphical device is created</p>
+</td></tr>
+<tr valign="top"><td><code>select</code></td>
+<td>
+<p>a selection of the elements that are drawn; see the details section</p>
+</td></tr>
+<tr valign="top"><td><code>unselect</code></td>
+<td>
+<p>may be either a value between 0 and 1 that gives the transparency of the unselected objects (if unselect=1 the transparency is total and the elements are not drawn, if unselect=0 the elements are drawn as usual but without any label) or may be a color (for example unselect=&quot;grey60&quot;)</p>
+</td></tr>
+<tr valign="top"><td><code>shadowtext</code></td>
+<td>
+<p>boolean; if true put a shadow on the labels (rectangles are written under the labels which may lead to difficulties to modify the graph with another program)</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>further arguments passed to or from other methods, such as cex, cex.main, ...</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The argument autoLab = &quot;yes&quot; is time-consuming if there are many labels that overlap. In this case, you can modify the size of the characters in order to have less overlapping, using for example cex=0.7.
+The select argument can be used in order to select a part of the elements (individuals if you draw the graph of individuals, or variables if you draw the graph of variabless) that are drawn. For example, you can use:
+select = 1:5 and then the elements 1:5 are drawn.
+select = c(&quot;name1&quot;,&quot;name5&quot;) and then the elements that have the names name1 and name5 are drawn.
+select = &quot;coord 10&quot; and then the 10 elements that have the highest (squared) coordinates on the 2 chosen dimensions are drawn.
+select = &quot;contrib 10&quot; and then the 10 elements that have the highest contribution on the 2 dimensions of your plot are drawn (available only when frequencies are drawn).
+select = &quot;cos2 5&quot; and then the 5 elements that have the highest cos2 on the 2 dimensions of your plot are drawn.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Returns the individuals, the frequencies and the variables factor map.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Belchin Kostov <a href="mailto:badriyan@clinic.ub.es">badriyan@clinic.ub.es</a>, Monica Becue-Bertaut, Francois Husson</p>
+
+
+<h3>See Also</h3>
+
+ <p><code><a href="CaGalt.html">CaGalt</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+## Not run: 
+data(health)
+res.cagalt&lt;-CaGalt(Y=health[,1:115],X=health[,116:118],type="n")
+plot(res.cagalt,choix="quali.var",conf.ellip=TRUE,axes=c(1,4))
+
+## Selection of some individuals,categories and frequencies
+plot(res.cagalt,choix="freq",col.freq="darkgreen",cex=1.5,select="contrib 10") 
+plot(res.cagalt,choix="ind",select="coord 10") 
+plot(res.cagalt,choix="quali.var",select="cos2 0.5") 
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FactoMineR</em> version 1.41 <a href="00Index.html">Index</a>]</div>
+</body></html>

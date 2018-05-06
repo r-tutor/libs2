@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Dimension description</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for dimdesc {FactoMineR}"><tr><td>dimdesc {FactoMineR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Dimension description</h2>
+
+<h3>Description</h3>
+
+<p>This function is designed to point out the variables and the categories that are the most characteristic according 
+to each dimension obtained by a Factor Analysis. <br />
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+dimdesc(res, axes = 1:3, proba = 0.05)</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>res</code></td>
+<td>
+<p>an object of class PCA, MCA, CA, MFA or HMFA</p>
+</td></tr>
+<tr valign="top"><td><code>axes</code></td>
+<td>
+<p>a vector with the dimensions to describe</p>
+</td></tr>
+<tr valign="top"><td><code>proba</code></td>
+<td>
+<p>the significance threshold considered to characterized the dimension (by default 0.05)</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Returns a list including:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>quanti</code></td>
+<td>
+<p>the description of the dimensions by the quantitative variables. The variables are sorted.</p>
+</td></tr>
+<tr valign="top"><td><code>quali</code></td>
+<td>
+<p>the description of the dimensions by the categorical variables</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Francois Husson <a href="mailto:Francois.Husson@agrocampus-ouest.fr">Francois.Husson@agrocampus-ouest.fr</a></p>
+
+
+<h3>References</h3>
+
+<p>Husson, F., Le, S. and Pages, J. (2010). Exploratory Multivariate Analysis by Example Using R, <em>Chapman and Hall</em>.
+</p>
+
+
+<h3>See Also</h3>
+
+ <p><code><a href="PCA.html">PCA</a></code>, <code><a href="CA.html">CA</a></code>, <code><a href="MCA.html">MCA</a></code>, <code><a href="MFA.html">MFA</a></code>, <code><a href="HMFA.html">HMFA</a></code>,<br />
+<a href="https://www.youtube.com/watch?v=Uhw-1NilmAk&amp;list=PLnZgp6epRBbTsZEFXi_p6W48HhNyqwxIu&amp;index=9">Video showing how to use this function</a></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(decathlon)
+res.pca &lt;- PCA(decathlon, quanti.sup = 11:12, quali.sup=13, graph=FALSE)
+dimdesc(res.pca)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FactoMineR</em> version 1.41 <a href="00Index.html">Index</a>]</div>
+</body></html>

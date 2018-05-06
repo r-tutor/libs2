@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Make graph of variables</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for graph.var {FactoMineR}"><tr><td>graph.var {FactoMineR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Make graph of variables</h2>
+
+<h3>Description</h3>
+
+<p>Plot the graphs of the variables after  a Factor Analysis.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+graph.var(x, axes = c(1, 2), 
+    xlim = NULL, ylim = NULL, col.sup = "blue", 
+    col.var = "black", draw="all", label=draw, lim.cos2.var = 0.1,
+    cex = 1, title = NULL, new.plot = TRUE, ...)
+    </pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>an object of class PCA, MCA, MFA or HMFA</p>
+</td></tr>
+<tr valign="top"><td><code>axes</code></td>
+<td>
+<p>a length 2 vector specifying the components to plot</p>
+</td></tr>
+<tr valign="top"><td><code>xlim</code></td>
+<td>
+<p>range for the plotted 'x' values, defaulting to the range of the finite values of 'x'</p>
+</td></tr>
+<tr valign="top"><td><code>ylim</code></td>
+<td>
+<p>range for the plotted 'y' values, defaulting to the range of the finite values of 'y'</p>
+</td></tr>
+<tr valign="top"><td><code>col.sup</code></td>
+<td>
+<p>a color for the quantitative supplementary variables</p>
+</td></tr>
+<tr valign="top"><td><code>col.var</code></td>
+<td>
+<p>a color for the variables</p>
+</td></tr>
+<tr valign="top"><td><code>draw</code></td>
+<td>
+<p>a list of character for the variables which are drawn (by default, all the variables are drawn). You can draw all the active variables
+by putting &quot;var&quot; and/or all the supplementary variables by putting &quot;quanti.sup&quot; and/or a list with the names of the variables which should be drawn</p>
+</td></tr>
+<tr valign="top"><td><code>label</code></td>
+<td>
+<p>a list of character for the variables which are labelled (by default, all the drawn variables are labelled). You can label all the active variables
+by putting &quot;var&quot; and/or all the supplementary variables by putting &quot;quanti.sup&quot; and/or a list with the names of the variables which should be labelled</p>
+</td></tr>
+<tr valign="top"><td><code>lim.cos2.var</code></td>
+<td>
+<p>value of the square cosinus under the variables are not drawn</p>
+</td></tr>
+<tr valign="top"><td><code>cex</code></td>
+<td>
+<p>cf. function <code><a href="../../graphics/html/par.html">par</a></code> in the <span class="pkg">graphics</span> package</p>
+</td></tr>
+<tr valign="top"><td><code>title</code></td>
+<td>
+<p>string corresponding to the title of the graph you draw (by default NULL and a title is chosen)</p>
+</td></tr>
+<tr valign="top"><td><code>new.plot</code></td>
+<td>
+<p>boolean, if TRUE, a new graphical device is created</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>further arguments passed to or from other methods</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Returns the variables factor map.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Francois Husson <a href="mailto:Francois.Husson@agrocampus-ouest.fr">Francois.Husson@agrocampus-ouest.fr</a></p>
+
+
+<h3>See Also</h3>
+
+ <p><code><a href="PCA.html">PCA</a></code>, <code><a href="MFA.html">MFA</a></code>, <code><a href="MCA.html">MCA</a></code>, <code><a href="DMFA.html">DMFA</a></code>, <code><a href="HMFA.html">HMFA</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(decathlon)
+res.pca &lt;- PCA(decathlon, quanti.sup = 11:12, quali.sup = 13, graph = FALSE)
+graph.var (res.pca, draw = c("var","Points"), 
+    label = c("Long.jump", "Points"))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FactoMineR</em> version 1.41 <a href="00Index.html">Index</a>]</div>
+</body></html>

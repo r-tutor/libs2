@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Categories description</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for catdes {FactoMineR}"><tr><td>catdes {FactoMineR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Categories description</h2>
+
+<h3>Description</h3>
+
+<p>Description of the categories of one factor by categorical variables and/or by quantitative variables
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+catdes(donnee,num.var,proba = 0.05, row.w = NULL)</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>donnee</code></td>
+<td>
+<p>a data frame made up of at least one categorical variables and a set of quantitative variables and/or categorical variables</p>
+</td></tr>
+<tr valign="top"><td><code>num.var</code></td>
+<td>
+<p>the indice of the variable to characterized</p>
+</td></tr>
+<tr valign="top"><td><code>proba</code></td>
+<td>
+<p>the significance threshold considered to characterized the category (by default 0.05)</p>
+</td></tr>
+<tr valign="top"><td><code>row.w</code></td>
+<td>
+<p>a vector of integers corresponding to an optional row weights (by default, a vector of 1 for uniform row weights)</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Returns a list including:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>test.chi</code></td>
+<td>
+<p>The categorical variables which characterized the factor are listed in ascending order (from the one which characterized the most
+the factor to the one which significantly characterized with the proba <code>proba</code></p>
+</td></tr>
+<tr valign="top"><td><code>category</code></td>
+<td>
+<p>description of each category of the <code>num.var</code> by each category of all the categorical variables</p>
+</td></tr>
+<tr valign="top"><td><code>quanti.var</code></td>
+<td>
+<p>the global description of the <code>num.var</code> variable by the quantitative variables with the square correlation coefficient and the p-value of the F-test in a one-way analysis of variance (assuming the hypothesis of homoscedsticity)</p>
+</td></tr>
+<tr valign="top"><td><code>quanti</code></td>
+<td>
+<p>the description of each category of the <code>num.var</code> variable by the quantitative variables.</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Francois Husson <a href="mailto:Francois.Husson@agrocampus-ouest.fr">Francois.Husson@agrocampus-ouest.fr</a></p>
+
+
+<h3>References</h3>
+
+<p>Husson, F., Le, S. and Pages, J. (2010). Exploratory Multivariate Analysis by Example Using R, <em>Chapman and Hall</em>.
+Lebart, L., Morineau, A. and Piron, M. (1995) Statistique exploratoire multidimensionnelle, <em>Dunod</em>.<br />
+</p>
+
+
+<h3>See Also</h3>
+
+ <p><code><a href="plot.catdes.html">plot.catdes</a></code>, <code><a href="condes.html">condes</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(wine)
+catdes(wine, num.var=2)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FactoMineR</em> version 1.41 <a href="00Index.html">Index</a>]</div>
+</body></html>

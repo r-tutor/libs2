@@ -1,0 +1,235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Draw the Multiple Factor Analysis (MFA) graphs</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for plot.MFA {FactoMineR}"><tr><td>plot.MFA {FactoMineR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Draw the Multiple Factor Analysis (MFA) graphs</h2>
+
+<h3>Description</h3>
+
+<p>Draw the Multiple Factor Analysis (MFA) graphs.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'MFA'
+plot(x, axes = c(1, 2), choix = c("ind","var","group","axes","freq"), 
+    ellipse=NULL, ellipse.par=NULL,
+    lab.grpe=TRUE, lab.var=TRUE, lab.ind=TRUE, 
+    lab.par=FALSE, lab.col=TRUE, habillage="group", col.hab=NULL, 
+    invisible = c("none","ind","ind.sup","quanti","quanti.sup",
+	"quali","quali.sup","row","row.sup","col","col.sup"), 
+	partial = NULL, lim.cos2.var = 0., 
+    chrono = FALSE, xlim = NULL, ylim = NULL, 
+    title = NULL, palette = NULL, 
+	autoLab = c("auto","yes","no"), new.plot = FALSE, 
+	select = NULL, unselect = 0.7, shadowtext = FALSE, 
+	legend = list(bty = "y", x = "topleft"), ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>an object of class MFA</p>
+</td></tr>
+<tr valign="top"><td><code>choix</code></td>
+<td>
+<p>a string corresponding to the graph that you want to do (&quot;ind&quot; for the individual or categorical
+variables graph, &quot;var&quot; for the quantitative variables graph, &quot;freq&quot; for the frequence or contingency tables,
+&quot;axes&quot; for the graph of the partial axes, &quot;group&quot; for the groups representation)</p>
+</td></tr>
+<tr valign="top"><td><code>axes</code></td>
+<td>
+<p>a length 2 vector specifying the components to plot</p>
+</td></tr>
+<tr valign="top"><td><code>ellipse</code></td>
+<td>
+<p>boolean (NULL by default), if not null, draw ellipses around the individuals, and use the results of <code>coord.ellipse</code></p>
+</td></tr>
+<tr valign="top"><td><code>ellipse.par</code></td>
+<td>
+<p>boolean (NULL by default), if not null, draw ellipses around the partial individuals, and use the results of <code>coord.ellipse</code></p>
+</td></tr>
+<tr valign="top"><td><code>lab.grpe</code></td>
+<td>
+<p>boolean, if TRUE, the labels of the groups are drawn</p>
+</td></tr>
+<tr valign="top"><td><code>lab.var</code></td>
+<td>
+<p>boolean, if TRUE, the labels of the variables are drawn</p>
+</td></tr>
+<tr valign="top"><td><code>lab.ind</code></td>
+<td>
+<p>boolean, if TRUE, the labels of the mean points are drawn</p>
+</td></tr>
+<tr valign="top"><td><code>lab.par</code></td>
+<td>
+<p>boolean, if TRUE, the labels of the partial points are drawn</p>
+</td></tr>
+<tr valign="top"><td><code>lab.col</code></td>
+<td>
+<p>boolean, if TRUE, the labels of the columns for the contingency tables are drawn</p>
+</td></tr>
+<tr valign="top"><td><code>habillage</code></td>
+<td>
+<p>string corresponding to the color which are used. If &quot;ind&quot;, one color is used for each individual;
+if &quot;group&quot; the individuals are colored according to the group; else if it is the name or the position of a categorical variable, it colors 
+according to the different categories of this variable</p>
+</td></tr>
+<tr valign="top"><td><code>col.hab</code></td>
+<td>
+<p>the colors to use. By default, colors are chosen</p>
+</td></tr>
+<tr valign="top"><td><code>invisible</code></td>
+<td>
+<p>list of string; for choix =&quot;ind&quot;, the individuals can be omit (invisible = &quot;ind&quot;),
+or supplementary individuals (invisible=&quot;ind.sup&quot;) or the center of gravity of the categorical variables 
+(invisible= &quot;quali&quot; or &quot;quali.sup&quot; for the supplementary categories); 
+if invisible = c(&quot;ind&quot;,&quot;ind.sup&quot;), just the centers of gravity are drawn; if choix=&quot;var&quot;, invisible=&quot;quanti&quot; suppress the
+active variable and invisible = &quot;quanti.sup&quot; suppress the supplementary variables</p>
+</td></tr>
+<tr valign="top"><td><code>partial</code></td>
+<td>
+<p>list of the individuals or of the center of gravity for which the partial points should be drawn (by
+default, partial = NULL and no partial points are drawn)</p>
+</td></tr>
+<tr valign="top"><td><code>lim.cos2.var</code></td>
+<td>
+<p>value of the square cosinus under with the points are not drawn</p>
+</td></tr>
+<tr valign="top"><td><code>chrono</code></td>
+<td>
+<p>boolean, if TRUE, the partial points of a same point are linked (useful when groups correspond to different moment)</p>
+</td></tr>
+<tr valign="top"><td><code>xlim</code></td>
+<td>
+<p>range for the plotted 'x' values, defaulting to the range of the finite values of 'x'</p>
+</td></tr>
+<tr valign="top"><td><code>ylim</code></td>
+<td>
+<p>range for the plotted 'y' values, defaulting to the range of the finite values of 'y'</p>
+</td></tr>
+<tr valign="top"><td><code>title</code></td>
+<td>
+<p>string corresponding to the title of the graph you draw (by default NULL and a title is chosen)</p>
+</td></tr>
+<tr valign="top"><td><code>palette</code></td>
+<td>
+<p>the color palette used to draw the points. By default colors are chosen. If you want to define the colors : palette=palette(c(&quot;black&quot;,&quot;red&quot;,&quot;blue&quot;)); or you can use: palette=palette(rainbow(30)), or in black and white for example: palette=palette(gray(seq(0,.9,len=25)))</p>
+</td></tr>
+<tr valign="top"><td><code>autoLab</code></td>
+<td>
+<p>if <code>autoLab="auto"</code>, <code>autoLab</code> is equal to &quot;yes&quot; if there are less than 50 elements and &quot;no&quot; otherwise; if &quot;yes&quot;, the labels of the drawn elements are placed in a &quot;good&quot; way (can be time-consuming if many elements), and if &quot;no&quot; the elements are placed quickly but may overlap</p>
+</td></tr>
+<tr valign="top"><td><code>new.plot</code></td>
+<td>
+<p>boolean, if TRUE, a new graphical device is created</p>
+</td></tr>
+<tr valign="top"><td><code>select</code></td>
+<td>
+<p>a selection of the elements that are drawn; see the details section</p>
+</td></tr>
+<tr valign="top"><td><code>unselect</code></td>
+<td>
+<p>may be either a value between 0 and 1 that gives the transparency of the unselected objects (if <code>unselect=1</code> the transparceny is total and the elements are not drawn, if <code>unselect=0</code> the elements are drawn as usual but without any label) or may be a color (for example <code>unselect="grey60"</code>)</p>
+</td></tr>
+<tr valign="top"><td><code>shadowtext</code></td>
+<td>
+<p>boolean; if true put a shadow on the labels (rectangles are written under the labels which may lead to difficulties to modify the graph with another program)</p>
+</td></tr>
+<tr valign="top"><td><code>legend</code></td>
+<td>
+<p>a list of arguments that defines the legend if needed (when individuals are drawn according to a variable); see the arguments of the function <code>legend</code></p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>further arguments passed to or from other methods, such as cex, cex.main, ...</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The argument <code>autoLab = "yes"</code> is time-consuming if there are many labels that overlap. In this case, you can modify the size of the characters in order to have less overlapping, using for example cex=0.7.<br />
+The <code>select</code> argument can be used in order to select a part of the elements (individuals if you draw the graph of individuals, or variables if you draw the graph of variabless) that are drawn.
+For example, you can use:<br />
+<code>select = 1:5</code> and then the elements 1:5 are drawn.<br /> 
+<code>select = c("name1","name5")</code> and then the elements that have the names name1 and name5 are drawn.<br /> 
+<code>select = "coord 10"</code> and then the 10 elements (individuals, variables, frequencies) that have the highest (squared) coordinates on the 2 chosen dimensions are drawn.<br /> 
+<code>select = "contrib 10"</code> and then the 10 elements (individuals, variables, frequencies) that have the highest contribution on the 2 dimensions of your plot are drawn.<br /> 
+<code>select = "cos2 5"</code> and then the 5 elements (individuals, variables, frequencies) that have the highest cos2 on the 2 dimensions of your plot are drawn.<br /> 
+<code>selectMod = "contrib 5"</code>, the 5 categories that contribute the most to the two dimensions are drawn.<br /> 
+<code>selectMod = "cos2 0.5"</code>, the categories that have a cos2 greater than 0.5 on the two dimensions are drawn.<br /> 
+<code>selectMod = "v.test 2"</code>, the categories that have a v.test higher than the value on one of the two dimensions are drawn.<br /> 
+</p>
+
+
+<h3>Value</h3>
+
+<p>Returns the individuals factor map and the variables factor map.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Francois Husson <a href="mailto:husson@agrocampus-ouest.fr">husson@agrocampus-ouest.fr</a>, Jeremy Mazet</p>
+
+
+<h3>See Also</h3>
+
+ <p><code><a href="MFA.html">MFA</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+data(wine)
+res &lt;- MFA(wine,group=c(2,5,3,10,9,2),type=c("n",rep("s",5)),ncp=5,
+    name.group=c("orig","olf","vis","olfag","gust","ens"),
+    num.group.sup=c(1,6),graph=FALSE)
+plot(res, choix = "ind")
+plot(res, choix = "ind", partial="all")
+plot(res, choix = "ind", habillage="Label")
+plot(res, choix = "var", habillage="group")
+plot(res, choix = "axes")
+
+data(wine)
+res &lt;- MFA(wine, group=c(2,5,3,10,9,2), type=c("n",rep("s",5)),
+    ncp=5, name.group=c("orig","olf","vis","olfag","gust","ens"),
+    num.group.sup=c(1,6))
+summary(res)
+barplot(res$eig[,1],main="Eigenvalues",names.arg=1:nrow(res$eig))
+
+#### Confidence ellipses around categories per variable
+plotellipses(res)
+plotellipses(res,keepvar="Label") ## for 1 variable
+
+#### Interactive graph
+liste = plotMFApartial(res)
+plot(res,choix="ind",habillage = "Terroir")
+
+###Example with groups of categorical variables
+data (poison)
+MFA(poison, group=c(2,2,5,6), type=c("s","n","n","n"),
+    name.group=c("desc","desc2","symptom","eat"),
+    num.group.sup=1:2)
+
+###Example with groups of frequency tables
+data(mortality)
+res&lt;-MFA(mortality,group=c(9,9),type=c("f","f"),
+    name.group=c("1979","2006"))
+
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FactoMineR</em> version 1.41 <a href="00Index.html">Index</a>]</div>
+</body></html>

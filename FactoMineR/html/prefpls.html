@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Scatter plot and additional variables with quality of...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for prefpls {FactoMineR}"><tr><td>prefpls {FactoMineR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Scatter plot and additional variables with quality of representation contour lines</h2>
+
+<h3>Description</h3>
+
+<p>This function is useful to interpret the usual graphs $(x,y)$ with additional
+quantitative variables.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+prefpls(donnee, var1 = 1, var2 = 2, firstvar = 3, 
+    lastvar = ncol(donnee), levels = c(0.2,0.4,0.6,0.7,0.8,0.9,1), 
+    asp = 1, nbchar = max(nchar(colnames(donnee))), title = NULL,
+    choix="var")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>donnee</code></td>
+<td>
+<p>a data frame made up of quantitative variables</p>
+</td></tr>  
+<tr valign="top"><td><code>var1</code></td>
+<td>
+<p>the position of the variable corresponding to the x-axis</p>
+</td></tr>
+<tr valign="top"><td><code>var2</code></td>
+<td>
+<p>the position of the variable corresponding to the y-axis</p>
+</td></tr>
+<tr valign="top"><td><code>firstvar</code></td>
+<td>
+<p>the position of the first endogenous variable</p>
+</td></tr>
+<tr valign="top"><td><code>lastvar</code></td>
+<td>
+<p>the position of the last endogenous variable (by default the last column of <code>donnee</code>)</p>
+</td></tr>
+<tr valign="top"><td><code>levels</code></td>
+<td>
+<p>a list of the levels displayed in the graph of variables</p>
+</td></tr>
+<tr valign="top"><td><code>asp</code></td>
+<td>
+<p>aspect ratio for the graph of the individuals</p>
+</td></tr>
+<tr valign="top"><td><code>nbchar</code></td>
+<td>
+<p>the number of characters used for the labels of the variables</p>
+</td></tr>
+<tr valign="top"><td><code>title</code></td>
+<td>
+<p>string corresponding to the title of the graph you draw (by default NULL and a title is chosen)</p>
+</td></tr>
+<tr valign="top"><td><code>choix</code></td>
+<td>
+<p>the graph to plot (&quot;ind&quot; for the individuals, &quot;var&quot; for the variables)</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This function is very useful when there is a strong correlation between two variables <em>x</em> and <em>y</em>
+</p>
+
+
+<h3>Value</h3>
+
+<p>A scatter plot of the invividuals<br />
+A graph with additional variables and the quality of representation contour lines.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Francois Husson <a href="mailto:Francois.Husson@agrocampus-ouest.fr">Francois.Husson@agrocampus-ouest.fr</a></p>
+
+
+<h3>References</h3>
+
+<p>Husson, F. &amp; Pages, J. (2005). Scatter plot and additional variables. <em>Journal of applied statistics</em></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(decathlon)
+prefpls(decathlon[,c(11,12,1:10)])
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FactoMineR</em> version 1.41 <a href="00Index.html">Index</a>]</div>
+</body></html>

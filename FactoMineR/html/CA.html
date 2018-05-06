@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Correspondence Analysis (CA)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for CA {FactoMineR}"><tr><td>CA {FactoMineR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Correspondence Analysis (CA)</h2>
+
+<h3>Description</h3>
+
+<p>Performs Correspondence Analysis (CA) including supplementary row and/or column points.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+CA(X, ncp = 5, row.sup = NULL, col.sup = NULL, 
+    quanti.sup=NULL, quali.sup = NULL, graph = TRUE, 
+	axes = c(1,2), row.w = NULL, excl=NULL)</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>X</code></td>
+<td>
+<p>a data frame or a table with <em>n</em> rows and <em>p</em> columns, i.e. a contingency table</p>
+</td></tr>
+<tr valign="top"><td><code>ncp</code></td>
+<td>
+<p>number of dimensions kept in the results (by default 5)</p>
+</td></tr>
+<tr valign="top"><td><code>row.sup</code></td>
+<td>
+<p>a vector indicating the indexes of the supplementary rows</p>
+</td></tr>
+<tr valign="top"><td><code>col.sup</code></td>
+<td>
+<p>a vector indicating the indexes of the supplementary columns</p>
+</td></tr>
+<tr valign="top"><td><code>quanti.sup</code></td>
+<td>
+<p>a vector indicating the indexes of the supplementary continuous variables</p>
+</td></tr>
+<tr valign="top"><td><code>quali.sup</code></td>
+<td>
+<p>a vector indicating the indexes of the categorical supplementary variables</p>
+</td></tr>
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>boolean, if TRUE a graph is displayed</p>
+</td></tr>
+<tr valign="top"><td><code>axes</code></td>
+<td>
+<p>a length 2 vector specifying the components to plot</p>
+</td></tr>
+<tr valign="top"><td><code>row.w</code></td>
+<td>
+<p>an optional row weights (by default, a vector of 1 and each row has a weight equals to its margin); the weights are given only for the active rows</p>
+</td></tr>
+<tr valign="top"><td><code>excl</code></td>
+<td>
+<p>numeric vector indicating the indexes of the &quot;junk&quot; columns (default is NULL). Useful for MCA with excl argument.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Returns a list including:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>eig</code></td>
+<td>
+<p>a matrix containing all the eigenvalues, the percentage of variance and the cumulative percentage of variance</p>
+</td></tr>
+<tr valign="top"><td><code>col</code></td>
+<td>
+<p>a list of matrices with all the results for the column variable (coordinates, square cosine, contributions, inertia)</p>
+</td></tr>
+<tr valign="top"><td><code>row</code></td>
+<td>
+<p>a list of matrices with all the results for the row variable (coordinates, square cosine, contributions, inertia)</p>
+</td></tr>
+<tr valign="top"><td><code>col.sup</code></td>
+<td>
+<p>a list of matrices containing all the results for the supplementary column points (coordinates, square cosine)</p>
+</td></tr>
+<tr valign="top"><td><code>row.sup</code></td>
+<td>
+<p>a list of matrices containing all the results for the supplementary row points (coordinates, square cosine)</p>
+</td></tr>
+<tr valign="top"><td><code>quanti.sup</code></td>
+<td>
+<p>if quanti.sup is not NULL, a matrix containing the results for the supplementary continuous variables (coordinates, square cosine)</p>
+</td></tr>
+<tr valign="top"><td><code>quali.sup</code></td>
+<td>
+<p>if quali.sup is not NULL, a list of matrices with all the results for the supplementary categorical variables (coordinates of each categories of each variables, v.test which is a criterion with a Normal distribution, square correlation ratio)</p>
+</td></tr>
+<tr valign="top"><td><code>call</code></td>
+<td>
+<p>a list with some statistics</p>
+</td></tr>
+</table>
+<p>Returns the row and column points factor map.<br />
+The plot may be improved using the argument autolab, modifying the size of the labels or selecting some elements thanks to the <code><a href="plot.CA.html">plot.CA</a></code> function.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Francois Husson <a href="mailto:Francois.Husson@agrocampus-ouest.fr">Francois.Husson@agrocampus-ouest.fr</a>,Jeremy Mazet</p>
+
+
+<h3>References</h3>
+
+<p>Benzecri, J.-P. (1992) <em>Correspondence Analysis Handbook</em>, New-York : Dekker <br />
+Benzecri, J.-P. (1980) <em>L'analyse des donnees tome 2 : l'analyse des correspondances</em>, Paris : Bordas <br />
+Greenacre, M.J. (1993) <em>Correspondence Analysis in Practice</em>, London : Academic Press<br />
+Husson, F., Le, S. and Pages, J. (2009). Analyse de donnees avec R, <em>Presses Universitaires de Rennes</em>.<br />
+Husson, F., Le, S. and Pages, J. (2010). Exploratory Multivariate Analysis by Example Using R, <em>Chapman and Hall</em>.
+</p>
+
+
+<h3>See Also</h3>
+
+ <p><code><a href="print.CA.html">print.CA</a></code>, <code><a href="summary.CA.html">summary.CA</a></code>, <code><a href="ellipseCA.html">ellipseCA</a></code>, <code><a href="plot.CA.html">plot.CA</a></code>, <code><a href="dimdesc.html">dimdesc</a></code>,<br />
+<a href="https://www.youtube.com/watch?v=Y-bXsUNX5hA&amp;list=PLnZgp6epRBbTsZEFXi_p6W48HhNyqwxIu&amp;index=4">Video showing how to perform CA with FactoMineR</a></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(children)
+res.ca &lt;- CA (children, row.sup = 15:18, col.sup = 6:8)
+summary(res.ca)
+## Ellipses for all the active elements
+ellipseCA(res.ca)
+## Ellipses around some columns only
+ellipseCA(res.ca,ellipse="col",col.col.ell=c(rep("blue",2),rep("transparent",3)),
+     invisible=c("row.sup","col.sup"))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FactoMineR</em> version 1.41 <a href="00Index.html">Index</a>]</div>
+</body></html>

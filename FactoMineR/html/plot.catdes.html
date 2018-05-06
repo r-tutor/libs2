@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Plots for description of clusters (catdes)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for plot.catdes {FactoMineR}"><tr><td>plot.catdes {FactoMineR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Plots for description of clusters (catdes)</h2>
+
+<h3>Description</h3>
+
+<p>Plots a graph from a catdes output.</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'catdes'
+plot(x, show="all", level=0.01, sort=NULL,
+   col.upper="indianred2", col.lower="royalblue1", numchar = 10,
+   barplot = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A catdes object, see <code><a href="catdes.html">catdes</a></code> for details.</p>
+</td></tr>
+<tr valign="top"><td><code>show</code></td>
+<td>
+<p>a strig. If &quot;quali&quot;, only the categorical variables are
+used. If &quot;quanti&quot;, only the the quantitative variables are used. If
+&quot;all&quot;, both quali and quanti are used.</p>
+</td></tr>
+<tr valign="top"><td><code>level</code></td>
+<td>
+<p>a positive float. Indicates a critical value the p-value.</p>
+</td></tr>
+<tr valign="top"><td><code>sort</code></td>
+<td>
+<p>NULL (default) or an integer between 1 and the number of clusters or a character (the name of a group). If it is an integer or the name of a group, the features are sorted according to their significances in the construction of the given cluster.</p>
+</td></tr>
+<tr valign="top"><td><code>col.upper</code></td>
+<td>
+<p>The color used for under-represented features.</p>
+</td></tr>
+<tr valign="top"><td><code>col.lower</code></td>
+<td>
+<p>The color used for over-represented features.</p>
+</td></tr>
+<tr valign="top"><td><code>numchar</code></td>
+<td>
+<p>number of characters for the labels</p>
+</td></tr>
+<tr valign="top"><td><code>barplot</code></td>
+<td>
+<p>a boolean; if true a barplot per category is drawn, else a table</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>further arguments passed to or from other methods</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>if barplot is true, a barplot is drawn per category with variables that significantly describe the category.<br />
+If barplot is false; it returns a grid. The rows stand for the clusters and the columns for the significant variables. 
+A cell colored in col.lower (resp. col.upper) i.e. by default in blue (resp. red) for a quantitative variable means that the average value of the variable in the given cluster is significantly lower (resp. higher) than in the overall data. 
+A cell colored in col.lower (resp. col.upper) for a categorical variable means that the given value of the variable is significantly under-represented (resp. over-represented) in the given cluster than in the overall data. 
+The degree of transparency of the color also indicates the significance of the difference between the behavior of the variable in the given cluster and in the overall data. Indeed, the more transparent the cell is, the less significant the difference is. 
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Guillaume Le Ray, Camille Chanial, Elise Dumas, Francois Husson <a href="mailto:husson@agrocampus-ouest.fr">husson@agrocampus-ouest.fr</a></p>
+
+
+<h3>See Also</h3>
+
+ <p><code><a href="catdes.html">catdes</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+data(wine)
+res.c=catdes(wine, num.var=2)
+plot(res.c)
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FactoMineR</em> version 1.41 <a href="00Index.html">Index</a>]</div>
+</body></html>

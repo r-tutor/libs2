@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Hierarchical Multiple Factor Analysis</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for HMFA {FactoMineR}"><tr><td>HMFA {FactoMineR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Hierarchical Multiple Factor Analysis</h2>
+
+<h3>Description</h3>
+
+<p>Performs a hierarchical multiple factor analysis, using an object of class <code>list</code> of <code>data.frame</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+HMFA(X,H,type = rep("s", length(H[[1]])), ncp = 5, graph = TRUE,
+    axes = c(1,2), name.group = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>X</code></td>
+<td>
+<p>a <code>data.frame</code></p>
+</td></tr>
+<tr valign="top"><td><code>H</code></td>
+<td>
+<p>a list with one vector for each hierarchical level; in each vector the number of variables or the number of group
+constituting the group</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>the type of variables in each group in the first partition; three possibilities: &quot;c&quot; or &quot;s&quot; for quantitative variables
+(the difference is that for &quot;s&quot;, the variables are scaled in the program), &quot;n&quot; for categorical variables; by default, all the variables
+are quantitative and the variables are scaled unit</p>
+</td></tr>
+<tr valign="top"><td><code>ncp</code></td>
+<td>
+<p>number of dimensions kept in the results (by default 5)</p>
+</td></tr>
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>boolean, if TRUE a graph is displayed</p>
+</td></tr>
+<tr valign="top"><td><code>axes</code></td>
+<td>
+<p>a length 2 vector specifying the components to plot</p>
+</td></tr>
+<tr valign="top"><td><code>name.group</code></td>
+<td>
+<p>a list of vector containing the name of the groups for each level of the hierarchy (by default, NULL and the 
+group are named L1.G1, L1.G2 and so on)</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Returns a list including:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>eig</code></td>
+<td>
+<p>a matrix containing all the eigenvalues, the percentage of variance and the cumulative percentage of variance</p>
+</td></tr>
+<tr valign="top"><td><code>group</code></td>
+<td>
+<p>a list with first a list of matrices with the coordinates of the groups for each level and second a matrix with the canonical correlation (correlation between the coordinates of the individuals and the partial points))</p>
+</td></tr>
+<tr valign="top"><td><code>ind</code></td>
+<td>
+<p>a list of matrices with all the results for the active individuals (coordinates, square cosine, contributions)</p>
+</td></tr>
+<tr valign="top"><td><code>quanti.var</code></td>
+<td>
+<p>a list of matrices with all the results for the quantitative variables (coordinates, correlation between variables and axes)</p>
+</td></tr>
+<tr valign="top"><td><code>quali.var</code></td>
+<td>
+<p>a list of matrices with all the results for the supplementary categorical variables (coordinates of each categories of each variables, and v.test which is a criterion with a Normal distribution)</p>
+</td></tr>
+<tr valign="top"><td><code>partial</code></td>
+<td>
+<p>a list of arrays with the coordinates of the partial points for each partition</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Sebastien Le, Francois Husson <a href="mailto:Francois.Husson@agrocampus-ouest.fr">Francois.Husson@agrocampus-ouest.fr</a></p>
+
+
+<h3>References</h3>
+
+<p>Le Dien, S. &amp; Pages, J. (2003) Hierarchical Multiple factor analysis: application to the comparison of sensory profiles, <em>Food Quality and Preferences</em>, <b>18 (6)</b>, 453-464.
+</p>
+
+
+<h3>See Also</h3>
+
+ <p><code><a href="print.HMFA.html">print.HMFA</a></code>, <code><a href="plot.HMFA.html">plot.HMFA</a></code>, <code><a href="dimdesc.html">dimdesc</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre> 
+data(wine)
+hierar &lt;- list(c(2,5,3,10,9,2), c(4,2))
+res.hmfa &lt;- HMFA(wine, H = hierar, type=c("n",rep("s",5)))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FactoMineR</em> version 1.41 <a href="00Index.html">Index</a>]</div>
+</body></html>

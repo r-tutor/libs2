@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Estimate the number of components in Principal Component...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for estim_ncp {FactoMineR}"><tr><td>estim_ncp {FactoMineR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Estimate the number of components in Principal Component Analysis</h2>
+
+<h3>Description</h3>
+
+<p>Estimate the number of components in PCA .
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+estim_ncp(X, ncp.min=0, ncp.max=NULL, scale=TRUE, method="GCV")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>X</code></td>
+<td>
+<p>a data frame with continuous variables</p>
+</td></tr>
+<tr valign="top"><td><code>ncp.min</code></td>
+<td>
+<p>minimum number of dimensions to interpret, by default 0</p>
+</td></tr>
+<tr valign="top"><td><code>ncp.max</code></td>
+<td>
+<p>maximum number of dimensions to interpret, by default NULL which corresponds to the number of columns minus 2</p>
+</td></tr>
+<tr valign="top"><td><code>scale</code></td>
+<td>
+<p>a boolean, if TRUE (value set by default) then data are scaled to unit variance</p>
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+<p>method used to estimate the number of components, &quot;GCV&quot; for the generalized cross-validation approximation or &quot;Smooth&quot; for the smoothing method (by default &quot;GCV&quot;)</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Returns ncp the best number of dimensions to use (find the minimum or the first local minimum) and the 
+mean error for each dimension tested
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Francois Husson <a href="mailto:Francois.Husson@agrocampus-ouest.fr">Francois.Husson@agrocampus-ouest.fr</a>, Julie Josse<a href="mailto:Julie.Josse@agrocampus-ouest.fr">Julie.Josse@agrocampus-ouest.fr</a></p>
+
+
+<h3>References</h3>
+
+<p>Josse, J. and Husson, F. (2012). Selecting the number of components in PCA using cross-validation approximations. Computational Statistics and Data Analysis, 56, 1869-1879.
+</p>
+
+
+<h3>See Also</h3>
+
+ <p><code><a href="PCA.html">PCA</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(decathlon)
+nb.dim &lt;- estim_ncp(decathlon[,1:10],scale=TRUE)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FactoMineR</em> version 1.41 <a href="00Index.html">Index</a>]</div>
+</body></html>

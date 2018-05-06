@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Factor Analysis for Mixed Data</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for FAMD {FactoMineR}"><tr><td>FAMD {FactoMineR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Factor Analysis for Mixed Data</h2>
+
+<h3>Description</h3>
+
+<p>FAMD is a principal component method dedicated to explore data with both continuous and categorical variables. It can be seen roughly as a mixed between PCA and MCA. More precisely, the continuous variables are scaled to unit variance and the categorical variables are transformed into a disjunctive data table (crisp coding) and then scaled using the specific scaling of MCA. This ensures to balance the influence of both continous and categorical variables in the analysis. It means that both variables are on a equal foot to determine the dimensions of variability. This method allows one to study the similarities between individuals taking into account mixed variables and to study the relationships between all the variables. It also provides graphical outputs such as the representation of the individuals, the correlation circle for the continuous variables and representations of the categories of the categorical variables, and also specific graphs to visulaize the associations between both type of variables. 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+FAMD (base, ncp = 5, graph = TRUE, sup.var = NULL, 
+    ind.sup = NULL, axes = c(1,2), row.w = NULL, tab.comp = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>base</code></td>
+<td>
+<p>a data frame with <em>n</em> rows (individuals) and <em>p</em> columns</p>
+</td></tr>
+<tr valign="top"><td><code>ncp</code></td>
+<td>
+<p>number of dimensions kept in the results (by default 5)</p>
+</td></tr>
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>boolean, if TRUE a graph is displayed</p>
+</td></tr>
+<tr valign="top"><td><code>ind.sup</code></td>
+<td>
+<p>a vector indicating the indexes of the supplementary individuals</p>
+</td></tr>
+<tr valign="top"><td><code>sup.var</code></td>
+<td>
+<p>a vector indicating the indexes of the supplementary variables</p>
+</td></tr>
+<tr valign="top"><td><code>axes</code></td>
+<td>
+<p>a length 2 vector specifying the components to plot</p>
+</td></tr>
+<tr valign="top"><td><code>row.w</code></td>
+<td>
+<p>an optional row weights (by default, uniform row weights); the weights are given only for the active individuals</p>
+</td></tr>
+<tr valign="top"><td><code>tab.comp</code></td>
+<td>
+<p>object obtained from the imputeFAMD function of the missMDA package that allows to handle missing values</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Returns a list including:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>eig</code></td>
+<td>
+<p>a matrix containing all the eigenvalues, the percentage of variance and the cumulative percentage of variance</p>
+</td></tr>
+<tr valign="top"><td><code>var</code></td>
+<td>
+<p>a list of matrices containing all the results for the variables considered as group (coordinates, square cosine, contributions)</p>
+</td></tr>
+<tr valign="top"><td><code>ind</code></td>
+<td>
+<p>a list of matrices with all the results for the individuals (coordinates, square cosine, contributions)</p>
+</td></tr>
+<tr valign="top"><td><code>quali.var</code></td>
+<td>
+<p>a list of matrices with all the results for the categorical variables (coordinates, square cosine, contributions, v.test)</p>
+</td></tr>
+<tr valign="top"><td><code>quanti.var</code></td>
+<td>
+<p>a list of matrices with all the results for the quantitative variables (coordinates, correlation, square cosine, contributions)</p>
+</td></tr>
+<tr valign="top"><td><code>call</code></td>
+<td>
+<p>a list with some statistics</p>
+</td></tr>
+</table>
+<p>Returns the individuals factor map.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Francois Husson <a href="mailto:Francois.Husson@agrocampus-ouest.fr">Francois.Husson@agrocampus-ouest.fr</a></p>
+
+
+<h3>References</h3>
+
+<p>Pages J. (2004). Analyse factorielle de donnees mixtes. Revue Statistique Appliquee.  LII (4). pp. 93-111.
+</p>
+
+
+<h3>See Also</h3>
+
+ <p><code><a href="print.FAMD.html">print.FAMD</a></code>, <code><a href="summary.FAMD.html">summary.FAMD</a></code>, <code><a href="plot.FAMD.html">plot.FAMD</a></code>,<br />
+<a href="https://www.youtube.com/watch?v=FKB96VGUgUE&amp;list=PLnZgp6epRBbTsZEFXi_p6W48HhNyqwxIu&amp;index=8">Video showing how to perform FAMD with FactoMineR</a></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+data(geomorphology)
+res &lt;- FAMD(geomorphology)
+summary(res)
+
+data(wine)
+res &lt;- FAMD(wine[,c(1,2,30,31)])
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FactoMineR</em> version 1.41 <a href="00Index.html">Index</a>]</div>
+</body></html>

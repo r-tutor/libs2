@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Draw the Correspondence Analysis (CA) graphs</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for plot.CA {FactoMineR}"><tr><td>plot.CA {FactoMineR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Draw the Correspondence Analysis (CA) graphs</h2>
+
+<h3>Description</h3>
+
+<p>Draw the Correspondence Analysis (CA) graphs.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'CA'
+plot(x, axes = c(1, 2),
+    xlim = NULL, ylim = NULL, 
+	invisible = c("none","row","col","row.sup","col.sup","quali.sup"), 
+	choix = c("CA","quanti.sup"), col.row="blue", col.col="red", 
+	col.row.sup="darkblue", col.col.sup="darkred", 
+    col.quali.sup="magenta", col.quanti.sup="blue",
+	label = c("all","none","row","row.sup","col","col.sup","quali.sup"), 
+    title = NULL, palette = NULL, autoLab = c("auto","yes","no"), 
+	new.plot=FALSE, selectRow = NULL, selectCol = NULL,
+	unselect = 0.7, shadowtext = FALSE, habillage = "none",
+	legend = list(bty = "y", x = "topleft"), ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>an object of class CA</p>
+</td></tr>
+<tr valign="top"><td><code>axes</code></td>
+<td>
+<p>a length 2 vector specifying the components to plot</p>
+</td></tr>
+<tr valign="top"><td><code>xlim</code></td>
+<td>
+<p>range for the plotted 'x' values, defaulting to the range of the finite values of 'x'</p>
+</td></tr>
+<tr valign="top"><td><code>ylim</code></td>
+<td>
+<p>range for the plotted 'y' values, defaulting to the range of the finite values of 'y'</p>
+</td></tr>
+<tr valign="top"><td><code>invisible</code></td>
+<td>
+<p>string indicating if some points should be unlabelled (&quot;row&quot;, &quot;col&quot;, &quot;row.sup&quot;, &quot;col.sup&quot;,&quot;quali.sup&quot;)</p>
+</td></tr>
+<tr valign="top"><td><code>choix</code></td>
+<td>
+<p>the graph to plot (&quot;CA&quot; for the CA map, &quot;quanti.sup&quot; for the supplementary quantitative variables)</p>
+</td></tr>
+<tr valign="top"><td><code>col.row</code></td>
+<td>
+<p>a color for the rows points</p>
+</td></tr>
+<tr valign="top"><td><code>col.col</code></td>
+<td>
+<p>a color for columns points</p>
+</td></tr>
+<tr valign="top"><td><code>col.row.sup</code></td>
+<td>
+<p>a color for the supplementary rows points</p>
+</td></tr>
+<tr valign="top"><td><code>col.col.sup</code></td>
+<td>
+<p>a color for supplementary columns points</p>
+</td></tr>
+<tr valign="top"><td><code>col.quali.sup</code></td>
+<td>
+<p>a color for the supplementary categorical variables</p>
+</td></tr>
+<tr valign="top"><td><code>col.quanti.sup</code></td>
+<td>
+<p>a color for the supplementary quantitative variables</p>
+</td></tr>
+<tr valign="top"><td><code>label</code></td>
+<td>
+<p>a list of character for the elements which are labelled (by default, all the elements are labelled (&quot;row&quot;, &quot;row.sup&quot;, &quot;col&quot;, &quot;col.sup&quot;,&quot;quali.sup&quot;)</p>
+</td></tr>
+<tr valign="top"><td><code>title</code></td>
+<td>
+<p>string corresponding to the title of the graph you draw (by default NULL and a title is chosen)</p>
+</td></tr>
+<tr valign="top"><td><code>palette</code></td>
+<td>
+<p>the color palette used to draw the points. By default colors are chosen. If you want to define the colors : palette=palette(c(&quot;black&quot;,&quot;red&quot;,&quot;blue&quot;)); or you can use: palette=palette(rainbow(30)), or in black and white for example: palette=palette(gray(seq(0,.9,len=25)))</p>
+</td></tr>
+<tr valign="top"><td><code>autoLab</code></td>
+<td>
+<p>if <code>autoLab="auto"</code>, <code>autoLab</code> is equal to &quot;yes&quot; if there are less than 50 elements and &quot;no&quot; otherwise; if &quot;yes&quot;, the labels of the drawn elements are placed in a &quot;good&quot; way (can be time-consuming if many elements), and if &quot;no&quot; the elements are placed quickly but may overlap</p>
+</td></tr>
+<tr valign="top"><td><code>new.plot</code></td>
+<td>
+<p>boolean, if TRUE, a new graphical device is created</p>
+</td></tr>
+<tr valign="top"><td><code>selectRow</code></td>
+<td>
+<p>a selection of the rows that are drawn; see the details section</p>
+</td></tr>
+<tr valign="top"><td><code>selectCol</code></td>
+<td>
+<p>a selection of the columns that are drawn; see the details section</p>
+</td></tr>
+<tr valign="top"><td><code>unselect</code></td>
+<td>
+<p>may be either a value between 0 and 1 that gives the transparency of the unselected objects (if <code>unselect=1</code> the transparceny is total and the elements are not drawn, if <code>unselect=0</code> the elements are drawn as usual but without any label) or may be a color (for example <code>unselect="grey60"</code>)</p>
+</td></tr>
+<tr valign="top"><td><code>shadowtext</code></td>
+<td>
+<p>boolean; if true put a shadow on the labels (rectangles are written under the labels which may lead to difficulties to modify the graph with another program)</p>
+</td></tr>
+<tr valign="top"><td><code>habillage</code></td>
+<td>
+<p>color the individuals among a categorical variable (give the number of the categorical supplementary variable or its name)</p>
+</td></tr>
+<tr valign="top"><td><code>legend</code></td>
+<td>
+<p>a list of arguments that defines the legend if needed (when individuals are drawn according to a variable); see the arguments of the function <code>legend</code></p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>further arguments passed to or from other methods, such as cex, cex.main, ...</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The argument <code>autoLab = "yes"</code> is time-consuming if there are many labels that overlap. In this case, you can modify the size of the characters in order to have less overlapping, using for example cex=0.7.<br />
+The <code>selectRow</code> and <code>selectCol</code> arguments can be used in order to select a part of the elements that are drawn.
+For example, you can use:<br />
+<code>selectRow = 1:5</code> and then the rows 1 to 5 are drawn.<br /> 
+<code>select = c("name1","name5")</code> and then the rows that have the names name1 and name5 are drawn.<br /> 
+<code>select = "coord 10"</code> and then the 10 rows (10 active and 10 supplementaries) that have the highest (squared) coordinates on the 2 chosen dimensions are drawn.<br /> 
+<code>select = "contrib 10"</code> and then the 10 rows (10 active) that have the highest contribution on the 2 dimensions of your plot are drawn.<br /> 
+<code>select = "cos2 5"</code> and then the 5 rows (5 actives and 5 supplementaries) that have the highest cos2 on the 2 dimensions of your plot are drawn.<br /> 
+<code>select = "dist 8"</code> and then the 8 rows (8 actives and 8 supplementaries) that have the highest distance to the center of gravity are drawn.<br /> 
+</p>
+
+
+<h3>Value</h3>
+
+<p>Returns the factor map with the joint plot of CA.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Francois Husson <a href="mailto:husson@agrocampus-ouest.fr">husson@agrocampus-ouest.fr</a>, Jeremy Mazet</p>
+
+
+<h3>See Also</h3>
+
+ <p><code><a href="CA.html">CA</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(children)
+res.ca &lt;- CA (children, col.sup = 6:8, row.sup = 15:18)
+## select rows and columns that have a cos2 greater than 0.8
+plot(res.ca,selectCol="cos2 0.8",selectRow="cos2 0.8")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FactoMineR</em> version 1.41 <a href="00Index.html">Index</a>]</div>
+</body></html>
