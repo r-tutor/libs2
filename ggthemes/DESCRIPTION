@@ -1,5 +1,5 @@
 Package: ggthemes
-Version: 3.4.2
+Version: 3.5.0
 Title: Extra Themes, Scales and Geoms for 'ggplot2'
 Authors@R: c(person("Jeffrey B.", "Arnold", role = c("aut", "cre"),
     email = "jeffrey.arnold@gmail.com"),
@@ -17,8 +17,8 @@ Authors@R: c(person("Jeffrey B.", "Arnold", role = c("aut", "cre"),
 Depends: R (>= 3.0.0),
 Imports: assertthat, colorspace, ggplot2 (>= 2.2.0), graphics, grid,
         methods, scales
-Suggests: dplyr, extrafont, knitr, lintr, maps, mapproj, pander, purrr,
-        rmarkdown, testthat, tibble, tidyr
+Suggests: spelling, dplyr, extrafont, knitr, lintr, maps, mapproj,
+        pander, purrr, rmarkdown, testthat, tibble, tidyr
 VignetteBuilder: knitr
 Description: Some extra themes, geoms, and scales for 'ggplot2'.
     Provides 'ggplot2' themes and scales that replicate the look of plots
@@ -38,8 +38,9 @@ Collate: 'banking.R' 'base.R' 'calc.R' 'canva.R' 'colorblind.R'
         'utils.R' 'wsj.R'
 RoxygenNote: 6.0.1
 LazyData: true
+Language: en-US
 NeedsCompilation: no
-Packaged: 2018-04-03 04:18:06 UTC; jrnold
+Packaged: 2018-05-07 07:59:38 UTC; jrnold
 Author: Jeffrey B. Arnold [aut, cre],
   Gergely Daroczi [ctb],
   Bo Werth [ctb],
@@ -52,5 +53,5 @@ Author: Jeffrey B. Arnold [aut, cre],
   Joshua London [ctb]
 Maintainer: Jeffrey B. Arnold <jeffrey.arnold@gmail.com>
 Repository: CRAN
-Date/Publication: 2018-04-03 07:44:51 UTC
-Built: R 3.4.4; ; 2018-04-05 03:00:45 UTC; windows
+Date/Publication: 2018-05-07 08:48:25 UTC
+Built: R 3.4.4; ; 2018-05-08 07:12:45 UTC; windows
