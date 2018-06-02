@@ -1,12 +1,12 @@
 Package: bit
 Type: Package
-Title: A class for vectors of 1-bit booleans
-Version: 1.1-12
-Date: 2012-01-17
-Author: Jens Oehlschl‰gel <Jens.Oehlschlaegel@truecluster.com>
-Maintainer: Jens Oehlschl‰gel <Jens.Oehlschlaegel@truecluster.com>
+Title: A Class for Vectors of 1-Bit Booleans
+Version: 1.1-14
+Date: 2018-04-11
+Author: Jens Oehlschl√§gel <Jens.Oehlschlaegel@truecluster.com>
+Maintainer: Jens Oehlschl√§gel <Jens.Oehlschlaegel@truecluster.com>
 Depends: R (>= 2.9.2)
-Description: bitmapped vectors of booleans (no NAs), 
+Description: True boolean datatype (no NAs), 
   coercion from and to logicals, integers and integer subscripts; 
   fast boolean operators and fast summary statistics. 
   With 'bit' vectors you can store true binary booleans {FALSE,TRUE} at the 
@@ -29,11 +29,11 @@ Description: bitmapped vectors of booleans (no NAs),
 License: GPL-2
 LazyLoad: yes
 ByteCompile: yes
-Encoding: latin1
+Encoding: UTF-8
 URL: http://ff.r-forge.r-project.org/
-Packaged: 2014-04-08 21:51:43 UTC; jens
 NeedsCompilation: yes
+Packaged: 2018-05-27 20:28:22 UTC; jens
 Repository: CRAN
-Date/Publication: 2014-04-09 09:54:10
-Built: R 3.2.3; x86_64-w64-mingw32; 2015-12-11 01:30:53 UTC; windows
+Date/Publication: 2018-05-29 16:56:33 UTC
+Built: R 3.4.4; x86_64-w64-mingw32; 2018-05-30 18:08:07 UTC; windows
 Archs: i386, x64

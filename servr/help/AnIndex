@@ -1,3 +1,4 @@
+browse_last	browse_last
 daemon_list	daemon_stop
 daemon_stop	daemon_stop
 httd	httd

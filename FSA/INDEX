@@ -39,9 +39,6 @@ WSlit                   All known standard weight equations.
 WhitefishLC             Assigned ages from two readers on three
                         structures for Lake Whitefish from Lake
                         Champlain.
-addRadCap               Add a total radius-at-capture variable to a
-                        data.frame that contains one-fish-per-line
-                        increments data.
 addZeroCatch            Adds zeros for catches of species not collected
                         in some sampling events.
 ageBias                 Compute and view possible differences between
@@ -53,8 +50,6 @@ alkIndivAge             Use an age-length key to assign age to
                         individuals in the unaged sample.
 alkMeanVar              Mean Values-at-age from an Age-Length Key
 alkPlot                 Plots to visualize age-length keys.
-bcFuns                  Creates a function for a specific
-                        back-calculation model.
 binCI                   Confidence intervals for binomial probability
                         of success.
 bootstrap               Case bootstrapping and associated S3 methods.
@@ -94,8 +89,6 @@ fishR                   Opens web pages associated with the fishR
 fitPlot                 Fitted model plot for an lm, glm, or nls
                         object.
 fsaNews                 Read news and changes for the 'FSA' package.
-gConvert                Converts between types of measurements from
-                        calcified structures.
 geomean                 Calculates the geometric mean or geometric
                         standard deviation.
 growthModels            Creates a function for a specific

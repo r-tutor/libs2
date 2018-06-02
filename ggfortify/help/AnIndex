@@ -120,7 +120,6 @@ support_autoplot	support_autoplot
 unscale	unscale
 [,ggmultiplot,ANY,ANY,ANY-method	ggmultiplot-class
 [,ggmultiplot-method	ggmultiplot-class
-[<-,ggmultiplot,ANY,ANY,ANY-method	ggmultiplot-class
 [<-,ggmultiplot-method	ggmultiplot-class
 [[,ggmultiplot-method	ggmultiplot-class
 [[<-,ggmultiplot-method	ggmultiplot-class

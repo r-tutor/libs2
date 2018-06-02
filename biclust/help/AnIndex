@@ -57,6 +57,8 @@ constantVariance	coherence
 densityOnes	binarize
 diagnoseColRow	diagnoseColRow
 diagnosticPlot	diagnosticPlot
+diagnosticPlot2	diagnosticPlot2
+diagnosticTest	diagnosticTest
 discretize	discretize
 drawHeatmap	drawHeatmap
 drawHeatmap2	drawHeatmap

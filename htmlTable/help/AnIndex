@@ -13,6 +13,7 @@ prAddCells	prAddCells
 prAddSemicolon2StrEnd	prAddSemicolon2StrEnd
 prAttr4RgroupAdd	prAttr4RgroupAdd
 prConvertDfFactors	prConvertDfFactors
+prEscapeHtml	prEscapeHtml
 prGetAlign	prGetAlign
 prGetCgroupHeader	prGetCgroupHeader
 prGetRgroupLine	prGetRgroupLine

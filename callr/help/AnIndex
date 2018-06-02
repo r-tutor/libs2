@@ -3,9 +3,8 @@ callr	callr
 convert_and_check_my_args	convert_and_check_my_args
 get_result	get_result
 make_error	make_error
-poll	poll
-process	process
-process_initialize	process_initialize
+poll	reexports
+process	reexports
 r	r
 rcmd	rcmd
 rcmd_bg	rcmd_bg
@@ -14,7 +13,8 @@ rcmd_process	rcmd_process
 rcmd_process_options	rcmd_process_options
 rcmd_safe	rcmd
 rcmd_safe_env	rcmd_safe
-run	run
+reexports	reexports
+run	reexports
 r_bg	r_bg
 r_copycat	r_copycat
 r_process	r_process

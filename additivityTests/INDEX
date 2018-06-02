@@ -1,0 +1,12 @@
+Boik                    Multi-headed Machine Data
+additivityTests-package
+                        Additivity tests in the two way ANOVA with
+                        single sub-class numbers.
+critical.values         Critical Values for the Johnson-Graybill, LBI
+                        and Tusell tests
+johnson.graybill.test   Johnson and Graybill Additivity Test
+lbi.test                Locally Best Invariant (LBI) Additivity Test
+mandel.test             Mandel Additivity Test
+mtukey.test             Modified Tukey Additivity Test
+tukey.test              Tukey Additivity Test
+tusell.test             Tusell Additivity Test

@@ -21,6 +21,8 @@ coherence               Coherence measures
 computeObservedFstat    Diagnostic F Statistic Calculation
 diagnoseColRow          Bootstrap Procedure for Bicluster Diagnostics
 diagnosticPlot          Diagnostic F Statistics Visualization
+diagnosticPlot2         Diagnostics F Statistiics Visualization
+diagnosticTest          Testing Procedure for Bicluster Diagnostics
 discretize              Create a discret matrix
 drawHeatmap             Draw Heatmap
 ensemble                Ensemble Methods for Bicluster Algorithms

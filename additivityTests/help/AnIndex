@@ -1,0 +1,11 @@
+additivityTests-package	additivityTests-package
+additivityTests	additivityTests-package
+Boik	Boik
+critical.values	critical.values
+johnson.graybill.test	johnson.graybill.test
+lbi.test	lbi.test
+mandel.test	mandel.test
+mtukey.test	mtukey.test
+print.aTest	print.aTest
+tukey.test	tukey.test
+tusell.test	tusell.test

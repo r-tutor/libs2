@@ -1,5 +1,5 @@
 # Namespace for bit (currently exporting (almost) everything in order to facilitate debugging)
-# (c) 2009 Jens Oehlsch‰gel
+# (c) 2009 Jens Oehlsch√§gel
 # Licence: GPL2
 # Created: 2009-10-25
 # Last changed: 2009-10-25
@@ -170,10 +170,13 @@ export(
 ,"intisasc"
 ,"intisdesc"
 ,"intrle"
-,"rev.rlepack"
 ,"rlepack"
+,"rlepack.integer"
 ,"rleunpack"
+,"rleunpack.rlepack"
+,"rev.rlepack"
 ,"unique.rlepack"
+,"anyDuplicated.rlepack"
 
 # -- Chunking utilities for bit and ff --
 
@@ -275,9 +278,15 @@ S3method("virtual", default)
 S3method("virtual<-", default)
 S3method("xor", bit)
 S3method("xor", bitwhich)
-#S3method("xor", default)
+S3method("xor", default)
 
 # -- rle.R - rle utilities for bit and ff --
+
+S3method("rlepack", integer)
+S3method("rleunpack", rlepack)
+S3method("rev", rlepack)
+S3method("unique", rlepack)
+S3method("anyDuplicated", rlepack)
 
 # -- Chunking utilities for bit and ff --
 

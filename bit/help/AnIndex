@@ -14,6 +14,7 @@ all.ri	Summary
 any.bit	Summary
 any.bitwhich	Summary
 any.ri	Summary
+anyDuplicated.rlepack	rlepack
 as.bit	as.bit
 as.bit.bit	as.bit
 as.bit.bitwhich	as.bit
@@ -117,7 +118,9 @@ repfromto<-	repfromto
 rev.rlepack	rlepack
 ri	ri
 rlepack	rlepack
+rlepack.integer	rlepack
 rleunpack	rlepack
+rleunpack.rlepack	rlepack
 setattr	setattributes
 setattributes	setattributes
 shellorder	ramsort

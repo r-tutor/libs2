@@ -1,8 +1,12 @@
 MOTHERS                 Supported mother wavelets
 ar1.spectrum            Power spectrum of a random red noise process
-ar1_ma0_sim             Slightly faster arima.sim implementation which
-                        assumes AR(1) and ma=0.
-arrow                   Helper function for phase.plot
+ar1_ma0_sim             Slightly faster 'arima.sim' implementation
+                        which assumes AR(1) and 'ma=0'.
+arrow                   Helper function for 'phase.plot' (not exported)
+arrow2                  This is an alternative helper function that
+                        plots arrows. It uses 'text()' to print a
+                        character using a default font. This way, it is
+                        possible to render different types of arrows.
 biwavelet-package       Conduct Univariate and Bivariate Wavelet
                         Analyses
 check.data              Check the format of time series
@@ -10,7 +14,7 @@ check.datum             Helper function
 convolve2D              Fast column-wise convolution of a matrix
 convolve2D_typeopen     Speed-optimized version of convolve2D
 enviro.data             Multivariate ENSO (MEI), NPGO, and PDO indices
-get_minroots            Helper function
+get_minroots            Helper function (not exported)
 phase.plot              Plot phases with arrows
 plot.biwavelet          Plot 'biwavelet' objects
 pwtc                    Compute partial wavelet coherence
@@ -32,6 +36,5 @@ wt.bases.paul           Helper method (not exported)
 wt.sig                  Determine significance of wavelet transform
 wtc                     Compute wavelet coherence
 wtc.sig                 Determine significance of wavelet coherence
-wtc_sig_parallel        Parallelized Monte Carlo simulation using
-                        'doParallel' package.
+wtc_sig_parallel        Parallel 'wtc.sig'
 xwt                     Compute cross-wavelet

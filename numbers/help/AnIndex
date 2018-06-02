@@ -19,9 +19,11 @@ extGCD	extGCD
 fibonacci	fibonacci
 GCD	GCD
 hermiteNF	hermite
+iNthroot	inthroot
 isIntpower	IsIntpower
 isNatural	isNatural
 isPrime	isprime
+isPrimroot	isPrimroot
 jacobi_sym	legendre_sym
 LCM	GCD
 legendre_sym	legendre_sym
@@ -34,11 +36,13 @@ mLCM	GCD
 mod	mod
 modinv	modinv
 modlin	modlin
+modlog	modlog
 modorder	modpower
 modpower	modpower
 moebius	moebius
 necklace	necklace
 nextPrime	nextprime
+numbers	numbers-package
 Omega	omega
 omega	omega
 ordpn	ordpn

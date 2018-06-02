@@ -1,0 +1,12 @@
+additivityTests 1.1
+----------------------------------------------------------------
+
+BUG FIXES
+
+* "tusell" was previously misspelled as "tussel" (my apologies to F. Tusell)
+* bug in critical values quantile in lbi.test corrected
+
+MINOR FEATURES
+
+* Vignette added
+* NEWS file added

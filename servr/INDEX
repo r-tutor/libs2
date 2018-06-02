@@ -1,3 +1,4 @@
+browse_last             Reopen the last browsed page
 daemon_stop             Utilities for daemonized servers
 httd                    Serve static files under a directory
 jekyll                  Serve R Markdown based websites

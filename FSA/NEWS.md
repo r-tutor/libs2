@@ -1,5 +1,16 @@
+# FSA 0.8.20 17-May-18
+* Added `asbio`, `DescTools`, `nlme`, and `psych` packages to Suggests because they are used in tests (and as will soon be required by CRAN ... per an e-mail from CRAN on 17-May-18).
+* Fixed a bunch of bad links to other packages in the documentation.
+* Removed the "Date" field from the Description file.
+* `addRadCap()`: Removed. Moved to `RFishBC` package.
+* `bcFuns()`: Removed. Moved to `RFishBC` package.
+* `gConvert()`: Removed. Moved to `RFishBC` package.
+* `mrClosed()`: Modified. Fixed a bug that was related to `poiCI()` returning results from all four types. Now `mrClosed()` will use only one type. Thanks to Timothy Spiers for pointing out this bug.
+* `SMBassWB`: Modified. Fixed minor data entry error in row 404. Changed link in documentation from `alr3` to `alr4` package.
+
+
 # FSA 0.8.19 2-Apr-18
-* `addZeroCatch`: Modified. Changed two `1:nrow()` structures to `seq_len(nrow())` (partially addressing [#36](https://github.com/droglenc/FSA/issues/36)).
+* `addZeroCatch()`: Modified. Changed two `1:nrow()` structures to `seq_len(nrow())` (partially addressing [#36](https://github.com/droglenc/FSA/issues/36)).
 * `ageBias()`: Modified. Changed all `1:` structures to `seq_len()` (partially addressing [#36](https://github.com/droglenc/FSA/issues/36)).
 * `agePrecision()`: Modified. Changed all `1:` structures to `seq_len()` (partially addressing [#36](https://github.com/droglenc/FSA/issues/36)).
 * `bcFuns()`: Modified. Changed three `1:length()` structures to `seq_along()` (partially addressing [#36](https://github.com/droglenc/FSA/issues/36)).

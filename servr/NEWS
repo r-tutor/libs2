@@ -1,3 +1,13 @@
+		 CHANGES IN servr VERSION 0.10
+
+NEW FEATURES
+
+- Added a function `browse_last()` to reopen the last browsed page.
+
+MAJOR CHANGES
+
+- The `daemon` argument in `server_config()` now defaults to `interactive()`, i.e., **servr** starts a daemonized server that does not block your interactive R session by default.
+
 		 CHANGES IN servr VERSION 0.9
 
 BUG FIXES

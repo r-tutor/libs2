@@ -1,6 +1,5 @@
 FSA-package	FSA
 .onAttach	FSA-internals
-addRadCap	addRadCap
 addZeroCatch	addZeroCatch
 ageBias	ageBias
 agePrecision	agePrecision
@@ -10,7 +9,6 @@ alkMeanVar	alkMeanVar
 alkPlot	alkPlot
 anova.catchCurve	catchCurve
 anova.depletion	depletion
-bcFuns	bcFuns
 binCI	binCI
 BluegillJL	BluegillJL
 bootCase	bootCase
@@ -72,7 +70,6 @@ FSA	FSA
 FSANews	fsaNews
 fsaNews	fsaNews
 FSAUtils	FSAUtils
-gConvert	gConvert
 geomean	geomean
 geosd	geomean
 GompertzFuns	growthModels

@@ -28,5 +28,5 @@ handling large datasets, together with packages 'rindex' and 'ff'.
 Best regards
 
 
-Jens Oehlschlägel
+Jens OehlschlÃ¤gel
 Munich, 10.10.2008

@@ -1,4 +1,51 @@
-    CHANGES IN bit VERSION 1.1-12
+        CHANGES IN bit VERSION 1.1-14
+
+BUG FIXES
+
+    o bit[i] and bit[i]<-v now check for non-positive integers
+      which prevents a segfault when bit[NA] or bit[NA]<-v
+
+
+
+        CHANGES IN bit VERSION 1.1-13
+
+USER VISIBLE CHANGES
+
+    o logical NA is now mapped to bit FALSE as in ff booleans
+    o extractor function '[.bit' with positive numeric subscripts
+	  (integer, double, bitwhich) now behaves like '[.logical' and returns 
+	  NA for out-of-bound requests and no element for 0
+    o extractor function '[[.bit' with positive numeric (integer, double, 
+      bitwhich) subscripts now behaves like '[[.logical' and throws an error
+      for out-of-bound requests
+    o extractor function '[.bit' with range index subscripts (ri)
+      subscripts now behaves like '[[.bit' and throws an error
+      for out-of-bound requests
+    o assignment functions '[<-.bit' and '[[<-.bit' with positive numeric 
+      (integer, double, bitwhich) subscripts now behave like '[<-.logical' and
+      '[[<-.logical' and silently increase vector length if necessary
+    o assignment function '[<-.bit' with range index subscripts (ri) now 
+      behaves like '[[<-.bit' and silently increases vector length if necessary
+    o rlepack() is now a generic with a method for class 'integer'
+    o rleunpack() is now a generic with a method for class 'rlepack'
+    o unique.rlepack() now gives correct results for unordered sequences
+    o anyDuplicated.rlepack() now returns the position of the first
+	  duplicate and gives correct results for unordered sequences
+
+TUNING
+
+    o The package can now compiled with 64bit words instead of 32bit words,
+      since we only measured a minor speedup, we left 32bit as the default.
+
+BUG FIXES
+
+    o extractor and assignment functions now check for legal (positive) 
+      subscript bounds, hence illegally large subscripts or zero no longer 
+      cause memory violations
+
+    
+    
+CHANGES IN bit VERSION 1.1-12
 
 NEW FEATURES
 
@@ -8,26 +55,26 @@ NEW FEATURES
 BUG FIXES
 
     o bit[bitwhich] is now subscripting properly (VALGRIND)
-	o UBSAN should no longer complain about left shift of int
+    o UBSAN should no longer complain about left shift of int
       (although that never was a problem)
 
-	
-	
+    
+    
     CHANGES IN bit VERSION 1.1-10
 
 
 TUNING
 
     o function 'vecseq' now calls C-code when calling with the default 
-	  parameters 'concat=TRUE, eval=TRUE' (wish of Matthew Dowle)
+      parameters 'concat=TRUE, eval=TRUE' (wish of Matthew Dowle)
 
 BUG FIXES
 
     o all.bit no longer ignores TRUE values in the second and following words
-	  (spotted by Nelson Chen)
+      (spotted by Nelson Chen)
 
-	
-	
+    
+    
     CHANGES IN bit VERSION 1.1-9
 
 
@@ -35,13 +82,13 @@ NEW FEATURES
 
     o new function 'repeat.time' for adaptive timing
 
-	
+    
 CODE ORGANIZATION
 
     o generics for sorting and ordering have been moved from 'ff' to 'bit'
-	
-	
-	
+    
+    
+    
     CHANGES IN bit VERSION 1.1-7
 
 
