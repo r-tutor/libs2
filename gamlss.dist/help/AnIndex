@@ -1,4 +1,4 @@
-gamlss.dist-package	gamlss.dist.package
+gamlss.dist-package	gamlss.dist-package
 as.family	gamlss.family
 as.gamlss.family	gamlss.family
 BB	BB
@@ -97,6 +97,7 @@ dSHASHo	SHASH
 dSHASHo2	SHASH
 dSI	SI
 dSICHEL	SICHEL
+dSIMPLEX	SIMPLEX
 dSN1	SN1
 dSN2	SN2
 dSST	ST1
@@ -145,7 +146,7 @@ Family.r	gen.Family
 fittedMN	Multinomial
 flexDist	flexDist
 GA	GA
-gamlss.dist	gamlss.dist.package
+gamlss.dist	gamlss.dist-package
 gamlss.family	gamlss.family
 gamlss.family.default	gamlss.family
 GB1	GB1
@@ -283,6 +284,7 @@ pSHASHo	SHASH
 pSHASHo2	SHASH
 pSI	SI
 pSICHEL	SICHEL
+pSIMPLEX	SIMPLEX
 pSN1	SN1
 pSN2	SN2
 pSST	ST1
@@ -392,6 +394,7 @@ qSHASHo	SHASH
 qSHASHo2	SHASH
 qSI	SI
 qSICHEL	SICHEL
+qSIMPLEX	SIMPLEX
 qSN1	SN1
 qSN2	SN2
 qSST	ST1
@@ -503,6 +506,7 @@ rSHASHo	SHASH
 rSHASHo2	SHASH
 rSI	SI
 rSICHEL	SICHEL
+rSIMPLEX	SIMPLEX
 rSN1	SN1
 rSN2	SN2
 rSST	ST1
@@ -551,6 +555,7 @@ SHASHo2	SHASH
 show.link	make.link.gamlss
 SI	SI
 SICHEL	SICHEL
+SIMPLEX	SIMPLEX
 SN1	SN1
 SN2	SN2
 SST	ST1

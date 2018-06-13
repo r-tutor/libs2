@@ -1,14 +1,14 @@
 Package: gamlss.dist
+Type: Package
 Title: Distributions for Generalized Additive Models for Location Scale
         and Shape
-Version: 5.0-5
-Date: 2018-04-30
-Author: c(person("Mikis", "Stasinopoulos", role = c("aut", "cre", "cph"), 
+Version: 5.0-6
+Date: 2018-05-25
+Authors@R: c(person("Mikis", "Stasinopoulos", role = c("aut", "cre", "cph"), 
            email = "d.stasinopoulos@londonmet.ac.uk"),
-           person("Bob", "Rigby", role = c("aut")), 
+           person("Robert", "Rigby", role = c("aut"), email = "r.rigby@londonmet.ac.uk"), 
            person("Calliope", "Akantziliotou", role = "ctb"),
-           person("Vlasios", "Voudouris", role = "ctb",  
-           email= "vlasios.voudouris@abm-analytics.com"),
+           person("Vlasios", "Voudouris", role = "ctb"),
            person("Gillian", "Heller", role = "ctb"),
            person("Raydonal", "Ospina", role = "ctb",  
            email= "rospina@ime.usp.br"),
@@ -18,16 +18,29 @@ Author: c(person("Mikis", "Stasinopoulos", role = c("aut", "cre", "cph"),
            person("Marco", "Enea", role = "ctb"),
            person("Alexios", "Ghalanos", role = "ctb"),
            person("Christos", "Argyropoulos", role = "ctb"),
-            person("Almond", "Stocker", role = "ctb")
+           person("Almond", "Stocker", role = "ctb")
            )
-Maintainer: Mikis Stasinopoulos <d.stasinopoulos@londonmet.ac.uk>
-Depends: R (>= 2.15.0), MASS, graphics, stats, methods
-Description: A set of distributions  which can be used  for modelling the response variables in Generalized Additive Models for Location Scale and Shape, Rigby and Stasinopoulos (2005), <doi:10.1111/j.1467-9876.2005.00510.x>.  The distributions can be continuous, discrete or mixed  distributions. Extra distributions can be created, by transforming, any continuous distribution defined on the real line,  to  a distribution defined on ranges 0 to infinity  or  0 to 1, by using a "log" or a "logit" transformation respectively. 
+Description: A set of distributions  which can be used  for modelling the response variables in Generalized Additive Models for Location Scale and Shape, Rigby and Stasinopoulos (2005), <doi:10.1111/j.1467-9876.2005.00510.x>. The distributions can be continuous, discrete or mixed  distributions.  Extra distributions can be created, by transforming, any continuous distribution defined on the real line,  to  a distribution defined on ranges 0 to infinity  or  0 to 1,  by using a ''log'' or a ''logit' transformation respectively. 
 License: GPL-2 | GPL-3
 URL: http://www.gamlss.org/
-NeedsCompilation: yes
-Packaged: 2018-04-30 16:27:10 UTC; MikisStasinopoulos
+Depends: R (>= 2.15.0), MASS, graphics, stats, methods
 Repository: CRAN
-Date/Publication: 2018-04-30 18:38:04 UTC
-Built: R 3.4.4; x86_64-w64-mingw32; 2018-05-01 14:56:53 UTC; windows
+Author: Mikis Stasinopoulos [aut, cre, cph],
+  Robert Rigby [aut],
+  Calliope Akantziliotou [ctb],
+  Vlasios Voudouris [ctb],
+  Gillian Heller [ctb],
+  Raydonal Ospina [ctb],
+  Nicoletta Motpan [ctb],
+  Fiona McElduff [ctb],
+  Majid Djennad [ctb],
+  Marco Enea [ctb],
+  Alexios Ghalanos [ctb],
+  Christos Argyropoulos [ctb],
+  Almond Stocker [ctb]
+Maintainer: Mikis Stasinopoulos <d.stasinopoulos@londonmet.ac.uk>
+NeedsCompilation: yes
+Packaged: 2018-06-06 09:05:36 UTC; MikisStasinopoulos
+Date/Publication: 2018-06-06 09:47:56 UTC
+Built: R 3.4.4; x86_64-w64-mingw32; 2018-06-06 14:32:28 UTC; windows
 Archs: i386, x64

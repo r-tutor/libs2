@@ -85,6 +85,7 @@ SI                      The Sichel dustribution for fitting a GAMLSS
                         model
 SICHEL                  The Sichel distribution for fitting a GAMLSS
                         model
+SIMPLEX                 The simplex distribution for fitting a GAMLSS
 SN1                     Skew Normal Type 1 distribution for fitting a
                         GAMLSS
 SN2                     Skew Normal Type 2 distribution for fitting a
@@ -122,7 +123,8 @@ checklink               Set the Right Link Function for Specified
 exGAUS                  The ex-Gaussian distribution
 flexDist                Non-parametric pdf from limited information
                         data
-gamlss.dist-package     The GAMLSS distributions
+gamlss.dist-package     Distributions for Generalized Additive Models
+                        for Location Scale and Shape
 gamlss.family           Family Objects for fitting a GAMLSS model
 gen.Family              Functions to generate log and logit
                         distributions from existing continuous
