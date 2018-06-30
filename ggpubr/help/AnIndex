@@ -26,6 +26,7 @@ ggballoonplot	ggballoonplot
 ggbarplot	ggbarplot
 ggboxplot	ggboxplot
 ggdensity	ggdensity
+ggdonutchart	ggdonutchart
 ggdotchart	ggdotchart
 ggdotplot	ggdotplot
 ggecdf	ggecdf

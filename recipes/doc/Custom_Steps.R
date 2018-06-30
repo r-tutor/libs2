@@ -18,7 +18,7 @@ str(biomass)
 biomass_tr <- biomass[biomass$dataset == "Training",]
 biomass_te <- biomass[biomass$dataset == "Testing",]
 
-## ----carbon_dist---------------------------------------------------------
+## ----carbon_dist, fig.width=6, fig.height=4.25,  out.width = '100%'------
 library(ggplot2)
 theme_set(theme_bw())
 ggplot(biomass_tr, aes(x = carbon)) + 
@@ -93,17 +93,29 @@ prep.step_percentile <- function(x, training, info = NULL, ...) {
     stop("`names` should be set to TRUE", call. = FALSE)
   
   if(!x$approx) {
-    x$ref_dist <- training[, col_names]
+    ref_dist <- training[, col_names]
   } else {
     pctl <- lapply(
       training[, col_names],  
       get_pctl, 
       args = x$options
     )
-    x$ref_dist <- pctl
+    ref_dist <- pctl
   }
-  ## Always return the updated step
-  x
+
+  ## It is a good idea to use the constructor function
+  ## to return the updated object. Note that `trained` is
+  ## set to TRUE
+  
+  step_percentile_new(
+    terms = x$terms, 
+    trained = TRUE,
+    role = x$role, 
+    ref_dist = ref_dist,
+    approx = x$approx,
+    options = x$options,
+    skip = x$skip
+  )
 }
 
 ## ----bake----------------------------------------------------------------
@@ -146,7 +158,7 @@ rec_obj <- prep(rec_obj, training = biomass_tr)
 percentiles <- bake(rec_obj, biomass_te)
 percentiles
 
-## ----cdf_plot, echo = FALSE----------------------------------------------
+## ----cdf_plot, echo = FALSE, fig.width=6, fig.height=4.25,  out.width = '100%'----
 grid_pct <- rec_obj$steps[[1]]$options$probs
 plot_data <- data.frame(
   carbon = c(

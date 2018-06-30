@@ -21,7 +21,7 @@ Encoding: UTF-8
 Packaged: 2018-02-14 12:30:29 UTC; ripley
 Author: Friedrich Leisch [aut, cre],
   Evgenia Dimitriadou [ctb]
-Maintainer: ORPHANED
+Maintainer: Friedrich Leisch <Friedrich.Leisch@R-project.org>
 NeedsCompilation: yes
 X-CRAN-Comment: Orphaned and corrected on 2018-02-14 as check errors
         were not corrected despite reminders.
@@ -29,8 +29,6 @@ X-CRAN-Comment: Orphaned and corrected on 2018-02-14 as check errors
  Included incorrect formula for Canberra distance, no registration,
         missing imports.
 Repository: CRAN
-Date/Publication: 2018-02-14 14:38:52
-X-CRAN-Original-Maintainer: Friedrich Leisch
-        <Friedrich.Leisch@R-project.org>
-Built: R 3.4.3; x86_64-w64-mingw32; 2018-02-15 17:43:59 UTC; windows
+Date/Publication: 2018-02-14 13:38:47 UTC
+Built: R 3.5.0; x86_64-w64-mingw32; 2018-06-22 08:25:20 UTC; windows
 Archs: i386, x64

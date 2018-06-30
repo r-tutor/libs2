@@ -4,10 +4,14 @@ bake                    Apply a Trained Data Recipe
 biomass                 Biomass Data
 check_cols              Check if all Columns are Present
 check_missing           Check for Missing Values
+check_range             Check Range Consistency
 covers                  Raw Cover Type Data
 credit_data             Credit Data
+detect_step             Detect if a particular step or check is used in
+                        a recipe
 discretize              Discretize Numeric Variables
 formula.recipe          Create a Formula from a Prepared Recipe
+fully_trained           Check to see if a recipe is trained/prepared
 has_role                Role Selection
 juice                   Extract Finalized Training Set
 names0                  Naming Tools
@@ -40,10 +44,12 @@ step_hyperbolic         Hyperbolic Transformations
 step_ica                ICA Signal Extraction
 step_interact           Create Interaction Variables
 step_intercept          Add intercept (or constant) column
+step_inverse            Inverse Transformation
 step_invlogit           Inverse Logit Transformation
 step_isomap             Isomap Embedding
 step_knnimpute          Imputation via K-Nearest Neighbors
 step_kpca               Kernel PCA Signal Extraction
+step_lag                Create a lagged predictor
 step_lincomb            Linear Combination Filter
 step_log                Logarithmic Transformation
 step_logit              Logit Transformation
@@ -51,6 +57,7 @@ step_lowerimpute        Impute Numeric Data Below the Threshold of
                         Measurement
 step_meanimpute         Impute Numeric Data Using the Mean
 step_modeimpute         Impute Nominal Data Using the Most Common Value
+step_naomit             Remove observations with missing values
 step_novel              Simple Value Assignments for Novel Factor
                         Levels
 step_ns                 Nature Spline Basis Functions
@@ -59,6 +66,7 @@ step_nzv                Near-Zero Variance Filter
 step_ordinalscore       Convert Ordinal Factors to Numeric Scores
 step_other              Collapse Some Categorical Levels
 step_pca                PCA Signal Extraction
+step_pls                Partial Least Squares Feature Extraction
 step_poly               Orthogonal Polynomial Basis Functions
 step_profile            Create a Profiling Version of a Data Set
 step_range              Scaling Numeric Data to a Specific Range
@@ -68,6 +76,8 @@ step_regex              Create Dummy Variables using Regular
 step_relu               Apply (Smoothed) Rectified Linear
                         Transformation
 step_rm                 General Variable Filter
+step_rollimpute         Impute Numeric Data Using a Rolling Window
+                        Statistic
 step_scale              Scaling Numeric Data
 step_shuffle            Shuffle Variables
 step_spatialsign        Spatial Sign Preprocessing

@@ -42,5 +42,5 @@ Maintainer: Mikis Stasinopoulos <d.stasinopoulos@londonmet.ac.uk>
 NeedsCompilation: yes
 Packaged: 2018-06-06 09:05:36 UTC; MikisStasinopoulos
 Date/Publication: 2018-06-06 09:47:56 UTC
-Built: R 3.4.4; x86_64-w64-mingw32; 2018-06-06 14:32:28 UTC; windows
+Built: R 3.5.0; x86_64-w64-mingw32; 2018-06-22 08:27:36 UTC; windows
 Archs: i386, x64

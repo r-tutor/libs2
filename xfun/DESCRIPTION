@@ -1,23 +1,26 @@
 Package: xfun
 Type: Package
 Title: Miscellaneous Functions by 'Yihui Xie'
-Version: 0.1
+Version: 0.2
 Authors@R: c(
   person("Yihui", "Xie", role = c("aut", "cre", "cph"), email = "xie@yihui.name", comment = c(ORCID = "0000-0003-0645-5666")),
   person()
   )
 Description: Miscellaneous functions commonly used in other packages maintained by 'Yihui Xie'.
-Suggests: testit
+Imports: tools
+Suggests: testit, parallel, rstudioapi, tinytex, mime, markdown, knitr,
+        rmarkdown
 License: MIT + file LICENSE
 URL: https://github.com/yihui/xfun
 BugReports: https://github.com/yihui/xfun/issues
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
+VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2018-01-16 17:04:15 UTC; yihui
-Author: Yihui Xie [aut, cre, cph] (0000-0003-0645-5666)
+Packaged: 2018-06-16 04:34:24 UTC; yihui
+Author: Yihui Xie [aut, cre, cph] (<https://orcid.org/0000-0003-0645-5666>)
 Maintainer: Yihui Xie <xie@yihui.name>
 Repository: CRAN
-Date/Publication: 2018-01-22 15:42:23 UTC
-Built: R 3.4.3; ; 2018-01-24 13:28:49 UTC; windows
+Date/Publication: 2018-06-16 04:52:57 UTC
+Built: R 3.5.0; ; 2018-06-22 08:41:37 UTC; windows

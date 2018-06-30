@@ -20,6 +20,7 @@ ggballoonplot           Ballon plot
 ggbarplot               Bar plot
 ggboxplot               Box plot
 ggdensity               Density plot
+ggdonutchart            Donut chart
 ggdotchart              Cleveland's Dot Plots
 ggdotplot               Dot plot
 ggecdf                  Empirical cumulative density function

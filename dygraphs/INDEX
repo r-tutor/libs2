@@ -2,7 +2,8 @@ dyAnnotation            Annotation for dygraph chart
 dyAxis                  dygraph axis
 dyCSS                   CSS for dygraph labels and legend
 dyCallbacks             Callbacks for dygraph events
-dyCandlestick           Candlestick plotter for dygraph chart
+dyCandlestick           Employ a dygraph plotter on a series, a group
+                        of series, or the whole dygraph
 dyCrosshair             The dyCrosshair plugin draws a crosshair line
                         over the point closest to the mouse when the
                         user hovers over the graph. It has a
@@ -13,6 +14,7 @@ dyCrosshair             The dyCrosshair plugin draws a crosshair line
 dyDataHandler           Include a dygraph data handler
 dyDependency            Add external assets as a dygraph dependency
 dyEvent                 dygraph event line
+dyGroup                 dygraph series group
 dyHighlight             dygraph series mouse-over highlighting
 dyLegend                dygraph legend
 dyLimit                 dygraph limit line

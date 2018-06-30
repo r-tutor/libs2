@@ -30,5 +30,5 @@ X-CRAN-Comment: Orphaned and corrected on 2018-06-09 as check errors
         fflush(stdin) is undefined behaviour (or pointless in POSIX
         2008).
 Date/Publication: 2018-06-09 16:25:13 UTC
-Built: R 3.4.4; x86_64-w64-mingw32; 2018-06-12 01:18:46 UTC; windows
+Built: R 3.5.0; x86_64-w64-mingw32; 2018-06-22 14:18:35 UTC; windows
 Archs: i386, x64

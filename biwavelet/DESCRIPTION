@@ -21,5 +21,5 @@ NeedsCompilation: yes
 Packaged: 2018-05-19 15:26:38 UTC; tarik
 Repository: CRAN
 Date/Publication: 2018-05-19 22:54:19 UTC
-Built: R 3.4.4; x86_64-w64-mingw32; 2018-05-30 22:06:46 UTC; windows
+Built: R 3.5.0; x86_64-w64-mingw32; 2018-06-22 12:09:41 UTC; windows
 Archs: i386, x64

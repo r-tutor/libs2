@@ -21,6 +21,7 @@ autolayer.mforecast	plot.mforecast
 autolayer.msts	autoplot.ts
 autolayer.mts	autoplot.ts
 autolayer.ts	autoplot.ts
+autoplot	reexports
 autoplot.acf	autoplot.acf
 autoplot.ar	plot.Arima
 autoplot.Arima	plot.Arima
@@ -62,6 +63,7 @@ fitted.Arima	fitted.Arima
 fitted.bats	fitted.Arima
 fitted.ets	fitted.Arima
 fitted.fracdiff	fitted.Arima
+fitted.modelAR	fitted.Arima
 fitted.nnetar	fitted.Arima
 fitted.tbats	fitted.Arima
 forecast	forecast
@@ -75,6 +77,7 @@ forecast.fracdiff	forecast.Arima
 forecast.HoltWinters	forecast.HoltWinters
 forecast.lm	forecast.lm
 forecast.mlm	forecast.mlm
+forecast.modelAR	forecast.modelAR
 forecast.mts	forecast.mts
 forecast.nnetar	forecast.nnetar
 forecast.stl	forecast.stl
@@ -122,6 +125,7 @@ is.constant	is.constant
 is.ets	is.ets
 is.forecast	is.forecast
 is.mforecast	is.forecast
+is.modelAR	is.ets
 is.nnetar	is.ets
 is.nnetarmodels	is.ets
 is.splineforecast	is.forecast
@@ -129,6 +133,7 @@ is.stlm	is.ets
 ma	ma
 meanf	meanf
 mforecast	forecast.mts
+modelAR	modelAR
 monthdays	monthdays
 mstl	mstl
 msts	msts
@@ -154,6 +159,7 @@ print.CVar	CVar
 print.ets	ets
 print.forecast	forecast
 print.mforecast	forecast.mts
+print.modelAR	modelAR
 print.msts	msts
 print.naive	naive
 print.nnetar	nnetar
@@ -188,6 +194,7 @@ simulate.ar	simulate.ets
 simulate.Arima	simulate.ets
 simulate.ets	simulate.ets
 simulate.fracdiff	simulate.ets
+simulate.modelAR	simulate.ets
 simulate.nnetar	simulate.ets
 sindexf	sindexf
 snaive	naive

@@ -45,5 +45,5 @@ Author: Vincent Goulet [cre, aut],
 Maintainer: Vincent Goulet <vincent.goulet@act.ulaval.ca>
 Repository: CRAN
 Date/Publication: 2018-03-19 19:21:00 UTC
-Built: R 3.4.3; x86_64-w64-mingw32; 2018-03-20 22:44:13 UTC; windows
+Built: R 3.5.0; x86_64-w64-mingw32; 2018-06-22 08:25:00 UTC; windows
 Archs: i386, x64

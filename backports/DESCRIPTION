@@ -23,5 +23,5 @@ Packaged: 2017-12-13 12:28:04 UTC; michel
 Author: Michel Lang [cre, aut] (0000-0001-9754-0393)
 Repository: CRAN
 Date/Publication: 2017-12-13 17:33:42 UTC
-Built: R 3.4.3; x86_64-w64-mingw32; 2017-12-17 10:05:53 UTC; windows
+Built: R 3.5.0; x86_64-w64-mingw32; 2018-04-21 03:24:21 UTC; windows
 Archs: i386, x64

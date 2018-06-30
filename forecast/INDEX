@@ -56,6 +56,7 @@ forecast.lm             Forecast a linear model with possible time
                         series components
 forecast.mlm            Forecast a multiple linear model with possible
                         time series components
+forecast.modelAR        Forecasting using user-defined model
 forecast.mts            Forecasting time series
 forecast.nnetar         Forecasting using neural network models
 forecast.stl            Forecasting using stl objects
@@ -74,6 +75,7 @@ is.constant             Is an object constant?
 is.forecast             Is an object a particular forecast type?
 ma                      Moving-average smoothing
 meanf                   Mean Forecast
+modelAR                 Time Series Forecasts with a user-defined model
 monthdays               Number of days in each season
 mstl                    Multiple seasonal decomposition
 msts                    Multi-Seasonal Time Series

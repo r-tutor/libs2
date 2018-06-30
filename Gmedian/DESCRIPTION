@@ -14,5 +14,5 @@ NeedsCompilation: yes
 Packaged: 2017-09-15 14:49:49 UTC; herve
 Repository: CRAN
 Date/Publication: 2017-09-15 20:26:10 UTC
-Built: R 3.4.1; i386-w64-mingw32; 2017-09-16 18:34:18 UTC; windows
+Built: R 3.5.0; x86_64-w64-mingw32; 2018-06-22 11:57:19 UTC; windows
 Archs: i386, x64

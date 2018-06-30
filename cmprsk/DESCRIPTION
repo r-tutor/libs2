@@ -17,5 +17,5 @@ Packaged: 2014-06-17 18:45:38 UTC; gray
 NeedsCompilation: yes
 Repository: CRAN
 Date/Publication: 2014-06-17 23:16:43
-Built: R 3.2.2; x86_64-w64-mingw32; 2015-08-15 16:11:50 UTC; windows
+Built: R 3.5.0; x86_64-w64-mingw32; 2018-06-22 08:29:00 UTC; windows
 Archs: i386, x64

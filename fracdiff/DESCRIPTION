@@ -14,5 +14,5 @@ License: GPL (>= 2)
 Packaged: 2012-12-01 23:24:14 UTC; maechler
 Repository: CRAN
 Date/Publication: 2012-12-02 07:08:12
-Built: R 3.3.1; x86_64-w64-mingw32; 2016-08-24 00:46:39 UTC; windows
+Built: R 3.5.0; x86_64-w64-mingw32; 2018-06-22 08:39:28 UTC; windows
 Archs: i386, x64

@@ -1,7 +1,7 @@
 Package: crosstalk
 Type: Package
 Title: Inter-Widget Interactivity for HTML Widgets
-Version: 1.0.1
+Version: 1.0.0
 Authors@R: c(
     person("Joe", "Cheng", role = c("aut", "cre"), email = "joe@rstudio.com"),
     person(family = "RStudio", role = "cph"),
@@ -37,6 +37,8 @@ Imports: htmltools (>= 0.3.5), jsonlite, lazyeval, R6, shiny (>= 0.11),
 URL: https://rstudio.github.io/crosstalk/
 BugReports: https://github.com/rstudio/crosstalk/issues
 RoxygenNote: 5.0.1
+NeedsCompilation: no
+Packaged: 2016-12-20 20:01:51 UTC; jcheng
 Author: Joe Cheng [aut, cre],
   RStudio [cph],
   jQuery Foundation [cph] (jQuery library and jQuery UI library),
@@ -52,14 +54,6 @@ Author: Joe Cheng [aut, cre],
   Denis Ineshin [ctb, cph] (ion.rangeSlider library),
   Sami Samhuri [ctb, cph] (Javascript strftime library)
 Maintainer: Joe Cheng <joe@rstudio.com>
-Built: R 3.4.1; ; 2017-07-04 18:22:20 UTC; windows
-RemoteType: github
-RemoteHost: https://api.github.com
-RemoteRepo: crosstalk
-RemoteUsername: jcheng5
-RemoteRef: master
-RemoteSha: d8f29eb0c59e67e92905530e55b45d83d227ca46
-GithubRepo: crosstalk
-GithubUsername: jcheng5
-GithubRef: master
-GithubSHA1: d8f29eb0c59e67e92905530e55b45d83d227ca46
+Repository: CRAN
+Date/Publication: 2016-12-21 08:30:32
+Built: R 3.5.0; ; 2018-06-22 13:11:08 UTC; windows

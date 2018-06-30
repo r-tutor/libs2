@@ -17,5 +17,5 @@ NeedsCompilation: yes
 Packaged: 2016-05-02 09:21:53 UTC; rsb
 Repository: CRAN
 Date/Publication: 2016-05-02 14:27:02
-Built: R 3.3.2; x86_64-w64-mingw32; 2017-02-12 16:53:46 UTC; windows
+Built: R 3.5.0; x86_64-w64-mingw32; 2018-06-22 10:05:30 UTC; windows
 Archs: i386, x64

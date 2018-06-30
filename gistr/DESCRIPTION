@@ -10,9 +10,11 @@ Description: Work with 'GitHub' 'gists' from 'R' (e.g.,
     'gist' 'commits', and get rate limit information when 'authenticated'. Some
     requests require authentication and some do not. 'Gists' website: 
     <https://gist.github.com/>.
-Version: 0.4.0
+Version: 0.4.2
 Authors@R: c(
-    person("Scott", "Chamberlain", role = c("aut", "cre"), email = "myrmecocystus@gmail.com"),
+    person("Scott", "Chamberlain", role = c("aut", "cre"), 
+        email = "myrmecocystus@gmail.com", 
+        comment = c(ORCID="0000-0003-1444-9135")),
     person("Ramnath", "Vaidyanathan", role = "aut"),
     person("Karthik", "Ram", role = "aut")
   )
@@ -22,14 +24,18 @@ BugReports: https://github.com/ropensci/gistr/issues
 VignetteBuilder: knitr
 Imports: jsonlite (>= 1.4), httr (>= 1.2.0), magrittr, assertthat,
         knitr, rmarkdown, dplyr
-Suggests: roxygen2 (>= 6.0.1), git2r, testthat
+Suggests: git2r, testthat
 RoxygenNote: 6.0.1
+X-schema.org-applicationCategory: Web
+X-schema.org-keywords: http, https, API, web-services, GitHub, GitHub
+        API, gist, gists, code, script, snippet
+X-schema.org-isPartOf: https://ropensci.org
 NeedsCompilation: no
-Packaged: 2017-04-20 19:42:16 UTC; sacmac
-Author: Scott Chamberlain [aut, cre],
+Packaged: 2018-06-27 22:31:37 UTC; sckott
+Author: Scott Chamberlain [aut, cre] (<https://orcid.org/0000-0003-1444-9135>),
   Ramnath Vaidyanathan [aut],
   Karthik Ram [aut]
 Maintainer: Scott Chamberlain <myrmecocystus@gmail.com>
 Repository: CRAN
-Date/Publication: 2017-04-20 23:40:22 UTC
-Built: R 3.3.3; ; 2017-04-21 18:23:14 UTC; windows
+Date/Publication: 2018-06-28 05:05:47 UTC
+Built: R 3.5.0; ; 2018-06-29 22:50:44 UTC; windows
