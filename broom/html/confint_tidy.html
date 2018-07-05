@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Calculate confidence interval as a tidy data frame</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for confint_tidy {broom}"><tr><td>confint_tidy {broom}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Calculate confidence interval as a tidy data frame</h2>
+
+<h3>Description</h3>
+
+<p>Return a confidence interval as a tidy data frame. This directly wraps the
+<code><a href="../../stats/html/confint.html">confint</a></code> function, but ensures it folllows broom conventions:
+column names of <code>conf.low</code> and <code>conf.high</code>, and no row names
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+confint_tidy(x, conf.level = 0.95, func = stats::confint, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a model object for which <code><a href="../../stats/html/confint.html">confint</a></code> can be calculated</p>
+</td></tr>
+<tr valign="top"><td><code>conf.level</code></td>
+<td>
+<p>confidence level</p>
+</td></tr>
+<tr valign="top"><td><code>func</code></td>
+<td>
+<p>Function to use for computing confint</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>extra arguments passed on to <code>confint</code></p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A data frame with two columns: <code>conf.low</code> and <code>conf.high</code>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><a href="../../stats/html/confint.html">confint</a>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

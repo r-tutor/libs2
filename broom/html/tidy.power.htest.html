@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: tidy a power.htest</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for tidy.power.htest {broom}"><tr><td>tidy.power.htest {broom}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>tidy a power.htest</h2>
+
+<h3>Description</h3>
+
+<p>tidy a power.htest
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'power.htest'
+tidy(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a power.htest object</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>extra arguments, not used</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A data frame with one row per parameter passed in, with
+columns <code>n</code>, <code>delta</code>, <code>sd</code>, <code>sig.level</code>, and
+<code>power</code> (from the <code>power.htest</code> object).
+</p>
+
+
+<h3>See Also</h3>
+
+<p><a href="../../stats/html/power.t.test.html">power.t.test</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+ptt &lt;- power.t.test(n = 2:30, delta = 1)
+tidy(ptt)
+
+library(ggplot2)
+ggplot(tidy(ptt), aes(n, power)) + geom_line()
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

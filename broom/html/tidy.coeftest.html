@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Tidying methods for coeftest objects</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for tidy.coeftest {broom}"><tr><td>tidy.coeftest {broom}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Tidying methods for coeftest objects</h2>
+
+<h3>Description</h3>
+
+<p>This tidies the result of a coefficient test, from the <code>coeftest</code>
+function in the <code>lmtest</code> package.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'coeftest'
+tidy(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>coeftest object</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>extra arguments (not used)</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A <code>data.frame</code> with one row for each coefficient, with five columns:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>term</code></td>
+<td>
+<p>The term in the linear model being estimated and tested</p>
+</td></tr>
+<tr valign="top"><td><code>estimate</code></td>
+<td>
+<p>The estimated coefficient</p>
+</td></tr>
+<tr valign="top"><td><code>std.error</code></td>
+<td>
+<p>The standard error</p>
+</td></tr>
+<tr valign="top"><td><code>statistic</code></td>
+<td>
+<p>test statistic</p>
+</td></tr>
+<tr valign="top"><td><code>p.value</code></td>
+<td>
+<p>p-value</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+if (require("lmtest", quietly = TRUE)) {
+    data(Mandible)
+    fm &lt;- lm(length ~ age, data=Mandible, subset=(age &lt;= 28))
+    
+    coeftest(fm)
+    tidy(coeftest(fm))
+}
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

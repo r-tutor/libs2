@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: tidy a MANOVA object</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for tidy.manova {broom}"><tr><td>tidy.manova {broom}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>tidy a MANOVA object</h2>
+
+<h3>Description</h3>
+
+<p>Constructs a data frame with one row for each of the terms in the model,
+containing the information from <a href="../../stats/html/summary.manova.html">summary.manova</a>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'manova'
+tidy(x, test = "Pillai", ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>object of class &quot;manova&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>test</code></td>
+<td>
+<p>one of &quot;Pillai&quot; (Pillai's trace), &quot;Wilks&quot; (Wilk's lambda), &quot;Hotelling-Lawley&quot; (Hotelling-Lawley trace) or &quot;Roy&quot; (Roy's greatest root) indicating which test statistic should be used. Defaults to &quot;Pillai&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>additional arguments passed on to <code>summary.manova</code></p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A data.frame with the columns
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>term</code></td>
+<td>
+<p>Term in design</p>
+</td></tr>
+<tr valign="top"><td><code>statistic</code></td>
+<td>
+<p>Approximate F statistic</p>
+</td></tr>
+<tr valign="top"><td><code>num.df</code></td>
+<td>
+<p>Degrees of freedom</p>
+</td></tr>
+<tr valign="top"><td><code>p.value</code></td>
+<td>
+<p>P-value</p>
+</td></tr>
+</table>
+<p>Depending on which test statistic is specified, one of the following columns is also included:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>pillai</code></td>
+<td>
+<p>Pillai's trace</p>
+</td></tr>
+<tr valign="top"><td><code>wilks</code></td>
+<td>
+<p>Wilk's lambda</p>
+</td></tr>
+<tr valign="top"><td><code>hl</code></td>
+<td>
+<p>Hotelling-Lawley trace</p>
+</td></tr>
+<tr valign="top"><td><code>roy</code></td>
+<td>
+<p>Roy's greatest root</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../stats/html/summary.manova.html">summary.manova</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+npk2 &lt;- within(npk, foo &lt;- rnorm(24))
+npk2.aov &lt;- manova(cbind(yield, foo) ~ block + N*P*K, npk2)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

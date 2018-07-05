@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Tidiers for summaryDefault objects</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for summary_tidiers {broom}"><tr><td>summary_tidiers {broom}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Tidiers for summaryDefault objects</h2>
+
+<h3>Description</h3>
+
+<p>Tidy a summary of a vector.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'summaryDefault'
+tidy(x, ...)
+
+## S3 method for class 'summaryDefault'
+glance(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>summaryDefault object</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>extra arguments, not used</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Both <code>tidy</code> and <code>glance</code> return the same object:
+a one-row data frame with columns
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>minimum</code></td>
+<td>
+<p>smallest value in original vector</p>
+</td></tr>
+<tr valign="top"><td><code>q1</code></td>
+<td>
+<p>value at the first quartile</p>
+</td></tr>
+<tr valign="top"><td><code>median</code></td>
+<td>
+<p>median of original vector</p>
+</td></tr>
+<tr valign="top"><td><code>mean</code></td>
+<td>
+<p>mean of original vector</p>
+</td></tr>
+<tr valign="top"><td><code>q3</code></td>
+<td>
+<p>value at the third quartile</p>
+</td></tr>
+<tr valign="top"><td><code>maximum</code></td>
+<td>
+<p>largest value in original vector</p>
+</td></tr>
+<tr valign="top"><td><code>NAs</code></td>
+<td>
+<p>number of NA values (if any)</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../base/html/summary.html">summary</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+v &lt;- rnorm(1000)
+s &lt;- summary(v)
+s
+
+tidy(s)
+glance(s)
+
+v2 &lt;- c(v,NA)
+tidy(summary(v2))
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

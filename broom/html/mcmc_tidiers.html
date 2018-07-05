@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Tidying methods for MCMC (Stan, JAGS, etc.) fits</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for mcmc_tidiers {broom}"><tr><td>mcmc_tidiers {broom}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Tidying methods for MCMC (Stan, JAGS, etc.) fits</h2>
+
+<h3>Description</h3>
+
+<p>Tidying methods for MCMC (Stan, JAGS, etc.) fits
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+tidyMCMC(x, pars, estimate.method = "mean", conf.int = FALSE,
+  conf.level = 0.95, conf.method = "quantile", droppars = "lp__",
+  rhat = FALSE, ess = FALSE, ...)
+
+## S3 method for class 'rjags'
+tidy(x, pars, estimate.method = "mean", conf.int = FALSE,
+  conf.level = 0.95, conf.method = "quantile", ...)
+
+## S3 method for class 'stanfit'
+tidy(x, pars, estimate.method = "mean", conf.int = FALSE,
+  conf.level = 0.95, conf.method = "quantile", droppars = "lp__",
+  rhat = FALSE, ess = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>an object of class &lsquo;&quot;stanfit&quot;&rsquo;</p>
+</td></tr>
+<tr valign="top"><td><code>pars</code></td>
+<td>
+<p>(character) specification of which parameters to include</p>
+</td></tr>
+<tr valign="top"><td><code>estimate.method</code></td>
+<td>
+<p>method for computing point estimate (&quot;mean&quot; or median&quot;)</p>
+</td></tr>
+<tr valign="top"><td><code>conf.int</code></td>
+<td>
+<p>(logical) include confidence interval?</p>
+</td></tr>
+<tr valign="top"><td><code>conf.level</code></td>
+<td>
+<p>probability level for CI</p>
+</td></tr>
+<tr valign="top"><td><code>conf.method</code></td>
+<td>
+<p>method for computing confidence intervals
+(&quot;quantile&quot; or &quot;HPDinterval&quot;)</p>
+</td></tr>
+<tr valign="top"><td><code>droppars</code></td>
+<td>
+<p>Parameters not to include in the output (such
+as log-probability information)</p>
+</td></tr>
+<tr valign="top"><td><code>rhat, ess</code></td>
+<td>
+<p>(logical) include Rhat and/or effective sample size estimates?</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>unused</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+## Not run: 
+
+# Using example from "RStan Getting Started"
+# https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started
+
+model_file &lt;- system.file("extdata", "8schools.stan", package = "broom")
+
+schools_dat &lt;- list(J = 8, 
+                    y = c(28,  8, -3,  7, -1,  1, 18, 12),
+                    sigma = c(15, 10, 16, 11,  9, 11, 10, 18))
+
+if (requireNamespace("rstan", quietly = TRUE)) {
+  set.seed(2015)
+  rstan_example &lt;- stan(file = model_file, data = schools_dat, 
+                        iter = 100, chains = 2)
+}
+
+
+## End(Not run)
+
+if (requireNamespace("rstan", quietly = TRUE)) {
+  # the object from the above code was saved as rstan_example.rda
+  infile &lt;- system.file("extdata", "rstan_example.rda", package = "broom")
+  load(infile)
+  
+  tidy(rstan_example)
+  tidy(rstan_example, conf.int = TRUE, pars = "theta")
+  
+  td_mean &lt;- tidy(rstan_example, conf.int = TRUE)
+  td_median &lt;- tidy(rstan_example, conf.int = TRUE, estimate.method = "median")
+  
+  library(dplyr)
+  library(ggplot2)
+  tds &lt;- rbind(mutate(td_mean, method = "mean"),
+               mutate(td_median, method = "median"))
+  
+  ggplot(tds, aes(estimate, term)) +
+    geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
+    geom_point(aes(color = method))
+}
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Add logLik, AIC, BIC, and other common measurements to a...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for finish_glance {broom}"><tr><td>finish_glance {broom}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Add logLik, AIC, BIC, and other common measurements to a glance of
+a prediction</h2>
+
+<h3>Description</h3>
+
+<p>A helper function for several functions in the glance generic. Methods
+such as logLik, AIC, and BIC are defined for many prediction
+objects, such as lm, glm, and nls. This is a helper function that adds
+them to a glance data.frame can be performed. If any of them cannot be
+computed, it fails quietly.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+finish_glance(ret, x)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>ret</code></td>
+<td>
+<p>a one-row data frame (a partially complete glance)</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>the prediction model</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>In one special case, deviance for objects of the
+<code>lmerMod</code> class from lme4 is computed with
+<code>deviance(x, REML=FALSE)</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a one-row data frame with additional columns added, such as
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>logLik</code></td>
+<td>
+<p>log likelihoods</p>
+</td></tr>
+<tr valign="top"><td><code>AIC</code></td>
+<td>
+<p>Akaike Information Criterion</p>
+</td></tr>
+<tr valign="top"><td><code>BIC</code></td>
+<td>
+<p>Bayesian Information Criterion</p>
+</td></tr>
+<tr valign="top"><td><code>deviance</code></td>
+<td>
+<p>deviance</p>
+</td></tr>
+<tr valign="top"><td><code>df.residual</code></td>
+<td>
+<p>residual degrees of freedom</p>
+</td></tr>
+</table>
+<p>Each of these are produced by the corresponding generics
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

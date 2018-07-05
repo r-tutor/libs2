@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Tidiers for Tests of Differences between Survival Curves</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for survdiff_tidiers {broom}"><tr><td>survdiff_tidiers {broom}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Tidiers for Tests of Differences between Survival Curves</h2>
+
+<h3>Description</h3>
+
+<p>Tidiers for Tests of Differences between Survival Curves
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'survdiff'
+tidy(x, strata = FALSE, ...)
+
+## S3 method for class 'survdiff'
+glance(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a &quot;survdiff&quot; object</p>
+</td></tr>
+<tr valign="top"><td><code>strata</code></td>
+<td>
+<p>logical, whether to include strata in the output</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>other arguments passed to/from other methods, currently ignored</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>All tidying methods return a data.frame without rownames, whose
+structure depends on the method chosen.
+</p>
+<p><code>tidy</code> on &quot;survdiff&quot; objects returns a data frame with the following columns:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>initial column(s) correspond to grouping factors (right-hand side of the formula)</p>
+</td></tr>
+<tr valign="top"><td><code>obs</code></td>
+<td>
+<p>weighted observed number of events in each group</p>
+</td></tr>
+<tr valign="top"><td><code>exp</code></td>
+<td>
+<p>weighted expected number of events in each group</p>
+</td></tr>
+<tr valign="top"><td><code>N</code></td>
+<td>
+<p>number of subjects in each group</p>
+</td></tr>
+</table>
+<p><code>glance</code> on &quot;survdiff&quot; objects returns a data frame with the following columns:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>statistic</code></td>
+<td>
+<p>value of the test statistic</p>
+</td></tr>
+<tr valign="top"><td><code>df</code></td>
+<td>
+<p>degrees of freedom</p>
+</td></tr>
+<tr valign="top"><td><code>p.value</code></td>
+<td>
+<p>p-value</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../survival/html/survdiff.html">survdiff</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+if( require("survival") ) {
+    s &lt;- survdiff( Surv(time, status) ~ pat.karno + strata(inst), data=lung)
+    tidy(s)
+    glance(s)
+}
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

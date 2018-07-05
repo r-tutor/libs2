@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Tidiers for linear model II objects from the lmodel2 package</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for lmodel2_tidiers {broom}"><tr><td>lmodel2_tidiers {broom}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Tidiers for linear model II objects from the lmodel2 package</h2>
+
+<h3>Description</h3>
+
+<p>Tidy or glance an lmodel2 object. An lmodel2 represents model II simple
+linear regression, where both variables in the regression equation are
+random.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'lmodel2'
+tidy(x, ...)
+
+## S3 method for class 'lmodel2'
+glance(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>lmodel2 object</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Extra arguments, not used</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Note that unlike linear regression, there are always only two terms
+in an lmodel2: Intercept and Slope. Furthermore, these are computed by four
+methods: OLS (ordinary least squares), MA (major axis), SMA (standard major
+axis), and RMA (ranged major axis). See the lmodel2 documentation for more.
+</p>
+<p>Note that there is no <code>augment</code> method for lmodel2 objects because
+lmodel2 does not provide a <code>predict</code> or <code>residuals</code> method
+(and since when both observations are random, fitted values and residuals
+have a less clear meaning).
+</p>
+
+
+<h3>Value</h3>
+
+<p>All tidying methods return a data.frame without rownames, whose
+structure depends on the method chosen.
+</p>
+<p><code>tidy</code> returns a data frame with one row for each combination
+of method (OLS/MA/SMA/RMA) and term (always Intercept/Slope). Its columns
+are:
+</p>
+
+<dl>
+<dt>method</dt><dd><p>Either OLS/MA/SMA/RMA</p>
+</dd>
+<dt>term</dt><dd><p>Either &quot;Intercept&quot; or &quot;Slope&quot;</p>
+</dd>
+<dt>estimate</dt><dd><p>Estimated coefficient</p>
+</dd>
+<dt>conf.low</dt><dd><p>Lower bound of 95% confidence interval</p>
+</dd>
+<dt>conf.high</dt><dd><p>Upper bound of 95% confidence interval</p>
+</dd>
+</dl>
+
+<p><code>glance</code> returns a one-row data frame with columns
+</p>
+
+<dl>
+<dt>r.squared</dt><dd><p>OLS R-squared</p>
+</dd>
+<dt>p.value</dt><dd><p>OLS parametric p-value</p>
+</dd>
+<dt>theta</dt><dd><p>Angle between OLS lines <code>lm(y ~ x)</code> and <code>lm(x ~ y)</code></p>
+</dd>
+<dt>H</dt><dd><p>H statistic for computing confidence interval of major axis slope</p>
+</dd>
+</dl>
+
+
+
+<h3>Examples</h3>
+
+<pre>
+
+if (require("lmodel2", quietly = TRUE)) {
+  data(mod2ex2)
+  Ex2.res &lt;- lmodel2(Prey ~ Predators, data=mod2ex2, "relative", "relative", 99)
+  Ex2.res
+
+  tidy(Ex2.res)
+  glance(Ex2.res)
+
+  # this allows coefficient plots with ggplot2
+  library(ggplot2)
+  ggplot(tidy(Ex2.res), aes(estimate, term, color = method)) +
+    geom_point() +
+    geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
+    geom_errorbarh(aes(xmin = conf.low, xmax = conf.high))
+}
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

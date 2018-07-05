@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: tidying methods for smooth.spline objects</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for smooth.spline_tidiers {broom}"><tr><td>smooth.spline_tidiers {broom}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>tidying methods for smooth.spline objects</h2>
+
+<h3>Description</h3>
+
+<p>This combines the original data given to smooth.spline with the
+fit and residuals
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'smooth.spline'
+augment(x, data = x$data, ...)
+
+## S3 method for class 'smooth.spline'
+glance(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a smooth.spline object</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>defaults to data used to fit model</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>not used in this method</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>No <code>tidy</code> method is provided for smooth.spline objects.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>augment</code> returns the original data with extra columns:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>.fitted</code></td>
+<td>
+<p>Fitted values of model</p>
+</td></tr>
+<tr valign="top"><td><code>.resid</code></td>
+<td>
+<p>Residuals</p>
+</td></tr>
+</table>
+<p><code>glance</code> returns one row with columns
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>spar</code></td>
+<td>
+<p>smoothing parameter</p>
+</td></tr>
+<tr valign="top"><td><code>lambda</code></td>
+<td>
+<p>choice of lambda corresponding to <code>spar</code></p>
+</td></tr>
+<tr valign="top"><td><code>df</code></td>
+<td>
+<p>equivalent degrees of freedom</p>
+</td></tr>
+<tr valign="top"><td><code>crit</code></td>
+<td>
+<p>minimized criterion</p>
+</td></tr>
+<tr valign="top"><td><code>pen.crit</code></td>
+<td>
+<p>penalized criterion</p>
+</td></tr>
+<tr valign="top"><td><code>cv.crit</code></td>
+<td>
+<p>cross-validation score</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+spl &lt;- smooth.spline(mtcars$wt, mtcars$mpg, df = 4)
+head(augment(spl, mtcars))
+head(augment(spl))  # calls original columns x and y
+
+library(ggplot2)
+ggplot(augment(spl, mtcars), aes(wt, mpg)) +
+    geom_point() + geom_line(aes(y = .fitted))
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

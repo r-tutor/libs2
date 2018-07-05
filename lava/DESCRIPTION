@@ -1,8 +1,8 @@
 Package: lava
 Type: Package
 Title: Latent Variable Models
-Version: 1.6.1
-Date: 2018-03-23
+Version: 1.6.2
+Date: 2018-07-02
 Authors@R: c(person("Klaus K.", "Holst", email="klaus@holst.it", role=c("aut", "cre")),
              person("Brice", "Ozenne", role = "ctb"),
              person("Thomas", "Gerds", role = "ctb"))
@@ -28,12 +28,12 @@ Imports: grDevices, graphics, methods, numDeriv, stats, survival,
         SQUAREM, utils
 Suggests: KernSmooth, Matrix, Rgraphviz, ascii, data.table, ellipse,
         fields, foreach, geepack, gof (>= 0.9), graph, igraph (>= 0.6),
-        lava.tobit (>= 0.4.7), lme4, mets (>= 1.1), optimx, quantreg,
-        rgl, testthat (>= 0.11), visNetwork, zoo
+        lava.tobit (>= 0.4.7), lme4, mets (>= 1.1), nlme, optimx,
+        polycor, quantreg, rgl, testthat (>= 0.11), visNetwork, zoo
 ByteCompile: yes
 RoxygenNote: 6.0.1
 NeedsCompilation: no
-Packaged: 2018-03-28 11:56:03 UTC; klaus
+Packaged: 2018-07-01 22:27:16 UTC; klaus
 Repository: CRAN
-Date/Publication: 2018-03-28 14:53:25 UTC
-Built: R 3.5.0; ; 2018-06-22 08:24:25 UTC; windows
+Date/Publication: 2018-07-02 08:40:05 UTC
+Built: R 3.5.1; ; 2018-07-02 14:17:44 UTC; windows

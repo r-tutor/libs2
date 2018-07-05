@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Augment data according to a tidied model</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for augment {broom}"><tr><td>augment {broom}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Augment data according to a tidied model</h2>
+
+<h3>Description</h3>
+
+<p>Given an R statistical model or other non-tidy object, add columns to the
+original dataset such as predictions, residuals and cluster assignments.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+augment(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>model or other R object to convert to data frame</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>other arguments passed to methods</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Note that by convention the first argument is almost always <code>data</code>,
+which specifies the original data object. This is not part of the S3
+signature, partly because it prevents <a href="rowwise_df_tidiers.html">rowwise_df_tidiers</a> from
+taking a column name as the first argument.
+</p>
+<p>This generic originated in the ggplot2 package, where it was called
+&quot;fortify.&quot;
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="lm_tidiers.html">augment.lm</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

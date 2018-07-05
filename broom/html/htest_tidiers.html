@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Tidying methods for an htest object</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for htest_tidiers {broom}"><tr><td>htest_tidiers {broom}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Tidying methods for an htest object</h2>
+
+<h3>Description</h3>
+
+<p>Tidies hypothesis test objects, such as those from <code>cor.test</code>,
+<code>t.test</code>, and <code>wilcox.test</code>, into a one-row data frame.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'htest'
+tidy(x, ...)
+
+## S3 method for class 'htest'
+glance(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>An object of class <code>"htest"</code></p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>extra arguments (not used)</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>No <code>augment</code> method is provided for <code>"htest"</code>,
+since there is no sense in which a hypothesis test generates one
+value for each observation.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Both <code>tidy</code> and <code>glance</code> return the same output,
+a one-row data frame with one or more of the following columns:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>estimate</code></td>
+<td>
+<p>Estimate of the effect size</p>
+</td></tr>
+<tr valign="top"><td><code>statistic</code></td>
+<td>
+<p>Test statistic used to compute the p-value</p>
+</td></tr>
+<tr valign="top"><td><code>p.value</code></td>
+<td>
+<p>P-value</p>
+</td></tr>
+<tr valign="top"><td><code>parameter</code></td>
+<td>
+<p>Parameter field in the htest, typically degrees of
+freedom</p>
+</td></tr>
+<tr valign="top"><td><code>conf.low</code></td>
+<td>
+<p>Lower bound on a confidence interval</p>
+</td></tr>
+<tr valign="top"><td><code>conf.high</code></td>
+<td>
+<p>Upper bound on a confidence interval</p>
+</td></tr>
+<tr valign="top"><td><code>estimate1</code></td>
+<td>
+<p>Sometimes two estimates are computed, such as in a
+two-sample t-test</p>
+</td></tr>
+<tr valign="top"><td><code>estimate2</code></td>
+<td>
+<p>Sometimes two estimates are computed, such as in a
+two-sample t-test</p>
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+<p>Method used to compute the statistic as a string</p>
+</td></tr>
+<tr valign="top"><td><code>alternative</code></td>
+<td>
+<p>Alternative hypothesis as a string</p>
+</td></tr>
+</table>
+<p>Which columns are included depends on the hypothesis test used.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+tt &lt;- t.test(rnorm(10))
+tidy(tt)
+glance(tt)  # same output for all htests
+
+tt &lt;- t.test(mpg ~ am, data = mtcars)
+tidy(tt)
+
+wt &lt;- wilcox.test(mpg ~ am, data = mtcars)
+tidy(wt)
+
+ct &lt;- cor.test(mtcars$wt, mtcars$mpg)
+tidy(ct)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

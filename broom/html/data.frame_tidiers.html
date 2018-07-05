@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Tidiers for data.frame objects</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for data.frame_tidiers {broom}"><tr><td>data.frame_tidiers {broom}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Tidiers for data.frame objects</h2>
+
+<h3>Description</h3>
+
+<p>These perform tidy summaries of data.frame objects. <code>tidy</code> produces
+summary statistics about each column, while <code>glance</code> simply reports
+the number of rows and columns. Note that <code>augment.data.frame</code> will
+throw an error.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'data.frame'
+tidy(x, ...)
+
+## S3 method for class 'data.frame'
+augment(x, data, ...)
+
+## S3 method for class 'data.frame'
+glance(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A data.frame</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>extra arguments: for <code>tidy</code>, these are passed on to
+<code><a href="../../Hmisc/html/describe.html">describe</a></code> from <code>psych</code> package</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>data, not used</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The <code>tidy</code> method calls the psych method
+<code><a href="../../Hmisc/html/describe.html">describe</a></code> directly to produce its per-columns summary
+statistics.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>tidy.data.frame</code> produces a data frame with one
+row per original column, containing summary statistics of each:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>column</code></td>
+<td>
+<p>name of original column</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>Number of valid (non-NA) values</p>
+</td></tr>
+<tr valign="top"><td><code>mean</code></td>
+<td>
+<p>mean</p>
+</td></tr>
+<tr valign="top"><td><code>sd</code></td>
+<td>
+<p>standard deviation</p>
+</td></tr>
+<tr valign="top"><td><code>median</code></td>
+<td>
+<p>median</p>
+</td></tr>
+<tr valign="top"><td><code>trimmed</code></td>
+<td>
+<p>trimmed mean, with trim defaulting to .1</p>
+</td></tr>
+<tr valign="top"><td><code>mad</code></td>
+<td>
+<p>median absolute deviation (from the median)</p>
+</td></tr>
+<tr valign="top"><td><code>min</code></td>
+<td>
+<p>minimum value</p>
+</td></tr>
+<tr valign="top"><td><code>max</code></td>
+<td>
+<p>maximum value</p>
+</td></tr>
+<tr valign="top"><td><code>range</code></td>
+<td>
+<p>range</p>
+</td></tr>
+<tr valign="top"><td><code>skew</code></td>
+<td>
+<p>skew</p>
+</td></tr>
+<tr valign="top"><td><code>kurtosis</code></td>
+<td>
+<p>kurtosis</p>
+</td></tr>
+<tr valign="top"><td><code>se</code></td>
+<td>
+<p>standard error</p>
+</td></tr>
+</table>
+<p><code>glance</code> returns a one-row data.frame with
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>nrow</code></td>
+<td>
+<p>number of rows</p>
+</td></tr>
+<tr valign="top"><td><code>ncol</code></td>
+<td>
+<p>number of columns</p>
+</td></tr>
+<tr valign="top"><td><code>complete.obs</code></td>
+<td>
+<p>number of rows that have no missing values</p>
+</td></tr>
+<tr valign="top"><td><code>na.fraction</code></td>
+<td>
+<p>fraction of values across all rows and columns that
+are missing</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../Hmisc/html/describe.html">describe</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+td &lt;- tidy(mtcars)
+td
+
+glance(mtcars)
+
+library(ggplot2)
+# compare mean and standard deviation
+ggplot(td, aes(mean, sd)) + geom_point() +
+     geom_text(aes(label = column), hjust = 1, vjust = 1) +
+     scale_x_log10() + scale_y_log10() + geom_abline()
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

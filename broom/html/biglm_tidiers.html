@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Tidiers for biglm and bigglm object</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for biglm_tidiers {broom}"><tr><td>biglm_tidiers {broom}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Tidiers for biglm and bigglm object</h2>
+
+<h3>Description</h3>
+
+<p>Tidiers for biglm object from the &quot;biglm&quot; package, which contains a linear model
+object that is limited in memory usage. Generally the behavior is as similar
+to the <code><a href="lm_tidiers.html">lm_tidiers</a></code> as is possible. Currently no <code>augment</code>
+is defined.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'biglm'
+tidy(x, conf.int = FALSE, conf.level = 0.95,
+  exponentiate = FALSE, quick = FALSE, ...)
+
+## S3 method for class 'biglm'
+glance(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a &quot;biglm&quot; object</p>
+</td></tr>
+<tr valign="top"><td><code>conf.int</code></td>
+<td>
+<p>whether to include a confidence interval</p>
+</td></tr>
+<tr valign="top"><td><code>conf.level</code></td>
+<td>
+<p>confidence level of the interval, used only if
+<code>conf.int=TRUE</code></p>
+</td></tr>
+<tr valign="top"><td><code>exponentiate</code></td>
+<td>
+<p>whether to exponentiate the coefficient estimates
+and confidence intervals (typical for logistic regression)</p>
+</td></tr>
+<tr valign="top"><td><code>quick</code></td>
+<td>
+<p>whether to compute a smaller and faster version, containing
+only the <code>term</code> and <code>estimate</code> columns.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>extra arguments (not used)</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>All tidying methods return a data.frame without rownames, whose
+structure depends on the method chosen.
+</p>
+<p><code>tidy.biglm</code> returns one row for each coefficient, with columns
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>term</code></td>
+<td>
+<p>The term in the linear model being estimated and tested</p>
+</td></tr>
+<tr valign="top"><td><code>estimate</code></td>
+<td>
+<p>The estimated coefficient</p>
+</td></tr>
+<tr valign="top"><td><code>std.error</code></td>
+<td>
+<p>The standard error from the linear model</p>
+</td></tr>
+<tr valign="top"><td><code>p.value</code></td>
+<td>
+<p>two-sided p-value</p>
+</td></tr>
+</table>
+<p>If <code>conf.int=TRUE</code>, it also includes columns for <code>conf.low</code> and
+<code>conf.high</code>, computed with <code><a href="../../stats/html/confint.html">confint</a></code>.
+</p>
+<p><code>glance.biglm</code> returns a one-row data frame, with columns
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>r.squared</code></td>
+<td>
+<p>The percent of variance explained by the model</p>
+</td></tr>
+<tr valign="top"><td><code>AIC</code></td>
+<td>
+<p>the Akaike Information Criterion</p>
+</td></tr>
+<tr valign="top"><td><code>deviance</code></td>
+<td>
+<p>deviance</p>
+</td></tr>
+<tr valign="top"><td><code>df.residual</code></td>
+<td>
+<p>residual degrees of freedom</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+if (require("biglm", quietly = TRUE)) {
+    bfit &lt;- biglm(mpg ~ wt + disp, mtcars)
+    tidy(bfit)
+    tidy(bfit, conf.int = TRUE)
+    tidy(bfit, conf.int = TRUE, conf.level = .9)
+
+    glance(bfit)
+}
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Tidiers for lmRob and glmRob objects</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for robust_tidiers {broom}"><tr><td>robust_tidiers {broom}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Tidiers for lmRob and glmRob objects</h2>
+
+<h3>Description</h3>
+
+<p>Tidying robust regression objects from the robust package. The tidy and augment
+methods simply pass it on to the linear model tidiers.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'lmRob'
+tidy(x, ...)
+
+## S3 method for class 'lmRob'
+augment(x, ...)
+
+## S3 method for class 'lmRob'
+glance(x, ...)
+
+## S3 method for class 'glmRob'
+tidy(x, ...)
+
+## S3 method for class 'glmRob'
+augment(x, ...)
+
+## S3 method for class 'glmRob'
+glance(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>An lmRob or glmRob object with a robust regression</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Extra arguments, not used</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>All tidying methods return a data.frame without rownames, whose
+structure depends on the method chosen.
+</p>
+<p><code>tidy</code> and <code>augment</code> return the same results as <code><a href="lm_tidiers.html">lm_tidiers</a></code>.
+</p>
+<p>On an <code>lmRob</code> <code>glance</code> returns a one-row data frame with the following columns:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>r.squared</code></td>
+<td>
+<p>R-squared</p>
+</td></tr>
+<tr valign="top"><td><code>deviance</code></td>
+<td>
+<p>Robust deviance</p>
+</td></tr>
+<tr valign="top"><td><code>sigma</code></td>
+<td>
+<p>Residual scale estimate</p>
+</td></tr>
+<tr valign="top"><td><code>df.residual</code></td>
+<td>
+<p>Number of residual degrees of freedom</p>
+</td></tr>
+</table>
+<p>On an <code>glmRob</code> <code>glance</code> returns a one-row data frame with the following columns:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>deviance</code></td>
+<td>
+<p>Robust deviance</p>
+</td></tr>
+<tr valign="top"><td><code>null.deviance</code></td>
+<td>
+<p>Deviance under the null model</p>
+</td></tr>
+<tr valign="top"><td><code>df.residual</code></td>
+<td>
+<p>Number of residual degrees of freedom</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="lm_tidiers.html">lm_tidiers</a></code>, <code><a href="../../robust/html/lmRob.html">lmRob</a></code>, <code><a href="../../robust/html/glmRob.html">glmRob</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+if (require("robust", quietly = TRUE)) {
+  m &lt;- lmRob(mpg ~ wt, data = mtcars)
+  
+  tidy(m)
+  augment(m)
+  glance(m)
+  
+  gm &lt;- glmRob(am ~ wt, data = mtcars, family = "binomial")
+  glance(gm)
+}
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Tidy a binDesign object</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for binDesign_tidiers {broom}"><tr><td>binDesign_tidiers {broom}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Tidy a binDesign object</h2>
+
+<h3>Description</h3>
+
+<p>Tidy a binDesign object from the &quot;binGroup&quot; package,
+which determines the sample size needed for
+a particular power.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'binDesign'
+tidy(x, ...)
+
+## S3 method for class 'binDesign'
+glance(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A &quot;binDesign&quot; object</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Extra arguments (not used)</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>All tidying methods return a data.frame without rownames, whose
+structure depends on the method chosen.
+</p>
+<p>The <code>tidy</code> method returns a data.frame
+with one row for each iteration that was performed,
+with columns
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>Number of trials in this iteration</p>
+</td></tr>
+<tr valign="top"><td><code>power</code></td>
+<td>
+<p>The power achieved for this n</p>
+</td></tr>
+</table>
+<p>The <code>glance</code> method returns a one-row data.frame
+with columns
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>power</code></td>
+<td>
+<p>The power achieved by the analysis</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>The sample size used to achieve this power</p>
+</td></tr>
+<tr valign="top"><td><code>power.reached</code></td>
+<td>
+<p>Whether the desired power was reached</p>
+</td></tr>
+<tr valign="top"><td><code>maxit</code></td>
+<td>
+<p>Number of iterations performed</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+if (require("binGroup", quietly = TRUE)) {
+    des &lt;- binDesign(nmax = 300, delta = 0.06,
+                     p.hyp = 0.1, power = .8)
+
+    glance(des)
+    head(tidy(des))
+    
+    # the ggplot2 equivalent of plot(des)
+    library(ggplot2)
+    ggplot(tidy(des), aes(n, power)) +
+        geom_line()
+}
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

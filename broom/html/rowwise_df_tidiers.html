@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Tidying methods for rowwise_dfs from dplyr, for tidying each...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for rowwise_df_tidiers {broom}"><tr><td>rowwise_df_tidiers {broom}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Tidying methods for rowwise_dfs from dplyr, for tidying each row and
+recombining the results</h2>
+
+<h3>Description</h3>
+
+<p>These <code>tidy</code>, <code>augment</code> and <code>glance</code> methods are for
+performing tidying on each row of a rowwise data frame created by dplyr's
+<code>group_by</code> and <code>do</code> operations. They first group a rowwise data
+frame based on all columns that are not lists, then perform the tidying
+operation on the specified column. This greatly shortens a common idiom
+of extracting tidy/augment/glance outputs after a do statement.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'rowwise_df'
+tidy(x, object, ...)
+
+## S3 method for class 'rowwise_df'
+tidy_(x, object, ...)
+
+## S3 method for class 'rowwise_df'
+augment(x, object, ...)
+
+## S3 method for class 'rowwise_df'
+augment_(x, object, ...)
+
+## S3 method for class 'rowwise_df'
+glance(x, object, ...)
+
+## S3 method for class 'rowwise_df'
+glance_(x, object, ...)
+
+## S3 method for class 'tbl_df'
+tidy(x, ...)
+
+## S3 method for class 'tbl_df'
+augment(x, ...)
+
+## S3 method for class 'tbl_df'
+glance(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a rowwise_df</p>
+</td></tr>
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>the column name of the column containing the models to
+be tidied. For tidy, augment, and glance it should be the bare name; for
+_ methods it should be quoted.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>additional arguments to pass on to the respective tidying method</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Note that this functionality is not currently implemented for
+data.tables, since the result of the do operation is difficult to
+distinguish from a regular data.table.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A <code>"grouped_df"</code>, where the non-list columns of the
+original are used as grouping columns alongside the tidied outputs.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+library(dplyr)
+regressions &lt;- mtcars %&gt;%
+    group_by(cyl) %&gt;%
+    do(mod = lm(mpg ~ wt, .))
+ 
+regressions
+
+regressions %&gt;% tidy(mod)
+regressions %&gt;% augment(mod)
+regressions %&gt;% glance(mod)
+
+# we can provide additional arguments to the tidying function
+regressions %&gt;% tidy(mod, conf.int = TRUE)
+
+# we can also include the original dataset as a "data" argument
+# to augment:
+regressions &lt;- mtcars %&gt;%
+    group_by(cyl) %&gt;%
+    do(mod = lm(mpg ~ wt, .), original = (.))
+
+# this allows all the original columns to be included:
+regressions %&gt;% augment(mod)  # doesn't include all original
+regressions %&gt;% augment(mod, data = original)  # includes all original
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

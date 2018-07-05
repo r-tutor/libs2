@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Tidy an expected survival curve</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for sexpfit_tidiers {broom}"><tr><td>sexpfit_tidiers {broom}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Tidy an expected survival curve</h2>
+
+<h3>Description</h3>
+
+<p>This constructs a summary across time points or overall of an expected survival
+curve. Note that this contains less information than most survfit objects.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'survexp'
+tidy(x, ...)
+
+## S3 method for class 'survexp'
+glance(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>&quot;survexp&quot; object</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>extra arguments (not used)</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>All tidying methods return a data.frame without rownames, whose
+structure depends on the method chosen.
+</p>
+<p><code>tidy</code> returns a one row for each time point, with columns
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>time</code></td>
+<td>
+<p>time point</p>
+</td></tr>
+<tr valign="top"><td><code>estimate</code></td>
+<td>
+<p>estimated survival</p>
+</td></tr>
+<tr valign="top"><td><code>n.risk</code></td>
+<td>
+<p>number of individuals at risk</p>
+</td></tr>
+</table>
+<p><code>glance</code> returns a one-row data.frame with the columns:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>n.max</code></td>
+<td>
+<p>maximum number of subjects at risk</p>
+</td></tr>
+<tr valign="top"><td><code>n.start</code></td>
+<td>
+<p>starting number of subjects at risk</p>
+</td></tr>
+<tr valign="top"><td><code>timepoints</code></td>
+<td>
+<p>number of timepoints</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+if (require("survival", quietly = TRUE)) {
+    sexpfit &lt;- survexp(futime ~ 1, rmap=list(sex="male", year=accept.dt,
+                                             age=(accept.dt-birth.dt)),
+                       method='conditional', data=jasa)
+
+    tidy(sexpfit)
+    glance(sexpfit)
+}
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

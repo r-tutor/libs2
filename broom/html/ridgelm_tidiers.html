@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Tidying methods for ridgelm objects from the MASS package</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for ridgelm_tidiers {broom}"><tr><td>ridgelm_tidiers {broom}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Tidying methods for ridgelm objects from the MASS package</h2>
+
+<h3>Description</h3>
+
+<p>These methods tidies the coefficients of a ridge regression model
+chosen at each value of lambda into a data frame, or constructs
+a one-row glance of the model's choices of lambda (the ridge
+constant)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'ridgelm'
+tidy(x, ...)
+
+## S3 method for class 'ridgelm'
+glance(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>An object of class &quot;ridgelm&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>extra arguments (not used)</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>All tidying methods return a data.frame without rownames, whose
+structure depends on the method chosen.
+</p>
+<p><code>tidy.ridgelm</code> returns one row for each combination of
+choice of lambda and term in the formula, with columns:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>lambda</code></td>
+<td>
+<p>choice of lambda</p>
+</td></tr>
+<tr valign="top"><td><code>GCV</code></td>
+<td>
+<p>generalized cross validation value for this lambda</p>
+</td></tr>
+<tr valign="top"><td><code>term</code></td>
+<td>
+<p>the term in the ridge regression model being estimated</p>
+</td></tr>
+<tr valign="top"><td><code>estimate</code></td>
+<td>
+<p>estimate of scaled coefficient using this lambda</p>
+</td></tr>
+<tr valign="top"><td><code>scale</code></td>
+<td>
+<p>Scaling factor of estimated coefficient</p>
+</td></tr>
+</table>
+<p><code>glance.ridgelm</code> returns a one-row data.frame with the columns
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>kHKB</code></td>
+<td>
+<p>modified HKB estimate of the ridge constant</p>
+</td></tr>
+<tr valign="top"><td><code>kLW</code></td>
+<td>
+<p>modified L-W estimate of the ridge constant</p>
+</td></tr>
+<tr valign="top"><td><code>lambdaGCV</code></td>
+<td>
+<p>choice of lambda that minimizes GCV</p>
+</td></tr>
+</table>
+<p>This is similar to the output of <code>select.ridgelm</code>, but it is returned
+rather than printed.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+names(longley)[1] &lt;- "y"
+fit1 &lt;- MASS::lm.ridge(y ~ ., longley)
+tidy(fit1)
+
+fit2 &lt;- MASS::lm.ridge(y ~ ., longley, lambda = seq(0.001, .05, .001))
+td2 &lt;- tidy(fit2)
+g2 &lt;- glance(fit2)
+
+# coefficient plot
+library(ggplot2)
+ggplot(td2, aes(lambda, estimate, color = term)) + geom_line()
+
+# GCV plot
+ggplot(td2, aes(lambda, GCV)) + geom_line()
+
+# add line for the GCV minimizing estimate
+ggplot(td2, aes(lambda, GCV)) + geom_line() +
+    geom_vline(xintercept = g2$lambdaGCV, col = "red", lty = 2)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

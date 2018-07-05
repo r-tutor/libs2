@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Tidying methods for kernel based hazard rate estimates</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for muhaz_tidiers {broom}"><tr><td>muhaz_tidiers {broom}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Tidying methods for kernel based hazard rate estimates</h2>
+
+<h3>Description</h3>
+
+<p>These methods tidy the output of <code>muhaz</code> objects as returned by the
+<code><a href="../../muhaz/html/muhaz.html">muhaz</a></code> function, which provides kernel based
+non-parametric hazard rate estimators.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'muhaz'
+tidy(x, ...)
+
+## S3 method for class 'muhaz'
+glance(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p><code>muhaz</code> object</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>extra arguments (not used)</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The &quot;augment&quot; method is not useful and therefore not
+available for <code>muhaz</code> objects.
+</p>
+
+
+<h3>Value</h3>
+
+<p>All tidying methods return a data.frame without rownames, whose
+structure depends on the method chosen.
+</p>
+<p><code>tidy.muhaz</code> returns a tibble containing two columns:
+<code>time</code> at which the hazard rate was estimated and <code>estimate</code>.
+</p>
+<p><code>glance.muhaz</code> returns a one-row data.frame with the columns
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>nobs</code></td>
+<td>
+<p>Number of observations used for estimation</p>
+</td></tr>
+<tr valign="top"><td><code>min.time</code></td>
+<td>
+<p>The minimum observed event or censoring time</p>
+</td></tr>
+<tr valign="top"><td><code>max.time</code></td>
+<td>
+<p>The maximum observed event or censoring time</p>
+</td></tr>
+<tr valign="top"><td><code>min.harzard</code></td>
+<td>
+<p>Minimal estimated hazard</p>
+</td></tr>
+<tr valign="top"><td><code>max.hazard</code></td>
+<td>
+<p>Maximal estimated hazard</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+if (require("muhaz", quietly = TRUE)) {
+  data(ovarian, package="survival")
+  x &lt;- muhaz(ovarian$futime, ovarian$fustat)
+  tidy(x)
+  glance(x)
+}
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -79,7 +79,7 @@ distribution	sim
 distribution.lvm	sim
 distribution<-	sim
 distribution<-.lvm	sim
-dmvn	internal
+dmvn0	internal
 dsep	dsep.lvm
 dsep.lvm	dsep.lvm
 edgelabels	labels-set
@@ -212,6 +212,7 @@ moments	gof
 moments.lvm	gof
 multigroup	internal
 multinomial	multinomial
+mvn.lvm	sim
 mvnmix	mvnmix
 na.pass0	internal
 NA2x	NA2x
@@ -287,7 +288,7 @@ revdiag<-	revdiag
 riskcomp	diagtest
 rmvar	rmvar
 rmvar<-	rmvar
-rmvn	internal
+rmvn0	internal
 roots	children
 rot2D	rotate2
 rot3D	rotate2
@@ -341,6 +342,7 @@ twostage.estimate	twostage.lvmfit
 twostage.lvm	twostage.lvmfit
 twostage.lvm.mixture	twostage.lvmfit
 twostage.lvmfit	twostage.lvmfit
+twostageCV	twostageCV
 uniform.lvm	sim
 updatelvm	internal
 variance	covariance

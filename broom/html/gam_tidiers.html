@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Tidying methods for a generalized additive model (gam)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for gam_tidiers {broom}"><tr><td>gam_tidiers {broom}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Tidying methods for a generalized additive model (gam)</h2>
+
+<h3>Description</h3>
+
+<p>These methods tidy the coefficients of a &quot;gam&quot; object (generalized additive
+model) into a summary, augment the original data with information on the
+fitted values and residuals, and construct a one-row glance of the model's
+statistics.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'gam'
+tidy(x, parametric = FALSE, ...)
+
+## S3 method for class 'Gam'
+tidy(x, ...)
+
+## S3 method for class 'gam'
+glance(x, ...)
+
+## S3 method for class 'Gam'
+glance(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>gam or Gam object</p>
+</td></tr>
+<tr valign="top"><td><code>parametric</code></td>
+<td>
+<p>logical. Return parametric coefficients (<code>TRUE</code>) or 
+information about smooth terms (<code>FALSE</code>)?</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>extra arguments (not used)</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The &quot;augment&quot; method is handled by <a href="lm_tidiers.html">lm_tidiers</a>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>All tidying methods return a data.frame without rownames, whose
+structure depends on the method chosen.
+</p>
+<p><code>tidy.gam</code> called on an object from the gam package,
+or an object from the mgcv package with <code>parametric = FALSE</code>, returns the 
+tidied output of the parametric ANOVA with one row for each term in the formula.
+The columns match those in <a href="anova_tidiers.html">anova_tidiers</a>. 
+<code>tidy.gam</code> called on a gam object from the mgcv package with 
+<code>parametric = TRUE</code> returns the fixed coefficients.
+</p>
+<p><code>glance.gam</code> returns a one-row data.frame with the columns
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>df</code></td>
+<td>
+<p>Degrees of freedom used by the coefficients</p>
+</td></tr>
+<tr valign="top"><td><code>logLik</code></td>
+<td>
+<p>the data's log-likelihood under the model</p>
+</td></tr>
+<tr valign="top"><td><code>AIC</code></td>
+<td>
+<p>the Akaike Information Criterion</p>
+</td></tr>
+<tr valign="top"><td><code>BIC</code></td>
+<td>
+<p>the Bayesian Information Criterion</p>
+</td></tr>
+<tr valign="top"><td><code>deviance</code></td>
+<td>
+<p>deviance</p>
+</td></tr>
+<tr valign="top"><td><code>df.residual</code></td>
+<td>
+<p>residual degrees of freedom</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p><a href="lm_tidiers.html">lm_tidiers</a>, <a href="anova_tidiers.html">anova_tidiers</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+if (require("gam", quietly = TRUE)) {
+    data(kyphosis)
+    g &lt;- gam(Kyphosis ~ s(Age,4) + Number, family = binomial, data = kyphosis)
+    tidy(g)
+    augment(g)
+    glance(g)
+}
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

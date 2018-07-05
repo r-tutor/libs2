@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Default tidying method</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for tidy.default {broom}"><tr><td>tidy.default {broom}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Default tidying method</h2>
+
+<h3>Description</h3>
+
+<p>By default, tidy uses <code>as.data.frame</code> to convert its output. This is 
+dangerous, as it may fail with an uninformative error message.
+Generally tidy is intended to be used on structured model objects
+such as lm or htest for which a specific S3 object exists.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## Default S3 method:
+tidy(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>an object to be tidied</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>extra arguments (not used)</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>If you know that you want to use <code>as.data.frame</code> on your untidy
+object, just use it directly.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A data frame, from <code>as.data.frame</code> applied to the input x.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

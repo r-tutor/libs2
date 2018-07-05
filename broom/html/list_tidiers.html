@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Tidiers for return values from functions that aren't S3...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for list_tidiers {broom}"><tr><td>list_tidiers {broom}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Tidiers for return values from functions that aren't S3 objects</h2>
+
+<h3>Description</h3>
+
+<p>This method handles the return values of functions that return lists
+rather than S3 objects, such as <code>optim</code>, <code>svd</code>, or
+<code><a href="../../akima/html/interp.html">interp</a></code>, and therefore cannot be handled by
+S3 dispatch.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'list'
+tidy(x, ...)
+
+## S3 method for class 'list'
+glance(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>list object</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>extra arguments, passed to the tidying function</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Those tiders themselves are implemented as functions of the
+form tidy_&lt;function&gt; or glance_&lt;function&gt; that are not exported.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><a href="optim_tidiers.html">optim_tidiers</a>, <a href="xyz_tidiers.html">xyz_tidiers</a>,
+<a href="svd_tidiers.html">svd_tidiers</a>, <a href="orcutt_tidiers.html">orcutt_tidiers</a>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

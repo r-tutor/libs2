@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Tidying method for a bootstrapped temporal exponential random...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for btergm_tidiers {broom}"><tr><td>btergm_tidiers {broom}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Tidying method for a bootstrapped temporal exponential random graph model</h2>
+
+<h3>Description</h3>
+
+<p>This method tidies the coefficients of a bootstrapped temporal exponential
+random graph model estimated with the <span class="pkg">xergm</span>. It simply returns the
+coefficients and their confidence intervals.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'btergm'
+tidy(x, conf.level = 0.95, exponentiate = FALSE,
+  quick = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a <code><a href="../../btergm/html/btergm.html">btergm</a></code> object</p>
+</td></tr>
+<tr valign="top"><td><code>conf.level</code></td>
+<td>
+<p>confidence level of the bootstrapped interval</p>
+</td></tr>
+<tr valign="top"><td><code>exponentiate</code></td>
+<td>
+<p>whether to exponentiate the coefficient estimates
+and confidence intervals</p>
+</td></tr>
+<tr valign="top"><td><code>quick</code></td>
+<td>
+<p>whether to compute a smaller and faster version, containing
+only the <code>term</code> and <code>estimate</code> columns.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>extra arguments (currently not used)</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>There is no <code>augment</code> or <code>glance</code> method
+for <span class="pkg">ergm</span> objects.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A <code>data.frame</code> without rownames.
+</p>
+<p><code>tidy.btergm</code> returns one row for each coefficient,
+with four columns:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>term</code></td>
+<td>
+<p>The term in the model being estimated and tested</p>
+</td></tr>
+<tr valign="top"><td><code>estimate</code></td>
+<td>
+<p>The estimated coefficient</p>
+</td></tr>
+<tr valign="top"><td><code>conf.low</code></td>
+<td>
+<p>The lower bound of the confidence interval</p>
+</td></tr>
+<tr valign="top"><td><code>conf.high</code></td>
+<td>
+<p>The lower bound of the confidence interval</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../btergm/html/btergm.html">btergm</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+## Not run: 
+if (require("xergm")) {
+    # Using the same simulated example as the xergm package
+    # Create 10 random networks with 10 actors
+    networks &lt;- list()
+    for(i in 1:10){
+        mat &lt;- matrix(rbinom(100, 1, .25), nrow = 10, ncol = 10)
+        diag(mat) &lt;- 0
+        nw &lt;- network::network(mat)
+        networks[[i]] &lt;- nw
+    }
+    # Create 10 matrices as covariates
+    covariates &lt;- list()
+    for (i in 1:10) {
+        mat &lt;- matrix(rnorm(100), nrow = 10, ncol = 10)
+        covariates[[i]] &lt;- mat
+    }
+    # Fit a model where the propensity to form ties depends
+    # on the edge covariates, controlling for the number of
+    # in-stars
+    btfit &lt;- btergm(networks ~ edges + istar(2) +
+                      edgecov(covariates), R = 100)
+
+    # Show terms, coefficient estimates and errors
+    tidy(btfit)
+
+    # Show coefficients as odds ratios with a 99% CI
+    tidy(btfit, exponentiate = TRUE, conf.level = 0.99)
+}
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

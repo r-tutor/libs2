@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Tidy a distance matrix</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for tidy.dist {broom}"><tr><td>tidy.dist {broom}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Tidy a distance matrix</h2>
+
+<h3>Description</h3>
+
+<p>Tidy a distance matrix, such as that computed by the <a href="../../stats/html/dist.html">dist</a>
+function, into a one-row-per-pair table. If the distance matrix
+does not include an upper triangle and/or diagonal, this will
+not either.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'dist'
+tidy(x, diag = attr(x, "Diag"), upper = attr(x, "Upper"),
+  ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A &quot;dist&quot; object</p>
+</td></tr>
+<tr valign="top"><td><code>diag</code></td>
+<td>
+<p>Whether to include the diagonal of the distance
+matrix. Defaults to whether the distance matrix includes it</p>
+</td></tr>
+<tr valign="top"><td><code>upper</code></td>
+<td>
+<p>Whether to include the upper right triangle of
+the distance matrix. Defaults to whether the distance matrix
+includes it</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Extra arguments, not used</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A data frame with one row for each pair of
+item distances, with columns:
+</p>
+
+<dl>
+<dt>item1</dt><dd><p>First item</p>
+</dd>
+<dt>item2</dt><dd><p>Second item</p>
+</dd>
+<dt>distance</dt><dd><p>Distance between items</p>
+</dd>
+</dl>
+
+
+
+<h3>Examples</h3>
+
+<pre>
+
+iris_dist &lt;- dist(t(iris[, 1:4]))
+iris_dist
+
+tidy(iris_dist)
+tidy(iris_dist, upper = TRUE)
+tidy(iris_dist, diag = TRUE)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

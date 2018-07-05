@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Augmenting methods for loess models</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for loess_tidiers {broom}"><tr><td>loess_tidiers {broom}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Augmenting methods for loess models</h2>
+
+<h3>Description</h3>
+
+<p>This method augments the original data with information
+on the fitted values and residuals, and optionally the 
+standard errors.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'loess'
+augment(x, data = stats::model.frame(x), newdata, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A &quot;loess&quot; object</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>Original data, defaults to the extracting it from the model</p>
+</td></tr>
+<tr valign="top"><td><code>newdata</code></td>
+<td>
+<p>If provided, performs predictions on the new data</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>extra arguments</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>When the modeling was performed with <code>na.action = "na.omit"</code>
+(as is the typical default), rows with NA in the initial data are omitted
+entirely from the augmented data frame. When the modeling was performed
+with <code>na.action = "na.exclude"</code>, one should provide the original data
+as a second argument, at which point the augmented data will contain those
+rows (typically with NAs in place of the new columns). If the original data
+is not provided to <code>augment</code> and <code>na.action = "na.exclude"</code>, a
+warning is raised and the incomplete rows are dropped.
+</p>
+
+
+<h3>Value</h3>
+
+<p>When <code>newdata</code> is not supplied <code>augment.loess</code>
+returns one row for each observation with three columns added
+to the original data:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>.fitted</code></td>
+<td>
+<p>Fitted values of model</p>
+</td></tr>
+<tr valign="top"><td><code>.se.fit</code></td>
+<td>
+<p>Standard errors of the fitted values</p>
+</td></tr>
+<tr valign="top"><td><code>.resid</code></td>
+<td>
+<p>Residuals of the fitted values</p>
+</td></tr>
+</table>
+<p>When <code>newdata</code> is supplied <code>augment.loess</code> returns
+one row for each observation with one additional column:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>.fitted</code></td>
+<td>
+<p>Fitted values of model</p>
+</td></tr>
+<tr valign="top"><td><code>.se.fit</code></td>
+<td>
+<p>Standard errors of the fitted values</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p><a href="../../stats/html/na.action.html">na.action</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+lo &lt;- loess(mpg ~ wt, mtcars)
+augment(lo)
+
+# with all columns of original data
+augment(lo, mtcars)
+
+# with a new dataset
+augment(lo, newdata = head(mtcars))
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

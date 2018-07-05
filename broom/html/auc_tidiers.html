@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Tidiers for objects from the AUC package</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for auc_tidiers {broom}"><tr><td>auc_tidiers {broom}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Tidiers for objects from the AUC package</h2>
+
+<h3>Description</h3>
+
+<p>Tidy &quot;roc&quot; objects from the &quot;auc&quot; package. This can be used to,
+for example, draw ROC curves in ggplot2.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'roc'
+tidy(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>an &quot;roc&quot; object</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments, not used</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A data frame with three columns:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>cutoff</code></td>
+<td>
+<p>The cutoff of the prediction scores used
+for classification</p>
+</td></tr>
+<tr valign="top"><td><code>tpr</code></td>
+<td>
+<p>The resulting true positive rate at that cutoff</p>
+</td></tr>
+<tr valign="top"><td><code>fpr</code></td>
+<td>
+<p>The resulting false positive rate at that cutoff</p>
+</td></tr>
+</table>
+<p>If the labels had names, those are added as an &quot;instance&quot; column.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+if (require("AUC", quietly = TRUE)) {
+  data(churn)
+  r &lt;- roc(churn$predictions,churn$labels)
+  
+  td &lt;- tidy(r)
+  head(td)
+  
+  library(ggplot2)
+  ggplot(td, aes(fpr, tpr)) +
+    geom_line()
+    
+  # compare the ROC curves for two prediction algorithms
+  library(dplyr)
+  library(tidyr)
+  
+  rocs &lt;- churn %&gt;%
+    tidyr::gather(algorithm, value, -labels) %&gt;%
+    group_by(algorithm) %&gt;%
+    do(tidy(roc(.$value, .$labels)))
+  
+  ggplot(rocs, aes(fpr, tpr, color = algorithm)) +
+    geom_line()
+}
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

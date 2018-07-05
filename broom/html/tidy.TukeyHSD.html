@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: tidy a TukeyHSD object</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for tidy.TukeyHSD {broom}"><tr><td>tidy.TukeyHSD {broom}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>tidy a TukeyHSD object</h2>
+
+<h3>Description</h3>
+
+<p>Returns a data.frame with one row for each pairwise comparison
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'TukeyHSD'
+tidy(x, separate.levels = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>object of class &quot;TukeyHSD&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>separate.levels</code></td>
+<td>
+<p>Whether to separate comparison into
+<code>level1</code> and <code>level2</code> columns</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>additional arguments (not used)</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A data.frame with one row per comparison, containing columns
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>term</code></td>
+<td>
+<p>Term for which levels are being compared</p>
+</td></tr>
+<tr valign="top"><td><code>comparison</code></td>
+<td>
+<p>Levels being compared, separated by -</p>
+</td></tr>
+<tr valign="top"><td><code>estimate</code></td>
+<td>
+<p>Estimate of difference</p>
+</td></tr>
+<tr valign="top"><td><code>conf.low</code></td>
+<td>
+<p>Low end of confidence interval of difference</p>
+</td></tr>
+<tr valign="top"><td><code>conf.high</code></td>
+<td>
+<p>High end of confidence interval of difference</p>
+</td></tr>
+<tr valign="top"><td><code>adj.p.value</code></td>
+<td>
+<p>P-value adjusted for multiple comparisons</p>
+</td></tr>
+</table>
+<p>If <code>separate.levels = TRUE</code>, the <code>comparison</code> column will be
+split up into <code>level1</code> and <code>level2</code>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../stats/html/TukeyHSD.html">TukeyHSD</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+fm1 &lt;- aov(breaks ~ wool + tension, data = warpbreaks)
+thsd &lt;- TukeyHSD(fm1, "tension", ordered = TRUE)
+tidy(thsd)
+tidy(thsd, separate.levels = TRUE)
+
+# may include comparisons on multiple terms
+fm2 &lt;- aov(mpg ~ as.factor(gear) * as.factor(cyl), data = mtcars)
+tidy(TukeyHSD(fm2))
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

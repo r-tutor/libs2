@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Tidiers for LASSO or elasticnet regularized fits</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for glmnet_tidiers {broom}"><tr><td>glmnet_tidiers {broom}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Tidiers for LASSO or elasticnet regularized fits</h2>
+
+<h3>Description</h3>
+
+<p>Tidying methods for regularized fits produced by <code>glmnet</code>, summarizing
+the estimates across values of the penalty parameter lambda.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'glmnet'
+tidy(x, ...)
+
+## S3 method for class 'glmnet'
+glance(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a &quot;glmnet&quot; object</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>extra arguments (not used)</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Note that while this representation of GLMs is much easier
+to plot and combine than the default structure, it is also much
+more memory-intensive. Do not use for extremely large, sparse matrices.
+</p>
+<p>No <code>augment</code> method is yet provided even though the model produces
+predictions, because the input data is not tidy (it is a matrix that
+may be very wide) and therefore combining predictions with it is not
+logical. Furthermore, predictions make sense only with a specific
+choice of lambda.
+</p>
+
+
+<h3>Value</h3>
+
+<p>All tidying methods return a data.frame without rownames, whose
+structure depends on the method chosen.
+</p>
+<p><code>tidy</code> produces a data.frame with one row per combination of
+coefficient (including the intercept) and value of lambda for which the estimate
+is nonzero, with the columns:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>term</code></td>
+<td>
+<p>coefficient name (V1...VN by default, along with
+&quot;(Intercept)&quot;)</p>
+</td></tr>
+<tr valign="top"><td><code>step</code></td>
+<td>
+<p>which step of lambda choices was used</p>
+</td></tr>
+<tr valign="top"><td><code>estimate</code></td>
+<td>
+<p>estimate of coefficient</p>
+</td></tr>
+<tr valign="top"><td><code>lambda</code></td>
+<td>
+<p>value of penalty parameter lambda</p>
+</td></tr>
+<tr valign="top"><td><code>dev.ratio</code></td>
+<td>
+<p>fraction of null deviance explained at each
+value of lambda</p>
+</td></tr>
+</table>
+<p><code>glance</code> returns a one-row data.frame with the values
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>nulldev</code></td>
+<td>
+<p>null deviance</p>
+</td></tr>
+<tr valign="top"><td><code>npasses</code></td>
+<td>
+<p>total passes over the data across all lambda values</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+if (require("glmnet", quietly = TRUE)) {
+    set.seed(2014)
+    x &lt;- matrix(rnorm(100*20),100,20)
+    y &lt;- rnorm(100)
+    fit1 &lt;- glmnet(x,y)
+    
+    head(tidy(fit1))
+    glance(fit1)
+    
+    library(dplyr)
+    library(ggplot2)
+    
+    tidied &lt;- tidy(fit1) %&gt;% filter(term != "(Intercept)")
+    
+    ggplot(tidied, aes(step, estimate, group = term)) + geom_line()
+    ggplot(tidied, aes(lambda, estimate, group = term)) +
+        geom_line() + scale_x_log10()
+ 
+    ggplot(tidied, aes(lambda, dev.ratio)) + geom_line()
+    
+    # works for other types of regressions as well, such as logistic
+    g2 &lt;- sample(1:2, 100, replace=TRUE)
+    fit2 &lt;- glmnet(x, g2, family="binomial")
+    head(tidy(fit2))
+}
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>
