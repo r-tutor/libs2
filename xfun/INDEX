@@ -1,6 +1,7 @@
 Rscript                 Run the commands 'Rscript' and 'R CMD'
 attr                    Obtain an attribute of an object without
                         partial matching
+download_file           Try various methods to download a file
 file_ext                Manipulate filename extensions
 file_string             Read a text file and concatenate the lines by
                         "\n"
@@ -9,10 +10,13 @@ in_dir                  Evaluate an expression under a specified
                         working directory
 install_dir             Install a source package from a directory
 isFALSE                 Test if an object is identical to 'FALSE'
+is_ascii                Check if a character vector consists of
+                        entirely ASCII characters
 is_windows              Test for types of operating systems
 native_encode           Try to use the system native encoding to
                         represent a character vector
 normalize_path          Normalize paths
+numbers_to_words        Convert numbers to English words
 optipng                 Run OptiPNG on all PNG files under a directory
 parse_only              Parse R code and do not keep the source
 pkg_attach              Attach or load packages, and automatically

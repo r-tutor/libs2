@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Include a dygraph plugin</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for dyPlugin {dygraphs}"><tr><td>dyPlugin {dygraphs}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Include a dygraph plugin</h2>
+
+<h3>Description</h3>
+
+<p>Include a dygraph plugin
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+dyPlugin(dygraph, name, path, options = list(), version = "1.0")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>dygraph</code></td>
+<td>
+<p>Dygraph to add plugin to</p>
+</td></tr>
+<tr valign="top"><td><code>name</code></td>
+<td>
+<p>Name of plugin</p>
+</td></tr>
+<tr valign="top"><td><code>path</code></td>
+<td>
+<p>Path to plugin JavaScript file</p>
+</td></tr>
+<tr valign="top"><td><code>options</code></td>
+<td>
+<p>Named list of options to pass to plugin constructor</p>
+</td></tr>
+<tr valign="top"><td><code>version</code></td>
+<td>
+<p>Plugin version (e.g. version of package which provides the plugin)</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>You can use dygraphs plugins to customize the appearance of dygraphs as well
+as add new interactive behaviors. For additional information on creating
+dygraphs plugins see the
+<a href="https://github.com/danvk/dygraphs/tree/master/src/plugins">dygraphs plugins</a>
+documentation.
+Once you've created a dygraphs plugins you can use the dyPlugin function to
+create an R wrapper for it. See
+<a href="https://rstudio.github.io/dygraphs/gallery-plugins.html">https://rstudio.github.io/dygraphs/gallery-plugins.html</a>
+for details on how to do this.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A dygraph with the specified plugin enabled.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>dygraphs</em> version 1.1.1.6 <a href="00Index.html">Index</a>]</div>
+</body></html>

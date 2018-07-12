@@ -1,4 +1,9 @@
-dygraphs 1.1.1.5 (unreleased)
+dygraphs 1.1.1.6
+--------------------------------------------------------------------------------
+
+* Fix bug which prevented accessing dygraph object in HTMLWidget (#196)
+
+dygraphs 1.1.1.5
 --------------------------------------------------------------------------------
 
 * Added pointShape parameter to dyOptions and dySeries function to set point shapes

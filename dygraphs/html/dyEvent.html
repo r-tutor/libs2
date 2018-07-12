@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: dygraph event line</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for dyEvent {dygraphs}"><tr><td>dyEvent {dygraphs}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>dygraph event line</h2>
+
+<h3>Description</h3>
+
+<p>Add a vertical event line to a dygraph
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+dyEvent(dygraph, x, label = NULL, labelLoc = c("top", "bottom"),
+  color = "black", strokePattern = "dashed", date)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>dygraph</code></td>
+<td>
+<p>Dygraph to add event line to</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>Either numeric or date/time for the event, depending on the format
+of the x-axis of the dygraph. (For date/time must be a <code>POSIXct</code>
+object or another object convertible to <code>POSIXct</code> via
+<code>as.POSIXct</code>)</p>
+</td></tr>
+<tr valign="top"><td><code>label</code></td>
+<td>
+<p>Label for event. Defaults to blank.</p>
+</td></tr>
+<tr valign="top"><td><code>labelLoc</code></td>
+<td>
+<p>Location for label (top or bottom)</p>
+</td></tr>
+<tr valign="top"><td><code>color</code></td>
+<td>
+<p>Color of event line. This can be of the form &quot;#AABBCC&quot; or 
+&quot;rgb(255,100,200)&quot; or &quot;yellow&quot;. Defaults to black.</p>
+</td></tr>
+<tr valign="top"><td><code>strokePattern</code></td>
+<td>
+<p>A predefined stroke pattern type (&quot;dotted&quot;, &quot;dashed&quot;,
+&quot;dotdash&quot;, or &quot;solid&quot;) or a custom pattern array where the even index is 
+a draw and odd is a space in pixels. Defaults to dashed.</p>
+</td></tr>
+<tr valign="top"><td><code>date</code></td>
+<td>
+<p>(deprecated) See argument <code>x</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A dygraph with the specified event line.
+</p>
+
+
+<h3>Note</h3>
+
+<p>See the <a href="https://rstudio.github.io/dygraphs/gallery-event-lines.html">online 
+documentation</a> for additional details and examples.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(dygraphs)
+
+dygraph(presidents, main = "Presidential Approval") %&gt;%
+  dyAxis("y", valueRange = c(0, 100)) %&gt;%
+  dyEvent("1950-6-30", "Korea", labelLoc = "bottom") %&gt;%
+  dyEvent("1965-2-09", "Vietnam", labelLoc = "bottom")
+dygraph(presidents, main = "Presidential Approval") %&gt;%
+  dyAxis("y", valueRange = c(0, 100)) %&gt;%
+  dyEvent(c("1950-6-30", "1965-2-09"), c("Korea", "Vietnam"), labelLoc = "bottom") 
+ 
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>dygraphs</em> version 1.1.1.6 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,3 +1,13 @@
+# CHANGES IN xfun VERSION 0.3
+
+## NEW FEATURES
+
+- Added a new functions `download_file()` to try various methods to download a file.
+
+- Added a new function `is_ascii()` to test if a character vector only consists of ASCII characters.
+
+- Added a new function `numbers_to_words()` to convert numbers to English words (thanks, @daijiang, #3).
+
 # CHANGES IN xfun VERSION 0.2
 
 ## NEW FEATURES

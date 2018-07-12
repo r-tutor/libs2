@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: dygraph data series</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for dySeries {dygraphs}"><tr><td>dySeries {dygraphs}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>dygraph data series</h2>
+
+<h3>Description</h3>
+
+<p>Add a data series to a dygraph plot. Note that options will use the default 
+global setting (as determined by <code><a href="dyOptions.html">dyOptions</a></code>) when not specified 
+explicitly. When no <code>dySeries</code> is specified for a plot then all series 
+within the underlying data are plotted.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+dySeries(dygraph, name = NULL, label = NULL, color = NULL, axis = "y",
+  stepPlot = NULL, stemPlot = NULL, fillGraph = NULL, drawPoints = NULL,
+  pointSize = NULL, pointShape = NULL, strokeWidth = NULL,
+  strokePattern = NULL, strokeBorderWidth = NULL,
+  strokeBorderColor = NULL, plotter = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>dygraph</code></td>
+<td>
+<p>Dygraph to add a series definition to</p>
+</td></tr>
+<tr valign="top"><td><code>name</code></td>
+<td>
+<p>Name of series within data set. If no name is specified then 
+series are bound to implicitly based on their order within the underlying 
+time series object. This parameter can also be a character vector of length
+3 that specifies a set of input column names to use as the lower, value,
+and upper for a series with a shaded bar drawn around it.</p>
+</td></tr>
+<tr valign="top"><td><code>label</code></td>
+<td>
+<p>Label to display for series (uses name if no label defined)</p>
+</td></tr>
+<tr valign="top"><td><code>color</code></td>
+<td>
+<p>Color for series. These can be of the form &quot;#AABBCC&quot; or 
+&quot;rgb(255,100,200)&quot; or &quot;yellow&quot;, etc. If not specified then the global 
+colors option (typically based on equally-spaced points around a color wheel).</p>
+</td></tr>
+<tr valign="top"><td><code>axis</code></td>
+<td>
+<p>Y-axis to associate the series with (&quot;y&quot; or &quot;y2&quot;)</p>
+</td></tr>
+<tr valign="top"><td><code>stepPlot</code></td>
+<td>
+<p>When set, display the graph as a step plot instead of a line 
+plot.</p>
+</td></tr>
+<tr valign="top"><td><code>stemPlot</code></td>
+<td>
+<p>When set, display the graph as a stem plot instead of a line
+plot.</p>
+</td></tr>
+<tr valign="top"><td><code>fillGraph</code></td>
+<td>
+<p>Should the area underneath the graph be filled? This option 
+is not compatible with error bars.</p>
+</td></tr>
+<tr valign="top"><td><code>drawPoints</code></td>
+<td>
+<p>Draw a small dot at each point, in addition to a line going
+through the point. This makes the individual data points easier to see, but
+can increase visual clutter in the chart.</p>
+</td></tr>
+<tr valign="top"><td><code>pointSize</code></td>
+<td>
+<p>The size of the dot to draw on each point in pixels. A dot 
+is always drawn when a point is &quot;isolated&quot;, i.e. there is a missing point 
+on either side of it. This also controls the size of those dots.</p>
+</td></tr>
+<tr valign="top"><td><code>pointShape</code></td>
+<td>
+<p>The shape of the dot to draw. Can be one of the following:
+&quot;dot&quot; (default), &quot;triangle&quot;, &quot;square&quot;, &quot;diamond&quot;, &quot;pentagon&quot;, &quot;hexagon&quot;,
+&quot;circle&quot;, &quot;star&quot;, &quot;plus&quot; or &quot;ex&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>strokeWidth</code></td>
+<td>
+<p>The width of the lines connecting data points. This can be
+used to increase the contrast or some graphs.</p>
+</td></tr>
+<tr valign="top"><td><code>strokePattern</code></td>
+<td>
+<p>A predefined stroke pattern type (&quot;dotted&quot;, &quot;dashed&quot;, or
+&quot;dotdash&quot;) or a custom pattern array where the even index is a draw and odd
+is a space in pixels. If <code>NULL</code> then it draws a solid line. The array 
+should have an even length as any odd length array could be expressed as 
+a smaller even length array.</p>
+</td></tr>
+<tr valign="top"><td><code>strokeBorderWidth</code></td>
+<td>
+<p>Draw a border around graph lines to make crossing 
+lines more easily distinguishable. Useful for graphs with many lines.</p>
+</td></tr>
+<tr valign="top"><td><code>strokeBorderColor</code></td>
+<td>
+<p>Color for the line border used if 
+<code>strokeBorderWidth</code> is set.</p>
+</td></tr>
+<tr valign="top"><td><code>plotter</code></td>
+<td>
+<p>A function which plots the data series. May also be set on on 
+a global basis using <code>dyOptions</code>. See the 
+<a href="http://dygraphs.com/tests/plotters.html">dygraphs documentation</a> for 
+additional details on plotting functions.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Dygraph with additional series
+</p>
+
+
+<h3>Note</h3>
+
+<p>See the 
+<a href="https://rstudio.github.io/dygraphs/gallery-series-options.html">online
+documentation</a> for additional details and examples.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(dygraphs)
+
+lungDeaths &lt;- cbind(ldeaths, mdeaths, fdeaths)
+
+dygraph(lungDeaths, main = "Deaths from Lung Disease (UK)") %&gt;%
+  dySeries("mdeaths", drawPoints = TRUE, color = "blue") %&gt;%
+  dySeries("fdeaths", stepPlot = TRUE, color = "red")   
+  
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>dygraphs</em> version 1.1.1.6 <a href="00Index.html">Index</a>]</div>
+</body></html>

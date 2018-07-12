@@ -1,6 +1,7 @@
 $.xfun_strict_list	strict_list
 attr	attr
 compare_Rcheck	rev_check
+download_file	download_file
 file_ext	file_ext
 file_string	file_string
 gsub_dir	gsub_file
@@ -10,14 +11,17 @@ gsub_files	gsub_file
 install_dir	install_dir
 in_dir	in_dir
 isFALSE	isFALSE
+is_ascii	is_ascii
 is_linux	os
 is_macos	os
 is_unix	os
 is_windows	os
 json_vector	tojson
 loadable	pkg_attach
+n2w	numbers_to_words
 native_encode	native_encode
 normalize_path	normalize_path
+numbers_to_words	numbers_to_words
 optipng	optipng
 parse_only	parse_only
 pkg_attach	pkg_attach

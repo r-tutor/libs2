@@ -1,7 +1,7 @@
 Package: dygraphs
 Type: Package
 Title: Interface to 'Dygraphs' Interactive Time Series Charting Library
-Version: 1.1.1.5
+Version: 1.1.1.6
 Authors@R: c(
     person("Dan", "Vanderkam", role = c("aut", "cph"),
        comment = "dygraphs library in htmlwidgets/lib, http://dygraphs.com/"),
@@ -33,7 +33,7 @@ Suggests: testthat
 Enhances: rmarkdown (>= 0.3.3), shiny (>= 0.10.2.1)
 RoxygenNote: 6.0.1
 NeedsCompilation: no
-Packaged: 2018-06-28 10:59:16 UTC; petr
+Packaged: 2018-07-11 21:29:28 UTC; petr
 Author: Dan Vanderkam [aut, cph] (dygraphs library in htmlwidgets/lib,
     http://dygraphs.com/),
   Petr Shevtsov [cre, cph],
@@ -48,5 +48,5 @@ Author: Dan Vanderkam [aut, cph] (dygraphs library in htmlwidgets/lib,
     inst/htmlwidgets/lib/jquery/AUTHORS.txt)
 Maintainer: Petr Shevtsov <petr.shevtsov@gmail.com>
 Repository: CRAN
-Date/Publication: 2018-06-28 12:09:25 UTC
-Built: R 3.5.0; ; 2018-06-29 22:42:04 UTC; windows
+Date/Publication: 2018-07-11 22:00:03 UTC
+Built: R 3.5.1; ; 2018-07-12 13:26:50 UTC; windows

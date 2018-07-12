@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Employ a dygraph plotter on a series, a group of series, or...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for dyCandlestick {dygraphs}"><tr><td>dyCandlestick {dygraphs}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Employ a dygraph plotter on a series, a group of series, or the whole dygraph</h2>
+
+<h3>Description</h3>
+
+<p>Plotters provide variuos ways to customize how your data appears
+on the dygraph.  Series-based plotters allow users to mix-and-match different plotters on a 
+per-series or (with dyGroup) a per-group basis.  See <code><a href="dyPlotter.html">dyPlotter</a></code> for additional detail.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+dyCandlestick(dygraph, compress = FALSE)
+
+dyBarChart(dygraph)
+
+dyStackedBarChart(dygraph)
+
+dyMultiColumn(dygraph)
+
+dyBarSeries(dygraph, name, ...)
+
+dyStemSeries(dygraph, name, ...)
+
+dyShadow(dygraph, name, ...)
+
+dyFilledLine(dygraph, name, ...)
+
+dyErrorFill(dygraph, name, ...)
+
+dyMultiColumnGroup(dygraph, name, ...)
+
+dyCandlestickGroup(dygraph, name, ...)
+
+dyStackedBarGroup(dygraph, name, ...)
+
+dyStackedLineGroup(dygraph, name, ...)
+
+dyStackedRibbonGroup(dygraph, name, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>dygraph</code></td>
+<td>
+<p>Dygraph to add plotter to</p>
+</td></tr>
+<tr valign="top"><td><code>compress</code></td>
+<td>
+<p>(For dyCandlestick) If true, compress data yearly, quarterly, monthly, weekly or daily
+according to overall amount of bars and/or current zoom level.</p>
+</td></tr>
+<tr valign="top"><td><code>name</code></td>
+<td>
+<p>name - or chrarcter vector of names - of (the) series within the data set</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>additional options to pass to dySeries</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A dygraph with the specified plotter(s) employed.
+</p>
+
+
+<h3>Available plotters</h3>
+
+<p>Currently the dygraphs package provides the following plotters:
+</p>
+
+<dl>
+<dt>dyBarChart()</dt><dd><p>Draws a bar plot rather than a line plot. If the provided dygraph
+features more than one series, dyBarChart will call dyMultiColumn instead.</p>
+</dd>
+<dt>dyStackedBarChart()</dt><dd><p>Draws a bar chart stacking all the underlying series.</p>
+</dd>
+<dt>dyMultiColumn()</dt><dd><p>Draws multiple column bar chart.</p>
+</dd> 
+<dt>dyBarSeries()</dt><dd><p>Draws a single set of bars for just the provided series.</p>
+</dd>
+<dt>dyStemSeries()</dt><dd><p>Draws a single set of stems for just the provided series.</p>
+</dd>
+<dt>dyShadow()</dt><dd><p>An extraction of the _fillplotter from dygraph-combined-dev.js, 
+drawing the filled area without the line.</p>
+</dd>
+<dt>dyFilledLIne()</dt><dd><p>An extraction of the _fillplotter and _lineplotter combo 
+from dygraph-combined-dev.js. dyFilledLine allows users to fill only a single series.</p>
+</dd>
+<dt>dyMultiColumnGroup()</dt><dd><p>The multicolumn plotter, but on a subset of the series, leaving 
+the others for other plotters.</p>
+</dd>
+<dt>dyCandlestick()</dt><dd><p>Draw a candlestick chart.</p>
+</dd>
+<dt>dyCandleStickGroup()</dt><dd><p>Employed on the provided series, 
+but still plotting the others.</p>
+</dd>
+<dt>dyStackerBarGroup()</dt><dd><p>Return the data group as stacked bars</p>
+</dd>
+<dt>dyStackerRibbonGroup()</dt><dd><p>Return the data group as stacked ribbons</p>
+</dd>
+</dl>
+
+
+
+<h3>Examples</h3>
+
+<pre>
+## The following two examples will results in the same dygraph:
+
+dygraph(mdeaths) %&gt;% 
+  dyBarChart()
+ 
+lungDeaths &lt;- cbind(mdeaths, fdeaths)
+dygraph(lungDeaths) %&gt;%
+  dyMultiColumn()
+  
+
+## Per-series plotters:
+
+lungDeaths &lt;- cbind(mdeaths, fdeaths)
+dygraph(lungDeaths) %&gt;%
+  dyBarSeries('fdeaths')
+
+lungDeaths &lt;- cbind(mdeaths, fdeaths)
+dygraph(lungDeaths) %&gt;%
+  dyStemSeries('fdeaths')
+  
+lungDeaths &lt;- cbind(mdeaths, fdeaths)
+dygraph(lungDeaths) %&gt;%
+  dyShadow('fdeaths')
+
+lungDeaths &lt;- cbind(mdeaths, fdeaths)
+dygraph(lungDeaths) %&gt;%
+  dyFilledLine('fdeaths')
+
+## A bunch of different plotters together:
+
+lungDeaths &lt;- cbind(fdeaths, mdeaths, ldeaths, foo = fdeaths/2, bar = fdeaths/3)
+dygraph(lungDeaths) %&gt;%
+  dyRangeSelector() %&gt;%
+  dyBarSeries('bar') %&gt;% 
+  dyStemSeries('mdeaths') %&gt;% 
+  dyShadow('foo') %&gt;% 
+  dyFilledLine('fdeaths')
+
+## Group-based plotters:
+  
+
+## Candlestick plotters:
+  
+library(xts)
+data(sample_matrix)
+library(dygraphs)
+dygraph(sample_matrix) %&gt;%
+  dyCandlestick()
+  
+sample&lt;-data.frame(sample_matrix)
+sample_2&lt;-sample*2
+names(sample_2)&lt;-c('O', 'H', 'L', 'C')
+sample&lt;-cbind(sample, sample_2)
+dygraph(sample) %&gt;% 
+  dyOptions(stackedGraph = TRUE) %&gt;% 
+  dyCandlestickGroup(c('Open', 'High', 'Low', 'Close')) %&gt;% 
+  dyCandlestickGroup(c('O', 'H', 'L', 'C'))
+
+## Stacked Bar and Ribbon Graphs:  
+
+dygraph(lungDeaths) %&gt;% 
+  dySeries('mdeaths', axis = 'y2') %&gt;%
+  dyAxis('y', valueRange = c(-100, 1000)) %&gt;% 
+  dyStackedBarGroup(c('ldeaths', 'fdeaths'))
+  
+lungDeaths &lt;- cbind(ldeaths, fdeaths, mdeaths, 
+                    additive = rep.int(200, length(ldeaths)),
+                    line = rep.int(3000, length(ldeaths)))
+dygraph(lungDeaths) %&gt;% 
+  dySeries('line', strokePattern = 'dashed') %&gt;% 
+  dySeries('ldeaths', stepPlot = TRUE) %&gt;% 
+  dyStackedBarGroup(c('additive', 'mdeaths')) %&gt;% 
+  dyStackedRibbonGroup(c('fdeaths', 'ldeaths'))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>dygraphs</em> version 1.1.1.6 <a href="00Index.html">Index</a>]</div>
+</body></html>

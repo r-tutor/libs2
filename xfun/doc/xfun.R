@@ -62,5 +62,13 @@ xfun::is_windows()
 #  xfun::pkg_attach2('tinytex')
 
 ## ------------------------------------------------------------------------
+n2w(0, cap = TRUE)
+n2w(seq(0, 121, 11), and = TRUE)
+n2w(1e+06)
+n2w(1e+11 + 12345678)
+n2w(-987654321)
+n2w(1e+15 - 1)
+
+## ------------------------------------------------------------------------
 xfun::session_info(c('xfun', 'rmarkdown', 'knitr', 'tinytex'), dependencies = FALSE)
 

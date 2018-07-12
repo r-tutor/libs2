@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Annotation for dygraph chart</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for dyAnnotation {dygraphs}"><tr><td>dyAnnotation {dygraphs}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Annotation for dygraph chart</h2>
+
+<h3>Description</h3>
+
+<p>Define a text annotation for a data-point on a dygraph chart.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+dyAnnotation(dygraph, x, text, tooltip = NULL, width = NULL,
+  height = NULL, cssClass = NULL, tickHeight = NULL,
+  attachAtBottom = FALSE, clickHandler = NULL, mouseOverHandler = NULL,
+  mouseOutHandler = NULL, dblClickHandler = NULL, series = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>dygraph</code></td>
+<td>
+<p>Dygraph to add an annotation to</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>Either numeric or date value indicating where to place the
+annotation. For date value, this should be of class <code>POSIXct</code> or
+convertible to <code>POSIXct</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>text</code></td>
+<td>
+<p>Text to overlay on the chart at the location of x</p>
+</td></tr>
+<tr valign="top"><td><code>tooltip</code></td>
+<td>
+<p>Additional tooltip text to display on mouse hover</p>
+</td></tr>
+<tr valign="top"><td><code>width</code></td>
+<td>
+<p>Width (in pixels) of the annotation flag.</p>
+</td></tr>
+<tr valign="top"><td><code>height</code></td>
+<td>
+<p>Height (in pixels) of the annotation flag.</p>
+</td></tr>
+<tr valign="top"><td><code>cssClass</code></td>
+<td>
+<p>CSS class to use for styling the annotation.</p>
+</td></tr>
+<tr valign="top"><td><code>tickHeight</code></td>
+<td>
+<p>Height of the tick mark (in pixels) connecting the point to
+its flag or icon.</p>
+</td></tr>
+<tr valign="top"><td><code>attachAtBottom</code></td>
+<td>
+<p>If true, attach annotations to the x-axis, rather than 
+to actual points.</p>
+</td></tr>
+<tr valign="top"><td><code>clickHandler</code></td>
+<td>
+<p>JavaScript function to call when an annotation is 
+clicked.</p>
+</td></tr>
+<tr valign="top"><td><code>mouseOverHandler</code></td>
+<td>
+<p>JavaScript function to call when the mouse hovers 
+over an annotation.</p>
+</td></tr>
+<tr valign="top"><td><code>mouseOutHandler</code></td>
+<td>
+<p>JavaScript function to call when the mouse exits an 
+annotation.</p>
+</td></tr>
+<tr valign="top"><td><code>dblClickHandler</code></td>
+<td>
+<p>JavaScript function to call when an annotation is 
+double clicked.</p>
+</td></tr>
+<tr valign="top"><td><code>series</code></td>
+<td>
+<p>Series to attach the annotation to. By default, the last series
+defined using <code><a href="dySeries.html">dySeries</a></code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Dygraph with specified annotation
+</p>
+
+
+<h3>Note</h3>
+
+<p>Annotations are bound to specific series in the input data. If you have
+only one series or if you define annotations immediately after a call to 
+<code><a href="dySeries.html">dySeries</a></code> then you need not specify the series explicitly. 
+Otherwise, you should use the <code>series</code> parameter to indicate which
+series the annotation should be bound to.
+</p>
+<p>Annotation event handlers can also specified globally (see 
+<code><a href="dyCallbacks.html">dyCallbacks</a></code>).
+</p>
+<p>See the
+<a href="https://rstudio.github.io/dygraphs/gallery-annotations.html">online
+documentation</a> for additional details and examples.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(dygraphs)
+  
+dygraph(presidents, main = "Presidential Approval") %&gt;%
+  dyAxis("y", valueRange = c(0, 100)) %&gt;%
+  dyAnnotation("1950-7-1", text = "A", tooltip = "Korea") %&gt;%
+  dyAnnotation("1965-1-1", text = "B", tooltip = "Vietnam")   
+  
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>dygraphs</em> version 1.1.1.6 <a href="00Index.html">Index</a>]</div>
+</body></html>

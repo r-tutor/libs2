@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: dygraph limit line</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for dyLimit {dygraphs}"><tr><td>dyLimit {dygraphs}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>dygraph limit line</h2>
+
+<h3>Description</h3>
+
+<p>Add a horizontal limit line to a dygraph
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+dyLimit(dygraph, limit, label = NULL, labelLoc = c("left", "right"),
+  color = "black", strokePattern = "dashed")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>dygraph</code></td>
+<td>
+<p>Dygraph to add limit line to</p>
+</td></tr>
+<tr valign="top"><td><code>limit</code></td>
+<td>
+<p>Numeric position of limit.</p>
+</td></tr>
+<tr valign="top"><td><code>label</code></td>
+<td>
+<p>Label for limit. Defaults to blank.</p>
+</td></tr>
+<tr valign="top"><td><code>labelLoc</code></td>
+<td>
+<p>Location for label (left or right).</p>
+</td></tr>
+<tr valign="top"><td><code>color</code></td>
+<td>
+<p>Color of limit line. This can be of the form &quot;#AABBCC&quot; or 
+&quot;rgb(255,100,200)&quot; or &quot;yellow&quot;. Defaults to black.</p>
+</td></tr>
+<tr valign="top"><td><code>strokePattern</code></td>
+<td>
+<p>A predefined stroke pattern type (&quot;dotted&quot;, &quot;dashed&quot;,
+&quot;dotdash&quot;, or &quot;solid&quot;) or a custom pattern array where the even index is 
+a draw and odd is a space in pixels. Defaults to dashed.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A dygraph with the specified limit line.
+</p>
+
+
+<h3>Note</h3>
+
+<p>See the <a href="https://rstudio.github.io/dygraphs/gallery-event-lines.html">online 
+documentation</a> for additional details and examples.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(dygraphs)
+
+dygraph(presidents, main = "Presidential Approval") %&gt;%
+  dyAxis("y", valueRange = c(0, 100)) %&gt;% 
+  dyLimit(max(presidents, na.rm = TRUE), "Max",
+          strokePattern = "solid", color = "blue")
+ 
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>dygraphs</em> version 1.1.1.6 <a href="00Index.html">Index</a>]</div>
+</body></html>

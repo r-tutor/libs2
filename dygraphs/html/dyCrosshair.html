@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: The dyCrosshair plugin draws a crosshair line over the point...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for dyCrosshair {dygraphs}"><tr><td>dyCrosshair {dygraphs}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>The dyCrosshair plugin draws a crosshair line over the point closest to the
+mouse when the user hovers over the graph. It has a &quot;direction&quot; option which
+is provided in the R wrapper function and then forwarded to the plugin using
+the &quot;options&quot; argument to dyPlugin.</h2>
+
+<h3>Description</h3>
+
+<p>The dyCrosshair plugin draws a crosshair line over the point closest to the
+mouse when the user hovers over the graph. It has a &quot;direction&quot; option which
+is provided in the R wrapper function and then forwarded to the plugin using
+the &quot;options&quot; argument to dyPlugin.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+dyCrosshair(dygraph, direction = c("both", "horizontal", "vertical"))
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>dygraph</code></td>
+<td>
+<p>Dygraph to add plugin to</p>
+</td></tr>
+<tr valign="top"><td><code>direction</code></td>
+<td>
+<p>Crosshair direction. Valid options are: &quot;both&quot;, &quot;horizontal&quot;,
+&quot;vertical&quot;</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Dygraph with Crosshair plugin enabled
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(dygraphs)
+dygraph(ldeaths) %&gt;%
+  dyRangeSelector() %&gt;%
+  dyCrosshair(direction = "vertical")
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>dygraphs</em> version 1.1.1.6 <a href="00Index.html">Index</a>]</div>
+</body></html>

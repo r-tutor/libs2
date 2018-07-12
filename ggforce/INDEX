@@ -15,6 +15,6 @@ n_pages                 Determine the number of pages in a paginated
 power_trans             Create a power transformation object
 radial_trans            Create radial data in a cartesian coordinate
                         system
-scale_type.units        Position scales for units data
+scale_x_unit            Position scales for units data
 theme_no_axes           Theme without axes and gridlines
 trans_reverser          Reverse a transformation

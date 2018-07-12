@@ -114,6 +114,25 @@ corrgram(auto, order=TRUE,
 corrgram(vote, order=TRUE,
          upper.panel=panel.cor, main="vote")
 
-## ----session----------------------------------------------------------------------------
+## ---------------------------------------------------------------------------------------
+
+load(url("https://github.com/alexanderrobitzsch/sirt/blob/master/data/data.ratings3.rda?raw=true"))
+
+# jitter first, so the upper/lower panels are symmetric
+data.ratings3 <- transform(data.ratings3,
+                           c2=jitter(crit2), c3=jitter(crit3),
+                           c4=jitter(crit4), c6=jitter(crit6))
+                           
+library(corrgram)
+panel.raters <- function (x, y, corr = NULL, col.regions, cor.method, ...) {
+  if (!is.null(corr)) 
+    return()
+  plot.xy(xy.coords(x, y), type = "p", ...)
+  abline(lm(y ~ x))
+  box(col = "lightgray")
+}
+corrgram(data.ratings3[,7:10], diag=panel.density, lower.panel=panel.raters, upper.panel=panel.conf)
+
+## ---------------------------------------------------------------------------------------
 sessionInfo()
 

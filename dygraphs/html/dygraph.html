@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: dygraph interactive plot for time series data</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for dygraph {dygraphs}"><tr><td>dygraph {dygraphs}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>dygraph interactive plot for time series data</h2>
+
+<h3>Description</h3>
+
+<p>R interface to interactive time series plotting using the 
+<a href="http://dygraphs.com">dygraphs</a> JavaScript library.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+dygraph(data, main = NULL, xlab = NULL, ylab = NULL, periodicity = NULL,
+  group = NULL, elementId = NULL, width = NULL, height = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>Either time series data or numeric data. For time series, this 
+must be an <a href="../../xts/html/xts.html">xts</a> object or an object which is convertible to 
+<code>xts</code>. For numeric data, this must be a named list or data frame,
+where the first element/column provides x-axis values and all subsequent
+elements/columns provide one or more series of y-values.</p>
+</td></tr>
+<tr valign="top"><td><code>main</code></td>
+<td>
+<p>Main plot title (optional)</p>
+</td></tr>
+<tr valign="top"><td><code>xlab</code></td>
+<td>
+<p>X axis label</p>
+</td></tr>
+<tr valign="top"><td><code>ylab</code></td>
+<td>
+<p>Y axis label</p>
+</td></tr>
+<tr valign="top"><td><code>periodicity</code></td>
+<td>
+<p>Periodicity of time series data (automatically detected
+via <a href="../../xts/html/periodicity.html">xts::periodicity</a> if not specified).</p>
+</td></tr>
+<tr valign="top"><td><code>group</code></td>
+<td>
+<p>Group to associate this plot with. The x-axis zoom level of 
+plots within a group is automatically synchronized.</p>
+</td></tr>
+<tr valign="top"><td><code>elementId</code></td>
+<td>
+<p>Use an explicit element ID for the widget (rather than an
+automatically generated one). Useful if you have other JavaScript that
+needs to explicitly discover and interact with a specific widget instance.</p>
+</td></tr>
+<tr valign="top"><td><code>width</code></td>
+<td>
+<p>Width in pixels (optional, defaults to automatic sizing)</p>
+</td></tr>
+<tr valign="top"><td><code>height</code></td>
+<td>
+<p>Height in pixels (optional, defaults to automatic sizing)</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Interactive dygraph plot
+</p>
+
+
+<h3>Note</h3>
+
+<p>See the <a href="https://rstudio.github.io/dygraphs/">online documentation</a> for
+additional details and examples.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(dygraphs)
+lungDeaths &lt;- cbind(mdeaths, fdeaths)
+dygraph(lungDeaths)
+
+indoConc &lt;- Indometh[Indometh$Subject == 1, c("time", "conc")]
+dygraph(indoConc)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>dygraphs</em> version 1.1.1.6 <a href="00Index.html">Index</a>]</div>
+</body></html>

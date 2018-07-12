@@ -1,8 +1,8 @@
 Package: ggforce
 Type: Package
 Title: Accelerating 'ggplot2'
-Version: 0.1.2
-Date: 2018-05-27
+Version: 0.1.3
+Date: 2018-07-07
 Author: Thomas Lin Pedersen
 Maintainer: Thomas Lin Pedersen <thomasp85@gmail.com>
 Description: The aim of 'ggplot2' is to aid in visual data investigations. This
@@ -11,12 +11,13 @@ Description: The aim of 'ggplot2' is to aid in visual data investigations. This
     this gap. All additional functionality is aimed to come through the official
     extension system so using 'ggforce' should be a stable experience.
 License: GPL (>= 2)
+Encoding: UTF-8
 LazyData: TRUE
 Depends: ggplot2 (>= 2.2.0), R (>= 3.3.0)
 Imports: Rcpp (>= 0.12.2), grid, dplyr, scales, MASS, tweenr (>=
         0.1.5), units (>= 0.4), gtable, lazyeval
 LinkingTo: Rcpp
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1.9000
 Suggests: knitr, rmarkdown, devtools
 VignetteBuilder: knitr
 Collate: 'RcppExports.R' 'aaa.R' 'arc_bar.R' 'arc.R' 'bezier.R'
@@ -25,8 +26,8 @@ Collate: 'RcppExports.R' 'aaa.R' 'arc_bar.R' 'arc.R' 'bezier.R'
         'ggproto-classes.R' 'interpolate.R' 'link.R' 'scale-unit.R'
         'sina.R' 'themes.R' 'trans.R'
 NeedsCompilation: yes
-Packaged: 2018-05-27 20:38:55 UTC; thomas
+Packaged: 2018-07-07 12:42:55 UTC; thomas
 Repository: CRAN
-Date/Publication: 2018-05-27 21:02:55 UTC
-Built: R 3.5.0; x86_64-w64-mingw32; 2018-06-22 13:37:44 UTC; windows
+Date/Publication: 2018-07-07 17:00:08 UTC
+Built: R 3.5.1; x86_64-w64-mingw32; 2018-07-11 12:22:32 UTC; windows
 Archs: i386, x64

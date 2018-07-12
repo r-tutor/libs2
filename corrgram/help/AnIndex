@@ -6,6 +6,7 @@ panel.conf	corrgram
 panel.cor	corrgram
 panel.density	corrgram
 panel.ellipse	corrgram
+panel.fill	corrgram
 panel.minmax	corrgram
 panel.pie	corrgram
 panel.pts	corrgram

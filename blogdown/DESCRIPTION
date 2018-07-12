@@ -1,7 +1,7 @@
 Package: blogdown
 Type: Package
 Title: Create Blogs and Websites with R Markdown
-Version: 0.6
+Version: 0.7
 Authors@R: c(
     person("Yihui", "Xie", role = c("aut", "cre"), email = "xie@yihui.name", comment = c(ORCID = "0000-0003-0645-5666")),
     person("Beilei", "Bian", role = "ctb"),
@@ -21,9 +21,9 @@ Description: Write blog posts and web pages in R Markdown. This package supports
     supports 'Jekyll' (<http://jekyllrb.com>) and 'Hexo' (<https://hexo.io>).
 License: GPL-3
 Imports: rmarkdown, bookdown (>= 0.5), knitr (>= 1.17), htmltools, yaml
-        (>= 2.1.14), httpuv, xfun, servr (>= 0.8)
+        (>= 2.1.19), httpuv (>= 1.4.0), xfun (>= 0.3), servr (>= 0.8)
 Suggests: testit, shiny, miniUI, RcppTOML, stringr, rstudioapi, tools,
-        processx, later, xaringan
+        processx, later
 LazyData: true
 URL: https://github.com/rstudio/blogdown
 BugReports: https://github.com/rstudio/blogdown/issues
@@ -31,7 +31,7 @@ SystemRequirements: Hugo (<https://gohugo.io>) and Pandoc
         (<http://pandoc.org>)
 RoxygenNote: 6.0.1
 NeedsCompilation: no
-Packaged: 2018-04-18 21:49:34 UTC; yihui
+Packaged: 2018-07-06 22:23:00 UTC; yihui
 Author: Yihui Xie [aut, cre] (<https://orcid.org/0000-0003-0645-5666>),
   Beilei Bian [ctb],
   Forest Fang [ctb],
@@ -45,5 +45,5 @@ Author: Yihui Xie [aut, cre] (<https://orcid.org/0000-0003-0645-5666>),
   RStudio Inc [cph]
 Maintainer: Yihui Xie <xie@yihui.name>
 Repository: CRAN
-Date/Publication: 2018-04-18 23:19:44 UTC
-Built: R 3.5.0; ; 2018-06-22 12:59:12 UTC; windows
+Date/Publication: 2018-07-07 07:20:03 UTC
+Built: R 3.5.1; ; 2018-07-11 11:14:32 UTC; windows

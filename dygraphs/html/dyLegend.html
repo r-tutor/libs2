@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: dygraph legend</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for dyLegend {dygraphs}"><tr><td>dyLegend {dygraphs}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>dygraph legend</h2>
+
+<h3>Description</h3>
+
+<p>Configure options for the dygraph series legend.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+dyLegend(dygraph, show = c("auto", "always", "onmouseover", "follow",
+  "never"), width = 250, showZeroValues = TRUE, labelsDiv = NULL,
+  labelsSeparateLines = FALSE, hideOnMouseOut = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>dygraph</code></td>
+<td>
+<p>Dygraph to configure legend options for.</p>
+</td></tr>
+<tr valign="top"><td><code>show</code></td>
+<td>
+<p>When to display the legend. Specify &quot;always&quot; to always show the 
+legend. Specify &quot;onmouseover&quot; to only display it when a user mouses over 
+the chart. Specify &quot;follow&quot; to have the legend show as overlay to the chart
+which follows the mouse. The default behavior is &quot;auto&quot;, which results in
+&quot;always&quot; when more than one series is plotted and &quot;onmouseover&quot; when only a
+single series is plotted.</p>
+</td></tr>
+<tr valign="top"><td><code>width</code></td>
+<td>
+<p>Width (in pixels) of the div which shows the legend.</p>
+</td></tr>
+<tr valign="top"><td><code>showZeroValues</code></td>
+<td>
+<p>Show zero value labels in the legend.</p>
+</td></tr>
+<tr valign="top"><td><code>labelsDiv</code></td>
+<td>
+<p>Show data labels in an external div, rather than on the 
+graph. This value should be a div element id.</p>
+</td></tr>
+<tr valign="top"><td><code>labelsSeparateLines</code></td>
+<td>
+<p>Put a &lt;br/&gt; between lines in the label string. 
+Often used in conjunction with <code>labelsDiv</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>hideOnMouseOut</code></td>
+<td>
+<p>Whether to hide the legend when the mouse leaves the 
+chart area. This option applies when <code>show</code> is set to &quot;onmouseover&quot;. 
+Note that this also affects the hiding of the <code><a href="dyHighlight.html">dyHighlight</a></code> on 
+mouse out.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A dygraph with customized legend options
+</p>
+
+
+<h3>Note</h3>
+
+<p>See the 
+<a href="https://rstudio.github.io/dygraphs/gallery-plot-labels.html">online
+documentation</a> for additional details and examples.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(dygraphs)
+
+dygraph(nhtemp, main = "New Haven Temperatures") %&gt;% 
+  dySeries("V1", label = "Temperature (F)") %&gt;%
+  dyLegend(show = "always", hideOnMouseOut = FALSE)   
+    
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>dygraphs</em> version 1.1.1.6 <a href="00Index.html">Index</a>]</div>
+</body></html>
