@@ -9,10 +9,8 @@
 
 <h3>Description</h3>
 
-<p>These perform tidy summaries of data.frame objects. <code>tidy</code> produces
-summary statistics about each column, while <code>glance</code> simply reports
-the number of rows and columns. Note that <code>augment.data.frame</code> will
-throw an error.
+<p>Data frame tidiers are deprecated and will be removed from an upcoming
+release of broom.
 </p>
 
 
@@ -20,10 +18,7 @@ throw an error.
 
 <pre>
 ## S3 method for class 'data.frame'
-tidy(x, ...)
-
-## S3 method for class 'data.frame'
-augment(x, data, ...)
+tidy(x, ..., na.rm = TRUE, trim = 0.1)
 
 ## S3 method for class 'data.frame'
 glance(x, ...)
@@ -39,8 +34,18 @@ glance(x, ...)
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
-<p>extra arguments: for <code>tidy</code>, these are passed on to
-<code><a href="../../Hmisc/html/describe.html">describe</a></code> from <code>psych</code> package</p>
+<p>Additional arguments for other methods.</p>
+</td></tr>
+<tr valign="top"><td><code>na.rm</code></td>
+<td>
+<p>a logical value indicating whether <code>NA</code> values should
+be stripped before the computation proceeds.</p>
+</td></tr>
+<tr valign="top"><td><code>trim</code></td>
+<td>
+<p>the fraction (0 to 0.5) of observations to be trimmed from
+each end of <code>x</code> before the mean is computed.  Passed to the
+<code>trim</code> argument of <code><a href="../../base/html/mean.html">mean()</a></code></p>
 </td></tr>
 <tr valign="top"><td><code>data</code></td>
 <td>
@@ -51,9 +56,10 @@ glance(x, ...)
 
 <h3>Details</h3>
 
-<p>The <code>tidy</code> method calls the psych method
-<code><a href="../../Hmisc/html/describe.html">describe</a></code> directly to produce its per-columns summary
-statistics.
+<p>These perform tidy summaries of data.frame objects. <code>tidy</code> produces
+summary statistics about each column, while <code>glance</code> simply reports
+the number of rows and columns. Note that <code>augment.data.frame</code> will
+throw an error.
 </p>
 
 
@@ -139,9 +145,18 @@ are missing</p>
 </table>
 
 
-<h3>See Also</h3>
+<h3>Author(s)</h3>
 
-<p><code><a href="../../Hmisc/html/describe.html">describe</a></code>
+<p>David Robinson, Benjamin Nutter
+</p>
+
+
+<h3>Source</h3>
+
+<p>Skew and Kurtosis functions are adapted from implementations in the <code>moments</code> package: <br />
+Lukasz Komsta and Frederick Novomestky (2015). moments: Moments, cumulants, skewness,
+kurtosis and related tests. R package version 0.14. <br />
+https://CRAN.R-project.org/package=moments
 </p>
 
 
@@ -149,6 +164,7 @@ are missing</p>
 
 <pre>
 
+## Not run: 
 td &lt;- tidy(mtcars)
 td
 
@@ -160,7 +176,9 @@ ggplot(td, aes(mean, sd)) + geom_point() +
      geom_text(aes(label = column), hjust = 1, vjust = 1) +
      scale_x_log10() + scale_y_log10() + geom_abline()
 
+## End(Not run)
+
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.5.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

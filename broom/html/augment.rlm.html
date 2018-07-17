@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Augment a(n) rlm object</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for augment.rlm {broom}"><tr><td>augment.rlm {broom}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Augment a(n) rlm object</h2>
+
+<h3>Description</h3>
+
+<p>This augment method wraps <code><a href="augment.lm.html">augment.lm()</a></code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'rlm'
+augment(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>An <code>rlm</code> object returned by <code><a href="../../MASS/html/rlm.html">MASS::rlm()</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Arguments passed on to <code>augment.lm</code>
+</p>
+
+<dl>
+<dt>data</dt><dd><p>A <code><a href="../../base/html/data.frame.html">data.frame()</a></code> or <code><a href="../../tibble/html/tibble.html">tibble::tibble()</a></code> containing the original
+data that was used to produce the object <code>x</code>. Defaults to
+<code>stats::model.frame(x)</code> so that <code>augment(my_fit)</code> returns the augmented
+original data. <strong>Do not</strong> pass new data to the <code>data</code> argument.
+Augment will report information such as influence and cooks distance for
+data passed to the <code>data</code> argument. These measures are only defined for
+the original training data.</p>
+</dd>
+<dt>newdata</dt><dd><p>A <code><a href="../../base/html/data.frame.html">data.frame()</a></code> or <code><a href="../../tibble/html/tibble.html">tibble::tibble()</a></code> containing all
+the original predictors used to create <code>x</code>. Defaults to <code>NULL</code>, indicating
+that nothing has been passed to <code>newdata</code>. If <code>newdata</code> is specified,
+the <code>data</code> argument will be ignored.</p>
+</dd>
+<dt>type.predict</dt><dd><p>Type of predictions to use when <code>x</code> is a <code>glm</code> object.
+Passed to <code><a href="../../stats/html/predict.glm.html">stats::predict.glm()</a></code>.</p>
+</dd>
+<dt>type.residuals</dt><dd><p>Type of residuals to use when <code>x</code> is a <code>glm</code> object.
+Passed to <code><a href="../../stats/html/residuals.glm.html">stats::residuals.glm()</a></code>.</p>
+</dd>
+<dt>x</dt><dd><p>An <code>lm</code> object created by <code><a href="../../stats/html/lm.html">stats::lm()</a></code>.</p>
+</dd>
+</dl>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>For tidiers for models from the <span class="pkg">robust</span> package see
+<code><a href="tidy.lmRob.html">tidy.lmRob()</a></code> and <code><a href="tidy.glmRob.html">tidy.glmRob()</a></code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>When <code>newdata</code> is not supplied <code>augment.lm</code> returns
+one row for each observation, with seven columns added to the original
+data:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>.hat</code></td>
+<td>
+<p>Diagonal of the hat matrix</p>
+</td></tr>
+<tr valign="top"><td><code>.sigma</code></td>
+<td>
+<p>Estimate of residual standard deviation when
+corresponding observation is dropped from model</p>
+</td></tr>
+<tr valign="top"><td><code>.cooksd</code></td>
+<td>
+<p>Cooks distance, <code><a href="../../stats/html/influence.measures.html">cooks.distance()</a></code></p>
+</td></tr>
+<tr valign="top"><td><code>.fitted</code></td>
+<td>
+<p>Fitted values of model</p>
+</td></tr>
+<tr valign="top"><td><code>.se.fit</code></td>
+<td>
+<p>Standard errors of fitted values</p>
+</td></tr>
+<tr valign="top"><td><code>.resid</code></td>
+<td>
+<p>Residuals</p>
+</td></tr>
+<tr valign="top"><td><code>.std.resid</code></td>
+<td>
+<p>Standardised residuals</p>
+</td></tr>
+</table>
+<p>Some unusual <code>lm</code> objects, such as <code>rlm</code> from MASS, may omit <code>.cooksd</code>
+and <code>.std.resid</code>. <code>gam</code> from mgcv omits <code>.sigma</code>.
+</p>
+<p>When <code>newdata</code> is supplied, returns one row for each observation, with
+three columns added to the new data:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>.fitted</code></td>
+<td>
+<p>Fitted values of model</p>
+</td></tr>
+<tr valign="top"><td><code>.se.fit</code></td>
+<td>
+<p>Standard errors of fitted values</p>
+</td></tr>
+<tr valign="top"><td><code>.resid</code></td>
+<td>
+<p>Residuals of fitted values on the new data</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="augment.html">augment()</a></code>, <code><a href="augment.lm.html">augment.lm()</a></code>
+</p>
+<p><code><a href="../../MASS/html/rlm.html">MASS::rlm()</a></code>
+</p>
+<p>Other rlm tidiers: <code><a href="glance.rlm.html">glance.rlm</a></code>,
+<code><a href="tidy.rlm.html">tidy.rlm</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.5.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

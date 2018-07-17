@@ -9,8 +9,9 @@
 
 <h3>Description</h3>
 
-<p>These methods tidy the coefficients of mixed effects models, particularly
-responses of the <code>merMod</code> class
+<p><code>lme4</code> tidiers will soon be deprecated in <code>broom</code> and there is no ongoing
+development of these functions at this time. <code>lme4</code> tidiers are being
+developed in the <code>broom.mixed</code> package, which is not yet on CRAN.
 </p>
 
 
@@ -18,9 +19,9 @@ responses of the <code>merMod</code> class
 
 <pre>
 ## S3 method for class 'merMod'
-tidy(x, effects = c("ran_pars", "fixed"), scales = NULL,
-  ran_prefix = NULL, conf.int = FALSE, conf.level = 0.95,
-  conf.method = "Wald", ...)
+tidy(x, effects = c("ran_pars", "fixed"),
+  scales = NULL, ran_prefix = NULL, conf.int = FALSE,
+  conf.level = 0.95, conf.method = "Wald", ...)
 
 ## S3 method for class 'merMod'
 augment(x, data = stats::model.frame(x), newdata, ...)
@@ -81,13 +82,16 @@ attempt to be reconstructed</p>
 
 <h3>Details</h3>
 
+<p>These methods tidy the coefficients of mixed effects models, particularly
+responses of the <code>merMod</code> class
+</p>
 <p>When the modeling was performed with <code>na.action = "na.omit"</code>
 (as is the typical default), rows with NA in the initial data are omitted
 entirely from the augmented data frame. When the modeling was performed
 with <code>na.action = "na.exclude"</code>, one should provide the original data
 as a second argument, at which point the augmented data will contain those
 rows (typically with NAs in place of the new columns). If the original data
-is not provided to <code>augment</code> and <code>na.action = "na.exclude"</code>, a
+is not provided to <code><a href="augment.html">augment()</a></code> and <code>na.action = "na.exclude"</code>, a
 warning is raised and the incomplete rows are dropped.
 </p>
 
@@ -150,8 +154,7 @@ with columns (each prepended by a .) added. Included are the columns
 </table>
 <p>Also added for &quot;merMod&quot; objects, but not for &quot;mer&quot; objects,
 are values from the response object within the model (of type
-<code>lmResp</code>, <code>glmResp</code>, <code>nlsResp</code>, etc). These include <code>".mu",
-".offset", ".sqrtXwt", ".sqrtrwt", ".eta"</code>.
+<code>lmResp</code>, <code>glmResp</code>, <code>nlsResp</code>, etc). These include <code>".mu", ".offset", ".sqrtXwt", ".sqrtrwt", ".eta"</code>.
 </p>
 <p><code>glance</code> returns one row with the columns
 </p>
@@ -220,5 +223,5 @@ if (require("lme4")) {
 ## End(Not run)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.5.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

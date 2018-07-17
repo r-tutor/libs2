@@ -9,8 +9,8 @@
 
 <h3>Description</h3>
 
-<p>These methods tidy the estimates from <code><a href="../../rstanarm/html/stanreg-objects.html">stanreg-objects</a></code>
-(fitted model objects from the <span class="pkg">rstanarm</span> package) into a summary.
+<p><code>rstanarm</code> tidiers will soon be deprecated in <code>broom</code> and there is no
+ongoing development of these functions at this time.
 </p>
 
 
@@ -18,8 +18,8 @@
 
 <pre>
 ## S3 method for class 'stanreg'
-tidy(x, parameters = "non-varying", intervals = FALSE,
-  prob = 0.9, ...)
+tidy(x, parameters = "non-varying",
+  intervals = FALSE, prob = 0.9, ...)
 
 ## S3 method for class 'stanreg'
 glance(x, looic = FALSE, ...)
@@ -31,37 +31,44 @@ glance(x, looic = FALSE, ...)
 <table summary="R argblock">
 <tr valign="top"><td><code>x</code></td>
 <td>
-<p>Fitted model object from the <span class="pkg">rstanarm</span> package. See 
-<code><a href="../../rstanarm/html/stanreg-objects.html">stanreg-objects</a></code>.</p>
+<p>Fitted model object from the <span class="pkg">rstanarm</span> package. See
+<code><a href="../../rstanarm/html/stanreg-objects.html">rstanarm::stanreg-objects()</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>parameters</code></td>
 <td>
-<p>One or more of <code>"non-varying"</code>, <code>"varying"</code>, 
+<p>One or more of <code>"non-varying"</code>, <code>"varying"</code>,
 <code>"hierarchical"</code>, <code>"auxiliary"</code> (can be abbreviated). See the
 Value section for details.</p>
 </td></tr>
 <tr valign="top"><td><code>intervals</code></td>
 <td>
 <p>If <code>TRUE</code> columns for the lower and upper bounds of the
-<code>100*prob</code>% posterior uncertainty intervals are included. See 
-<code><a href="../../rstanarm/html/posterior_interval.html">posterior_interval</a></code> for details.</p>
+<code>100*prob</code>% posterior uncertainty intervals are included. See
+<code><a href="../../rstanarm/html/posterior_interval.html">rstanarm::posterior_interval()</a></code> for details.</p>
 </td></tr>
 <tr valign="top"><td><code>prob</code></td>
 <td>
-<p>See <code><a href="../../rstanarm/html/posterior_interval.html">posterior_interval</a></code>.</p>
+<p>See <code><a href="../../rstanarm/html/posterior_interval.html">rstanarm::posterior_interval()</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
-<p>For <code>glance</code>, if <code>looic=TRUE</code>, optional arguments to 
-<code><a href="../../rstanarm/html/loo.stanreg.html">loo.stanreg</a></code>.</p>
+<p>For <code>glance</code>, if <code>looic=TRUE</code>, optional arguments to
+<code><a href="../../rstanarm/html/loo.stanreg.html">rstanarm::loo.stanreg()</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>looic</code></td>
 <td>
 <p>Should the LOO Information Criterion (and related info) be
-included? See <code><a href="../../rstanarm/html/loo.stanreg.html">loo.stanreg</a></code> for details. Note: for
+included? See <code><a href="../../rstanarm/html/loo.stanreg.html">rstanarm::loo.stanreg()</a></code> for details. Note: for
 models fit to very large datasets this can be a slow computation.</p>
 </td></tr>
 </table>
+
+
+<h3>Details</h3>
+
+<p>These methods tidy the estimates from <code><a href="../../rstanarm/html/stanreg-objects.html">rstanarm::stanreg-objects()</a></code>
+(fitted model objects from the <span class="pkg">rstanarm</span> package) into a summary.
+</p>
 
 
 <h3>Value</h3>
@@ -84,29 +91,29 @@ one row for each coefficient, with three columns:
 <tr valign="top"><td><code>std.error</code></td>
 <td>
 <p>A standard error for the point estimate based on
-<code><a href="../../stats/html/mad.html">mad</a></code>. See the <em>Uncertainty estimates</em> section in 
-<code><a href="../../rstanarm/html/print.stanreg.html">print.stanreg</a></code> for more details.</p>
+<code><a href="../../stats/html/mad.html">stats::mad()</a></code>. See the <em>Uncertainty estimates</em> section in
+<code><a href="../../rstanarm/html/print.stanreg.html">rstanarm::print.stanreg()</a></code> for more details.</p>
 </td></tr>
 </table>
-<p>For models with group-specific parameters (e.g., models fit with 
-<code><a href="../../rstanarm/html/stan_glmer.html">stan_glmer</a></code>), setting <code>parameters="varying"</code> 
-selects the group-level parameters instead of the non-varying regression 
-coefficients. Addtional columns are added indicating the <code>level</code> and 
-<code>group</code>. Specifying <code>parameters="hierarchical"</code> selects the 
-standard deviations and (for certain models) correlations of the group-level 
+<p>For models with group-specific parameters (e.g., models fit with
+<code><a href="../../rstanarm/html/stan_glmer.html">rstanarm::stan_glmer()</a></code>), setting <code>parameters="varying"</code>
+selects the group-level parameters instead of the non-varying regression
+coefficients. Additional columns are added indicating the <code>level</code> and
+<code>group</code>. Specifying <code>parameters="hierarchical"</code> selects the
+standard deviations and (for certain models) correlations of the group-level
 parameters.
 </p>
 <p>Setting <code>parameters="auxiliary"</code> will select parameters other than those
-included by the other options. The particular parameters depend on which 
-<span class="pkg">rstanarm</span> modeling function was used to fit the model. For example, for 
-models fit using <code><a href="../../rstanarm/html/stan_glm.nb.html">stan_glm.nb</a></code> the overdispersion 
-parameter is included if <code>parameters="aux"</code>, for 
-<code><a href="../../rstanarm/html/stan_lm.html">stan_lm</a></code> the auxiliary parameters include the residual
+included by the other options. The particular parameters depend on which
+<span class="pkg">rstanarm</span> modeling function was used to fit the model. For example, for
+models fit using <code><a href="../../rstanarm/html/stan_glm.nb.html">rstanarm::stan_glm.nb()</a></code> the overdispersion
+parameter is included if <code>parameters="aux"</code>, for
+<code><a href="../../rstanarm/html/stan_lm.html">rstanarm::stan_lm()</a></code> the auxiliary parameters include the residual
 SD, R^2, and log(fit_ratio), etc.
 </p>
-<p>If <code>intervals=TRUE</code>, columns for the <code>lower</code> and <code>upper</code> 
-values of the posterior intervals computed with 
-<code><a href="../../rstanarm/html/posterior_interval.html">posterior_interval</a></code> are also included.
+<p>If <code>intervals=TRUE</code>, columns for the <code>lower</code> and <code>upper</code>
+values of the posterior intervals computed with
+<code><a href="../../rstanarm/html/posterior_interval.html">rstanarm::posterior_interval()</a></code> are also included.
 </p>
 <p><code>glance</code> returns one row with the columns
 </p>
@@ -117,7 +124,7 @@ values of the posterior intervals computed with
 </td></tr>
 <tr valign="top"><td><code>pss</code></td>
 <td>
-<p>The posterior sample size (except for models fit using 
+<p>The posterior sample size (except for models fit using
 optimization).</p>
 </td></tr>
 <tr valign="top"><td><code>nobs</code></td>
@@ -141,8 +148,7 @@ included:
 </td></tr>
 <tr valign="top"><td><code>elpd_loo</code></td>
 <td>
-<p>The expected log predictive density (<code>elpd_loo = -2 *
-  looic</code>).</p>
+<p>The expected log predictive density (<code>elpd_loo = -2 * looic</code>).</p>
 </td></tr>
 <tr valign="top"><td><code>p_loo</code></td>
 <td>
@@ -153,7 +159,7 @@ included:
 
 <h3>See Also</h3>
 
-<p><code><a href="../../rstanarm/html/summary.stanreg.html">summary.stanreg</a></code>
+<p><code><a href="../../rstanarm/html/summary.stanreg.html">rstanarm::summary.stanreg()</a></code>
 </p>
 
 
@@ -162,7 +168,7 @@ included:
 <pre>
 
 ## Not run: 
-fit &lt;- stan_glmer(mpg ~ wt + (1|cyl) + (1+wt|gear), data = mtcars, 
+fit &lt;- stan_glmer(mpg ~ wt + (1|cyl) + (1+wt|gear), data = mtcars,
                   iter = 300, chains = 2)
 # non-varying ("population") parameters
 tidy(fit, intervals = TRUE, prob = 0.5)
@@ -178,8 +184,8 @@ glance(fit)
 glance(fit, looic = TRUE, cores = 1)
 
 ## End(Not run)
- 
+
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.5.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

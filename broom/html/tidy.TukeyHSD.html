@@ -1,15 +1,20 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: tidy a TukeyHSD object</title>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Tidy a(n) TukeyHSD object</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="R.css" />
 </head><body>
 
 <table width="100%" summary="page for tidy.TukeyHSD {broom}"><tr><td>tidy.TukeyHSD {broom}</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2>tidy a TukeyHSD object</h2>
+<h2>Tidy a(n) TukeyHSD object</h2>
 
 <h3>Description</h3>
 
-<p>Returns a data.frame with one row for each pairwise comparison
+<p>Tidy summarizes information about the components of a model.
+A model component might be a single term in a regression, a single
+hypothesis, a cluster, or a class. Exactly what tidy considers to be a
+model component varies cross models but is usually self-evident.
+If a model has several distinct types of components, you will need to
+specify which components to return.
 </p>
 
 
@@ -17,7 +22,7 @@
 
 <pre>
 ## S3 method for class 'TukeyHSD'
-tidy(x, separate.levels = FALSE, ...)
+tidy(x, ...)
 </pre>
 
 
@@ -26,23 +31,26 @@ tidy(x, separate.levels = FALSE, ...)
 <table summary="R argblock">
 <tr valign="top"><td><code>x</code></td>
 <td>
-<p>object of class &quot;TukeyHSD&quot;</p>
-</td></tr>
-<tr valign="top"><td><code>separate.levels</code></td>
-<td>
-<p>Whether to separate comparison into
-<code>level1</code> and <code>level2</code> columns</p>
+<p>A <code>TukeyHSD</code> object return from <code><a href="../../stats/html/TukeyHSD.html">stats::TukeyHSD()</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
-<p>additional arguments (not used)</p>
+<p>Additional arguments. Not used. Needed to match generic
+signature only. <strong>Cautionary note:</strong> Misspelled arguments will be
+absorbed in <code>...</code>, where they will be ignored. If the misspelled
+argument has a default value, the default value will be used.
+For example, if you pass <code>conf.lvel = 0.9</code>, all computation will
+proceed using <code>conf.level = 0.95</code>. Additionally, if you pass
+<code>newdata = my_tibble</code> to an <code><a href="augment.html">augment()</a></code> method that does not
+accept a <code>newdata</code> argument, it will use the default value for
+the <code>data</code> argument.</p>
 </td></tr>
 </table>
 
 
 <h3>Value</h3>
 
-<p>A data.frame with one row per comparison, containing columns
+<p>A <a href="../../tibble/html/tibble.html">tibble::tibble</a> with one row per comparison and columns:
 </p>
 <table summary="R valueblock">
 <tr valign="top"><td><code>term</code></td>
@@ -70,14 +78,15 @@ tidy(x, separate.levels = FALSE, ...)
 <p>P-value adjusted for multiple comparisons</p>
 </td></tr>
 </table>
-<p>If <code>separate.levels = TRUE</code>, the <code>comparison</code> column will be
-split up into <code>level1</code> and <code>level2</code>.
-</p>
 
 
 <h3>See Also</h3>
 
-<p><code><a href="../../stats/html/TukeyHSD.html">TukeyHSD</a></code>
+<p><code><a href="tidy.html">tidy()</a></code>, <code><a href="../../stats/html/TukeyHSD.html">stats::TukeyHSD()</a></code>
+</p>
+<p>Other anova tidiers: <code><a href="tidy.anova.html">tidy.anova</a></code>,
+<code><a href="tidy.aovlist.html">tidy.aovlist</a></code>, <code><a href="tidy.aov.html">tidy.aov</a></code>,
+<code><a href="tidy.manova.html">tidy.manova</a></code>
 </p>
 
 
@@ -88,7 +97,6 @@ split up into <code>level1</code> and <code>level2</code>.
 fm1 &lt;- aov(breaks ~ wool + tension, data = warpbreaks)
 thsd &lt;- TukeyHSD(fm1, "tension", ordered = TRUE)
 tidy(thsd)
-tidy(thsd, separate.levels = TRUE)
 
 # may include comparisons on multiple terms
 fm2 &lt;- aov(mpg ~ as.factor(gear) * as.factor(cyl), data = mtcars)
@@ -96,5 +104,5 @@ tidy(TukeyHSD(fm2))
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.5.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

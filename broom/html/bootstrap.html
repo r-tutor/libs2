@@ -9,7 +9,9 @@
 
 <h3>Description</h3>
 
-<p>Set up bootstrap replicates of a dplyr operation
+<p>The <code>bootstrap()</code> function is deprecated and will be removed from
+an upcoming release of broom. For tidy resampling, please use the rsample
+package instead.
 </p>
 
 
@@ -46,20 +48,19 @@ corrections) here:
 </p>
 <p>https://github.com/hadley/dplyr/issues/269
 </p>
-<p>Some examples can be found at
-</p>
-<p>https://github.com/dgrtwo/broom/blob/master/vignettes/bootstrapping.Rmd
-</p>
 
 
 <h3>Examples</h3>
 
 <pre>
 
+## Not run: 
 library(dplyr)
 mtcars %&gt;% bootstrap(10) %&gt;% do(tidy(lm(mpg ~ wt, .)))
 
+## End(Not run)
+
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.5.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

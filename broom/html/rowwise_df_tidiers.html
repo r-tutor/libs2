@@ -10,12 +10,9 @@ recombining the results</h2>
 
 <h3>Description</h3>
 
-<p>These <code>tidy</code>, <code>augment</code> and <code>glance</code> methods are for
-performing tidying on each row of a rowwise data frame created by dplyr's
-<code>group_by</code> and <code>do</code> operations. They first group a rowwise data
-frame based on all columns that are not lists, then perform the tidying
-operation on the specified column. This greatly shortens a common idiom
-of extracting tidy/augment/glance outputs after a do statement.
+<p>Rowwise tidiers are deprecated and will be removed from an upcoming version
+of broom. We strongly recommend moving to a <code>nest-map-unnest</code> workflow
+over a <code>rowwise-do</code> workflow. See the vignettes for examples.
 </p>
 
 
@@ -73,6 +70,13 @@ _ methods it should be quoted.</p>
 
 <h3>Details</h3>
 
+<p>These <code>tidy</code>, <code>augment</code> and <code>glance</code> methods are for
+performing tidying on each row of a rowwise data frame created by dplyr's
+<code>group_by</code> and <code>do</code> operations. They first group a rowwise data
+frame based on all columns that are not lists, then perform the tidying
+operation on the specified column. This greatly shortens a common idiom
+of extracting tidy/augment/glance outputs after a do statement.
+</p>
 <p>Note that this functionality is not currently implemented for
 data.tables, since the result of the do operation is difficult to
 distinguish from a regular data.table.
@@ -94,7 +98,7 @@ library(dplyr)
 regressions &lt;- mtcars %&gt;%
     group_by(cyl) %&gt;%
     do(mod = lm(mpg ~ wt, .))
- 
+
 regressions
 
 regressions %&gt;% tidy(mod)
@@ -116,5 +120,5 @@ regressions %&gt;% augment(mod, data = original)  # includes all original
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.5.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

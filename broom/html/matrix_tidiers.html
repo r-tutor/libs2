@@ -9,11 +9,8 @@
 
 <h3>Description</h3>
 
-<p>These perform tidying operations on matrix objects. <code>tidy</code> turns the
-matrix into a data.frame while bringing rownames, if they exist, in as
-a column called <code>.rownames</code> (since results of tidying operations never
-contain rownames). <code>glance</code> simply reports the number of rows and
-columns. Note that no augment method exists for matrices.
+<p>Matrix tidiers are deprecated and will be removed from an upcoming release
+of broom.
 </p>
 
 
@@ -40,6 +37,16 @@ glance(x, ...)
 <p>extra arguments, not used</p>
 </td></tr>
 </table>
+
+
+<h3>Details</h3>
+
+<p>These perform tidying operations on matrix objects. <code>tidy</code> turns the
+matrix into a data.frame while bringing rownames, if they exist, in as
+a column called <code>.rownames</code> (since results of tidying operations never
+contain rownames). <code>glance</code> simply reports the number of rows and
+columns. Note that no augment method exists for matrices.
+</p>
 
 
 <h3>Value</h3>
@@ -75,11 +82,14 @@ are missing</p>
 
 <pre>
 
+## Not run: 
 mat &lt;- as.matrix(mtcars)
 tidy(mat)
 glance(mat)
 
+## End(Not run)
+
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.5.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Convert plot or other graphics object into a gtable</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for plot_to_gtable {cowplot}"><tr><td>plot_to_gtable {cowplot}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Convert plot or other graphics object into a gtable</h2>
+
+<h3>Description</h3>
+
+<p>This function does it's best attempt to take whatever you provide it and turn it into a gtable.
+It is primarily meant to convert ggplot plots into gtables, but it will also take any grid
+object (grob), a recorded R base plot, or a function that generates an R base plot.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+plot_to_gtable(plot)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>plot</code></td>
+<td>
+<p>The plot or other graphics object to convert into a gtable. Here, <code>plot</code> can be an
+object of the following classes: <code><a href="../../ggplot2/html/ggplot.html">ggplot</a></code>, <code><a href="../../grDevices/html/recordPlot.html">recordedplot</a></code>,
+<code><a href="../../grid/html/grob.html">grob</a></code>, or <code><a href="../../gtable/html/gtable.html">gtable</a></code>. Alternatively, <code>plot</code> can be
+a function creating a plot when called (see examples for <code><a href="plot_grid.html">plot_grid()</a></code>).</p>
+</td></tr>
+</table>
+
+<hr /><div style="text-align: center;">[Package <em>cowplot</em> version 0.9.3 <a href="00Index.html">Index</a>]</div>
+</body></html>

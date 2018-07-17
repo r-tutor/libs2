@@ -1,17 +1,25 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: tidying methods for classes from the sp package.</title>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Tidy a(n) SpatialPolygonsDataFrame object</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="R.css" />
 </head><body>
 
 <table width="100%" summary="page for sp_tidiers {broom}"><tr><td>sp_tidiers {broom}</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2>tidying methods for classes from the sp package.</h2>
+<h2>Tidy a(n) SpatialPolygonsDataFrame object</h2>
 
 <h3>Description</h3>
 
-<p>Tidy classes from the sp package to allow them to be plotted using ggplot2.
-To figure out the correct variable name for region, inspect
-<code>as.data.frame(x)</code>.
+<p>Tidy summarizes information about the components of a model.
+A model component might be a single term in a regression, a single
+hypothesis, a cluster, or a class. Exactly what tidy considers to be a
+model component varies cross models but is usually self-evident.
+If a model has several distinct types of components, you will need to
+specify which components to return.
+</p>
+<p>Note that the <code>sf</code> package now defines tidy spatial objects
+and is the recommend approach to spatial data. <code>sp</code> tidiers are likely
+to be deprecated in the near future in favor of <code>sf::st_as_sf()</code>.
+Development of <code>sp</code> tidiers has halted in <code>broom</code>.
 </p>
 
 
@@ -46,7 +54,8 @@ tidy(x, ...)
 <table summary="R argblock">
 <tr valign="top"><td><code>x</code></td>
 <td>
-<p><code>SpatialPolygonsDataFrame</code> to convert into a dataframe.</p>
+<p>A <code>SpatialPolygonsDataFrame</code>, <code>SpatialPolygons</code>, <code>Polygons</code>,
+<code>Polygon</code>, <code>SpatialLinesDataFrame</code>, <code>Lines</code> or <code>Line</code> object.</p>
 </td></tr>
 <tr valign="top"><td><code>region</code></td>
 <td>
@@ -58,24 +67,5 @@ tidy(x, ...)
 </td></tr>
 </table>
 
-
-<h3>Details</h3>
-
-<p>These functions originated in the ggplot2 package as &quot;fortify&quot; functions.
-</p>
-
-
-<h3>Examples</h3>
-
-<pre>
-if (require("maptools")) {
-    sids &lt;- system.file("shapes/sids.shp", package="maptools")
-    nc1 &lt;- readShapePoly(sids,
-    proj4string = CRS("+proj=longlat +datum=NAD27"))
-    nc1_df &lt;- tidy(nc1)
-}
-
-</pre>
-
-<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.5.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Tidy a(n) orcutt object</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for tidy.orcutt {broom}"><tr><td>tidy.orcutt {broom}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Tidy a(n) orcutt object</h2>
+
+<h3>Description</h3>
+
+<p>This method wraps <code><a href="tidy.lm.html">tidy.lm()</a></code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'orcutt'
+tidy(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>An <code>orcutt</code> object returned from <code><a href="../../orcutt/html/cochrane.orcutt.html">orcutt::cochrane.orcutt()</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Arguments passed on to <code>tidy.lm</code>
+</p>
+
+<dl>
+<dt>x</dt><dd><p>An <code>lm</code> object created by <code><a href="../../stats/html/lm.html">stats::lm()</a></code>.</p>
+</dd>
+<dt>conf.int</dt><dd><p>Logical indicating whether or not to include a confidence
+interval in the tidied output. Defaults to <code>FALSE</code>.</p>
+</dd>
+<dt>conf.level</dt><dd><p>The confidence level to use for the confidence interval
+if <code>conf.int = TRUE</code>. Must be strictly greater than 0 and less than 1.
+Defaults to 0.95, which corresponds to a 95 percent confidence interval.</p>
+</dd>
+<dt>quick</dt><dd><p>Logical indiciating if the only the <code>term</code> and <code>estimate</code>
+columns should be returned. Often useful to avoid time consuming
+covariance and standard error calculations. Defaults to <code>FALSE</code>.</p>
+</dd>
+<dt>exponentiate</dt><dd><p>Logical indicating whether or not to exponentiate the
+the coefficient estimates. This is typical for logistic and multinomial
+regressions, but a bad idea if there is no log or logit link. Defaults
+to <code>FALSE</code>.</p>
+</dd>
+</dl>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p><code>tidy</code> returns the same information as <code><a href="tidy.lm.html">tidy.lm()</a></code>,
+though without confidence interval options.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="tidy.html">tidy()</a></code>, <code><a href="tidy.lm.html">tidy.lm()</a></code>
+</p>
+<p><code><a href="../../orcutt/html/cochrane.orcutt.html">orcutt::cochrane.orcutt()</a></code>
+</p>
+<p>Other orcutt tidiers: <code><a href="glance.orcutt.html">glance.orcutt</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+reg &lt;- lm(mpg ~ wt + qsec + disp, mtcars)
+tidy(reg)
+
+if (require("orcutt", quietly = TRUE)) {
+  co &lt;- cochrane.orcutt(reg)
+  co
+
+  tidy(co)
+  glance(co)
+}
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>broom</em> version 0.5.0 <a href="00Index.html">Index</a>]</div>
+</body></html>
