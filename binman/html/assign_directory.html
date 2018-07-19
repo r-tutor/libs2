@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Assign directory</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for assign_directory {binman}"><tr><td>assign_directory {binman}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Assign directory</h2>
+
+<h3>Description</h3>
+
+<p>Assign directory to download list
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+assign_directory(dllist, appname)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>dllist</code></td>
+<td>
+<p>A named list of data.frames. The name indicates the
+platform. The data.frame should contain the version, url and file
+to be processed.</p>
+</td></tr>
+<tr valign="top"><td><code>appname</code></td>
+<td>
+<p>Name to give the app</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A named list of data.frames. The data.frame should contain the
+version, url and file to be processed, the directory to download
+the file to and whether the file already exists.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+tdata &lt;- system.file("testdata", "test_dllist.Rdata", package="binman")
+load(tdata)
+assign_directory(test_dllist, "myapp")
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>binman</em> version 0.1.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

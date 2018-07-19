@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Pre-Download Google Storage</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for predl_google_storage {binman}"><tr><td>predl_google_storage {binman}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Pre-Download Google Storage</h2>
+
+<h3>Description</h3>
+
+<p>Pre-Download Google Storage template function
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+predl_google_storage(url, platform, history, appname, fileregex = "\\.zip$",
+  platformregex = platform, versionregex = c(paste0("(.*)/.*", fileregex),
+  "\\1"))
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>url</code></td>
+<td>
+<p>A url giving the JSON bucket listings for a project. For
+example: http://chromedriver.storage.googleapis.com/index.html
+lists the chromedriver files but
+https://www.googleapis.com/storage/v1/b/chromedriver/o/ is the
+JSON listings for the project.</p>
+</td></tr>
+<tr valign="top"><td><code>platform</code></td>
+<td>
+<p>A character vector of platform names</p>
+</td></tr>
+<tr valign="top"><td><code>history</code></td>
+<td>
+<p>The maximum number of files to get for a platform</p>
+</td></tr>
+<tr valign="top"><td><code>appname</code></td>
+<td>
+<p>Name of the app</p>
+</td></tr>
+<tr valign="top"><td><code>fileregex</code></td>
+<td>
+<p>A filter for files</p>
+</td></tr>
+<tr valign="top"><td><code>platformregex</code></td>
+<td>
+<p>A filter for platforms. Defaults to the platform
+names.</p>
+</td></tr>
+<tr valign="top"><td><code>versionregex</code></td>
+<td>
+<p>A regex for retrieving the version.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A named list of data.frames. The name indicates the
+platform. The data.frame should contain the version, url and file
+to be processed. Used as input for <code><a href="download_files.html">download_files</a></code> or
+an equivalent.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+gsdata &lt;- system.file("testdata", "test_googstor.json",
+                      package="binman")
+platform &lt;- c("linux64", "win32", "mac64")
+gsdllist &lt;- predl_google_storage(url = gsdata, platform, history = 5L,
+                                 appname = "binman_chromedriver")
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>binman</em> version 0.1.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

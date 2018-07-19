@@ -8,10 +8,12 @@ circlefill_shape_pal	circlefill_shape_pal
 cleveland_shape_pal	cleveland_shape_pal
 colorblind_pal	colorblind
 economist_pal	economist_pal
+excel_new_pal	excel_new_pal
 excel_pal	excel_pal
 extended_range_breaks	range_breaks
 extended_range_breaks_	range_breaks
 few_pal	few_pal
+few_shape_pal	few_shape_pal
 fivethirtyeight_pal	fivethirtyeight_pal
 gdocs_pal	gdocs_pal
 GeomRangeFrame	geom_rangeframe
@@ -29,6 +31,7 @@ scale_color_colorblind	colorblind
 scale_color_continuous_tableau	scale_colour_gradient_tableau
 scale_color_economist	scale_economist
 scale_color_excel	scale_excel
+scale_color_excel_new	scale_excel_new
 scale_color_few	scale_few
 scale_color_fivethirtyeight	scale_fivethirtyeight
 scale_color_gdocs	scale_gdocs
@@ -46,6 +49,7 @@ scale_colour_canva	scale_colour_canva
 scale_colour_colorblind	colorblind
 scale_colour_economist	scale_economist
 scale_colour_excel	scale_excel
+scale_colour_excel_new	scale_excel_new
 scale_colour_few	scale_few
 scale_colour_fivethirtyeight	scale_fivethirtyeight
 scale_colour_gdocs	scale_gdocs
@@ -64,6 +68,7 @@ scale_fill_colorblind	colorblind
 scale_fill_continuous_tableau	scale_colour_gradient_tableau
 scale_fill_economist	scale_economist
 scale_fill_excel	scale_excel
+scale_fill_excel_new	scale_excel_new
 scale_fill_few	scale_few
 scale_fill_fivethirtyeight	scale_fivethirtyeight
 scale_fill_gdocs	scale_gdocs
@@ -80,6 +85,7 @@ scale_linetype_stata	scale_linetype_stata
 scale_shape_calc	scale_shape_calc
 scale_shape_circlefill	scale_shape_circlefill
 scale_shape_cleveland	scale_shape_cleveland
+scale_shape_few	scale_shape_few
 scale_shape_stata	scale_shape_stata
 scale_shape_tableau	scale_shape_tableau
 scale_shape_tremmel	scale_shape_tremmel
@@ -95,14 +101,16 @@ stata_shape_pal	stata_shape_pal
 StatFivenumber	stat_fivenumber
 stat_fivenumber	stat_fivenumber
 tableau_color_pal	tableau_color_pal
-tableau_div_gradient_pal	tableau_div_gradient_pal
-tableau_seq_gradient_pal	tableau_seq_gradient_pal
+tableau_div_gradient_pal	tableau_gradient_pal
+tableau_gradient_pal	tableau_gradient_pal
+tableau_seq_gradient_pal	tableau_gradient_pal
 tableau_shape_pal	tableau_shape_pal
 theme_base	theme_base
 theme_calc	theme_calc
 theme_economist	theme_economist
 theme_economist_white	theme_economist
 theme_excel	theme_excel
+theme_excel_new	theme_excel_new
 theme_few	theme_few
 theme_fivethirtyeight	theme_fivethirtyeight
 theme_foundation	theme_foundation

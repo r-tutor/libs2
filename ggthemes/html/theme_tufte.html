@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Tufte Maximal Data, Minimal Ink Theme</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for theme_tufte {ggthemes}"><tr><td>theme_tufte {ggthemes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Tufte Maximal Data, Minimal Ink Theme</h2>
+
+<h3>Description</h3>
+
+<p>Theme based on Chapter 6 'Data-Ink Maximization and Graphical
+Design' of Edward Tufte *The Visual Display of Quantitative
+Information*. No border, no axis lines, no grids. This theme works
+best in combination with <code><a href="../../ggplot2/html/geom_rug.html">geom_rug</a></code> or
+<code><a href="geom_rangeframe.html">geom_rangeframe</a></code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+theme_tufte(base_size = 11, base_family = "serif", ticks = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>base_size</code></td>
+<td>
+<p>base font size</p>
+</td></tr>
+<tr valign="top"><td><code>base_family</code></td>
+<td>
+<p>base font family</p>
+</td></tr>
+<tr valign="top"><td><code>ticks</code></td>
+<td>
+<p><code>logical</code> Show axis ticks?</p>
+</td></tr>
+</table>
+
+
+<h3>Note</h3>
+
+<p>The default font family is set to 'serif' as he uses serif fonts
+for labels in 'The Visual Display of Quantitative Information'.
+The serif font used by Tufte in his books is a variant of Bembo,
+while the sans serif font is Gill Sans. If these fonts are
+installed on your system, then you can use them with the package
+<b>extrafont</b>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Tufte, Edward R. (2001) The Visual Display of
+Quantitative Information, Chapter 6.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library("ggplot2")
+
+p &lt;- ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_point() +
+  scale_x_continuous(breaks = extended_range_breaks()(mtcars$wt)) +
+  scale_y_continuous(breaks = extended_range_breaks()(mtcars$mpg)) +
+  ggtitle("Cars")
+
+p + geom_rangeframe() +
+  theme_tufte()
+
+p + geom_rug() +
+ theme_tufte(ticks = FALSE)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggthemes</em> version 4.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

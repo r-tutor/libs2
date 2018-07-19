@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Economist color palette (discrete)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for economist_pal {ggthemes}"><tr><td>economist_pal {ggthemes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Economist color palette (discrete)</h2>
+
+<h3>Description</h3>
+
+<p>The hues in the palette are blues, grays, and greens. Red is not
+included in these palettes and should be used to indicate
+important data.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+economist_pal(fill = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>fill</code></td>
+<td>
+<p>Use the fill palette.</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p>Other colour economist: <code><a href="scale_economist.html">scale_colour_economist</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library("scales")
+
+show_col(economist_pal()(6))
+## fill palette
+show_col(economist_pal(fill = TRUE)(6))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggthemes</em> version 4.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

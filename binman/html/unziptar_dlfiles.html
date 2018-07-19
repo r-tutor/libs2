@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Unzip/Untar downloaded files</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for unziptar_dlfiles {binman}"><tr><td>unziptar_dlfiles {binman}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Unzip/Untar downloaded files</h2>
+
+<h3>Description</h3>
+
+<p>Unzip/Untar downloaded files. Keeps the original zip file
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+unziptar_dlfiles(dlfiles, chmod = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>dlfiles</code></td>
+<td>
+<p>A data.frame of files by platform and indicating
+whether they were processed</p>
+</td></tr>
+<tr valign="top"><td><code>chmod</code></td>
+<td>
+<p>change the mode of the unarchived file/files to &quot;755&quot; so
+they are executable on unix like systems.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Returns a list of character vectors indicating files
+processed
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+ymlfile &lt;- system.file("exdata", "sampleapp.yml", package="binman")
+trdata &lt;- system.file("testdata", "test_dlres.Rdata", package="binman")
+load(trdata)
+testthat::with_mock(
+  `httr::GET` = function(...){
+    test_llres
+  },
+  `base::dir.create` = function(...){TRUE},
+  `utils::unzip` = function(zipfile, ...){zipfile},
+  procyml &lt;- process_yaml(ymlfile)
+)
+procyml
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>binman</em> version 0.1.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

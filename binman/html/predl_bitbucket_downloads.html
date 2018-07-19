@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Pre download bitbucket downloads</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for predl_bitbucket_downloads {binman}"><tr><td>predl_bitbucket_downloads {binman}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Pre download bitbucket downloads</h2>
+
+<h3>Description</h3>
+
+<p>Pre download bitbucket downloads template function
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+predl_bitbucket_downloads(url, platform, history, appname,
+  platformregex = platform, versionregex = "\\d+(?:\\.\\d+)+")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>url</code></td>
+<td>
+<p>A url giving the bitbucket download JSON for a project. As
+an example https://bitbucket.org/ariya/phantomjs/downloads the
+phantomjs project has an asset JSON available at
+https://api.bitbucket.org/2.0/repositories/ariya/phantomjs/downloads?pagelen=100</p>
+</td></tr>
+<tr valign="top"><td><code>platform</code></td>
+<td>
+<p>A character vector of platform names</p>
+</td></tr>
+<tr valign="top"><td><code>history</code></td>
+<td>
+<p>The maximum number of files to get for a platform</p>
+</td></tr>
+<tr valign="top"><td><code>appname</code></td>
+<td>
+<p>Name of the app</p>
+</td></tr>
+<tr valign="top"><td><code>platformregex</code></td>
+<td>
+<p>A filter for platforms. Defaults to the platform</p>
+</td></tr>
+<tr valign="top"><td><code>versionregex</code></td>
+<td>
+<p>A regex for retrieving the version.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A named list of data.frames. The name indicates the
+platform. The data.frame should contain the version, url and file
+to be processed. Used as input for <code><a href="download_files.html">download_files</a></code> or
+an equivalent.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+bbdata &lt;- system.file("testdata", "test_bitbucketdl.json",
+                      package="binman")
+platform &lt;- c("linux64", "linux32", "windows", "macosx")
+platformregex &lt;- c("linux-x86_64", "linux-i686", "windows", "macosx")
+bbdllist &lt;-
+  predl_bitbucket_downloads(url = bbdata, platform, history = 3L,
+                            appname = "binman_chromedriver",
+                            platformregex)
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>binman</em> version 0.1.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

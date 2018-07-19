@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Tableau sequential colour scale (continuous)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for scale_colour_gradient_tableau {ggthemes}"><tr><td>scale_colour_gradient_tableau {ggthemes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Tableau sequential colour scale (continuous)</h2>
+
+<h3>Description</h3>
+
+<p>Tableau sequential colour scale (continuous)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+scale_colour_gradient_tableau(palette = "Blue", ..., na.value = "grey50",
+  guide = "colourbar")
+
+scale_fill_gradient_tableau(palette = "Blue", ..., na.value = "grey50",
+  guide = "colourbar")
+
+scale_color_gradient_tableau(palette = "Blue", ..., na.value = "grey50",
+  guide = "colourbar")
+
+scale_color_continuous_tableau(palette = "Blue", ..., na.value = "grey50",
+  guide = "colourbar")
+
+scale_fill_continuous_tableau(palette = "Blue", ..., na.value = "grey50",
+  guide = "colourbar")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>palette</code></td>
+<td>
+<p>Palette name.
+</p>
+
+<ul>
+<li><p><code>"ordered-sequential"</code><code>"Blue-Green Sequential"</code>, <code>"Blue Light"</code>, <code>"Orange Light"</code>, <code>"Blue"</code>, <code>"Orange"</code>, <code>"Green"</code>, <code>"Red"</code>, <code>"Purple"</code>, <code>"Brown"</code>, <code>"Gray"</code>, <code>"Gray Warm"</code>, <code>"Blue-Teal"</code>, <code>"Orange-Gold"</code>, <code>"Green-Gold"</code>, <code>"Red-Gold"</code>, <code>"Classic Green"</code>, <code>"Classic Gray"</code>, <code>"Classic Blue"</code>, <code>"Classic Red"</code>, <code>"Classic Orange"</code>, <code>"Classic Area Red"</code>, <code>"Classic Area Green"</code>, <code>"Classic Area-Brown"</code>
+</p>
+</li>
+<li><p><code>"ordered-diverging"</code><code>"Orange-Blue Diverging"</code>, <code>"Red-Green Diverging"</code>, <code>"Green-Blue Diverging"</code>, <code>"Red-Blue Diverging"</code>, <code>"Red-Black Diverging"</code>, <code>"Gold-Purple Diverging"</code>, <code>"Red-Green-Gold Diverging"</code>, <code>"Sunset-Sunrise Diverging"</code>, <code>"Orange-Blue-White Diverging"</code>, <code>"Red-Green-White Diverging"</code>, <code>"Green-Blue-White Diverging"</code>, <code>"Red-Blue-White Diverging"</code>, <code>"Red-Black-White Diverging"</code>, <code>"Orange-Blue Light Diverging"</code>, <code>"Temperature Diverging"</code>, <code>"Classic Red-Green"</code>, <code>"Classic Red-Blue"</code>, <code>"Classic Red-Black"</code>, <code>"Classic Area Red-Green"</code>, <code>"Classic Orange-Blue"</code>, <code>"Classic Green-Blue"</code>, <code>"Classic Red-White-Green"</code>, <code>"Classic Red-White-Black"</code>, <code>"Classic Orange-White-Blue"</code>, <code>"Classic Red-White-Black Light"</code>, <code>"Classic Orange-White-Blue Light"</code>, <code>"Classic Red-White-Green Light"</code>, <code>"Classic Red-Green Light"</code>
+</p>
+</li></ul>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Arguments passed to <code>tableau_gradient_pal</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>na.value</code></td>
+<td>
+<p>Colour to use for missing values</p>
+</td></tr>
+<tr valign="top"><td><code>guide</code></td>
+<td>
+<p>Type of legend. Use <code>'colourbar'</code> for continuous
+colour bar, or <code>'legend'</code> for discrete colour legend.</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p>Other colour tableau: <code><a href="scale_colour_gradient2_tableau.html">scale_colour_gradient2_tableau</a></code>,
+<code><a href="scale_color_tableau.html">scale_colour_tableau</a></code>,
+<code><a href="tableau_color_pal.html">tableau_color_pal</a></code>,
+<code><a href="tableau_gradient_pal.html">tableau_gradient_pal</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library("ggplot2")
+
+df &lt;- data.frame(
+  x = runif(100),
+  y = runif(100),
+  z1 = rnorm(100),
+  z2 = abs(rnorm(100))
+)
+
+p &lt;- ggplot(df, aes(x, y)) +
+     geom_point(aes(colour = z2)) +
+     theme_igray()
+
+palettes &lt;-
+  ggthemes_data[["tableau"]][["color-palettes"]][["ordered-sequential"]]
+for (palette in head(names(palettes))) {
+  print(p + scale_colour_gradient_tableau(palette) +
+          ggtitle(palette))
+}
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggthemes</em> version 4.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

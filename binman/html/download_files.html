@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Download binaries</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for download_files {binman}"><tr><td>download_files {binman}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Download binaries</h2>
+
+<h3>Description</h3>
+
+<p>Download binaries from repository
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+download_files(dllist, overwrite = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>dllist</code></td>
+<td>
+<p>A named list of data.frames. The data.frame should
+contain the version, url and file to be processed, the directory to
+download the file to and whether the file already exists.</p>
+</td></tr>
+<tr valign="top"><td><code>overwrite</code></td>
+<td>
+<p>Overwrite existing binaries. Default value of FALSE</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A data.frame indicating whether a file was
+downloaded for a platform.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+trdata &lt;- system.file("testdata", "test_dlres.Rdata", package="binman")
+tldata &lt;- system.file("testdata", "test_dllist.Rdata", package="binman")
+load(trdata)
+load(tldata)
+dllist &lt;- assign_directory(test_dllist, "myapp")
+testthat::with_mock(
+  `httr::GET` = function(...){
+    test_llres
+  },
+  `base::dir.create` = function(...){TRUE},
+  dlfiles &lt;- download_files(dllist)
+)
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>binman</em> version 0.1.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

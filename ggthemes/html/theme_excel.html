@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: ggplot theme based on old Excel plots</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for theme_excel {ggthemes}"><tr><td>theme_excel {ggthemes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>ggplot theme based on old Excel plots</h2>
+
+<h3>Description</h3>
+
+<p>Theme to replicate the ugly monstrosity that was the old
+gray-background Excel chart. Please never use this.
+This should be combined with
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+theme_excel(base_size = 12, base_family = "", horizontal = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>base_size</code></td>
+<td>
+<p>base font size</p>
+</td></tr>
+<tr valign="top"><td><code>base_family</code></td>
+<td>
+<p>base font family</p>
+</td></tr>
+<tr valign="top"><td><code>horizontal</code></td>
+<td>
+<p><code>logical</code>. Horizontal axis lines?</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>An object of class <code><a href="../../ggplot2/html/theme.html">theme</a></code>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other themes excel: <code><a href="theme_excel_new.html">theme_excel_new</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library("ggplot2")
+
+# Line and scatter plot colors
+p &lt;- ggplot(mtcars) +
+     geom_point(aes(x = wt, y = mpg, colour = factor(gear))) +
+     facet_wrap(~am)
+p + theme_excel() + scale_colour_excel()
+
+# Bar plot (area/fill) colors
+ggplot(mpg, aes(x = class, fill = drv)) +
+  geom_bar() +
+  scale_fill_excel() +
+  theme_excel()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggthemes</em> version 4.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Remove application platform</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for rm_platform {binman}"><tr><td>rm_platform {binman}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Remove application platform</h2>
+
+<h3>Description</h3>
+
+<p>Remove application files/directories for a given platform
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+rm_platform(appname, platform = c("ALL"))
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>appname</code></td>
+<td>
+<p>A character string giving the name of the application</p>
+</td></tr>
+<tr valign="top"><td><code>platform</code></td>
+<td>
+<p>A character vector indicating the platform to remove.
+Defaults to &quot;ALL&quot;</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Returns a logical vector indicating whether the removal of
+platform was successful. Return is invisible.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+appdir &lt;- app_dir(appname, FALSE)
+platforms &lt;- LETTERS[1:4]
+versions &lt;- LETTERS[5:7]
+mkdirs &lt;- file.path(appdir, outer(platforms, versions, file.path))
+chk &lt;- vapply(mkdirs, dir.create, logical(1), recursive = TRUE)
+appver &lt;- list_versions(appname)
+rm_platform(appname, platforms[2:3])
+unlink(appdir, recursive = TRUE)
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>binman</em> version 0.1.1 <a href="00Index.html">Index</a>]</div>
+</body></html>
