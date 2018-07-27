@@ -1,7 +1,7 @@
 Type: Package
 Package: dbplyr
 Title: A 'dplyr' Back End for Databases
-Version: 1.2.1
+Version: 1.2.2
 Authors@R: c(
     person("Hadley", "Wickham", , "hadley@rstudio.com", c("aut", "cre")),
     person("Edgar", "Ruiz", role = "aut"),
@@ -20,10 +20,11 @@ Imports: assertthat (>= 0.2.0), DBI (>= 0.7), dplyr (>= 0.7.4), glue
         0.1.6), tibble (>= 1.4.1), tidyselect (>= 0.2.2), utils
 Suggests: bit64, covr, knitr, Lahman (>= 5.0.0), nycflights13 (>=
         0.2.2), rmarkdown, RMariaDB (>= 1.0.2), RMySQL (>= 0.10.11),
-        RPostgreSQL (>= 0.4.1), RSQLite (>= 2.0), testthat (>= 2.0.0)
+        RPostgreSQL (>= 0.4.1), RSQLite (>= 2.0), testthat (>= 2.0.0),
+        withr
 VignetteBuilder: knitr
 LazyData: yes
-RoxygenNote: 6.0.1
+RoxygenNote: 6.0.1.9000
 Collate: 'cache.r' 'compat-purrr.R' 'data-lahman.r'
         'data-nycflights13.r' 'db-compute.R' 'db-mysql.r'
         'db-odbc-access.R' 'db-odbc-hive.R' 'db-odbc-impala.R'
@@ -40,11 +41,11 @@ Collate: 'cache.r' 'compat-purrr.R' 'data-lahman.r'
         'translate-sql-odbc.R' 'translate-sql-paste.R'
         'translate-sql.r' 'utils-format.r' 'window.R' 'zzz.R'
 NeedsCompilation: no
-Packaged: 2018-02-19 15:55:28 UTC; hadley
+Packaged: 2018-07-25 14:25:42 UTC; hadley
 Author: Hadley Wickham [aut, cre],
   Edgar Ruiz [aut],
   RStudio [cph, fnd]
 Maintainer: Hadley Wickham <hadley@rstudio.com>
 Repository: CRAN
-Date/Publication: 2018-02-19 19:40:06 UTC
-Built: R 3.5.0; ; 2018-06-22 14:01:35 UTC; windows
+Date/Publication: 2018-07-25 15:00:03 UTC
+Built: R 3.5.1; ; 2018-07-27 03:33:12 UTC; windows

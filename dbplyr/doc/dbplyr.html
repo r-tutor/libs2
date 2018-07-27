@@ -332,15 +332,15 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <p>When you print it out, you’ll notice that it mostly looks like a regular tibble:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">flights_db </a>
 <a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co">#&gt; # Source:   table&lt;flights&gt; [?? x 19]</span></a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt; # Database: sqlite 3.19.3 []</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt; # Database: sqlite 3.22.0 []</span></a>
 <a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt;    year month   day dep_time sched_dep_time dep_delay arr_time</span></a>
 <a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;</span></a>
-<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; 1  2013     1     1      517            515      2.00      830</span></a>
-<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; 2  2013     1     1      533            529      4.00      850</span></a>
-<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; 3  2013     1     1      542            540      2.00      923</span></a>
-<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; 4  2013     1     1      544            545     -1.00     1004</span></a>
-<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co">#&gt; 5  2013     1     1      554            600     -6.00      812</span></a>
-<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co">#&gt; 6  2013     1     1      554            558     -4.00      740</span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; 1  2013     1     1      517            515         2      830</span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; 2  2013     1     1      533            529         4      850</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; 3  2013     1     1      542            540         2      923</span></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; 4  2013     1     1      544            545        -1     1004</span></a>
+<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co">#&gt; 5  2013     1     1      554            600        -6      812</span></a>
+<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co">#&gt; 6  2013     1     1      554            558        -4      740</span></a>
 <a class="sourceLine" id="cb6-12" data-line-number="12"><span class="co">#&gt; # ... with more rows, and 12 more variables: sched_arr_time &lt;int&gt;,</span></a>
 <a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co">#&gt; #   arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;,</span></a>
 <a class="sourceLine" id="cb6-14" data-line-number="14"><span class="co">#&gt; #   origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;,</span></a>
@@ -353,20 +353,20 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <p>Most of the time you don’t need to know anything about SQL, and you can continue to use the dplyr verbs that you’re already familiar with:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">flights_db <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(year<span class="op">:</span>day, dep_delay, arr_delay)</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">#&gt; # Source:   lazy query [?? x 5]</span></a>
-<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt; # Database: sqlite 3.19.3 []</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt; # Database: sqlite 3.22.0 []</span></a>
 <a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt;    year month   day dep_delay arr_delay</span></a>
 <a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt; 1  2013     1     1      2.00      11.0</span></a>
-<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; 2  2013     1     1      4.00      20.0</span></a>
-<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; 3  2013     1     1      2.00      33.0</span></a>
-<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; 4  2013     1     1     -1.00     -18.0</span></a>
-<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt; 5  2013     1     1     -6.00     -25.0</span></a>
-<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt; 6  2013     1     1     -4.00      12.0</span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt; 1  2013     1     1         2        11</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; 2  2013     1     1         4        20</span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; 3  2013     1     1         2        33</span></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; 4  2013     1     1        -1       -18</span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt; 5  2013     1     1        -6       -25</span></a>
+<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt; 6  2013     1     1        -4        12</span></a>
 <a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt; # ... with more rows</span></a>
 <a class="sourceLine" id="cb7-13" data-line-number="13"></a>
 <a class="sourceLine" id="cb7-14" data-line-number="14">flights_db <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(dep_delay <span class="op">&gt;</span><span class="st"> </span><span class="dv">240</span>)</a>
 <a class="sourceLine" id="cb7-15" data-line-number="15"><span class="co">#&gt; # Source:   lazy query [?? x 19]</span></a>
-<a class="sourceLine" id="cb7-16" data-line-number="16"><span class="co">#&gt; # Database: sqlite 3.19.3 []</span></a>
+<a class="sourceLine" id="cb7-16" data-line-number="16"><span class="co">#&gt; # Database: sqlite 3.22.0 []</span></a>
 <a class="sourceLine" id="cb7-17" data-line-number="17"><span class="co">#&gt;    year month   day dep_time sched_dep_time dep_delay arr_time</span></a>
 <a class="sourceLine" id="cb7-18" data-line-number="18"><span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;</span></a>
 <a class="sourceLine" id="cb7-19" data-line-number="19"><span class="co">#&gt; 1  2013     1     1      848           1835       853     1001</span></a>
@@ -386,15 +386,15 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb7-33" data-line-number="33"><span class="co">#&gt; Warning: Missing values are always removed in SQL.</span></a>
 <a class="sourceLine" id="cb7-34" data-line-number="34"><span class="co">#&gt; Use `AVG(x, na.rm = TRUE)` to silence this warning</span></a>
 <a class="sourceLine" id="cb7-35" data-line-number="35"><span class="co">#&gt; # Source:   lazy query [?? x 2]</span></a>
-<a class="sourceLine" id="cb7-36" data-line-number="36"><span class="co">#&gt; # Database: sqlite 3.19.3 []</span></a>
+<a class="sourceLine" id="cb7-36" data-line-number="36"><span class="co">#&gt; # Database: sqlite 3.22.0 []</span></a>
 <a class="sourceLine" id="cb7-37" data-line-number="37"><span class="co">#&gt;   dest  delay</span></a>
 <a class="sourceLine" id="cb7-38" data-line-number="38"><span class="co">#&gt;   &lt;chr&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb7-39" data-line-number="39"><span class="co">#&gt; 1 ABQ    2006</span></a>
-<a class="sourceLine" id="cb7-40" data-line-number="40"><span class="co">#&gt; 2 ACK    1033</span></a>
-<a class="sourceLine" id="cb7-41" data-line-number="41"><span class="co">#&gt; 3 ALB    1627</span></a>
-<a class="sourceLine" id="cb7-42" data-line-number="42"><span class="co">#&gt; 4 ANC    1635</span></a>
-<a class="sourceLine" id="cb7-43" data-line-number="43"><span class="co">#&gt; 5 ATL    1293</span></a>
-<a class="sourceLine" id="cb7-44" data-line-number="44"><span class="co">#&gt; 6 AUS    1521</span></a>
+<a class="sourceLine" id="cb7-39" data-line-number="39"><span class="co">#&gt; 1 ABQ   2006.</span></a>
+<a class="sourceLine" id="cb7-40" data-line-number="40"><span class="co">#&gt; 2 ACK   1033.</span></a>
+<a class="sourceLine" id="cb7-41" data-line-number="41"><span class="co">#&gt; 3 ALB   1627.</span></a>
+<a class="sourceLine" id="cb7-42" data-line-number="42"><span class="co">#&gt; 4 ANC   1635.</span></a>
+<a class="sourceLine" id="cb7-43" data-line-number="43"><span class="co">#&gt; 5 ATL   1293.</span></a>
+<a class="sourceLine" id="cb7-44" data-line-number="44"><span class="co">#&gt; 6 AUS   1521.</span></a>
 <a class="sourceLine" id="cb7-45" data-line-number="45"><span class="co">#&gt; # ... with more rows</span></a></code></pre></div>
 <p>However, in the long-run, I highly recommend you at least learn the basics of SQL. It’s a valuable skill for any data scientist, and it will help you debug problems if you run into problems with dplyr’s automatic translation. If you’re completely new to SQL you might start with this <a href="https://www.codecademy.com/learn/learn-sql">codeacademy tutorial</a>. If you have some familiarity with SQL and you’d like to learn more, I found <a href="http://www.sqlite.org/queryplanner.html">how indexes work in SQLite</a> and <a href="http://blog.jooq.org/2016/03/17/10-easy-steps-to-a-complete-understanding-of-sql">10 easy steps to a complete understanding of SQL</a> to be particularly helpful.</p>
 <p>The most important difference between ordinary data frames and remote database queries is that your R code is translated into SQL and executed in the database on the remote server, not in R on your local machine. When working with databases, dplyr tries to be as lazy as possible:</p>
@@ -416,7 +416,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; Warning: Missing values are always removed in SQL.</span></a>
 <a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt; Use `AVG(x, na.rm = TRUE)` to silence this warning</span></a>
 <a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co">#&gt; # Source:     lazy query [?? x 3]</span></a>
-<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt; # Database:   sqlite 3.19.3 []</span></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt; # Database:   sqlite 3.22.0 []</span></a>
 <a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt; # Ordered by: desc(delay)</span></a>
 <a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co">#&gt;   tailnum delay     n</span></a>
 <a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co">#&gt;   &lt;chr&gt;   &lt;dbl&gt; &lt;int&gt;</span></a>
