@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Computes Directional Variograms</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for variog4 {geoR}"><tr><td>variog4 {geoR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Computes Directional Variograms</h2>
+
+<h3>Description</h3>
+
+<p>Computes directional variograms for 4 directions provided by the user.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+variog4(geodata, coords = geodata$coords, data = geodata$data, 
+        uvec = "default", breaks = "default", trend = "cte", lambda = 1,
+        option = c("bin", "cloud", "smooth"),
+        estimator.type = c("classical", "modulus"), 
+        nugget.tolerance, max.dist, pairs.min = 2,
+        bin.cloud = FALSE, direction = c(0, pi/4, pi/2, 3*pi/4), tolerance = pi/8,
+        unit.angle = c("radians", "degrees"), messages, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>geodata</code></td>
+<td>
+<p>a list containing element <code>coords</code>
+as described next. Typically an object of the class
+<code>"geodata"</code> - a <span class="pkg">geoR</span> data-set.
+If not provided the arguments
+<code>coords</code> must be provided instead.  </p>
+</td></tr>
+<tr valign="top"><td><code>coords</code></td>
+<td>
+<p>an <i>n x 2</i> matrix containing
+coordinates of the <i>n</i> data locations in each row.
+Defaults to <code>geodata$coords</code>, if provided.</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a vector or matrix with data values.
+If a matrix is provided, each column is regarded as one variable or realization.
+Defaults to <code>geodata$data</code>, if provided.</p>
+</td></tr>
+<tr valign="top"><td><code>uvec</code></td>
+<td>
+<p>a vector with values to define the variogram binning. For
+further details see documentation for <code><a href="variog.html">variog</a></code>.  </p>
+</td></tr> 
+<tr valign="top"><td><code>breaks</code></td>
+<td>
+<p>a vector with values to define the variogram binning. For
+further details see documentation for <code><a href="variog.html">variog</a></code>.  </p>
+</td></tr> 
+<tr valign="top"><td><code>trend</code></td>
+<td>
+<p>specifies the mean part of the model.
+The options are:
+<code>"cte"</code> (constant mean),
+<code>"1st"</code> (a first order polynomial
+on the coordinates), <code>"2nd"</code> (a second order polynomial
+on the coordinates), or a formula of the type <code>~X</code> where <code>X</code>
+is a matrix with the covariates (external trend). Defaults to <code>"cte"</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>lambda</code></td>
+<td>
+<p>values of the Box-Cox transformation parameter.
+Defaults to <i>1</i> (no
+transformation). If another value is provided the variogram is
+computed after transforming the 
+data. A case of particular interest is <i>lambda = 0</i>
+which corresponds to log-transformation.  </p>
+</td></tr>
+<tr valign="top"><td><code>option</code></td>
+<td>
+<p>defines the output type: the options <code>"bin"</code> returns values of
+binned variogram, <code>"cloud"</code> returns the variogram cloud and
+<code>"smooth"</code> returns the kernel smoothed variogram.
+Defaults to <code>"bin"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>estimator.type</code></td>
+<td>
+<p><code>"classical"</code> computes the classical method of
+moments estimator.  <code>"modulus"</code> returns the variogram
+estimator suggested by Hawkins and Cressie (see Cressie, 1993, pg 75).
+Defaults to <code>"classical"</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>nugget.tolerance</code></td>
+<td>
+<p>a numeric value. Points which are separated
+by a distance less than this value
+are considered co-located. Defaults to zero.  </p>
+</td></tr>
+<tr valign="top"><td><code>max.dist</code></td>
+<td>
+<p>a numerical value defining the maximum distance for
+the variogram. Pairs of locations
+separated for distance larger than this value are ignored for the
+variogram calculation. Defaults to the maximum distance among the pairs
+of data locations.  </p>
+</td></tr>
+<tr valign="top"><td><code>pairs.min</code></td>
+<td>
+<p>a integer number defining the minimum numbers of
+pairs for the bins.
+For <code>option = "bin"</code>,
+bins with number of pairs smaller than this
+value are ignored. Defaults to <code>NULL</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>bin.cloud</code></td>
+<td>
+<p>logical. If <code>TRUE</code> and
+<code>option = "bin"</code> the cloud values for each class are
+included in the output. Defaults to <code>FALSE</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>direction</code></td>
+<td>
+<p>a vector with values of 4 angles, indicating the
+directions for which the variograms will be computed. Default
+corresponds to <code>c(0, 45, 90, 135)</code> (degrees). </p>
+</td></tr>
+<tr valign="top"><td><code>tolerance</code></td>
+<td>
+<p>numerical value for the tolerance angle, when
+computing directional variograms. The value must be in the interval
+<i>[0, 90]</i> degrees.  Defaults to <i>pi/8</i>.  </p>
+</td></tr>
+<tr valign="top"><td><code>unit.angle</code></td>
+<td>
+<p>defines the unit for the specification of angles in
+the two previous arguments. Options are <code>"degrees"</code> and <code>"radians"</code>. </p>
+</td></tr>
+<tr valign="top"><td><code>messages</code></td>
+<td>
+<p>logical. Indicates whether
+status messages should be printed on the screen (or output device)
+while the function is running.  </p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>arguments to be passed to the function <code><a href="../../stats/html/ksmooth.html">ksmooth</a></code>, if
+<code>option = "smooth"</code>.  </p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>The output is an object of the class <code>variog4</code>,
+a list with five components.
+The first four elements are estimated variograms for the directions
+provided and the last is the omnidirectional variogram. 
+Each individual component is an object of the class <code>variogram</code>,
+an output of the function <code><a href="variog.html">variog</a></code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Paulo J. Ribeiro Jr. <a href="mailto:paulojus@leg.ufpr.br">paulojus@leg.ufpr.br</a>, <br />
+Peter J. Diggle <a href="mailto:p.diggle@lancaster.ac.uk">p.diggle@lancaster.ac.uk</a>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Further information on the package <span class="pkg">geoR</span> can be found at:<br />
+<a href="http://www.leg.ufpr.br/geoR">http://www.leg.ufpr.br/geoR</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="variog.html">variog</a></code> for variogram calculations and
+<code><a href="plot.variog4.html">plot.variog4</a></code> for plotting results</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+var4 &lt;- variog4(s100, max.dist=1)
+plot(var4)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>geoR</em> version 1.7-5.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

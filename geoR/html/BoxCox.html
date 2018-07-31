@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: The Box-Cox Transformed Normal Distribution</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for boxcox {geoR}"><tr><td>boxcox {geoR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>The Box-Cox Transformed Normal Distribution</h2>
+
+<h3>Description</h3>
+
+<p>Functions related with the Box-Cox family of transformations.
+Density and random generation for the Box-Cox transformed normal
+distribution with mean
+equal to <code>mean</code> and standard deviation equal to <code>sd</code>, <em>in the normal scale</em>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+rboxcox(n, lambda, lambda2 = NULL, mean = 0, sd = 1)
+
+dboxcox(x, lambda, lambda2 = NULL, mean = 0, sd = 1)
+
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>lambda</code></td>
+<td>
+<p>numerical value(s) for the transformation parameter
+<i>lambda</i>.  </p>
+</td></tr>
+<tr valign="top"><td><code>lambda2</code></td>
+<td>
+<p>logical or numerical value(s) of the additional transformation
+(see DETAILS below). Defaults to <code>NULL</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>number of observations to be generated.  </p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a vector of quantiles (<code>dboxcox</code>) or an output of
+<code>boxcoxfit</code> (<code>print</code>, <code>plot</code>, <code>lines</code>).  </p>
+</td></tr>
+<tr valign="top"><td><code>mean</code></td>
+<td>
+<p>a vector of mean values at the normal scale.  </p>
+</td></tr>
+<tr valign="top"><td><code>sd</code></td>
+<td>
+<p>a vector of standard deviations at the normal scale.  </p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Denote <i>Y</i> the variable at the original scale and <i>Y'</i> the
+transformed variable. The Box-Cox transformation is defined by:
+</p>
+<p style="text-align: center;"><i>Y' = log(Y) if lambda = 0 , Y' = ((Y ^ lambda) - 1)/lambda otherwise </i></p>
+<p>. 
+</p>
+<p>An additional shifting parameter <i>lambda2</i> can be
+included in which case the transformation is given by: 
+</p>
+<p style="text-align: center;"><i>Y' = log(Y + lambda2) if lambda = 0 ,
+    Y' = (((Y + lambda2) ^ lambda) - 1)/lambda otherwise </i></p>
+<p>.
+</p>
+<p>The function <code>rboxcox</code> samples <i>Y'</i> from the normal distribution using
+the function <code><a href="../../stats/html/Normal.html">rnorm</a></code> and backtransform the values according to the
+equations above to obtain values of <i>Y</i>.
+If necessary the back-transformation truncates the values such that
+<i>Y' &gt;= -1/lambda</i> results in
+<i>Y = 0</i> in the original scale.
+Increasing the value of the mean and/or reducing the variance might help to avoid truncation.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The functions returns the following results:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>rboxcox</code></td>
+<td>
+<p>a vector of random deviates.  </p>
+</td></tr>
+<tr valign="top"><td><code>dboxcox</code></td>
+<td>
+<p>a vector of densities.  </p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Paulo Justiniano Ribeiro Jr. <a href="mailto:paulojus@leg.ufpr.br">paulojus@leg.ufpr.br</a>, <br />
+Peter J. Diggle <a href="mailto:p.diggle@lancaster.ac.uk">p.diggle@lancaster.ac.uk</a>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Box, G.E.P. and Cox, D.R.(1964) An analysis of transformations. JRSS B
+<b>26</b>:211&ndash;246.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>The parameter estimation function <code><a href="boxcoxfit.html">boxcoxfit</a></code>,
+the function <code><a href="../../MASS/html/boxcox.html">boxcox</a></code> in the package <span class="pkg">MASS</span> and
+the function <code><a href="../../car/html/box.cox.html">box.cox</a></code> in the package <span class="pkg">car</span>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Simulating data
+simul &lt;- rboxcox(100, lambda=0.5, mean=10, sd=2)
+##
+## Comparing models with different lambdas,
+## zero  means and unit variances
+curve(dboxcox(x, lambda=-1), 0, 8)
+for(lambda in seq(-.5, 1.5, by=0.5))
+  curve(dboxcox(x, lambda), 0, 8, add = TRUE)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>geoR</em> version 1.7-5.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

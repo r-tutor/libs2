@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Image or Perspective Plot with Kriging Results</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for image.kriging {geoR}"><tr><td>image.kriging {geoR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Image or Perspective Plot with Kriging Results</h2>
+
+<h3>Description</h3>
+
+<p>Plots image or perspective plots with results of the kriging
+calculations.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'kriging'
+image(x, locations, borders, values = x$predict,
+              coords.data, x.leg, y.leg, ...)
+## S3 method for class 'kriging'
+contour(x, locations, borders, values = x$predict,
+              coords.data, filled=FALSE, ...)
+## S3 method for class 'kriging'
+persp(x, locations, borders, values = x$predict, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>an object of the  class <code>kriging</code>, typically
+with the output of the functions <code><a href="krige.conv.html">krige.conv</a></code> or <code><a href="ksline.html">ksline</a></code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>locations</code></td>
+<td>
+<p>an <i>n x 2</i> matrix with the
+coordinates of the prediction locations, which should define a
+regular grid
+in order to be plotted by <code><a href="../../graphics/html/image.html">image</a></code> or
+<code><a href="../../graphics/html/persp.html">persp</a></code>. By default does not need to be provided and
+evaluates the attribute &quot;prediction.locations&quot; from the input object. </p>
+</td></tr>
+<tr valign="top"><td><code>borders</code></td>
+<td>
+<p>an <i>n x 2</i> matrix with the
+coordinates defining the borders of a region inside the grid defined
+by <code>locations</code>. Elements in the
+argument <code>values</code> are assigned to locations internal to the
+borders and <code>NA</code>'s to the external ones.
+</p>
+</td></tr>
+<tr valign="top"><td><code>values</code></td>
+<td>
+<p>a vector with values to be plotted. Defaults to <code>obj$predict</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>coords.data</code></td>
+<td>
+<p>optional. If an <i>n x 2</i>
+matrix with the data coordinates is
+provided, points indicating the data locations are included in the
+plot.  </p>
+</td></tr>
+<tr valign="top"><td><code>x.leg, y.leg</code></td>
+<td>
+<p>limits for the legend in the horizontal and vertical directions.  </p>
+</td></tr>
+<tr valign="top"><td><code>filled</code></td>
+<td>
+<p>logical. If <code>FALSE</code> the function
+<code><a href="../../graphics/html/contour.html">contour</a></code> is used otherwise
+<code><a href="../../graphics/html/filled.contour.html">filled.contour</a></code>. Defaults to <code>FALSE</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>further arguments to be passed to the functions
+<code><a href="../../graphics/html/image.html">image</a></code>, <code><a href="../../graphics/html/contour.html">contour</a></code>, <code><a href="../../graphics/html/filled.contour.html">filled.contour</a></code>, <code><a href="../../graphics/html/persp.html">persp</a></code> or
+<code><a href="legend.krige.html">legend.krige</a></code>.
+For instance, the
+argument <code>zlim</code> can be used to set the the minimum and maximum
+&lsquo;z&rsquo; values for which colors should be plotted.
+See documentation for those function for
+possible arguments.
+</p>
+</td></tr>   
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>plot1d</code> and <code>prepare.graph.kriging</code> are auxiliary functions
+called by the others.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An image or perspective plot is produced o the current graphics
+device.
+No values are returned.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Paulo J. Ribeiro Jr. <a href="mailto:paulojus@leg.ufpr.br">paulojus@leg.ufpr.br</a>, <br />
+Peter J. Diggle <a href="mailto:p.diggle@lancaster.ac.uk">p.diggle@lancaster.ac.uk</a>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Further information on the package <span class="pkg">geoR</span> can be found at:<br />
+<a href="http://www.leg.ufpr.br/geoR">http://www.leg.ufpr.br/geoR</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="krige.conv.html">krige.conv</a></code> and <code><a href="ksline.html">ksline</a></code> for kriging
+calculations. Documentation for
+<code><a href="../../graphics/html/image.html">image</a></code>, <code><a href="../../graphics/html/contour.html">contour</a></code>, <code><a href="../../graphics/html/filled.contour.html">filled.contour</a></code> and  <code><a href="../../graphics/html/persp.html">persp</a></code> contain basic information
+on the plotting functions.</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+loci &lt;- expand.grid(seq(0,1,l=51), seq(0,1,l=51))
+kc &lt;- krige.conv(s100, loc=loci,
+                 krige=krige.control(cov.pars=c(1, .25)))
+image(kc)
+contour(kc)
+image(kc)
+contour(kc, add=TRUE, nlev=21)
+persp(kc, theta=20, phi=20)
+contour(kc, filled=TRUE)
+contour(kc, filled=TRUE, color=terrain.colors)
+contour(kc, filled=TRUE, col=gray(seq(1,0,l=21)))
+# adding data locations
+image(kc, coords.data=s100$coords)
+contour(kc,filled=TRUE,coords.data=s100$coords,color=terrain.colors)
+#
+# now dealing with borders
+#
+bor &lt;- matrix(c(.4,.1,.3,.9,.9,.7,.9,.7,.3,.2,.5,.8),
+              ncol=2)
+# plotting just inside borders
+image(kc, borders=bor)
+contour(kc, borders=bor)
+image(kc, borders=bor)
+contour(kc, borders=bor, add=TRUE)
+contour(kc, borders=bor, filled=TRUE, color=terrain.colors)
+# kriging just inside borders
+kc1 &lt;- krige.conv(s100, loc=loci,
+                 krige=krige.control(cov.pars=c(1, .25)),
+                 borders=bor)
+image(kc1)
+contour(kc1)
+# avoiding the borders 
+image(kc1, borders=NULL)
+contour(kc1, borders=NULL)
+
+op &lt;- par(no.readonly = TRUE)
+par(mfrow=c(1,2), mar=c(3,3,0,0), mgp=c(1.5, .8,0))
+image(kc)
+image(kc, val=sqrt(kc$krige.var))
+
+# different ways to add the legends and pass arguments:
+image(kc, ylim=c(-0.2, 1), x.leg=c(0,1), y.leg=c(-0.2, -0.1))
+image(kc, val=kc$krige.var, ylim=c(-0.2, 1))
+legend.krige(y.leg=c(-0.2,-0.1), x.leg=c(0,1), val=sqrt(kc$krige.var))
+
+image(kc, ylim=c(-0.2, 1), x.leg=c(0,1), y.leg=c(-0.2, -0.1), cex=1.5)
+image(kc, ylim=c(-0.2, 1), x.leg=c(0,1), y.leg=c(-0.2, -0.1), offset.leg=0.5)
+
+image(kc, xlim=c(0, 1.2))
+legend.krige(x.leg=c(1.05,1.1), y.leg=c(0,1), kc$pred, vert=TRUE)
+image(kc, xlim=c(0, 1.2))
+legend.krige(x.leg=c(1.05,1.1), y.leg=c(0,1),kc$pred, vert=TRUE, off=1.5, cex=1.5)
+
+par(op)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>geoR</em> version 1.7-5.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

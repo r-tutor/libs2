@@ -1,0 +1,262 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Converts an Object to the Class &quot;geodata&quot;</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for as.geodata {geoR}"><tr><td>as.geodata {geoR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Converts an Object to the Class &quot;geodata&quot;</h2>
+
+<h3>Description</h3>
+
+<p>The default method converts a matrix or a data-frame
+to an object of the
+<code><a href="../../base/html/class.html">class</a></code>  <code>"geodata"</code>.<br />
+Objects of the class <code>"geodata"</code> are lists with two obligatory
+components: <code>coords</code> and <code>data</code>.
+Optional components are allowed and a typical example is a vector or
+matrix with covariate(s) values.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+as.geodata(obj, ...)
+
+## Default S3 method:
+as.geodata(obj, coords.col = 1:2, data.col = 3, data.names = NULL, 
+                   covar.col = NULL, covar.names = "obj.names",
+                   units.m.col = NULL, realisations = NULL,
+                   na.action = c("ifany", "ifdata", "ifcovar", "none"),
+                   rep.data.action, rep.covar.action, rep.units.action,
+                   ...)
+
+## S3 method for class 'geodata'
+as.data.frame(x, ..., borders = TRUE)
+
+## S3 method for class 'geodata.frame'
+as.geodata(obj, ...)
+
+## S3 method for class 'SpatialPointsDataFrame'
+as.geodata(obj, data.col = 1, ...)
+
+is.geodata(x)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>obj</code></td>
+<td>
+<p>a matrix or data-frame where each line corresponds to one
+spatial location. It should contain values of 2D coordinates,
+data and, optionally, covariate(s) value(s) at the locations.
+A method for <code><a href="../../sp/html/SpatialPointsDataFrame.html">SpatialPointsDataFrame</a></code> is also provided.
+It can also take an output of the function <code><a href="grf.html">grf</a></code>, see
+DETAILS below. </p>
+</td></tr>
+<tr valign="top"><td><code>coords.col</code></td>
+<td>
+<p>a vector with the column numbers corresponding to the
+spatial coordinates.  </p>
+</td></tr>
+<tr valign="top"><td><code>data.col</code></td>
+<td>
+<p>a scalar or vector with column number(s) corresponding
+to the data.  </p>
+</td></tr>
+<tr valign="top"><td><code>data.names</code></td>
+<td>
+<p>optional. A string or vector of strings with names for
+the data columns. Only valid if there is more than one column of
+data. By default, takes the names from the original object.  </p>
+</td></tr>
+<tr valign="top"><td><code>covar.col</code></td>
+<td>
+<p>optional. A scalar or numeric vector
+with the column number(s) corresponding to the covariate(s).
+Alternativelly can be a character vector with the names of the
+covariates. </p>
+</td></tr>
+<tr valign="top"><td><code>covar.names</code></td>
+<td>
+<p>optional. A string or vector of strings with the name(s) of
+the covariates. By default take the names from the original object.  </p>
+</td></tr>
+<tr valign="top"><td><code>units.m.col</code></td>
+<td>
+<p>optional. A scalar 
+with the column number corresponding to the offset variable.
+Alternativelly can be a character vector with the name of the
+offset. This option is particularly relevant when using the package
+<span class="pkg">geoRglm</span>. All values must be greater then zero. </p>
+</td></tr>
+<tr valign="top"><td><code>realisations</code></td>
+<td>
+<p>optional. A vector indicating the realisation
+number or a number indicating a column in <code>obj</code> with the
+realisation indicator variable.
+See <code>DETAILS</code> below.  </p>
+</td></tr>
+<tr valign="top"><td><code>na.action</code></td>
+<td>
+<p>string defining action to be taken in the presence of
+<code>NA</code>'s. The default option <code>"ifany"</code> excludes all points
+for which there are <code>NA</code>'s in the data or covariates. The option <code>"ifdata"</code> excludes points
+for which there are <code>NA</code>'s in the data. The default option <code>"ifcovar"</code> excludes all points
+for which there are <code>NA</code>'s in the covariates. The option
+<code>"none"</code> do not exclude points.  </p>
+</td></tr>
+<tr valign="top"><td><code>rep.data.action</code></td>
+<td>
+<p>a string or a function. Defines action to be taken when there is more than
+one data at the same location. The default option <code>"none"</code>
+keeps the repeated locations, if any. The option <code>"first"</code> retains
+only the first data recorded at each location. Alternativelly a
+function can be passed and it will be used. For instance if
+<code>mean</code> is provided, the function will compute and return the average of
+the data at coincident locations. The non-default
+options will eliminate the repeated locations.  </p>
+</td></tr>
+<tr valign="top"><td><code>rep.covar.action</code></td>
+<td>
+<p>idem to <code>rep.data.locations</code>, to be applied to
+the covariates, if any. Defaults to
+the same option set for <code>rep.data.locations</code>. </p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>an object which is tested for the class <code>geodata</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>rep.units.action</code></td>
+<td>
+<p>a string or a function.
+Defines action to be taken on the element <code>units.m</code>, if present
+when there is more than
+one data at the same location. The default option is the same
+value set for <code>rep.data.action</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>borders</code></td>
+<td>
+<p>logical. If TRUE the element borders in the
+<code>geodata</code>
+object is set as an attribute of the data-frame.  </p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>values to be passed for the methods.  </p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Objects of the class <code>"geodata"</code> contain data for
+geostatistical analysis using the package <span class="pkg">geoR</span>.
+Storing data in this format facilitates the usage of the functions in <span class="pkg">geoR</span>.
+However, conversion of objects to this class is not obligatory
+to carry out the analysis.
+</p>
+<p><code>NA</code>'s are not allowed in the coordinates. By default the
+respective rows will not be included in the output.
+</p>
+<p><b>Realisations</b><br />
+Tipically geostatistical data correspond to a unique realisation of
+the spatial process.
+However, sometimes different &quot;realisations&quot; are possible.
+For instance, if data are collected in the same area at different
+points in time and independence between time points is assumed,
+each time can be considered a different &quot;replicate&quot; or &quot;realisation&quot;
+of the same process. The argument <code>realisations</code> takes a vector
+indication the replication number and can be passed to other <span class="pkg">geoR</span>
+functions as, for instance, <code><a href="likfit.html">likfit</a></code>.
+</p>
+<p>The data format is similar to the usual <code>geodata</code> format in
+<span class="pkg">geoR</span>.
+Suppose there are realisations (times) <i>1, ..., J</i>
+and for each realisations <i>n_1, ..., n_j</i> observations are available.
+The coordinates for different realisations
+should be combined in a single <i>nx2</i> object,
+where <i>n=n_1 + ... + n_J</i>.
+Similarly for the data vector and covariates (if any).
+</p>
+<p><b>grf objects</b><br />
+If an object of the class <code>grf</code> is provided the functions just
+extracts the elements <code>coords</code> and <code>data</code> of this object. 
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of the <code><a href="../../base/html/class.html">class</a></code> <code>"geodata"</code> which is a list
+with two obligatory components (coords and data)
+and other optional components:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>coords</code></td>
+<td>
+<p>an <i>n \times 2</i>  matrix where <i>n</i> is the number
+of spatial locations.</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a vector of length <i>n</i>, for the univariate case or,
+an <i>n \times v</i> matrix or data-frame for the multivariate case,
+where <i>v</i> is the number of variables.</p>
+</td></tr>
+<tr valign="top"><td><code>covariates</code></td>
+<td>
+<p>a vector of length <i>n</i> or
+an <i>n \times p</i> matrix with covariate(s) values,
+where <i>p</i> is the number of covariates. Only returned if
+covariates are provided.  </p>
+</td></tr>
+<tr valign="top"><td><code>realisations</code></td>
+<td>
+<p>a vector on size <i>n</i> with the replication
+number. Only returned if argument realisations is provided.  </p>
+</td></tr> 
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Paulo Justiniano Ribeiro Jr. <a href="mailto:paulojus@leg.ufpr.br">paulojus@leg.ufpr.br</a>, <br />
+Peter J. Diggle <a href="mailto:p.diggle@lancaster.ac.uk">p.diggle@lancaster.ac.uk</a>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Further information on the package <span class="pkg">geoR</span> can be found at:<br />
+<a href="http://www.leg.ufpr.br/geoR">http://www.leg.ufpr.br/geoR</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="read.geodata.html">read.geodata</a></code> for reading data from an
+<em>ASCII</em> file and <code><a href="../../base/html/list.html">list</a></code> for general information on lists.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+## converting the data-set "topo" from the package MASS (VR's bundle)
+## to the geodata format:
+if(require(MASS)){
+topo
+topogeo &lt;- as.geodata(topo)
+names(topogeo)
+topogeo
+}
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>geoR</em> version 1.7-5.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Points of a water retention curve data set</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for wrc {geoR}"><tr><td>wrc {geoR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Points of a water retention curve data set</h2>
+
+<h3>Description</h3>
+
+<p>Soil density and measures of the water retention curve obtained at
+different pressures on a regular grid with 10x25 points
+spaced by 5 meters.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>data(wrc)</pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 250 observations on the following 11 variables.
+</p>
+
+<dl>
+<dt><code>CoordX</code></dt><dd><p>a numeric vector with the X coordinates of the
+samples. </p>
+</dd>
+<dt><code>CoordY</code></dt><dd><p>a numeric vector with the Y coordinate of the
+samples. </p>
+</dd>
+<dt><code>Densidade</code></dt><dd><p>a numeric vector, soil density <i>(g/cm^3)</i></p>
+</dd>
+<dt><code>Pr5</code></dt><dd><p>a numeric vector, water content at a pressure of 5
+mca &ndash; <i>5 x 10^2</i> Pa (atm)</p>
+</dd>
+<dt><code>Pr10</code></dt><dd><p>a numeric vector, water content at a pressure of
+10 mca &ndash; <i>1x10^3</i> Pa (atm)</p>
+</dd>
+<dt><code>Pr60</code></dt><dd><p>a numeric vector, water content at a pressure of 60 mca &ndash; <i>6x10^3</i> Pa (atm)</p>
+</dd>
+<dt><code>Pr100</code></dt><dd><p>a numeric vector, water content at a pressure of 100 mca &ndash; <i>1x10^4</i> Pa (atm)</p>
+</dd>
+<dt><code>Pr306</code></dt><dd><p>a numeric vector, water content at a pressure of 306 mca &ndash; <i>3x10^4</i> Pa (atm)</p>
+</dd>
+<dt><code>Pr816</code></dt><dd><p>a numeric vector, water content at a pressure of 816 mca &ndash; <i>8x10^4</i> Pa (atm)</p>
+</dd>
+<dt><code>Pr3060</code></dt><dd><p>a numeric vector, water content at a pressure of 3060 mca &ndash; <i>8x10^5</i> Pa (atm)</p>
+</dd>
+<dt><code>Pr15300</code></dt><dd><p>a numeric vector, water content at a pressure of 15300 mca &ndash; <i>1.5x10^6</i> Pa (atm)</p>
+</dd>
+</dl>
+
+
+
+<h3>Details</h3>
+
+<p>Uniformity trial with 250 undisturbed soil samples collected at 25cm
+soil depth of spacing of 5 meters, resulting on a regular grid of
+<i>25 x 10</i> sampling points.
+</p>
+<p>For each sampling point there are measurents of the soil density and
+water content obtained at eight pressures: 5, 10, 60, 100, 306, 816,
+3060 and 15300 meters of column of water (mca), corresponding to
+<i>5 x 10^2</i>, 
+<i>1 x 10^3</i>, <i>6 x 10^3</i>, <i>1 x 10^4</i>,
+<i>3 x 10^</i>, <i>8 x 10^4</i>, <i>3 x 10^5</i>,
+<i>1.5 x 10^6</i> Pa.
+</p>
+<p>The experiment aimed to use the water contents of the samples to
+estimate the water retention curve at the 250 data points.
+</p>
+<p>See also the data-set <code><a href="soil250.html">soil250</a></code> with soil chemistry properties measured at the same points.
+</p>
+
+
+<h3>Source</h3>
+
+<p>MORAES, S.O. (1991) Heterogeneidade hidráulica de uma terra roxa
+estruturada. PhD Thesis. ESALQ/USP.
+</p>
+
+
+<h3>References</h3>
+
+<p>MORAES, S. O. ; LIBARDI, P. L. ; REICHARDT, K. (1993) Problemas
+metodológicos na obtenção da curva de retenção de água pelo
+solo. Scientia Agricola, Piracicaba, v. 50, n. 3, p. 383-392.
+</p>
+<p>MORAES, S. O. ; LIBARDI, P. L. ; REICHARDT, K. ; BACCHI,
+O. O. S. (1993) Heterogeneidade dos pontos experimentais
+de curvas de retenção da água do solo.. Scientia Agricola, Piracicaba, v. 50, n. 3, p. 393-402.
+</p>
+<p>MORAES, S. O. ; LIBARDI, P. L. (1993) Variabilidade da água disponível
+em uma terra roxa estruturada latossólica.
+Scientia Agricola, Piracicaba, v. 50, n. 3, p. 393-402, 1993. 
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+pr100 &lt;- as.geodata(wrc, data.col=7)
+summary(pr100)
+plot(pr100)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>geoR</em> version 1.7-5.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

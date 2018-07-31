@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Rainfall Data from Parana State, Brasil</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for parana {geoR}"><tr><td>parana {geoR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Rainfall Data from Parana State, Brasil</h2>
+
+<h3>Description</h3>
+
+<p>This data-set was used by Diggle and Ribeiro (2001) to illustrate the methods
+discussed in the paper. The data reported analysis was
+carried out using the package <span class="pkg">geoR</span>. 
+</p>
+<p>The data refers to average rainfall over different years for the period May-June
+(dry-season). It was collected at 143 recording stations throughout <i>Parana</i> State,
+Brasil.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>data(parana)</pre>
+
+
+<h3>Format</h3>
+
+<p>The object <code>parana</code> of the class <code>geodata</code>, which is a list
+containing the following components:
+</p>
+    
+<dl>
+<dt><code>coords</code></dt><dd><p>a matrix with the coordinates of the recording
+stations.  </p>
+</dd>
+<dt><code>data</code></dt><dd><p>a vector with the average recorded rainfall for the May-June period.  </p>
+</dd>
+<dt><code>borders</code></dt><dd><p>a matrix with the coordinates defining the borders of
+<i>Parana</i> state.  </p>
+</dd>
+<dt><code>loci.paper</code></dt><dd><p>a matrix with the coordinates of the four
+prediction locations discussed in the paper. </p>
+</dd>
+</dl>
+
+
+
+<h3>Source</h3>
+
+<p>The data were collected at several recording stations at
+<i>Parana</i> State, Brasil, belonging to the following companies:
+COPEL, IAPAR, DNAEE, SUREHMA  and INEMET.
+</p>
+<p>The data base was organized by Laura Regina Bernardes Kiihl (IAPAR,
+Instituto <i>Agronomico</i> do <i>Parana</i>, Londrina, Brasil)
+and the fraction of the data included in this data-set was
+provided by Jacinta Loudovico Zamboti (Universidade Estadual de
+Londrina, Brasil).
+The coordinates of the borders of <i>Parana</i> State were provided
+by <i>Joao</i> Henrique Caviglione (IAPAR).
+</p>
+
+
+<h3>References</h3>
+
+<p>Diggle, P.J. \&amp; Ribeiro Jr, P.J. (2002) Bayesian inference in
+Gaussian model-based geostatistics. Geographical and Environmental
+Modelling, Vol. 6, No. 2, 129-146.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+summary(parana)
+plot(parana, bor=borders)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>geoR</em> version 1.7-5.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

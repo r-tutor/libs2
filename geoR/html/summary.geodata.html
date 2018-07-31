@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Summaries for geodata object</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for summary.geodata {geoR}"><tr><td>summary.geodata {geoR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Summaries for geodata object</h2>
+
+<h3>Description</h3>
+
+<p>Sumarises each of the main elements of an object of the class <code>geodata</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'geodata'
+summary(object, lambda =1, add.to.data = 0,
+                by.realisations=TRUE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>an object of the class <code>geodata</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>lambda</code></td>
+<td>
+<p>value of the Box-Cox transformation parameter. Two particular cases
+are <i>lambda = 1</i> which corresponds to no
+transformation and  <i>lambda = 0</i> corresponding to
+the log-transformation.  </p>
+</td></tr>
+<tr valign="top"><td><code>add.to.data</code></td>
+<td>
+<p>scalar, Constant value to be added to the data
+values.
+Only used if a value different from 1 is passed to the argument <code>lambda</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>by.realisations</code></td>
+<td>
+<p>logical. Indicates whether the summary must be performed separatly for each realisation, if the <code>geodata</code> object contains the element <code>realisations</code>. Defaults to <code>TRUE</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>further arguments to be passed to the function
+<code><a href="../../base/html/summary.html">summary.default</a></code>.  </p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A list with components
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>coords.summary </code></td>
+<td>
+<p>a matrix with minimum and maximum values for
+the coordinates.  </p>
+</td></tr>
+<tr valign="top"><td><code>distances.summary</code></td>
+<td>
+<p>minimum and maximum distances between pairs of points.  </p>
+</td></tr>
+<tr valign="top"><td><code>borders.summary </code></td>
+<td>
+<p>a matrix with minimum and maximum values for
+the coordinates. Only returned if there is an element <code>borders</code>
+in the <code>geodata</code> object.  </p>
+</td></tr>
+<tr valign="top"><td><code>data.summary </code></td>
+<td>
+<p>summary statistics (min, max, quartiles and mean)
+for the data.  </p>
+</td></tr>
+<tr valign="top"><td><code>units.m.summary </code></td>
+<td>
+<p>summary statistics (min, max, quartiles and mean)
+for the offset variable. Only returned if there is an element <code>units.m</code>
+in the <code>geodata</code> object. </p>
+</td></tr>
+<tr valign="top"><td><code>covariate.summary </code></td>
+<td>
+<p>summary statistics (min, max, quartiles and mean)
+for the covariate(s). Only returned if there is an element <code>covariate</code>
+in the <code>geodata</code> object. </p>
+</td></tr>
+<tr valign="top"><td><code>others</code></td>
+<td>
+<p>names of other elements if present in the <code>geodata</code> object.  </p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Paulo Justiniano Ribeiro Jr. <a href="mailto:paulojus@leg.ufpr.br">paulojus@leg.ufpr.br</a>, <br />
+Peter J. Diggle <a href="mailto:p.diggle@lancaster.ac.uk">p.diggle@lancaster.ac.uk</a>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Further information on the package <span class="pkg">geoR</span> can be found at:<br />
+<a href="http://www.leg.ufpr.br/geoR">http://www.leg.ufpr.br/geoR</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../base/html/summary.html">summary</a></code>, <code><a href="as.geodata.html">as.geodata</a></code>. </p>
+
+
+<h3>Examples</h3>
+
+<pre>
+summary(s100)
+
+summary(ca20)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>geoR</em> version 1.7-5.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

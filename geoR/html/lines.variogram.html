@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Line with a Empirical Variogram</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for lines.variogram {geoR}"><tr><td>lines.variogram {geoR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Line with a Empirical Variogram</h2>
+
+<h3>Description</h3>
+
+<p>A sample (empirical) variogram computed using the
+function <code><a href="variog.html">variog</a></code> is added to the current plot.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'variogram'
+lines(x, max.dist, type = "o",  scaled = FALSE,
+         pts.range.cex, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>an object of the class <code>"variogram"</code>, typically an
+output from the function <code><a href="variog.html">variog</a></code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>max.dist</code></td>
+<td>
+<p>maximum distance for the x-axis. By default takes
+the maximum distance for which the sample variogram was computed.  </p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>type of line for the empirical variogram. The default is
+<code>"o"</code> (dots and lines). See documentation for
+<code><a href="../../graphics/html/lines.html">lines</a></code> for further details.  </p>
+</td></tr>
+<tr valign="top"><td><code>scaled</code></td>
+<td>
+<p>logical. If <code>TRUE</code> the variogram values are divided by the
+sample variance. This allows comparison between variograms of
+different variables.  </p>
+</td></tr>
+<tr valign="top"><td><code>pts.range.cex</code></td>
+<td>
+<p>optional. A two elements vector with maximum and
+minimum values for the caracter expansion factor <code>cex</code>. If
+provided the point sizes in binned variogram are proportional to the
+number of pairs of points used to compute each bin.  </p>
+</td></tr> 
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>other arguments to be passed to the function
+<code><a href="../../graphics/html/lines.html">lines</a></code>.  </p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A line with the empirical variogram is added to the plot in the current
+graphics device. No values are returned.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Paulo Justiniano Ribeiro Jr. <a href="mailto:paulojus@leg.ufpr.br">paulojus@leg.ufpr.br</a>, <br />
+Peter J. Diggle <a href="mailto:p.diggle@lancaster.ac.uk">p.diggle@lancaster.ac.uk</a>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Further information on the package <span class="pkg">geoR</span> can be found at:<br />
+<a href="http://www.leg.ufpr.br/geoR">http://www.leg.ufpr.br/geoR</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="variog.html">variog</a></code>, <code><a href="lines.variogram.html">lines.variogram</a></code>,
+<code><a href="lines.variomodel.html">lines.variomodel</a></code>, <code><a href="variog.model.env.html">variog.model.env</a></code>,
+<code><a href="variog.mc.env.html">variog.mc.env</a></code>, <code><a href="plot.grf.html">plot.grf</a></code>, <code><a href="../../graphics/html/lines.html">lines</a></code>.</p>
+
+<hr /><div style="text-align: center;">[Package <em>geoR</em> version 1.7-5.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

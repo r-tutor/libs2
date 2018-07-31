@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Summary statistics from predictive distributions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for statistics.predictive {geoR}"><tr><td>statistics.predictive {geoR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Summary statistics from predictive distributions</h2>
+
+<h3>Description</h3>
+
+<p>Computes summaries based on simulations of predictive distribution
+returned by
+<code><a href="krige.bayes.html">krige.bayes</a></code> and <code><a href="krige.conv.html">krige.conv</a></code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+statistics.predictive(simuls, mean.var = TRUE, quantile, threshold,
+                      sim.means, sim.vars)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>simuls</code></td>
+<td>
+<p>object with simulations from the predictive distribution</p>
+</td></tr>
+<tr valign="top"><td><code>mean.var</code></td>
+<td>
+<p>Logical. Indicates whether or not to compute mean and variances
+of the simulations at each location.  </p>
+</td></tr>
+<tr valign="top"><td><code>quantile</code></td>
+<td>
+<p>defines quantile estimator. See
+documentation for <code><a href="output.control.html">output.control</a></code> .  </p>
+</td></tr>
+<tr valign="top"><td><code>threshold</code></td>
+<td>
+<p>defines probability estimator. See
+documentation for <code><a href="output.control.html">output.control</a></code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>sim.means</code></td>
+<td>
+<p>Logical. Indicates whether or not to compute the mean
+of of the conditional simulations.  </p>
+</td></tr>
+<tr valign="top"><td><code>sim.vars</code></td>
+<td>
+<p>Logical. Indicates whether or not to compute the variances
+of the conditional simulations.  </p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A list with one ore more of the following components.
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>mean </code></td>
+<td>
+<p>mean at each prediction location.  </p>
+</td></tr>
+<tr valign="top"><td><code>variance</code></td>
+<td>
+<p>variance at each prediction location.  </p>
+</td></tr>
+<tr valign="top"><td><code>quantiles</code></td>
+<td>
+<p>quantiles, at each prediction location.</p>
+</td></tr>  
+<tr valign="top"><td><code>probabilities</code></td>
+<td>
+<p>probabilities, at each prediction location, of been below
+the provided threshold.  </p>
+</td></tr>
+<tr valign="top"><td><code>sim.means </code></td>
+<td>
+<p>vector with means of each conditional simulation.  </p>
+</td></tr>
+<tr valign="top"><td><code>sim.vars </code></td>
+<td>
+<p>vector with variances of each conditional simulation.  </p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Paulo J. Ribeiro Jr. <a href="mailto:paulojus@leg.ufpr.br">paulojus@leg.ufpr.br</a>, <br />
+Peter J. Diggle <a href="mailto:p.diggle@lancaster.ac.uk">p.diggle@lancaster.ac.uk</a>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Further information on the package <span class="pkg">geoR</span> can be found at:<br />
+<a href="http://www.leg.ufpr.br/geoR">http://www.leg.ufpr.br/geoR</a>.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>geoR</em> version 1.7-5.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

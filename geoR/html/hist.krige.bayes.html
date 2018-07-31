@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Plots Sample from Posterior Distributions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for hist.krige.bayes {geoR}"><tr><td>hist.krige.bayes {geoR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Plots Sample from Posterior Distributions</h2>
+
+<h3>Description</h3>
+
+<p>Plots histograms and/or density estimation with samples
+from the posterior distribution of the model parameters
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'krige.bayes'
+hist(x, pars, density.est = TRUE, histogram = TRUE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>an object of the class <code>krige.bayes</code>, with an output of
+the funtions <code><a href="krige.bayes.html">krige.bayes</a></code>. </p>
+</td></tr>
+<tr valign="top"><td><code>pars</code></td>
+<td>
+<p>a vector with the names of one or more of the model parameters.
+Defaults to all model parameters. Setting to -1 excludes the intercept.  </p>
+</td></tr>
+<tr valign="top"><td><code>density.est</code></td>
+<td>
+<p>logical indication whether a line with the density 
+estimation should be added to the plot.  </p>
+</td></tr>
+<tr valign="top"><td><code>histogram</code></td>
+<td>
+<p>logical indicating whether the histogram is included in the 
+plot.  </p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>further arguments for the plotting functions and or for the 
+density estimation.  </p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Produces a plot in the currently graphics device.<br />
+Returns a <code><a href="../../base/html/invisible.html">invisible</a></code> list with the components:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>histogram</code></td>
+<td>
+<p>with the output of the function <code><a href="../../graphics/html/hist.html">hist</a></code> for 
+each parameter</p>
+</td></tr>
+<tr valign="top"><td><code>density.estimation</code></td>
+<td>
+<p>with the output of the function 
+<code><a href="../../stats/html/density.html">density</a></code> for each parameter</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Paulo J. Ribeiro Jr. <a href="mailto:paulojus@leg.ufpr.br">paulojus@leg.ufpr.br</a>, <br />
+Peter J. Diggle <a href="mailto:p.diggle@lancaster.ac.uk">p.diggle@lancaster.ac.uk</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="krige.bayes.html">krige.bayes</a></code>, <code><a href="../../graphics/html/hist.html">hist</a></code>, <code><a href="../../stats/html/density.html">density</a></code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## See documentation for krige.bayes()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>geoR</em> version 1.7-5.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

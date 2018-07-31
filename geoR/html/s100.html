@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Simulated Data-Sets which Illustrate the Usage of the Package...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for s100 and s121 {geoR}"><tr><td>s100 and s121 {geoR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Simulated Data-Sets which Illustrate the Usage of the Package
+geoR  </h2>
+
+<h3>Description</h3>
+
+<p>These two simulated data sets are the ones used in the Technical
+Report which describes the package <span class="pkg">geoR</span>
+(see reference below). 
+These data-sets are used in several examples throughout the package
+documentation.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+data(s100)
+
+data(s121)
+</pre>
+
+
+<h3>Format</h3>
+
+<p>Two objects of the <code><a href="../../base/html/class.html">class</a></code> <code>geodata</code>. Both are lists
+with the following components:
+</p>
+
+<dl>
+<dt><code>coords</code></dt><dd><p>the coordinates of data locations.  </p>
+</dd>
+<dt><code>data</code></dt><dd><p>the simulated data. Notice that for <code>s121</code>
+this a <i>101x10</i> matrix with 10 simulations.  </p>
+</dd>
+<dt><code>cov.model</code></dt><dd><p>the correlation model.  </p>
+</dd>
+<dt><code>nugget</code></dt><dd><p>the values of the nugget parameter.  </p>
+</dd>
+<dt><code>cov.pars</code></dt><dd><p>the covariance parameters.  </p>
+</dd>
+<dt><code>kappa</code></dt><dd><p>the value of the parameter <em>kappa</em>.  </p>
+</dd>
+<dt><code>lambda</code></dt><dd><p>the value of the parameter <em>lambda</em>.  </p>
+</dd>
+</dl>
+
+
+
+<h3>References</h3>
+
+<p>Ribeiro Jr, P.J. and Diggle, P.J. (1999) geoS: A geostatistical
+library for S-PLUS. <em>Technical report ST-99-09, Dept of Maths and
+Stats, Lancaster University</em>. 
+</p>
+<p>Further information on the package <span class="pkg">geoR</span> can be found at:<br />
+<a href="http://www.leg.ufpr.br/geoR">http://www.leg.ufpr.br/geoR</a>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+plot(s100)
+plot(s121, type="l")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>geoR</em> version 1.7-5.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

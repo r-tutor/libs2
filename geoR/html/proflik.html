@@ -1,0 +1,259 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Computes Profile Likelihoods</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for proflik {geoR}"><tr><td>proflik {geoR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Computes Profile Likelihoods</h2>
+
+<h3>Description</h3>
+
+<p>Computes profile likelihoods for model parameters
+previously estimated using the function
+<code><a href="likfit.html">likfit</a></code>. 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+proflik(obj.likfit, geodata, coords = geodata$coords,
+        data = geodata$data, sill.values, range.values,
+        nugget.values, nugget.rel.values, lambda.values, 
+        sillrange.values = TRUE, sillnugget.values = TRUE,
+        rangenugget.values = TRUE, sillnugget.rel.values = FALSE,
+        rangenugget.rel.values = FALSE, silllambda.values = FALSE,
+        rangelambda.values = TRUE,  nuggetlambda.values = FALSE,
+        nugget.rellambda.values = FALSE,
+        uni.only = TRUE, bi.only = FALSE, messages, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>obj.likfit</code></td>
+<td>
+<p>an object of the class <code>likfit</code>, typically an
+output of the function <code><a href="likfit.html">likfit</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>geodata</code></td>
+<td>
+<p>a list containing elements <code>coords</code> and
+<code>data</code> described next. Typically an object of the class
+<code>"geodata"</code> - a <span class="pkg">geoR</span> data-set. If not provided the arguments
+<code>coords</code> and <code>data</code> must be provided instead.  </p>
+</td></tr>
+<tr valign="top"><td><code>coords</code></td>
+<td>
+<p> an <i>n x 2</i> matrix containing in each row Euclidean
+coordinates of the <i>n</i> data locations. By default it takes the
+element <code>coords</code> of the argument <code>geodata</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a vector with data values. By default it takes the
+element <code>data</code> of the argument <code>geodata</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>sill.values</code></td>
+<td>
+<p>set of values of the partial sill parameter
+<i>sigma^2</i> for which the profile likelihood will be
+computed.  </p>
+</td></tr>
+<tr valign="top"><td><code>range.values</code></td>
+<td>
+<p>set of values of the range parameter
+<i>phi</i> for which the profile likelihood will be computed.  </p>
+</td></tr>
+<tr valign="top"><td><code>nugget.values</code></td>
+<td>
+<p>set of values of the nugget parameter
+<i>tau^2</i> for which the profile likelihood will be
+computed. Only used if the model was fitted using the function
+<code><a href="likfit.html">likfit</a></code> with the option <code>fix.nugget = FALSE</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>nugget.rel.values</code></td>
+<td>
+<p>set of values of the relative nugget parameter
+<i>tauR^2</i> for which the profile likelihood will be
+computed. Only used if the model was fitted using the function
+<code><a href="likfit.html">likfit</a></code> with the option <code>fix.nugget = FALSE</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>lambda.values</code></td>
+<td>
+<p>set of values of the Box-Cox transformation parameter
+<i>lambda</i> for which the profile likelihood will be
+computed. Only to be used if the model was fitted using the function
+<code><a href="likfit.html">likfit</a></code> with the option <code>fix.lambda = FALSE</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>sillrange.values</code></td>
+<td>
+<p>logical indicating
+whether or not the 2-D profile likelihood should be computed.
+Only valid if <code>uni.only = FALSE</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>sillnugget.values</code></td>
+<td>
+<p>as above.  </p>
+</td></tr>
+<tr valign="top"><td><code>rangenugget.values</code></td>
+<td>
+<p>as above.  </p>
+</td></tr>
+<tr valign="top"><td><code>sillnugget.rel.values</code></td>
+<td>
+<p>as above.  </p>
+</td></tr>
+<tr valign="top"><td><code>rangenugget.rel.values</code></td>
+<td>
+<p>as above.  </p>
+</td></tr>
+<tr valign="top"><td><code>silllambda.values</code></td>
+<td>
+<p>as above.  </p>
+</td></tr>
+<tr valign="top"><td><code>rangelambda.values</code></td>
+<td>
+<p>as above.  </p>
+</td></tr>
+<tr valign="top"><td><code>nuggetlambda.values</code></td>
+<td>
+<p>as above.  </p>
+</td></tr>
+<tr valign="top"><td><code>nugget.rellambda.values</code></td>
+<td>
+<p>as above.  </p>
+</td></tr>
+<tr valign="top"><td><code>uni.only</code></td>
+<td>
+<p>as above.  </p>
+</td></tr>
+<tr valign="top"><td><code>bi.only</code></td>
+<td>
+<p>as above.  </p>
+</td></tr>
+<tr valign="top"><td><code>messages</code></td>
+<td>
+<p>logical. Indicates whether
+status messages should be printed on the screen (i.e. current output device)
+while the function is running.  </p>
+</td></tr>
+</table>
+
+
+<table summary="R argblock">
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>additional parameters to be passed to the minimization
+function.  </p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The functions <code>.proflik.*</code> are auxiliary functions used to
+compute the profile likelihoods. These functions are
+internally called by the
+minimization functions when estimating the model parameters.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of the class <code>"proflik"</code> which is 
+a list. Each element contains values of a parameter (or a pair of
+parameters for 2-D profiles) and the
+corresponding value of the profile likelihood.
+The components of the output will vary according to the
+input options.
+</p>
+
+
+<h3>Note</h3>
+
+
+<ol>
+<li><p> Profile likelihoods for Gaussian Random Fields are usually
+uni-modal. 
+Unusual or jagged shapes can
+be due to the lack of the convergence in the numerical minimization
+for particular values of the parameter(s).  
+If this is the case it might be necessary to pass <code>control</code> arguments 
+to the minimization functions using the argument ....
+It's also advisable to try the different options for the
+<code>minimisation.function</code> argument.
+See documentation of the functions <code><a href="../../stats/html/optim.html">optim</a></code> and/or
+<code><a href="../../stats/html/nlm.html">nlm</a></code> for further details.
+</p>
+</li>
+<li><p> 2-D profiles can be computed by setting the argument
+<code>uni.only = FALSE</code>. However, before computing 2-D profiles be
+sure they are really necessary.
+Their computation can be time demanding since it 
+is performed on a grid determined by the
+cross-product of the values defining the 1-D profiles.
+</p>
+</li>
+<li><p> There is no &quot;default strategy&quot; to find reasonable values for the
+x-axis.
+They must be found in a &quot;try-and-error&quot; exercise. It's recommended
+to use short sequences in the initial attempts.
+The <code>EXAMPLE</code> section below illustrates this.
+</p>
+</li></ol>
+
+
+
+<h3>Author(s)</h3>
+
+<p>Paulo Justiniano Ribeiro Jr. <a href="mailto:paulojus@leg.ufpr.br">paulojus@leg.ufpr.br</a>, <br />
+Peter J. Diggle <a href="mailto:p.diggle@lancaster.ac.uk">p.diggle@lancaster.ac.uk</a>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Further information on the package <span class="pkg">geoR</span> can be found at:<br />
+<a href="http://www.leg.ufpr.br/geoR">http://www.leg.ufpr.br/geoR</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="plot.proflik.html">plot.proflik</a></code> for graphical output,
+<code><a href="likfit.html">likfit</a></code> for the parameter estimation,
+<code><a href="../../stats/html/optim.html">optim</a></code> and <code><a href="../../stats/html/nlm.html">nlm</a></code> for further details about
+the minimization functions.  </p>
+
+
+<h3>Examples</h3>
+
+<pre>
+op &lt;- par(no.readonly=TRUE)
+ml &lt;- likfit(s100, ini=c(.5, .5), fix.nug=TRUE)
+## a first atempt to find reasonable values for the x-axis:
+prof &lt;- proflik(ml, s100, sill.values=seq(0.5, 1.5, l=4),
+                range.val=seq(0.1, .5, l=4))
+par(mfrow=c(1,2))
+plot(prof)
+## a nicer setting 
+## Not run: 
+prof &lt;- proflik(ml, s100, sill.values=seq(0.45, 2, l=11),
+                range.val=seq(0.1, .55, l=11))
+plot(prof)
+## to include 2-D profiles use:
+## (commented because this is time demanding)
+#prof &lt;- proflik(ml, s100, sill.values=seq(0.45, 2, l=11),
+#                range.val=seq(0.1, .55, l=11), uni.only=FALSE)
+#par(mfrow=c(2,2))
+#plot(prof, nlevels=16)
+
+## End(Not run)
+par(op)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>geoR</em> version 1.7-5.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

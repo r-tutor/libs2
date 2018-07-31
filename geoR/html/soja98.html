@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Soya bean production and other variables in a uniformity...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for soja98 {geoR}"><tr><td>soja98 {geoR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Soya bean production and other variables in a uniformity trial</h2>
+
+<h3>Description</h3>
+
+<p>Data on soya bean production in a uniformity trial measured at
+plots of size 5x5 meters and other soil properties measured
+in points given by the data coordinates.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>data(soja98)</pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 256 observations on the following 10 variables.
+</p>
+
+<dl>
+<dt><code>X</code></dt><dd><p>a numeric vector with X-coordinates of the plot centres.  </p>
+</dd>
+<dt><code>Y</code></dt><dd><p>a numeric vector with X-coordinates of the plot centres.  </p>
+</dd>
+<dt><code>P</code></dt><dd><p>a numeric vector, phosphorous content.  </p>
+</dd>
+<dt><code>PH</code></dt><dd><p>a numeric vector, soil pH.  </p>
+</dd>
+<dt><code>K</code></dt><dd><p>a numeric vector, potassium content. (Cmol/dm^3)  </p>
+</dd>
+<dt><code>MO</code></dt><dd><p>a numeric vector, organic matter. (percentage) </p>
+</dd>
+<dt><code>SB</code></dt><dd><p>a numeric vector, basis saturation.  </p>
+</dd>
+<dt><code>iCone</code></dt><dd><p>a numeric vector, cone index, measuring mechanic
+resistence of the soil. (kg/cm^2)  </p>
+</dd>
+<dt><code>Rend</code></dt><dd><p>a numeric vector, total soya production within
+the plot (kg). </p>
+</dd>
+<dt><code>PROD</code></dt><dd><p>a numeric vector, production converted to
+productivity by a unit of area - hectare (ton/ha). </p>
+</dd>
+</dl>
+
+
+
+<h3>Source</h3>
+
+<p>Souza, E.G.; Jojann, J. A.; Rocha, J. V.; Ribeiro, S. R. A.; Silva, M. S., Upazo, M. A. U.; Molin, J. P.; Oliveira, E. F.; Nóbrega, L. H. P. (1999) Variabilidade espacial dos atributos químicos do solo em um latossolo roxo distrófico da região de Cascavel-PR. <em>Engenharia Agrícola</em>. Jaboticabal, volume 18, nr. 3, p.80-92.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(soja98)
+plot(soja98)
+require(geoR)
+prod98 &lt;- as.geodata(soja98, coords.col=1:2, data.col=)
+plot(prod98, low=TRUE)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>geoR</em> version 1.7-5.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: dotCall64 - Extended Foreign Function Interface</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for dotCall64 {dotCall64}"><tr><td>dotCall64 {dotCall64}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>dotCall64 - Extended Foreign Function Interface</h2>
+
+<h3>Description</h3>
+
+<p><code>.C64</code> can be used to call compiled and loaded C/C++ functions and Fortran subroutines.
+<code>.C64</code> is similar to <code><a href="../../base/html/Foreign.html">.C</a></code> and <code><a href="../../base/html/Foreign.html">.Fortran</a></code>, but
+</p>
+
+<ol>
+<li><p> supports long vectors, i.e., vectors with more than <code>2^31-1</code> elements
+</p>
+</li>
+<li><p> does the necessary castings to expose the R representation of &quot;64-bit integers&quot; (numeric vectors)
+to 64-bit integer arguments of the compiled function. The latter are int64_t in C code and integer (kind = 8) in Fortran code
+</p>
+</li>
+<li><p> provides a mechanism the control duplication of the R objects exposed to the compiled code
+</p>
+</li>
+<li><p> checks if the provided R objects are of the expected types and coerces them if necessary
+</p>
+</li></ol>
+
+<p>Compared to <code><a href="../../base/html/Foreign.html">.C</a></code>, <code>.C64</code> has the additional arguments <code>SIGNATURE</code>, <code>INTENT</code> and <code>VERBOSE</code>.
+<code>SIGNATURE</code> specifies the types of the arguments of the compiled function.
+<code>INTENT</code> indicates whether the compiled function &quot;reads&quot;, &quot;writes&quot;,
+or &quot;read and writes&quot; to the R objects passed to the compiled function.
+This information is then used to duplicate R objects if and only if necessary.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+.C64(.NAME, SIGNATURE, ..., INTENT = NULL, NAOK = FALSE, PACKAGE = "",
+  VERBOSE = getOption("dotCall64.verbose"))
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>.NAME</code></td>
+<td>
+<p>character vector of length 1. Name of the compiled function to be called.</p>
+</td></tr>
+<tr valign="top"><td><code>SIGNATURE</code></td>
+<td>
+<p>character vector of the same length as the number of arguments of the compiled function.
+Accepted strings are <code>"double"</code>, <code>"integer"</code>, and <code>"int64"</code>.
+They describe the signature of each argument of the compiled function.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>arguments passed to the compiled function. One R object for each argument. Up to 65 arguments are supported.</p>
+</td></tr>
+<tr valign="top"><td><code>INTENT</code></td>
+<td>
+<p>character vector of the same length as the number of arguments of the compiled function.
+Accepted strings are <code>"rw"</code>, <code>"r"</code>, and <code>"w"</code>, which indicate
+whether the intent of the argument is &quot;read and write&quot;, &quot;read&quot;, or &quot;write&quot;, respectively.
+If the INTENT of an argument is <code>"rw"</code>, the R object is copied and the
+compiled function receives a pointer to that copy.
+If the INTENT of an R object is <code>"r"</code>, the compiled
+function receives a pointer to the R object itself.
+While this avoids copying and hence is more efficient in terms of speed and memory usage,
+it is absolutely necessary that the compiled function does not alter the object,
+since this corrupts the R object in the current R session.
+When the INTENT is <code>"w"</code>, the corresponding input argument can be specified
+with the function <code><a href="vector_dc.html">vector_dc</a></code> or its shortcuts <code><a href="vector_dc.html">integer_dc</a></code> and <code><a href="vector_dc.html">numeric_dc</a></code>.
+This avoids copying the passed R objects and hence is more efficient in terms of speed and memory usage.
+By default, all arguments have INTENT <code>"rw"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>NAOK</code></td>
+<td>
+<p>logical vector of length 1. If <code>FALSE</code> (default), the presence of <code>NA</code>, <code>NaN</code>, and <code>Inf</code>
+in the R objects passed through <code>...</code> results in an error.
+If <code>TRUE</code>, <code>NA</code>, <code>NaN</code>, and <code>Inf</code> values are passed to the compiled function.
+The used time to check arguments (if <code>FALSE</code>) is considerable for large vectors.</p>
+</td></tr>
+<tr valign="top"><td><code>PACKAGE</code></td>
+<td>
+<p>character vector of length 1. Specifies where to search for the function given in <code>.NAME</code>. 
+This is intended to add safety for packages,
+which can use this argument to ensure that no other package can override their external symbols,
+and also speeds up the search.</p>
+</td></tr>
+<tr valign="top"><td><code>VERBOSE</code></td>
+<td>
+<p>numeric vector of length 1. If <code>0</code>, no warnings are printed.
+If <code>1</code>, warnings are printed, which help to improve the performance of the call.
+If <code>2</code>, additional debug information is given as warnings.
+The default value can be changed via the <code>dotCall64.verbose</code> option, which is set to <code>0</code> by default.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>list of R objects similar to the list of arguments specified as <code>...</code> arguments.
+The objects of the list reflect the changes made by the compiled C or Fortran function.
+</p>
+
+
+<h3>References</h3>
+
+<p>F. Gerber, K. Moesinger, R. Furrer (2018),
+dotCall64: An R package providing an efficient interface to compiled C, C++, and Fortran code supporting long vectors,
+SoftwareX 7, 217-221,
+https://doi.org/10.1016/j.softx.2018.06.002.
+</p>
+<p>F. Gerber, K. Moesinger, and R. Furrer (2017),
+Extending R packages to support 64-bit compiled code: An illustration with spam64 and GIMMS NDVI3g data,
+Computer &amp; Geoscience 104, 109-119,
+https://doi.org/10.1016/j.cageo.2016.11.015.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Consider the following C function, which is included
+## in the dotCall64 package:  
+## void get_c(double *input, int *index, double *output) {
+##     output[0] = input[index[0] - 1];
+## }
+##
+## We can use .C64() to call get_c() from R:
+.C64("get_c", SIGNATURE = c("double", "integer", "double"),
+     input = 1:10, index = 9, output = double(1))$output
+
+## Not run: 
+## 'input' can be a long vector
+x_long &lt;- double(2^31) ## requires 16 GB RAM
+x_long[9] &lt;- 9; x_long[2^31] &lt;- -1
+.C64("get_c", SIGNATURE = c("double", "integer", "double"),
+     input = x_long, index = 9, output = double(1))$output
+
+## Since 'index' is of type 'signed int' (a 32-bit integer),
+## it can only address the first 2^31-1 elements of 'input'.
+## To also address elements beyond 2^31-1, we change the
+## definition of the C function as follows:
+## #include &lt;stdint.h&gt;  //  for int64_t 
+## void get64_c(double *input, int64_t *index, double *output) {
+##     output[0] = input[index[0] - 1];
+## }
+
+## Now, we can use .C64() to call get64_c() from R.
+.C64("get64_c", SIGNATURE = c("double", "int64", "double"),
+     input = x_long, index = 2^31, output = double(1))$output
+## Note that 2^31 is of type double and .C64() casts it into an
+## int64_t type before calling the C function get64_c().
+
+## The performance of the previous call can be improved by
+## setting additional arguments:
+.C64("get64_c", SIGNATURE = c("double", "int64", "double"),
+     x = x_long, i = 2^31, r = numeric_dc(1), INTENT = c("r", "r", "w"),
+     NAOK = TRUE, PACKAGE = "dotCall64", VERBOSE = 0)$r
+
+
+## Consider the same function defined in Fortran:
+##      subroutine get64_f(input, index, output)
+##      double precision :: input(*), output(*)
+##      integer (kind = 8) :: index  ! specific to GFortran
+##      output(1) = input(index)
+##      end
+
+## The function is provided in dotCall64 and can be called with
+.C64("get64_f", SIGNATURE = c("double", "int64", "double"),
+     input = x_long, index = 2^31, output = double(1))$output
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>dotCall64</em> version 1.0-0 <a href="00Index.html">Index</a>]</div>
+</body></html>

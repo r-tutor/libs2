@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Plots Results of the Predictive Distribution</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for image.krige.bayes {geoR}"><tr><td>image.krige.bayes {geoR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Plots Results of the Predictive Distribution</h2>
+
+<h3>Description</h3>
+
+<p>This function produces an image or perspective plot of a selected
+element
+of the predictive distribution
+returned by the function <code><a href="krige.bayes.html">krige.bayes</a></code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'krige.bayes'
+image(x, locations, borders,
+                  values.to.plot=c("mean", "variance",
+                            "mean.simulations", "variance.simulations",
+                            "quantiles", "probabilities", "simulation"),
+                  number.col, coords.data, x.leg, y.leg, messages, ...)
+## S3 method for class 'krige.bayes'
+contour(x, locations, borders, 
+                  values.to.plot = c("mean", "variance",
+                       "mean.simulations", "variance.simulations",
+                       "quantiles", "probabilities", "simulation"),
+                  filled=FALSE, number.col, coords.data,
+                  x.leg, y.leg, messages, ...)
+## S3 method for class 'krige.bayes'
+persp(x, locations, borders,
+                  values.to.plot=c("mean", "variance",
+                       "mean.simulations", "variance.simulations",
+                       "quantiles", "probabilities", "simulation"),
+                  number.col, messages, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>an object of the class <code>krige.bayes</code>, typically an
+output of the function <code><a href="krige.bayes.html">krige.bayes</a></code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>locations</code></td>
+<td>
+<p>an <i>n x 2</i> matrix with the
+coordinates of the prediction locations, which should define a
+regular grid
+in order to be plotted by <code><a href="../../graphics/html/image.html">image</a></code> or
+<code><a href="../../graphics/html/persp.html">persp</a></code>. By default does not need to be provided and
+evaluates the attribute &quot;prediction.locations&quot; from the input object.  </p>
+</td></tr>
+<tr valign="top"><td><code>borders</code></td>
+<td>
+<p>an <i>n x 2</i> matrix with the
+coordinates defining the borders of a region inside the grid defined
+by <code>locations</code>. Elements in the
+argument <code>values</code> are assigned to locations internal to the
+borders  and <code>NA</code>'s to the external ones.  </p>
+</td></tr>
+<tr valign="top"><td><code>values.to.plot</code></td>
+<td>
+<p>select the element of the predictive
+distribution to be plotted. See DETAILS below.</p>
+</td></tr>
+<tr valign="top"><td><code>filled</code></td>
+<td>
+<p>logical. If <code>FALSE</code> the function
+<code><a href="../../graphics/html/contour.html">contour</a></code> is used otherwise
+<code><a href="../../graphics/html/filled.contour.html">filled.contour</a></code>. Defaults to <code>FALSE</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>number.col</code></td>
+<td>
+<p>Specifies the number of the column to be plotted.
+Only used if previous argument is set to one of <code>"quantiles"</code>, 
+<code>"probabilities"</code>  or <code>"simulation"</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>coords.data</code></td>
+<td>
+<p>optional. If an <i>n x 2</i>
+matrix with the data coordinates is
+provided, points indicating the data locations are included in the
+plot.  </p>
+</td></tr>
+<tr valign="top"><td><code>x.leg, y.leg</code></td>
+<td>
+<p>limits for the legend in the horizontal and vertical directions.  </p>
+</td></tr>
+</table>
+
+
+
+<table summary="R argblock">
+<tr valign="top"><td><code>messages</code></td>
+<td>
+<p>logical, if TRUE status messages are printed while
+running the function.  </p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>extra arguments to be passed to the plotting function
+<code><a href="../../graphics/html/image.html">image</a></code> or <code><a href="../../graphics/html/persp.html">persp</a></code>.  </p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The function <code><a href="krige.bayes.html">krige.bayes</a></code> returns
+summaries and other results about the predictive distributions.
+The argument <code>values.to.plot</code> specifies which result will be
+plotted. It can be passed to the function in two different forms:
+</p>
+
+<ul>
+<li><p> a vector with the object containing the values to be plotted, or
+</p>
+</li>
+<li><p> one of the following options: <code>"moments.mean"</code>,
+<code>"moments.variance"</code>, 
+<code>"mean.simulations"</code>,
+<code>"variance.simulations"</code>,
+<code>"quantiles"</code>,
+<code>"probability"</code> or
+<code>"simulation"</code>.  </p>
+</li></ul>
+
+<p>For the last three options, if the results are stored in matrices,
+a column number must be provided using the argument <code>number.col</code>.
+</p>
+<p>The documentation for the function <code><a href="krige.bayes.html">krige.bayes</a></code> provides
+further details about these options.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An <code><a href="../../graphics/html/image.html">image</a></code> or <code><a href="../../graphics/html/persp.html">persp</a></code> plot is produced on the
+current graphics device. No values are returned. 
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Paulo J. Ribeiro Jr. <a href="mailto:paulojus@leg.ufpr.br">paulojus@leg.ufpr.br</a>,
+<br />
+Peter J. Diggle <a href="mailto:p.diggle@lancaster.ac.uk">p.diggle@lancaster.ac.uk</a>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Further information on the package <span class="pkg">geoR</span> can be found at:<br />
+<a href="http://www.leg.ufpr.br/geoR">http://www.leg.ufpr.br/geoR</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="krige.bayes.html">krige.bayes</a></code> for Bayesian Kriging computations and, <code><a href="../../graphics/html/image.html">image</a></code> and  <code><a href="../../graphics/html/persp.html">persp</a></code> for the generic plotting functions.</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+#See examples in the documentation for the function krige.bayes().
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>geoR</em> version 1.7-5.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

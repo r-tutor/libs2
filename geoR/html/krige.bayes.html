@@ -1,0 +1,555 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Bayesian Analysis for Gaussian Geostatistical Models</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for krige.bayes {geoR}"><tr><td>krige.bayes {geoR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Bayesian Analysis for Gaussian Geostatistical Models</h2>
+
+<h3>Description</h3>
+
+<p>The function <code>krige.bayes</code> performs Bayesian analysis of
+geostatistical data allowing specifications of
+different levels of uncertainty in the model parameters.<br />
+It returns results on the posterior distributions for the model
+parameters and on the predictive distributions for prediction
+locations (if provided).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+krige.bayes(geodata, coords = geodata$coords, data = geodata$data,
+            locations = "no", borders, model, prior, output)
+
+model.control(trend.d = "cte", trend.l = "cte", cov.model = "matern",
+              kappa = 0.5, aniso.pars = NULL, lambda = 1)
+
+prior.control(beta.prior = c("flat", "normal", "fixed"),
+              beta = NULL, beta.var.std = NULL,
+              sigmasq.prior = c("reciprocal", "uniform",
+                                "sc.inv.chisq", "fixed"),
+              sigmasq = NULL, df.sigmasq = NULL,
+              phi.prior = c("uniform", "exponential","fixed",
+                            "squared.reciprocal", "reciprocal"),
+              phi = NULL, phi.discrete = NULL,
+              tausq.rel.prior = c("fixed", "uniform", "reciprocal"),
+              tausq.rel, tausq.rel.discrete = NULL)
+
+post2prior(obj)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>geodata</code></td>
+<td>
+<p>a list containing elements <code>coords</code> and
+<code>data</code> as described next. Typically an object of the class
+<code>"geodata"</code> - a <span class="pkg">geoR</span> data-set. If not provided the arguments
+<code>coords</code> and <code>data</code> must be provided instead.  </p>
+</td></tr>
+<tr valign="top"><td><code>coords</code></td>
+<td>
+<p>an <i>n x 2</i> matrix where each row has the 2-D
+coordinates of the <i>n</i> data locations.
+By default it takes the
+component <code>coords</code> of the argument <code>geodata</code>, if provided.
+</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a vector with <em>n</em> data values. By default it takes the
+component <code>data</code> of the argument <code>geodata</code>, if provided.  </p>
+</td></tr>
+<tr valign="top"><td><code>locations</code></td>
+<td>
+<p>an <i>N x 2</i> matrix or data-frame with the 2-D
+coordinates of the <i>N</i> prediction locations, or a list for which
+the first two components are used. Input is internally checked by the
+function <code>check.locations</code>. 
+Defaults to <code>"no"</code> in which case
+the function returns only results on the posterior distributions of
+the model parameters.  </p>
+</td></tr>
+<tr valign="top"><td><code>borders</code></td>
+<td>
+<p>optional. If missing,
+by default reads the element <code>borders</code>
+from the <code>geodata</code> object, if present.
+Setting to <code>NULL</code> preents this behavior.
+If a two column matrix defining a polygon is
+provided the prediction is performed only at locations inside this polygon. </p>
+</td></tr>
+<tr valign="top"><td><code>model</code></td>
+<td>
+<p>a list defining the fixed components of the model.
+It can take an output to a call to <code>model.control</code> or
+a list with elements as for the arguments in <code>model.control</code>.
+Default values are assumed for arguments not provided.
+See section DETAILS below.  </p>
+</td></tr>
+<tr valign="top"><td><code>prior</code></td>
+<td>
+<p>a list with the specification of priors for the model
+parameters.
+It can take an output to a call to <code>prior.control</code> or
+a list with elements as for the arguments in <code>prior.control</code>.
+Default values are assumed for arguments not provided.
+See section DETAILS below.  </p>
+</td></tr>
+<tr valign="top"><td><code>output</code></td>
+<td>
+<p>a list specifying output options.
+It can take an output to a call to <code>output.control</code> or
+a list with elements as for the arguments in <code>output.control</code>.
+Default values are assumed for arguments not provided.
+See documentation for
+<code><a href="output.control.html">output.control</a></code> for further details.  </p>
+</td></tr>
+<tr valign="top"><td><code>trend.d</code></td>
+<td>
+<p>specifies the trend (covariates) values at the data
+locations. See documentation
+of <code><a href="trend.spatial.html">trend.spatial</a></code> for further details.
+Defaults to <code>"cte"</code>.  </p>
+</td></tr>  
+<tr valign="top"><td><code>trend.l</code></td>
+<td>
+<p>specifies the trend (covariates) at the prediction
+locations. Must be of the same type as defined for <code>trend.d</code>.
+Only used if prediction locations are provided in the argument
+<code>locations</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>cov.model</code></td>
+<td>
+<p>string indicating the name of the model for the correlation function. Further details in the
+documentation for <code><a href="cov.spatial.html">cov.spatial</a></code>. </p>
+</td></tr>
+<tr valign="top"><td><code>kappa</code></td>
+<td>
+<p>additional smoothness parameter. Only used if the
+correlation function is one of: <code>"matern"</code>,
+<code>"powered.exponential"</code>, <code>"cauchy"</code> or
+<code>"gneiting.matern"</code>. In the current implementation this
+parameter is always regarded as fixed during the Bayesian analysis.  </p>
+</td></tr>
+<tr valign="top"><td><code>aniso.pars</code></td>
+<td>
+<p>fixed parameters for geometric anisotropy
+correction. If <code>aniso.pars = FALSE</code> no correction is made, otherwise
+a two elements vector with values for the anisotropy parameters
+must be provided. Anisotropy correction consists of a
+transformation of the data and prediction coordinates performed
+by the function <code><a href="coords.aniso.html">coords.aniso</a></code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>lambda</code></td>
+<td>
+<p>numerical value of the Box-Cox transformation parameter.
+The value <i>lambda = 1</i> corresponds to
+no transformation. The Box-Cox parameter <i>lambda</i>
+is always regarded as fixed and
+data transformation is 
+performed before the analysis.
+Prediction results are back-transformed and
+returned is the same scale as for the original data.
+For <i>lambda = 0</i> the log-transformation is performed.
+If <i>lambda &lt; 0</i> the mean predictor doesn't make sense
+(the resulting distribution has no expectation).  </p>
+</td></tr>
+<tr valign="top"><td><code>beta.prior</code></td>
+<td>
+<p>prior distribution for the mean (vector)
+parameter <i>beta</i>. The options are &quot;flat&quot; (default),
+&quot;normal&quot; or &quot;fixed&quot; (known mean).  </p>
+</td></tr>
+<tr valign="top"><td><code>beta</code></td>
+<td>
+<p>mean hyperparameter for the distribution of the mean (vector) parameter        <i>beta</i>. Only used if <code>beta.prior = "normal"</code> or
+<code>beta.prior = "fixed"</code>. For the later <code>beta</code> defines the value of
+the known mean.  </p>
+</td></tr>
+<tr valign="top"><td><code>beta.var.std</code></td>
+<td>
+<p>standardised (co)variance hyperparameter(s)
+for the prior for the mean
+(vector) parameter <i>beta</i>.
+The (co)variance matrix for<i>beta</i> is given by the
+multiplication of this matrix by <i>sigma^2</i>.
+Only used if <code>beta.prior = "normal"</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>sigmasq.prior</code></td>
+<td>
+<p>specifies the prior for the parameter
+<i>sigma^2</i>. If <code>"reciprocal"</code> (the default), the prior 
+<i>1/sigma^2</i> is used. Otherwise the
+parameter is regarded as fixed.  </p>
+</td></tr>
+<tr valign="top"><td><code>sigmasq</code></td>
+<td>
+<p>fixed value of the sill parameter
+<i>sigma^2</i>. Only used if 
+<code>sigmasq.prior = FALSE</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>df.sigmasq</code></td>
+<td>
+<p>numerical. Number of degrees of freedom for the
+prior for the parameter <i>sigma^2</i>. Only used if
+<code>sigmasq.prior = "sc.inv.chisq"</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>phi.prior</code></td>
+<td>
+<p>prior distribution for the range parameter
+<i>phi</i>.
+Options are: <code>"uniform"</code>, <code>"exponential"</code>,
+<code>"reciprocal"</code> , <code>"squared.reciprocal"</code> and
+<code>"fixed"</code>.
+Alternativelly, a user defined discrete distribution can be
+specified. In this case the argument takes a vector of numerical
+values of probabilities with corresponding support points
+provided in the argument <code>phi.discrete</code>. <br />     
+If <code>"fixed"</code> the argument <i>phi</i>
+must be provided and is regarded as fixed when performing predictions.<br />
+For the exponential prior the argument <code>phi</code> must provide
+the value for of hyperparameter <i>nu</i> which corresponds to the
+expected value for this distribution.
+</p>
+</td></tr>
+<tr valign="top"><td><code>phi</code></td>
+<td>
+<p>fixed value of the range parameter <i>phi</i>. Only needed if
+<code>phi.prior = "fixed"</code> or if <code>phi.prior = "exponential"</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>phi.discrete</code></td>
+<td>
+<p>support points of the discrete prior
+for the range parameter <i>phi</i>. The default is a sequence
+of 51 values between 0 and 2 times the maximum distance between the
+data locations.</p>
+</td></tr>
+<tr valign="top"><td><code>tausq.rel.prior</code></td>
+<td>
+<p>specifies a prior distribution for the
+relative nugget parameter
+<i>tau^2/sigma^2</i>.
+If <code>tausq.rel.prior = "fixed"</code> the relative nugget is
+considered known (fixed) with value given by the argument
+<code>tausq.rel</code>.
+If <code>tausq.rel.prior = "uniform"</code> a discrete uniform prior is used
+with support points given by the argument
+<code>tausq.rel.discrete</code>.
+Alternativelly, a user defined discrete distribution can be
+specified. In this case the argument takes the a vector of
+probabilities of a discrete distribution and the support points
+should be provided in the argument <code>tausq.rel.discrete</code>.      
+</p>
+</td></tr>
+<tr valign="top"><td><code>tausq.rel</code></td>
+<td>
+<p>fixed value for the relative nugget parameter.
+Only used if
+<code>tausq.rel.prior = "fixed"</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>tausq.rel.discrete</code></td>
+<td>
+<p>support points of the discrete prior
+for the relative nugget parameter <i>tau^2/sigma^2</i>.  </p>
+</td></tr>
+<tr valign="top"><td><code>obj</code></td>
+<td>
+<p>an object of the class <code>krige.bayes</code> or
+<code>posterior.krige.bayes</code> with the output of a call to
+<code>krige.bayes</code>. The function <code>post2prior</code> takes the
+posterior distribution computed by one call to <code>krige.bayes</code>
+and prepares it to be used a a prior in a subsequent call. Notice
+that in this case the function <code>post2prior</code> is used instead
+of <code>prior.control</code>.  </p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>krige.bayes</code> is a generic function for Bayesian geostatistical 
+analysis of (transformed) Gaussian where predictions take into account the  parameter
+uncertainty.
+</p>
+<p>It can be set to run conventional kriging methods which
+use known parameters or <em>plug-in</em> estimates. However, the
+functions <code>krige.conv</code> and <code>ksline</code> are preferable for
+prediction with fixed parameters.<br />
+</p>
+<p><b>PRIOR SPECIFICATION</b>
+</p>
+<p>The basis of the Bayesian algorithm is the discretisation of the prior
+distribution for the parameters <i>phi</i> and <i>tau_rel = tau/sigma</i>.
+The Tech. Report (see <code>References</code> below)
+provides details on the results used in the current implementation.<br />
+The expressions of the implemented priors for the parameter <i>phi</i>
+are:
+</p>
+
+<dl>
+<dt>&quot;uniform&quot;: </dt><dd><p><i>p(phi) propto 1</i>. </p>
+</dd>
+<dt>&quot;exponential&quot;: </dt><dd><p><i>(-1/nu) exp(- (1/nu) * phi)</i>.  </p>
+</dd>
+<dt>&quot;reciprocal&quot;: </dt><dd><p><i>p(&phi;) propto 1/phi</i>.  </p>
+</dd>
+<dt>&quot;squared.reciprocal&quot;: </dt><dd><p><i>p(&phi;) propto 1/phi^2</i>.  </p>
+</dd>
+<dt>&quot;fixed&quot;: </dt><dd><p>fixed known or estimated value of <i>phi</i>.  </p>
+</dd>
+</dl>
+
+<p>The expressions of the implemented priors for the parameter <i>tausq.rel</i>
+are:
+</p>
+
+<dl>
+<dt>&quot;fixed&quot;: </dt><dd><p>fixed known or estimated value of
+<i>tausq.rel</i>. Defaults to zero. </p>
+</dd>
+<dt>&quot;uniform&quot;: </dt><dd><p><i>p(tausq.rel) propto 1</i>. </p>
+</dd>
+<dt>&quot;reciprocal&quot;: </dt><dd><p><i>p(tausq.rel) propto 1/tausq.rel</i>.  </p>
+</dd>
+</dl>
+
+<p>Apart from those a <em>user defined</em> prior can be specifyed  by
+entering a vector of probabilities for a discrete distribution 
+with suport points given by the argument <code>phi.discrete</code> and/or
+<code>tausq.rel.discrete</code>.<br />
+</p>
+<p><b>CONTROL FUNCTIONS</b>
+</p>
+<p>The function call includes auxiliary control functions which allows
+the user to specify and/or change the specification of model
+components
+(using <code>model.control</code>), prior
+distributions (using <code>prior.control</code>) and 
+output options (using <code>output.control</code>).
+Default options are available in most of the cases.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object with <code><a href="../../base/html/class.html">class</a></code> <code>"krige.bayes"</code> and
+<code>"kriging"</code>.
+The attribute <code>prediction.locations</code> containing the name of the
+object with the coordinates of the prediction locations (argument
+<code>locations</code>) is assigned to the object.
+Returns a list with the following components:  
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>posterior</code></td>
+<td>
+<p>results on on the posterior distribution of the
+model parameters. A list with the following possible components:<br />  </p>
+</td></tr>
+</table>
+   
+<ul>
+<li><p>beta summary information on the posterior distribution
+of the mean parameter <i>beta</i>.  
+</p>
+</li>
+<li><p>sigmasq summary information on the posterior distribution
+of the variance parameter <i>sigma^2</i> (partial sill).  
+</p>
+</li>
+<li><p>phi summary information on the posterior distribution
+of the correlation parameter <i>phi</i> (range parameter) .  
+</p>
+</li>
+<li><p>tausq.rel summary information on the posterior distribution
+of the relative nugget variance parameter
+<i>tau^2_rel</i>.  
+</p>
+</li>
+<li><p>joint.phi.tausq.relinformation on discrete the joint
+distribution of these parameters.  
+</p>
+</li>
+<li><p>sample a data.frame with a sample from the posterior
+distribution.
+Each column corresponds to one of the basic model parameters.  
+</p>
+</li></ul>
+
+<table summary="R valueblock">
+<tr valign="top"><td><code>predictive </code></td>
+<td>
+<p>results on the predictive distribution at the
+prediction locations, if provided.
+A list with the following possible components:  </p>
+</td></tr>
+</table>
+    
+<ul>
+<li><p>mean expected values.  
+</p>
+</li>
+<li><p>variance expected variance.  
+</p>
+</li>
+<li><p>distribution type of posterior distribution.  
+</p>
+</li>
+<li><p>mean.simulations mean of the simulations at each locations.  
+</p>
+</li>
+<li><p>variance.simulations variance of the simulations at each locations.  
+</p>
+</li>
+<li><p>quantiles.simulations quantiles computed from the the simulations.  
+</p>
+</li>
+<li><p>probabilities.simulations probabilities computed from the simulations.  
+</p>
+</li>
+<li><p>simulations simulations from the predictive distribution.  
+</p>
+</li></ul>
+
+<table summary="R valueblock">
+<tr valign="top"><td><code>prior </code></td>
+<td>
+<p>a list with information on the prior distribution
+and hyper-parameters of the model parameters (<i>beta, sigma^2, phi, tau^2_rel</i>).
+</p>
+</td></tr>
+<tr valign="top"><td><code>model </code></td>
+<td>
+<p>model specification as defined by <code>model.control</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>.Random.seed </code></td>
+<td>
+<p>system random seed before running the function.
+Allows reproduction of results. If
+the <code><a href="../../base/html/Random.html">.Random.seed</a></code> is set to this value and the function is run
+again, it will produce exactly the same results.  </p>
+</td></tr>
+<tr valign="top"><td><code>max.dist </code></td>
+<td>
+<p>maximum distance found between two data locations.  </p>
+</td></tr>
+<tr valign="top"><td><code>call</code></td>
+<td>
+<p>the function call.  </p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Paulo J. Ribeiro Jr. <a href="mailto:paulojus@leg.ufpr.br">paulojus@leg.ufpr.br</a>, <br />
+Peter J. Diggle <a href="mailto:p.diggle@lancaster.ac.uk">p.diggle@lancaster.ac.uk</a>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Diggle, P.J. \&amp; Ribeiro Jr, P.J. (2002) Bayesian inference in
+Gaussian model-based geostatistics. Geographical and Environmental
+Modelling, Vol. 6, No. 2, 129-146.
+</p>
+<p>The technical details about the  implementation of <code>krige.bayes</code> can be
+found at:<br />
+Ribeiro, P.J. Jr. and Diggle, P.J. (1999) <em>Bayesian inference in
+Gaussian model-based geostatistics</em>. Tech. Report ST-99-08, Dept
+Maths and Stats, Lancaster University.<br />
+Available at:
+<a href="http://www.leg.ufpr.br/geoR/geoRdoc/bayeskrige.pdf">http://www.leg.ufpr.br/geoR/geoRdoc/bayeskrige.pdf</a>
+</p>
+<p>Further information about <span class="pkg">geoR</span> can be found at:<br />
+<a href="http://www.leg.ufpr.br/geoR">http://www.leg.ufpr.br/geoR</a>.  
+</p>
+<p>For a extended list of examples of the usage
+see <a href="http://www.leg.ufpr.br/geoR/tutorials/examples.krige.bayes.R">http://www.leg.ufpr.br/geoR/tutorials/examples.krige.bayes.R</a>
+and/or the <span class="pkg">geoR</span> tutorials page at
+<a href="http://www.leg.ufpr.br/geoR/tutorials">http://www.leg.ufpr.br/geoR/tutorials</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="lines.krige.bayes.html">lines.variomodel.krige.bayes</a></code>,
+<code><a href="plot.krige.bayes.html">plot.krige.bayes</a></code> for outputs related to the
+parameters in the model,
+<code><a href="image.krige.bayes.html">image.krige.bayes</a></code> and
+<code><a href="image.krige.bayes.html">persp.krige.bayes</a></code> for graphical output of
+prediction results.  
+<code><a href="krige.conv.html">krige.conv</a></code> and
+<code><a href="ksline.html">ksline</a></code> for conventional kriging methods.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+# generating a simulated data-set
+ex.data &lt;- grf(70, cov.pars=c(10, .15), cov.model="matern", kappa=2)
+#
+# defining the grid of prediction locations:
+ex.grid &lt;- as.matrix(expand.grid(seq(0,1,l=21), seq(0,1,l=21)))
+#
+# computing posterior and predictive distributions
+# (warning: the next command can be time demanding)
+ex.bayes &lt;- krige.bayes(ex.data, loc=ex.grid,
+                 model = model.control(cov.m="matern", kappa=2),
+                 prior = prior.control(phi.discrete=seq(0, 0.7, l=51),
+                             phi.prior="reciprocal"))
+#
+# Prior and posterior for the parameter phi
+plot(ex.bayes, type="h", tausq.rel = FALSE, col=c("red", "blue"))
+#
+# Plot histograms with samples from the posterior
+par(mfrow=c(3,1))
+hist(ex.bayes)
+par(mfrow=c(1,1))
+
+# Plotting empirical variograms and some Bayesian estimates:
+# Empirical variogram
+plot(variog(ex.data, max.dist = 1), ylim=c(0, 15))
+# Since ex.data is a simulated data we can plot the line with the "true" model 
+lines.variomodel(ex.data, lwd=2)
+# adding lines with summaries of the posterior of the binned variogram
+lines(ex.bayes, summ = mean, lwd=1, lty=2)
+lines(ex.bayes, summ = median, lwd=2, lty=2)
+# adding line with summary of the posterior of the parameters
+lines(ex.bayes, summary = "mode", post = "parameters")
+
+# Plotting again the empirical variogram
+plot(variog(ex.data, max.dist=1), ylim=c(0, 15))
+# and adding lines with median and quantiles estimates
+my.summary &lt;- function(x){quantile(x, prob = c(0.05, 0.5, 0.95))}
+lines(ex.bayes, summ = my.summary, ty="l", lty=c(2,1,2), col=1)
+
+# Plotting some prediction results
+op &lt;- par(no.readonly = TRUE)
+par(mfrow=c(2,2), mar=c(4,4,2.5,0.5), mgp = c(2,1,0))
+image(ex.bayes, main="predicted values")
+image(ex.bayes, val="variance", main="prediction variance")
+image(ex.bayes, val= "simulation", number.col=1,
+      main="a simulation from the \npredictive distribution")
+image(ex.bayes, val= "simulation", number.col=2,
+      main="another simulation from \nthe predictive distribution")
+#
+par(op)
+
+## End(Not run)
+##
+## For a extended list of exemples of the usage of krige.bayes()
+## see http://www.leg.ufpr.br/geoR/tutorials/examples.krige.bayes.R
+##
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>geoR</em> version 1.7-5.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

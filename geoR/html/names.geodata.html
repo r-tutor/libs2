@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Lists names of the key elements of a geodata object</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for names.geodata {geoR}"><tr><td>names.geodata {geoR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Lists names of the key elements of a geodata object</h2>
+
+<h3>Description</h3>
+
+<p>Produces a list with the names of the main elements of
+<code>geodata</code> object: coords, data, units.m, covariate and
+realisation.
+Can be useful to list names before using <code>{subset.geodata}</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'geodata'
+names(x)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>an object of the class <code>geodata</code>.  </p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A list with
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>coords</code></td>
+<td>
+<p>names of the coordinates in the geodata object. </p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>name(s) of the data elements in the geodata object.  </p>
+</td></tr>
+<tr valign="top"><td><code>units.m</code></td>
+<td>
+<p>returns the string <code>units.m</code>. </p>
+</td></tr>
+<tr valign="top"><td><code>covariates</code></td>
+<td>
+<p>return the covariate(s) name(s) if present
+in the <code>geodata object</code></p>
+</td></tr>
+<tr valign="top"><td><code>realisations</code></td>
+<td>
+<p>returns the string <code>units.m</code>  if present
+in the <code>geodata object</code>. </p>
+</td></tr>
+<tr valign="top"><td><code>other</code></td>
+<td>
+<p>other elements in the <code>geodata</code>  object.</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../base/html/names.html">names</a></code>, <code><a href="subset.geodata.html">subset.geodata</a></code>, <code><a href="as.geodata.html">as.geodata</a></code>. </p>
+
+
+<h3>Examples</h3>
+
+<pre>
+names(ca20)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>geoR</em> version 1.7-5.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

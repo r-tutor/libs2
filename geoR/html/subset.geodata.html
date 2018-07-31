@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Method for subsetting geodata objects</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for subset.geodata {geoR}"><tr><td>subset.geodata {geoR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Method for subsetting geodata objects</h2>
+
+<h3>Description</h3>
+
+<p>Subsets a object of the class <code>geodata</code>
+by transforming it to a data-frame, using <code>subset</code>
+and back transforming to a <code>geodata</code> object.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'geodata'
+subset(x, ..., other = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>an object of the class <code>geodata</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>arguments to be passed to
+<code><a href="../../base/html/subset.html">subset.data.frame</a></code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>other</code></td>
+<td>
+<p>logical. If <code>TRUE</code> non-standard
+<code>geodata</code> elements
+of the original <code>geodata</code> object are copied to the
+resulting object.  </p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A list which is an object of the class <code>geodata</code>.  
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../base/html/subset.html">subset</a></code> for the generic function and methods and
+<code><a href="as.geodata.html">as.geodata</a></code> for more information on geodata objects.  </p>
+
+
+<h3>Examples</h3>
+
+<pre>
+subset(ca20, data &gt; 70)
+subset(ca20, area == 1)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>geoR</em> version 1.7-5.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

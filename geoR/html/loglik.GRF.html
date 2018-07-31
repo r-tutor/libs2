@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Log-Likelihood for a Gaussian Random Field</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for loglik.GRF {geoR}"><tr><td>loglik.GRF {geoR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Log-Likelihood for a Gaussian Random Field</h2>
+
+<h3>Description</h3>
+
+<p>This function computes the value of the log-likelihood for a
+Gaussian random field.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+loglik.GRF(geodata, coords = geodata$coords, data = geodata$data,
+           obj.model = NULL, cov.model = "exp", cov.pars, nugget = 0,
+           kappa = 0.5, lambda = 1, psiR = 1, psiA = 0,
+           trend = "cte", method.lik = "ML", compute.dists = TRUE,
+           realisations = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>geodata</code></td>
+<td>
+<p>a list containing elements <code>coords</code> and
+<code>data</code> as described next. 
+Typically an object of the class <code>"geodata"</code> - a <span class="pkg">geoR</span>
+data-set.
+If not provided the arguments
+<code>coords</code> and <code>data</code> must be provided instead.  </p>
+</td></tr>
+<tr valign="top"><td><code>coords</code></td>
+<td>
+<p>an <i>n x 2</i> matrix, each row containing Euclidean
+coordinates of the <em>n</em> data locations. By default it takes the
+element <code>coords</code> of the argument <code>geodata</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a vector with data values. By default it takes the
+element <code>data</code> of the argument <code>geodata</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>obj.model</code></td>
+<td>
+<p>a object of the class <code>variomodel</code> with a fitted
+model. Tipically an output of 
+<code><a href="likfit.html">likfit</a></code> or <code><a href="variofit.html">variofit</a></code>. </p>
+</td></tr>
+<tr valign="top"><td><code>cov.model</code></td>
+<td>
+<p>a string specifying the model for the correlation
+function. For further details see 
+documentation for <code><a href="cov.spatial.html">cov.spatial</a></code>. </p>
+</td></tr>
+<tr valign="top"><td><code>cov.pars</code></td>
+<td>
+<p>a vector with 2 elements with values of  the covariance parameters
+<i>sigma^2</i> (partial sill) and <i>phi</i> (range
+parameter).  </p>
+</td></tr>
+<tr valign="top"><td><code>nugget</code></td>
+<td>
+<p>value of the nugget parameter. Defaults to <i>0</i>.  </p>
+</td></tr>
+<tr valign="top"><td><code>kappa</code></td>
+<td>
+<p>value of the smoothness parameter. Defaults to
+<i>0.5</i>.  </p>
+</td></tr>
+<tr valign="top"><td><code>lambda</code></td>
+<td>
+<p>value of the Box-Cox tranformation parameter. Defaults
+to <i>1</i>.  </p>
+</td></tr>
+<tr valign="top"><td><code>psiR</code></td>
+<td>
+<p>value of the anisotropy ratio parameter. Defaults to
+<i>1</i>, corresponding to isotropy.  </p>
+</td></tr>
+<tr valign="top"><td><code>psiA</code></td>
+<td>
+<p>value (in radians) of the anisotropy rotation parameter. Defaults to zero.</p>
+</td></tr>
+<tr valign="top"><td><code>trend</code></td>
+<td>
+<p>specifies the mean part of the model.
+The options are:
+<code>"cte"</code> (constant mean),
+<code>"1st"</code> (a first order polynomial
+on the coordinates), <code>"2nd"</code> (a second order polynomial
+on the coordinates), or a formula of the type <code>~X</code> where <code>X</code>
+is a matrix with the covariates (external trend). Defaults to <code>"cte"</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>method.lik</code></td>
+<td>
+<p>options are <code>"ML"</code> for likelihood and <code>"REML"</code> for
+restricted likelihood. Defaults to <code>"ML"</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>compute.dists</code></td>
+<td>
+<p>for internal use with other function. Don't
+change the default unless you know what you are doing.  </p>
+</td></tr>
+<tr valign="top"><td><code>realisations</code></td>
+<td>
+<p>optional. A vector indicating replication number
+for each data. For more details see <code><a href="as.geodata.html">as.geodata</a></code>. </p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The expression log-likelihood is:
+</p>
+<p style="text-align: center;"><i>l(theta) = -(n/2) * log(2 * pi) - 0.5 * log|V| - 0.5 * (y - F b)' V^{-1} (y - F
+    b),</i></p>
+
+<p>where <i>n</i> is the size of the data vector <i>y</i>, <i>b</i>
+is the mean (vector) parameter with dimention <i>p</i>, <i>V</i> is the covariance
+matrix and <i>F</i> is the matrix with the values of the covariates (a
+vector of <i>1</i>'s if the mean is constant.
+</p>
+<p>The expression restricted log-likelihood is:
+</p>
+<p style="text-align: center;"><i>rl(&theta;) =  -((n-p)/2) *
+  log (2 * pi) + 0.5 * log |F'F| - 0.5 * log |V|  - 0.5 * log |F'VF| -
+  0.5 * (y - Fb)' V^(-1) (y - Fb).</i></p>
+
+
+
+<h3>Value</h3>
+
+<p>The numerical value of the log-likelihood.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Paulo Justiniano Ribeiro Jr. <a href="mailto:paulojus@leg.ufpr.br">paulojus@leg.ufpr.br</a>,  <br />
+Peter J. Diggle <a href="mailto:p.diggle@lancaster.ac.uk">p.diggle@lancaster.ac.uk</a>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Further information on the package <span class="pkg">geoR</span> can be found at:<br />
+<a href="http://www.leg.ufpr.br/geoR">http://www.leg.ufpr.br/geoR</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="likfit.html">likfit</a></code> for likelihood-based parameter estimation.</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+loglik.GRF(s100, cov.pars=c(0.8, .25), nugget=0.2)
+loglik.GRF(s100, cov.pars=c(0.8, .25), nugget=0.2, met="RML")
+
+## Computing the likelihood of a model fitted by ML
+s100.ml &lt;- likfit(s100, ini=c(1, .5))
+s100.ml
+s100.ml$loglik
+loglik.GRF(s100, obj=s100.ml)
+
+## Computing the likelihood of a variogram fitted model
+s100.v &lt;- variog(s100, max.dist=1)
+s100.vf &lt;- variofit(s100.v, ini=c(1, .5))
+s100.vf
+loglik.GRF(s100, obj=s100.vf)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>geoR</em> version 1.7-5.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

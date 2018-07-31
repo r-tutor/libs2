@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Calcium content in soil samples</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for ca20 {geoR}"><tr><td>ca20 {geoR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Calcium content in soil samples</h2>
+
+<h3>Description</h3>
+
+<p>This data set contains the calcium content measured in soil samples
+taken from the 0-20cm layer at 178 locations within a certain study area divided in three
+sub-areas. The elevation at each location was also recorded.
+</p>
+<p>The first region is typically flooded during the rain season and not
+used as an experimental area. The calcium levels would represent
+the natural content in the region. The second region has received
+fertilisers a while ago and is typically occupied by rice fields.
+The third region has received fertilisers recently and is frequently
+used as an experimental area.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>data(ca20)</pre>
+
+
+<h3>Format</h3>
+
+<p>The object <code>ca20</code> belongs to the class <code>geodata</code>
+and is a list
+with the following elements:
+</p>
+    
+<dl>
+<dt><code>coords</code></dt><dd><p>a matrix with the coordinates of the soil samples.  </p>
+</dd>
+<dt><code>data</code></dt><dd><p>calcium content measured in <i>mmol_c/dm^3</i>.  </p>
+</dd>
+<dt><code>covariate</code></dt><dd><p>a data-frame with the covariates
+</p>
+
+<dl>
+<dt><code>altitude</code></dt><dd><p>a vector with the elevation of each
+sampling location, in meters (<i>m</i>).</p>
+</dd>
+<dt><code>area</code></dt><dd><p>a factor indicating the sub area to which the
+locations belongs.</p>
+</dd>
+</dl>
+
+</dd>
+<dt><code>borders</code></dt><dd><p>a matrix with the coordinates defining the
+borders of the area.  </p>
+</dd>
+<dt><code>reg1</code></dt><dd><p>a matrix with the coordinates of the limits of
+the sub-area 1. </p>
+</dd>
+<dt><code>reg1</code></dt><dd><p>a matrix with the coordinates of the limits of
+the sub-area 2. </p>
+</dd>
+<dt><code>reg1</code></dt><dd><p>a matrix with the coordinates of the limits of
+the sub-area 3. </p>
+</dd>
+</dl>
+
+
+
+<h3>Source</h3>
+
+<p>The data was collected by researchers from PESAGRO and EMBRAPA-Solos, Rio
+de Janeiro, Brasil
+and provided by Dra. Maria Cristina Neves de Oliveira.
+</p>
+<p>Capeche, C.L.; Macedo, J.R.; Manzatto, H.R.H.; Silva, E.F. (1997)
+Caracterização pedológica da fazenda Angra - PESAGRO/RIO -
+Estação experimental de Campos (RJ). (compact disc).
+In: Congresso BRASILEIRO de Ciência do Solo. 26.,
+Informação, globalização, uso do solo; Rio de Janeiro, 1997.
+trabalhos. Rio de Janeiro: Embrapa/SBCS.
+</p>
+
+
+<h3>References</h3>
+
+<p>Oliveira, M.C.N. (2003) <em>Métodos de estimação de parâmetros
+em modelos geoestatísticos com diferentes estruturas de
+covariâncias: uma aplicação ao teor de cálcio no solo.</em>
+Tese de Doutorado, ESALQ/USP/Brasil. 
+</p>
+<p>Further information on the package <span class="pkg">geoR</span> can be found at:<br />
+<a href="http://www.leg.ufpr.br/geoR">http://www.leg.ufpr.br/geoR</a>.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>geoR</em> version 1.7-5.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

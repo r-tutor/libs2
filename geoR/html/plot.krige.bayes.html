@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Plots Prior and/or Posterior Distributions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for plot.krige.bayes {geoR}"><tr><td>plot.krige.bayes {geoR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Plots Prior and/or Posterior Distributions</h2>
+
+<h3>Description</h3>
+
+<p>Produces
+plots the priors and posteriors distribuitions for the paramters
+<code>phi</code> and <code>tausq.rel</code> based on results returned by
+<code><a href="krige.bayes.html">krige.bayes</a></code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'krige.bayes'
+plot(x, phi.dist = TRUE, tausq.rel.dist = TRUE, add = FALSE,
+                 type=c("bars", "h", "l", "b", "o", "p"), thin, ...)
+
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>an object of the class <code>krige.bayes</code>, with an output of
+the funtions <code><a href="krige.bayes.html">krige.bayes</a></code>. </p>
+</td></tr>
+<tr valign="top"><td><code>phi.dist</code></td>
+<td>
+<p>logical indicating whether or not plot the
+distributions for this parameter.  </p>
+</td></tr>
+<tr valign="top"><td><code>tausq.rel.dist</code></td>
+<td>
+<p>logical indicating whether or not plot the
+distributions for this parameter.  </p>
+</td></tr>
+<tr valign="top"><td><code>add</code></td>
+<td>
+<p>logical. If <code>TRUE</code> plots is added to current one.  </p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>indicates the type of plot. Option <code>"bars"</code> uses the
+function <code><a href="../../graphics/html/barplot.html">barplot</a></code> and the others uses
+<code><a href="../../graphics/html/matplot.html">matplot</a></code>. </p>
+</td></tr>
+<tr valign="top"><td><code>thin</code></td>
+<td>
+<p>a numerical vector defining the thining for values of the
+parameters <code>phi</code> and <code>tausq.rel</code> respectively.
+This improves visualisation when there are many values
+in the discrete distribution of the parameters.  </p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>further arguments for the plotting function.  </p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>For <code>plot.krige.bayes</code> a plot is produced or added to the current
+graphics device. No values are returned.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Paulo J. Ribeiro Jr. <a href="mailto:paulojus@leg.ufpr.br">paulojus@leg.ufpr.br</a>, <br />
+Peter J. Diggle <a href="mailto:p.diggle@lancaster.ac.uk">p.diggle@lancaster.ac.uk</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="krige.bayes.html">krige.bayes</a></code>, <code><a href="../../graphics/html/barplot.html">barplot</a></code>, <code><a href="../../graphics/html/matplot.html">matplot</a></code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## See documentation for krige.bayes
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>geoR</em> version 1.7-5.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

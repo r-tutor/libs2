@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Parameter Estimation for the Box-Cox Transformation</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for boxcoxfit {geoR}"><tr><td>boxcoxfit {geoR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Parameter Estimation for the Box-Cox Transformation</h2>
+
+<h3>Description</h3>
+
+<p>Parameter estimation and plotting of the results for the
+Box-Cox transformed normal distribution.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+boxcoxfit(object, xmat, lambda, lambda2 = NULL, add.to.data = 0, ...)
+
+## S3 method for class 'boxcoxfit'
+print(x, ...)
+
+## S3 method for class 'boxcoxfit'
+plot(x, hist = TRUE, data = eval(x$call$object), ...)
+
+## S3 method for class 'boxcoxfit'
+lines(x, data = eval(x$call$object), ...)
+
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>a vector with the data.  </p>
+</td></tr>
+<tr valign="top"><td><code>xmat</code></td>
+<td>
+<p>a matrix with covariates values. Defaults to <code>rep(1,
+      length(y))</code>.  </p>
+</td></tr> 
+<tr valign="top"><td><code>lambda</code></td>
+<td>
+<p>numerical value(s) for the transformation parameter
+<i>lambda</i>. 
+Used as the initial value in the function for parameter estimation.
+If not provided default values are assumed. If multiple values are passed
+the one with highest likelihood is used as initial value. </p>
+</td></tr>
+<tr valign="top"><td><code>lambda2</code></td>
+<td>
+<p>logical or numerical value(s) of the additional transformation
+(see DETAILS below). Defaults to <code>NULL</code>.
+If <code>TRUE</code> this parameter is also estimated and the initial
+value is set to the absolute value of the minimum data.
+A numerical value is provided it is used as the initial
+value. Multiple values are allowed as for <code>lambda</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>add.to.data</code></td>
+<td>
+<p>a constant value to be added to the data.  </p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a list, typically an output of the function
+<code>boxcoxfit</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>hist</code></td>
+<td>
+<p>logical indicating whether histograms should to be
+plotted.  </p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>data values. </p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>extra parameters to be passed to the minimization
+function <code><a href="../../stats/html/optim.html">optim</a></code> (<code>boxcoxfit</code>), <code><a href="../../graphics/html/hist.html">hist</a></code>
+(<code>plot</code>) or <code><a href="../../graphics/html/curve.html">curve</a></code> (<code>lines</code>).  </p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>The functions returns the following results:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>boxcoxfit</code></td>
+<td>
+<p>a list with estimated  parameters and results on
+the numerical minimization.  </p>
+</td></tr>
+<tr valign="top"><td><code>print.boxcoxfit</code></td>
+<td>
+<p>print estimated parameters. No values
+returned.  </p>
+</td></tr>
+<tr valign="top"><td><code>plot.boxcoxfit</code></td>
+<td>
+<p>plots histogram of the data (optional) and
+the model.  No values returned.  This function is only valid if
+covariates are not included in <code>boxcoxfit</code>. </p>
+</td></tr>
+<tr valign="top"><td><code>lines.boxcoxfit</code></td>
+<td>
+<p>adds a line with the fitted model to the
+current plot. No values returned.  This function is only valid if
+covariates are not included in <code>boxcoxfit</code>.  </p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Paulo Justiniano Ribeiro Jr. <a href="mailto:paulojus@leg.ufpr.br">paulojus@leg.ufpr.br</a>, <br />
+Peter J. Diggle <a href="mailto:p.diggle@lancaster.ac.uk">p.diggle@lancaster.ac.uk</a>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Box, G.E.P. and Cox, D.R.(1964) An analysis of transformations. JRSS B
+<b>26</b>:211&ndash;246.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="BoxCox.html">rboxcox</a></code> and  <code><a href="BoxCox.html">dboxcox</a></code> for the
+expression and more on the
+Box-Cox transformation,
+the minimization function <code><a href="../../stats/html/optim.html">optim</a></code>,
+the function <code><a href="../../MASS/html/boxcox.html">boxcox</a></code> in the package <span class="pkg">MASS</span> and
+the function <code><a href="../../car/html/box.cox.html">box.cox</a></code> in the package <span class="pkg">car</span>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+set.seed(384)
+## Simulating data
+simul &lt;- rboxcox(100, lambda=0.5, mean=10, sd=2)
+## Finding the ML estimates
+ml &lt;- boxcoxfit(simul)
+ml
+## Ploting histogram and fitted model
+plot(ml)
+##
+## Comparing models with different lambdas,
+## zero  means and unit variances
+curve(dboxcox(x, lambda=-1), 0, 8)
+for(lambda in seq(-.5, 1.5, by=0.5))
+  curve(dboxcox(x, lambda), 0, 8, add = TRUE)
+##
+## Another example, now estimating lambda2
+##
+simul &lt;- rboxcox(100, lambda=0.5, mean=10, sd=2)
+ml &lt;- boxcoxfit(simul, lambda2 = TRUE)
+ml
+plot(ml)
+##
+## An example with a regression model
+##
+boxcoxfit(object = trees[,3], xmat = trees[,1:2])
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>geoR</em> version 1.7-5.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

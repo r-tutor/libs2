@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Reads and Converts Data to geoR Format</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for read.geodata {geoR}"><tr><td>read.geodata {geoR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Reads and Converts Data to geoR Format</h2>
+
+<h3>Description</h3>
+
+<p>Reads data from a <em>ASCII</em> file and converts it to an object of the
+<code><a href="../../base/html/class.html">class</a></code> <code>geodata</code>, the standard data format for the
+<span class="pkg">geoR</span> package.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+read.geodata(file, header = FALSE, coords.col = 1:2, data.col = 3,
+             data.names = NULL, covar.col = NULL, covar.names = "header",
+             units.m.col = NULL, realisations = NULL,
+             na.action = c("ifany", "ifdata", "ifcovar", "none"),
+             rep.data.action, rep.covar.action, rep.units.action, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>file</code></td>
+<td>
+<p>a string with the name of the <em>ASCII</em> file.  </p>
+</td></tr>
+<tr valign="top"><td><code>header</code></td>
+<td>
+<p>logical.
+Indicates whether the variables names should be
+read from the first line of the input file.   </p>
+</td></tr>
+<tr valign="top"><td><code>coords.col</code></td>
+<td>
+<p>a vector with the numbers of the columns containing the
+coordinates.  </p>
+</td></tr>
+<tr valign="top"><td><code>data.col</code></td>
+<td>
+<p>a scalar or vector with the number of the column(s)
+containing the data.  </p>
+</td></tr>
+<tr valign="top"><td><code>data.names</code></td>
+<td>
+<p>a string or vector of strings with names for
+the data columns. Only valid if there is more than one column of
+data.
+By default the names in the original object are used.  </p>
+</td></tr>
+<tr valign="top"><td><code>covar.col</code></td>
+<td>
+<p>optional. A scalar or vector with the number
+of the column(s) with the values of the covariate(s).  </p>
+</td></tr>
+<tr valign="top"><td><code>covar.names</code></td>
+<td>
+<p>optional. A vector with the names of the
+the covariates. By default the names in the original object are
+used.  </p>
+</td></tr>
+<tr valign="top"><td><code>units.m.col</code></td>
+<td>
+<p>optional. A scalar 
+with the column number corresponding to the offset variable.
+Alternativelly can be a character vector with the name of the
+offset. This option is particularly relevant when using the package
+<span class="pkg">geoRglm</span>. </p>
+</td></tr>
+<tr valign="top"><td><code>realisations</code></td>
+<td>
+<p>optional. A vector indicating the replication
+number. For more details see documentation for
+<code><a href="as.geodata.html">as.geodata</a></code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>na.action</code></td>
+<td>
+<p>a string. Defines action to be taken in the presence of
+<code>NA</code>'s. For more details see documentation for
+<code><a href="as.geodata.html">as.geodata</a></code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>rep.data.action</code></td>
+<td>
+<p>a string or a function. Defines action to be taken when there is more than
+one data at the same location. For more details see documentation for
+<code><a href="as.geodata.html">as.geodata</a></code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>rep.covar.action</code></td>
+<td>
+<p>a string or a function. Defines action to be taken when there is more than
+one covariate at the same location. For more details see documentation for
+<code><a href="as.geodata.html">as.geodata</a></code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>rep.units.action</code></td>
+<td>
+<p>a string or a function.
+Defines action to be taken on the element <code>units.m</code>, if present
+when there is more than
+one data at the same location. The default option is the same
+value set for <code>rep.data.action</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>further arguments to be passed to the function <code><a href="../../utils/html/read.table.html">read.table</a></code>.  </p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The function <code><a href="../../utils/html/read.table.html">read.table</a></code> is used to read the data from the
+<em>ASCII</em> file and then <code><a href="as.geodata.html">as.geodata</a></code> is used to convert
+to an object of the <code><a href="../../base/html/class.html">class</a></code> <code>geodata</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of the <code><a href="../../base/html/class.html">class</a></code> <code>geodata</code>.
+See documentation for the function <code><a href="as.geodata.html">as.geodata</a></code> for
+further details.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Paulo Justiniano Ribeiro Jr. <a href="mailto:paulojus@leg.ufpr.br">paulojus@leg.ufpr.br</a>, <br />
+Peter J. Diggle <a href="mailto:p.diggle@lancaster.ac.uk">p.diggle@lancaster.ac.uk</a>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Further information on the package <span class="pkg">geoR</span> can be found at:<br />
+<a href="http://www.leg.ufpr.br/geoR">http://www.leg.ufpr.br/geoR</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="as.geodata.html">as.geodata</a></code> to convert existing <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> objects,
+<code><a href="../../utils/html/read.table.html">read.table</a></code>, the basic <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> function used to  read <em>ASCII</em> files,
+and <code><a href="../../base/html/list.html">list</a></code> for detailed information about lists.</p>
+
+<hr /><div style="text-align: center;">[Package <em>geoR</em> version 1.7-5.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

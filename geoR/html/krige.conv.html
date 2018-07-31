@@ -1,0 +1,301 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Spatial Prediction - Conventional Kriging</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for krige.conv {geoR}"><tr><td>krige.conv {geoR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Spatial Prediction &ndash; Conventional Kriging</h2>
+
+<h3>Description</h3>
+
+<p>This function performs spatial prediction for fixed covariance
+parameters using global neighbourhood.
+</p>
+<p>Options available implement the following types of kriging:
+<em>SK</em> (simple kriging), <em>OK</em> (ordinary kriging),
+<em>KTE</em> (external trend kriging) and <em>UK</em> (universal kriging). 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+krige.conv(geodata, coords=geodata$coords, data=geodata$data,
+           locations, borders, krige, output)
+
+krige.control(type.krige = "ok", trend.d = "cte", trend.l = "cte",
+            obj.model = NULL, beta, cov.model, cov.pars, kappa,
+            nugget, micro.scale = 0, dist.epsilon = 1e-10, 
+            aniso.pars, lambda)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>geodata</code></td>
+<td>
+<p>a list containing elements <code>coords</code> and
+<code>data</code> as described next. Typically an object of the <code><a href="../../base/html/class.html">class</a></code>
+<code>"geodata"</code> - a <span class="pkg">geoR</span> data-set. If not provided the arguments
+<code>coords</code> and <code>data</code> must be provided instead.  </p>
+</td></tr>
+<tr valign="top"><td><code>coords</code></td>
+<td>
+<p>an <i>n x 2</i> matrix or data-frame with the 2-D
+coordinates of the <i>n</i> data locations.
+By default it takes the
+component <code>coords</code> of the argument <code>geodata</code>, if provided.  </p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a vector with <em>n</em> data values. By default it takes the
+component <code>data</code> of the argument <code>geodata</code>, if provided.  </p>
+</td></tr>
+<tr valign="top"><td><code>locations</code></td>
+<td>
+<p>an <i>N x 2</i> matrix or data-frame with the 2-D
+coordinates of the <i>N</i> prediction locations, or a list for which
+the first two components are used. Input is internally checked by the
+function <code>check.locations</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>borders</code></td>
+<td>
+<p>optional. By default reads the element <code>borders</code>
+from the <code>geodata</code> object, if present.
+Setting to <code>NULL</code> prevents this behavior.
+If a two column matrix defining a polygon is
+provided the prediction is performed only at locations inside this polygon. </p>
+</td></tr>
+<tr valign="top"><td><code>krige</code></td>
+<td>
+<p>a list defining the model components and the type of
+kriging. It can take an output to a call to <code>krige.control</code> or
+a list with elements as for the arguments in <code>krige.control</code>.
+Default values are assumed for arguments  or list elements not provided.
+See the description of arguments in &lsquo;krige.control&rsquo; below.  </p>
+</td></tr>
+<tr valign="top"><td><code>output</code></td>
+<td>
+<p>a list specifying output options.
+It can take an output to a call to <code>output.control</code> or
+a list with elements as for the arguments in <code>output.control</code>.
+Default values are assumed for arguments not provided.
+See documentation for
+<code><a href="output.control.html">output.control</a></code> for further details.  </p>
+</td></tr>
+<tr valign="top"><td><code>type.krige</code></td>
+<td>
+<p>type of kriging to be performed. Options are
+<code>"SK", "OK"</code> corresponding to simple or ordinary
+kriging. Kriging with external trend and universal kriging can be
+defined setting <code>type.krige = "OK"</code> and specifying the
+trend model using the arguments <code>trend.d</code> and
+<code>trend.l</code>.  </p>
+</td></tr> 
+<tr valign="top"><td><code>trend.d</code></td>
+<td>
+<p>specifies the trend (covariate) values at the data
+locations.
+See documentation of <code><a href="trend.spatial.html">trend.spatial</a></code> for
+further details.
+Defaults to <code>"cte"</code>.   </p>
+</td></tr>
+<tr valign="top"><td><code>trend.l</code></td>
+<td>
+<p>specifies the trend (covariate) values at prediction
+locations. It must be of the same type as for <code>trend.d</code>.
+Only used if prediction locations are provided in the argument
+<code>locations</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>obj.model</code></td>
+<td>
+<p>a list with the model parameters. Typically an
+output of <code><a href="likfit.html">likfit</a></code> or
+<code><a href="variofit.html">variofit</a></code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>beta</code></td>
+<td>
+<p>numerical value of the mean (vector) parameter.
+Only used if <code>type.krige="SK"</code>.</p>
+</td></tr>  
+<tr valign="top"><td><code>cov.model</code></td>
+<td>
+<p>string indicating the name of the model for the
+correlation function. Further details  can be found in the
+documentation of the function
+<code><a href="cov.spatial.html">cov.spatial</a></code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>cov.pars</code></td>
+<td>
+<p>a 2 elements vector with values of the covariance parameters <i>sigma^2</i>
+(partial sill)  and <i>phi</i> (range parameter),
+respectively.  </p>
+</td></tr>
+</table>
+
+
+
+
+
+
+
+<table summary="R argblock">
+<tr valign="top"><td><code>kappa</code></td>
+<td>
+<p>additional smoothness parameter required by the following correlation
+functions: <code>"matern"</code>, <code>"powered.exponential"</code>, <code>"cauchy"</code> and
+<code>"gneiting.matern"</code>.   </p>
+</td></tr>
+<tr valign="top"><td><code>nugget</code></td>
+<td>
+<p>the value of the nugget variance parameter <i>tau^2</i>. Defaults to zero.  </p>
+</td></tr>
+<tr valign="top"><td><code>micro.scale</code></td>
+<td>
+<p>micro-scale variance. If different from zero, the
+nugget variance is divided into 2 terms: <em>micro-scale variance</em>
+and <em>measurement error</em>. This affect the precision of the predictions. 
+Often in practice, these two variance components are indistinguishable but the
+distinction can be made here if justifiable. See the section
+<code>DETAILS</code> in the documentation of <code><a href="output.control.html">output.control</a></code>. </p>
+</td></tr> 
+<tr valign="top"><td><code>dist.epsilon</code></td>
+<td>
+<p>a numeric value. Locations which are separated
+by a distance less than this value
+are considered co-located.  </p>
+</td></tr>
+<tr valign="top"><td><code>aniso.pars</code></td>
+<td>
+<p>parameters for geometric anisotropy
+correction. If <code>aniso.pars = FALSE</code> no correction is made, otherwise
+a two elements vector with values for the anisotropy parameters
+must be provided. Anisotropy correction consists of a
+transformation of the data and prediction coordinates performed
+by the function <code><a href="coords.aniso.html">coords.aniso</a></code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>lambda</code></td>
+<td>
+<p>numeric value of the Box-Cox transformation parameter.
+The value <i>lambda = 1</i> corresponds to
+no transformation and <i>lambda = 0</i> corresponds to
+the log-transformation. 
+Prediction results are back-transformed and
+returned is the same scale as for the original data.  </p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>According to the arguments provided,  one of the following different
+types of kriging: <em>SK</em>, <em>OK</em>, <em>UK</em> or  <em>KTE</em>
+is performed.
+Defaults correspond to ordinary kriging.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of the <code><a href="../../base/html/class.html">class</a></code> <code>kriging</code>.
+The attribute <code>prediction.locations</code> containing the name of the
+object with the coordinates of the prediction locations (argument
+<code>locations</code>) is assigned to the object.
+Returns  a  list with the following components:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>predict</code></td>
+<td>
+<p>a vector with predicted values.  </p>
+</td></tr>
+<tr valign="top"><td><code>krige.var</code></td>
+<td>
+<p>a vector with predicted variances.  </p>
+</td></tr>
+<tr valign="top"><td><code>beta.est</code></td>
+<td>
+<p>estimates of the <i>beta</i>, parameter
+implicit in kriging procedure. Not included if <code>type.krige = "SK"</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>simulations</code></td>
+<td>
+<p>an <i>ni x n.sim</i> matrix where <i>ni</i> is the
+number of prediction locations. Each column corresponds to a
+conditional simulation of the predictive distribution.
+Only returned if <code>n.sim &gt; 0</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>message</code></td>
+<td>
+<p>messages about the type of prediction performed.  </p>
+</td></tr>
+<tr valign="top"><td><code>call</code></td>
+<td>
+<p>the function call.  </p>
+</td></tr>
+</table>
+<p>Other results can be included depending on the options passed to
+<code><a href="output.control.html">output.control</a></code>. 
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Paulo J. Ribeiro Jr. <a href="mailto:paulojus@leg.ufpr.br">paulojus@leg.ufpr.br</a>, <br />
+Peter J. Diggle <a href="mailto:p.diggle@lancaster.ac.uk">p.diggle@lancaster.ac.uk</a>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Further information on the package <span class="pkg">geoR</span> can be found at:<br />
+<a href="http://www.leg.ufpr.br/geoR">http://www.leg.ufpr.br/geoR</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="output.control.html">output.control</a></code> sets output options,
+<code><a href="image.kriging.html">image.kriging</a></code> and <code><a href="image.kriging.html">persp.kriging</a></code>
+for graphical output of the results,
+<code><a href="krige.bayes.html">krige.bayes</a></code> for Bayesian prediction and <code><a href="ksline.html">ksline</a></code>
+for a different implementation of kriging allowing for moving
+neighborhood. For model fitting see <code><a href="likfit.html">likfit</a></code> or <code><a href="variofit.html">variofit</a></code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+# Defining a prediction grid
+loci &lt;- expand.grid(seq(0,1,l=21), seq(0,1,l=21))
+# predicting by ordinary kriging
+kc &lt;- krige.conv(s100, loc=loci,
+                 krige=krige.control(cov.pars=c(1, .25)))
+# mapping point estimates and variances
+par.ori &lt;- par(no.readonly = TRUE)
+par(mfrow=c(1,2), mar=c(3.5,3.5,1,0), mgp=c(1.5,.5,0))
+image(kc, main="kriging estimates")
+image(kc, val=sqrt(kc$krige.var), main="kriging std. errors")
+# Now setting the output to simulate from the predictive
+# (obtaining conditional simulations),
+# and to compute quantile and probability estimators
+s.out &lt;- output.control(n.predictive = 1000, quant=0.9, thres=2)
+set.seed(123)
+kc &lt;- krige.conv(s100, loc = loci,
+         krige = krige.control(cov.pars = c(1,.25)),
+         output = s.out)
+par(mfrow=c(2,2))
+image(kc, val=kc$simul[,1], main="a cond. simul.")
+image(kc, val=kc$simul[,1], main="another cond. simul.")
+image(kc, val=(1 - kc$prob), main="Map of P(Y &gt; 2)")
+image(kc, val=kc$quant, main="Map of y s.t. P(Y &lt; y) = 0.9")
+par(par.ori)
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>geoR</em> version 1.7-5.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

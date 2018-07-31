@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Adds a Bayesian Estimate of the Variogram to a Plot</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for lines.variomodel.krige.bayes {geoR}"><tr><td>lines.variomodel.krige.bayes {geoR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Adds a Bayesian Estimate of the Variogram to a Plot</h2>
+
+<h3>Description</h3>
+
+<p>Adds a Bayesian estimate of the variogram model to a plot typically with an empirical variogram.
+The estimate is a chosen summary (mean, mode or mean) of the
+posterior distribution returned by the function <code><a href="krige.bayes.html">krige.bayes</a></code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'krige.bayes'
+lines.variomodel(x, summary.posterior, max.dist, uvec,
+                 posterior = c("variogram", "parameters"),  ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>an object of the class <code>krige.bayes</code>, typically an output
+of the function <code><a href="krige.bayes.html">krige.bayes</a></code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>summary.posterior</code></td>
+<td>
+<p>specify which summary of the posterior
+distribution should be used as the parameter estimate.
+Options are <code>"mean"</code>, <code>"median"</code> or
+<code>"mode"</code>. See <code>DETAILS</code> below. </p>
+</td></tr>
+<tr valign="top"><td><code>max.dist</code></td>
+<td>
+<p>numerical, the maximum distance for the x-axis.  </p>
+</td></tr>
+<tr valign="top"><td><code>uvec</code></td>
+<td>
+<p>a numerical vector with support points to compute the
+variogram values. Only used if <code>posterior = "variogram"</code>.
+Defaults to <code>seq(0, max.dist, length = 51)</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>posterior</code></td>
+<td>
+<p>indicates whether the the variogram line is
+based on the posterior of the variogram function (default)
+or the posterior of the model parameters.  </p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>arguments passed to the functions <code><a href="../../graphics/html/lines.html">lines</a></code> or <code><a href="../../graphics/html/curve.html">curve</a></code>.  </p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The function <code><a href="krige.bayes.html">krige.bayes</a></code> returns samples from the
+posterior distribution of the parameters <i>(sigma^2, phi, tausq.rel)</i>.
+</p>
+<p>This function allows for two basic options to draw a line with a
+summary of the variogram function.
+</p>
+
+<ol>
+<li><p>[1.]&quot;variogram&quot;: for each sample of the parameters the variogram
+function is computed at the support points defined in the
+argument <code>uvec</code>. Then a function provided by the user in the
+argument <code>summary.posterior</code> is used to compute a summary of
+the values obtained at each support point.
+</p>
+</li>
+<li><p>[2.]&quot;parameters&quot;: in this case summaries of the posterior
+distribution of the model parameters as &quot;plugged-in&quot; in the
+variogram function.
+One of the options <code>"mode"</code> (default) ,<code>"median"</code> or <code>"mean"</code>
+can be provided in the argument <code>summary.posterior</code>.
+The option <code>mode</code>, uses the mode of <i>(phi, tau^2.rel)</i> and the mode of
+of <i>sigma^2</i> conditional on the modes of the former parameters.
+For the options <code>mean</code> and <code>median</code> these summaries are
+computed from the samples of the posterior.
+
+</p>
+</li></ol>
+
+
+
+<h3>Value</h3>
+
+<p>A line with the estimated variogram plot is added to the plot in the
+current graphics device. No values are returned.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Paulo J. Ribeiro Jr. <a href="mailto:paulojus@leg.ufpr.br">paulojus@leg.ufpr.br</a>, <br />
+Peter J. Diggle <a href="mailto:p.diggle@lancaster.ac.uk">p.diggle@lancaster.ac.uk</a>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Further information on the package <span class="pkg">geoR</span> can be found at:<br />
+<a href="http://www.leg.ufpr.br/geoR">http://www.leg.ufpr.br/geoR</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="lines.variomodel.html">lines.variomodel</a></code>, <code><a href="krige.bayes.html">krige.bayes</a></code> and <code><a href="../../graphics/html/lines.html">lines</a></code>.</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+#See examples in the documentation of the function krige.bayes().
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>geoR</em> version 1.7-5.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

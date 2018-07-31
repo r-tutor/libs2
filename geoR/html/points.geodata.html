@@ -1,0 +1,314 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Plots Spatial Locations and Data Values</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for points.geodata {geoR}"><tr><td>points.geodata {geoR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Plots Spatial Locations and Data Values</h2>
+
+<h3>Description</h3>
+
+<p>This function produces a plot with 
+points indicating the  data locations. Arguments can control the
+points sizes, patterns and colors. These can be set to be proportional
+to data values, ranks  or quantiles. Alternatively, points can be added
+to the current  plot.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'geodata'
+points(x, coords=x$coords, data=x$data, data.col = 1, borders,
+               pt.divide=c("data.proportional","rank.proportional",
+                           "quintiles", "quartiles", "deciles", "equal"),
+               lambda = 1, trend = "cte", abs.residuals = FALSE,
+               weights.divide = "units.m", cex.min, cex.max, cex.var,
+               pch.seq, col.seq, add.to.plot = FALSE,
+               x.leg, y.leg = NULL, dig.leg = 2, 
+               round.quantiles = FALSE, permute = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a list containing elements <code>coords</code> and
+<code>data</code> described next. Typically an object of the class
+<code>"geodata"</code> - a <span class="pkg">geoR</span> data-set. If not provided the arguments
+<code>coords</code> and <code>data</code> must be provided instead.  
+</p>
+</td></tr>
+<tr valign="top"><td><code>coords</code></td>
+<td>
+<p>an <i>n x 2</i> matrix containing
+coordinates of the <i>n</i> data locations in each row.
+Defaults to <code>geodata$coords</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a vector or matrix with data values.
+If a matrix is provided each column is regarded as one variable or realization.
+Defaults to <code>geodata$data</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>data.col</code></td>
+<td>
+<p>the number of the data column. Only used if
+<code>data</code> is a matrix with columns corresponding to different
+variables or simulations.  </p>
+</td></tr>
+<tr valign="top"><td><code>borders</code></td>
+<td>
+<p>If an <i>nx2</i>
+matrix or data-frame with the coordinates of the borders of the
+regions is provided, the borders are added to the plot.
+By default it searches for a element named &quot;borders&quot; in  the geodata
+object.  </p>
+</td></tr>
+<tr valign="top"><td><code>pt.divide</code></td>
+<td>
+<p>defines the division of the points in categories.
+See <code>DETAILS</code> below for the available options.
+Defaults to <code>pt.divide = "data.proportional"</code>.   </p>
+</td></tr>
+<tr valign="top"><td><code>trend</code></td>
+<td>
+<p>specifies the mean part of the model. The options are:
+<code>"cte"</code> (constant mean - default option), <code>"1st"</code> (a first order polynomial
+on the coordinates), <code>"2nd"</code> (a second order polynomial
+on the coordinates), or a formula of the type <code>~X</code> where <code>X</code>
+is a matrix with the covariates (external trend).
+If provided the trend is &quot;removed&quot; using the function
+<code><a href="../../stats/html/lm.html">lm</a></code> and the residuals are plotted.  </p>
+</td></tr>
+<tr valign="top"><td><code>abs.residuals</code></td>
+<td>
+<p>logical. If <code>TRUE</code> and the value passed to
+the
+argument <code>trend</code> is different from <code>"cte"</code> the point sizes
+are proportional to absolute values of the residuals.  </p>
+</td></tr>
+<tr valign="top"><td><code>lambda</code></td>
+<td>
+<p>value of the Box-Cox transformation parameter. Two particular cases
+are <i>lambda = 1</i> which corresponds to no
+transformation and  <i>lambda = 0</i> corresponding to
+the log-transformation.  </p>
+</td></tr>
+<tr valign="top"><td><code>weights.divide</code></td>
+<td>
+<p>if a vector of weights with the same length as
+the data is provided each  data is
+divided by the corresponding element in this vector.
+Defaults divides the data by the element <code>units.m</code> in the
+data object, if present, otherwise no action is taken and original
+data is used.
+The usage of <code>units.m</code> is common for data objects
+to be analysed using the package <span class="pkg">geoRglm</span>. </p>
+</td></tr>
+<tr valign="top"><td><code>cex.min</code></td>
+<td>
+<p>minimum value for the graphical parameter
+<code>cex</code>. This value defines the size of the point corresponding the minimum
+of the data. Defaults to 0.5.  </p>
+</td></tr>
+<tr valign="top"><td><code>cex.max</code></td>
+<td>
+<p>maximum value for the graphical parameter
+<code>cex</code>. This value defines the size of the point corresponding the maximum
+of the data. If <code>pt.divide = "equal"</code> it is used to set
+the value for the
+graphical parameter <code>cex</code>. Defaults to 1.5.  </p>
+</td></tr>
+<tr valign="top"><td><code>cex.var</code></td>
+<td>
+<p>a numeric vector with the values of a variable defining
+the size of the points. Particularly useful for displaying 2
+variables at once.  </p>
+</td></tr>
+<tr valign="top"><td><code>pch.seq</code></td>
+<td>
+<p>number(s) defining the graphical parameter <code>pch</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>col.seq</code></td>
+<td>
+<p>number(s) defining the colors in the graphical parameter
+<code>col</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>add.to.plot</code></td>
+<td>
+<p>logical. If <code>TRUE</code> the points are added
+to the current plot or image otherwise a display is open. Defaults to <code>FALSE</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>x.leg, y.leg</code></td>
+<td>
+<p><code>x</code> and <code>y</code> location of the legend as
+documented in <code><a href="../../graphics/html/legend.html">legend</a></code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>dig.leg</code></td>
+<td>
+<p>the desired number of digits after the decimal
+point. Printing values in the legend uses <code><a href="../../base/html/formatc.html">formatC</a></code> with
+argument <code>format = "f"</code>. </p>
+</td></tr>
+<tr valign="top"><td><code>round.quantiles</code></td>
+<td>
+<p>logical. Defines whether or not the values
+of the quantiles should be rounded. Defaults to <code>FALSE</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>permute</code></td>
+<td>
+<p>logical indication whether the data values should be
+randomly re-alocatted to the coordinates. See <code>DETAILS</code> below.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>further arguments to be passed to the function
+<code><a href="../../graphics/html/plot.html">plot</a></code>, if <code>add.to.plot = FALSE</code>; or to the function
+<code><a href="../../graphics/html/points.html">points</a></code>, if <code>add.to.plot = TRUE</code>.  </p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The points can be devided in categories and have different sizes
+and/or colours according to the argument
+<code>pt.divide</code>. The options are:
+</p>
+
+<dl>
+<dt>&quot;data.proportional&quot;</dt><dd><p>sizes proportional to the data values.  </p>
+</dd>
+<dt>&quot;rank.proportional&quot;</dt><dd><p>sizes proportional to the rank of the
+data.  </p>
+</dd>
+<dt>&quot;quintiles&quot;</dt><dd><p>five different sizes according to the
+quintiles of the data.  </p>
+</dd>
+<dt>&quot;quartiles&quot;</dt><dd><p>four different sizes according to the
+quartiles of the data.  </p>
+</dd> 
+<dt>&quot;deciles&quot;</dt><dd><p>ten different sizes according to the
+deciles of the data. </p>
+</dd>
+<dt>&quot;equal&quot;</dt><dd><p>all points with the same size.  </p>
+</dd>
+<dt>a scalar</dt><dd><p>defines a number of quantiles, the number provided
+defines the  number of different points sizes and colors.  </p>
+</dd>
+<dt>a numerical vector with quantiles and length &gt; 1</dt><dd><p>the values in the
+vector will be used by the function <code><a href="../../base/html/cut.html">cut</a></code> as break
+points to divide the data in classes. </p>
+</dd>
+</dl>
+
+<p>For cases where points have different sizes the arguments
+<code>cex.min</code> and <code>cex.max</code> set the minimum and the maximum
+point sizes. Additionally,
+<code>pch.seq</code> can set different patterns for the points and
+<code>col.seq</code> can be used to define colors.
+For example, different colors
+can be used for quartiles, quintiles and deciles while a sequence of
+gray tones (or a color sequence) can be used
+for point sizes proportional to the data or their ranks.
+For more details see the section <code>EXAMPLES</code>.
+</p>
+<p>The argument <code>cex.var</code> allows for displaying 2 variables
+at once. In this case one variable defines the backgroung colour
+of the points and the other defines the points size.
+</p>
+<p>The argument <code>permute</code> if set to <code>TRUE</code>
+randomly realocates the data in the coordinates.
+This may be used to
+contrast the spatial pattern of original data against another
+situation where there is no spatial dependence (when setting
+<code>permute = TRUE</code>). If a <code>trend</code> is provided the residuals
+(and not the original data) are permuted.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A plot is created or points are added to the current graphics device.<br />
+A list with graphical parameters used to produce the plot is returned invisibily.
+According to the input options, the list has some or all of the
+following components:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>quantiles</code></td>
+<td>
+<p>the values of the quantiles used to divide the data.  </p>
+</td></tr>
+<tr valign="top"><td><code>cex</code></td>
+<td>
+<p>the values of the graphics expansion parameter <code>cex</code>.
+</p>
+</td></tr> 
+<tr valign="top"><td><code>col</code></td>
+<td>
+<p>the values of the graphics color parameter <code>col</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>pch</code></td>
+<td>
+<p>the values of the graphics pattern parameter <code>pch</code>.  </p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Paulo J. Ribeiro Jr. <a href="mailto:paulojus@leg.ufpr.br">paulojus@leg.ufpr.br</a>, <br />
+Peter J. Diggle <a href="mailto:p.diggle@lancaster.ac.uk">p.diggle@lancaster.ac.uk</a>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Further information on the package <span class="pkg">geoR</span> can be found at:<br />
+<a href="http://www.leg.ufpr.br/geoR">http://www.leg.ufpr.br/geoR</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="plot.geodata.html">plot.geodata</a></code> for another display of the data and
+<code><a href="../../graphics/html/points.html">points</a></code> and <code><a href="../../graphics/html/plot.html">plot</a></code> for information on the
+generic <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> functions. The documentation of
+<code><a href="../../graphics/html/par.html">par</a></code> provides details on graphical parameters.
+For  color schemes in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> see <code><a href="../../grDevices/html/gray.html">gray</a></code> and
+<code><a href="../../grDevices/html/palettes.html">rainbow</a></code>.  </p>
+
+
+<h3>Examples</h3>
+
+<pre>
+op &lt;- par(no.readonly = TRUE)
+par(mfrow=c(2,2), mar=c(3,3,1,1), mgp = c(2,1,0))
+points(s100, xlab="Coord X", ylab="Coord Y")
+points(s100, xlab="Coord X", ylab="Coord Y", pt.divide="rank.prop")
+points(s100, xlab="Coord X", ylab="Coord Y", cex.max=1.7,
+               col=gray(seq(1, 0.1, l=100)), pt.divide="equal")
+points(s100, pt.divide="quintile", xlab="Coord X", ylab="Coord Y")
+par(op)
+
+points(ca20, pt.div='quartile', x.leg=4900, y.leg=5850, bor=borders)
+
+par(mfrow=c(1,2), mar=c(3,3,1,1), mgp = c(2,1,0))
+points(s100, main="Original data")
+points(s100, permute=TRUE, main="Permuting locations")
+
+## Now an example using 2 variable, 1 defining the
+## gray scale and the other the points size
+points.geodata(coords=camg[,1:2], data=camg[,3], col="gray",
+               cex.var=camg[,5])
+points.geodata(coords=camg[,1:2], data=camg[,3], col="gray",
+               cex.var=camg[,5], pt.div="quint")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>geoR</em> version 1.7-5.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

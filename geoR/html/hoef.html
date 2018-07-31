@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Data for spatial analysis of experiments</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for hoef {geoR}"><tr><td>hoef {geoR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Data for spatial analysis of experiments</h2>
+
+<h3>Description</h3>
+
+<p>The <code>hoef</code> data frame has 25 rows and 5 columns.<br />
+The data consists of a uniformity trial for which <em>artificial</em>
+treatment effects were assign to the plots.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>data(hoef)</pre>
+
+
+<h3>Format</h3>
+
+<p>This data frame contains the following columns:
+</p>
+
+<dl>
+<dt>x1</dt><dd><p>x-coordinate of the plot.</p>
+</dd>
+<dt>x2</dt><dd><p>y-coordinate of the plot.</p>
+</dd>
+<dt>dat</dt><dd><p>the <em>artificial</em> data.</p>
+</dd>
+<dt>trat</dt><dd><p>the treatment number.</p>
+</dd>
+<dt>ut</dt><dd><p>the data from the uniformity trial, without the treatment effect.</p>
+</dd>
+</dl>
+
+
+
+<h3>Details</h3>
+
+<p>The treatment effects assign to the plots are:
+</p>
+
+<ul>
+<li><p> Treatment 1: <i>tau1 = 0</i>
+</p>
+</li>
+<li><p> Treatment 2: <i>tau2 = -3</i>
+</p>
+</li>
+<li><p> Treatment 3: <i>tau3 = -5</i>
+</p>
+</li>
+<li><p> Treatment 4: <i>tau4 = 6</i>
+</p>
+</li>
+<li><p> Treatment 5: <i>tau5 = 6</i>
+</p>
+</li></ul>
+    
+
+
+<h3>Source</h3>
+
+<p>Ver Hoef, J.M. &amp; Cressie, N. (1993) Spatial statistics: analysis of field experiments.
+In Scheiner S.M. and Gurevitch, J. (Eds) <em>Design and Analysis of
+Ecological Experiments</em>. Chapman and Hall. 
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+hoef.geo &lt;- as.geodata(hoef, covar.col=4)
+summary(hoef)
+summary(hoef.geo)
+points(hoef.geo, cex.min=2, cex.max=2, pt.div="quintiles")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>geoR</em> version 1.7-5.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

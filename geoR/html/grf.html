@@ -1,0 +1,337 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Simulation of Gaussian Random Fields</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for grf {geoR}"><tr><td>grf {geoR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Simulation of Gaussian Random Fields</h2>
+
+<h3>Description</h3>
+
+<p><code>grf()</code> generates (unconditional)
+simulations of Gaussian random fields for
+given covariance parameters.
+<code>geoR2RF</code> converts model specification used by <span class="pkg">geoR</span>
+to the correponding one in <span class="pkg">RandomFields</span>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+grf(n, grid = "irreg", nx, ny, xlims = c(0, 1), ylims = c(0, 1),
+    borders, nsim = 1, cov.model = "matern",
+    cov.pars = stop("missing covariance parameters sigmasq and phi"), 
+    kappa = 0.5, nugget = 0, lambda = 1, aniso.pars,
+    mean = 0, method, RF=TRUE, messages)
+
+geoR2RF(cov.model, cov.pars, nugget = 0, kappa, aniso.pars)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>number of points (spatial locations) in each simulations.  </p>
+</td></tr>
+<tr valign="top"><td><code>grid</code></td>
+<td>
+<p>optional. An <i>n x 2</i> matrix with coordinates of the
+simulated data.  </p>
+</td></tr>
+<tr valign="top"><td><code>nx</code></td>
+<td>
+<p>optional. Number of points in the X direction.  </p>
+</td></tr>
+<tr valign="top"><td><code>ny</code></td>
+<td>
+<p>optional. Number of points in the Y direction.  </p>
+</td></tr>
+<tr valign="top"><td><code>xlims</code></td>
+<td>
+<p>optional. Limits of the area in the X direction. Defaults
+to <i>[0,1]</i>.  </p>
+</td></tr>
+<tr valign="top"><td><code>ylims</code></td>
+<td>
+<p>optional. Limits of the area in the Y direction.  Defaults
+to <i>[0,1]</i>.  </p>
+</td></tr>
+<tr valign="top"><td><code>borders</code></td>
+<td>
+<p>optional. Typically a two coluns matrix especifying a
+polygon. See DETAILS below.</p>
+</td></tr>
+<tr valign="top"><td><code>nsim</code></td>
+<td>
+<p>Number of simulations. Defaults to 1.</p>
+</td></tr>
+<tr valign="top"><td><code>cov.model</code></td>
+<td>
+<p>correlation function. See <code><a href="cov.spatial.html">cov.spatial</a></code> for
+further details. Defaults to the 
+<em>exponential</em> model.  </p>
+</td></tr>
+<tr valign="top"><td><code>cov.pars</code></td>
+<td>
+<p>a vector with 2 elements or an <i>n x 2</i>
+matrix with values of  the covariance parameters
+<i>sigma^2</i> (partial sill) and <i>phi</i> (range
+parameter). If a vector, the elements are the values of
+<i>sigma^2</i> and <i>phi</i>, respectively.
+If a matrix, corresponding to a model with several structures, the
+values of <i>sigma^2</i> 
+are in the first column and the values of <i>phi</i> are in the second.  </p>
+</td></tr>
+<tr valign="top"><td><code>kappa</code></td>
+<td>
+<p>additional smoothness parameter required only for the
+following correlation 
+functions: <code>"matern"</code>, <code>"powered.exponential"</code>, <code>"cauchy"</code> 
+and  <code>"gneiting.matern"</code>. More details on the documentation for the
+function <code><a href="cov.spatial.html">cov.spatial</a></code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>nugget</code></td>
+<td>
+<p>the value of the nugget effect parameter <i>tau^2</i>.</p>
+</td></tr>
+<tr valign="top"><td><code>lambda</code></td>
+<td>
+<p>value of the Box-Cox transformation parameter. The value <i>lambda = 1</i> corresponds to no transformation, the default.
+For any other value of <i>lambda</i> Gaussian data is
+simulated and then transformed.  </p>
+</td></tr>
+<tr valign="top"><td><code>aniso.pars</code></td>
+<td>
+<p>geometric anisotropy parameters. By default an
+isotropic field is assumed and this argument is ignored.
+If a vector with 2 values is provided, with values for the
+anisotropy angle <i>psi_A</i> (in
+radians) and 
+anisotropy ratio <i>psi_A</i>, the coordinates
+are transformed, 
+the simulation is performed on the isotropic (transformed) space
+and then the coordinates are back-transformed such that the resulting
+field is anisotropic. Coordinates transformation is performed 
+by the function <code><a href="coords.aniso.html">coords.aniso</a></code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>mean</code></td>
+<td>
+<p>a numerical vector, scalar or the same length of the
+data to be simulated. Defaults to zero.</p>
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+<p>simulation method with options for
+<code>"cholesky"</code>, <code>"svd"</code>, <code>"eigen"</code>, <code>"RF"</code>.
+Defaults to the <em>Cholesky</em>
+decomposition.  See section <code>DETAILS</code> below.  </p>
+</td></tr>
+<tr valign="top"><td><code>RF</code></td>
+<td>
+<p>logical, with defaults to TRUE, indicating whether
+the algorithm should try to use the function
+<code><a href="../../RandomFields/html/GaussRF.html">GaussRF</a></code> from the package
+<span class="pkg">RandomFields</span> in case of <code>method</code> is missing
+and the number of points is greater than 500. </p>
+</td></tr>
+<tr valign="top"><td><code>messages</code></td>
+<td>
+<p>logical,  indicating
+whether or not status messages are printed on the screen (or output device)
+while the function is running. Defaults to <code>TRUE</code>.  </p>
+</td></tr> 
+</table>
+
+
+<h3>Details</h3>
+
+<p>For the methods <code>"cholesky"</code>, <code>"svd"</code> and <code>"eigen"</code> the
+simulation consists of multiplying a vector of standardized
+normal deviates by a square root of the covariance matrix.
+The square root of a matrix is not uniquely defined. These 
+three methods differs in the way they compute the
+square root of the (positive definite) covariance matrix.
+</p>
+<p>The previously available
+method <code>method = "circular.embedding"</code> is no longer available
+in <span class="pkg">geoR</span>. For simulations in a fine grid and/or with a large number
+of points use the package <span class="pkg">RandomFields</span>.
+</p>
+<p>The option <code>"RF"</code> calls internally  the function
+<code><a href="../../RandomFields/html/GaussRF.html">GaussRF</a></code> from the package <span class="pkg">RandomFields</span>.
+</p>
+<p>The argument <code>borders</code>, if provides takes a
+polygon data set following argument <code>poly</code>
+for the <span class="pkg">splancs</span>' function <code><a href="../../splancs/html/csr.html">csr</a></code>, in case of
+<code>grid="reg"</code> or <code><a href="../../splancs/html/gridpts.html">gridpts</a></code>, in case of
+<code>grid="irreg"</code>. For the latter the simulation will have 
+<em>approximately</em> &ldquo;n&rdquo; points.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>grf</code> returns a list with the components:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>coords</code></td>
+<td>
+<p>an <i>n x 2</i> matrix with the coordinates of the
+simulated data.  </p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a vector (if <code>nsim = 1</code>) or a matrix with the
+simulated values. For the latter each column corresponds to one
+simulation.  </p>
+</td></tr>
+<tr valign="top"><td><code>cov.model</code></td>
+<td>
+<p>a string with the name of the correlation function.  </p>
+</td></tr>
+<tr valign="top"><td><code>nugget</code></td>
+<td>
+<p>the value of the nugget parameter.</p>
+</td></tr>
+<tr valign="top"><td><code>cov.pars</code></td>
+<td>
+<p>a vector with the values of <i>sigma^2</i>
+and <i>phi</i>, respectively.  </p>
+</td></tr>
+<tr valign="top"><td><code>kappa</code></td>
+<td>
+<p>value of the parameter <i>kappa</i>.  </p>
+</td></tr>
+<tr valign="top"><td><code>lambda</code></td>
+<td>
+<p>value of the Box-Cox transformation parameter
+<i>lambda</i>.  </p>
+</td></tr>
+<tr valign="top"><td><code>aniso.pars</code></td>
+<td>
+<p>a vector with values of the anisotropy parameters, if
+provided in the function call.  </p>
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+<p>a string with the name of the simulation method used.</p>
+</td></tr>
+<tr valign="top"><td><code>sim.dim</code></td>
+<td>
+<p>a string &quot;1d&quot; or &quot;2d&quot; indicating the spatial dimension of the
+simulation.</p>
+</td></tr>
+<tr valign="top"><td><code>.Random.seed</code></td>
+<td>
+<p>the random seed by the time the function was
+called.  </p>
+</td></tr>
+<tr valign="top"><td><code>messages</code></td>
+<td>
+<p>messages produced by the function describing the
+simulation.  </p>
+</td></tr>
+<tr valign="top"><td><code>call</code></td>
+<td>
+<p>the function call.  </p>
+</td></tr>
+</table>
+<p><code>geoR2grf</code> returns a list with the components:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>model</code></td>
+<td>
+<p><span class="pkg">RandomFields</span> name of the correlation model</p>
+</td></tr>
+<tr valign="top"><td><code>param</code></td>
+<td>
+<p><span class="pkg">RandomFields</span> parameter vector</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Paulo Justiniano Ribeiro Jr. <a href="mailto:paulojus@leg.ufpr.br">paulojus@leg.ufpr.br</a>,  <br />
+Peter J. Diggle <a href="mailto:p.diggle@lancaster.ac.uk">p.diggle@lancaster.ac.uk</a>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Wood, A.T.A. and Chan, G. (1994) Simulation of stationary Gaussian
+process in <i>[0,1]^d</i>.
+<em>Journal of Computatinal and Graphical Statistics</em>, <b>3</b>, 409&ndash;432.
+</p>
+<p>Schlather, M. (1999) <em>Introduction to positive definite functions
+and to unconditional simulation of random fields</em>. Tech. Report
+ST&ndash;99&ndash;10, Dept Maths and Stats, Lancaster University.
+</p>
+<p>Schlather, M. (2001) <em>Simulation and Analysis of Random Fields</em>. R-News <b>1</b> (2), p. 18-20.
+</p>
+<p>Further information on the package <span class="pkg">geoR</span> can be found at:<br />
+<a href="http://www.leg.ufpr.br/geoR">http://www.leg.ufpr.br/geoR</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="plot.grf.html">plot.grf</a></code> and <code><a href="image.grf.html">image.grf</a></code> for
+graphical output,
+<code><a href="coords.aniso.html">coords.aniso</a></code> for anisotropy coordinates transformation
+and, <code><a href="../../Matrix/html/chol.html">chol</a></code>,
+<code><a href="../../base/html/svd.html">svd</a></code> and <code><a href="../../base/html/eigen.html">eigen</a></code> for methods of matrix
+decomposition and <code><a href="../../RandomFields/html/GaussRF.html">GaussRF</a></code> function
+in the package <span class="pkg">RandomFields</span>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+sim1 &lt;- grf(100, cov.pars = c(1, .25))
+# a display of simulated locations and values
+points(sim1)   
+# empirical and theoretical variograms
+plot(sim1)
+## alternative way
+plot(variog(sim1, max.dist=1))
+lines.variomodel(sim1)
+#
+# a "smallish" simulation
+sim2 &lt;- grf(441, grid = "reg", cov.pars = c(1, .25)) 
+image(sim2)
+##
+## 1-D simulations using the same seed and different noise/signal ratios
+##
+set.seed(234)
+sim11 &lt;- grf(100, ny=1, cov.pars=c(1, 0.25), nug=0)
+set.seed(234)
+sim12 &lt;- grf(100, ny=1, cov.pars=c(0.75, 0.25), nug=0.25)
+set.seed(234)
+sim13 &lt;- grf(100, ny=1, cov.pars=c(0.5, 0.25), nug=0.5)
+##
+par.ori &lt;- par(no.readonly = TRUE)
+par(mfrow=c(3,1), mar=c(3,3,.5,.5))
+yl &lt;- range(c(sim11$data, sim12$data, sim13$data))
+image(sim11, type="l", ylim=yl)
+image(sim12, type="l", ylim=yl)
+image(sim13, type="l", ylim=yl)
+par(par.ori)
+
+## simulating within borders
+data(parana)
+pr1 &lt;- grf(100, cov.pars=c(200, 40), borders=parana$borders, mean=500)
+points(pr1)
+pr1 &lt;- grf(100, grid="reg", cov.pars=c(200, 40), borders=parana$borders)
+points(pr1)
+pr1 &lt;- grf(100, grid="reg", nx=10, ny=5, cov.pars=c(200, 40), borders=parana$borders)
+points(pr1)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>geoR</em> version 1.7-5.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

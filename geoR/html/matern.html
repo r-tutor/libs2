@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Computer Values of the Matern Correlation Function</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for matern {geoR}"><tr><td>matern {geoR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Computer Values of the Matern Correlation Function</h2>
+
+<h3>Description</h3>
+
+<p>This function computes values of the <i>Matern</i>
+correlation function
+for given distances and parameters.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+matern(u, phi, kappa)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>u</code></td>
+<td>
+<p>a vector, matrix or array with values of the distances
+between pairs of data locations.  </p>
+</td></tr>
+<tr valign="top"><td><code>phi</code></td>
+<td>
+<p>value of the range parameter <i>phi</i>.  </p>
+</td></tr>
+<tr valign="top"><td><code>kappa</code></td>
+<td>
+<p>value of the smoothness parameter <i>kappa</i>.  </p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The <i>Matern</i> model is defined as:
+</p>
+<p style="text-align: center;"><i>rho(u;phi,kappa) =(2^(kappa-1) Gamma(kappa))^(-1)
+    (u/phi)^&kappa; K_&kappa;(u/&phi;)</i></p>
+
+<p>where <i>phi</i>  and <i>kappa</i> are parameters and 
+<i>K_&kappa;(&hellip;)</i> denotes the modified Bessel function of the third
+kind of order <i>kappa</i>.
+The family is valid for <i>phi &gt; 0</i> and <i>kappa &gt; 0</i>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A vector matrix or array, according to the argument <code>u</code>, with the
+values of the <i>Matern</i>
+correlation function for the given distances.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Paulo J. Ribeiro Jr. <a href="mailto:paulojus@leg.ufpr.br">paulojus@leg.ufpr.br</a>, <br />
+Peter J. Diggle <a href="mailto:p.diggle@lancaster.ac.uk">p.diggle@lancaster.ac.uk</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="cov.spatial.html">cov.spatial</a></code> for the correlation functions
+implemented in <span class="pkg">geoR</span>, and <code><a href="../../base/html/Bessel.html">besselK</a></code> for computation
+of the Bessel functions.</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+#
+# Models with fixed range and varying smoothness parameter
+#
+curve(matern(x, phi= 0.25, kappa = 0.5),from = 0, to = 1.5,
+      xlab = "distance", ylab = expression(rho(h)), lty = 2,
+      main=expression(paste("varying  ", kappa, "  and fixed  ", phi)))
+curve(matern(x, phi= 0.25, kappa = 1),from = 0, to = 1.5, add = TRUE)
+curve(matern(x, phi= 0.25, kappa = 2),from = 0, to = 1.5, add = TRUE,
+      lwd = 2, lty=2)
+curve(matern(x, phi= 0.25, kappa = 3),from = 0, to = 1.5, add = TRUE,
+      lwd = 2)
+legend("topright", expression(kappa==0.5, kappa==1.5, kappa==2, kappa==3),
+    lty=c(2,1,2,1), lwd=c(1,1,2,2))
+
+#
+# Correlations with equivalent "practical range"
+# and varying smoothness parameter
+#
+curve(matern(x, phi = 0.25, kappa = 0.5),from = 0, to = 1,
+      xlab = "distance", ylab = expression(gamma(h)), lty = 2,
+      main = "models with equivalent \"practical\" range")
+curve(matern(x, phi = 0.188, kappa = 1),from = 0, to = 1, add = TRUE)      
+curve(matern(x, phi = 0.14, kappa = 2),from = 0, to = 1,
+      add = TRUE, lwd=2, lty=2)      
+curve(matern(x, phi = 0.117, kappa = 2), from = 0, to = 1,
+      add = TRUE, lwd=2)      
+legend("topright", expression(list(kappa == 0.5, phi == 0.250),
+       list(kappa == 1, phi == 0.188), list(kappa == 2, phi == 0.140),
+       list(kappa == 3, phi == 0.117)), lty=c(2,1,2,1), lwd=c(1,1,2,2))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>geoR</em> version 1.7-5.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

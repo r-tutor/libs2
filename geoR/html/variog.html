@@ -1,0 +1,403 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Compute Empirical Variograms</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for variog {geoR}"><tr><td>variog {geoR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Compute Empirical Variograms</h2>
+
+<h3>Description</h3>
+
+<p>Computes sample (empirical) variograms with options for  the <em>classical</em> or <em>robust</em>
+estimators. Output can be returned as a <code>binned variogram</code>, a <code>
+    variogram cloud</code> or a <code>smoothed variogram</code>. Data
+transformation (Box-Cox) is allowed.
+&ldquo;Trends&rdquo; can be specified and are fitted by ordinary least
+squares in which case the variograms are computed using the
+residuals.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+variog(geodata, coords = geodata$coords, data = geodata$data, 
+       uvec = "default", breaks = "default",
+       trend = "cte", lambda = 1,
+       option = c("bin", "cloud", "smooth"),
+       estimator.type = c("classical", "modulus"), 
+       nugget.tolerance, max.dist, pairs.min = 2,
+       bin.cloud = FALSE, direction = "omnidirectional", tolerance = pi/8,
+       unit.angle = c("radians","degrees"), angles = FALSE, messages, ...) 
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>geodata</code></td>
+<td>
+<p>a list containing element <code>coords</code>
+as described next. Typically an object of the class
+<code>"geodata"</code> - a <span class="pkg">geoR</span> data-set.
+If not provided the arguments
+<code>coords</code> must be provided instead.  </p>
+</td></tr>
+<tr valign="top"><td><code>coords</code></td>
+<td>
+<p>an <i>n x 2</i> matrix containing
+coordinates of the <i>n</i> data locations in each row.
+Defaults to <code>geodata$coords</code>, if provided.</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a vector or matrix with data values.
+If a matrix is provided, each column is regarded as one variable or realization.
+Defaults to <code>geodata$data</code>, if provided.</p>
+</td></tr>
+<tr valign="top"><td><code>uvec</code></td>
+<td>
+<p>a vector with values used to define the variogram binning. Only
+used when <code>option = "bin"</code>.
+See <code>DETAILS</code> below for more details on how to specify the bins.
+</p>
+</td></tr>
+<tr valign="top"><td><code>breaks</code></td>
+<td>
+<p>a vector with values to define the variogram binning. Only
+used when <code>option = "bin"</code>.
+See <code>DETAILS</code> below for more details on how to specify the bins.
+</p>
+</td></tr>
+<tr valign="top"><td><code>trend</code></td>
+<td>
+<p>specifies the mean part of the model.
+See documentation of <code><a href="trend.spatial.html">trend.spatial</a></code> for further details.
+Defaults to <code>"cte"</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>lambda</code></td>
+<td>
+<p>values of the Box-Cox transformation parameter.
+Defaults to <i>1</i> (no
+transformation). If another value is provided the variogram is
+computed after transforming the 
+data. A case of particular interest is <i>lambda = 0</i>
+which corresponds to log-transformation.  </p>
+</td></tr>
+<tr valign="top"><td><code>option</code></td>
+<td>
+<p>defines the output type: the options <code>"bin"</code> returns values of
+binned variogram, <code>"cloud"</code> returns the variogram cloud and
+<code>"smooth"</code> returns the kernel smoothed variogram.
+Defaults to <code>"bin"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>estimator.type</code></td>
+<td>
+<p><code>"classical"</code> computes the classical method of
+moments estimator.  <code>"modulus"</code> returns the variogram
+estimator suggested by Hawkins and Cressie (see Cressie, 1993, pg 75).
+Defaults to <code>"classical"</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>nugget.tolerance</code></td>
+<td>
+<p>a numeric value. Points which are separated
+by a distance less than this value
+are considered co-located. Defaults to zero.  </p>
+</td></tr>
+<tr valign="top"><td><code>max.dist</code></td>
+<td>
+<p>a numerical value defining the maximum distance for
+the variogram. Pairs of locations
+separated for distance larger than this value are ignored for the
+variogram calculation. If not provided defaults takes the maximum
+distance among all pairs of data locations.  </p>
+</td></tr>
+<tr valign="top"><td><code>pairs.min</code></td>
+<td>
+<p>a integer number defining the minimum numbers of
+pairs for the bins.
+For <code>option = "bin"</code>,
+bins with number of pairs smaller than this
+value are ignored. Defaults to <code>NULL</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>bin.cloud</code></td>
+<td>
+<p>logical. If <code>TRUE</code> and
+<code>option = "bin"</code> the cloud values for each class are
+included in the output. Defaults to <code>FALSE</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>direction</code></td>
+<td>
+<p>a numerical value for the directional (azimuth) angle. This
+used to specify directional variograms. Default defines the
+omnidirectional variogram. The value must be in the interval
+<i>[0, pi]</i> radians (<i>[0, 180]</i> degrees).  </p>
+</td></tr>
+<tr valign="top"><td><code>tolerance</code></td>
+<td>
+<p>numerical value for the tolerance angle, when
+computing directional variograms. The value must be in the interval
+<i>[0, pi/2]</i> radians (<i>[0, 90]</i> degrees).  Defaults to <i>pi/8</i>.  </p>
+</td></tr>
+<tr valign="top"><td><code>unit.angle</code></td>
+<td>
+<p>defines the unit for the specification of angles in
+the two previous arguments. Options are <code>"radians"</code> and
+<code>"degrees"</code>, with default to <code>"radians"</code>. </p>
+</td></tr>
+<tr valign="top"><td><code>angles</code></td>
+<td>
+<p>Logical with default to <code>FALSE</code>. If <code>TRUE</code> the
+function also returns the angles between the pairs of points
+(unimplemented). </p>
+</td></tr>
+<tr valign="top"><td><code>messages</code></td>
+<td>
+<p>logical. Indicates whether
+status messages should be printed on the screen (or output device)
+while the function is running.  </p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>arguments to be passed to the function <code><a href="../../stats/html/ksmooth.html">ksmooth</a></code>, if
+<code>option = "smooth"</code>.  </p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Variograms are widely used in geostatistical analysis for exploratory
+purposes, to estimate covariance parameters and/or to compare theoretical
+and fitted models against sample variograms.
+</p>
+<p><b>Estimators</b><br />
+The two estimators currently implemented are:
+</p>
+
+<ul>
+<li> <p><em>classical</em> (method of moments) estimator:
+</p>
+<p style="text-align: center;"><i>gamma(h) = (1/2N_h) sum [Y(x_i+h) - Y(x_i)]^2</i></p>
+
+</li>
+<li><p> Hawkins and Cressie's <em>modulus</em> estimator
+</p>
+<p style="text-align: center;"><i>&gamma;(h)
+      = ([(1/N_h)&sum;_{i=1}^{N_h} |Y(x_{i+h}) -
+	Y(x_i)|^(1/2)]^4)/(0.914 + (0.988/N_h))</i></p>
+
+</li></ul>
+
+<p><b>Defining the bins</b>
+</p>
+<p><em>The defaults</em><br />
+If arguments <code>breaks</code> and <code>uvec</code> are not provided, the
+binning is defined as follows:<br />
+</p>
+
+<ol>
+<li><p> read the argument <code>max.dist</code>. If not provided it is set
+to the maximum distance between the pairs of points.
+</p>
+</li>
+<li><p> the center of the bins are initially defined by the sequence <code>u = seq(0,
+      max.dist, l = 13)</code>.
+</p>
+</li>
+<li><p> the interval spanned by each bin is given by the mid-points
+between the centers of the bins.
+
+</p>
+</li></ol>
+
+<p>If an vector is passed to the argument <code>breaks</code> its elements are
+taken as the limits of the bins (classes of distance) and the argument <code>uvec</code> is ignored.
+</p>
+<p><em>Variations on the default</em><br />
+The default definition of the bins is different for some particular
+cases.
+</p>
+
+<ol>
+<li><p> if there are  coincident data locations
+the bins follows the default above but
+one more bin is added at the origin (distance zero) for
+the collocated points.
+</p>
+</li>
+<li><p> if the argument <code>nugget.tolerance</code> is provided the
+separation distance between all pairs
+in the interval <i>[0, nugget.tolerance]</i> are set to zero.
+The first bin distance is set to zero (<code>u[1] = 0</code>).
+The remaining bins follows the default.
+</p>
+</li>
+<li><p> if a scalar is provided to the argument <code>uvec</code> the
+default number of bins is defined by this number.
+
+</p>
+</li>
+<li><p> if a vector is provided to the argument <code>uvec</code>,
+its elements are taken as central points of the bins.
+</p>
+</li></ol>
+
+
+
+
+
+
+
+<h3>Value</h3>
+
+<p>An object of the <code><a href="../../base/html/class.html">class</a></code> <code>variogram</code> which is a
+list with the following components:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>u </code></td>
+<td>
+<p>a vector with distances.  </p>
+</td></tr>
+<tr valign="top"><td><code>v </code></td>
+<td>
+<p>a vector with estimated variogram values at distances given
+in <code>u</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>n </code></td>
+<td>
+<p>number of pairs in each bin, if
+<code>option = "bin"</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>sd </code></td>
+<td>
+<p>standard deviation of the values in each bin.  </p>
+</td></tr>
+<tr valign="top"><td><code>bins.lim </code></td>
+<td>
+<p>limits defining the interval spanned by each bin.  </p>
+</td></tr>
+<tr valign="top"><td><code>ind.bin </code></td>
+<td>
+<p>a logical vector indicating whether the number of
+pairs in each bin is greater or equal to the value in the argument
+<code>pairs.min</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>var.mark </code></td>
+<td>
+<p>variance of the data.  </p>
+</td></tr>
+<tr valign="top"><td><code>beta.ols </code></td>
+<td>
+<p>parameters of the mean part of the model fitted by
+ordinary least squares.  </p>
+</td></tr>
+<tr valign="top"><td><code>output.type </code></td>
+<td>
+<p>echoes the <code>option</code> argument.  </p>
+</td></tr>
+<tr valign="top"><td><code>max.dist</code></td>
+<td>
+<p>maximum distance between pairs allowed in the
+variogram calculations.</p>
+</td></tr>
+<tr valign="top"><td><code>estimator.type </code></td>
+<td>
+<p>echoes the type of estimator used.  </p>
+</td></tr>
+<tr valign="top"><td><code>n.data </code></td>
+<td>
+<p>number of data.  </p>
+</td></tr>
+<tr valign="top"><td><code>lambda</code></td>
+<td>
+<p>value of the transformation parameter.  </p>
+</td></tr>
+<tr valign="top"><td><code>trend</code></td>
+<td>
+<p>trend specification.  </p>
+</td></tr>
+<tr valign="top"><td><code>nugget.tolerance</code></td>
+<td>
+<p>value of the nugget tolerance argument.  </p>
+</td></tr>
+<tr valign="top"><td><code>direction </code></td>
+<td>
+<p>direction for which the variogram was computed.  </p>
+</td></tr>
+<tr valign="top"><td><code>tolerance </code></td>
+<td>
+<p>tolerance angle for directional variogram.  </p>
+</td></tr>
+<tr valign="top"><td><code>uvec </code></td>
+<td>
+<p>lags provided in the function call.  </p>
+</td></tr>
+<tr valign="top"><td><code>call </code></td>
+<td>
+<p>the function call.  </p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Paulo J. Ribeiro Jr. <a href="mailto:paulojus@leg.ufpr.br">paulojus@leg.ufpr.br</a>, <br />
+Peter J. Diggle <a href="mailto:p.diggle@lancaster.ac.uk">p.diggle@lancaster.ac.uk</a>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Cressie, N.A.C (1993) <em>Statistics for Spatial Data</em>. New York: Wiley.
+</p>
+<p>Further information on the package <span class="pkg">geoR</span> can be found at:<br />
+<a href="http://www.leg.ufpr.br/geoR">http://www.leg.ufpr.br/geoR</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="variog4.html">variog4</a></code> for more on computation of
+directional variograms, 
+<code><a href="variog.model.env.html">variog.model.env</a></code> and <code><a href="variog.mc.env.html">variog.mc.env</a></code> for
+variogram envelopes,
+<code><a href="variofit.html">variofit</a></code>  for variogram based
+parameter estimation and
+<code><a href="plot.variogram.html">plot.variogram</a></code> for graphical output.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+#
+# computing variograms:
+#
+# binned variogram
+vario.b &lt;- variog(s100, max.dist=1)
+# variogram cloud
+vario.c &lt;- variog(s100, max.dist=1, op="cloud")
+#binned variogram and stores the cloud
+vario.bc &lt;- variog(s100, max.dist=1, bin.cloud=TRUE)
+# smoothed variogram
+vario.s &lt;- variog(s100, max.dist=1, op="sm", band=0.2)
+#
+#
+# plotting the variograms:
+par(mfrow=c(2,2))
+plot(vario.b, main="binned variogram") 
+plot(vario.c, main="variogram cloud")
+plot(vario.bc, bin.cloud=TRUE, main="clouds for binned variogram")  
+plot(vario.s, main="smoothed variogram") 
+
+# computing a directional variogram
+vario.0 &lt;- variog(s100, max.dist=1, dir=0, tol=pi/8)
+plot(vario.b, type="l", lty=2)
+lines(vario.0)
+legend("topleft", legend=c("omnidirectional", expression(0 * degree)), lty=c(2,1))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>geoR</em> version 1.7-5.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

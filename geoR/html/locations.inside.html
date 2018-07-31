@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Select prediction locations inside borders</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for locations.inside {geoR}"><tr><td>locations.inside {geoR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Select prediction locations inside borders</h2>
+
+<h3>Description</h3>
+
+<p>Selects the prediction locations located inside a polygon defining
+borders of a region where prediction is aimed.
+Typically internally called by <span class="pkg">geoR</span> functions
+<code><a href="krige.bayes.html">krige.bayes</a></code>, <code><a href="krige.conv.html">krige.conv</a></code>,
+<code><a href="ksline.html">ksline</a></code>. 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+locations.inside(locations, borders, as.is = TRUE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>locations</code></td>
+<td>
+<p>a two columns matrix or dqata frame with coordinates
+of the prediction locations.  </p>
+</td></tr>
+<tr valign="top"><td><code>borders</code></td>
+<td>
+<p>a two column matrix or data-frame with coordinates of a
+polygon defining the borders of the region.  </p>
+</td></tr>
+<tr valign="top"><td><code>as.is</code></td>
+<td>
+<p>logical defining if the returned object of of the same
+type (list, data-frame or matrix) as the provided in
+<code>locations</code>. If <code>FALSE</code> the function returns a matrix.  </p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>arguments to be passed to the internal function
+<code>.geoR_pip</code> and currently not used. </p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A two columns matrix, data-frame or a list with 2 elements with coordinates of points inside the borders.  
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../sp/html/over.html">over</a></code>,<code><a href="../../sp/html/coordinates.html">coordinates</a></code>,
+<code><a href="../../sp/html/SpatialPoints.html">SpatialPoints</a></code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+gr &lt;- pred_grid(parana$borders, by=20)
+plot(gr, asp=1, pch="+")
+polygon(parana$borders)
+gr.in &lt;- locations.inside(gr, parana$borders)
+points(gr.in, col=2, pch="+")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>geoR</em> version 1.7-5.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

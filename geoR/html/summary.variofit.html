@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Summarize Results of Variogram Estimation</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for summary.variofit {geoR}"><tr><td>summary.variofit {geoR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Summarize Results of Variogram Estimation</h2>
+
+<h3>Description</h3>
+
+<p>This function prints a summary of the parameter estimation results given
+by <code><a href="variofit.html">variofit</a></code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'variofit'
+summary(object, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>an object of the class <code>"variomodel"</code>
+typically an output of
+<code><a href="variofit.html">variofit</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>other arguments to be passed to the function
+<code><a href="../../base/html/print.html">print</a></code> or <code><a href="../../base/html/summary.html">summary</a></code>.  </p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Prints a summary of the estimation results on the screen or
+other output device. 
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Paulo J. Ribeiro Jr. <a href="mailto:paulojus@leg.ufpr.br">paulojus@leg.ufpr.br</a>, <br />
+Peter J. Diggle <a href="mailto:p.diggle@lancaster.ac.uk">p.diggle@lancaster.ac.uk</a>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Further information on the package <span class="pkg">geoR</span> can be found at:<br />
+<a href="http://www.leg.ufpr.br/geoR">http://www.leg.ufpr.br/geoR</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>The functions <code><a href="variofit.html">variofit</a></code> for
+variogram based estimation. For likelihood based parameter estimation see  <code><a href="likfit.html">likfit</a></code>. </p>
+
+
+<h3>Examples</h3>
+
+<pre>
+s100.vario &lt;- variog(s100, max.dist=1)
+wls &lt;- variofit(s100.vario, ini=c(.5, .5), fix.nugget = TRUE)
+wls
+summary(wls)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>geoR</em> version 1.7-5.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

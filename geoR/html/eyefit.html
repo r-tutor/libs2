@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Interactive Variogram Estimation</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for eyefit {geoR}"><tr><td>eyefit {geoR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Interactive Variogram Estimation</h2>
+
+<h3>Description</h3>
+
+<p>Function to fit an empirical variogram &quot;by eye&quot; using an interactive
+Tcl-Tk interface.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+eyefit(vario, silent = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>vario</code></td>
+<td>
+<p>An empirical variogram object as returned by the function
+<code><a href="variog.html">variog</a></code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>silent</code></td>
+<td>
+<p>logical indicating wheather or not the fitted variogram
+must be returned.  </p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Returns a list of list
+with the model parameters for each of the saved fit(s).
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Andreas Kiefer <a href="mailto:andreas@inf.ufpr.br">andreas@inf.ufpr.br</a> <br />
+Paulo Justiniano Ribeiro Junior <a href="mailto:paulojus@leg.ufpr.br">paulojus@leg.ufpr.br</a>. </p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="variofit.html">variofit</a></code> for least squares variogram fit,
+<code><a href="likfit.html">likfit</a></code> for likelihood based parameter estimation
+and <code><a href="krige.bayes.html">krige.bayes</a></code> to obtain the posterior distribution for the model parameters. </p>
+
+<hr /><div style="text-align: center;">[Package <em>geoR</em> version 1.7-5.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

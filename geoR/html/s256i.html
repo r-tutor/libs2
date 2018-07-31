@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Simulated Data-Set which Illustrate the Usage of krige.bayes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for s256i {geoR}"><tr><td>s256i {geoR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Simulated Data-Set which Illustrate the Usage of krige.bayes  </h2>
+
+<h3>Description</h3>
+
+<p>This is the simulated data-set used in the Technical
+Report which describes the implementation of the function <b>krige.bayes</b>
+(see reference below). 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+data(s256i)
+</pre>
+
+
+<h3>Format</h3>
+
+<p>Two objects of the <code><a href="../../base/html/class.html">class</a></code> <code>geodata</code>. Both are lists
+with the following components:
+</p>
+
+<dl>
+<dt><code>coords</code></dt><dd><p>the coordinates of data locations.  </p>
+</dd>
+<dt><code>data</code></dt><dd><p>the simulated data.  </p>
+</dd>
+</dl>
+
+
+
+<h3>References</h3>
+
+<p>Ribeiro Jr, P.J. and Diggle, P.J. (1999)
+Bayesian inference in Gaussian model-based geostatistics.
+<em>Technical report ST-99-08, Dept of Maths and
+Stats, Lancaster University</em>. 
+</p>
+<p>Further information about the <span class="pkg">geoR</span> package can be found at:<br />
+<a href="http://www.leg.ufpr.br/geoR">http://www.leg.ufpr.br/geoR</a>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+points(s256i, pt.div="quintiles", cex.min=1, cex.max=1)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>geoR</em> version 1.7-5.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

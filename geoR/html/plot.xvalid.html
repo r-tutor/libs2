@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Plot Cross-Validation Results</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for plot.xvalid {geoR}"><tr><td>plot.xvalid {geoR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Plot Cross-Validation Results</h2>
+
+<h3>Description</h3>
+
+<p>This function produces ten plots with the results produced by the
+cross-validation function <code><a href="xvalid.html">xvalid</a></code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'xvalid'
+plot(x, coords, borders = NULL, ask = TRUE,
+            error = TRUE, std.error = TRUE, data.predicted = TRUE,
+            pp = TRUE, map = TRUE, histogram = TRUE,
+            error.predicted = TRUE, error.data = TRUE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>an object of the class <code>"xvalid"</code>, typically an output
+from the function <code><a href="xvalid.html">xvalid</a></code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>coords</code></td>
+<td>
+<p>an <i>n x 2</i> object containing
+coordinates of the (cross-)validation locations.  </p>
+</td></tr>
+<tr valign="top"><td><code>borders</code></td>
+<td>
+<p>optional. Takes a two column matrix or data-frame with
+coordinates of the borders. If provided the borders are included in
+the errors maps.  </p>
+</td></tr>
+<tr valign="top"><td><code>ask</code></td>
+<td>
+<p>logical. Defines whether or not the user is prompted before
+each plot is produced.</p>
+</td></tr>
+<tr valign="top"><td><code>error</code></td>
+<td>
+<p>logical. Defines whether the plots for the errors
+(<i>error = data - predicted</i>) will
+be produced.  </p>
+</td></tr>
+<tr valign="top"><td><code>std.error</code></td>
+<td>
+<p>logical. Defines whether the plots for the
+standardised errors will be produced.  </p>
+</td></tr>
+<tr valign="top"><td><code>data.predicted</code></td>
+<td>
+<p>logical defining whether a plot of data versus
+predicted should be displayed. Defaults to <code>TRUE</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>pp</code></td>
+<td>
+<p>logical defining whether a <em>pp</em> plot
+should be displayed. Defaults to <code>TRUE</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>map</code></td>
+<td>
+<p>logical defining whether a map of the errors
+should be displayed. Defaults to <code>TRUE</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>histogram</code></td>
+<td>
+<p>logical defining whether a histogram of the errors
+should be displayed. Defaults to <code>TRUE</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>error.predicted</code></td>
+<td>
+<p>logical defining whether a plot of errors versus
+predicted should be displayed. Defaults to <code>TRUE</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>error.data</code></td>
+<td>
+<p>logical defining whether a plot of errors versus
+data should be displayed. Defaults to <code>TRUE</code>.  </p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>other arguments to be passed to the function
+<code><a href="../../graphics/html/plot.html">plot</a></code>.  </p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The number of plots to be produced will depend on the input options.
+If the graphics device is set to just one plot (something equivalent
+to <span class="option">par(mfcol=c(1,1))</span>) after each graphic being displayed the user will be prompt
+to press <kbd>&lt;return&gt;</kbd> to see the next graphic.
+</p>
+<p>Alternativaly the user can set the graphical parameter to have several
+plots in one page. With default options for the arguments the maximum
+number of plots (10) is produced and setting <span class="option">par(mfcol=c(5,2))</span>)
+will display them in the same page.
+</p>
+<p>The &ldquo;errors&rdquo; for the plots are defined as
+</p>
+<p style="text-align: center;"><i>error = data - predicted</i></p>
+
+<p>and the plots uses the color blue to indicate positive errors and
+red to indicate negative erros. 
+</p>
+
+
+<h3>Value</h3>
+
+<p>No value returned. Plots are produced on the current graphics device.  
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="xvalid.html">xvalid</a></code> for the cross-validation computations.  </p>
+
+
+<h3>Examples</h3>
+
+<pre>
+wls &lt;- variofit(variog(s100, max.dist = 1), ini = c(.5, .5), fix.n = TRUE)
+xvl &lt;- xvalid(s100, model = wls)
+#
+op &lt;- par(no.readonly = TRUE)
+par(mfcol = c(3,2))
+par(mar = c(3,3,0,1))
+par(mgp = c(2,1,0))
+plot(xvl, error = FALSE, ask = FALSE)
+plot(xvl, std.err = FALSE, ask = FALSE)
+par(op)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>geoR</em> version 1.7-5.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

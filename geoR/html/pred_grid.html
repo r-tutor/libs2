@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Generates a 2D Prediction Grid</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for pred_grid {geoR}"><tr><td>pred_grid {geoR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Generates a 2D Prediction Grid </h2>
+
+<h3>Description</h3>
+
+<p>This function facilitates the generation of a 2D prediction grid for
+geostatistical kriging.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+pred_grid(coords, y.coords = NULL, ..., y.by = NULL,
+          y.length.out = NULL, y.along.with = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>coords</code></td>
+<td>
+<p>a list, matrix or data-frame with xy-coordinates
+of prediction points or a vector with x-coordinates.  </p>
+</td></tr>
+<tr valign="top"><td><code>y.coords</code></td>
+<td>
+<p>a vector with y-coordinates. Needed if
+argument <code>coords</code> provides only x-coordinates.  </p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>arguments <code>by</code> or <code>length.out</code>
+to be passed to the function <code><a href="../../base/html/rep.html">rep</a></code>.
+These arguments are used for the x-coordinates and are
+default optioons for y-coordinates.  </p>
+</td></tr>
+<tr valign="top"><td><code>y.by</code></td>
+<td>
+<p>Optional. <code>by</code> argument for <code><a href="../../base/html/rep.html">rep</a></code> to be
+used with the y-coordinates. </p>
+</td></tr>
+<tr valign="top"><td><code>y.length.out</code></td>
+<td>
+<p>Optional. <code>length.out</code> argument for
+<code><a href="../../base/html/rep.html">rep</a></code> to be used with the y-coordinates. </p>
+</td></tr>
+<tr valign="top"><td><code>y.along.with</code></td>
+<td>
+<p>Optional. <code>along.with</code> argument for <code><a href="../../base/html/rep.html">rep</a></code> to be
+used with the y-coordinates. </p>
+</td></tr>
+</table>
+
+
+
+
+
+<h3>Value</h3>
+
+<p>An two column data-frame which is on output of <code><a href="../../base/html/expand.grid.html">expand.grid</a></code>. 
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See <code><a href="../../base/html/seq.html">seq</a></code> and <code><a href="../../base/html/expand.grid.html">expand.grid</a></code> which are
+used internally and  <code><a href="locations.inside.html">locations.inside</a></code> and
+<code><a href="polygrid.html">polygrid</a></code> to select points inside a border.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+pred_grid(c(0,1), c(0,1), by=0.25) ## create a grid in a unit square
+loc0 &lt;- pred_grid(ca20$borders, by=20)
+points(ca20, borders=borders)
+points(loc0, pch="+")
+points(locations.inside(loc0, ca20$border), pch="+", col=2)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>geoR</em> version 1.7-5.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

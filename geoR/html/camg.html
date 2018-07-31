@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Calcium and magnesium content in soil samples</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for camg {geoR}"><tr><td>camg {geoR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Calcium and magnesium content in soil samples</h2>
+
+<h3>Description</h3>
+
+<p>This data set contains the calcium content measured in soil samples
+taken from the 0-20cm layer at 178 locations within a certain study area divided in three
+sub-areas. The elevation at each location was also recorded.
+</p>
+<p>The first region is tipically flooded during the rain season and not
+used as an experimental area. The calcium levels would represent
+the natural content in the region. The second region has received
+fertilizers a while ago and is tipically occupied by rice fields.
+The third region has recieved fertilizers recently and is frequently
+used as an experimental area.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>data(camg)</pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 178 observations on the following 10 variables.
+</p>
+
+<dl>
+<dt>east</dt><dd><p>east-west coordinates, in meters.</p>
+</dd>
+<dt>north</dt><dd><p>north-south coordinates, in meters.</p>
+</dd>
+<dt>elevation</dt><dd><p>elevation, in meters</p>
+</dd>
+<dt>region</dt><dd><p>a factor where numbers indicate different sub-regions
+within the area</p>
+</dd>
+<dt>ca020</dt><dd><p>calcium content in the 0-20cm soil layer, measured in <i>mmol_c/dm^3</i>.  </p>
+</dd>
+<dt>mg020</dt><dd><p>calcium content in the 0-20cm soil layer, measured in <i>mmol_c/dm^3</i>.  </p>
+</dd>
+<dt>ctc020</dt><dd><p>calcium content in the 0-20cm soil layer.  </p>
+</dd>
+<dt>ca2040</dt><dd><p>calcium content in the 20-40cm soil layer, measured in <i>mmol_c/dm^3</i>.  </p>
+</dd>
+<dt>mg2040</dt><dd><p>calcium content in the 20-40cm soil layer, measured in <i>mmol_c/dm^3</i>.  </p>
+</dd>
+<dt>ctc2040</dt><dd><p>calcium content in the 20-40cm soil layer.  </p>
+</dd>
+</dl>
+
+
+
+<h3>Details</h3>
+
+<p>More details about this data-set, including coordinates of the region
+and sub-region borders
+can be found in the data object <code><a href="ca20.html">ca20</a></code>.
+</p>
+
+
+<h3>Source</h3>
+
+<p>The data was collected by researchers from PESAGRO and EMBRAPA-Solos, Rio
+de Janeiro, Brasil
+and provided by Dra. Maria Cristina Neves de Oliveira.
+</p>
+<p>Capeche, C.L.; Macedo, J.R.; Manzatto, H.R.H.; Silva, E.F. (1997)
+Caracterização pedológica da fazenda Angra - PESAGRO/RIO -
+Estação experimental de Campos (RJ). (compact disc).
+In: Congresso BRASILEIRO de Ciência do Solo. 26.,
+Informação, globalização, uso do solo; Rio de Janeiro, 1997.
+trabalhos. Rio de Janeiro: Embrapa/SBCS.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+plot(camg[-(1:2),])
+mg20 &lt;- as.geodata(camg, data.col=6)
+plot(mg20)
+points(mg20)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>geoR</em> version 1.7-5.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>
