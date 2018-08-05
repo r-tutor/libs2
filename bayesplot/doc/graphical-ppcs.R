@@ -1,3 +1,6 @@
+params <-
+list(EVAL = TRUE)
+
 ## ---- SETTINGS-knitr, include=FALSE--------------------------------------
 stopifnot(require("knitr"))
 library("bayesplot")
@@ -8,7 +11,8 @@ knitr::opts_chunk$set(
   fig.width = 5,
   out.width = "60%",
   fig.align = "center",
-  comment = NA
+  comment = NA,
+  eval = params$EVAL
 )
 
 ## ---- pkgs, include=FALSE------------------------------------------------

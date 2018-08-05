@@ -7,6 +7,10 @@ bayesplot-colors	bayesplot-colors
 bayesplot-extractors	bayesplot-extractors
 bayesplot-helpers	bayesplot-helpers
 bayesplot_grid	bayesplot_grid
+bayesplot_theme_get	bayesplot_theme_get
+bayesplot_theme_replace	bayesplot_theme_get
+bayesplot_theme_set	bayesplot_theme_get
+bayesplot_theme_update	bayesplot_theme_get
 color_scheme_get	bayesplot-colors
 color_scheme_set	bayesplot-colors
 color_scheme_view	bayesplot-colors

@@ -28,6 +28,7 @@ bayesplot-helpers       Convenience functions for adding or changing
                         plot details
 bayesplot-package       Plots for Bayesian Models
 bayesplot_grid          Arrange plots in a grid
+bayesplot_theme_get     Get, set, and modify the active bayesplot theme
 pp_check                Posterior predictive checks (S3 generic and
                         default method)
 theme_default           Default bayesplot plotting theme
