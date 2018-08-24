@@ -22,7 +22,7 @@ symbox(x, ...)
 ## S3 method for class 'formula'
 symbox(formula, data=NULL, subset, na.action=NULL, ylab,  ...)
 ## Default S3 method:
-symbox(x, powers = c(-1, -0.5, 0, 0.5, 1), start=0, 
+symbox(x, powers = c(-1, -0.5, 0, 0.5, 1), start, 
 	trans=bcPower, xlab="Powers", ylab, ...)
 </pre>
 
@@ -54,13 +54,19 @@ in the vector of powers.</p>
 </td></tr>
 <tr valign="top"><td><code>start</code></td>
 <td>
-<p>a constant to be added to <code>x</code>.</p>
+<p>a constant to be added to <code>x</code>. If <code>start</code> is missing and
+<code>trans</code> is <code><a href="bcPower.html">bcPower</a></code> (the default) or <code><a href="bcPower.html">bcnPower</a></code>, then
+a start will be automatically generated if there are zero or negative values in 
+<code>x</code>, and a warning will be printed; the auto-generated <code>start</code> is the
+absolute value of the minimum <code>x</code> plus 1 percent of the range of <code>x</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>trans</code></td>
 <td>
 <p>a transformation function whose first argument is a numeric vector and whose second
 argument is a transformation parameter, given by the <code>powers</code> argument; the default
-is <code><a href="bcPower.html">bcPower</a></code>, and another possibility is <code><a href="bcPower.html">yjPower</a></code>.</p>
+is <code><a href="bcPower.html">bcPower</a></code>, and another possibility is <code><a href="bcPower.html">yjPower</a></code>.
+<code><a href="bcPower.html">bcnPower</a></code> may also be used, in which case the <code>gamma</code> parameter
+is set to the value of <code>start</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
@@ -97,5 +103,5 @@ is <code><a href="bcPower.html">bcPower</a></code>, and another possibility is <
 symbox(~ income, data=Prestige)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>car</em> version 3.0-0 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>car</em> version 3.0-2 <a href="00Index.html">Index</a>]</div>
 </body></html>

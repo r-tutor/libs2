@@ -28,9 +28,9 @@ scatterplotMatrix(formula, data=NULL, subset, ...)
 scatterplotMatrix(x, smooth = TRUE,
     id = FALSE, legend = TRUE, regLine = TRUE,
     ellipse = FALSE, var.labels = colnames(x), diagonal = TRUE,
-    plot.points = TRUE, groups = NULL, by.groups = TRUE, 
-    use = c("complete.obs", "pairwise.complete.obs"), col = 
-    carPalette()[-1], pch = 1:n.groups, cex = par("cex"), 
+    plot.points = TRUE, groups = NULL, by.groups = TRUE,
+    use = c("complete.obs", "pairwise.complete.obs"), col =
+    carPalette()[-1], pch = 1:n.groups, cex = par("cex"),
     cex.axis = par("cex.axis"), cex.labels = NULL,
     cex.main = par("cex.main"), row1attop = TRUE, ...)
 
@@ -177,15 +177,15 @@ opposed to at the bottom, as in graph (argument suggested by Richard Heiberger).
 
 <h3>Details</h3>
 
-<p>Many arguments to scatterplotMatrix were changed with verions 3 of <span class="pkg">car</span> that we hope simplifies use of
+<p>Many arguments to <code>scatterplotMatrix</code> were changed in version 3 of <span class="pkg">car</span>, to simplify use of
 this function.
 </p>
-<p>The <code>smooth</code> argument is usually either equal to <code>TRUE</code> or <code>FALSE</code> to draw, or omit,
-the smoother.  Alternatively <code>smooth</code> can equal a list of arguments.  The default behavior of
+<p>The <code>smooth</code> argument is usually either set to <code>TRUE</code> or <code>FALSE</code> to draw, or omit,
+the smoother.  Alternatively <code>smooth</code> can be set to a list of arguments.  The default behavior of
 <code>smooth=TRUE</code> is equivalent to <code>smooth=list(smoother=loessLine, spread=TRUE, lty.smooth=1, lwd.smooth=1.5, lty.spread=3, lwd.spread=1)</code>, specifying the smoother to be used, including the spread or variance smooth,
-and the line widths and types for the curves.  You can also specify the colors you want to use for the mean and variance smooths with the arguments <code>col.smooth</code> and <code>col.spread</code>. Alternative smoothers are <code>gamline</code> that uses the
-<code><a href="../../mgcv/html/gam.html">gam</a></code> function from the mgcv package, and <code>quantregLine</code> that uses quantile regression to
-estimate the median and quartile functiona using <code><a href="../../quantreg/html/rqss.html">rqss</a></code> frm the quantreg package.  All of these
+and the line widths and types for the curves.  You can also specify the colors you want to use for the mean and variance smooths with the arguments <code>col.smooth</code> and <code>col.spread</code>. Alternative smoothers are <code>gamline</code> which uses the
+<code><a href="../../mgcv/html/gam.html">gam</a></code> function from the <span class="pkg">mgcv</span> package, and <code>quantregLine</code> which uses quantile regression to
+estimate the median and quartile functions using <code><a href="../../quantreg/html/rqss.html">rqss</a></code> from the <span class="pkg">quantreg</span> package.  All of these
 smoothers have one or more arguments described on their help pages, and these arguments can be added to the
 <code>smooth</code> argument; for example, <code>smooth = list(span=1/2)</code> would use the default
 <code>loessLine</code> smoother,
@@ -201,27 +201,29 @@ function.  For the <code>quantregLine</code> method, the center estimates the me
 horizontal axis, and the spread estimates the lower and upper quartiles of the estimated conditional
 distribution for each value of the horizontal axis.
 </p>
+<p>The sub-arguments <code>spread</code>, <code>lty.spread</code> and <code>col.spread</code> of the <code>smooth</code> argument are equivalent to the newer <code>var</code>, <code>col.var</code> and <code>lty.var</code>, respectively, recognizing that the spread is a measuure of conditional variability.
+</p>
 <p>By default the diagonal argument is used to draw kernel density estimates of the
 variables by setting <code>diagonal=TRUE</code>, which is equivalent to setting <code>diagonal =
-   list(method="adaptiveDensity", bw=bw.nrd0, adjust=1, kernel=dnorm, na.rm=TRUE)</code>.  The additional argument
+   list(method="adaptiveDensity", bw=bw.nrd0, adjust=1, kernel=dnorm, na.rm=TRUE)</code>.  The additional arguments
 shown are descibed at <code><a href="densityPlot.html">adaptiveKernel</a></code>.  The other methods avaliable, with their default
-arguments, are <code>diagonal=list(method="denisty", bw="nrd0", adjust=1, kernel="gaussian", na.rm=TRUE)</code>
-that uses <code><a href="../../stats/html/density.html">density</a></code> for nonadaptive kernel density estimation; <code>diagonal=list(method
+arguments, are <code>diagonal=list(method="density", bw="nrd0", adjust=1, kernel="gaussian", na.rm=TRUE)</code>
+which uses <code><a href="../../stats/html/density.html">density</a></code> for nonadaptive kernel density estimation; <code>diagonal=list(method
    ="histogram", breaks="FD")</code>
-that uses <code><a href="../../graphics/html/hist.html">hist</a></code> for drawing a histogram that ignores grouping, if present;
-<code>diagonal=list(method="boplot")</code> with no additional arguments that draws (parallel) boxplots;
-<code>diagonal=list(method="qqplot")</code> with no additional arguments that draws a normal QQplot; and
-<code>diagonal=list(method="oned")</code> with no additional arguments that draws a rug plot tilted to the
+which uses <code><a href="../../graphics/html/hist.html">hist</a></code> for drawing a histogram that ignores grouping, if present;
+<code>diagonal=list(method="boxplot")</code> with no additional arguments which draws (parallel) boxplots;
+<code>diagonal=list(method="qqplot")</code> with no additional arguments which draws a normal QQ plot; and
+<code>diagonal=list(method="oned")</code> with no additional arguments which draws a rug plot tilted to the
 diagonal, as suggested by Richard Heiberger.
 </p>
-<p>Earlier versions of <code>scatterplotMatrix</code> included arguments <code>transform</code> and <code>famiy</code> to estimate power transformations using the <code><a href="powerTransform.html">powerTransform</a></code> function before drawing the plot.  The sample functionality can be achieved by calling <code>powerTransform</code> directly to estimate a transformation, saving the transformed variables, and then plotting.
+<p>Earlier versions of <code>scatterplotMatrix</code> included arguments <code>transform</code> and <code>family</code> to estimate power transformations using the <code><a href="powerTransform.html">powerTransform</a></code> function before drawing the plot.  The same functionality can be achieved by calling <code>powerTransform</code> directly to estimate a transformation, saving the transformed variables, and then plotting.
 </p>
 
 
 <h3>Value</h3>
 
-<p><code>NULL</code>. This function is used for its side effect: producing
-a plot.  If point identification is used, a list of identified points is returned.
+<p><code>NULL</code>, returned invisibly. This function is used for its side effect: producing
+a plot.  If point identification is used, a vector of identified points is returned.
 </p>
 
 
@@ -255,5 +257,5 @@ scatterplotMatrix(~ income + education + prestige,
     data=Duncan, id=TRUE, smooth=list(method=gamLine))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>car</em> version 3.0-0 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>car</em> version 3.0-2 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -9,7 +9,7 @@
 
 <h3>Description</h3>
 
-<p>This function uses basic R graphics to draw a two-dimensional scatterplot, with options to allow for plot enhancements that are often helpful with regression problems.  Enhancements include adding marginal boxplots, estimated mean and variance functions using either parametric or nonparametric methods, point identification, jittering, setting characteristics of points and lines like color, size and symbol, fitting conditional on a grouping variable, and other enhancements.
+<p>This function uses basic R graphics to draw a two-dimensional scatterplot, with options to allow for plot enhancements that are often helpful with regression problems.  Enhancements include adding marginal boxplots, estimated mean and variance functions using either parametric or nonparametric methods, point identification, jittering, setting characteristics of points and lines like color, size and symbol, marking points and fitting lines conditional on a grouping variable, and other enhancements.
 <code>sp</code> is an abbreviation for <code>scatterplot</code>.
 </p>
 
@@ -72,10 +72,10 @@ suppress both boxplots.</p>
 </td></tr>
 <tr valign="top"><td><code>regLine</code></td>
 <td>
-<p>controls adding a fitted regression line to the plot.  if 
-<code>regLine=FALSE</code>, no line is drawn.  If <code>TRUE</code>, the default, an ols 
+<p>controls adding a fitted regression line to the plot.  if
+<code>regLine=FALSE</code>, no line is drawn.  If <code>TRUE</code>, the default, an OLS
 line is fit.  This argument can also be a list.  The default of <code>TRUE</code> is
-equivalent to <code>refLine=list(method=lm, lty=1, lwd=2, col=col)</code>, which specifies
+equivalent to <code>regLine=list(method=lm, lty=1, lwd=2, col=col)</code>, which specifies
 using the <code>lm</code> function to estimate the fitted line, to draw a solid line
 (<code>lty=1</code>) of width 2 times the nominal width (<code>lwd=2</code>) in the color given by
 the first element of the <code>col</code> argument described below.
@@ -87,19 +87,19 @@ the first element of the <code>col</code> argument described below.
 and properties of a
 legend; if <code>FALSE</code>, the legend is suppressed. Can be a list of
 named arguments, as follows: <code>title</code> for the legend; <code>inset</code>, giving space
-as a proportion of the axes to offset the legend from the axes; <code>coords</code> 
-specifying the position of the legend in any form acceptable to the 
-<code><a href="../../graphics/html/legend.html">legend</a></code> function or, if not given, the legend is placed <em>above</em> 
+as a proportion of the axes to offset the legend from the axes; <code>coords</code>
+specifying the position of the legend in any form acceptable to the
+<code><a href="../../graphics/html/legend.html">legend</a></code> function or, if not given, the legend is placed <em>above</em>
 the plot in the upper margin; <code>columns</code> for the legend, determined automatically
-to prefer a horizontal layout if not given explicitly; <code>cex</code> giving the 
-relative size of the legend. <code>TRUE</code> (the default) is equivalent to
+to prefer a horizontal layout if not given explicitly; <code>cex</code> giving the
+relative size of the legend symbols and text. <code>TRUE</code> (the default) is equivalent to
 <code>list(title=deparse(substitute(groups)), inset=0.02, cex=1)</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>id</code></td>
 <td>
 <p>controls point identification; if <code>FALSE</code> (the default), no points are
 identified; can be a list of named arguments to the <code><a href="showLabels.html">showLabels</a></code> function;
-<code>TRUE</code> is equivalent to 
+<code>TRUE</code> is equivalent to
 <code>list(method="mahal", n=2, cex=1, col=carPalette()[-1], location="lr")</code>,
 which identifies the 2 points (in each group) with the largest Mahalanobis distances
 from the center of the data.  See <code><a href="showLabels.html">showLabels</a></code> for a description of the
@@ -108,13 +108,13 @@ functions in <span class="pkg">car</span>, as the <code>method</code> used depen
 </td></tr>
 <tr valign="top"><td><code>ellipse</code></td>
 <td>
-<p>controls plotting data-concentration ellipses. If <code>FALSE</code>     
-(the default), no ellipses are plotted.  Can be a list of named values giving 
+<p>controls plotting data-concentration ellipses. If <code>FALSE</code>
+(the default), no ellipses are plotted.  Can be a list of named values giving
 <code>levels</code>, a vector of one or more bivariate-normal probability-contour levels at
-which to plot the ellipses; <code>robust</code>, a logical value determing whether to use 
-the <code><a href="../../MASS/html/cov.trob.html">cov.trob</a></code> function in the <span class="pkg">MASS</span> package to calculate the center 
+which to plot the ellipses; <code>robust</code>, a logical value determing whether to use
+the <code><a href="../../MASS/html/cov.trob.html">cov.trob</a></code> function in the <span class="pkg">MASS</span> package to calculate the center
 and covariance matrix for the data ellipses; and <code>fill</code> and <code>fill.alpha</code>,
-which control whether the ellipse is filled and the transparency of the fill. 
+which control whether the ellipse is filled and the transparency of the fill.
 <code>TRUE</code> is equivalent to
 <code>list(levels=c(.5, .95), robust=TRUE, fill=TRUE, fill.alpha=0.2)</code>.</p>
 </td></tr>
@@ -126,27 +126,26 @@ which control whether the ellipse is filled and the transparency of the fill.
 <td>
 <p>specifies a nonparametric estimate of the mean or median
 function of the vertical axis variable given the
-horizontal axis variable and optionally a nonparametric estimate of the spread or 
-variance function.  If
-<code>smooth=FALSE</code> neither function is drawn.  If <code>smooth=TRUE</code>, then both the mean     function
-and variance funtions are drawn for ungrouped data, and the mean function only is drawn 
+horizontal axis variable and optionally a nonparametric estimate of the conditional variance.  If
+<code>smooth=FALSE</code> neither function is drawn.  If <code>smooth=TRUE</code>, then both the mean function
+and variance funtions are drawn for ungrouped data, and the mean function only is drawn
 for grouped
-data.  The default smoother is <code><a href="ScatterplotSmoothers.html">loessLine</a></code>, which uses the 
+data.  The default smoother is <code><a href="ScatterplotSmoothers.html">loessLine</a></code>, which uses the
 <code><a href="../../stats/html/loess.html">loess</a></code> function from
-the <span class="pkg">stats</span> package.  This smoother is fast and reliable.  See the details below 
+the <span class="pkg">stats</span> package.  This smoother is fast and reliable.  See the details below
 for changing
-the smoother, line type, width and color, of the added lines, and adding arguments 
+the smoother, line type, width and color, of the added lines, and adding arguments
 for the smoother.</p>
 </td></tr>
 <tr valign="top"><td><code>groups</code></td>
 <td>
 <p>a factor or other variable dividing the data into groups; groups are
-plotted with different colors, plotting characters, fits and smooths.  Using this 
+plotted with different colors, plotting characters, fits, and smooths.  Using this
 argument is equivalent to specifying the grouping variable in the formula.</p>
 </td></tr>
 <tr valign="top"><td><code>by.groups</code></td>
 <td>
-<p>if <code>TRUE</code>, regression lines are fit by groups.</p>
+<p>if <code>TRUE</code> (the default when there are groups), regression lines are fit by groups.</p>
 </td></tr>
 <tr valign="top"><td><code>xlab</code></td>
 <td>
@@ -165,14 +164,14 @@ argument is equivalent to specifying the grouping variable in the formula.</p>
 <p>a list with elements <code>x</code> or <code>y</code> or both, specifying jitter factors
 for the horizontal and vertical coordinates of the points in the scatterplot. The
 <code><a href="../../base/html/jitter.html">jitter</a></code> function is used to randomly perturb the points; specifying a
-factor of <code>1</code> produces the default jitter. 
+factor of <code>1</code> produces the default jitter.
 Fitted lines are unaffected by the jitter.</p>
 </td></tr>
 <tr valign="top"><td><code>col</code></td>
 <td>
-<p>with no grouping, this specifies a color for plotted points; 
-with grouping this argument  must be a vector
-of colors of length at least equal to the number of groups. The default is 
+<p>with no grouping, this specifies a color for plotted points;
+with grouping, this argument  should be a vector
+of colors of length at least equal to the number of groups. The default is
 value returned by <code><a href="carPalette.html">carPalette</a>[-1]</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>pch</code></td>
@@ -204,15 +203,15 @@ vertical axes, respectively; see <code><a href="../../graphics/html/par.html">pa
 
 <h3>Details</h3>
 
-<p>Many arguments to scatterplot were changed with verions 3 of <span class="pkg">car</span> that we hope simplifies use of
+<p>Many arguments to <code>scatterplot</code> were changed in version 3 of <span class="pkg">car</span> to simplify use of
 this function.
 </p>
-<p>The <code>smooth</code> argument is usually either equal to <code>TRUE</code> or <code>FALSE</code> to draw, or omit,
-the smoother.  Alternatively <code>smooth</code> can equal a list of arguments.  The default behavior of
-<code>smooth=TRUE</code> is equivalent to <code>smooth=list(smoother=loessLine, spread=!by.groups, lty.smooth=2, lty.spread=4)</code>, specifying the smoother to be used, including the spread or variance smooth,
-and the line widths and types for the curves.  You can also specify the colors you want to use for the mean and variance smooths with the arguments <code>col.smooth</code> and <code>col.spread</code>. Alternative smoothers are <code>gamline</code> that uses the
-<code><a href="../../mgcv/html/gam.html">gam</a></code> function from the <span class="pkg">mgcv</span> package, and <code>quantregLine</code> that uses quantile regression to
-estimate the median and quartile functiona using <code><a href="../../quantreg/html/rqss.html">rqss</a></code> frm the <span class="pkg">quantreg</span> package.  All of these
+<p>The <code>smooth</code> argument is usually either set to <code>TRUE</code> or <code>FALSE</code> to draw, or omit,
+the smoother.  Alternatively <code>smooth</code> can be set to a list of arguments.  The default behavior of
+<code>smooth=TRUE</code> is equivalent to <code>smooth=list(smoother=loessLine, var=!by.groups, lty.var=2, lty.var=4)</code>, specifying the smoother to be used, including the variance smooth,
+and the line widths and types for the curves.  You can also specify the colors you want to use for the mean and variance smooths with the arguments <code>col.smooth</code> and <code>col.var</code>. Alternative smoothers are <code>gamline</code> which uses the
+<code><a href="../../mgcv/html/gam.html">gam</a></code> function from the <span class="pkg">mgcv</span> package, and <code>quantregLine</code> which uses quantile regression to
+estimate the median and quartile functions using <code><a href="../../quantreg/html/rqss.html">rqss</a></code> from the <span class="pkg">quantreg</span> package.  All of these
 smoothers have one or more arguments described on their help pages, and these arguments can be added to the
 <code>smooth</code> argument; for example, <code>smooth = list(span=1/2)</code> would use the default
 <code>loessLine</code> smoother,
@@ -225,8 +224,10 @@ the square root of the smooth of the negative squared residuals.  The lines ther
 comnditional variabiliity at each value on the horizontal axis.  Because smoothing is done separately for
 positive and negative residuals, the variation shown will generally not be symmetric about the fitted mean
 function.  For the <code>quantregLine</code> method, the center estimates the median for each value on the
-horizontal axis, and the spread estimates the lower and upper quartiles of the estimated conditional
+horizontal axis, and the variability estimates the lower and upper quartiles of the estimated conditional
 distribution for each value of the horizontal axis.
+</p>
+<p>The sub-arguments <code>spread</code>, <code>lty.spread</code> and <code>col.spread</code> of the <code>smooth</code> argument are equivalent to the newer <code>var</code>, <code>col.var</code> and <code>lty.var</code>, respectively, recognizing that the spread is a measuure of conditional variability.
 </p>
 
 
@@ -243,7 +244,7 @@ distribution for each value of the horizontal axis.
 
 <h3>References</h3>
 
-<p>Fox, J. and Weisberg, S. (2019) 
+<p>Fox, J. and Weisberg, S. (2019)
 <em>An R Companion to Applied Regression</em>, Third Edition, Sage.
 </p>
 
@@ -266,7 +267,7 @@ scatterplot(prestige ~ income, data=Prestige, smooth=list(smoother=quantregLine)
 
 # use quantile regression for median and quartile fits
 scatterplot(prestige ~ income | type, data=Prestige,
-            smooth=list(smoother=quantregLine, spread=TRUE, span=1, lwd=4, lwd.spread=2))
+            smooth=list(smoother=quantregLine, var=TRUE, span=1, lwd=4, lwd.var=2))
 
 scatterplot(prestige ~ income | type, data=Prestige, legend=list(coords="topleft"))
 
@@ -284,5 +285,5 @@ scatterplot(income ~ type, data=Prestige)
 ## End(Not run)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>car</em> version 3.0-0 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>car</em> version 3.0-2 <a href="00Index.html">Index</a>]</div>
 </body></html>

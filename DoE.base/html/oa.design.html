@@ -1,0 +1,494 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Function for accessing orthogonal arrays</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for oa.design {DoE.base}"><tr><td>oa.design {DoE.base}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2> Function for accessing orthogonal arrays </h2>
+
+<h3>Description</h3>
+
+<p>Function for accessing orthogonal arrays,
+allowing limited optimal allocation of columns
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+oa.design(ID=NULL, nruns=NULL, nfactors=NULL, nlevels=NULL,
+      factor.names = if (!is.null(nfactors)) {
+        if (nfactors &lt;= 50) Letters[1:nfactors]
+           else paste("F", 1:nfactors, sep = "")}
+        else NULL,
+        columns="order",
+        replications=1, repeat.only=FALSE,
+        randomize=TRUE, seed=NULL, min.residual.df=0, levordold = FALSE)
+origin(ID)
+oa
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>ID</code></td>
+<td>
+<p> orthogonal array to be used; must be given as the name without quotes
+(e.g. <code>L12.2.2.6.1</code>);
+available names can be looked at using function <code><a href="show.oas.html">show.oas</a></code>
+with option <code>parents.only = TRUE</code> (later it will also be possible
+to directly access child designs); furthermore, <code>L18</code>, <code>L36</code>
+and <code>L54</code> for the respective Taguchi arrays can be used.
+Users can also specify names of their own designs here (cf. details).
+<code>ID</code> must be of class <code>oa</code>.
+If omitted, <code>ID</code> is automatically determined based on <code>nlevels</code>
+or <code>factor.names</code>. </p>
+</td></tr>
+<tr valign="top"><td><code>nruns</code></td>
+<td>
+<p> minimum number of runs to be used,
+can be omitted if obvious from <code>ID</code> or if
+the smallest possible array is to be found </p>
+</td></tr>
+<tr valign="top"><td><code>nfactors</code></td>
+<td>
+<p> number of factors;
+only needed if <code>nlevels</code> is a single number and
+<code>factor.names</code> is omitted;
+can otherwise determined from length of <code>factor.names</code>,
+<code>nlevels</code> or <code>column</code> </p>
+</td></tr>
+<tr valign="top"><td><code>nlevels</code></td>
+<td>
+<p> number(s) of levels, vector with <code>nfactors</code> entries or single number;
+can be omitted, if obvious from <code>factor.names</code> or if <code>ID</code>
+and <code>columns</code> are given or if all columns of <code>ID</code> are to be used
+with default factor names and levels;
+can be a single number if <code>nfactors</code> is known directly or as length of
+<code>factor.names</code> </p>
+</td></tr>
+<tr valign="top"><td><code>factor.names</code></td>
+<td>
+<p> a character vector of <code>nfactors</code> factor names
+or a list with <code>nfactors</code> elements;<br />
+if the list is named, list names represent factor names, otherwise default factor names are used;<br />
+the elements of the list are <br />
+EITHER vectors of appropriate length (corresponding to <code>nlevels</code>)
+with factor levels for the respective factor<br />
+OR empty strings;<br />
+Default factor names are the first elements of the character vector <code><a href="utilities.html">Letters</a></code>,
+or the factors position numbers preceded by capital F in case of more than 50 factors.
+Default factor levels are the numbers from 1 to the number of levels for each factor.</p>
+</td></tr>
+<tr valign="top"><td><code>columns</code></td>
+<td>
+
+<p>EITHER<br />
+a vector of column numbers referring to columns of design <code>ID</code>,
+assigning a specific column of the array to each factor;<br />
+this can only be specified, if <code>ID</code> is also given;<br />
+OR<br />
+a string that defines the degree of optimization requested
+in terms of column allocation (cf. section &ldquo;Details&rdquo;):
+choices are <code>"order"</code>, <code>"min3"</code>, <code>"min34"</code>,
+<code>"min3.rela"</code>, <code>"min34.rela"</code>, <code>"minRPFT"</code>
+or <code>"minRelProjAberr"</code>.<br />
+For resource reasons, the default is <code>"order"</code>, but smaller designs
+can sometimes be substantially improved with other choices.
+Cf. the &ldquo;Details&rdquo; section for the
+meaning of the character string specifications for <code>columns.</code>
+Column optimization can be computationally intensive. If it cannot
+be accomplished with the given ressources, a warning is issued, and
+an unoptimized design is returned.<br />
+Some of the optimization methods have just been proposed, and there is
+little experience with them. It is strongly recommended to always check
+the properties of the design w.r.t. suitability for the planned experiment
+BEFORE starting expensive investments.</p>
+</td></tr>
+<tr valign="top"><td><code>replications</code></td>
+<td>
+<p> the number of replications of the array,
+the setting of <code>repeat.only</code> determines, whether these are real replications
+or repeated measurements only. Note that replications are not considered for
+accomodation of <code>min.residual.df</code> residual degrees of freedom,
+unless a full factorial is used.</p>
+</td></tr>
+<tr valign="top"><td><code>repeat.only</code></td>
+<td>
+<p> default <code>FALSE</code> implies real replications,
+<code>TRUE</code> implies repeated measurements only </p>
+</td></tr>
+<tr valign="top"><td><code>randomize</code></td>
+<td>
+<p> logical indicating whether the run order is to be randomized ? </p>
+</td></tr>
+<tr valign="top"><td><code>seed</code></td>
+<td>
+<p> integer seed for the random number generator </p>
+</td></tr>
+<tr valign="top"><td><code>min.residual.df</code></td>
+<td>
+<p> minimum number of residual degrees of freedom;<br />
+Note: function <code>oa.design</code> does not count replications specified with option
+<code>replications</code> in determining residual degrees of freedom for <code>min.resid.df</code>. </p>
+</td></tr>
+<tr valign="top"><td><code>levordold</code></td>
+<td>
+<p> logical indicating whether or not old (=pre version 0.27)
+level ordering should be used;<br />
+defaults to <code>FALSE</code>, which implies that levels are ordered as indicated
+in <code>factor.names</code>;<br /> in the old ordering, levels were automatically reordered
+by the <code>as.factor</code> function, which is usually undesirable, but may be desired
+for reproducing designs created with earlier versions </p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Package <span class="pkg">DoE.base</span> is described in Groemping (2016), which is a preprint of a paper in the
+Journal of Statistical Software. This paper also has detailed material on function <code>oa.design</code>.
+</p>
+<p>Function <code>oa.design</code> assigns factors to the columns of orthogonal arrays that are
+available within package <span class="pkg">DoE.base</span> or are provided by the user.
+The available arrays and their properties are listed in the
+data frame <code>oacat</code> and can be systematically searched for using function <code><a href="show.oas.html">show.oas</a></code>.
+The design names also indicate the number of runs and the numbers of factors
+for each number of levels, e.g. <code>L18.3.6.6.1</code> is an 18 run design with six factors in 3 levels
+(<code>3.6</code>) and one factor in 6 levels (<code>6.1</code>).
+</p>
+<p><code>oa</code> is the S3 class used for orthogonal arrays. Objects of class <code>oa</code> should at least have
+the attribute <code>origin</code>, an attribute <code>comment</code> should be used for additional information.
+</p>
+<p>Users can define their own orthogonal arrays and hand them to <code>oa.design</code> with parameter <code>ID</code>.
+Requirements for the arrays: <br />
+</p>
+
+<ul>
+<li><p> Factor levels must be coded as numbers from 1 to number of levels.
+</p>
+</li>
+<li><p> The array must be of classes <code>oa</code> and <code>matrix</code><br />
+(If your array is a matrix named <code>foo</code>, you can simply assign it class <code>oa</code> by
+the command <code>class(foo) &lt;- c("oa","matrix")</code>, see also last example.)
+</p>
+</li>
+<li><p> The array should have an attribute <code>origin</code>.
+</p>
+</li>
+<li><p> The array can have an attribute <code>comment</code>; <br />
+this should be used for mentioning specific properties, e.g.
+for the <code>L18.2.1.3.7</code> that the interaction of the first two factors
+can be estimated.
+</p>
+</li></ul>
+
+<p>Users are encouraged to send additional arrays to the package maintainer.
+The requirements for these are the same as listed above, with attribute <code>origin</code>
+being a MUST in this case. (See the last example for how to assign an attribute.)
+</p>
+<p>The data frame <code><a href="oacat.html">oacat</a></code> lists the orthogonal arrays from Warren Kuhfelds
+collection of &ldquo;parent&rdquo; arrays only, plus a few additional arrays,
+and can automatically create the child arrays from Kuhfelds collection, using
+the replacement instructions provided in the variable <code>lineage</code>.    
+The last example below indicates how
+a child array can be created manually, and compares this to the automatically created array.<br />
+(A lot more than just the child arrays could be obtained from these arrays
+by implementing a functionality similar to the market research macros available in SAS; presumably,
+this topic will not be addressed soon, as it will involve a substantial amount of work.)
+</p>
+<p>Furthermore, there are stronger arrays 
+(at least resolution IV) in the catalogue <code><a href="oacat.html">oacat3</a></code>. Since version 1.1, 
+function <code>oa.design</code> uses the stronger arrays, where possible. 
+</p>
+<p>If no specific orthogonal array is specified and function <code>oa.design</code> does not
+find an orthogonal array that meets the specified requirements,
+<code>oa.design</code> returns a full factorial, replicated for enough residual degrees of freedom, if necessary.
+If <code>oa.design</code> has not found an array smaller than the full factorial, it is
+absolutely possibly that a smaller array does exist nevertheless. It may be worth
+while checking with oacat whether an appropriate smaller array can be found by
+combining some of the parent arrays listed there (looking for a design with a few
+factors in 5 runs, you may e.g. call <code>oacat[oacat$n5&gt;0,]$name</code> in order to see the
+names of more promising candidate arrays for combination, or you may also want to look
+up arrays with <code>n25&gt;0</code> subsequently.
+</p>
+<p>With version 0.9-18 of the package,
+the possibility for an automatic allocation of columns for improved design
+performance was implemented. With version 0.23, this approach has been sped
+up and extended to properly cover relative projection aberration according to
+Groemping (2011) with and without step (b) (see below) (the previous choice
+<code>"maxGR.min34"</code> was modified and renamed to <code>"minRelProjAberr"</code>).<br />
+Because of performance reasons, and because of a lack of a clear best default,
+optimum column allocation is not switched on per default.
+However, with the default column order from left to right,
+the package always issues a warning to remind users that an automatic unoptimized design
+can be quite far from ideal.
+If optimization is activated, the first step is selection of an array,
+either explicitly by the user (option <code>ID</code>) or automatically (unoptimized)
+according to the required combination of factors. Within that array, the following
+choices for the <code>column</code> option are on offer:<br />
+</p>
+
+<dl>
+<dt>&quot;order&quot;</dt><dd><p>the default choice; allocates factors from left to right, which
+is what most software does (but what is not necessarily good, see also the example section)</p>
+</dd>
+<dt><code>"min3"</code></dt><dd><p><b>recommended</b>, if <code>"min34"</code> is not affordable; 
+aliasing between main effects and 2-factor
+interactions is kept to a minimal degree,
+minimizing the number of generalized words of length 3 according to Xu and Wu (2001)</p>
+</dd>
+<dt>&quot;min3.rela&quot;</dt><dd><p>the same approach is taken, but with
+<em>relative</em> number of generalized words according to Groemping (2011)</p>
+</dd>
+<dt>&quot;min34&quot;</dt><dd><p><b>recommended</b>, if affordable; 
+beware the time demand; this requests
+that the number of words of generalized length 4 is also minimized.</p>
+</dd>
+<dt>&quot;min34.rela&quot;</dt><dd><p>again takes the same approach, but with
+<em>relative</em> number of generalized words according to Groemping (2011)</p>
+</dd>
+<dt>&quot;minRPFT&quot;</dt><dd><p>minimizes the relative projection frequency table, applying the
+approach according to Groemping (2011) without step (b) (see next entry).</p>
+</dd>
+<dt>&quot;minRelProjAberr&quot;</dt><dd><p>applies minimum relative projection aberration
+according to Groemping (2011)
+((a): maximize generalized resolution,
+(b): minimize total relative number of shortest words, (c) rank designs
+according to relative projection frequency table (obtainable with P3.3 or P4.4, depending on resolution)
+and (d) resolve ties by looking at absolute number of length 4 words in case of resolution III).</p>
+</dd>
+</dl>
+
+<p>WARNING: Usually, it is recommended to investigate the properties of a design automatically
+created by function <code>oa.design</code> before starting experimentation.
+While all designs can estimate main effects <em>in the absence of interactions</em>,
+the presence of interactions may render some designs useless or even dangerous.
+Deliberate choice of columns different from the default may improve a design
+(see example section)!
+</p>
+<p>Mathematical comment on the expansion example:
+There are 720 different ways to expand the unique <code>L18.3.6.6.1</code>
+into an <code>L18.2.1.3.7</code>, depending on which row of the replacement design
+<code>nest.des</code> is assigned to which level of the 6 level factor; 
+for qualitative factors, 
+60 of these are potentially non-isomorphic (divide 720 by the 2 * 3! ways 
+of permuting levels within a factor; there are
+more possibly different arrays for quantitative 3 level factors, since arbitrary
+relabelling of the levels is no longer isomorphic).
+According to Eric Schoen (personal communication), for this particular case, 
+all the resulting children
+are isomorphic to each other and are also isomorphic to the Taguchi L18.
+To see isomorphism of two designs is not easy; in the example, <code>nest.des</code>
+has been prepared such that it is easy to see isomorphism of the resulting
+child to the Taguchi <code>L18</code>: <code>L18</code> is reproduced by
+assigning the first row of <code>nest.des</code> to level 1 etc.,
+except for a swap of columns <code>G</code> and <code>H</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>oa.design</code> returns a data frame of S3 class <code><a href="class-design.html">design</a></code>
+with attributes attached.
+</p>
+<p>In the data frame itself, the experimental factors are all stored as R factors. <br />
+For factors with 2 levels, <code><a href="contr.FrF2.html">contr.FrF2</a></code> contrasts (-1 / +1) are used. <br />
+For factors with more than 2 numerical levels, polynomial contrasts are used
+(i.e. analyses will per default use orthogonal polynomials). <br />
+For factors with more than 2 categorical levels, the default contrasts are used.<br />
+Future versions will most likely allow more user control about the type of
+contrasts to be used.
+</p>
+<p>The <code>desnum</code> and <code>run.order</code> attributes of class <code><a href="class-design.html">design</a></code> are
+as usual. In the <code>design.info</code> attribute, the following elements are specific for
+this type of designs:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>is <code>oa</code> (unless no special orthogonal array is found, in which case
+a full factorial is created instead, cf. <code><a href="fac.design.html">fac.design</a></code> for its <code>design.info</code> attribute),</p>
+</td></tr>
+<tr valign="top"><td><code>nlevels</code></td>
+<td>
+<p>vector containing the number of levels for each factor</p>
+</td></tr>
+<tr valign="top"><td><code>generating.oa</code></td>
+<td>
+<p>contains information on the generating orthogonal array,</p>
+</td></tr>
+<tr valign="top"><td><code>selected.columns</code></td>
+<td>
+<p>contains information, which column of the orthogonal array underlies which factor,</p>
+</td></tr>
+<tr valign="top"><td><code>origin</code></td>
+<td>
+<p>contains the respective attribute of the orthogonal array,</p>
+</td></tr>
+<tr valign="top"><td><code>comment</code></td>
+<td>
+<p>contains the respective attribute of the orthogonal array,</p>
+</td></tr>
+<tr valign="top"><td><code>residual.df</code></td>
+<td>
+<p>contains the requested residual degrees of freedom for a main effects model.</p>
+</td></tr>
+</table>
+<p>Other information is generic, like documented for class <code><a href="class-design.html">design</a></code>.
+</p>
+<p>Function <code>origin</code> returns the origin attribute of the orthogonal array <code>ID</code>,
+functions <code><a href="../../base/html/comment.html">comment</a></code> and <code>"comment&lt;-"</code> from package <span class="pkg">base</span>
+return and set the comment attribute.
+</p>
+
+
+<h3>Warning</h3>
+
+<p>With version 1.1 of the package, strength 3 arrays are automatically used, if available. 
+This changes the behavior of function <code>oa.design</code> for situations for requests with a 
+combination of <code>nruns</code> and <code>nlevels</code> for which a strength 3 array exists in <code>oacat3</code>. 
+If the old behavior is required for reproducing a previously-created array, it is 
+possible to set <code>oacat3</code> to <code>NULL</code> by the command <code>assignInNamespace("oacat3", NULL, pos="package:DoE.base")</code>; 
+this temporary replacement of <code>oacat3</code> with <code>NULL</code> remains in effect 
+for the current R session; detaching it (with namespace unloading) and reloading is possible but can also go wrong; 
+therefore, it is recommended to only use the above technique if you are prepared to restart the 
+R session before using the original version of <code>oacat3</code>.
+</p>
+
+
+<h3>Note</h3>
+
+<p> This package is currently under intensive development. Substantial changes are to be expected in the near future.</p>
+
+
+<h3>Author(s)</h3>
+
+<p> Ulrike Groemping </p>
+
+
+<h3>References</h3>
+
+<p>Groemping, U. (2011). Relative projection frequency tables for orthogonal arrays.
+Report 1/2011, <em>Reports in Mathematics, Physics and Chemistry</em> <a href="http://www1.beuth-hochschule.de/FB_II/reports/welcome.htm">http://www1.beuth-hochschule.de/FB_II/reports/welcome.htm</a>,
+Department II, Beuth University of Applied Sciences, Berlin.
+</p>
+<p>Groemping, U. (2016).  R Package DoE.base for Factorial Designs.
+Report 1/2016, <em>Reports in Mathematics, Physics and Chemistry</em> <a href="http://www1.beuth-hochschule.de/FB_II/reports/welcome.htm">http://www1.beuth-hochschule.de/FB_II/reports/welcome.htm</a>,
+Department II, Beuth University of Applied Sciences, Berlin. (preprint of a paper in the Journal of Statistical Software)
+</p>
+<p>Hedayat, A.S., Sloane, N.J.A. and Stufken, J. (1999) <em>Orthogonal Arrays: Theory and Applications</em>, Springer, New York.
+</p>
+<p>Kuhfeld, W. (2009). Orthogonal arrays. Website courtesy of SAS Institute <a href="http://support.sas.com/techsup/technote/ts723.html">http://support.sas.com/techsup/technote/ts723.html</a>.
+</p>
+<p>Schoen, E. (2009). All orthogonal arrays with 18 runs. <em>Quality and Reliability Engineering International</em> <b>25</b>, 467&ndash;480.
+</p>
+<p>Xu, H.-Q. and Wu, C.F.J. (2001). Generalized minimum aberration for asymmetrical
+fractional factorial designs. <em>Annals of Statistics</em> <b>29</b>, 1066&ndash;1077.
+</p>
+
+
+<h3>See Also</h3>
+
+<p> See Also <code><a href="../../FrF2/html/FrF2.html">FrF2</a></code>, <code><a href="fac.design.html">fac.design</a></code>, <code><a href="../../FrF2/html/pb.html">pb</a></code> </p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  ## smallest available array for 6 factors with 3 levels each
+  oa.design(nfactors=6, nlevels=3)
+  ## level combination for which only a full factorial is (currently) found
+  oa.design(nlevels=c(4,3,3,2))
+  ## array requested via factor.names
+  oa.design(factor.names=list(one=c("a","b","c"), two=c(125,275),
+     three=c("old","new"), four=c(-1,1), five=c("min","medium","max")))
+  ## array requested via character factor.names and nlevels
+    ## (with a little German lesson for one two three four five)
+  oa.design(factor.names=c("eins","zwei","drei","vier","fuenf"), nlevels=c(2,2,2,3,7))
+  ## array requested via explicit name, Taguchi L18
+  oa.design(ID=L18)
+  ## array requested via explicit name, with column selection
+  oa.design(ID=L18.3.6.6.1,columns=c(2,3,7))
+  ## array requested with nruns, not very reasonable
+  oa.design(nruns=12, nfactors=3, nlevels=2)
+  ## array requested with min.residual.df
+  oa.design(nfactors=3, nlevels=2, min.residual.df=12)
+
+  ## examples showing alias structures and their improvment with option columns
+  plan &lt;- oa.design(nfactors=6,nlevels=3)
+  plan
+     ## generalized word length pattern
+     length3(plan)
+     ## length3 (first element of GWP) can be slightly improved by columns="min3"
+     plan &lt;- oa.design(nfactors=6,nlevels=3,columns="min3")
+     summary(plan)  ## the first 3-level column of the array is not used
+     length3(plan)
+  plan &lt;- oa.design(nlevels=c(2,2,2,6))
+     length3(plan)
+  plan.opt &lt;- oa.design(nlevels=c(2,2,2,6),columns="min3") ## substantial improvement
+     length3(plan.opt)
+     length4(plan.opt)
+  ## visualize practical relevance of improvement:
+     ## for optimal plan, all 3-dimensional projections are full factorials
+  plot(plan, select=1:3)
+  plot(plan, select=c(1,2,4))
+  plot(plan, select=c(1,3,4))
+  plot(plan, select=2:4)
+  plot(plan.opt, select=1:3)
+  plot(plan.opt, select=c(1,2,4))
+  plot(plan.opt, select=c(1,3,4))
+  plot(plan.opt, select=2:4)
+
+
+  ## The last example:
+  ## generate an orthogonal array equivalent to Taguchi's L18
+  ## by combining L18.3.6.6.1 with a full factorial in 2 and 3 levels
+  
+  show.oas(nruns=18, parents.only=FALSE)
+       ## lineage entry leads the way:
+           ## start from L18.3.6.6.1
+           ## insert L6.2.1.3.1 for the 6 level factor
+  ## prepare the parent
+   parent.des &lt;- L18.3.6.6.1
+   colnames(parent.des) &lt;- c(Letters[3:9])
+       ## new columns will become A and B
+  ## 6-level design can be created by fac.design or expand.grid or cbind
+   nest.des &lt;- as.matrix(expand.grid(1:3,1:2))[c(1:3,5,6,4),c(2,1)]
+        ## want first column to change most slowly
+        ## want resulting design to be easily transformable into Taguchi L18
+        ## see mathematical comments in section Details
+   colnames(nest.des) &lt;- c("A","B")
+  ## do the expansion (see mathematical comments in section Details)
+  ## using function expansive.replace
+  L18.2.1.3.7.manual &lt;- expansive.replace(parent.des, nest.des)[,c(7:8,1:6)]
+  L18.2.1.3.7.manual &lt;- L18.2.1.3.7.manual[ord(L18.2.1.3.7.manual),]  ## sort array
+      rownames(L18.2.1.3.7.manual) &lt;- 1:18
+        ## (ordering is not necessary, just **tidy**)
+  ## prepare for using it with function oa.design
+        ## note: function expansive.replace creates a matrix of class "oa"
+        ## rearranging the columns removed that class and makes it necessary 
+        ##    to add the class again for using the array in DoE.base 
+  attr(L18.2.1.3.7.manual, "origin") &lt;-
+      c(show.oas(name="L18.2.1.3.7", parents.only=FALSE,show=0)$lineage,
+        "unconventional order")
+  class(L18.2.1.3.7.manual) &lt;- c("oa", "matrix")
+  comment(L18.2.1.3.7.manual) &lt;- "Interaction of first two factors estimable"
+     ## indicates that first two factors are full factorial from 6-level factor
+  origin(L18.2.1.3.7.manual)
+  comment(L18.2.1.3.7.manual)
+  L18  ## Taguchi array
+  L18.2.1.3.7.manual  ## manually expanded array
+  oa.design(L18.2.1.3.7, randomize=FALSE)
+        ## automatically expanded array
+  P3.3(L18.2.1.3.7.manual)  ## length 3 pattern of 3 factor projections
+                  ## this also identifies the array as isomorphic to L18
+                  ## according to Schoen 2009
+  ## the array can now be used in oa.design, like the built-in arrays
+  oa.design(ID=L18.2.1.3.7.manual,nfactors=7,nlevels=3)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DoE.base</em> version 1.1-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

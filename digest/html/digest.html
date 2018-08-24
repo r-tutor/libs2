@@ -154,13 +154,23 @@ xxhash64; and of length 8 for murmur32.
 </p>
 
 
+<h3>Change Management</h3>
+
+<p>Version 0.6.16 of digest corrects an error in which <code>crc32</code> was not
+guaranteeing an eight-character return. We now pad with zero to always
+return eight characters. Should the previous behaviour be required,
+set <code>option("digestOldCRC32Format"=TRUE)</code> and the output will be
+consistent with prior version (but not be consistentnly eight characters).
+</p>
+
+
 <h3>Author(s)</h3>
 
 <p>Dirk Eddelbuettel <a href="mailto:edd@debian.org">edd@debian.org</a> for the <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> interface;
 Antoine Lucas for the integration of crc32; Jarek Tuszynski for the
 file-based operations; Henrik Bengtsson and Simon Urbanek for improved
 serialization patches; Christophe Devine for the hash function
-implementations for sha-1, sha-256 and md5; Jean-loup Gailly and Mark Adler
+implementations for sha-1, sha-256 and md5; Jean-Loup Gailly and Mark Adler
 for crc32; Hannes Muehleisen for the integration of sha-512; Jim Hester for
 the integration of xxhash32, xxhash64 and murmur32.</p>
 
@@ -366,5 +376,5 @@ stopifnot(identical(v[1], digest(1L)),	# check first and third result
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>digest</em> version 0.6.15 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>digest</em> version 0.6.16 <a href="00Index.html">Index</a>]</div>
 </body></html>

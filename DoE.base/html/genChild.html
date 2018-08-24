@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Internal utility functions to support automatic creation of...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for genChild {DoE.base}"><tr><td>genChild {DoE.base}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+Internal utility functions to support automatic creation of child arrays
+from entries of the data frame oacat
+</h2>
+
+<h3>Description</h3>
+
+<p>The functions are used internally for creating the child arrays listed in
+data frame <code>oacat</code> from the parent arrays that come with <span class="pkg">DoE.base</span>
+(or using full factorials).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+parseArrayLine(array.line)
+genChild(array.list)
+getArray(nbRuns, descr)
+symb2oa(nbRuns, descr)
+oa2symb(name)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>array.line</code></td>
+<td>
+<p> a row from data frame <code><a href="oacat.html">oacat</a></code></p>
+</td></tr>
+<tr valign="top"><td><code>array.list</code></td>
+<td>
+<p> the output from function <code>parseArrayLine</code></p>
+</td></tr>
+<tr valign="top"><td><code>nbRuns</code></td>
+<td>
+<p> the number of runs of the array to be received</p>
+</td></tr>
+<tr valign="top"><td><code>descr</code></td>
+<td>
+<p> a character string containing the description of the array
+to be retrieved, of the form <br />
+<code>nl1~fl1;nl2~fl2; ...</code>, where <code>nl</code> stands for the number of levels
+and <code>fl</code> for their respective frequency; the string may (but need not)
+contain a trailing semicolon</p>
+</td></tr>
+<tr valign="top"><td><code>name</code></td>
+<td>
+<p> name of an array according to the naming conventions in
+<code><a href="oacat.html">oacat</a></code></p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Function <code>parseArrayLine</code> transforms information from a row of <code>oacat</code>
+into a list format digestible by function <code>genChild</code>.
+</p>
+<p>Function <code>genChild</code> creates a child array from the appropriate information
+provided by function <code>parseArrayLine</code>.
+</p>
+<p>Function <code>getArray</code> retrieves a stored orthogonal array based on the list
+information it receives.
+</p>
+<p>Functions <code>symb2oa</code> and <code>oa2symb</code> can be used for
+switching between design names from data frame <code><a href="oacat.html">oacat</a></code>
+and list type information used by functions internally. Note that the result
+from <code>oa2symb</code> is not sufficient to get back to the <code>oa</code> representation,
+but needs the number of runs in addition.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>parseArrayLine</code> returns a list with design and lineage description in symbolic form.
+</p>
+<p><code>genChild</code> and <code>getArray</code> return an array matrix of class <code><a href="oa.design.html">oa</a></code>.
+</p>
+<p><code>symb2oa</code> and <code>oa2symb</code> return a character string.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p> Boyko Amarov and Ulrike Groemping </p>
+
+
+<h3>See Also</h3>
+
+<p> See also <code><a href="oacat.html">oacat</a></code>, <code><a href="oa.design.html">oa</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>DoE.base</em> version 1.1-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

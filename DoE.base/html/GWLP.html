@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Functions for fast calculation of GWLP</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for GWLP {DoE.base}"><tr><td>GWLP {DoE.base}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2> Functions for fast calculation of GWLP </h2>
+
+<h3>Description</h3>
+
+<p>Functions needed for fast calculation of GWLP using the formulae 
+from Xu and Wu (2001)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+GWLP(design, ...)
+## S3 method for class 'design'
+GWLP(design, kmax=design.info(design)$nfactors, 
+     attrib.out=FALSE, with.blocks = FALSE, digits = NULL, ...)
+## Default S3 method:
+GWLP(design, kmax=ncol(design), attrib.out=FALSE, digits = NULL, ...)
+Choose(n, k)
+Kraw(k,x,n,q)
+ham(c1, c2)
+levels.no(xx)
+levelmix(xx)
+distDistmix(code, levm)
+Bprime(dists, nmax=5)
+dualDistmix(Bprime, nmax=5)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>design</code></td>
+<td>
+<p> a design, not necessarily of class <code><a href="class-design.html">design</a></code>;
+class design properties are exploited by using only factor columns 
+(or factor and block columns, if <code>with.blocks</code> is <code>TRUE</code>) </p>
+</td></tr>
+<tr valign="top"><td><code>kmax</code></td>
+<td>
+<p> the maximum word length requested </p>
+</td></tr>
+<tr valign="top"><td><code>attrib.out</code></td>
+<td>
+<p> the detail added to the output (see Value section)</p>
+</td></tr>
+<tr valign="top"><td><code>with.blocks</code></td>
+<td>
+<p> if <code>TRUE</code>, the block column contributes to 
+the GWLP, otherwise it does not </p>
+</td></tr>
+<tr valign="top"><td><code>digits</code></td>
+<td>
+<p> the number of decimals to round to; <code>NULL</code> prevents rounding </p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>an integer number</p>
+</td></tr>
+<tr valign="top"><td><code>k</code></td>
+<td>
+<p>an integer number</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>an integer number</p>
+</td></tr>
+<tr valign="top"><td><code>q</code></td>
+<td>
+<p>an integer number</p>
+</td></tr>
+<tr valign="top"><td><code>c1</code></td>
+<td>
+<p>a design row</p>
+</td></tr>
+<tr valign="top"><td><code>c2</code></td>
+<td>
+<p>a design row</p>
+</td></tr>
+<tr valign="top"><td><code>xx</code></td>
+<td>
+<p> a design, not necessarily of class <code><a href="class-design.html">design</a></code> </p>
+</td></tr>
+<tr valign="top"><td><code>code</code></td>
+<td>
+<p> a design, not necessarily of class <code><a href="class-design.html">design</a></code> </p>
+</td></tr>
+<tr valign="top"><td><code>levm</code></td>
+<td>
+<p> an object returned by function <code>levelmix</code> </p>
+</td></tr>
+<tr valign="top"><td><code>dists</code></td>
+<td>
+<p> the BSep element of an outcome object from <code>distDistmix</code>, 
+analogous to the B_j1_j2 of p.1072 of Xu and Wu 2001</p>
+</td></tr>
+<tr valign="top"><td><code>nmax</code></td>
+<td>
+<p>set to <code>kmax</code> in calls by other functions</p>
+</td></tr>
+<tr valign="top"><td><code>Bprime</code></td>
+<td>
+<p>an outcome object from <code>Bprime</code>, the MacWilliams transform 
+of the distance distribution</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Function <code>GWLP</code> is intended for direct use, the others are not. <br />
+Function <code>GWLP</code> is much faster but also more inaccurate than the 
+function <code><a href="generalized.word.length.html">lengths</a></code>, which calculates numbers of words 
+for lengths 2 to 5 only. Note, however, that function <code><a href="generalized.word.length.html">lengths</a></code> 
+can be faster for designs with very many rows. <br />
+If a design factor contains only some of the intended levels, 
+<code>design</code> must be a data frame, and the factor must be an R
+factor with the complete set of levels specified, 
+in order to make function <code>GWLP</code> aware of the missing levels.
+</p>
+<p>Function <code>ham</code> calculates the Hamming distance, function <code>Kraw</code> 
+the Krawtchouk polynomials, function <code>Choose</code> differs from the base 
+function <code><a href="../../base/html/choose.html">choose</a></code> by treatment of negative values <code>n</code>, 
+functions <code>levels.no</code> and <code>levelmix</code> are utilities providing the 
+level information on the design <code>xx</code>. 
+The functions <code>distDistmix</code>, <code>Bprime</code> and <code>dualDistmix</code> 
+implement formulae from Xu and Wu (2001) for the distance distribution, 
+its MacWilliams transform and the calculation of GWLP from the latter.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Only function <code>GWLP</code> is intended for direct use.
+</p>
+<p>The <code>GWLP</code> methods output a named vector with the numbers of generalized 
+words of lengths zero to <code>kmax</code>. If <code>attrib.out</code> is <code>TRUE</code>, 
+this vector comes with the attributes <code>B</code> and <code>levels.info</code>, 
+the latter documenting the level situation of the design, the former 
+the distance distribution B (Xu and Wu 2001).
+</p>
+
+
+<h3>Note</h3>
+
+<p> This package is currently under intensive development. 
+Substantial changes are to be expected in the near future.</p>
+
+
+<h3>Author(s)</h3>
+
+<p> Hongquan Xu, Ulrike Groemping </p>
+
+
+<h3>References</h3>
+
+ 
+<p>Xu, H.-Q. and Wu, C.F.J. (2001). Generalized minimum aberration for 
+asymmetrical fractional factorial designs. 
+<em>Annals of Statistics</em> <b>29</b>, 1066&ndash;1077.
+</p>
+
+
+<h3>See Also</h3>
+
+<p> See Also <code><a href="generalized.word.length.html">lengths</a></code> </p>
+
+
+<h3>Examples</h3>
+
+<pre>
+GWLP(L18)
+GWLP(L18, attrib.out=TRUE)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DoE.base</em> version 1.1-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

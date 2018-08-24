@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Contrasts for orthogonal Fractional Factorial 2-level designs</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for contr.FrF2 {DoE.base}"><tr><td>contr.FrF2 {DoE.base}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2> Contrasts for orthogonal Fractional Factorial 2-level designs </h2>
+
+<h3>Description</h3>
+
+<p>Contrasts for orthogonal Fractional Factorial 2-level designs 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+   contr.FrF2(n, contrasts=TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p> power of 2; number of levels of the factor for which contrasts are 
+to be generated</p>
+</td></tr>
+<tr valign="top"><td><code>contrasts</code></td>
+<td>
+<p>must always be <code>TRUE</code>; option needed for 
+function <code>model.matrix</code> to work properly</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This function mainly supports <code>-1/+1</code> contrasts for 2-level factors.
+It does also work if the number of levels is a power of 2. 
+For more than four levels, the levels of the factor must be in an appropriate order 
+in order to guarantee that the columns of the model matrix for an FrF2-derived structure 
+are orthogonal.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The function returns orthogonal contrasts for factors with number of levels a power of 2. 
+All contrast columns consist of <code>-1</code> and <code>+1</code> entries (half of each). 
+If factors in orthogonal arrays 
+with 2-level factors are assigned these contrasts, the columns of the model matrix 
+for the main effects model are orthogonal to each other and to the column for the intercept.
+</p>
+
+
+<h3>Note</h3>
+
+<p> This package is currently under intensive development. Substantial changes are to be expected in the near future.</p>
+
+
+<h3>Author(s)</h3>
+
+<p> Ulrike Groemping </p>
+
+
+<h3>See Also</h3>
+
+<p> See Also <code><a href="../../stats/html/contrasts.html">contrasts</a></code>, <code><a href="../../FrF2/html/FrF2.html">FrF2</a></code>, 
+<code><a href="fac.design.html">fac.design</a></code>, <code><a href="oa.design.html">oa.design</a></code>, <code><a href="../../FrF2/html/pb.html">pb</a></code> </p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## assign contr.FrF2 contrasts to a factor
+status &lt;- as.factor(rep(c("current","new"),4))
+contrasts(status) &lt;- contr.FrF2(2)
+contrasts(status)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DoE.base</em> version 1.1-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

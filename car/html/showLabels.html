@@ -45,8 +45,8 @@ showLabels(x, y, labels=NULL, method="identify",
 <tr valign="top"><td><code>labels</code></td>
 <td>
 
-<p>Plotting labels.  If <code>NULL</code>, case numbers will be used.  If labels are long, the
-<code><a href="../../base/html/substr.html">substr</a></code> or <code><a href="../../base/html/abbreviate.html">abbreviate</a></code> functions can be used to shorten them.
+<p>Plotting labels.  When called from within a <span class="pkg">car</span> plotting function, the labels are automatically obtained from the row names in the data frame used to create the modeling object. If <code>labels=NULL</code>, case numbers will be used.  If labels are long, the
+<code><a href="../../base/html/substr.html">substr</a></code> or <code><a href="../../base/html/abbreviate.html">abbreviate</a></code> functions can be used to shorten them. Users may supply their own labels as a character vector of length equal to the number of plotted points.  For use with <span class="pkg">car</span> plotting functions, the number of plotted points is equal to the number of rows of data that have neither missing values nor are excluded using the &lsquo;subset&rsquo; argument.  When called directly, the length of labels shoud equal the length of x.
 </p>
 </td></tr>
 <tr valign="top"><td><code>method</code></td>
@@ -183,5 +183,5 @@ with(Prestige, showLabels(education, income,
      labels=rownames(Prestige), method=abs(residuals(m)), n=4))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>car</em> version 3.0-0 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>car</em> version 3.0-2 <a href="00Index.html">Index</a>]</div>
 </body></html>

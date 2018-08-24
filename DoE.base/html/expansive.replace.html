@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Expansive replacement for two orthogonal arrays</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for expansive.replace {DoE.base}"><tr><td>expansive.replace {DoE.base}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2> Expansive replacement for two orthogonal arrays </h2>
+
+<h3>Description</h3>
+
+<p>Expansive replacement for two orthogonal arrays 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+   expansive.replace(array1, array2, fac1 = NULL, all = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>array1</code></td>
+<td>
+<p> an orthogonal array, must be a matrix; <br />
+the levels of column <code>fac1</code> of this array are replaced by the 
+corresponding runs of <code>array2</code>; 
+they must be numbered with integers starting with 1</p>
+</td></tr>
+<tr valign="top"><td><code>array2</code></td>
+<td>
+<p> an orthogonal array, must be a matrix <br />
+this array is replaced for a column in <code>array1</code>  </p>
+</td></tr>
+<tr valign="top"><td><code>fac1</code></td>
+<td>
+<p>if <code>NULL</code>, the first suitable column of <code>array1</code> 
+is replaced with <code>array2</code>;<br />
+alternatively, a suitable column number for <code>array1</code> can be specified</p>
+</td></tr>
+<tr valign="top"><td><code>all</code></td>
+<td>
+<p>logical; <code>TRUE</code> is permitted, if <code>array2</code> is a full factorial in two factors; 
+if <code>TRUE</code>, a list of permutations of the replacement array 
+<code>array2</code> is used for creating all potentially combinatorially 
+different outcomes, instead of a single expansive replacement based on the 
+order of <code>array2</code> as stated (see Details section</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This function mainly is meant for combining two orthogonal arrays
+via what Kuhfeld (2009) calls expansive replacement. 
+</p>
+<p>If <code>array2</code> is a full factorial in two factors, argument <code>all = TRUE</code> 
+creates a list of expanded arrays obtained by permuting the second array in all ways 
+that may lead to combinatorially different end results. With s1 and s2 the numbers 
+of levels of the factors in <code>array2</code>, this is the number of partitions of the 
+runs of <code>array2</code> into s1 equally-sized groups, multiplied with s2!^(s1-1) for 
+the possibilities of permuting the levels of the second factor within all but the first 
+level of the first factor. This functionality is primarily meant for the creation of 
+strength 3 arrays in combination with arrays listed in the catalogue <code><a href="oacat.html">oacat3</a></code> 
+(see an example on expanding the 6-level factor in <code>L96.2.5.4.2.6.1</code>).
+</p>
+
+
+<h3>Value</h3>
+
+<p>The function returns an object of classes <code>oa</code> and <code>matrix</code>, 
+which can be used in function <code><a href="oa.design.html">oa.design</a></code>, or a list of such arrays, 
+in case <code>all = TRUE</code>. 
+</p>
+<p>Whether or not the object is an orthogonal array depends on the choice of suitable input 
+arrays by the user. The properties of the resulting array(s) can e.g. be inspected with functions 
+<code><a href="GWLP.html">GWLP</a></code> or <code><a href="GRind.html">GRind</a></code>.
+</p>
+
+
+<h3>Note</h3>
+
+<p> This package is still under development. Bug reports and feature requests are welcome.</p>
+
+
+<h3>Author(s)</h3>
+
+<p> Ulrike Groemping </p>
+
+
+<h3>References</h3>
+
+<p>Kuhfeld, W. (2009). Orthogonal arrays. Website courtesy of SAS Institute <a href="http://support.sas.com/techsup/technote/ts723.html">http://support.sas.com/techsup/technote/ts723.html</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p> See Also <code><a href="oacat.html">oacat</a></code>, <code><a href="oacat.html">oacat3</a></code> </p>
+
+
+<h3>Examples</h3>
+
+<pre>
+myL24.2.14.6.1 &lt;- expansive.replace(L24.2.12.12.1, L12.2.2.6.1)
+
+L96.2.6.3.1.4.2_list &lt;- expansive.replace(L96.2.5.4.2.6.1, 
+      cbind(U=rep(c(1,2),each=3), V=rep(1:3,2)), all=TRUE)
+## the list of 60 resolution IV arrays can be used for design creation, 
+## e.g. as follows:
+## Not run: 
+     ## resolution IV designs obtained from the 60 different arrays
+     deslist &lt;- lapply(L96.2.6.3.1.4.2_list, 
+         function(aa) oa.design(aa, nlevels=c(2,2,2,2,3,4,4), columns="min34"))
+     table(A4s &lt;- sapply(deslist, length4))  ## a single best design exists
+     best &lt;- deslist[[which(A4s &lt; 2)]]
+     GWLP(best)
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DoE.base</em> version 1.1-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

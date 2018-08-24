@@ -1,0 +1,234 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Plotting class design objects</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for Plotting class design objects {DoE.base}"><tr><td>Plotting class design objects {DoE.base}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Plotting class design objects</h2>
+
+<h3>Description</h3>
+
+<p>The plot method for class design objects; other methods are part of a
+separate help page.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'design'
+plot(x, y=NULL, select=NULL, selprop=0.25, ask=NULL, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p> data frame of S3 class <code><a href="class-design.html">design</a></code> </p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p> a character vector of names of numeric variables in <code>x</code> to be plotted as responses,
+or a numeric response vector, or a numeric matrix containing response columns,
+or a data frame of numeric response variables (the latter would not work when directly
+using function <code><a href="../../graphics/html/plot.design.html">plot.design</a></code> from package graphics)</p>
+</td></tr>
+<tr valign="top"><td><code>select</code></td>
+<td>
+
+<p>Specification of selected factors through option <code>select</code>
+has been introduced in order to obtain manageable plot sizes. For example,
+mosaic plots are most easily readible for up to three or at most four factors.
+Main effects plots with too many factors may also be hard to read because of overlapping
+labeling. <code>select</code> can also be used for bringing the factors into a desirable order. <br />
+<code>select</code> can be<br />
+a vector of integers with position numbers of experimental factors,<br />
+a character vector of factor letters, <br />
+or a character vector of factor names for factors to be selected for plotting; 
+in case of ambiguity, factor names take precedence over factor letters.<br />
+The following choices are of interest for creating mosaic plots of the design 
+factors; any response data will be ignored.<br />
+<code>select</code> can be<br />
+a list of numeric vectors (all of equal length) specifying the tuples to be plotted 
+(a length one list (insted of the numeric vector itself) allows to plot 
+the design table as a mosaic plot instead of showing a main effects 
+plot, if the design has responses)<br />
+one of the special character strings <code>"all2"</code>, <code>"all3"</code> or <code>"all4"</code>
+for obtaining mosaic plots of all pairs, triples or quadruples of (a selection of) factors 
+(see Details section), <br />
+a list with a numeric vector with position numbers of experimental factors as the first
+and one of the above special character strings as the second element for requesting all 
+tuples of a subset of the factors,<br />
+or a list with a single factor position number as the first and one of the above special 
+character strings as the second element for requesting all tuples that include 
+the specified single factor,<br />
+or any of the character strings <code>"complete"</code>, <code>"worst"</code>, <code>"worst.rel"</code>, 
+<code>"worst.parft"</code> or <code>"worst.parftdf"</code>  
+for automatic selection of the projections with the worst confounding to be plotted 
+(see Details section)
+</p>
+</td></tr>
+<tr valign="top"><td><code>selprop</code></td>
+<td>
+<p> a number between 0 and 1 indicating which proportion of 
+worst cases to plot in case <code>select=worst</code> or <code>select=worst.rel</code> 
+is to be plotted (see Details section). The default is useful for small 
+designs only. For large designs, reduce this number !
+</p>
+</td></tr>  
+<tr valign="top"><td><code>ask</code></td>
+<td>
+<p> a logical; <br />
+default behavior if <code>ask=NULL</code>: 
+<code>ask</code> is set to <code>TRUE</code> if multiple plots are requested and 
+the current graphics device is interactive 
+(or none is open but be the next to be opened device is interactive) and 
+<code>FALSE</code> otherwise</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p> further arguments to functions <code><a href="../../graphics/html/plot.html">plot</a></code>,
+<code><a href="../../vcd/html/mosaic.html">mosaic</a></code>, or the function <code><a href="../../graphics/html/plot.design.html">plot.design</a></code> from package graphics;<br />
+For experts, option <code>sub</code> with the special settings <code>"GR"</code>, <code>"A"</code>,<code>"rA"</code>, 
+<code>"sumPARFT"</code> or <code>"sumPARFTdf"</code> 
+can be used to create sub titles that display the generalized resolution, 
+absolute or relative word lengths (see <code><a href="generalized.word.length.html">generalized.word.length</a></code>). 
+All other specifications for <code>sub</code> should work as expected.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Items of class <code><a href="class-design.html">design</a></code> are data frames with attributes,
+that have been created for conducting experiments. Apart from the plot method
+documented here, separate files document the methods <code><a href="formula.design.html">formula.design</a></code>,
+<code><a href="lm.design.html">lm.design</a></code>, and <code><a href="class-design-methods.html">further methods</a></code>.
+</p>
+<p>The method for <code>plot</code> calls the method available in package graphics
+(see <code><a href="../../graphics/html/plot.design.html">plot.design</a></code>) wherever this makes sense (<code>x</code> not of class <code>design</code>,
+<code>x</code> of class <code>design</code> but not following the class <code><a href="class-design.html">design</a></code> structure
+defined in package <span class="pkg">DoE.base</span>,
+and <code>x</code> a design with all factors being R-factors and at least one response available).
+</p>
+<p>Function <code><a href="../../graphics/html/plot.design.html">plot.design</a></code> from package <span class="pkg">graphics</span> is not
+an adequate choice for designs without responses or designs with experimental factors
+that are not R-factors. <br />
+For designs with all factors being R-factors and no response defined (e.g. a freshly-created
+design from function <code>link{oa.design}</code>), function <code>plot.design</code> creates a mosaic plot of
+the frequency table of the design, which may be quite useful to understand the structure
+for designs with relatively few factors (cf. example below; function <code>plot.design</code> calls
+function <code><a href="../../vcd/html/mosaic.html">mosaic</a></code> for this purpose).<br />
+For designs with at least one experimental factor that is not an R-factor, function
+<code>plot.design</code> calls function <code><a href="../../graphics/html/plot.dataframe.html">plot.data.frame</a></code> in order
+to create a scatter plot matrix.<br />
+Currently, there is no good method for plotting designs with mixed qualitative
+and quantitative factors.
+</p>
+<p>If option <code>select</code> is set to <code>"all2"</code>, <code>"all3"</code> or <code>"all4"</code>,
+or a list with a numeric vector as its first element and one of these as the second element, 
+or with <code>select</code> as any of <code>"complete"</code>, <code>"worst"</code>, <code>"worst.rel"</code>,
+<code>"worst.parft"</code> or <code>"worst.parftdf"</code>,
+response variables are ignored, and mosaic plots are created.<br /> 
+These requests usually ask for several plots; note that the plots are
+created one after the other; with an interactive graphics device, the default is that they overwrite each other
+after a user confirmation for the next plot, which allows users to visually inspect them one at a time;
+under Windows, the plotting series can be aborted using the <code>Esc</code>-key. 
+With non-interactive graphics devices, 
+the default is <code>ask=FALSE</code> (e.g. for storing all the plots
+in a multi-page file, see examples).
+</p>
+<p>If option <code>select</code> is any of <code>"all2"</code>, <code>"all3"</code> or <code>"all4"</code>,
+mosaic plots of all pairs, triples or quadruples of factors are created as specified. <br />
+Note that <code>"all2"</code>
+is interesting for non-orthogonal designs only, e.g. ones created by function <code>Dopt.design</code>.<br />
+</p>
+<p>If option <code>select</code> is set to <code>"complete"</code>, <code>"worst"</code> <code>"worst.rel"</code>,
+<code>"worst.parft"</code> or <code>"worst.parftdf"</code>,
+the worst case tuples to be displayed are selected by function <code><a href="generalized.word.length.html">tupleSel</a></code>.    
+</p>
+
+
+<h3>Value</h3>
+
+<p>The <code>plot</code> method is called for its side effects and returns <code>NULL</code>.
+</p>
+
+
+<h3>Note</h3>
+
+<p> The package is currently subject to intensive development; most key functionality is now included.
+Some changes to input and output structures may still occur.</p>
+
+
+<h3>Author(s)</h3>
+
+<p> Ulrike Groemping </p>
+
+
+<h3>References</h3>
+
+<p>Groemping, U (2014) Mosaic plots are useful for visualizing low order projections 
+of factorial designs. To appear in <em>The American Statistician</em>
+<a href="http://www.tandfonline.com/action/showAxaArticles?journalCode=utas20">http://www.tandfonline.com/action/showAxaArticles?journalCode=utas20</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p> See also the following functions known to produce objects of class
+<code>design</code>: <code>FrF2</code>, <code>pb</code>, <code><a href="fac.design.html">fac.design</a></code>, <code><a href="oa.design.html">oa.design</a></code>,
+and function <code><a href="../../graphics/html/plot.design.html">plot.design</a></code> from package graphics;
+a method for function <code><a href="../../stats/html/lm.html">lm</a></code> is described in the separate help file
+<code><a href="lm.design.html">lm.design</a></code>.</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+#### Examples for plotting designs
+oa12 &lt;- oa.design(nlevels=c(2,2,6))
+  ## plotting a design without response (uses function mosaic from package vcd)
+  plot(oa12)
+  ## equivalent to mosaic(~A+B+C, oa12)
+  ## alternative order: mosaic(~C+A+B, oa12)
+  plot(oa12, select=c(3,1,2))
+  ## using the select function: the plots show that the projection for factors
+  ## C, D and E (columns 3, 14 and 15 of the array) is a full factorial,
+  ## while A, D and E (columns 1, 14, and 15 of the array) do not occur in
+  ## all combinations
+  plan &lt;- oa.design(L24.2.13.3.1.4.1,nlevels=c(2,2,2,3,4))
+  plot(plan, select=c("E","D","A"))
+  plot(plan, select=c("E","D","C"))
+  ## Not run: 
+  plot(plan, select="all3")
+  plot(plan, select=list(c(1,3,4,5), "all3"))
+  ## use the specialist version of option sub
+  plot(plan, select=list(c(1,3,4,5), "all3"), sub="A")
+  ## create a file with mosaic plots of all 3-factor projections
+  pdf(file="exampleplots.pdf")
+  plot(plan, select="all3", main="Design from L24.2.13.3.1.4.1 in default column order)")
+  plot(plan, select="worst", selprop=0.3, sub="A")
+  dev.off()
+  ## the file exampleplots.pdf is now available within the current working
+  ## directory
+  
+## End(Not run)
+
+  ## plotting a design with response
+  y=rnorm(12)
+  plot(oa12, y)
+  ## plot design with a response included
+  oa12.r &lt;- add.response(oa12,y)
+  plot(oa12.r)
+  ## plotting a numeric design (with or without response,
+  ##   does not make statistical sense here, for demo only)
+  noa12 &lt;- qua.design(oa12, quantitative="all")
+  plot(noa12, y, main="Scatter Plot Matrix")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DoE.base</em> version 1.1-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

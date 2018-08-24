@@ -1,0 +1,600 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Functions for calculating the generalized word length...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for generalized.word.length {DoE.base}"><tr><td>generalized.word.length {DoE.base}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+Functions for calculating the generalized word length pattern,
+projection frequency tables or optimizing column selection within an array
+</h2>
+
+<h3>Description</h3>
+
+<p>Functions length2, length3, length4 and length5 calculate the numbers of generalized words
+of lengths 2, 3, 4, and 5 respectively, lengths calculates them all. Functions P3.3 and P4.4
+calculate projection frequency tables, functions oa.min3, oa.min4, oa.min34, 
+oa.maxGR (deprecated), oa.minRelProjAberr,
+oa.max3 and oa.max4 determine column allocations with minimum or maximum aliasing.
+Function nchoosek is an auxiliary function
+for calculating all subsets without replacement.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+length2(design, with.blocks = FALSE, J = FALSE)
+length3(design, with.blocks = FALSE, J = FALSE, rela = FALSE)
+length4(design, with.blocks = FALSE, separate = FALSE, J = FALSE, rela = FALSE)
+length5(design, with.blocks = FALSE, J = FALSE, rela = FALSE)
+lengths(design, ...)
+## Default S3 method:
+lengths(design, ...)
+## S3 method for class 'design'
+lengths(design, ...)
+## S3 method for class 'matrix'
+lengths(design, ...)
+contr.XuWu(n, contrasts=TRUE)
+contr.XuWuPoly(n, contrasts=TRUE)
+oa.min3(ID, nlevels, all, rela = FALSE, variants = NULL, crit = "total")
+oa.min4(ID, nlevels, all, rela = FALSE, variants = NULL, crit = "total")
+oa.min34(ID, nlevels, variants = NULL, min3=NULL, all = FALSE, rela = FALSE)
+oa.max3(ID, nlevels, rela = FALSE)
+oa.max4(ID, nlevels, rela = FALSE)
+oa.maxGR(ID, nlevels, variants = NULL)
+oa.minRelProjAberr(ID, nlevels, maxGR = NULL)
+P2.2(ID, digits = 4, rela=FALSE, parft=FALSE, parftdf=FALSE, detailed=FALSE)
+P3.3(ID, digits = 4, rela=FALSE, parft=FALSE, parftdf=FALSE, detailed=FALSE)
+P4.4(ID, digits = 4, rela=FALSE, parft=FALSE, parftdf=FALSE, detailed=FALSE)
+nchoosek(n, k)
+tupleSel(design, type="complete", selprop=0.25, ...)
+## S3 method for class 'design'
+tupleSel(design, type="complete", selprop=0.25, ...)
+## Default S3 method:
+tupleSel(design, type="complete", selprop=0.25, ...)
+
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>design</code></td>
+<td>
+<p>an experimental design. This can either be a matrix or a data frame
+in which all columns are experimental factors, or a special data frame
+of class <code><a href="class-design.html">design</a></code>, which may also include response data.<br />
+In any case, the design should be a factorial design;
+the functions are not useful for quantitative designs (like e.g. latin hypercube samples).
+</p>
+</td></tr>
+<tr valign="top"><td><code>with.blocks</code></td>
+<td>
+<p>a logical, indicating whether or not an existing block factor
+is to be included into word counting. This option is ignored if <code>design</code>
+is not of class <code>design</code>.<br />
+Per default, an existing block factor is ignored.<br />
+For designs without a block factor, the option does not have an effect.<br />
+If the design is blocked, and <code>with.blocks</code>
+is <code>TRUE</code>, the block factor is treated like any other factor in terms of word counting.</p>
+</td></tr>
+<tr valign="top"><td><code>J</code></td>
+<td>
+<p>a logical, indicating whether or not a vector of contributions from
+individual degrees of freedom is produced. If <code>TRUE</code>, the entries of the vector
+are absolute normalized J-characteristics from all 3- or 4-factor products respectively,
+based on normalized Helmert contrasts (cf. Ai and Zhang 2004). <br />
+This is not expected to be useful for practical purposes.<br />
+<code>J</code> cannot be <code>TRUE</code> simultaneously with <code>separate</code> or <code>rela</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>rela</code></td>
+<td>
+<p>logical indicating whether the word lengths are to be calculated in
+absolute terms (as usual) or relative to the maximum possible word length in case of
+complete aliasing; if <code>TRUE</code>, each word length is divided by the worst
+case word length (that corresponds to a completely aliased set of factors)
+derived in Groemping (2011).<br />
+<code>rela=TRUE</code> is only permitted for the shortest possible word length,
+i.e. <code>length3</code> or <code>P3.3</code> for resolution III designs,
+<code>length4</code> or <code>P4.4</code> for resolution IV designs, or <code>length5</code>
+for resolution V designs.<br />
+<code>rela</code> cannot be <code>TRUE</code> simultaneously with <code>parft</code>, <code>parftdf</code>,
+<code>J</code> or <code>separate</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>separate</code></td>
+<td>
+<p>a logical, indicating whether or not separate (and overlapping)
+sums are requested for each two-factor interaction;
+the idea is to be able to identify clear two-factor interactions;
+this may be useful for a design for which <code>length3</code> returns zero,
+in analogy to clear 2fis for regular fractional factorials,
+implemented in function <code><a href="../../FrF2/html/FrF2.html">FrF2</a></code>; this
+is currently experimental and may be removed again if it does not prove useful.<br />
+<code>separate</code> cannot be <code>TRUE</code> simultaneously with <code>J</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>integer; <br />
+for functions <code>contr.XuWu</code> and <code>contr.XuWuPoly</code>:
+number of levels of the factor for which to determine contrasts<br />
+for function <code>nchoosek</code>: number of elements to choose from</p>
+</td></tr>
+<tr valign="top"><td><code>contrasts</code></td>
+<td>
+<p>must always be <code>TRUE</code>; option needed for
+function <code>model.matrix</code> to work properly</p>
+</td></tr>
+<tr valign="top"><td><code>ID</code></td>
+<td>
+<p>an orthogonal array, either a matrix or a data frame; need not be of class <code>oa</code>;
+can also be a character string containing the name of an array listed in data frame <code><a href="oacat.html">oacat</a></code></p>
+</td></tr>
+<tr valign="top"><td><code>nlevels</code></td>
+<td>
+<p>a vector of requested level informations (vector with an entry for each factor)</p>
+</td></tr>
+<tr valign="top"><td><code>all</code></td>
+<td>
+<p>logical; if <code>FALSE</code>, the search stops whenever a design with 0 generalized words
+of highest requested length is found; otherwise, the function always determines all best designs</p>
+</td></tr>
+<tr valign="top"><td><code>variants</code></td>
+<td>
+<p>matrix of integer column number entries; each row gives the column numbers
+for one variant to be compared; the matrix columns must correspond to the entries of the <code>nlevels</code>
+option</p>
+</td></tr>
+<tr valign="top"><td><code>crit</code></td>
+<td>
+<p>character string that requests <code>"total"</code> or <code>"worst"</code> triple optimization;
+<code>"total"</code> corresponds to the previous version that optimizes the overall number of length 3 words;
+<code>"worst"</code> minimizes the aliasing of the worst triple.</p>
+</td></tr>
+<tr valign="top"><td><code>min3</code></td>
+<td>
+<p>the outcome of a call to <code>oa.min3</code> with <code>crit="total"</code>,
+which is to be used for a call to <code>oa.min34</code></p>
+</td></tr>
+<tr valign="top"><td><code>maxGR</code></td>
+<td>
+<p>the outcome of a call to <code>oa.min3</code> with <code>crit="worst"</code> and <code>rela=TRUE</code>
+(or the outcome of a call to <code>oa.maxGR</code>), which is to be used for a call to <code>oa.minRelProjAberr</code></p>
+</td></tr>
+<tr valign="top"><td><code>digits</code></td>
+<td>
+<p>number of decimal points to which to round the result</p>
+</td></tr>
+<tr valign="top"><td><code>parft</code></td>
+<td>
+<p>logical indicating whether to tabulate projection averaged $R^2$
+values (see Groemping 2013) instead of word lengths;
+if <code>TRUE</code>, the table shows projection averaged $R^2$ values as
+detailed in Groemping (2013, 2017).<br />
+<code>parft=TRUE</code> is only permitted for the shortest possible word length,
+i.e. <code>length3</code> or <code>P3.3</code> for resolution III designs,
+<code>length4</code> or <code>P4.4</code> for resolution IV designs.<br />
+<code>parft</code> cannot be <code>TRUE</code> simultaneously with <code>rela</code> or <code>parftdf</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>parftdf</code></td>
+<td>
+<p>logical indicating whether to tabulate averaged $R^2$
+values, where averaging is over individual degrees of freedom; this variant
+is not explicitly described in Groemping (2013, 2017) and usually yields very similar
+results as <code>parft</code>, except for some situations where there are factors
+with very unequal numbers of levels (e.g. 2-level and 8-level factors).<br />
+<code>parftdf=TRUE</code> is only permitted for the shortest possible word length,
+i.e. <code>length3</code> or <code>P3.3</code> for resolution III designs,
+<code>length4</code> or <code>P4.4</code> for resolution IV designs.<br />
+<code>parftdf</code> cannot be <code>TRUE</code> simultaneously with <code>rela</code> or <code>parft</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>detailed</code></td>
+<td>
+<p>logical indicating whether the vector of all (relative) tuple word lengths
+is to become an attribute of the output object (attribute <code>detail</code>); <br />
+intended for supporting other functions (can be a very long vector!)
+</p>
+</td></tr>
+<tr valign="top"><td><code>k</code></td>
+<td>
+<p>number of elements to be chosen, integer from 0 to n</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>character string with type of worst case to consider;<br />
+<code>"complete"</code>, <code>"worst"</code> and <code>"worst.rel"</code> are available.<br />
+For a resolution R design, tuples of R factors are considered (works for R=3 and R=4 only).
+<code>"complete"</code> selects all tuples with complete aliasing of at least one factor,
+<code>"worst"</code> selects all tuples whose number of words is larger than the <code>1-selprop</code>
+quantile of the word length distribution of R-tuples, <code>"worst.rel"</code> does the same
+with relative words (i.e. increases the weight for tuples whose minimum number of levels
+is small), <code>"worst.parft"</code> and <code>"worst.parftdf"</code> do the same with the
+different versions of projection average $R^2$ values.</p>
+</td></tr>
+<tr valign="top"><td><code>selprop</code></td>
+<td>
+<p>(approximate) proportion of worst case tuples to be selected (see <code>type</code>)</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>further arguments; for the <code>design</code> method of function <code>lengths</code>,
+the defaults <code>with.blocks = FALSE, J = FALSE</code> can be changed here;
+for function <code>tupleSel</code>, ... is currently not used</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>These functions work for factors only and are not intended for quantitative variables.
+Nevertheless it is possible to apply them to class <code><a href="class-design.html">design</a></code> plans with quantitative
+variables in them in some situations.
+</p>
+<p>The generalized word length pattern as introduced in Xu and Wu (2001) is the basis
+for the functions described here. Consult their article or Groemping (2011)
+for rigorous mathematical detail of this concept. A brief explanation is also given here,
+before explaining the details for the functions: Assume a design with qualitative
+factors, for which all factors are coded with specially normalized Helmert <code><a href="../../stats/html/contrasts.html">contrasts</a></code>
+(which orthogonalizes the model matrix columns to the intercept column).
+Functions <code>contr.XuWu</code> and <code>contr.XuWuPoly</code> provide such contrasts
+based on Helmert contrasts or orthogonal polynomial contrasts,
+normalized according to the prescription by Xu and Wu (2001)
+which implies that all model matrix columns
+have Euclidean norm <code>sqrt(n)</code>, provided that each
+individual factor is balanced.<br />
+Then, the number of generalized words of length 3 is determined by taking the sum
+of squares of the column averages of all three-factor interaction columns
+(from a model matrix with all three-factor interactions included). <br />
+Likewise, the number of generalized words of length 4 is determined by taking the sum
+of squares of the column averages of all four-factor interaction columns
+(from a model matrix with all four-factor interactions included), and so on.<br />
+A certain plausibility can be found in these numbers by noting that they provide the
+more well-known word length pattern for regular fractional factorial 2-level designs,
+implying that they are exactly zero for resolution IV or resolution V fractional
+factorial 2-level designs, respectively. Furthermore, Groemping and Xu (2014) provided
+an interpretation in terms of R^2-values from linear models for the number of
+shortest words.
+</p>
+<p>Function <code>lengths</code> calculates the generalized word length
+pattern (numbers of generalized words of lengths 2, 3, 4 and 5 respectively),
+functions <code>length2</code>, <code>length3</code>, <code>length4</code> and <code>length5</code> calculate
+each length separately. For designs with few rows and many columns, the newer
+function <code><a href="GWLP.html">GWLP</a></code> is much faster; therefore it will be a better choice
+than <code>lengths</code> for most applications. On the other hand, for designs with
+many rows, <code>lengths</code> can be much faster. Furthermore, <code>lengths</code> and
+the compoment functions <code>length2</code> to <code>length5</code> can calculate additional
+detail not available from <code><a href="GWLP.html">GWLP</a></code>.
+</p>
+<p>The most important component length functions are
+<code>length3</code> and <code>length4</code>; <code>length2</code>
+should yield zero for all orthogonal arrays, and <code>length5</code> will in most
+cases not be of interest either. The number of shortest possible words, e.g.
+length 4 for resolution IV designs, can be calculated in relative terms, if
+interest is in the extent of complete aliasing (cf. Groemping 2011).<br />
+The length functions are fast for small numbers of factors but can take a
+long time if the number of factors is large. Note that an orthogonal array
+based design is called resolution III if the result of
+function <code>length3</code> is non-zero, resolution IV,
+if the result of function <code>length3</code> is zero and the
+result of function <code>length4</code> is non-zero,
+and resolution V+ (at least V), if the result of both functions <code>length3</code>
+and <code>length4</code> are zero.
+</p>
+<p>Functions <code>P3.3</code> and <code>P4.4</code>
+calculate the pattern of generalized words of length 3 for all three-factor
+projections of an array and of generalized words of length 3 or 4 for all four-factor
+projections of an array. Calculation of such projection frequency tables has been proposed
+by Xu, Cheng and Wu (2004). The relative version for <code>P3.3</code> and <code>P4.4</code> has been
+introduced by Groemping (2011) for better assessment of the projective properties of a design.
+It divides each absolute number of words by the maximum possible number in case one
+factor is completely determined by the combinations of the other two factors.
+For <code>P4.4</code>, the relative version is valid only for resolution IV designs.
+NOTE: For mixed-level designs, it is meanwhile recommended to use
+ARFTs (Groemping 2013, 2017) instead of relative <code>P3.3</code> and <code>P4.4</code>;
+these can be obtained by functions <code><a href="GRind.html">GRind</a></code> or <code><a href="GRind.html">SCFTs</a></code>
+and have relevant advantages over the projection frequency tables from <code>P3.3</code> and <code>P4.4</code>
+for mixed level designs. SCFTs (also treated in Groemping 2013, 2017) provide more detail
+than ARFTs and are interesting for assessing the suitability of a design for screening purposes.
+</p>
+<p>The functions can be used in selecting among different possibilities to accomodate factors
+within a given orthogonal array (cf. examples). For general purposes, it is recommended
+to use designs with as small an outcome of <code>length3</code> as possible (either absolute or relative,
+either total or worst case), and within the same result
+for <code>length3</code> (particularly 0), with as small a result for <code>length4</code> as possible. This
+corresponds to (a step towards) generalized minimum aberration. It can also be useful
+to consider the patterns, particularly <code>P3.3</code>, or for mixed levels the aforementioned
+ARFTs or SCFTs obtainable with functions <code><a href="GRind.html">GRind</a></code> or <code><a href="GRind.html">SCFTs</a></code>.
+Note that some overall information on a design's behavior is available in the catalogue data frames
+<code><a href="oacat.html">oacat</a></code> and <code><a href="oacat.html">oacat3</a></code> and can be queried with function <code><a href="show.oas.html">show.oas</a></code>;
+this helps for selecting a suitable array from which to start optimization efforts (see below).
+</p>
+<p>Functions <code>oa.min3</code>, <code>oa.min4</code>, <code>oa.min34</code>
+optimize column allocation for a given array
+for which a certain factor combination must be accomodated: They return designs that allocate
+columns such that the number of generalized words of length 3 is minimized (<code>oa.min3</code>;
+with a choice between minimizing the total number or minimizing the number for the worst-case triple
+of factors), or
+the number of generalized words of length 4 is minimized within all designs for which the number
+of generalized words of length 3 is minimal (<code>oa.min34</code>, total number only); 
+<code>oa.min4</code> does the same as <code>oa.min3</code>, but for designs of resolution IV, either entirely 
+(e.g. designs from <code>oacat3</code>) or through the selection of suitable column variants.
+Option <code>rela</code> allows to switch
+from the default consideration of absolute numbers of words to relative numbers of words
+according to Groemping (2011). This relative number corresponds to concentrating on the worst-case
+ARFT entry for each set of R factors (R the resolution).
+</p>
+<p>Function <code>oa.maxGR</code> maximizes generalized resolution
+according to Deng and Tang (1999) as generalized by Groemping (2011).    
+**Note that function <code>oa.maxGR</code>
+can be replaced by the much faster function <code>oa.min3</code> with options
+<code>crit="worst"</code> and <code>rela=TRUE</code>, whenever GR&lt;=4. Only for designs with
+GR &gt; 4, the extra effort with function <code>oa.maxGR</code> is useful.**
+</p>
+<p>Function <code>oa.minRelProjAberr</code> conducts minimum relative projection aberration
+according to Groemping (2011), with the four steps <br /> 
+(a) maximize GR (using function 
+<code>oa.min3</code> with options <code>crit="worst"</code> and <code>rela=TRUE</code>), <br />
+(b) minimize rA3 or
+rA4 (depending on resolution), <br />
+(c) optimize RPFT (as obtained by <code>P3.3</code>
+or <code>P4.4</code>) and <br />
+(d) minimize absolute words of lengths 4 etc. (only carried through
+to length 4 by the function).
+</p>
+<p>Functions <code>oa.max3</code> and <code>oa.max4</code>
+do the opposite: they search for the worst design in terms of the number of
+generalized words of lengths 3 or 4. Such a design can e.g. be used
+for demonstrating the benefit of optimizing the number of words,
+or for exemplifying theoretical properties.
+Occasionally, it may also be useful,
+if there are severe restrictions on possible combinations.
+(<code>oa.max4</code> should only be used for resolution IV designs.)
+</p>
+<p>Function <code>tupleSel</code> selects worst case tuples of R factors for resolution R designs.
+Depending on the type requested, all completely aliased tuples are selected,
+or the worst case tuples that exceed the <code>1-selprop</code> quantile of the numbers
+of absolute or relative words are selected.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The functions <code>length3</code> and <code>length4</code> (currently) per default
+return the number of generalized words. <br />
+If option <code>J=TRUE</code> is set, their value
+is a named vector of normalized absolute J-characteristics (cf. Ai and Zhang 2004)
+for the respective length, based on normalized Helmert contrasts,
+with names indicating factor indices.
+(For blocked designs with the <code>with.blocks=TRUE</code> option,
+the block factor has index 1.)
+</p>
+<p>Functions <code>P3.3</code> and <code>P4.4</code> return a matrix
+with the numbers of generalized words of length 3 (4) that do occur
+for 3 (4) factor projections (column <code>length3</code> or <code>length4</code> resp.)
+and their frequencies. If option <code>rela=TRUE</code> is set, the numbers of generalized
+words are normalized by dividing them by the number of words that corresponds
+to perfect aliasing among the factors for each projection. For <code>P4.4</code>, the
+relative version is only reasonable for resolution IV designs.
+The matrix of projection frequencies has the overall number of generalized words
+of the respective length as an attribute; in the case <code>rela=TRUE</code> it also
+has the generalized resolution and the overall absolute number of generalized words
+of the respective length as an attribute.
+</p>
+<p>The functions <code>oa.min3</code>, <code>oa.min34</code>, <code>oa.max3</code> and <code>oa.max4</code>
+(currently) return a list with elements
+<code>GWP</code> (the number(s) of generalized words of length 3 (lengths 3 and 4))
+<code>column.variants</code> (the columns to be used for design creation, ordered with
+ascending nlevels) and <code>complete</code> (logical indicating whether or not the list is
+guaranteed to be complete).
+<code>oa.min3</code>, the name of the first element is either <code>GWP3</code> (<code>crit="total"</code>),
+<code>worst.a3</code> (<code>rela=FALSE, crit="worst"</code>) or <code>GR</code> (<code>rela=FALSE, crit="worst"</code>).
+The function <code>oa.maxGR</code> returns a list with elements <code>GR</code>, <code>column.variants</code>
+and <code>complete</code>, the function <code>oa.minRelProjAberr</code> returns a list with elements
+<code>GR</code>, <code>GWP</code>, <code>column.variants</code> and <code>complete</code>.
+</p>
+<p>The function <code>nchoosek</code> returns a matrix with k rows and <code>choose(n, k)</code> columns,
+each of which contains a different subset of k elements.
+</p>
+<p>The function <code>tupleSel</code> returns a sorted list of worst case tuples,
+beginning with the worst case. In case of types <code>"worst"</code> or <code>"worst.rel"</code>,
+attributes provide the (relative) projection frequency tables and the sorted
+vector of the worst case projection values corresponding to the listed tuples.
+</p>
+
+
+<h3>Warning </h3>
+
+<p>The functions have been checked on the types of designs for which
+they are intended (especially orthogonal arrays produced with oa.design) and
+on 2-level fractional factorial designs produced with package <span class="pkg">FrF2</span>.
+They may produce meaningless results for some other types of designs.
+</p>
+<p>Furthermore, all optimizing functions work for relatively small problems only
+and will break down for larger problems because of storage space requirements
+(size depends on the number of possible selections among columns; for example, selecting
+9 out of 31 columns is not doable on my computer because of storage space issues,
+while selecting 29 out of 31 columns is doable within the available storage space).
+Programming of a less storage-intensive algorithm is underway.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Function <code>nchoosek</code> has been taken from <span class="pkg">Bioconductor</span> package <span class="pkg">vsn</span>.<br />
+Function <code>GWLP</code> is much faster (but also more inaccurate) than function <code>lengths</code>
+and may be a better choice for designs with many factors.</p>
+
+
+<h3>Author(s)</h3>
+
+<p> Ulrike Groemping </p>
+
+
+<h3>References</h3>
+
+<p>Ai, M.-Y. and Zhang, R.-C. (2004). Projection justification of generalized minimum
+aberration for asymmetrical fractional factorial designs.
+<em>Metrika</em> <b>60</b>, 279&ndash;285.
+</p>
+<p>Groemping, U. (2011). Relative projection frequency tables for orthogonal arrays.
+Report 1/2011, <em>Reports in Mathematics, Physics and Chemistry</em>
+<a href="http://www1.beuth-hochschule.de/FB_II/reports/welcome.htm">http://www1.beuth-hochschule.de/FB_II/reports/welcome.htm</a>,
+Department II, Beuth University of Applied Sciences, Berlin.
+</p>
+<p>Groemping, U. (2013). Frequency tables for the coding invariant ranking of
+orthogonal arrays. Report 2/2013, <em>Reports in Mathematics, Physics and Chemistry</em>
+<a href="http://www1.beuth-hochschule.de/FB_II/reports/welcome.htm">http://www1.beuth-hochschule.de/FB_II/reports/welcome.htm</a>,
+Department II, Beuth University of Applied Sciences, Berlin.
+</p>
+<p>Groemping, U. (2017). Frequency tables for the coding invariant quality assessment
+of factorial designs. <em>IISE Transactions</em> <b>49</b>, 505-517.
+<a href="https://doi.org/10.1080/0740817X.2016.1241458">https://doi.org/10.1080/0740817X.2016.1241458</a>.
+</p>
+<p>Xu, H.-Q. and Wu, C.F.J. (2001). Generalized minimum aberration for asymmetrical
+fractional factorial designs. <em>The Annals of Statistics</em> <b>29</b>, 1066&ndash;1077.
+</p>
+<p>Xu, H., Cheng, S., and Wu, C.F.J. (2004). Optimal projective three-level
+designs for factor screening and interaction detection. <em>Technometrics</em> <b>46</b>,
+280&ndash;292.
+</p>
+
+
+<h3>See Also</h3>
+
+<p> See also <code><a href="GWLP.html">GWLP</a></code> for a version of lengths that is much
+faster for designs with not so many runs, and <code><a href="GRind.html">GRind</a></code>
+for another set of quality criteria for orthogonal arrays.<br />
+Package <span class="pkg"><a href="../../DoE.MIParray/html/DoE.MIParray.html">DoE.MIParray</a></span> can create 
+arrays for smallish situations for which the catalogued arrays do not provide 
+satisfactory results; this package requires at least one of the commercial 
+softwares Mosek or Gurobi to be installed (both provide free academic licenses).</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+   ## check a small design
+   oa12 &lt;- oa.design(nlevels=c(2,2,6))
+   length3(oa12)
+   ## length4 is of course 0, because there are only 3 factors
+   P3.3(oa12)
+
+   ## the results need not be an integer
+   oa12 &lt;- oa.design(L12.2.11,columns=1:6)
+   length3(oa12)
+   length4(oa12)
+   P3.3(oa12)  ## all projections have the same pattern
+             ## which is known to be true for the complete L12.2.11 as well
+   P3.3(L18)   ## this is the pattern of the Taguchi L18
+             ## also published by Schoen 2009
+   P3.3(L18[,-2])  ## without the 2nd column (= the 1st 3-level column)
+   P3.3(L18[,-2], rela=TRUE)  ## relative pattern, divided by theoretical upper
+                              ## bound for each 3-factor projection
+
+   ## choosing among different assignment possibilities
+   ## for two 2-level factors and one 3- and 4-level factor each
+   show.oas(nlevels=c(2,2,3,4))
+   ## default allocation: first two columns for the 2-level factors
+   oa24.bad &lt;- oa.design(L24.2.13.3.1.4.1, columns=c(1,2,14,15))
+   length3(oa24.bad)
+   ## much better: columns 3 and 10
+   oa24.good &lt;- oa.design(L24.2.13.3.1.4.1, columns=c(3,10,14,15))
+   length3(oa24.good)
+   length4(oa24.good)  ## there are several variants,
+                       ## which produce the same pattern for lengths 3 and 4
+
+   ## the difference matters
+   plot(oa24.bad, select=c(2,3,4))
+   plot(oa24.good, select=c(2,3,4))
+
+   ## generalized resolution differs as well (resolution is III in both cases)
+   GR(oa24.bad)
+   GR(oa24.good)
+
+   ## and analogously also GRind and ARFT and SCFT
+   GRind(oa24.bad)
+   GRind(oa24.good)
+
+   ## GR and GRind can be different
+   GRind(L18[, c(1:4,6:8)], arft=FALSE, scft=FALSE)
+
+   ## choices for columns can be explored with functions oa.min3, oa.min34 or oa.max3
+   oa.min3(L24.2.13.3.1.4.1, nlevels=c(2,2,3,4))
+   oa.min34(L24.2.13.3.1.4.1, nlevels=c(2,2,3,4))
+   ## columns for designs with maximum generalized resolution
+   ##    (can take very long, if all designs have worst-case aliasing)
+      ## then optimize these for overall relative number of words of length 3
+      ##     and in addition absolute number of words of length 4
+   mGR &lt;- oa.maxGR(L18, c(2,3,3,3,3,3,3))
+   oa.minRelProjAberr(L18, c(2,3,3,3,3,3,3), maxGR=mGR)
+
+   oa.max3(L24.2.13.3.1.4.1, nlevels=c(2,2,3,4))    ## this is not for finding
+                                                    ## a good design!!!
+
+   ## Not run: 
+   ## play with selection of optimum design
+   ## somewhat experimental at present
+   oa.min3(L32.2.10.4.7, nlevels=c(2,2,2,4,4,4,4,4))
+   best3 &lt;- oa.min3(L32.2.10.4.7, nlevels=c(2,2,2,4,4,4,4,4), rela=TRUE)
+   oa.min34(L32.2.10.4.7, nlevels=c(2,2,2,4,4,4,4,4))
+   oa.min34(L32.2.10.4.7, nlevels=c(2,2,2,4,4,4,4,4), min3=best3)
+
+   ## generalized resolution according to Groemping 2011, manually
+   best3GR &lt;- oa.min3(L36.2.11.3.12, c(rep(2,3),rep(3,3)), rela=TRUE, crit="worst")
+      ## optimum GR is 3.59
+   ## subsequent optimization w.r.t. rA3
+   best3reltot.GR &lt;- oa.min3(L36.2.11.3.12, c(rep(2,3),rep(3,3)), rela=TRUE,
+           variants=best3GR$column.variants)
+      ## optimum rA3 is 0.5069
+   ## (note: different from first optimizing rA3 (0.3611) and then GR (3.5))
+   ## remaining nine designs: optimize RPFTs
+   L36 &lt;- oa.design(L36.2.11.3.12, randomize=FALSE)
+   lapply(1:9, function(obj) P3.3(L36[,best3reltot.GR$column.variants[obj,]]))
+      ## all identical
+   oa.min34(L36, nlevels=c(rep(2,3),rep(3,3)), min3=best3reltot.GR)
+      ## still all identical
+   
+## End(Not run)
+
+   ## select among column variants with projection frequencies
+   ## here, all variants have identical projection frequencies
+   ## for larger problems, this may sometimes be relevant
+   variants &lt;- oa.min34(L24.2.13.3.1.4.1, nlevels=c(2,2,3,4))
+   for (i in 1:nrow(variants$column.variants)){
+      cat("variant ", i, "\n")
+      print(P3.3(oa.design(L24.2.13.3.1.4.1, columns=variants$column.variants[i,])))
+      }
+
+   ## automatic optimization is possible, but can be time-consuming
+   ## (cf. help for oa.design)
+   plan &lt;- oa.design(L24.2.13.3.1.4.1, nlevels=c(2,2,3,4), columns="min3")
+   length3(plan)
+   length4(plan)
+   plan &lt;- oa.design(L24.2.13.3.1.4.1, nlevels=c(2,2,3,4), columns="min34")
+   length3(plan)
+   length4(plan)
+
+   ## Not run: 
+   ## blocked design from FrF2
+   ## the design is of resolution IV
+   ## there is one (generalized) 4-letter word that does not involve the block factor
+   ## there are four more 4-letter words involving the block factor
+   ## all this and more can also be learnt from design.info(plan)
+   require(FrF2)
+   plan &lt;- FrF2(32,6,blocks=4)
+   length3(plan)
+   length3(plan, with.blocks=TRUE)
+   length4(plan)
+   length4(plan, with.blocks=TRUE)
+   design.info(plan)
+   
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DoE.base</em> version 1.1-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

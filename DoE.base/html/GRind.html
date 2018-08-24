@@ -1,0 +1,280 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Functions for calculating generalized resolution, average...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for GRind {DoE.base}"><tr><td>GRind {DoE.base}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+Functions for calculating generalized resolution, average R-squared values and
+squared canonical correlations, and for checking design regularity
+</h2>
+
+<h3>Description</h3>
+
+<p>Function GR calculates generalized resolution, function GRind calculates
+more detailed generalized resolution values, squared canonical correlations
+and average R-squared values, the print method for class GRind appropriately prints the
+detailed GRind values. Function SCFTs calculates squared canonical correlations for
+factorial designs. SCFTs includes more projections than GRind (all full resolution
+projections or even all projections) and decides on regularity of the design,
+based on a conjecture.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+GR(ID, digits=2)
+GRind(design, digits=3, arft=TRUE, scft=TRUE, cancors=FALSE, with.blocks=FALSE)
+SCFTs(design, digits = 3, all = TRUE, resk.only = TRUE, kmin = NULL, kmax = ncol(design),
+   regcheck = FALSE, arft = TRUE, cancors = FALSE, with.blocks = FALSE)
+## S3 method for class 'GRind'
+print(x, quote=FALSE,  ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>ID</code></td>
+<td>
+<p>an orthogonal array, either a matrix or a data frame; need not be of class <code>oa</code>;
+can also be a character string containing the name of an array listed in data frame <code><a href="oacat.html">oacat</a></code></p>
+</td></tr>
+<tr valign="top"><td><code>digits</code></td>
+<td>
+<p>number of decimal points to which to round the result</p>
+</td></tr>
+<tr valign="top"><td><code>design</code></td>
+<td>
+<p>a factorial design. This can either be a matrix or a data frame
+in which all columns are experimental factors, or a special data frame
+of class <code><a href="class-design.html">design</a></code>, which may also include response data.<br />
+In any case, the design should be a factorial design;
+the functions are not useful for quantitative designs (like e.g. latin hypercube samples).
+</p>
+</td></tr>
+<tr valign="top"><td><code>arft</code></td>
+<td>
+<p>logical indicating whether or not the average $R^2$ frequency table
+(ARFT, see Gr?mping 2013) is to be returned
+</p>
+</td></tr>
+<tr valign="top"><td><code>scft</code></td>
+<td>
+<p>logical indicating whether the squared canonical correlation frequency
+table (SCFT, see Gr?mping 2013) is to be returned
+</p>
+</td></tr>
+<tr valign="top"><td><code>cancors</code></td>
+<td>
+<p>logical indicating whether individual canonical correlations
+are to be returned (see Groemping 2013). These will not be needed
+for normal use of the package.
+</p>
+</td></tr>
+<tr valign="top"><td><code>with.blocks</code></td>
+<td>
+<p>a logical, indicating whether or not an existing block factor
+is to be included into word counting. This option is ignored if <code>design</code>
+is not of class <code>design</code>.<br />
+Per default, an existing block factor is ignored.<br />
+For designs without a block factor, the option does not have an effect.<br />
+If the design is blocked, and <code>with.blocks</code>
+is <code>TRUE</code>, the block factor is treated like any other factor in terms of word counting.</p>
+</td></tr>
+<tr valign="top"><td><code>all</code></td>
+<td>
+<p> logical; decides whether or not to consider projections of more than R~factors, where R denotes the design resolution</p>
+</td></tr>
+<tr valign="top"><td><code>resk.only</code></td>
+<td>
+<p>logical; if <code>all</code> is <code>TRUE</code>, should only full resolution projections be considered?
+Choosing <code>FALSE</code> may cause very long run times.</p>
+</td></tr>
+<tr valign="top"><td><code>kmin</code></td>
+<td>
+<p>integer; purpose is to continue an earlier run with additional larger projections</p>
+</td></tr>
+<tr valign="top"><td><code>kmax</code></td>
+<td>
+<p>integer; limit on projection sizes to consider</p>
+</td></tr>
+<tr valign="top"><td><code>regcheck</code></td>
+<td>
+<p>logical; is the purpose a regularity check? If <code>TRUE</code>, the function stops after the first projection size
+that included squared canonical correlation different from 0 or 1.</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a list of class <code>GRind</code>, as created by function <code>GRind</code></p>
+</td></tr>
+<tr valign="top"><td><code>quote</code></td>
+<td>
+<p>a logical indicating whether character values are quoted</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>further arguments to function <code>print</code></p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Functions <code>GR</code>, <code>GRind</code>, and <code>SCFTs</code> work for factors only and are not intended
+for quantitative variables. Nevertheless it is possible to apply them to class <code><a href="class-design.html">design</a></code> plans with quantitative
+variables in them in some situations.
+</p>
+<p>Function <code>GR</code> calculates the generalized resolution according to Deng and Tang (1999)
+for 2-level designs or a generalization thereof according to Groemping (2011) and
+Groemping and Xu (2014) for general
+orthogonal arrays. It returns a value between 3 and 5, where the numeric value 5 stands for
+&ldquo;at least 5&rdquo;. Roughly, generalized resolution measures the closeness of a design
+to the next higher resolution (worst-case based, e.g. one completely aliased triple of
+factors implies resolution 3).
+</p>
+<p>Function <code>GRind</code> (newer than <code>GR</code>, and recommended) calculates the generalized
+resolution, together with factor wise generalized resolution values, squared canonical correlations
+and average R-squared values, as mentioned in Groemping and Xu (2014) and further developed in
+Groemping (2013, 2017).
+The print method for class <code>Grind</code> objects prints the individual factor components of GRind.i such that they
+do not mislead:
+Because of the shortest word approach for GR, SCFT and ARFT, a GRind.i component
+can be at most one larger than the resolution. For example, if GR is 3.5 so that the
+resolution is 3, the largest possible numeric value of a GRind.i component is 4, but it means &quot;&gt;=4&quot;.
+</p>
+<p>Function <code>SCFTs</code> does more extensive SCFT and ARFT calculations than function <code>GRind</code>:
+in particular, the function allows to do such calculations for more projection sizes,
+either restricting attention to full resolution projections or going for ALL projections
+with non-zero word lengths.
+These capabilities have been introduced in relation to regularity checking based on SCFTs
+(see Groemping and Bailey 2016):
+Defining a factorial design as regular if all main effects are orthogonal in some sense
+to effects including other factors of any order, it is conjectured that a regularity check on full resolution
+projections only will suffice for identifying non-regularity (work in progress).
+However, this is a conjecture only; as long as it is not proven, a definite check for this type of regularity requires checking ALL projections,
+i.e. setting <code>resk.only</code> to <code>FALSE</code>. With this setting, the function may run for a very long time
+(depends in particular on the number of factors)!
+</p>
+
+
+<h3>Value</h3>
+
+<p>Function <code>GR</code> returns a list with elements <code>GR</code> (the generalized resolution of the array, a not necessarily integer
+number between 3 and 5) and <code>RPFT</code> (the relative projection frequency table).
+<code>GR</code> values smaller than 5 are exact, while the number five
+stands for &ldquo;at least 5&rdquo;. The resolution itself is the integer portion of <code>GR</code>.
+The <code>RPFT</code> element is the relative projection frequency table for 4-factor projections
+for <code>GR=5</code>. For unconfounded three- and four-column designs, <code>GR</code> takes the
+value <code>Inf</code> (used to be 5 for package versions up to 0.23-4).
+</p>
+<p>Function <code>GRind</code> works on designs with resolution at least 3 and
+returns a list with elements <br />
+<code>GRs</code> (the two versions of
+generalized resolution described in Groemping and Xu 2014), <br />
+the matrix <code>GR.i</code> with rows GRtot.i and GRind.i for the
+factor wise generalized resolutions (also in Groemping and Xu 2014), <br />
+and optionally <br />
+the ARFT (Groemping 2013, 2017), <br />
+the SCFT (Groemping 2013, 2017), <br />
+and/or the canonical correlations.<br />
+The latter are held in an <br />
+nfac x choose(nfac-1, R-1) x max(nlev)-1 array <br />
+and are supplemented with 0es,
+if there are fewer of them than the respective dfi.
+</p>
+<p>The factor wise generalized resolutions are in the closed interval between
+resolution and resolution + 1. In the latter case, their meaning is &quot;at least
+resolution + 1&quot;. (The print method ensures that they are printed accordingly,
+but the list elements themselves are just the numbers.)
+</p>
+<p>Function <code>SCFTs</code> returns a list of lists with a component for
+each projection size considered. Each such component contains the following entries:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>SCFT</code></td>
+<td>
+<p>Squared canonical correlation table for the projection size</p>
+</td></tr>
+<tr valign="top"><td><code>ARFT </code></td>
+<td>
+<p>Average R^2 frequency table for the projection size (if requested)</p>
+</td></tr>
+<tr valign="top"><td><code>cancors </code></td>
+<td>
+<p>canonical correlations (if requested)</p>
+</td></tr>
+</table>
+
+
+<h3>Warning </h3>
+
+<p>The functions have been checked on the types of designs for which
+they are intended (especially orthogonal arrays produced with oa.design) and
+on 2-level fractional factorial designs produced with package <span class="pkg">FrF2</span>.
+They may produce meaningless results for some other types of designs.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p> Ulrike Groemping </p>
+
+
+<h3>References</h3>
+
+<p>Groemping, U. (2011). Relative projection frequency tables for orthogonal arrays.
+Report 1/2011, <em>Reports in Mathematics, Physics and Chemistry</em>
+<a href="http://www1.beuth-hochschule.de/FB_II/reports/welcome.htm">http://www1.beuth-hochschule.de/FB_II/reports/welcome.htm</a>,
+Department II, Beuth University of Applied Sciences, Berlin.
+</p>
+<p>Groemping, U. (2013). Frequency tables for the coding invariant ranking of
+orthogonal arrays. Report 2/2013, <em>Reports in Mathematics, Physics and Chemistry</em>
+<a href="http://www1.beuth-hochschule.de/FB_II/reports/welcome.htm">http://www1.beuth-hochschule.de/FB_II/reports/welcome.htm</a>,
+Department II, Beuth University of Applied Sciences, Berlin.
+</p>
+<p>Groemping, U. (2017). Frequency tables for the coding invariant quality assessment
+of factorial designs. <em>IISE Transactions</em> <b>49</b>, 505-517.
+<a href="https://doi.org/10.1080/0740817X.2016.1241458">https://doi.org/10.1080/0740817X.2016.1241458</a>.
+</p>
+<p>Groemping, U. and Bailey, R.A. (2016). Regular fractions of factorial arrays. In:
+<em>mODa 11 &ndash; Advances in Model-Oriented Design and Analysis</em>.
+New York: Springer.
+</p>
+<p>Groemping, U. and Xu, H. (2014). Generalized resolution for orthogonal arrays.
+<em>The Annals of Statistics</em> <b>42</b>, 918&ndash;939.
+<a href="https://prof.beuth-hochschule.de/fileadmin/prof/groemp/downloads/AOS1205.pdf">https://prof.beuth-hochschule.de/fileadmin/prof/groemp/downloads/AOS1205.pdf</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p> See also <code><a href="GWLP.html">GWLP</a></code> and <code><a href="generalized.word.length.html">generalized.word.length</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+   oa24.bad &lt;- oa.design(L24.2.13.3.1.4.1, columns=c(1,2,14,15))
+   oa24.good &lt;- oa.design(L24.2.13.3.1.4.1, columns=c(3,10,14,15))
+   ## generalized resolution differs (resolution is III in both cases)
+   GR(oa24.bad)
+   GR(oa24.good)
+
+   ## and analogously also GRind and ARFT and SCFT
+   GRind(oa24.bad)
+   GRind(oa24.good)
+
+   ## SCFTs
+   ## Not run: plan &lt;- L24.2.12.12.1[,c(1:5,13)]
+   GRind(plan)  ## looks regular (0/1 SCFT only)
+   SCFTs(plan)
+   SCFTs(plan, resk.only=FALSE)
+   
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DoE.base</em> version 1.1-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

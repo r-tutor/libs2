@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Data Frames That List Available Orthogonal Arrays</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for oacat {DoE.base}"><tr><td>oacat {DoE.base}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+Data Frames That List Available Orthogonal Arrays
+</h2>
+
+<h3>Description</h3>
+
+<p>These data frames hold the lists of available orthogonal arrays, 
+except for a few structurally equivalent additional arrays known 
+as Taguchi arrays (L18, L36, L54). Arrays in  
+in oacat are mostly from the Kuhfeld collection, 
+those in oacat3 from some other sources.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+oacat
+oacat3
+</pre>
+
+
+<h3>Details</h3>
+
+<p>The data frames hold a list of orthogonal arrays, as described in Section &ldquo;value&rdquo;. 
+Inspection of these arrays can be most easily done with function <code><a href="show.oas.html">show.oas</a></code>. 
+Some of the listed arrays are directly accessible through their names (&ldquo;parent&rdquo; arrays, 
+also listed under <code><a href="arrays.html">arrays</a></code>) or 
+are full factorials the construction of which is obvious. Others 
+can be constructed as &ldquo;child&rdquo; arrays from the parent and full factorial 
+arrays, using a so-called <code>lineage</code> which is also included as a column 
+in data frame <code>oacat</code>. Most of the listed arrays have been taken 
+from Kuhfeld 2009. Exceptions: The three arrays <code>L128.2.15.8.1</code>, 
+<code>L256.2.19</code> and <code>L2048.2.63</code>) have been taken from Mee 2009; these 
+are irregular resolution IV or V arrays for which all main effects can be 
+orthogonally estimated even in the presence of interactions, or even all 2fis 
+can be orthogonally estimated, provided there are no higher order effects.
+</p>
+<p>Note that most of the arrays in <code>oacat</code>, per default, are guaranteed to 
+orthogonally estimate 
+all main effects, <b>provided all higher order effects are negligible</b> 
+(again, the Mee arrays are an exception). This can be 
+a very severe limitation, of course, and arbitrary strong biases can distort the 
+estimates even of main effects, if this assumption is violated. 
+It is therefore strongly recommended to inspect 
+the quality of an orthogonal array quite closely before deciding to use it 
+for experimentation. Some functions for inspecting arrays are provided in the 
+package (cf. <code><a href="generalized.word.length.html">generalized.word.length</a></code>).
+</p>
+<p>The data frame <code>oacat3</code> contains stronger arrays that have at least the main 
+effects unconfounded with two-factor interactions. If only these are of interest, 
+function <code><a href="show.oas.html">show.oas</a></code> can be restricted to strong arrays 
+by option <code>Rgt3=TRUE</code>. Function <code><a href="oa.design.html">oa.design</a></code> will use a strong 
+array, if possible. It may also be worthwhile to check whether expansive replacement 
+of a strong array with a full factorial can yield a suitable strong array 
+(for an example, see function <code><a href="expansive.replace.html">expansive.replace</a></code>); this is not 
+automatically checked and can only be done by the user.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The data frames contain the columns <code>name</code>, <code>nruns</code>, <code>lineage</code> 
+and further columns <code>n2</code> to <code>n72</code>; furthermore, some columns with 
+calculated metrics are included. <code>name</code> holds the name of the 
+array, <code>nruns</code> its number of runs, and <code>lineage</code> the way the array can 
+be constructed from other arrays, if applicable. The columns <code>n2</code> to <code>n72</code> 
+each contain the number of factors with the respective number of levels.
+</p>
+<p>The logical columns <code>ff</code>, <code>regular.strict</code> and <code>regular</code> indicate a  
+full factorial and a regular design in the strict or weak sense, respectively
+(strict: all ARFT entries are 0 or 1, defined as &ldquo;R^2 regular&rdquo; in Groemping and Bailey (2016); 
+weak: all SCFT entries are 0 or 1, defined as &ldquo;CC regular&rdquo; in 
+Groemping and Bailey (2016)). For R^2 regularity, it suffices to check all full resolution factor sets, 
+i.e., sets of j factors with resolution j; for CC regularity, this is conjectured to be also true.
+The entries in column <code>regular</code> are based on that conjecture (and for some larger designs, 
+even those checks were not completed);
+thus, designs denominated as CC regular might prove otherwise if the conjecture 
+proves wrong, and for larger designs also for unchecked full resolution factor sets of higher dimensions).
+</p>
+<p>Column <code>SCones</code> contains the number of worst case (=1)
+squared canonical correlations for the number of R factor subsets, with 
+R the resolution; if this number is 0, main effects can be considered 
+to have partial confounding only with any interactions of up to R-1 factors. 
+<code>GR</code>, <code>GRind</code>, <code>maxAR</code>
+and <code>maxSC</code> contain the generalized resolution in two versions, 
+the maximum average R^2 and the maximum squared canonical correlation.
+</p>
+<p><code>dfe</code> contains the error degrees of freedom of a main effects model, 
+if all columns of the array are populated; if this is 0, the design is saturated. 
+<code>A3</code> to <code>A8</code> contain the numbers of words of lengths 3 to 8. 
+More information on these metrics can be found in 
+<code><a href="generalized.word.length.html">generalized.word.length</a></code> and the literature therein. 
+</p>
+<p>The design names also indicate the number of runs and the numbers of factors: 
+The first portion of each array name (starting with L) indicates the number of runs, 
+each subsequent pair of numbers indicates a number of levels together with the frequency with which it occurs.
+For example, <code>L18.2.1.3.7</code> is an 18 run design with one factor with 
+2 levels and seven factors with 3 levels each. 
+</p>
+<p>The columns <code>gmarule</code> and <code>sgmarule</code> refer to the implementation of 
+known rules from the literature that certain subsets of array columns have 
+generalized minimum aberration (Butler 2005); if such a subset is requested, 
+there is no message of caution even if the array columns are used with 
+<code>column="order"</code> instead of optimizing the selection. Currently, 
+only the rules from Butler (2005) are implemented; hopefully, more rules will be added 
+in the future.
+</p>
+<p>The column <code>lineage</code> deserves particular attention for <code>oacat</code> (always empty for <code>oacat3</code>): 
+it is an empty string, if the design is directly available and can be accessed via its name, or if the design 
+is a full factorial (e.g. L6.2.1.3.1). Otherwise, the lineage entry is structured as follows: 
+It starts with the specification of a parent array, given as <code>levels1~no of factors; levels2~no of factors;</code>. 
+After a colon, there are one or more replacements, each enclosed in brackets; within each pair of brackets, 
+the left-hand side of the exclamation mark shows the to-be-replaced factor, the right-hand side the 
+replacement array that has to be used for replacing the levels of such a factor one or more times. For example, 
+the lineage for <code>L18.2.1.3.7</code> is <code>3~6;6~1;:(6~1!2~1;3~1;)</code>, which means that the parent array in 
+18 runs with six 3 level factors and one 6 level factor has to be used, and the 6 level factor has to be replaced 
+with the full factorial with one 2 level factor and one 3 level factor.
+</p>
+
+
+<h3>Warning</h3>
+
+<p>For designs with only 2-level factors, it is usually more wise to 
+use package <span class="pkg"><a href="../../FrF2/html/FrF2-package.html">FrF2</a></span>. Exceptions: The three arrays by 
+Mee (2009; cf. section &ldquo;Details&rdquo; above) are very useful for 2-level factors. 
+</p>
+<p>Most of the orthogonal arrays from <code>oacat</code>, 
+especially when using all columns for experimentation, 
+are guaranteed to orthogonally estimate all main effects, 
+<b>provided all higher order effects are negligible</b>. 
+</p>
+<p>Make sure you understand the implications of using an orthogonal main effects design 
+for experimentation. In particular, for some designs there is a very severe 
+risk of obtaining biased main effect estimates, if there are some interactions between 
+experimental factors. The documentation for <code><a href="generalized.word.length.html">generalized.word.length</a></code> and 
+examples section below that illustrate this remark. 
+Cf. also the instructions in section &ldquo;Details&rdquo;).
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Ulrike Groemping, with contributions by Boyko Amarov 
+</p>
+
+
+<h3>References</h3>
+
+ 
+<p>Agrawal, V. and Dey, A. (1983). Orthogonal resolution IV designs for some asymmetrical factorials. 
+<em>Technometrics</em> <b>25</b>, 197&ndash;199.
+</p>
+<p>Brouwer, A. Small mixed fractional factorial designs of strength 3. <a href="https://www.win.tue.nl/~aeb/codes/oa/3oa.html#toc1">https://www.win.tue.nl/~aeb/codes/oa/3oa.html#toc1</a> accessed March 1 2016
+</p>
+<p>Brouwer, A., Cohen, A.M. and Nguyen, M.V.M. (2006). Orthogonal arrays of strength 3 and small run sizes. <em>Journal of Statistical Planning and Inference</em> <b>136</b>, 3268&ndash;3280.
+</p>
+<p>Butler, N.A. (2005). Generalised minimum aberration construction results for symmetrical orthogonal arrays. <em>Biometrika</em> <b>92</b>, 485 &ndash; 491.
+</p>
+<p>Eendebak, P. and Schoen, E. Complete Series of Orthogonal Arrays. <a href="http://pietereendebak.nl/oapage/">http://pietereendebak.nl/oapage/</a> accessed March 1 2016
+</p>
+<p>Groemping, U. and Bailey, R.A. (2016). Regular fractions of factorial arrays. In: 
+<em>mODa 11 &ndash; Advances in Model-Oriented Design and Analysis</em>. 
+Cham: Springer International Publishing.
+</p>
+<p>Kuhfeld, W. (2009). Orthogonal arrays. Website courtesy of SAS Institute <a href="http://support.sas.com/techsup/technote/ts723.html">http://support.sas.com/techsup/technote/ts723.html</a>.
+</p>
+<p>Mee, R. (2009). <em>A Comprehensive Guide to Factorial Two-Level Experimentation</em>. 
+New York: Springer.
+</p>
+<p>Nguyen, M.V.M. (2005). <em>Journal of Statistical Planning and Inference</em> <b>138</b>,
+220&ndash;233.
+</p>
+<p>Nguyen, M.V.M. (2008). Some new constructions of strength 3 mixed orthogonal arrays. <em>Journal of Statistical Planning and Inference</em> <b>138</b>,
+220&ndash;233.
+</p>
+<p>Sloane, N. Orthogonal Arrays. <a href="http://neilsloane.com/oadir/">http://neilsloane.com/oadir/</a> accessed March 1 2016
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="oa.design.html">oa.design</a></code> for using the designs from <code>oacat</code> in design creation<br />
+<code><a href="show.oas.html">show.oas</a></code> for inspecting the available arrays from <code>oacat</code><br />
+<code><a href="generalized.word.length.html">generalized.word.length</a></code> for inspection functions for array properties<br />
+<code><a href="arrays.html">arrays</a></code> for a list of orthogonal arrays which are directly accessible 
+within the package 
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+   head(oacat)
+   
+   sapply(oacat3$name, function(nn) unlist(attributes(get(nn))[c("origin", "comment")]))
+   
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DoE.base</em> version 1.1-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

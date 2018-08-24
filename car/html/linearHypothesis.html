@@ -116,7 +116,7 @@ in symbolic form (see <em>Details</em>).</p>
 <p>right-hand-side vector for hypothesis, with as many entries as
 rows in the hypothesis matrix; can be omitted, in which case it defaults
 to a vector of zeroes. For a multivariate linear model, <code>rhs</code> is a
-matrix, defaulting to 0.</p>
+matrix, defaulting to 0. This argument isn't available for F-tests for linear mixed models.</p>
 </td></tr>
 <tr valign="top"><td><code>singular.ok</code></td>
 <td>
@@ -472,5 +472,5 @@ linearHypothesis(mod.ok, c("treatment1:gender1", "treatment2:gender1"),
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>car</em> version 3.0-0 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>car</em> version 3.0-2 <a href="00Index.html">Index</a>]</div>
 </body></html>
