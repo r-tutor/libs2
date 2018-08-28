@@ -6,6 +6,8 @@ r_copycat               Run an R process that mimics the current R
                         process
 r_process               External R Process
 r_process_options       Create options for an r_process object
+r_session               External R Session
+r_session_options       Create options for an r_session object
 r_vanilla               Run an R child process, with no configuration
 rcmd                    Run an R CMD command
 rcmd_bg                 Run an R CMD command in the background
