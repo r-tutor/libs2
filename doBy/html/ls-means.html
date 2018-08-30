@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Compute LS-means (aka population means or marginal means)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for ls-means {doBy}"><tr><td>ls-means {doBy}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Compute  LS-means (aka population means or
+marginal means)</h2>
+
+<h3>Description</h3>
+
+<p>LS-means (least squares means, also known as
+population means and as marginal means) for a range of model types.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+LSmeans(object, effect = NULL, at = NULL, level = 0.95, ...)
+
+## Default S3 method:
+LSmeans(object, effect = NULL, at = NULL,
+  level = 0.95, ...)
+
+## S3 method for class 'lmerMod'
+LSmeans(object, effect = NULL, at = NULL,
+  level = 0.95, adjust.df = TRUE, ...)
+
+popMeans(object, effect = NULL, at = NULL, level = 0.95, ...)
+
+## Default S3 method:
+popMeans(object, effect = NULL, at = NULL,
+  level = 0.95, ...)
+
+## S3 method for class 'lmerMod'
+popMeans(object, effect = NULL, at = NULL,
+  level = 0.95, adjust.df = TRUE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>Model object</p>
+</td></tr>
+<tr valign="top"><td><code>effect</code></td>
+<td>
+<p>A vector of variables. For each configuration of
+these the estimate will be calculated.</p>
+</td></tr>
+<tr valign="top"><td><code>at</code></td>
+<td>
+<p>A list of values of covariates (including levels of some
+factors) to be used in the calculations</p>
+</td></tr>
+<tr valign="top"><td><code>level</code></td>
+<td>
+<p>The level of the (asymptotic) confidence interval.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments; currently not used.</p>
+</td></tr>
+<tr valign="top"><td><code>adjust.df</code></td>
+<td>
+<p>Should denominator degrees of freedom be adjusted?</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>There are restrictions on the formulas allowed in the model object.
+For example having <code>y ~ log(x)</code> will cause an error. Instead one
+must define the variable <code>logx = log(x)</code> and do <code>y~logx</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A dataframe with results from computing the contrasts.
+</p>
+
+
+<h3>Warning</h3>
+
+<p>Notice that <code>LSmeans</code> and <code>LE_matrix</code>
+fails if the model formula contains an offset (as one would
+have in connection with e.g. Poisson regression. It is on the
+todo-list to fix this
+</p>
+
+
+<h3>Note</h3>
+
+<p>The <code>LSmeans</code> method is a recent addition to the
+package, and it will eventually replace the <code>popMeans</code>
+method.
+</p>
+<p>Some of the code has been inspired by the <b>lsmeans</b> package.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Søren Højsgaard, <a href="mailto:sorenh@math.aau.dk">sorenh@math.aau.dk</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="linest-matrix.html">LE_matrix</a></code>, <code><a href="linest.html">linest</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+
+## Two way anova:
+
+data(warpbreaks)
+
+m0 &lt;- lm(breaks ~ wool + tension, data=warpbreaks)
+m1 &lt;- lm(breaks ~ wool * tension, data=warpbreaks)
+LSmeans(m0)
+LSmeans(m1)
+
+## same as:
+K &lt;- LE_matrix(m0);K
+linest(m0, K)
+K &lt;- LE_matrix(m1);K
+linest(m1, K)
+
+LE_matrix(m0, effect="wool")
+LSmeans(m0, effect="wool")
+
+LE_matrix(m1, effect="wool")
+LSmeans(m1, effect="wool")
+
+LE_matrix(m0, effect=c("wool", "tension"))
+LSmeans(m0, effect=c("wool", "tension"))
+
+LE_matrix(m1, effect=c("wool", "tension"))
+LSmeans(m1, effect=c("wool", "tension"))
+
+
+## Regression; two parallel regression lines:
+
+data(Puromycin)
+
+m0 &lt;- lm(rate ~ state + log(conc), data=Puromycin)
+## Can not use LSmeans / LE_matrix here because of
+## the log-transformation. Instead we must do:
+Puromycin$lconc &lt;- log( Puromycin$conc )
+m1 &lt;- lm(rate ~ state + lconc, data=Puromycin)
+
+LE_matrix(m1)
+LSmeans(m1)
+
+LE_matrix(m1, effect="state")
+LSmeans(m1, effect="state")
+
+LE_matrix(m1, effect="state", at=list(lconc=3))
+LSmeans(m1, effect="state", at=list(lconc=3))
+
+## Non estimable contrasts
+
+## ## Make balanced dataset
+dat.bal &lt;- expand.grid(list(AA=factor(1:2), BB=factor(1:3),
+                            CC=factor(1:3)))
+dat.bal$y &lt;- rnorm(nrow(dat.bal))
+
+## ## Make unbalanced dataset
+#      'BB' is nested within 'CC' so BB=1 is only found when CC=1
+#       and BB=2,3 are found in each CC=2,3,4
+dat.nst &lt;- dat.bal
+dat.nst$CC &lt;-factor(c(1, 1, 2, 2, 2, 2, 1, 1, 3, 3,
+                      3, 3, 1, 1, 4, 4, 4, 4))
+
+mod.bal  &lt;- lm(y ~ AA + BB * CC,    data=dat.bal)
+mod.nst  &lt;- lm(y ~ AA + BB : CC, data=dat.nst)
+
+LSmeans(mod.bal, effect=c("BB", "CC"))
+LSmeans(mod.nst, effect=c("BB", "CC"))
+LSmeans(mod.nst, at=list(BB=1, CC=1))
+
+LSmeans(mod.nst, at=list(BB=1, CC=2))
+## Above: NA's are correct; not an estimable function
+
+if( require( lme4 )){
+ warp.mm &lt;- lmer(breaks ~ -1 + tension + (1|wool), data=warpbreaks)
+ LSmeans(warp.mm, effect="tension")
+ class(warp.mm)
+ fixef(warp.mm)
+ coef(summary(warp.mm))
+ vcov(warp.mm)
+ if (require(pbkrtest))
+   vcovAdj(warp.mm)
+}
+
+LSmeans(warp.mm, effect="tension")
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>doBy</em> version 4.6-2 <a href="00Index.html">Index</a>]</div>
+</body></html>

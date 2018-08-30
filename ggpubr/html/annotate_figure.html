@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Annotate Arranged Figure</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for annotate_figure {ggpubr}"><tr><td>annotate_figure {ggpubr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Annotate Arranged Figure</h2>
+
+<h3>Description</h3>
+
+<p>Annotate figures including: i) ggplots, ii) arranged ggplots from
+<code><a href="ggarrange.html">ggarrange</a>()</code>, <code><a href="../../gridExtra/html/grid.arrange.html">grid.arrange</a>()</code> and
+<code><a href="../../cowplot/html/plot_grid.html">plot_grid</a>()</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+annotate_figure(p, top = NULL, bottom = NULL, left = NULL, right = NULL,
+  fig.lab = NULL, fig.lab.pos = c("top.left", "top", "top.right",
+  "bottom.left", "bottom", "bottom.right"), fig.lab.size, fig.lab.face)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>(arranged) ggplots.</p>
+</td></tr>
+<tr valign="top"><td><code>top, bottom, left, right</code></td>
+<td>
+<p>optional string, or grob.</p>
+</td></tr>
+<tr valign="top"><td><code>fig.lab</code></td>
+<td>
+<p>figure label (e.g.: &quot;Figure 1&quot;).</p>
+</td></tr>
+<tr valign="top"><td><code>fig.lab.pos</code></td>
+<td>
+<p>position of the figure label, can be one of &quot;top.left&quot;,
+&quot;top&quot;, &quot;top.right&quot;, &quot;bottom.left&quot;, &quot;bottom&quot;, &quot;bottom.right&quot;. Default is
+&quot;top.left&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>fig.lab.size</code></td>
+<td>
+<p>optional size of the figure label.</p>
+</td></tr>
+<tr valign="top"><td><code>fig.lab.face</code></td>
+<td>
+<p>optional font face of the figure label. Allowed values
+include: &quot;plain&quot;, &quot;bold&quot;, &quot;italic&quot;, &quot;bold.italic&quot;.</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Alboukadel Kassambara <a href="mailto:alboukadel.kassambara@gmail.com">alboukadel.kassambara@gmail.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="ggarrange.html">ggarrange</a>()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data("ToothGrowth")
+df &lt;- ToothGrowth
+df$dose &lt;- as.factor(df$dose)
+
+# Create some plots
+# ::::::::::::::::::::::::::::::::::::::::::::::::::
+# Box plot
+bxp &lt;- ggboxplot(df, x = "dose", y = "len",
+    color = "dose", palette = "jco")
+# Dot plot
+dp &lt;- ggdotplot(df, x = "dose", y = "len",
+    color = "dose", palette = "jco")
+# Density plot
+dens &lt;- ggdensity(df, x = "len", fill = "dose", palette = "jco")
+
+# Arrange and annotate
+# ::::::::::::::::::::::::::::::::::::::::::::::::::
+figure &lt;- ggarrange(bxp, dp, dens, ncol = 2, nrow = 2)
+annotate_figure(figure,
+               top = text_grob("Visualizing Tooth Growth", color = "red", face = "bold", size = 14),
+               bottom = text_grob("Data source: \n ToothGrowth data set", color = "blue",
+                                  hjust = 1, x = 1, face = "italic", size = 10),
+               left = text_grob("Figure arranged using ggpubr", color = "green", rot = 90),
+               right = "I'm done, thanks :-)!",
+               fig.lab = "Figure 1", fig.lab.face = "bold"
+)
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggpubr</em> version 0.1.8 <a href="00Index.html">Index</a>]</div>
+</body></html>

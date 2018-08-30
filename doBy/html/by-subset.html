@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Finds subsets of a dataframe which is split by variables in a...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for by-subset {doBy}"><tr><td>by-subset {doBy}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Finds subsets of a dataframe which is split by variables in a formula.</h2>
+
+<h3>Description</h3>
+
+<p>A data frame is split by a formula into groups. Then subsets are found
+within each group, and the result is collected into a data frame.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+subsetBy(formula, subset, data = parent.frame(), select, drop = FALSE,
+  join = TRUE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>formula</code></td>
+<td>
+<p>A right hand sided formula or a character vector of variables
+to split by.</p>
+</td></tr>
+<tr valign="top"><td><code>subset</code></td>
+<td>
+<p>logical expression indicating elements or rows to keep: missing
+values are taken as false.</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>A data frame.</p>
+</td></tr>
+<tr valign="top"><td><code>select</code></td>
+<td>
+<p>expression, indicating columns to select from a data frame.</p>
+</td></tr>
+<tr valign="top"><td><code>drop</code></td>
+<td>
+<p>passed on to <code>[</code> indexing operator.</p>
+</td></tr>
+<tr valign="top"><td><code>join</code></td>
+<td>
+<p>If FALSE the result is a list of data frames (as defined by
+'formula'); if TRUE one data frame is returned.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>further arguments to be passed to or from other methods.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A data frame.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Søren Højsgaard, <a href="mailto:sorenh@math.aau.dk">sorenh@math.aau.dk</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="by-split.html">splitBy</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+data(dietox)
+subsetBy(~Evit, Weight &lt; mean(Weight), data=dietox)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>doBy</em> version 4.6-2 <a href="00Index.html">Index</a>]</div>
+</body></html>

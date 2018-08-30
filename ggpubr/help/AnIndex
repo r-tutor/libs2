@@ -1,3 +1,4 @@
+%>%	reexports
 add_summary	add_summary
 annotate_figure	annotate_figure
 as_ggplot	as_ggplot
@@ -50,6 +51,7 @@ ggviolin	ggviolin
 gradient_color	gradient_color
 gradient_fill	gradient_color
 grids	grids
+group_by	reexports
 labs_pubr	theme_pubr
 mean_ci	add_summary
 mean_range	add_summary
@@ -58,6 +60,8 @@ mean_se_	add_summary
 median_iqr	add_summary
 median_mad	add_summary
 median_range	add_summary
+mutate	reexports
+reexports	reexports
 rotate	rotate
 rotate_axis_text	rotate_axis_text
 rotate_x_text	rotate_axis_text
@@ -72,6 +76,8 @@ stat_compare_means	stat_compare_means
 stat_conf_ellipse	stat_conf_ellipse
 stat_cor	stat_cor
 stat_mean	stat_mean
+stat_pvalue_manual	stat_pvalue_manual
+stat_regline_equation	stat_regline_equation
 stat_stars	stat_stars
 table_cell_bg	ggtexttable
 table_cell_font	ggtexttable

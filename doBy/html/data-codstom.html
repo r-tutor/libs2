@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Diet of Atlantic cod in the Gulf of St. Lawrence (Canada)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for data-codstom {doBy}"><tr><td>data-codstom {doBy}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Diet of Atlantic cod in the Gulf of St. Lawrence (Canada)</h2>
+
+<h3>Description</h3>
+
+<p>Stomach content data for Atlantic cod (Gadus morhua) in the Gulf of
+St.Lawrence, Eastern Canada.  Note: many prey items were of no interest for
+this analysis and were regrouped into the &quot;Other&quot; category.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+codstom
+</pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 10000 observations on the following 10 variables.
+</p>
+
+<dl>
+<dt><code>region</code></dt><dd><p>a factor with levels <code>SGSL</code> <code>NGSL</code> 
+representing the southern and northern Gulf of St. Lawrence, respectively</p>
+</dd>
+<dt><code>ship.type</code></dt><dd><p>a factor with levels <code>2</code> <code>3</code> <code>31</code> 
+<code>34</code> <code>90</code> <code>99</code></p>
+</dd>
+<dt><code>ship.id</code></dt><dd><p>a factor with levels <code>11558</code> <code>11712</code>
+<code>136148</code> <code>136885</code>
+<code>136902</code> <code>137325</code> <code>151225</code> <code>151935</code> <code>99433</code></p>
+</dd>
+<dt><code>trip</code></dt><dd><p>a factor with levels <code>10</code> <code>11</code>
+<code>12</code> <code>179</code> <code>1999</code>
+<code>2</code> <code>2001</code> <code>20020808</code> <code>3</code> <code>4</code> <code>5</code>
+<code>6</code> <code>7</code> <code>8</code>
+<code>88</code> <code>9</code> <code>95</code></p>
+</dd>     
+<dt><code>set</code></dt><dd><p>a numeric vector</p>
+</dd>
+<dt><code>fish.id</code></dt><dd><p>a numeric vector</p>
+</dd>
+<dt><code>fish.length</code></dt><dd><p>a numeric vector, length in mm</p>
+</dd>
+<dt><code>prey.mass</code></dt><dd><p>a numeric vector, mass of item in stomach, in g</p>
+</dd>
+<dt><code>prey.type</code></dt><dd><p>a factor with levels <code>Ammodytes_sp</code>
+<code>Argis_dent</code>
+<code>Chion_opil</code> <code>Detritus</code> <code>Empty</code> <code>Eualus_fab</code>
+<code>Eualus_mac</code> <code>Gadus_mor</code> <code>Hyas_aran</code>
+<code>Hyas_coar</code>
+<code>Lebbeus_gro</code> <code>Lebbeus_pol</code> <code>Leptocl_mac</code>
+<code>Mallot_vil</code>
+<code>Megan_norv</code> <code>Ophiuroidea</code> <code>Other</code> <code>Paguridae</code>
+<code>Pandal_bor</code> <code>Pandal_mon</code> <code>Pasiph_mult</code>
+<code>Sabin_sept</code>
+<code>Sebastes_sp</code> <code>Them_abys</code> <code>Them_comp</code> <code>Them_lib</code></p>
+</dd>    
+</dl>
+
+
+<h3>Details</h3>
+
+<p>Cod are collected either by contracted commerical fishing vessels
+(<code>ship.type</code> 90 or 99) or by research vessels.  Commercial vessels are
+identified by a unique <code>ship.id</code>.
+</p>
+<p>Either one research vessel or several commercial vessels conduct a survey
+(<code>trip</code>), during which a trawl, gillnets or hooked lines are set
+several times. Most trips are random stratified surveys (depth-based
+stratification).
+</p>
+<p>Each trip takes place within one of the <code>region</code>s.  The <code>trip</code>
+label is only guaranteed to be unique within a region and the <code>set</code>
+label is only guaranteed to be unique within a <code>trip</code>.
+</p>
+<p>For each fish caught, the <code>fish.length</code> is recorded and the fish is
+allocated a <code>fish.id</code>, but the <code>fish.id</code> is only guaranteed to be
+unique within a <code>set</code>. A subset of the fish caught are selected for
+stomach analysis (stratified random selection according to fish length; unit
+of stratification is the set for research surveys, the combination ship.id
+and stratum for surveys conducted by commercial vessels, although strata are
+not shown in codstom).
+</p>
+<p>The basic experimental unit in this data set is a cod stomach (one stomach
+per fish).  Each stomach is uniquely identified by a combination of
+<code>region</code>, <code>ship.type</code>, <code>ship.id</code>, <code>trip</code>, <code>set</code>,
+and <code>fish.id</code>.
+</p>
+<p>For each prey item found in a stomach, the species and mass of the prey item
+are recorded, so there can be multiple observations per stomach.  There may
+also be several prey items with the same <code>prey.type</code> in the one stomach
+(for example many <code>prey.types</code> have been recoded <code>Other</code>, which
+produced many instances of <code>Other</code> in the same stomach).
+</p>
+<p>If a stomach is empty, a single observation is recorded with
+<code>prey.type</code> <code>Empty</code> and a <code>prey.mass</code> of zero.
+</p>
+
+
+<h3>Source</h3>
+
+<p>Small subset from a larger dataset (more stomachs, more variables,
+more <code>prey.types</code>) collected by D. Chabot and M. Hanson, Fisheries &amp;
+Oceans Canada (chabotd@dfo-mpo.gc.ca).
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+data(codstom)
+str(codstom)
+# removes multiple occurences of same prey.type in stomachs
+codstom1 &lt;- summaryBy(prey.mass ~ 
+                      region + ship.type + ship.id + trip + set + fish.id + prey.type,
+                      data = codstom, 
+                      FUN = sum) 
+
+# keeps a single line per stomach with the total mass of stomach content
+codstom2 &lt;- summaryBy(prey.mass ~ region + ship.type + ship.id + trip + set + fish.id,
+                      data = codstom, 
+                      FUN = sum) 
+
+# mean prey mass per stomach for each trip
+codstom3 &lt;- summaryBy(prey.mass.sum ~ region + ship.type + ship.id + trip,
+                      data = codstom2, FUN = mean) 
+
+## Not run:           
+# wide version, one line per stomach, one column per prey type
+library(reshape)
+codstom4 &lt;- melt(codstom, id = c(1:7, 9))
+codstom5 &lt;- cast(codstom4, 
+                 region + ship.type + ship.id + trip + set + fish.id + fish.length ~ 
+                 prey.type, sum)
+k &lt;- length(names(codstom5))
+prey_col &lt;- 8:k
+out &lt;- codstom5[,prey_col]
+out[is.na(out)] &lt;- 0
+codstom5[,prey_col] &lt;- out
+codstom5$total.content &lt;- rowSums(codstom5[, prey_col])
+
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>doBy</em> version 4.6-2 <a href="00Index.html">Index</a>]</div>
+</body></html>

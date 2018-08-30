@@ -1,0 +1,253 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Visualizing Error</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for ggerrorplot {ggpubr}"><tr><td>ggerrorplot {ggpubr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Visualizing Error</h2>
+
+<h3>Description</h3>
+
+<p>Visualizing error.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ggerrorplot(data, x, y, desc_stat = "mean_se", combine = FALSE,
+  merge = FALSE, color = "black", fill = "white", palette = NULL,
+  size = NULL, width = NULL, title = NULL, xlab = NULL, ylab = NULL,
+  facet.by = NULL, panel.labs = NULL, short.panel.labs = TRUE,
+  select = NULL, remove = NULL, order = NULL, add = "none",
+  add.params = list(), error.plot = "pointrange", ci = 0.95,
+  position = position_dodge(), ggtheme = theme_pubr(), ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a data frame</p>
+</td></tr>
+<tr valign="top"><td><code>x, y</code></td>
+<td>
+<p>x and y variables for drawing.</p>
+</td></tr>
+<tr valign="top"><td><code>desc_stat</code></td>
+<td>
+<p>descriptive statistics to be used for visualizing errors. Default value is &quot;mean_se&quot;.
+Allowed values are one of , &quot;mean&quot;, &quot;mean_se&quot;, &quot;mean_sd&quot;, &quot;mean_ci&quot;, &quot;mean_range&quot;,
+&quot;median&quot;, &quot;median_iqr&quot;, &quot;median_mad&quot;, &quot;median_range&quot;; see <code><a href="desc_statby.html">desc_statby</a></code> for more details.</p>
+</td></tr>
+<tr valign="top"><td><code>combine</code></td>
+<td>
+<p>logical value. Default is FALSE. Used only when y is a vector
+containing multiple variables to plot. If TRUE, create a multi-panel plot by
+combining the plot of y variables.</p>
+</td></tr>
+<tr valign="top"><td><code>merge</code></td>
+<td>
+<p>logical or character value. Default is FALSE. Used only when y is
+a vector containing multiple variables to plot. If TRUE, merge multiple y
+variables in the same plotting area. Allowed values include also &quot;asis&quot;
+(TRUE) and &quot;flip&quot;. If merge = &quot;flip&quot;, then y variables are used as x tick
+labels and the x variable is used as grouping variable.</p>
+</td></tr>
+<tr valign="top"><td><code>color, fill</code></td>
+<td>
+<p>outline and fill colors.</p>
+</td></tr>
+<tr valign="top"><td><code>palette</code></td>
+<td>
+<p>the color palette to be used for coloring or filling by groups.
+Allowed values include &quot;grey&quot; for grey color palettes; brewer palettes e.g.
+&quot;RdBu&quot;, &quot;Blues&quot;, ...; or custom color palette e.g. c(&quot;blue&quot;, &quot;red&quot;); and
+scientific journal palettes from ggsci R package, e.g.: &quot;npg&quot;, &quot;aaas&quot;,
+&quot;lancet&quot;, &quot;jco&quot;, &quot;ucscgb&quot;, &quot;uchicago&quot;, &quot;simpsons&quot; and &quot;rickandmorty&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>size</code></td>
+<td>
+<p>Numeric value (e.g.: size = 1). change the size of points and
+outlines.</p>
+</td></tr>
+<tr valign="top"><td><code>width</code></td>
+<td>
+<p>numeric value between 0 and 1 specifying box width.</p>
+</td></tr>
+<tr valign="top"><td><code>title</code></td>
+<td>
+<p>plot main title.</p>
+</td></tr>
+<tr valign="top"><td><code>xlab</code></td>
+<td>
+<p>character vector specifying x axis labels. Use xlab = FALSE to
+hide xlab.</p>
+</td></tr>
+<tr valign="top"><td><code>ylab</code></td>
+<td>
+<p>character vector specifying y axis labels. Use ylab = FALSE to
+hide ylab.</p>
+</td></tr>
+<tr valign="top"><td><code>facet.by</code></td>
+<td>
+<p>character vector, of length 1 or 2, specifying grouping
+variables for faceting the plot into multiple panels. Should be in the data.</p>
+</td></tr>
+<tr valign="top"><td><code>panel.labs</code></td>
+<td>
+<p>a list of one or two character vectors to modify facet panel
+labels. For example, panel.labs = list(sex = c(&quot;Male&quot;, &quot;Female&quot;)) specifies
+the labels for the &quot;sex&quot; variable. For two grouping variables, you can use
+for example panel.labs = list(sex = c(&quot;Male&quot;, &quot;Female&quot;), rx = c(&quot;Obs&quot;,
+&quot;Lev&quot;, &quot;Lev2&quot;) ).</p>
+</td></tr>
+<tr valign="top"><td><code>short.panel.labs</code></td>
+<td>
+<p>logical value. Default is TRUE. If TRUE, create short
+labels for panels by omitting variable names; in other words panels will be
+labelled only by variable grouping levels.</p>
+</td></tr>
+<tr valign="top"><td><code>select</code></td>
+<td>
+<p>character vector specifying which items to display.</p>
+</td></tr>
+<tr valign="top"><td><code>remove</code></td>
+<td>
+<p>character vector specifying which items to remove from the plot.</p>
+</td></tr>
+<tr valign="top"><td><code>order</code></td>
+<td>
+<p>character vector specifying the order of items.</p>
+</td></tr>
+<tr valign="top"><td><code>add</code></td>
+<td>
+<p>character vector for adding another plot element (e.g.: dot plot or
+error bars). Allowed values are one or the combination of: &quot;none&quot;,
+&quot;dotplot&quot;, &quot;jitter&quot;, &quot;boxplot&quot;, &quot;point&quot;, &quot;mean&quot;, &quot;mean_se&quot;, &quot;mean_sd&quot;,
+&quot;mean_ci&quot;, &quot;mean_range&quot;, &quot;median&quot;, &quot;median_iqr&quot;, &quot;median_mad&quot;,
+&quot;median_range&quot;; see ?desc_statby for more details.</p>
+</td></tr>
+<tr valign="top"><td><code>add.params</code></td>
+<td>
+<p>parameters (color, shape, size, fill, linetype) for the
+argument 'add'; e.g.: add.params = list(color = &quot;red&quot;).</p>
+</td></tr>
+<tr valign="top"><td><code>error.plot</code></td>
+<td>
+<p>plot type used to visualize error. Allowed values are one of
+c(&quot;pointrange&quot;, &quot;linerange&quot;, &quot;crossbar&quot;, &quot;errorbar&quot;, &quot;upper_errorbar&quot;,
+&quot;lower_errorbar&quot;, &quot;upper_pointrange&quot;, &quot;lower_pointrange&quot;, &quot;upper_linerange&quot;,
+&quot;lower_linerange&quot;). Default value is &quot;pointrange&quot; or &quot;errorbar&quot;. Used only
+when add != &quot;none&quot; and add contains one &quot;mean_*&quot; or &quot;med_*&quot; where &quot;*&quot; = sd,
+se, ....</p>
+</td></tr>
+<tr valign="top"><td><code>ci</code></td>
+<td>
+<p>the percent range of the confidence interval (default is 0.95).</p>
+</td></tr>
+<tr valign="top"><td><code>position</code></td>
+<td>
+<p>Position adjustment, either as a string, or the result of
+a call to a position adjustment function.</p>
+</td></tr>
+<tr valign="top"><td><code>ggtheme</code></td>
+<td>
+<p>function, ggplot2 theme name. Default value is theme_pubr().
+Allowed values include ggplot2 official themes: theme_gray(), theme_bw(),
+theme_minimal(), theme_classic(), theme_void(), ....</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>other arguments to be passed to be passed to ggpar().</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The plot can be easily customized using the function ggpar(). Read
+?ggpar for changing: </p>
+ <ul>
+<li><p> main title and axis labels: main,
+xlab, ylab </p>
+</li>
+<li><p> axis limits: xlim, ylim (e.g.: ylim = c(0, 30)) </p>
+</li>
+<li><p> axis
+scales: xscale, yscale (e.g.: yscale = &quot;log2&quot;) </p>
+</li>
+<li><p> color palettes:
+palette = &quot;Dark2&quot; or palette = c(&quot;gray&quot;, &quot;blue&quot;, &quot;red&quot;) </p>
+</li>
+<li><p> legend title,
+labels and position: legend = &quot;right&quot; </p>
+</li>
+<li><p> plot orientation : orientation
+= c(&quot;vertical&quot;, &quot;horizontal&quot;, &quot;reverse&quot;) </p>
+</li></ul>
+
+
+
+<h3>See Also</h3>
+
+<p><code><a href="ggpar.html">ggpar</a></code>, <code><a href="ggline.html">ggline</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+# Data: ToothGrowth data set we'll be used.
+df&lt;- ToothGrowth
+head(df, 10)
+
+# Plot mean_se
+ggerrorplot(df, x = "dose", y = "len")
+
+
+# Change desc_stat to mean_sd
+# (other values include: mean_sd, mean_ci, median_iqr, ....)
+# Add labels
+ggerrorplot(df, x = "dose", y = "len",
+ desc_stat = "mean_sd")
+
+# Change error.plot to "errorbar" and add mean point
+# Visualize the mean of each group
+ggerrorplot(df, x = "dose", y = "len",
+ add = "mean", error.plot = "errorbar")
+
+# Horizontal plot
+ggerrorplot(df, x = "dose", y = "len",
+ add = "mean", error.plot = "errorbar",
+ orientation = "horizontal")
+
+
+# Change error.plot to "crossbar"
+ggerrorplot(df, x = "dose", y = "len",
+ error.plot = "crossbar", width = 0.5)
+
+
+# Add jitter points and errors (mean_se)
+ggerrorplot(df, x = "dose", y = "len",
+ add = "jitter")
+
+# Add dot and errors (mean_se)
+ggerrorplot(df, x = "dose", y = "len",
+ add = "dotplot")
+
+# Multiple groups with error bars and jitter point
+ggerrorplot(df, x = "dose", y = "len",
+ color = "supp", palette = "Paired",
+ error.plot = "pointrange",
+ position = position_dodge(0.5))
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggpubr</em> version 0.1.8 <a href="00Index.html">Index</a>]</div>
+</body></html>

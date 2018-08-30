@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Recode values of a vector</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for recodeVar {doBy}"><tr><td>recodeVar {doBy}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Recode values of a vector</h2>
+
+<h3>Description</h3>
+
+<p>Recodes a vector with values, say 1,2 to a variable with values, say 'a',
+'b'
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+recodeVar(x, src, tgt, default = NULL, keep.na = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A vector; the variable to be recoded</p>
+</td></tr>
+<tr valign="top"><td><code>src</code></td>
+<td>
+<p>The source values: a subset of the present values of x</p>
+</td></tr>
+<tr valign="top"><td><code>tgt</code></td>
+<td>
+<p>The target values: the corresponding new values of x</p>
+</td></tr>
+<tr valign="top"><td><code>default</code></td>
+<td>
+<p>Default target value for those values of x not listed in
+'src'. When default=NULL, values of x which are not given in 'src' will
+be kept in the output.</p>
+</td></tr>
+<tr valign="top"><td><code>keep.na</code></td>
+<td>
+<p>If TRUE then NA's in x will be retained in the output</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A vector
+</p>
+
+
+<h3>Warning </h3>
+
+<p>Care should be taken if x is a factor. A safe approach may
+be to convert x to a character vector using as.character.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Søren Højsgaard, <a href="mailto:sorenh@math.aau.dk">sorenh@math.aau.dk</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../base/html/cut.html">cut</a></code>, <code><a href="../../base/html/factor.html">factor</a></code>,
+<code><a href="recodeVar.html">recodeVar</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+x &lt;- c("dec", "jan", "feb", "mar", "apr", "may")
+src1 &lt;- list(c("dec", "jan", "feb"), c("mar", "apr", "may"))
+tgt1 &lt;- list("winter", "spring")
+recodeVar(x, src=src1, tgt=tgt1)
+#[1] "winter" "winter" "winter" "spring" "spring" "spring"
+
+x &lt;- c(rep(1:3, 3))
+#[1] 1 2 3 1 2 3 1 2 3
+
+## Simple usage:
+recodeVar(x, src=c(1, 2), tgt=c("A", "B"))
+#[1] "A" "B" NA  "A" "B" NA  "A" "B" NA 
+
+## Here we need to use lists
+recodeVar(x, src=list(c(1, 2)), tgt=list("A"))
+#[1] "A" "A" NA  "A" "A" NA  "A" "A" NA 
+recodeVar(x, src=list(c(1, 2)), tgt=list("A"), default="L")
+#[1] "A" "A" "L" "A" "A" "L" "A" "A" "L"
+recodeVar(x, src=list(c(1, 2), 3), tgt=list("A", "B"), default="L")
+#[1] "A" "A" "B" "A" "A" "B" "A" "A" "B"
+
+## Dealing with NA's in x
+x&lt;-c(NA,rep(1:3, 3),NA)
+#[1] NA  1  2  3  1  2  3  1  2  3 NA
+recodeVar(x, src=list(c(1, 2)), tgt=list("A"))
+#[1] NA  "A" "A" NA  "A" "A" NA  "A" "A" NA  NA 
+recodeVar(x, src=list(c(1, 2)), tgt=list("A"), default="L")
+#[1] NA  "A" "A" "L" "A" "A" "L" "A" "A" "L" NA 
+recodeVar(x, src=list(c(1, 2)), tgt=list("A"), default="L", keep.na=FALSE)
+#[1] "L" "A" "A" "L" "A" "A" "L" "A" "A" "L" "L"
+
+x &lt;- c("no", "yes", "not registered", "no", "yes", "no answer")
+recodeVar(x, src = c("no", "yes"), tgt = c("0", "1"), default = NA)
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>doBy</em> version 4.6-2 <a href="00Index.html">Index</a>]</div>
+</body></html>

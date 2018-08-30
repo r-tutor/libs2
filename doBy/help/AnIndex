@@ -4,7 +4,9 @@ asNumericMatrix2	doBy-internal
 beets	data-beets
 breastcancer	data-breastcancer
 budworm	data-budworm
+by-lapply	by-lapply
 by-order	by-order
+by-sample	by-sample
 by-split	by-split
 by-subset	by-subset
 by-summary	by-summary
@@ -60,6 +62,7 @@ haldCement	data-haldCement
 internal	doBy-internal
 is-estimable	is-estimable
 is_estimable	is-estimable
+lapplyBy	by-lapply
 lastobs	firstlastobs
 lastobs.default	firstlastobs
 lastobs.formula	firstlastobs
@@ -100,6 +103,7 @@ print.splitByData	doBy-internal
 print.summary_lmBy	doBy-internal
 recodeVar	recodeVar
 renameCol	renameCol
+sampleBy	by-sample
 set_covariate_val	linest-get
 set_xlevels	linest-get
 specialize	doBy-internal

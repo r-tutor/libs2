@@ -1,4 +1,6 @@
+by-lapply               Formula based version of lapply.
 by-order                Ordering (sorting) rows of a data frame
+by-sample               Sampling from a data frame
 by-split                Split a data frame
 by-subset               Finds subsets of a dataframe which is split by
                         variables in a formula.
