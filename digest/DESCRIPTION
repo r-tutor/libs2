@@ -25,5 +25,5 @@ NeedsCompilation: yes
 Packaged: 2018-08-21 12:08:07.514864 UTC; edd
 Repository: CRAN
 Date/Publication: 2018-08-22 16:20:07 UTC
-Built: R 3.5.1; x86_64-w64-mingw32; 2018-08-24 00:59:37 UTC; windows
+Built: R 3.5.1; x86_64-w64-mingw32; 2018-08-28 11:29:46 UTC; windows
 Archs: i386, x64
