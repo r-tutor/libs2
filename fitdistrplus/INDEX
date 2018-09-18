@@ -5,8 +5,6 @@ bootdist                Bootstrap simulation of uncertainty for
                         non-censored data
 bootdistcens            Bootstrap simulation of uncertainty for
                         censored data
-cdfcompcens             Compares various fitted distributions to
-                        censored data on a cdf plot
 danish                  Danish reinsurance claim dataset
 dataFAQ                 Datasets for the FAQ
 descdist                Description of an empirical distribution for
@@ -24,6 +22,8 @@ fluazinam               Species-Sensitivity Distribution (SSD) for
 gofstat                 Goodness-of-fit statistics
 graphcomp               Graphical comparison of multiple fitted
                         distributions (for non-censored data)
+graphcompcens           Graphical comparison of multiple fitted
+                        distributions for censored data
 groundbeef              Ground beef serving size data set
 llplot                  (Log)likelihood plot for a fit using maximum
                         likelihood

@@ -12,7 +12,7 @@
 
 <meta name="author" content="Andrie de Vries" />
 
-<meta name="date" content="2017-12-15" />
+<meta name="date" content="2018-09-07" />
 
 <title>Using checkpoint for reproducible research</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Using checkpoint for reproducible research</h1>
 <h4 class="author"><em>Andrie de Vries</em></h4>
-<h4 class="date"><em>2017-12-15</em></h4>
+<h4 class="date"><em>2018-09-07</em></h4>
 
 
 <div id="TOC">
@@ -212,9 +212,9 @@ oldpar &lt;-<span class="st"> </span><span class="kw">par</span>(<span class="dt
 <pre><code>## [1] &quot;https://mran.microsoft.com/snapshot/2017-04-01&quot;</code></pre>
 <p>Next, check that the library path is set to <code>~/.checkpoint</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">normalizePath</span>(<span class="kw">.libPaths</span>(), <span class="dt">winslash =</span> <span class="st">&quot;/&quot;</span>)</code></pre></div>
-<pre><code>## [1] &quot;C:/tmp/RtmpOuqaLo/.checkpoint/2017-04-01/lib/x86_64-w64-mingw32/3.4.2&quot;
-## [2] &quot;C:/tmp/RtmpOuqaLo/.checkpoint/R-3.4.2&quot;                                
-## [3] &quot;C:/Program Files/R/R-3.4.2/library&quot;</code></pre>
+<pre><code>## [1] &quot;C:/tmp/RtmpOIq91l/.checkpoint/2017-04-01/lib/x86_64-w64-mingw32/3.5.1&quot;
+## [2] &quot;C:/tmp/RtmpOIq91l/.checkpoint/R-3.5.1&quot;                                
+## [3] &quot;C:/Program Files/R/R-3.5.1/library&quot;</code></pre>
 <p>Finally, check which packages are installed in checkpoint library:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">installed.packages</span>(<span class="kw">.libPaths</span>()[<span class="dv">1</span>])[, <span class="st">&quot;Package&quot;</span>]</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## cleanup
@@ -225,9 +225,9 @@ oldpar &lt;-<span class="st"> </span><span class="kw">par</span>(<span class="dt
 <span class="kw">options</span>(<span class="dt">repos =</span> oldRepos)
 <span class="kw">unCheckpoint</span>(oldLibPaths)
 <span class="kw">.libPaths</span>()</code></pre></div>
-<pre><code>## [1] &quot;C:/tmp/RtmpEzkTRa/Rinst3d1c66d15e33&quot;          
-## [2] &quot;C:/Users/richcala/Documents/R/win-library/3.4&quot;
-## [3] &quot;C:/Program Files/R/R-3.4.2/library&quot;</code></pre>
+<pre><code>## [1] &quot;C:/tmp/Rtmp69rJVn/Rinst1e3c1470709e&quot;          
+## [2] &quot;C:/Users/richcala/Documents/R/win-library/3.5&quot;
+## [3] &quot;C:/Program Files/R/R-3.5.1/library&quot;</code></pre>
 </div>
 </div>
 </div>

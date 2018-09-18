@@ -1,7 +1,9 @@
 basehaz.gbm             Baseline hazard function
 calibrate.plot          Calibration plot
-gbm                     Generalized Boosted Regression Modeling
-gbm-package             Generalized Boosted Regression Models
+gbm                     Generalized Boosted Regression Modeling (GBM)
+gbm-package             Generalized Boosted Regression Models (GBMs)
+gbm.fit                 Generalized Boosted Regression Modeling (GBM)
+gbm.more                Generalized Boosted Regression Modeling (GBM)
 gbm.object              Generalized Boosted Regression Model Object
 gbm.perf                GBM performance
 gbm.roc.area            Compute Information Retrieval measures.
@@ -19,4 +21,4 @@ shrink.gbm              L1 shrinkage of the predictor variables in a
                         GBM
 shrink.gbm.pred         Predictions from a shrunked GBM
 summary.gbm             Summary of a gbm object
-validate.gbm            Test the 'gbm' package.
+test.gbm                Test the 'gbm' package.
