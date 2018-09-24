@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create a nice plot for Bar Plots Create a nice looking plot...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for ggplot.barplot {DescribeDisplay}"><tr><td>ggplot.barplot {DescribeDisplay}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create a nice plot for Bar Plots
+Create a nice looking plot complete with axes using ggplot.</h2>
+
+<h3>Description</h3>
+
+<p>Create a nice plot for Bar Plots
+Create a nice looking plot complete with axes using ggplot.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'barplot'
+ggplot(data, spine = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>plot to display, object created by <code>dd_load()</code></p>
+</td></tr>
+<tr valign="top"><td><code>spine</code></td>
+<td>
+<p>(not implemented currently) whether to display the barchart as a spine plot</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>arguments passed through to the ggplot function</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Barret Schloerke <a href="mailto:schloerke@gmail.com">schloerke@gmail.com</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(ggplot2)
+print(ggplot(dd_example("barchart")))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DescribeDisplay</em> version 0.2.7 <a href="00Index.html">Index</a>]</div>
+</body></html>

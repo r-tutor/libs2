@@ -1,8 +1,8 @@
 Package: DescribeDisplay
-Version: 0.2.5
-Date: 2016-01-14
-Title: An Interface to the DescribeDisplay GGobi Plugin
-Description: Produce publication quality graphics from output of GGobi's
+Version: 0.2.7
+Date: 2018-09-23
+Title: An Interface to the 'DescribeDisplay' 'GGobi' Plugin
+Description: Produce publication quality graphics from output of 'GGobi'
     describe display plugin.
 Authors@R: c(
     person("Di", "Cook",          , "dicook@monash.edu"     , c("aut", "cre")),
@@ -13,17 +13,17 @@ Authors@R: c(
 License: MIT + file LICENSE
 URL: https://github.com/ggobi/DescribeDisplay
 BugReports: https://github.com/ggobi/DescribeDisplay/issues
-Imports: reshape2, ggplot2 (>= 2.0.0), plyr, scales, grid, GGally (>=
-        1.0.0)
-Suggests: roxygen2 (>= 5.0.1), testthat
-RoxygenNote: 5.0.1
+Imports: reshape2, ggplot2 (>= 3.0.0), plyr, scales, grid, GGally (>=
+        1.4.0)
+Suggests: roxygen2 (>= 6.0.1), testthat
+RoxygenNote: 6.0.1
 NeedsCompilation: no
-Packaged: 2016-01-14 19:40:00 UTC; barret
+Packaged: 2018-09-23 21:30:35 UTC; dicook
 Author: Di Cook [aut, cre],
   Hadley Wickham [aut],
   Andreas Buja [aut],
   Barret Schloerke [aut]
 Maintainer: Di Cook <dicook@monash.edu>
 Repository: CRAN
-Date/Publication: 2016-01-15 10:48:11
-Built: R 3.5.0; ; 2018-06-22 12:54:08 UTC; windows
+Date/Publication: 2018-09-23 22:20:12 UTC
+Built: R 3.5.1; ; 2018-09-24 02:01:58 UTC; windows

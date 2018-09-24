@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create nice plots for a time series Create nice looking plots...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for ggplot.timeseries {DescribeDisplay}"><tr><td>ggplot.timeseries {DescribeDisplay}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create nice plots for a time series
+Create nice looking plots complete with axes using ggplot.  Produces graphics with a uniform x axis.</h2>
+
+<h3>Description</h3>
+
+<p>Create nice plots for a time series
+Create nice looking plots complete with axes using ggplot.  Produces graphics with a uniform x axis.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'timeseries'
+ggplot(data, edges = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>to display</p>
+</td></tr>
+<tr valign="top"><td><code>edges</code></td>
+<td>
+<p>Boolean operator to tell whether to try to force the edges or not.  Will not work to remove the edges.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>(currently) unused arguments</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Barret Schloerke <a href="mailto:schloerke@gmail.com">schloerke@gmail.com</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(ggplot2)
+print(ggplot(dd_example("timeseries")))
+print(ggplot(dd_example("timeseries"), edges = TRUE))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DescribeDisplay</em> version 0.2.7 <a href="00Index.html">Index</a>]</div>
+</body></html>

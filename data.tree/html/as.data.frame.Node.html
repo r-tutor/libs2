@@ -18,9 +18,9 @@ data.frame.
 
 <pre>
 ## S3 method for class 'Node'
-as.data.frame(x, row.names = NULL, optional = FALSE, ...,
-  traversal = c("pre-order", "post-order", "in-order", "level", "ancestor"),
-  pruneFun = NULL, filterFun = NULL, format = FALSE,
+as.data.frame(x, row.names = NULL, optional = FALSE,
+  ..., traversal = c("pre-order", "post-order", "in-order", "level",
+  "ancestor"), pruneFun = NULL, filterFun = NULL, format = FALSE,
   inheritFromAncestors = FALSE)
 
 ToDataFrameTree(x, ..., pruneFun = NULL)
@@ -30,7 +30,8 @@ ToDataFrameTable(x, ..., pruneFun = NULL)
 ToDataFrameNetwork(x, ..., direction = c("climb", "descend"),
   pruneFun = NULL, format = FALSE, inheritFromAncestors = FALSE)
 
-ToDataFrameTypeCol(x, ..., type = "level", prefix = type, pruneFun = NULL)
+ToDataFrameTypeCol(x, ..., type = "level", prefix = type,
+  pruneFun = NULL)
 </pre>
 
 
@@ -154,5 +155,5 @@ ToDataFrameTypeCol(acme, type = 'type')
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>data.tree</em> version 0.7.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>data.tree</em> version 0.7.7 <a href="00Index.html">Index</a>]</div>
 </body></html>
