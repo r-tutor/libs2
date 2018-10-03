@@ -1,7 +1,7 @@
 Package: ggridges
 Type: Package
 Title: Ridgeline Plots in 'ggplot2'
-Version: 0.5.0
+Version: 0.5.1
 Authors@R: c( 
     person("Claus O.", "Wilke", , "wilke@austin.utexas.edu", c("cre", "aut")),
     person("RStudio", role = c("cph"), comment = "Copyright for ggplot2 code copied to ggridges"))
@@ -19,12 +19,12 @@ Collate: 'data.R' 'ggridges.R' 'geoms.R' 'geomsv.R' 'geoms-gradient.R'
         'geom-density-line.R' 'position.R' 'scale-.R'
         'scale-cyclical.R' 'scale-point.R' 'scale-vline.R' 'stats.R'
         'theme.R' 'utils_ggplot2.R' 'utils.R'
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
 NeedsCompilation: no
-Packaged: 2018-04-04 22:25:52 UTC; wilke
+Packaged: 2018-09-27 13:30:58 UTC; wilke
 Author: Claus O. Wilke [cre, aut],
   RStudio [cph] (Copyright for ggplot2 code copied to ggridges)
 Maintainer: Claus O. Wilke <wilke@austin.utexas.edu>
 Repository: CRAN
-Date/Publication: 2018-04-05 05:48:09 UTC
-Built: R 3.5.0; ; 2018-06-22 12:37:30 UTC; windows
+Date/Publication: 2018-09-27 15:20:03 UTC
+Built: R 3.5.1; ; 2018-10-01 23:23:58 UTC; windows

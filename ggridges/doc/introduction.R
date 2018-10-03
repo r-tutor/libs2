@@ -1,4 +1,4 @@
-## ------------------------------------------------------------------------
+## ----warning = FALSE, message = FALSE------------------------------------
 library(ggplot2)
 library(ggridges)
 
@@ -12,8 +12,11 @@ library(gridExtra)
 
 data <- data.frame(x = 1:5, y = rep(1, 5), height = c(0, 1, -1, 3, 2))
 plot_base <- ggplot(data, aes(x, y, height = height))
-grid.arrange(plot_base + geom_ridgeline(),
-          plot_base + geom_ridgeline(min_height = -2), ncol = 2)
+grid.arrange(
+  plot_base + geom_ridgeline(),
+  plot_base + geom_ridgeline(min_height = -2),
+  ncol = 2
+)
 
 ## ----message = FALSE-----------------------------------------------------
 d <- data.frame(x = rep(1:5, 3), y = c(rep(0, 5), rep(1, 5), rep(2, 5)),
@@ -87,14 +90,19 @@ ggplot(iris, aes(x=Sepal.Length, y=Species)) +
 
 ## ----message = FALSE-----------------------------------------------------
 ggplot(iris, aes(x=Sepal.Length, y=Species, fill=factor(..quantile..))) +
-  stat_density_ridges(geom = "density_ridges_gradient", calc_ecdf = TRUE, quantiles = 4, quantile_lines = TRUE) +
+  stat_density_ridges(
+    geom = "density_ridges_gradient", calc_ecdf = TRUE,
+    quantiles = 4, quantile_lines = TRUE
+  ) +
   scale_fill_viridis(discrete = TRUE, name = "Quartiles")
 
 ## ----message = FALSE-----------------------------------------------------
 ggplot(iris, aes(x=Sepal.Length, y=Species, fill=factor(..quantile..))) +
   stat_density_ridges(geom = "density_ridges_gradient", calc_ecdf = TRUE, quantiles = c(0.025, 0.975)) +
-  scale_fill_manual(name = "Probability", values = c("#FF0000A0", "#A0A0A0A0", "#0000FFA0"),
-                    labels = c("(0, 0.025]", "(0.025, 0.975]", "(0.975, 1]"))
+  scale_fill_manual(
+    name = "Probability", values = c("#FF0000A0", "#A0A0A0A0", "#0000FFA0"),
+    labels = c("(0, 0.025]", "(0.025, 0.975]", "(0.975, 1]")
+  )
 
 ## ----message = FALSE-----------------------------------------------------
 ggplot(iris, aes(x=Sepal.Length, y=Species, fill=0.5 - abs(0.5-..ecdf..))) +
@@ -107,36 +115,45 @@ ggplot(iris, aes(x=Sepal.Length, y=Species)) +
 
 ## ----message = FALSE-----------------------------------------------------
 ggplot(iris, aes(x=Sepal.Length, y=Species)) +
-  geom_density_ridges(jittered_points = TRUE, position = "raincloud",
-                      alpha = 0.7, scale = 0.9)
+  geom_density_ridges(
+    jittered_points = TRUE, position = "raincloud",
+    alpha = 0.7, scale = 0.9
+  )
 
 ## ----message = FALSE-----------------------------------------------------
 ggplot(iris, aes(x=Sepal.Length, y=Species)) +
-  geom_density_ridges(jittered_points = TRUE,
-                      position = position_points_jitter(width = 0.05, height = 0),
-                      point_shape = '|', point_size = 3, alpha = 0.7)
+  geom_density_ridges(
+    jittered_points = TRUE,
+    position = position_points_jitter(width = 0.05, height = 0),
+    point_shape = '|', point_size = 3, point_alpha = 1, alpha = 0.7,
+  )
 
 ## ----message = FALSE-----------------------------------------------------
 ggplot(iris, aes(x=Sepal.Length, y=Species, fill = Species)) +
-  geom_density_ridges(aes(point_color = Species, point_fill = Species,
-                          point_shape = Species),
-                      alpha = .2, jittered_points = TRUE) +
+  geom_density_ridges(
+    aes(point_color = Species, point_fill = Species, point_shape = Species),
+    alpha = .2, point_alpha = 1, jittered_points = TRUE
+  ) +
   scale_point_color_hue(l = 40) +
   scale_discrete_manual(aesthetics = "point_shape", values = c(21, 22, 23))
 
 ## ----message = FALSE, fig.width = 6, fig.height = 6----------------------
 ggplot(iris, aes(x = Sepal.Length, y = Species, fill = Species)) +
-  geom_density_ridges(aes(point_shape = Species, point_fill = Species,
-                          point_size = Petal.Length), 
-                      alpha = .2, jittered_points = TRUE) +
+  geom_density_ridges(
+    aes(point_shape = Species, point_fill = Species, point_size = Petal.Length), 
+    alpha = .2, point_alpha = 1, jittered_points = TRUE
+  ) +
   scale_point_color_hue(l = 40) + scale_point_size_continuous(range = c(0.5, 4)) +
   scale_discrete_manual(aesthetics = "point_shape", values = c(21, 22, 23))
 
 ## ----message = FALSE-----------------------------------------------------
 ggplot(iris, aes(x = Sepal.Length, y = Species)) +
-  geom_density_ridges(jittered_points = TRUE, quantile_lines = TRUE, scale = 0.9, alpha = 0.7,
-                      vline_size = 1, vline_color = "red", point_size = 0.4,
-                      position = position_raincloud(adjust_vlines = TRUE))
+  geom_density_ridges(
+    jittered_points = TRUE, quantile_lines = TRUE, scale = 0.9, alpha = 0.7,
+    vline_size = 1, vline_color = "red", vline_alpha = 1,
+    point_size = 0.4, point_alpha = 1,
+    position = position_raincloud(adjust_vlines = TRUE)
+  )
 
 ## ----message=FALSE-------------------------------------------------------
 ggplot(iris, aes(x = Sepal.Length, y = Species, height = ..density..)) + 
@@ -192,31 +209,39 @@ ggplot(iris, aes(x = Sepal.Length, y = Species)) +
 ## ----message=FALSE, fig.width = 5.5--------------------------------------
  ggplot(diamonds, aes(x = price, y = cut, fill = cut)) + 
    geom_density_ridges(scale = 4) + 
-   scale_fill_cyclical(values = c("blue", "green"), guide = "legend",
-                       labels = c("Fair" = "blue", "Good" = "green"),
-                       name = "Fill colors")
+   scale_fill_cyclical(
+     values = c("blue", "green"), guide = "legend",
+     labels = c("Fair" = "blue", "Good" = "green"),
+     name = "Fill colors"
+   )
 
 ## ----message=FALSE, fig.width = 6.5--------------------------------------
  ggplot(diamonds, aes(x = price, y = cut, fill = cut, color = cut)) + 
    geom_density_ridges(scale = 4, size = 1) + 
-   scale_fill_cyclical(values = c("blue", "green"), guide = "legend",
-                       labels = c("Fair" = "blue w/ black outline",
-                                  "Good" = "green w/ yellow outline"),
-                       name = "Color scheme") +
-   scale_color_cyclical(values = c("black", "yellow"), guide = "legend",
-                       labels = c("Fair" = "blue w/ black outline",
-                                  "Good" = "green w/ yellow outline"),
-                       name = "Color scheme")
+   scale_fill_cyclical(
+     values = c("blue", "green"), guide = "legend",
+     labels = c("Fair" = "blue w/ black outline", "Good" = "green w/ yellow outline"),
+     name = "Color scheme"
+    ) +
+   scale_color_cyclical(
+     values = c("black", "yellow"), guide = "legend",
+     labels = c("Fair" = "blue w/ black outline", "Good" = "green w/ yellow outline"),
+     name = "Color scheme"
+   )
 
 ## ----message=FALSE, fig.width = 6.5--------------------------------------
 ggplot(mpg, aes(x = class, fill = class, color = class)) + 
   geom_bar(size = 1.5) +
-  scale_fill_cyclical(values = c("blue", "green"), guide = "legend",
-                      labels = c("blue w/ black outline", "green w/ yellow outline"),
-                      name = "Color scheme") +
-  scale_color_cyclical(values = c("black", "yellow"), guide = "legend",
-                      labels = c("blue w/ black outline", "green w/ yellow outline"),
-                      name = "Color scheme")
+  scale_fill_cyclical(
+    values = c("blue", "green"), guide = "legend",
+    labels = c("blue w/ black outline", "green w/ yellow outline"),
+    name = "Color scheme"
+  ) +
+  scale_color_cyclical(
+    values = c("black", "yellow"), guide = "legend",
+    labels = c("blue w/ black outline", "green w/ yellow outline"),
+    name = "Color scheme"
+  )
 
 ## ----message=FALSE, fig.width=5.5----------------------------------------
 mpg %>% group_by(class) %>% tally() %>% arrange(desc(n)) %>%
