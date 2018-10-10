@@ -16,6 +16,8 @@ BI                      Binomial distribution for fitting a GAMLSS
 BNB                     Beta Negative Binomial distribution for fitting
                         a GAMLSS
 DBI                     The Double binomial distribution
+DBURR12                 The Discrete Burr type XII distribution for
+                        fitting a GAMLSS model
 DEL                     The Delaporte distribution for fitting a GAMLSS
                         model
 DPO                     The Double Poisson distribution
