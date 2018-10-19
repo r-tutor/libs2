@@ -61,20 +61,8 @@ hc &lt;- hclust(dist(USArrests[1:4,]), "ave")
 dend &lt;- as.dendrogram(hc)
 get_branches_heights(dend)
 
-## Not run: 
-dat1 &lt;- iris[1:150,-5]
-dat1 &lt;- rbind(dat1,dat1,dat1,dat1,dat1,dat1,dat1)
-dend = as.dendrogram(hclust(dist(dat1)))
-library(microbenchmark)
-library(dendextendRcpp)
-microbenchmark(
-   dendextendRcpp::dendextendRcpp_get_branches_heights(dend),
-   old_get_branches_heights(dend,sort=F)
-)
-
-## End(Not run)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>dendextend</em> version 1.8.0 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>dendextend</em> version 1.9.0 <a href="00Index.html">Index</a>]</div>
 </body></html>
