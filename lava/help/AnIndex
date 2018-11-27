@@ -13,6 +13,8 @@ backdoor	backdoor
 baptize	baptize
 beta.lvm	sim
 binomial.lvm	sim
+binomial.rd	binomial.rd
+binomial.rr	binomial.rd
 blockdiag	blockdiag
 bmd	bmd
 bmidata	bmidata
@@ -138,6 +140,7 @@ heavytail	sim
 heavytail<-	sim
 hubble	hubble
 hubble2	hubble2
+Identical	internal
 idplot	click
 igraph.lvm	internal
 iid	iid
@@ -222,7 +225,7 @@ nodecolor<-.default	labels-set
 nonlinear	twostage.lvmfit
 nonlinear<-	twostage.lvmfit
 normal.lvm	sim
-NR	internal
+NR	NR
 nsem	nsem
 odds	diagtest
 offdiag	revdiag

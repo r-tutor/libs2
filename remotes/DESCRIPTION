@@ -1,7 +1,7 @@
 Package: remotes
 Title: R Package Installation from Remote Repositories, Including
         'GitHub'
-Version: 2.0.0
+Version: 2.0.2
 Authors@R: c(
     person("Gábor", "Csárdi", , "csardi.gabor@gmail.com", role = c("aut", "cre")),
     person("Hadley", "Wickham", role = c("aut")),
@@ -28,7 +28,7 @@ RoxygenNote: 6.1.0
 SystemRequirements: Subversion for install_svn, git for install_git
 Encoding: UTF-8
 NeedsCompilation: no
-Packaged: 2018-10-11 20:01:07 UTC; gaborcsardi
+Packaged: 2018-10-30 10:46:53 UTC; gaborcsardi
 Author: Gábor Csárdi [aut, cre],
   Hadley Wickham [aut],
   Winston Chang [aut],
@@ -39,5 +39,5 @@ Author: Gábor Csárdi [aut, cre],
   Mango Solutions [cph]
 Maintainer: Gábor Csárdi <csardi.gabor@gmail.com>
 Repository: CRAN
-Date/Publication: 2018-10-11 20:20:03 UTC
-Built: R 3.5.1; ; 2018-10-14 07:52:37 UTC; windows
+Date/Publication: 2018-10-30 11:30:10 UTC
+Built: R 3.5.1; ; 2018-11-23 18:15:02 UTC; windows

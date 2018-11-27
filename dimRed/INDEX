@@ -1,5 +1,6 @@
 AUC_lnK_R_NX,dimRedResult-method
                         Method AUC_lnK_R_NX
+AutoEncoder-class       AutoEncoder
 DRR-class               Dimensionality Reduction via Regression
 DiffusionMaps-class     Diffusion Maps
 DrL-class               Distributed Recursive Graph Layout
@@ -15,7 +16,9 @@ LLE-class               Locally Linear Embedding
 LaplacianEigenmaps-class
                         Laplacian Eigenmaps
 MDS-class               Metric Dimensional Scaling
+NNMF-class              Non-Negative Matrix Factorization
 PCA-class               Principal Component Analysis
+PCA_L1-class            Principal Component Analysis with L1 error.
 Q_NX,dimRedResult-method
                         Method Q_NX
 Q_global,dimRedResult-method
@@ -24,6 +27,7 @@ Q_local,dimRedResult-method
                         Method Q_local
 R_NX,dimRedResult-method
                         Method R_NX
+UMAP-class              Umap embedding
 as.data.frame           Converts to data.frame
 as.dimRedData           Converts to dimRedData
 cophenetic_correlation,dimRedResult-method
@@ -41,7 +45,9 @@ embed                   dispatches the different methods for
 getData                 Method getData
 getDimRedData           Method getDimRedData
 getMeta                 Method getMeta
+getNDim                 Method getNDim
 getOrgData              Method getOrgData
+getOtherData            Method getOtherData
 getPars                 Method getPars
 getRotationMatrix       getRotationMatrix
 installSuggests         getSuggests

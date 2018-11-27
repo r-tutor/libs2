@@ -1,3 +1,6 @@
+available_packages	available_packages
+available_packages_reset	available_packages
+available_packages_set	available_packages
 bioc_install_repos	bioc_install_repos
 dev_package_deps	package_deps
 download_version	download_version

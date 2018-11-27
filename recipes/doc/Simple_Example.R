@@ -27,8 +27,8 @@ rec_obj <- recipe(Status ~ ., data = credit_train)
 rec_obj
 
 ## ----step_code, eval = FALSE---------------------------------------------
-#  rec_obj <- step_name(rec_obj, arguments)    ## or
-#  rec_obj <- rec_obj %>% step_name(arguments)
+#  rec_obj <- step_{X}(rec_obj, arguments)    ## or
+#  rec_obj <- rec_obj %>% step_{X}(arguments)
 
 ## ----imp-steps-----------------------------------------------------------
 grep("impute$", ls("package:recipes"), value = TRUE)
@@ -54,8 +54,8 @@ trained_rec <- prep(standardized, training = credit_train)
 trained_rec
 
 ## ----apply---------------------------------------------------------------
-train_data <- bake(trained_rec, newdata = credit_train)
-test_data  <- bake(trained_rec, newdata = credit_test)
+train_data <- bake(trained_rec, new_data = credit_train)
+test_data  <- bake(trained_rec, new_data = credit_test)
 
 ## ----tibbles-------------------------------------------------------------
 class(test_data)

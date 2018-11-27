@@ -340,7 +340,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 </div>
 <div id="how-to-skip-steps" class="section level1">
 <h1>How To Skip Steps</h1>
-<p>As of version recipes 0.1.2, each step has an optional logical argument called <code>skip</code>. In almost every case, the default is <code>TRUE</code>. When using this option:</p>
+<p>As of version recipes 0.1.2, each step has an optional logical argument called <code>skip</code>. In almost every case, the default is <code>FALSE</code>. When using this option:</p>
 <ul>
 <li>No steps are skipped during <code>prep</code></li>
 <li>Steps with <code>skip = TRUE</code> are not applied to the data when <code>bake</code> is called</li>
@@ -368,7 +368,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <a class="sourceLine" id="cb1-15" data-line-number="15"><span class="co">#&gt; 4  0.268 -36.7</span></a>
 <a class="sourceLine" id="cb1-16" data-line-number="16"><span class="co">#&gt; 5  0.601  28.3</span></a>
 <a class="sourceLine" id="cb1-17" data-line-number="17"><span class="co">#&gt; 6  0.131 -41.7</span></a>
-<a class="sourceLine" id="cb1-18" data-line-number="18"><span class="kw">bake</span>(car_recipe, <span class="dt">newdata =</span> mtcars) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(disp, hp)</a>
+<a class="sourceLine" id="cb1-18" data-line-number="18"><span class="kw">bake</span>(car_recipe, <span class="dt">new_data =</span> mtcars) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(disp, hp)</a>
 <a class="sourceLine" id="cb1-19" data-line-number="19"><span class="co">#&gt; # A tibble: 6 x 2</span></a>
 <a class="sourceLine" id="cb1-20" data-line-number="20"><span class="co">#&gt;    disp    hp</span></a>
 <a class="sourceLine" id="cb1-21" data-line-number="21"><span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt;</span></a>

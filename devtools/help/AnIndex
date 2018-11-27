@@ -42,9 +42,9 @@ install	install
 install_bioc	reexports
 install_bitbucket	reexports
 install_cran	reexports
-install_deps	reexports
+install_deps	install_deps
 install_dev	reexports
-install_dev_deps	install_dev_deps
+install_dev_deps	install_deps
 install_git	reexports
 install_github	reexports
 install_gitlab	reexports

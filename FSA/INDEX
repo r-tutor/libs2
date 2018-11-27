@@ -45,10 +45,10 @@ ageBias                 Compute and view possible differences between
                         paired sets of ages.
 agePrecision            Compute measures of precision among sets of
                         ages.
-alkAgeDist              Proportions-at-age from an Age-Length Key
+alkAgeDist              Proportions-at-age from an age-length key
 alkIndivAge             Use an age-length key to assign age to
                         individuals in the unaged sample.
-alkMeanVar              Mean Values-at-age from an Age-Length Key
+alkMeanVar              Mean Values-at-age from an age-length key
 alkPlot                 Plots to visualize age-length keys.
 binCI                   Confidence intervals for binomial probability
                         of success.
@@ -123,6 +123,8 @@ oddeven                 Determine if a number is odd or even.
 perc                    Computes the percentage of values in a vector
                         less than or greater than (and equal to) some
                         value.
+plotAB                  Construct traditional (Campana-like) age-bias
+                        plots.
 plotBinResp             Plots a binary response variable versus a
                         quantitative explanatory variable.
 poiCI                   Confidence interval for Poisson counts.

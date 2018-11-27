@@ -18,7 +18,12 @@ document                Use roxygen to document a package.
 dr_devtools             Diagnose potential devtools issues
 dr_github               Diagnose potential GitHub issues
 install                 Install a local development package.
-install_dev_deps        Install package dependencies if needed.
+install_deps            Install package dependencies if needed.
+                        'install_deps()' will install the user
+                        dependencies needed to run the package,
+                        'install_dev_deps()' will also install the
+                        development dependencies needed to test and
+                        build the package.
 lint                    Lint all source files in a package.
 load_all                Load complete package.
 missing_s3              Find missing s3 exports.

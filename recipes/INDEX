@@ -1,4 +1,4 @@
-add_role                Manually Add Roles
+Smithsonian             Smithsonian Museums
 add_step                Add a New Operation to the Current Recipe
 bake                    Apply a Trained Data Recipe
 biomass                 Biomass Data
@@ -17,13 +17,17 @@ juice                   Extract Finalized Training Set
 names0                  Naming Tools
 okc                     OkCupid Data
 prep                    Train a Data Recipe
+prepper                 Wrapper function for preparing recipes within
+                        resampling
 print.recipe            Print a Recipe
 recipe                  Create a Recipe for Preprocessing Data
 recipes                 recipes: A package for computing and
                         preprocessing design matrices.
+roles                   Manually Alter Roles
 selections              Methods for Select Variables in Step Functions
 step_BoxCox             Box-Cox Transformation for Non-Negative Data
 step_YeoJohnson         Yeo-Johnson Transformation
+step_arrange            Sort rows using dplyr
 step_bagimpute          Imputation via Bagged Trees
 step_bin2factor         Create a Factors from A Dummy Variable
 step_bs                 B-Spline Basis Functions
@@ -39,9 +43,12 @@ step_downsample         Down-Sample a Data Set Based on a Factor
                         Variable
 step_dummy              Dummy Variables Creation
 step_factor2string      Convert Factors to Strings
+step_filter             Filter rows using dplyr
+step_geodist            Distance between two locations
 step_holiday            Holiday Feature Generator
 step_hyperbolic         Hyperbolic Transformations
 step_ica                ICA Signal Extraction
+step_integer            Convert values to predefined integers
 step_interact           Create Interaction Variables
 step_intercept          Add intercept (or constant) column
 step_inverse            Inverse Transformation
@@ -56,8 +63,11 @@ step_logit              Logit Transformation
 step_lowerimpute        Impute Numeric Data Below the Threshold of
                         Measurement
 step_meanimpute         Impute Numeric Data Using the Mean
+step_medianimpute       Impute Numeric Data Using the Median
 step_modeimpute         Impute Nominal Data Using the Most Common Value
+step_mutate             Add new variables using 'mutate'
 step_naomit             Remove observations with missing values
+step_nnmf               NNMF Signal Extraction
 step_novel              Simple Value Assignments for Novel Factor
                         Levels
 step_ns                 Nature Spline Basis Functions
@@ -78,8 +88,10 @@ step_relu               Apply (Smoothed) Rectified Linear
 step_rm                 General Variable Filter
 step_rollimpute         Impute Numeric Data Using a Rolling Window
                         Statistic
+step_sample             Sample rows using dplyr
 step_scale              Scaling Numeric Data
 step_shuffle            Shuffle Variables
+step_slice              Filter rows by position using dplyr
 step_spatialsign        Spatial Sign Preprocessing
 step_sqrt               Square Root Transformation
 step_string2factor      Convert Strings to Factors

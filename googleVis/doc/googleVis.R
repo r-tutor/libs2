@@ -402,7 +402,7 @@ G <- createGoogleGadget(M)
 ###################################################
 ### code chunk number 43: googleVis.Rnw:1301-1307 (eval = FALSE)
 ###################################################
-## jscode <- "window.open('http://en.wikipedia.org/wiki/' 
+## jscode <- "window.open('https://en.wikipedia.org/wiki/' 
 ##                   + data.getValue(chart.getSelection()[0].row,0)); "
 ## 
 ## J1 <- gvisGeoMap(Exports, locationvar='Country', numvar='Profit',

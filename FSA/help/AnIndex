@@ -141,7 +141,7 @@ plot.catchCurve	catchCurve
 plot.chapmanRobson	chapmanRobson
 plot.depletion	depletion
 plot.mrClosed2	mrClosed
-plotAB	ageBias
+plotAB	plotAB
 plotBinResp	plotBinResp
 plotBinResp.default	plotBinResp
 plotBinResp.formula	plotBinResp
