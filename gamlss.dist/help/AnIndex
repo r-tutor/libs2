@@ -19,9 +19,27 @@ BEo	BE
 BEOI	BEOI
 BEZI	BEZI
 BI	BI
+binom_1_31	count_1_31
+binom_2_33	count_1_31
+binom_3_33	count_1_31
 BNB	BNB
 checkBCPE	BCPE
 checklink	checklink
+contR01_2_13	count_1_31
+contR01_4_33	count_1_31
+contRplus_2_11	count_1_31
+contRplus_3_13	count_1_31
+contRplus_4_33	count_1_31
+contR_2_12	count_1_31
+contR_3_11	count_1_31
+contR_4_13	count_1_31
+count_1_22	count_1_31
+count_1_31	count_1_31
+count_2_32	count_1_31
+count_2_32R	count_1_31
+count_2_33	count_1_31
+count_3_32	count_1_31
+count_3_33	count_1_31
 dBB	BB
 dBCCG	BCCG
 dBCCGo	BCCG
@@ -49,6 +67,7 @@ DEL	DEL
 dexGAUS	exGAUS
 dEXP	EXP
 dGA	GA
+dGAF	GAF
 dGB1	GB1
 dGB2	GB2
 dGEOM	GEOM
@@ -148,6 +167,7 @@ Family.r	gen.Family
 fittedMN	Multinomial
 flexDist	flexDist
 GA	GA
+GAF	GAF
 gamlss.dist	gamlss.dist-package
 gamlss.family	gamlss.family
 gamlss.family.default	gamlss.family
@@ -228,6 +248,7 @@ pEGB2	EGB2
 pexGAUS	exGAUS
 pEXP	EXP
 pGA	GA
+pGAF	GAF
 pGB1	GB1
 pGB2	GB2
 pGEOM	GEOM
@@ -349,6 +370,7 @@ qEGB2	EGB2
 qexGAUS	exGAUS
 qEXP	EXP
 qGA	GA
+qGAF	GAF
 qGB1	GB1
 qGB2	GB2
 qGEOM	GEOM
@@ -461,6 +483,7 @@ rexGAUS	exGAUS
 rEXP	EXP
 RG	RG
 rGA	GA
+rGAF	GAF
 rGB1	GB1
 rGB2	GB2
 RGE	RGE

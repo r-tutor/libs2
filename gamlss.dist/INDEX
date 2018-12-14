@@ -25,6 +25,7 @@ EGB2                    The exponential generalized Beta type 2
                         distribution for fitting a GAMLSS
 EXP                     Exponential distribution for fitting a GAMLSS
 GA                      Gamma distribution for fitting a GAMLSS
+GAF                     The Gamma distribution family
 GB1                     The generalized Beta type 1 distribution for
                         fitting a GAMLSS
 GB2                     The generalized Beta type 2 and generalized
@@ -122,6 +123,8 @@ ZIPF                    The zipf and zero adjusted zipf distributions
                         for fitting a GAMLSS model
 checklink               Set the Right Link Function for Specified
                         Parameter and Distribution
+count_1_31              A set of functions to plot gamlss.family
+                        distributions
 exGAUS                  The ex-Gaussian distribution
 flexDist                Non-parametric pdf from limited information
                         data

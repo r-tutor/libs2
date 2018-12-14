@@ -1,6 +1,4 @@
 argument_glossary       Allowed argument names in tidiers
-augment                 Augment data with information from a(n)
-                        statistical object
 augment.Mclust          Augment data with information from a(n) Mclust
                         object
 augment.betareg         Augment data with information from a(n) betareg
@@ -67,8 +65,6 @@ finish_glance           Add logLik, AIC, BIC, and other common
                         measurements to a glance of a prediction
 fix_data_frame          Ensure an object is a data frame, with rownames
                         moved into a column
-glance                  Construct a single row summary "glance" of a
-                        model, fit, or other object
 glance.Arima            Glance at a(n) Arima object
 glance.Gam              Glance at a(n) Gam object
 glance.Mclust           Glance at a(n) Mclust object
@@ -132,7 +128,6 @@ sp_tidiers              Tidy a(n) SpatialPolygonsDataFrame object
 sparse_tidiers          Tidy a sparseMatrix object from the Matrix
                         package
 summary_tidiers         Tidy/glance a(n) summaryDefault object
-tidy                    Turn a model object into a tidy tibble
 tidy.Arima              Tidy a(n) Arima object
 tidy.Gam                Tidy a(n) Gam object
 tidy.Kendall            Tidy a(n) Kendall object

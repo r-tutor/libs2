@@ -43,6 +43,7 @@ ASparameter	ASparameter-class
 ASparameter-class	ASparameter-class
 associations	associations-class
 associations-class	associations-class
+binning	discretize
 c	combine
 c,itemMatrix-method	combine
 c,itemsets-method	combine

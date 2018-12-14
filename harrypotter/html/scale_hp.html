@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Harry Potter colour scales</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for scale_color_hp {harrypotter}"><tr><td>scale_color_hp {harrypotter}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Harry Potter colour scales</h2>
+
+<h3>Description</h3>
+
+<p>Uses the Harry Potter color scale.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+scale_color_hp(..., alpha = 1, begin = 0, end = 1, direction = 1,
+  discrete = FALSE, house = "hufflepuff")
+
+scale_colour_hp(..., alpha = 1, begin = 0, end = 1, direction = 1,
+  discrete = FALSE, house = "hufflepuff")
+
+scale_colour_hp_d
+
+scale_color_hp_d
+
+scale_fill_hp(..., alpha = 1, begin = 0, end = 1, direction = 1,
+  discrete = FALSE, house = "hufflepuff")
+
+scale_fill_hp_d
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>parameters to <code>discrete_scale</code> or <code>scale_fill_gradientn</code></p>
+</td></tr>
+<tr valign="top"><td><code>alpha</code></td>
+<td>
+<p>pass through parameter to <code>hp</code></p>
+</td></tr>
+<tr valign="top"><td><code>begin</code></td>
+<td>
+<p>The (corrected) hue in [0,1] at which the hp colormap begins.</p>
+</td></tr>
+<tr valign="top"><td><code>end</code></td>
+<td>
+<p>The (corrected) hue in [0,1] at which the hp colormap ends.</p>
+</td></tr>
+<tr valign="top"><td><code>direction</code></td>
+<td>
+<p>Sets the order of colors in the scale. If 1, the default, colors
+are as output by <code>hp_pal</code>. If -1, the order of colors is reversed.</p>
+</td></tr>
+<tr valign="top"><td><code>discrete</code></td>
+<td>
+<p>generate a discrete palette? (default: <code>FALSE</code> - generate continuous palette)</p>
+</td></tr>
+<tr valign="top"><td><code>house</code></td>
+<td>
+<p>A character string indicating the colourmap from a house to use.
+Four houses are available: &quot;Gryffindor&quot;, &quot;Slytherin&quot;, &quot;Ravenclaw&quot; and &quot;Hufflepuff&quot;.</p>
+</td></tr>
+</table>
+
+
+<h3>Format</h3>
+
+<p>An object of class <code>ScaleDiscrete</code> (inherits from <code>Scale</code>, <code>ggproto</code>, <code>gg</code>) of length 16.</p>
+
+
+<h3>Details</h3>
+
+<p>For <code>discrete == FALSE</code> (the default) all other arguments are as to
+<a href="../../ggplot2/html/scale_fill_gradientn.html">scale_fill_gradientn</a> or <a href="../../ggplot2/html/scale_color_gradientn.html">scale_color_gradientn</a>.
+Otherwise the function will return a <code>discrete_scale</code> with the plot-computed
+number of colors.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Alejandro Jiménez Rico <a href="mailto:aljrico@gmail.com">aljrico@gmail.com</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(ggplot2)
+
+# ripped from the pages of ggplot2
+ggplot(mtcars, aes(wt, mpg)) +
+  geom_point(size=4, aes(colour = factor(cyl))) +
+    scale_color_hp(discrete=TRUE, house = "Gryffindor") +
+    theme_bw()
+
+# ripped from the pages of ggplot2
+dsub &lt;- subset(diamonds, x &gt; 5 &amp; x &lt; 6 &amp; y &gt; 5 &amp; y &lt; 6)
+dsub$diff &lt;- with(dsub, sqrt(abs(x-y))* sign(x-y))
+ggplot(dsub, aes(x, y, colour=diff)) +
+  geom_point() +
+  scale_colour_hp(house = "Ravenclaw") +
+  theme_bw()
+
+
+# from the main hp example
+dat &lt;- data.frame(x = rnorm(10000), y = rnorm(10000))
+
+ggplot(dat, aes(x = x, y = y)) +
+  geom_hex() +
+  coord_fixed() +
+  scale_fill_hp(house = "Hufflepuff") +
+  theme_bw()
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>harrypotter</em> version 2.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

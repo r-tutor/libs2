@@ -4,7 +4,7 @@ aer_tidiers	tidy.ivreg
 argument_glossary	argument_glossary
 Arima_tidiers	tidy.Arima
 auc_tidiers	tidy.roc
-augment	augment
+augment	reexports
 augment.betareg	augment.betareg
 augment.clm	ordinal_tidiers
 augment.coxph	augment.coxph
@@ -73,7 +73,7 @@ gam_tidiers	mgcv_tidy_gam
 garch_tidiers	tidy.garch
 geeglm_tidiers	geeglm_tidiers
 geepack_tidiers	geeglm_tidiers
-glance	glance
+glance	reexports
 glance.aareg	glance.aareg
 glance.Arima	glance.Arima
 glance.betareg	glance.betareg
@@ -185,6 +185,7 @@ psych_tidiers	tidy.kappa
 pyears_tidiers	tidy.pyears
 quantreg_tidiers	tidy.rq
 rcorr_tidiers	tidy.rcorr
+reexports	reexports
 ridgelm_tidiers	tidy.ridgelm
 rlm_tidiers	glance.rlm
 robust_tidiers	tidy.lmRob
@@ -206,7 +207,7 @@ survexp_tidiers	tidy.survexp
 survfit_tidiers	tidy.survfit
 survreg_tidiers	tidy.survreg
 svd_tidiers	tidy_svd
-tidy	tidy
+tidy	reexports
 tidy.aareg	tidy.aareg
 tidy.acf	tidy.acf
 tidy.anova	tidy.anova

@@ -14,6 +14,9 @@ rcmd_process_options	rcmd_process_options
 rcmd_safe	rcmd
 rcmd_safe_env	rcmd_safe
 reexports	reexports
+rscript	rscript
+rscript_process	rscript_process
+rscript_process_options	rscript_process_options
 run	reexports
 r_bg	r_bg
 r_copycat	r_copycat

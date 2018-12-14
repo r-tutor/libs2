@@ -1,7 +1,7 @@
 Package: bookdown
 Type: Package
 Title: Authoring Books and Technical Documents with R Markdown
-Version: 0.7
+Version: 0.8
 Authors@R: c(
     person("Yihui", "Xie", role = c("aut", "cre"), email = "xie@yihui.name", comment = c(ORCID = "0000-0003-0645-5666")),
     person("JJ", "Allaire", role = "ctb"),
@@ -17,6 +17,7 @@ Authors@R: c(
     person("David", "Shuman", role = "ctb"),
     person("Dean", "Attali", role = "ctb"),
     person("Drew", "Tyre", role = "ctb"),
+    person("Ellis", "Valentiner", role = "ctb"),
     person("Frans", "van Dunne", role = "ctb"),
     person("Hadley", "Wickham", role = "ctb"),
     person("Jeff", "Allen", role = "ctb"),
@@ -32,9 +33,11 @@ Authors@R: c(
     person("Maximilian", "Held", role = "ctb"),
     person("Michael", "Sachs", role = "ctb"),
     person("Michal", "Bojanowski", role = "ctb"),
+    person("Noam", "Ross", role = "ctb"),
     person("Peter", "Hickey", role = "ctb"),
     person("Sahir", "Bhatnagar", role = "ctb"),
     person("Steve", "Simpson", role = "ctb"),
+    person("Thierry", "Onkelinx", role = "ctb", comment = c(ORCID = "0000-0001-8804-4216")),
     person("Vincent", "Fulco", role = "ctb"),
     person("Yixuan", "Qiu", role = "ctb"),
     person("Zhuoer", "Dong", role = "ctb"),
@@ -48,17 +51,18 @@ Authors@R: c(
 Maintainer: Yihui Xie <xie@yihui.name>
 Description: Output formats and utilities for authoring books and technical documents with R Markdown.
 License: GPL-3
-Imports: htmltools (>= 0.3.6), knitr (>= 1.16), rmarkdown (>= 1.5),
-        xfun, tinytex, yaml (>= 2.1.14)
+Imports: htmltools (>= 0.3.6), knitr (>= 1.16), rmarkdown (>= 1.9),
+        xfun (>= 0.2), tinytex, yaml (>= 2.1.14)
 Suggests: htmlwidgets, rstudioapi, miniUI, rsconnect (>= 0.4.3), servr
         (>= 0.3), shiny, testit (>= 0.5), tufte, webshot
 URL: https://github.com/rstudio/bookdown
 BugReports: https://github.com/rstudio/bookdown/issues
 SystemRequirements: Pandoc (>= 1.17.2)
 LazyData: TRUE
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
+Encoding: UTF-8
 NeedsCompilation: no
-Packaged: 2018-02-14 20:05:40 UTC; yihui
+Packaged: 2018-12-03 22:24:33 UTC; yihui
 Author: Yihui Xie [aut, cre] (<https://orcid.org/0000-0003-0645-5666>),
   JJ Allaire [ctb],
   Albert Kim [ctb],
@@ -73,6 +77,7 @@ Author: Yihui Xie [aut, cre] (<https://orcid.org/0000-0003-0645-5666>),
   David Shuman [ctb],
   Dean Attali [ctb],
   Drew Tyre [ctb],
+  Ellis Valentiner [ctb],
   Frans van Dunne [ctb],
   Hadley Wickham [ctb],
   Jeff Allen [ctb],
@@ -88,9 +93,11 @@ Author: Yihui Xie [aut, cre] (<https://orcid.org/0000-0003-0645-5666>),
   Maximilian Held [ctb],
   Michael Sachs [ctb],
   Michal Bojanowski [ctb],
+  Noam Ross [ctb],
   Peter Hickey [ctb],
   Sahir Bhatnagar [ctb],
   Steve Simpson [ctb],
+  Thierry Onkelinx [ctb] (<https://orcid.org/0000-0001-8804-4216>),
   Vincent Fulco [ctb],
   Yixuan Qiu [ctb],
   Zhuoer Dong [ctb],
@@ -103,5 +110,5 @@ Author: Yihui Xie [aut, cre] (<https://orcid.org/0000-0003-0645-5666>),
     inst/resources/AUTHORS),
   FriendCode Inc [cph, ctb] (The gitbook style, with modifications)
 Repository: CRAN
-Date/Publication: 2018-02-18 16:41:50 UTC
-Built: R 3.5.0; ; 2018-06-22 12:39:44 UTC; windows
+Date/Publication: 2018-12-03 22:50:03 UTC
+Built: R 3.5.1; ; 2018-12-12 03:06:19 UTC; windows

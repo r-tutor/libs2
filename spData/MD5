@@ -1,4 +1,4 @@
-0afe19a5411930b696e0fa96022711b3 *DESCRIPTION
+2d404cfd2bf52d9233669c4fb8cd9f42 *DESCRIPTION
 fee4a0df0367ec813e5649f2b6df20c1 *INDEX
 5b93a3555483f712f96b8fd9ffd10746 *Meta/Rd.rds
 256ab0c7575c5587efff363bfeb8b775 *Meta/data.rds
@@ -6,11 +6,11 @@ fee4a0df0367ec813e5649f2b6df20c1 *INDEX
 cdb3b97633ce5e9084940637bac8e713 *Meta/hsearch.rds
 a5f2381258b9e924ba9deebc01d23c98 *Meta/links.rds
 391aea956dd6f828a5b9e5926fa2eb3a *Meta/nsInfo.rds
-cdde36f5d21f1c5785def0d102695ba6 *Meta/package.rds
+67e2f3a6bab5840ce09e5348d0d3688d *Meta/package.rds
 dc21c19f0d6968ee25d441b2cf46017d *NAMESPACE
 ebf0fc819595d631b8bf280c4b049940 *R/spData
-6dcf572e5198e06ec2de45bb61bec556 *R/spData.rdb
-ad539a1521ffc061f121fc312968a5cb *R/spData.rdx
+fdfcfe746d1b2b41a910cd7fab69db06 *R/spData.rdb
+aa1fc46c042b2c3f79d915ba6969559a *R/spData.rdx
 119363fcd90fc0bd7e7ea798cd7fbc7b *README
 d48511f91bb0b88bfce44aebdcbcf6ab *data/Rdata.rdb
 aeb4a13175fad6104d6d9ebef31d44e4 *data/Rdata.rds
@@ -18,10 +18,10 @@ aeb4a13175fad6104d6d9ebef31d44e4 *data/Rdata.rds
 dc97bf2029d7123693ff500e675c1ae0 *data/datalist
 aeb670bd8ecfbf1dfb087f4119a61617 *help/AnIndex
 6a5fa051ee846060faa6d834c492172d *help/aliases.rds
-8c8c0fc024bb6050d0274cea096fb0dc *help/paths.rds
-1e61b5d36418027869a4cfd651fe39ff *help/spData.rdb
-ea4d4425651dd34680bf1892c9bc9c86 *help/spData.rdx
-67eb906bc9d013c3a928f67c3dfbc838 *html/00Index.html
+50fde36e9b8f6ae2b8e9d91683cb1f75 *help/paths.rds
+668a8ed915edd61ac0bd4d147178b24d *help/spData.rdb
+d5e7894b99a4b1ec5728b1658a7c6f8c *help/spData.rdx
+9c4c3228e964bf91b4fbddaef1ce5b01 *html/00Index.html
 b6763e6916890c631fdc3f2643803b1a *html/R.css
 d4cb876eddfc53ed5c131927f5fc9efe *misc/cycle_hire_xy.csv
 2591ac95bd9191d0aee07450f7caf9bb *misc/nyadjwts.dbf

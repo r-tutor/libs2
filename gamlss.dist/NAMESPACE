@@ -18,6 +18,7 @@ export(WEI3, dWEI3, pWEI3, qWEI3, rWEI3,
        BEOI, dBEOI, pBEOI, qBEOI, rBEOI, plotBEOI, meanBEOI,
        BEZI, dBEZI, pBEZI, qBEZI, rBEZI, plotBEZI, meanBEZI,
        NOF, dNOF, pNOF, qNOF, rNOF,
+       GAF, dGAF, pGAF, qGAF, rGAF,
        GG, dGG, pGG, qGG, rGG,
        GIG, dGIG, pGIG, qGIG, rGIG,
        EXP, dEXP, pEXP, qEXP, rEXP,
@@ -114,7 +115,12 @@ export(dBCCG, pBCCG, qBCCG, rBCCG, BCCG, BCCGo, BCCGuntr,
       MULTIN, fittedMN,
       hazardFun, gen.hazard,
       Family, Family.d, Family.p, Family.q, Family.r, gen.Family,
-      flexDist
+      flexDist, count_1_31, count_1_22, count_2_32,
+      count_2_32R, count_2_33, count_3_32, count_3_33,
+      binom_1_31, binom_2_33, binom_3_33,
+      contR_2_12, contR_3_11, contR_4_13,
+      contRplus_2_11, contRplus_3_13, contRplus_4_33, contR01_2_13,
+      contR01_4_33
 )
 # needed for gamlss family
 export(as.family, gamlss.family, gamlss.family.default, as.gamlss.family,

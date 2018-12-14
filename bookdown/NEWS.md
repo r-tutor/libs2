@@ -1,4 +1,38 @@
+# CHANGES IN bookdown VERSION 0.8
+
+## NEW FEATURE
+
+- Added Conjecture to the list of theorem environments.
+
+- In addition to `rmd_subdir: true`, which searches all subdirectories, you can now provide a list of subdirectories to be recursively searched (#242).
+
+- Added an argument `template` to `gitbook()` and `epub_book()` (thanks, @ThierryO, #570).
+
+- Added an argument `table_css` to `gitbook()` to allow customized css for tables. (thanks, @haozhu233, #642)
+
+- You can also add a "history" button on the Gitbook toolbar, which is similar to the "edit" button, but shows the GIT history of a source file instead (thanks, @maelle #638, @noamross, #639).
+
+- Added a `quiet` argument to `serve_book()`, so that users can suppress stdout with `bookdown::serve_book(quiet = TRUE)` (thanks, @hammer, #633).
+
+- For HTML output, the title of the current chapter or section will be added to the page title (in the `<title>` tag). This will give readers more information when reading the results from search engines or Twitter cards. Previously, all pages would have identical titles (thanks, @benwhalley and @batpigandme, #544).
+
+## BUG FIXES
+
+- HTML output formats such as `gitbook` and `html_document2` won't work when only unnumbered parts (i.e., `# (PART\*)`) are used (thanks, @tjmahr, #575).
+
+- Previously the `rmd_files` parameter in `_bookdown.yml` would override `rmd_subdir`, but now both parameters can be used simultaneously (thanks, @ellisvalentiner, #600).
+
+- Resources with URL encoded special characters are now correctly copied to the output directory (thanks, @AshesITR, #622).
+
+- `serve_book()` can now be used without error when rstudioapi is installed but RStudio is not being used (thanks, @jimhester, #637).
+
+- Text references via `(ref:label)` for `bookdown::pdf_document()` doesn't always work (thanks, @brendanf, #616).
+
 # CHANGES IN bookdown VERSION 0.7
+
+## MAJOR CHANGES
+
+- The label prefix for Example blocks must be `exm:` (`ex:` is no longer supported).
 
 ## MINOR CHANGES
 
