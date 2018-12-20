@@ -10,7 +10,7 @@
 
 
 
-<meta name="date" content="2017-12-16" />
+<meta name="date" content="2018-12-15" />
 
 <title>The hunspell package: High-Performance Stemmer, Tokenizer, and Spell Checker for R</title>
 
@@ -1846,7 +1846,10 @@ color: #d14;
         }
 
         if (binding.resize) {
-          var lastSize = {};
+          var lastSize = {
+            w: sizeObj ? sizeObj.getWidth() : el.offsetWidth,
+            h: sizeObj ? sizeObj.getHeight() : el.offsetHeight
+          };
           var resizeHandler = function(e) {
             var size = {
               w: sizeObj ? sizeObj.getWidth() : el.offsetWidth,
@@ -3271,15 +3274,14 @@ if (!window.clearImmediate) {
 function newlabel(el){
   var newDiv = document.createElement("div");
   var newSpan = document.createElement("span");
-  newDiv.id = 'wcLabel'
-  newSpan.id = "wcSpan"
+  newDiv.id = 'wcLabel';
+  newSpan.id = "wcSpan";
   el.appendChild(newDiv);
-  document.getElementById("wcLabel").appendChild(newSpan)
+  document.getElementById("wcLabel").appendChild(newSpan);
 }
 
 // hover function
-function cv_handleHover(item,
-                                                           dimension, evt) {
+function cv_handleHover(item, dimension, evt) {
   var el = document.getElementById("wcLabel");
   if (!item) {
     el.setAttribute('hidden', true);
@@ -3301,12 +3303,63 @@ function cv_handleHover(item,
     'data-l10n-args', JSON.stringify({ word: item[0], count: item[1] }));
   document.getElementById("wcSpan").innerHTML =item[0]+":" + item[1];
 
-};
+}
+
+function updateCanvasMask(maskCanvas) {
+    var ctx = maskCanvas.getContext('2d');
+    var imageData = ctx.getImageData(
+        0, 0, maskCanvas.width, maskCanvas.height);
+    var newImageData = ctx.createImageData(imageData);
+
+    var toneSum = 0;
+    var toneCnt = 0;
+    for (var i = 0; i < imageData.data.length; i += 4) {
+        var alpha = imageData.data[i + 3];
+        if (alpha > 128) {
+            var tone = imageData.data[i]
+                + imageData.data[i + 1]
+                + imageData.data[i + 2];
+            toneSum += tone;
+            ++toneCnt;
+        }
+    }
+    var threshold = toneSum / toneCnt;
+
+    for (var i = 0; i < imageData.data.length; i += 4) {
+        var tone = imageData.data[i]
+            + imageData.data[i + 1]
+            + imageData.data[i + 2];
+        var alpha = imageData.data[i + 3];
+
+        if (alpha < 128 || tone > threshold) {
+            // Area not to draw
+            newImageData.data[i] = 0;
+            newImageData.data[i + 1] = 0;
+            newImageData.data[i + 2] = 0;
+            newImageData.data[i + 3] = 0;
+        }
+        else {
+            // Area to draw
+            // The color must be same with backgroundColor
+            newImageData.data[i] = 255;
+            newImageData.data[i + 1] = 255;
+            newImageData.data[i + 2] = 255;
+            newImageData.data[i + 3] = 255;
+        }
+    }
+
+    ctx.putImageData(newImageData, 0, 0);
+    console.log(maskCanvas.toDataURL());
+}
+
+
 
 //mask function
 function maskInit(el,x){
+  console.log(1)
   str = x.figBase64;
-  var newImg = document.createElement("img");
+  //console.log(str)
+  var newImg = new Image();
   newImg.src = str;
   newImg.style.position = 'absolute';
   newImg.style.left = 0;
@@ -3314,108 +3367,18 @@ function maskInit(el,x){
   newImg.width = el.clientWidth;
   newImg.height = el.clientHeight;
   // maskCanvas = init(el, x, newImg);
-
   vvalue = 128
 
-
-  maskCanvas = null;
-  // var img = new Image();
-  // img.src = x.figBase64;
-
-
-
-    maskCanvas = document.createElement('canvas');
-    maskCanvas.width = newImg.width;
-    maskCanvas.height = newImg.height;
-
-    var ctx = maskCanvas.getContext('2d');
-    ctx.drawImage(newImg, 0, 0, newImg.width, newImg.height);
-
-    var imageData = ctx.getImageData(
-      0, 0, maskCanvas.width, maskCanvas.height);
-    var newImageData = ctx.createImageData(imageData);
-
-    // M = 0
-    for (var i = 0; i < imageData.data.length; i += 4) {
-
-      var tone = imageData.data[i] +
-        imageData.data[i + 1] +
-        imageData.data[i + 2];
-      var alpha = imageData.data[i + 3];
-
-      if (alpha < vvalue || tone > vvalue * 3) {
-        // Area not to draw
-        newImageData.data[i] =
-          newImageData.data[i + 1] =
-          newImageData.data[i + 2] = 255;
-        newImageData.data[i + 3] = 0;
-      } else {
-        // Area to draw
-        newImageData.data[i] =
-          newImageData.data[i + 1] =
-          newImageData.data[i + 2] = 0;
-        newImageData.data[i + 3] = 255;
-      }
-
-    }
-
-    ctx.putImageData(newImageData, 0, 0);
-
-  mask(el, x, maskCanvas);
-
-}
-
-
-
-function mask(el,x,maskCanvas){
-  // options.clearCanvas = false;
-
-  /* Determine bgPixel by creating
-     another canvas and fill the specified background color. */
-  var bctx = document.createElement('canvas').getContext('2d');
-
-  bctx.fillStyle = x.backgroundColor || '#fff';
-  bctx.fillRect(0, 0, 1, 1);
-  var bgPixel = bctx.getImageData(0, 0, 1, 1).data;
-  // console.log(bgPixel)
-  var maskCanvasScaled =
-    document.createElement('canvas');
-
-  maskCanvasScaled.width = el.clientWidth;
-  maskCanvasScaled.height = el.clientHeight;
-  var ctx = maskCanvasScaled.getContext('2d');
-  console.log(maskCanvasScaled)
-  ctx.drawImage(maskCanvas,
-    0, 0, maskCanvas.width, maskCanvas.height,
-    0, 0, maskCanvasScaled.width, maskCanvasScaled.height);
-
-  var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-
-  var newImageData = ctx.createImageData(imageData);
-  for (var i = 0; i < imageData.data.length; i += 4) {
-    if (imageData.data[i + 3] > vvalue) {
-      newImageData.data[i] = bgPixel[0];
-      newImageData.data[i + 1] = bgPixel[1];
-      newImageData.data[i + 2] = bgPixel[2];
-      newImageData.data[i + 3] = bgPixel[3];
-    } else {
-      // This color must not be the same w/ the bgPixel.
-      newImageData.data[i] = bgPixel[0];
-      newImageData.data[i + 1] = bgPixel[1];
-      newImageData.data[i + 2] = bgPixel[2];
-      newImageData.data[i + 3] = bgPixel[3] ? (bgPixel[3] - 1) : 0;
-    }
-  }
-
-  ctx.putImageData(newImageData, 0, 0);
-
   ctx = el.firstChild.getContext('2d');
-  ctx.drawImage(maskCanvasScaled, 0, 0);
 
-  maskCanvasScaled = ctx = imageData = newImageData = bctx = bgPixel = undefined;
+                ctx.drawImage(newImg, 0, 0, canvas.width, canvas.height);
+                updateCanvasMask(ctx);
 
 
-  WordCloud(el.firstChild, { list: listData,
+
+
+
+            WordCloud(el.firstChild, { list: listData,
                   fontFamily: x.fontFamily,
                   fontWeight: x.fontWeight,
                   color: x.color,
@@ -3430,14 +3393,19 @@ function mask(el,x,maskCanvas){
                   rotateRatio: x.rotateRatio,
                   ellipticity: x.ellipticity,
                   clearCanvas: false,
+                  drawMask: true,
                   hover: x.hover || cv_handleHover,
                   abortThreshold: 3000
                   });
 }
+
 </script>
 <script>HTMLWidgets.widget({
-  name: "wordcloud2",
-  type: "output",
+
+  name: 'wordcloud2',
+
+  type: 'output',
+
   initialize: function(el, width, height) {
     var newCanvas = document.createElement("canvas");
     newCanvas.height = height;
@@ -3449,41 +3417,40 @@ function mask(el,x,maskCanvas){
     return(el.firstChild);
   },
   renderValue: function(el, x, instance) {
-    // parse gexf data
-    listData=[];
-    for(var i=0; i<x.word.length; i++){
-      listData.push([x.word[i], x.freq[i]]);
-    }
-    if(x.figBase64){
-      maskInit(el,x);
-    }else{
-      WordCloud(el.firstChild, { list: listData,
-                      fontFamily: x.fontFamily,
-                      fontWeight: x.fontWeight,
-                      color: x.color,
-                      minSize: x.minSize,
-                      weightFactor: x.weightFactor,
-                      backgroundColor: x.backgroundColor,
-                      gridSize: x.gridSize,
-                      minRotation: x.minRotation,
-                      maxRotation: x.maxRotation,
-                      shuffle: x.shuffle,
-                      shape: x.shape,
-                      rotateRatio: x.rotateRatio,
-                      ellipticity: x.ellipticity,
-                      drawMask: x.drawMask,
-                      maskColor: x.maskColor,
-                      maskGapWidth: x.maskGapWidth,
-                      hover: x.hover || cv_handleHover
-                      });
-    }
+  // parse gexf data
+        listData=[];
+        for(var i=0; i<x.word.length; i++){
+          listData.push([x.word[i], x.freq[i]]);
+        }
+     if(x.figBase64){
 
-  },
+        maskInit(el,x);
+        console.log(3)
 
-  resize: function(el, width, height) {
-  }
-
-
+      }else{
+        WordCloud(el.firstChild, { list: listData,
+                        fontFamily: x.fontFamily,
+                        fontWeight: x.fontWeight,
+                        color: x.color,
+                        minSize: x.minSize,
+                        weightFactor: x.weightFactor,
+                        backgroundColor: x.backgroundColor,
+                        gridSize: x.gridSize,
+                        minRotation: x.minRotation,
+                        maxRotation: x.maxRotation,
+                        shuffle: x.shuffle,
+                        shape: x.shape,
+                        rotateRatio: x.rotateRatio,
+                        ellipticity: x.ellipticity,
+                        drawMask: x.drawMask,
+                        maskColor: x.maskColor,
+                        maskGapWidth: x.maskGapWidth,
+                        hover: x.hover || cv_handleHover
+                        });
+      }
+    },
+      resize: function(el, width, height) {
+      }
 
 });
 </script>
@@ -3555,8 +3522,14 @@ img {
 .tabbed-pane {
   padding-top: 12px;
 }
+.html-widget {
+  margin-bottom: 20px;
+}
 button.code-folding-btn:focus {
   outline: none;
+}
+summary {
+  display: list-item;
 }
 </style>
 
@@ -3565,14 +3538,74 @@ button.code-folding-btn:focus {
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
 });
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
 </script>
 
 <!-- code folding -->
-
 
 
 
@@ -3684,7 +3717,7 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">The hunspell package: High-Performance Stemmer, Tokenizer, and Spell Checker for R</h1>
-<h4 class="date"><em>2017-12-16</em></h4>
+<h4 class="date"><em>2018-12-15</em></h4>
 
 </div>
 
@@ -3727,7 +3760,7 @@ print(bad[[1]])</code></pre>
 [1] &quot;necessary&quot;   &quot;necessarily&quot;
 
 [[2]]
-[1] &quot;language&quot; &quot;Augean&quot;   &quot;Angela&quot;  </code></pre>
+[1] &quot;language&quot; &quot;melange&quot; </code></pre>
 <p>Besides plain text, <code>hunspell</code> supports various document formats, such as html or latex:</p>
 <pre class="r"><code>download.file(&quot;https://arxiv.org/e-print/1406.4806v1&quot;, &quot;1406.4806v1.tar.gz&quot;,  mode = &quot;wb&quot;)
 untar(&quot;1406.4806v1.tar.gz&quot;, &quot;content.tex&quot;)
@@ -3746,28 +3779,27 @@ sort(unique(unlist(bad_words)))</code></pre>
 [28] &quot;de&quot;                &quot;dec&quot;               &quot;decompositions&quot;   
 [31] &quot;dir&quot;               &quot;eol&quot;               &quot;facto&quot;            
 [34] &quot;grDevices&quot;         &quot;httpuv&quot;            &quot;ignorable&quot;        
-[37] &quot;interoperability&quot;  &quot;interoperable&quot;     &quot;js&quot;               
-[40] &quot;json&quot;              &quot;jsonlite&quot;          &quot;knitr&quot;            
-[43] &quot;md&quot;                &quot;memcached&quot;         &quot;mydata&quot;           
-[46] &quot;myfile&quot;            &quot;nondegenerateness&quot; &quot;ocpu&quot;             
-[49] &quot;opencpu&quot;           &quot;pandoc&quot;            &quot;pb&quot;               
-[52] &quot;php&quot;               &quot;png&quot;               &quot;preinstalled&quot;     
-[55] &quot;prescripted&quot;       &quot;priori&quot;            &quot;protobuf&quot;         
-[58] &quot;rApache&quot;           &quot;rda&quot;               &quot;rds&quot;              
-[61] &quot;reproducibility&quot;   &quot;rlm&quot;               &quot;rmd&quot;              
-[64] &quot;rnorm&quot;             &quot;rnw&quot;               &quot;rpy&quot;              
-[67] &quot;saveRDS&quot;           &quot;scalability&quot;       &quot;scalable&quot;         
-[70] &quot;schemas&quot;           &quot;se&quot;                &quot;sep&quot;              
-[73] &quot;stateful&quot;          &quot;statefulness&quot;      &quot;stdout&quot;           
-[76] &quot;suboptimal&quot;        &quot;svg&quot;               &quot;sweave&quot;           
-[79] &quot;tex&quot;               &quot;texi&quot;              &quot;tmp&quot;              
-[82] &quot;toJSON&quot;            &quot;urlencoded&quot;        &quot;www&quot;              
-[85] &quot;xyz&quot;              </code></pre>
+[37] &quot;interoperable&quot;     &quot;js&quot;                &quot;json&quot;             
+[40] &quot;jsonlite&quot;          &quot;knitr&quot;             &quot;md&quot;               
+[43] &quot;memcached&quot;         &quot;mydata&quot;            &quot;myfile&quot;           
+[46] &quot;nondegenerateness&quot; &quot;ocpu&quot;              &quot;opencpu&quot;          
+[49] &quot;pandoc&quot;            &quot;pb&quot;                &quot;php&quot;              
+[52] &quot;png&quot;               &quot;prescripted&quot;       &quot;priori&quot;           
+[55] &quot;protobuf&quot;          &quot;rApache&quot;           &quot;rda&quot;              
+[58] &quot;rds&quot;               &quot;reproducibility&quot;   &quot;rlm&quot;              
+[61] &quot;rmd&quot;               &quot;rnorm&quot;             &quot;rnw&quot;              
+[64] &quot;rpy&quot;               &quot;saveRDS&quot;           &quot;scalability&quot;      
+[67] &quot;scalable&quot;          &quot;schemas&quot;           &quot;se&quot;               
+[70] &quot;sep&quot;               &quot;stateful&quot;          &quot;statefulness&quot;     
+[73] &quot;stdout&quot;            &quot;suboptimal&quot;        &quot;svg&quot;              
+[76] &quot;sweave&quot;            &quot;tex&quot;               &quot;texi&quot;             
+[79] &quot;tmp&quot;               &quot;toJSON&quot;            &quot;urlencoded&quot;       
+[82] &quot;www&quot;               &quot;xyz&quot;              </code></pre>
 </div>
 <div id="check-pdf-files" class="section level3">
 <h3>Check PDF files</h3>
 <p>Use the text-extraction from the <code>pdftools</code> package to spell check text from PDF files!</p>
-<pre class="r"><code>text &lt;- pdftools::pdf_text('https://www.gnu.org/licenses/quick-guide-gplv3.pdf')
+<pre class="r"><code>text &lt;- pdftools::pdf_text(&#39;https://www.gnu.org/licenses/quick-guide-gplv3.pdf&#39;)
 bad_words &lt;- hunspell(text)
 sort(unique(unlist(bad_words)))</code></pre>
 <pre><code> [1] &quot;AGPLed&quot;        &quot;Affero&quot;        &quot;DRM&quot;           &quot;GPLed&quot;        
@@ -3873,17 +3905,16 @@ print(head(words, 30))</code></pre>
 <p>Most of these are stop words. Let’s filter these out:</p>
 <pre class="r"><code>df &lt;- as.data.frame(words)
 df$stems &lt;- as.character(df$stems)
-stopwords &lt;- hunspell_parse(readLines('https://jeroen.github.io/files/stopwords.txt'))
-stops &lt;- df$stems %in% unlist(stopwords)
+stops &lt;- df$stems %in% stopwords::stopwords(source=&quot;stopwords-iso&quot;)
 wcdata &lt;- head(df[!stops,], 150)
 print(wcdata, max = 40)</code></pre>
 <pre><code>           stems Freq
+8              I 2069
 20            Mr 1129
 30     Elizabeth  635
 48         Darcy  418
 63        sister  294
 64          Jane  292
-65          miss  290
 68          Miss  281
 72          lady  265
 76            It  247
@@ -3893,17 +3924,18 @@ print(wcdata, max = 40)</code></pre>
 96           aft  200
 105        happy  183
 107      Collins  180
-109         dear  178
 112          bee  175
 115          day  174
 117        Lydia  171
 119         feel  167
+120       friend  166
  [ reached getOption(&quot;max.print&quot;) -- omitted 130 rows ]</code></pre>
 <pre class="r"><code>library(wordcloud2)
 names(wcdata) &lt;- c(&quot;word&quot;, &quot;freq&quot;)
+wcdata$freq &lt;- (wcdata$freq)^(2/3)
 wordcloud2(wcdata)</code></pre>
-<div id="htmlwidget-561f256938cd6e4ad6fd" style="width:672px;height:480px;" class="wordcloud2 html-widget"></div>
-<script type="application/json" data-for="htmlwidget-561f256938cd6e4ad6fd">{"x":{"word":["Mr","Elizabeth","Darcy","sister","Jane","miss","Miss","lady","It","He","time","ha","aft","happy","Collins","dear","bee","day","Lydia","feel","friend","family","Collin","hope","manner","Lady","mother","father","daughter","ply","letter","walk","Catherine","marry","real","love","house","talk","receive","A","answer","speak","pleasure","Lizzy","hear","cry","subject","till","add","call","suppose","heard","Charlotte","In","aunt","doe","expect","girl","leave","agree","brother","moment","morn","morning","sir","word","ill","opine","ye","dance","passe","evening","happiness","mind","relate","surprise","uncle","Kitty","assure","kitty","reason","Lucas","attention","half","light","found","party","told","broth","opinion","character","eye","follow","smile","colonel","home","marriage","town","world","hour","left","mention","visit","perfect","acquaintance","live","continue","conversation","idea","chapter","coming","express","married","settle","cousin","person","woman","hard","object","affection","read","short","As","enter","form","meet","life","London","dare","stay","husband","regard","join","No","civility","Sir","engage","equal","minute","observe","understand","carriage","occasion","people","satisfy","advantage","concern","doubt","pride","spirit"],"freq":[1129,635,418,294,292,290,281,265,247,235,224,221,200,183,180,178,175,174,171,167,166,159,156,144,143,137,137,135,134,133,132,127,126,126,119,118,111,111,109,106,105,103,99,97,97,94,94,93,91,89,89,87,85,85,85,85,84,83,82,81,81,81,79,79,78,78,77,76,76,75,75,74,74,73,73,72,72,71,71,71,71,70,70,70,70,69,69,69,68,68,67,67,67,67,66,66,66,66,66,65,65,65,65,64,63,63,62,62,62,61,61,61,61,61,60,60,60,59,59,58,58,58,57,57,57,57,56,55,55,55,54,54,53,52,52,51,51,51,51,51,51,50,50,50,50,49,49,49,49,49],"fontFamily":"Segoe UI","fontWeight":"bold","color":"random-dark","minSize":0,"weightFactor":0.159433126660762,"backgroundColor":"white","gridSize":0,"minRotation":-0.785398163397448,"maxRotation":0.785398163397448,"shuffle":true,"rotateRatio":0.4,"shape":"circle","ellipticity":0.65,"figBase64":null,"hover":null},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-0047d70acff4c6a7af9f" style="width:672px;height:480px;" class="wordcloud2 html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0047d70acff4c6a7af9f">{"x":{"word":["I","Mr","Elizabeth","Darcy","sister","Jane","Miss","lady","It","He","time","ha","aft","happy","Collins","bee","day","Lydia","feel","friend","family","Collin","hope","manner","Lady","mother","father","daughter","ply","letter","walk","Catherine","marry","real","love","house","talk","receive","A","answer","speak","pleasure","Lizzy","hear","subject","add","suppose","heard","Charlotte","In","aunt","doe","expect","girl","leave","agree","brother","moment","morn","morning","sir","word","opine","dance","passe","evening","happiness","mind","relate","surprise","uncle","Kitty","assure","kitty","reason","Lucas","attention","light","party","told","broth","opinion","character","eye","follow","smile","colonel","marriage","town","hour","left","mention","visit","perfect","acquaintance","live","continue","conversation","idea","chapter","coming","express","married","settle","cousin","person","woman","hard","object","affection","read","short","As","enter","form","meet","life","London","stay","husband","regard","No","civility","Sir","engage","equal","minute","observe","understand","carriage","occasion","people","satisfy","advantage","concern","doubt","pride","spirit","power","circumstance","determine","fear","week","wife","William","account","astonish","busy","handsome","listen"],"freq":[162.370449803086,108.424965995577,73.8781168669376,55.9050260936931,44.2145171835946,44.0137697949779,42.9013422313748,41.2569623999274,39.3669077180385,38.0813124944838,36.8834903364676,36.5534339661647,34.1995189335339,32.232999873805,31.8797570754783,31.2866237283799,31.167322789559,30.8080402914219,30.3257102232856,30.2045283620813,29.34932266478,28.9789780269356,27.47314182128,27.3458036824867,26.5754347614518,26.5754347614518,26.3161596439158,26.1860423295735,26.0556009338912,25.9248322037974,25.2659605656467,25.1331561847202,25.1331561847202,24.1934595169973,24.0577313876399,23.0966318808889,23.0966318808889,22.8183549742924,22.3977251091113,22.2566364919149,21.9731076365707,21.4004774691849,21.1112762888482,21.1112762888482,20.6737170996165,20.2314772451263,19.9339487685462,19.6341830257168,19.3321111659706,19.3321111659706,19.3321111659706,19.3321111659706,19.1801878966444,19.0276605427665,18.8745193801862,18.7207544074671,18.7207544074671,18.7207544074671,18.4113115702024,18.4113115702024,18.2556122102886,18.2556122102886,17.94220143693,17.7844665224503,17.7844665224503,17.6260289793766,17.6260289793766,17.4668761184085,17.4668761184085,17.3069948436889,17.3069948436889,17.1463716339353,17.1463716339353,17.1463716339353,17.1463716339353,16.9849925224181,16.9849925224181,16.9849925224181,16.8228430756951,16.8228430756951,16.6599083710079,16.6599083710079,16.4961729722339,16.4961729722339,16.4961729722339,16.4961729722339,16.3316209042784,16.3316209042784,16.3316209042784,16.1662356257816,16.1662356257816,16.1662356257816,16.1662356257816,16,15.8328962637122,15.8328962637122,15.6649059939785,15.6649059939785,15.6649059939785,15.4960100725713,15.4960100725713,15.4960100725713,15.4960100725713,15.4960100725713,15.3261886478711,15.3261886478711,15.3261886478711,15.1554210940021,15.1554210940021,14.9836859669579,14.9836859669579,14.9836859669579,14.8109609574388,14.8109609574388,14.8109609574388,14.8109609574388,14.6372228400919,14.4624474188111,14.4624474188111,14.2866094677138,14.2866094677138,13.9316395357652,13.9316395357652,13.7524513535797,13.7524513535797,13.7524513535797,13.7524513535797,13.7524513535797,13.7524513535797,13.5720880829745,13.5720880829745,13.5720880829745,13.5720880829745,13.3905182794067,13.3905182794067,13.3905182794067,13.3905182794067,13.3905182794067,13.2077089955785,13.0236256766892,13.0236256766892,13.0236256766892,13.0236256766892,13.0236256766892,12.8382320459919,12.8382320459919,12.8382320459919,12.8382320459919,12.8382320459919,12.8382320459919],"fontFamily":"Segoe UI","fontWeight":"bold","color":"random-dark","minSize":0,"weightFactor":1.10857610001262,"backgroundColor":"white","gridSize":0,"minRotation":-0.785398163397448,"maxRotation":0.785398163397448,"shuffle":true,"rotateRatio":0.4,"shape":"circle","ellipticity":0.65,"figBase64":null,"hover":null},"evals":[],"jsHooks":{"render":[{"code":"function(el,x){\n                        console.log(123);\n                        if(!iii){\n                          window.location.reload();\n                          iii = False;\n\n                        }\n  }","data":null}]}}</script>
 </div>
 </div>
 <div id="hunspell-dictionaries" class="section level2">
@@ -3914,11 +3946,14 @@ wordcloud2(wcdata)</code></pre>
 <li>The <code>[lang].aff</code> file specifies the affix syntax for the language</li>
 <li>The <code>[lang].dic</code> file contains a wordlist formatted using syntax from the aff file.</li>
 </ul>
-<p>Typically both files are located in the same directory and share the same filename, for example <code>en_GB.aff</code> and <code>en_GB.dic</code>. The <code>dictionary</code> function will search for these files in the current directory and standard system paths where dictionaries are usually installed.</p>
+<p>Typically both files are located in the same directory and share the same filename, for example <code>en_GB.aff</code> and <code>en_GB.dic</code>. The <code>list_dictionaries()</code> function lists available dictionaries in the current directory and standard system paths where dictionaries are usually installed.</p>
+<pre class="r"><code>list_dictionaries()</code></pre>
+<pre><code>[1] &quot;en_GB&quot; &quot;en_US&quot;</code></pre>
+<p>The <code>dictionary</code> function is then used to load any of these available dictionaries:</p>
 <pre class="r"><code>dictionary(&quot;en_GB&quot;)</code></pre>
 <pre><code>&lt;hunspell dictionary&gt;
- affix: /private/var/folders/l8/bhmtp25n2lx0q0dgv1x4gf1w0000gn/T/Rtmpon621w/Rinst22761fd6787a/hunspell/dict/en_GB.aff 
- dictionary: /private/var/folders/l8/bhmtp25n2lx0q0dgv1x4gf1w0000gn/T/Rtmpon621w/Rinst22761fd6787a/hunspell/dict/en_GB.dic 
+ affix: /private/var/folders/hp/fg4q7m353d91v9mgm4d1stvh0000gn/T/RtmpyCBS8F/Rinstdd884308819a/hunspell/dict/en_GB.aff 
+ dictionary: /private/var/folders/hp/fg4q7m353d91v9mgm4d1stvh0000gn/T/RtmpyCBS8F/Rinstdd884308819a/hunspell/dict/en_GB.dic 
  encoding: UTF-8 
  wordchars: ’ 
  added: 0 custom words</code></pre>
@@ -3929,14 +3964,14 @@ print(dutch)</code></pre>
  affix: /Users/jeroen/workspace/Dictionaries/Dutch.aff 
  dictionary: /Users/jeroen/workspace/Dictionaries/Dutch.dic 
  encoding: UTF-8 
- wordchars: '-./0123456789\ĳ’ </code></pre>
+ wordchars: &#39;-./0123456789\ĳ’ </code></pre>
 <div id="setting-a-language" class="section level3">
 <h3>Setting a Language</h3>
 <p>The hunspell R package includes dictionaries for <code>en_US</code> and <code>en_GB</code>. So if you you don’t speak <code>en_US</code> you can always switch to the British English:</p>
 <pre class="r"><code>hunspell(&quot;My favourite colour to visualise is grey&quot;)</code></pre>
 <pre><code>[[1]]
 [1] &quot;favourite&quot; &quot;colour&quot;    &quot;visualise&quot; &quot;grey&quot;     </code></pre>
-<pre class="r"><code>hunspell(&quot;My favourite colour to visualise is grey&quot;, dict = 'en_GB')</code></pre>
+<pre class="r"><code>hunspell(&quot;My favourite colour to visualise is grey&quot;, dict = &#39;en_GB&#39;)</code></pre>
 <pre><code>[[1]]
 character(0)</code></pre>
 <p>If you want to use another language you need to make sure that the dictionary is available from your system. The <code>dictionary</code> function is used to read in dictionary.</p>
@@ -3944,14 +3979,19 @@ character(0)</code></pre>
 hunspell(&quot;Hij heeft de klok wel horen luiden, maar weet niet waar de klepel hangt&quot;, dict = dutch)</code></pre>
 <p>Note that if the <code>dict</code> argument is a string, it will be passed on to the <code>dictionary</code> function.</p>
 </div>
-<div id="system-dictionaries" class="section level3">
-<h3>System Dictionaries</h3>
-<p>The best way to install dictionaries on Linux is via the system package manager. For example on if you would like to install the Austrian-German dictionary on <strong>Debian</strong> or <strong>Ubuntu</strong> you either need the <a href="https://packages.debian.org/testing/hunspell-de-at"><code>hunspell-de-at</code></a> or <a href="https://packages.debian.org/testing/myspell-de-at"><code>myspell-de-at</code></a> package:</p>
+<div id="installing-dictionaries-in-rstudio" class="section level3">
+<h3>Installing Dictionaries in RStudio</h3>
+<p>RStudio users can install various dictionaries via the “Global Options” menu of the IDE. Once these dictionaries are installed they become available to the <code>hunspell</code> and <code>spelling</code> package as well.</p>
+<p><img data-external="1" src="https://jeroen.github.io/images/rs-hunspell.png" alt="rstudio screenshot"></p>
+</div>
+<div id="dictionaries-on-linux" class="section level3">
+<h3>Dictionaries on Linux</h3>
+<p>The best way to install dictionaries on <strong>Linux</strong> is via the system package manager. For example on if you would like to install the Austrian-German dictionary on <strong>Debian</strong> or <strong>Ubuntu</strong> you either need the <a href="https://packages.debian.org/testing/hunspell-de-at"><code>hunspell-de-at</code></a> or <a href="https://packages.debian.org/testing/myspell-de-at"><code>myspell-de-at</code></a> package:</p>
 <pre class="sh"><code>sudo apt-get install hunspell-de-at</code></pre>
 <p>On <strong>Fedora</strong> and <strong>CentOS</strong> / <strong>RHEL</strong> all German dialects are included with the <a href="https://apps.fedoraproject.org/packages/hunspell-de"><code>hunspell-de</code></a> package</p>
 <pre class="sh"><code>sudo yum install hunspell-de</code></pre>
 <p>After installing this you should be able to load the dictionary:</p>
-<pre class="r"><code>dict &lt;- dictionary('de_AT')</code></pre>
+<pre class="r"><code>dict &lt;- dictionary(&#39;de_AT&#39;)</code></pre>
 <p>If that didn’t work, verify that the dictionary files were installed in one of the system directories (usually <code>/usr/share/myspell</code> or <code>/usr/share/hunspell</code>).</p>
 </div>
 <div id="custom-dictionaries" class="section level3">
@@ -3968,7 +4008,7 @@ hunspell(&quot;Hij heeft de klok wel horen luiden, maar weet niet waar de klepel
 <pre class="r"><code>Sys.setenv(DICPATH = &quot;/my/custom/hunspell/dir&quot;)
 hunspell:::dicpath()</code></pre>
 <pre><code> [1] &quot;/my/custom/hunspell/dir&quot;                                                                            
- [2] &quot;/private/var/folders/l8/bhmtp25n2lx0q0dgv1x4gf1w0000gn/T/Rtmpon621w/Rinst22761fd6787a/hunspell/dict&quot;
+ [2] &quot;/private/var/folders/hp/fg4q7m353d91v9mgm4d1stvh0000gn/T/RtmpyCBS8F/Rinstdd884308819a/hunspell/dict&quot;
  [3] &quot;/Users/jeroen/Library/Spelling&quot;                                                                     
  [4] &quot;/usr/local/share/hunspell&quot;                                                                          
  [5] &quot;/usr/local/share/myspell&quot;                                                                           
@@ -3977,7 +4017,9 @@ hunspell:::dicpath()</code></pre>
  [8] &quot;/usr/share/myspell&quot;                                                                                 
  [9] &quot;/usr/share/myspell/dicts&quot;                                                                           
 [10] &quot;/Library/Spelling&quot;                                                                                  
-[11] &quot;/dictionaries&quot;                                                                                      </code></pre>
+[11] &quot;/dictionaries&quot;                                                                                      
+[12] &quot;~/.rstudio-desktop/dictionaries/languages-system&quot;                                                   
+[13] &quot;~/.rstudio-desktop/dictionaries/languages-user&quot;                                                     </code></pre>
 </div>
 </div>
 

@@ -9,3 +9,4 @@ hunspell_info	hunspell
 hunspell_parse	hunspell
 hunspell_stem	hunspell
 hunspell_suggest	hunspell
+list_dictionaries	hunspell

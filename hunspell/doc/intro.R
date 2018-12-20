@@ -56,15 +56,18 @@ print(head(words, 30))
 ## ------------------------------------------------------------------------
 df <- as.data.frame(words)
 df$stems <- as.character(df$stems)
-stopwords <- hunspell_parse(readLines('https://jeroen.github.io/files/stopwords.txt'))
-stops <- df$stems %in% unlist(stopwords)
+stops <- df$stems %in% stopwords::stopwords(source="stopwords-iso")
 wcdata <- head(df[!stops,], 150)
 print(wcdata, max = 40)
 
 ## ------------------------------------------------------------------------
 library(wordcloud2)
 names(wcdata) <- c("word", "freq")
+wcdata$freq <- (wcdata$freq)^(2/3)
 wordcloud2(wcdata)
+
+## ------------------------------------------------------------------------
+list_dictionaries()
 
 ## ------------------------------------------------------------------------
 dictionary("en_GB")
