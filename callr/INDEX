@@ -1,4 +1,6 @@
 callr                   Call R from R
+default_repos           Default value for the 'repos' option in callr
+                        subprocesses
 r                       Evaluate an expression in another R session
 r_bg                    Evaluate an expression in another R session, in
                         the background

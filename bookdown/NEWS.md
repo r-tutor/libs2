@@ -1,3 +1,9 @@
+# CHANGES IN bookdown VERSION 0.9
+
+## BUG FIXES
+
+- The tags for OpenGraph titles in HTML output were not properly closed.
+
 # CHANGES IN bookdown VERSION 0.8
 
 ## NEW FEATURE
