@@ -36,8 +36,8 @@ translate_sql(mean(x, trim = 0.1))
 translate_sql(glob(x, y))
 translate_sql(x %like% "ab%")
 
-## ------------------------------------------------------------------------
-knitr::include_graphics("windows.png", dpi = 200)
+## ----echo = FALSE, out.width = "100%"------------------------------------
+knitr::include_graphics("windows.png", dpi = 300)
 
 ## ------------------------------------------------------------------------
 translate_sql(mean(G))

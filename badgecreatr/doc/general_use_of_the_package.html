@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Roel M. Hogervorst" />
+
+<meta name="date" content="2019-01-05" />
+
+<title>General use of the package</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#header {
+text-align: center;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">General use of the package</h1>
+<h4 class="author"><em>Roel M. Hogervorst</em></h4>
+<h4 class="date"><em>2019-01-05</em></h4>
+
+
+<div id="TOC">
+<ul>
+<li><a href="#badges-or-shields">Badges or shields</a></li>
+<li><a href="#use-cases">Use cases</a><ul>
+<li><a href="#scenario-0-add-a-few-loose-badges">Scenario 0: add a few loose badges</a></li>
+<li><a href="#scenario-1-starting-a-package-with-minimal-badges">Scenario 1: starting a package with minimal badges</a></li>
+<li><a href="#scenario-2-adding-dynamic-badges-to-your-readme">Scenario 2: adding dynamic badges to your readme</a></li>
+<li><a href="#scenario-3-you-already-have-some-badges-but-you-want-to-add-other-ones-cran-rdocumentation-travis-etc">Scenario 3: you already have some badges, but you want to add other ones (cran, rdocumentation, travis, etc)</a></li>
+<li><a href="#scenario-4-you-want-to-add-certain-badges-essentially-a-list-of-badges-that-you-want-regardless-of-what-is-already-there-so-it-should-ignore-badges-ignore-if-there-is-a-travis-file">scenario 4: you want to add certain badges, essentially a list of badges that you want, regardless of what is already there (so it should ignore badges, ignore if there is a travis file)</a></li>
+<li><a href="#scenario-5-you-dont-want-a-rmarkdown-file-but-a-markdown-file.">scenario 5: You don’t want a RMarkdown file, but a markdown file.</a></li>
+</ul></li>
+</ul>
+</div>
+
+<p>Badgecreatr was developed with myself in mind. I often create packages on Github and wanted to have a standardized way to add badges to the README file. In Github (and many other code sharing websites) the README.md file on top of the repository is automatically rendered as HTML (a normal webpage) and can be viewed by everyone in the browser with full markup.</p>
+<p>I’ve written a blogpost about the older version of this package <a href="https://rmhogervorst.nl/cleancode/blog/2016/07/09/content/post/2016-07-09-submtting-to-cran-first-experience/">here</a></p>
+<p>I’ve also added a vignette describing how you can add new badges to this package.</p>
+<div id="badges-or-shields" class="section level2">
+<h2>Badges or shields</h2>
+<p>Many projects have shields that signal the status of the project. When you make use of continuous integration (CI) tools such as <a href="https://docs.travis-ci.com/user/languages/r" title="a R-specific guide for travis">travis-ci</a>, you let the service rebuild and retest your package after every commit to Github. Travis has a badge that signals if the build passed or not. I’ve added extra information such as under what license the code is shared, the latest change in the package and what version the package has.</p>
+<p>Keep in mind that I don’t create all of the badges (only 2 are of my invention), this package is just a convenient way to place badges in your readme.</p>
+</div>
+<div id="use-cases" class="section level1">
+<h1>Use cases</h1>
+<p>I realized that I don’t often use the package in its original form anymore, so the use cases might change. I’ve identified some cases.</p>
+<ul>
+<li>[x] scenario 0: you just want to add a few loose badges</li>
+<li>[x] scenario 1: starting a package with minimal badges.</li>
+<li>[] scenario 2: base version but with logic added to seperate code part that tracks changes to R version, change date and versions.</li>
+<li>[] scenario 3: you already have some badges, but you want to add newer ones (cran, rdocumentation, travis, etc).</li>
+<li>[] scenario 4: you want to add certain badges, essentially a list of badges that you want, regardless of whats already there (so it should ignore badges, ignore if there is a travis file)</li>
+<li>[] scenario 5: You don’t want a RMarkdown file, but a markdown file. Since markdown cannot process R, we add badges once.</li>
+</ul>
+<div id="scenario-0-add-a-few-loose-badges" class="section level3">
+<h3>Scenario 0: add a few loose badges</h3>
+<p>You just want to add a badge for projectstatus. All the badges start with badge_. So adding badges is as simple as typing badge_ and looking through the options.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(badgecreatr)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">badge_projectstatus</span>(<span class="st">&quot;wip&quot;</span>) <span class="co"># any of concept, wip, suspended, abandoned, active, inactive, unsupported</span></a></code></pre></div>
+<pre><code>## [1] &quot;[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)&quot;</code></pre>
+<p>The badge functions result in markdown that you can paste into your readme file. This would input the current date.</p>
+</div>
+<div id="scenario-1-starting-a-package-with-minimal-badges" class="section level3">
+<h3>Scenario 1: starting a package with minimal badges</h3>
+<p>I imagin using this to add some quick badges that you might update later but it communicates the basic properties of the package:</p>
+<ul>
+<li>Maturity (project status)</li>
+<li>license</li>
+<li>Last change (static)</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">minimal_badges</span>(<span class="dt">status =</span> <span class="st">&quot;concept&quot;</span>, <span class="dt">license =</span> <span class="st">&quot;MIT&quot;</span>,<span class="dt">date =</span> <span class="st">&quot;2017-05-17&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;[![Project Status: Concept – Minimal or no implementation has been done yet, or the repository is only intended to be a limited example, demo, or proof-of-concept.](https://www.repostatus.org/badges/latest/concept.svg)](https://www.repostatus.org/#concept)[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://choosealicense.com/licenses/mit/)[![Last-changedate](https://img.shields.io/badge/last%20change-2017--05--17-yellowgreen.svg)](/commits/master)&quot;</code></pre>
+</div>
+<div id="scenario-2-adding-dynamic-badges-to-your-readme" class="section level3">
+<h3>Scenario 2: adding dynamic badges to your readme</h3>
+<p>You add badges that change everytime you re-knit your document so that everything stays up to date.</p>
+<p>Communicate - Maturity (project status) - license - Last change - minimal r version - package version - travis badge (when a travis file is available) - codecov badge (when this is specified in the travis file)</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">dynamic_badges_minimal</span>(<span class="dt">license =</span> <span class="st">&quot;MIT&quot;</span>, <span class="dt">travisfile =</span> <span class="ot">TRUE</span>, <span class="dt">codecov =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+</div>
+<div id="scenario-3-you-already-have-some-badges-but-you-want-to-add-other-ones-cran-rdocumentation-travis-etc" class="section level3">
+<h3>Scenario 3: you already have some badges, but you want to add other ones (cran, rdocumentation, travis, etc)</h3>
+</div>
+<div id="scenario-4-you-want-to-add-certain-badges-essentially-a-list-of-badges-that-you-want-regardless-of-what-is-already-there-so-it-should-ignore-badges-ignore-if-there-is-a-travis-file" class="section level3">
+<h3>scenario 4: you want to add certain badges, essentially a list of badges that you want, regardless of what is already there (so it should ignore badges, ignore if there is a travis file)</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co"># is not implemented yet.</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw">place_badge_groups</span>( </a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">    <span class="dt">CI_status =</span> <span class="kw">c</span>(<span class="st">&quot;travis&quot;</span>, <span class="st">&quot;rwin&quot;</span>), </a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">    <span class="dt">versions =</span> <span class="kw">c</span>(<span class="st">&quot;CRAN&quot;</span>, <span class="st">&quot;github&quot;</span>),</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">    <span class="dt">stats =</span> <span class="kw">c</span>(<span class="st">&quot;downloads, gh_stars&quot;</span>))</a></code></pre></div>
+</div>
+<div id="scenario-5-you-dont-want-a-rmarkdown-file-but-a-markdown-file." class="section level3">
+<h3>scenario 5: You don’t want a RMarkdown file, but a markdown file.</h3>
+<p>Since markdown cannot process R, we add badges once.</p>
+</div>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,7 +1,7 @@
 Package: blogdown
 Type: Package
 Title: Create Blogs and Websites with R Markdown
-Version: 0.9
+Version: 0.10
 Authors@R: c(
     person("Yihui", "Xie", role = c("aut", "cre"), email = "xie@yihui.name", comment = c(ORCID = "0000-0003-0645-5666")),
     person("Beilei", "Bian", role = "ctb"),
@@ -20,19 +20,19 @@ Description: Write blog posts and web pages in R Markdown. This package supports
     the static site generator 'Hugo' (<https://gohugo.io>) best, and it also
     supports 'Jekyll' (<http://jekyllrb.com>) and 'Hexo' (<https://hexo.io>).
 License: GPL-3
-Imports: rmarkdown, bookdown (>= 0.5), knitr (>= 1.17), htmltools, yaml
-        (>= 2.1.19), httpuv (>= 1.4.0), xfun (>= 0.3), servr (>= 0.8)
+Imports: rmarkdown, bookdown (>= 0.9), knitr (>= 1.20), htmltools, yaml
+        (>= 2.1.19), httpuv (>= 1.4.0), xfun (>= 0.4), servr (>= 0.11)
 Suggests: testit, shiny, miniUI, stringr, rstudioapi, tools, processx,
         later
 LazyData: true
 URL: https://github.com/rstudio/blogdown
 BugReports: https://github.com/rstudio/blogdown/issues
 SystemRequirements: Hugo (<https://gohugo.io>) and Pandoc
-        (<http://pandoc.org>)
-RoxygenNote: 6.1.0
+        (<https://pandoc.org>)
+RoxygenNote: 6.1.1
 Encoding: UTF-8
 NeedsCompilation: no
-Packaged: 2018-10-23 16:09:34 UTC; yihui
+Packaged: 2019-01-09 04:09:48 UTC; yihui
 Author: Yihui Xie [aut, cre] (<https://orcid.org/0000-0003-0645-5666>),
   Beilei Bian [ctb],
   Forest Fang [ctb],
@@ -46,5 +46,5 @@ Author: Yihui Xie [aut, cre] (<https://orcid.org/0000-0003-0645-5666>),
   RStudio Inc [cph]
 Maintainer: Yihui Xie <xie@yihui.name>
 Repository: CRAN
-Date/Publication: 2018-10-23 16:20:03 UTC
-Built: R 3.5.1; ; 2018-11-23 22:55:05 UTC; windows
+Date/Publication: 2019-01-09 05:50:03 UTC
+Built: R 3.5.2; ; 2019-01-18 04:57:58 UTC; windows

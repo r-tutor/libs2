@@ -194,6 +194,7 @@ simulate.ar	simulate.ets
 simulate.Arima	simulate.ets
 simulate.ets	simulate.ets
 simulate.fracdiff	simulate.ets
+simulate.lagwalk	simulate.ets
 simulate.modelAR	simulate.ets
 simulate.nnetar	simulate.ets
 sindexf	sindexf

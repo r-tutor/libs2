@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Number of trading days in each season</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for bizdays {forecast}"><tr><td>bizdays {forecast}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Number of trading days in each season</h2>
+
+<h3>Description</h3>
+
+<p>Returns number of trading days in each month or quarter of the observed time
+period in a major financial center.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+bizdays(x, FinCenter = c("New York", "London", "NERC", "Tokyo",
+  "Zurich"))
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>Monthly or quarterly time series</p>
+</td></tr>
+<tr valign="top"><td><code>FinCenter</code></td>
+<td>
+<p>Major financial center.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Useful for trading days length adjustments. More on how to define &quot;business
+days&quot;, please refer to <code><a href="../../timeDate/html/isBizday.html">isBizday</a></code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Time series
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Earo Wang
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="monthdays.html">monthdays</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+  x &lt;-  ts(rnorm(30), start = c(2013, 2), frequency = 12)
+  bizdays(x, FinCenter = "New York")
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>forecast</em> version 8.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Osborn, Chui, Smith, and Birchenhall Test for Seasonal Unit...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for ocsb.test {forecast}"><tr><td>ocsb.test {forecast}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Osborn, Chui, Smith, and Birchenhall Test for Seasonal Unit Roots</h2>
+
+<h3>Description</h3>
+
+<p>An implementation of the Osborn, Chui, Smith, and Birchenhall (OCSB) test.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ocsb.test(x, lag.method = c("fixed", "AIC", "BIC", "AICc"), maxlag = 0)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a univariate seasonal time series.</p>
+</td></tr>
+<tr valign="top"><td><code>lag.method</code></td>
+<td>
+<p>a character specifying the lag order selection method.</p>
+</td></tr>
+<tr valign="top"><td><code>maxlag</code></td>
+<td>
+<p>the maximum lag order to be considered by <code>lag.method</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The regression equation may include lags of the dependent variable. When lag.method = &quot;fixed&quot;, the lag order is fixed to maxlag; otherwise, maxlag is the maximum number of lags considered in a lag selection procedure that minimises the lag.method criterion, which can be AIC or BIC or corrected AIC, AICc, obtained as AIC + (2k(k+1))/(n-k-1), where k is the number of parameters and n is the number of available observations in the model.
+</p>
+<p>Critical values for the test are based on simulations, which has been smoothed over to produce critical values for all seasonal periods.
+</p>
+
+
+<h3>Value</h3>
+
+<p>ocsb.test returns a list of class &quot;OCSBtest&quot; with the following components:
+* statistics the value of the test statistics.
+* pvalues the p-values for each test statistics.
+* method a character string describing the type of test.
+* data.name a character string giving the name of the data.
+* fitted.model	the fitted regression model.
+</p>
+
+
+<h3>References</h3>
+
+<p>Osborn DR, Chui APL, Smith J, and Birchenhall CR (1988) &quot;Seasonality and the
+order of integration for consumption&quot;, <em>Oxford Bulletin of Economics
+and Statistics</em> <b>50</b>(4):361-377.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="nsdiffs.html">nsdiffs</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+ocsb.test(AirPassengers)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>forecast</em> version 8.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

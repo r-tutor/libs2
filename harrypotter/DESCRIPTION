@@ -1,8 +1,10 @@
 Package: harrypotter
 Type: Package
 Title: Palettes Generated from All "Harry Potter" Movies
-Version: 2.0.0
-Authors@R: person("Alejandro", "Jimenez Rico", email = "aljrico@gmail.com", role = c("aut", "cre"))
+Version: 2.1.0
+Authors@R: c(
+    person("Alejandro", "Jimenez Rico", email = "aljrico@gmail.com", role = c("aut", "cre")),
+    person("Alfredo", "Hernandez", email = "aldomann.designs@gmail.com", role = "ctb"))
 Maintainer: Alejandro Jimenez Rico <aljrico@gmail.com>
 Description: Implementation of the characteristic palette of the houses of Hogwarts School of magic, present in all Harry Potter movies.
 License: MIT + file LICENSE
@@ -15,8 +17,9 @@ BugReports: https://github.com/aljrico/harrypotter/issues
 Imports: ggplot2 (>= 1.0.1), gridExtra
 RoxygenNote: 6.1.1
 NeedsCompilation: no
-Packaged: 2018-12-13 09:20:27 UTC; aljrico
-Author: Alejandro Jimenez Rico [aut, cre]
+Packaged: 2019-01-20 18:23:43 UTC; alejandro
+Author: Alejandro Jimenez Rico [aut, cre],
+  Alfredo Hernandez [ctb]
 Repository: CRAN
-Date/Publication: 2018-12-13 09:30:02 UTC
-Built: R 3.5.1; ; 2018-12-14 14:16:57 UTC; windows
+Date/Publication: 2019-01-20 18:50:02 UTC
+Built: R 3.5.2; ; 2019-01-21 05:07:58 UTC; windows

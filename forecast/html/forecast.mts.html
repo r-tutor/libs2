@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Forecasting time series</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for forecast.mts {forecast}"><tr><td>forecast.mts {forecast}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Forecasting time series</h2>
+
+<h3>Description</h3>
+
+<p><code>mforecast</code> is a class of objects for forecasting from multivariate
+time series or multivariate time series models. The function invokes
+particular <em>methods</em> which depend on the class of the first argument.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'mts'
+forecast(object, h = ifelse(frequency(object) &gt; 1, 2 *
+  frequency(object), 10), level = c(80, 95), fan = FALSE,
+  robust = FALSE, lambda = NULL, biasadj = FALSE,
+  find.frequency = FALSE, allow.multiplicative.trend = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>a multivariate time series or multivariate time series model
+for which forecasts are required</p>
+</td></tr>
+<tr valign="top"><td><code>h</code></td>
+<td>
+<p>Number of periods for forecasting</p>
+</td></tr>
+<tr valign="top"><td><code>level</code></td>
+<td>
+<p>Confidence level for prediction intervals.</p>
+</td></tr>
+<tr valign="top"><td><code>fan</code></td>
+<td>
+<p>If TRUE, <code>level</code> is set to <code>seq(51,99,by=3)</code>. This is
+suitable for fan plots.</p>
+</td></tr>
+<tr valign="top"><td><code>robust</code></td>
+<td>
+<p>If TRUE, the function is robust to missing values and outliers
+in <code>object</code>. This argument is only valid when <code>object</code> is of class
+<code>mts</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>lambda</code></td>
+<td>
+<p>Box-Cox transformation parameter. If <code>lambda="auto"</code>,
+then a transformation is automatically selected using <code>BoxCox.lambda</code>.
+The transformation is ignored if NULL. Otherwise,
+data transformed before model is estimated.</p>
+</td></tr>
+<tr valign="top"><td><code>biasadj</code></td>
+<td>
+<p>Use adjusted back-transformed mean for Box-Cox
+transformations. If transformed data is used to produce forecasts and fitted values,
+a regular back transformation will result in median forecasts. If biasadj is TRUE,
+an adjustment will be made to produce mean forecasts and fitted values.</p>
+</td></tr>
+<tr valign="top"><td><code>find.frequency</code></td>
+<td>
+<p>If TRUE, the function determines the appropriate
+period, if the data is of unknown period.</p>
+</td></tr>
+<tr valign="top"><td><code>allow.multiplicative.trend</code></td>
+<td>
+<p>If TRUE, then ETS models with
+multiplicative trends are allowed. Otherwise, only additive or no trend ETS
+models are permitted.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments affecting the forecasts produced.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>For example, the function <code><a href="forecast.mlm.html">forecast.mlm</a></code> makes multivariate
+forecasts based on the results produced by <code><a href="tslm.html">tslm</a></code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of class &quot;<code>mforecast</code>&quot;.
+</p>
+<p>The function <code>summary</code> is used to obtain and print a summary of the
+results, while the function <code>plot</code> produces a plot of the multivariate
+forecasts and prediction intervals.
+</p>
+<p>The generic accessors functions <code>fitted.values</code> and <code>residuals</code>
+extract various useful features of the value returned by
+<code>forecast$model</code>.
+</p>
+<p>An object of class <code>"mforecast"</code> is a list usually containing at least
+the following elements: </p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>model</code></td>
+<td>
+<p>A list containing information about the
+fitted model</p>
+</td></tr> <tr valign="top"><td><code>method</code></td>
+<td>
+<p>The name of the forecasting method as a
+character string</p>
+</td></tr> <tr valign="top"><td><code>mean</code></td>
+<td>
+<p>Point forecasts as a time series</p>
+</td></tr>
+<tr valign="top"><td><code>lower</code></td>
+<td>
+<p>Lower limits for prediction intervals</p>
+</td></tr> <tr valign="top"><td><code>upper</code></td>
+<td>
+<p>Upper
+limits for prediction intervals</p>
+</td></tr> <tr valign="top"><td><code>level</code></td>
+<td>
+<p>The confidence values
+associated with the prediction intervals</p>
+</td></tr> <tr valign="top"><td><code>x</code></td>
+<td>
+<p>The original time series
+(either <code>object</code> itself or the time series used to create the model
+stored as <code>object</code>).</p>
+</td></tr> <tr valign="top"><td><code>residuals</code></td>
+<td>
+<p>Residuals from the fitted model.
+For models with additive errors, the residuals will be x minus the fitted
+values.</p>
+</td></tr> <tr valign="top"><td><code>fitted</code></td>
+<td>
+<p>Fitted values (one-step forecasts)</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Rob J Hyndman &amp; Mitchell O'Hara-Wild
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other functions which return objects of class <code>"mforecast"</code>
+are <code><a href="forecast.mlm.html">forecast.mlm</a></code>, <code>forecast.varest</code>.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>forecast</em> version 8.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -7,7 +7,7 @@ options(tibble.print_min = 6L, tibble.print_max = 6L, digits = 3)
 
 ## ----setup, message = FALSE----------------------------------------------
 library(dplyr)
-con <- DBI::dbConnect(RSQLite::SQLite(), path = ":memory:")
+con <- DBI::dbConnect(RSQLite::SQLite(), dbname = ":memory:")
 
 ## ---- eval = FALSE-------------------------------------------------------
 #  con <- DBI::dbConnect(RMySQL::MySQL(),

@@ -11,7 +11,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;highcharter&rsquo; version 0.5.0</h2>
+</div><h2>Documentation for package &lsquo;highcharter&rsquo; version 0.7.0</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
@@ -44,7 +44,7 @@
 </p>
 
 <table width="100%">
-<tr><td style="width: 25%;"><a href="higcharter.html">higcharter-package</a></td>
+<tr><td style="width: 25%;"><a href="highcharter.html">highcharter-package</a></td>
 <td>An 'htmlwidget' interface to the Highcharts javascript chart library</td></tr>
 </table>
 
@@ -60,7 +60,7 @@
 <tr><td style="width: 25%;"><a href="color_stops.html">color_stops</a></td>
 <td>Function to create 'stops' argument in 'hc_colorAxis'</td></tr>
 <tr><td style="width: 25%;"><a href="create_yaxis.html">create_yaxis</a></td>
-<td>Creating multiples yAxis for add a highcharts</td></tr>
+<td>Creating multiples yAxis t use with highcharts</td></tr>
 </table>
 
 <h2><a name="D">-- D --</a></h2>
@@ -69,9 +69,9 @@
 <tr><td style="width: 25%;"><a href="dash_styles.html">dash_styles</a></td>
 <td>Get dash styles</td></tr>
 <tr><td style="width: 25%;"><a href="datetime_to_timestamp.html">datetime_to_timestamp</a></td>
-<td>Date to Timesstamps</td></tr>
+<td>Date to timestamps</td></tr>
 <tr><td style="width: 25%;"><a href="download_map_data.html">download_map_data</a></td>
-<td>Auxilar function to download the map data form a url The urls are listed in &lt;URL: https://code.highcharts.com/mapdata/&gt;.</td></tr>
+<td>Helper function to download the map data form a url</td></tr>
 </table>
 
 <h2><a name="E">-- E --</a></h2>
@@ -88,9 +88,9 @@
 <td>Marshall's Favorite Bars</td></tr>
 <tr><td style="width: 25%;"><a href="favorite_pies.html">favorite_pies</a></td>
 <td>Marshall's Favorite Pies</td></tr>
-<tr><td style="width: 25%;"><a href="fa_icon.html">fa_icon</a></td>
+<tr><td style="width: 25%;"><a href="hc_add_dependency_fa.html">fa_icon</a></td>
 <td>Helpers functions to get FontAwesome icons code</td></tr>
-<tr><td style="width: 25%;"><a href="fa_icon.html">fa_icon_mark</a></td>
+<tr><td style="width: 25%;"><a href="hc_add_dependency_fa.html">fa_icon_mark</a></td>
 <td>Helpers functions to get FontAwesome icons code</td></tr>
 <tr><td style="width: 25%;"><a href="fix_1_length_data.html">fix_1_length_data</a></td>
 <td>Function to avoid the jsonlite::auto_unbox default</td></tr>
@@ -100,7 +100,7 @@
 
 <table width="100%">
 <tr><td style="width: 25%;"><a href="get_data_from_map.html">get_data_from_map</a></td>
-<td>Auxilar function to get the data inside the map data The urls are listed in &lt;URL: https://code.highcharts.com/mapdata/&gt;.</td></tr>
+<td>Helper function to get the data inside the map data The urls are listed in &lt;URL: https://code.highcharts.com/mapdata/&gt;.</td></tr>
 <tr><td style="width: 25%;"><a href="get_hc_series_from_df.html">get_hc_series_from_df</a></td>
 <td>Auxiliar function to get series and options from tidy frame for hchart.data.frame</td></tr>
 <tr><td style="width: 25%;"><a href="globaltemp.html">globaltemp</a></td>
@@ -112,34 +112,52 @@
 <table width="100%">
 <tr><td style="width: 25%;"><a href="hcaes.html">hcaes</a></td>
 <td>Define aesthetic mappings. Similar in spirit to 'ggplot2::aes'</td></tr>
+<tr><td style="width: 25%;"><a href="hcaes_string.html">hcaes_</a></td>
+<td>Define aesthetic mappings using strings. Similar in spirit to 'ggplot2::aes_string'</td></tr>
+<tr><td style="width: 25%;"><a href="hcaes_string.html">hcaes_string</a></td>
+<td>Define aesthetic mappings using strings. Similar in spirit to 'ggplot2::aes_string'</td></tr>
 <tr><td style="width: 25%;"><a href="hcbar.html">hcbar</a></td>
-<td>Shorcut to make a bar chart</td></tr>
+<td>Shortcut to make a bar chart</td></tr>
 <tr><td style="width: 25%;"><a href="hcboxplot.html">hcboxplot</a></td>
 <td>Shortcut to make a boxplot</td></tr>
 <tr><td style="width: 25%;"><a href="hcdensity.html">hcdensity</a></td>
-<td>Shorcut to make density charts</td></tr>
+<td>Shortcut to make density charts</td></tr>
 <tr><td style="width: 25%;"><a href="hchart.html">hchart</a></td>
 <td>Create a highchart object from a particular data type</td></tr>
 <tr><td style="width: 25%;"><a href="hchart.survfit.html">hchart.survfit</a></td>
 <td>Plot survival curves using Highcharts</td></tr>
 <tr><td style="width: 25%;"><a href="hchist.html">hchist</a></td>
-<td>Shorcut to make an histogram</td></tr>
+<td>Shortcut to make an histogram</td></tr>
 <tr><td style="width: 25%;"><a href="hciconarray.html">hciconarray</a></td>
-<td>Shorcut to make icon arrays charts</td></tr>
+<td>Shortcut to make icon arrays charts</td></tr>
 <tr><td style="width: 25%;"><a href="hcmap.html">hcmap</a></td>
-<td>Shorcut for create map Shorcut for create map from &lt;URL: https://code.highcharts.com/mapdata/&gt; collection.</td></tr>
+<td>Shortcut for create map from &lt;URL: https://code.highcharts.com/mapdata/&gt; collection.</td></tr>
+<tr><td style="width: 25%;"><a href="hcparcords.html">hcparcords</a></td>
+<td>Shortcut for create parallel coordinates</td></tr>
 <tr><td style="width: 25%;"><a href="hcpie.html">hcpie</a></td>
-<td>Shorcut to make a pie chart</td></tr>
+<td>Shortcut to make a pie chart</td></tr>
 <tr><td style="width: 25%;"><a href="hcspark.html">hcspark</a></td>
-<td>Shorcut to make spkarlines</td></tr>
+<td>Shortcut to make spkarlines</td></tr>
 <tr><td style="width: 25%;"><a href="hctreemap.html">hctreemap</a></td>
-<td>Shorcut for create treemaps</td></tr>
+<td>Shortcut for create treemaps</td></tr>
+<tr><td style="width: 25%;"><a href="hctreemap2.html">hctreemap2</a></td>
+<td>Shortcut to create treemaps.</td></tr>
 <tr><td style="width: 25%;"><a href="hcts.html">hcts</a></td>
-<td>Shorcut to make time series or line charts</td></tr>
+<td>Shortcut to make time series or line charts</td></tr>
+<tr><td style="width: 25%;"><a href="hc_accessibility.html">hc_accessibility</a></td>
+<td>Setting accessibility options to highcharts objects</td></tr>
 <tr><td style="width: 25%;"><a href="hc_annotations.html">hc_add_annotation</a></td>
-<td>Adding annotations to highcharts objects</td></tr>
+<td>Setting annotations to highcharts objects</td></tr>
 <tr><td style="width: 25%;"><a href="hc_annotations.html">hc_add_annotations</a></td>
-<td>Adding annotations to highcharts objects</td></tr>
+<td>Setting annotations to highcharts objects</td></tr>
+<tr><td style="width: 25%;"><a href="hc_add_dependency.html">hc_add_dependency</a></td>
+<td>Add modules or plugin dependencies to highcharts objects</td></tr>
+<tr><td style="width: 25%;"><a href="hc_add_dependency_fa.html">hc_add_dependency_fa</a></td>
+<td>Helpers functions to get FontAwesome icons code</td></tr>
+<tr><td style="width: 25%;"><a href="hc_add_event_point.html">hc_add_event_point</a></td>
+<td>Helpers to use highcharter as input in shiny apps</td></tr>
+<tr><td style="width: 25%;"><a href="hc_add_event_point.html">hc_add_event_series</a></td>
+<td>Helpers to use highcharter as input in shiny apps</td></tr>
 <tr><td style="width: 25%;"><a href="hc_add_series.html">hc_add_series</a></td>
 <td>Adding and removing series from highchart objects</td></tr>
 <tr><td style="width: 25%;"><a href="hc_add_series.character.html">hc_add_series.character</a></td>
@@ -156,6 +174,10 @@
 <td>hc_add_series for geo_json &amp; geo_list objects</td></tr>
 <tr><td style="width: 25%;"><a href="hc_add_series.geo_json.html">hc_add_series.geo_list</a></td>
 <td>hc_add_series for geo_json &amp; geo_list objects</td></tr>
+<tr><td style="width: 25%;"><a href="hc_add_series.lm.html">hc_add_series.lm</a></td>
+<td>hc_add_series for lm and loess objects</td></tr>
+<tr><td style="width: 25%;"><a href="hc_add_series.lm.html">hc_add_series.loess</a></td>
+<td>hc_add_series for lm and loess objects</td></tr>
 <tr><td style="width: 25%;"><a href="hc_add_series.numeric.html">hc_add_series.numeric</a></td>
 <td>'hc_add_series' for numeric objects</td></tr>
 <tr><td style="width: 25%;"><a href="hc_add_series.xts.html">hc_add_series.ohlc</a></td>
@@ -165,75 +187,79 @@
 <tr><td style="width: 25%;"><a href="hc_add_series.xts.html">hc_add_series.xts</a></td>
 <td>hc_add_series for xts objects</td></tr>
 <tr><td style="width: 25%;"><a href="hc_add_series_boxplot.html">hc_add_series_boxplot</a></td>
-<td>Shorcut for create boxplot</td></tr>
+<td>Shortcut for create boxplot</td></tr>
 <tr><td style="width: 25%;"><a href="hc_add_series_df.html">hc_add_series_df</a></td>
-<td>Shorcut for tidy data frame a la ggplot2/qplot</td></tr>
+<td>Shortcut for tidy data frame a la ggplot2/qplot</td></tr>
 <tr><td style="width: 25%;"><a href="hc_add_series_flags.html">hc_add_series_flags</a></td>
-<td>Shorcut for add flags to highstock chart</td></tr>
+<td>Shortcut for add flags to highstock chart</td></tr>
 <tr><td style="width: 25%;"><a href="hc_add_series_labels_values.html">hc_add_series_labels_values</a></td>
-<td>Shorcut for add series for pie, bar and column charts</td></tr>
+<td>Shortcut for add series for pie, bar and columnn charts</td></tr>
 <tr><td style="width: 25%;"><a href="hc_add_series_list.html">hc_add_series_list</a></td>
-<td>Shorcut for data series from a list of data series</td></tr>
+<td>Shortcut for data series from a list of data series</td></tr>
 <tr><td style="width: 25%;"><a href="hc_add_series_map.html">hc_add_series_map</a></td>
 <td>Add a map series</td></tr>
 <tr><td style="width: 25%;"><a href="hc_add_series_ohlc.html">hc_add_series_ohlc</a></td>
-<td>Shorcut for create candlestick charts</td></tr>
+<td>Shortcut for create candlestick charts</td></tr>
 <tr><td style="width: 25%;"><a href="hc_add_series_scatter.html">hc_add_series_scatter</a></td>
-<td>Shorcut for create scatter plots</td></tr>
+<td>Shortcut for create scatter plots</td></tr>
 <tr><td style="width: 25%;"><a href="hc_add_series_times_values.html">hc_add_series_times_values</a></td>
-<td>Shorcut for create/add time series from times and values</td></tr>
+<td>Shortcut for create/add time series from times and values</td></tr>
 <tr><td style="width: 25%;"><a href="hc_add_series_treemap.html">hc_add_series_treemap</a></td>
-<td>Shorcut for create treemaps</td></tr>
+<td>Shortcut for create treemaps</td></tr>
 <tr><td style="width: 25%;"><a href="hc_add_series_ts.html">hc_add_series_ts</a></td>
-<td>Shorcut for create/add time series charts from a ts object</td></tr>
+<td>Shortcut for create/add time series charts from a ts object</td></tr>
 <tr><td style="width: 25%;"><a href="hc_add_series_xts.html">hc_add_series_xts</a></td>
-<td>Shorcut for create highstock chart from 'xts' object</td></tr>
+<td>Shortcut for create highstock chart from 'xts' object</td></tr>
 <tr><td style="width: 25%;"><a href="hc_add_theme.html">hc_add_theme</a></td>
 <td>Add themes to a highchart object</td></tr>
 <tr><td style="width: 25%;"><a href="hc_annotations.html">hc_annotations</a></td>
-<td>Adding annotations to highcharts objects</td></tr>
+<td>Setting annotations to highcharts objects</td></tr>
 <tr><td style="width: 25%;"><a href="hc_annotationsOptions.html">hc_annotationsOptions</a></td>
-<td>Setting Annotations Options</td></tr>
+<td>Setting annotations options to highcharts objects</td></tr>
+<tr><td style="width: 25%;"><a href="hc_boost.html">hc_boost</a></td>
+<td>Setting boost module options to highcharts objects</td></tr>
 <tr><td style="width: 25%;"><a href="hc_chart.html">hc_chart</a></td>
-<td>Adding chart options to highchart objects</td></tr>
+<td>Setting chart options to highchart objects</td></tr>
 <tr><td style="width: 25%;"><a href="hc_colorAxis.html">hc_colorAxis</a></td>
-<td>Adding Color Axis options to highchart objects</td></tr>
+<td>Setting color Axis options to highchart objects Function to set the axis color to highcharts objects.</td></tr>
 <tr><td style="width: 25%;"><a href="hc_colors.html">hc_colors</a></td>
-<td>Adding color options to highchart objects</td></tr>
+<td>Setting color options to highchart objects</td></tr>
 <tr><td style="width: 25%;"><a href="hc_credits.html">hc_credits</a></td>
-<td>Adding credits options to highchart objects</td></tr>
+<td>Setting credits options to highchart objects</td></tr>
 <tr><td style="width: 25%;"><a href="hc_defs.html">hc_defs</a></td>
-<td>Adding patterns to be used in highcharts series</td></tr>
+<td>Setting patterns to be used in highcharts series</td></tr>
 <tr><td style="width: 25%;"><a href="hc_drilldown.html">hc_drilldown</a></td>
-<td>Drilldown options for higcharts objects</td></tr>
+<td>Setting drilldown options for highcharts objects</td></tr>
 <tr><td style="width: 25%;"><a href="hc_elementId.html">hc_elementId</a></td>
-<td>Setting elementId</td></tr>
+<td>Setting 'elementId'</td></tr>
 <tr><td style="width: 25%;"><a href="hc_exporting.html">hc_exporting</a></td>
-<td>Exporting options for higcharts objects</td></tr>
+<td>Setting exporting options for highcharts objects</td></tr>
 <tr><td style="width: 25%;"><a href="hc_legend.html">hc_legend</a></td>
-<td>Adding legend options to highchart objects</td></tr>
+<td>Setting legend options to highchart objects</td></tr>
 <tr><td style="width: 25%;"><a href="hc_mapNavigation.html">hc_mapNavigation</a></td>
-<td>Adding mapNavigation options to highmaps charts</td></tr>
+<td>Setting mapNavigation options to highmaps charts</td></tr>
 <tr><td style="width: 25%;"><a href="hc_motion.html">hc_motion</a></td>
-<td>Adding options to Motion options to highcharts objects</td></tr>
+<td>Setting Motion options to highcharts objects</td></tr>
 <tr><td style="width: 25%;"><a href="hc_navigator.html">hc_navigator</a></td>
-<td>Adding navigator options to highstock charts</td></tr>
+<td>Setting navigator options to highstock charts Options regarding the navigator: The miniseries below chart in a highstock chart.</td></tr>
 <tr><td style="width: 25%;"><a href="hc_pane.html">hc_pane</a></td>
-<td>Adding panes</td></tr>
+<td>Setting panes options to highchart objects</td></tr>
 <tr><td style="width: 25%;"><a href="hc_plotOptions.html">hc_plotOptions</a></td>
-<td>Adding plot options to highchart objects</td></tr>
+<td>Setting plot options to highchart objects</td></tr>
 <tr><td style="width: 25%;"><a href="hc_rangeSelector.html">hc_rangeSelector</a></td>
-<td>Adding scrollbar options to highstock charts</td></tr>
+<td>Setting scrollbar options to highstock charts</td></tr>
+<tr><td style="width: 25%;"><a href="hc_responsive.html">hc_responsive</a></td>
+<td>Setting responsive options to highchart objects</td></tr>
 <tr><td style="width: 25%;"><a href="hc_rm_series.html">hc_rm_series</a></td>
 <td>Removing series to highchart objects</td></tr>
 <tr><td style="width: 25%;"><a href="hc_scrollbar.html">hc_scrollbar</a></td>
-<td>Adding scrollbar options to highstock objects</td></tr>
+<td>Setting scrollbar options to highstock objects</td></tr>
 <tr><td style="width: 25%;"><a href="hc_series.html">hc_series</a></td>
-<td>Series options from highchart objects</td></tr>
+<td>Setting series/data options from highchart objects</td></tr>
 <tr><td style="width: 25%;"><a href="hc_size.html">hc_size</a></td>
 <td>Changing the size of a 'highchart' object</td></tr>
 <tr><td style="width: 25%;"><a href="hc_title.html">hc_subtitle</a></td>
-<td>Adding title and subtitle options to highchart objects</td></tr>
+<td>Setting title and subtitle options to highchart objects</td></tr>
 <tr><td style="width: 25%;"><a href="hc_theme.html">hc_theme</a></td>
 <td>Highchart theme constructor</td></tr>
 <tr><td style="width: 25%;"><a href="hc_theme_538.html">hc_theme_538</a></td>
@@ -256,6 +282,8 @@
 <td>Flatdark theme for highcharts</td></tr>
 <tr><td style="width: 25%;"><a href="hc_theme_ft.html">hc_theme_ft</a></td>
 <td>Financial Times theme for highcharts</td></tr>
+<tr><td style="width: 25%;"><a href="hc_theme_ggplot2.html">hc_theme_ggplot2</a></td>
+<td>ggplot2 theme for highcharts</td></tr>
 <tr><td style="width: 25%;"><a href="hc_theme_google.html">hc_theme_google</a></td>
 <td>Google theme for highcharts</td></tr>
 <tr><td style="width: 25%;"><a href="hc_theme_gridlight.html">hc_theme_gridlight</a></td>
@@ -274,36 +302,44 @@
 <td>Simple theme for highcharts</td></tr>
 <tr><td style="width: 25%;"><a href="hc_theme_sparkline.html">hc_theme_sparkline</a></td>
 <td>Sparkline theme for highcharts</td></tr>
+<tr><td style="width: 25%;"><a href="hc_theme_superheroes.html">hc_theme_superheroes</a></td>
+<td>Superheroes theme for highcharts</td></tr>
 <tr><td style="width: 25%;"><a href="hc_theme_tufte.html">hc_theme_tufte</a></td>
 <td>Tufte theme for highcharts</td></tr>
 <tr><td style="width: 25%;"><a href="hc_theme_tufte.html">hc_theme_tufte2</a></td>
 <td>Tufte theme for highcharts</td></tr>
 <tr><td style="width: 25%;"><a href="hc_title.html">hc_title</a></td>
-<td>Adding title and subtitle options to highchart objects</td></tr>
+<td>Setting title and subtitle options to highchart objects</td></tr>
 <tr><td style="width: 25%;"><a href="hc_tooltip.html">hc_tooltip</a></td>
-<td>Adding tooltip options to highchart objects</td></tr>
+<td>Setting tooltip options to highchart objects</td></tr>
 <tr><td style="width: 25%;"><a href="hc_xAxis.html">hc_xAxis</a></td>
-<td>Adding axis options to highchart objects</td></tr>
+<td>Setting axis options to highchart objects</td></tr>
 <tr><td style="width: 25%;"><a href="hc_xAxis.html">hc_yAxis</a></td>
-<td>Adding axis options to highchart objects</td></tr>
+<td>Setting axis options to highchart objects</td></tr>
 <tr><td style="width: 25%;"><a href="hc_xAxis.html">hc_yAxis_multiples</a></td>
-<td>Adding axis options to highchart objects</td></tr>
+<td>Setting axis options to highchart objects</td></tr>
+<tr><td style="width: 25%;"><a href="hc_xAxis.html">hc_zAxis</a></td>
+<td>Setting axis options to highchart objects</td></tr>
 <tr><td style="width: 25%;"><a href="hex_to_rgba.html">hex_to_rgba</a></td>
-<td>Transform colors from hexadeximal format to rgba hc notation</td></tr>
-<tr><td style="width: 25%;"><a href="higcharter.html">higcharter</a></td>
-<td>An 'htmlwidget' interface to the Highcharts javascript chart library</td></tr>
-<tr><td style="width: 25%;"><a href="highcarter-exports.html">highcarter-exports</a></td>
-<td>highcharter exported operators and S3 methods</td></tr>
+<td>Transform colors from hexadecimal format to rgba hc notation</td></tr>
 <tr><td style="width: 25%;"><a href="highchart.html">highchart</a></td>
 <td>Create a Highcharts chart widget</td></tr>
 <tr><td style="width: 25%;"><a href="highchart2.html">highchart2</a></td>
 <td>Create a Highcharts chart widget</td></tr>
+<tr><td style="width: 25%;"><a href="highcharter.html">highcharter</a></td>
+<td>An 'htmlwidget' interface to the Highcharts javascript chart library</td></tr>
+<tr><td style="width: 25%;"><a href="highcharter-exports.html">highcharter-exports</a></td>
+<td>highcharter exported operators and S3 methods</td></tr>
 <tr><td style="width: 25%;"><a href="highchartOutput.html">highchartOutput</a></td>
 <td>Widget output function for use in Shiny</td></tr>
 <tr><td style="width: 25%;"><a href="highchartOutput.html">highchartOutput2</a></td>
 <td>Widget output function for use in Shiny</td></tr>
 <tr><td style="width: 25%;"><a href="highcharts_demo.html">highcharts_demo</a></td>
 <td>Chart a demo for testing themes</td></tr>
+<tr><td style="width: 25%;"><a href="highchart2.html">highchartzero</a></td>
+<td>Create a Highcharts chart widget</td></tr>
+<tr><td style="width: 25%;"><a href="highchart_ct.html">highchart_ct</a></td>
+<td>Highcharter Crosstalk Widget</td></tr>
 <tr><td style="width: 25%;"><a href="hw_grid.html">hw_grid</a></td>
 <td>Lays out highchart widgets into a "grid", similar to 'grid.arrange' from 'gridExtra'</td></tr>
 </table>
@@ -320,17 +356,13 @@
 <h2><a name="J">-- J --</a></h2>
 
 <table width="100%">
-<tr><td style="width: 25%;"><a href="highcarter-exports.html">JS</a></td>
+<tr><td style="width: 25%;"><a href="highcharter-exports.html">JS</a></td>
 <td>highcharter exported operators and S3 methods</td></tr>
 </table>
 
 <h2><a name="L">-- L --</a></h2>
 
 <table width="100%">
-<tr><td style="width: 25%;"><a href="list_parse.html">list.parse2</a></td>
-<td>Convert an object to list with identical structure</td></tr>
-<tr><td style="width: 25%;"><a href="list_parse.html">list.parse3</a></td>
-<td>Convert an object to list with identical structure</td></tr>
 <tr><td style="width: 25%;"><a href="list_parse.html">list_parse</a></td>
 <td>Convert an object to list with identical structure</td></tr>
 <tr><td style="width: 25%;"><a href="list_parse.html">list_parse2</a></td>
@@ -341,7 +373,7 @@
 
 <table width="100%">
 <tr><td style="width: 25%;"><a href="mutate_mapping.html">mutate_mapping</a></td>
-<td>Modify data frame accoring to mapping</td></tr>
+<td>Modify data frame according to mapping</td></tr>
 </table>
 
 <h2><a name="P">-- P --</a></h2>
@@ -374,8 +406,10 @@
 <h2><a name="T">-- T --</a></h2>
 
 <table width="100%">
-<tr><td style="width: 25%;"><a href="highcarter-exports.html">tags</a></td>
+<tr><td style="width: 25%;"><a href="highcharter-exports.html">tags</a></td>
 <td>highcharter exported operators and S3 methods</td></tr>
+<tr><td style="width: 25%;"><a href="tooltip_chart.html">tooltip_chart</a></td>
+<td>Helper to create charts in tooltips.</td></tr>
 <tr><td style="width: 25%;"><a href="tooltip_table.html">tooltip_table</a></td>
 <td>Helper for make table in tooltips</td></tr>
 </table>
@@ -410,7 +444,7 @@
 <h2><a name="misc">-- misc --</a></h2>
 
 <table width="100%">
-<tr><td style="width: 25%;"><a href="highcarter-exports.html">%&gt;%</a></td>
+<tr><td style="width: 25%;"><a href="highcharter-exports.html">%&gt;%</a></td>
 <td>highcharter exported operators and S3 methods</td></tr>
 </table>
 </body></html>

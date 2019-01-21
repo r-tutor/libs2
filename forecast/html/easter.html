@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Easter holidays in each season</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for easter {forecast}"><tr><td>easter {forecast}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Easter holidays in each season</h2>
+
+<h3>Description</h3>
+
+<p>Returns a vector of 0's and 1's or fractional results if Easter spans March
+and April in the observed time period. Easter is defined as the days from
+Good Friday to Easter Sunday inclusively, plus optionally Easter Monday if
+<code>easter.mon=TRUE</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+easter(x, easter.mon = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>Monthly or quarterly time series</p>
+</td></tr>
+<tr valign="top"><td><code>easter.mon</code></td>
+<td>
+<p>If TRUE, the length of Easter holidays includes Easter
+Monday.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Useful for adjusting calendar effects.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Time series
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Earo Wang
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+  easter(wineind, easter.mon = TRUE)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>forecast</em> version 8.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Seasonal dummy variables</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for seasonaldummy {forecast}"><tr><td>seasonaldummy {forecast}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Seasonal dummy variables</h2>
+
+<h3>Description</h3>
+
+<p><code>seasonaldummy</code> returns a matrix of dummy variables suitable for use in
+<code><a href="Arima.html">Arima</a></code>, <code><a href="auto.arima.html">auto.arima</a></code> or <code><a href="tslm.html">tslm</a></code>. The
+last season is omitted and used as the control.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+seasonaldummy(x, h = NULL)
+
+seasonaldummyf(x, h)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>Seasonal time series: a <code>ts</code> or a <code>msts</code> object</p>
+</td></tr>
+<tr valign="top"><td><code>h</code></td>
+<td>
+<p>Number of periods ahead to forecast (optional)</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>seasonaldummyf</code> is deprecated, instead use the <code>h</code> argument in
+<code>seasonaldummy</code>.
+</p>
+<p>The number of dummy variables is determined from the time series
+characteristics of <code>x</code>. When <code>h</code> is missing, the length of
+<code>x</code> also determines the number of rows for the matrix returned by
+<code>seasonaldummy</code>. the value of <code>h</code> determines the number of rows
+for the matrix returned by <code>seasonaldummy</code>, typically used for
+forecasting. The values within <code>x</code> are not used.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Numerical matrix.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Rob J Hyndman
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="fourier.html">fourier</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+plot(ldeaths)
+
+# Using seasonal dummy variables
+month &lt;- seasonaldummy(ldeaths)
+deaths.lm  &lt;- tslm(ldeaths ~ month)
+tsdisplay(residuals(deaths.lm))
+ldeaths.fcast &lt;- forecast(deaths.lm,
+    data.frame(month=I(seasonaldummy(ldeaths,36))))
+plot(ldeaths.fcast)
+
+# A simpler approach to seasonal dummy variables
+deaths.lm  &lt;- tslm(ldeaths ~ season)
+ldeaths.fcast &lt;- forecast(deaths.lm, h=36)
+plot(ldeaths.fcast)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>forecast</em> version 8.5 <a href="00Index.html">Index</a>]</div>
+</body></html>
