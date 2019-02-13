@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Calculate diagnostic tests for 2x2 table</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for diagtest {lava}"><tr><td>diagtest {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Calculate diagnostic tests for 2x2 table</h2>
+
+<h3>Description</h3>
+
+<p>Calculate prevalence, sensitivity, specificity, and positive and
+negative predictive values
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+diagtest(table, positive = 2, exact = FALSE, p0 = NA,
+  confint = c("logit", "arcsin", "pseudoscore", "exact"), ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>table</code></td>
+<td>
+<p>Table or (matrix/data.frame with two columns)</p>
+</td></tr>
+<tr valign="top"><td><code>positive</code></td>
+<td>
+<p>Switch reference</p>
+</td></tr>
+<tr valign="top"><td><code>exact</code></td>
+<td>
+<p>If TRUE exact binomial proportions CI/test will be used</p>
+</td></tr>
+<tr valign="top"><td><code>p0</code></td>
+<td>
+<p>Optional null hypothesis (test prevalenc, sensitivity, ...)</p>
+</td></tr>
+<tr valign="top"><td><code>confint</code></td>
+<td>
+<p>Type of confidence limits</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments to lower level functions</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Table should be in the format with outcome in columns and
+test in rows.  Data.frame should be with test in the first
+column and outcome in the second column.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Klaus Holst
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+M &lt;- as.table(matrix(c(42,12,
+                       35,28),ncol=2,byrow=TRUE,
+                     dimnames=list(rater=c("no","yes"),gold=c("no","yes"))))
+diagtest(M,exact=TRUE)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

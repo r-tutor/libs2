@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Define constant risk difference or relative risk association...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for binomial.rd {lava}"><tr><td>binomial.rd {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Define constant risk difference or relative risk association for binary exposure</h2>
+
+<h3>Description</h3>
+
+<p>Set up model as defined in Richardson, Robins and Wang (2017).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+binomial.rd(x, response, exposure, target.model, nuisance.model,
+  exposure.model = binomial.lvm(), ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>model</p>
+</td></tr>
+<tr valign="top"><td><code>response</code></td>
+<td>
+<p>response variable (character or formula)</p>
+</td></tr>
+<tr valign="top"><td><code>exposure</code></td>
+<td>
+<p>exposure variable (character or formula)</p>
+</td></tr>
+<tr valign="top"><td><code>target.model</code></td>
+<td>
+<p>variable defining the linear predictor for the target model</p>
+</td></tr>
+<tr valign="top"><td><code>nuisance.model</code></td>
+<td>
+<p>variable defining the linear predictor for the nuisance model</p>
+</td></tr>
+<tr valign="top"><td><code>exposure.model</code></td>
+<td>
+<p>model for exposure (default binomial logit link)</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>additional arguments to lower level functions</p>
+</td></tr>
+</table>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

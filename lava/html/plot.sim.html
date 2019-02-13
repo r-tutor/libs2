@@ -1,0 +1,266 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Plot method for simulation 'sim' objects</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for plot.sim {lava}"><tr><td>plot.sim {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Plot method for simulation 'sim' objects</h2>
+
+<h3>Description</h3>
+
+<p>Density and scatter plots
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'sim'
+plot(x, estimate, se = NULL, true = NULL, names = NULL,
+  auto.layout = TRUE, byrow = FALSE, type = "p",
+  ask = grDevices::dev.interactive(), col = c("gray60", "orange",
+  "darkblue", "seagreen", "darkred"), pch = 16, cex = 0.5, lty = 1,
+  lwd = 0.3, legend, legendpos = "topleft", cex.legend = 0.8,
+  plot.type = c("multiple", "single"), polygon = TRUE, density = 0,
+  angle = -45, cex.axis = 0.8, alpha = 0.2, main, cex.main = 1,
+  equal = FALSE, delta = 1.15, ylim = NULL, xlim = NULL,
+  ylab = "", xlab = "", rug = TRUE, rug.alpha = 0.5,
+  line.col = scatter.col, line.lwd = 1, line.lty = 1,
+  line.alpha = 1, scatter.ylab = "Estimate", scatter.ylim = NULL,
+  scatter.xlim = NULL, scatter.alpha = 0.5, scatter.col = col,
+  border = col, true.lty = 2, true.col = "gray70", true.lwd = 1.2,
+  density.plot = TRUE, scatter.plot = FALSE,
+  running.mean = scatter.plot, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>sim object</p>
+</td></tr>
+<tr valign="top"><td><code>estimate</code></td>
+<td>
+<p>columns with estimates</p>
+</td></tr>
+<tr valign="top"><td><code>se</code></td>
+<td>
+<p>columns with standard error estimates</p>
+</td></tr>
+<tr valign="top"><td><code>true</code></td>
+<td>
+<p>(optional) vector of true parameter values</p>
+</td></tr>
+<tr valign="top"><td><code>names</code></td>
+<td>
+<p>(optional) names of estimates</p>
+</td></tr>
+<tr valign="top"><td><code>auto.layout</code></td>
+<td>
+<p>Auto layout (default TRUE)</p>
+</td></tr>
+<tr valign="top"><td><code>byrow</code></td>
+<td>
+<p>Add new plots to layout by row</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>plot type</p>
+</td></tr>
+<tr valign="top"><td><code>ask</code></td>
+<td>
+<p>if TRUE user is asked for input, before a new figure is drawn</p>
+</td></tr>
+<tr valign="top"><td><code>col</code></td>
+<td>
+<p>colour (for each estimate)</p>
+</td></tr>
+<tr valign="top"><td><code>pch</code></td>
+<td>
+<p>plot symbol</p>
+</td></tr>
+<tr valign="top"><td><code>cex</code></td>
+<td>
+<p>point size</p>
+</td></tr>
+<tr valign="top"><td><code>lty</code></td>
+<td>
+<p>line type</p>
+</td></tr>
+<tr valign="top"><td><code>lwd</code></td>
+<td>
+<p>line width</p>
+</td></tr>
+<tr valign="top"><td><code>legend</code></td>
+<td>
+<p>legend</p>
+</td></tr>
+<tr valign="top"><td><code>legendpos</code></td>
+<td>
+<p>legend position</p>
+</td></tr>
+<tr valign="top"><td><code>cex.legend</code></td>
+<td>
+<p>size of legend text</p>
+</td></tr>
+<tr valign="top"><td><code>plot.type</code></td>
+<td>
+<p>'single' or 'multiple' (default)</p>
+</td></tr>
+<tr valign="top"><td><code>polygon</code></td>
+<td>
+<p>if TRUE fill the density estimates with colour</p>
+</td></tr>
+<tr valign="top"><td><code>density</code></td>
+<td>
+<p>if non-zero add shading lines to polygon</p>
+</td></tr>
+<tr valign="top"><td><code>angle</code></td>
+<td>
+<p>shading lines angle of polygon</p>
+</td></tr>
+<tr valign="top"><td><code>cex.axis</code></td>
+<td>
+<p>Font size on axis</p>
+</td></tr>
+<tr valign="top"><td><code>alpha</code></td>
+<td>
+<p>Semi-transparent level (1: non-transparent, 0: full)</p>
+</td></tr>
+<tr valign="top"><td><code>main</code></td>
+<td>
+<p>Main title</p>
+</td></tr>
+<tr valign="top"><td><code>cex.main</code></td>
+<td>
+<p>Size of title font</p>
+</td></tr>
+<tr valign="top"><td><code>equal</code></td>
+<td>
+<p>Same x-axis and y-axis for all plots</p>
+</td></tr>
+<tr valign="top"><td><code>delta</code></td>
+<td>
+<p>Controls the amount of space around axis limits</p>
+</td></tr>
+<tr valign="top"><td><code>ylim</code></td>
+<td>
+<p>y-axis limits</p>
+</td></tr>
+<tr valign="top"><td><code>xlim</code></td>
+<td>
+<p>x-axis limits</p>
+</td></tr>
+<tr valign="top"><td><code>ylab</code></td>
+<td>
+<p>y axis label</p>
+</td></tr>
+<tr valign="top"><td><code>xlab</code></td>
+<td>
+<p>x axis label</p>
+</td></tr>
+<tr valign="top"><td><code>rug</code></td>
+<td>
+<p>if TRUE add rug representation of data to x-axis</p>
+</td></tr>
+<tr valign="top"><td><code>rug.alpha</code></td>
+<td>
+<p>rug semi-transparency level</p>
+</td></tr>
+<tr valign="top"><td><code>line.col</code></td>
+<td>
+<p>line colour (running mean, only for scatter plots)</p>
+</td></tr>
+<tr valign="top"><td><code>line.lwd</code></td>
+<td>
+<p>line width (running mean, only for scatter plots)</p>
+</td></tr>
+<tr valign="top"><td><code>line.lty</code></td>
+<td>
+<p>line type (running mean, only for scatter plots)</p>
+</td></tr>
+<tr valign="top"><td><code>line.alpha</code></td>
+<td>
+<p>line transparency</p>
+</td></tr>
+<tr valign="top"><td><code>scatter.ylab</code></td>
+<td>
+<p>y label for density plots</p>
+</td></tr>
+<tr valign="top"><td><code>scatter.ylim</code></td>
+<td>
+<p>y-axis limits for density plots</p>
+</td></tr>
+<tr valign="top"><td><code>scatter.xlim</code></td>
+<td>
+<p>x-axis limits for density plots</p>
+</td></tr>
+<tr valign="top"><td><code>scatter.alpha</code></td>
+<td>
+<p>semi-transparency of scatter plot</p>
+</td></tr>
+<tr valign="top"><td><code>scatter.col</code></td>
+<td>
+<p>scatter plot colour</p>
+</td></tr>
+<tr valign="top"><td><code>border</code></td>
+<td>
+<p>border colour of density estimates</p>
+</td></tr>
+<tr valign="top"><td><code>true.lty</code></td>
+<td>
+<p>true parameter estimate line type</p>
+</td></tr>
+<tr valign="top"><td><code>true.col</code></td>
+<td>
+<p>true parameter colour</p>
+</td></tr>
+<tr valign="top"><td><code>true.lwd</code></td>
+<td>
+<p>true parameter line width</p>
+</td></tr>
+<tr valign="top"><td><code>density.plot</code></td>
+<td>
+<p>if TRUE add density plot</p>
+</td></tr>
+<tr valign="top"><td><code>scatter.plot</code></td>
+<td>
+<p>if TRUE add scatter plot</p>
+</td></tr>
+<tr valign="top"><td><code>running.mean</code></td>
+<td>
+<p>if TRUE add running average estimate to scatter plot</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>additional arguments to lower level functions</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+n &lt;- 1000
+val &lt;- cbind(est1=rnorm(n,sd=1),est2=rnorm(n,sd=0.2),est3=rnorm(n,1,sd=0.5),
+             sd1=runif(n,0.8,1.2),sd2=runif(n,0.1,0.3),sd3=runif(n,0.25,0.75))
+
+plot.sim(val,estimate=c(1,2),true=c(0,0),se=c(4,5),equal=TRUE,scatter.plot=TRUE)
+plot.sim(val,estimate=c(1,3),true=c(0,1),se=c(4,6),xlim=c(-3,3),
+	scatter.ylim=c(-3,3),scatter.plot=TRUE)
+plot.sim(val,estimate=c(1,2),true=c(0,0),se=c(4,5),equal=TRUE,
+	plot.type="single",scatter.plot=TRUE)
+plot.sim(val,estimate=c(1),se=c(4,5,6),plot.type="single",scatter.plot=TRUE)
+plot.sim(val,estimate=c(1,2,3),equal=TRUE,scatter.plot=TRUE)
+plot.sim(val,estimate=c(1,2,3),equal=TRUE,byrow=TRUE,scatter.plot=TRUE)
+plot.sim(val,estimate=c(1,2,3),plot.type="single",scatter.plot=TRUE)
+plot.sim(val,estimate=1,se=c(3,4,5),plot.type="single",scatter.plot=TRUE)
+
+density.sim(val,estimate=c(1,2,3),density=c(0,10,10),angle=c(0,45,-45))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

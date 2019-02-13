@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create random missing data</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for makemissing {lava}"><tr><td>makemissing {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create random missing data</h2>
+
+<h3>Description</h3>
+
+<p>Generates missing entries in data.frame/matrix
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+makemissing(data, p = 0.2, cols = seq_len(ncol(data)),
+  rowwise = FALSE, nafun = function(x) x, seed = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>data.frame</p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>Fraction of missing data in each column</p>
+</td></tr>
+<tr valign="top"><td><code>cols</code></td>
+<td>
+<p>Which columns (name or index) to alter</p>
+</td></tr>
+<tr valign="top"><td><code>rowwise</code></td>
+<td>
+<p>Should missing occur row-wise (either none or all selected columns are missing)</p>
+</td></tr>
+<tr valign="top"><td><code>nafun</code></td>
+<td>
+<p>(Optional) function to be applied on data.frame before return (e.g. <code>na.omit</code> to return complete-cases only)</p>
+</td></tr>
+<tr valign="top"><td><code>seed</code></td>
+<td>
+<p>Random seed</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>data.frame
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Klaus K. Holst
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

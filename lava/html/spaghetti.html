@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Spaghetti plot</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for spaghetti {lava}"><tr><td>spaghetti {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Spaghetti plot</h2>
+
+<h3>Description</h3>
+
+<p>Spaghetti plot for longitudinal data
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+spaghetti(formula, data, id = "id", group = NULL, type = "o",
+  lty = 1, pch = NA, col = 1:10, alpha = 0.3, lwd = 1,
+  level = 0.95, trend.formula = formula, tau = NULL, trend.lty = 1,
+  trend.join = TRUE, trend.delta = 0.2, trend = !is.null(tau),
+  trend.col = col, trend.alpha = 0.2, trend.lwd = 3,
+  trend.jitter = 0, legend = NULL, by = NULL, xlab = "Time",
+  ylab = "", add = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>formula</code></td>
+<td>
+<p>Formula (response ~ time)</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>data.frame</p>
+</td></tr>
+<tr valign="top"><td><code>id</code></td>
+<td>
+<p>Id variable</p>
+</td></tr>
+<tr valign="top"><td><code>group</code></td>
+<td>
+<p>group variable</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>Type (line 'l', stair 's', ...)</p>
+</td></tr>
+<tr valign="top"><td><code>lty</code></td>
+<td>
+<p>Line type</p>
+</td></tr>
+<tr valign="top"><td><code>pch</code></td>
+<td>
+<p>Colour</p>
+</td></tr>
+<tr valign="top"><td><code>col</code></td>
+<td>
+<p>Colour</p>
+</td></tr>
+<tr valign="top"><td><code>alpha</code></td>
+<td>
+<p>transparency (0-1)</p>
+</td></tr>
+<tr valign="top"><td><code>lwd</code></td>
+<td>
+<p>Line width</p>
+</td></tr>
+<tr valign="top"><td><code>level</code></td>
+<td>
+<p>Confidence level</p>
+</td></tr>
+<tr valign="top"><td><code>trend.formula</code></td>
+<td>
+<p>Formula for trendline</p>
+</td></tr>
+<tr valign="top"><td><code>tau</code></td>
+<td>
+<p>Quantile to estimate (trend)</p>
+</td></tr>
+<tr valign="top"><td><code>trend.lty</code></td>
+<td>
+<p>Trend line type</p>
+</td></tr>
+<tr valign="top"><td><code>trend.join</code></td>
+<td>
+<p>Trend polygon</p>
+</td></tr>
+<tr valign="top"><td><code>trend.delta</code></td>
+<td>
+<p>Length of limit bars</p>
+</td></tr>
+<tr valign="top"><td><code>trend</code></td>
+<td>
+<p>Add trend line</p>
+</td></tr>
+<tr valign="top"><td><code>trend.col</code></td>
+<td>
+<p>Colour of trend line</p>
+</td></tr>
+<tr valign="top"><td><code>trend.alpha</code></td>
+<td>
+<p>Transparency</p>
+</td></tr>
+<tr valign="top"><td><code>trend.lwd</code></td>
+<td>
+<p>Trend line width</p>
+</td></tr>
+<tr valign="top"><td><code>trend.jitter</code></td>
+<td>
+<p>Jitter amount</p>
+</td></tr>
+<tr valign="top"><td><code>legend</code></td>
+<td>
+<p>Legend</p>
+</td></tr>
+<tr valign="top"><td><code>by</code></td>
+<td>
+<p>make separate plot for each level in 'by' (formula, name of column, or vector)</p>
+</td></tr>
+<tr valign="top"><td><code>xlab</code></td>
+<td>
+<p>Label of X-axis</p>
+</td></tr>
+<tr valign="top"><td><code>ylab</code></td>
+<td>
+<p>Label of Y-axis</p>
+</td></tr>
+<tr valign="top"><td><code>add</code></td>
+<td>
+<p>Add to existing device</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments to lower level arguments</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Klaus K. Holst
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+if (interactive() &amp; requireNamespace("mets")) {
+K &lt;- 5
+y &lt;- "y"%++%seq(K)
+m &lt;- lvm()
+regression(m,y=y,x=~u) &lt;- 1
+regression(m,y=y,x=~s) &lt;- seq(K)-1
+regression(m,y=y,x=~x) &lt;- "b"
+N &lt;- 50
+d &lt;- sim(m,N); d$z &lt;- rbinom(N,1,0.5)
+dd &lt;- mets::fast.reshape(d); dd$num &lt;- dd$num+3
+spaghetti(y~num,dd,id="id",lty=1,col=Col(1,.4),
+          trend.formula=~factor(num),trend=TRUE,trend.col="darkblue")
+dd$num &lt;- dd$num+rnorm(nrow(dd),sd=0.5) ## Unbalance
+spaghetti(y~num,dd,id="id",lty=1,col=Col(1,.4),
+          trend=TRUE,trend.col="darkblue")
+spaghetti(y~num,dd,id="id",lty=1,col=Col(1,.4),
+           trend.formula=~num+I(num^2),trend=TRUE,trend.col="darkblue")
+}
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

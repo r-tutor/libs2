@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Fix mean parameters in 'lvm'-object</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for intercept {lava}"><tr><td>intercept {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Fix mean parameters in 'lvm'-object</h2>
+
+<h3>Description</h3>
+
+<p>Define linear constraints on intercept parameters in a <code>lvm</code>-object.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 replacement method for class 'lvm'
+intercept(object, vars, ...) &lt;- value
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p><code>lvm</code>-object</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments</p>
+</td></tr>
+<tr valign="top"><td><code>vars</code></td>
+<td>
+<p>character vector of variable names</p>
+</td></tr>
+<tr valign="top"><td><code>value</code></td>
+<td>
+<p>Vector (or list) of parameter values or labels (numeric or
+character) or a formula defining the linear constraints (see also the
+<code>regression</code> or <code>covariance</code> methods).</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The <code>intercept</code> function is used to specify linear constraints on the
+intercept parameters of a latent variable model. As an example we look at
+the multivariate regression model
+</p>
+<p style="text-align: center;"><i> E(Y_1|X) = &alpha;_1 + &beta;_1 X</i></p>
+ <p style="text-align: center;"><i> E(Y_2|X) = &alpha;_2 + &beta;_2
+X</i></p>
+
+<p>defined by the call
+</p>
+<p><code>m &lt;- lvm(c(y1,y2) ~ x)</code>
+</p>
+<p>To fix <i>&alpha;_1=&alpha;_2</i> we call
+</p>
+<p><code>intercept(m) &lt;- c(y1,y2) ~ f(mu)</code>
+</p>
+<p>Fixed parameters can be reset by fixing them to <code>NA</code>.  For instance to
+free the parameter restriction of <i>Y_1</i> and at the same time fixing
+<i>&alpha;_2=2</i>, we call
+</p>
+<p><code>intercept(m, ~y1+y2) &lt;- list(NA,2)</code>
+</p>
+<p>Calling <code>intercept</code> with no additional arguments will return the
+current intercept restrictions of the <code>lvm</code>-object.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A <code>lvm</code>-object
+</p>
+
+
+<h3>Note</h3>
+
+<p>Variables will be added to the model if not already present.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Klaus K. Holst
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="covariance.html">covariance&lt;-</a></code>, <code><a href="regression-set.html">regression&lt;-</a></code>,
+<code><a href="constrain-set.html">constrain&lt;-</a></code>, <code><a href="constrain-set.html">parameter&lt;-</a></code>,
+<code><a href="vars.html">latent&lt;-</a></code>, <code><a href="cancel.html">cancel&lt;-</a></code>, <code><a href="rmvar.html">kill&lt;-</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+
+## A multivariate model
+m &lt;- lvm(c(y1,y2) ~ f(x1,beta)+x2)
+regression(m) &lt;- y3 ~ f(x1,beta)
+intercept(m) &lt;- y1 ~ f(mu)
+intercept(m, ~y2+y3) &lt;- list(2,"mu")
+intercept(m) ## Examine intercepts of model (NA translates to free/unique paramete##r)
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

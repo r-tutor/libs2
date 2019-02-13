@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Plot path diagram</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for plot.lvm {lava}"><tr><td>plot.lvm {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Plot path diagram</h2>
+
+<h3>Description</h3>
+
+<p>Plot the path diagram of a SEM
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'lvm'
+plot(x, diag = FALSE, cor = TRUE, labels = FALSE,
+  intercept = FALSE, addcolor = TRUE, plain = FALSE, cex,
+  fontsize1 = 10, noplot = FALSE, graph = list(rankdir = "BT"),
+  attrs = list(graph = graph), unexpr = FALSE, addstyle = TRUE,
+  plot.engine = lava.options()$plot.engine, init = TRUE,
+  layout = lava.options()$layout, edgecolor = lava.options()$edgecolor,
+  graph.proc = lava.options()$graph.proc, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>Model object</p>
+</td></tr>
+<tr valign="top"><td><code>diag</code></td>
+<td>
+<p>Logical argument indicating whether to visualize
+variance parameters (i.e. diagonal of variance matrix)</p>
+</td></tr>
+<tr valign="top"><td><code>cor</code></td>
+<td>
+<p>Logical argument indicating whether to visualize
+correlation parameters</p>
+</td></tr>
+<tr valign="top"><td><code>labels</code></td>
+<td>
+<p>Logical argument indiciating whether to add labels
+to plot (Unnamed parameters will be labeled p1,p2,...)</p>
+</td></tr>
+<tr valign="top"><td><code>intercept</code></td>
+<td>
+<p>Logical argument indiciating whether to add
+intercept labels</p>
+</td></tr>
+<tr valign="top"><td><code>addcolor</code></td>
+<td>
+<p>Logical argument indiciating whether to add colors
+to plot (overrides <code>nodecolor</code> calls)</p>
+</td></tr>
+<tr valign="top"><td><code>plain</code></td>
+<td>
+<p>if TRUE strip plot of colors and boxes</p>
+</td></tr>
+<tr valign="top"><td><code>cex</code></td>
+<td>
+<p>Fontsize of node labels</p>
+</td></tr>
+<tr valign="top"><td><code>fontsize1</code></td>
+<td>
+<p>Fontsize of edge labels</p>
+</td></tr>
+<tr valign="top"><td><code>noplot</code></td>
+<td>
+<p>if TRUE then return <code>graphNEL</code> object only</p>
+</td></tr>
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>Graph attributes (Rgraphviz)</p>
+</td></tr>
+<tr valign="top"><td><code>attrs</code></td>
+<td>
+<p>Attributes (Rgraphviz)</p>
+</td></tr>
+<tr valign="top"><td><code>unexpr</code></td>
+<td>
+<p>if TRUE remove expressions from labels</p>
+</td></tr>
+<tr valign="top"><td><code>addstyle</code></td>
+<td>
+<p>Logical argument indicating whether additional
+style should automatically be added to the plot (e.g. dashed
+lines to double-headed arrows)</p>
+</td></tr>
+<tr valign="top"><td><code>plot.engine</code></td>
+<td>
+<p>default 'Rgraphviz' if available, otherwise
+visNetwork,igraph</p>
+</td></tr>
+<tr valign="top"><td><code>init</code></td>
+<td>
+<p>Reinitialize graph (for internal use)</p>
+</td></tr>
+<tr valign="top"><td><code>layout</code></td>
+<td>
+<p>Graph layout (see Rgraphviz or igraph manual)</p>
+</td></tr>
+<tr valign="top"><td><code>edgecolor</code></td>
+<td>
+<p>if TRUE plot style with colored edges</p>
+</td></tr>
+<tr valign="top"><td><code>graph.proc</code></td>
+<td>
+<p>Function that post-process the graph object
+(default: subscripts are automatically added to labels of the
+nodes)</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments to be passed to the low level
+functions</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Klaus K. Holst
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+if (interactive()) {
+m &lt;- lvm(c(y1,y2) ~ eta)
+regression(m) &lt;- eta ~ z+x2
+regression(m) &lt;- c(eta,z) ~ x1
+latent(m) &lt;- ~eta
+labels(m) &lt;- c(y1=expression(y[scriptscriptstyle(1)]),
+y2=expression(y[scriptscriptstyle(2)]),
+x1=expression(x[scriptscriptstyle(1)]),
+x2=expression(x[scriptscriptstyle(2)]),
+eta=expression(eta))
+edgelabels(m, eta ~ z+x1+x2, cex=2, lwd=3,
+           col=c("orange","lightblue","lightblue")) &lt;- expression(rho,phi,psi)
+nodecolor(m, vars(m), border="white", labcol="darkblue") &lt;- NA
+nodecolor(m, ~y1+y2+z, labcol=c("white","white","black")) &lt;- NA
+plot(m,cex=1.5)
+
+d &lt;- sim(m,100)
+e &lt;- estimate(m,d)
+plot(e)
+
+m &lt;- lvm(c(y1,y2) ~ eta)
+regression(m) &lt;- eta ~ z+x2
+regression(m) &lt;- c(eta,z) ~ x1
+latent(m) &lt;- ~eta
+plot(lava:::beautify(m,edgecol=FALSE))
+}
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

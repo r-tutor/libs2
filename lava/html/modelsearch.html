@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Model searching</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for modelsearch {lava}"><tr><td>modelsearch {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Model searching</h2>
+
+<h3>Description</h3>
+
+<p>Performs Wald or score tests
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+modelsearch(x, k = 1, dir = "forward", type = "all", ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p><code>lvmfit</code>-object</p>
+</td></tr>
+<tr valign="top"><td><code>k</code></td>
+<td>
+<p>Number of parameters to test simultaneously. For <code>equivalence</code>
+the number of additional associations to be added instead of <code>rel</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>dir</code></td>
+<td>
+<p>Direction to do model search. &quot;forward&quot; := add
+associations/arrows to model/graph (score tests), &quot;backward&quot; := remove
+associations/arrows from model/graph (wald test)</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>If equal to 'correlation' only consider score tests for covariance parameters. If equal to 'regression' go through direct effects only  (default 'all' is to do both)</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments to be passed to the low level functions</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Matrix of test-statistics and p-values
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Klaus K. Holst
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="compare.html">compare</a></code>, <code><a href="equivalence.html">equivalence</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+m &lt;- lvm();
+regression(m) &lt;- c(y1,y2,y3) ~ eta; latent(m) &lt;- ~eta
+regression(m) &lt;- eta ~ x
+m0 &lt;- m; regression(m0) &lt;- y2 ~ x
+dd &lt;- sim(m0,100)[,manifest(m0)]
+e &lt;- estimate(m,dd);
+modelsearch(e,messages=0)
+modelsearch(e,messages=0,type="cor")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

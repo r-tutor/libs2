@@ -1,0 +1,298 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Simulate model</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for sim {lava}"><tr><td>sim {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Simulate model</h2>
+
+<h3>Description</h3>
+
+<p>Simulate data from a general SEM model including non-linear effects and
+general link and distribution of variables.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'lvm'
+sim(x, n = NULL, p = NULL, normal = FALSE, cond = FALSE,
+sigma = 1, rho = 0.5, X = NULL, unlink=FALSE, latent=TRUE,
+use.labels = TRUE, seed=NULL, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>Model object</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments to be passed to the low level functions</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>Number of simulated values/individuals</p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>Parameter value (optional)</p>
+</td></tr>
+<tr valign="top"><td><code>normal</code></td>
+<td>
+<p>Logical indicating whether to simulate data from a
+multivariate normal distribution conditional on exogenous variables hence
+ignoring functional/distribution definition</p>
+</td></tr>
+<tr valign="top"><td><code>cond</code></td>
+<td>
+<p>for internal use</p>
+</td></tr>
+<tr valign="top"><td><code>sigma</code></td>
+<td>
+<p>Default residual variance (1)</p>
+</td></tr>
+<tr valign="top"><td><code>rho</code></td>
+<td>
+<p>Default covariance parameter (0.5)</p>
+</td></tr>
+<tr valign="top"><td><code>X</code></td>
+<td>
+<p>Optional matrix of fixed values of variables (manipulation)</p>
+</td></tr>
+<tr valign="top"><td><code>unlink</code></td>
+<td>
+<p>Return Inverse link transformed data</p>
+</td></tr>
+<tr valign="top"><td><code>latent</code></td>
+<td>
+<p>Include latent variables (default TRUE)</p>
+</td></tr>
+<tr valign="top"><td><code>use.labels</code></td>
+<td>
+<p>convert categorical variables to factors before applying transformation</p>
+</td></tr>
+<tr valign="top"><td><code>seed</code></td>
+<td>
+<p>Random seed</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Klaus K. Holst
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+##################################################
+## Logistic regression
+##################################################
+m &lt;- lvm(y~x+z)
+regression(m) &lt;- x~z
+distribution(m,~y+z) &lt;- binomial.lvm("logit")
+d &lt;- sim(m,1e3)
+head(d)
+e &lt;- estimate(m,d,estimator="glm")
+e
+## Simulate a few observation from estimated model
+sim(e,n=5)
+##################################################
+## Poisson
+##################################################
+distribution(m,~y) &lt;- poisson.lvm()
+d &lt;- sim(m,1e4,p=c(y=-1,"y~x"=2,z=1))
+head(d)
+estimate(m,d,estimator="glm")
+mean(d$z); lava:::expit(1)
+summary(lm(y~x,sim(lvm(y[1:2]~4*x),1e3)))
+##################################################
+### Gamma distribution
+##################################################
+m &lt;- lvm(y~x)
+distribution(m,~y+x) &lt;- list(Gamma.lvm(shape=2),binomial.lvm())
+intercept(m,~y) &lt;- 0.5
+d &lt;- sim(m,1e4)
+summary(g &lt;- glm(y~x,family=Gamma(),data=d))
+## Not run: MASS::gamma.shape(g)
+args(lava::Gamma.lvm)
+distribution(m,~y) &lt;- Gamma.lvm(shape=2,log=TRUE)
+sim(m,10,p=c(y=0.5))[,"y"]
+##################################################
+### Beta
+##################################################
+m &lt;- lvm()
+distribution(m,~y) &lt;- beta.lvm(alpha=2,beta=1)
+var(sim(m,100,"y,y"=2))
+distribution(m,~y) &lt;- beta.lvm(alpha=2,beta=1,scale=FALSE)
+var(sim(m,100))
+##################################################
+### Transform
+##################################################
+m &lt;- lvm()
+transform(m,xz~x+z) &lt;- function(x) x[1]*(x[2]&gt;0)
+regression(m) &lt;- y~x+z+xz
+d &lt;- sim(m,1e3)
+summary(lm(y~x+z + x*I(z&gt;0),d))
+##################################################
+### Non-random variables
+##################################################
+m &lt;- lvm()
+distribution(m,~x+z+v+w) &lt;- list(sequence.lvm(0,5),## Seq. 0 to 5 by 1/n
+                               ones.lvm(),       ## Vector of ones
+                               ones.lvm(0.5),    ##  0.8n 0, 0.2n 1
+                               ones.lvm(interval=list(c(0.3,0.5),c(0.8,1))))
+sim(m,10)
+##################################################
+### Cox model
+### piecewise constant hazard
+################################################
+m &lt;- lvm(t~x)
+rates &lt;- c(1,0.5); cuts &lt;- c(0,5)
+## Constant rate: 1 in [0,5), 0.5 in [5,Inf)
+distribution(m,~t) &lt;- coxExponential.lvm(rate=rates,timecut=cuts)
+## Not run: 
+    d &lt;- sim(m,2e4,p=c("t~x"=0.1)); d$status &lt;- TRUE
+    plot(timereg::aalen(survival::Surv(t,status)~x,data=d,
+                        resample.iid=0,robust=0),spec=1)
+    L &lt;- approxfun(c(cuts,max(d$t)),f=1,
+                   cumsum(c(0,rates*diff(c(cuts,max(d$t))))),
+                   method="linear")
+    curve(L,0,100,add=TRUE,col="blue")
+
+## End(Not run)
+##################################################
+### Cox model
+### piecewise constant hazard, gamma frailty
+##################################################
+m &lt;- lvm(y~x+z)
+rates &lt;- c(0.3,0.5); cuts &lt;- c(0,5)
+distribution(m,~y+z) &lt;- list(coxExponential.lvm(rate=rates,timecut=cuts),
+                             loggamma.lvm(rate=1,shape=1))
+## Not run: 
+    d &lt;- sim(m,2e4,p=c("y~x"=0,"y~z"=0)); d$status &lt;- TRUE
+    plot(timereg::aalen(survival::Surv(y,status)~x,data=d,
+                        resample.iid=0,robust=0),spec=1)
+    L &lt;- approxfun(c(cuts,max(d$y)),f=1,
+                   cumsum(c(0,rates*diff(c(cuts,max(d$y))))),
+                   method="linear")
+    curve(L,0,100,add=TRUE,col="blue")
+
+## End(Not run)
+## Equivalent via transform (here with Aalens additive hazard model)
+m &lt;- lvm(y~x)
+distribution(m,~y) &lt;- aalenExponential.lvm(rate=rates,timecut=cuts)
+distribution(m,~z) &lt;- Gamma.lvm(rate=1,shape=1)
+transform(m,t~y+z) &lt;- prod
+sim(m,10)
+## Shared frailty
+m &lt;- lvm(c(t1,t2)~x+z)
+rates &lt;- c(1,0.5); cuts &lt;- c(0,5)
+distribution(m,~y) &lt;- aalenExponential.lvm(rate=rates,timecut=cuts)
+distribution(m,~z) &lt;- loggamma.lvm(rate=1,shape=1)
+## Not run: 
+mets::fast.reshape(sim(m,100),varying="t")
+
+## End(Not run)
+##################################################
+### General multivariate distributions
+##################################################
+## Not run: 
+m &lt;- lvm()
+distribution(m,~y1+y2,oratio=4) &lt;- VGAM::rbiplackcop
+ksmooth2(sim(m,1e4),rgl=FALSE,theta=-20,phi=25)
+m &lt;- lvm()
+distribution(m,~z1+z2,"or1") &lt;- VGAM::rbiplackcop
+distribution(m,~y1+y2,"or2") &lt;- VGAM::rbiplackcop
+sim(m,10,p=c(or1=0.1,or2=4))
+
+## End(Not run)
+m &lt;- lvm()
+distribution(m,~y1+y2+y3,TRUE) &lt;- function(n,...) rmvn0(n,sigma=diag(3)+1)
+var(sim(m,100))
+## Syntax also useful for univariate generators, e.g.
+m &lt;- lvm(y~x+z)
+distribution(m,~y,TRUE) &lt;- function(n) rnorm(n,mean=1000)
+sim(m,5)
+distribution(m,~y,"m1",0) &lt;- rnorm
+sim(m,5)
+sim(m,5,p=c(m1=100))
+##################################################
+### Regression design in other parameters
+##################################################
+## Variance heterogeneity
+m &lt;- lvm(y~x)
+distribution(m,~y) &lt;- function(n,mean,x) rnorm(n,mean,exp(x)^.5)
+if (interactive()) plot(y~x,sim(m,1e3))
+## Alternaively, calculate the standard error directly
+addvar(m) &lt;- ~sd ## If 'sd' should be part of the resulting data.frame
+constrain(m,sd~x) &lt;- function(x) exp(x)^.5
+distribution(m,~y) &lt;- function(n,mean,sd) rnorm(n,mean,sd)
+if (interactive()) plot(y~x,sim(m,1e3))
+## Regression on variance parameter
+m &lt;- lvm()
+regression(m) &lt;- y~x
+regression(m) &lt;- v~x
+##distribution(m,~v) &lt;- 0 # No stochastic term
+## Alternative:
+## regression(m) &lt;- v[NA:0]~x
+distribution(m,~y) &lt;- function(n,mean,v) rnorm(n,mean,exp(v)^.5)
+if (interactive()) plot(y~x,sim(m,1e3))
+## Regression on shape parameter in Weibull model
+m &lt;- lvm()
+regression(m) &lt;- y ~ z+v
+regression(m) &lt;- s ~ exp(0.6*x-0.5*z)
+distribution(m,~x+z) &lt;- binomial.lvm()
+distribution(m,~cens) &lt;- coxWeibull.lvm(scale=1)
+distribution(m,~y) &lt;- coxWeibull.lvm(scale=0.1,shape=~s)
+eventTime(m) &lt;- time ~ min(y=1,cens=0)
+if (interactive()) {
+    d &lt;- sim(m,1e3)
+    require(survival)
+    (cc &lt;- coxph(Surv(time,status)~v+strata(x,z),data=d))
+    plot(survfit(cc) ,col=1:4,mark.time=FALSE)
+}
+##################################################
+### Categorical predictor
+##################################################
+m &lt;- lvm()
+## categorical(m,K=3) &lt;- "v"
+categorical(m,labels=c("A","B","C")) &lt;- "v"
+regression(m,additive=FALSE) &lt;- y~v
+## Not run: 
+plot(y~v,sim(m,1000,p=c("y~v:2"=3)))
+
+## End(Not run)
+m &lt;- lvm()
+categorical(m,labels=c("A","B","C"),p=c(0.5,0.3)) &lt;- "v"
+regression(m,additive=FALSE,beta=c(0,2,-1)) &lt;- y~v
+## equivalent to:
+## regression(m,y~v,additive=FALSE) &lt;- c(0,2,-1)
+regression(m,additive=FALSE,beta=c(0,4,-1)) &lt;- z~v
+table(sim(m,1e4)$v)
+glm(y~v, data=sim(m,1e4))
+glm(y~v, data=sim(m,1e4,p=c("y~v:1"=3)))
+
+transform(m,v2~v) &lt;- function(x) x=='A'
+sim(m,10)
+
+##################################################
+### Pre-calculate object
+##################################################
+m &lt;- lvm(y~x)
+m2 &lt;- sim(m,'y~x'=2)
+sim(m,10,'y~x'=2)
+sim(m2,10) ## Faster
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

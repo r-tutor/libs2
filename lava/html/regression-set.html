@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Add regression association to latent variable model</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for regression&amp;lt;- {lava}"><tr><td>regression&lt;- {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Add regression association to latent variable model</h2>
+
+<h3>Description</h3>
+
+<p>Define regression association between variables in a <code>lvm</code>-object and
+define linear constraints between model equations.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'lvm'
+regression(object = lvm(), to, from, fn = NA,
+messages = lava.options()$messages, additive=TRUE, y, x, value, ...)
+## S3 replacement method for class 'lvm'
+regression(object, to=NULL, quick=FALSE, ...) &lt;- value
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p><code>lvm</code>-object.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments to be passed to the low level functions</p>
+</td></tr>
+<tr valign="top"><td><code>value</code></td>
+<td>
+<p>A formula specifying the linear constraints or if
+<code>to=NULL</code> a <code>list</code> of parameter values.</p>
+</td></tr>
+<tr valign="top"><td><code>to</code></td>
+<td>
+<p>Character vector of outcome(s) or formula object.</p>
+</td></tr>
+<tr valign="top"><td><code>from</code></td>
+<td>
+<p>Character vector of predictor(s).</p>
+</td></tr>
+<tr valign="top"><td><code>fn</code></td>
+<td>
+<p>Real function defining the functional form of predictors (for
+simulation only).</p>
+</td></tr>
+<tr valign="top"><td><code>messages</code></td>
+<td>
+<p>Controls which messages are turned on/off (0: all off)</p>
+</td></tr>
+<tr valign="top"><td><code>additive</code></td>
+<td>
+<p>If FALSE and predictor is categorical a non-additive effect is assumed</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>Alias for 'to'</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>Alias for 'from'</p>
+</td></tr>
+<tr valign="top"><td><code>quick</code></td>
+<td>
+<p>Faster implementation without parameter constraints</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The <code>regression</code> function is used to specify linear associations
+between variables of a latent variable model, and offers formula syntax
+resembling the model specification of e.g. <code>lm</code>.
+</p>
+<p>For instance, to add the following linear regression model, to the
+<code>lvm</code>-object, <code>m</code>:
+</p>
+<p style="text-align: center;"><i> E(Y|X_1,X_2) = &beta;_1 X_1 + &beta;_2 X_2</i></p>
+
+<p>We can write
+</p>
+<p><code>regression(m) &lt;- y ~ x1 + x2</code>
+</p>
+<p>Multivariate models can be specified by successive calls with
+<code>regression</code>, but multivariate formulas are also supported, e.g.
+</p>
+<p><code>regression(m) &lt;- c(y1,y2) ~ x1 + x2</code>
+</p>
+<p>defines
+</p>
+<p style="text-align: center;"><i> E(Y_i|X_1,X_2) = &beta;_{1i} X_1 + &beta;_{2i} X_2 </i></p>
+
+<p>The special function, <code>f</code>, can be used in the model specification to
+specify linear constraints. E.g. to fix <i>&beta;_1=&beta;_2</i>
+, we could write
+</p>
+<p><code>regression(m) &lt;- y ~ f(x1,beta) + f(x2,beta)</code>
+</p>
+<p>The second argument of <code>f</code> can also be a number (e.g. defining an
+offset) or be set to <code>NA</code> in order to clear any previously defined
+linear constraints.
+</p>
+<p>Alternatively, a more straight forward notation can be used:
+</p>
+<p><code>regression(m) &lt;- y ~ beta*x1 + beta*x2</code>
+</p>
+<p>All the parameter values of the linear constraints can be given as the right
+handside expression of the assigment function <code>regression&lt;-</code> (or
+<code>regfix&lt;-</code>) if the first (and possibly second) argument is defined as
+well. E.g:
+</p>
+<p><code>regression(m,y1~x1+x2) &lt;- list("a1","b1")</code>
+</p>
+<p>defines <i>E(Y_1|X_1,X_2) = a1 X_1 + b1 X_2</i>. The rhs argument can be a
+mixture of character and numeric values (and NA's to remove constraints).
+</p>
+<p>The function <code>regression</code> (called without additional arguments) can be
+used to inspect the linear constraints of a <code>lvm</code>-object.
+</p>
+<p>For backward compatibility the &quot;$&quot;-symbol can be used to fix parameters at
+a given value. E.g. to add a linear relationship between <code>y</code> and
+<code>x</code> with slope 2 to the model <code>m</code>, we can write
+<code>regression(m,"y") &lt;- "x$2"</code>.  Similarily we can use the &quot;@&quot;-symbol to
+name parameters. E.g. in a multiple regression we can force the parameters
+to be equal: <code>regression(m,"y") &lt;- c("x1@b","x2@b")</code>.  Fixed parameters
+can be reset by fixing (with \$) them to <code>NA</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A <code>lvm</code>-object
+</p>
+
+
+<h3>Note</h3>
+
+<p>Variables will be added to the model if not already present.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Klaus K. Holst
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="intercept.html">intercept&lt;-</a></code>, <code><a href="covariance.html">covariance&lt;-</a></code>,
+<code><a href="constrain-set.html">constrain&lt;-</a></code>, <code><a href="constrain-set.html">parameter&lt;-</a></code>,
+<code><a href="vars.html">latent&lt;-</a></code>, <code><a href="cancel.html">cancel&lt;-</a></code>, <code><a href="rmvar.html">kill&lt;-</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+m &lt;- lvm() ## Initialize empty lvm-object
+### E(y1|z,v) = beta1*z + beta2*v
+regression(m) &lt;- y1 ~ z + v
+### E(y2|x,z,v) = beta*x + beta*z + 2*v + beta3*u
+regression(m) &lt;- y2 ~ f(x,beta) + f(z,beta)  + f(v,2) + u
+### Clear restriction on association between y and
+### fix slope coefficient of u to beta
+regression(m, y2 ~ v+u) &lt;- list(NA,"beta")
+
+regression(m) ## Examine current linear parameter constraints
+
+## ## A multivariate model, E(yi|x1,x2) = beta[1i]*x1 + beta[2i]*x2:
+m2 &lt;- lvm(c(y1,y2) ~ x1+x2)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

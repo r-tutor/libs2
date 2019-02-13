@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Calculate bootstrap estimates of a lvm object</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for bootstrap.lvm {lava}"><tr><td>bootstrap.lvm {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Calculate bootstrap estimates of a lvm object</h2>
+
+<h3>Description</h3>
+
+<p>Draws non-parametric bootstrap samples
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'lvm'
+bootstrap(x,R=100,data,fun=NULL,control=list(),
+                          p, parametric=FALSE, bollenstine=FALSE,
+                          constraints=TRUE,sd=FALSE,messages=lava.options()$messages,
+                          parallel=lava.options()$parallel,
+                          mc.cores=NULL,
+                          ...)
+
+## S3 method for class 'lvmfit'
+bootstrap(x,R=100,data=model.frame(x),
+                             control=list(start=coef(x)),
+                             p=coef(x), parametric=FALSE, bollenstine=FALSE,
+                             estimator=x$estimator,weights=Weights(x),...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p><code>lvm</code>-object.</p>
+</td></tr>
+<tr valign="top"><td><code>R</code></td>
+<td>
+<p>Number of bootstrap samples</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>The data to resample from</p>
+</td></tr>
+<tr valign="top"><td><code>fun</code></td>
+<td>
+<p>Optional function of the (bootstrapped) model-fit defining the
+statistic of interest</p>
+</td></tr>
+<tr valign="top"><td><code>control</code></td>
+<td>
+<p>Options to the optimization routine</p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>Parameter vector of the null model for the parametric bootstrap</p>
+</td></tr>
+<tr valign="top"><td><code>parametric</code></td>
+<td>
+<p>If TRUE a parametric bootstrap is calculated. If FALSE a
+non-parametric (row-sampling) bootstrap is computed.</p>
+</td></tr>
+<tr valign="top"><td><code>bollenstine</code></td>
+<td>
+<p>Bollen-Stine transformation (non-parametric bootstrap) for bootstrap hypothesis testing.</p>
+</td></tr>
+<tr valign="top"><td><code>constraints</code></td>
+<td>
+<p>Logical indicating whether non-linear parameter
+constraints should be included in the bootstrap procedure</p>
+</td></tr>
+<tr valign="top"><td><code>sd</code></td>
+<td>
+<p>Logical indicating whether standard error estimates should be
+included in the bootstrap procedure</p>
+</td></tr>
+<tr valign="top"><td><code>messages</code></td>
+<td>
+<p>Control amount of messages printed</p>
+</td></tr>
+<tr valign="top"><td><code>parallel</code></td>
+<td>
+<p>If TRUE parallel backend will be used</p>
+</td></tr>
+<tr valign="top"><td><code>mc.cores</code></td>
+<td>
+<p>Number of threads (if NULL foreach::foreach will be used, otherwise parallel::mclapply)</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments, e.g. choice of estimator.</p>
+</td></tr>
+<tr valign="top"><td><code>estimator</code></td>
+<td>
+<p>String definining estimator, e.g. 'gaussian' (see
+<code>estimator</code>)</p>
+</td></tr>
+<tr valign="top"><td><code>weights</code></td>
+<td>
+<p>Optional weights matrix used by <code>estimator</code></p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A <code>bootstrap.lvm</code> object.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Klaus K. Holst
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="confint.lvmfit.html">confint.lvmfit</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+m &lt;- lvm(y~x)
+d &lt;- sim(m,100)
+e &lt;- estimate(lvm(y~x), data=d)
+ ## Reduce Ex.Timings
+B &lt;- bootstrap(e,R=50,parallel=FALSE)
+B
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

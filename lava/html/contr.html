@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create contrast matrix</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for contr {lava}"><tr><td>contr {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create contrast matrix</h2>
+
+<h3>Description</h3>
+
+<p>Create contrast matrix typically for use with 'estimate' (Wald tests).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+contr(p, n, diff = TRUE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>index of non-zero entries (see example)</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>Total number of parameters (if omitted the max number in p will be used)</p>
+</td></tr>
+<tr valign="top"><td><code>diff</code></td>
+<td>
+<p>If FALSE all non-zero entries are +1, otherwise the second non-zero element in each row will be -1.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments to lower level functions</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+contr(2,n=5)
+contr(as.list(2:4),n=5)
+contr(list(1,2,4),n=5)
+contr(c(2,3,4),n=5)
+contr(list(c(1,3),c(2,4)),n=5)
+contr(list(c(1,3),c(2,4),5))
+
+parsedesign(c("aa","b","c"),"?","?",diff=c(FALSE,TRUE))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

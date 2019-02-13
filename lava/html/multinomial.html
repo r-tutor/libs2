@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Estimate probabilities in contingency table</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for multinomial {lava}"><tr><td>multinomial {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Estimate probabilities in contingency table</h2>
+
+<h3>Description</h3>
+
+<p>Estimate probabilities in contingency table
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+multinomial(x, data = parent.frame(), marginal = FALSE, transform,
+  vcov = TRUE, iid = TRUE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>Formula (or matrix or data.frame with observations, 1 or 2 columns)</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>Optional data.frame</p>
+</td></tr>
+<tr valign="top"><td><code>marginal</code></td>
+<td>
+<p>If TRUE the marginals are estimated</p>
+</td></tr>
+<tr valign="top"><td><code>transform</code></td>
+<td>
+<p>Optional transformation of parameters (e.g., logit)</p>
+</td></tr>
+<tr valign="top"><td><code>vcov</code></td>
+<td>
+<p>Calculate asymptotic variance (default TRUE)</p>
+</td></tr>
+<tr valign="top"><td><code>iid</code></td>
+<td>
+<p>Return iid decomposition (default TRUE)</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments to lower-level functions</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Klaus K. Holst
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+set.seed(1)
+breaks &lt;- c(-Inf,-1,0,Inf)
+m &lt;- lvm(); covariance(m,pairwise=TRUE) &lt;- ~y1+y2+y3+y4
+d &lt;- transform(sim(m,5e2),
+              z1=cut(y1,breaks=breaks),
+              z2=cut(y2,breaks=breaks),
+              z3=cut(y3,breaks=breaks),
+              z4=cut(y4,breaks=breaks))
+
+multinomial(d[,5])
+(a1 &lt;- multinomial(d[,5:6]))
+(K1 &lt;- kappa(a1)) ## Cohen's kappa
+
+K2 &lt;- kappa(d[,7:8])
+## Testing difference K1-K2:
+estimate(merge(K1,K2,id=TRUE),diff)
+
+estimate(merge(K1,K2,id=FALSE),diff) ## Wrong std.err ignoring dependence
+sqrt(vcov(K1)+vcov(K2))
+
+## Average of the two kappas:
+estimate(merge(K1,K2,id=TRUE),function(x) mean(x))
+estimate(merge(K1,K2,id=FALSE),function(x) mean(x)) ## Independence
+##'
+## Goodman-Kruskal's gamma
+m2 &lt;- lvm(); covariance(m2) &lt;- y1~y2
+breaks1 &lt;- c(-Inf,-1,0,Inf)
+breaks2 &lt;- c(-Inf,0,Inf)
+d2 &lt;- transform(sim(m2,5e2),
+              z1=cut(y1,breaks=breaks1),
+              z2=cut(y2,breaks=breaks2))
+
+(g1 &lt;- gkgamma(d2[,3:4]))
+## same as
+## Not run: 
+gkgamma(table(d2[,3:4]))
+gkgamma(multinomial(d2[,3:4]))
+
+## End(Not run)
+
+##partial gamma
+d2$x &lt;- rbinom(nrow(d2),2,0.5)
+gkgamma(z1~z2|x,data=d2)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

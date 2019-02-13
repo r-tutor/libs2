@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Cross-validated two-stage estimator</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for twostageCV {lava}"><tr><td>twostageCV {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Cross-validated two-stage estimator</h2>
+
+<h3>Description</h3>
+
+<p>Cross-validated two-stage estimator for non-linear SEM
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+twostageCV(model1, model2, data, control1 = list(trace = 0),
+  control2 = list(trace = 0), knots.boundary, mc.cores = 1,
+  nmix = 1:4, df = 1:9, fix = TRUE, std.err = TRUE, nfolds = 5,
+  rep = 1, messages = 0, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>model1</code></td>
+<td>
+<p>model 1 (exposure measurement error model)</p>
+</td></tr>
+<tr valign="top"><td><code>model2</code></td>
+<td>
+<p>model 2</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>data.frame</p>
+</td></tr>
+<tr valign="top"><td><code>control1</code></td>
+<td>
+<p>optimization parameters for model 1</p>
+</td></tr>
+<tr valign="top"><td><code>control2</code></td>
+<td>
+<p>optimization parameters for model 1</p>
+</td></tr>
+<tr valign="top"><td><code>knots.boundary</code></td>
+<td>
+<p>boundary points for natural cubic spline basis</p>
+</td></tr>
+<tr valign="top"><td><code>mc.cores</code></td>
+<td>
+<p>number of cores to use for parallel computations</p>
+</td></tr>
+<tr valign="top"><td><code>nmix</code></td>
+<td>
+<p>number of mixture components</p>
+</td></tr>
+<tr valign="top"><td><code>df</code></td>
+<td>
+<p>spline degrees of freedom</p>
+</td></tr>
+<tr valign="top"><td><code>fix</code></td>
+<td>
+<p>automatically fix parameters for identification (TRUE)</p>
+</td></tr>
+<tr valign="top"><td><code>std.err</code></td>
+<td>
+<p>calculation of standard errors (TRUE)</p>
+</td></tr>
+<tr valign="top"><td><code>nfolds</code></td>
+<td>
+<p>Number of folds (cross-validation)</p>
+</td></tr>
+<tr valign="top"><td><code>rep</code></td>
+<td>
+<p>Number of repeats of cross-validation</p>
+</td></tr>
+<tr valign="top"><td><code>messages</code></td>
+<td>
+<p>print information (&gt;0)</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>additional arguments to lower level functions</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+ ## Reduce Ex.Timings
+m1 &lt;- lvm( x1+x2+x3 ~ u1, latent= ~u1)
+m2 &lt;- lvm( y ~ 1 )
+m &lt;- functional(merge(m1,m2), y ~ u, value=function(x) sin(x)+x)
+distribution(m, ~u1) &lt;- uniform.lvm(-6,6)
+d &lt;- sim(m,n=500,seed=1)
+nonlinear(m2) &lt;- y~u1
+val &lt;- twostageCV(m1, m2, data=d, std.err=FALSE, df=2:6, nmix=1:2,
+                  nfolds=2, mc.cores=1)
+val
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

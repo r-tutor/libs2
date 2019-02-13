@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Dose response calculation for binomial regression models</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for PD {lava}"><tr><td>PD {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Dose response calculation for binomial regression models</h2>
+
+<h3>Description</h3>
+
+<p>Dose response calculation for binomial regression models
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+PD(model, intercept = 1, slope = 2, prob = NULL, x, level = 0.5,
+  ci.level = 0.95, vcov, family, EB = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>model</code></td>
+<td>
+<p>Model object or vector of parameter estimates</p>
+</td></tr>
+<tr valign="top"><td><code>intercept</code></td>
+<td>
+<p>Index of intercept parameters</p>
+</td></tr>
+<tr valign="top"><td><code>slope</code></td>
+<td>
+<p>Index of intercept parameters</p>
+</td></tr>
+<tr valign="top"><td><code>prob</code></td>
+<td>
+<p>Index of mixture parameters (only relevant for
+<code>zibreg</code> models)</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>Optional weights
+length(x)=length(intercept)+length(slope)+length(prob)</p>
+</td></tr>
+<tr valign="top"><td><code>level</code></td>
+<td>
+<p>Probability at which level to calculate dose</p>
+</td></tr>
+<tr valign="top"><td><code>ci.level</code></td>
+<td>
+<p>Level of confidence limits</p>
+</td></tr>
+<tr valign="top"><td><code>vcov</code></td>
+<td>
+<p>Optional estimate of variance matrix of parameter
+estimates</p>
+</td></tr>
+<tr valign="top"><td><code>family</code></td>
+<td>
+<p>Optional distributional family argument</p>
+</td></tr>
+<tr valign="top"><td><code>EB</code></td>
+<td>
+<p>Optional ratio of treatment effect and adverse effects
+used to find optimal dose (regret-function argument)</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Klaus K. Holst
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

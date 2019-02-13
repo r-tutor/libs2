@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Two-stage (non-linear) measurement error</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for measurement.error {lava}"><tr><td>measurement.error {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Two-stage (non-linear) measurement error</h2>
+
+<h3>Description</h3>
+
+<p>Two-stage measurement error
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+measurement.error(model1, formula, data = parent.frame(),
+  predictfun = function(mu, var, data, ...) mu[, 1]^2 + var[1], id1, id2,
+  ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>model1</code></td>
+<td>
+<p>Stage 1 model</p>
+</td></tr>
+<tr valign="top"><td><code>formula</code></td>
+<td>
+<p>Formula specifying observed covariates in stage 2 model</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>data.frame</p>
+</td></tr>
+<tr valign="top"><td><code>predictfun</code></td>
+<td>
+<p>Predictions to be used in stage 2</p>
+</td></tr>
+<tr valign="top"><td><code>id1</code></td>
+<td>
+<p>Optional id-vector of stage 1</p>
+</td></tr>
+<tr valign="top"><td><code>id2</code></td>
+<td>
+<p>Optional id-vector of stage 2</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments to lower level functions</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p>stack.estimate
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+m &lt;- lvm(c(y1,y2,y3)~u,c(y3,y4,y5)~v,u~~v,c(u,v)~x)
+transform(m,u2~u) &lt;- function(x) x^2
+transform(m,uv~u+v) &lt;- prod
+regression(m) &lt;- z~u2+u+v+uv+x
+set.seed(1)
+d &lt;- sim(m,1000,p=c("u,u"=1))
+
+## Stage 1
+m1 &lt;- lvm(c(y1[0:s],y2[0:s],y3[0:s])~1*u,c(y3[0:s],y4[0:s],y5[0:s])~1*v,u~b*x,u~~v)
+latent(m1) &lt;- ~u+v
+e1 &lt;- estimate(m1,d)
+
+pp &lt;- function(mu,var,data,...) {
+    cbind(u=mu[,"u"],u2=mu[,"u"]^2+var["u","u"],v=mu[,"v"],uv=mu[,"u"]*mu[,"v"]+var["u","v"])
+}
+(e &lt;- measurement.error(e1, z~1+x, data=d, predictfun=pp))
+
+## uu &lt;- seq(-1,1,length.out=100)
+## pp &lt;- estimate(e,function(p,...) p["(Intercept)"]+p["u"]*uu+p["u2"]*uu^2)$coefmat
+if (interactive()) {
+    plot(e,intercept=TRUE,line=0)
+
+    f &lt;- function(p) p[1]+p["u"]*u+p["u2"]*u^2
+    u &lt;- seq(-1,1,length.out=100)
+    plot(e, f, data=data.frame(u), ylim=c(-.5,2.5))
+}
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

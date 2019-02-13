@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Cross-validation</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for cv {lava}"><tr><td>cv {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Cross-validation</h2>
+
+<h3>Description</h3>
+
+<p>Cross-validation
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+cv(modelList, data, K = 5, rep = 1, perf, seed = NULL,
+  mc.cores = 1, shared = NULL, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>modelList</code></td>
+<td>
+<p>List of fitting functions or models</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>data.frame</p>
+</td></tr>
+<tr valign="top"><td><code>K</code></td>
+<td>
+<p>Number of folds (default 5, 0 splits in 1:n/2, n/2:n with last part used for testing)</p>
+</td></tr>
+<tr valign="top"><td><code>rep</code></td>
+<td>
+<p>Number of repetitions (default 1)</p>
+</td></tr>
+<tr valign="top"><td><code>perf</code></td>
+<td>
+<p>Performance measure (default RMSE)</p>
+</td></tr>
+<tr valign="top"><td><code>seed</code></td>
+<td>
+<p>Optional random seed</p>
+</td></tr>
+<tr valign="top"><td><code>mc.cores</code></td>
+<td>
+<p>Number of cores used for parallel computations</p>
+</td></tr>
+<tr valign="top"><td><code>shared</code></td>
+<td>
+<p>function applied to each fold with results send to each model</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments parsed to models in modelList and perf</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Generic cross-validation function
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Klaus K. Holst
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+f0 &lt;- function(data,...) lm(...,data)
+f1 &lt;- function(data,...) lm(Sepal.Length~Species,data)
+f2 &lt;- function(data,...) lm(Sepal.Length~Species+Petal.Length,data)
+x &lt;- cv(list(m0=f0,m1=f1,m2=f2),rep=10, data=iris, formula=Sepal.Length~.)
+x2 &lt;- cv(list(f0(iris),f1(iris),f2(iris)),rep=10, data=iris)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

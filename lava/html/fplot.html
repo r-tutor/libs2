@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: fplot</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for fplot {lava}"><tr><td>fplot {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>fplot</h2>
+
+<h3>Description</h3>
+
+<p>Faster plot via RGL
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+fplot(x, y, z = NULL, xlab, ylab, ..., z.col = topo.colors(64),
+  data = parent.frame(), add = FALSE, aspect = c(1, 1), zoom = 0.8)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>X variable</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>Y variable</p>
+</td></tr>
+<tr valign="top"><td><code>z</code></td>
+<td>
+<p>Z variable (optional)</p>
+</td></tr>
+<tr valign="top"><td><code>xlab</code></td>
+<td>
+<p>x-axis label</p>
+</td></tr>
+<tr valign="top"><td><code>ylab</code></td>
+<td>
+<p>y-axis label</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>additional arggument to lower-level plot functions</p>
+</td></tr>
+<tr valign="top"><td><code>z.col</code></td>
+<td>
+<p>color (use argument alpha to set transparency)</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>data.frame</p>
+</td></tr>
+<tr valign="top"><td><code>add</code></td>
+<td>
+<p>if TRUE use current active device</p>
+</td></tr>
+<tr valign="top"><td><code>aspect</code></td>
+<td>
+<p>aspect ratio</p>
+</td></tr>
+<tr valign="top"><td><code>zoom</code></td>
+<td>
+<p>zoom level</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+if (interactive()) {
+data(iris)
+fplot(Sepal.Length ~ Petal.Length+Species, data=iris, size=2, type="s")
+}
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

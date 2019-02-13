@@ -1,0 +1,222 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Plot regression lines</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for plotConf {lava}"><tr><td>plotConf {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Plot regression lines</h2>
+
+<h3>Description</h3>
+
+<p>Plot regression line (with interactions) and partial residuals.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+plotConf(model, var1 = NULL, var2 = NULL, data = NULL, ci.lty = 0,
+  ci = TRUE, level = 0.95, pch = 16, lty = 1, lwd = 2,
+  npoints = 100, xlim, col = NULL, colpt, alpha = 0.5, cex = 1,
+  delta = 0.07, centermark = 0.03, jitter = 0.2, cidiff = FALSE,
+  mean = TRUE, legend = ifelse(is.null(var1), FALSE, "topright"),
+  trans = function(x) {     x }, partres = inherits(model, "lm"),
+  partse = FALSE, labels, vcov, predictfun, plot = TRUE, new = TRUE,
+  ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>model</code></td>
+<td>
+<p>Model object (e.g. <code>lm</code>)</p>
+</td></tr>
+<tr valign="top"><td><code>var1</code></td>
+<td>
+<p>predictor (Continuous or factor)</p>
+</td></tr>
+<tr valign="top"><td><code>var2</code></td>
+<td>
+<p>Factor that interacts with <code>var1</code></p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>data.frame to use for prediction (model.frame is used as default)</p>
+</td></tr>
+<tr valign="top"><td><code>ci.lty</code></td>
+<td>
+<p>Line type for confidence limits</p>
+</td></tr>
+<tr valign="top"><td><code>ci</code></td>
+<td>
+<p>Boolean indicating wether to draw pointwise 95% confidence limits</p>
+</td></tr>
+<tr valign="top"><td><code>level</code></td>
+<td>
+<p>Level of confidence limits (default 95%)</p>
+</td></tr>
+<tr valign="top"><td><code>pch</code></td>
+<td>
+<p>Point type for partial residuals</p>
+</td></tr>
+<tr valign="top"><td><code>lty</code></td>
+<td>
+<p>Line type for estimated regression lines</p>
+</td></tr>
+<tr valign="top"><td><code>lwd</code></td>
+<td>
+<p>Line width for regression lines</p>
+</td></tr>
+<tr valign="top"><td><code>npoints</code></td>
+<td>
+<p>Number of points used to plot curves</p>
+</td></tr>
+<tr valign="top"><td><code>xlim</code></td>
+<td>
+<p>Range of x axis</p>
+</td></tr>
+<tr valign="top"><td><code>col</code></td>
+<td>
+<p>Color (for each level in <code>var2</code>)</p>
+</td></tr>
+<tr valign="top"><td><code>colpt</code></td>
+<td>
+<p>Color of partial residual points</p>
+</td></tr>
+<tr valign="top"><td><code>alpha</code></td>
+<td>
+<p>Alpha level</p>
+</td></tr>
+<tr valign="top"><td><code>cex</code></td>
+<td>
+<p>Point size</p>
+</td></tr>
+<tr valign="top"><td><code>delta</code></td>
+<td>
+<p>For categorical <code>var1</code></p>
+</td></tr>
+<tr valign="top"><td><code>centermark</code></td>
+<td>
+<p>For categorical <code>var1</code></p>
+</td></tr>
+<tr valign="top"><td><code>jitter</code></td>
+<td>
+<p>For categorical <code>var1</code></p>
+</td></tr>
+<tr valign="top"><td><code>cidiff</code></td>
+<td>
+<p>For categorical <code>var1</code></p>
+</td></tr>
+<tr valign="top"><td><code>mean</code></td>
+<td>
+<p>For categorical <code>var1</code></p>
+</td></tr>
+<tr valign="top"><td><code>legend</code></td>
+<td>
+<p>Boolean (add legend)</p>
+</td></tr>
+<tr valign="top"><td><code>trans</code></td>
+<td>
+<p>Transform estimates (e.g. exponential)</p>
+</td></tr>
+<tr valign="top"><td><code>partres</code></td>
+<td>
+<p>Boolean indicating whether to plot partial residuals</p>
+</td></tr>
+<tr valign="top"><td><code>partse</code></td>
+<td>
+<p>.</p>
+</td></tr>
+<tr valign="top"><td><code>labels</code></td>
+<td>
+<p>Optional labels of <code>var2</code></p>
+</td></tr>
+<tr valign="top"><td><code>vcov</code></td>
+<td>
+<p>Optional variance estimates</p>
+</td></tr>
+<tr valign="top"><td><code>predictfun</code></td>
+<td>
+<p>Optional predict-function used to calculate confidence limits and predictions</p>
+</td></tr>
+<tr valign="top"><td><code>plot</code></td>
+<td>
+<p>If FALSE return only predictions and confidence bands</p>
+</td></tr>
+<tr valign="top"><td><code>new</code></td>
+<td>
+<p>If FALSE add to current plot</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>additional arguments to lower level functions</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>list with following members:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>Variable on the x-axis (<code>var1</code>)</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>Variable on the y-axis (partial residuals)</p>
+</td></tr>
+<tr valign="top"><td><code>predict</code></td>
+<td>
+<p>Matrix with confidence limits and predicted values</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Klaus K. Holst
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>termplot</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+n &lt;- 100
+x0 &lt;- rnorm(n)
+x1 &lt;- seq(-3,3, length.out=n)
+x2 &lt;- factor(rep(c(1,2),each=n/2), labels=c("A","B"))
+y &lt;- 5 + 2*x0 + 0.5*x1 + -1*(x2=="B")*x1 + 0.5*(x2=="B") + rnorm(n, sd=0.25)
+dd &lt;- data.frame(y=y, x1=x1, x2=x2)
+lm0 &lt;- lm(y ~ x0 + x1*x2, dd)
+plotConf(lm0, var1="x1", var2="x2")
+abline(a=5,b=0.5,col="red")
+abline(a=5.5,b=-0.5,col="red")
+### points(5+0.5*x1 -1*(x2=="B")*x1 + 0.5*(x2=="B") ~ x1, cex=2)
+
+data(iris)
+l &lt;- lm(Sepal.Length ~ Sepal.Width*Species,iris)
+plotConf(l,var2="Species")
+plotConf(l,var1="Sepal.Width",var2="Species")
+
+## Not run: 
+## lme4 model
+dd$Id &lt;- rbinom(n, size = 3, prob = 0.3)
+lmer0 &lt;- lme4::lmer(y ~ x0 + x1*x2 + (1|Id), dd)
+plotConf(lmer0, var1="x1", var2="x2")
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

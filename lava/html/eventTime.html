@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Add an observed event time outcome to a latent variable...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for eventTime {lava}"><tr><td>eventTime {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Add an observed event time outcome to a latent variable model.</h2>
+
+<h3>Description</h3>
+
+<p>For example, if the model 'm' includes latent event time variables
+are called 'T1' and 'T2' and 'C' is the end of follow-up (right censored),
+then one can specify
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+eventTime(object, formula, eventName = "status", ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>Model object</p>
+</td></tr>
+<tr valign="top"><td><code>formula</code></td>
+<td>
+<p>Formula (see details)</p>
+</td></tr>
+<tr valign="top"><td><code>eventName</code></td>
+<td>
+<p>Event names</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments to lower levels functions</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>eventTime(object=m,formula=ObsTime~min(T1=a,T2=b,C=0,"ObsEvent"))</code>
+</p>
+<p>when data are simulated from the model
+one gets 2 new columns:
+</p>
+<p>- &quot;ObsTime&quot;: the smallest of T1, T2 and C
+- &quot;ObsEvent&quot;: 'a' if T1 is smallest, 'b' if T2 is smallest and '0' if C is smallest
+</p>
+<p>Note that &quot;ObsEvent&quot; and &quot;ObsTime&quot; are names specified by the user.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Thomas A. Gerds, Klaus K. Holst
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+# Right censored survival data without covariates
+m0 &lt;- lvm()
+distribution(m0,"eventtime") &lt;- coxWeibull.lvm(scale=1/100,shape=2)
+distribution(m0,"censtime") &lt;- coxExponential.lvm(rate=10)
+m0 &lt;- eventTime(m0,time~min(eventtime=1,censtime=0),"status")
+sim(m0,10)
+
+# Alternative specification of the right censored survival outcome
+## eventTime(m,"Status") &lt;- ~min(eventtime=1,censtime=0)
+
+# Cox regression:
+# lava implements two different parametrizations of the same
+# Weibull regression model. The first specifies
+# the effects of covariates as proportional hazard ratios
+# and works as follows:
+m &lt;- lvm()
+distribution(m,"eventtime") &lt;- coxWeibull.lvm(scale=1/100,shape=2)
+distribution(m,"censtime") &lt;- coxWeibull.lvm(scale=1/100,shape=2)
+m &lt;- eventTime(m,time~min(eventtime=1,censtime=0),"status")
+distribution(m,"sex") &lt;- binomial.lvm(p=0.4)
+distribution(m,"sbp") &lt;- normal.lvm(mean=120,sd=20)
+regression(m,from="sex",to="eventtime") &lt;- 0.4
+regression(m,from="sbp",to="eventtime") &lt;- -0.01
+sim(m,6)
+# The parameters can be recovered using a Cox regression
+# routine or a Weibull regression model. E.g.,
+## Not run: 
+    set.seed(18)
+    d &lt;- sim(m,1000)
+    library(survival)
+    coxph(Surv(time,status)~sex+sbp,data=d)
+
+    sr &lt;- survreg(Surv(time,status)~sex+sbp,data=d)
+    library(SurvRegCensCov)
+    ConvertWeibull(sr)
+
+
+## End(Not run)
+
+# The second parametrization is an accelerated failure time
+# regression model and uses the function weibull.lvm instead
+# of coxWeibull.lvm to specify the event time distributions.
+# Here is an example:
+
+ma &lt;- lvm()
+distribution(ma,"eventtime") &lt;- weibull.lvm(scale=3,shape=0.7)
+distribution(ma,"censtime") &lt;- weibull.lvm(scale=2,shape=0.7)
+ma &lt;- eventTime(ma,time~min(eventtime=1,censtime=0),"status")
+distribution(ma,"sex") &lt;- binomial.lvm(p=0.4)
+distribution(ma,"sbp") &lt;- normal.lvm(mean=120,sd=20)
+regression(ma,from="sex",to="eventtime") &lt;- 0.7
+regression(ma,from="sbp",to="eventtime") &lt;- -0.008
+set.seed(17)
+sim(ma,6)
+# The regression coefficients of the AFT model
+# can be tranformed into log(hazard ratios):
+#  coef.coxWeibull = - coef.weibull / shape.weibull
+## Not run: 
+    set.seed(17)
+    da &lt;- sim(ma,1000)
+    library(survival)
+    fa &lt;- coxph(Surv(time,status)~sex+sbp,data=da)
+    coef(fa)
+    c(0.7,-0.008)/0.7
+
+## End(Not run)
+
+
+# The Weibull parameters are related as follows:
+# shape.coxWeibull = 1/shape.weibull
+# scale.coxWeibull = exp(-scale.weibull/shape.weibull)
+# scale.AFT = log(scale.coxWeibull) / shape.coxWeibull
+# Thus, the following are equivalent parametrizations
+# which produce exactly the same random numbers:
+
+model.aft &lt;- lvm()
+distribution(model.aft,"eventtime") &lt;- weibull.lvm(scale=-log(1/100)/2,shape=0.5)
+distribution(model.aft,"censtime") &lt;- weibull.lvm(scale=-log(1/100)/2,shape=0.5)
+set.seed(17)
+sim(model.aft,6)
+
+model.cox &lt;- lvm()
+distribution(model.cox,"eventtime") &lt;- coxWeibull.lvm(scale=1/100,shape=2)
+distribution(model.cox,"censtime") &lt;- coxWeibull.lvm(scale=1/100,shape=2)
+set.seed(17)
+sim(model.cox,6)
+
+# The minimum of multiple latent times one of them still
+# being a censoring time, yield
+# right censored competing risks data
+
+mc &lt;- lvm()
+distribution(mc,~X2) &lt;- binomial.lvm()
+regression(mc) &lt;- T1~f(X1,-.5)+f(X2,0.3)
+regression(mc) &lt;- T2~f(X2,0.6)
+distribution(mc,~T1) &lt;- coxWeibull.lvm(scale=1/100)
+distribution(mc,~T2) &lt;- coxWeibull.lvm(scale=1/100)
+distribution(mc,~C) &lt;- coxWeibull.lvm(scale=1/100)
+mc &lt;- eventTime(mc,time~min(T1=1,T2=2,C=0),"event")
+sim(mc,6)
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

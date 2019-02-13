@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Prediction in structural equation models</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for predict.lvm {lava}"><tr><td>predict.lvm {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Prediction in structural equation models</h2>
+
+<h3>Description</h3>
+
+<p>Prediction in structural equation models
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'lvm'
+predict(object, x = NULL, y = NULL, residual = FALSE,
+  p, data, path = FALSE, quick = is.null(x) &amp; !(residual | path), ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>Model object</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>optional list of (endogenous) variables to condition on</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>optional subset of variables to predict</p>
+</td></tr>
+<tr valign="top"><td><code>residual</code></td>
+<td>
+<p>If true the residuals are predicted</p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>Parameter vector</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>Data to use in prediction</p>
+</td></tr>
+<tr valign="top"><td><code>path</code></td>
+<td>
+<p>Path prediction</p>
+</td></tr>
+<tr valign="top"><td><code>quick</code></td>
+<td>
+<p>If TRUE the conditional mean and variance given covariates are returned (and all other calculations skipped)</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments to lower level function</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p>predictlvm
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+m &lt;- lvm(list(c(y1,y2,y3)~u,u~x)); latent(m) &lt;- ~u
+d &lt;- sim(m,100)
+e &lt;- estimate(m,d)
+
+## Conditional mean (and variance as attribute) given covariates
+r &lt;- predict(e)
+## Best linear unbiased predictor (BLUP)
+r &lt;- predict(e,vars(e))
+##  Conditional mean of y3 giving covariates and y1,y2
+r &lt;- predict(e,y3~y1+y2)
+##  Conditional mean  gives covariates and y1
+r &lt;- predict(e,~y1)
+##  Predicted residuals (conditional on all observed variables)
+r &lt;- predict(e,vars(e),residual=TRUE)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

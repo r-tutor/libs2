@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Wrapper function for mclapply</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for sim.default {lava}"><tr><td>sim.default {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Wrapper function for mclapply</h2>
+
+<h3>Description</h3>
+
+<p>Wrapper function for mclapply
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## Default S3 method:
+sim(x = NULL, R = 100, f = NULL, colnames = NULL,
+  messages = lava.options()$messages, mc.cores, blocksize = 2L *
+  mc.cores, cl, type = 1L, seed = NULL, args = list(),
+  iter = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>function or 'sim' object</p>
+</td></tr>
+<tr valign="top"><td><code>R</code></td>
+<td>
+<p>Number of replications or data.frame with parameters</p>
+</td></tr>
+<tr valign="top"><td><code>f</code></td>
+<td>
+<p>Optional function (i.e., if x is a matrix)</p>
+</td></tr>
+<tr valign="top"><td><code>colnames</code></td>
+<td>
+<p>Optional column names</p>
+</td></tr>
+<tr valign="top"><td><code>messages</code></td>
+<td>
+<p>Messages</p>
+</td></tr>
+<tr valign="top"><td><code>mc.cores</code></td>
+<td>
+<p>Number of cores to use</p>
+</td></tr>
+<tr valign="top"><td><code>blocksize</code></td>
+<td>
+<p>Split computations in blocks</p>
+</td></tr>
+<tr valign="top"><td><code>cl</code></td>
+<td>
+<p>(optional) cluster to use for parallelization</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>type=0 is an alias for messages=1,mc.cores=1,blocksize=R</p>
+</td></tr>
+<tr valign="top"><td><code>seed</code></td>
+<td>
+<p>(optional) Seed (needed with cl=TRUE)</p>
+</td></tr>
+<tr valign="top"><td><code>args</code></td>
+<td>
+<p>(optional) list of named arguments passed to (mc)mapply</p>
+</td></tr>
+<tr valign="top"><td><code>iter</code></td>
+<td>
+<p>If TRUE the iteration number is passed as first argument to (mc)mapply</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments to (mc)mapply</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p>summary.sim plot.sim print.sim
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+m &lt;- lvm(y~x+e)
+distribution(m,~y) &lt;- 0
+distribution(m,~x) &lt;- uniform.lvm(a=-1.1,b=1.1)
+transform(m,e~x) &lt;- function(x) (1*x^4)*rnorm(length(x),sd=1)
+
+onerun &lt;- function(iter=NULL,...,n=2e3,b0=1,idx=2) {
+    d &lt;- sim(m,n,p=c("y~x"=b0))
+    l &lt;- lm(y~x,d)
+    res &lt;- c(coef(summary(l))[idx,1:2],
+             confint(l)[idx,],
+             estimate(l,only.coef=TRUE)[idx,2:4])
+    names(res) &lt;- c("Estimate","Model.se","Model.lo","Model.hi",
+                    "Sandwich.se","Sandwich.lo","Sandwich.hi")
+    res
+}
+val &lt;- sim(onerun,R=10,b0=1,messages=0,mc.cores=1)
+val
+
+val &lt;- sim(val,R=40,b0=1,mc.cores=1) ## append results
+summary(val,estimate=c(1,1),confint=c(3,4,6,7),true=c(1,1))
+
+summary(val,estimate=c(1,1),se=c(2,5),names=c("Model","Sandwich"))
+summary(val,estimate=c(1,1),se=c(2,5),true=c(1,1),names=c("Model","Sandwich"),confint=TRUE)
+
+if (interactive()) {
+    plot(val,estimate=1,c(2,5),true=1,names=c("Model","Sandwich"),polygon=FALSE)
+    plot(val,estimate=c(1,1),se=c(2,5),main=NULL,
+         true=c(1,1),names=c("Model","Sandwich"),
+         line.lwd=1,col=c("gray20","gray60"),
+         rug=FALSE)
+    plot(val,estimate=c(1,1),se=c(2,5),true=c(1,1),
+         names=c("Model","Sandwich"))
+}
+
+f &lt;- function(a=1,b=1) {
+  rep(a*b,5)
+}
+R &lt;- Expand(a=1:3,b=1:3)
+sim(f,R,type=0)
+sim(function(a,b) f(a,b), 3, args=c(a=5,b=5),type=0)
+sim(function(iter=1,a=5,b=5) iter*f(a,b), type=0, iter=TRUE, R=5)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

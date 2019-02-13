@@ -1,0 +1,289 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Estimation of functional of parameters</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for estimate.default {lava}"><tr><td>estimate.default {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Estimation of functional of parameters</h2>
+
+<h3>Description</h3>
+
+<p>Estimation of functional of parameters.
+Wald tests, robust standard errors, cluster robust standard errors,
+LRT (when <code>f</code> is not a function)...
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## Default S3 method:
+estimate(x = NULL, f = NULL, ..., data, id, iddata,
+  stack = TRUE, average = FALSE, subset, score.deriv, level = 0.95,
+  iid = robust, type = c("robust", "df", "mbn"), keep, use,
+  regex = FALSE, contrast, null, vcov, coef, robust = TRUE,
+  df = NULL, print = NULL, labels, label.width, only.coef = FALSE,
+  back.transform = NULL, folds = 0, cluster, R = 0, null.sim)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>model object (<code>glm</code>, <code>lvmfit</code>, ...)</p>
+</td></tr>
+<tr valign="top"><td><code>f</code></td>
+<td>
+<p>transformation of model parameters and (optionally) data, or contrast matrix (or vector)</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>additional arguments to lower level functions</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p><code>data.frame</code></p>
+</td></tr>
+<tr valign="top"><td><code>id</code></td>
+<td>
+<p>(optional) id-variable corresponding to iid decomposition of model parameters.</p>
+</td></tr>
+<tr valign="top"><td><code>iddata</code></td>
+<td>
+<p>(optional) id-variable for 'data'</p>
+</td></tr>
+<tr valign="top"><td><code>stack</code></td>
+<td>
+<p>if TRUE (default)  the i.i.d. decomposition is automatically stacked according to 'id'</p>
+</td></tr>
+<tr valign="top"><td><code>average</code></td>
+<td>
+<p>if TRUE averages are calculated</p>
+</td></tr>
+<tr valign="top"><td><code>subset</code></td>
+<td>
+<p>(optional) subset of data.frame on which to condition (logical expression or variable name)</p>
+</td></tr>
+<tr valign="top"><td><code>score.deriv</code></td>
+<td>
+<p>(optional) derivative of mean score function</p>
+</td></tr>
+<tr valign="top"><td><code>level</code></td>
+<td>
+<p>level of confidence limits</p>
+</td></tr>
+<tr valign="top"><td><code>iid</code></td>
+<td>
+<p>if TRUE (default) the iid decompositions are also returned (extract with <code>iid</code> method)</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>type of small-sample correction</p>
+</td></tr>
+<tr valign="top"><td><code>keep</code></td>
+<td>
+<p>(optional) index of parameters to keep from final result</p>
+</td></tr>
+<tr valign="top"><td><code>use</code></td>
+<td>
+<p>(optional) index of parameters to use in calculations</p>
+</td></tr>
+<tr valign="top"><td><code>regex</code></td>
+<td>
+<p>If TRUE use regular expression (perl compatible) for keep,use arguments</p>
+</td></tr>
+<tr valign="top"><td><code>contrast</code></td>
+<td>
+<p>(optional) Contrast matrix for final Wald test</p>
+</td></tr>
+<tr valign="top"><td><code>null</code></td>
+<td>
+<p>(optional) null hypothesis to test</p>
+</td></tr>
+<tr valign="top"><td><code>vcov</code></td>
+<td>
+<p>(optional) covariance matrix of parameter estimates (e.g. Wald-test)</p>
+</td></tr>
+<tr valign="top"><td><code>coef</code></td>
+<td>
+<p>(optional) parameter coefficient</p>
+</td></tr>
+<tr valign="top"><td><code>robust</code></td>
+<td>
+<p>if TRUE robust standard errors are calculated. If
+FALSE p-values for linear models are calculated from t-distribution</p>
+</td></tr>
+<tr valign="top"><td><code>df</code></td>
+<td>
+<p>degrees of freedom (default obtained from 'df.residual')</p>
+</td></tr>
+<tr valign="top"><td><code>print</code></td>
+<td>
+<p>(optional) print function</p>
+</td></tr>
+<tr valign="top"><td><code>labels</code></td>
+<td>
+<p>(optional) names of coefficients</p>
+</td></tr>
+<tr valign="top"><td><code>label.width</code></td>
+<td>
+<p>(optional) max width of labels</p>
+</td></tr>
+<tr valign="top"><td><code>only.coef</code></td>
+<td>
+<p>if TRUE only the coefficient matrix is return</p>
+</td></tr>
+<tr valign="top"><td><code>back.transform</code></td>
+<td>
+<p>(optional) transform of parameters and confidence intervals</p>
+</td></tr>
+<tr valign="top"><td><code>folds</code></td>
+<td>
+<p>(optional) aggregate influence functions (divide and conquer)</p>
+</td></tr>
+<tr valign="top"><td><code>cluster</code></td>
+<td>
+<p>(obsolete) alias for 'id'.</p>
+</td></tr>
+<tr valign="top"><td><code>R</code></td>
+<td>
+<p>Number of simulations (simulated p-values)</p>
+</td></tr>
+<tr valign="top"><td><code>null.sim</code></td>
+<td>
+<p>Mean under the null for simulations</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>iid decomposition
+</p>
+<p style="text-align: center;"><i>&radic;{n}(\widehat{&theta;}-&theta;) = &sum;_{i=1}^n&epsilon;_i + o_p(1)</i></p>
+
+<p>can be extracted with the <code>iid</code> method.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+## Simulation from logistic regression model
+m &lt;- lvm(y~x+z);
+distribution(m,y~x) &lt;- binomial.lvm("logit")
+d &lt;- sim(m,1000)
+g &lt;- glm(y~z+x,data=d,family=binomial())
+g0 &lt;- glm(y~1,data=d,family=binomial())
+
+## LRT
+estimate(g,g0)
+
+## Plain estimates (robust standard errors)
+estimate(g)
+
+## Testing contrasts
+estimate(g,null=0)
+estimate(g,rbind(c(1,1,0),c(1,0,2)))
+estimate(g,rbind(c(1,1,0),c(1,0,2)),null=c(1,2))
+estimate(g,2:3) ## same as cbind(0,1,-1)
+estimate(g,as.list(2:3)) ## same as rbind(c(0,1,0),c(0,0,1))
+## Alternative syntax
+estimate(g,"z","z"-"x",2*"z"-3*"x")
+estimate(g,z,z-x,2*z-3*x)
+estimate(g,"?")  ## Wilcards
+estimate(g,"*Int*","z")
+estimate(g,"1","2"-"3",null=c(0,1))
+estimate(g,2,3)
+
+## Usual (non-robust) confidence intervals
+estimate(g,robust=FALSE)
+
+## Transformations
+estimate(g,function(p) p[1]+p[2])
+
+## Multiple parameters
+e &lt;- estimate(g,function(p) c(p[1]+p[2],p[1]*p[2]))
+e
+vcov(e)
+
+## Label new parameters
+estimate(g,function(p) list("a1"=p[1]+p[2],"b1"=p[1]*p[2]))
+##'
+## Multiple group
+m &lt;- lvm(y~x)
+m &lt;- baptize(m)
+d2 &lt;- d1 &lt;- sim(m,50)
+e &lt;- estimate(list(m,m),list(d1,d2))
+estimate(e) ## Wrong
+estimate(e,id=rep(seq(nrow(d1)),2))
+estimate(lm(y~x,d1))
+
+## Marginalize
+f &lt;- function(p,data)
+  list(p0=lava:::expit(p["(Intercept)"] + p["z"]*data[,"z"]),
+       p1=lava:::expit(p["(Intercept)"] + p["x"] + p["z"]*data[,"z"]))
+e &lt;- estimate(g, f, average=TRUE)
+e
+estimate(e,diff)
+estimate(e,cbind(1,1))
+
+## Clusters and subset (conditional marginal effects)
+d$id &lt;- rep(seq(nrow(d)/4),each=4)
+estimate(g,function(p,data)
+         list(p0=lava:::expit(p[1] + p["z"]*data[,"z"])),
+         subset=d$z&gt;0, id=d$id, average=TRUE)
+
+## More examples with clusters:
+m &lt;- lvm(c(y1,y2,y3)~u+x)
+d &lt;- sim(m,10)
+l1 &lt;- glm(y1~x,data=d)
+l2 &lt;- glm(y2~x,data=d)
+l3 &lt;- glm(y3~x,data=d)
+
+## Some random id-numbers
+id1 &lt;- c(1,1,4,1,3,1,2,3,4,5)
+id2 &lt;- c(1,2,3,4,5,6,7,8,1,1)
+id3 &lt;- seq(10)
+
+## Un-stacked and stacked i.i.d. decomposition
+iid(estimate(l1,id=id1,stack=FALSE))
+iid(estimate(l1,id=id1))
+
+## Combined i.i.d. decomposition
+e1 &lt;- estimate(l1,id=id1)
+e2 &lt;- estimate(l2,id=id2)
+e3 &lt;- estimate(l3,id=id3)
+(a2 &lt;- merge(e1,e2,e3))
+
+## If all models were estimated on the same data we could use the
+## syntax:
+## Reduce(merge,estimate(list(l1,l2,l3)))
+
+## Same:
+iid(a1 &lt;- merge(l1,l2,l3,id=list(id1,id2,id3)))
+
+iid(merge(l1,l2,l3,id=TRUE)) # one-to-one (same clusters)
+iid(merge(l1,l2,l3,id=FALSE)) # independence
+
+
+## Monte Carlo approach, simple trend test example
+
+m &lt;- categorical(lvm(),~x,K=5)
+regression(m,additive=TRUE) &lt;- y~x
+d &lt;- simulate(m,100,seed=1,'y~x'=0.1)
+l &lt;- lm(y~-1+factor(x),data=d)
+
+f &lt;- function(x) coef(lm(x~seq_along(x)))[2]
+null &lt;- rep(mean(coef(l)),length(coef(l))) ## just need to make sure we simulate under H0: slope=0
+estimate(l,f,R=1e2,null.sim=null)
+
+estimate(l,f)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

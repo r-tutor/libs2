@@ -9,7 +9,7 @@
 
 <h3>Description</h3>
 
-<p>Compare to <code><a href="../../base/html/eval.html">eval</a></code>, <code>evaluate</code> captures all of the
+<p>Compare to <code><a href="../../base/html/eval.html">eval()</a></code>, <code>evaluate</code> captures all of the
 information necessary to recreate the output as if you had copied and pasted
 the code into a R terminal. It captures messages, warnings, errors and
 output, all correctly interleaved in the order in which they occured. It
@@ -33,7 +33,7 @@ evaluate(input, envir = parent.frame(), enclos = NULL, debug = FALSE,
 <tr valign="top"><td><code>input</code></td>
 <td>
 <p>input object to be parsed and evaluated.  May be a string, file
-connection or function.</p>
+connection or function.  Passed on to <code><a href="parse_all.html">parse_all()</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>envir</code></td>
 <td>
@@ -69,13 +69,13 @@ interfering with your existing graphics environment.</p>
 </td></tr>
 <tr valign="top"><td><code>output_handler</code></td>
 <td>
-<p>an instance of <code><a href="new_output_handler.html">output_handler</a></code> that
+<p>an instance of <code><a href="new_output_handler.html">output_handler()</a></code> that
 processes the output from the evaluation. The default simply prints the
 visible return values.</p>
 </td></tr>
 <tr valign="top"><td><code>filename</code></td>
 <td>
-<p>string overrriding the <code><a href="../../base/html/srcfile.html">srcfile</a></code> filename.</p>
+<p>string overrriding the <code><a href="../../base/html/srcfile.html">base::srcfile()</a></code> filename.</p>
 </td></tr>
 <tr valign="top"><td><code>include_timing</code></td>
 <td>
@@ -86,5 +86,5 @@ command.</p>
 </td></tr>
 </table>
 
-<hr /><div style="text-align: center;">[Package <em>evaluate</em> version 0.12 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>evaluate</em> version 0.13 <a href="00Index.html">Index</a>]</div>
 </body></html>

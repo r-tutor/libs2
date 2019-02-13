@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Composite Likelihood for probit latent variable models</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for complik {lava}"><tr><td>complik {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Composite Likelihood for probit latent variable models</h2>
+
+<h3>Description</h3>
+
+<p>Estimate parameters in a probit latent variable model via a composite
+likelihood decomposition.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+complik(x, data, k = 2, type = c("nearest", "all"), pairlist,
+  messages = 0, estimator = "normal", ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p><code>lvm</code>-object</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>data.frame</p>
+</td></tr>
+<tr valign="top"><td><code>k</code></td>
+<td>
+<p>Size of composite groups</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>Determines number of groups. With <code>type="nearest"</code> (default)
+only neighboring items will be grouped, e.g. for <code>k=2</code>
+(y1,y2),(y2,y3),... With <code>type="all"</code> all combinations of size <code>k</code>
+are included</p>
+</td></tr>
+<tr valign="top"><td><code>pairlist</code></td>
+<td>
+<p>A list of indices specifying the composite groups. Optional
+argument which overrides <code>k</code> and <code>type</code> but gives complete
+flexibility in the specification of the composite likelihood</p>
+</td></tr>
+<tr valign="top"><td><code>messages</code></td>
+<td>
+<p>Control amount of messages printed</p>
+</td></tr>
+<tr valign="top"><td><code>estimator</code></td>
+<td>
+<p>Model (pseudo-likelihood) to use for the pairs/groups</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments parsed on to lower-level functions</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>An object of class <code>clprobit</code> inheriting methods from <code>lvm</code>
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Klaus K. Holst
+</p>
+
+
+<h3>See Also</h3>
+
+<p>estimate
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+m &lt;- lvm(c(y1,y2,y3)~b*x+1*u[0],latent=~u)
+ordinal(m,K=2) &lt;- ~y1+y2+y3
+d &lt;- sim(m,50,seed=1)
+e1 &lt;- complik(m,d,control=list(trace=1),type="all")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

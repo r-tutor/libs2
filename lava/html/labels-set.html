@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Define labels of graph</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for labels&amp;lt;- {lava}"><tr><td>labels&lt;- {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Define labels of graph</h2>
+
+<h3>Description</h3>
+
+<p>Alters labels of nodes and edges in the graph of a latent variable model
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## Default S3 replacement method:
+labels(object, ...) &lt;- value
+## S3 replacement method for class 'lvm'
+edgelabels(object, to, ...) &lt;- value
+## Default S3 replacement method:
+nodecolor(object, var=vars(object),
+border, labcol, shape, lwd, ...) &lt;- value
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p><code>lvm</code>-object.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments (<code>lwd</code>, <code>cex</code>, <code>col</code>,
+<code>labcol</code>), <code>border</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>value</code></td>
+<td>
+<p>node label/edge label/color</p>
+</td></tr>
+<tr valign="top"><td><code>to</code></td>
+<td>
+<p>Formula specifying outcomes and predictors defining relevant
+edges.</p>
+</td></tr>
+<tr valign="top"><td><code>var</code></td>
+<td>
+<p>Formula or character vector specifying the nodes/variables to
+alter.</p>
+</td></tr>
+<tr valign="top"><td><code>border</code></td>
+<td>
+<p>Colors of borders</p>
+</td></tr>
+<tr valign="top"><td><code>labcol</code></td>
+<td>
+<p>Text label colors</p>
+</td></tr>
+<tr valign="top"><td><code>shape</code></td>
+<td>
+<p>Shape of node</p>
+</td></tr>
+<tr valign="top"><td><code>lwd</code></td>
+<td>
+<p>Line width of border</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Klaus K. Holst
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+m &lt;- lvm(c(y,v)~x+z)
+regression(m) &lt;- c(v,x)~z
+labels(m) &lt;- c(y=expression(psi), z=expression(zeta))
+nodecolor(m,~y+z+x,border=c("white","white","black"),
+          labcol="white", lwd=c(1,1,5),
+          lty=c(1,2)) &lt;-  c("orange","indianred","lightgreen")
+edgelabels(m,y~z+x, cex=c(2,1.5), col=c("orange","black"),labcol="darkblue",
+           arrowhead=c("tee","dot"),
+           lwd=c(3,1)) &lt;- expression(phi,rho)
+edgelabels(m,c(v,x)~z, labcol="red", cex=0.8,arrowhead="none") &lt;- 2
+if (interactive()) {
+    plot(m,addstyle=FALSE)
+}
+
+m &lt;- lvm(y~x)
+labels(m) &lt;- list(x="multiple\nlines")
+if (interactive()) {
+op &lt;- par(mfrow=c(1,2))
+plot(m,plain=TRUE)
+plot(m)
+par(op)
+
+d &lt;- sim(m,100)
+e &lt;- estimate(m,d)
+plot(e,type="sd")
+}
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

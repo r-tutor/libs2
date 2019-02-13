@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Univariate cumulative link regression models</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for ordreg {lava}"><tr><td>ordreg {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Univariate cumulative link regression models</h2>
+
+<h3>Description</h3>
+
+<p>Ordinal regression models
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ordreg(formula, data = parent.frame(), offset,
+  family = stats::binomial("probit"), start, fast = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>formula</code></td>
+<td>
+<p>formula</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>data.frame</p>
+</td></tr>
+<tr valign="top"><td><code>offset</code></td>
+<td>
+<p>offset</p>
+</td></tr>
+<tr valign="top"><td><code>family</code></td>
+<td>
+<p>family (default proportional odds)</p>
+</td></tr>
+<tr valign="top"><td><code>start</code></td>
+<td>
+<p>optional starting values</p>
+</td></tr>
+<tr valign="top"><td><code>fast</code></td>
+<td>
+<p>If TRUE standard errors etc. will not be calculated</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments to lower level functions</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Klaus K. Holst
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+m &lt;- lvm(y~x)
+ordinal(m,K=3) &lt;- ~y
+d &lt;- sim(m,100)
+e &lt;- ordreg(y~x,d)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

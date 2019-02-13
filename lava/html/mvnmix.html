@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Estimate mixture latent variable model</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for mvnmix {lava}"><tr><td>mvnmix {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Estimate mixture latent variable model</h2>
+
+<h3>Description</h3>
+
+<p>Estimate mixture latent variable model
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+mvnmix(data, k = 2, theta, steps = 500, tol = 1e-16, lambda = 0,
+  mu = NULL, silent = TRUE, extra = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p><code>data.frame</code></p>
+</td></tr>
+<tr valign="top"><td><code>k</code></td>
+<td>
+<p>Number of mixture components</p>
+</td></tr>
+<tr valign="top"><td><code>theta</code></td>
+<td>
+<p>Optional starting values</p>
+</td></tr>
+<tr valign="top"><td><code>steps</code></td>
+<td>
+<p>Maximum number of iterations</p>
+</td></tr>
+<tr valign="top"><td><code>tol</code></td>
+<td>
+<p>Convergence tolerance of EM algorithm</p>
+</td></tr>
+<tr valign="top"><td><code>lambda</code></td>
+<td>
+<p>Added to diagonal of covariance matrix (to avoid
+singularities)</p>
+</td></tr>
+<tr valign="top"><td><code>mu</code></td>
+<td>
+<p>Initial centres (if unspecified random centres will be chosen)</p>
+</td></tr>
+<tr valign="top"><td><code>silent</code></td>
+<td>
+<p>Turn on/off output messages</p>
+</td></tr>
+<tr valign="top"><td><code>extra</code></td>
+<td>
+<p>Extra debug information</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments parsed to lower-level functions</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Estimate parameters in a mixture of latent variable models via the EM
+algorithm.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A <code>mixture</code> object
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Klaus K. Holst
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>mixture</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+data(faithful)
+set.seed(1)
+M1 &lt;- mvnmix(faithful[,"waiting",drop=FALSE],k=2)
+M2 &lt;- mvnmix(faithful,k=2)
+if (interactive()) {
+    par(mfrow=c(2,1))
+    plot(M1,col=c("orange","blue"),ylim=c(0,0.05))
+    plot(M2,col=c("orange","blue"))
+}
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Add non-linear constraints to latent variable model</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for constrain&amp;lt;- {lava}"><tr><td>constrain&lt;- {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Add non-linear constraints to latent variable model</h2>
+
+<h3>Description</h3>
+
+<p>Add non-linear constraints to latent variable model
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## Default S3 replacement method:
+constrain(x,par,args,...) &lt;- value
+
+## S3 replacement method for class 'multigroup'
+constrain(x,par,k=1,...) &lt;- value
+
+constraints(object,data=model.frame(object),vcov=object$vcov,level=0.95,
+                        p=pars.default(object),k,idx,...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p><code>lvm</code>-object</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments to be passed to the low level functions</p>
+</td></tr>
+<tr valign="top"><td><code>value</code></td>
+<td>
+<p>Real function taking args as a vector argument</p>
+</td></tr>
+<tr valign="top"><td><code>par</code></td>
+<td>
+<p>Name of new parameter. Alternatively a formula with lhs
+specifying the new parameter and the rhs defining the names of the
+parameters or variable names defining the new parameter (overruling the
+<code>args</code> argument).</p>
+</td></tr>
+<tr valign="top"><td><code>args</code></td>
+<td>
+<p>Vector of variables names or parameter names that are used in
+defining <code>par</code></p>
+</td></tr>
+<tr valign="top"><td><code>k</code></td>
+<td>
+<p>For multigroup models this argument specifies which group to
+add/extract the constraint</p>
+</td></tr>
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p><code>lvm</code>-object</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>Data-row from which possible non-linear constraints should be
+calculated</p>
+</td></tr>
+<tr valign="top"><td><code>vcov</code></td>
+<td>
+<p>Variance matrix of parameter estimates</p>
+</td></tr>
+<tr valign="top"><td><code>level</code></td>
+<td>
+<p>Level of confidence limits</p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>Parameter vector</p>
+</td></tr>
+<tr valign="top"><td><code>idx</code></td>
+<td>
+<p>Index indicating which constraints to extract</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Add non-linear parameter constraints as well as non-linear associations
+between covariates and latent or observed variables in the model (non-linear
+regression).
+</p>
+<p>As an example we will specify the follow multiple regression model:
+</p>
+<p style="text-align: center;"><i>E(Y|X_1,X_2) = &alpha; + &beta;_1 X_1 + &beta;_2 X_2</i></p>
+ <p style="text-align: center;"><i>V(Y|X_1,X_2)
+= v</i></p>
+
+<p>which is defined (with the appropiate parameter labels) as
+</p>
+<p><code>m &lt;- lvm(y ~ f(x,beta1) + f(x,beta2))</code>
+</p>
+<p><code>intercept(m) &lt;- y ~ f(alpha)</code>
+</p>
+<p><code>covariance(m) &lt;- y ~ f(v)</code>
+</p>
+<p>The somewhat strained parameter constraint </p>
+<p style="text-align: center;"><i> v =
+\frac{(beta1-beta2)^2}{alpha}</i></p>
+
+<p>can then specified as
+</p>
+<p><code>constrain(m,v ~ beta1 + beta2 + alpha) &lt;- function(x)
+(x[1]-x[2])^2/x[3] </code>
+</p>
+<p>A subset of the arguments <code>args</code> can be covariates in the model,
+allowing the specification of non-linear regression models.  As an example
+the non-linear regression model </p>
+<p style="text-align: center;"><i> E(Y\mid X) = &nu; + &Phi;(&alpha; +
+&beta; X)</i></p>
+<p> where <i>&Phi;</i> denotes the standard normal cumulative
+distribution function, can be defined as
+</p>
+<p><code>m &lt;- lvm(y ~ f(x,0)) # No linear effect of x</code>
+</p>
+<p>Next we add three new parameters using the <code>parameter</code> assigment
+function:
+</p>
+<p><code>parameter(m) &lt;- ~nu+alpha+beta</code>
+</p>
+<p>The intercept of <i>Y</i> is defined as <code>mu</code>
+</p>
+<p><code>intercept(m) &lt;- y ~ f(mu)</code>
+</p>
+<p>And finally the newly added intercept parameter <code>mu</code> is defined as the
+appropiate non-linear function of <i>&alpha;</i>, <i>&nu;</i> and <i>&beta;</i>:
+</p>
+<p><code>constrain(m, mu ~ x + alpha + nu) &lt;- function(x)
+pnorm(x[1]*x[2])+x[3]</code>
+</p>
+<p>The <code>constraints</code> function can be used to show the estimated non-linear
+parameter constraints of an estimated model object (<code>lvmfit</code> or
+<code>multigroupfit</code>). Calling <code>constrain</code> with no additional arguments
+beyound <code>x</code> will return a list of the functions and parameter names
+defining the non-linear restrictions.
+</p>
+<p>The gradient function can optionally be added as an attribute <code>grad</code> to
+the return value of the function defined by <code>value</code>. In this case the
+analytical derivatives will be calculated via the chain rule when evaluating
+the corresponding score function of the log-likelihood. If the gradient
+attribute is omitted the chain rule will be applied on a numeric
+approximation of the gradient.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A <code>lvm</code> object.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Klaus K. Holst
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="regression-set.html">regression</a></code>, <code><a href="intercept.html">intercept</a></code>,
+<code><a href="covariance.html">covariance</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+##############################
+### Non-linear parameter constraints 1
+##############################
+m &lt;- lvm(y ~ f(x1,gamma)+f(x2,beta))
+covariance(m) &lt;- y ~ f(v)
+d &lt;- sim(m,100)
+m1 &lt;- m; constrain(m1,beta ~ v) &lt;- function(x) x^2
+## Define slope of x2 to be the square of the residual variance of y
+## Estimate both restricted and unrestricted model
+e &lt;- estimate(m,d,control=list(method="NR"))
+e1 &lt;- estimate(m1,d)
+p1 &lt;- coef(e1)
+p1 &lt;- c(p1[1:2],p1[3]^2,p1[3])
+## Likelihood of unrestricted model evaluated in MLE of restricted model
+logLik(e,p1)
+## Likelihood of restricted model (MLE)
+logLik(e1)
+
+##############################
+### Non-linear regression
+##############################
+
+## Simulate data
+m &lt;- lvm(c(y1,y2)~f(x,0)+f(eta,1))
+latent(m) &lt;- ~eta
+covariance(m,~y1+y2) &lt;- "v"
+intercept(m,~y1+y2) &lt;- "mu"
+covariance(m,~eta) &lt;- "zeta"
+intercept(m,~eta) &lt;- 0
+set.seed(1)
+d &lt;- sim(m,100,p=c(v=0.01,zeta=0.01))[,manifest(m)]
+d &lt;- transform(d,
+               y1=y1+2*pnorm(2*x),
+               y2=y2+2*pnorm(2*x))
+
+## Specify model and estimate parameters
+constrain(m, mu ~ x + alpha + nu + gamma) &lt;- function(x) x[4]*pnorm(x[3]+x[1]*x[2])
+ ## Reduce Ex.Timings
+e &lt;- estimate(m,d,control=list(trace=1,constrain=TRUE))
+constraints(e,data=d)
+## Plot model-fit
+plot(y1~x,d,pch=16); points(y2~x,d,pch=16,col="gray")
+x0 &lt;- seq(-4,4,length.out=100)
+lines(x0,coef(e)["nu"] + coef(e)["gamma"]*pnorm(coef(e)["alpha"]*x0))
+
+
+##############################
+### Multigroup model
+##############################
+### Define two models
+m1 &lt;- lvm(y ~ f(x,beta)+f(z,beta2))
+m2 &lt;- lvm(y ~ f(x,psi) + z)
+### And simulate data from them
+d1 &lt;- sim(m1,500)
+d2 &lt;- sim(m2,500)
+### Add 'non'-linear parameter constraint
+constrain(m2,psi ~ beta2) &lt;- function(x) x
+## Add parameter beta2 to model 2, now beta2 exists in both models
+parameter(m2) &lt;- ~ beta2
+ee &lt;- estimate(list(m1,m2),list(d1,d2),control=list(method="NR"))
+summary(ee)
+
+m3 &lt;- lvm(y ~ f(x,beta)+f(z,beta2))
+m4 &lt;- lvm(y ~ f(x,beta2) + z)
+e2 &lt;- estimate(list(m3,m4),list(d1,d2),control=list(method="NR"))
+e2
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -3,6 +3,7 @@ daemon_stop             Utilities for daemonized servers
 httd                    Serve static files under a directory
 jekyll                  Serve R Markdown based websites
 make                    Serve files under a directory based on GNU Make
+random_port             Find a random available TCP port
 serve_example           A convenience function to serve examples in
                         this package
 server_config           Server configurations

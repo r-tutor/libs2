@@ -1,3 +1,14 @@
+		 CHANGES IN servr VERSION 0.12
+
+NEW FEATURES
+
+- Exported the function `random_port()` to return an available random TCP port.
+
+MAJOR CHANGES
+
+- `daemon_list()` returns server IDs instead of handles, so that it will work
+  with httpuv >= v1.4.5.1 (rstudio/blogdown#365).
+
 		 CHANGES IN servr VERSION 0.11
 
 NEW FEATURES

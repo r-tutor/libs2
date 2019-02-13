@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Time-dependent parameters</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for timedep {lava}"><tr><td>timedep {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Time-dependent parameters</h2>
+
+<h3>Description</h3>
+
+<p>Add time-varying covariate effects to model
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+timedep(object, formula, rate, timecut, type = "coxExponential.lvm", ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>Model</p>
+</td></tr>
+<tr valign="top"><td><code>formula</code></td>
+<td>
+<p>Formula with rhs specifying time-varying covariates</p>
+</td></tr>
+<tr valign="top"><td><code>rate</code></td>
+<td>
+<p>Optional rate parameters. If given as a vector this
+parameter is interpreted as the raw (baseline-)rates within each
+time interval defined by <code>timecut</code>.  If given as a matrix the
+parameters are interpreted as log-rates (and log-rate-ratios for
+the time-varying covariates defined in the formula).</p>
+</td></tr>
+<tr valign="top"><td><code>timecut</code></td>
+<td>
+<p>Time intervals</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>Type of model (default piecewise constant intensity)</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments to lower level functions</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Klaus K. Holst
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+## Piecewise constant hazard
+m &lt;- lvm(y~1)
+m &lt;- timedep(m,y~1,timecut=c(0,5),rate=c(0.5,0.3))
+
+## Not run: 
+d &lt;- sim(m,1e4); d$status &lt;- TRUE
+dd &lt;- mets::lifetable(Surv(y,status)~1,data=d,breaks=c(0,5,10));
+exp(coef(glm(events ~ offset(log(atrisk)) + -1 + interval, dd, family=poisson)))
+
+## End(Not run)
+
+
+## Piecewise constant hazard and time-varying effect of z1
+m &lt;- lvm(y~1)
+distribution(m,~z1) &lt;- ones.lvm(0.5)
+R &lt;- log(cbind(c(0.2,0.7,0.9),c(0.5,0.3,0.3)))
+m &lt;- timedep(m,y~z1,timecut=c(0,3,5),rate=R)
+
+## Not run: 
+d &lt;- sim(m,1e4); d$status &lt;- TRUE
+dd &lt;- mets::lifetable(Surv(y,status)~z1,data=d,breaks=c(0,3,5,Inf));
+exp(coef(glm(events ~ offset(log(atrisk)) + -1 + interval+z1:interval, dd, family=poisson)))
+
+## End(Not run)
+
+
+
+## Explicit simulation of time-varying effects
+m &lt;- lvm(y~1)
+distribution(m,~z1) &lt;- ones.lvm(0.5)
+distribution(m,~z2) &lt;- binomial.lvm(p=0.5)
+#variance(m,~m1+m2) &lt;- 0
+#regression(m,m1[m1:0] ~ z1) &lt;- log(0.5)
+#regression(m,m2[m2:0] ~ z1) &lt;- log(0.3)
+regression(m,m1 ~ z1,variance=0) &lt;- log(0.5)
+regression(m,m2 ~ z1,variance=0) &lt;- log(0.3)
+intercept(m,~m1+m2) &lt;- c(-0.5,0)
+m &lt;- timedep(m,y~m1+m2,timecut=c(0,5))
+
+## Not run: 
+d &lt;- sim(m,1e5); d$status &lt;- TRUE
+dd &lt;- mets::lifetable(Surv(y,status)~z1,data=d,breaks=c(0,5,Inf))
+exp(coef(glm(events ~ offset(log(atrisk)) + -1 + interval + interval:z1, dd, family=poisson)))
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

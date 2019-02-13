@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Extract pathways in model graph</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for path {lava}"><tr><td>path {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Extract pathways in model graph</h2>
+
+<h3>Description</h3>
+
+<p>Extract all possible paths from one variable to another connected component
+in a latent variable model. In an estimated model the effect size is
+decomposed into direct, indirect and total effects including approximate
+standard errors.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'lvm'
+ path(object, to = NULL, from, all=FALSE, ...)
+## S3 method for class 'lvmfit'
+ effects(object, to, from, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>Model object (<code>lvm</code>)</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments to be passed to the low level functions</p>
+</td></tr>
+<tr valign="top"><td><code>to</code></td>
+<td>
+<p>Outcome variable (string). Alternatively a formula specifying
+response and predictor in which case the argument <code>from</code> is ignored.</p>
+</td></tr>
+<tr valign="top"><td><code>from</code></td>
+<td>
+<p>Response variable (string), not necessarily directly affected by
+<code>to</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>all</code></td>
+<td>
+<p>If TRUE all simple paths (in undirected graph) is returned
+on/off.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>If <code>object</code> is of class <code>lvmfit</code> a list with the following
+elements is returned </p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>idx</code></td>
+<td>
+<p> A list where each element defines a
+possible pathway via a integer vector indicating the index of the visited
+nodes. </p>
+</td></tr> <tr valign="top"><td><code>V </code></td>
+<td>
+<p> A List of covariance matrices for each path. </p>
+</td></tr>
+<tr valign="top"><td><code>coef </code></td>
+<td>
+<p>A list of parameters estimates for each path</p>
+</td></tr> <tr valign="top"><td><code>path </code></td>
+<td>
+<p>A
+list where each element defines a possible pathway via a character vector
+naming the visited nodes in order.  </p>
+</td></tr> <tr valign="top"><td><code>edges </code></td>
+<td>
+<p>Description of 'comp2'</p>
+</td></tr>
+</table>
+<p>If <code>object</code> is of class <code>lvm</code> only the <code>path</code> element will be
+returned.
+</p>
+<p>The <code>effects</code> method returns an object of class <code>effects</code>.
+</p>
+
+
+<h3>Note</h3>
+
+<p>For a <code>lvmfit</code>-object the parameters estimates and their
+corresponding covariance matrix are also returned.  The
+<code>effects</code>-function additionally calculates the total and indirect
+effects with approximate standard errors
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Klaus K. Holst
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>children</code>, <code>parents</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+m &lt;- lvm(c(y1,y2,y3)~eta)
+regression(m) &lt;- y2~x1
+latent(m) &lt;- ~eta
+regression(m) &lt;- eta~x1+x2
+d &lt;- sim(m,500)
+e &lt;- estimate(m,d)
+
+path(Model(e),y2~x1)
+parents(Model(e), ~y2)
+children(Model(e), ~x2)
+children(Model(e), ~x2+eta)
+effects(e,y2~x1)
+## All simple paths (undirected)
+path(m,y1~x1,all=TRUE)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

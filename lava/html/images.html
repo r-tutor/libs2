@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Organize several image calls (for visualizing categorical...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for images {lava}"><tr><td>images {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Organize several image calls (for visualizing categorical data)</h2>
+
+<h3>Description</h3>
+
+<p>Visualize categorical by group variable
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+images(x, group, ncol = 2, byrow = TRUE, colorbar = 1,
+  colorbar.space = 0.1, label.offset = 0.02, order = TRUE,
+  colorbar.border = 0, main, rowcol = FALSE, plotfun = NULL, axis1,
+  axis2, mar, col = list(c("#EFF3FF", "#BDD7E7", "#6BAED6", "#2171B5"),
+  c("#FEE5D9", "#FCAE91", "#FB6A4A", "#CB181D"), c("#EDF8E9", "#BAE4B3",
+  "#74C476", "#238B45"), c("#FEEDDE", "#FDBE85", "#FD8D3C", "#D94701")),
+  ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>data.frame or matrix</p>
+</td></tr>
+<tr valign="top"><td><code>group</code></td>
+<td>
+<p>group variable</p>
+</td></tr>
+<tr valign="top"><td><code>ncol</code></td>
+<td>
+<p>number of columns in layout</p>
+</td></tr>
+<tr valign="top"><td><code>byrow</code></td>
+<td>
+<p>organize by row if TRUE</p>
+</td></tr>
+<tr valign="top"><td><code>colorbar</code></td>
+<td>
+<p>Add color bar</p>
+</td></tr>
+<tr valign="top"><td><code>colorbar.space</code></td>
+<td>
+<p>Space around color bar</p>
+</td></tr>
+<tr valign="top"><td><code>label.offset</code></td>
+<td>
+<p>label offset</p>
+</td></tr>
+<tr valign="top"><td><code>order</code></td>
+<td>
+<p>order</p>
+</td></tr>
+<tr valign="top"><td><code>colorbar.border</code></td>
+<td>
+<p>Add border around color bar</p>
+</td></tr>
+<tr valign="top"><td><code>main</code></td>
+<td>
+<p>Main title</p>
+</td></tr>
+<tr valign="top"><td><code>rowcol</code></td>
+<td>
+<p>switch rows and columns</p>
+</td></tr>
+<tr valign="top"><td><code>plotfun</code></td>
+<td>
+<p>Alternative plot function (instead of 'image')</p>
+</td></tr>
+<tr valign="top"><td><code>axis1</code></td>
+<td>
+<p>Axis 1</p>
+</td></tr>
+<tr valign="top"><td><code>axis2</code></td>
+<td>
+<p>Axis 2</p>
+</td></tr>
+<tr valign="top"><td><code>mar</code></td>
+<td>
+<p>Margins</p>
+</td></tr>
+<tr valign="top"><td><code>col</code></td>
+<td>
+<p>Colours</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments to lower level graphics functions</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Klaus Holst
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+X &lt;- matrix(rbinom(400,3,0.5),20)
+group &lt;- rep(1:4,each=5)
+images(X,colorbar=0,zlim=c(0,3))
+images(X,group=group,zlim=c(0,3))
+## Not run: 
+images(X,group=group,col=list(RColorBrewer::brewer.pal(4,"Purples"),
+                               RColorBrewer::brewer.pal(4,"Greys"),
+                               RColorBrewer::brewer.pal(4,"YlGn"),
+                               RColorBrewer::brewer.pal(4,"PuBuGn")),colorbar=2,zlim=c(0,3))
+
+## End(Not run)
+images(list(X,X,X,X),group=group,zlim=c(0,3))
+images(list(X,X,X,X),ncol=1,group=group,zlim=c(0,3))
+images(list(X,X),group,axis2=c(FALSE,FALSE),axis1=c(FALSE,FALSE),
+      mar=list(c(0,0,0,0),c(0,0,0,0)),yaxs="i",xaxs="i",zlim=c(0,3))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

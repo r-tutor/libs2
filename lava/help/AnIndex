@@ -236,7 +236,6 @@ OR	diagtest
 ordinal	ordinal-set
 ordinal<-	ordinal-set
 ordreg	ordreg
-Org	Org
 p.correct	closed.testing
 parameter	internal
 parameter<-	constrain-set

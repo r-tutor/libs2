@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Newton-Raphson method</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for NR {lava}"><tr><td>NR {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Newton-Raphson method</h2>
+
+<h3>Description</h3>
+
+<p>Newton-Raphson method
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+NR(start, objective = NULL, gradient = NULL, hessian = NULL, control,
+  args = NULL, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>start</code></td>
+<td>
+<p>Starting value</p>
+</td></tr>
+<tr valign="top"><td><code>objective</code></td>
+<td>
+<p>Optional objective function (used for selecting step length)</p>
+</td></tr>
+<tr valign="top"><td><code>gradient</code></td>
+<td>
+<p>gradient</p>
+</td></tr>
+<tr valign="top"><td><code>hessian</code></td>
+<td>
+<p>hessian (if NULL a numerical derivative is used)</p>
+</td></tr>
+<tr valign="top"><td><code>control</code></td>
+<td>
+<p>optimization arguments (see details)</p>
+</td></tr>
+<tr valign="top"><td><code>args</code></td>
+<td>
+<p>Optional list of arguments parsed to objective, gradient and hessian</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>additional arguments parsed to lower level functions</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>control</code> should be a list with one or more of the following components:
+</p>
+
+<ul>
+<li><p>trace integer for which output is printed each 'trace'th iteration
+</p>
+</li>
+<li><p>iter.max number of iterations
+</p>
+</li>
+<li><p>stepsize: Step size (default 1)
+</p>
+</li>
+<li><p>nstepsize: Increase stepsize every nstepsize iteration (from stepsize to 1)
+</p>
+</li>
+<li><p>tol: Convergence criterion (gradient)
+</p>
+</li>
+<li><p>epsilon: threshold used in pseudo-inverse
+</p>
+</li>
+<li><p>backtrack: In each iteration reduce stepsize unless solution is improved according to criterion (gradient, armijo, curvature, wolfe)
+</p>
+</li></ul>
+
+
+
+<h3>Examples</h3>
+
+<pre>
+# Objective function with gradient and hessian as attributes
+f &lt;- function(z) {
+    x &lt;- z[1]; y &lt;- z[2]
+    val &lt;- x^2 + x*y^2 + x + y
+    structure(val, gradient=function(x) c(2*x+y^2+1, x+1),
+              hessian=function(x) c(2, 0))
+}
+NR(c(0,0),f)
+
+
+# Parsing arguments to the function and
+g &lt;- function(x,y) (x*y+1)^2
+NR(0, gradient=g, args=list(y=2), control=list(trace=1,tol=1e-20))
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

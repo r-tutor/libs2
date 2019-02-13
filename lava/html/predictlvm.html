@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Predict function for latent variable models</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for predictlvm {lava}"><tr><td>predictlvm {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Predict function for latent variable models</h2>
+
+<h3>Description</h3>
+
+<p>Predictions of conditinoal mean and variance and calculation of
+jacobian with respect to parameter vector.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+predictlvm(object, formula, p = coef(object),
+  data = model.frame(object), ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>Model object</p>
+</td></tr>
+<tr valign="top"><td><code>formula</code></td>
+<td>
+<p>Formula specifying which variables to predict and which to condition on</p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>Parameter vector</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>Data.frame</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments to lower level functions</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p>predict.lvm
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+m &lt;- lvm(c(x1,x2,x3)~u1,u1~z,
+         c(y1,y2,y3)~u2,u2~u1+z)
+latent(m) &lt;- ~u1+u2
+d &lt;- simulate(m,10,"u2,u2"=2,"u1,u1"=0.5,seed=123)
+e &lt;- estimate(m,d)
+
+## Conditional mean given covariates
+predictlvm(e,c(x1,x2)~1)$mean
+## Conditional variance of u1,y1 given x1,x2
+predictlvm(e,c(u1,y1)~x1+x2)$var
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

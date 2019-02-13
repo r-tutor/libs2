@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Extract i.i.d. decomposition (influence function) from model...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for iid {lava}"><tr><td>iid {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Extract i.i.d. decomposition (influence function) from model object</h2>
+
+<h3>Description</h3>
+
+<p>Extract i.i.d. decomposition (influence function) from model object
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+iid(x,...)
+
+## Default S3 method:
+iid(x,bread,id=NULL,folds=0,maxsize=(folds&gt;0)*1e6,...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>model object</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>additional arguments</p>
+</td></tr>
+<tr valign="top"><td><code>id</code></td>
+<td>
+<p>(optional) id/cluster variable</p>
+</td></tr>
+<tr valign="top"><td><code>bread</code></td>
+<td>
+<p>(optional) Inverse of derivative of mean score function</p>
+</td></tr>
+<tr valign="top"><td><code>folds</code></td>
+<td>
+<p>(optional) Calculate aggregated iid decomposition (0:=disabled)</p>
+</td></tr>
+<tr valign="top"><td><code>maxsize</code></td>
+<td>
+<p>(optional) Data is split in groups of size up to 'maxsize' (0:=disabled)</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+m &lt;- lvm(y~x+z)
+distribution(m, ~y+z) &lt;- binomial.lvm("logit")
+d &lt;- sim(m,1e3)
+g &lt;- glm(y~x+z,data=d,family=binomial)
+crossprod(iid(g))
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

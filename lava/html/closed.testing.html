@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Closed testing procedure</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for closed.testing {lava}"><tr><td>closed.testing {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Closed testing procedure</h2>
+
+<h3>Description</h3>
+
+<p>Closed testing procedure
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+closed.testing(object, idx = seq_along(coef(object)), null = rep(0,
+  length(idx)), ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>estimate object</p>
+</td></tr>
+<tr valign="top"><td><code>idx</code></td>
+<td>
+<p>Index of parameters to adjust for multiple testing</p>
+</td></tr>
+<tr valign="top"><td><code>null</code></td>
+<td>
+<p>Null hypothesis value</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+m &lt;- lvm()
+regression(m, c(y1,y2,y3,y4,y5,y6,y7)~x) &lt;- c(0,0.25,0,0.25,0.25,0,0)
+regression(m, to=endogenous(m), from="u") &lt;- 1
+variance(m,endogenous(m)) &lt;- 1
+set.seed(2)
+d &lt;- sim(m,200)
+l1 &lt;- lm(y1~x,d)
+l2 &lt;- lm(y2~x,d)
+l3 &lt;- lm(y3~x,d)
+l4 &lt;- lm(y4~x,d)
+l5 &lt;- lm(y5~x,d)
+l6 &lt;- lm(y6~x,d)
+l7 &lt;- lm(y7~x,d)
+
+(a &lt;- merge(l1,l2,l3,l4,l5,l6,l7,subset=2))
+if (requireNamespace("mets",quietly=TRUE)) {
+   p.correct(a)
+}
+as.vector(closed.testing(a))
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

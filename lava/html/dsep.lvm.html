@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Check d-separation criterion</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for dsep.lvm {lava}"><tr><td>dsep.lvm {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Check d-separation criterion</h2>
+
+<h3>Description</h3>
+
+<p>Check for conditional independence (d-separation)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'lvm'
+dsep(object, x, cond = NULL, return.graph = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>lvm object</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>Variables for which to check for conditional independence</p>
+</td></tr>
+<tr valign="top"><td><code>cond</code></td>
+<td>
+<p>Conditioning set</p>
+</td></tr>
+<tr valign="top"><td><code>return.graph</code></td>
+<td>
+<p>If TRUE the moralized ancestral graph with the
+conditioning set removed is returned</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments to lower level functions</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The argument 'x' can be given as a formula, e.g.  x~y|z+v
+or ~x+y|z+v With everything on the rhs of the bar defining the
+variables on which to condition on.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+m &lt;- lvm(x5 ~ x4+x3, x4~x3+x1, x3~x2, x2~x1)
+if (interactive()) {
+plot(m,layoutType='neato')
+}
+dsep(m,x5~x1|x2+x4)
+dsep(m,x5~x1|x3+x4)
+dsep(m,~x1+x2+x3|x4)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

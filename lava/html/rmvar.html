@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Remove variables from (model) object.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for rmvar {lava}"><tr><td>rmvar {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Remove variables from (model) object.</h2>
+
+<h3>Description</h3>
+
+<p>Generic method for removing elements of object
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+rmvar(x, ...) &lt;- value
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>Model object</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>additional arguments to lower level functions</p>
+</td></tr>
+<tr valign="top"><td><code>value</code></td>
+<td>
+<p>Vector of variables or formula specifying which nodes to
+remove</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Klaus K. Holst
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>cancel</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+m &lt;- lvm()
+addvar(m) &lt;- ~y1+y2+x
+covariance(m) &lt;- y1~y2
+regression(m) &lt;- c(y1,y2) ~ x
+### Cancel the covariance between the residuals of y1 and y2
+cancel(m) &lt;- y1~y2
+### Remove y2 from the model
+rmvar(m) &lt;- ~y2
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Initialize new latent variable model</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for lvm {lava}"><tr><td>lvm {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Initialize new latent variable model</h2>
+
+<h3>Description</h3>
+
+<p>Function that constructs a new latent variable model object
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+lvm(x = NULL, ..., latent = NULL, messages = lava.options()$messages)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>Vector of variable names. Optional but gives control of the
+sequence of appearance of the variables. The argument can be given as a
+character vector or formula, e.g. <code>~y1+y2</code> is equivalent to
+<code>c("y1","y2")</code>. Alternatively the argument can be a formula specifying
+a linear model.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments to be passed to the low level functions</p>
+</td></tr>
+<tr valign="top"><td><code>latent</code></td>
+<td>
+<p>(optional) Latent variables</p>
+</td></tr>
+<tr valign="top"><td><code>messages</code></td>
+<td>
+<p>Controls what messages are printed (0: none)</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Returns an object of class <code>lvm</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Klaus K. Holst
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="regression-set.html">regression</a></code>, <code><a href="covariance.html">covariance</a></code>,
+<code><a href="intercept.html">intercept</a></code>, ...
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+m &lt;- lvm() # Empty model
+m1 &lt;- lvm(y~x) # Simple linear regression
+m2 &lt;- lvm(~y1+y2) # Model with two independent variables (argument)
+m3 &lt;- lvm(list(c(y1,y2,y3)~u,u~x+z)) # SEM with three items
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

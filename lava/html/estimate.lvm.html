@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Estimation of parameters in a Latent Variable Model (lvm)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for estimate.lvm {lava}"><tr><td>estimate.lvm {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Estimation of parameters in a Latent Variable Model (lvm)</h2>
+
+<h3>Description</h3>
+
+<p>Estimate parameters. MLE, IV or user-defined estimator.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'lvm'
+estimate(x, data = parent.frame(), estimator = NULL,
+  control = list(), missing = FALSE, weights, weightsname, data2, id,
+  fix, index = !quick, graph = FALSE,
+  messages = lava.options()$messages, quick = FALSE, method, param,
+  cluster, p, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p><code>lvm</code>-object</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p><code>data.frame</code></p>
+</td></tr>
+<tr valign="top"><td><code>estimator</code></td>
+<td>
+<p>String defining the estimator (see details below)</p>
+</td></tr>
+<tr valign="top"><td><code>control</code></td>
+<td>
+<p>control/optimization parameters (see details below)</p>
+</td></tr>
+<tr valign="top"><td><code>missing</code></td>
+<td>
+<p>Logical variable indiciating how to treat missing data.
+Setting to FALSE leads to complete case analysis. In the other case
+likelihood based inference is obtained by integrating out the missing data
+under assumption the assumption that data is missing at random (MAR).</p>
+</td></tr>
+<tr valign="top"><td><code>weights</code></td>
+<td>
+<p>Optional weights to used by the chosen estimator.</p>
+</td></tr>
+<tr valign="top"><td><code>weightsname</code></td>
+<td>
+<p>Weights names (variable names of the model) in case
+<code>weights</code> was given as a vector of column names of <code>data</code></p>
+</td></tr>
+<tr valign="top"><td><code>data2</code></td>
+<td>
+<p>Optional additional dataset used by the chosen
+estimator.</p>
+</td></tr>
+<tr valign="top"><td><code>id</code></td>
+<td>
+<p>Vector (or name of column in <code>data</code>) that identifies
+correlated groups of observations in the data leading to variance estimates
+based on a sandwich estimator</p>
+</td></tr>
+<tr valign="top"><td><code>fix</code></td>
+<td>
+<p>Logical variable indicating whether parameter restriction
+automatically should be imposed (e.g. intercepts of latent variables set to
+0 and at least one regression parameter of each measurement model fixed to
+ensure identifiability.)</p>
+</td></tr>
+<tr valign="top"><td><code>index</code></td>
+<td>
+<p>For internal use only</p>
+</td></tr>
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>For internal use only</p>
+</td></tr>
+<tr valign="top"><td><code>messages</code></td>
+<td>
+<p>Control how much information should be
+printed during estimation (0: none)</p>
+</td></tr>
+<tr valign="top"><td><code>quick</code></td>
+<td>
+<p>If TRUE the parameter estimates are calculated but all
+additional information such as standard errors are skipped</p>
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+<p>Optimization method</p>
+</td></tr>
+<tr valign="top"><td><code>param</code></td>
+<td>
+<p>set parametrization (see <code>help(lava.options)</code>)</p>
+</td></tr>
+<tr valign="top"><td><code>cluster</code></td>
+<td>
+<p>Obsolete. Alias for 'id'.</p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>Evaluate model in parameter 'p' (no optimization)</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments to be passed to lower-level functions</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>A list of parameters controlling the estimation and optimization procedures
+is parsed via the <code>control</code> argument. By default Maximum Likelihood is
+used assuming multivariate normal distributed measurement errors. A list
+with one or more of the following elements is expected:
+</p>
+
+<dl>
+<dt>start:</dt><dd><p>Starting value. The order of the parameters can be shown by
+calling <code>coef</code> (with <code>mean=TRUE</code>) on the <code>lvm</code>-object or with
+<code>plot(..., labels=TRUE)</code>. Note that this requires a check that it is
+actual the model being estimated, as <code>estimate</code> might add additional
+restriction to the model, e.g. through the <code>fix</code> and <code>exo.fix</code>
+arguments. The <code>lvm</code>-object of a fitted model can be extracted with the
+<code>Model</code>-function.</p>
+</dd>
+<dt>starterfun:</dt><dd><p>Starter-function with syntax
+<code>function(lvm, S, mu)</code>.  Three builtin functions are available:
+<code>startvalues</code>, <code>startvalues0</code>, <code>startvalues1</code>, ...</p>
+</dd>
+<dt>estimator:</dt><dd><p> String defining which estimator to use (Defaults to
+&ldquo;<code>gaussian</code>&rdquo;)</p>
+</dd>
+<dt>meanstructure</dt><dd><p>Logical variable indicating
+whether to fit model with meanstructure.</p>
+</dd>
+<dt>method:</dt><dd><p> String pointing to
+alternative optimizer (e.g. <code>optim</code> to use simulated annealing).</p>
+</dd>
+<dt>control:</dt><dd><p> Parameters passed to the optimizer (default
+<code>stats::nlminb</code>).</p>
+</dd>
+<dt>tol:</dt><dd><p> Tolerance of optimization constraints on lower limit of
+variance parameters.  </p>
+</dd> </dl>
+
+
+
+<h3>Value</h3>
+
+<p>A <code>lvmfit</code>-object.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Klaus K. Holst
+</p>
+
+
+<h3>See Also</h3>
+
+<p>estimate.default score, information
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+dd &lt;- read.table(header=TRUE,
+text="x1 x2 x3
+ 0.0 -0.5 -2.5
+-0.5 -2.0  0.0
+ 1.0  1.5  1.0
+ 0.0  0.5  0.0
+-2.5 -1.5 -1.0")
+e &lt;- estimate(lvm(c(x1,x2,x3)~u),dd)
+
+## Simulation example
+m &lt;- lvm(list(y~v1+v2+v3+v4,c(v1,v2,v3,v4)~x))
+covariance(m) &lt;- v1~v2+v3+v4
+dd &lt;- sim(m,10000) ## Simulate 10000 observations from model
+e &lt;- estimate(m, dd) ## Estimate parameters
+e
+
+## Using just sufficient statistics
+n &lt;- nrow(dd)
+e0 &lt;- estimate(m,data=list(S=cov(dd)*(n-1)/n,mu=colMeans(dd),n=n))
+rm(dd)
+
+## Multiple group analysis
+m &lt;- lvm()
+regression(m) &lt;- c(y1,y2,y3)~u
+regression(m) &lt;- u~x
+d1 &lt;- sim(m,100,p=c("u,u"=1,"u~x"=1))
+d2 &lt;- sim(m,100,p=c("u,u"=2,"u~x"=-1))
+
+mm &lt;- baptize(m)
+regression(mm,u~x) &lt;- NA
+covariance(mm,~u) &lt;- NA
+intercept(mm,~u) &lt;- NA
+ee &lt;- estimate(list(mm,mm),list(d1,d2))
+
+## Missing data
+d0 &lt;- makemissing(d1,cols=1:2)
+e0 &lt;- estimate(m,d0,missing=TRUE)
+e0
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

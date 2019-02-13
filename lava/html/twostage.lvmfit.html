@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Two-stage estimator (non-linear SEM)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for twostage.lvmfit {lava}"><tr><td>twostage.lvmfit {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Two-stage estimator (non-linear SEM)</h2>
+
+<h3>Description</h3>
+
+<p>Two-stage estimator for non-linear structural equation models
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'lvmfit'
+twostage(object, model2, data = NULL,
+  predict.fun = NULL, id1 = NULL, id2 = NULL, all = FALSE,
+  formula = NULL, std.err = TRUE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>Stage 1 measurement model</p>
+</td></tr>
+<tr valign="top"><td><code>model2</code></td>
+<td>
+<p>Stage 2 SEM</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>data.frame</p>
+</td></tr>
+<tr valign="top"><td><code>predict.fun</code></td>
+<td>
+<p>Prediction of latent variable</p>
+</td></tr>
+<tr valign="top"><td><code>id1</code></td>
+<td>
+<p>Optional id-variable (stage 1 model)</p>
+</td></tr>
+<tr valign="top"><td><code>id2</code></td>
+<td>
+<p>Optional id-variable (stage 2 model)</p>
+</td></tr>
+<tr valign="top"><td><code>all</code></td>
+<td>
+<p>If TRUE return additional output (naive estimates)</p>
+</td></tr>
+<tr valign="top"><td><code>formula</code></td>
+<td>
+<p>optional formula specifying non-linear relation</p>
+</td></tr>
+<tr valign="top"><td><code>std.err</code></td>
+<td>
+<p>If FALSE calculations of standard errors will be skipped</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments to lower level functions</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+m &lt;- lvm(c(x1,x2,x3)~f1,f1~z,
+         c(y1,y2,y3)~f2,f2~f1+z)
+latent(m) &lt;- ~f1+f2
+d &lt;- simulate(m,100,p=c("f2,f2"=2,"f1,f1"=0.5),seed=1)
+
+## Full MLE
+ee &lt;- estimate(m,d)
+
+## Manual two-stage
+## Not run: 
+m1 &lt;- lvm(c(x1,x2,x3)~f1,f1~z); latent(m1) &lt;- ~f1
+e1 &lt;- estimate(m1,d)
+pp1 &lt;- predict(e1,f1~x1+x2+x3)
+
+d$u1 &lt;- pp1[,]
+d$u2 &lt;- pp1[,]^2+attr(pp1,"cond.var")[1]
+m2 &lt;- lvm(c(y1,y2,y3)~eta,c(y1,eta)~u1+u2+z); latent(m2) &lt;- ~eta
+e2 &lt;- estimate(m2,d)
+
+## End(Not run)
+
+## Two-stage
+m1 &lt;- lvm(c(x1,x2,x3)~f1,f1~z); latent(m1) &lt;- ~f1
+m2 &lt;- lvm(c(y1,y2,y3)~eta,c(y1,eta)~u1+u2+z); latent(m2) &lt;- ~eta
+pred &lt;- function(mu,var,data,...)
+    cbind("u1"=mu[,1],"u2"=mu[,1]^2+var[1])
+(mm &lt;- twostage(m1,model2=m2,data=d,predict.fun=pred))
+
+if (interactive()) {
+    pf &lt;- function(p) p["eta"]+p["eta~u1"]*u + p["eta~u2"]*u^2
+    plot(mm,f=pf,data=data.frame(u=seq(-2,2,length.out=100)),lwd=2)
+}
+
+## Splines
+f &lt;- function(x) cos(2*x)+x+-0.25*x^2
+m &lt;- lvm(x1+x2+x3~eta1, y1+y2+y3~eta2, latent=~eta1+eta2)
+functional(m, eta2~eta1) &lt;- f
+d &lt;- sim(m,500,seed=1,latent=TRUE)
+m1 &lt;- lvm(x1+x2+x3~eta1,latent=~eta1)
+m2 &lt;- lvm(y1+y2+y3~eta2,latent=~eta2)
+mm &lt;- twostage(m1,m2,formula=eta2~eta1,type="spline")
+if (interactive()) plot(mm)
+
+nonlinear(m2,type="quadratic") &lt;- eta2~eta1
+a &lt;- twostage(m1,m2,data=d)
+if (interactive()) plot(a)
+
+kn &lt;- c(-1,0,1)
+nonlinear(m2,type="spline",knots=kn) &lt;- eta2~eta1
+a &lt;- twostage(m1,m2,data=d)
+x &lt;- seq(-3,3,by=0.1)
+y &lt;- predict(a, newdata=data.frame(eta1=x))
+
+if (interactive()) {
+  plot(eta2~eta1, data=d)
+  lines(x,y, col="red", lwd=5)
+
+  p &lt;- estimate(a,f=function(p) predict(a,p=p,newdata=x))$coefmat
+  plot(eta2~eta1, data=d)
+  lines(x,p[,1], col="red", lwd=5)
+  confband(x,lower=p[,3],upper=p[,4],center=p[,1], polygon=TRUE, col=Col(2,0.2))
+
+  l1 &lt;- lm(eta2~splines::ns(eta1,knots=kn),data=d)
+  p1 &lt;- predict(l1,newdata=data.frame(eta1=x),interval="confidence")
+  lines(x,p1[,1],col="green",lwd=5)
+  confband(x,lower=p1[,2],upper=p1[,3],center=p1[,1], polygon=TRUE, col=Col(3,0.2))
+}
+
+## Not run:  ## Reduce timing
+ ## Cross-validation example
+ ma &lt;- lvm(c(x1,x2,x3)~u,latent=~u)
+ ms &lt;- functional(ma, y~u, value=function(x) -.4*x^2)
+ d &lt;- sim(ms,500)#,seed=1)
+ ea &lt;- estimate(ma,d)
+
+ mb &lt;- lvm()
+ mb1 &lt;- nonlinear(mb,type="linear",y~u)
+ mb2 &lt;- nonlinear(mb,type="quadratic",y~u)
+ mb3 &lt;- nonlinear(mb,type="spline",knots=c(-3,-1,0,1,3),y~u)
+ mb4 &lt;- nonlinear(mb,type="spline",knots=c(-3,-2,-1,0,1,2,3),y~u)
+ ff &lt;- lapply(list(mb1,mb2,mb3,mb4),
+      function(m) function(data,...) twostage(ma,m,data=data,st.derr=FALSE))
+ a &lt;- cv(ff,data=d,rep=1,mc.cores=1)
+ a
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Summary method for 'sim' objects</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for summary.sim {lava}"><tr><td>summary.sim {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Summary method for 'sim' objects</h2>
+
+<h3>Description</h3>
+
+<p>Summary method for 'sim' objects
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'sim'
+summary(object, estimate = NULL, se = NULL,
+  confint = !is.null(se) &amp;&amp; !is.null(true), true = NULL, fun,
+  names = NULL, unique.names = TRUE, minimal = FALSE, level = 0.95,
+  quantiles = c(0, 0.025, 0.5, 0.975, 1), ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>sim object</p>
+</td></tr>
+<tr valign="top"><td><code>estimate</code></td>
+<td>
+<p>(optional) columns with estimates</p>
+</td></tr>
+<tr valign="top"><td><code>se</code></td>
+<td>
+<p>(optional) columns with standard error estimates</p>
+</td></tr>
+<tr valign="top"><td><code>confint</code></td>
+<td>
+<p>(optional) list of pairs of columns with confidence limits</p>
+</td></tr>
+<tr valign="top"><td><code>true</code></td>
+<td>
+<p>(optional) vector of true parameter values</p>
+</td></tr>
+<tr valign="top"><td><code>fun</code></td>
+<td>
+<p>(optional) summary function</p>
+</td></tr>
+<tr valign="top"><td><code>names</code></td>
+<td>
+<p>(optional) names of</p>
+</td></tr>
+<tr valign="top"><td><code>unique.names</code></td>
+<td>
+<p>if TRUE, unique.names will be applied to column names</p>
+</td></tr>
+<tr valign="top"><td><code>minimal</code></td>
+<td>
+<p>if TRUE, minimal summary will be returned</p>
+</td></tr>
+<tr valign="top"><td><code>level</code></td>
+<td>
+<p>confidence level</p>
+</td></tr>
+<tr valign="top"><td><code>quantiles</code></td>
+<td>
+<p>quantiles</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>additional levels to lower-level functions</p>
+</td></tr>
+</table>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

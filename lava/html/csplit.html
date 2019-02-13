@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Split data into folds</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for csplit {lava}"><tr><td>csplit {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Split data into folds</h2>
+
+<h3>Description</h3>
+
+<p>Split data into folds
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+csplit(x, p = NULL, replace = FALSE, return.index = FALSE, k = 2,
+  ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>Data or integer (size)</p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>Number of folds, or if a number between 0 and 1 is given two folds of size p and (1-p) will be returned</p>
+</td></tr>
+<tr valign="top"><td><code>replace</code></td>
+<td>
+<p>With or with-out replacement</p>
+</td></tr>
+<tr valign="top"><td><code>return.index</code></td>
+<td>
+<p>If TRUE index of folds are returned otherwise the actual data splits are returned (default)</p>
+</td></tr>
+<tr valign="top"><td><code>k</code></td>
+<td>
+<p>(Optional, only used when p=NULL) number of folds without shuffling</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>additional arguments to lower-level functions</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Klaus K. Holst
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+foldr(5,2,rep=2)
+csplit(10,3)
+csplit(iris[1:10,]) ## Split in two sets 1:(n/2) and (n/2+1):n
+csplit(iris[1:10,],0.5)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

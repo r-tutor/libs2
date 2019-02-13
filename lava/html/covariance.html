@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Add covariance structure to Latent Variable Model</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for covariance {lava}"><tr><td>covariance {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Add covariance structure to Latent Variable Model</h2>
+
+<h3>Description</h3>
+
+<p>Define covariances between residual terms in a <code>lvm</code>-object.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 replacement method for class 'lvm'
+covariance(object, var1=NULL, var2=NULL, constrain=FALSE, pairwise=FALSE,...) &lt;- value
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p><code>lvm</code>-object</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments to be passed to the low level functions</p>
+</td></tr>
+<tr valign="top"><td><code>var1</code></td>
+<td>
+<p>Vector of variables names (or formula)</p>
+</td></tr>
+<tr valign="top"><td><code>var2</code></td>
+<td>
+<p>Vector of variables names (or formula) defining pairwise
+covariance between <code>var1</code> and <code>var2</code>)</p>
+</td></tr>
+<tr valign="top"><td><code>constrain</code></td>
+<td>
+<p>Define non-linear parameter constraints to ensure positive definite structure</p>
+</td></tr>
+<tr valign="top"><td><code>pairwise</code></td>
+<td>
+<p>If TRUE and <code>var2</code> is omitted then pairwise correlation is added between all variables in <code>var1</code></p>
+</td></tr>
+<tr valign="top"><td><code>value</code></td>
+<td>
+<p>List of parameter values or (if <code>var1</code> is unspecified)</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The <code>covariance</code> function is used to specify correlation structure
+between residual terms of a latent variable model, using a formula syntax.
+</p>
+<p>For instance, a multivariate model with three response variables,
+</p>
+<p style="text-align: center;"><i>Y_1 = &mu;_1 + &epsilon;_1</i></p>
+
+<p style="text-align: center;"><i>Y_2 = &mu;_2 + &epsilon;_2</i></p>
+
+<p style="text-align: center;"><i>Y_3 = &mu;_3 + &epsilon;_3</i></p>
+
+<p>can be specified as
+</p>
+<p><code>m &lt;- lvm(~y1+y2+y3)</code>
+</p>
+<p>Pr. default the two variables are assumed to be independent. To add a
+covariance parameter <i>r = cov(&epsilon;_1,&epsilon;_2)</i>, we execute the
+following code
+</p>
+<p><code>covariance(m) &lt;- y1 ~ f(y2,r)</code>
+</p>
+<p>The special function <code>f</code> and its second argument could be omitted thus
+assigning an unique parameter the covariance between <code>y1</code> and
+<code>y2</code>.
+</p>
+<p>Similarily the marginal variance of the two response variables can be fixed
+to be identical (<i>var(Y_i)=v</i>) via
+</p>
+<p><code>covariance(m) &lt;- c(y1,y2,y3) ~ f(v)</code>
+</p>
+<p>To specify a completely unstructured covariance structure, we can call
+</p>
+<p><code>covariance(m) &lt;- ~y1+y2+y3</code>
+</p>
+<p>All the parameter values of the linear constraints can be given as the right
+handside expression of the assigment function <code>covariance&lt;-</code> if the
+first (and possibly second) argument is defined as well. E.g:
+</p>
+<p><code>covariance(m,y1~y1+y2) &lt;- list("a1","b1")</code>
+</p>
+<p><code>covariance(m,~y2+y3) &lt;- list("a2",2)</code>
+</p>
+<p>Defines
+</p>
+<p style="text-align: center;"><i>var(&epsilon;_1) = a1</i></p>
+
+<p style="text-align: center;"><i>var(&epsilon;_2) = a2</i></p>
+
+<p style="text-align: center;"><i>var(&epsilon;_3) = 2</i></p>
+
+<p style="text-align: center;"><i>cov(&epsilon;_1,&epsilon;_2) = b1</i></p>
+
+<p>Parameter constraints can be cleared by fixing the relevant parameters to
+<code>NA</code> (see also the <code>regression</code> method).
+</p>
+<p>The function <code>covariance</code> (called without additional arguments) can be
+used to inspect the covariance constraints of a <code>lvm</code>-object.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A <code>lvm</code>-object
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Klaus K. Holst
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="regression-set.html">regression&lt;-</a></code>, <code><a href="intercept.html">intercept&lt;-</a></code>,
+<code><a href="constrain-set.html">constrain&lt;-</a></code> <code><a href="constrain-set.html">parameter&lt;-</a></code>, <code><a href="vars.html">latent&lt;-</a></code>,
+<code><a href="cancel.html">cancel&lt;-</a></code>, <code><a href="rmvar.html">kill&lt;-</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+m &lt;- lvm()
+### Define covariance between residuals terms of y1 and y2
+covariance(m) &lt;- y1~y2
+covariance(m) &lt;- c(y1,y2)~f(v) ## Same marginal variance
+covariance(m) ## Examine covariance structure
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

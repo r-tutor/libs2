@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Convert pdf to raster format</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for pdfconvert {lava}"><tr><td>pdfconvert {lava}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Convert pdf to raster format</h2>
+
+<h3>Description</h3>
+
+<p>Convert PDF file to print quality png (default 300 dpi)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+pdfconvert(files, dpi = 300, resolution = 1024, gs, gsopt, resize,
+  format = "png", ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>files</code></td>
+<td>
+<p>Vector of (pdf-)filenames to process</p>
+</td></tr>
+<tr valign="top"><td><code>dpi</code></td>
+<td>
+<p>DPI</p>
+</td></tr>
+<tr valign="top"><td><code>resolution</code></td>
+<td>
+<p>Resolution of raster image file</p>
+</td></tr>
+<tr valign="top"><td><code>gs</code></td>
+<td>
+<p>Optional ghostscript command</p>
+</td></tr>
+<tr valign="top"><td><code>gsopt</code></td>
+<td>
+<p>Optional ghostscript arguments</p>
+</td></tr>
+<tr valign="top"><td><code>resize</code></td>
+<td>
+<p>Optional resize arguments (mogrify)</p>
+</td></tr>
+<tr valign="top"><td><code>format</code></td>
+<td>
+<p>Raster format (e.g. png, jpg, tif, ...)</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Access to ghostscript program 'gs' is needed
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Klaus K. Holst
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>dev.copy2pdf</code>, <code>printdev</code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>lava</em> version 1.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>
