@@ -1,3 +1,11 @@
+version 0.2.0
+- gower_dist and gower_topn gain `weight` argument for weighted matching (thanks to David Turner)
+- gower_dist and gower_topn gain `ignore_case` argument for automatic column matching.
+- gower_dist now returns numeric(0) invisibly when there are no columns to compare.
+- gower_topn now returns a list with empty matrices when there are no columns to compare.
+- gower_topn now warns when n>nrow(y) and sets n=nrow(y)
+- bugfix: comparing factors with characters would cause a crash (thanks to Max Kuhn)
+
 version 0.1.2
 - fixed valgrind warning
 - registered native routines, as now recommended by CRAN

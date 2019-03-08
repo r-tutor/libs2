@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Facet data for zoom with context</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for facet_zoom {ggforce}"><tr><td>facet_zoom {ggforce}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Facet data for zoom with context</h2>
+
+<h3>Description</h3>
+
+<p>This facetting provides the means to zoom in on a subset of the data, while
+keeping the view of the full dataset as a separate panel. The zoomed-in area
+will be indicated on the full dataset panel for reference. It is possible to
+zoom in on both the x and y axis at the same time. If this is done it is
+possible to both get each zoom separately and combined or just combined.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+facet_zoom(x, y, xy, zoom.data, xlim = NULL, ylim = NULL,
+  split = FALSE, horizontal = TRUE, zoom.size = 2,
+  show.area = TRUE, shrink = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x, y, xy</code></td>
+<td>
+<p>An expression evaluating to a logical vector that determines
+the subset of data to zoom in on</p>
+</td></tr>
+<tr valign="top"><td><code>zoom.data</code></td>
+<td>
+<p>An expression evaluating to a logical vector. If <code>TRUE</code>
+the data only shows in the zoom panels. If <code>FALSE</code> the data only show in
+the context panel. If <code>NA</code> the data will show in all panels.</p>
+</td></tr>
+<tr valign="top"><td><code>xlim, ylim</code></td>
+<td>
+<p>Specific zoom ranges for each axis. If present they will
+override <code>x</code>, <code>y</code>, and/or <code>xy</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>split</code></td>
+<td>
+<p>If both <code>x</code> and <code>y</code> is given, should each axis zoom
+be shown separately as well? Defaults to <code>FALSE</code></p>
+</td></tr>
+<tr valign="top"><td><code>horizontal</code></td>
+<td>
+<p>If both <code>x</code> and <code>y</code> is given and
+<code>split = FALSE</code> How should the zoom panel be positioned relative to the
+full data panel? Defaults to <code>TRUE</code></p>
+</td></tr>
+<tr valign="top"><td><code>zoom.size</code></td>
+<td>
+<p>Sets the relative size of the zoom panel to the full data
+panel. The default (<code>2</code>) makes the zoom panel twice the size of the full
+data panel.</p>
+</td></tr>
+<tr valign="top"><td><code>show.area</code></td>
+<td>
+<p>Should the zoom area be drawn below the data points on the
+full data panel? Defaults to <code>TRUE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>shrink</code></td>
+<td>
+<p>If <code>TRUE</code>, will shrink scales to fit output of
+statistics, not raw data. If <code>FALSE</code>, will be range of raw data
+before statistical summary.</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p>Other ggforce facets: <code><a href="facet_grid_paginate.html">facet_grid_paginate</a></code>,
+<code><a href="facet_stereo.html">facet_stereo</a></code>,
+<code><a href="facet_wrap_paginate.html">facet_wrap_paginate</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Zoom in on the versicolor species on the x-axis
+ggplot(iris, aes(Petal.Length, Petal.Width, colour = Species)) +
+  geom_point() +
+  facet_zoom(x = Species == 'versicolor')
+
+# Zoom in on versicolor on both axes
+ggplot(iris, aes(Petal.Length, Petal.Width, colour = Species)) +
+  geom_point() +
+  facet_zoom(xy = Species == 'versicolor')
+
+# Use different zoom criteria on each axis
+ggplot(iris, aes(Petal.Length, Petal.Width, colour = Species)) +
+  geom_point() +
+  facet_zoom(x = Species != 'setosa', y = Species == 'versicolor')
+
+# Get each axis zoom separately as well
+ggplot(iris, aes(Petal.Length, Petal.Width, colour = Species)) +
+  geom_point() +
+  facet_zoom(xy = Species == 'versicolor', split = TRUE)
+
+# Define the zoom area directly
+ggplot(iris, aes(Petal.Length, Petal.Width, colour = Species)) +
+  geom_point() +
+  facet_zoom(xlim = c(2, 4))
+
+# Selectively show data in the zoom panel
+ggplot(iris, aes(Petal.Length, Petal.Width, colour = Species)) +
+  geom_point() +
+  facet_zoom(x = Species == 'versicolor', zoom.data = Species == 'versicolor')
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggforce</em> version 0.2.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

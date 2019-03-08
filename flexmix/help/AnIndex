@@ -257,6 +257,8 @@ rFLXM,FLXMCmultinom,FLXcomponent-method	rflexmix
 rFLXM,FLXMRglm,FLXcomponent-method	rflexmix
 rFLXM,FLXMRglm,list-method	rflexmix
 rFLXM,FLXMRglmfix,list-method	rflexmix
+rFLXM,FLXMRlmc,FLXcomponent-method	FLXMRlmer
+rFLXM,FLXMRlmer,FLXcomponent-method	FLXMRlmer
 rFLXM,FLXMRlmm,FLXcomponent-method	FLXMRlmer
 rFLXM,FLXMRlmm,list-method	FLXMRlmer
 salmonellaTA98	salmonellaTA98

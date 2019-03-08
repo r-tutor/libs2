@@ -1,8 +1,8 @@
 Package: fftw
-Version: 1.0-4
+Version: 1.0-5
 Title: Fast FFT and DCT Based on the FFTW Library
 Description: Provides a simple and efficient wrapper around the fastest
-        Fourier transform in the west (FFTW) <http://www.fftw.org/> library.
+        Fourier transform in the west (FFTW) library <http://www.fftw.org/>.
 Authors@R: c( person("Olaf", "Mersmann", email="olafm@p-value.net",
         role=c("aut")), person("Sebastian", "Krey",
         email="skrey@statistik.tu-dortmund.de", role=c("ctb")),
@@ -13,12 +13,12 @@ SystemRequirements: fftw3 (>= 3.1.2)
 License: GPL-2
 RoxygenNote: 6.0.1
 NeedsCompilation: yes
-Packaged: 2017-05-01 16:32:33 UTC; ligges
+Packaged: 2019-03-04 12:47:53 UTC; ligges
 Author: Olaf Mersmann [aut],
   Sebastian Krey [ctb],
   Uwe Ligges [ctb, cre]
 Maintainer: Uwe Ligges <ligges@statistik.tu-dortmund.de>
 Repository: CRAN
-Date/Publication: 2017-05-01 19:19:56 UTC
-Built: R 3.5.0; x86_64-w64-mingw32; 2018-04-21 03:58:59 UTC; windows
+Date/Publication: 2019-03-04 13:50:09 UTC
+Built: R 3.5.2; x86_64-w64-mingw32; 2019-03-05 14:46:25 UTC; windows
 Archs: i386, x64

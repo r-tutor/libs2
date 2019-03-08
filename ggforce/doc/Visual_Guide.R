@@ -2,6 +2,32 @@
 library(ggforce)
 set.seed(1)
 
+## ------------------------------------------------------------------------
+# Adapted from geom_polygon documentation
+ids <- factor(c("1.1", "2.1", "1.2", "2.2", "1.3", "2.3"))
+
+values <- data.frame(
+  id = ids,
+  value = c(3, 3.1, 3.1, 3.2, 3.15, 3.5)
+)
+
+positions <- data.frame(
+  id = rep(ids, each = 4),
+  x = c(2, 1, 1.1, 2.2, 1, 0, 0.3, 1.1, 2.2, 1.1, 1.2, 2.5, 1.1, 0.3,
+  0.5, 1.2, 2.5, 1.2, 1.3, 2.7, 1.2, 0.5, 0.6, 1.3),
+  y = c(-0.5, 0, 1, 0.5, 0, 0.5, 1.5, 1, 0.5, 1, 2.1, 1.7, 1, 1.5,
+  2.2, 2.1, 1.7, 2.1, 3.2, 2.8, 2.1, 2.2, 3.3, 3.2)
+)
+
+datapoly <- merge(values, positions, by = c("id"))
+
+ggplot(datapoly, aes(x = x, y = y)) +
+  geom_shape(aes(fill = value, group = id), expand = unit(-3, 'mm'))
+ggplot(datapoly, aes(x = x, y = y)) +
+  geom_shape(aes(fill = value, group = id), radius = unit(3, 'mm'))
+ggplot(datapoly, aes(x = x, y = y)) +
+  geom_shape(aes(fill = value, group = id), expand = unit(3, 'mm'), radius = unit(2, 'mm'), alpha = 0.5)
+
 ## ---- eval=TRUE, echo=TRUE, fig.align='center'---------------------------
 # We'll start by defining some dummy data
 pie <- data.frame(
@@ -78,6 +104,18 @@ ggplot() + geom_circle(aes(x0=x0, y0=y0, r=r, fill=r), data=circles) +
 ggplot() + geom_circle(aes(x0=x0, y0=y0, r=r, fill=r), data=circles, n=10) +
     coord_fixed()
 
+## ------------------------------------------------------------------------
+# Basic usage
+ggplot() +
+  geom_ellipse(aes(x0 = 0, y0 = 0, a = 10, b = 3, angle = 0)) +
+  coord_fixed()
+
+# Rotation
+# Note that it expects radians and rotates the ellipse counter-clockwise
+ggplot() +
+  geom_ellipse(aes(x0 = 0, y0 = 0, a = 10, b = 3, angle = pi/4)) +
+  coord_fixed()
+
 ## ---- echo=TRUE, eval=TRUE, fig.align='center'---------------------------
 links <- data.frame(
     x = 0, y = 0, xend = runif(10), yend = runif(10)
@@ -114,6 +152,36 @@ ggplot() + geom_segment(aes(x = x, xend = xend, y = y, yend = yend),
                 data = beziers) + 
     geom_point(aes(x = x, y = y, colour = point), data = beziers)
 
+## ------------------------------------------------------------------------
+data <- data.frame(
+  x = rep(0, 10),
+  y = 1:10,
+  xend = 1:10,
+  yend = 2:11
+)
+ggplot(data) +
+  geom_diagonal(aes(x, y, xend = xend, yend = yend))
+
+## ------------------------------------------------------------------------
+data <- data.frame(
+  x = c(1, 2, 2, 1, 2, 3, 3, 2),
+  y = c(1, 2, 3, 2, 3, 1, 2, 5),
+  group = c(1, 1, 1, 1, 2, 2, 2, 2)
+)
+ggplot(data) +
+  geom_diagonal_wide(aes(x, y, group = group), 
+                     colour = 'black', fill = 'steelblue', radius = 0.01)
+
+## ------------------------------------------------------------------------
+data <- reshape2::melt(Titanic)
+head(data)
+data <- gather_set_data(data, 1:4)
+head(data)
+ggplot(data, aes(x, id = id, split = y, value = value)) +
+  geom_parallel_sets(aes(fill = Sex), alpha = 0.3, axis.width = 0.1) +
+  geom_parallel_sets_axes(axis.width = 0.1) +
+  geom_parallel_sets_labels(colour = 'white')
+
 ## ---- echo=TRUE, eval=TRUE, fig.align='center'---------------------------
 spline <- data.frame(
     x = runif(5), y = runif(5), group = 1
@@ -140,6 +208,16 @@ df$Distribution <- factor(df$Distribution,
 p <- ggplot(df, aes(Distribution, Value))
 p + geom_violin(aes(fill = Distribution))
 p + geom_sina(aes(color = Distribution), size = 1)
+
+## ------------------------------------------------------------------------
+ggplot() +
+  geom_spiro(aes(R = 10, r = 3, d = 5))
+# Only draw a portion
+ggplot() +
+  geom_spiro(aes(R = 10, r = 3, d = 5), revolutions = 1.2)
+# Let the inner gear circle the outside of the outer gear
+ggplot() +
+  geom_spiro(aes(R = 10, r = 3, d = 5, outer = TRUE))
 
 ## ------------------------------------------------------------------------
 # Standard facetting
@@ -189,6 +267,30 @@ ggplot(iris, aes(Petal.Length, Petal.Width, colour = Species)) +
     facet_zoom(x = Species != 'setosa', y = Species == 'versicolor', 
                split = TRUE)
 
+## ------------------------------------------------------------------------
+volcano3d <- structure(reshape2::melt(volcano), names = c('x', 'y', 'z'))
+
+ggplot() + 
+    stat_contour(aes(x, y, z = z), data = cbind(volcano3d, zoom = FALSE), geom = 'contour', colour = 'grey20') + 
+    stat_contour(aes(x, y, z = z, fill = ..level..), data = cbind(volcano3d, zoom = TRUE), geom = 'polygon', bins = 30) + 
+    facet_zoom(xlim = c(25, 50), ylim = c(20, 40), horizontal = FALSE, zoom.data = zoom, split = T) + 
+    scale_fill_distiller(direction = 1, palette = 2) + 
+    theme_minimal() + 
+    theme(zoom = element_rect(fill = 'grey75', colour = NA), validate = FALSE)
+
+## ---- fig.asp=1/2--------------------------------------------------------
+ggplot(mtcars) + 
+    geom_point(aes(mpg, disp, depth = wt)) + 
+    scale_depth(range = c(0, 0.2)) + 
+    facet_stereo()
+
+## ---- fig.asp=1/2--------------------------------------------------------
+ggplot(mtcars) + 
+    geom_point(aes(mpg, disp, depth = wt, colour = wt, size = wt)) + 
+    scale_size(range = c(1.5, 3)) + 
+    scale_color_gradient(low = 'grey70', high = 'black') + 
+    facet_stereo()
+
 ## ---- echo=TRUE, eval=TRUE, fig.align='center'---------------------------
 p3 <- power_trans(3)
 p3
@@ -211,10 +313,21 @@ ggplot() + geom_path(aes(x, y), data = line, colour = 'red') +
     geom_path(aes(x, y), data = spiral, colour = 'green')
 
 ## ------------------------------------------------------------------------
+# parameterized rotation and translation, fixed shearing
+trans <- linear_trans(rotate(a), shear(1, 0), translate(x1, y1))
+square <- data.frame(x = c(0, 0, 1, 1), y = c(0, 1, 1, 0))
+square2 <- trans$transform(square$x, square$y, a = pi/3, x1 = 4, y1 = 8)
+square3 <- trans$transform(square$x, square$y, a = pi/1.5, x1 = 2, y1 = -6)
+square_all <- rbind(square, square2, square3)
+square_all$group <- rep(1:3, each = 4)
+ggplot(square_all, aes(x, y, group = group)) +
+    geom_polygon(aes(fill = factor(group)), colour = 'black')
+
+## ------------------------------------------------------------------------
 library(units)
-miles <- make_unit('miles')
-gallon <- make_unit('gallon')
-horsepower <- make_unit('horsepower')
+miles <- as_units('miles')
+gallon <- as_units('gallon')
+horsepower <- as_units('horsepower')
 mtcars$consumption <- mtcars$mpg * (miles/gallon)
 mtcars$power <- mtcars$hp * horsepower
 
@@ -274,5 +387,5 @@ ggplot() + geom_link(aes(x=2, y=2, xend=3, yend=3, alpha=..index..,
            theme(plot.title = element_text(size = 20))
 
 ## ---- echo=FALSE---------------------------------------------------------
-devtools::session_info()
+sessioninfo::session_info()
 

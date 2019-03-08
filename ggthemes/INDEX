@@ -39,11 +39,11 @@ scale_colour_fivethirtyeight
 scale_colour_gradient2_tableau
                         Tableau diverging colour scales (continuous)
 scale_colour_gradient_tableau
-                        Tableau sequential colour scale (continuous)
+                        Tableau sequential colour scales (continuous)
 scale_colour_hc         Highcharts color and fill scales
 scale_colour_ptol       Color Scales from Paul Tol's "Colour Schemes
 scale_colour_stata      Stata color scales
-scale_colour_tableau    Tableau color scales
+scale_colour_tableau    Tableau color scales (discrete)
 scale_colour_wsj        Wall Street Journal color and fill scales
 scale_fill_calc         LibreOffice Calc color scales
 scale_fill_excel        Excel 97 ugly color scales

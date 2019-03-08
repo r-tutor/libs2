@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Tidy data for use with geom_parallel_sets</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for gather_set_data {ggforce}"><tr><td>gather_set_data {ggforce}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Tidy data for use with geom_parallel_sets</h2>
+
+<h3>Description</h3>
+
+<p>This helper function makes it easy to change tidy data into a tidy(er) format
+that can be used by geom_parallel_sets.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+gather_set_data(data, x, id_name = "id")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>A tidy dataframe with some categorical columns</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>The columns to use for axes in the parallel sets diagram</p>
+</td></tr>
+<tr valign="top"><td><code>id_name</code></td>
+<td>
+<p>The name of the column that will contain the original index of
+the row.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A data.frame
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data &lt;- reshape2::melt(Titanic)
+head(gather_set_data(data, 1:4))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggforce</em> version 0.2.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

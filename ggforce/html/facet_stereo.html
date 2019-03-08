@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create a stereogram plot</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for facet_stereo {ggforce}"><tr><td>facet_stereo {ggforce}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create a stereogram plot</h2>
+
+<h3>Description</h3>
+
+<p>This, arguably pretty useless function, lets you create plots with a sense of
+depth by creating two slightly different versions of the plot that
+corresponds to how the eyes would see it if the plot was 3 dimensional. To
+experience the effect look at the plots through 3D hardware such as Google
+Cardboard or by relaxing the eyes and focusing into the distance. The
+depth of a point is calculated for layers having a depth aesthetic supplied.
+The scaling of the depth can be controlled with <code><a href="scale_depth.html">scale_depth()</a></code> as
+you would control any aesthetic. Negative values will result in features
+placed behind the paper plane, while positive values will result in
+features hovering in front of the paper. While features within each layer is
+sorted so those closest to you are plotted on top of those more distant, this
+cannot be done between layers. Thus, layers are always plotted on top of
+each others, even if the features in one layer lies behind features in a
+layer behind it. The depth experience is inaccurate and should not be used
+for conveying important data. Regard this more as a party-trick...
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+facet_stereo(IPD = 63.5, panel.size = 200, shrink = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>IPD</code></td>
+<td>
+<p>The interpupillary distance (in mm) used for calculating point
+displacement. The default value is an average of both genders</p>
+</td></tr>
+<tr valign="top"><td><code>panel.size</code></td>
+<td>
+<p>The final plot size in mm. As IPD this is used to calculate
+point displacement. Don't take this value too literal but experiment until
+you get a nice effect. Lower values gives higher displacement and thus
+require the plots to be observed from a closer distance</p>
+</td></tr>
+<tr valign="top"><td><code>shrink</code></td>
+<td>
+<p>If <code>TRUE</code>, will shrink scales to fit output of
+statistics, not raw data. If <code>FALSE</code>, will be range of raw data
+before statistical summary.</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p>Other ggforce facets: <code><a href="facet_grid_paginate.html">facet_grid_paginate</a></code>,
+<code><a href="facet_wrap_paginate.html">facet_wrap_paginate</a></code>,
+<code><a href="facet_zoom.html">facet_zoom</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# You'll have to accept a warning about depth being an unknown aesthetic
+ggplot(mtcars) +
+  geom_point(aes(mpg, disp, depth = cyl)) +
+  facet_stereo()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggforce</em> version 0.2.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

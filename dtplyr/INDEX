@@ -1,3 +1,4 @@
+dtplyr-package          dtplyr: Data Table Back-End for 'dplyr'
 grouped_dt              A grouped data table.
 join.tbl_dt             Join data table tbls.
 src_dt                  A local data table source.

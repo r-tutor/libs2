@@ -57,6 +57,45 @@ Often the focus will be on the geoms, unless a new stat does not have an
 accompanying geom, in which case the stat will be discussed along with which
 geoms it should be used with.
 
+## Shapes
+Most area based geoms in `ggplot2` is using `geom_polygon()` underneath in order
+to draw the shapes. `ggforce` offers a more powerful version of this 
+functionality in the form of `geom_shape` which is used in all the area based 
+geoms in ggforce, and can be dropped in everywhere `geom_polygon()` is being 
+used in `ggplot2` and elsewhere. The difference between `geom_shape()` and 
+`geom_polygon()` lies in the ability of `geom_shape()` to round its corners as
+well as expand and contract itself by absolute amounts (i.e. not relative to
+the plot dimensions). All of these ability is automatically transferred to all
+the other geoms that depends on `geom_shape()`
+
+```{r}
+# Adapted from geom_polygon documentation
+ids <- factor(c("1.1", "2.1", "1.2", "2.2", "1.3", "2.3"))
+
+values <- data.frame(
+  id = ids,
+  value = c(3, 3.1, 3.1, 3.2, 3.15, 3.5)
+)
+
+positions <- data.frame(
+  id = rep(ids, each = 4),
+  x = c(2, 1, 1.1, 2.2, 1, 0, 0.3, 1.1, 2.2, 1.1, 1.2, 2.5, 1.1, 0.3,
+  0.5, 1.2, 2.5, 1.2, 1.3, 2.7, 1.2, 0.5, 0.6, 1.3),
+  y = c(-0.5, 0, 1, 0.5, 0, 0.5, 1.5, 1, 0.5, 1, 2.1, 1.7, 1, 1.5,
+  2.2, 2.1, 1.7, 2.1, 3.2, 2.8, 2.1, 2.2, 3.3, 3.2)
+)
+
+datapoly <- merge(values, positions, by = c("id"))
+
+ggplot(datapoly, aes(x = x, y = y)) +
+  geom_shape(aes(fill = value, group = id), expand = unit(-3, 'mm'))
+ggplot(datapoly, aes(x = x, y = y)) +
+  geom_shape(aes(fill = value, group = id), radius = unit(3, 'mm'))
+ggplot(datapoly, aes(x = x, y = y)) +
+  geom_shape(aes(fill = value, group = id), expand = unit(3, 'mm'), radius = unit(2, 'mm'), alpha = 0.5)
+```
+
+
 ## Arcs
 Arcs are segments of a circle and defined by a centre point, a radius and a 
 start and end angle. In ggforce arcs come in two flavors: arc and arc_bar, where
@@ -174,6 +213,27 @@ ggplot() + geom_circle(aes(x0=x0, y0=y0, r=r, fill=r), data=circles, n=10) +
     coord_fixed()
 ```
 
+## Ellipse
+As with circles it is possible to draw ellipses according to the coordinate 
+system. It requires some more parameters than `geom_circle`, namely two radii 
+and an angle:
+
+```{r}
+# Basic usage
+ggplot() +
+  geom_ellipse(aes(x0 = 0, y0 = 0, a = 10, b = 3, angle = 0)) +
+  coord_fixed()
+
+# Rotation
+# Note that it expects radians and rotates the ellipse counter-clockwise
+ggplot() +
+  geom_ellipse(aes(x0 = 0, y0 = 0, a = 10, b = 3, angle = pi/4)) +
+  coord_fixed()
+```
+
+Be aware that `ggplot2` contains a `stat_ellipse` which estimates uncertainty
+ellipses to points.
+
 ## Links
 Links are the ggforce equivalent of segments, i.e. connecting two points by a 
 straight line. While `geom_segment()` does a decent job of this, the link geoms
@@ -236,6 +296,66 @@ ggplot() + geom_segment(aes(x = x, xend = xend, y = y, yend = yend),
     geom_point(aes(x = x, y = y, colour = point), data = beziers)
 ```
 
+## Diagonals
+In visualization parlance a diagonal is a path connecting two points through a
+smooth curve that starts perpendicular to either the x or y axis and gradually
+bends to meet the other end. It is often implemented as cubic bezier curves with
+the control points of each end extending perpendicular from the end points. 
+Diagonals are often used in visualising trees (see `geom_edge_diagonal()` in
+`ggraph`) but is provided here as a general construct.
+
+```{r}
+data <- data.frame(
+  x = rep(0, 10),
+  y = 1:10,
+  xend = 1:10,
+  yend = 2:11
+)
+ggplot(data) +
+  geom_diagonal(aes(x, y, xend = xend, yend = yend))
+```
+
+## Wide Diagonals
+As arcs have `arc_bar` diagonals have `diagonal_wide` for drawing diagonals as
+polygons, potentially with changing thickness. It requires four points per 
+diagonal, and as with the standard diagonal it will expect the flow to be in the
+x-direction. As `geom_diagonal_wide()` uses `geom_shape()` you get all the 
+controls of that, such as corner rounding and expansion.
+
+```{r}
+data <- data.frame(
+  x = c(1, 2, 2, 1, 2, 3, 3, 2),
+  y = c(1, 2, 3, 2, 3, 1, 2, 5),
+  group = c(1, 1, 1, 1, 2, 2, 2, 2)
+)
+ggplot(data) +
+  geom_diagonal_wide(aes(x, y, group = group), 
+                     colour = 'black', fill = 'steelblue', radius = 0.01)
+```
+
+## Parallel sets
+A parallel sets diagram is a way to show multidimensional categorical data. It
+will show the overlaps between levels in multiple categories by drawing thick
+diagonals between levels in parallel categorical axes. A classic way of 
+exemplifying this is with the titanic survival data set.
+
+A small note is that the way to normally represent this type of data is by
+encoding each categorical level in its own column, but this does not work in
+`ggplot2`, as it requires all values for the same axis to be in the same column.
+`ggforce` facilitates this by providing a helper function for transforming data
+in its natural representation into one understood by `ggplot2`.
+
+```{r}
+data <- reshape2::melt(Titanic)
+head(data)
+data <- gather_set_data(data, 1:4)
+head(data)
+ggplot(data, aes(x, id = id, split = y, value = value)) +
+  geom_parallel_sets(aes(fill = Sex), alpha = 0.3, axis.width = 0.1) +
+  geom_parallel_sets_axes(axis.width = 0.1) +
+  geom_parallel_sets_labels(colour = 'white')
+```
+
 
 ## B-splines
 Like beziers b-splines are smooth curves, but unlike beziers b-splines are 
@@ -281,6 +401,26 @@ df$Distribution <- factor(df$Distribution,
 p <- ggplot(df, aes(Distribution, Value))
 p + geom_violin(aes(fill = Distribution))
 p + geom_sina(aes(color = Distribution), size = 1)
+```
+
+## Spirographs
+Spirographs are most well known for the plastic toys consisting of interlocking
+gears that can be used to create circular patterns. There's math behind it 
+though, so it's not a problem to provide a parameterized version where the gear
+dimensions define the resulting pattern. One nice benefit of doing the drawing
+on a computer is that you are not limited by physical boundaries, and it is thus
+possible to create pattern not possible wih the standard toy set (e.g. the 
+pencil does not have to be positioned inside the revolving gear).
+
+```{r}
+ggplot() +
+  geom_spiro(aes(R = 10, r = 3, d = 5))
+# Only draw a portion
+ggplot() +
+  geom_spiro(aes(R = 10, r = 3, d = 5), revolutions = 1.2)
+# Let the inner gear circle the outside of the outer gear
+ggplot() +
+  geom_spiro(aes(R = 10, r = 3, d = 5, outer = TRUE))
 ```
 
 # Facets
@@ -375,8 +515,68 @@ ggplot(iris, aes(Petal.Length, Petal.Width, colour = Species)) +
 
 The relative size of the zoom area can be controlled with the `zoom.size` 
 argument, while the appearance of the indicator can be controlled by modifying
-the `strip.background` theme setting or potentially be removed completely by 
+the `strip.background` theme setting (or `zoom` though it requires 
+`validate = FALSE) or potentially be removed completely by 
 setting `show.area = FALSE` in `facet_zoom()`.
+
+If you want to control the zoom area directly this can be done using the `xlim` 
+and `ylim` arguments instead of `x` and/or `y`. This lets you set the range for
+the zoom panel. Furthermore it is possible to control which data gets plotted in
+the context and zoom panels selectively through the `zoom.data` argument that
+takes an expression to evaulate for each row in the data (as `x`, `y`, and `xy`)
+and assigns data to the zoom panel if it evaluates to `TRUE`, the context panel
+if it evaluates to `FALSE` and both if it evaulates to `NA` (the default). 
+Combining all this into one plot we can get this:
+
+```{r}
+volcano3d <- structure(reshape2::melt(volcano), names = c('x', 'y', 'z'))
+
+ggplot() + 
+    stat_contour(aes(x, y, z = z), data = cbind(volcano3d, zoom = FALSE), geom = 'contour', colour = 'grey20') + 
+    stat_contour(aes(x, y, z = z, fill = ..level..), data = cbind(volcano3d, zoom = TRUE), geom = 'polygon', bins = 30) + 
+    facet_zoom(xlim = c(25, 50), ylim = c(20, 40), horizontal = FALSE, zoom.data = zoom, split = T) + 
+    scale_fill_distiller(direction = 1, palette = 2) + 
+    theme_minimal() + 
+    theme(zoom = element_rect(fill = 'grey75', colour = NA), validate = FALSE)
+```
+
+## Stereographic projection
+One of the more "fun and useless" additions to ggforce is `facet_stereo` which
+allows the user to create a stereographic projection of the plot in order to
+make a faux 3D plot. `facet_stereo` shifts features sligtly to the left and
+right based on the provided `depth`-aesthetic to simulate how each eye will see
+a sligtly different picture when looking at a 3D scenery. In order to experience
+the 3D effect, either look at the plot with 3D hardware such as Google Cardboard
+or by using relaxed focusing where the eyes focus on the far distance while 
+looking at the plot (the same technique used when looking at stereograms such as 
+Magic Eye).
+
+In order to use `facet_stereo` provide a depth aesthetic to the layers (will
+generate a warning) and modify the depth perception with `scale_depth`:
+
+```{r, fig.asp=1/2}
+ggplot(mtcars) + 
+    geom_point(aes(mpg, disp, depth = wt)) + 
+    scale_depth(range = c(0, 0.2)) + 
+    facet_stereo()
+```
+
+To improve the effect you can scale the size of the features as well as the 
+colour to enhance the 3D feeling
+
+```{r, fig.asp=1/2}
+ggplot(mtcars) + 
+    geom_point(aes(mpg, disp, depth = wt, colour = wt, size = wt)) + 
+    scale_size(range = c(1.5, 3)) + 
+    scale_color_gradient(low = 'grey70', high = 'black') + 
+    facet_stereo()
+```
+
+Note that due to the design of ggplot2 there are some limitations to this, most
+notably that layers will always be placed on top of each other no matter their
+depth values. This means that you can end up with features occluding other 
+features in front of them. Also, even though grid lines are placed at 
+`depth = 0` they will always be behind all features.
 
 # Transformations
 Transformations are not really a part of ggplot2, but rather the scales package.
@@ -444,6 +644,29 @@ ggplot() + geom_path(aes(x, y), data = line, colour = 'red') +
     geom_path(aes(x, y), data = spiral, colour = 'green')
 ```
 
+### Linear transformation
+The family of linear transformations cover scaling/stretching, rotation, 
+shearing, reflection, and translation. All of these are implemented in the 
+`linear_trans` constructor that lets you compose a sequence of transformation
+steps, either fixed or parameterized. To avoid dealing with transformation 
+matrices and ease parameterisation each transformation is encapsulated into a
+function that creates a transformation matrix. All transformations are done
+relative to the origin so shapes needs to be translated into the origin if e.g.
+rotation around their own center (rather than [0, 0]) is required.
+
+```{r}
+# parameterized rotation and translation, fixed shearing
+trans <- linear_trans(rotate(a), shear(1, 0), translate(x1, y1))
+square <- data.frame(x = c(0, 0, 1, 1), y = c(0, 1, 1, 0))
+square2 <- trans$transform(square$x, square$y, a = pi/3, x1 = 4, y1 = 8)
+square3 <- trans$transform(square$x, square$y, a = pi/1.5, x1 = 2, y1 = -6)
+square_all <- rbind(square, square2, square3)
+square_all$group <- rep(1:3, each = 4)
+ggplot(square_all, aes(x, y, group = group)) +
+    geom_polygon(aes(fill = factor(group)), colour = 'black')
+```
+
+
 # Scales
 Currently only a single new scale is added to ggplot2 with ggforce, but it is a
 rather nifty little fellow. 
@@ -468,9 +691,9 @@ on the axis is meassured in:
 
 ```{r}
 library(units)
-miles <- make_unit('miles')
-gallon <- make_unit('gallon')
-horsepower <- make_unit('horsepower')
+miles <- as_units('miles')
+gallon <- as_units('gallon')
+horsepower <- as_units('horsepower')
 mtcars$consumption <- mtcars$mpg * (miles/gallon)
 mtcars$power <- mtcars$hp * horsepower
 
@@ -497,6 +720,9 @@ ggplot(mtcars) +
     scale_x_unit(unit = 'W') +
     scale_y_unit(unit = 'km/l')
 ```
+
+## Depth
+See [facet_stereo](#stereographic-projection)...
 
 # A rocket
 We'll finish this of by drawing a rocket:
@@ -547,6 +773,6 @@ ggplot() + geom_link(aes(x=2, y=2, xend=3, yend=3, alpha=..index..,
 # Session info
 
 ```{r, echo=FALSE}
-devtools::session_info()
+sessioninfo::session_info()
 ```
 

@@ -1,5 +1,7 @@
+dtplyr-package	dtplyr-package
 .datatable.aware	tbl_dt
 anti_join.data.table	join.tbl_dt
+dtplyr	dtplyr-package
 full_join.data.table	join.tbl_dt
 grouped_dt	grouped_dt
 inner_join.data.table	join.tbl_dt
