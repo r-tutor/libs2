@@ -1,9 +1,6 @@
 AsymptNullDistribution
                         Computation of the Reference Distribution
 CWD                     Coarse Woody Debris
-ExpectCovar-class       Class '"ExpectCovar"'
-ExpectCovarInfluence-class
-                        Class '"ExpectCovarInfluence"'
 GTSG                    Gastrointestinal Tumor Study Group
 IndependenceLinearStatistic-class
                         Class '"IndependenceLinearStatistic"'
@@ -47,8 +44,8 @@ ocarcinoma              Ovarian Carcinoma
 oneway_test             Two- and K-Sample Location Tests
 photocar                Multiple Dosing Photococarcinogenicity
                         Experiment
-pvalue-methods          Computation of the p-Value, Mid-p-Value and
-                        p-Value Interval
+pvalue-methods          Computation of the p-Value, Mid-p-Value,
+                        p-Value Interval and Test Size
 rotarod                 Rotating Rats
 sign_test               Symmetry Tests
 spearman_test           Correlation Tests

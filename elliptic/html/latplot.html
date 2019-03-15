@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Plots a lattice of periods on the complex plane</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for latplot {elliptic}"><tr><td>latplot {elliptic}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Plots a lattice of periods on the complex plane</h2>
+
+<h3>Description</h3>
+
+<p>Given a pair of basic periods, plots a lattice of periods on the complex plane
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+latplot(p, n=10, do.lines=TRUE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>Vector of length two with first element the first period and
+second element the second period.  Note that
+<i>p1=2*omega1</i></p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>Size of lattice</p>
+</td></tr>
+<tr valign="top"><td><code>do.lines</code></td>
+<td>
+<p>Boolean with default <code>TRUE</code> meaning to show
+boundaries between adjacent period parallelograms</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Extra arguments passed to
+<code>plot()</code>.  See examples section for working use</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Robin K. S. Hankin</p>
+
+
+<h3>References</h3>
+
+<p>K. Chandrasekharan 1985. <em>Elliptic functions</em>,
+Springer-Verlag.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+p1 &lt;- c(1,1i)
+p2 &lt;- c(2+3i,5+7i)
+latplot(p1)
+latplot(p2,xlim=c(-4,4),ylim=c(-4,4),n=40)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>elliptic</em> version 1.4-0 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Parameters for Weierstrass's P function</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for parameters {elliptic}"><tr><td>parameters {elliptic}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Parameters for Weierstrass's P function</h2>
+
+<h3>Description</h3>
+
+<p>Calculates the invariants <i>g2</i> and <i>g3</i>,
+the e-values <i>e1,e2,e3</i>, and the half periods
+<i>omega1, omega2</i>, from any one of them.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+parameters(Omega=NULL, g=NULL, description=NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>Omega</code></td>
+<td>
+<p>Vector of length two, containing the <strong>half
+periods</strong> <i>(omega1,omega2)</i></p>
+</td></tr>
+<tr valign="top"><td><code>g</code></td>
+<td>
+<p>Vector of length two:
+<i>(g2,g3)</i></p>
+</td></tr>
+<tr valign="top"><td><code>description</code></td>
+<td>
+<p>string containing &ldquo;equianharmonic&rdquo;,
+&ldquo;lemniscatic&rdquo;, or &ldquo;pseudolemniscatic&rdquo;, to specify one
+of A and S's special cases</p>
+</td></tr>    
+</table>
+
+
+<h3>Value</h3>
+
+<p>Returns a list with the following items:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>Omega</code></td>
+<td>
+<p>A complex vector of length 2 giving the fundamental half
+periods <i>omega1</i> and <i>omega2</i>.  Notation
+follows Chandrasekharan: half period
+<i>omega1</i> is 0.5 times a (nontrivial) period of minimal
+modulus, and <i>omega2</i> is 0.5 times a period of smallest
+modulus having the property <i>omega2/omega1</i>
+not real.
+</p>
+<p>The relevant periods are made unique by the further requirement that
+<i>Re(omega1)&gt;0</i>, and 
+<i>Im(omega2)&gt;0</i>; but note that this
+often results in sign changes when considering cases on boundaries
+(such as real <i>g2</i> and <i>g3</i>). 
+</p>
+<p><strong>Note</strong> Different definitions exist for <i>omega3</i>!
+A and S use <i>omega3=omega2-omega1</i>,
+while Whittaker and Watson (eg, page 443), and Mathematica, have
+<i>omega1+omega2+omega3=0</i>
+</p>
+</td></tr>
+<tr valign="top"><td><code>q</code></td>
+<td>
+<p>The nome.  Here,
+<i>q=exp(pi*i*omega2/omega1)</i>.</p>
+</td></tr>
+<tr valign="top"><td><code>g</code></td>
+<td>
+<p>Complex vector of length 2 holding the invariants</p>
+</td></tr>
+<tr valign="top"><td><code>e</code></td>
+<td>
+<p>Complex vector of length 3.  Here <i>e1</i>, <i>e2</i>,
+and <i>e3</i> are defined by
+</p>
+<p style="text-align: center;"><i>e1=P(omega1/2), e2=P(omega2/2),
+	e3=P(omega3/2),</i></p>
+
+<p>where <i>omega3</i> is defined by
+<i>&omega;1+omega2+omega3=0</i>.
+</p>
+<p>Note that the <i>e</i>s are also defined as the three roots of
+<i>x^3-g2*x-g3=0</i>; but this method cannot be used in
+isolation because the roots may be returned in the wrong order.</p>
+</td></tr>
+<tr valign="top"><td><code>Delta</code></td>
+<td>
+<p>The quantity <i>g2^3-27*g3^2</i>, often
+denoted <i>Greek capital Delta</i></p>
+</td></tr>
+<tr valign="top"><td><code>Eta</code></td>
+<td>
+<p>Complex vector of length 3 often denoted
+<i>by the greek letter eta</i>.  Here
+<i>eta=(eta_1,eta_2,eta_3)</i> are defined
+in terms of the Weierstrass zeta function with
+<i>eta_i&zeta;(omega_i)</i> for <i>i=1,2,3</i>.
+</p>
+<p>Note that the name of this element is capitalized to avoid confusion 
+with function <code>eta()</code></p>
+</td></tr>
+<tr valign="top"><td><code>is.AnS</code></td>
+<td>
+<p>Boolean, with <code>TRUE</code> corresponding to real
+invariants, as per Abramowitz and Stegun</p>
+</td></tr>
+<tr valign="top"><td><code>given</code></td>
+<td>
+<p>character string indicating which parameter was supplied.
+Currently, one of &ldquo;<code>o</code>&rdquo; (omega), or  &ldquo;<code>g</code>&rdquo;
+(invariants)</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Robin K. S. Hankin</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+ ## Example 6, p665, LHS
+ parameters(g=c(10,2+0i))
+
+
+ ## Example 7, p665, RHS
+ a &lt;- parameters(g=c(7,6)) ;  attach(a)
+ c(omega2=Omega[1],omega2dash=Omega[1]+Omega[2]*2)
+
+
+  ## verify 18.3.37:
+  Eta[2]*Omega[1]-Eta[1]*Omega[2]   #should be close to pi*1i/2
+
+
+## from Omega to g and and back;
+## following should be equivalentto c(1,1i):
+ parameters(g=parameters(Omega=c(1,1i))$g)$Omega 
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>elliptic</em> version 1.4-0 <a href="00Index.html">Index</a>]</div>
+</body></html>

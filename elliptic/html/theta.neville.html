@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Neville's form for the theta functions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for theta.neville {elliptic}"><tr><td>theta.neville {elliptic}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Neville's form for the theta functions</h2>
+
+<h3>Description</h3>
+
+<p>Neville's notation for theta functions as per section 16.36 of
+Abramowitz and Stegun.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+theta.s(u, m, method = "16.36.6", ...)
+theta.c(u, m, method = "16.36.6", ...)
+theta.d(u, m, method = "16.36.7", ...)
+theta.n(u, m, method = "16.36.7", ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>u</code></td>
+<td>
+<p>Primary complex argument</p>
+</td></tr>
+<tr valign="top"><td><code>m</code></td>
+<td>
+<p>Real parameter</p>
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+<p>Character string corresponding to A and S's equation
+numbering scheme</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Extra arguments passed to the method function, such as
+<code>maxiter</code></p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Robin K. S. Hankin</p>
+
+
+<h3>References</h3>
+
+<p>M. Abramowitz and I. A. Stegun 1965.  <em>Handbook of mathematical
+functions</em>. New York: Dover
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+#Figure 16.4.
+m &lt;- 0.5
+K &lt;- K.fun(m)
+Kdash &lt;- K.fun(1-m)
+x &lt;- seq(from=0,to=4*K,len=100)
+plot  (x/K,theta.s(x,m=m),type="l",lty=1,main="Figure 16.4, p578")
+points(x/K,theta.n(x,m=m),type="l",lty=2)
+points(x/K,theta.c(x,m=m),type="l",lty=3)
+points(x/K,theta.d(x,m=m),type="l",lty=4)
+abline(0,0)
+
+
+
+#plot a graph of something that should be zero:
+ x &lt;- seq(from=-4,to=4,len=55)
+ plot(x,(e16.37.1(x,0.5)-theta.s(x,0.5)),pch="+",main="error: note vertical scale")
+
+#now table 16.1 on page 582 et seq:
+ alpha &lt;- 85
+ m &lt;- sin(alpha*pi/180)^2
+## K &lt;- ellint_Kcomp(sqrt(m))
+ K &lt;- K.fun(m)
+ u &lt;- K/90*5*(0:18)
+ u.deg &lt;- round(u/K*90)
+ cbind(u.deg,"85"=theta.s(u,m))      # p582, last col. 
+ cbind(u.deg,"85"=theta.n(u,m))      # p583, last col. 
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>elliptic</em> version 1.4-0 <a href="00Index.html">Index</a>]</div>
+</body></html>

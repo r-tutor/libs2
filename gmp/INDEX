@@ -32,6 +32,7 @@ matrix                  Matrix manipulation with gmp
 max.bigz                Extrema (Maxima and Minima)
 modulus                 Modulus of a Big Integer
 nextprime               Next Prime Number
+outer                   Base Functions in 'gmp'-ified Versions
 powm                    Exponentiation function
 sizeinbase              Compute size of a bigz in a base
 solve.bigz              Solve a system of equation

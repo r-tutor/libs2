@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Numerical checks of equations 18.10.9-11, page 650</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for e18.10.9 {elliptic}"><tr><td>e18.10.9 {elliptic}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Numerical checks of equations 18.10.9-11, page 650</h2>
+
+<h3>Description</h3>
+
+<p>Numerical checks of equations 18.10.9-11, page 650.  Function returns
+LHS minus RHS.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+e18.10.9(parameters)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>parameters</code></td>
+<td>
+<p>An object of class &ldquo;parameters&rdquo;</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Returns a complex vector of length three: <i>e_1</i>,
+<i>e_2</i>, <i>e_3</i>
+</p>
+
+
+<h3>Note</h3>
+
+<p>A good check for the three <i>e</i>'s being in the right order.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Robin K. S. Hankin</p>
+
+
+<h3>References</h3>
+
+<p>M. Abramowitz and I. A. Stegun 1965. <em>Handbook of Mathematical
+Functions.</em>  New York, Dover.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+e18.10.9(parameters(g=c(0,1)))
+e18.10.9(parameters(g=c(1,0)))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>elliptic</em> version 1.4-0 <a href="00Index.html">Index</a>]</div>
+</body></html>

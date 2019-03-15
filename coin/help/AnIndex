@@ -29,6 +29,8 @@ cmh_test.formula	ContingencyTests
 cmh_test.IndependenceProblem	ContingencyTests
 cmh_test.table	ContingencyTests
 coin	coin-package
+confint,IndependenceTest-method	IndependenceTest-class
+confint,ScalarIndependenceTestConfint-method	IndependenceTest-class
 conover_test	ScaleTests
 conover_test.formula	ScaleTests
 conover_test.IndependenceProblem	ScaleTests
@@ -54,8 +56,6 @@ expectation	expectation-methods
 expectation,IndependenceLinearStatistic-method	expectation-methods
 expectation,IndependenceTest-method	expectation-methods
 expectation-methods	expectation-methods
-ExpectCovar-class	ExpectCovar-class
-ExpectCovarInfluence-class	ExpectCovarInfluence-class
 fisyat_test	CorrelationTests
 fisyat_test.formula	CorrelationTests
 fisyat_test.IndependenceProblem	CorrelationTests
@@ -82,8 +82,6 @@ independence_test.formula	IndependenceTest
 independence_test.IndependenceProblem	IndependenceTest
 independence_test.table	IndependenceTest
 initialize,CovarianceMatrix-method	VarCovar-class
-initialize,ExpectCovar-method	ExpectCovar-class
-initialize,ExpectCovarInfluence-method	ExpectCovarInfluence-class
 initialize,IndependenceLinearStatistic-method	IndependenceLinearStatistic-class
 initialize,IndependenceProblem-method	IndependenceProblem-class
 initialize,IndependenceTestProblem-method	IndependenceTestProblem-class
@@ -132,6 +130,7 @@ mh_test.formula	MarginalHomogeneityTests
 mh_test.SymmetryProblem	MarginalHomogeneityTests
 mh_test.table	MarginalHomogeneityTests
 midpvalue	pvalue-methods
+midpvalue,ApproxNullDistribution-method	pvalue-methods
 midpvalue,IndependenceTest-method	pvalue-methods
 midpvalue,NullDistribution-method	pvalue-methods
 midpvalue-methods	pvalue-methods
@@ -157,9 +156,11 @@ pperm,IndependenceTest-method	PermutationDistribution-methods
 pperm,NullDistribution-method	PermutationDistribution-methods
 pperm-methods	PermutationDistribution-methods
 pvalue	pvalue-methods
+pvalue,ApproxNullDistribution-method	pvalue-methods
 pvalue,IndependenceTest-method	pvalue-methods
 pvalue,MaxTypeIndependenceTest-method	pvalue-methods
 pvalue,NullDistribution-method	pvalue-methods
+pvalue,PValue-method	pvalue-methods
 PValue-class	PValue-class
 pvalue-methods	pvalue-methods
 pvalue_interval	pvalue-methods
@@ -199,6 +200,10 @@ show,ScalarIndependenceTestConfint-method	IndependenceTest-class
 sign_test	SymmetryTests
 sign_test.formula	SymmetryTests
 sign_test.SymmetryProblem	SymmetryTests
+size	pvalue-methods
+size,IndependenceTest-method	pvalue-methods
+size,NullDistribution-method	pvalue-methods
+size-methods	pvalue-methods
 spearman_test	CorrelationTests
 spearman_test.formula	CorrelationTests
 spearman_test.IndependenceProblem	CorrelationTests
@@ -237,3 +242,4 @@ wilcoxsign_test.SymmetryProblem	SymmetryTests
 wilcox_test	LocationTests
 wilcox_test.formula	LocationTests
 wilcox_test.IndependenceProblem	LocationTests
+zheng_trafo	Transformations

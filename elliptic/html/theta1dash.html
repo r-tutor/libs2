@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Derivatives of theta functions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for theta1dash {elliptic}"><tr><td>theta1dash {elliptic}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Derivatives of theta functions</h2>
+
+<h3>Description</h3>
+
+<p>First, second, and third derivatives of the theta functions
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+theta1dash(z, ignore = NULL, m = NULL, q = NULL, give.n = FALSE, maxiter = 30)
+theta1dashdash(z, ignore = NULL, m = NULL, q = NULL, give.n = FALSE, maxiter = 30)
+theta1dashdashdash(z, ignore = NULL, m = NULL, q = NULL, give.n = FALSE, maxiter = 30)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>z</code></td>
+<td>
+<p>Primary complex argument</p>
+</td></tr>
+<tr valign="top"><td><code>ignore</code></td>
+<td>
+<p>Dummy argument to force the user to name the next
+argument either <code>m</code> or <code>q</code></p>
+</td></tr>
+<tr valign="top"><td><code>m</code></td>
+<td>
+<p>m as documented in <code>theta1()</code></p>
+</td></tr>
+<tr valign="top"><td><code>q</code></td>
+<td>
+<p>q as documented in <code>theta1()</code></p>
+</td></tr>
+<tr valign="top"><td><code>give.n</code></td>
+<td>
+<p>Boolean with default <code>FALSE</code> meaning to return the
+function evaluation, and <code>TRUE</code> meaning to return a two element
+list, with first element the function evaluation, and second element
+the number of iterations used</p>
+</td></tr>
+<tr valign="top"><td><code>maxiter</code></td>
+<td>
+<p>Maximum number of iterations</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Uses direct expansion as for <code>theta1()</code> et seq
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Robin K. S. Hankin</p>
+
+
+<h3>References</h3>
+
+<p>M. Abramowitz and I. A. Stegun 1965. <em>Handbook of Mathematical
+Functions.</em>  New York, Dover
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="theta.html">theta</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+m &lt;- 0.3+0.31i
+z &lt;- seq(from=1,to=2+1i,len=7)
+delta &lt;- 0.001
+deriv.numer &lt;- (theta1dashdash(z=z+delta,m=m) - theta1dashdash(z=z,m=m))/delta
+deriv.exact &lt;- theta1dashdashdash(z=z+delta/2,m=m)
+abs(deriv.numer-deriv.exact)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>elliptic</em> version 1.4-0 <a href="00Index.html">Index</a>]</div>
+</body></html>

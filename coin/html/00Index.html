@@ -11,7 +11,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;coin&rsquo; version 1.2-2</h2>
+</div><h2>Documentation for package &lsquo;coin&rsquo; version 1.3-0</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
@@ -44,6 +44,7 @@
 <a href="#T">T</a>
 <a href="#V">V</a>
 <a href="#W">W</a>
+<a href="#Z">Z</a>
 </p>
 
 <table width="100%">
@@ -111,6 +112,8 @@
 <td>Tests of Independence in Two- or Three-Way Contingency Tables</td></tr>
 <tr><td style="width: 25%;"><a href="coin-package.html">coin</a></td>
 <td>General Information on the 'coin' Package</td></tr>
+<tr><td style="width: 25%;"><a href="IndependenceTest-class.html">confint-method</a></td>
+<td>Class '"IndependenceTest"' and its subclasses</td></tr>
 <tr><td style="width: 25%;"><a href="ScaleTests.html">conover_test</a></td>
 <td>Two- and K-Sample Scale Tests</td></tr>
 <tr><td style="width: 25%;"><a href="ScaleTests.html">conover_test.formula</a></td>
@@ -161,10 +164,6 @@
 <td>Extraction of the Expectation, Variance and Covariance of the Linear Statistic</td></tr>
 <tr><td style="width: 25%;"><a href="expectation-methods.html">expectation-methods</a></td>
 <td>Extraction of the Expectation, Variance and Covariance of the Linear Statistic</td></tr>
-<tr><td style="width: 25%;"><a href="ExpectCovar-class.html">ExpectCovar-class</a></td>
-<td>Class '"ExpectCovar"'</td></tr>
-<tr><td style="width: 25%;"><a href="ExpectCovarInfluence-class.html">ExpectCovarInfluence-class</a></td>
-<td>Class '"ExpectCovarInfluence"'</td></tr>
 </table>
 
 <h2><a name="F">-- F --</a></h2>
@@ -235,10 +234,6 @@
 <td>General Independence Test</td></tr>
 <tr><td style="width: 25%;"><a href="IndependenceTest.html">independence_test.table</a></td>
 <td>General Independence Test</td></tr>
-<tr><td style="width: 25%;"><a href="ExpectCovar-class.html">initialize-method</a></td>
-<td>Class '"ExpectCovar"'</td></tr>
-<tr><td style="width: 25%;"><a href="ExpectCovarInfluence-class.html">initialize-method</a></td>
-<td>Class '"ExpectCovarInfluence"'</td></tr>
 <tr><td style="width: 25%;"><a href="IndependenceLinearStatistic-class.html">initialize-method</a></td>
 <td>Class '"IndependenceLinearStatistic"'</td></tr>
 <tr><td style="width: 25%;"><a href="IndependenceProblem-class.html">initialize-method</a></td>
@@ -350,11 +345,11 @@
 <tr><td style="width: 25%;"><a href="MarginalHomogeneityTests.html">mh_test.table</a></td>
 <td>Marginal Homogeneity Tests</td></tr>
 <tr><td style="width: 25%;"><a href="pvalue-methods.html">midpvalue</a></td>
-<td>Computation of the p-Value, Mid-p-Value and p-Value Interval</td></tr>
+<td>Computation of the p-Value, Mid-p-Value, p-Value Interval and Test Size</td></tr>
 <tr><td style="width: 25%;"><a href="pvalue-methods.html">midpvalue-method</a></td>
-<td>Computation of the p-Value, Mid-p-Value and p-Value Interval</td></tr>
+<td>Computation of the p-Value, Mid-p-Value, p-Value Interval and Test Size</td></tr>
 <tr><td style="width: 25%;"><a href="pvalue-methods.html">midpvalue-methods</a></td>
-<td>Computation of the p-Value, Mid-p-Value and p-Value Interval</td></tr>
+<td>Computation of the p-Value, Mid-p-Value, p-Value Interval and Test Size</td></tr>
 <tr><td style="width: 25%;"><a href="ScaleTests.html">mood_test</a></td>
 <td>Two- and K-Sample Scale Tests</td></tr>
 <tr><td style="width: 25%;"><a href="ScaleTests.html">mood_test.formula</a></td>
@@ -411,19 +406,19 @@
 <tr><td style="width: 25%;"><a href="PermutationDistribution-methods.html">pperm-methods</a></td>
 <td>Computation of the Permutation Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="pvalue-methods.html">pvalue</a></td>
-<td>Computation of the p-Value, Mid-p-Value and p-Value Interval</td></tr>
+<td>Computation of the p-Value, Mid-p-Value, p-Value Interval and Test Size</td></tr>
 <tr><td style="width: 25%;"><a href="PValue-class.html">PValue-class</a></td>
 <td>Class '"PValue"'</td></tr>
 <tr><td style="width: 25%;"><a href="pvalue-methods.html">pvalue-method</a></td>
-<td>Computation of the p-Value, Mid-p-Value and p-Value Interval</td></tr>
+<td>Computation of the p-Value, Mid-p-Value, p-Value Interval and Test Size</td></tr>
 <tr><td style="width: 25%;"><a href="pvalue-methods.html">pvalue-methods</a></td>
-<td>Computation of the p-Value, Mid-p-Value and p-Value Interval</td></tr>
+<td>Computation of the p-Value, Mid-p-Value, p-Value Interval and Test Size</td></tr>
 <tr><td style="width: 25%;"><a href="pvalue-methods.html">pvalue_interval</a></td>
-<td>Computation of the p-Value, Mid-p-Value and p-Value Interval</td></tr>
+<td>Computation of the p-Value, Mid-p-Value, p-Value Interval and Test Size</td></tr>
 <tr><td style="width: 25%;"><a href="pvalue-methods.html">pvalue_interval-method</a></td>
-<td>Computation of the p-Value, Mid-p-Value and p-Value Interval</td></tr>
+<td>Computation of the p-Value, Mid-p-Value, p-Value Interval and Test Size</td></tr>
 <tr><td style="width: 25%;"><a href="pvalue-methods.html">pvalue_interval-methods</a></td>
-<td>Computation of the p-Value, Mid-p-Value and p-Value Interval</td></tr>
+<td>Computation of the p-Value, Mid-p-Value, p-Value Interval and Test Size</td></tr>
 </table>
 
 <h2><a name="Q">-- Q --</a></h2>
@@ -493,6 +488,12 @@
 <td>Symmetry Tests</td></tr>
 <tr><td style="width: 25%;"><a href="SymmetryTests.html">sign_test.SymmetryProblem</a></td>
 <td>Symmetry Tests</td></tr>
+<tr><td style="width: 25%;"><a href="pvalue-methods.html">size</a></td>
+<td>Computation of the p-Value, Mid-p-Value, p-Value Interval and Test Size</td></tr>
+<tr><td style="width: 25%;"><a href="pvalue-methods.html">size-method</a></td>
+<td>Computation of the p-Value, Mid-p-Value, p-Value Interval and Test Size</td></tr>
+<tr><td style="width: 25%;"><a href="pvalue-methods.html">size-methods</a></td>
+<td>Computation of the p-Value, Mid-p-Value, p-Value Interval and Test Size</td></tr>
 <tr><td style="width: 25%;"><a href="CorrelationTests.html">spearman_test</a></td>
 <td>Correlation Tests</td></tr>
 <tr><td style="width: 25%;"><a href="CorrelationTests.html">spearman_test.formula</a></td>
@@ -572,5 +573,12 @@
 <td>Two- and K-Sample Location Tests</td></tr>
 <tr><td style="width: 25%;"><a href="LocationTests.html">wilcox_test.IndependenceProblem</a></td>
 <td>Two- and K-Sample Location Tests</td></tr>
+</table>
+
+<h2><a name="Z">-- Z --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="Transformations.html">zheng_trafo</a></td>
+<td>Functions for Data Transformation</td></tr>
 </table>
 </body></html>

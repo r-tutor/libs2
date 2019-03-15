@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Dedekind's eta function</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for eta {elliptic}"><tr><td>eta {elliptic}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Dedekind's eta function</h2>
+
+<h3>Description</h3>
+
+<p>  Dedekind's <i>eta</i> function  </p>
+
+
+<h3>Usage</h3>
+
+<pre>
+eta(z, ...)
+eta.series(z, maxiter=300)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>z</code></td>
+<td>
+<p>Complex argument</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>In function <code>eta()</code>, extra arguments sent to
+<code>theta3()</code></p>
+</td></tr>
+<tr valign="top"><td><code>maxiter</code></td>
+<td>
+<p>In function <code>eta.series()</code>, maximum value of
+iteration</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Function <code>eta()</code> uses Euler's formula, viz
+</p>
+<p style="text-align: center;"><i>[omitted;
+    see LaTeX version</i></p>
+
+<p>Function <code>eta.series()</code> is present for validation (and interest)
+only; it uses the infinite product formula:
+</p>
+<p style="text-align: center;"><i>[omitted;
+    see LaTeX version]</i></p>
+
+
+
+<h3>Author(s)</h3>
+
+<p>Robin K. S. Hankin</p>
+
+
+<h3>References</h3>
+
+<p>K. Chandrasekharan 1985. <em>Elliptic functions</em>,  Springer-Verlag.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="farey.html">farey</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+ z &lt;- seq(from=1+1i,to=10+0.06i,len=999)
+ plot(eta(z))
+
+max(abs(eta(z)-eta.series(z)))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>elliptic</em> version 1.4-0 <a href="00Index.html">Index</a>]</div>
+</body></html>

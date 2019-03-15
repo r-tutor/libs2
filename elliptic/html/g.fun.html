@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Calculates the invariants g2 and g3</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for g.fun {elliptic}"><tr><td>g.fun {elliptic}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Calculates the invariants g2 and g3</h2>
+
+<h3>Description</h3>
+
+<p>Calculates the invariants g2 and g3 using any of a number of methods
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+g.fun(b, ...)
+g2.fun(b, use.first=TRUE, ...)
+g3.fun(b, use.first=TRUE, ...)
+g2.fun.lambert(b, nmax=50, tol=1e-10, strict=TRUE)
+g3.fun.lambert(b, nmax=50, tol=1e-10, strict=TRUE)
+g2.fun.direct(b, nmax=50, tol=1e-10)
+g3.fun.direct(b, nmax=50, tol=1e-10)
+g2.fun.fixed(b, nmax=50, tol=1e-10, give=FALSE)
+g3.fun.fixed(b, nmax=50, tol=1e-10, give=FALSE)
+g2.fun.vectorized(b, nmax=50, tol=1e-10, give=FALSE)
+g3.fun.vectorized(b, nmax=50, tol=1e-10, give=FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>b</code></td>
+<td>
+<p>Half periods.  NB: the arguments
+are the <strong>half periods</strong> as per AMS55!
+In these functions, argument <code>b</code> is interpreted as per
+<code>p1.tau()</code></p>
+</td></tr>
+<tr valign="top"><td><code>nmax</code></td>
+<td>
+<p>Maximum number of terms to sum.  See details section for
+more discussion</p>
+</td></tr>
+<tr valign="top"><td><code>tol</code></td>
+<td>
+<p>Numerical tolerance for stopping: summation stops when adding
+an additional term makes less</p>
+</td></tr>
+<tr valign="top"><td><code>strict</code></td>
+<td>
+<p>Boolean, with default (where taken) <code>TRUE</code> meaning to
+<code>stop()</code> if convergence is not achieved in <code>nmax</code> terms.
+Setting to <code>FALSE</code> returns the partial sum and a warning.</p>
+</td></tr>
+<tr valign="top"><td><code>give</code></td>
+<td>
+<p>Boolean, with default (where taken) <code>TRUE</code> meaning to
+return the partial sums.  See examples section for an example of this
+argument in use</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>In functions <code>g.fun()</code>, <code>g2.fun()</code> and
+<code>g3.fun()</code>, extra arguments passed to <code>theta1()</code> and friends</p>
+</td></tr>
+<tr valign="top"><td><code>use.first</code></td>
+<td>
+<p>In function <code>g2.fun()</code> and <code>g3.fun()</code>,
+Boolean with default <code>TRUE</code> meaning to use Wolfram's first formula
+(<strong>remember to cite this</strong>) and <code>FALSE</code> meaning to use the second</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Functions <code>g2.fun()</code> and <code>g3.fun()</code> use theta functions
+which converge very quickly.  These functions are the best in most
+circumstances.  The theta functions include a loop that continues to add
+terms until the partial sum is unaltered by addition
+of the next term.  Note that summation continues until <em>all</em>
+elements of the argument are properly summed, so performance is
+limited by the single worst-case element.
+</p>
+<p>The following functions are provided for interest only, although there
+is a remote possibility that some weird circumstances may exist in which
+they are faster than the theta function approach.  
+</p>
+<p>Functions <code>g2.fun.divisor()</code> and <code>g3.fun.divisor()</code> use
+Chandrasekharan's formula on page 83.  This is generally slower than
+the theta function approach
+</p>
+<p>Functions <code>g2.fun.lambert()</code> and <code>g3.fun.lambert()</code> use a 
+Lambert series to accelerate Chandrasekharan's formula.  In general,
+it is a little better than the divisor form.
+</p>
+<p>Functions <code>g2.fun.fixed()</code> and <code>g2.fun.fixed()</code> also use
+Lambert series.  These functions are vectorized in the sense that
+the function body uses only vector operations.  These functions do
+not take a vector argument.  They are called &ldquo;fixed&rdquo; because
+the number of terms used is fixed in advance (unlike <code>g2.fun()</code>
+and <code>g3.fun()</code>).
+</p>
+<p>Functions <code>g2.fun.vectorized()</code> and <code>g3.fun.vectorized()</code>
+also use Lambert series.  They are fully vectorized in that they take
+a vector of periods or period ratios, unlike the previous two
+functions.  However, this can lead to loss of precision in some
+cases (specifically when the periods give rise to widely varying
+values of g2 and g3).
+</p>
+<p>Functions <code>g2.fun.direct()</code> and <code>g3.fun.direct()</code> use a
+direct summation.  These functions are absurdly slow.  In general,
+the Lambert series functions converge much faster; and the
+&ldquo;default&rdquo; functions <code>g2.fun()</code> and <code>g3.fun()</code>,
+which use theta functions, converge faster still.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Robin K. S. Hankin</p>
+
+
+<h3>References</h3>
+
+<p>Mathematica website
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+g.fun(half.periods(g=c(8,4+1i)))  ## should be c(8,4+1i)
+
+
+## Example 4, p664, LHS:
+omega &lt;- c(10,11i)
+(g2 &lt;- g2.fun(omega))
+(g3 &lt;- g3.fun(omega))
+e1e2e3(Re(c(g2,g3)))
+
+## Example 4, p664, RHS:
+omega2 &lt;- 10
+omega2dash &lt;- 11i
+omega1 &lt;- (omega2-omega2dash)/2   ## From figure 18.1, p630
+(g2 &lt;- g2.fun(c(omega1,omega2)))
+(g3 &lt;- g3.fun(c(omega1,omega2)))
+e1e2e3(Re(c(g2,g3)))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>elliptic</em> version 1.4-0 <a href="00Index.html">Index</a>]</div>
+</body></html>

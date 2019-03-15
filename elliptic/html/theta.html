@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Jacobi theta functions 1-4</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for theta {elliptic}"><tr><td>theta {elliptic}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Jacobi theta functions 1-4</h2>
+
+<h3>Description</h3>
+
+<p>Computes Jacobi's four theta functions for complex <i>z</i> in terms
+of the parameter <i>m</i> or <i>q</i>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+theta1  (z, ignore=NULL, m=NULL, q=NULL, give.n=FALSE, maxiter=30)
+theta2  (z, ignore=NULL, m=NULL, q=NULL, give.n=FALSE, maxiter=30)
+theta3  (z, ignore=NULL, m=NULL, q=NULL, give.n=FALSE, maxiter=30)
+theta4  (z, ignore=NULL, m=NULL, q=NULL, give.n=FALSE, maxiter=30)
+theta.00(z, ignore=NULL, m=NULL, q=NULL, give.n=FALSE, maxiter=30)
+theta.01(z, ignore=NULL, m=NULL, q=NULL, give.n=FALSE, maxiter=30)
+theta.10(z, ignore=NULL, m=NULL, q=NULL, give.n=FALSE, maxiter=30)
+theta.11(z, ignore=NULL, m=NULL, q=NULL, give.n=FALSE, maxiter=30)
+Theta (u, m, ...)
+Theta1(u, m, ...)
+H (u, m, ...)
+H1(u, m, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>z,u</code></td>
+<td>
+<p>Complex argument of function</p>
+</td></tr>
+<tr valign="top"><td><code>ignore</code></td>
+<td>
+<p>Dummy variable whose intention is to force the user to
+name the second argument either <code>m</code> or <code>q</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>m</code></td>
+<td>
+<p>Does not seem to have a name.   The variable is introduced in
+section 16.1, p569</p>
+</td></tr>
+<tr valign="top"><td><code>q</code></td>
+<td>
+<p>The nome <i>q</i>, defined in section 16.27, p576</p>
+</td></tr>
+<tr valign="top"><td><code>give.n</code></td>
+<td>
+<p>Boolean with default <code>FALSE</code> meaning to return the
+function evaluation, and <code>TRUE</code> meaning to return a two element
+list, with first element the function evaluation, and second element
+the number of iterations used</p>
+</td></tr>
+<tr valign="top"><td><code>maxiter</code></td>
+<td>
+<p>Maximum number of iterations used.  Note that the
+series generally converge very quickly</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>In functions that take it, extra arguments passed to
+<code>theta1()</code> et seq; notably, <code>maxiter</code></p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Should have a <code>tol</code> argument.
+</p>
+<p>Functions <code>theta.00()</code> eq seq are just wrappers for 
+<code>theta1()</code> et seq, following Whittaker and Watson's terminology
+on p487; the notation does not appear in Abramowitz and Stegun.
+</p>
+
+<ul>
+<li> <p><code>theta.11() = theta1()</code>
+</p>
+</li>
+<li> <p><code>theta.10() = theta2()</code>
+</p>
+</li>
+<li> <p><code>theta.00() = theta3()</code>
+</p>
+</li>
+<li> <p><code>theta.01() = theta4()</code>
+</p>
+</li></ul>
+
+
+
+<h3>Value</h3>
+
+<p>Returns a complex-valued object with the same attributes as either
+<code>z</code>, or (<code>m</code> or <code>q</code>), whichever wasn't recycled.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Robin K. S. Hankin</p>
+
+
+<h3>References</h3>
+
+<p>M. Abramowitz and I. A. Stegun 1965.  <em>Handbook of mathematical
+functions</em>.  New York: Dover
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="theta.neville.html">theta.neville</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+m &lt;- 0.5
+derivative &lt;- function(small){(theta1(small,m=m)-theta1(0,m=m))/small}
+right.hand.side1 &lt;-  theta2(0,m=m)*theta3(0,m=m)*theta4(0,m=m)
+right.hand.side2 &lt;-  theta1.dash.zero(m)
+
+derivative(1e-5)-right.hand.side1   #should be zero
+derivative(1e-5)-right.hand.side2   #should be zero
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>elliptic</em> version 1.4-0 <a href="00Index.html">Index</a>]</div>
+</body></html>

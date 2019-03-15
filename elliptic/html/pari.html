@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Wrappers for PARI functions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for pari {elliptic}"><tr><td>pari {elliptic}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Wrappers for PARI functions</h2>
+
+<h3>Description</h3>
+
+<p>Wrappers for the three elliptic functions of PARI
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+P.pari(z,Omega,pari.fun="ellwp",numerical=TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>z</code></td>
+<td>
+<p>Complex argument</p>
+</td></tr>
+<tr valign="top"><td><code>Omega</code></td>
+<td>
+<p>Half periods</p>
+</td></tr>
+<tr valign="top"><td><code>pari.fun</code></td>
+<td>
+<p>String giving the name of the function passed to
+PARI.  Values of <code>ellwp</code>, <code>ellsigma</code>, and <code>ellzeta</code>,
+are acceptable here for the Weierstrass <i>P</i> function, the
+<i>sigma</i> function, and the <i>zeta</i> function
+respectively</p>
+</td></tr>   
+<tr valign="top"><td><code>numerical</code></td>
+<td>
+<p>Boolean with default <code>TRUE</code> meaning to return
+the complex value returned by PARI, and <code>FALSE</code> meaning to
+return the ascii string returned by PARI</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This function calls PARI via an R <code>system()</code> call.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Returns an object with the same attributes as <code>z</code>.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Function translates input into, for example,
+&ldquo;<code>ellwp([1+1*I,2+3*I],1.111+5.1132*I)</code>&rdquo; and pipes this string
+directly into <code>gp</code>.
+</p>
+<p>The PARI system clearly has more powerful syntax than the basic version
+that I'm using here, but I can't (for example) figure out how to
+vectorize any of the calls.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Robin K. S. Hankin</p>
+
+
+<h3>References</h3>
+
+<p><a href="http://www.parigp-home.de/">http://www.parigp-home.de/</a></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run:  #this in a dontrun environment because it requires pari/gp 
+z  &lt;- seq(from=1,to=3+2i,len=34)
+p &lt;- c(1,1i)
+plot(abs(P.pari(z=z,Omega=p) - P(z=z,Omega=p)))
+plot(zeta(z=z,params=parameters(Omega=p))- P.pari(z=z,Omega=c(p),pari.fun="ellzeta"))
+
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>elliptic</em> version 1.4-0 <a href="00Index.html">Index</a>]</div>
+</body></html>

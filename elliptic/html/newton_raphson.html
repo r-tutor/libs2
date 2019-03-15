@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Newton Raphson iteration to find roots of equations</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for newton_raphson {elliptic}"><tr><td>newton_raphson {elliptic}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Newton Raphson iteration to find roots of equations</h2>
+
+<h3>Description</h3>
+
+<p>Newton-Raphson iteration to find roots of equations with the emphasis
+on complex functions
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ newton_raphson(initial, f, fdash, maxiter, give=TRUE, tol = .Machine$double.eps)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>initial</code></td>
+<td>
+<p>Starting guess</p>
+</td></tr>
+<tr valign="top"><td><code>f</code></td>
+<td>
+<p>Function for which <i>f(z)=0</i> is to be solved for
+<i>z</i></p>
+</td></tr>
+<tr valign="top"><td><code>fdash</code></td>
+<td>
+<p>Derivative of function (note: Cauchy-Riemann conditions
+assumed)</p>
+</td></tr> 
+<tr valign="top"><td><code>maxiter</code></td>
+<td>
+<p>Maximum number of iterations attempted</p>
+</td></tr>
+<tr valign="top"><td><code>give</code></td>
+<td>
+<p>Boolean, with default <code>TRUE</code> meaning to give
+output based on that of <code>uniroot()</code> and <code>FALSE</code> meaning to
+return only the estimated root</p>
+</td></tr>
+<tr valign="top"><td><code>tol</code></td>
+<td>
+<p>Tolerance: iteration stops if <i>|f(z)|&lt;tol</i></p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Bog-standard implementation of the Newton-Raphson algorithm
+</p>
+
+
+<h3>Value</h3>
+
+<p>If <code>give</code> is <code>FALSE</code>,
+returns <i>z</i> with <i>|f(z)|&lt;tol</i>; if <code>TRUE</code>, returns a list
+with elements <code>root</code> (the estimated root), <code>f.root</code> (the
+function evaluated at the estimated root; should have small modulus),
+and <code>iter</code>, the number of iterations required.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Previous versions of this function used the misspelling
+&ldquo;Rapheson&rdquo;.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Robin K. S. Hankin</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+# Find the two square roots of 2+i:
+f &lt;- function(z){z^2-(2+1i)}
+fdash &lt;- function(z){2*z}
+newton_raphson( 1.4+0.3i,f,fdash,maxiter=10)
+newton_raphson(-1.4-0.3i,f,fdash,maxiter=10)
+
+# Now find the three cube roots of unity:
+g &lt;- function(z){z^3-1}
+gdash &lt;- function(z){3*z^2}
+newton_raphson(-0.5+1i,g,gdash,maxiter=10)
+newton_raphson(-0.5-1i,g,gdash,maxiter=10)
+newton_raphson(+0.5+0i,g,gdash,maxiter=10)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>elliptic</em> version 1.4-0 <a href="00Index.html">Index</a>]</div>
+</body></html>

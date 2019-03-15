@@ -1,7 +1,7 @@
 Package: blogdown
 Type: Package
 Title: Create Blogs and Websites with R Markdown
-Version: 0.10
+Version: 0.11
 Authors@R: c(
     person("Yihui", "Xie", role = c("aut", "cre"), email = "xie@yihui.name", comment = c(ORCID = "0000-0003-0645-5666")),
     person("Beilei", "Bian", role = "ctb"),
@@ -13,6 +13,7 @@ Authors@R: c(
     person("Kevin", "Ushey", role = "ctb"),
     person("Leonardo", "Collado-Torres", role = "ctb"),
     person("Xianying", "Tan", role = "ctb"),
+    person("Raniere", "Silva", role = "ctb"),
     person(family = "RStudio Inc", role = "cph"),
     person()
     )
@@ -20,8 +21,9 @@ Description: Write blog posts and web pages in R Markdown. This package supports
     the static site generator 'Hugo' (<https://gohugo.io>) best, and it also
     supports 'Jekyll' (<http://jekyllrb.com>) and 'Hexo' (<https://hexo.io>).
 License: GPL-3
-Imports: rmarkdown, bookdown (>= 0.9), knitr (>= 1.20), htmltools, yaml
-        (>= 2.1.19), httpuv (>= 1.4.0), xfun (>= 0.4), servr (>= 0.11)
+Imports: rmarkdown (>= 1.11), bookdown (>= 0.9), knitr (>= 1.21),
+        htmltools, yaml (>= 2.1.19), httpuv (>= 1.4.0), xfun (>= 0.5),
+        servr (>= 0.13)
 Suggests: testit, shiny, miniUI, stringr, rstudioapi, tools, processx,
         later
 LazyData: true
@@ -32,7 +34,7 @@ SystemRequirements: Hugo (<https://gohugo.io>) and Pandoc
 RoxygenNote: 6.1.1
 Encoding: UTF-8
 NeedsCompilation: no
-Packaged: 2019-01-09 04:09:48 UTC; yihui
+Packaged: 2019-03-11 20:41:26 UTC; yihui
 Author: Yihui Xie [aut, cre] (<https://orcid.org/0000-0003-0645-5666>),
   Beilei Bian [ctb],
   Forest Fang [ctb],
@@ -43,8 +45,9 @@ Author: Yihui Xie [aut, cre] (<https://orcid.org/0000-0003-0645-5666>),
   Kevin Ushey [ctb],
   Leonardo Collado-Torres [ctb],
   Xianying Tan [ctb],
+  Raniere Silva [ctb],
   RStudio Inc [cph]
 Maintainer: Yihui Xie <xie@yihui.name>
 Repository: CRAN
-Date/Publication: 2019-01-09 05:50:03 UTC
-Built: R 3.5.2; ; 2019-01-18 04:57:58 UTC; windows
+Date/Publication: 2019-03-11 21:15:44 UTC
+Built: R 3.5.3; ; 2019-03-13 22:59:35 UTC; windows

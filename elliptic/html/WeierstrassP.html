@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Weierstrass P and related functions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for WeierstrassP {elliptic}"><tr><td>WeierstrassP {elliptic}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Weierstrass P and related functions</h2>
+
+<h3>Description</h3>
+
+<p>Weierstrass elliptic function and its derivative, Weierstrass sigma
+function, and the Weierstrass zeta function
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+P(z, g=NULL, Omega=NULL, params=NULL, use.fpp=TRUE, give.all.3=FALSE, ...)
+Pdash(z, g=NULL, Omega=NULL, params=NULL, use.fpp=TRUE, ...)
+sigma(z, g=NULL, Omega=NULL, params=NULL, use.theta=TRUE, ...)
+zeta(z, g=NULL, Omega=NULL, params=NULL, use.fpp=TRUE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>z</code></td>
+<td>
+<p>Primary complex argument</p>
+</td></tr>
+<tr valign="top"><td><code>g</code></td>
+<td>
+<p>Invariants <code>g=c(g2,g3)</code>.  Supply exactly one of
+(<code>g</code>, <code>Omega</code>, <code>params</code>)</p>
+</td></tr>
+<tr valign="top"><td><code>Omega</code></td>
+<td>
+<p>Half periods</p>
+</td></tr>
+<tr valign="top"><td><code>params</code></td>
+<td>
+<p>Object with class &ldquo;<code>parameters</code>&rdquo; (typically
+provided by  <code>parameters()</code>)</p>
+</td></tr>
+<tr valign="top"><td><code>use.fpp</code></td>
+<td>
+<p>Boolean, with default <code>TRUE</code> meaning to calculate
+<i>P(z^C)</i> where <i>z^C</i> is congruent to <i>z</i>
+in the period lattice.  The default means that accuracy is greater
+for large <i>z</i> but has the deficiency that slight
+discontinuities may appear near parallelogram boundaries</p>
+</td></tr>
+<tr valign="top"><td><code>give.all.3</code></td>
+<td>
+<p>Boolean, with default <code>FALSE</code> meaning to return
+<i>P(z)</i> and <code>TRUE</code> meaning to return the other forms given
+in equation 18.10.5, p650.  Use <code>TRUE</code> to check for accuracy</p>
+</td></tr>
+<tr valign="top"><td><code>use.theta</code></td>
+<td>
+<p>Boolean, with default <code>TRUE</code> meaning to use
+theta function forms, and <code>FALSE</code> meaning to use a Laurent
+expansion.  Usually, the theta function form is faster, but not
+always</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Extra parameters passed to <code>theta1()</code> and <code>theta1dash()</code></p>
+</td></tr>
+</table>
+
+
+<h3>Note</h3>
+
+<p>In this package, function <code>sigma()</code> is the Weierstrass sigma
+function.  For the number theoretic divisor function also known as
+&ldquo;sigma&rdquo;, see <code>divisor()</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Robin K. S. Hankin</p>
+
+
+<h3>References</h3>
+
+<p>R. K. S. Hankin.  <em>Introducing Elliptic, an R package for
+Elliptic and Modular Functions</em>.  Journal of Statistical Software,
+Volume 15, Issue 7.  February 2006.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Example 8, p666, RHS:
+P(z=0.07 + 0.1i,g=c(10,2))
+
+## Example 8, p666, RHS:
+P(z=0.1 + 0.03i,g=c(-10,2))
+## Right answer!
+
+## Compare the Laurent series, which also gives the Right Answer (tm):
+ P.laurent(z=0.1 + 0.03i,g=c(-10,2))
+
+
+## Now a nice little plot of the zeta function:
+x &lt;- seq(from=-4,to=4,len=100)
+z &lt;- outer(x,1i*x,"+")
+view(x,x,limit(zeta(z,c(1+1i,2-3i))),nlevels=6,scheme=1)
+
+
+#now figure 18.5, top of p643:
+p &lt;- parameters(Omega=c(1+0.1i,1+1i))
+n &lt;- 40
+
+f &lt;- function(r,i1,i2=1)seq(from=r+1i*i1, to=r+1i*i2,len=n)
+g &lt;- function(i,r1,r2=1)seq(from=1i*i+r1,to=1i*i+2,len=n)
+
+solid.lines &lt;-
+  c(
+    f(0.1,0.5),NA,
+    f(0.2,0.4),NA,
+    f(0.3,0.3),NA,
+    f(0.4,0.2),NA,
+    f(0.5,0.0),NA,
+    f(0.6,0.0),NA,
+    f(0.7,0.0),NA,
+    f(0.8,0.0),NA,
+    f(0.9,0.0),NA,
+    f(1.0,0.0)
+    )
+dotted.lines &lt;-
+  c(
+    g(0.1,0.5),NA,
+    g(0.2,0.4),NA,
+    g(0.3,0.3),NA,
+    g(0.4,0.2),NA,
+    g(0.5,0.0),NA,
+    g(0.6,0.0),NA,
+    g(0.7,0.0),NA,
+    g(0.8,0.0),NA,
+    g(0.9,0.0),NA,
+    g(1.0,0.0),NA
+    )
+
+plot(P(z=solid.lines,params=p),xlim=c(-4,4),ylim=c(-6,0),type="l",asp=1)
+lines(P(z=dotted.lines,params=p),xlim=c(-4,4),ylim=c(-6,0),type="l",lty=2)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>elliptic</em> version 1.4-0 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -141,6 +141,7 @@ numerator<-	bigrational
 Oakley	Oakley
 Oakley1	Oakley
 Oakley2	Oakley
+outer	base-copies
 pow	add.biginteger
 pow.bigq	operators_bigq
 pow.bigz	add.biginteger

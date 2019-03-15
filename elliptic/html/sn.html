@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Jacobi form of the elliptic functions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for sn {elliptic}"><tr><td>sn {elliptic}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Jacobi form of the elliptic functions</h2>
+
+<h3>Description</h3>
+
+<p>Jacobian elliptic functions
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ss(u,m, ...)
+sc(u,m, ...)
+sn(u,m, ...)
+sd(u,m, ...)
+cs(u,m, ...)
+cc(u,m, ...)
+cn(u,m, ...)
+cd(u,m, ...)
+ns(u,m, ...)
+nc(u,m, ...)
+nn(u,m, ...)
+nd(u,m, ...)
+ds(u,m, ...)
+dc(u,m, ...)
+dn(u,m, ...)
+dd(u,m, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>u</code></td>
+<td>
+<p>Complex argument</p>
+</td></tr>
+<tr valign="top"><td><code>m</code></td>
+<td>
+<p>Parameter</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Extra arguments, such as <code>maxiter</code>, passed to
+<code>theta.?()</code></p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>All sixteen Jacobi elliptic functions. 
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Robin K. S. Hankin</p>
+
+
+<h3>References</h3>
+
+<p>M. Abramowitz and I. A. Stegun 1965.  <em>Handbook of mathematical
+functions</em>. New York: Dover
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="theta.html">theta</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+#Example 1, p579:
+nc(1.9965,m=0.64)
+# (some problem here)
+
+# Example 2, p579:
+dn(0.20,0.19)
+
+# Example 3, p579:
+dn(0.2,0.81)
+
+# Example 4, p580:
+cn(0.2,0.81)
+
+# Example 5, p580:
+dc(0.672,0.36)
+
+# Example 6, p580:
+Theta(0.6,m=0.36)
+
+# Example 7, p581:
+cs(0.53601,0.09)
+
+# Example 8, p581:
+sn(0.61802,0.5)
+
+#Example 9, p581:
+sn(0.61802,m=0.5)
+
+#Example 11, p581:
+cs(0.99391,m=0.5)
+# (should be 0.75 exactly)
+
+#and now a pretty picture:
+
+n &lt;- 300
+K &lt;- K.fun(1/2)
+f &lt;- function(z){1i*log((z-1.7+3i)*(z-1.7-3i)/(z+1-0.3i)/(z+1+0.3i))}
+# f &lt;- function(z){log((z-1.7+3i)/(z+1.7+3i)*(z+1-0.3i)/(z-1-0.3i))}
+x &lt;- seq(from=-K,to=K,len=n)
+y &lt;- seq(from=0,to=K,len=n)
+z &lt;- outer(x,1i*y,"+")
+
+view(x, y, f(sn(z,m=1/2)), nlevels=44, imag.contour=TRUE,
+     real.cont=TRUE, code=1, drawlabels=FALSE,
+     main="Potential flow in a rectangle",axes=FALSE,xlab="",ylab="")
+rect(-K,0,K,K,lwd=3)
+
+
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>elliptic</em> version 1.4-0 <a href="00Index.html">Index</a>]</div>
+</body></html>
