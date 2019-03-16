@@ -157,6 +157,7 @@ prune                   Prunes a tree (using leaves' labels)
 prune_common_subtrees.dendlist
                         Prune trees to their common subtrees
 prune_leaf              Trims one leaf from a dendrogram
+pvclust_edges           Get Pvclust Edges Information
 pvclust_show_signif     The significant branches in a dendrogram, based
                         on a pvclust object
 pvclust_show_signif_gradient

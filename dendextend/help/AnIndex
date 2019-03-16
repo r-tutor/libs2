@@ -48,8 +48,10 @@ cor_cophenetic.dendlist	cor_cophenetic
 cor_FM_index	cor_FM_index
 count_terminal_nodes	count_terminal_nodes
 cutree	cutree-methods
+cutree.agnes	cutree-methods
 cutree.default	cutree-methods
 cutree.dendrogram	cutree-methods
+cutree.diana	cutree-methods
 cutree.hclust	cutree-methods
 cutree.phylo	cutree-methods
 cutree_1h.dendrogram	cutree_1h.dendrogram
@@ -177,6 +179,7 @@ prune.phylo	prune
 prune.rpart	prune
 prune_common_subtrees.dendlist	prune_common_subtrees.dendlist
 prune_leaf	prune_leaf
+pvclust_edges	pvclust_edges
 pvclust_show_signif	pvclust_show_signif
 pvclust_show_signif_gradient	pvclust_show_signif_gradient
 pvrect2	pvrect2
