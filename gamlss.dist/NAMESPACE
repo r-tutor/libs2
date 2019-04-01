@@ -104,6 +104,8 @@ export(dBCCG, pBCCG, qBCCG, rBCCG, BCCG, BCCGo, BCCGuntr,
        IGAMMA, dIGAMMA, pIGAMMA, qIGAMMA,rIGAMMA,
        PARETO2, dPARETO2, pPARETO2, qPARETO2, rPARETO2,
        PARETO2o, dPARETO2o, pPARETO2o, qPARETO2o, rPARETO2o,
+       PARETO, dPARETO, pPARETO, qPARETO, rPARETO,
+       PARETO1, dPARETO1, pPARETO1, qPARETO1, rPARETO1,
       WARING, dWARING, pWARING, qWARING, rWARING,
       YULE, dYULE, pYULE, qYULE, rYULE,
       GPO, dGPO, pGPO, qGPO, rGPO,
@@ -120,15 +122,25 @@ export(dBCCG, pBCCG, qBCCG, rBCCG, BCCG, BCCGo, BCCGuntr,
       binom_1_31, binom_2_33, binom_3_33,
       contR_2_12, contR_3_11, contR_4_13,
       contRplus_2_11, contRplus_3_13, contRplus_4_33, contR01_2_13,
-      contR01_4_33
+      contR01_4_33, momentSK, centileSK, centileSkew, centileKurt, 
+      theoCentileSK, plotCentileSK, checkMomentSK, checkCentileSK 
 )
 # needed for gamlss family
 export(as.family, gamlss.family, gamlss.family.default, as.gamlss.family,
        checklink, make.link.gamlss, show.link)
+
+#export(fJSU, fSHASHo, fSEP3, fST3_1, fST3_2, fEGB2_1, fEGB2_2  )
+
 importFrom("methods", "is")
 import(MASS)
 import(graphics)
+import(grDevices)
 import(stats)
+#importFrom("grDevices", "gray")
+#importFrom("graphics", "lines")
+#importFrom("graphics", "abline", "axis", "curve", "legend", "lines",
+#             "par", "plot", "points", "title")
+#importFrom("grDevices", "gray")
 # documented but unexported methods
 
 S3method(gamlss.family, default)

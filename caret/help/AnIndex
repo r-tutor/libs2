@@ -94,6 +94,7 @@ F_meas.default	recall
 F_meas.table	recall
 gafs	gafs.default
 gafs.default	gafs.default
+gafs.recipe	gafs.default
 gafsControl	safsControl
 gafs_initial	gafs_initial
 gafs_lrSelection	gafs_initial
@@ -111,9 +112,11 @@ getModelInfo	modelLookup
 getSamplingInfo	getSamplingInfo
 getTrainPerf	postResample
 ggplot.calibration	calibration
+ggplot.gafs	plot.gafs
 ggplot.lift	lift
 ggplot.resamples	xyplot.resamples
 ggplot.rfe	plot.rfe
+ggplot.safs	plot.gafs
 ggplot.train	plot.train
 ggplot.varImp.train	plot.varImp.train
 groupKFold	createDataPartition
@@ -139,7 +142,7 @@ knnregTrain	knnreg
 ldaBag	bag
 ldaFuncs	caretFuncs
 ldaSBF	caretSBF
-learing_curve_dat	learing_curve_dat
+learning_curve_dat	learning_curve_dat
 levelplot.diff.resamples	dotplot.diff.resamples
 lift	lift
 lift.default	lift
@@ -274,6 +277,8 @@ resampleSummary	resampleSummary
 resampleWrapper	caret-internal
 rfe	rfe
 rfe.default	rfe
+rfe.formula	rfe
+rfe.recipe	rfe
 rfeControl	rfeControl
 rfeIter	rfe
 rfFuncs	caretFuncs
@@ -285,6 +290,7 @@ RMSE	postResample
 Sacramento	Sacramento
 safs	safs
 safs.default	safs
+safs.recipe	safs
 safsControl	safsControl
 safs_initial	safs_initial
 safs_perturb	safs_initial
@@ -292,6 +298,7 @@ safs_prob	safs_initial
 sbf	sbf
 sbf.default	sbf
 sbf.formula	sbf
+sbf.recipe	sbf
 sbfControl	sbfControl
 sbfIter	caret-internal
 scat	scat

@@ -102,3 +102,4 @@ step_zv                 Zero Variance Filter
 summary.recipe          Summarize a Recipe
 terms_select            Select Terms in a Step Function.
 tidy.recipe             Tidy the Result of a Recipe
+update.step             Update a recipe step

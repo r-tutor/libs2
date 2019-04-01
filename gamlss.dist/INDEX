@@ -68,7 +68,7 @@ NO                      Normal distribution for fitting a GAMLSS
 NO2                     Normal distribution (with variance as sigma
                         parameter) for fitting a GAMLSS
 NOF                     Normal distribution family for fitting a GAMLSS
-PARETO2                 Pareto Type 2 distribution for fitting a GAMLSS
+PARETO2                 Pareto distributions for fitting in GAMLSS
 PE                      Power Exponential distribution for fitting a
                         GAMLSS
 PIG                     The Poisson-inverse Gaussian distribution for
@@ -137,3 +137,5 @@ gen.Family              Functions to generate log and logit
 hazardFun               Hazard functions for gamlss.family
                         distributions
 make.link.gamlss        Create a Link for GAMLSS families
+momentSK                Sample and theoretical Moment and Centile
+                        Skewness and Kurtosis Functions

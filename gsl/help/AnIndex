@@ -123,6 +123,7 @@ debye_1	Debye
 debye_2	Debye
 debye_3	Debye
 debye_4	Debye
+deprecated_legendre	gsl-deprecated
 Dilog	Dilog
 dilog	Dilog
 doublefact	Gamma
@@ -143,6 +144,7 @@ elljac	Elljac
 erf	Error
 erfc	Error
 erf_Q	Error
+erf_Z	Error
 Error	Error
 error	Error
 Error function	Error
@@ -185,6 +187,7 @@ gegenpoly_array	Gegenbauer
 gegenpoly_n	Gegenbauer
 GSL	gsl-package
 gsl	gsl-package
+gsl-deprecated	gsl-deprecated
 gsl_cd	Elljac
 gsl_cn	Elljac
 gsl_cs	Elljac
@@ -235,6 +238,15 @@ Lambert_Wm1	Lambert
 lambert_Wm1	Lambert
 Legendre	Legendre
 legendre	Legendre
+legendre_array	Legendre
+legendre_array_index	Legendre
+legendre_array_n	Legendre
+legendre_array_size	gsl-deprecated
+legendre_check_args	Legendre
+legendre_deriv2_alt_array	Legendre
+legendre_deriv2_array	Legendre
+legendre_deriv_alt_array	Legendre
+legendre_deriv_array	Legendre
 legendre_H3d	Legendre
 legendre_H3d_0	Legendre
 legendre_H3d_1	Legendre
@@ -244,13 +256,15 @@ legendre_P2	Legendre
 legendre_P3	Legendre
 legendre_Pl	Legendre
 legendre_Plm	Legendre
-legendre_Plm_array	Legendre
+legendre_Plm_array	gsl-deprecated
+legendre_Plm_deriv_array	gsl-deprecated
 legendre_Pl_array	Legendre
 legendre_Q0	Legendre
 legendre_Q1	Legendre
 legendre_Ql	Legendre
 legendre_sphPlm	Legendre
-legendre_sphPlm_array	Legendre
+legendre_sphPlm_array	gsl-deprecated
+legendre_sphPlm_deriv_array	gsl-deprecated
 lnbeta	Gamma
 lnchoose	Gamma
 lncosh	Trig

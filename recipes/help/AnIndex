@@ -65,6 +65,7 @@ recipe.matrix	recipe
 recipes	recipes
 recipes_pkg_check	recipes_pkg_check
 reexports	reexports
+remove_role	roles
 roles	roles
 sel2char	recipes-internal
 selections	selections
@@ -211,5 +212,6 @@ tidy.step_upsample	step_upsample
 tidy.step_window	step_window
 tidy.step_YeoJohnson	step_YeoJohnson
 tidy.step_zv	step_zv
+update.step	update.step
 update_role	roles
 yj_trans	recipes-internal

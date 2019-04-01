@@ -17,7 +17,7 @@
 
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
+<style type="text/css" data-origin="pandoc">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; position: absolute; }
@@ -81,7 +81,29 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
 </style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 
 
 
@@ -386,7 +408,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">#&gt;  8 good           9    12    27         -1</span></a>
 <a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#&gt;  9 good           0    60    32         -1</span></a>
 <a class="sourceLine" id="cb5-16" data-line-number="16"><span class="co">#&gt; 10 bad            0    48    41         -1</span></a>
-<a class="sourceLine" id="cb5-17" data-line-number="17"><span class="co">#&gt; # ... with 4,444 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb5-17" data-line-number="17"><span class="co">#&gt; # … with 4,444 more rows</span></a></code></pre></div>
 <p><code>Status</code> is unaffected.</p>
 <p>One important aspect about selecting variables in steps is that the variable names and types may change as steps are being executed. In the above example, <code>Records</code> is a factor variable before the step is executed. Afterwards, <code>Records</code> is gone and the binary variable <code>Records_yes</code> is in its place. One reason to have general selection routines like <code>all_predictors</code> or <code>contains</code> is to be able to select variables that have not be created yet.</p>
 

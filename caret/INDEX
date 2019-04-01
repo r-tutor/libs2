@@ -51,7 +51,7 @@ icr.formula             Independent Component Regression
 index2vec               Convert indicies to a binary vector
 knn3                    k-Nearest Neighbour Classification
 knnreg                  k-Nearest Neighbour Regression
-learing_curve_dat       Create Data to Plot a Learning Curve
+learning_curve_dat      Create Data to Plot a Learning Curve
 lift                    Lift Plot
 maxDissim               Maximum Dissimilarity Sampling
 mdrr                    Multidrug Resistance Reversal (MDRR) Agent Data
