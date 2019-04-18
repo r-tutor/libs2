@@ -9,16 +9,17 @@
 
 <h3>Description</h3>
 
-<p>Uses linear interpolation for non-seasonal series. For seasonal series, a 
-robust STL decomposition is used. A linear interpolation is applied to the 
-seasonally adjusted data, and then the seasonal component is added back.
+<p>By default, uses linear interpolation for non-seasonal series. For seasonal series, a 
+robust STL decomposition is first computed. Then a linear interpolation is applied to the 
+seasonally adjusted data, and the seasonal component is added back.
 </p>
 
 
 <h3>Usage</h3>
 
 <pre>
-na.interp(x, lambda = NULL)
+na.interp(x, lambda = NULL, linear = (frequency(x) &lt;= 1 |
+  sum(!is.na(x)) &lt;= 2 * frequency(x)))
 </pre>
 
 
@@ -35,6 +36,10 @@ na.interp(x, lambda = NULL)
 then a transformation is automatically selected using <code>BoxCox.lambda</code>.
 The transformation is ignored if NULL. Otherwise,
 data transformed before model is estimated.</p>
+</td></tr>
+<tr valign="top"><td><code>linear</code></td>
+<td>
+<p>Should a linear interpolation be used.</p>
 </td></tr>
 </table>
 
@@ -73,5 +78,5 @@ plot(na.interp(gold))
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>forecast</em> version 8.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>forecast</em> version 8.6 <a href="00Index.html">Index</a>]</div>
 </body></html>

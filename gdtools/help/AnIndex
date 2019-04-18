@@ -1,3 +1,4 @@
+fontconfig_reinit	fontconfig_reinit
 font_family_exists	font_family_exists
 glyphs_match	glyphs_match
 match_family	match_family

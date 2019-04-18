@@ -1,5 +1,5 @@
 Package: ggthemes
-Version: 4.1.0
+Version: 4.1.1
 Title: Extra Themes, Scales and Geoms for 'ggplot2'
 Authors@R: c(person("Jeffrey B.", "Arnold", role = c("aut", "cre"),
     email = "jeffrey.arnold@gmail.com", 
@@ -34,7 +34,7 @@ LazyData: true
 Language: en-US
 Encoding: UTF-8
 NeedsCompilation: no
-Packaged: 2019-02-19 16:38:52 UTC; jrnold
+Packaged: 2019-04-09 14:41:14 UTC; jrnold
 Author: Jeffrey B. Arnold [aut, cre] (<https://orcid.org/0000-0001-9953-3904>),
   Gergely Daroczi [ctb],
   Bo Werth [ctb],
@@ -47,5 +47,5 @@ Author: Jeffrey B. Arnold [aut, cre] (<https://orcid.org/0000-0001-9953-3904>),
   Joshua London [ctb]
 Maintainer: Jeffrey B. Arnold <jeffrey.arnold@gmail.com>
 Repository: CRAN
-Date/Publication: 2019-02-19 17:50:12 UTC
-Built: R 3.5.2; ; 2019-03-05 20:10:49 UTC; windows
+Date/Publication: 2019-04-09 17:12:41 UTC
+Built: R 3.5.3; ; 2019-04-16 18:16:59 UTC; windows
