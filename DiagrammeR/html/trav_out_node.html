@@ -1,0 +1,256 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Traverse from one or more selected edges onto adjacent,...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for trav_out_node {DiagrammeR}"><tr><td>trav_out_node {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Traverse from one or more selected edges onto
+adjacent, outward nodes</h2>
+
+<h3>Description</h3>
+
+<p>From a graph object of class
+<code>dgr_graph</code> with an active selection of
+edges move opposite to the edge direction to
+connected nodes, replacing the current edge selection
+with those nodes traversed to. An optional filter by
+node attribute can limit the set of nodes traversed
+to.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+trav_out_node(graph, conditions = NULL, copy_attrs_from = NULL,
+  copy_attrs_as = NULL, agg = "sum")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>a graph object of class
+<code>dgr_graph</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>conditions</code></td>
+<td>
+<p>an option to use filtering
+conditions for the traversal.</p>
+</td></tr>
+<tr valign="top"><td><code>copy_attrs_from</code></td>
+<td>
+<p>providing an edge attribute
+name will copy those edge attribute values to the
+traversed nodes. If the edge attribute already exists,
+the values will be merged to the traversed nodes;
+otherwise, a new node attribute will be created.</p>
+</td></tr>
+<tr valign="top"><td><code>copy_attrs_as</code></td>
+<td>
+<p>if an edge attribute name
+is provided in <code>copy_attrs_from</code>, this option
+will allow the copied attribute values to be
+written under a different node attribute name.
+If the attribute name provided in
+<code>copy_attrs_as</code> does not exist in the graph's
+ndf, the new node attribute will be created
+with the chosen name.</p>
+</td></tr>
+<tr valign="top"><td><code>agg</code></td>
+<td>
+<p>if an edge attribute is provided
+to <code>copy_attrs_from</code>, then an aggregation
+function is required since there may be cases where
+multiple edge attribute values will be passed onto
+the traversed node(s). To pass only a single value,
+the following aggregation functions can be used:
+<code>sum</code>, <code>min</code>, <code>max</code>, <code>mean</code>, or
+<code>median</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a graph object of class <code>dgr_graph</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Set a seed
+set.seed(23)
+
+# Create a simple graph
+graph &lt;-
+  create_graph() %&gt;%
+  add_n_nodes(
+    n = 2,
+    type = "a",
+    label = c("asd", "iekd")) %&gt;%
+  add_n_nodes(
+    n = 3,
+    type = "b",
+    label = c("idj", "edl", "ohd")) %&gt;%
+  add_edges_w_string(
+    edges = "1-&gt;2 1-&gt;3 2-&gt;4 2-&gt;5 3-&gt;5",
+    rel = c(NA, "A", "B", "C", "D"))
+
+# Create a data frame with node ID values
+# representing the graph edges (with `from`
+# and `to` columns), and, a set of numeric values
+df_edges &lt;-
+  data.frame(
+    from = c(1, 1, 2, 2, 3),
+      to = c(2, 3, 4, 5, 5),
+    values = round(rnorm(5, 5), 2))
+
+# Create a data frame with node ID values
+# representing the graph nodes (with the `id`
+# columns), and, a set of numeric values
+df_nodes &lt;-
+  data.frame(
+    id = 1:5,
+    values = round(rnorm(5, 7), 2))
+
+# Join the data frame to the graph's internal
+# edge data frame (edf)
+graph &lt;-
+  graph %&gt;%
+  join_edge_attrs(df = df_edges) %&gt;%
+  join_node_attrs(df = df_nodes)
+
+# Show the graph's internal node data frame
+graph %&gt;%
+  get_node_df()
+
+# Show the graph's internal edge data frame
+graph %&gt;%
+  get_edge_df()
+
+# Perform a simple traversal from the
+# edge `1`-&gt;`3` to the attached node
+# in the direction of the edge; here, no
+# conditions are placed on the nodes
+# traversed to
+graph %&gt;%
+  select_edges(
+    from = 1,
+      to = 3) %&gt;%
+  trav_out_node() %&gt;%
+  get_selection()
+
+# Traverse from edges `2`-&gt;`5` and
+# `3`-&gt;`5` to the attached node along
+# the direction of the edge; here, the
+# traversals lead to different nodes
+graph %&gt;%
+  select_edges(
+    from = 2,
+      to = 5) %&gt;%
+  select_edges(
+    from = 3,
+      to = 5) %&gt;%
+  trav_out_node() %&gt;%
+  get_selection()
+
+# Traverse from the edge `1`-&gt;`3`
+# to the attached node where the edge
+# is outgoing, this time filtering
+# numeric values greater than `7.0` for
+# the `values` node attribute
+graph %&gt;%
+  select_edges(
+    from = 1,
+      to = 3) %&gt;%
+  trav_out_node(
+    conditions = values &gt; 7.0) %&gt;%
+  get_selection()
+
+# Traverse from the edge `1`-&gt;`3`
+# to the attached node where the edge
+# is outgoing, this time filtering
+# numeric values less than `7.0` for
+# the `values` node attribute (the
+# condition is not met so the original
+# selection of edge `1`-&gt;`3` remains)
+graph %&gt;%
+  select_edges(
+    from = 1,
+      to = 3) %&gt;%
+  trav_out_node(
+    conditions = values &lt; 7.0) %&gt;%
+  get_selection()
+
+# Traverse from the edge `1`-&gt;`2`
+# to node `2`, using multiple conditions
+graph %&gt;%
+  select_edges(
+    from = 1,
+      to = 2) %&gt;%
+  trav_out_node(
+    conditions =
+      grepl(".*d$", label) |
+      values &lt; 6.0) %&gt;%
+  get_selection()
+
+# Create another simple graph to demonstrate
+# copying of edge attribute values to traversed
+# nodes
+graph &lt;-
+  create_graph() %&gt;%
+  add_node() %&gt;%
+  select_nodes() %&gt;%
+  add_n_nodes_ws(
+    n = 2,
+    direction = "from") %&gt;%
+  clear_selection() %&gt;%
+  select_nodes_by_id(nodes = 2) %&gt;%
+  set_node_attrs_ws(
+    node_attr = value,
+    value = 8) %&gt;%
+  clear_selection() %&gt;%
+  select_edges_by_edge_id(edges = 1) %&gt;%
+  set_edge_attrs_ws(
+    edge_attr = value,
+    value = 5) %&gt;%
+  clear_selection() %&gt;%
+  select_edges_by_edge_id(edges = 2) %&gt;%
+  set_edge_attrs_ws(
+    edge_attr = value,
+    value = 5) %&gt;%
+  clear_selection() %&gt;%
+  select_edges()
+
+# Show the graph's internal edge data frame
+graph %&gt;%
+  get_edge_df()
+
+# Show the graph's internal node data frame
+graph %&gt;%
+  get_node_df()
+
+# Perform a traversal from the edges to
+# the central node (`1`) while also applying
+# the edge attribute `value` to the node (in
+# this case summing the `value` of 5 from
+# both edges before adding as a node attribute)
+graph &lt;-
+  graph %&gt;%
+  trav_out_node(
+    copy_attrs_from = value,
+    agg = "sum")
+
+# Show the graph's internal node data frame
+# after this change
+graph %&gt;%
+  get_node_df()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

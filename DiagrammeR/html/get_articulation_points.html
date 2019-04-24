@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Get articulation points</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for get_articulation_points {DiagrammeR}"><tr><td>get_articulation_points {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Get articulation points</h2>
+
+<h3>Description</h3>
+
+<p>Get the nodes in the graph that are
+identified as articulation points.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+get_articulation_points(graph)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>a graph object of class
+<code>dgr_graph</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a vector of node IDs.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create a random graph using the
+# `add_gnm_graph()` function
+graph &lt;-
+  create_graph() %&gt;%
+  add_gnm_graph(
+    n = 10,
+    m = 12,
+    set_seed = 23) %&gt;%
+  set_node_attrs(
+    node_attr = shape,
+    values = "square")
+
+# Get the articulation points
+# in the graph (i.e., those
+# nodes that if any were to be
+# removed, the graph would
+# become disconnected)
+graph %&gt;%
+  get_articulation_points()
+
+# For the articulation points,
+# change the node shape to
+# a `circle`
+graph &lt;-
+  graph %&gt;%
+  select_nodes_by_id(
+    nodes = get_articulation_points(.)) %&gt;%
+  set_node_attrs_ws(
+    node_attr = shape,
+    value = "circle")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

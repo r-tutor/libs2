@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Is the graph a property graph?</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for is_property_graph {DiagrammeR}"><tr><td>is_property_graph {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Is the graph a property graph?</h2>
+
+<h3>Description</h3>
+
+<p>Provides a logical value on whether
+the graph is property graph (i.e., all nodes have
+an assigned <code>type</code> value and all edges have
+an assigned <code>rel</code> value).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+is_property_graph(graph)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>a graph object of class
+<code>dgr_graph</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a logical value.
+# Create a graph with 2 nodes
+# (with 'type' values) and a
+# single edge (with a 'rel')
+simple_property_graph &lt;-
+create_graph() 
+add_node(
+type = &quot;a&quot;,
+label = &quot;first&quot;) 
+add_node(
+type = &quot;b&quot;,
+label = &quot;second&quot;) 
+add_edge(
+from = &quot;first&quot;,
+to = &quot;second&quot;,
+rel = &quot;rel_1&quot;)
+</p>
+<p># This is indeed a property graph
+# but to confirm this, use the
+# 'is_property_graph()' function
+is_property_graph(simple_property_graph)
+</p>
+<p># If a 'type' attribute is
+# removed, then this graph will
+# no longer be a property graph
+simple_property_graph 
+set_node_attrs(
+node_attr = type,
+values = NA,
+nodes = 1) 
+is_property_graph()
+</p>
+<p># An empty graph will return FALSE
+create_graph() 
+is_property_graph()
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

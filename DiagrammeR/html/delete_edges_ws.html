@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Delete all selected edges in an edge selection</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for delete_edges_ws {DiagrammeR}"><tr><td>delete_edges_ws {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Delete all selected edges in an edge selection</h2>
+
+<h3>Description</h3>
+
+<p>In a graph object of class
+<code>dgr_graph</code>, delete all edges present in a
+selection.
+</p>
+<p>Selections of edges can be performed using
+the following <code>select_...</code> functions:
+<code>select_edges()</code>,
+<code>select_last_edge()</code>, or
+<code>select_edges_by_node_id()</code>.
+Selections of edges can also be performed using
+the following traversal functions:
+<code>trav_out_edge()</code>, <code>trav_in_edge()</code>,
+or <code>trav_both_edge()</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+delete_edges_ws(graph)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>a graph object of class
+<code>dgr_graph</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a graph object of class <code>dgr_graph</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create a graph
+graph &lt;-
+  create_graph() %&gt;%
+  add_n_nodes(n = 3) %&gt;%
+  add_edges_w_string(
+    edges = "1-&gt;3 1-&gt;2 2-&gt;3")
+
+# Select edges attached to
+# node with ID `3` (these are
+# `1`-&gt;`3` and `2`-&gt;`3`)
+graph &lt;-
+  graph %&gt;%
+  select_edges_by_node_id(nodes = 3)
+
+# Delete edges in selection
+graph &lt;-
+  graph %&gt;%
+  delete_edges_ws()
+
+# Get a count of edges in the graph
+graph %&gt;%
+  count_edges()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

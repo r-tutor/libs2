@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Insert edge data attributes during edge creation</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for edge_data {DiagrammeR}"><tr><td>edge_data {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Insert edge data attributes during edge creation</h2>
+
+<h3>Description</h3>
+
+<p>This helper function should be
+invoked to provide values for the namesake
+<code>edge_data</code> argument, which is present
+in any function where edges are created.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+edge_data(...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>edge data attributes provided
+as one or more named vectors.</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+# Create a new graph and add
+# a path with several edge
+# data attributes
+graph &lt;-
+  create_graph() %&gt;%
+  add_path(
+    n = 3,
+    type = "path",
+    edge_data = edge_data(
+      hour = 5,
+      index = c(1, 2)))
+
+# View the graph's internal
+# edge data frame; the edge
+# data attributes have
+# been inserted
+graph %&gt;%
+  get_edge_df()
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

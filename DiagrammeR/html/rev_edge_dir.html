@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Reverse the direction of all edges in a graph</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for rev_edge_dir {DiagrammeR}"><tr><td>rev_edge_dir {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Reverse the direction of all edges in a graph</h2>
+
+<h3>Description</h3>
+
+<p>Using a directed graph as input,
+reverse the direction of all edges in that graph.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+rev_edge_dir(graph)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>a graph object of class
+<code>dgr_graph</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a graph object of class <code>dgr_graph</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create a graph with a
+# directed tree
+graph &lt;-
+  create_graph() %&gt;%
+  add_balanced_tree(
+    k = 2, h = 2)
+
+# Inspect the graph's edges
+graph %&gt;%
+  get_edges()
+
+# Reverse the edge directions
+# such that edges are directed
+# toward the root of the tree
+graph &lt;-
+  graph %&gt;%
+  rev_edge_dir()
+
+# Inspect the graph's edges
+# after their reversal
+graph %&gt;%
+  get_edges()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

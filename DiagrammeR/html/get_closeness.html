@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Get closeness centrality values</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for get_closeness {DiagrammeR}"><tr><td>get_closeness {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Get closeness centrality values</h2>
+
+<h3>Description</h3>
+
+<p>Get the closeness centrality values
+for all nodes in a graph.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+get_closeness(graph, direction = "all")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>a graph object of class
+<code>dgr_graph</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>direction</code></td>
+<td>
+<p>using <code>all</code> (the default), the
+search will ignore edge direction while traversing
+through the graph. With <code>out</code>, measurements of
+paths will be from a node whereas with <code>in</code>,
+measurements of paths will be to a node.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a data frame with closeness values for
+each of the nodes.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create a random graph using the
+# `add_gnm_graph()` function
+graph &lt;-
+  create_graph() %&gt;%
+  add_gnm_graph(
+    n = 10,
+    m = 12,
+    set_seed = 23)
+
+# Get closeness values for all nodes
+# in the graph
+graph %&gt;%
+  get_closeness()
+
+# Add the closeness values to
+# the graph as a node attribute
+graph &lt;-
+  graph %&gt;%
+  join_node_attrs(
+    df = get_closeness(.))
+
+# Display the graph's node data frame
+graph %&gt;%
+  get_node_df()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

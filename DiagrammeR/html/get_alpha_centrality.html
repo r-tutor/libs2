@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Get the alpha centrality for all nodes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for get_alpha_centrality {DiagrammeR}"><tr><td>get_alpha_centrality {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Get the alpha centrality for all nodes</h2>
+
+<h3>Description</h3>
+
+<p>Get the alpha centrality
+values for all nodes in the graph.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+get_alpha_centrality(graph, alpha = 1, exo = 1, weights_attr = NULL,
+  tol = 1e-07)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>a graph object of class
+<code>dgr_graph</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>alpha</code></td>
+<td>
+<p>the parameter that
+specifies the relative importance of
+endogenous versus exogenous factors in
+the determination of centrality.</p>
+</td></tr>
+<tr valign="top"><td><code>exo</code></td>
+<td>
+<p>the exogenous factors, in
+most cases this is either a constant
+(which applies the same factor to
+every node), or a vector giving the
+factor for every node.</p>
+</td></tr>
+<tr valign="top"><td><code>weights_attr</code></td>
+<td>
+<p>an optional name
+of the edge attribute to use in the
+adjacency matrix. If <code>NULL</code> then,
+if it exists, the <code>weight</code> edge
+attribute of the graph will be used.
+Failing that, the standard adjacency
+matrix will be used in calculations.</p>
+</td></tr>
+<tr valign="top"><td><code>tol</code></td>
+<td>
+<p>the tolerance for
+near-singularities during matrix
+inversion. Default value is set to
+<code>1e-7</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a data frame with alpha
+centrality scores for each of the
+nodes.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create a random graph using the
+# `add_gnm_graph()` function
+graph &lt;-
+  create_graph() %&gt;%
+  add_gnm_graph(
+    n = 10,
+    m = 12,
+    set_seed = 23)
+
+# Get the alpha centrality scores
+# for all nodes
+graph %&gt;%
+  get_alpha_centrality()
+
+# Add the alpha centrality
+# scores to the graph as a node
+# attribute
+graph &lt;-
+  graph %&gt;%
+  join_node_attrs(
+    df = get_alpha_centrality(.))
+
+# Display the graph's node
+# data frame
+graph %&gt;%
+  get_node_df()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

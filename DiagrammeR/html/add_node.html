@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Add a node to an existing graph object</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for add_node {DiagrammeR}"><tr><td>add_node {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Add a node to an existing graph object</h2>
+
+<h3>Description</h3>
+
+<p>With a graph object of class
+<code>dgr_graph</code>, add a new node to the graph.
+One can optionally provide node attributes
+for the created node. There is also the
+option to create edges to and from existing
+nodes in the graph. Because new edges can
+also be created through this function, there
+is the possibility to set edge attributes
+for any new graph edges.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+add_node(graph, type = NULL, label = NULL, from = NULL, to = NULL,
+  node_aes = NULL, edge_aes = NULL, node_data = NULL, edge_data = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>a graph object of class
+<code>dgr_graph</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>an optional character object that
+acts as a group identifier for the node to be added.</p>
+</td></tr>
+<tr valign="top"><td><code>label</code></td>
+<td>
+<p>an optional character object that
+describes the node.</p>
+</td></tr>
+<tr valign="top"><td><code>from</code></td>
+<td>
+<p>an optional vector containing node IDs
+from which edges will be directed to the new node.</p>
+</td></tr>
+<tr valign="top"><td><code>to</code></td>
+<td>
+<p>an optional vector containing node IDs to
+which edges will be directed from the new node.</p>
+</td></tr>
+<tr valign="top"><td><code>node_aes</code></td>
+<td>
+<p>an optional list of named vectors
+comprising node aesthetic attributes. The helper
+function <code>node_aes()</code> is strongly recommended
+for use here as it contains arguments for each
+of the accepted node aesthetic attributes (e.g.,
+<code>shape</code>, <code>style</code>, <code>color</code>,
+<code>fillcolor</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>edge_aes</code></td>
+<td>
+<p>an optional list of named vectors
+comprising edge aesthetic attributes. The helper
+function <code>edge_aes()</code> is strongly recommended
+for use here as it contains arguments for each
+of the accepted edge aesthetic attributes (e.g.,
+<code>shape</code>, <code>style</code>, <code>penwidth</code>,
+<code>color</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>node_data</code></td>
+<td>
+<p>an optional list of named vectors
+comprising node data attributes. The helper
+function <code>node_data()</code> is strongly recommended
+for use here as it helps bind data specifically
+to the created nodes.</p>
+</td></tr>
+<tr valign="top"><td><code>edge_data</code></td>
+<td>
+<p>an optional list of named vectors
+comprising edge data attributes. The helper
+function <code>edge_data()</code> is strongly recommended
+for use here as it helps bind data specifically
+to the created edges.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a graph object of class <code>dgr_graph</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create an empty graph and add 2 nodes by using
+# the `add_node()` function twice
+graph &lt;-
+  create_graph() %&gt;%
+  add_node() %&gt;%
+  add_node()
+
+# Get a count of all nodes
+# in the graph
+graph %&gt;%
+  count_nodes()
+
+# The nodes added were given
+# ID values `1` and `2`; obtain
+# the graph's node IDs
+graph %&gt;%
+  get_node_ids()
+
+# Add a node with a `type`
+# value defined
+graph &lt;-
+  graph %&gt;%
+  add_node(type = "person")
+
+# View the graph's internal
+# node data frame (ndf)
+graph %&gt;%
+  get_node_df()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

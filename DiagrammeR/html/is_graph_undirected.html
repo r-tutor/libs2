@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Is the graph an undirected graph?</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for is_graph_undirected {DiagrammeR}"><tr><td>is_graph_undirected {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Is the graph an undirected graph?</h2>
+
+<h3>Description</h3>
+
+<p>Determines whether a graph
+is set as undirected or not and
+returns a logical value to that effect.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+is_graph_undirected(graph)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>a graph object of class
+<code>dgr_graph</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a logical value.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create an empty graph; by
+# default, new graphs made
+# by `create_graph()` are
+# directed graph, so, use
+# `directed = FALSE` to create
+# an undirected graph
+graph &lt;-
+  create_graph(
+    directed = FALSE)
+
+# Determine whether the
+# graph is undirected
+graph %&gt;%
+  is_graph_undirected()
+
+# Use the `set_graph_directed()`
+# function and check again
+# as to whether the graph is
+# undirected
+graph %&gt;%
+  set_graph_directed() %&gt;%
+  is_graph_undirected()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

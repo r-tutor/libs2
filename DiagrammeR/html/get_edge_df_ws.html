@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Get the graph's edf filtered by a selection of edges</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for get_edge_df_ws {DiagrammeR}"><tr><td>get_edge_df_ws {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Get the graph's edf filtered by a selection of edges</h2>
+
+<h3>Description</h3>
+
+<p>From a graph object of class
+<code>dgr_graph</code>, get the graph's internal
+edge data frame that is filtered by the edge
+ID values currently active as a selection.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+get_edge_df_ws(graph)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>a graph object of class
+<code>dgr_graph</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>an edge data frame.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create a random graph using the
+# `add_gnm_graph()` function
+graph &lt;-
+  create_graph() %&gt;%
+  add_gnm_graph(
+    n = 4,
+    m = 4,
+    set_seed = 23) %&gt;%
+  set_edge_attrs(
+    edge_attr = value,
+    values = c(2.5, 8.2, 4.2, 2.4))
+
+# Select edges with ID values
+# `1` and `3`
+graph &lt;-
+  graph %&gt;%
+  select_edges_by_edge_id(
+    edges = c(1, 3))
+
+# Get the edge data frame that's
+# limited to the rows that correspond
+# to the edge selection
+graph %&gt;%
+  get_edge_df_ws()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

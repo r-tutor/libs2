@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Combine two graphs into a single graph</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for combine_graphs {DiagrammeR}"><tr><td>combine_graphs {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Combine two graphs into a single graph</h2>
+
+<h3>Description</h3>
+
+<p>Combine two graphs in order
+to make a new graph.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+combine_graphs(x, y)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a <code>DiagrammeR</code> graph
+object to which another graph will be
+unioned. This graph should be considered
+the graph from which global graph
+attributes will be inherited in the
+resulting graph.</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>a <code>DiagrammeR</code> graph
+object that is to be unioned with the
+graph supplied as <code>x</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a graph object of class
+<code>dgr_graph</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create a graph with a cycle
+# containing 6 nodes
+graph_cycle &lt;-
+ create_graph() %&gt;%
+   add_cycle(n = 6)
+
+# Create a random graph with
+# 8 nodes and 15 edges using the
+# `add_gnm_graph()` function
+graph_random &lt;-
+  create_graph() %&gt;%
+  add_gnm_graph(
+    n = 8,
+    m = 15,
+    set_seed = 23)
+
+# Combine the two graphs in a
+# union operation
+combined_graph &lt;-
+  combine_graphs(
+    graph_cycle,
+    graph_random)
+
+# Get the number of nodes in
+# the combined graph
+combined_graph %&gt;%
+  count_nodes()
+
+# The `combine_graphs()`
+# function will renumber
+# node ID values in graph `y`
+# during the union; this ensures
+# that node ID values are unique
+combined_graph %&gt;%
+  get_node_ids()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: ggforce: Accelerating ggplot2</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for ggforce {ggforce}"><tr><td>ggforce {ggforce}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>ggforce: Accelerating ggplot2</h2>
+
+<h3>Description</h3>
+
+<p>This package contains a range of useful stats, geoms, trans and utilities to
+get more out of ggplot2. Many of the additions are mainly aimed at developers
+wanting to develop new visualizations using ggplot2 rather than statisticians
+wanting to understand their data.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Thomas Lin Pedersen
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Useful links:
+</p>
+
+<ul>
+<li> <p><a href="https://ggforce.data-imaginist.com">https://ggforce.data-imaginist.com</a>
+</p>
+</li>
+<li><p> Report bugs at <a href="https://github.com/thomasp85/ggforce/issues">https://github.com/thomasp85/ggforce/issues</a>
+</p>
+</li></ul>
+
+
+
+<h3>Examples</h3>
+
+<pre>
+rocketData &lt;- data.frame(
+  x = c(1, 1, 2, 2),
+  y = c(1, 2, 2, 3)
+)
+rocketData &lt;- do.call(rbind, lapply(seq_len(500) - 1, function(i) {
+  rocketData$y &lt;- rocketData$y - c(0, i / 500)
+  rocketData$group &lt;- i + 1
+  rocketData
+}))
+rocketData2 &lt;- data.frame(
+  x = c(2, 2.25, 2),
+  y = c(2, 2.5, 3)
+)
+rocketData2 &lt;- do.call(rbind, lapply(seq_len(500) - 1, function(i) {
+  rocketData2$x[2] &lt;- rocketData2$x[2] - i * 0.25 / 500
+  rocketData2$group &lt;- i + 1 + 500
+  rocketData2
+}))
+
+ggplot() + geom_link(aes(
+  x = 2, y = 2, xend = 3, yend = 3, alpha = ..index..,
+  size = ..index..
+), colour = 'goldenrod', n = 500) +
+  geom_bezier(aes(x = x, y = y, group = group, colour = ..index..),
+    data = rocketData
+  ) +
+  geom_bezier(aes(x = y, y = x, group = group, colour = ..index..),
+    data = rocketData
+  ) +
+  geom_bezier(aes(x = x, y = y, group = group, colour = 1),
+    data = rocketData2
+  ) +
+  geom_bezier(aes(x = y, y = x, group = group, colour = 1),
+    data = rocketData2
+  ) +
+  geom_text(aes(x = 1.65, y = 1.65, label = 'ggplot2', angle = 45),
+    colour = 'white', size = 15
+  ) +
+  coord_fixed() +
+  scale_x_reverse() +
+  scale_y_reverse() +
+  scale_alpha(range = c(1, 0), guide = 'none') +
+  scale_size_continuous(
+    range = c(20, 0.1), trans = 'exp',
+    guide = 'none'
+  ) +
+  scale_color_continuous(guide = 'none') +
+  xlab('') + ylab('') +
+  ggtitle('ggforce: Accelerating ggplot2') +
+  theme(plot.title = element_text(size = 20))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggforce</em> version 0.2.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Select edges in a graph using edge ID values</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for select_edges_by_edge_id {DiagrammeR}"><tr><td>select_edges_by_edge_id {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Select edges in a graph using edge ID values</h2>
+
+<h3>Description</h3>
+
+<p>Select edges in a graph object of class
+<code>dgr_graph</code> using edge ID values.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+select_edges_by_edge_id(graph, edges, set_op = "union")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>a graph object of class
+<code>dgr_graph</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>edges</code></td>
+<td>
+<p>a vector of edge IDs for the selection
+of edges present in the graph.</p>
+</td></tr>
+<tr valign="top"><td><code>set_op</code></td>
+<td>
+<p>the set operation to perform upon
+consecutive selections of graph edges This can
+either be as a <code>union</code> (the default), as an
+intersection of selections with <code>intersect</code>,
+or, as a <code>difference</code> on the previous
+selection, if it exists.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a graph object of class <code>dgr_graph</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create a graph with 5 nodes
+graph &lt;-
+  create_graph() %&gt;%
+  add_path(n = 5)
+
+# Create a graph selection by selecting
+# edges with edge IDs `1` and `2`
+graph &lt;-
+  graph %&gt;%
+  select_edges_by_edge_id(
+    edges = 1:2)
+
+# Get the selection of edges
+graph %&gt;%
+  get_selection()
+
+# Perform another selection of edges,
+# with edge IDs `1`, `2`, and `4`
+graph &lt;-
+  graph %&gt;%
+  clear_selection() %&gt;%
+  select_edges_by_edge_id(
+    edges = c(1, 2, 4))
+
+# Get the selection of edges
+graph %&gt;%
+  get_selection()
+
+# Get the fraction of edges selected
+# over all the edges in the graph
+graph %&gt;%
+  {
+    l &lt;- get_selection(.) %&gt;%
+      length(.)
+    e &lt;- count_edges(.)
+    l/e
+  }
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

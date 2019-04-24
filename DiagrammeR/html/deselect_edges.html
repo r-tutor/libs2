@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Deselect any selected edges in a graph</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for deselect_edges {DiagrammeR}"><tr><td>deselect_edges {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Deselect any selected edges in a graph</h2>
+
+<h3>Description</h3>
+
+<p>Deselect edges in a graph object of
+class <code>dgr_graph</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+deselect_edges(graph, edges)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>a graph object of class
+<code>dgr_graph</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>edges</code></td>
+<td>
+<p>a vector of edge IDs that
+should be deselected.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a graph object of class <code>dgr_graph</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create a graph with
+# a single path
+graph &lt;-
+  create_graph() %&gt;%
+  add_path(n = 5)
+
+# Select edges with IDs `1`
+# and `3`
+graph &lt;-
+  graph %&gt;%
+  select_edges_by_edge_id(
+    edges = c(1, 3))
+
+# Verify that an edge selection
+# has been made
+graph %&gt;%
+  get_selection()
+
+# Deselect edge `1`
+graph &lt;-
+  graph %&gt;%
+  select_edges_by_edge_id(
+    edges = c(1, 3)) %&gt;%
+  deselect_edges(edges = 1)
+
+# Verify that the edge selection
+# has been made for edges `1` and
+# `3` and that edge `1` has been
+# deselected (leaving only `3`)
+graph %&gt;%
+  get_selection()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

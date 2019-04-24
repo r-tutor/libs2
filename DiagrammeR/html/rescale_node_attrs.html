@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Rescale numeric node attribute values</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for rescale_node_attrs {DiagrammeR}"><tr><td>rescale_node_attrs {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Rescale numeric node attribute values</h2>
+
+<h3>Description</h3>
+
+<p>From a graph object of class
+<code>dgr_graph</code>, take a set of numeric values for a
+node attribute, rescale to a new numeric or color
+range, then write to the same node attribute or to
+a new node attribute column.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+rescale_node_attrs(graph, node_attr_from, to_lower_bound = 0,
+  to_upper_bound = 1, node_attr_to = NULL, from_lower_bound = NULL,
+  from_upper_bound = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>a graph object of class
+<code>dgr_graph</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>node_attr_from</code></td>
+<td>
+<p>the node attribute containing
+numeric data that is to be rescaled to new numeric
+or color values.</p>
+</td></tr>
+<tr valign="top"><td><code>to_lower_bound</code></td>
+<td>
+<p>the lower bound value for the
+set of rescaled values. This can be a numeric value
+or an X11 color name.</p>
+</td></tr>
+<tr valign="top"><td><code>to_upper_bound</code></td>
+<td>
+<p>the upper bound value for the
+set of rescaled values. This can be a numeric value
+or an X11 color name.</p>
+</td></tr>
+<tr valign="top"><td><code>node_attr_to</code></td>
+<td>
+<p>an optional name of a new node
+attribute to which the recoded values will be
+applied. This will retain the original node
+attribute and its values.</p>
+</td></tr>
+<tr valign="top"><td><code>from_lower_bound</code></td>
+<td>
+<p>an optional, manually set
+lower bound value for the rescaled values. If not
+set, the minimum value from the set will be used.</p>
+</td></tr>
+<tr valign="top"><td><code>from_upper_bound</code></td>
+<td>
+<p>an optional, manually set
+upper bound value for the rescaled values. If not
+set, the minimum value from the set will be used.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a graph object of class <code>dgr_graph</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create a random graph using the
+# `add_gnm_graph()` function
+graph &lt;-
+  create_graph() %&gt;%
+  add_gnm_graph(
+    n = 5,
+    m = 10,
+    set_seed = 23) %&gt;%
+  set_node_attrs(
+    node_attr = value,
+    values = rnorm(
+      n = count_nodes(.),
+      mean = 5,
+      sd = 1) %&gt;% round(1))
+
+# Get the graph's internal ndf
+# to show which node attributes
+# are available
+graph %&gt;%
+  get_node_df()
+
+# Rescale the `value` node
+# attribute, so that its values
+# are rescaled between 0 and 1
+graph &lt;-
+  graph %&gt;%
+  rescale_node_attrs(
+    node_attr_from = value,
+    to_lower_bound = 0,
+    to_upper_bound = 1)
+
+# Get the graph's internal ndf
+# to show that the node attribute
+# values had been rescaled
+graph %&gt;%
+  get_node_df()
+
+# Scale the values in the `value`
+# node attribute to different
+# shades of gray for the `fillcolor`
+# and `fontcolor` node attributes
+graph &lt;-
+  graph %&gt;%
+  rescale_node_attrs(
+    node_attr_from = value,
+    to_lower_bound = "gray80",
+    to_upper_bound = "gray20",
+    node_attr_to = fillcolor) %&gt;%
+  rescale_node_attrs(
+    node_attr_from = value,
+    to_lower_bound = "gray5",
+    to_upper_bound = "gray95",
+    node_attr_to = fontcolor)
+
+# Get the graph's internal ndf
+# once more to show that scaled
+# grayscale colors are now available
+# in the `fillcolor` and `fontcolor`
+# node attributes
+graph %&gt;%
+  get_node_df()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

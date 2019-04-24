@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create a node data frame</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for create_node_df {DiagrammeR}"><tr><td>create_node_df {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create a node data frame</h2>
+
+<h3>Description</h3>
+
+<p>Combine several vectors for nodes
+and their attributes into a data frame, which can be
+combined with other similarly-generated data frames,
+or, added to a graph object. A node data frame,
+or ndf, has at least the following columns:
+</p>
+<p>- <code>id</code> (of type <code>integer</code>)
+</p>
+<p>- <code>type</code> (of type <code>character</code>)
+</p>
+<p>- <code>label</code> (of type <code>character</code>)
+</p>
+<p>An arbitrary number of additional columns containing
+aesthetic or data attributes can be part of the ndf,
+so long as they follow the aforementioned columns.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+create_node_df(n, type = NULL, label = NULL, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>the total number of nodes to include in the
+node data frame.</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>an optional <code>type</code> for each
+node.</p>
+</td></tr>
+<tr valign="top"><td><code>label</code></td>
+<td>
+<p>an optional <code>label</code> for each node.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>one or more vectors for associated node
+attributes.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a node data frame (ndf).
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create a node data frame (ndf) where the labels
+# are equivalent to the node ID values (this is not
+# recommended); the `label` and `type` node
+# attributes will always be a `character` class
+# whereas `id` will always be an `integer`
+node_df &lt;-
+  create_node_df(
+    n = 4,
+    type = c("a", "a", "b", "b"),
+    label = TRUE)
+
+# Display the node data frame
+node_df
+
+# Create an ndf with distinct labels and
+# additional node attributes (where their classes
+# will be inferred from the input vectors)
+node_df &lt;-
+  create_node_df(
+    n = 4,
+    type = "a",
+    label = c(2384, 3942, 8362, 2194),
+    style = "filled",
+    color = "aqua",
+    shape = c("circle", "circle",
+              "rectangle", "rectangle"),
+    value = c(3.5, 2.6, 9.4, 2.7))
+
+# Display the node data frame
+node_df
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

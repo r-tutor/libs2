@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Convert an igraph graph to a DiagrammeR one</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for from_igraph {DiagrammeR}"><tr><td>from_igraph {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Convert an igraph graph to a DiagrammeR one</h2>
+
+<h3>Description</h3>
+
+<p>Convert an igraph graph to a DiagrammeR
+graph object.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+from_igraph(igraph, graph_name = NULL, write_backups = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>igraph</code></td>
+<td>
+<p>an igraph graph object.</p>
+</td></tr>
+<tr valign="top"><td><code>graph_name</code></td>
+<td>
+<p>an optional string for labeling
+the graph object.</p>
+</td></tr>
+<tr valign="top"><td><code>write_backups</code></td>
+<td>
+<p>an option to write incremental
+backups of changing graph states to disk. If
+<code>TRUE</code>, a subdirectory of the working directory
+will be used to store <code>RDS</code> files. The
+default value is <code>FALSE</code> so one has to opt in
+to use this functionality.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a graph object of class <code>dgr_graph</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create a DiagrammeR graph object
+dgr_graph_orig &lt;-
+  create_graph() %&gt;%
+  add_gnm_graph(
+    n = 36,
+    m = 50,
+    set_seed = 23)
+
+# Convert the DiagrammeR
+# graph to an igraph object
+ig_graph &lt;-
+  dgr_graph_orig %&gt;%
+  to_igraph()
+
+# Convert the igraph graph
+# back to a DiagrammeR graph
+dgr_graph_new &lt;-
+  ig_graph %&gt;%
+  from_igraph()
+
+# Get some graph information
+(dgr_graph_new %&gt;%
+  get_graph_info())[, 1:6]
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

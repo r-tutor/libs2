@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Select nodes based on a walk distance from a specified node</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for select_nodes_in_neighborhood {DiagrammeR}"><tr><td>select_nodes_in_neighborhood {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Select nodes based on a walk
+distance from a specified node</h2>
+
+<h3>Description</h3>
+
+<p>Select those nodes in
+the neighborhood of nodes connected
+a specified distance from an initial
+node.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+select_nodes_in_neighborhood(graph, node, distance, set_op = "union")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>a graph object of class
+<code>dgr_graph</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>node</code></td>
+<td>
+<p>the node from which the
+traversal will originate.</p>
+</td></tr>
+<tr valign="top"><td><code>distance</code></td>
+<td>
+<p>the maximum number
+of steps from the <code>node</code> for
+inclusion in the selection.</p>
+</td></tr>
+<tr valign="top"><td><code>set_op</code></td>
+<td>
+<p>the set operation to
+perform upon consecutive selections
+of graph nodes. This can either be
+as a <code>union</code> (the default), as
+an intersection of selections with
+<code>intersect</code>, or, as a
+<code>difference</code> on the previous
+selection, if it exists.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a graph object of class
+<code>dgr_graph</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create a graph containing
+# a balanced tree
+graph &lt;-
+  create_graph() %&gt;%
+  add_balanced_tree(
+    k = 2, h = 2)
+
+# Create a graph selection by
+# selecting nodes in the
+# neighborhood of node `1`, where
+# the neighborhood is limited by
+# nodes that are 1 connection
+# away from node `1`
+graph &lt;-
+  graph %&gt;%
+  select_nodes_in_neighborhood(
+    node = 1,
+    distance = 1)
+
+# Get the selection of nodes
+graph %&gt;%
+  get_selection()
+
+# Perform another selection
+# of nodes, this time with a
+# neighborhood spanning 2 nodes
+# from node `1`
+graph &lt;-
+  graph %&gt;%
+  clear_selection() %&gt;%
+  select_nodes_in_neighborhood(
+    node = 1,
+    distance = 2)
+
+# Get the selection of nodes
+graph %&gt;%
+  get_selection()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

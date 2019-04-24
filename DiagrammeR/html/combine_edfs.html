@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Combine multiple edge data frames into a single edge data...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for combine_edfs {DiagrammeR}"><tr><td>combine_edfs {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Combine multiple edge data frames into a single
+edge data frame</h2>
+
+<h3>Description</h3>
+
+<p>Combine several edge data frames in
+the style of <code>rbind</code>, except, it works
+regardless of the number and ordering of the
+columns.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+combine_edfs(...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>two or more edge data frames, which
+contain edge IDs and associated attributes.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a combined edge data frame.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create an edge data frame (edf)
+edf_1 &lt;-
+  create_edge_df(
+    from = c(1, 1, 2, 3),
+    to = c(2, 4, 4, 1),
+    rel = "requires",
+    color = "green",
+    data = c(2.7, 8.9, 2.6, 0.6))
+
+# Create a second edge data frame
+edf_2 &lt;-
+  create_edge_df(
+    from = c(5, 7, 8, 8),
+    to = c(7, 8, 6, 5),
+    rel = "receives",
+    arrowhead = "dot",
+    color = "red")
+
+# Combine the two edge data frames
+all_edges &lt;-
+  combine_edfs(edf_1, edf_2)
+
+# View the combined edge data frame
+all_edges
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

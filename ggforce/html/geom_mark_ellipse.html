@@ -1,0 +1,340 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Annotate areas with ellipses</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for geom_mark_ellipse {ggforce}"><tr><td>geom_mark_ellipse {ggforce}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Annotate areas with ellipses</h2>
+
+<h3>Description</h3>
+
+<p>This geom lets you annotate sets of points via ellipses. The enclosing
+ellipses are estimated using the Khachiyan algorithm which guarantees and
+optimal solution within the given tolerance level. As this geom is often
+expanded it is of lesser concern that some points are slightly outside the
+ellipsis. The Khachiyan algorithm has polynomial complexity and can thus
+suffer from scaling issues. Still, it is only calculated on the convex hull
+of the groups, so performance issues should be rare (it can easily handle a
+hull consisting of 1000 points).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+geom_mark_ellipse(mapping = NULL, data = NULL, stat = "identity",
+  position = "identity", expand = unit(5, "mm"), radius = expand,
+  n = 100, tol = 0.01, label.margin = margin(2, 2, 2, 2, "mm"),
+  label.width = NULL, label.minwidth = unit(50, "mm"),
+  label.hjust = 0, label.fontsize = 12, label.family = "",
+  label.lineheight = 1, label.fontface = c("bold", "plain"),
+  label.fill = "white", label.colour = "black",
+  label.buffer = unit(10, "mm"), con.colour = "black",
+  con.size = 0.5, con.type = "elbow", con.linetype = 1,
+  con.border = "one", con.cap = unit(3, "mm"), con.arrow = NULL, ...,
+  na.rm = FALSE, show.legend = NA, inherit.aes = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>mapping</code></td>
+<td>
+<p>Set of aesthetic mappings created by <code><a href="../../ggplot2/html/aes.html">aes()</a></code> or
+<code><a href="../../ggplot2/html/aes_.html">aes_()</a></code>. If specified and <code>inherit.aes = TRUE</code> (the
+default), it is combined with the default mapping at the top level of the
+plot. You must supply <code>mapping</code> if there is no plot mapping.</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>The data to be displayed in this layer. There are three
+options:
+</p>
+<p>If <code>NULL</code>, the default, the data is inherited from the plot
+data as specified in the call to <code><a href="../../ggplot2/html/ggplot.html">ggplot()</a></code>.
+</p>
+<p>A <code>data.frame</code>, or other object, will override the plot
+data. All objects will be fortified to produce a data frame. See
+<code><a href="../../ggplot2/html/fortify.html">fortify()</a></code> for which variables will be created.
+</p>
+<p>A <code>function</code> will be called with a single argument,
+the plot data. The return value must be a <code>data.frame</code>, and
+will be used as the layer data.</p>
+</td></tr>
+<tr valign="top"><td><code>stat</code></td>
+<td>
+<p>The statistical transformation to use on the data for this
+layer, as a string.</p>
+</td></tr>
+<tr valign="top"><td><code>position</code></td>
+<td>
+<p>Position adjustment, either as a string, or the result of
+a call to a position adjustment function.</p>
+</td></tr>
+<tr valign="top"><td><code>expand</code></td>
+<td>
+<p>A numeric or unit vector of length one, specifying the
+expansion amount. Negative values will result in contraction instead. If the
+value is given as a numeric it will be understood as a proportion of the
+plot area width.</p>
+</td></tr>
+<tr valign="top"><td><code>radius</code></td>
+<td>
+<p>As <code>expand</code> but specifying the corner radius.</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>The number of points used to draw each circle. Defaults to <code>100</code></p>
+</td></tr>
+<tr valign="top"><td><code>tol</code></td>
+<td>
+<p>The tolerance cutoff. Lower values will result in ellipses closer
+to the optimal solution. Defaults to <code>0.01</code></p>
+</td></tr>
+<tr valign="top"><td><code>label.margin</code></td>
+<td>
+<p>The margin around the annotation boxes, given by a call
+to <code><a href="../../ggplot2/html/margin.html">ggplot2::margin()</a></code></p>
+</td></tr>
+<tr valign="top"><td><code>label.width</code></td>
+<td>
+<p>A fixed width for the label. Set to <code>NULL</code> to let the text
+or <code>label.minwidth</code> decide</p>
+</td></tr>
+<tr valign="top"><td><code>label.minwidth</code></td>
+<td>
+<p>The minimum width to provide for the description. If
+the size of the label exceeds this, the the description is allowed to fill as
+much as the label</p>
+</td></tr>
+<tr valign="top"><td><code>label.hjust</code></td>
+<td>
+<p>The horizontal justification for the annotation. If it
+contains two elements the first will be used for the label and the second for
+the description.</p>
+</td></tr>
+<tr valign="top"><td><code>label.fontsize</code></td>
+<td>
+<p>The size of the text for the annotation. If it contains
+two elements the first will be used for the label and the second for the
+description.</p>
+</td></tr>
+<tr valign="top"><td><code>label.family</code></td>
+<td>
+<p>The font family used for the annotation. If it contains
+two elements the first will be used for the label and the second for the
+description.</p>
+</td></tr>
+<tr valign="top"><td><code>label.lineheight</code></td>
+<td>
+<p>The height of a line as a multipler of the fontsize.
+If it contains two elements the first will be used for the label and the
+second for the description.</p>
+</td></tr>
+<tr valign="top"><td><code>label.fontface</code></td>
+<td>
+<p>The font face used for the annotation. If it contains
+two elements the first will be used for the label and the second for the
+description.</p>
+</td></tr>
+<tr valign="top"><td><code>label.fill</code></td>
+<td>
+<p>The fill colour for the annotation box.</p>
+</td></tr>
+<tr valign="top"><td><code>label.colour</code></td>
+<td>
+<p>The text colour for the annotation. If it contains
+two elements the first will be used for the label and the second for the
+description.</p>
+</td></tr>
+<tr valign="top"><td><code>label.buffer</code></td>
+<td>
+<p>The size of the region around the mark where labels
+cannot be placed.</p>
+</td></tr>
+<tr valign="top"><td><code>con.colour</code></td>
+<td>
+<p>The colour for the line connecting the annotation to the
+mark</p>
+</td></tr>
+<tr valign="top"><td><code>con.size</code></td>
+<td>
+<p>The width of the connector</p>
+</td></tr>
+<tr valign="top"><td><code>con.type</code></td>
+<td>
+<p>The type of the connector. Either <code>"elbow"</code>, <code>"straight"</code>, or
+<code>"none"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>con.linetype</code></td>
+<td>
+<p>The linetype of the connector</p>
+</td></tr>
+<tr valign="top"><td><code>con.border</code></td>
+<td>
+<p>The bordertype of the connector. Either <code>"one"</code> (to draw a
+line on the horizontal side closest to the mark), <code>"all"</code> (to draw a border
+on all sides), or <code>"none"</code> (not going to explain that one)</p>
+</td></tr>
+<tr valign="top"><td><code>con.cap</code></td>
+<td>
+<p>The distance before the mark that the line should stop at.</p>
+</td></tr>
+<tr valign="top"><td><code>con.arrow</code></td>
+<td>
+<p>An arrow specification for the connection using
+<code><a href="../../grid/html/arrow.html">grid::arrow()</a></code> for the end pointing towards the mark</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Other arguments passed on to <code><a href="../../ggplot2/html/layer.html">layer()</a></code>. These are
+often aesthetics, used to set an aesthetic to a fixed value, like
+<code>colour = "red"</code> or <code>size = 3</code>. They may also be parameters
+to the paired geom/stat.</p>
+</td></tr>
+<tr valign="top"><td><code>na.rm</code></td>
+<td>
+<p>If <code>FALSE</code>, the default, missing values are removed with
+a warning. If <code>TRUE</code>, missing values are silently removed.</p>
+</td></tr>
+<tr valign="top"><td><code>show.legend</code></td>
+<td>
+<p>logical. Should this layer be included in the legends?
+<code>NA</code>, the default, includes if any aesthetics are mapped.
+<code>FALSE</code> never includes, and <code>TRUE</code> always includes.
+It can also be a named logical vector to finely select the aesthetics to
+display.</p>
+</td></tr>
+<tr valign="top"><td><code>inherit.aes</code></td>
+<td>
+<p>If <code>FALSE</code>, overrides the default aesthetics,
+rather than combining with them. This is most useful for helper functions
+that define both data and aesthetics and shouldn't inherit behaviour from
+the default plot specification, e.g. <code><a href="../../ggplot2/html/borders.html">borders()</a></code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Aesthetics</h3>
+
+<p>geom_mark_ellipse understand the following aesthetics (required aesthetics are
+in bold):
+</p>
+
+<ul>
+<li> <p><strong>x</strong>
+</p>
+</li>
+<li> <p><strong>y</strong>
+</p>
+</li>
+<li><p> filter
+</p>
+</li>
+<li><p> label
+</p>
+</li>
+<li><p> description
+</p>
+</li>
+<li><p> color
+</p>
+</li>
+<li><p> fill
+</p>
+</li>
+<li><p> group
+</p>
+</li>
+<li><p> size
+</p>
+</li>
+<li><p> linetype
+</p>
+</li>
+<li><p> alpha
+</p>
+</li></ul>
+
+
+
+<h3>Annotation</h3>
+
+<p>All <code>geom_mark_*</code> allows you to put descriptive textboxes connected to the
+mark on the plot, using the <code>label</code> and <code>description</code> aesthetics. The
+textboxes are automatically placed close to the mark, but without obscuring
+any of the datapoints in the layer. The placement is dynamic so if you resize
+the plot you'll see that the annotation might move around as areas become big
+enough or too small to fit the annotation. If there's not enough space for
+the annotation without overlapping data it will not get drawn. In these cases
+try resizing the plot, change the size of the annotation, or decrease the
+buffer region around the marks.
+</p>
+
+
+<h3>Filtering</h3>
+
+<p>Often marks are used to draw attention to, or annotate specific features of
+the plot and it is thus not desirable to have marks around everything. While
+it is possible to simply pre-filter the data used for the mark layer, the
+<code>geom_mark_*</code> geoms also comes with a dedicated <code>filter</code> aesthetic that, if
+set, will remove all rows where it evalutates to <code>FALSE</code>. There are
+multiple benefits of using this instead of prefiltering. First, you don't
+have to change your data source, making your code more adaptable for
+exploration. Second, the data removed by the filter aesthetic is remembered
+by the geom, and any annotation will take care not to overlap with the
+removed data.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other mark geoms: <code><a href="geom_mark_circle.html">geom_mark_circle</a></code>,
+<code><a href="geom_mark_hull.html">geom_mark_hull</a></code>,
+<code><a href="geom_mark_rect.html">geom_mark_rect</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+ggplot(iris, aes(Petal.Length, Petal.Width)) +
+  geom_mark_ellipse(aes(fill = Species, filter = Species != 'versicolor')) +
+  geom_point()
+
+# Add annotation
+ggplot(iris, aes(Petal.Length, Petal.Width)) +
+  geom_mark_ellipse(aes(fill = Species, label = Species)) +
+  geom_point()
+
+# Long descriptions are automatically wrapped to fit into the width
+iris$desc &lt;- c(
+  'A super Iris - and it knows it',
+  'Pretty mediocre Iris, but give it a couple of years and it might surprise you',
+  "You'll never guess what this Iris does every Sunday"
+)[iris$Species]
+
+ggplot(iris, aes(Petal.Length, Petal.Width)) +
+  geom_mark_ellipse(aes(fill = Species, label = Species, description = desc,
+                        filter = Species == 'setosa')) +
+  geom_point()
+
+# Change the buffer size to move labels farther away (or closer) from the
+# marks
+ggplot(iris, aes(Petal.Length, Petal.Width)) +
+  geom_mark_ellipse(aes(fill = Species, label = Species),
+                    label.buffer = unit(40, 'mm')) +
+  geom_point()
+
+# The connector is capped a bit before it reaches the mark, but this can be
+# controlled
+ggplot(iris, aes(Petal.Length, Petal.Width)) +
+  geom_mark_ellipse(aes(fill = Species, label = Species),
+                    con.cap = 0) +
+  geom_point()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggforce</em> version 0.2.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create a complement of a graph</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for transform_to_complement_graph {DiagrammeR}"><tr><td>transform_to_complement_graph {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create a complement of a graph</h2>
+
+<h3>Description</h3>
+
+<p>Create a complement graph which
+contains only edges not present in the input graph.
+It's important to nodes that any edge attributes
+in the input graph's edges will be lost. Node
+attributes will be retained, since they are
+not affected by this transformation.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+transform_to_complement_graph(graph, loops = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>a graph object of class
+<code>dgr_graph</code> that is created using
+<code>create_graph</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>loops</code></td>
+<td>
+<p>an option for whether loops should
+be generated in the complement graph.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a graph object of class <code>dgr_graph</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create a simple graph
+# with a single cycle
+graph &lt;-
+  create_graph() %&gt;%
+  add_cycle(n = 4)
+
+# Get the graph's edge
+# data frame
+graph %&gt;%
+  get_edge_df()
+
+# Create the complement
+# of the graph
+graph_c &lt;-
+  graph %&gt;%
+    transform_to_complement_graph()
+
+# Get the edge data frame
+# for the complement graph
+graph_c %&gt;%
+  get_edge_df()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

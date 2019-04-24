@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Join new node attribute values using a data frame</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for join_node_attrs {DiagrammeR}"><tr><td>join_node_attrs {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Join new node attribute values using a data frame</h2>
+
+<h3>Description</h3>
+
+<p>Join new node attribute values in a
+left join using a data frame. The use of a left join
+in this function allows for no possibility that
+nodes in the graph might be removed after the join.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+join_node_attrs(graph, df, by_graph = NULL, by_df = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>a graph object of class
+<code>dgr_graph</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>df</code></td>
+<td>
+<p>the data frame to use for joining.</p>
+</td></tr>
+<tr valign="top"><td><code>by_graph</code></td>
+<td>
+<p>optional specification of the column
+in the graph's internal node data frame for the left
+join. If both <code>by_graph</code> and <code>by_df</code> are
+not provided, then a natural join will occur if
+there are columns in the graph's ndf and in
+<code>df</code> with identical names.</p>
+</td></tr>
+<tr valign="top"><td><code>by_df</code></td>
+<td>
+<p>optional specification of the column in
+<code>df</code> for the left join. If both <code>by_graph</code>
+and <code>by_df</code> are not provided, then a natural
+join will occur if there are columns in the graph's
+ndf and in <code>df</code> with identical names.
+<code>dgr_graph</code> that is created using
+<code>create_graph</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a graph object of class <code>dgr_graph</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Set a seed
+set.seed(23)
+
+# Create a simple graph
+graph &lt;-
+  create_graph() %&gt;%
+  add_n_nodes(n = 5) %&gt;%
+  add_edges_w_string(
+    edges = "1-&gt;2 1-&gt;3 2-&gt;4 2-&gt;5 3-&gt;5")
+
+# Create a data frame with node ID values and a
+# set of numeric values
+df &lt;-
+  data.frame(
+    values = round(rnorm(6, 5), 2),
+    id = 1:6)
+
+# Join the values in the data frame to the
+# graph's nodes; this works as a left join using
+# identically-named columns in the graph and the df
+# (in this case the `id` column is common to both)
+graph &lt;-
+  graph %&gt;%
+  join_node_attrs(
+    df = df)
+
+# Get the graph's internal ndf to show that the
+# join has been made
+graph %&gt;%
+  get_node_df()
+
+# Get betweenness values for each node and
+# add them as a node attribute (Note the
+# common column name `id` in the different
+# tables results in a natural join)
+graph &lt;-
+  graph %&gt;%
+  join_node_attrs(
+    df = get_betweenness(.))
+
+# Get the graph's internal ndf to show that
+# this join has been made
+graph %&gt;%
+  get_node_df()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

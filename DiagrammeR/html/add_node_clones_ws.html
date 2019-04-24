@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Add clones of a selection of nodes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for add_node_clones_ws {DiagrammeR}"><tr><td>add_node_clones_ws {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Add clones of a selection of nodes</h2>
+
+<h3>Description</h3>
+
+<p>Add new nodes to a
+graph object of class <code>dgr_graph</code>
+which are clones of nodes in an active
+selection of nodes. All node attributes
+are preserved except for the node
+<code>label</code> attribute (to maintain the
+uniqueness of non-<code>NA</code> node label
+values). A vector of node <code>label</code>
+can be provided to bind new labels
+to the cloned nodes.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+add_node_clones_ws(graph, add_edges = FALSE, direction = NULL,
+  label = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>a graph object of class
+<code>dgr_graph</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>add_edges</code></td>
+<td>
+<p>an option for whether to
+add edges from the selected nodes to each
+of their clones, or, in the opposite
+direction.</p>
+</td></tr>
+<tr valign="top"><td><code>direction</code></td>
+<td>
+<p>using <code>from</code> will
+create new edges from existing nodes to
+the new, cloned nodes. The <code>to</code> option
+will create new edges directed toward the
+existing nodes.</p>
+</td></tr>
+<tr valign="top"><td><code>label</code></td>
+<td>
+<p>an optional vector of node
+label values. The vector length should
+correspond to the number of nodes in the
+active selection of nodes.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a graph object of class
+<code>dgr_graph</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create a graph with a path of
+# nodes; supply `label`, `type`,
+# and `value` node attributes,
+# and select the created nodes
+graph &lt;-
+  create_graph() %&gt;%
+  add_path(
+    n = 3,
+    label = c("d", "g", "r"),
+    type = c("a", "b", "c")) %&gt;%
+  select_last_nodes_created()
+
+# Display the graph's internal
+# node data frame
+graph %&gt;%
+  get_node_df()
+
+# Create clones of all nodes
+# in the selection but assign
+# new node label values
+# (leaving `label` as NULL
+# yields NA values)
+graph &lt;-
+  graph %&gt;%
+  add_node_clones_ws(
+    label = c("a", "b", "v"))
+
+# Display the graph's internal
+# node data frame: nodes `4`,
+# `5`, and `6` are clones of
+# `1`, `2`, and `3`
+graph %&gt;%
+  get_node_df()
+
+# Select the last nodes
+# created (`4`, `5`, and `6`)
+# and clone those nodes and
+# their attributes while
+# creating new edges between
+# the new and existing nodes
+graph &lt;-
+  graph %&gt;%
+  select_last_nodes_created() %&gt;%
+  add_node_clones_ws(
+    add_edges = TRUE,
+    direction = "to",
+    label = c("t", "z", "s"))
+
+# Display the graph's internal
+# edge data frame; there are
+# edges between the selected
+# nodes and their clones
+graph %&gt;%
+  get_edge_df()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

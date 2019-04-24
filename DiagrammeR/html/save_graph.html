@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Save a graph or graph series to disk</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for save_graph {DiagrammeR}"><tr><td>save_graph {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Save a graph or graph series to disk</h2>
+
+<h3>Description</h3>
+
+<p>Save a graph or a graph series object
+to disk.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+save_graph(x, file)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a graph object of class <code>dgr_graph</code>
+or a graph series object of type <code>dgr_graph_1D</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>file</code></td>
+<td>
+<p>a file name for the graph or
+graph series. Provide a character string and the
+<code>.dgr</code> extension will be applied to it.</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create an undirected GNP
+# graph with 100 nodes using
+# a probability value of 0.05
+gnp_graph &lt;-
+  create_graph(
+    directed = FALSE) %&gt;%
+  add_gnp_graph(
+    n = 100,
+    p = 0.05)
+
+# Save the graph to disk; use
+# the file name `gnp_graph.dgr`
+save_graph(
+  x = gnp_graph,
+  file = "gnp_graph")
+
+# To read the graph file from
+# disk, use `open_graph()`
+gnp_graph_2 &lt;-
+  open_graph(
+    file = "gnp_graph.dgr")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

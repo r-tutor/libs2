@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Get a minimum spanning tree subgraph</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for transform_to_min_spanning_tree {DiagrammeR}"><tr><td>transform_to_min_spanning_tree {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Get a minimum spanning tree subgraph</h2>
+
+<h3>Description</h3>
+
+<p>Get a minimum spanning tree subgraph
+for a connected graph of class <code>dgr_graph</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+transform_to_min_spanning_tree(graph)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>a graph object of class
+<code>dgr_graph</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a graph object of class <code>dgr_graph</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create a random graph using the
+# `add_gnm_graph()` function
+graph &lt;-
+  create_graph() %&gt;%
+  add_gnm_graph(
+    n = 10,
+    m = 15,
+    set_seed = 23)
+
+# Obtain Jaccard similarity
+# values for each pair of
+# nodes as a square matrix
+j_sim_matrix &lt;-
+  graph %&gt;%
+    get_jaccard_similarity()
+
+# Create a weighted, undirected
+# graph from the resultant matrix
+# (effectively treating that
+# matrix as an adjacency matrix)
+graph &lt;-
+  j_sim_matrix %&gt;%
+  from_adj_matrix(weighted = TRUE)
+
+# The graph in this case is a fully connected graph
+# with loops, where jaccard similarity values are
+# assigned as edge weights (edge attribute `weight`);
+# The minimum spanning tree for this graph is the
+# connected subgraph where the edges retained have
+# the lowest similarity values possible
+min_spanning_tree_graph &lt;-
+  graph %&gt;%
+  transform_to_min_spanning_tree() %&gt;%
+  copy_edge_attrs(
+    edge_attr_from = weight,
+    edge_attr_to = label) %&gt;%
+  set_edge_attrs(
+    edge_attr = fontname,
+    values = "Helvetica") %&gt;%
+  set_edge_attrs(
+    edge_attr = color,
+    values = "gray85") %&gt;%
+  rescale_edge_attrs(
+    edge_attr_from = weight,
+    to_lower_bound = 0.5,
+    to_upper_bound = 4.0,
+      edge_attr_to = penwidth)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

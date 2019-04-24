@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Get community membership by Louvain optimization</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for get_cmty_louvain {DiagrammeR}"><tr><td>get_cmty_louvain {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Get community membership by Louvain optimization</h2>
+
+<h3>Description</h3>
+
+<p>Through the use of multi-level
+optimization of a modularity score, obtain the
+group membership values for each of the nodes in
+the graph.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+get_cmty_louvain(graph)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>a graph object of class
+<code>dgr_graph</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a data frame with group membership
+assignments for each of the nodes.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create a random graph using the
+# `add_gnm_graph()` function
+graph &lt;-
+  create_graph(
+    directed = FALSE) %&gt;%
+  add_gnm_graph(
+    n = 10,
+    m = 15,
+    set_seed = 23)
+
+# Get the group membership values
+# for all nodes in the graph
+# through the multi-level
+# optimization of modularity
+# algorithm
+graph %&gt;%
+  get_cmty_louvain()
+
+# Add the group membership
+# values to the graph as a
+# node attribute
+graph &lt;-
+  graph %&gt;%
+  join_node_attrs(
+    df = get_cmty_louvain(.))
+
+# Display the graph's
+# node data frame
+graph %&gt;%
+  get_node_df()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

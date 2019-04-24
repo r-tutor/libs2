@@ -233,6 +233,7 @@ PRISMelevation	RMprecip
 pushpin	pushpin
 qr.q2ty	fields-internal
 qr.yq2	fields-internal
+QSreg	QTps
 qsreg	qsreg
 qsreg.fit	fields-internal
 qsreg.psi	fields-internal

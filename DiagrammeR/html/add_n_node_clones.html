@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Add one or several clones of an existing node to the graph</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for add_n_node_clones {DiagrammeR}"><tr><td>add_n_node_clones {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Add one or several clones of an existing node to the graph</h2>
+
+<h3>Description</h3>
+
+<p>Add n new nodes to a graph object of
+class <code>dgr_graph</code> which are clones of a node already
+in the graph. All node attributes are preserved except for
+the node <code>label</code> attribute (to maintain the
+uniqueness of non-<code>NA</code> node label values). A vector
+of node <code>label</code> can be provided to bind new labels
+to the cloned nodes.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+add_n_node_clones(graph, n, node, label = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>a graph object of class
+<code>dgr_graph</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>the number of node clones to add to the graph.</p>
+</td></tr>
+<tr valign="top"><td><code>node</code></td>
+<td>
+<p>a node ID corresponding to the graph node
+to be cloned.</p>
+</td></tr>
+<tr valign="top"><td><code>label</code></td>
+<td>
+<p>an optional vector of node label values.
+The vector length should correspond to the value set
+for <code>n</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a graph object of class <code>dgr_graph</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create a graph with a path of
+# nodes; supply `label`, `type`,
+# and `value` node attributes
+graph &lt;-
+  create_graph() %&gt;%
+  add_path(
+    n = 3,
+    label = c("d", "g", "r"),
+    type = c("a", "b", "c"))
+
+# Display the graph's internal
+# node data frame
+graph %&gt;%
+  get_node_df()
+
+# Create 3 clones of node `1`
+# but assign new node label
+# values (leaving `label` as
+# NULL yields NA values)
+graph &lt;-
+  graph %&gt;%
+  add_n_node_clones(
+    n = 3,
+    node = 1,
+    label = c("x", "y", "z"))
+
+# Display the graph's internal
+# node data frame: nodes `4`,
+# `5`, and `6` are clones of `1`
+graph %&gt;%
+  get_node_df()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Rename an edge attribute</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for rename_edge_attrs {DiagrammeR}"><tr><td>rename_edge_attrs {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Rename an edge attribute</h2>
+
+<h3>Description</h3>
+
+<p>Within a graph's internal edge data
+frame (edf), rename an existing edge attribute.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+rename_edge_attrs(graph, edge_attr_from, edge_attr_to)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>a graph object of class
+<code>dgr_graph</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>edge_attr_from</code></td>
+<td>
+<p>the name of the edge attribute
+that will be renamed.</p>
+</td></tr>
+<tr valign="top"><td><code>edge_attr_to</code></td>
+<td>
+<p>the new name of the edge
+attribute column identified in <code>edge_attr_from</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a graph object of class <code>dgr_graph</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create a random graph using the
+# `add_gnm_graph()` function
+graph &lt;-
+  create_graph() %&gt;%
+  add_gnm_graph(
+    n = 5,
+    m = 8,
+    set_seed = 23) %&gt;%
+  set_edge_attrs(
+    edge_attr = color,
+    values = "green")
+
+# Get the graph's internal edf
+# to show which edge attributes
+# are available
+graph %&gt;%
+  get_edge_df()
+
+# Rename the `color` node
+# attribute as `weight`
+graph &lt;-
+  graph %&gt;%
+  rename_edge_attrs(
+    edge_attr_from = color,
+    edge_attr_to = labelfontcolor)
+
+# Get the graph's internal
+# edf to show that the edge
+# attribute had been renamed
+graph %&gt;%
+  get_edge_df()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

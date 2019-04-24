@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Get all nodes connected to a specified node</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for get_all_connected_nodes {DiagrammeR}"><tr><td>get_all_connected_nodes {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Get all nodes connected to a specified node</h2>
+
+<h3>Description</h3>
+
+<p>With a single node serving as
+the starting point get all nodes connected (i.e.,
+reachable with a traversable path) to that node.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+get_all_connected_nodes(graph, node)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>a graph object of class
+<code>dgr_graph</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>node</code></td>
+<td>
+<p>a single-length vector containing a
+node ID value.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a vector of node ID values.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create a random graph using the
+# `add_gnm_graph()` function; it
+# has an unconnected node (`6`)
+graph_1 &lt;-
+  create_graph() %&gt;%
+  add_gnm_graph(
+    n = 20,
+    m = 32,
+    set_seed = 23)
+
+# There won't be any connected
+# nodes to `6` so when specifying
+# this node with `get_all_connected_nodes()`
+# we get NA back
+graph_1 %&gt;%
+  get_all_connected_nodes(
+    node = 6)
+
+# Any other node in `graph_1` will
+# provide a vector of all the nodes
+# other than `6`
+graph_1 %&gt;%
+  get_all_connected_nodes(
+    node = 1)
+
+# The following graph has two
+# clusters of nodes (i.e., the
+# graph has two connected components)
+graph_2 &lt;-
+  create_graph() %&gt;%
+  add_path(n = 6) %&gt;%
+  add_path(n = 4)
+
+# In `graph_2`, node `1` is in
+# the larger of the two
+# connected components
+graph_2 %&gt;%
+  get_all_connected_nodes(
+    node = 1)
+
+# Also in `graph_2`, node `8`
+# is in the smaller of the two
+# connected components
+graph_2 %&gt;%
+  get_all_connected_nodes(
+    node = 8)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

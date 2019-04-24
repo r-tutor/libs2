@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Determine whether a specified edge is present</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for is_edge_present {DiagrammeR}"><tr><td>is_edge_present {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Determine whether a specified edge is present</h2>
+
+<h3>Description</h3>
+
+<p>From a graph object of class
+<code>dgr_graph</code>, determine whether an edge
+(defined by a pair of node IDs or node label
+values) is present.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+is_edge_present(graph, edge = NULL, from = NULL, to = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>a graph object of class
+<code>dgr_graph</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>edge</code></td>
+<td>
+<p>an edge ID value to test for
+presence in the graph. If a single, numeric
+value is provided then values for <code>from</code>
+or <code>to</code> needn't be supplied.</p>
+</td></tr>
+<tr valign="top"><td><code>from</code></td>
+<td>
+<p>a node ID from which the edge
+is outgoing, or, the label associated with
+the node. For an undirected graph, the
+value in <code>from</code> can be interchangeable
+with that in <code>to</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>to</code></td>
+<td>
+<p>a node ID to which the edge is
+incoming, or, the label associated with
+the node. For an undirected graph, the
+value in <code>to</code> can be interchangeable
+with that in <code>from</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a logical value.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create a simple graph with
+# a path of four nodes
+graph &lt;-
+  create_graph() %&gt;%
+  add_path(
+    n = 4,
+    type = "path",
+    label = c("one", "two",
+              "three", "four"))
+
+# Find out if edge ID `3`
+# is present in the graph
+graph %&gt;%
+  is_edge_present(edge = 3)
+
+# Determine if there are any edges
+# with the definition `1` -&gt; `2`
+graph %&gt;%
+  is_edge_present(
+    from = 1,
+    to = 2)
+
+# Determine if there are any edges
+# with the definition `4` -&gt; `5`
+graph %&gt;%
+  is_edge_present(
+    from = 4,
+    to = 5)
+
+# Determine whether an edge,
+# defined by its labels as
+# `two` -&gt; `three`, exists in
+# the graph
+graph %&gt;%
+  is_edge_present(
+    from = "two",
+    to = "three")
+
+# Set the graph as undirected
+# and determine whether an
+# edge between nodes with labels
+# `three` and `two` exists
+graph %&gt;%
+  set_graph_undirected() %&gt;%
+  is_edge_present(
+    from = "three",
+    to = "two")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

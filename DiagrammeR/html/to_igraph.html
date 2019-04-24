@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Convert a DiagrammeR graph to an igraph one</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for to_igraph {DiagrammeR}"><tr><td>to_igraph {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Convert a DiagrammeR graph to an igraph one</h2>
+
+<h3>Description</h3>
+
+<p>Convert a DiagrammeR graph to
+an igraph graph object.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+to_igraph(graph)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>a graph object of class
+<code>dgr_graph</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>an igraph object.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create a random graph using the
+# `add_gnm_graph()` function
+graph &lt;-
+  create_graph() %&gt;%
+  add_gnm_graph(
+    n = 36,
+    m = 50,
+    set_seed = 23)
+
+# Confirm that `graph` is a
+# DiagrammeR graph by getting
+# the object's class
+class(graph)
+
+# Convert the DiagrammeR graph
+# to an igraph object
+ig_graph &lt;- to_igraph(graph)
+
+# Get the class of the converted
+# graph, just to be certain
+class(ig_graph)
+
+# Get a summary of the igraph
+# graph object
+summary(ig_graph)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

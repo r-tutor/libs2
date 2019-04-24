@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Select the last set of nodes created in a graph</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for select_last_nodes_created {DiagrammeR}"><tr><td>select_last_nodes_created {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Select the last set of nodes created in a graph</h2>
+
+<h3>Description</h3>
+
+<p>Select the last nodes that were created
+in a graph object of class <code>dgr_graph</code>. This
+function should ideally be used just after creating
+the nodes to be selected.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+select_last_nodes_created(graph)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>a graph object of class
+<code>dgr_graph</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a graph object of class <code>dgr_graph</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create a graph and add 4 nodes
+# in 2 separate function calls
+graph &lt;-
+  create_graph() %&gt;%
+  add_n_nodes(
+    n = 2,
+    type = "a",
+    label = c("a_1", "a_2")) %&gt;%
+  add_n_nodes(
+    n = 2,
+    type = "b",
+    label = c("b_1", "b_2"))
+
+# Select the last nodes created (2 nodes
+# from the last function call) and then
+# set their color to be `red`
+graph &lt;-
+  graph %&gt;%
+  select_last_nodes_created() %&gt;%
+  set_node_attrs_ws(
+    node_attr = color,
+    value = "red") %&gt;%
+  clear_selection()
+
+# Display the graph's internal node
+# data frame to verify the change
+graph %&gt;%
+  get_node_df()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

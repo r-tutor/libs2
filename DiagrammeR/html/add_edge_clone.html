@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Add a clone of an existing edge to the graph</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for add_edge_clone {DiagrammeR}"><tr><td>add_edge_clone {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Add a clone of an existing edge to the graph</h2>
+
+<h3>Description</h3>
+
+<p>Add a new edge to
+a graph object of class
+<code>dgr_graph</code> which is a
+clone of an edge already in the
+graph. All edge attributes are
+preserved.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+add_edge_clone(graph, edge, from, to)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>a graph object of
+class <code>dgr_graph</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>edge</code></td>
+<td>
+<p>an edge ID
+corresponding to the graph edge
+to be cloned.</p>
+</td></tr>
+<tr valign="top"><td><code>from</code></td>
+<td>
+<p>the outgoing node
+from which the edge is connected.</p>
+</td></tr>
+<tr valign="top"><td><code>to</code></td>
+<td>
+<p>the incoming nodes to
+which each edge is connected.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a graph object of
+class <code>dgr_graph</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create a graph with a path of
+# 2 nodes; supply a common `rel`
+# edge attribute for all edges
+# in this path and then add a
+# `color` edge attribute
+graph &lt;-
+  create_graph() %&gt;%
+  add_path(
+    n = 2,
+    rel = "a") %&gt;%
+  select_last_edges_created() %&gt;%
+  set_edge_attrs(
+    edge_attr = color,
+    values = "steelblue") %&gt;%
+  clear_selection()
+
+# Display the graph's internal
+# edge data frame
+graph %&gt;%
+  get_edge_df()
+
+# Create a new node (will have
+# node ID of `3`) and then
+# create an edge between it and
+# node `1` while reusing the edge
+# attributes of edge `1` -&gt; `2`
+# (edge ID `1`)
+graph_2 &lt;-
+  graph %&gt;%
+  add_node() %&gt;%
+  add_edge_clone(
+    edge = 1,
+    from = 3,
+      to = 1)
+
+# Display the graph's internal
+# edge data frame
+graph_2 %&gt;%
+  get_edge_df()
+
+# The same change can be performed
+# with some helper functions in the
+# `add_edge_clone()` function call
+graph_3 &lt;-
+  graph %&gt;%
+    add_node() %&gt;%
+    add_edge_clone(
+      edge = get_last_edges_created(.),
+      from = get_last_nodes_created(.),
+      to = 1)
+
+# Display the graph's internal
+# edge data frame
+graph_3 %&gt;%
+  get_edge_df()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

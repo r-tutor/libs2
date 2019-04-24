@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Get edge attribute values</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for get_edge_attrs_ws {DiagrammeR}"><tr><td>get_edge_attrs_ws {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Get edge attribute values</h2>
+
+<h3>Description</h3>
+
+<p>From a graph object of class
+<code>dgr_graph</code>, get edge attribute values for one
+or more edges.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+get_edge_attrs_ws(graph, edge_attr)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>a graph object of class
+<code>dgr_graph</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>edge_attr</code></td>
+<td>
+<p>the name of the attribute for which
+to get values.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a named vector of edge attribute values for
+the attribute given by <code>edge_attr</code> by edge.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create a simple graph where
+# edges have an edge attribute
+# named `value`
+graph &lt;-
+  create_graph() %&gt;%
+  add_n_nodes(n = 4) %&gt;%
+  {
+    edges &lt;-
+      create_edge_df(
+        from = c(1, 2, 1, 4),
+          to = c(2, 3, 4, 3),
+         rel = "rel")
+    add_edge_df(
+      graph = .,
+      edge_df = edges)
+  } %&gt;%
+  set_edge_attrs(
+    edge_attr = value,
+    values = 1.6,
+    from = 1,
+      to = 2) %&gt;%
+  set_edge_attrs(
+    edge_attr = value,
+    values = 4.3,
+    from = 1,
+      to = 4) %&gt;%
+  set_edge_attrs(
+    edge_attr = value,
+    values = 2.9,
+    from = 2,
+      to = 3) %&gt;%
+  set_edge_attrs(
+    edge_attr = value,
+    values = 8.4,
+    from = 4,
+      to = 3)
+
+# Select the edges defined as
+# `1`-&gt;`3` and `2`-&gt;`3`
+graph &lt;-
+  graph %&gt;%
+  select_edges(
+    from = c(1, 2),
+    to = c(2, 3))
+
+# Get the edge attribute values
+# for the `value` attribute, limited
+# to the current edge selection
+graph %&gt;%
+  get_edge_attrs_ws(
+    edge_attr = value)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

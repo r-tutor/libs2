@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Copy a node attribute column and set the name</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for copy_node_attrs {DiagrammeR}"><tr><td>copy_node_attrs {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Copy a node attribute column and set the name</h2>
+
+<h3>Description</h3>
+
+<p>Within a graph's internal node data
+frame (ndf), copy the contents an existing node
+attribute and create a distinct node attribute
+within the ndf with a different attribute name.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+copy_node_attrs(graph, node_attr_from, node_attr_to)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>a graph object of class
+<code>dgr_graph</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>node_attr_from</code></td>
+<td>
+<p>the name of the node attribute
+column from which values will be copied.</p>
+</td></tr>
+<tr valign="top"><td><code>node_attr_to</code></td>
+<td>
+<p>the name of the new node
+attribute column to which the copied values will be
+placed.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a graph object of class
+<code>dgr_graph</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create a random graph using the
+# `add_gnm_graph()` function
+graph &lt;-
+  create_graph() %&gt;%
+  add_gnm_graph(
+    n = 5,
+    m = 10,
+    set_seed = 23) %&gt;%
+  set_node_attrs(
+    node_attr = shape,
+    values = "circle") %&gt;%
+  set_node_attrs(
+    node_attr = value,
+    values = rnorm(
+      n = count_nodes(.),
+      mean = 5,
+      sd = 1) %&gt;% round(1))
+
+# Get the graph's internal
+# ndf to show which node
+# attributes are available
+graph %&gt;%
+  get_node_df()
+
+# Make a copy the `value`
+# node attribute as the
+# `width` node attribute
+graph &lt;-
+  graph %&gt;%
+  copy_node_attrs(
+    node_attr_from = value,
+    node_attr_to = size)
+
+# Get the graph's internal
+# ndf to show that the node
+# attribute had been copied
+graph %&gt;%
+  get_node_df()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

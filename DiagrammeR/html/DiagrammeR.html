@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: R + mermaid.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for DiagrammeR {DiagrammeR}"><tr><td>DiagrammeR {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>R + mermaid.js</h2>
+
+<h3>Description</h3>
+
+<p>Make diagrams in R using
+<a href="https://github.com/mdaines/viz.js">viz.js</a> or
+<a href="https://github.com/knsv/mermaid">mermaid.js</a> with infrastructure
+provided by <a href="http://www.htmlwidgets.org/">htmlwidgets</a>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+DiagrammeR(diagram = "", type = "mermaid", ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>diagram</code></td>
+<td>
+<p>diagram in <code>graphviz</code> or <code>mermaid</code> format or a
+file (as a connection or file name) containing a diagram specification. The
+recommended filename extensions are <code>.gv</code> and <code>.mmd</code> for the
+Graphviz and the mermaid diagram specifications, respectively. If no diagram
+is provided (<code>diagram = ""</code>) then the function will assume that
+a diagram will be provided by <code><a href="../../htmltools/html/tags.html">tags</a></code> and
+<code>DiagrammeR</code> is just being used for dependency injection.</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>string - either <code>mermaid</code> (default) or <code>grViz</code>
+indicating the type of diagram spec and the desired parser/renderer</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>any other parameters to pass to <code>grViz</code> or <code>mermaid</code></p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>An object of class <code>htmlwidget</code> that will
+intelligently print itself into HTML in a variety of contexts
+including the R console, within R Markdown documents,
+and within Shiny output bindings.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+# note the whitespace is not important
+DiagrammeR("
+  graph LR
+    A--&gt;B
+    A--&gt;C
+    C--&gt;E
+    B--&gt;D
+    C--&gt;D
+    D--&gt;F
+    E--&gt;F
+")
+
+DiagrammeR("
+   graph TB
+   A--&gt;B
+   A--&gt;C
+   C--&gt;E
+   B--&gt;D
+   C--&gt;D
+   D--&gt;F
+   E--&gt;F
+")
+
+DiagrammeR("graph LR;A(Rounded)--&gt;B[Squared];B--&gt;C{A Decision};
+ C--&gt;D[Square One];C--&gt;E[Square Two];
+ style A fill:#E5E25F;  style B fill:#87AB51; style C fill:#3C8937;
+ style D fill:#23772C;  style E fill:#B6E6E6;"
+)
+
+# Load in the 'mtcars' dataset
+data(mtcars)
+connections &lt;- sapply(
+ 1:ncol(mtcars)
+  ,function(i) {
+     paste0(
+        i
+      ,"(",colnames(mtcars)[i],")---"
+      ,i,"-stats("
+      ,paste0(
+        names(summary(mtcars[,i]))
+        ,": "
+        ,unname(summary(mtcars[,i]))
+        ,collapse="&lt;br/&gt;"
+      )
+      ,")"
+   )
+ }
+)
+
+DiagrammeR(
+   paste0(
+     "graph TD;", "\n",
+     paste(connections, collapse = "\n"),"\n",
+     "classDef column fill:#0001CC, stroke:#0D3FF3, stroke-width:1px;" ,"\n",
+     "class ", paste0(1:length(connections), collapse = ","), " column;"
+   )
+ )
+
+# also with DiagrammeR() you can use tags from htmltools
+# just make sure to use class = "mermaid"
+library(htmltools)
+diagramSpec = "
+graph LR;
+  id1(Start)--&gt;id2(Stop);
+  style id1 fill:#f9f,stroke:#333,stroke-width:4px;
+  style id2 fill:#ccf,stroke:#f66,stroke-width:2px,stroke-dasharray: 5, 5;
+"
+html_print(tagList(
+  tags$h1("R + mermaid.js = Something Special")
+  ,tags$pre(diagramSpec)
+  ,tags$div(class="mermaid",diagramSpec)
+  ,DiagrammeR()
+))
+
+# sequence diagrams
+# Using this "How to Draw a Sequence Diagram"
+#   http://www.cs.uku.fi/research/publications/reports/A-2003-1/page91.pdf
+# draw some sequence diagrams with DiagrammeR
+
+library(DiagrammeR)
+
+DiagrammeR("
+sequenceDiagram;
+   customer-&gt;&gt;ticket seller: ask for ticket;
+   ticket seller-&gt;&gt;database: seats;
+   alt tickets available
+     database-&gt;&gt;ticket seller: ok;
+     ticket seller-&gt;&gt;customer: confirm;
+     customer-&gt;&gt;ticket seller: ok;
+     ticket seller-&gt;&gt;database: book a seat;
+     ticket seller-&gt;&gt;printer: print ticket;
+   else sold out
+     database-&gt;&gt;ticket seller: none left;
+     ticket seller-&gt;&gt;customer:  sorry;
+   end
+")
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

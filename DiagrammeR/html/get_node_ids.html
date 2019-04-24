@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Get a vector of node ID values</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for get_node_ids {DiagrammeR}"><tr><td>get_node_ids {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Get a vector of node ID values</h2>
+
+<h3>Description</h3>
+
+<p>Obtain a vector of
+node ID values from a graph
+object. An optional filter by
+node attribute can limit the set
+of node ID values returned.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+get_node_ids(graph, conditions = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>a graph object of
+class <code>dgr_graph</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>conditions</code></td>
+<td>
+<p>an option to
+use filtering conditions for the
+retrieval of nodes.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a vector of node ID
+values.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create a node data
+# frame (ndf)
+ndf &lt;-
+  create_node_df(
+    n = 4,
+    type = "letter",
+    color = c(
+      "red", "green",
+      "blue", "blue"),
+    value = c(
+      3.5, 2.6, 9.4, 2.7))
+
+# Create a graph using
+# the ndf
+graph &lt;-
+  create_graph(
+    nodes_df = ndf)
+
+# Get a vector of all nodes in a graph
+graph %&gt;%
+  get_node_ids()
+
+# Get a vector of node ID values using a
+# numeric comparison (i.e., all nodes with
+# `value` attribute greater than 3)
+graph %&gt;%
+  get_node_ids(
+    conditions = value &gt; 3)
+
+# Get a vector of node ID values using
+# a match pattern (i.e., all nodes with
+# `color` attribute of `green`)
+graph %&gt;%
+  get_node_ids(
+    conditions = color == "green")
+
+# Use multiple conditions to return nodes
+# with the desired attribute values
+graph %&gt;%
+  get_node_ids(
+    conditions =
+      color == "blue" &amp;
+      value &gt; 5)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

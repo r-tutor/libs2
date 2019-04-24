@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Select nodes in the graph based on their degree values</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for select_nodes_by_degree {DiagrammeR}"><tr><td>select_nodes_by_degree {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Select nodes in the graph based on
+their degree values</h2>
+
+<h3>Description</h3>
+
+<p>Using a graph object of
+class <code>dgr_graph</code>, create a
+selection of nodes that have certain
+degree values.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+select_nodes_by_degree(graph, expressions, set_op = "union")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>a graph object of class
+<code>dgr_graph</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>expressions</code></td>
+<td>
+<p>one or more
+expressions for filtering nodes by
+degree values. Use a combination of
+degree type (<code>deg</code> for total
+degree, <code>indeg</code> for in-degree,
+and <code>outdeg</code> for out-degree)
+with a comparison operator and
+values for comparison (e.g., use
+<code>"deg &gt;= 2"</code> to select nodes
+with a degree greater than or equal
+to 2).</p>
+</td></tr>
+<tr valign="top"><td><code>set_op</code></td>
+<td>
+<p>the set operation to
+perform upon consecutive selections
+of graph nodes. This can either be
+as a <code>union</code> (the default), as
+an intersection of selections with
+<code>intersect</code>, or, as a
+<code>difference</code> on the previous
+selection, if it exists.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a graph object of class
+<code>dgr_graph</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create a random graph using
+# the `add_gnm_graph()` function
+graph &lt;-
+  create_graph() %&gt;%
+  add_gnm_graph(
+    n = 35, m = 125,
+    set_seed = 23)
+
+# Report which nodes have a
+# total degree (in-degree +
+# out-degree) of exactly 9
+graph %&gt;%
+  select_nodes_by_degree(
+    expressions = "deg == 9") %&gt;%
+  get_selection()
+
+# Report which nodes have a
+# total degree greater than or
+# equal to 9
+graph %&gt;%
+  select_nodes_by_degree(
+    expressions = "deg &gt;= 9") %&gt;%
+  get_selection()
+
+# Combine two calls of
+# `select_nodes_by_degree()` to
+# get those nodes with total
+# degree less than 3 and total
+# degree greater than 10 (by
+# default, those `select...()`
+# functions will `union` the
+# sets of nodes selected)
+graph %&gt;%
+  select_nodes_by_degree(
+    expressions = "deg &lt; 3") %&gt;%
+  select_nodes_by_degree(
+    expressions = "deg &gt; 10") %&gt;%
+  get_selection()
+
+# Combine two calls of
+# `select_nodes_by_degree()` to
+# get those nodes with total
+# degree greater than or equal
+# to 3 and less than or equal
+# to 10 (the key here is to
+# `intersect` the sets of nodes
+# selected in the second call)
+graph %&gt;%
+  select_nodes_by_degree(
+    expressions = "deg &gt;= 3") %&gt;%
+  select_nodes_by_degree(
+    expressions = "deg &lt;= 10",
+    set_op = "intersect") %&gt;%
+  get_selection()
+
+# Select all nodes with an
+# in-degree greater than 5, then,
+# apply a node attribute to those
+# selected nodes (coloring the
+# selected nodes red)
+graph_2 &lt;-
+  graph %&gt;%
+  select_nodes_by_degree(
+    expressions = "indeg &gt; 5") %&gt;%
+  set_node_attrs_ws(
+    node_attr = color,
+    value = "red")
+
+# Get the selection of nodes
+graph_2 %&gt;%
+  get_selection()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

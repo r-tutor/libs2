@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Get all neighbors of one or more nodes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for get_nbrs {DiagrammeR}"><tr><td>get_nbrs {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Get all neighbors of one or more nodes</h2>
+
+<h3>Description</h3>
+
+<p>With one or more nodes, get the set of
+all neighboring nodes.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+get_nbrs(graph, nodes)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>a graph object of class
+<code>dgr_graph</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>nodes</code></td>
+<td>
+<p>a vector of node ID values.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a vector of node ID values.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create a simple, directed graph with 5
+# nodes and 4 edges
+graph &lt;-
+  create_graph() %&gt;%
+  add_path(n = 5)
+
+# Find all neighbor nodes for node `2`
+graph %&gt;%
+  get_nbrs(nodes = 2)
+
+# Find all neighbor nodes for nodes `1`
+# and `5`
+graph %&gt;%
+  get_nbrs(nodes = c(1, 5))
+
+# Color node `3` with purple, get its
+# neighbors and color those nodes green
+graph &lt;-
+  graph %&gt;%
+  select_nodes_by_id(nodes = 3) %&gt;%
+  set_node_attrs_ws(
+    node_attr = color,
+    value = "purple") %&gt;%
+  clear_selection() %&gt;%
+  select_nodes_by_id(
+    nodes = get_nbrs(
+      graph = .,
+      nodes = 3)) %&gt;%
+  set_node_attrs_ws(
+    node_attr = color,
+    value = "green")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

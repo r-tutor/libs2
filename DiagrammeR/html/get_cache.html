@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Get a cached vector from a graph object</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for get_cache {DiagrammeR}"><tr><td>get_cache {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Get a cached vector from a graph object</h2>
+
+<h3>Description</h3>
+
+<p>Get the vector cached in a
+graph object of class <code>dgr_graph</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+get_cache(graph, name = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>a graph object of class
+<code>dgr_graph</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>name</code></td>
+<td>
+<p>the name of the object to
+extract from the cache. If none supplied,
+the most recent object added to the cache
+will be returned.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a vector.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Set a seed
+set.seed(23)
+
+# Create a graph with 5 nodes and 5 edges
+graph &lt;-
+  create_graph() %&gt;%
+  add_n_nodes(n = 5) %&gt;%
+  set_node_attrs(
+    node_attr = value,
+    values = rnorm(
+      n = count_nodes(.),
+      mean = 8,
+      sd = 2)) %&gt;%
+  add_edges_w_string(
+    edges = "1-&gt;2 1-&gt;3 2-&gt;4 2-&gt;5 3-&gt;2")
+
+# Cache all values from the node attribute `value`
+# as a numeric vector
+graph &lt;-
+  graph %&gt;%
+  set_cache(
+    name = "value",
+    to_cache = get_node_attrs(
+      graph = .,
+      node_attr = value))
+
+# Return the cached vector
+graph %&gt;%
+  get_cache()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

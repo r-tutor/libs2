@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Get the minimum cut between source and sink nodes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for get_min_cut_between {DiagrammeR}"><tr><td>get_min_cut_between {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Get the minimum cut between source and sink nodes</h2>
+
+<h3>Description</h3>
+
+<p>Get the minimum cut between source
+and sink nodes. This is the minimum total capacity
+of edges needed for removal in order to eliminate
+all paths from the source and sink nodes.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+get_min_cut_between(graph, from, to)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>a graph object of class
+<code>dgr_graph</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>from</code></td>
+<td>
+<p>the node ID for the source node.</p>
+</td></tr>
+<tr valign="top"><td><code>to</code></td>
+<td>
+<p>the node ID for the sink or target node.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a single numeric value representing the
+minimum total edge capacity removed to disconnect
+the source and sink nodes.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Set a seed
+set.seed(23)
+
+# Create a cycle graph
+graph &lt;-
+  create_graph() %&gt;%
+  add_cycle(n = 5)
+
+# Determine the minimum cut
+# between nodes `1` and `4`
+graph %&gt;%
+  get_min_cut_between(
+    from = 1,
+    to = 2)
+
+# Create a cycle graph with
+# randomized values given to all
+# edges as the `capacity` attribute
+graph_capacity &lt;-
+  create_graph() %&gt;%
+  add_cycle(n = 5) %&gt;%
+  select_edges() %&gt;%
+  set_edge_attrs_ws(
+    edge_attr = capacity,
+    value =
+      rnorm(
+        n = count_edges(.),
+        mean = 5,
+        sd = 1)) %&gt;%
+  clear_selection()
+
+# Determine the minimum cut
+# between nodes `1` and `4` for
+# this graph, where `capacity`is
+# set as an edge attribute
+graph_capacity %&gt;%
+  get_min_cut_between(
+    from = 1,
+    to = 2)
+
+# Create a full graph and then
+# get the minimum cut requirement
+# between nodes `2` and `8`
+create_graph() %&gt;%
+  add_full_graph(n = 10) %&gt;%
+  get_min_cut_between(
+    from = 2,
+    to = 8)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Voronoi tesselation and delaunay triangulation</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for geom_voronoi {ggforce}"><tr><td>geom_voronoi {ggforce}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Voronoi tesselation and delaunay triangulation</h2>
+
+<h3>Description</h3>
+
+<p>This set of geoms and stats allows you to display voronoi tesselation and
+delaunay triangulation, both as polygons and as line segments. Furthermore
+it lets you augment your point data with related summary statistics. The
+computations are based on the <code><a href="../../deldir/html/deldir.html">deldir::deldir()</a></code> package.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+geom_voronoi_tile(mapping = NULL, data = NULL, stat = "voronoi_tile",
+  position = "identity", na.rm = FALSE, bound = NULL, eps = 1e-09,
+  max.radius = NULL, normalize = FALSE, asp.ratio = 1, expand = 0,
+  radius = 0, show.legend = NA, inherit.aes = TRUE, ...)
+
+geom_voronoi_segment(mapping = NULL, data = NULL,
+  stat = "voronoi_segment", position = "identity", na.rm = FALSE,
+  bound = NULL, eps = 1e-09, normalize = FALSE, asp.ratio = 1,
+  show.legend = NA, inherit.aes = TRUE, ...)
+
+geom_delaunay_tile(mapping = NULL, data = NULL,
+  stat = "delaunay_tile", position = "identity", na.rm = FALSE,
+  bound = NULL, eps = 1e-09, normalize = FALSE, asp.ratio = 1,
+  expand = 0, radius = 0, show.legend = NA, inherit.aes = TRUE,
+  ...)
+
+geom_delaunay_segment(mapping = NULL, data = NULL,
+  stat = "delaunay_segment", position = "identity", na.rm = FALSE,
+  bound = NULL, eps = 1e-09, normalize = FALSE, asp.ratio = 1,
+  show.legend = NA, inherit.aes = TRUE, ...)
+
+geom_delaunay_segment2(mapping = NULL, data = NULL,
+  stat = "delaunay_segment2", position = "identity", na.rm = FALSE,
+  bound = NULL, eps = 1e-09, normalize = FALSE, asp.ratio = 1,
+  n = 100, show.legend = NA, inherit.aes = TRUE, ...)
+
+stat_delvor_summary(mapping = NULL, data = NULL, geom = "point",
+  position = "identity", na.rm = FALSE, bound = NULL, eps = 1e-09,
+  normalize = FALSE, asp.ratio = asp.ratio, show.legend = NA,
+  inherit.aes = TRUE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>mapping</code></td>
+<td>
+<p>Set of aesthetic mappings created by <code><a href="../../ggplot2/html/aes.html">aes()</a></code> or
+<code><a href="../../ggplot2/html/aes_.html">aes_()</a></code>. If specified and <code>inherit.aes = TRUE</code> (the
+default), it is combined with the default mapping at the top level of the
+plot. You must supply <code>mapping</code> if there is no plot mapping.</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>The data to be displayed in this layer. There are three
+options:
+</p>
+<p>If <code>NULL</code>, the default, the data is inherited from the plot
+data as specified in the call to <code><a href="../../ggplot2/html/ggplot.html">ggplot()</a></code>.
+</p>
+<p>A <code>data.frame</code>, or other object, will override the plot
+data. All objects will be fortified to produce a data frame. See
+<code><a href="../../ggplot2/html/fortify.html">fortify()</a></code> for which variables will be created.
+</p>
+<p>A <code>function</code> will be called with a single argument,
+the plot data. The return value must be a <code>data.frame</code>, and
+will be used as the layer data.</p>
+</td></tr>
+<tr valign="top"><td><code>stat</code></td>
+<td>
+<p>The statistical transformation to use on the data for this
+layer, as a string.</p>
+</td></tr>
+<tr valign="top"><td><code>position</code></td>
+<td>
+<p>Position adjustment, either as a string, or the result of
+a call to a position adjustment function.</p>
+</td></tr>
+<tr valign="top"><td><code>na.rm</code></td>
+<td>
+<p>If <code>FALSE</code>, the default, missing values are removed with
+a warning. If <code>TRUE</code>, missing values are silently removed.</p>
+</td></tr>
+<tr valign="top"><td><code>bound</code></td>
+<td>
+<p>The bounding rectangle for the tesselation or a custom polygon
+to clip the tesselation to. Defaults to <code>NULL</code> which creates a rectangle
+expanded 10% in all directions. If supplied as a bounding box it should be a
+vector giving the bounds in the following order: xmin, xmax, ymin, ymax. If
+supplied as a polygon it should either be a 2-column matrix or a data.frame
+containing an <code>x</code> and <code>y</code> column.</p>
+</td></tr>
+<tr valign="top"><td><code>eps</code></td>
+<td>
+<p>A value of epsilon used in testing whether a quantity is zero,
+mainly in the context of whether points are collinear. If anomalous errors
+arise, it is possible that these may averted by adjusting the value of eps
+upward or downward.</p>
+</td></tr>
+<tr valign="top"><td><code>max.radius</code></td>
+<td>
+<p>The maximum distance a tile can extend from the point of
+origin. Will in effect clip each tile to a circle centered at the point with
+the given radius. If <code>normalize = TRUE</code> the radius will be given relative to
+the normalized values</p>
+</td></tr>
+<tr valign="top"><td><code>normalize</code></td>
+<td>
+<p>Should coordinates be normalized prior to calculations. If
+<code>x</code> and <code>y</code> are in wildly different ranges it can lead to
+tesselation and triangulation that seems off when plotted without
+<code><a href="../../ggplot2/html/coord_fixed.html">ggplot2::coord_fixed()</a></code>. Normalization of coordinates solves this.
+The coordinates are transformed back after calculations.</p>
+</td></tr>
+<tr valign="top"><td><code>asp.ratio</code></td>
+<td>
+<p>If <code>normalize = TRUE</code> the x values will be multiplied by this
+amount after normalization.</p>
+</td></tr>
+<tr valign="top"><td><code>expand</code></td>
+<td>
+<p>A numeric or unit vector of length one, specifying the
+expansion amount. Negative values will result in contraction instead. If the
+value is given as a numeric it will be understood as a proportion of the
+plot area width.</p>
+</td></tr>
+<tr valign="top"><td><code>radius</code></td>
+<td>
+<p>As <code>expand</code> but specifying the corner radius.</p>
+</td></tr>
+<tr valign="top"><td><code>show.legend</code></td>
+<td>
+<p>logical. Should this layer be included in the legends?
+<code>NA</code>, the default, includes if any aesthetics are mapped.
+<code>FALSE</code> never includes, and <code>TRUE</code> always includes.
+It can also be a named logical vector to finely select the aesthetics to
+display.</p>
+</td></tr>
+<tr valign="top"><td><code>inherit.aes</code></td>
+<td>
+<p>If <code>FALSE</code>, overrides the default aesthetics,
+rather than combining with them. This is most useful for helper functions
+that define both data and aesthetics and shouldn't inherit behaviour from
+the default plot specification, e.g. <code><a href="../../ggplot2/html/borders.html">borders()</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Other arguments passed on to <code><a href="../../ggplot2/html/layer.html">layer()</a></code>. These are
+often aesthetics, used to set an aesthetic to a fixed value, like
+<code>colour = "red"</code> or <code>size = 3</code>. They may also be parameters
+to the paired geom/stat.</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>The number of points to create for each segment</p>
+</td></tr>
+<tr valign="top"><td><code>geom</code></td>
+<td>
+<p>The geometric object to use display the data</p>
+</td></tr>
+</table>
+
+
+<h3>Aesthetics</h3>
+
+<p>geom_voronoi_tile and geom_delaunay_tile understand the following aesthetics
+(required aesthetics are in bold):
+</p>
+
+<ul>
+<li> <p><strong>x</strong>
+</p>
+</li>
+<li> <p><strong>y</strong>
+</p>
+</li>
+<li><p> alpha
+</p>
+</li>
+<li><p> color
+</p>
+</li>
+<li><p> fill
+</p>
+</li>
+<li><p> linetype
+</p>
+</li>
+<li><p> size
+</p>
+</li></ul>
+
+<p>geom_voronoi_segment, geom_delaunay_segment, and geom_delaunay_segment2
+understand the following aesthetics (required aesthetics are in bold):
+</p>
+
+<ul>
+<li> <p><strong>x</strong>
+</p>
+</li>
+<li> <p><strong>y</strong>
+</p>
+</li>
+<li><p> alpha
+</p>
+</li>
+<li><p> color
+</p>
+</li>
+<li><p> linetype
+</p>
+</li>
+<li><p> size
+</p>
+</li></ul>
+
+
+
+<h3>Computed variables</h3>
+
+<p>stat_delvor_summary computes the following variables:
+</p>
+
+<dl>
+<dt>x, y</dt><dd><p>If <code>switch.centroid = TRUE</code> this will be the coordinates for
+the voronoi tile centroid, otherwise it is the original point</p>
+</dd>
+<dt>xcent, ycent</dt><dd><p>If <code>switch.centroid = FALSE</code> this will be the
+coordinates for the voronoi tile centroid, otherwise it will be <code>NULL</code></p>
+</dd>
+<dt>xorig, yorig</dt><dd><p>If <code>switch.centroid = TRUE</code> this will be the
+coordinates for the original point, otherwise it will be <code>NULL</code></p>
+</dd>
+<dt>ntri</dt><dd><p>Number of triangles emanating from the point</p>
+</dd>
+<dt>triarea</dt><dd><p>The total area of triangles emanating from the point divided
+by 3</p>
+</dd>
+<dt>triprop</dt><dd><p><code>triarea</code> divided by the sum of the area of all
+triangles</p>
+</dd>
+<dt>nsides</dt><dd><p>Number of sides on the voronoi tile associated with the point</p>
+</dd>
+<dt>nedges</dt><dd><p>Number of sides of the associated voronoi tile that is part of
+the bounding box</p>
+</dd>
+<dt>vorarea</dt><dd><p>The area of the voronoi tile associated with the point</p>
+</dd>
+<dt>vorprop</dt><dd><p><code>vorarea</code> divided by the sum of all voronoi tiles</p>
+</dd>
+</dl>
+
+
+
+<h3>Examples</h3>
+
+<pre>
+# Voronoi
+# You usually wants all points to take part in the same tesselation so set
+# the group aesthetic to a constant (-1L is just a convention)
+ggplot(iris, aes(Sepal.Length, Sepal.Width, group = -1L)) +
+  geom_voronoi_tile(aes(fill = Species)) +
+  geom_voronoi_segment() +
+  geom_text(aes(label = stat(nsides), size = stat(vorarea)),
+    stat = 'delvor_summary', switch.centroid = TRUE
+  )
+
+# Difference of normalize = TRUE (segment layer is calculated without
+# normalisation)
+ggplot(iris, aes(Sepal.Length, Sepal.Width, group = -1L)) +
+  geom_voronoi_tile(aes(fill = Species), normalize = TRUE) +
+  geom_voronoi_segment()
+
+# Set a max radius
+ggplot(iris, aes(Sepal.Length, Sepal.Width, group = -1L)) +
+  geom_voronoi_tile(aes(fill = Species), colour = 'black', max.radius = 0.25)
+
+# Set custom bounding polygon
+triangle &lt;- cbind(c(3, 9, 6), c(1, 1, 6))
+ggplot(iris, aes(Sepal.Length, Sepal.Width, group = -1L)) +
+  geom_voronoi_tile(aes(fill = Species), colour = 'black', bound = triangle)
+
+# Use geom_shape functionality to round corners etc
+ggplot(iris, aes(Sepal.Length, Sepal.Width, group = -1L)) +
+  geom_voronoi_tile(aes(fill = Species), colour = 'black',
+                    expand = unit(-.5, 'mm'), radius = unit(2, 'mm'))
+
+# Delaunay triangles
+ggplot(iris, aes(Sepal.Length, Sepal.Width)) +
+  geom_delaunay_tile(alpha = 0.3, colour = 'black')
+
+# Use geom_delauney_segment2 to interpolate aestetics between end points
+ggplot(iris, aes(Sepal.Length, Sepal.Width)) +
+  geom_delaunay_segment2(aes(colour = Species, group = -1), size = 2,
+                         lineend = 'round')
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggforce</em> version 0.2.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

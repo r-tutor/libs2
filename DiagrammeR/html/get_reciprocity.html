@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Get the graph reciprocity</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for get_reciprocity {DiagrammeR}"><tr><td>get_reciprocity {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Get the graph reciprocity</h2>
+
+<h3>Description</h3>
+
+<p>Get the reciprocity of a directed graph.
+The reciprocity of a graph is the fraction of
+reciprocal edges (e.g., '1' -&gt; '2' and '2' -&gt; '1')
+over all edges available in the graph. Note that for
+an undirected graph, all edges are reciprocal. This
+function does not consider loop edges (e.g., '1' -&gt; '1').
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+get_reciprocity(graph)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>a graph object of class
+<code>dgr_graph</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a single, numerical value that is the
+ratio value of reciprocal edges over all graph
+edges.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Define a graph where 2 edge definitions
+# have pairs of reciprocal edges
+graph &lt;-
+  create_graph() %&gt;%
+  add_cycle(n = 3) %&gt;%
+  add_node(
+    from = 1,
+      to = 1) %&gt;%
+  add_node(
+    from = 1,
+      to = 1)
+
+# Get the graph reciprocity, which will
+# be calculated as the ratio 4/7 (where
+# 4 is the number reciprocating edges
+# and 7 is the total number of edges
+# in the graph)
+graph %&gt;%
+  get_reciprocity()
+
+# For an undirected graph, all edges
+# are reciprocal, so the ratio will
+# always be 1
+graph %&gt;%
+  set_graph_undirected() %&gt;%
+  get_reciprocity()
+
+# For a graph with no edges, the graph
+# reciprocity cannot be determined (and
+# the same NA result is obtained from an
+# empty graph)
+create_graph() %&gt;%
+  add_n_nodes(n = 5) %&gt;%
+  get_reciprocity()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

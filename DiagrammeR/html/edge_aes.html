@@ -1,0 +1,347 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Insert edge aesthetic attributes during edge creation</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for edge_aes {DiagrammeR}"><tr><td>edge_aes {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Insert edge aesthetic attributes during edge creation</h2>
+
+<h3>Description</h3>
+
+<p>This helper function should be
+invoked to provide values for the namesake
+<code>edge_aes</code> argument, which is present
+in any function where edges are created.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+edge_aes(style = NULL, penwidth = NULL, color = NULL, arrowsize = NULL,
+  arrowhead = NULL, arrowtail = NULL, fontname = NULL, fontsize = NULL,
+  fontcolor = NULL, len = NULL, tooltip = NULL, URL = NULL,
+  label = NULL, labelfontname = NULL, labelfontsize = NULL,
+  labelfontcolor = NULL, labeltooltip = NULL, labelURL = NULL,
+  edgetooltip = NULL, edgeURL = NULL, dir = NULL, headtooltip = NULL,
+  headURL = NULL, headclip = NULL, headlabel = NULL, headport = NULL,
+  tailtooltip = NULL, tailURL = NULL, tailclip = NULL, taillabel = NULL,
+  tailport = NULL, decorate = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>style</code></td>
+<td>
+<p>the edge line style. The
+<code>style</code> types that can be used are
+<code>solid</code>, <code>bold</code>, <code>dashed</code>,
+<code>dotted</code>, <code>tapered</code>, and
+<code>invisible</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>penwidth</code></td>
+<td>
+<p>the thickness of the stroke
+line for the edge itself.</p>
+</td></tr>
+<tr valign="top"><td><code>color</code></td>
+<td>
+<p>the color of the edge. Can be
+an X11 color or a hexadecimal color code.</p>
+</td></tr>
+<tr valign="top"><td><code>arrowsize</code></td>
+<td>
+<p>a scaling factor for
+arrowheads. The default value is <code>1.0</code>
+and the minimum is <code>0</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>arrowhead</code></td>
+<td>
+<p>the type of arrowhead to use.
+The <code>style</code> attribute can either any of
+these types: <code>normal</code>, <code>vee</code>,
+<code>tee</code>, <code>dot</code>, <code>diamond</code>,
+<code>box</code>, <code>curve</code>, <code>icurve</code>,
+<code>inv</code>, <code>crow</code>, or <code>none</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>arrowtail</code></td>
+<td>
+<p>the type of arrowtail to use.
+The <code>style</code> attribute can either any of
+these types: <code>normal</code>, <code>vee</code>,
+<code>tee</code>, <code>dot</code>, <code>diamond</code>,
+<code>box</code>, <code>curve</code>, <code>icurve</code>,
+<code>inv</code>, <code>crow</code>, or <code>none</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>fontname</code></td>
+<td>
+<p>the name of the
+system font that will be used for any edge
+text.</p>
+</td></tr>
+<tr valign="top"><td><code>fontsize</code></td>
+<td>
+<p>the point size of
+the font used for any edge text.</p>
+</td></tr>
+<tr valign="top"><td><code>fontcolor</code></td>
+<td>
+<p>the color used
+for any edge text. Can be an X11 color or a
+hexadecimal color code.</p>
+</td></tr>
+<tr valign="top"><td><code>len</code></td>
+<td>
+<p>the preferred edge length for
+an edge, in inches. Default value is
+<code>1.0</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>tooltip</code></td>
+<td>
+<p>text for a tooltip that
+appears when hovering over an edge. If text
+is not provided, then the default tooltip
+text will provide the edge definition (i.e.,
+<code>[id]-&gt;[id] or [id]--[id]</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>URL</code></td>
+<td>
+<p>a URL to associate with an edge.
+Upon rendering the plot, clicking edges
+with any associated URLs will open the
+URL in the default browser.</p>
+</td></tr>
+<tr valign="top"><td><code>label</code></td>
+<td>
+<p>the label text associated
+with the edge. This text will appear near
+the center of the edge.</p>
+</td></tr>
+<tr valign="top"><td><code>labelfontname</code></td>
+<td>
+<p>the name of the
+system font that will be used for the
+<code>headlabel</code> and the
+<code>taillabel</code> label text. If not
+set, the <code>fontname</code> value will
+instead be used.</p>
+</td></tr>
+<tr valign="top"><td><code>labelfontsize</code></td>
+<td>
+<p>the point size of
+the font used for the <code>headlabel</code>
+and the <code>taillabel</code> label text.
+If not set, the <code>fontsize</code> value
+will instead be used.</p>
+</td></tr>
+<tr valign="top"><td><code>labelfontcolor</code></td>
+<td>
+<p>the color used
+for the label text of the
+<code>headlabel</code> and the
+<code>taillabel</code> label text. If not
+set, the <code>fontcolor</code> value will
+instead be used. Can be an X11 color
+or a hexadecimal color code.</p>
+</td></tr>
+<tr valign="top"><td><code>labeltooltip</code></td>
+<td>
+<p>text for a tooltip
+that will appear when hovering over the
+main label of an edge (if label text
+provided in the <code>label</code> edge
+attribute). If text is not provided and
+an edge label is visible, then the
+default tooltip text will provide the
+edge definition (i.e., <code>[id]-&gt;[id]
+or [id]--[id]</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>labelURL</code></td>
+<td>
+<p>a URL to associate with
+edge label text. Upon rendering the plot,
+clicking edge labels with any associated
+URLs will open the URL in the default
+browser.</p>
+</td></tr>
+<tr valign="top"><td><code>edgetooltip</code></td>
+<td>
+<p>this option provides
+a means to specify a tooltip with only
+the non-label parts of an edge. If this
+is defined, the value overrides any
+<code>tooltip</code> defined for the edge.
+This tooltip text is when hovering along
+the edge (even near the head or tail
+node) unless overridden by a
+<code>headtooltip</code> or <code>tailtooltip</code>
+value.</p>
+</td></tr>
+<tr valign="top"><td><code>edgeURL</code></td>
+<td>
+<p>this option provides a
+means to specify a URL with only the
+non-label parts of an edge. If this
+is defined, the value overrides any
+<code>URL</code> defined for the edge. This
+URL is used along the edge (even near
+the head or tail node) unless
+overridden by a <code>headURL</code> or
+<code>tailURL</code> value.</p>
+</td></tr>
+<tr valign="top"><td><code>dir</code></td>
+<td>
+<p>an optional direction type.
+Normally, for directed graphs, this is
+<code>forward</code> and needn't be set. For
+undirected graphs, this would be
+<code>none</code> and again no explicit setting
+is required. However, one can also use
+the <code>back</code> or <code>both</code> options.
+The <code>back</code> option draws an arrowhead
+in the reverse direction of an edge. The
+<code>both</code> option draws two arrowheads.
+When using any of these options in such
+an explicit manner, the <code>head...</code> and
+<code>tail...</code> edge attributes allow
+control over aesthetic edge attributes in
+either side of the edge.</p>
+</td></tr>
+<tr valign="top"><td><code>headtooltip</code></td>
+<td>
+<p>this option
+provides a means to specify a
+tooltip that can be displayed by
+hovering over the part of an edge
+that is adjacent to incoming node
+(see the <code>tooltip</code> argument
+for further details).</p>
+</td></tr>
+<tr valign="top"><td><code>headURL</code></td>
+<td>
+<p>this option
+provides a means to specify a
+URL that can be accessed by
+clicking the part of an edge
+that is adjacent to incoming node
+(see the <code>URL</code> argument
+for further details).</p>
+</td></tr>
+<tr valign="top"><td><code>headclip</code></td>
+<td>
+<p>if <code>TRUE</code>
+(the default behavior), then the
+head of the affected edge is
+clipped to the node boundary.
+Using <code>FALSE</code> places the
+head of the outgoing edge at the
+center of its node.</p>
+</td></tr>
+<tr valign="top"><td><code>headlabel</code></td>
+<td>
+<p>this option
+provides a means to display a
+label near the part of an edge
+that is adjacent to incoming node
+(see the <code>label</code> argument
+for further details).</p>
+</td></tr>
+<tr valign="top"><td><code>headport</code></td>
+<td>
+<p>allows one to
+specify which compass position
+on the incoming node the head
+of the edge will alight. Options
+are <code>n</code>, <code>ne</code>, <code>e</code>,
+<code>se</code>, <code>s</code>, <code>sw</code>,
+<code>w</code>, and <code>nw</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>tailtooltip</code></td>
+<td>
+<p>this option
+provides a means to specify a
+tooltip that can be displayed by
+hovering over the part of an edge
+that is adjacent to outgoing node
+(see the <code>tooltip</code> argument
+for further details).</p>
+</td></tr>
+<tr valign="top"><td><code>tailURL</code></td>
+<td>
+<p>this option
+provides a means to specify a
+URL that can be accessed by
+clicking the part of an edge
+that is adjacent to outgoing
+node (see the <code>URL</code>
+argument for further details).</p>
+</td></tr>
+<tr valign="top"><td><code>tailclip</code></td>
+<td>
+<p>if <code>TRUE</code>
+(the default behavior), then the
+tail of the affected edge is
+clipped to the node boundary.
+Using <code>FALSE</code> places the tail
+of the outgoing edge at the center
+of its node.</p>
+</td></tr>
+<tr valign="top"><td><code>taillabel</code></td>
+<td>
+<p>this option
+provides a means to display a
+label near the part of an edge
+that is adjacent to outgoing
+node (see the <code>label</code>
+argument for further details).</p>
+</td></tr>
+<tr valign="top"><td><code>tailport</code></td>
+<td>
+<p>allows one to
+specify which compass position
+on the outgoing node the tail of
+the edge will be emitted from.
+Options are <code>n</code>, <code>ne</code>,
+<code>e</code>, <code>se</code>, <code>s</code>,
+<code>sw</code>, <code>w</code>, and <code>nw</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>decorate</code></td>
+<td>
+<p>if <code>TRUE</code>
+then attach any edge label to
+the edge line via a 2-segment
+polyline, underlining the label
+text and partially overlapping
+the edge line.</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create a new graph and add
+# a path with several edge
+# aesthetic attributes
+graph &lt;-
+  create_graph() %&gt;%
+  add_path(
+    n = 3,
+    type = "path",
+    edge_aes = edge_aes(
+      style = "dot",
+      color = c("red", "blue")))
+
+# View the graph's internal
+# node data frame; the node
+# aesthetic attributes have
+# been inserted
+graph %&gt;%
+  get_edge_df()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

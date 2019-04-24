@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Traverse outward node-by_node until stopping conditions are...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for trav_out_until {DiagrammeR}"><tr><td>trav_out_until {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Traverse outward node-by_node until stopping conditions are met</h2>
+
+<h3>Description</h3>
+
+<p>From a graph object of
+class <code>dgr_graph</code>, move along
+outward edges from one or more nodes
+present in a selection to other
+connected nodes, replacing the current
+nodes in the selection with those nodes
+traversed to until reaching nodes that
+satisfy one or more conditions.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+trav_out_until(graph, conditions, max_steps = 30, exclude_unmatched = TRUE,
+  add_to_selection = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>a graph object of class
+<code>dgr_graph</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>conditions</code></td>
+<td>
+<p>an option to use a
+stopping condition for the traversal.
+If the condition is met during the
+traversal (i.e., the node(s) traversed
+to match the condition), then those
+traversals will terminate at those
+nodes. Otherwise, traversals with
+continue and terminate when the number
+of steps provided in <code>max_steps</code>
+is reached.</p>
+</td></tr>
+<tr valign="top"><td><code>max_steps</code></td>
+<td>
+<p>the maximum number
+of <code>trav_out()</code> steps (i.e.,
+node-to-node traversals in the outward
+direction) to allow before stopping.</p>
+</td></tr>
+<tr valign="top"><td><code>exclude_unmatched</code></td>
+<td>
+<p>if <code>TRUE</code>
+(the default value) then any nodes not
+satisfying the conditions provided in
+<code>conditions</code> that are in the ending
+selection are excluded.</p>
+</td></tr>
+<tr valign="top"><td><code>add_to_selection</code></td>
+<td>
+<p>if <code>TRUE</code>
+then every node traversed will be part
+of the final selection of nodes. If
+<code>FALSE</code> (the default value) then
+only the nodes finally traversed to
+will be part of the final node
+selection.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a graph object of class
+<code>dgr_graph</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create a path graph and add
+# values of 1 to 10 across the
+# nodes from beginning to end;
+# select the first path node
+graph &lt;-
+  create_graph() %&gt;%
+  add_path(
+    n = 10,
+    node_data = node_data(
+      value = 1:10)) %&gt;%
+  select_nodes_by_id(
+    nodes = 1)
+
+# Traverse outward, node-by-node
+# until stopping at a node where
+# the `value` attribute is 8
+graph &lt;-
+  graph %&gt;%
+  trav_out_until(
+    conditions =
+      value == 8)
+
+# Get the graph's node selection
+graph %&gt;%
+  get_selection()
+
+# Create two cycles in graph and
+# add values of 1 to 6 to the
+# first cycle, and values 7 to
+# 12 in the second; select nodes
+# `1` and `7`
+graph &lt;-
+  create_graph() %&gt;%
+  add_cycle(
+    n = 6,
+    node_data = node_data(
+      value = 1:6)) %&gt;%
+  add_cycle(
+    n = 6,
+    node_data = node_data(
+      value = 7:12)) %&gt;%
+  select_nodes_by_id(
+    nodes = c(1, 7))
+
+# Traverse outward, node-by-node
+# from `1` and `7` until stopping
+# at the first nodes where the
+# `value` attribute is 5, 6, or 15;
+# specify that we should only
+# keep the finally traversed to
+# nodes that satisfy the conditions
+graph &lt;-
+  graph %&gt;%
+  trav_out_until(
+    conditions =
+      value %in% c(5, 6, 9),
+    exclude_unmatched = TRUE)
+
+# Get the graph's node selection
+graph %&gt;%
+  get_selection()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

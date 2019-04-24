@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Determine the number of pages in a paginated facet plot</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for n_pages {ggforce}"><tr><td>n_pages {ggforce}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Determine the number of pages in a paginated facet plot</h2>
+
+<h3>Description</h3>
+
+<p>This is a simple helper that returns the number of pages it takes to plot all
+panels when using <code><a href="facet_wrap_paginate.html">facet_wrap_paginate()</a></code> and
+<code><a href="facet_grid_paginate.html">facet_grid_paginate()</a></code>. It partially builds the plot so depending
+on the complexity of your plot it might take some time to calculate...
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+n_pages(plot)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>plot</code></td>
+<td>
+<p>A ggplot object using either facet_wrap_paginate or
+facet_grid_paginate</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>If the plot uses  using either facet_wrap_paginate or
+facet_grid_paginate it returns the total number of pages. Otherwise it
+returns NULL
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+p &lt;- ggplot(diamonds) +
+  geom_point(aes(carat, price), alpha = 0.1) +
+  facet_wrap_paginate(~ cut:clarity, ncol = 3, nrow = 3, page = 1)
+n_pages(p)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggforce</em> version 0.2.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

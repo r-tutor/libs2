@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Get node IDs for predecessor nodes to the specified node</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for get_predecessors {DiagrammeR}"><tr><td>get_predecessors {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Get node IDs for predecessor nodes to the specified
+node</h2>
+
+<h3>Description</h3>
+
+<p>Provides a vector of node IDs for all
+nodes that have a connection to the given node.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+get_predecessors(graph, node)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>a graph object of class
+<code>dgr_graph</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>node</code></td>
+<td>
+<p>a node ID for the selected node.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a vector of node ID values.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Set a seed
+set.seed(23)
+
+# Create a node data frame (ndf)
+ndf &lt;- create_node_df(n = 26)
+
+# Create an edge data
+# frame (edf)
+edf &lt;-
+  create_edge_df(
+    from = sample(
+      1:26, replace = TRUE),
+    to = sample(
+      1:26, replace = TRUE))
+
+# From the ndf and edf,
+# create a graph object
+graph &lt;-
+  create_graph(
+    nodes_df = ndf,
+    edges_df = edf)
+
+# Get predecessors for node
+# `23` in the graph
+graph %&gt;%
+  get_predecessors(
+    node = 23)
+
+# If there are no predecessors,
+# `NA` is returned
+graph %&gt;%
+  get_predecessors(
+    node = 26)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

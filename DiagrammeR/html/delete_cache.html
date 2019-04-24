@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Delete vectors cached in a graph object</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for delete_cache {DiagrammeR}"><tr><td>delete_cache {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Delete vectors cached in a graph object</h2>
+
+<h3>Description</h3>
+
+<p>Delete vectors cached in a
+graph object of class <code>dgr_graph</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+delete_cache(graph, name = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>a graph object of class
+<code>dgr_graph</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>name</code></td>
+<td>
+<p>one or more name of vector
+objects to delete from the cache. If none
+supplied, all cached vectors available in
+the graph will be deleted.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a vector.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create an empty graph
+graph &lt;-
+  create_graph()
+
+# Cache 3 different vectors inside
+# the graph object
+graph &lt;-
+  graph %&gt;%
+  set_cache(
+    name = "a",
+    to_cache = 1:4) %&gt;%
+  set_cache(
+    name = "b",
+    to_cache = 5:9) %&gt;%
+  set_cache(
+    name = "c",
+    to_cache = 10:14)
+
+# Delete cache `b`
+graph &lt;-
+  graph %&gt;%
+  delete_cache(name = "b")
+
+# Delete remaining cached vectors
+graph &lt;-
+  graph %&gt;%
+  delete_cache()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

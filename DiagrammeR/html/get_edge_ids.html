@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Get a vector of edge ID values</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for get_edge_ids {DiagrammeR}"><tr><td>get_edge_ids {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Get a vector of edge ID values</h2>
+
+<h3>Description</h3>
+
+<p>Obtain a vector of edge ID values
+from a graph object. An optional filter by
+edge attribute can limit the set of edge ID
+values returned.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+get_edge_ids(graph, conditions = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>a graph object of class
+<code>dgr_graph</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>conditions</code></td>
+<td>
+<p>an option to use filtering
+conditions for the retrieval of edges.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a vector of edge ID values.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create a node data frame (ndf)
+ndf &lt;-
+  create_node_df(
+    n = 4,
+    type = "letter",
+    color = c("red", "green", "grey", "blue"),
+    value = c(3.5, 2.6, 9.4, 2.7))
+
+# Create an edge data frame (edf)
+edf &lt;-
+  create_edge_df(
+    from = c(1, 2, 3),
+    to = c(4, 3, 1),
+    rel = "leading_to",
+    color = c("pink", "blue", "blue"),
+    value = c(3.9, 2.5, 7.3))
+
+# Create a graph
+graph &lt;-
+  create_graph(
+    nodes_df = ndf,
+    edges_df = edf)
+
+# Get a vector of all edges in a graph
+graph %&gt;%
+  get_edge_ids()
+
+# Get a vector of edge ID values using a
+# numeric comparison (i.e., all edges with
+# `value` attribute greater than 3)
+get_edge_ids(
+  graph,
+  conditions = value &gt; 3)
+
+# Get a vector of edge ID values using
+# a match pattern (i.e., all edges with
+# `color` attribute of `pink`)
+get_edge_ids(
+  graph,
+  conditions = color == "pink")
+
+# Use multiple conditions to return edges
+# with the desired attribute values
+get_edge_ids(
+  graph,
+  conditions =
+    color == "blue" &amp;
+    value &gt; 5)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

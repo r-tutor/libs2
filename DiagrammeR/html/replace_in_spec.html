@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Razor-like template for diagram specification</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for replace_in_spec {DiagrammeR}"><tr><td>replace_in_spec {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Razor-like template for diagram specification</h2>
+
+<h3>Description</h3>
+
+<p>Use Razor-like syntax to define a template for use in a
+<code>grViz</code> diagram.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+replace_in_spec(spec)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>spec</code></td>
+<td>
+<p>string spec to be parsed and evaluated</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+# a simple example to use a LETTER as a node label
+spec &lt;- "
+  digraph { '@1' }
+
+ [1]: LETTERS[1]
+"
+grViz(replace_in_spec(spec))
+
+
+spec &lt;- "
+digraph a_nice_graph {
+node [fontname = Helvetica]
+a [label = '@1']
+b [label = '@2-1']
+c [label = '@2-2']
+d [label = '@2-3']
+e [label = '@2-4']
+f [label = '@2-5']
+g [label = '@2-6']
+h [label = '@2-7']
+i [label = '@2-8']
+j [label = '@2-9']
+a -&gt; { b c d e f g h i j}
+}
+
+[1]: 'top'
+[2]: 10:20
+"
+grViz(replace_in_spec(spec))
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

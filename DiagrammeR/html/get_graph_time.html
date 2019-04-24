@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Get the graph date-time or timezone</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for get_graph_time {DiagrammeR}"><tr><td>get_graph_time {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Get the graph date-time or timezone</h2>
+
+<h3>Description</h3>
+
+<p>Set the time and timezone for a graph
+object of class <code>dgr_graph</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+get_graph_time(graph)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>a graph object of class
+<code>dgr_graph</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a single-length
+<code>POSIXct</code> vector with the
+assigned graph time.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create an empty graph and
+# set the graph's time; if nothing
+# is supplied for the `tz` argument,
+# `GMT` is used as the time zone
+graph &lt;-
+  create_graph() %&gt;%
+    set_graph_time(
+      time = "2015-10-25 15:23:00")
+
+# Get the graph's time as a POSIXct
+# object using `get_graph_time()`
+graph %&gt;%
+  get_graph_time()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Is the edge a loop edge?</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for is_edge_loop {DiagrammeR}"><tr><td>is_edge_loop {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Is the edge a loop edge?</h2>
+
+<h3>Description</h3>
+
+<p>Determines whether an edge
+definition is a loop edge.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+is_edge_loop(graph, edge)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>a graph object of class
+<code>dgr_graph</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>edge</code></td>
+<td>
+<p>a numeric edge ID value.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a logical value.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create a graph that has multiple
+# loop edges
+graph &lt;-
+  create_graph() %&gt;%
+  add_path(n = 4) %&gt;%
+  add_edge(
+    from = 1,
+    to = 1) %&gt;%
+  add_edge(
+    from = 3,
+    to = 3)
+
+# Get the graph's internal
+# edge data frame
+graph %&gt;%
+  get_edge_df()
+
+# Determine if edge `4` is
+# a loop edge
+graph %&gt;%
+  is_edge_loop(edge = 4)
+
+# Determine if edge `2` is
+# a loop edge
+graph %&gt;%
+  is_edge_loop(edge = 2)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create a graph object</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for create_graph {DiagrammeR}"><tr><td>create_graph {DiagrammeR}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create a graph object</h2>
+
+<h3>Description</h3>
+
+<p>Generates a graph object
+with the option to use node data frames
+(ndfs) and/or edge data frames (edfs)
+to populate the initial graph.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+create_graph(nodes_df = NULL, edges_df = NULL, directed = TRUE,
+  graph_name = NULL, attr_theme = "default", write_backups = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>nodes_df</code></td>
+<td>
+<p>an optional data frame
+containing, at minimum, a column
+(called <code>id</code>) which contains
+node IDs for the graph. Additional
+columns (node attributes) can be
+included with values for the named
+node attribute.</p>
+</td></tr>
+<tr valign="top"><td><code>edges_df</code></td>
+<td>
+<p>an optional data
+frame containing, at minimum, two
+columns (called <code>from</code> and
+<code>to</code>) where node IDs are
+provided. Additional columns (edge
+attributes) can be included with
+values for the named edge attribute.</p>
+</td></tr>
+<tr valign="top"><td><code>directed</code></td>
+<td>
+<p>with <code>TRUE</code>
+(the default) or <code>FALSE</code>, either
+directed or undirected edge
+operations will be generated,
+respectively.</p>
+</td></tr>
+<tr valign="top"><td><code>graph_name</code></td>
+<td>
+<p>an optional
+string for labeling the graph object.</p>
+</td></tr>
+<tr valign="top"><td><code>attr_theme</code></td>
+<td>
+<p>the theme (i.e.,
+collection of <code>graph</code>,
+<code>node</code>, and <code>edge</code> global
+graph attributes) to use for this
+graph. The default theme is called
+<code>default</code>. If this is set to
+<code>NULL</code> then no global graph
+attributes will be applied to the
+graph upon creation.</p>
+</td></tr>
+<tr valign="top"><td><code>write_backups</code></td>
+<td>
+<p>an option to
+write incremental backups of changing
+graph states to disk. If <code>TRUE</code>,
+a subdirectory within the working
+directory will be created and used
+to store <code>RDS</code> files. The
+default value is <code>FALSE</code> so
+one has to opt in to use this
+functionality.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a graph object of class
+<code>dgr_graph</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# With `create_graph()` we can
+# simply create an empty graph (and
+# add in nodes and edges later
+# with other functions)
+graph &lt;- create_graph()
+
+# A graph can be created with
+# nodes and without having any edges;
+# this can be done in 2 steps:
+# 1. create a node data frame (ndf)
+#    using `create_node_df()`
+ndf &lt;-
+  create_node_df(n = 4)
+
+# 2. create a new graph object with
+#    `create_graph()` and then pass
+#    in the ndf to `nodes_df`
+graph &lt;-
+  create_graph(
+    nodes_df = ndf)
+
+# Get information on the graph's nodes
+graph %&gt;%
+  get_node_info()
+
+# You can create a similar graph with
+# just nodes but also providing a
+# range of attributes for the nodes
+# (e.g., types, labels, or arbitrary
+# 'values')
+ndf &lt;-
+  create_node_df(
+    n = 4,
+    label = TRUE,
+    type = c("type_1", "type_1",
+             "type_5", "type_2"),
+    shape = c("circle", "circle",
+              "rectangle", "rectangle"),
+    values = c(3.5, 2.6, 9.4, 2.7))
+
+graph &lt;-
+  create_graph(nodes_df = ndf)
+
+# Get information on the graph's
+# internal node data frame (ndf)
+graph %&gt;%
+  get_node_df()
+
+# A graph can also be created by
+# specifying both the nodes and
+# edges; create an edge data frame
+# (edf) using the `create_edge_df()`
+# function:
+edf &lt;-
+  create_edge_df(
+    from = c(1, 2, 3),
+    to = c(4, 3, 1),
+    rel = "leading_to",
+    values = c(7.3, 2.6, 8.3))
+
+# 2. create the graph object with
+#    `create_graph()` and pass in
+#    the ndf and edf objects
+graph &lt;-
+  create_graph(
+    nodes_df = ndf,
+    edges_df = edf)
+
+# Get information on the graph's
+# internal edge data frame (edf)
+graph %&gt;%
+  get_edge_df()
+
+# Get information on the graph's
+# internal node data frame (ndf)
+graph %&gt;%
+  get_node_df()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DiagrammeR</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>
