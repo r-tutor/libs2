@@ -1,3 +1,9 @@
+# CHANGES IN blogdown VERSION 0.12
+
+## MINOR CHANGES
+
+- When creating a post with a date in the future, a warning will be issued by default. To turn off this warning (if you are aware of the consequences of future dates), set `options(blogdown.warn.future = FALSE)` (thanks, @Chucheria on Twitter, #377).
+
 # CHANGES IN blogdown VERSION 0.11
 
 ## NEW FEATURES
@@ -86,7 +92,7 @@
 
 ## MINOR CHANGES
 
-- The Github repo `yihui/hugo-lithium-theme` was renamed to `yihui/hugo-lithiutm`, and the default `theme` argument value was changed accordingly (thanks, @rorynolan, #291).
+- The Github repo `yihui/hugo-lithium-theme` was renamed to `yihui/hugo-lithium`, and the default `theme` argument value was changed accordingly (thanks, @rorynolan, #291).
 
 # CHANGES IN blogdown VERSION 0.5
 
