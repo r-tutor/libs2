@@ -1,0 +1,338 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Population estimates for k-, 3-, or 2-pass removal data.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for removal {FSA}"><tr><td>removal {FSA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Population estimates for k-, 3-, or 2-pass removal data.</h2>
+
+<h3>Description</h3>
+
+<p>Computes estimates, with confidence intervals, of the population size and probability of capture from the number of fish removed in k-, 3-, or 2-passes in a closed population.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+removal(catch, method = c("CarleStrub", "Zippin", "Seber3", "Seber2",
+  "RobsonRegier2", "Moran", "Schnute", "Burnham"), alpha = 1, beta = 1,
+  CS.se = c("Zippin", "alternative"), conf.level = 0.95,
+  just.ests = FALSE, Tmult = 3, CIMicroFish = FALSE)
+
+## S3 method for class 'removal'
+summary(object, parm = c("No", "p", "p1"),
+  digits = getOption("digits"), verbose = FALSE, ...)
+
+## S3 method for class 'removal'
+confint(object, parm = c("No", "p"),
+  level = conf.level, conf.level = NULL,
+  digits = getOption("digits"), verbose = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>catch</code></td>
+<td>
+<p>A numerical vector of catch at each pass.</p>
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+<p>A single string that identifies the removal method to use. See details.</p>
+</td></tr>
+<tr valign="top"><td><code>alpha</code></td>
+<td>
+<p>A single numeric value for the alpha parameter in the CarleStrub method (default is <code>1</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>beta</code></td>
+<td>
+<p>A single numeric value for the beta parameter in the CarleStrub method (default is <code>1</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>CS.se</code></td>
+<td>
+<p>A single string that identifies whether the SE in the CarleStrub method should be computed according to Seber or Zippin.</p>
+</td></tr>
+<tr valign="top"><td><code>conf.level</code></td>
+<td>
+<p>A single number representing the level of confidence to use for constructing confidence intervals. This is sent in the main <code>removal</code> function rather than <code>confint</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>just.ests</code></td>
+<td>
+<p>A logical that indicates whether just the estimates (<code>=TRUE</code>) or the return list (<code>=FALSE</code>; default; see below) is returned.</p>
+</td></tr>
+<tr valign="top"><td><code>Tmult</code></td>
+<td>
+<p>A single numeric that will be multiplied by the total catch in all samples to set the upper value for the range of population sizes when minimizing the log-likelihood and creating confidence intervals for the Moran and Schnute methods. Large values are much slower to compute, but values that are too low may result in missing the best estimate. A warning is issued if too low of a value is suspected.</p>
+</td></tr>
+<tr valign="top"><td><code>CIMicroFish</code></td>
+<td>
+<p>A logical that indicates whether the t value used to calculate confidence intervals when <code>method="Burnham"</code> should be rounded to two or three decimals and whether the confidence intervals for No should be rounded to whole numbers as done in MicroFish 3.0. The default (<code>=FALSE</code>) is to NOT round the t values or No confidence interval. This option is provided only so that results will exactly match MicroFish results (see testing).</p>
+</td></tr>
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>An object saved from <code>removal()</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>parm</code></td>
+<td>
+<p>A specification of which parameters are to be given confidence intervals, either a vector of numbers or a vector of names. If missing, all parameters are considered.</p>
+</td></tr>
+<tr valign="top"><td><code>digits</code></td>
+<td>
+<p>A single numeric that controls the number of decimals in the output from <code>summary</code> and <code>confint</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>verbose</code></td>
+<td>
+<p>A logical that indicates whether descriptive labels should be printed from <code>summary</code> and if certain warnings are shown with <code>confint</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments for methods.</p>
+</td></tr>
+<tr valign="top"><td><code>level</code></td>
+<td>
+<p>Not used, but here for compatibility with generic <code>confint</code> function.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The main function computes the estimates and associated standard errors, if possible, for the initial population size, No, and probability of capture, p, for eight methods chosen with <code>method=</code>. The possible methods are:
+</p>
+
+<ul>
+<li> <p><code>method="CarleStrub"</code>: The general weighted k-pass estimator proposed by Carle and Strub (1978). This function iteratively solves for No in equation 7 of Carle and Strub (1978).
+</p>
+</li>
+<li> <p><code>method="Zippin"</code>: The general k-pass estimator generally attributed to Zippin. This function iteratively solves for No in bias corrected version of equation 3 (page 622) of Carle and Strub (1978). These results are not yet trustworthy (see Testing section below).
+</p>
+</li>
+<li> <p><code>method="Seber3"</code>: The special case for k=3 estimator shown in equation 7.24 of Seber(2002).
+</p>
+</li>
+<li> <p><code>method="Seber2"</code>: The special case for k=2 estimator shown on page 312 of Seber(2002).
+</p>
+</li>
+<li> <p><code>method="RobsonRegier2"</code>: The special case for k=2 estimator shown by Robson and Regier (1968).
+</p>
+</li>
+<li> <p><code>method="Moran"</code>: The likelihood method of Moran (1951) as implemented by Schnute (1983).
+</p>
+</li>
+<li> <p><code>method="Schnute"</code>: The likelihood method of Schnute (1983) for the model that has a different probability of capture for the first sample but a constant probability of capture for all ensuing samples.
+</p>
+</li>
+<li> <p><code>method="Burnham"</code>: The general k-pass estimator likelihood method created by Ken Burnham and presented by Van Deventer and Platts (1983). This method is used in the Microfish software (Van Deventer 1989).
+</p>
+</li></ul>
+
+<p>Confidence intervals for the first five methods are computed using standard large-sample normal distribution theory. Note that the confidence intervals for the 2- and 3-pass special cases are only approximately correct if the estimated population size is greater than 200. If the estimated population size is between 50 and 200 then a 95% CI behaves more like a 90% CI.
+</p>
+<p>Confidence intervals for the next two methods use likelihood ratio theory as described in Schnute (1983) and are only produced for the No parameter. Standard errors are not produced with the Moran or Schnute methods.
+</p>
+<p>Confidence intervals for the last method are computed as per Ken Burnham's instructions for the Burnham Method (Jack Van Deventer, personal communication). Specifically, they are calculated with the t-statistic and No-1 degrees of freedom. Please note that the MicroFish software rounds the t-statistic before it calculates the confidence intervals about No and p. If you need the confidence interals produced by FSA::removal to duplicate MicroFish, please use CIMicroFish=TRUE.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A vector that contains the estimates and standard errors for No and p if <code>just.ests=TRUE</code> or (default) a list with at least the following items:
+</p>
+
+<ul>
+<li><p> catch The original vector of observed catches.
+</p>
+</li>
+<li><p> method The method used (provided by the user).
+</p>
+</li>
+<li><p> lbl A descriptive label for the method used.
+</p>
+</li>
+<li><p> est A matrix that contains the estimates and standard errors for No and p.
+</p>
+</li></ul>
+
+<p>In addition, if the Moran or Schnute methods are used the list will also contain
+</p>
+
+<ul>
+<li><p> min.nlogLH The minimum value of the negative log-likelihood function.
+</p>
+</li>
+<li><p> Tmult The Tmult value sent by the user.
+</p>
+</li></ul>
+
+
+
+<h3>testing</h3>
+
+<p>The Carle-Strub method matches the examples in Carle and Strub (1978) for No, p, and the variance of No. The Carle-Strub estimates of No and p match the examples in Cowx (1983) but the SE of No does not. The Carle-Strub estimates of No match the results (for estimates that they did not reject) from Jones and Stockwell (1995) to within 1 individual in most instances and within 1% for all other instances (e.g., off by 3 individuals when the estimate was 930 individuals).
+</p>
+<p>The Seber3 results for No match the results in Cowx (1983).
+</p>
+<p>The Seber2 results for No, p, and the SE of No match the results in example 7.4 of Seber (2002) and in Cowx (1983).
+</p>
+<p>The RobsonRegier2 results for No and the SE of NO match the results in Cowx (1983)
+</p>
+<p>The Zippin method results do not match the examples in Seber (2002) or Cowx (1983) because <code>removal</code> uses the bias-corrected version from Carle and Strub (1978) and does not use the tables in Zippin (1958). The Zippin method is not yet trustworthy.
+</p>
+<p>The Moran and Schnute methods match the examples in Schnute (1983) perfectly for all point estimates and within 0.1 units for all confidence intervals.
+</p>
+<p>The Burnham method was tested against the free (gratis) Demo Version of MicroFish 3.0. Powell Wheeler used R to simulate 100, three-pass removal samples with capture probabilities between 0 and 1 and population sizes &lt;= 1000. The Burnham method implemented here exactly matched MicroFish in all 100 trials for No and p. In addition, the CIs for No exactly matched all 100 trials when CIMicroFish=TRUE. Powell was not able to check the CIs for p because the MicroFish 'Quick Population Estimate' does not report them.
+</p>
+
+
+<h3>IFAR Chapter</h3>
+
+<p>10-Abundance from Depletion Data.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Derek H. Ogle, <a href="mailto:derek@derekogle.com">derek@derekogle.com</a>
+</p>
+<p>A. Powell Wheeler, <a href="mailto:powell.wheeler@gmail.com">powell.wheeler@gmail.com</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Ogle, D.H. 2016. <a href="http://derekogle.com/IFAR">Introductory Fisheries Analyses with R</a>. Chapman &amp; Hall/CRC, Boca Raton, FL.
+</p>
+<p>Carle, F.L. and M.R. Strub. 1978. A new method for estimating population size from removal data. Biometrics, 34:621-630.
+</p>
+<p>Cowx, I.G. 1983. Review of the methods for estimating fish population size from survey removal data. Fisheries Management, 14:67-82.
+</p>
+<p>Moran, P.A.P. 1951. A mathematical theory of animal trapping. Biometrika 38:307-311.
+</p>
+<p>Robson, D.S., and H.A. Regier. 1968. Estimation of population number and mortality rates. pp. 124-158 in Ricker, W.E. (editor) Methods for Assessment of Fish Production in Fresh Waters. IBP Handbook NO. 3 Blackwell Scientific Publications, Oxford.
+</p>
+<p>Schnute, J. 1983. A new approach to estimating populations by the removal method. Canadian Journal of Fisheries and Aquatic Sciences, 40:2153-2169.
+</p>
+<p>Seber, G.A.F. 2002. The Estimation of Animal Abundance. Edward Arnold, second edition (Reprint).
+</p>
+<p>van Dishoeck, P. 2009. Effects of catchability variation on performance of depletion estimators: Application to an adaptive management experiment. Masters Thesis, Simon Fraser University. [Was (is?) from http://rem-main.rem.sfu.ca/theses/vanDishoeckPier_2009_MRM483.pdf.]
+</p>
+<p>Van Deventer, J.S. 1989. Microcomputer Software System for Generating Population Statistics from Electrofishing Data&ndash;User's Guide for MicroFish 3.0. USDA Forest Service, General Technical Report INT-254. 29 p. [Was (is?) from https://relicensing.pcwa.net/documents/Library/PCWA-L
+</p>
+<p>Van Deventer, J.S., and W.S. Platts. 1983. Sampling and estimating fish populations from streams. Transactions of the 48th North American Wildlife and Natural Resource Conference. pp. 349-354.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See <code><a href="depletion.html">depletion</a></code> for related functionality.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## First example -- 3 passes
+ct3 &lt;- c(77,50,37)
+
+# Carle Strub (default) method
+p1 &lt;- removal(ct3)
+summary(p1)
+summary(p1,verbose=TRUE)
+summary(p1,parm="No")
+summary(p1,parm="p")
+confint(p1)
+confint(p1,parm="No")
+confint(p1,parm="p")
+
+# Moran method
+p2 &lt;- removal(ct3,method="Moran")
+summary(p2,verbose=TRUE)
+confint(p2,verbose=TRUE)
+#'
+# Schnute method
+p3 &lt;- removal(ct3,method="Schnute")
+summary(p3,verbose=TRUE)
+confint(p3,verbose=TRUE)
+
+# Burnham method
+p4 &lt;- removal(ct3,method="Burnham")
+summary(p4)
+summary(p4,verbose=TRUE)
+summary(p4,parm="No")
+summary(p4,parm="p")
+confint(p4)
+confint(p4,parm="No")
+confint(p4,parm="p")
+## Second example -- 2 passes
+ct2 &lt;- c(77,37)
+
+# Seber method
+p4 &lt;- removal(ct2,method="Seber2")
+summary(p4,verbose=TRUE)
+confint(p4)
+
+
+### Test if catchability differs between first sample and the other samples
+# chi-square test statistic from  negative log-likelihoods
+#   from Moran and Schnute fits (from above)
+chi2.val &lt;- 2*(p2$min.nlogLH-p3$min.nlogLH)
+# p-value ... no significant difference
+pchisq(chi2.val,df=1,lower.tail=FALSE)
+
+# Another LRT example ... sample 1 from Schnute (1983)
+ct4 &lt;- c(45,11,18,8)
+p2a &lt;- removal(ct4,method="Moran")
+p3a &lt;- removal(ct4,method="Schnute")
+chi2.val &lt;- 2*(p2a$min.nlogLH-p3a$min.nlogLH)  # 4.74 in Schnute(1983)
+pchisq(chi2.val,df=1,lower.tail=FALSE)         # significant difference (catchability differs)
+summary(p3a)
+
+
+### Using lapply() to use removal() on many different groups
+###   with the removals in a single variable ("long format")
+## create a dummy data frame
+lake &lt;- factor(rep(c("Ash Tree","Bark","Clay"),each=5))
+year &lt;- factor(rep(c("2010","2011","2010","2011","2010","2011"),times=c(2,3,3,2,2,3)))
+pass &lt;- factor(c(1,2,1,2,3,1,2,3,1,2,1,2,1,2,3))
+catch &lt;- c(57,34,65,34,12,54,26,9,54,27,67,34,68,35,12)
+d &lt;- data.frame(lake,year,pass,catch)
+
+## create a variable that indicates each different group
+d$group &lt;- with(d,interaction(lake,year))
+d
+## split the catch by the different groups (creates a list of catch vectors)
+ds &lt;- split(d$catch,d$group)
+## apply removal() to each catch vector (i.e., different group)
+res &lt;- lapply(ds,removal,just.ests=TRUE)
+res &lt;- data.frame(t(data.frame(res,check.names=FALSE)))
+## get rownames from above and split into separate columns
+nms &lt;- t(data.frame(strsplit(rownames(res),"\\.")))
+attr(nms,"dimnames") &lt;- NULL
+fnl &lt;- data.frame(nms,res)
+## put names together with values
+rownames(fnl) &lt;- NULL
+colnames(fnl)[1:2] &lt;- c("Lake","Year")
+fnl
+
+
+### Using apply() to use removal() on many different groups
+###   with the removals in several variables ("wide format")
+## create a dummy data frame (just reshaped from above as
+## an example; -5 to ignore the group variable from above)
+d1 &lt;- reshape(d[,-5],timevar="pass",idvar=c("lake","year"),direction="wide")
+## apply restore() to each row of only the catch data
+res1 &lt;- apply(d1[,3:5],MARGIN=1,FUN=removal,method="CarleStrub",just.ests=TRUE)
+res1 &lt;- data.frame(t(data.frame(res1,check.names=FALSE)))
+## add the grouping information to the results
+fnl1 &lt;- data.frame(d1[,1:2],res1)
+## put names together with values
+rownames(fnl1) &lt;- NULL
+fnl1
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FSA</em> version 0.8.23 <a href="00Index.html">Index</a>]</div>
+</body></html>

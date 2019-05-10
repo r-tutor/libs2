@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: The four-parameter growth function from Schnute (1981).</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for Schnute {FSA}"><tr><td>Schnute {FSA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>The four-parameter growth function from Schnute (1981).</h2>
+
+<h3>Description</h3>
+
+<p>The four-parameter growth function from Schnute (1981).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+Schnute(t, case = 1, t1 = NULL, t3 = NULL, L1 = NULL, L3 = NULL,
+  a = NULL, b = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>t</code></td>
+<td>
+<p>A numeric vector of ages over which to model growth.</p>
+</td></tr>
+<tr valign="top"><td><code>case</code></td>
+<td>
+<p>A string that indicates the case of the Schnute growth function to use.</p>
+</td></tr>
+<tr valign="top"><td><code>t1</code></td>
+<td>
+<p>The (young) age that corresponds to <code>L1</code>. Set to minimum value in <code>t</code> by default.</p>
+</td></tr>
+<tr valign="top"><td><code>t3</code></td>
+<td>
+<p>The (old) age that corresponds to <code>L3</code>. Set to maximum value in <code>t</code> by default.</p>
+</td></tr>
+<tr valign="top"><td><code>L1</code></td>
+<td>
+<p>The mean size/length at <code>t1</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>L3</code></td>
+<td>
+<p>The mean size/length at <code>t3</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>a</code></td>
+<td>
+<p>A dimensionless parameter that is related to the time/age at the inflection point.</p>
+</td></tr>
+<tr valign="top"><td><code>b</code></td>
+<td>
+<p>A dimensionless parameter that is related to size/length at the inflection point.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p><code>Schnute</code> returns a predicted size given the case of the function and the provided parameter values.
+</p>
+
+
+<h3>IFAR Chapter</h3>
+
+<p>None specifically, but 12-Individual Growth is related.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Derek H. Ogle, <a href="mailto:derek@derekogle.com">derek@derekogle.com</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Schnute, J. 1981. A versatile growth model with statistical stable parameters. Canadian Journal of Fisheries and Aquatic Sciences 38:1128-1140.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See <code><a href="growthModels.html">vbFuns</a></code>, <code><a href="growthModels.html">GompertzFuns</a></code>, <code><a href="growthModels.html">RichardsFuns</a></code>, <code><a href="growthModels.html">logisticFuns</a></code>, and <code><a href="SchnuteRichards.html">SchnuteRichards</a></code> for similar functionality for other models.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## See the formulae
+growthFunShow("Schnute",1,plot=TRUE)
+growthFunShow("Schnute",2,plot=TRUE)
+growthFunShow("Schnute",3,plot=TRUE)
+growthFunShow("Schnute",4,plot=TRUE)
+
+## Simple examples
+ages &lt;- 1:15
+s1 &lt;- Schnute(ages,case=1,t1=1,t3=15,L1=30,L3=400,a=0.3,b=1)
+s2 &lt;- Schnute(ages,case=2,t1=1,t3=15,L1=30,L3=400,a=0.3,b=1)
+s3 &lt;- Schnute(ages,case=3,t1=1,t3=15,L1=30,L3=400,a=0.3,b=1)
+s4 &lt;- Schnute(ages,case=4,t1=1,t3=15,L1=30,L3=400,a=0.3,b=1)
+
+plot(s1~ages,type="l",lwd=2)
+lines(s2~ages,lwd=2,col="red")
+lines(s3~ages,lwd=2,col="blue")
+lines(s4~ages,lwd=2,col="green")
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FSA</em> version 0.8.23 <a href="00Index.html">Index</a>]</div>
+</body></html>

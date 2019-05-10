@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Opens web pages associated with the fishR website.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for fishR {FSA}"><tr><td>fishR {FSA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Opens web pages associated with the fishR website.</h2>
+
+<h3>Description</h3>
+
+<p>Opens web pages associated with the <a href="http://derekogle.com/fishR/">fishR website</a> in a browser. The user can open the main page or choose a specific page to open.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+fishR(where = c("home", "IFAR", "general", "books", "AIFFD", "posts",
+  "news"))
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>where</code></td>
+<td>
+<p>A string that indicates a particular page on the fishR website to open.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>None, but a webpage will be opened in the default browser.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Derek H. Ogle, <a href="mailto:derek@derekogle.com">derek@derekogle.com</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+## Opens an external webpage ... only run interactively
+fishR()            # home page
+fishR("IFAR")      # Introduction to Fisheries Analysis with R page
+fishR("general")   # examples page
+fishR("books")     # examples page
+fishR("AIFFD")     # Analysis &amp; Interpretation of Freshw. Fisher. Data page
+fishR("posts")     # blog posts (some examples) page
+
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FSA</em> version 0.8.23 <a href="00Index.html">Index</a>]</div>
+</body></html>

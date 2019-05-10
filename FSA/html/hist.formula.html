@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Creates separate histograms by levels.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for hist.formula {FSA}"><tr><td>hist.formula {FSA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Creates separate histograms by levels.</h2>
+
+<h3>Description</h3>
+
+<p>Creates separate histograms of a quantitative variable by levels of a factor variable.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'formula'
+hist(formula, data = NULL, main = "",
+  right = FALSE, pre.main = "", xlab = NULL, ylab = "Frequency",
+  same.breaks = TRUE, breaks = "Sturges", w = NULL,
+  same.ylim = TRUE, ymax = NULL, col = "gray90",
+  nrow = round(sqrt(num)), ncol = ceiling(sqrt(num)), byrow = TRUE,
+  iaxs = TRUE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>formula</code></td>
+<td>
+<p>A formula. See details.</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>An optional data frame that contains the variables in the model.</p>
+</td></tr>
+<tr valign="top"><td><code>main</code></td>
+<td>
+<p>A character string used as the main title for when a SINGLE histogram is produced.</p>
+</td></tr>
+<tr valign="top"><td><code>right</code></td>
+<td>
+<p>A logical that indicates if the histogram bins are right-closed (left open) intervals (<code>=TRUE</code>) or not (<code>=FALSE</code>; default).</p>
+</td></tr>
+<tr valign="top"><td><code>pre.main</code></td>
+<td>
+<p>A character string to be used as a prefix for the main title when multiple histograms are produced. See details.</p>
+</td></tr>
+<tr valign="top"><td><code>xlab</code></td>
+<td>
+<p>A character label for the x-axis. Defaults to name of quantitative variable in <code>formula</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>ylab</code></td>
+<td>
+<p>A character label for the y-axis. Defaults to &ldquo;Frequency&rdquo;.</p>
+</td></tr>
+<tr valign="top"><td><code>same.breaks</code></td>
+<td>
+<p>A logical that indicates whether the same break values (i.e., bins) should be used on each histogram. Ignored if <code>breaks</code> or <code>w</code> is provided by the user. Defaults to <code>TRUE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>breaks</code></td>
+<td>
+<p>A single numeric that indicates the number of bins or breaks or a vector that contains the lower values of the breaks. Ignored if <code>w</code> is not <code>NULL</code>. See <code><a href="../../graphics/html/hist.html">hist</a></code> for more details.</p>
+</td></tr>
+<tr valign="top"><td><code>w</code></td>
+<td>
+<p>A single numeric that indicates the width of the bins to use. The bins will start at &ldquo;rounded&rdquo; values depending on the value of <code>w</code>. See <code><a href="lencat.html">lencat</a></code> for more details.</p>
+</td></tr>
+<tr valign="top"><td><code>same.ylim</code></td>
+<td>
+<p>A logical that indicates whether the same limits for the y-axis should be used on each histogram. Defaults to <code>TRUE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>ymax</code></td>
+<td>
+<p>A single value that sets the maximum y-axis limit for each histogram or a vector of length equal to the number of groups that sets the maximum y-axis limit for each histogram separately. If <code>NULL</code> (default), then a value will be found.</p>
+</td></tr>
+<tr valign="top"><td><code>col</code></td>
+<td>
+<p>A string that indicates the color for the bars on the histogram. Defaults to a light shade of gray (i.e., <code>"gray90"</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>nrow</code></td>
+<td>
+<p>A single numeric that contains the number of rows to use on the graphic.</p>
+</td></tr>
+<tr valign="top"><td><code>ncol</code></td>
+<td>
+<p>A single numeric that contains the number of columns to use on the graphic.</p>
+</td></tr>
+<tr valign="top"><td><code>byrow</code></td>
+<td>
+<p>A single logical that indicates if the histograms should fill rows first (<code>=TRUE</code> or columns first (<code>=FALSE</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>iaxs</code></td>
+<td>
+<p>A single logical that indicates whether both axes should be plotted using <code>xaxs="i"</code> and <code>yaxs="i"</code> (the default) or <code>xaxs="r"</code> and <code>yaxs="r"</code> (what R typically does).</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Other arguments to pass through to the default <code>hist()</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The formula must be of the form <code>~quantitative</code>, <code>quantitative~1</code>, <code>quantitative~factor</code>, or <code>quantitative~factor*factor2</code> where <code>quantitative</code> is the quantitative variable to construct the histograms for and <code>factor</code> or <code>factor2</code> are factor variables that contain the levels for which separate histograms should be constructed.
+</p>
+<p>If the formula is of the form <code>~quantitative</code> or <code>quantitative~1</code> then only a single histogram of the quantitative variable will be produced. This allows <code>hist.formula()</code> to be used similarly to <code>hist()</code> but with a <code>data=</code> argument.
+</p>
+<p>The function produces a single (but see below) graphic that consists of a grid on which the separate histograms are printed. The rows and columns of this grid are determined to construct a plot that is as square as possible. However, the rows and columns can be set by the user with the <code>nrow=</code> and <code>ncol=</code> arguments. If the product of the number of rows and number of columns set by the user is less than the total number of histograms to be constructed then multiple pages of histograms will be produced (each requiring the user to click on the graph to go to the next graph). The x-axis of each separate histogram will be labeled identically. The default x-axis label is the name of the quantitative variable. This can be changed by the user with the <code>xlab=</code> argument.
+</p>
+<p>The default for <code>right=</code> is not the same as that used in <code>hist()</code> from <span class="pkg">graphics</span>. Thus, right-open (left-closed) bins are the default.
+</p>
+<p>The <code>iaxs=</code> argument defaults to <code>TRUE</code> so that <code>xaxs="i"</code> and <code>yaxs="i"</code> are used for both axes, which eliminates the &ldquo;floating&rdquo; x-axis that R typically plots for histograms.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A graphic is produced and nothing is returned unless <code>formula</code> results in only one histogram. In that case, an object of class <code>"histogram"</code> is returned, which is described in <code><a href="../../graphics/html/hist.html">hist</a></code>.
+</p>
+
+
+<h3>IFAR Chapter</h3>
+
+<p>3-Plotting Fundamentals.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Students often need to look at the distribution of a quantitative variable separated for different levels of a categorical variable. One method for examining these distributions is with <code>boxplot(quantitative~factor)</code>. Other methods use functions in <span class="pkg">Lattice</span> and <span class="pkg">ggplots2</span> but these packages have some learning &lsquo;overhead&rsquo; for newbie students. The formula notation, however, is a common way in R to tell R to separate a quantitative variable by the levels of a factor. Thus, this function adds code for formulas to the generic <code>hist</code> function. This allows newbie students to use a common notation (i.e., formula) to easily create multiple histograms of a quantitative variable separated by the levels of a factor.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Derek H. Ogle, <a href="mailto:derek@derekogle.com">derek@derekogle.com</a>, but this implementation is largely a modification of the code provided by Marc Schwartz on the R-help mailing list on 1Jun07.
+</p>
+
+
+<h3>References</h3>
+
+<p>Ogle, D.H. 2016. <a href="http://derekogle.com/IFAR">Introductory Fisheries Analyses with R</a>. Chapman &amp; Hall/CRC, Boca Raton, FL.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See base <code><a href="../../graphics/html/hist.html">hist</a></code> for related functionality and <code><a href="../../plotrix/html/multhist.html">multhist</a></code> in <span class="pkg">plotrix</span> for similar functionality.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Using the defaults
+hist(Sepal.Length~Species,data=iris)
+
+## Add x-labels and use a pre-fix on the main labels
+hist(Sepal.Length~Species,data=iris,xlab="Sepal Length (cm)",
+     pre.main="Species==")
+
+## Use different breaks and different y-axis limits for each graph
+hist(Sepal.Length~Species,data=iris,xlab="Sepal Length (cm)",
+     same.breaks=FALSE,same.ylim=FALSE)
+
+## Use same but user-controlled breaks for each graph
+hist(Sepal.Length~Species,data=iris,xlab="Sepal Length (cm)",
+     breaks=seq(4,8,1))
+
+## Use same but user-controlled maximum value for y-axis
+hist(Sepal.Length~Species,data=iris,xlab="Sepal Length (cm)",ymax=30)
+
+## Control the organization of the 'grid' of histograms
+hist(Sepal.Length~Species,data=iris,xlab="Sepal Length (cm)",nrow=1,ncol=3)
+
+## Use right=FALSE &amp; freq=FALSE to demon sending an argument used by base hist()
+hist(Sepal.Length~Species,data=iris,xlab="Sepal Length (cm)",right=FALSE,
+     freq=FALSE,ymax=2)
+
+## Add a junk variable to the iris data set to show two factors on RHS
+iris$junk &lt;- factor(sample(c("A","B"),nrow(iris),replace=TRUE))
+hist(Sepal.Length~Species*junk,data=iris,xlab="Sepal Length (cm)")
+
+## Single histogram without grouping using formula notation
+hist(~Sepal.Length,data=iris,xlab="Sepal Length (cm)")
+
+## Single histogram with "axis correction" turned off (compare to previous)
+hist(~Sepal.Length,data=iris,xlab="Sepal Length (cm)",iaxs=FALSE)
+
+## Single histogram with "axis correction", testing xlim and ylim
+hist(~Sepal.Length,data=iris,xlab="Sepal Length (cm)",
+     xlim=c(3.8,8.2),ylim=c(0,35))
+hist(~Sepal.Length,data=iris,xlab="Sepal Length (cm)",
+     xlim=c(3.8,8.2),ymax=35)
+
+## Using the bin width argument
+hist(~Sepal.Length,data=iris,xlab="Sepal Length (cm)",w=1)
+hist(~Sepal.Length,data=iris,xlab="Sepal Length (cm)",w=0.25)
+hist(Sepal.Length~Species,data=iris,xlab="Sepal Length (cm)",w=1)
+hist(Sepal.Length~Species,data=iris,xlab="Sepal Length (cm)",w=0.25)
+
+## Using a vector (and not a data.frame)
+vec &lt;- 1:100
+hist(~vec)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FSA</em> version 0.8.23 <a href="00Index.html">Index</a>]</div>
+</body></html>

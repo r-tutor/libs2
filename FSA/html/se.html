@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Computes standard error of the mean.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for se {FSA}"><tr><td>se {FSA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Computes standard error of the mean.</h2>
+
+<h3>Description</h3>
+
+<p>Computes the standard error of the mean (i.e., standard deviation divided by the square root of the sample size).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+se(x, na.rm = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A numeric vector.</p>
+</td></tr>
+<tr valign="top"><td><code>na.rm</code></td>
+<td>
+<p>A logical that indicates whether missing values should be removed before computing the standard error.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A single numeric that is the standard error of the mean of <code>x</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Derek H. Ogle, <a href="mailto:derek@derekogle.com">derek@derekogle.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See <code><a href="../../sciplot/html/se.html">se</a></code> in <span class="pkg">sciplot</span> for similar functionality.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+x &lt;- 1:20
+sd(x)/sqrt(length(x))
+se(x)
+
+# all return NA if missing values are not removed
+x2 &lt;- c(x,NA)
+sd(x2)/sqrt(length(x2))
+
+# Better if missing values are removed
+se(x2,na.rm=FALSE)
+sd(x2,na.rm=TRUE)/sqrt(length(x2[complete.cases(x2)]))
+se(x2)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FSA</em> version 0.8.23 <a href="00Index.html">Index</a>]</div>
+</body></html>

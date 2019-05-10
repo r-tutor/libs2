@@ -29,6 +29,8 @@ SMBassWB                Growth increment data for West Bearskin Lake,
                         MN, Smallmouth Bass.
 Schnute                 The four-parameter growth function from Schnute
                         (1981).
+SchnuteRichards         The five-parameter growth function from Schnute
+                        and Richards (1990).
 SpotVA1                 Age and length of spot.
 Subset                  Subsets/filters a data frame and drops the
                         unused levels.

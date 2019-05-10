@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Tests for significant differences among all pairs of slopes...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for compSlopes {FSA}"><tr><td>compSlopes {FSA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Tests for significant differences among all pairs of slopes in a dummy variable regression (DVR).</h2>
+
+<h3>Description</h3>
+
+<p>Tests for significant differences among all pairs of slopes in a dummy variable regression where the dummy variables all stem from one factor.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+compSlopes(mdl, method = stats::p.adjust.methods, conf.level = 0.95,
+  order.slopes = TRUE, digits = getOption("digits"))
+
+## S3 method for class 'compSlopes'
+print(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>mdl</code></td>
+<td>
+<p>A <code>lm</code> object.</p>
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+<p>A string indicating the method of p-value adjustment to use. See details and <code>p.adjust.methods</code> (documented in <code><a href="../../stats/html/p.adjust.html">p.adjust</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>conf.level</code></td>
+<td>
+<p>A single number that represents the level of confidence to use for constructing confidence intervals.</p>
+</td></tr>
+<tr valign="top"><td><code>order.slopes</code></td>
+<td>
+<p>A logical indicating whether the slopes should be ordered from smallest to largest upon output.</p>
+</td></tr>
+<tr valign="top"><td><code>digits</code></td>
+<td>
+<p>A numeric that controls the number of digits to print.</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A <code>compSlopes</code> object (i.e., returned from <code>compSlopes</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Other arguments sent to <code>print</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>In a dummy variable regression the coefficient for the interaction between the covariate (x) and a dummy variable tests for a difference in slopes between the level of the dummy variable and the reference level. Thus, all dummy variables from a particular linear model fit only compare slopes with the reference level. Other slope comparisons may be found by changing the reference level, which requires refitting the model. This function automates this sequential process and produces a data.frame that shows the estimated difference, an unadjusted confidence interval for the difference, and the unadjusted and adjusted (for multiple comparisons) p-values for testing that the difference in slopes is equal to zero for each pair of levels. The adjusted p-values may be computed with any of the methods coded in <code><a href="../../stats/html/p.adjust.html">p.adjust</a></code> (see <code>p.adjust.methods</code> there).
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list with three components. The first component contains the p-value adjustment method in <code>method</code>. The second component, called <code>comparisons</code>, is a data.frame that contains the following:
+</p>
+
+<table summary="Rd table">
+<tr>
+ <td style="text-align: left;">
+<code>comparison</code> </td><td style="text-align: left;"> Description of how the difference in levels was computed.</td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+<code>diff</code> </td><td style="text-align: left;"> The estimated difference in slope values.</td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+<code>lwr</code> </td><td style="text-align: left;"> Lower confidence bound for difference in slope values.</td>
+</tr>
+<tr>
+ <td style="text-align: left;"> 
+<code>upr</code> </td><td style="text-align: left;"> Upper confidence bound for difference in slope values.</td>
+</tr>
+<tr>
+ <td style="text-align: left;"> 
+<code>p.unadj</code> </td><td style="text-align: left;"> Unadjusted p-value for testing the difference in slopes is zero.</td>
+</tr>
+<tr>
+ <td style="text-align: left;"> 
+<code>p.adj</code> </td><td style="text-align: left;"> Adjusted p-value for testing the difference in slopes is zero.</td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+</td>
+</tr>
+
+</table>
+
+<p>The third component, called <code>slopes</code>, is a data.frame that contains the following:
+</p>
+
+<table summary="Rd table">
+<tr>
+ <td style="text-align: left;">
+<code>level</code> </td><td style="text-align: left;"> A level name.</td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+<code>slope</code> </td><td style="text-align: left;"> The estimated slope value for the given level.</td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+<code>XX LCI</code> </td><td style="text-align: left;"> Lower confidence bound for difference in slope values.</td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+<code>XX UCI</code> </td><td style="text-align: left;"> Upper confidence bound for difference in slope values.</td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+<code>p.unadj</code> </td><td style="text-align: left;"> Unadjusted p-value for testing the slope is zero.</td>
+</tr>
+<tr>
+ <td style="text-align: left;"> 
+<code>p.adj</code> </td><td style="text-align: left;"> Adjusted p-value for testing the slope is zero.</td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+</td>
+</tr>
+
+</table>
+
+<p>The <code>print</code> function prints the results nicely.
+</p>
+
+
+<h3>Note</h3>
+
+<p>This function only works for linear models with one factor variable.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Derek H. Ogle, <a href="mailto:derek@derekogle.com">derek@derekogle.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="compIntercepts.html">compIntercepts</a></code> in <span class="pkg">FSA</span>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+Mirex$year &lt;- factor(Mirex$year)
+# fit a dummy variable regression, see that slopes differ
+lm1 &lt;- lm(mirex~weight*year,data=Mirex)
+anova(lm1)
+# compare all pairs of slopes using default Holm control
+compSlopes(lm1)
+# compare all pairs of slopes using the false discovery rate control
+compSlopes(lm1,method="fdr")
+# visualize the results
+fitPlot(lm1)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FSA</em> version 0.8.23 <a href="00Index.html">Index</a>]</div>
+</body></html>

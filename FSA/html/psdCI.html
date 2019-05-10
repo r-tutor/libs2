@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Compute confidence intervals for PSD-X and PSD X-Y values.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for psdCI {FSA}"><tr><td>psdCI {FSA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Compute confidence intervals for PSD-X and PSD X-Y values.</h2>
+
+<h3>Description</h3>
+
+<p>Compute confidence intervals for (traditional) PSD-X and (incremental) PSD X-Y values as requested by the user.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+psdCI(indvec, ptbl, n, method = c("binomial", "multinomial"),
+  bin.type = c("wilson", "exact", "asymptotic"), conf.level = 0.95,
+  label = NULL, digits = 1)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>indvec</code></td>
+<td>
+<p>A numeric vector of 0s and 1s that identify the linear combination of proportions from <code>ptbl</code> that the user is interested in.  See details.</p>
+</td></tr>
+<tr valign="top"><td><code>ptbl</code></td>
+<td>
+<p>A numeric vector or array that contains the proportion or percentage of all individuals in each length category.  See details.</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>A single numeric of the number of fish used to construct <code>ptbl</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+<p>A string that identifies the confidence interval method to use.  See details.</p>
+</td></tr>
+<tr valign="top"><td><code>bin.type</code></td>
+<td>
+<p>A string that identifies the type of method to use for calculation of the confidence intervals when <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>method=&quot;binomial&quot;.  See details of <code><a href="binCI.html">binCI</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>conf.level</code></td>
+<td>
+<p>A number that indicates the level of confidence to use for constructing confidence intervals (default is <code>0.95</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>label</code></td>
+<td>
+<p>A single string that can be used to label the row of the output matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>digits</code></td>
+<td>
+<p>A numeric that indicates the number of decimals to round the result to.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Computes confidence intervals for (traditional) PSD-X and (incremental) PSD X-Y values.  Two methods can be used as chosen with <code>method=</code>.  If <code>method="binomial"</code> then the binomial distribution (via <code>binCI()</code>) is used.  If <code>method="multinomial"</code> then the multinomial method described by Brenden et al. (2008) is used.  This function is defined to compute one confidence interval so <code>method="binomial"</code> is the default.  See examples and <code><a href="psdCalc.html">psdCalc</a></code> for computing several simultaneous confidence intervals.
+</p>
+<p>A table of proportions within each length category is given in <code>ptbl</code>.  If <code>ptbl</code> has any values greater than 1 then it is assumed that a table of percentages was supplied and the entire table will be divided by 100 to continue.  The proportions must sum to 1 (with some allowance for rounding).
+</p>
+<p>A vector of length equal to the length of <code>ptbl</code> is given in <code>indvec</code> which contains zeros and ones to identify the linear combination of values in <code>ptbl</code> to use to construct the confidence intervals.  For example, if <code>ptbl</code> has four proportions then <code>indvec=c(1,0,0,0)</code> would be used to construct a confidence interval for the population proportion in the first category.  Alternatively, <code>indvec=c(0,0,1,1)</code> would be used to construct a confidence interval for the population proportion in the last two categories.  This vector must not contain all zeros or all ones.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A matrix with columns that contain the computed PSD-X or PSD X-Y value and the associated confidence interval.  The confidence interval values were set to zero or 100 if the computed value was negative or greater than 100, respectively.
+</p>
+
+
+<h3>Testing</h3>
+
+<p>The multinomial results match the results given in Brendent et al. (2008).
+</p>
+
+
+<h3>IFAR Chapter</h3>
+
+<p>6-Size Structure.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Derek H. Ogle, <a href="mailto:derek@derekogle.com">derek@derekogle.com</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Ogle, D.H.  2016.  <a href="http://derekogle.com/IFAR">Introductory Fisheries Analyses with R</a>.  Chapman &amp; Hall/CRC, Boca Raton, FL.
+</p>
+<p>Brenden, T.O., T. Wagner, and B.R. Murphy.  2008.  Novel tools for analyzing proportional size distribution index data.  North American Journal of Fisheries Management 28:1233-1242.  [Was (is?) from http://qfc.fw.msu.edu/Publications/Publication%20List/2008/Novel%20Tools%20for%20Analyzing%20Proportional%20Size%20Distribution_Brenden.pdf.]
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See <code><a href="psdVal.html">psdVal</a></code>, <code><a href="psdPlot.html">psdPlot</a></code>, <code><a href="psdAdd.html">psdAdd</a></code>, <code><a href="PSDlit.html">PSDlit</a></code>, <code><a href="tictactoe.html">tictactoe</a></code>, <code><a href="lencat.html">lencat</a></code>, and <code><a href="rcumsum.html">rcumsum</a></code> for related functionality.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## similar to Brenden et al. (2008)
+n &lt;- 997
+ipsd &lt;- c(130,491,253,123)/n
+
+## single binomial
+psdCI(c(0,0,1,1),ipsd,n=n)
+psdCI(c(1,0,0,0),ipsd,n=n,label="PSD S-Q")
+
+## single multinomial
+psdCI(c(0,0,1,1),ipsd,n=n,method="multinomial")
+psdCI(c(1,0,0,0),ipsd,n=n,method="multinomial",label="PSD S-Q")
+
+## multiple multinomials (but see psdCalc())
+lbls &lt;- c("PSD S-Q","PSD Q-P","PSD P-M","PSD M-T","PSD","PSD-P")
+imat &lt;- matrix(c(1,0,0,0,
+                 0,1,0,0,
+                 0,0,1,0,
+                 0,0,0,1,
+                 0,1,1,1,
+                 0,0,1,1),nrow=6,byrow=TRUE)
+rownames(imat) &lt;- lbls
+imat
+
+mcis &lt;- t(apply(imat,MARGIN=1,FUN=psdCI,ptbl=ipsd,n=n,method="multinomial"))
+colnames(mcis) &lt;- c("Estimate","95% LCI","95% UCI")
+mcis
+
+## Multiple "Bonferroni-corrected" (for six comparisons) binomial method
+bcis &lt;- t(apply(imat,MARGIN=1,FUN=psdCI,ptbl=ipsd,n=n,conf.level=1-0.05/6))
+colnames(bcis) &lt;- c("Estimate","95% LCI","95% UCI")
+bcis
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FSA</em> version 0.8.23 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Shows rows from the head and tail of a data frame or matrix.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for headtail {FSA}"><tr><td>headtail {FSA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Shows rows from the head and tail of a data frame or matrix.</h2>
+
+<h3>Description</h3>
+
+<p>Shows rows from the head and tail of a data frame or matrix.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+headtail(x, n = 3L, which = NULL, addrownums = TRUE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A data frame or matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>A single numeric that indicates the number of rows to display from each of the head and tail of structure.</p>
+</td></tr>
+<tr valign="top"><td><code>which</code></td>
+<td>
+<p>A numeric or string vector that contains the column numbers or names to display. Defaults to showing all columns.</p>
+</td></tr>
+<tr valign="top"><td><code>addrownums</code></td>
+<td>
+<p>If there are no row names for the MATRIX, then create them from the row numbers.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Arguments to be passed to or from other methods.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A matrix or data.frame with 2*n rows.
+</p>
+
+
+<h3>Note</h3>
+
+<p>If <code>n</code> is larger than the number of rows in <code>x</code> then all of <code>x</code> is displayed.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Derek H. Ogle, <a href="mailto:derek@derekogle.com">derek@derekogle.com</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+headtail(iris)
+headtail(iris,10)
+headtail(iris,which=c("Sepal.Length","Sepal.Width","Species"))
+headtail(iris,which=grep("Sepal",names(iris)))
+headtail(iris,n=200)
+
+## Make a matrix for demonstration purposes only
+miris &lt;- as.matrix(iris[,1:4])
+headtail(miris)
+headtail(miris,10)
+headtail(miris,addrownums=FALSE)
+headtail(miris,10,which=2:4)
+
+## Make a tbl_df type from dplyr ... note how headtail()
+## is not limited by the tbl_df restriction on number of
+## rows to show (but head() is).
+if (require(dplyr)) {
+  iris2 &lt;- tbl_df(iris)
+  class(iris2)
+  headtail(iris2,n=15)
+  head(iris2,n=30)
+}
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FSA</em> version 0.8.23 <a href="00Index.html">Index</a>]</div>
+</body></html>

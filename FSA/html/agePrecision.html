@@ -1,0 +1,258 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Compute measures of precision among sets of ages.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for agePrecision {FSA}"><tr><td>agePrecision {FSA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Compute measures of precision among sets of ages.</h2>
+
+<h3>Description</h3>
+
+<p>Computes overall measures of precision for multiple age estimates made on the same individuals. Ages may be from two or more readers of the same structure, one reader at two or more times, or two or more structures (e.g., scales, spines, otoliths). Measures of precision include ACV (Average Coefficient of Variation), APE (Average Percent Error), AAD (Average Absolute Deviation), and ASD (Average Standard Devation), and various percentage difference values.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+agePrecision(formula, data)
+
+## S3 method for class 'agePrec'
+summary(object, what = c("precision", "difference",
+  "absolute difference", "details"), percent = TRUE, trunc.diff = NULL,
+  digits = 4, show.prec2 = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>formula</code></td>
+<td>
+<p>A formula of the form <code>~var1+var2+var3+...</code> or, alternatively, <code>var1~var2+var3+...</code>, where the <code>varX</code> generically represent the variables that contain the age estimates. The alternative formula allows for similar code as used in <code><a href="ageBias.html">ageBias</a></code> and can have only one variable on the left-hand side.</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>A data.frame that minimally contains the variables in <code>formula</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>An object of class <code>agePrec</code>, usually from <code>agePrecision</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>what</code></td>
+<td>
+<p>A string (or vector of strings) that indicates what type of summary to print. See details.</p>
+</td></tr>
+<tr valign="top"><td><code>percent</code></td>
+<td>
+<p>A logical that indicates whether the difference table (see details) should be represented as percentages (<code>TRUE</code>; default) or frequency (<code>FALSE</code>) of fish.</p>
+</td></tr>
+<tr valign="top"><td><code>trunc.diff</code></td>
+<td>
+<p>A single integer that identifies the age for which all values that age and greater are combined into one category. See the examples.</p>
+</td></tr>
+<tr valign="top"><td><code>digits</code></td>
+<td>
+<p>A single numeric that indicates the minimum number of digits to print when using <code>summary</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>show.prec2</code></td>
+<td>
+<p>A logical that indicates whether the precision metrics that use the median (i.e., ACV2 and APE2) should be shown when only two age estimates were made (in this instance they will be exactly equal to ACV and APE). Default is to not show these values in this situation.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments for methods.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>If <code>what="precision"</code> in <code>summary</code> then a summary table that contains the following items will be printed:
+</p>
+
+<ul>
+<li><p> n Number of fish in <code>data</code>.
+</p>
+</li>
+<li><p> validn Number of fish in <code>data</code> that have non-<code>NA</code> data for all R age estimates.
+</p>
+</li>
+<li><p> R Number of age estimates given in <code>formula</code>.
+</p>
+</li>
+<li><p> PercAgree The percentage of fish for which all age estimates perfectly agree.
+</p>
+</li>
+<li><p> ASD The average (across all fish) standard deviation of ages within a fish.
+</p>
+</li>
+<li><p> ACV The average (across all fish) coefficient of variation of ages within a fish using the <b>mean</b> as the divisor. See the <a href="http://derekogle.com/IFAR">IFAR chapter</a> for calculation details.
+</p>
+</li>
+<li><p> ACV2 The average (across all fish) coefficient of variation of ages within a fish using the <b>median</b> as the divisor. This will only be shown if R&gt;2 or <code>show.prec2=TRUE</code>.
+</p>
+</li>
+<li><p> AAD The average (across all fish) absolute deviation of ages within a fish.
+</p>
+</li>
+<li><p> APE The average (across all fish) percent error of ages within a fish using the <b>mean</b> as the divisor. See the <a href="http://derekogle.com/IFAR">IFAR chapter</a> for calculation details.
+</p>
+</li>
+<li><p> APE2 The average (across all fish) percent error of ages within a fish using the <b>median</b> as the divisor. This will only be shown if R&gt;2 or <code>show.prec2=TRUE</code>.
+</p>
+</li>
+<li><p> AD The average (across all fish) index of precision (D).
+</p>
+</li></ul>
+
+<p>Note that ACV2 and APE2 will not be printed when <code>what="precision"</code> if only two sets of ages are given (because mean=median such that ACV=ACV2 and APE=APE2).
+If <code>what="difference"</code> is used in <code>summary</code>, then a table that describes either the percentage (if <code>percent=TRUE</code>, DEFAULT) or frequency of fish by the difference in paired age estimates. This table has one row for each possible pair of age estimates.
+</p>
+<p>If <code>what="absolute difference"</code> is used in <code>summary</code>, then a table that describes either the percentage (if <code>percent=TRUE</code>, DEFAULT) or frequency of fish by the absolute value of the difference in paired age estimates. This table has one row for each possible pair of age estimates. The &ldquo;1&rdquo; column, for example, represents age estimates that disagree by one year (in either direction).
+</p>
+<p>If <code>what="detail"</code> is used in <code>summary</code>, then a data.frame of the original <code>data</code> along with the intermediate calculations of the mean age, median age, modal age (will be <code>NA</code> if a mode does not exist (e.g., all different ages) or multiple modes exist), standard deviation of age (SD), coefficient of variation using the mean as the divisor (CV), coefficient of variation using the median as the divisor (CV2), absolute deviation using the mean as the divisor (AD), absolute deviation using the median as the divisor (AD2), average percent error (PE), and index of precision (D) for each individual will be printed.
+</p>
+<p>All percentage calculations above use the <code>validn</code> value in the denominator.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The main function returns a list with the following items:
+</p>
+
+<ul>
+<li><p> detail A data.frame with all data given in <code>data</code> and intermediate calculations for each fish. See details
+</p>
+</li>
+<li><p> rawdiff A frequency table of fish by differences for each pair of ages.
+</p>
+</li>
+<li><p> absdiff A frequency table of fish by absolute differences for each pair of ages.
+</p>
+</li>
+<li><p> AAD The average absolute deviation.
+</p>
+</li>
+<li><p> APE The average percent error (using the <b>mean</b> age as the divisor).
+</p>
+</li>
+<li><p> APE2 The average percent error (using the <b>median</b> age as the divisor).
+</p>
+</li>
+<li><p> ASD The average standard deviation.
+</p>
+</li>
+<li><p> ACV The average coefficient of variation (using the <b>mean</b> age as the divisor).
+</p>
+</li>
+<li><p> ACV2 The average coefficient of variation (using the <b>median</b> age as the divisor).
+</p>
+</li>
+<li><p> AD The average index of precision.
+</p>
+</li>
+<li><p> R The number of readings for each individual fish.
+</p>
+</li>
+<li><p> n Number of fish in <code>data</code>.
+</p>
+</li>
+<li><p> validn Number of fish in <code>data</code> that have non-<code>NA</code> data for all R age estimates.
+</p>
+</li></ul>
+
+<p>The <code>summary</code> returns the result if <code>what=</code> contains only one item, otherwise it returns nothing. See details for what is printed.
+</p>
+
+
+<h3>Testing</h3>
+
+<p>Tested all precision results against published results in Herbst and Marsden (2011) for the <code><a href="WhitefishLC.html">WhitefishLC</a></code> data and the results for the <code><a href="../../FSAdata/html/AlewifeLH.html">AlewifeLH</a></code> data set from <span class="pkg">FSAdata</span> against results from the online resource at http://www.nefsc.noaa.gov/fbp/age-prec/.
+</p>
+
+
+<h3>IFAR Chapter</h3>
+
+<p>4-Age Comparisons.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Derek H. Ogle, <a href="mailto:derek@derekogle.com">derek@derekogle.com</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Ogle, D.H. 2016. <a href="http://derekogle.com/IFAR">Introductory Fisheries Analyses with R</a>. Chapman &amp; Hall/CRC, Boca Raton, FL.
+</p>
+<p>Beamish, R.J. and D.A. Fournier. 1981. A method for comparing the precision of a set of age determinations. Canadian Journal of Fisheries and Aquatic Sciences 38:982-983. [Was (is?) available from http://www.pac.dfo-mpo.gc.ca/science/people-gens/beamish/PDF_files/compareagecjfas1981.pdf.]
+</p>
+<p>Campana, S.E. 1982. Accuracy, precision and quality control in age determination, including a review of the use and abuse of age validation methods. Journal of Fish Biology 59:197-242. [Was (is?) available from http://www.denix.osd.mil/nr/crid/Coral_Reef_Iniative_Database/References_for_Reef_Assessment_files/Campana,%202001.pdf.]
+</p>
+<p>Campana, S.E., M.C. Annand, and J.I. McMillan. 1995. Graphical and statistical methods for determining the consistency of age determinations. Transactions of the American Fisheries Society 124:131-138. [Was (is?) available from http://www.bio.gc.ca/otoliths/documents/Campana%20et%20al%201995%20TAFS.pdf.]
+</p>
+<p>Chang, W.Y.B. 1982. A statistical method for evaluating the reproducibility of age determination. Canadian Journal of Fisheries and Aquatic Sciences 39:1208-1210. [Was (is?) available from http://www.nrcresearchpress.com/doi/abs/10.1139/f82-158.]
+</p>
+<p>McBride, R.S. 2015. Diagnosis of paired age agreement: A simulation approach of accuracy and precision effects. ICES Journal of Marine Science, 72:2149-2167.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See <code><a href="ageBias.html">ageBias</a></code> for computation of the full age agreement table, along with tests and plots of age bias.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Example with just two age estimates
+ap1 &lt;- agePrecision(~otolithC+scaleC,data=WhitefishLC)
+summary(ap1)
+summary(ap1,what="precision")
+summary(ap1,what="difference")
+summary(ap1,what="difference",percent=FALSE)
+summary(ap1,what="absolute")
+summary(ap1,what="absolute",percent=FALSE)
+summary(ap1,what="absolute",trunc.diff=4)
+summary(ap1,what=c("precision","difference"))
+summary(ap1,what="detail")
+
+barplot(ap1$rawdiff,ylab="Frequency",xlab="Otolith - Scale Age")
+plot(AD~mean,data=ap1$detail,pch=19,col=col2rgbt("black",1/5),
+     xlab="Mean Age",ylab="Absolute Deviation Age")
+plot(SD~mean,data=ap1$detail,pch=19,col=col2rgbt("black",1/5),
+     xlab="Mean Age",ylab="Standard deviation Age")
+plot(SD~AD,data=ap1$detail,pch=19,col=col2rgbt("black",1/5),
+     xlab="Absolute Deviation Age",ylab="Standard deviation Age")
+plot(CV~PE,data=ap1$detail,pch=19,col=col2rgbt("black",1/5),
+     xlab="Percent Error Age",ylab="Coefficient of Variation Age")
+
+## Example with three age estimates
+ap2 &lt;- agePrecision(~otolithC+finrayC+scaleC,data=WhitefishLC)
+summary(ap2,digits=3)
+summary(ap2,what="precision")
+summary(ap2,what="difference")
+summary(ap2,what="absolute",percent=FALSE,trunc.diff=4)
+summary(ap2,what="detail",digits=3)
+
+plot(AD~mean,data=ap2$detail,pch=19,col=col2rgbt("black",1/5),
+     xlab="Mean Age",ylab="Absolute Deviation Age")
+plot(SD~mean,data=ap2$detail,pch=19,col=col2rgbt("black",1/5),
+     xlab="Mean Age",ylab="Standard Deviation Age")
+plot(SD~AD,data=ap2$detail,pch=19,col=col2rgbt("black",1/5),
+     xlab="Absolute Deviation Age",ylab="Standard Deviation Age")
+plot(CV~PE,data=ap2$detail,pch=19,col=col2rgbt("black",1/5),
+     xlab="Percent Error Age",ylab="Coefficient of Variation Age")
+plot(median~mean,data=ap2$detail,pch=19,col=col2rgbt("black",1/5),
+     xlab="Mean Age",ylab="Median Age")
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FSA</em> version 0.8.23 <a href="00Index.html">Index</a>]</div>
+</body></html>

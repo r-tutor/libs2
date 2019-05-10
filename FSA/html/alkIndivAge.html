@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Use an age-length key to assign age to individuals in the...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for alkIndivAge {FSA}"><tr><td>alkIndivAge {FSA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Use an age-length key to assign age to individuals in the unaged sample.</h2>
+
+<h3>Description</h3>
+
+<p>Use either the semi- or completely-random methods from Isermann and Knight (2005) to assign ages to individual fish in the unaged sample according to the information in an age-length key supplied by the user.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+alkIndivAge(key, formula, data, type = c("SR", "CR"), breaks = NULL,
+  seed = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>key</code></td>
+<td>
+<p>A numeric matrix that contains the age-length key.  The format of this matrix is important.  See details.</p>
+</td></tr>
+<tr valign="top"><td><code>formula</code></td>
+<td>
+<p>A formula of the form <code>age~length</code> where <code>age</code> generically represents the variable that will contain the estimated ages once the key is applied (i.e., should currently contain no values) and <code>length</code> generically represents the variable that contains the known length measurements.  If only <code>~length</code> is used, then a new variable called &ldquo;age&rdquo; will be created in the resulting data frame.</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>A data.frame that minimally contains the length measurements and possibly contains a variable that will receive the age assignments as given in <code>formula</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>A string that indicates whether to use the semi-random (<code>type="SR"</code>, default) or completely-random (<code>type="CR"</code>) methods for assigning ages to individual fish.  See the <a href="http://derekogle.com/IFAR">IFAR chapter</a> for more details.</p>
+</td></tr>
+<tr valign="top"><td><code>breaks</code></td>
+<td>
+<p>A numeric vector of lower values that define the length intervals.  See details.</p>
+</td></tr>
+<tr valign="top"><td><code>seed</code></td>
+<td>
+<p>A single numeric that is given to <code>set.seed</code> to set the random seed.  This allows repeatability of results.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The age-length key in <code>key</code> must have length intervals as rows and ages as columns.  The row names of <code>key</code> (i.e., <code>rownames(key)</code>) must contain the minimum values of each length interval (e.g., if an interval is 100-109, then the corresponding row name must be 100).  The column names of <code>key</code> (i.e., <code>colnames(key)</code>) must contain the age values (e.g., the columns can NOT be named with &ldquo;age.1&rdquo;, for example).
+</p>
+<p>The length intervals in the rows of <code>key</code> must contain all of the length intervals present in the unaged sample to which the age-length key is to be applied (i.e., sent in the <code>length</code> portion of the <code>formula</code>).  If this constraint is not met, then the function will stop with an error message.
+</p>
+<p>If <code>breaks=NULL</code>, then the length intervals for the unaged sample will be determined with a starting interval at the minimum value of the row names in <code>key</code> and a width of the length intervals as determined by the minimum difference in adjacent row names of <code>key</code>.  If length intervals of differing widths were used when constructing <code>key</code>, then those breaks should be supplied to <code>breaks=</code>.  Use of <code>breaks=</code> may be useful when &ldquo;uneven&rdquo; length interval widths were used because the lengths in the unaged sample are not fully represented in the aged sample.  See the examples.
+</p>
+<p>Assigned ages will be stored in the column identified on the left-hand-side of <code>formula</code> (if the formula has both a left- and right-hand-side).  If this variable is missing in <code>formula</code>, then the new column will be labeled with <code>age</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The original data.frame in <code>data</code> with assigned ages added to the column supplied in <code>formula</code> or in an additional column labeled as <code>age</code>.  See details.
+</p>
+
+
+<h3>Testing</h3>
+
+<p>The <code>type="SR"</code> method worked perfectly on a small example.  The <code>type="SR"</code> method provides results that reasonably approximate the results from <code><a href="alkAgeDist.html">alkAgeDist</a></code> and <code><a href="alkMeanVar.html">alkMeanVar</a></code>, which suggests that the age assessments are reasonable.
+</p>
+
+
+<h3>IFAR Chapter</h3>
+
+<p>5-Age-Length Key.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Derek H. Ogle, <a href="mailto:derek@derekogle.com">derek@derekogle.com</a>.  This is largely an R version of the SAS code provided by Isermann and Knight (2005).
+</p>
+
+
+<h3>References</h3>
+
+<p>Ogle, D.H.  2016.  <a href="http://derekogle.com/IFAR">Introductory Fisheries Analyses with R</a>.  Chapman &amp; Hall/CRC, Boca Raton, FL.
+</p>
+<p>Isermann, D.A. and C.T. Knight.  2005.  A computer program for age-length keys incorporating age assignment to individual fish.  North American Journal of Fisheries Management, 25:1153-1160.  [Was (is?) from http://www.tandfonline.com/doi/abs/10.1577/M04-130.1.]
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See <code><a href="alkAgeDist.html">alkAgeDist</a></code> and <code><a href="alkMeanVar.html">alkMeanVar</a></code> for alternative methods to derived age distributions and mean (and SD) values for each age.  See <code><a href="alkPlot.html">alkPlot</a></code> for methods to visualize age-length keys.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## First Example -- Even breaks for length categories
+WR1 &lt;- WR79
+# add length categories (width=5)
+WR1$LCat &lt;- lencat(WR1$len,w=5)
+# isolate aged and unaged samples
+WR1.age &lt;- subset(WR1, !is.na(age))
+WR1.len &lt;- subset(WR1, is.na(age))
+# note no ages in unaged sample
+head(WR1.len)
+# create age-length key
+raw &lt;- xtabs(~LCat+age,data=WR1.age)
+( WR1.key &lt;- prop.table(raw, margin=1) )
+# apply the age-length key
+WR1.len &lt;- alkIndivAge(WR1.key,age~len,data=WR1.len)
+# now there are ages
+head(WR1.len)
+# combine orig age &amp; new ages
+WR1.comb &lt;- rbind(WR1.age, WR1.len)
+# mean length-at-age
+Summarize(len~age,data=WR1.comb,digits=2)
+# age frequency distribution
+( af &lt;- xtabs(~age,data=WR1.comb) )
+# proportional age distribution
+( ap &lt;- prop.table(af) )
+
+## Second Example -- length sample does not have an age variable
+WR2 &lt;- WR79
+# isolate age and unaged samples
+WR2.age &lt;- subset(WR2, !is.na(age))
+WR2.len &lt;- subset(WR2, is.na(age))
+# remove age variable (for demo only)
+WR2.len &lt;- WR2.len[,-3]
+# add length categories to aged sample
+WR2.age$LCat &lt;- lencat(WR2.age$len,w=5)
+# create age-length key
+raw &lt;- xtabs(~LCat+age,data=WR2.age)
+( WR2.key &lt;- prop.table(raw, margin=1) )
+# apply the age-length key
+WR2.len &lt;- alkIndivAge(WR2.key,~len,data=WR2.len)
+# add length cat to length sample
+WR2.len$LCat &lt;- lencat(WR2.len$len,w=5)
+head(WR2.len)
+# combine orig age &amp; new ages
+WR2.comb &lt;- rbind(WR2.age, WR2.len)
+Summarize(len~age,data=WR2.comb,digits=2)
+
+## Third Example -- Uneven breaks for length categories
+WR3 &lt;- WR79
+# set up uneven breaks
+brks &lt;- c(seq(35,100,5),110,130)
+WR3$LCat &lt;- lencat(WR3$len,breaks=brks)
+WR3.age &lt;- subset(WR3, !is.na(age))
+WR3.len &lt;- subset(WR3, is.na(age))
+head(WR3.len)
+raw &lt;- xtabs(~LCat+age,data=WR3.age)
+( WR3.key &lt;- prop.table(raw, margin=1) )
+WR3.len &lt;- alkIndivAge(WR3.key,age~len,data=WR3.len,breaks=brks)
+head(WR3.len)
+WR3.comb &lt;- rbind(WR3.age, WR3.len)
+Summarize(len~age,data=WR3.comb,digits=2)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FSA</em> version 0.8.23 <a href="00Index.html">Index</a>]</div>
+</body></html>

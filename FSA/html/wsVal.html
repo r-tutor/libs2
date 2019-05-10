@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Finds standard weight equation coefficients for a particular...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for wsVal {FSA}"><tr><td>wsVal {FSA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Finds standard weight equation coefficients for a particular species.</h2>
+
+<h3>Description</h3>
+
+<p>Returns a vector that contains all known or a subset of information about the standard weight equation for a given species, type of measurement units, and reference percentile.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+wsVal(species = "List", units = c("metric", "English"), ref = 75,
+  simplify = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>species</code></td>
+<td>
+<p>A string that contains the species name for which to find coefficients.  See details.</p>
+</td></tr>
+<tr valign="top"><td><code>units</code></td>
+<td>
+<p>A string that indicates whether the coefficients for the standard weight equation to be returned are in (<code>"metric"</code> (DEFAULT; mm and g) or <code>"English"</code> (in and lbs) units.</p>
+</td></tr>
+<tr valign="top"><td><code>ref</code></td>
+<td>
+<p>A numeric that indicates which percentile the equation should be returned for.  Note that the vast majority of equations only exist for the <code>75</code>th percentile (DEFAULT).</p>
+</td></tr>
+<tr valign="top"><td><code>simplify</code></td>
+<td>
+<p>A logical that indicates whether the &lsquo;units&rsquo;, &lsquo;ref&rsquo;, &lsquo;measure&rsquo;, &lsquo;method&rsquo;, &lsquo;comments&rsquo;, and &lsquo;source&rsquo; fields should be included (<code>=FALSE</code>) or not (<code>=TRUE</code>; DEFAULT).  See details.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This function extract all known information from <code><a href="WSlit.html">WSlit</a></code> about the following standard weight equation,
+</p>
+<p style="text-align: center;"><i>log_{10}(Ws) = log_{10}(a) + blog_{10}(L) + blog_{10}(L)^{2}</i></p>
+
+<p>See <code><a href="WSlit.html">WSlit</a></code> for more information about the meaning of each value returned.
+</p>
+<p>Note from above that the coefficients are returned for the TRANSFORMED model.  Thus, to obtain the standard weight (Ws), the returned coefficients are used to compute the common log of Ws which must then bed raised to the power of 10 to compute the Ws.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A one row data frame from <code><a href="WSlit.html">WSlit</a></code> that contains all known information about the standard weight equation for a given species, type of measurement units, and reference percentile if <code>simplify=FALSE</code>.  If <code>simplify=TRUE</code> then only the species; minimum and maximum length for which the standard equation should be applied; and intercept, slope, and quadratic  coefficients for the standard weight equation.  Note that the maximum length and the quadratic coefficient will not be returned if they do not exist in <code><a href="WSlit.html">WSlit</a></code>.
+</p>
+<p>If no arguments are given to this function, a species name is mis-spelled, or if a standard weight equation does not exist (in <code><a href="WSlit.html">WSlit</a></code>) for a particular species, then a warning will be issued and a list of species names will be printed.
+</p>
+
+
+<h3>IFAR Chapter</h3>
+
+<p>8-Condition.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Derek H. Ogle, <a href="mailto:derek@derekogle.com">derek@derekogle.com</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Ogle, D.H.  2016.  <a href="http://derekogle.com/IFAR">Introductory Fisheries Analyses with R</a>.  Chapman &amp; Hall/CRC, Boca Raton, FL.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See <code><a href="wrAdd.html">wrAdd</a></code> and <code><a href="WSlit.html">WSlit</a></code> for related functionality.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+wsVal()
+wsVal("Bluegill")
+wsVal("Bluegill",units="metric")
+wsVal("Bluegill",units="English")
+wsVal("Bluegill",units="English",simplify=TRUE)
+wsVal("Ruffe",units="metric",simplify=TRUE)
+wsVal("Ruffe",units="metric",ref=50,simplify=TRUE)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FSA</em> version 0.8.23 <a href="00Index.html">Index</a>]</div>
+</body></html>

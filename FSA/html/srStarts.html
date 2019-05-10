@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Finds reasonable starting values for parameters in specific...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for srStarts {FSA}"><tr><td>srStarts {FSA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Finds reasonable starting values for parameters in specific parameterizations of common stock-recruitment models.</h2>
+
+<h3>Description</h3>
+
+<p>Finds reasonable starting values for parameters in specific parameterizations of the &ldquo;Beverton-Holt&rdquo;, &ldquo;Ricker&rdquo;,  &ldquo;Shepherd&rdquo;, or &ldquo;Saila-Lorda&rdquo; stock-recruitment models. Use <code>srFunShow()</code> to see the equations of each model.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+srStarts(formula, data = NULL, type = c("BevertonHolt", "Ricker",
+  "Shepherd", "SailaLorda", "independence"), param = 1, fixed = NULL,
+  plot = FALSE, col.mdl = "gray70", lwd.mdl = 3, lty.mdl = 1,
+  cex.main = 0.9, col.main = "red", dynamicPlot = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>formula</code></td>
+<td>
+<p>A formula of the form <code>Recruits~Stock</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>A data frame in which <code>Recruits</code> and <code>Stock</code> are found.</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>A string that indicates the type of the stock-recruitment model. Must be one of <code>"BevertonHolt"</code>, <code>"Ricker"</code>, <code>"Shepherd"</code>, or <code>"SailaLorda"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>param</code></td>
+<td>
+<p>A numeric that indicates the parameterization of the stock-recruitment model type. This is ignored if <code>type="Shepherd"</code> or <code>type="SailaLorda"</code></p>
+</td></tr>
+<tr valign="top"><td><code>fixed</code></td>
+<td>
+<p>A named list that contains user-defined rather than automatically generated (i.e., fixed) starting values for one or more parameters. See details.</p>
+</td></tr>
+<tr valign="top"><td><code>plot</code></td>
+<td>
+<p>A logical that indicates whether or not a plot of the data with the model fit at the starting values superimposed is created.</p>
+</td></tr>
+<tr valign="top"><td><code>col.mdl</code></td>
+<td>
+<p>A color for the model when <code>plot=TRUE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>lwd.mdl</code></td>
+<td>
+<p>A line width for the model when <code>plot=TRUE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>lty.mdl</code></td>
+<td>
+<p>A line type for the model when <code>plot=TRUE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>cex.main</code></td>
+<td>
+<p>A character expansion value for the main title when <code>plot=TRUE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>col.main</code></td>
+<td>
+<p>A color for the main title when <code>plot=TRUE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>dynamicPlot</code></td>
+<td>
+<p>DEPRECATED.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Further arguments passed to the methods.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This function attempts to find reasonable starting values for a variety of parameterizations of the &ldquo;Beverton-Holt&rdquo;, &ldquo;Ricker&rdquo;,  &ldquo;Shepherd&rdquo;, or &ldquo;Saila-Lorda&rdquo; stock-recruitment models. There is no guarantee that these starting values are the &lsquo;best&rsquo; starting values. One should use them with caution and should perform sensitivity analyses to determine the impact of different starting values on the final model results.
+</p>
+<p>Starting values for the first parameterization of the Beverton-Holt model were derived by linearizing the function (inverting both sides and simplifying), fitting a linear model to the observed data, and extracting parameter values from the corresponding linear model parameters. Starting values for the other parameterizations of the Beverton-Holt model were derived from known relationships between the parameters of each parameterization and the first parameterization. If the computed starting value for the <code>Rp</code> parameter was larger than the largest observed recruitment value, then the starting value for <code>Rp</code> was set to the largest observed recruitment value.
+</p>
+<p>Starting values for the Shepherd function were the same as those for the first parameterization of the Beverton-Holt function with the addition that <code>c=1</code>.
+</p>
+<p>Starting values for the Ricker parameterizations followed the same general procedure as described for the Beverton-Holt parameterizations. If the computed starting value for <code>atilde</code> was less than zero then the starting value was set to 0.00001.
+</p>
+<p>Starting values for the Saila-Lorda function were the same as those for the first parameterization of the Ricker function with the addition that <code>c=1</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list that contains reasonable starting values. Note that the parameters will be listed in the same order and with the same names as listed in <code><a href="stockRecruitment.html">srFuns</a></code>.
+</p>
+
+
+<h3>IFAR Chapter</h3>
+
+<p>13-Recruitment.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Derek H. Ogle, <a href="mailto:derek@derekogle.com">derek@derekogle.com</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Ogle, D.H. 2016. <a href="http://derekogle.com/IFAR">Introductory Fisheries Analyses with R</a>. Chapman &amp; Hall/CRC, Boca Raton, FL.
+</p>
+<p>Beverton, R.J.H. and S.J. Holt. 1957. On the dynamics of exploited fish populations, Fisheries Investigations (Series 2), volume 19. United Kingdom Ministry of Agriculture and Fisheries, 533 pp.
+</p>
+<p>Iles, T.C. 1994. A review of stock-recruitment relationships with reference to flatfish populations. Netherlands Journal of Sea Research 32:399-420.
+</p>
+<p>Quinn II, T.J. and R.B. Deriso. 1999. Quantitative Fish Dynamics. Oxford University Press.
+</p>
+<p>Ricker, W.E. 1954. Stock and recruitment. Journal of the Fisheries Research Board of Canada 11:559-623.
+</p>
+<p>Ricker, W.E. 1975. Computation and interpretation of biological statistics of fish populations. Technical Report Bulletin 191, Bulletin of the Fisheries Research Board of Canada. [Was (is?) from http://www.dfo-mpo.gc.ca/Library/1485.pdf.]
+</p>
+<p>Shepherd, J. 1982. A versatile new stock-recruitment relationship for fisheries and construction of sustainable yield curves. Journal du Conseil International pour l'Exploration de la Mar 40:67-75.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See <code><a href="stockRecruitment.html">srFunShow</a></code> and <code><a href="stockRecruitment.html">srFuns</a></code> for related functionality. See <code><a href="nlsTracePlot.html">nlsTracePlot</a></code> for help troubleshooting nonlinear models that don't converge.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Simple Examples
+srStarts(recruits~stock,data=CodNorwegian)
+srStarts(recruits~stock,data=CodNorwegian,param=2)
+srStarts(recruits~stock,data=CodNorwegian,param=3)
+srStarts(recruits~stock,data=CodNorwegian,param=4)
+srStarts(recruits~stock,data=CodNorwegian,type="Ricker")
+srStarts(recruits~stock,data=CodNorwegian,type="Ricker",param=2)
+srStarts(recruits~stock,data=CodNorwegian,type="Ricker",param=3)
+srStarts(recruits~stock,data=CodNorwegian,type="Shepherd")
+srStarts(recruits~stock,data=CodNorwegian,type="SailaLorda")
+srStarts(recruits~stock,data=CodNorwegian,type="independence")
+
+## Simple Examples with a Plot
+srStarts(recruits~stock,data=CodNorwegian,type="Ricker",plot=TRUE)
+srStarts(recruits~stock,data=CodNorwegian,type="BevertonHolt",plot=TRUE)
+srStarts(recruits~stock,data=CodNorwegian,type="Shepherd",plot=TRUE)
+srStarts(recruits~stock,data=CodNorwegian,type="SailaLorda",plot=TRUE)
+srStarts(recruits~stock,data=CodNorwegian,type="independence",plot=TRUE)
+
+## See examples in srFuns() for use of srStarts() when fitting stock-recruit models
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FSA</em> version 0.8.23 <a href="00Index.html">Index</a>]</div>
+</body></html>

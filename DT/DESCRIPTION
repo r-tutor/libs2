@@ -1,7 +1,7 @@
 Package: DT
 Type: Package
 Title: A Wrapper of the JavaScript Library 'DataTables'
-Version: 0.5
+Version: 0.6
 Authors@R: c(
     person("Yihui", "Xie", email = "xie@yihui.name", role = c("aut", "cre")),
     person("Joe", "Cheng", role = "aut"),
@@ -28,12 +28,12 @@ License: GPL-3 | file LICENSE
 Imports: htmltools (>= 0.3.6), htmlwidgets (>= 1.3), magrittr,
         crosstalk, promises
 Suggests: jsonlite (>= 0.9.16), knitr (>= 1.8), rmarkdown, shiny (>=
-        0.12.1)
+        1.1.0)
 VignetteBuilder: knitr
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
 Encoding: UTF-8
 NeedsCompilation: no
-Packaged: 2018-11-05 20:21:03 UTC; yihui
+Packaged: 2019-05-08 22:08:29 UTC; yihui
 Author: Yihui Xie [aut, cre],
   Joe Cheng [aut],
   Xianying Tan [aut],
@@ -48,5 +48,5 @@ Author: Yihui Xie [aut, cre],
   Bartek Szopka [ctb, cph] (jquery.highlight.js in htmlwidgets/lib),
   RStudio Inc [cph]
 Repository: CRAN
-Date/Publication: 2018-11-05 21:00:20 UTC
-Built: R 3.5.1; ; 2018-11-23 23:55:03 UTC; windows
+Date/Publication: 2019-05-09 04:40:03 UTC
+Built: R 3.6.0; ; 2019-05-09 09:57:54 UTC; windows

@@ -1,0 +1,415 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Creates a function for a specific parameterization of the von...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for growthModels {FSA}"><tr><td>growthModels {FSA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Creates a function for a specific parameterization of the von Bertalanffy, Gompertz, Richards, and logistic growth functions.</h2>
+
+<h3>Description</h3>
+
+<p>Creates a function for a specific parameterizations of the von Bertalanffy, Gompertz, Richards, and logistic growth functions. Use <code>growthFunShow()</code> to see the equations for each growth function.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+vbFuns(param = c("Typical", "typical", "Traditional", "traditional",
+  "BevertonHolt", "Original", "original", "vonBertalanffy", "GQ",
+  "GallucciQuinn", "Mooij", "Weisberg", "Ogle", "Schnute", "Francis",
+  "Laslett", "Polacheck", "Somers", "Somers2", "Pauly", "Fabens",
+  "Fabens2", "Wang", "Wang2", "Wang3", "Francis2", "Francis3"),
+  simple = FALSE, msg = FALSE)
+
+GompertzFuns(param = c("Ricker1", "Ricker2", "Ricker3", "QuinnDeriso1",
+  "QuinnDeriso2", "QuinnDeriso3", "QD1", "QD2", "QD3", "Original",
+  "original", "Troynikov1", "Troynikov2"), simple = FALSE, msg = FALSE)
+
+RichardsFuns(param = 1, simple = FALSE, msg = FALSE)
+
+logisticFuns(param = c("CJ1", "CJ2", "Karkach", "Haddon",
+  "CampanaJones1", "CampanaJones2"), simple = FALSE, msg = FALSE)
+
+growthFunShow(type = c("vonBertalanffy", "Gompertz", "Richards",
+  "Logistic", "Schnute", "SchnuteRichards"), param = NULL,
+  case = param, plot = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>param</code></td>
+<td>
+<p>A string (for von Bertalanffy, Gompertz, and logistic) or numeric (for Richards) that indicates the specific parameterization of the growth function. See details.</p>
+</td></tr>
+<tr valign="top"><td><code>simple</code></td>
+<td>
+<p>A logical that indicates whether the function will accept all parameter values in the first parameter argument (<code>=FALSE</code>; DEFAULT) or whether all individual parameters must be specified in separate arguments (<code>=TRUE</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>msg</code></td>
+<td>
+<p>A logical that indicates whether a message about the growth function and parameter definitions should be output (<code>=TRUE</code>) or not (<code>=FALSE</code>; DEFAULT).</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>A string (in <code>growthFunShow</code>) that indicates the type of growth function to show.</p>
+</td></tr>
+<tr valign="top"><td><code>case</code></td>
+<td>
+<p>A numeric that indicates the specific case of the Schnute function to use. See details.</p>
+</td></tr>
+<tr valign="top"><td><code>plot</code></td>
+<td>
+<p>A logical that indicates whether the growth function expression should be shown as an equation in a simple plot.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Not implemented.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>The functions ending in <code>xxxFuns</code> return a function that can be used to predict fish size given a vector of ages and values for the growth function parameters and, in some parameterizations, values for constants. The result should be saved to an object that is then the function name. When the resulting function is used, the parameters are ordered as shown when the definitions of the parameters are printed after the function is called (if <code>msg=TRUE</code>). If <code>simple=FALSE</code> (DEFAULT), then the values for all parameters may be included as a vector in the first parameter argument (but in the same order). Similarly, the values for all constants may be included as a vector in the first constant argument (i.e., <code>t1</code>). If <code>simple=TRUE</code>, then all parameters and constants must be declared individually. The resulting function is somewhat easier to read when <code>simple=TRUE</code>, but is less general for some applications.
+</p>
+<p>An expression of the equation for each growth function may be created with <code>growthFunShow</code>. In this function <code>type=</code> is used to select the major function type (e.g., von Bertalanffy, Gompertz, Richards, Logistic, Schnute) and <code>param=</code> is used to select a specific parameterization of that growth function. If <code>plot=TRUE</code>, then a simple graphic will be created with the equation using <code><a href="../../grDevices/html/plotmath.html">plotmath</a></code> for a pretty format.
+</p>
+
+
+<h3>IFAR Chapter</h3>
+
+<p>12-Individual Growth.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Take note of the following for parameterizations (i.e., <code>param</code>) of each growth function:
+</p>
+
+<ul>
+<li><p> von Bertalanffy
+</p>
+
+<ul>
+<li><p> The &lsquo;Original&rsquo; and &lsquo;vonBertalanffy&rsquo; are synonymous as are &lsquo;Typical&rsquo;, &lsquo;Traditional&rsquo;, and &lsquo;BevertonHolt&rsquo;. Further note that the &lsquo;Ogle&rsquo; parameterization has the &lsquo;Original&rsquo;/&lsquo;vonBertalanffy&rsquo; and &lsquo;Typical&rsquo;/&lsquo;Traditional&rsquo;/&lsquo;BevertonHolt&rsquo; parameterizations as special cases.
+</p>
+</li></ul>
+
+</li>
+<li><p> Gompertz
+</p>
+
+<ul>
+<li><p> The &lsquo;Ricker2&rsquo; and &lsquo;QuinnDeriso1&rsquo; are synonymous, as are &lsquo;Ricker3&rsquo; and &lsquo;QuinnDeriso2&rsquo;.
+</p>
+</li>
+<li><p> The parameterizations and parameters for the Gompertz function are varied and confusing in the literature. I have attempted to use a uniform set of parameters in these functions, but that makes a direct comparison to the literature difficult. Common sources for Gompertz models are listed in the references below. I make some comments here to aid comparisons to the literature.
+</p>
+</li>
+<li><p> Within FSA, L0 is the mean length at age 0, Linf is the mean asymptotic length, ti is the age at the inflection point, gi is the instantaneous growth rate at the inflection point, t* is a dimensionless parameter related to time/age, and a is a dimensionless parameter related to growth.
+</p>
+</li>
+<li><p> In the Quinn and Deriso (1999) functions (the &lsquo;QuinnDerisoX&rsquo; functions), the a parameter here is equal to lambda/K there and the gi parameter here is equal to the K parameter there. Also note that their Y is L here.
+</p>
+</li>
+<li><p> In the Ricker (1979)[p. 705] functions (the &lsquo;RickerX&rsquo; functions), the a parameter here is equal to k there and the gi parameter here is equal to the g parameter there. Also note that their w is L here. In the Ricker (1979) functions as presented in Campana and Jones (1992), the a parameter here is equal to k parameter there and the gi parameter here is equal to the G parameter there. Also note that their X is L here.
+</p>
+</li>
+<li><p> The function in Ricker (1975)[p. 232] is the same as &lsquo;Ricker2&rsquo; where the a parameter here is qual to G there and the gi parameter here is equal to the g parameter there. Also note that their w is L here.
+</p>
+</li>
+<li><p> The function in Quist et al. (2012)[p. 714] is the same as &lsquo;Ricker1&rsquo; where the gi parameter here is equal to the G parameter there and the ti parameter here is equal to the t0 parameter there.
+</p>
+</li>
+<li><p> The function in Katsanevakis and Maravelias (2008) is the same as &lsquo;Ricker1&rsquo; where the gi parameter here is equal to k2 parameter there and the ti parameter here is equal to the t2 parameter there.
+</p>
+</li></ul>
+
+</li>
+<li><p> Richards
+</p>
+
+<ul>
+<li><p> Within FSA, Linf is the mean asymptotic length, ti is the age at the inflection point, k is related to growth (slope at the inflection point), b is related to the vertical position of the inflection point, and L0 is the mean length at age-0.
+</p>
+</li>
+<li><p> The parameterizations (1-6) correspond to functions/equations 1, 4, 5, 6, 7, and 8, respectively, in Tjorve and Tjorve (2010). Note that their A, S, k, d, and B are Linf, a, k, b, and L0, respectively, here (in FSA).
+</p>
+</li></ul>
+
+</li>
+<li><p> logistic
+</p>
+
+<ul>
+<li><p> Within FSA, L0 is the mean length at age 0, Linf is the mean asymptotic length, ti is the age at the inflection point, and gninf is the instantaneous growth rate at negative infinity.
+</p>
+</li></ul>
+
+</li></ul>
+
+
+
+<h3>Author(s)</h3>
+
+<p>Derek H. Ogle, <a href="mailto:derek@derekogle.com">derek@derekogle.com</a>, thanks to Gabor Grothendieck for a hint about using <code>get()</code>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Ogle, D.H. 2016. <a href="http://derekogle.com/IFAR">Introductory Fisheries Analyses with R</a>. Chapman &amp; Hall/CRC, Boca Raton, FL.
+</p>
+<p>Campana, S.E. and C.M. Jones. 1992. Analysis of otolith microstructure data. Pages 73-100 In D.K. Stevenson and S.E. Campana, editors. Otolith microstructure examination and analysis. Canadian Special Publication of Fisheries and Aquatic Sciences 117. [Was (is?) from http://www.dfo-mpo.gc.ca/Library/141734.pdf.]
+</p>
+<p>Fabens, A. 1965. Properties and fitting of the von Bertalanffy growth curve. Growth 29:265-289.
+</p>
+<p>Francis, R.I.C.C. 1988. Are growth parameters estimated from tagging and age-length data comparable?  Canadian Journal of Fisheries and Aquatic Sciences, 45:936-942.
+</p>
+<p>Gallucci, V.F. and T.J. Quinn II. 1979. Reparameterizing, fitting, and testing a simple growth model. Transactions of the American Fisheries Society, 108:14-25.
+</p>
+<p>Garcia-Berthou, E., G. Carmona-Catot, R. Merciai, and D.H. Ogle. A technical note on seasonal growth models. Reviews in Fish Biology and Fisheries 22:635-640. [Was (is?) from https://www.researchgate.net/publication/257658359_A_technical_note_on_seasonal_growth_models.]
+</p>
+<p>Gompertz, B. 1825. On the nature of the function expressive of the law of human mortality, and on a new method of determining the value of life contingencies. Philosophical Transactions of the Royal Society of London. 115:513-583.
+</p>
+<p>Haddon, M., C. Mundy, and D. Tarbath. 2008. Using an inverse-logistic model to describe growth increments of Blacklip Abalone (<em>Haliotis rubra</em>) in Tasmania. Fishery Bulletin 106:58-71. [Was (is?) from http://aquaticcommons.org/8857/1/haddon_Fish_Bull_2008.pdf.]
+</p>
+<p>Karkach, A. S. 2006. Trajectories and models of individual growth. Demographic Research 15:347-400. [Was (is?) from http://www.demographic-research.org/volumes/vol15/12/15-12.pdf.]
+</p>
+<p>Katsanevakis, S. and C.D. Maravelias. 2008. Modeling fish growth: multi-model inference as a better alternative to a priori using von Bertalanffy equation. Fish and Fisheries 9:178-187.
+</p>
+<p>Mooij, W.M., J.M. Van Rooij, and S. Wijnhoven. 1999. Analysis and comparison of fish growth from small samples of length-at-age data: Detection of sexual dimorphism in Eurasian Perch as an example. Transactions of the American Fisheries Society 128:483-490.
+</p>
+<p>Polacheck, T., J.P. Eveson, and G.M. Laslett. 2004. Increase in growth rates of southern Bluefin Tuna (<em>Thunnus maccoyii</em>) over four decades: 1960 to 2000. Canadian Journal of Fisheries and Aquatic Sciences, 61:307-322.
+</p>
+<p>Quinn, T. J. and R. B. Deriso. 1999. Quantitative Fish Dynamics. Oxford University Press, New York, New York. 542 pages.
+</p>
+<p>Quist, M.C., M.A. Pegg, and D.R. DeVries. 2012. Age and Growth. Chapter 15 in A.V. Zale, D.L Parrish, and T.M. Sutton, Editors  Fisheries Techniques, Third Edition. American Fisheries Society, Bethesda, MD.
+</p>
+<p>Richards, F. J. 1959. A flexible growth function for empirical use. Journal of Experimental Biology 10:290-300.
+</p>
+<p>Ricker, W.E. 1975. Computation and interpretation of biological statistics of fish populations. Technical Report Bulletin 191, Bulletin of the Fisheries Research Board of Canada. [Was (is?) from http://www.dfo-mpo.gc.ca/Library/1485.pdf.]
+</p>
+<p>Ricker, W.E. 1979. Growth rates and models. Pages 677-743 In W.S. Hoar, D.J. Randall, and J.R. Brett, editors. Fish Physiology, Vol. 8: Bioenergetics and Growth. Academic Press, NY, NY. [Was (is?) from https://books.google.com/books?id=CB1qu2VbKwQC&amp;pg=PA705&amp;lpg=PA705&amp;dq=Gompertz+fish&amp;source=bl&amp;ots=y34lhFP4IU&amp;sig=EM_DGEQMPGIn_DlgTcGIi_wbItE&amp;hl=en&amp;sa=X&amp;ei=QmM4VZK6EpDAgwTt24CABw&amp;ved=0CE8Q6AEwBw#v=onepage&amp;q=Gompertz%20fish&amp;f=false.]
+</p>
+<p>Schnute, J. 1981. A versatile growth model with statistically stable parameters. Canadian Journal of Fisheries and Aquatic Sciences, 38:1128-1140.
+</p>
+<p>Somers, I. F. 1988. On a seasonally oscillating growth function. Fishbyte 6(1):8-11. [Was (is?) from http://www.worldfishcenter.org/Naga/na_2914.pdf.]
+</p>
+<p>Tjorve, E. and K. M. C. Tjorve. 2010. A unified approach to the Richards-model family for use in growth analyses: Why we need only two model forms. Journal of Theoretical Biology 267:417-425. [Was (is?) from https://www.researchgate.net/profile/Even_Tjorve/publication/46218377_A_unified_approach_to_the_Richards-model_family_for_use_in_growth_analyses_why_we_need_only_two_model_forms/links/54ba83b80cf29e0cb04bd24e.pdf.]
+</p>
+<p>Troynikov, V. S., R. W. Day, and A. M. Leorke. Estimation of seasonal growth parameters using a stochastic Gompertz model for tagging data. Journal of Shellfish Research 17:833-838. [Was (is?) from https://www.researchgate.net/profile/Robert_Day2/publication/249340562_Estimation_of_seasonal_growth_parameters_using_a_stochastic_gompertz_model_for_tagging_data/links/54200fa30cf203f155c2a08a.pdf.]
+</p>
+<p>Vaughan, D. S. and T. E. Helser. 1990. Status of the Red Drum stock of the Atlantic coast: Stock assessment report for 1989. NOAA Technical Memorandum NMFS-SEFC-263, 117 p. [Was (is?) from http://docs.lib.noaa.gov/noaa_documents/NMFS/SEFSC/TM_NMFS_SEFSC/NMFS_SEFSC_TM_263.pdf.]
+</p>
+<p>Wang, Y.-G. 1998. An improved Fabens method for estimation of growth parameters in the von Bertalanffy model with individual asymptotes. Canadian Journal of Fisheries and Aquatic Sciences 55:397-400.
+</p>
+<p>Weisberg, S., G.R. Spangler, and L. S. Richmond. 2010. Mixed effects models for fish growth. Canadian Journal of Fisheries And Aquatic Sciences 67:269-277.
+</p>
+<p>Winsor, C.P. 1932. The Gompertz curve as a growth curve. Proceedings of the National Academy of Sciences. 18:1-8. [Was (is?) from http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1076153/pdf/pnas01729-0009.pdf.]
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See <code><a href="Schnute.html">Schnute</a></code> for an implementation of the Schnute (1981) model.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+###########################################################
+## Simple Examples -- Von B
+( vb1 &lt;- vbFuns() )
+ages &lt;- 0:20
+plot(vb1(ages,Linf=20,K=0.3,t0=-0.2)~ages,type="b",pch=19)
+( vb2 &lt;- vbFuns("Francis") )
+plot(vb2(ages,L1=10,L2=19,L3=20,t1=2,t3=18)~ages,type="b",pch=19)
+( vb2c &lt;- vbFuns("Francis",simple=TRUE) )   # compare to vb2
+
+## Simple Examples -- Gompertz
+( gomp1 &lt;- GompertzFuns() )
+plot(gomp1(ages,Linf=800,gi=0.5,ti=5)~ages,type="b",pch=19)
+( gomp2 &lt;- GompertzFuns("Ricker2") )
+plot(gomp2(ages,L0=2,a=6,gi=0.5)~ages,type="b",pch=19)
+( gomp2c &lt;- GompertzFuns("Ricker2",simple=TRUE) )   # compare to gomp2
+( gompT &lt;- GompertzFuns("Troynikov1"))
+
+## Simple Examples -- Richards
+( rich1 &lt;- RichardsFuns() )
+plot(rich1(ages,Linf=800,k=0.5,a=1,b=6)~ages,type="b",pch=19)
+( rich2 &lt;- RichardsFuns(2) )
+plot(rich2(ages,Linf=800,k=0.5,ti=3,b=6)~ages,type="b",pch=19)
+( rich3 &lt;- RichardsFuns(3) )
+plot(rich3(ages,Linf=800,k=0.5,ti=3,b=0.15)~ages,type="b",pch=19)
+( rich4 &lt;- RichardsFuns(4) )
+plot(rich4(ages,Linf=800,k=0.5,ti=3,b=0.95)~ages,type="b",pch=19)
+lines(rich4(ages,Linf=800,k=0.5,ti=3,b=1.5)~ages,type="b",pch=19,col="blue")
+( rich5 &lt;- RichardsFuns(5) )
+plot(rich5(ages,Linf=800,k=0.5,L0=50,b=1.5)~ages,type="b",pch=19)
+( rich6 &lt;- RichardsFuns(6) )
+plot(rich6(ages,Linf=800,k=0.5,ti=3,Lninf=50,b=1.5)~ages,type="b",pch=19)
+( rich2c &lt;- RichardsFuns(2,simple=TRUE) ) # compare to rich2
+
+## Simple Examples -- Logistic
+( log1 &lt;- logisticFuns() )
+plot(log1(ages,Linf=800,gninf=0.5,ti=5)~ages,type="b",pch=19)
+( log2 &lt;- logisticFuns("CJ2") )
+plot(log2(ages,Linf=800,gninf=0.5,a=10)~ages,type="b",pch=19)
+( log2c &lt;- logisticFuns("CJ2",simple=TRUE) ) # compare to log2
+( log3 &lt;- logisticFuns("Karkach") )
+plot(log3(ages,L0=10,Linf=800,gninf=0.5)~ages,type="b",pch=19)
+( log4 &lt;- logisticFuns("Haddon") )
+
+
+###########################################################
+## Examples of fitting
+##   After the last example a plot is constructed with three
+##   or four lines on top of each other illustrating that the
+##   parameterizations all produce the same fitted values.
+##   However, observe the correlations in the summary() results.
+
+## Von B
+plot(tl~age,data=SpotVA1,pch=19)
+
+# Fitting the typical parameterization of the von B function
+fit1 &lt;- nls(tl~vb1(age,Linf,K,t0),data=SpotVA1,
+            start=vbStarts(tl~age,data=SpotVA1))
+summary(fit1,correlation=TRUE)
+curve(vb1(x,Linf=coef(fit1)),from=0,to=5,col="red",lwd=10,add=TRUE)
+
+# Fitting the Francis parameterization of the von B function
+fit2 &lt;- nls(tl~vb2c(age,L1,L2,L3,t1=0,t3=5),data=SpotVA1,
+            start=vbStarts(tl~age,data=SpotVA1,type="Francis",ages2use=c(0,5)))
+summary(fit2,correlation=TRUE)
+curve(vb2c(x,L1=coef(fit2)[1],L2=coef(fit2)[2],L3=coef(fit2)[3],t1=0,t3=5),
+      from=0,to=5,col="blue",lwd=5,add=TRUE)
+
+# Fitting the Schnute parameterization of the von B function
+vb3 &lt;- vbFuns("Schnute")
+fit3 &lt;- nls(tl~vb3(age,L1,L3,K,t1=0,t3=4),data=SpotVA1,
+            start=vbStarts(tl~age,data=SpotVA1,type="Schnute",ages2use=c(0,4)))
+summary(fit3,correlation=TRUE)
+curve(vb3(x,L1=coef(fit3),t1=c(0,4)),from=0,to=5,col="green",lwd=2,add=TRUE)
+
+## Gompertz
+# Make some fake data using the original parameterization
+gompO &lt;- GompertzFuns("original")
+# setup ages, sample sizes (general reduction in numbers with
+# increasing age), and additive SD to model
+t &lt;- 1:15
+n &lt;- c(10,40,35,25,12,10,10,8,6,5,3,3,3,2,2)
+sd &lt;- 15
+# expand ages
+ages &lt;- rep(t,n)
+# get lengths from gompertz and a random error for individuals
+lens &lt;- gompO(ages,Linf=450,a=1,gi=0.3)+rnorm(length(ages),0,sd)
+# put together as a data.frame
+df &lt;- data.frame(age=ages,len=round(lens,0))
+
+plot(len~age,data=df,pch=19,col=rgb(0,0,0,1/5))
+  
+# Fit first Ricker parameterization
+fit1 &lt;- nls(len~gomp1(age,Linf,gi,ti),data=df,start=list(Linf=500,gi=0.3,ti=3))
+summary(fit1,correlation=TRUE)
+curve(gomp1(x,Linf=coef(fit1)),from=0,to=15,col="red",lwd=10,add=TRUE)
+
+# Fit third Ricker parameterization
+fit2 &lt;- nls(len~gomp2(age,L0,a,gi),data=df,start=list(L0=30,a=3,gi=0.3))
+summary(fit2,correlation=TRUE)
+curve(gomp2(x,L0=coef(fit2)),from=0,to=15,col="blue",lwd=5,add=TRUE)
+
+# Fit third Quinn and Deriso parameterization (using simple=TRUE model)
+gomp3 &lt;- GompertzFuns("QD3",simple=TRUE)
+fit3 &lt;- nls(len~gomp3(age,Linf,gi,t0),data=df,start=list(Linf=500,gi=0.3,t0=0))
+summary(fit3,correlation=TRUE)
+curve(gomp3(x,Linf=coef(fit3)[1],gi=coef(fit3)[2],t0=coef(fit3)[3]),
+      from=0,to=15,col="green",lwd=2,add=TRUE)
+
+## Richards
+
+## Not run: 
+# Fit first Richards parameterization ... DOES NOT CONVERGE
+fit1 &lt;- nls(len~rich1(age,Linf,k,a,b),data=df,
+            start=list(Linf=450,k=0.3,a=0.2,b=3))
+summary(fit1,correlation=TRUE)
+curve(rich1(x,Linf=coef(fit1)),from=0,to=15,col="red",lwd=10,add=TRUE)
+
+# Fit second Richards parameterization ... DOES NOT CONVERGE
+fit2 &lt;- nls(len~rich2(age,Linf,k,ti,b),data=df,
+            start=list(Linf=450,k=0.25,ti=3,b=3))
+summary(fit2,correlation=TRUE)
+curve(rich2(x,Linf=coef(fit2)),from=0,to=15,col="blue",lwd=7,add=TRUE)
+
+## End(Not run)
+
+plot(len~age,data=df,pch=19,col=rgb(0,0,0,1/5))
+
+# Fit third Richards parameterization
+fit3 &lt;- nls(len~rich3(age,Linf,k,ti,b),data=df,
+            start=list(Linf=450,k=0.25,ti=3,b=-0.1))
+summary(fit3,correlation=TRUE)
+curve(rich3(x,Linf=coef(fit3)),from=0,to=15,col="green",lwd=4,add=TRUE)
+
+# Fit fourth Richards parameterization
+fit4 &lt;- nls(len~rich4(age,Linf,k,ti,b),data=df,
+            start=list(Linf=450,k=0.25,ti=3,b=0.7))
+summary(fit4,correlation=TRUE)
+curve(rich4(x,Linf=coef(fit4)),from=0,to=15,col="black",lwd=1,add=TRUE)
+
+## Logistic
+plot(len~age,data=df,pch=19,col=rgb(0,0,0,1/5))
+
+# Fit first Campana-Jones parameterization
+fit1 &lt;- nls(len~log1(age,Linf,gninf,ti),data=df,
+            start=list(Linf=450,gninf=0.45,ti=4))
+summary(fit1,correlation=TRUE)
+curve(log1(x,Linf=coef(fit1)),from=0,to=15,col="red",lwd=10,add=TRUE)
+
+# Fit second Campana-Jones parameterization
+fit2 &lt;- nls(len~log2(age,Linf,gninf,a),data=df,
+            start=list(Linf=450,gninf=0.45,a=7))
+summary(fit2,correlation=TRUE)
+curve(log2(x,Linf=coef(fit2)),from=0,to=15,col="blue",lwd=5,add=TRUE)
+
+# Fit Karkach parameterization (using simple=TRUE model)
+log3 &lt;- logisticFuns("Karkach",simple=TRUE)
+fit3 &lt;- nls(len~log3(age,Linf,L0,gninf),data=df,
+            start=list(Linf=450,L0=30,gninf=0.45))
+summary(fit3,correlation=TRUE)
+curve(log3(x,Linf=coef(fit3)[1],L0=coef(fit3)[2],gninf=coef(fit3)[3]),
+      from=0,to=15,col="green",lwd=2,add=TRUE)
+
+
+#############################################################################
+## Create expressions of the models
+#############################################################################
+# Typical von Bertalanffy ... Show as a stand-alone plot
+growthFunShow("vonBertalanffy","Typical",plot=TRUE)
+# Get and save the expression
+( tmp &lt;- growthFunShow("vonBertalanffy","Typical") )
+# Use expression as title on a plot
+lens &lt;- vb1(ages,Linf=20,K=0.3,t0=-0.2)
+plot(lens~ages,type="b",pch=19,main=tmp)
+# Put expression in the main plot
+text(10,5,tmp)
+# Put multiple expressions on a plot
+op &lt;- par(mar=c(0.1,0.1,0.1,0.1))
+plot(0,type="n",xlab="",ylab="",xlim=c(0,1),ylim=c(0,3),xaxt="n",yaxt="n")
+text(0,2.5,"Original:",pos=4)
+text(0.5,2.5,growthFunShow("vonBertalanffy","Original"))
+text(0,1.5,"Typical:",pos=4)
+text(0.5,1.5,growthFunShow("vonBertalanffy","Typical"))
+text(0,0.5,"Francis:",pos=4)
+text(0.5,0.5,growthFunShow("vonBertalanffy","Francis"))
+par(op)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FSA</em> version 0.8.23 <a href="00Index.html">Index</a>]</div>
+</body></html>

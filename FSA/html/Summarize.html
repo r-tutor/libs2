@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Summary statistics for a numeric variable.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for Summarize {FSA}"><tr><td>Summarize {FSA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Summary statistics for a numeric variable.</h2>
+
+<h3>Description</h3>
+
+<p>Summary statistics for a single numeric variable, possibly separated by the levels of a factor variable or variables. This function is very similar to <code><a href="../../base/html/summary.html">summary</a></code> for a numeric variable.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+Summarize(object, ...)
+
+## Default S3 method:
+Summarize(object, digits = getOption("digits"),
+  na.rm = TRUE, exclude = NULL, nvalid = c("different", "always",
+  "never"), percZero = c("different", "always", "never"), ...)
+
+## S3 method for class 'formula'
+Summarize(object, data = NULL,
+  digits = getOption("digits"), na.rm = TRUE, exclude = NULL,
+  nvalid = c("different", "always", "never"), percZero = c("different",
+  "always", "never"), ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>A vector of numeric data.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Not implemented.</p>
+</td></tr>
+<tr valign="top"><td><code>digits</code></td>
+<td>
+<p>A single numeric that indicates the number of decimals to round the numeric summaries.</p>
+</td></tr>
+<tr valign="top"><td><code>na.rm</code></td>
+<td>
+<p>A logical that indicates whether numeric missing values (<code>NA</code>) should be removed (<code>=TRUE</code>, default) or not.</p>
+</td></tr>
+<tr valign="top"><td><code>exclude</code></td>
+<td>
+<p>A string that contains the level that should be excluded from a factor variable.</p>
+</td></tr>
+<tr valign="top"><td><code>nvalid</code></td>
+<td>
+<p>A string that indicates how the &ldquo;validn&rdquo; result will be handled. If <code>"always"</code> then &ldquo;validn&rdquo; will always be shown and if <code>"never"</code> then &ldquo;validn&rdquo; will never be shown. However, if <code>"different"</code> (DEFAULT), then &ldquo;validn&rdquo; will only be shown if it differs from &ldquo;n&rdquo; (or if at least one group differs from &ldquo;n&rdquo; when summarized by multiple groups).</p>
+</td></tr>
+<tr valign="top"><td><code>percZero</code></td>
+<td>
+<p>A string that indicates how the &ldquo;percZero&rdquo; result will be handled. If <code>"always"</code> then &ldquo;percZero&rdquo; will always be shown and if <code>"never"</code> then &ldquo;percZero&rdquo; will never be shown. However, if <code>"different"</code> (DEFAULT), then &ldquo;percZero&rdquo; will only be shown if it is greater than zero (or if at least one group is greater than zero when summarized by multiple groups).</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>A data.frame that contains the variables in <code>formula</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This function is primarily used with formulas of the following types (where <code>quant</code> and <code>factor</code> generically represent quantitative/numeric and factor variables, respectively):
+</p>
+
+<table summary="Rd table">
+<tr>
+ <td style="text-align: left;">
+  Formula </td><td style="text-align: left;"> Description of Summary </td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+  <code>~quant</code> </td><td style="text-align: left;"> Numerical summaries (see below) of <code>quant</code>.</td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+  <code>quant~factor</code> </td><td style="text-align: left;"> Summaries of <code>quant</code> separated by levels in <code>factor</code>.</td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+  <code>quant~factor1*factor2</code> </td><td style="text-align: left;"> Summaries of <code>quant</code> separated by the combined levels in <code>factor1</code> and <code>factor2</code>.</td>
+</tr>
+<tr>
+ <td style="text-align: left;">
+</td>
+</tr>
+
+</table>
+
+<p>Numerical summaries include all results from <code><a href="../../base/html/summary.html">summary</a></code> (min, Q1, mean, median, Q3, and max) and the sample size, valid sample size (sample size minus number of <code>NA</code>s), and standard deviation (i.e., <code>sd</code>). <code>NA</code> values are removed from the calculations with <code>na.rm=TRUE</code> (the DEFAULT). The number of digits in the returned results are controlled with <code>digits=</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A named vector or data frame (when a quantitative variable is separated by one or two factor variables) of summary statistics for numeric data.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Students often need to examine basic statistics of a quantitative variable separated for different levels of a categorical variable. These results may be obtained with <code><a href="../../base/html/tapply.html">tapply</a></code>, <code><a href="../../base/html/by.html">by</a></code>, or <code><a href="../../stats/html/aggregate.html">aggregate</a></code> (or with functions in other packages), but the use of these functions is not obvious to newbie students or return results in a format that is not obvious to newbie students. Thus, the formula method to <code>Summarize</code> allows newbie students to use a common notation (i.e., formula) to easily compute summary statistics for a quantitative variable separated by the levels of a factor.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Derek H. Ogle, <a href="mailto:derek@derekogle.com">derek@derekogle.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See <code><a href="../../base/html/summary.html">summary</a></code> for related one dimensional functionality. See <code><a href="../../base/html/tapply.html">tapply</a></code>, <code>summaryBy</code> in <span class="pkg">doBy</span>, <code><a href="../../psych/html/describe.html">describe</a></code> in <span class="pkg">psych</span>, <code><a href="../../prettyR/html/describe.html">describe</a></code> in <span class="pkg">prettyR</span>, and <code>basicStats</code> in <span class="pkg">fBasics</span> for similar &ldquo;by&rdquo; functionality.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Create a data.frame of "data"
+n &lt;- 102
+d &lt;- data.frame(y=c(0,0,NA,NA,NA,runif(n-5)),
+                w=sample(7:9,n,replace=TRUE),
+                v=sample(0:2,n,replace=TRUE),
+                g1=factor(sample(c("A","B","C",NA),n,replace=TRUE)),
+                g2=factor(sample(c("male","female","UNKNOWN"),n,replace=TRUE)),
+                g3=sample(c("a","b","c","d"),n,replace=TRUE),
+                stringsAsFactors=FALSE)
+
+# typical output of summary() for a numeric variable
+summary(d$y)   
+
+# this function           
+Summarize(d$y,digits=3)
+Summarize(~y,data=d,digits=3)
+Summarize(y~1,data=d,digits=3)
+
+# note that nvalid is not shown if there are no NAs and
+#   percZero is not shown if there are no zeros
+Summarize(~w,data=d,digits=3)
+Summarize(~v,data=d,digits=3)
+
+# note that the nvalid and percZero results can be forced to be shown
+Summarize(~w,data=d,digits=3,nvalid="always",percZero="always")
+
+## Numeric vector by levels of a factor variable
+Summarize(y~g1,data=d,digits=3)
+Summarize(y~g2,data=d,digits=3)
+Summarize(y~g2,data=d,digits=3,exclude="UNKNOWN")
+
+## Numeric vector by levels of two factor variables
+Summarize(y~g1+g2,data=d,digits=3)
+Summarize(y~g1+g2,data=d,digits=3,exclude="UNKNOWN")
+
+## What happens if RHS of formula is not a factor
+Summarize(y~w,data=d,digits=3)
+
+## Summarizing multiple variables in a data.frame (must reduce to numerics)
+lapply(as.list(d[,1:3]),Summarize,digits=4)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FSA</em> version 0.8.23 <a href="00Index.html">Index</a>]</div>
+</body></html>

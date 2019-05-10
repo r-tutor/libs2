@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Mirex concentration, weight, capture year, and species of...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for Mirex {FSA}"><tr><td>Mirex {FSA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Mirex concentration, weight, capture year, and species of Lake Ontario salmon.</h2>
+
+<h3>Description</h3>
+
+<p>Mirex concentration, weight, capture year, and species of Lake Ontario Coho and Chinook salmon.
+</p>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 122 observations on the following 4 variables.
+</p>
+ 
+<dl>
+<dt>year</dt><dd><p>a numeric vector of capture years</p>
+</dd>
+<dt>weight</dt><dd><p>a numeric vector of salmon weights (kg)</p>
+</dd>
+<dt>mirex</dt><dd><p>a numeric vector of mirex concentration in the salmon tissue (mg/kg)</p>
+</dd>
+<dt>species</dt><dd><p>a factor with levels <code>chinook</code> and <code>coho</code></p>
+</dd>
+</dl>
+
+
+<h3>Details</h3>
+
+<p>The <code>year</code> variable should be converted to a factor as shown in the example.
+</p>
+
+
+<h3>Topic(s)</h3>
+
+
+<ul>
+<li><p> Linear models
+</p>
+</li>
+<li><p> Other
+</p>
+</li></ul>
+
+
+
+<h3>Source</h3>
+
+<p>From (actual data) Makarewicz, J.C., E.Damaske, T.W. Lewis, and M. Merner.  2003.  Trend analysis reveals a recent reduction in mirex concentrations in coho (<em>Oncorhynchus kisutch</em>) and chinook (<em>O. tshawytscha</em>) salmon from Lake Ontario.  Environmental Science and Technology, 37:1521-1527.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Used in <code><a href="fitPlot.html">fitPlot</a></code>, <code><a href="residPlot.html">residPlot</a></code>, <code><a href="compSlopes.html">compSlopes</a></code>, <code><a href="compIntercepts.html">compIntercepts</a></code>, <code><a href="hoCoef.html">hoCoef</a></code>, and <code><a href="rSquared.html">rSquared</a></code> examples.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+Mirex$year &lt;- factor(Mirex$year)
+lm1 &lt;- lm(mirex~weight*year*species,data=Mirex)
+anova(lm1)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FSA</em> version 0.8.23 <a href="00Index.html">Index</a>]</div>
+</body></html>

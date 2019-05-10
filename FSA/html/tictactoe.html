@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Construct a base tic-tac-toe plot for presenting...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for tictactoe {FSA}"><tr><td>tictactoe {FSA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Construct a base tic-tac-toe plot for presenting predator-prey PSD values.</h2>
+
+<h3>Description</h3>
+
+<p>Construct a base tic-tac-toe plot for presenting predator-prey PSD values.  Predator-prey PSD values are added with <code><a href="../../plotrix/html/plotCI.html">plotCI</a></code> from <span class="pkg">plotrix</span>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+tictactoe(predobj = c(30, 70), preyobj = c(30, 70),
+  predlab = "Predator PSD", preylab = "Prey PSD", obj.col = "black",
+  obj.trans = 0.2, bnd.col = "black", bnd.lwd = 1, bnd.lty = 2)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>predobj</code></td>
+<td>
+<p>A vector of length 2 that contains the target objective range for the predator.</p>
+</td></tr>
+<tr valign="top"><td><code>preyobj</code></td>
+<td>
+<p>A vector of length 2 that contains the target objective range for the prey.</p>
+</td></tr>
+<tr valign="top"><td><code>predlab</code></td>
+<td>
+<p>A string representing a label for the x-axis.</p>
+</td></tr>
+<tr valign="top"><td><code>preylab</code></td>
+<td>
+<p>A string representing a label for the y-axis.</p>
+</td></tr>
+<tr valign="top"><td><code>obj.col</code></td>
+<td>
+<p>A string designating a color to which the target objective regions should be shaded.</p>
+</td></tr>
+<tr valign="top"><td><code>obj.trans</code></td>
+<td>
+<p>A numeric (decimal) that indicates the level of transparency for marking the target objective regions.</p>
+</td></tr>
+<tr valign="top"><td><code>bnd.col</code></td>
+<td>
+<p>A string that indicates a color for the boundaries of the target objective regions.</p>
+</td></tr>
+<tr valign="top"><td><code>bnd.lwd</code></td>
+<td>
+<p>A numeric that indicates the line width for the boundaries of the target objective regions.</p>
+</td></tr>
+<tr valign="top"><td><code>bnd.lty</code></td>
+<td>
+<p>A numeric that indicates the line type for the boundaries of the target objective regions.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This function simply creates a base tic-tac-toe plot.  Observed values, with confidence intervals, are added to this plot with <code><a href="../../plotrix/html/plotCI.html">plotCI</a></code> from <span class="pkg">plotrix</span>; see examples.
+</p>
+
+
+<h3>Value</h3>
+
+<p>None.  However, a graphic is produced.
+</p>
+
+
+<h3>IFAR Chapter</h3>
+
+<p>6-Size Structure.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Derek H. Ogle, <a href="mailto:derek@derekogle.com">derek@derekogle.com</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Ogle, D.H.  2016.  <a href="http://derekogle.com/IFAR">Introductory Fisheries Analyses with R</a>.  Chapman &amp; Hall/CRC, Boca Raton, FL.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See <code><a href="psdVal.html">psdVal</a></code> and <code><a href="psdCalc.html">psdCalc</a></code> for related functionality.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Create hypothetical data for plotting one point .. similar to what might come from psdCalc()
+prey &lt;- c(45.4,30.2,56.8)
+pred &lt;- c(24.5,10.2,36.7)
+names(prey) &lt;- names(pred) &lt;- c("Estimate","95% LCI","95% UCI")
+prey
+pred
+
+tictactoe()
+if (require(plotrix)) {
+  plotCI(prey[1],pred[1],li=prey[2],ui=prey[3],err="x",pch=16,add=TRUE)
+  plotCI(prey[1],pred[1],li=pred[2],ui=pred[3],err="y",pch=16,add=TRUE) 
+}
+
+## Create hypothetical data for plotting three points .. similar to what might come from psdCalc()
+prey &lt;- rbind(c(45.4,30.2,56.8),
+              c(68.2,56.7,79.4),
+              c(17.1, 9.5,26.3))
+pred &lt;- rbind(c(24.5,10.2,36.7),
+              c(14.2, 7.1,21.3),
+              c(16.3, 8.2,24.4))
+colnames(prey) &lt;- colnames(pred) &lt;- c("Estimate","95% LCI","95% UCI")
+prey
+pred
+
+tictactoe()
+if (require(plotrix)) {
+  plotCI(prey[,1],pred[,1],li=prey[,2],ui=prey[,3],err="x",pch=16,add=TRUE)
+  plotCI(prey[,1],pred[,1],li=pred[,2],ui=pred[,3],err="y",pch=16,add=TRUE)
+}
+lines(prey[,1],pred[,1])
+text(prey[,1],pred[,1],labels=c(2010,2011,2012),adj=c(-0.5,-0.5))
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FSA</em> version 0.8.23 <a href="00Index.html">Index</a>]</div>
+</body></html>

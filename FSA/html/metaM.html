@@ -1,0 +1,283 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Estimate natural mortality from a variety of empirical...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for Mmethods {FSA}"><tr><td>Mmethods {FSA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Estimate natural mortality from a variety of empirical methods.</h2>
+
+<h3>Description</h3>
+
+<p>Several methods can be used to estimated natural mortality (M) from other types of data, including parameters from the von Bertalanffy growth equation, maximum age, and temperature. These relationships have been developed from meta-analyses of a large number of populations. Several of these methods are implemented in this function.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+Mmethods(what = c("all", "tmax", "K", "Hoenig", "Pauly"))
+
+metaM(method = Mmethods(), justM = TRUE, tmax = NULL, K = NULL,
+  Linf = NULL, t0 = NULL, b = NULL, L = NULL, Temp = NULL,
+  t50 = NULL, Winf = NULL)
+
+## S3 method for class 'metaM'
+print(x, digits = 4, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>what</code></td>
+<td>
+<p>A string that indicates what grouping of methods to return. Defaults to returning all methods.</p>
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+<p>A string that indicates which method or equation to use. See details.</p>
+</td></tr>
+<tr valign="top"><td><code>justM</code></td>
+<td>
+<p>A logical that indicates whether just the estimate of M (<code>TRUE</code>; Default) or a more descriptive list should be returned.</p>
+</td></tr>
+<tr valign="top"><td><code>tmax</code></td>
+<td>
+<p>The maximum age for the population of fish.</p>
+</td></tr>
+<tr valign="top"><td><code>K</code></td>
+<td>
+<p>The Brody growth coefficient from the fit of the von Bertalanffy growth function.</p>
+</td></tr>
+<tr valign="top"><td><code>Linf</code></td>
+<td>
+<p>The asymptotic mean length (cm) from the fit of the von Bertalanffy growth function.</p>
+</td></tr>
+<tr valign="top"><td><code>t0</code></td>
+<td>
+<p>The x-intercept from the fit of the von Bertalanffy growth function.</p>
+</td></tr>
+<tr valign="top"><td><code>b</code></td>
+<td>
+<p>The exponent from the weight-length relationship (slope from the logW-logL relationship).</p>
+</td></tr>
+<tr valign="top"><td><code>L</code></td>
+<td>
+<p>The body length of the fish (cm).</p>
+</td></tr>
+<tr valign="top"><td><code>Temp</code></td>
+<td>
+<p>The temperature experienced by the fish (C).</p>
+</td></tr>
+<tr valign="top"><td><code>t50</code></td>
+<td>
+<p>The age (time) when half the fish in the population are mature.</p>
+</td></tr>
+<tr valign="top"><td><code>Winf</code></td>
+<td>
+<p>The asymptotic mean weight (g) from the fit of the von Bertalanffy growth function.</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A <code>metaM</code> object returned from <code>metaM</code> when <code>justM=FALSE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>digits</code></td>
+<td>
+<p>A numeric that controls the number of digits printed for the estimate of M.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments for methods. Not implemented.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>One of several methods is chosen with <code>method</code>. The available methods can be seen with <code>Mmethods()</code> and are listed below with a brief description of where the equation came from. The sources (listed below) should be consulted for more specific information.
+</p>
+
+<ul>
+<li> <p><code>method="HoenigNLS"</code>:  The &ldquo;modified Hoenig equation derived with a non-linear model&rdquo; as described in Then et al. (2015) on the third line of Table 3. This method was the preferred method suggested by Then et al. (2015). Requires only <code>tmax</code>.
+</p>
+</li>
+<li> <p><code>method="PaulyLNoT"</code>: The &ldquo;modified Pauly length equation&rdquo; as described on the sixth line of Table 3 in Then et al. (2015). Then et al. (2015) suggested that this is the preferred model if maximum age (tmax) information was not available. Requires <code>K</code> and <code>Linf</code>.
+</p>
+</li>
+<li> <p><code>method="PaulyL"</code>: The &ldquo;Pauly (1980) equation using fish lengths&rdquo; from his equation 11. This is the most commonly used method in the literature. Note that Pauly used common logarithms as used here but the model is often presented in other sources with natural logarithms. Requires <code>K</code>, <code>Linf</code>, and <code>T</code>.
+</p>
+</li>
+<li> <p><code>method="PaulyW"</code>: The &ldquo;Pauly (1980) equation for weights&rdquo; from his equation 10. Requires <code>K</code>, <code>Winf</code>, and <code>T</code>.
+</p>
+</li>
+<li> <p><code>method="HoeingO"</code>, <code>method="HoeingOF"</code>, <code>method="HoeingOM"</code>, <code>method="HoeingOC"</code>: The original &ldquo;Hoenig (1983) composite&rdquo;, &ldquo;fish&rdquo;, &ldquo;mollusc&rdquo;, and &ldquo;cetacean&rdquo; (fit with OLS) equations from the second column on page 899 of Hoenig (1983). Requires only <code>tmax</code>.
+</p>
+</li>
+<li> <p><code>method="HoeingO2"</code>, <code>method="HoeingO2F"</code>, <code>method="HoeingO2M"</code>, <code>method="HoeingO2C"</code>: The original &ldquo;Hoenig (1983) composite&rdquo;, &ldquo;fish&rdquo;, &ldquo;mollusc&rdquo;, and &ldquo;cetacean&rdquo; (fit with Geometric Mean Regression) equations from the second column on page 537 of Kenchington (2014). Requires only <code>tmax</code>.
+</p>
+</li>
+<li> <p><code>method="HoenigLM"</code>:  The &ldquo;modified Hoenig equation derived with a linear model&rdquo; as described in Then et al. (2015) on the second line of Table 3. Requires only <code>tmax</code>.
+</p>
+</li>
+<li> <p><code>method="HewittHoenig"</code>:  The &ldquo;Hewitt and Hoenig (2005) equation&rdquo; from their equation 8. Requires only <code>tmax</code>.
+</p>
+</li>
+<li> <p><code>method="tmax1"</code>: The &ldquo;one-parameter tmax equation&rdquo; from the first line of Table 3 in Then et al. (2015). Requires only <code>tmax</code>.
+</p>
+</li>
+<li> <p><code>method="K1"</code>:  The &ldquo;one-parameter K equation&rdquo; from the fourth line of Table 3 in Then et al. (2015). Requires only <code>K</code>.
+</p>
+</li>
+<li> <p><code>method="K2"</code>: The &ldquo;two-parameter K equation&rdquo; from the fifth line of Table 3 in Then et al. (2015). Requires only <code>K</code>.
+</p>
+</li>
+<li> <p><code>method="JensenK1"</code>: The &ldquo;Jensen (1996) one-parameter K equation&rdquo;. Requires only <code>K</code>.
+</p>
+</li>
+<li> <p><code>method="JensenK2"</code>: The &ldquo;Jensen (2001) two-parameter K equation&rdquo; from their equation 8. Requires only <code>K</code>.
+</p>
+</li>
+<li> <p><code>method="Gislason"</code>: The &ldquo;Gislason et al. (2010) equation&rdquo; from their equation 2. Requires <code>K</code>, <code>Linf</code>, and <code>L</code>.
+</p>
+</li>
+<li> <p><code>method="AlversonCarney"</code>: The &ldquo;Alverson and Carney (1975) equation&rdquo; as given in equation 10 of Zhang and Megrey (2006). Requires <code>tmax</code> and <code>K</code>.
+</p>
+</li>
+<li> <p><code>method="Charnov"</code>: The &ldquo;Charnov et al. (2013) equation&rdquo; as given in the second column of page 545 of Kenchington (2014). Requires <code>K</code>, <code>Linf</code>, and <code>L</code>.
+</p>
+</li>
+<li> <p><code>method="ZhangMegreyD"</code>, <code>method="ZhangMegreyP"</code>: The &ldquo;Zhang and Megrey (2006) equation&rdquo; as given in their equation 8 but modified for demersal or pelagic fish. Thus, the user must choose the fish type with <code>group</code>. Requires <code>tmax</code>, <code>K</code>, <code>t0</code>, <code>t50</code>, and <code>b</code>.
+</p>
+</li>
+<li> <p><code>method="RikhterEfanov1"</code>: The &ldquo;Rikhter and Efanov (1976) equation (#2)&rdquo; as given in the second column of page 541 of Kenchington (2014) and in Table 6.4 of Miranda and Bettoli (2007). Requires only <code>t50</code>.
+</p>
+</li>
+<li> <p><code>method="RikhterEfanov2"</code>: The &ldquo;Rikhter and Efanov (1976) equation (#1)&rdquo; as given in the first column of page 541 of Kenchington (2014). Requires <code>t50</code>, <code>K</code>, <code>t0</code>, and <code>b</code>.
+</p>
+</li></ul>
+
+
+
+<h3>Value</h3>
+
+<p><code>Mmethods</code> returns a character vector with a list of methods. If only one <code>method</code> is chosen then <code>metaM</code> returns a single numeric if <code>justM=TRUE</code> or, otherwise, a <code>metaM</code> object that is a list with the following items:
+</p>
+
+<ul>
+<li> <p><code>method</code>: The name for the method within the function (as given in <code>method</code>).
+</p>
+</li>
+<li> <p><code>name</code>: A more descriptive name for the method.
+</p>
+</li>
+<li> <p><code>givens</code>: A vector of values required by the method to estimate M.
+</p>
+</li>
+<li> <p><code>M</code>: The estimated natural mortality rate.
+</p>
+</li></ul>
+
+<p>If multiple <code>method</code>s are chosen then a data.frame is returned with the method name abbreviation in the <code>method</code> variable and the associated estimated M in the <code>M</code> variable.
+</p>
+
+
+<h3>Testing</h3>
+
+<p>Kenchington (2014) provided life history parameters for several stocks and used many models to estimate M. I checked the calculations for the <code>PaulyL</code>, <code>PaulyW</code>, <code>HoenigO</code> for <code>Hgroup="all"</code> and <code>Hgroup="fish"</code>, <code>HoenigO2</code> for <code>Hgroup="all"</code> and <code>Hgroup="fish"</code>, <code>"JensenK1"</code>, <code>"Gislason"</code>, <code>"AlversonCarney"</code>, <code>"Charnov"</code>, <code>"ZhangMegrey"</code>, <code>"RikhterEfanov1"</code>, and <code>"RikhterEfanov2"</code> methods for three stocks. All results perfectly matched Kenchington's results for Chesapeake Bay Anchovy and Rio Formosa Seahorse. For the Norwegian Fjord Lanternfish, all results perfectly matched Kenchington's results except for when <code>Hgroup="fish"</code> for both <code>HoenigO</code> and <code>HoenigO2</code>.
+</p>
+<p>Results for the Rio Formosa Seahorse data were also tested against results from <code><a href="../../fishmethods/html/M.empirical.html">M.empirical</a></code> from <span class="pkg">fishmethods</span> for the <code>PaulyL</code>, <code>PaulyW</code>, <code>HoenigO</code> for <code>Hgroup="all"</code> and <code>Hgroup="fish"</code>, <code>"Gislason"</code>, and <code>"AlversonCarney"</code> methods (the only methods in common between the two packages). All results matched perfectly.
+</p>
+
+
+<h3>IFAR Chapter</h3>
+
+<p>11-Mortality.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Derek H. Ogle, <a href="mailto:derek@derekogle.com">derek@derekogle.com</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Ogle, D.H. 2016. <a href="http://derekogle.com/IFAR">Introductory Fisheries Analyses with R</a>. Chapman &amp; Hall/CRC, Boca Raton, FL.
+</p>
+<p>Alverson, D.L. and M.J. Carney. 1975. A graphic review of the growth and decay of population cohorts. Journal du Conseil International pour l'Exploration de la Mer. 36:133-143.
+</p>
+<p>Charnov, E.L., H. Gislason, and J.G. Pope. 2013. Evolutionary assembly rules for fish life histories. Fish and Fisheries. 14:213-224.
+</p>
+<p>Gislason, H., N. Daan, J.C. Rice, and J.G. Pope. 2010. Size, growth, temperature and the natural mortality of marine fish. Fish and Fisheries 11:149-158.
+</p>
+<p>Hewitt, D.A. and J.M. Hoenig. 2005. Comparison of two approaches for estimating natural mortality based on longevity. Fishery Bulletin. 103:433-437. [Was (is?) from http://fishbull.noaa.gov/1032/hewitt.pdf.]
+</p>
+<p>Hoenig, J.M. 1983. Empirical use of longevity data to estimate mortality rates. Fishery Bulletin. 82:898-903. [Was (is?) from http://www.afsc.noaa.gov/REFM/age/Docs/Hoenig_EmpiricalUseOfLongevityData.pdf.]
+</p>
+<p>Jensen, A.L. 1996. Beverton and Holt life history invariants result from optimal trade-off of reproduction and survival. Canadian Journal of Fisheries and Aquatic Sciences. 53:820-822. [Was (is?) from .]
+</p>
+<p>Jensen, A.L. 2001. Comparison of theoretical derivations, simple linear regressions, multiple linear regression and principal components for analysis of fish mortality, growth and environmental temperature data. Environometrics. 12:591-598. [Was (is?) from http://deepblue.lib.umich.edu/bitstream/handle/2027.42/35236/487_ftp.pdf.]
+</p>
+<p>Kenchington, T.J. 2014. Natural mortality estimators for information-limited fisheries. Fish and Fisheries. 14:533-562.
+</p>
+<p>Pauly, D. 1980. On the interrelationships between natural mortality, growth parameters, and mean environmental temperature in 175 fish stocks. Journal du Conseil International pour l'Exploration de la Mer. 39:175-192. [Was (is?) from http://innri.unuftp.is/pauly/On%20the%20interrelationships%20betwe.pdf.]
+</p>
+<p>Rikhter, V.A., and V.N. Efanov. 1976. On one of the approaches for estimating natural mortality in fish populations (in Russian). ICNAF Research Document 76/IV/8, 12pp. 
+</p>
+<p>Then, A.Y., J.M. Hoenig, N.G. Hall, and D.A. Hewitt. 2015. Evaluating the predictive performance of empirical estimators of natural mortality rate using information on over 200 fish species. ICES Journal of Marine Science. 72:82-92.
+</p>
+<p>Zhang, C-I and B.A. Megrey. 2006. A revised Alverson and Carney model for estimating the instantaneous rate of natural mortality. Transactions of the American Fisheries Society. 135-620-633. [Was (is?) from http://www.pmel.noaa.gov/foci/publications/2006/zhan0531.pdf.]
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See <code><a href="../../fishmethods/html/M.empirical.html">M.empirical</a></code> in <span class="pkg">fishmethods</span> for similar functionality.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## List names for available methods
+Mmethods()
+Mmethods("tmax")
+
+## Simple Examples
+metaM("tmax",tmax=20)
+metaM("tmax",tmax=20,justM=FALSE)
+metaM("HoenigNLS",tmax=20)
+metaM("HoenigNLS",tmax=20,justM=FALSE)
+ 
+## Example Patagonian Sprat ... from Table 2 in Cerna et al. (2014)
+## http://www.scielo.cl/pdf/lajar/v42n3/art15.pdf
+Temp &lt;- 11
+Linf &lt;- 17.71
+K &lt;- 0.78
+t0 &lt;- -0.46
+tmax &lt;- t0+3/K
+t50 &lt;- t0-(1/K)*log(1-13.5/Linf)
+metaM("RikhterEfanov1",t50=t50)
+metaM("PaulyL",K=K,Linf=Linf,Temp=Temp)
+metaM("PaulyL",K=K,Linf=Linf,Temp=Temp,justM=FALSE)
+metaM("HoenigNLS",tmax=tmax)
+metaM("HoenigO",tmax=tmax)
+metaM("HewittHoenig",tmax=tmax)
+metaM("AlversonCarney",K=K,tmax=tmax)
+
+## Example of multiple calculations
+metaM(c("RikhterEfanov1","PaulyL","HoenigO","HewittHoenig","AlversonCarney"),
+     K=K,Linf=Linf,Temp=Temp,tmax=tmax,t50=t50)
+
+## Example of multiple methods using Mmethods
+# select some methods
+metaM(Mmethods()[-c(15,20,22:24,26)],K=K,Linf=Linf,Temp=Temp,tmax=tmax,t50=t50)
+# select just the Hoenig methods
+metaM(Mmethods("Hoenig"),K=K,Linf=Linf,Temp=Temp,tmax=tmax,t50=t50)
+ 
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FSA</em> version 0.8.23 <a href="00Index.html">Index</a>]</div>
+</body></html>

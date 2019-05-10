@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Creates a function for a specific parameterization of a...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for stockRecruitment {FSA}"><tr><td>stockRecruitment {FSA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Creates a function for a specific parameterization of a common stock-recruitment function .</h2>
+
+<h3>Description</h3>
+
+<p>Creates a function for a specific parameterization of a &ldquo;Beverton-Holt&rdquo;, &ldquo;Ricker&rdquo;,  &ldquo;Shepherd&rdquo;, or &ldquo;Saila-Lorda&rdquo; stock-recruitment function.  Use <code>srFunShow()</code> to see the equations of each function.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+srFuns(type = c("BevertonHolt", "Ricker", "Shepherd", "SailaLorda",
+  "independence"), param = 1, simple = FALSE, msg = FALSE)
+
+srFunShow(type = c("BevertonHolt", "Ricker", "Shepherd", "SailaLorda"),
+  param = 1, plot = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>A string that indicates the type of stock-recruitment function.</p>
+</td></tr>
+<tr valign="top"><td><code>param</code></td>
+<td>
+<p>A single numeric that indicates the parameterization of the stock-recruitment function.</p>
+</td></tr>
+<tr valign="top"><td><code>simple</code></td>
+<td>
+<p>A logical that indicates whether the user should be allowed to send all parameter values in the first parameter argument (<code>=FALSE</code>; default) or whether all individual parameters must be specified (<code>=TRUE</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>msg</code></td>
+<td>
+<p>A logical that indicates whether a message about the function and parameter definitions should be output (<code>=TRUE</code>) or not (<code>=FALSE</code>; default).</p>
+</td></tr>
+<tr valign="top"><td><code>plot</code></td>
+<td>
+<p>A logical that indicates whether the growth function expression should be shown as an equation in a simple plot.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Not implemented.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p><code>srFuns</code> returns a function that can be used to predict recruitment given a vector of stock sizes and values for the function parameters.  The result should be saved to an object that can then be used as a function name.  When the resulting function is used, the parameters are ordered as shown when the definitions of the parameters are printed after the function is called (assuming that <code>msg=TRUE</code>).  The values for both/all parameters can be included as a vector of length two/three in the first parameter argument.  If <code>simple=FALSE</code> then the values for all parameters can be included as a vector in the first parameter argument.  If <code>simple=TRUE</code> then all parameters must be declared individually in each function.  The resulting function is somewhat easier to read when <code>simple=TRUE</code>.
+</p>
+<p><code>srFunShow</code> returns an expression that can be use with <code><a href="../../grDevices/html/plotmath.html">plotmath</a></code> to show the function equation in a pretty format.  See examples.
+</p>
+
+
+<h3>IFAR Chapter</h3>
+
+<p>13-Recruitment.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Derek H. Ogle, <a href="mailto:derek@derekogle.com">derek@derekogle.com</a>, thanks to Gabor Grothendieck for a hint about using <code>get()</code>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Ogle, D.H.  2016.  <a href="http://derekogle.com/IFAR">Introductory Fisheries Analyses with R</a>.  Chapman &amp; Hall/CRC, Boca Raton, FL.
+</p>
+<p>Beverton, R.J.H. and S.J. Holt.  1957.  On the dynamics of exploited fish populations, Fisheries Investigations (Series 2), volume 19. United Kingdom Ministry of Agriculture and Fisheries, 533 pp.
+</p>
+<p>Iles, T.C.  1994.  A review of stock-recruitment relationships with reference to flatfish populations.  Netherlands Journal of Sea Research 32:399-420.
+</p>
+<p>Quinn II, T.J. and R.B. Deriso. 1999. Quantitative Fish Dynamics. Oxford University Press.
+</p>
+<p>Ricker, W.E. 1954. Stock and recruitment. Journal of the Fisheries Research Board of Canada 11:559-623.
+</p>
+<p>Ricker, W.E. 1975. Computation and interpretation of biological statistics of fish populations. Technical Report Bulletin 191, Bulletin of the Fisheries Research Board of Canada.  [Was (is?) from http://www.dfo-mpo.gc.ca/Library/1485.pdf.]
+</p>
+<p>Shepherd, J. 1982. A versatile new stock-recruitment relationship for fisheries and construction of sustainable yield curves. Journal du Conseil International pour l'Exploration de la Mar 40:67-75.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See <code><a href="srStarts.html">srStarts</a></code> for related functionality.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## See the formulae
+## Simple Examples
+# show what a message looks like with the function definition
+srFuns("Ricker",msg=TRUE)
+
+# create some dummy stock data
+stock &lt;- seq(0.01,1000,length.out=199)
+
+# Beverton-Holt #1 parameterization
+( bh1 &lt;- srFuns() )
+plot(bh1(stock,a=0.5,b=0.01)~stock,type="l",lwd=2,ylab="Recruits",xlab="Spawners",ylim=c(0,50))
+
+# Ricker #1 parameterization
+( r1 &lt;- srFuns("Ricker") )
+lines(r1(stock,a=0.5,b=0.005)~stock,lwd=2,col="red")
+
+# Shephered parameterization
+( s1 &lt;- srFuns("Shepherd") )
+lines(s1(stock,a=0.5,b=0.005,c=2.5)~stock,lwd=2,col="blue")
+
+# Saila-Lorda parameterization
+( sl1 &lt;- srFuns("SailaLorda") )
+lines(sl1(stock,a=0.5,b=0.005,c=1.05)~stock,lwd=2,col="salmon")
+
+## Examples of fitting stock-recruitment functions
+# Fitting the Beverton-Holt #1 parameterization with multiplicative errors
+bh1s &lt;- srStarts(recruits~stock,data=CodNorwegian)
+fit1 &lt;- nls(log(recruits)~log(bh1(stock,a,b)),data=CodNorwegian,start=bh1s)
+summary(fit1,correlation=TRUE)
+plot(recruits~stock,data=CodNorwegian,pch=19,xlim=c(0,200))
+curve(bh1(x,a=coef(fit1)[1],b=coef(fit1)[2]),from=0,to=200,col="red",lwd=3,add=TRUE)
+
+# Fitting the Ricker #3 parameterization with multiplicative errors
+r3 &lt;- srFuns("Ricker",param=3)
+r3s &lt;- srStarts(recruits~stock,data=CodNorwegian,type="Ricker",param=3)
+fit2 &lt;- nls(log(recruits)~log(r3(stock,a,Rp)),data=CodNorwegian,start=r3s)
+summary(fit2,correlation=TRUE)
+curve(r3(x,a=coef(fit2)[1],Rp=coef(fit2)[2]),from=0,to=200,col="blue",lwd=3,add=TRUE)
+
+#############################################################################
+## Create expressions of the functions
+#############################################################################
+# Simple example
+srFunShow()
+srFunShow(plot=TRUE)
+srFunShow("BevertonHolt",1,plot=TRUE)
+
+# Get and save the expression
+( tmp &lt;- srFunShow("BevertonHolt",1) )
+# Use expression as title on a plot
+plot(bh1(stock,a=0.5,b=0.01)~stock,type="l",ylim=c(0,50),
+     ylab="Recruits",xlab="Spawners",main=tmp)
+# Put expression in the main plot
+text(800,10,tmp)
+# Put multiple expressions on a plot
+op &lt;- par(mar=c(0.1,0.1,0.1,0.1))
+plot(0,type="n",xlab="",ylab="",xlim=c(0,1),ylim=c(0,3),xaxt="n",yaxt="n")
+text(0,2.5,"Beverton-Holt #1:",pos=4)
+text(0.5,2.5,srFunShow("BevertonHolt",1))
+text(0,1.5,"Ricker #2:",pos=4)
+text(0.5,1.5,srFunShow("Ricker",2))
+text(0,0.5,"Shepherd:",pos=4)
+text(0.5,0.5,srFunShow("Shepherd"))
+par(op)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FSA</em> version 0.8.23 <a href="00Index.html">Index</a>]</div>
+</body></html>

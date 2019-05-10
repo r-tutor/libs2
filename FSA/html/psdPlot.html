@@ -1,0 +1,215 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Length-frequency histogram with Gabelhouse lengths...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for psdPlot {FSA}"><tr><td>psdPlot {FSA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Length-frequency histogram with Gabelhouse lengths highlighted.</h2>
+
+<h3>Description</h3>
+
+<p>Constructs a length-frequency histogram with Gabelhouse lengths highlighted.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+psdPlot(formula, data, species = "List", units = c("mm", "cm", "in"),
+  startcat = 0, w = 1, justPSDQ = FALSE, main = "",
+  xlab = "Length", ylab = "Number", xlim = NULL, ylim = c(0,
+  max(h$counts)), substock.col = "white", stock.col = "gray90",
+  psd.col = "black", psd.lty = 2, psd.lwd = 1, show.abbrevs = TRUE,
+  psd.add = TRUE, psd.pos = "topleft", psd.cex = 0.75, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>formula</code></td>
+<td>
+<p>A formula of the form <code>~length</code> where &ldquo;length&rdquo; generically represents a variable in <code>data</code> that contains length measurements. Note that this formula can only contain one variable.</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>A data.frame that minimally contains the length measurements given in the variable in the <code>formula</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>species</code></td>
+<td>
+<p>A string that contains the species name for which Gabelhouse length categories exist. See <code><a href="psdVal.html">psdVal</a></code> for details.</p>
+</td></tr>
+<tr valign="top"><td><code>units</code></td>
+<td>
+<p>A string that indicates the type of units used for the length measurements. Choices are <code>mm</code> for millimeters (DEFAULT), <code>cm</code> for centimeters, and <code>in</code> for inches.</p>
+</td></tr>
+<tr valign="top"><td><code>startcat</code></td>
+<td>
+<p>A number that indicates the beginning of the first length-class.</p>
+</td></tr>
+<tr valign="top"><td><code>w</code></td>
+<td>
+<p>A number that indicates the width of length classes to create.</p>
+</td></tr>
+<tr valign="top"><td><code>justPSDQ</code></td>
+<td>
+<p>A logical that indicates whether just stock and quality (for PSD-Q calculations) categories should be used. If <code>FALSE</code> (default) then the five Gabelhouse categories will be used.</p>
+</td></tr>
+<tr valign="top"><td><code>main</code></td>
+<td>
+<p>A string that serves as the main label for the histogram.</p>
+</td></tr>
+<tr valign="top"><td><code>xlab</code></td>
+<td>
+<p>A string that serves as the label for the x-axis.</p>
+</td></tr>
+<tr valign="top"><td><code>ylab</code></td>
+<td>
+<p>A string that serves as the label for the y-axis.</p>
+</td></tr>
+<tr valign="top"><td><code>xlim</code></td>
+<td>
+<p>A numeric vector of length two that indicates the minimum and maximum values (i.e., fish lengths) for the x-axis.</p>
+</td></tr>
+<tr valign="top"><td><code>ylim</code></td>
+<td>
+<p>A numeric vector of length two that indicates the minimum and maximum values for the y-axis.</p>
+</td></tr>
+<tr valign="top"><td><code>substock.col</code></td>
+<td>
+<p>A string that indicates the color to use for the bars representing under-stock size fish.</p>
+</td></tr>
+<tr valign="top"><td><code>stock.col</code></td>
+<td>
+<p>A string that indicates the color to use for the bars representing stock size fish.</p>
+</td></tr>
+<tr valign="top"><td><code>psd.col</code></td>
+<td>
+<p>A string that indicates the color to use for the vertical lines at the Gabelhouse length category values.</p>
+</td></tr>
+<tr valign="top"><td><code>psd.lty</code></td>
+<td>
+<p>A numeric that indicates the line type to use for the vertical lines at the Gabelhouse length category values.</p>
+</td></tr>
+<tr valign="top"><td><code>psd.lwd</code></td>
+<td>
+<p>A numeric that indicates the line width to use for the vertical lines at the Gabelhouse length category values.</p>
+</td></tr>
+<tr valign="top"><td><code>show.abbrevs</code></td>
+<td>
+<p>A logical that indicates if the abbreviations for the Gabelhouse length categories should be added to the top of the plot.</p>
+</td></tr>
+<tr valign="top"><td><code>psd.add</code></td>
+<td>
+<p>A logical that indicates if the calculated PSD values should be added to the plot (default is <code>TRUE</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>psd.pos</code></td>
+<td>
+<p>A string that indicates the position for where the PSD values will be shown. See details in <code><a href="../../graphics/html/legend.html">legend</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>psd.cex</code></td>
+<td>
+<p>A numeric value that indicates the character expansion for the PSD values text.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Arguments to be passed to the low-level plotting functions.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Constructs a length-frequency histogram with the stock-sized fish highlighted, the Gabelhouse lengths marked by vertical lines, and the (traditional) PSD-X values superimposed.
+</p>
+<p>The length of fish plotted on the x-axis can be controlled with <code>xlim</code>, however, the minimum value in <code>xlim</code> must be less than the stock length for that species.
+</p>
+
+
+<h3>Value</h3>
+
+<p>None. However, a graphic is produced.
+</p>
+
+
+<h3>IFAR Chapter</h3>
+
+<p>6-Size Structure.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Derek H. Ogle, <a href="mailto:derek@derekogle.com">derek@derekogle.com</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Ogle, D.H. 2016. <a href="http://derekogle.com/IFAR">Introductory Fisheries Analyses with R</a>. Chapman &amp; Hall/CRC, Boca Raton, FL.
+</p>
+<p>Guy, C.S., R.M. Neumann, and D.W. Willis. 2006. New terminology for proportional stock density (PSD) and relative stock density (RSD): proportional size structure (PSS). Fisheries 31:86-87. [Was (is?) from http://pubstorage.sdstate.edu/wfs/415-F.pdf.]
+</p>
+<p>Guy, C.S., R.M. Neumann, D.W. Willis, and R.O. Anderson. 2006. Proportional size distribution (PSD): A further refinement of population size structure index terminology. Fisheries 32:348. [Was (is?) from http://pubstorage.sdstate.edu/wfs/450-F.pdf.]
+</p>
+<p>Willis, D.W., B.R. Murphy, and C.S. Guy. 1993. Stock density indices: development, use, and limitations. Reviews in Fisheries Science 1:203-222. [Was (is?) from http://web1.cnre.vt.edu/murphybr/web/Readings/Willis%20et%20al.pdf.]
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See <code><a href="psdVal.html">psdVal</a></code>, <code><a href="psdCalc.html">psdCalc</a></code>, <code><a href="psdAdd.html">psdAdd</a></code>, <code><a href="PSDlit.html">PSDlit</a></code>, <code><a href="lencat.html">lencat</a></code>, <code><a href="tictactoe.html">tictactoe</a></code>, <code><a href="lencat.html">lencat</a></code>, and <code><a href="rcumsum.html">rcumsum</a></code> for related functionality.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Random length data
+# suppose this is yellow perch to the nearest mm
+mm &lt;- c(rnorm(100,mean=125,sd=15),rnorm(50,mean=200,sd=25),
+        rnorm(20,mean=300,sd=40))
+# same data to the nearest 0.1 cm
+cm &lt;- mm/10
+# same data to the nearest 0.1 in
+inch &lt;- mm/25.4
+# put together as data.frame
+df &lt;- data.frame(mm,cm,inch)
+
+## Example graphics
+op &lt;- par(mar=c(3,3,2,1),mgp=c(1.7,0.5,0))
+# mm data using 10-mm increments
+psdPlot(~mm,data=df,species="Yellow perch",w=10)
+# cm data using 1-cm increments
+psdPlot(~cm,data=df,species="Yellow perch",units="cm",w=1)
+# inch data using 1-in increments
+psdPlot(~inch,data=df,species="Yellow perch",units="in",w=1)
+# same as first with some color changes
+psdPlot(~mm,data=df,species="Yellow perch",w=10,substock.col="gray90",
+        stock.col="gray30")
+# ... but without the PSD values
+psdPlot(~mm,data=df,species="Yellow perch",w=10,psd.add=FALSE)
+# ... demonstrate use of xlim
+psdPlot(~mm,data=df,species="Yellow perch",w=10,xlim=c(100,300))
+
+## different subsets of fish
+# ... without any sub-stock fish
+brks &lt;- psdVal("Yellow Perch")
+tmp &lt;- filterD(df,mm&gt;brks["stock"])
+psdPlot(~mm,data=tmp,species="Yellow perch",w=10)
+# ... without any sub-stock or stock fish
+tmp &lt;- filterD(df,mm&gt;brks["quality"])
+psdPlot(~mm,data=tmp,species="Yellow perch",w=10)
+# ... with only sub-stock, stock, and quality fish ... only PSD-Q
+tmp &lt;- filterD(df,mm&lt;brks["preferred"])
+psdPlot(~mm,data=tmp,species="Yellow perch",w=10)
+# ... with only sub-stock fish (don't run ... setup to give an error)
+tmp &lt;- filterD(df,mm&lt;brks["stock"])
+## Not run:  psdPlot(~mm,data=tmp,species="Yellow perch",w=10) 
+par(op)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FSA</em> version 0.8.23 <a href="00Index.html">Index</a>]</div>
+</body></html>

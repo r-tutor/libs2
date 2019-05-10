@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Ratio of lagged observations.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for lagratio {FSA}"><tr><td>lagratio {FSA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Ratio of lagged observations.</h2>
+
+<h3>Description</h3>
+
+<p>Computes the ratio of lagged observations in a vector.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+lagratio(x, lag = 1L, recursion = 1L, differences = recursion,
+  direction = c("backward", "forward"), ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A numeric vector or matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>lag</code></td>
+<td>
+<p>An integer representing the lag &lsquo;distance&rsquo;.</p>
+</td></tr>
+<tr valign="top"><td><code>recursion</code></td>
+<td>
+<p>An integer that indicates the level of recursion for the calculations. A <code>1</code> will simply compute the ratios. A <code>2</code>, for example, will compute the ratios, save the result, and then compute the ratios of the results using the same <code>lag</code>. See examples.</p>
+</td></tr>
+<tr valign="top"><td><code>differences</code></td>
+<td>
+<p>Same as <code>recursion</code>. Used for symmetry with <code><a href="../../base/html/diff.html">diff</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>direction</code></td>
+<td>
+<p>A string that indicates the direction of calculation. A <code>"backward"</code> indicates that &lsquo;latter&rsquo; values are divided by &lsquo;former&rsquo; values. A <code>"forward"</code> indicates that &lsquo;former&rsquo; values are divided by &lsquo;latter&rsquo; values. See examples.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments to <code>diff()</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This function behaves similarly to <code>diff()</code> except that it returns a vector or matrix of ratios rather than differences.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A vector or matrix of lagged ratios.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Derek H. Ogle, <a href="mailto:derek@derekogle.com">derek@derekogle.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>diff</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Backward lagged ratios
+# no recursion
+lagratio(1:10,1)
+lagratio(1:10,2)
+# with recursion
+lagratio(1:10,1,2)
+lagratio(1:10,2,2)
+
+## Forward lagged ratios
+# no recursion
+lagratio(10:1,1,direction="forward")
+lagratio(10:1,2,direction="forward")
+# with recursion
+lagratio(10:1,1,2,direction="forward")
+lagratio(10:1,2,2,direction="forward")
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FSA</em> version 0.8.23 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Construct a residual plot from lm or nls objects.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for residPlot {FSA}"><tr><td>residPlot {FSA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Construct a residual plot from lm or nls objects.</h2>
+
+<h3>Description</h3>
+
+<p>Constructs a residual plot for <code>lm</code> or <code>nls</code> objects. Different symbols for different groups can be added to the plot if an indicator variable regression is used.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+residPlot(object, ...)
+
+## S3 method for class 'lm'
+residPlot(object, ...)
+
+## S3 method for class 'SLR'
+residPlot(object, xlab = "Fitted Values",
+  ylab = "Residuals", main = "", pch = 16, col = "black",
+  lty.ref = 3, lwd.ref = 1, col.ref = "black",
+  resid.type = c("raw", "standardized", "studentized"),
+  outlier.test = TRUE, alpha = 0.05, loess = FALSE, lty.loess = 2,
+  lwd.loess = 1, col.loess = "black", trans.loess = 8,
+  inclHist = TRUE, ...)
+
+## S3 method for class 'POLY'
+residPlot(object, ...)
+
+## S3 method for class 'IVR'
+residPlot(object, legend = "topright", cex.leg = 1,
+  box.lty.leg = 0, ...)
+
+## S3 method for class 'ONEWAY'
+residPlot(object, xlab = "Fitted Values",
+  ylab = "Residuals", main = "", pch = 16, col = "black",
+  lty.ref = 3, lwd.ref = 1, col.ref = "black",
+  resid.type = c("raw", "standardized", "studentized"), bp = TRUE,
+  outlier.test = TRUE, alpha = 0.05, loess = FALSE, lty.loess = 2,
+  lwd.loess = 1, col.loess = "black", trans.loess = 8,
+  inclHist = TRUE, ...)
+
+## S3 method for class 'TWOWAY'
+residPlot(object, xlab = "Fitted Values",
+  ylab = "Residuals", main = "", pch = 16, col = "black",
+  lty.ref = 3, lwd.ref = 1, col.ref = "black",
+  resid.type = c("raw", "standardized", "studentized"), bp = TRUE,
+  outlier.test = TRUE, alpha = 0.05, loess = FALSE, lty.loess = 2,
+  lwd.loess = 1, col.loess = "black", trans.loess = 8,
+  inclHist = TRUE, ...)
+
+## S3 method for class 'nls'
+residPlot(object, xlab = "Fitted Values",
+  ylab = "Residuals", main = "", pch = 16, col = "black",
+  lty.ref = 3, lwd.ref = 1, col.ref = "black",
+  resid.type = c("raw", "standardized", "studentized"), loess = FALSE,
+  lty.loess = 2, lwd.loess = 1, col.loess = "black",
+  trans.loess = 8, inclHist = TRUE, ...)
+
+## S3 method for class 'nlme'
+residPlot(object, xlab = "Fitted Values",
+  ylab = "Residuals", main = "", pch = 16, col = "black",
+  lty.ref = 3, lwd.ref = 1, col.ref = "black",
+  resid.type = c("raw", "standardized", "studentized"), loess = FALSE,
+  lty.loess = 2, lwd.loess = 1, col.loess = "black",
+  trans.loess = 8, inclHist = TRUE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>An <code>lm</code> or <code>nls</code> object (i.e., returned from fitting a model with either <code>lm</code> or <code>nls</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Other arguments to the generic <code>plot</code> function.</p>
+</td></tr>
+<tr valign="top"><td><code>xlab</code></td>
+<td>
+<p>A string for labeling the x-axis.</p>
+</td></tr>
+<tr valign="top"><td><code>ylab</code></td>
+<td>
+<p>A string for labeling the y-axis.</p>
+</td></tr>
+<tr valign="top"><td><code>main</code></td>
+<td>
+<p>A string for the main label to the plot. See details.</p>
+</td></tr>
+<tr valign="top"><td><code>pch</code></td>
+<td>
+<p>A numeric that indicates the plotting character to be used or a vector of numerics that indicates what plotting character codes to use for the levels of the second factor. See <code>par</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>col</code></td>
+<td>
+<p>A vector of color names that indicates what color of points and lines to use for the levels of the first factor. See <code>par</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>lty.ref</code></td>
+<td>
+<p>A numeric that indicates the line type to use for the reference line at residual=0. See <code>par</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>lwd.ref</code></td>
+<td>
+<p>A numeric that indicates the line width to use for the reference line at residual=0. See <code>par</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>col.ref</code></td>
+<td>
+<p>A numeric or character that indicates the line color to use for the reference line at residual=0. See <code>par</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>resid.type</code></td>
+<td>
+<p>The type of residual to use. &lsquo;Raw&rsquo; residuals are used by default. See details.</p>
+</td></tr>
+<tr valign="top"><td><code>outlier.test</code></td>
+<td>
+<p>A logical that indicates if an <code>outlierTest</code> will <code>TRUE</code> (default) be performed and if the individual with the largest studentized residual is deemed to be a significant outlier it will be noted on the residual plot by its observation number.</p>
+</td></tr>
+<tr valign="top"><td><code>alpha</code></td>
+<td>
+<p>A numeric that indicates the alpha level to use for the outlier test (only used if <code>outlier.test=TRUE</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>loess</code></td>
+<td>
+<p>A logical that indicates if a loess smoother line and approximate confidence interval band is fit to and shown on the residual plot (<code>TRUE</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>lty.loess</code></td>
+<td>
+<p>A numeric that indicates the line type to use for loess fit line. See <code>par</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>lwd.loess</code></td>
+<td>
+<p>A numeric that indicates the line width to use for loess fit line. See <code>par</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>col.loess</code></td>
+<td>
+<p>A numeric or character that indicates the line color to use for loess fit line. See <code>par</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>trans.loess</code></td>
+<td>
+<p>A single numeric that indicates how transparent the loess band should be (larger numbers are more transparent).</p>
+</td></tr>
+<tr valign="top"><td><code>inclHist</code></td>
+<td>
+<p>A logical that indicates if a second pane that includes the histogram of residuals should be constructed.</p>
+</td></tr>
+<tr valign="top"><td><code>legend</code></td>
+<td>
+<p>If <code>TRUE</code>, draw a legend and the user must click in the upper-left corner of where the legend should be placed; if <code>FALSE</code> do not draw a legend. If a vector of length 2 then draw the upper left corner of the legend at the coordinates given in the vector of length 2.</p>
+</td></tr>
+<tr valign="top"><td><code>cex.leg</code></td>
+<td>
+<p>A single numeric values used to represent the character expansion value for the legend. Ignored if <code>legend=FALSE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>box.lty.leg</code></td>
+<td>
+<p>A single numeric values used to indicate the type of line to use for the box around the legend. The default is to not plot a box.</p>
+</td></tr>
+<tr valign="top"><td><code>bp</code></td>
+<td>
+<p>A logical that indicates if the plot for the one-way and two-way ANOVA will be a boxplot (<code>TRUE</code>; default) or not.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Three types of residuals are allowed for most model types. Raw residuals are simply the difference between the observed response variable and the predicted/fitted value. Standardized residuals are internally studentized residuals returned by <code><a href="../../stats/html/influence.measures.html">rstandard</a></code> for linear models and are the raw residual divided by the standard deviation of the residuals for nonlinear models (as is done by <code><a href="../../nlstools/html/nlsResiduals.html">nlsResiduals</a></code> from <span class="pkg">nlstools</span>). Studentized residuals are the externally studentized residuals returned by <code><a href="../../stats/html/influence.measures.html">rstudent</a></code> for linear models and are not available for nonlinear models.
+</p>
+<p>Externally Studentized residuals are not supported for <code>nls</code> or <code>nlme</code> objects.
+</p>
+<p>If <code>outlier.test=TRUE</code> then significant outliers are detected with <code><a href="../../car/html/outlierTest.html">outlierTest</a></code> from the <span class="pkg">car</span> package. See the help for this function for more details.
+</p>
+<p>The user can include the model call as a title to the residual plot by using <code>main="MODEL"</code>. This only works for models created with <code>lm()</code>.
+</p>
+<p>If the user chooses to add a legend without identifying coordinates for the upper-left corner of the legend (i.e., <code>legend=TRUE</code>) then the R console is suspended until the user places the legend by clicking on the produced graphic at the point where the upper-left corner of the legend should appear. A legend will only be placed if the <code>mdl</code> is an indicator variable regression, even if <code>legend=TRUE</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>None. However, a residual plot is produced.
+</p>
+
+
+<h3>Note</h3>
+
+<p>This function is meant to allow newbie students the ability to easily construct residual plots for one-way ANOVA, two-way ANOVA, simple linear regression, and indicator variable regressions. The plots can be constructed by submitting a saved linear model to this function which allows students to interact with and visualize moderately complex linear models in a fairly easy and efficient manner.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Derek H. Ogle, <a href="mailto:derek@derekogle.com">derek@derekogle.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See <code><a href="../../car/html/residualPlots.html">residualPlots</a></code> in <span class="pkg">car</span> and <code><a href="../../nlstools/html/nlsResiduals.html">nlsResiduals</a></code> in <span class="pkg">nlstools</span>) for similar functionality and <code><a href="fitPlot.html">fitPlot</a></code> and <code><a href="../../car/html/outlierTest.html">outlierTest</a></code> in <span class="pkg">car</span> for related methods.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# create year factor variable &amp; reduce number of years for visual simplicity
+Mirex$fyear &lt;- factor(Mirex$year)
+Mirex2 &lt;- filterD(Mirex,fyear %in% c(1977,1992))
+
+## Indicator variable regression with two factors
+lm1 &lt;- lm(mirex~weight*fyear*species,data=Mirex2)
+# defaults
+residPlot(lm1)
+# remove the histogram
+residPlot(lm1,inclHist=FALSE)
+# add the loess line
+residPlot(lm1,loess=TRUE,inclHist=FALSE)
+# modify colors used
+residPlot(lm1,col="rainbow",inclHist=FALSE)
+# use only one point type -- notice that all points are of same type
+residPlot(lm1,pch=16,inclHist=FALSE)
+# use only one point and one color (might as well not use legend also)
+residPlot(lm1,pch=16,col="black",legend=FALSE,inclHist=FALSE)
+# can accomplish same thing just by removing the legend
+residPlot(lm1,legend=FALSE,inclHist=FALSE)
+# modify the reference line
+residPlot(lm1,col.ref="blue",lwd.ref=5,inclHist=FALSE)
+# include model in the title
+residPlot(lm1,main="MODEL")
+# use Studentized residuals
+residPlot(lm1,resid.type="studentized",inclHist=FALSE)
+# use Standardized residuals
+residPlot(lm1,resid.type="standardized",inclHist=FALSE)
+
+## Indicator variable regression with same two factors but in different order
+##   (notice use of colors and symbols)
+lm1a &lt;- lm(mirex~weight*species*fyear,data=Mirex2)
+residPlot(lm1a)
+
+## Indicator variable regression with only one factor
+lm2 &lt;- lm(mirex~weight*fyear,data=Mirex)
+residPlot(lm2)
+residPlot(lm2,inclHist=FALSE)
+residPlot(lm2,inclHist=FALSE,pch=19)
+residPlot(lm2,inclHist=FALSE,pch=19,col="black")
+residPlot(lm2,inclHist=FALSE,legend=FALSE)
+residPlot(lm2,inclHist=FALSE,pch=2,col="red",legend=FALSE)
+
+## Indicator variable regression (assuming same slope)
+lm3 &lt;- lm(mirex~weight+fyear,data=Mirex)
+residPlot(lm3)
+
+## Simple linear regression
+lm4 &lt;- lm(mirex~weight,data=Mirex)
+residPlot(lm4)
+
+## One-way ANOVA
+lm5 &lt;- lm(mirex~fyear,data=Mirex)
+# default (uses boxplots)
+residPlot(lm5)
+# use points rather than boxplot
+residPlot(lm5,bp=FALSE)
+
+## Two-Way ANOVA
+lm6 &lt;- lm(mirex~species*fyear,data=Mirex)
+# default (uses boxplots)
+residPlot(lm6)
+# No boxplots
+residPlot(lm6,bp=FALSE)
+
+## Examples showing outlier detection
+x &lt;- c(runif(100))
+y &lt;- c(7,runif(99))
+lma &lt;- lm(y~x)
+residPlot(lma)
+# with studentized residuals
+residPlot(lma,resid.type="studentized")
+# multiple outliers
+y &lt;- c(7,runif(98),-5)
+lmb &lt;- lm(y~x)
+residPlot(lmb)
+# check that NAs are handled properly ... label should be 100
+y &lt;- c(NA,NA,runif(97),7)
+lmc &lt;- lm(y~x)
+residPlot(lmc)
+
+## Nonlinear regression
+# from first example in nls()
+DNase1 &lt;- subset(DNase,Run==1)
+fm1DNase1 &lt;- nls(density~SSlogis(log(conc),Asym,xmid,scal),DNase1)
+residPlot(fm1DNase1)
+residPlot(fm1DNase1,resid.type="standardized")
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FSA</em> version 0.8.23 <a href="00Index.html">Index</a>]</div>
+</body></html>

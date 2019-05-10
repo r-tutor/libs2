@@ -1,0 +1,512 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Convert between capture history data.frame formats.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for capHistConvert {FSA}"><tr><td>capHistConvert {FSA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Convert between capture history data.frame formats.</h2>
+
+<h3>Description</h3>
+
+<p>Use to convert between simple versions of several capture history data.frame formats &ndash; &ldquo;individual&rdquo;, &ldquo;frequency&rdquo;, &ldquo;event&rdquo;, &ldquo;MARK&rdquo;, and &ldquo;RMark&rdquo;. The primary use is to convert to the &ldquo;individual&rdquo; format for use in <code><a href="capHistSum.html">capHistSum</a></code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+capHistConvert(df, cols2use = NULL, cols2ignore = NULL,
+  in.type = c("frequency", "event", "individual", "MARK", "marked",
+  "RMark"), out.type = c("individual", "event", "frequency", "MARK",
+  "marked", "RMark"), id = NULL, event.ord = NULL, freq = NULL,
+  var.lbls = NULL, var.lbls.pre = "event",
+  include.id = ifelse(is.null(id), FALSE, TRUE))
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>df</code></td>
+<td>
+<p>A data.frame that contains the capture histories and, perhaps, a unique fish identifier or frequency variable. See details.</p>
+</td></tr>
+<tr valign="top"><td><code>cols2use</code></td>
+<td>
+<p>A string or numeric vector that indicates columns in <code>df</code> to use. Negative numeric values will not use those columns. Cannot use both <code>cols2use</code> and <code>col2ignore</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>cols2ignore</code></td>
+<td>
+<p>A string or numeric vector that indicates columns in <code>df</code> to ignore. Typical columns to ignore are those that are not either in <code>id=</code> or <code>freq=</code> or part of the capture history data. Cannot use both <code>cols2use</code> and <code>col2ignore</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>in.type</code></td>
+<td>
+<p>A single string that indicates the type of capture history format to convert <b>FROM</b>.</p>
+</td></tr>
+<tr valign="top"><td><code>out.type</code></td>
+<td>
+<p>A single string that indicates the type of capture history format to convert <b>TO</b>.</p>
+</td></tr>
+<tr valign="top"><td><code>id</code></td>
+<td>
+<p>A string or numeric that indicates the column in <code>df</code> that contains the unique identifier for an individual fish. This argument is only used if <code>in.type="event"</code>, <code>in.type="individual"</code>, or, possibly, <code>in.type="RMark"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>event.ord</code></td>
+<td>
+<p>A string that contains a vector of ordered levels to be used when <code>in.type="event"</code>. The default is to order alphabetically which may not be desirable if, for example, the events are labeled as &lsquo;first&rsquo;, &lsquo;second&rsquo;, &lsquo;third&rsquo;, and &lsquo;fourth&rsquo;. In this case, use <code>event.ord=c("first","second","third","fourth")</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>freq</code></td>
+<td>
+<p>A string or numeric that indicates the column in <code>df</code> that contains the frequency of individual fish corresponding to a capture history. This argument is only used if <code>in.type="MARK"</code>, <code>in.type="frequency"</code>, or, possibly, <code>in.type="RMark"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>var.lbls</code></td>
+<td>
+<p>A string vector of labels for the columns that contain the returned individual or frequency capture histories. If <code>var.lbls=NULL</code> or the length is different then the number of events then default labels using <code>var.lbls.pre</code> will be used. This argument is only used if <code>out.type="frequency"</code> or <code>out.type="individual"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>var.lbls.pre</code></td>
+<td>
+<p>A single string used as a prefix for the labels of the columns that contain the returned individual or frequency capture histories. This prefix will be appended with a number corresponding to the sample event. This argument is only used if <code>out.type="frequency"</code> or <code>out.type="individual"</code> and will be ignored if a proper vector is given in <code>var.lbls</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>include.id</code></td>
+<td>
+<p>A logical that indicates whether a unique fish identifier variable/column should be included in the output data.frame. This argument is only used if <code>out.type="individual"</code> or <code>out.type="RMark"</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code><a href="capHistSum.html">capHistSum</a></code> requires capture histories to be recorded in the &ldquo;individual&rdquo; format. In this format, the data frame contains (at least) as many columns as sample events and as many rows as individually tagged fish. Optionally, the data.frame may also contain a column with unique fish identifiers (e.g., tag numbers). Each cell in the capture history portion of the data.frame contains a &lsquo;0&rsquo; if the fish of that row was NOT seen in the event of that column and a &lsquo;1&rsquo; if the fish of that row WAS seen in the event of that column. For example, suppose that five fish were marked on four sampling events; fish &lsquo;17&rsquo; was captured on the first two events; fish &lsquo;18&rsquo; was captured on the first and third events; fish &lsquo;19&rsquo; was captured on only the third event; fish &lsquo;20&rsquo; was captured on only the fourth event; and fish &lsquo;21&rsquo; was captured on the first and second events. The &ldquo;individual&rdquo; capture history date.frame for these data looks like:
+</p>
+
+<table summary="Rd table">
+<tr>
+ <td style="text-align: center;">
+fish </td><td style="text-align: center;"> event1 </td><td style="text-align: center;"> event2 </td><td style="text-align: center;"> event3 </td><td style="text-align: center;"> event4 </td>
+</tr>
+<tr>
+ <td style="text-align: center;">
+17 </td><td style="text-align: center;"> 1 </td><td style="text-align: center;"> 1 </td><td style="text-align: center;"> 0 </td><td style="text-align: center;"> 0 </td>
+</tr>
+<tr>
+ <td style="text-align: center;">
+18 </td><td style="text-align: center;"> 1 </td><td style="text-align: center;"> 0 </td><td style="text-align: center;"> 1 </td><td style="text-align: center;"> 0 </td>
+</tr>
+<tr>
+ <td style="text-align: center;">
+19 </td><td style="text-align: center;"> 0 </td><td style="text-align: center;"> 0 </td><td style="text-align: center;"> 1 </td><td style="text-align: center;"> 0 </td>
+</tr>
+<tr>
+ <td style="text-align: center;">
+20 </td><td style="text-align: center;"> 0 </td><td style="text-align: center;"> 0 </td><td style="text-align: center;"> 0 </td><td style="text-align: center;"> 1 </td>
+</tr>
+<tr>
+ <td style="text-align: center;"> 
+21 </td><td style="text-align: center;"> 1 </td><td style="text-align: center;"> 1 </td><td style="text-align: center;"> 0 </td><td style="text-align: center;"> 0 </td>
+</tr>
+<tr>
+ <td style="text-align: center;">
+</td>
+</tr>
+
+</table>
+
+<p>The &ldquo;frequency&rdquo; format data.frame (this format is used in <span class="pkg">Rcapture</span>) has unique capture histories in separate columns, as in the &ldquo;individual&rdquo; format, but also includes a column with the frequency of individuals that had the capture history of that row. It will not contain a fish identifier variable. The same data from above looks like:
+</p>
+
+<table summary="Rd table">
+<tr>
+ <td style="text-align: center;">
+event1 </td><td style="text-align: center;"> event2 </td><td style="text-align: center;"> event3 </td><td style="text-align: center;"> event4 </td><td style="text-align: center;"> freq </td>
+</tr>
+<tr>
+ <td style="text-align: center;">
+1 </td><td style="text-align: center;"> 1 </td><td style="text-align: center;"> 0 </td><td style="text-align: center;"> 0 </td><td style="text-align: center;"> 2 </td>
+</tr>
+<tr>
+ <td style="text-align: center;">
+1 </td><td style="text-align: center;"> 0 </td><td style="text-align: center;"> 1 </td><td style="text-align: center;"> 0 </td><td style="text-align: center;"> 1 </td>
+</tr>
+<tr>
+ <td style="text-align: center;">
+0 </td><td style="text-align: center;"> 0 </td><td style="text-align: center;"> 1 </td><td style="text-align: center;"> 0 </td><td style="text-align: center;"> 1 </td>
+</tr>
+<tr>
+ <td style="text-align: center;">
+0 </td><td style="text-align: center;"> 0 </td><td style="text-align: center;"> 0 </td><td style="text-align: center;"> 1 </td><td style="text-align: center;"> 1 </td>
+</tr>
+<tr>
+ <td style="text-align: center;">
+</td>
+</tr>
+
+</table>
+
+<p>The &ldquo;event&rdquo; format data.frame has a column with the unique fish identifier and a column with the event in which the fish of that row was observed. The same data from above looks like:
+</p>
+
+<table summary="Rd table">
+<tr>
+ <td style="text-align: center;">
+fish </td><td style="text-align: center;"> event </td>
+</tr>
+<tr>
+ <td style="text-align: center;">
+17 </td><td style="text-align: center;"> 1 </td>
+</tr>
+<tr>
+ <td style="text-align: center;">
+18 </td><td style="text-align: center;"> 1 </td>
+</tr>
+<tr>
+ <td style="text-align: center;">
+21 </td><td style="text-align: center;"> 1 </td>
+</tr>
+<tr>
+ <td style="text-align: center;">
+17 </td><td style="text-align: center;"> 2 </td>
+</tr>
+<tr>
+ <td style="text-align: center;">
+21 </td><td style="text-align: center;"> 2 </td>
+</tr>
+<tr>
+ <td style="text-align: center;">
+18 </td><td style="text-align: center;"> 3 </td>
+</tr>
+<tr>
+ <td style="text-align: center;">
+19 </td><td style="text-align: center;"> 3 </td>
+</tr>
+<tr>
+ <td style="text-align: center;">
+20 </td><td style="text-align: center;"> 4 </td>
+</tr>
+<tr>
+ <td style="text-align: center;">
+</td>
+</tr>
+
+</table>
+
+<p>MARK (http://www.phidot.org/software/mark/index.html) is the &ldquo;gold-standard&rdquo; software for analyzing complex capture history information. In the &ldquo;MARK&rdquo; format the 0s and 1s of the capture histories are combined together as a string without any spaces. Thus, the &ldquo;MARK&rdquo; format has the capture history strings in one column with an additional column that contains the frequency of individuals that exhibited the capture history of that row. The final column ends with a semi-colon. The same data from above looks like:
+</p>
+
+<table summary="Rd table">
+<tr>
+ <td style="text-align: center;">
+ch </td><td style="text-align: center;"> freq </td>
+</tr>
+<tr>
+ <td style="text-align: center;">
+0001 </td><td style="text-align: center;"> 1; </td>
+</tr>
+<tr>
+ <td style="text-align: center;">
+0010 </td><td style="text-align: center;"> 1; </td>
+</tr>
+<tr>
+ <td style="text-align: center;">
+1010 </td><td style="text-align: center;"> 1; </td>
+</tr>
+<tr>
+ <td style="text-align: center;">
+1100 </td><td style="text-align: center;"> 2; </td>
+</tr>
+<tr>
+ <td style="text-align: center;">
+</td>
+</tr>
+
+</table>
+
+<p>The <code><a href="../../RMark/html/ABeginnersGuide.html">RMark</a></code> and <span class="pkg">marked</span> are packages used to replace some of the functionality of MARK or to interact with MARK. The &ldquo;RMark&rdquo; or &ldquo;marked&rdquo; format requires the capture histories as one string (must be a character string and called &lsquo;ch&rsquo;), as in the &ldquo;MARK&rdquo; format, but without the semicolon. The data.frame may be augmented with an identifier for individual fish OR with a frequency variable. If augmented with a unique fish identification variable then the same data from above looks like:
+</p>
+
+<table summary="Rd table">
+<tr>
+ <td style="text-align: center;">
+fish </td><td style="text-align: center;"> ch </td>
+</tr>
+<tr>
+ <td style="text-align: center;">
+17 </td><td style="text-align: center;"> 1100 </td>
+</tr>
+<tr>
+ <td style="text-align: center;">
+18 </td><td style="text-align: center;"> 1010 </td>
+</tr>
+<tr>
+ <td style="text-align: center;">
+19 </td><td style="text-align: center;"> 0010 </td>
+</tr>
+<tr>
+ <td style="text-align: center;">
+20 </td><td style="text-align: center;"> 0001 </td>
+</tr>
+<tr>
+ <td style="text-align: center;"> 
+21 </td><td style="text-align: center;"> 1100 </td>
+</tr>
+<tr>
+ <td style="text-align: center;">
+</td>
+</tr>
+
+</table>
+
+<p>However, if augmented with a frequency variable then the same data from above looks like:
+</p>
+
+<table summary="Rd table">
+<tr>
+ <td style="text-align: center;">
+ch </td><td style="text-align: center;"> freq </td>
+</tr>
+<tr>
+ <td style="text-align: center;">
+0001 </td><td style="text-align: center;"> 1 </td>
+</tr>
+<tr>
+ <td style="text-align: center;">
+0010 </td><td style="text-align: center;"> 1 </td>
+</tr>
+<tr>
+ <td style="text-align: center;">
+1010 </td><td style="text-align: center;"> 1 </td>
+</tr>
+<tr>
+ <td style="text-align: center;">
+1100 </td><td style="text-align: center;"> 2 </td>
+</tr>
+<tr>
+ <td style="text-align: center;">
+</td>
+</tr>
+
+</table>
+
+<p>Each of the formats can be used to convert from (i.e., in <code>in.type=</code>) or to convert to (i.e., in <code>out.type=</code>) with the exception that only the individual fish identifier version can be converted to when <code>out.type="RMark"</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A data frame of the proper type given in <code>out.type</code> is returned. See details.
+</p>
+
+
+<h3>Warning</h3>
+
+<p><code>capHistConvert</code> may give unwanted results if the data are <code>in.type="event"</code> but there are unused levels for the variable, as would result if the data.frame had been subsetted on the event variable. The unwanted results can be corrected by using <code>droplevels</code> before <code>capHistConvert</code>. See the last example for an example.
+</p>
+
+
+<h3>IFAR Chapter</h3>
+
+<p>9-Abundance from Capture-Recapture Data.
+</p>
+
+
+<h3>Note</h3>
+
+<p>The formats as used here are simple in the sense that one is only allowed to have the individual fish identifier or the frequency variable in addition to the capture history information. More complex analyses may use a number of covariates. For these more complex analyses, one should work directly with the <span class="pkg">Rcapture</span>, <code><a href="../../RMark/html/ABeginnersGuide.html">RMark</a></code>, or <span class="pkg">marked</span> packages.
+</p>
+<p>This function also assumes that all unmarked captured fish are marked and returned to the population (i.e., no losses at the time of marking are allowed).
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Derek H. Ogle, <a href="mailto:derek@derekogle.com">derek@derekogle.com</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Ogle, D.H. 2016. <a href="http://derekogle.com/IFAR">Introductory Fisheries Analyses with R</a>. Chapman &amp; Hall/CRC, Boca Raton, FL.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See <code><a href="capHistSum.html">capHistSum</a></code> to summarize &ldquo;individual&rdquo; capture histories into a format usable in <code><a href="mrClosed.html">mrClosed</a></code> and <code><a href="mrOpen.html">mrOpen</a></code>. Also see <span class="pkg">Rcapture</span>, <code><a href="../../RMark/html/ABeginnersGuide.html">RMark</a></code>, or <span class="pkg">marked</span> packages for handling more complex analyses.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## A small example of 'event' format
+( ex1 &lt;- data.frame(fish=c(17,18,21,17,21,18,19,20),yr=c(1987,1987,1987,1988,1988,1989,1989,1990)) )
+# convert to 'individual' format
+( ex1.E2I &lt;- capHistConvert(ex1,id="fish",in.type="event") )
+# convert to 'frequency' format
+( ex1.E2F &lt;- capHistConvert(ex1,id="fish",in.type="event",out.type="frequency") )
+# convert to 'MARK' format
+( ex1.E2M &lt;- capHistConvert(ex1,id="fish",in.type="event",out.type="MARK") )
+# convert to 'RMark' format
+( ex1.E2R &lt;- capHistConvert(ex1,id="fish",in.type="event",out.type="RMark") )
+
+## convert converted 'individual' format ...
+# to 'frequency' format (must ignore "id")
+( ex1.I2F &lt;- capHistConvert(ex1.E2I,id="fish",in.type="individual",out.type="frequency") )
+# to 'MARK' format
+( ex1.I2M &lt;- capHistConvert(ex1.E2I,id="fish",in.type="individual",out.type="MARK") )
+# to 'RMark' format
+( ex1.I2R &lt;- capHistConvert(ex1.E2I,id="fish",in.type="individual",out.type="RMark") )
+# to 'event' format
+( ex1.I2E &lt;- capHistConvert(ex1.E2I,id="fish",in.type="individual",out.type="event") )
+
+#' ## convert converted 'frequency' format ...
+# to 'individual' format
+( ex1.F2I &lt;- capHistConvert(ex1.E2F,freq="freq",in.type="frequency") )
+( ex1.F2Ia &lt;- capHistConvert(ex1.E2F,freq="freq",in.type="frequency",include.id=TRUE) )
+# to 'Mark' format
+( ex1.F2M &lt;- capHistConvert(ex1.E2F,freq="freq",in.type="frequency",
+                            out.type="MARK") )
+# to 'RMark' format
+( ex1.F2R &lt;- capHistConvert(ex1.E2F,freq="freq",in.type="frequency",
+                            out.type="RMark") )
+( ex1.F2Ra &lt;- capHistConvert(ex1.E2F,freq="freq",in.type="frequency",
+                             out.type="RMark",include.id=TRUE) )
+# to 'event' format
+( ex1.F2E &lt;- capHistConvert(ex1.E2F,freq="freq",in.type="frequency",
+                            out.type="event") )
+
+## convert converted 'MARK' format ...
+# to 'individual' format
+( ex1.M2I &lt;- capHistConvert(ex1.E2M,freq="freq",in.type="MARK") )
+( ex1.M2Ia &lt;- capHistConvert(ex1.E2M,freq="freq",in.type="MARK",include.id=TRUE) )
+# to 'frequency' format
+( ex1.M2F &lt;- capHistConvert(ex1.E2M,freq="freq",in.type="MARK",out.type="frequency") )
+# to 'RMark' format
+( ex1.M2R &lt;- capHistConvert(ex1.E2M,freq="freq",in.type="MARK",out.type="RMark") )
+( ex1.M2Ra &lt;- capHistConvert(ex1.E2M,freq="freq",in.type="MARK",out.type="RMark",include.id=TRUE) )
+# to 'event' format
+( ex1.M2E &lt;- capHistConvert(ex1.E2M,freq="freq",in.type="MARK",out.type="event") )
+ 
+## convert converted 'RMark' format ...
+# to 'individual' format
+( ex1.R2I &lt;- capHistConvert(ex1.E2R,id="fish",in.type="RMark") )
+# to 'frequency' format
+( ex1.R2F &lt;- capHistConvert(ex1.E2R,id="fish",in.type="RMark",out.type="frequency") )
+# to 'MARK' format
+( ex1.R2M &lt;- capHistConvert(ex1.E2R,id="fish",in.type="RMark",out.type="MARK") )
+# to 'event' format
+( ex1.R2E &lt;- capHistConvert(ex1.E2R,id="fish",in.type="RMark",out.type="event") )
+
+## Remove semi-colon from MARK format to make a RMark 'frequency' format
+ex1.E2R1 &lt;- ex1.E2M
+ex1.E2R1$freq &lt;- as.numeric(sub(";","",ex1.E2R1$freq))
+ex1.E2R1
+# convert this to 'individual' format
+( ex1.R2I1 &lt;- capHistConvert(ex1.E2R1,freq="freq",in.type="RMark") )
+( ex1.R2I1a &lt;- capHistConvert(ex1.E2R1,freq="freq",in.type="RMark",include.id=TRUE) )
+# convert this to 'frequency' format
+( ex1.R2F1 &lt;- capHistConvert(ex1.E2R1,freq="freq",in.type="RMark",out.type="frequency") )
+# convert this to 'MARK' format
+( ex1.R2M1 &lt;- capHistConvert(ex1.E2R1,freq="freq",in.type="RMark",out.type="MARK") )
+# convert this to 'event' format
+( ex1.R2E1 &lt;- capHistConvert(ex1.E2R1,freq="freq",in.type="RMark",out.type="event") )
+
+
+########################################################################
+## A small example using character ids
+( ex2 &lt;- data.frame(fish=c("id17","id18","id21","id17","id21","id18","id19","id20"),
+                    yr=c(1987,1987,1987,1988,1988,1989,1989,1990)) )
+# convert to 'individual' format
+( ex2.E2I &lt;- capHistConvert(ex2,id="fish",in.type="event") )
+# convert to 'frequency' format
+( ex2.E2F &lt;- capHistConvert(ex2,id="fish",in.type="event",out.type="frequency") )
+# convert to 'MARK' format
+( ex2.E2M &lt;- capHistConvert(ex2,id="fish",in.type="event",out.type="MARK") )
+# convert to 'RMark' format
+( ex2.E2R &lt;- capHistConvert(ex2,id="fish",in.type="event",out.type="RMark") )
+
+## convert converted 'individual' format ...
+# to 'frequency' format
+( ex2.I2F &lt;- capHistConvert(ex2.E2I,id="fish",in.type="individual",out.type="frequency") )
+# to 'MARK' format
+( ex2.I2M &lt;- capHistConvert(ex2.E2I,id="fish",in.type="individual",out.type="MARK") )
+# to 'RMark' format
+( ex2.I2R &lt;- capHistConvert(ex2.E2I,id="fish",in.type="individual",out.type="RMark") )
+# to 'event' format
+( ex2.I2E &lt;- capHistConvert(ex2.E2I,id="fish",in.type="individual",out.type="event") )
+
+## demo use of var.lbls
+( ex2.E2Ia &lt;- capHistConvert(ex2,id="fish",in.type="event",var.lbls.pre="Sample") )
+( ex2.E2Ib &lt;- capHistConvert(ex2,id="fish",in.type="event",
+              var.lbls=c("first","second","third","fourth")) )
+
+## demo use of event.ord
+( ex2.I2Ea &lt;- capHistConvert(ex2.E2Ib,id="fish",in.type="individual",out.type="event") )
+( ex2.E2Ibad &lt;- capHistConvert(ex2.I2Ea,id="fish",in.type="event") )
+( ex2.E2Igood &lt;- capHistConvert(ex2.I2Ea,id="fish",in.type="event",
+                 event.ord=c("first","second","third","fourth")) )
+
+## ONLY RUN IN INTERACTIVE MODE
+if (interactive()) {
+
+########################################################################
+## A larger example of 'frequency' format (data from Rcapture package)
+data(bunting,package="Rcapture")
+head(bunting)
+# convert to 'individual' format
+bun.F2I &lt;- capHistConvert(bunting,in.type="frequency",freq="freq")
+head(bun.F2I)
+# convert to 'MARK' format
+bun.F2M &lt;- capHistConvert(bunting,id="id",in.type="frequency",freq="freq",out.type="MARK")
+head(bun.F2M)
+# convert converted 'individual' back to 'MARK' format
+bun.I2M &lt;- capHistConvert(bun.F2I,id="id",in.type="individual",out.type="MARK")
+head(bun.I2M)
+# convert converted 'individual' back to 'frequency' format
+bun.I2F &lt;- capHistConvert(bun.F2I,id="id",in.type="individual",
+           out.type="frequency",var.lbls.pre="Sample")
+head(bun.I2F)
+
+
+########################################################################
+## A larger example of 'marked' or 'RMark' format, but with a covariate
+##   and when the covariate is removed there is no frequency or individual
+##   fish identifier.
+data(dipper,package="marked")
+head(dipper)
+# isolate males and females
+dipperF &lt;- subset(dipper,sex=="Female")
+dipperM &lt;- subset(dipper,sex=="Male")
+# convert females to 'individual' format
+dipF.R2I &lt;- capHistConvert(dipperF,cols2ignore="sex",in.type="RMark")
+head(dipF.R2I)
+# convert males to 'individual' format
+dipM.R2I &lt;- capHistConvert(dipperM,cols2ignore="sex",in.type="RMark")
+head(dipM.R2I)
+# add sex variable to each data.frame and then combine
+dipF.R2I$sex &lt;- "Female"
+dipM.R2I$sex &lt;- "Male"
+dip.R2I &lt;- rbind(dipF.R2I,dipM.R2I)
+head(dip.R2I)
+tail(dip.R2I)
+
+} # end interactive
+
+
+## An example of problem with unused levels
+## Create a set of test data with several groups
+( df &lt;- data.frame(fish=c("id17","id18","id21","id17","id21","id18","id19","id20","id17"),
+                   group=c("B1","B1","B1","B2","B2","B3","B4","C1","C1")) )
+#  Let's assume the user wants to subset the data from the "B" group
+( df1 &lt;- subset(df,group %in% c("B1","B2","B3","B4")) )
+#  Looks like capHistConvert() is still using the unused factor
+#  level from group C
+capHistConvert(df1,id="fish",in.type="event")
+# use droplevels() to remove the unused groups and no problem
+df1 &lt;- droplevels(df1)
+capHistConvert(df1,id="fish",in.type="event")
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FSA</em> version 0.8.23 <a href="00Index.html">Index</a>]</div>
+</body></html>

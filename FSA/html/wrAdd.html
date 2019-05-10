@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Computes a vector of relative weights specific to a species...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for wrAdd {FSA}"><tr><td>wrAdd {FSA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Computes a vector of relative weights specific to a species in an entire data frame.</h2>
+
+<h3>Description</h3>
+
+<p>This computes a vector that contains the relative weight specific to each species for all individuals in an entire data frame.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+wrAdd(wt, ...)
+
+## Default S3 method:
+wrAdd(wt, len, spec, units = c("metric", "English"),
+  ...)
+
+## S3 method for class 'formula'
+wrAdd(wt, data, units = c("metric", "English"), ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>wt</code></td>
+<td>
+<p>A numeric vector that contains weight measurements or a formula of the form <code>wt~len+spec</code> where &ldquo;wt&rdquo; generically represents the weight variable, &ldquo;len&rdquo; generically represents the length variable, and &ldquo;spec&rdquo; generically represents the species variable. Note that this formula can only contain three variables and they must be in the order of weight first, length second, species third.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Not used.</p>
+</td></tr>
+<tr valign="top"><td><code>len</code></td>
+<td>
+<p>A numeric vector that contains length measurements. Not used if <code>wt</code> is a formula.</p>
+</td></tr>
+<tr valign="top"><td><code>spec</code></td>
+<td>
+<p>A character or factor vector that contains the species names. Not used if <code>wt</code> is a formula.</p>
+</td></tr>
+<tr valign="top"><td><code>units</code></td>
+<td>
+<p>A string that indicates whether the weight and length data in <code>formula</code> are in (<code>"metric"</code> (DEFAULT; mm and g) or <code>"English"</code> (in and lbs) units.</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>A data.frame that minimally contains variables of the the observed lengths, observed weights, and the species names given in the <code>formula=</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This computes a vector that contains the relative weight specific to each species for all individuals in an entire data frame. The vector can be appended to an existing data.frame to create a variable that contains the relative weights for each individual. The relative weight value will be <code>NA</code> for each individual for which a standard weight equation does not exist in <code><a href="WSlit.html">WSlit</a></code>, a standard weight equation for the units given in <code>units=</code> does not exist in <code><a href="WSlit.html">WSlit</a></code>, a standard weight equation for the 75th percentile does not exist in <code><a href="WSlit.html">WSlit</a></code>, or if the individual is shorter or longer than the lengths for which the standard weight equation should be applied. Either the linear or quadratic equation has been listed as preferred for each species, so only that equation will be used. The use of the 75th percentile is by far the most common and, because this function is designed for use on entire data frames, it will be the only percentile allowed. Thus, to use equations for other percentiles, one will have to use &ldquo;manual&rdquo; methods. See <code><a href="WSlit.html">WSlit</a></code> and <code><a href="wsVal.html">wsVal</a></code> for more details about types of equations, percentiles, finding which species have published standard weight equations, etc. See the examples for one method for changing species names to something that this function will recognize.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Returns A numeric vector that contains the computed relative weights, in the same order as in <code>data=</code>.
+</p>
+
+
+<h3>IFAR Chapter</h3>
+
+<p>8-Condition.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Derek H. Ogle, <a href="mailto:derek@derekogle.com">derek@derekogle.com</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Ogle, D.H. 2016. <a href="http://derekogle.com/IFAR">Introductory Fisheries Analyses with R</a>. Chapman &amp; Hall/CRC, Boca Raton, FL.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See <code><a href="wsVal.html">wsVal</a></code>, <code><a href="WSlit.html">WSlit</a></code>, and <code><a href="psdAdd.html">psdAdd</a></code> for related functionality. See <code><a href="mapvalues.html">mapvalues</a></code> for help in changing species names to match those in <code><a href="WSlit.html">WSlit</a></code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Create random data for three species
+# just to control the randomization
+set.seed(345234534)
+dbt &lt;- data.frame(species=factor(rep(c("Bluefin Tuna"),30)),tl=round(rnorm(30,1900,300),0))
+dbt$wt &lt;- round(4.5e-05*dbt$tl^2.8+rnorm(30,0,6000),1)
+dbg &lt;- data.frame(species=factor(rep(c("Bluegill"),30)),tl=round(rnorm(30,130,50),0))
+dbg$wt &lt;- round(4.23e-06*dbg$tl^3.316+rnorm(30,0,10),1)
+dlb &lt;- data.frame(species=factor(rep(c("Largemouth Bass"),30)),tl=round(rnorm(30,350,60),0))
+dlb$wt &lt;- round(2.96e-06*dlb$tl^3.273+rnorm(30,0,60),1)
+df &lt;- rbind(dbt,dbg,dlb)
+str(df)
+
+df$Wr1 &lt;- wrAdd(wt~tl+species,data=df)
+## same but with non-formula interface
+df$Wr2 &lt;- wrAdd(df$wt,df$tl,df$species)
+
+## Same as above but using dplyr
+if (require(dplyr)) {
+  df &lt;- mutate(df,Wr3a=wrAdd(wt,tl,species))
+}
+
+df
+ 
+## Example with only one species in the data.frame
+bg &lt;- filterD(df,species=="Bluegill")
+bg$Wr4 &lt;- wrAdd(wt~tl+species,data=bg)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FSA</em> version 0.8.23 <a href="00Index.html">Index</a>]</div>
+</body></html>

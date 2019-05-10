@@ -1,0 +1,260 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Mortality estimates from the descending limb of a catch...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for catchCurve {FSA}"><tr><td>catchCurve {FSA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Mortality estimates from the descending limb of a catch curve.</h2>
+
+<h3>Description</h3>
+
+<p>Fits a linear model to the user-defined descending limb of a catch curve. Method functions extract estimates of the instantaneous (Z) and total annual (A) mortality rates with associated standard errors and confidence intervals. A plot method highlights the descending limb, shows the linear model on the descending limb, and, optionally, prints the estimated Z and A.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+catchCurve(x, ...)
+
+## Default S3 method:
+catchCurve(x, catch, ages2use = age,
+  weighted = FALSE, negWeightReplace = 0, ...)
+
+## S3 method for class 'formula'
+catchCurve(x, data, ages2use = age, weighted = FALSE,
+  negWeightReplace = 0, ...)
+
+## S3 method for class 'catchCurve'
+summary(object, parm = c("both", "all", "Z", "A",
+  "lm"), ...)
+
+## S3 method for class 'catchCurve'
+coef(object, parm = c("all", "both", "Z", "A",
+  "lm"), ...)
+
+## S3 method for class 'catchCurve'
+anova(object, ...)
+
+## S3 method for class 'catchCurve'
+confint(object, parm = c("all", "both", "Z", "A",
+  "lm"), level = conf.level, conf.level = 0.95, ...)
+
+## S3 method for class 'catchCurve'
+rSquared(object, digits = getOption("digits"),
+  percent = FALSE, ...)
+
+## S3 method for class 'catchCurve'
+plot(x, pos.est = "topright", cex.est = 0.95,
+  ylab = "log(Catch)", xlab = "Age", col.pt = "gray30",
+  col.mdl = "black", lwd = 2, lty = 1, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A numerical vector of assigned ages in the catch curve or a formula of the form <code>catch~age</code> when used in <code>catchCurve</code>. An object saved from <code>catchCurve</code> (i.e., of class <code>catchCurve</code>) when used in the methods.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments for methods.</p>
+</td></tr>
+<tr valign="top"><td><code>catch</code></td>
+<td>
+<p>A numerical vector of catches or CPUEs for the ages in the catch curve. Not used if <code>x</code> is a formula.</p>
+</td></tr>
+<tr valign="top"><td><code>ages2use</code></td>
+<td>
+<p>A numerical vector of ages that define the descending limb of the catch curve.</p>
+</td></tr>
+<tr valign="top"><td><code>weighted</code></td>
+<td>
+<p>A logical that indicates whether a weighted regression should be used. See details.</p>
+</td></tr>
+<tr valign="top"><td><code>negWeightReplace</code></td>
+<td>
+<p>A single non-negative numeric that will replace negative weights (defaults to 0). Only used when <code>weighted=TRUE</code>. See details.</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>A data.frame from which the variables in the <code>x</code> formula can be found. Not used if <code>x</code> is not a formula.</p>
+</td></tr>
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>An object saved from the <code>catchCurve</code> call (i.e., of class <code>catchCurve</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>parm</code></td>
+<td>
+<p>A numeric or string (of parameter names) vector that specifies which parameters are to be given confidence intervals. If <code>parm="lm"</code> then confidence intervals for the underlying linear model are returned.</p>
+</td></tr>
+<tr valign="top"><td><code>level</code></td>
+<td>
+<p>Same as <code>conf.level</code>. Used for compatibility with the generic <code>confint</code> function.</p>
+</td></tr>
+<tr valign="top"><td><code>conf.level</code></td>
+<td>
+<p>A number representing the level of confidence to use for constructing confidence intervals.</p>
+</td></tr>
+<tr valign="top"><td><code>digits</code></td>
+<td>
+<p>The number of digits to round the <code>rSquared</code> result to.</p>
+</td></tr>
+<tr valign="top"><td><code>percent</code></td>
+<td>
+<p>A logical that indicates if the <code>rSquared</code> result should be returned as a percentage (<code>=TRUE</code>) or as a proportion (<code>=FALSE</code>; default).</p>
+</td></tr>
+<tr valign="top"><td><code>pos.est</code></td>
+<td>
+<p>A string to identify where to place the estimated mortality rates on the plot. Can be set to one of <code>"bottomright"</code>, <code>"bottom"</code>, <code>"bottomleft"</code>, <code>"left"</code>, <code>"topleft"</code>, <code>"top"</code>, <code>"topright"</code>, <code>"right"</code> or <code>"center"</code> for positioning the estimated mortality rates on the plot. Typically <code>"bottomleft"</code> (DEFAULT) and <code>"topright"</code> will be &ldquo;out-of-the-way&rdquo; placements. Set <code>pos.est</code> to <code>NULL</code> to remove the estimated mortality rates from the plot.</p>
+</td></tr>
+<tr valign="top"><td><code>cex.est</code></td>
+<td>
+<p>A single numeric character expansion value for the estimated mortality rates on the plot.</p>
+</td></tr>
+<tr valign="top"><td><code>ylab</code></td>
+<td>
+<p>A label for the y-axis (<code>"log(Catch)"</code> is the default).</p>
+</td></tr>
+<tr valign="top"><td><code>xlab</code></td>
+<td>
+<p>A label for the x-axis (<code>"Age"</code> is the default).</p>
+</td></tr>
+<tr valign="top"><td><code>col.pt</code></td>
+<td>
+<p>A string that indicates the color of the plotted points.</p>
+</td></tr>
+<tr valign="top"><td><code>col.mdl</code></td>
+<td>
+<p>A string that indicates the color of the fitted line.</p>
+</td></tr>
+<tr valign="top"><td><code>lwd</code></td>
+<td>
+<p>A numeric that indicates the line width of the fitted line.</p>
+</td></tr>
+<tr valign="top"><td><code>lty</code></td>
+<td>
+<p>A numeric that indicates the type of line used for the fitted line.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The default is to use all ages in the age vector. This is appropriate only when the age and catch vectors contain only the ages and catches on the descending limb of the catch curve. Use <code>ages2use</code> to isolate only the catch and ages on the descending limb.
+</p>
+<p>If <code>weighted=TRUE</code> then a weighted regression is used where the weights are the log(number) at each age predicted from the unweighted regression of log(number) on age (as proposed by Maceina and Bettoli (1998)). If a negative weight is computed it will be changed to the value in <code>negWeightReplace</code> and a warning will be issued.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list that contains the following items:
+</p>
+
+<ul>
+<li><p> age The original vector of assigned ages.
+</p>
+</li>
+<li><p> catch The original vector of observed catches or CPUEs.
+</p>
+</li>
+<li><p> age.e A vector of assigned ages for which the catch curve was fit.
+</p>
+</li>
+<li><p> log.catch.e A vector of log catches or CPUEs for which the catch curve was fit.
+</p>
+</li>
+<li><p> W A vector of weights used in the catch curve fit. Will be <code>NULL</code> unless <code>weighted=TRUE</code>.
+</p>
+</li>
+<li><p> lm An <code>lm</code> object from the fit to the ages and log catches or CPUEs on the descending limb (i.e., in age.e and log.catch.e).
+</p>
+</li></ul>
+
+
+
+<h3>Testing</h3>
+
+<p>Tested the results of catch curve, both unweighted and weighted, against the results in Miranda and Bettoli (2007). Results for Z and the SE of Z matched perfectly. Tested the unweighted results against the results from <code>agesurv</code> in <span class="pkg">fishmethods</span> using the <code>rockbass</code> data.frame in <span class="pkg">fishmethods</span>. Results for Z and the SE of Z matched perfectly.
+</p>
+
+
+<h3>IFAR Chapter</h3>
+
+<p>11-Mortality.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Derek H. Ogle, <a href="mailto:derek@derekogle.com">derek@derekogle.com</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Ogle, D.H. 2016. <a href="http://derekogle.com/IFAR">Introductory Fisheries Analyses with R</a>. Chapman &amp; Hall/CRC, Boca Raton, FL.
+</p>
+<p>Maceina, M.J., and P.W. Bettoli. 1998. Variation in Largemouth Bass recruitment in four mainstream impoundments on the Tennessee River. North American Journal of Fisheries Management 18:998-1003.
+</p>
+<p>Ricker, W.E. 1975. Computation and interpretation of biological statistics of fish populations. Technical Report Bulletin 191, Bulletin of the Fisheries Research Board of Canada. [Was (is?) from http://www.dfo-mpo.gc.ca/Library/1485.pdf.]
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See <code><a href="../../fishmethods/html/agesurv.html">agesurv</a></code> in <span class="pkg">fishmethods</span> for similar functionality. See <code><a href="chapmanRobson.html">chapmanRobson</a></code> and <code><a href="../../fishmethods/html/agesurvcl.html">agesurvcl</a></code> in <span class="pkg">fishmethods</span> for alternative methods to estimate mortality rates. See <code><a href="metaM.html">metaM</a></code> for empirical methods to estimate natural mortality.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+plot(catch~age,data=BrookTroutTH,pch=19)
+
+## demonstration of formula notation
+cc1 &lt;- catchCurve(catch~age,data=BrookTroutTH,ages2use=2:6)
+summary(cc1)
+cbind(Est=coef(cc1),confint(cc1))
+rSquared(cc1)
+plot(cc1)
+summary(cc1,parm="Z")
+cbind(Est=coef(cc1,parm="Z"),confint(cc1,parm="Z"))
+
+## demonstration of excluding ages2use
+cc2 &lt;- catchCurve(catch~age,data=BrookTroutTH,ages2use=-c(0,1))
+summary(cc2)
+plot(cc2)
+
+## demonstration of using weights
+cc3 &lt;- catchCurve(catch~age,data=BrookTroutTH,ages2use=2:6,weighted=TRUE)
+summary(cc3)
+plot(cc3)
+
+## demonstration of returning the linear model results
+summary(cc3,parm="lm")
+cbind(Est=coef(cc3,parm="lm"),confint(cc3,parm="lm"))
+
+## demonstration of ability to work with missing age classes
+df &lt;- data.frame(age=c(  2, 3, 4, 5, 7, 9,12),
+                 ct= c(100,92,83,71,56,35, 1))
+cc4 &lt;- catchCurve(ct~age,data=df,ages2use=4:12)
+summary(cc4)
+plot(cc4)
+
+## demonstration of ability to work with missing age classes
+## evein if catches are recorded as NAs
+df &lt;- data.frame(age=c(  2, 3, 4, 5, 6, 7, 8, 9,10,11,12),
+                 ct= c(100,92,83,71,NA,56,NA,35,NA,NA, 1))
+cc5 &lt;- catchCurve(ct~age,data=df,ages2use=4:12)
+summary(cc5)
+plot(cc5)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FSA</em> version 0.8.23 <a href="00Index.html">Index</a>]</div>
+</body></html>

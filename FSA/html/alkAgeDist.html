@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Proportions-at-age from an age-length key</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for alkAgeDist {FSA}"><tr><td>alkAgeDist {FSA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Proportions-at-age from an age-length key</h2>
+
+<h3>Description</h3>
+
+<p>Computes the proportions-at-age (with standard errors) in a larger sample based on an age-length-key created from a subsample of ages through a two-stage random sampling design. Follows the methods in Quinn and Deriso (1999).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+alkAgeDist(key, lenA.n, len.n)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>key</code></td>
+<td>
+<p>A numeric matrix that contains the age-length key. See details.</p>
+</td></tr>
+<tr valign="top"><td><code>lenA.n</code></td>
+<td>
+<p>A numeric vector of sample sizes for each length interval in the <em>aged sample</em>.</p>
+</td></tr>
+<tr valign="top"><td><code>len.n</code></td>
+<td>
+<p>A numeric vector of sample sizes for each length interval in the <em>complete sample</em> (i.e., all fish regardless of whether they were aged or not).</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The age-length key in <code>key</code> must have length intervals as rows and ages as columns. The row names of <code>key</code> (i.e., <code>rownames(key)</code>) must contain the minimum values of each length interval (e.g., if an interval is 100-109 then the corresponding row name must be 100). The column names of <code>key</code> (i.e., <code>colnames(key)</code>) must contain the age values (e.g., the columns can NOT be named with &ldquo;age.1&rdquo;, for example).
+</p>
+<p>The length intervals in the rows of <code>key</code> must contain all of the length intervals present in the larger sample. Thus, the length of <code>len.n</code> must, at least, equal the number of rows in <code>key</code>. If this constraint is not met, then the function will stop with an error message.
+</p>
+<p>The values in <code>lenA.n</code> are equal to what the row sums of <code>key</code> would have been before <code>key</code> was converted to a row proportions table. Thus, the length of <code>lenA.n</code> must also be equal to the number of rows in <code>key</code>. If this constraint is not met, then the function will stop with an error message.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A data.frame with as many rows as ages (columns) present in <code>key</code> and the following three variables:
+</p>
+
+<ul>
+<li><p> age The ages.
+</p>
+</li>
+<li><p> prop The proportion of fish at each age.
+</p>
+</li>
+<li><p> se The SE for the proportion of fish at each age.
+</p>
+</li></ul>
+
+
+
+<h3>Testing</h3>
+
+<p>The results from this function perfectly match the results in Table 8.4 (left) of Quinn and Deriso (1999) using <code><a href="../../FSAdata/html/SnapperHG2.html">SnapperHG2</a></code> from <span class="pkg">FSAdata</span>. The results also perfectly match the results from using <code><a href="../../fishmethods/html/alkprop.html">alkprop</a></code> in <span class="pkg">fishmethods</span>.
+</p>
+
+
+<h3>IFAR Chapter</h3>
+
+<p>5-Age-Length Key.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Derek H. Ogle, <a href="mailto:derek@derekogle.com">derek@derekogle.com</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Ogle, D.H. 2016. <a href="http://derekogle.com/IFAR">Introductory Fisheries Analyses with R</a>. Chapman &amp; Hall/CRC, Boca Raton, FL.
+</p>
+<p>Lai, H.-L. 1987. Optimum allocation for estimating age composition using age-length key. Fishery Bulletin, 85:179-185.
+</p>
+<p>Lai, H.-L. 1993. Optimum sampling design for using the age-length key to estimate age composition of a fish population. Fishery Bulletin, 92:382-388.
+</p>
+<p>Quinn, T. J. and R. B. Deriso. 1999. Quantitative Fish Dynamics. Oxford University Press, New York, New York. 542 pages.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See <code><a href="alkIndivAge.html">alkIndivAge</a></code> and related functions for a completely different methodology. See <code><a href="../../fishmethods/html/alkprop.html">alkprop</a></code> from <span class="pkg">fishmethods</span> for the exact same methodology but with a different format for the inputs.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Example -- Even breaks for length categories
+WR1 &lt;- WR79
+# add length intervals (width=5)
+WR1$LCat &lt;- lencat(WR1$len,w=5)
+# get number of fish in each length interval in the entire sample
+len.n &lt;- xtabs(~LCat,data=WR1)
+# isolate aged sample and get number in each length interval
+WR1.age &lt;- subset(WR1, !is.na(age))
+lenA.n &lt;- xtabs(~LCat,data=WR1.age)
+# create age-length key
+raw &lt;- xtabs(~LCat+age,data=WR1.age)
+( WR1.key &lt;- prop.table(raw, margin=1) )
+
+# use age-length key to estimate age distribution of all fish
+alkAgeDist(WR1.key,lenA.n,len.n)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FSA</em> version 0.8.23 <a href="00Index.html">Index</a>]</div>
+</body></html>

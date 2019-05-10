@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Kolmogorov-Smirnov Tests.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for ksTest {FSA}"><tr><td>ksTest {FSA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Kolmogorov-Smirnov Tests.</h2>
+
+<h3>Description</h3>
+
+<p>Performs a one- or two-sample Kolmogorov-Smirnov test.  Includes the option to perform the two-sample test using the formula notation.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ksTest(x, ...)
+
+## Default S3 method:
+ksTest(x, y, ..., alternative = c("two.sided", "less",
+  "greater"), exact = NULL)
+
+## S3 method for class 'formula'
+ksTest(x, data = NULL, ...,
+  alternative = c("two.sided", "less", "greater"), exact = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A numeric vector of data values or a formula (see details).</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Parameters of the distribution specified (as a character string) by <code>y</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>A numeric vector of data values, a character string naming a cumulative distribution function, or an actual cumulative distribution function.  See <code><a href="../../stats/html/ks.test.html">ks.test</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>alternative</code></td>
+<td>
+<p>A string that indicates the alternative hypothesis.  See <code><a href="../../stats/html/ks.test.html">ks.test</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>exact</code></td>
+<td>
+<p><code>NULL</code> or a logical that indicates whether an exact p-value should be computed. See <code><a href="../../stats/html/ks.test.html">ks.test</a></code>.  Not available if ties are present, nor for the one-sided two-sample case.</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>A data frame that contains the variables in the formula for <code>x</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This is exactly <code><a href="../../stats/html/ks.test.html">ks.test</a></code> except that a formula may be used for the two-sample situation.  The default version is simply a pass through to <code><a href="../../stats/html/ks.test.html">ks.test</a></code>.  See <code><a href="../../stats/html/ks.test.html">ks.test</a></code> for more details.
+</p>
+
+
+<h3>Value</h3>
+
+<p>See <code><a href="../../stats/html/ks.test.html">ks.test</a></code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Derek H. Ogle, <a href="mailto:derek@derekogle.com">derek@derekogle.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../stats/html/ks.test.html">ks.test</a></code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## see ks.test for other examples
+x &lt;- rnorm(50)
+y &lt;- runif(30)
+df &lt;- data.frame(dat=c(x,y),grp=rep(c("X","Y"),c(50,30)))
+
+## one-sample (from ks.test) still works
+ksTest(x+2, "pgamma", 3, 2)
+ks.test(x+2, "pgamma", 3, 2)
+
+## first two-sample example in ?ks.test
+ksTest(x,y)
+ks.test(x,y)
+
+## same as above but using data.frame and formula
+ksTest(dat~grp,data=df)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FSA</em> version 0.8.23 <a href="00Index.html">Index</a>]</div>
+</body></html>

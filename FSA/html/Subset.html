@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Subsets/filters a data frame and drops the unused levels.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for Subset {FSA}"><tr><td>Subset {FSA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Subsets/filters a data frame and drops the unused levels.</h2>
+
+<h3>Description</h3>
+
+<p>Subsets/filters a data frame and drops the unused levels.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+Subset(x, subset, select, drop = FALSE, resetRownames = TRUE, ...)
+
+filterD(x, ..., except = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A data frame.</p>
+</td></tr>
+<tr valign="top"><td><code>subset</code></td>
+<td>
+<p>A logical expression that indicates elements or rows to keep: missing values are taken as false.</p>
+</td></tr>
+<tr valign="top"><td><code>select</code></td>
+<td>
+<p>An expression, that indicates columns to select from a data frame.</p>
+</td></tr>
+<tr valign="top"><td><code>drop</code></td>
+<td>
+<p>passed on to <code>[</code> indexing operator.</p>
+</td></tr>
+<tr valign="top"><td><code>resetRownames</code></td>
+<td>
+<p>A logical that indicates if the rownames should be reset after the subsetting (<code>TRUE</code>; default). Resetting rownames will simply number the rows from 1 to the number of rows in the result.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>further arguments to be passed to or from other methods.</p>
+</td></tr>
+<tr valign="top"><td><code>except</code></td>
+<td>
+<p>Indices of columns from which NOT to drop levels.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Newbie students using R expect that when a factor variable is subsetted with <code><a href="../../base/html/subset.html">subset</a></code> or filtered with <code><a href="../../dplyr/html/filter.html">filter</a></code> that any original levels that are no longer used after the subsetting or filtering will be ignored. This, however, is not the case and often results in tables with empty cells and figures with empty bars. One remedy is to use <code><a href="../../gdata/html/drop.levels.html">drop.levels</a></code> from <span class="pkg">gdata</span> immediately following the <code><a href="../../base/html/subset.html">subset</a></code> or <code><a href="../../dplyr/html/filter.html">filter</a></code> call. This generally becomes a repetitive sequence for most newbie students; thus, <code>Subset</code> and <code>filterD</code> incorporate these two functions into one function.
+</p>
+<p><code>Subset</code> is a wrapper to <code><a href="../../base/html/subset.html">subset</a></code> with a catch for non-data.frames and a specific call to <code><a href="../../gdata/html/drop.levels.html">drop.levels</a></code> just before the data.frame is returned. I also added an argument to allow resetting the row names. <code>filterD</code> is a wrapper for <code><a href="../../dplyr/html/filter.html">filter</a></code> from <span class="pkg">dplyr</span> followed by <code><a href="../../gdata/html/drop.levels.html">drop.levels</a></code> just before the data.frame is returned. Otherwise, there is no new code here.
+</p>
+<p>These functions are used only for data frames.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A data frame with the subsetted rows and selected variables.
+</p>
+
+
+<h3>IFAR Chapter</h3>
+
+<p>Basic Data Manipulations.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Derek H. Ogle, <a href="mailto:derek@derekogle.com">derek@derekogle.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See <code>subset</code> and <code><a href="../../dplyr/html/filter.html">filter</a></code> from <span class="pkg">dplyr</span> for similar functionality. See <code><a href="../../gdata/html/drop.levels.html">drop.levels</a></code> in <span class="pkg">gdata</span> and <code><a href="../../base/html/droplevels.html">droplevels</a></code> for related functionality.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## The problem -- note use of unused level in the final table.
+levels(iris$Species)
+iris.set1 &lt;- subset(iris,Species=="setosa" | Species=="versicolor")
+levels(iris.set1$Species)
+xtabs(~Species,data=iris)
+
+## A simpler fix using Subset
+iris.set2 &lt;- Subset(iris,Species=="setosa" | Species=="versicolor")
+levels(iris.set2$Species)
+xtabs(~Species,data=iris.set2)
+
+## A simpler fix using filterD
+iris.set3 &lt;- filterD(iris,Species=="setosa" | Species=="versicolor")
+levels(iris.set3$Species)
+xtabs(~Species,data=iris.set3)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FSA</em> version 0.8.23 <a href="00Index.html">Index</a>]</div>
+</body></html>

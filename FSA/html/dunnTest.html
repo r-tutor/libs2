@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Dunn's Kruskal-Wallis Multiple Comparisons.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for dunnTest {FSA}"><tr><td>dunnTest {FSA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Dunn's Kruskal-Wallis Multiple Comparisons.</h2>
+
+<h3>Description</h3>
+
+<p>Performs Dunn's (1964) test of multiple comparisons following a significant Kruskal-Wallis test, possibly with a correction to control the experimentwise error rate. This is largely a wrapper for the <code><a href="../../dunn.test/html/dunn.test.html">dunn.test</a></code> function in <span class="pkg">dunn.test</span>. Please see and cite that package.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+dunnTest(x, ...)
+
+## Default S3 method:
+dunnTest(x, g,
+  method = dunn.test::p.adjustment.methods[c(4, 2:3, 5:8, 1)],
+  two.sided = TRUE, altp = two.sided, ...)
+
+## S3 method for class 'formula'
+dunnTest(x, data = NULL,
+  method = dunn.test::p.adjustment.methods[c(4, 2:3, 5:8, 1)],
+  two.sided = TRUE, altp = two.sided, ...)
+
+## S3 method for class 'dunnTest'
+print(x, dunn.test.results = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A numeric vector of data values or a formula of the form x~g.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Not yet used.</p>
+</td></tr>
+<tr valign="top"><td><code>g</code></td>
+<td>
+<p>A factor vector or a (non-numeric) vector that can be coerced to a factor vector.</p>
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+<p>A single string that identifies the method used to control the experimentwise error rate. See the list of methods in <code>p.adjustment.methods</code> (documented with <code><a href="../../dunn.test/html/dunn.test.html">dunn.test</a></code>) in <span class="pkg">dunn.test</span>.</p>
+</td></tr>
+<tr valign="top"><td><code>two.sided</code></td>
+<td>
+<p>A single logical that indicates whether a two-sided p-value should be returned (<code>TRUE</code>; default) or not. See details.</p>
+</td></tr>
+<tr valign="top"><td><code>altp</code></td>
+<td>
+<p>Same as <code>two.sided</code>. Allows similar code with the <code><a href="../../dunn.test/html/dunn.test.html">dunn.test</a></code> function in <span class="pkg">dunn.test</span>. <code>two.sided</code> is maintained because it pre-dates <code>altp</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>A data.frame that minimally contains <code>x</code> and <code>g</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>dunn.test.results</code></td>
+<td>
+<p>A single logical that indicates whether the results that would have been printed by <code><a href="../../dunn.test/html/dunn.test.html">dunn.test</a></code> function in <span class="pkg">dunn.test</span> are shown.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This function performs &ldquo;Dunn's&rdquo; test of multiple comparisons following a Kruskal-Wallis test. Unadjusted one- or two-sided p-values for each pairwise comparison among groups are computed following Dunn's description as implemented in the <code><a href="../../dunn.test/html/dunn.test.html">dunn.test</a></code> function from <span class="pkg">dunn.test</span>. These p-values may be adjusted using methods in the <code>p.adjustment.methods</code> function in <span class="pkg">dunn.test</span>.
+</p>
+<p>This function is largely a wrapper for the <code><a href="../../dunn.test/html/dunn.test.html">dunn.test</a></code> function in <span class="pkg">dunn.test</span>. Changes here are the possible use of formula notation, results not printed by the main function (but are printed in a more useful format (in my opinion) by the <code>print</code> function), the p-values are adjusted by default with the &ldquo;holm&rdquo; method, and two-sided p-values are returned by default. See <code><a href="../../dunn.test/html/dunn.test.html">dunn.test</a></code> function in <span class="pkg">dunn.test</span> for more details underlying these computations.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list with three items &ndash; <code>method</code> is the long name of the method used to control the experimentwise error rate, <code>dtres</code> is the strings that would have been printed by the <code><a href="../../dunn.test/html/dunn.test.html">dunn.test</a></code> function in <span class="pkg">dunn.test</span>, and <code>res</code> is a data.frame with the following variables:
+</p>
+
+<ul>
+<li><p> Comparison: Labels for each pairwise comparison.
+</p>
+</li>
+<li><p> Z: Values for the Z test statistic for each comparison.
+</p>
+</li>
+<li><p> P.unadj: Unadjusted p-values for each comparison.
+</p>
+</li>
+<li><p> P.adj: Adjusted p-values for each comparison.
+</p>
+</li></ul>
+
+
+
+<h3>Note</h3>
+
+<p>The data.frame will be reduced to only those rows that are complete cases for <code>x</code> and <code>g</code>. In other words, rows with missing data for either <code>x</code> or <code>g</code> are removed from the analysis and a warning will be issued.
+</p>
+<p>There are a number of functions in other packages that do similar analyses.
+</p>
+<p>The results from <code>DunnTest</code> match the results (in a different format) from the <code><a href="../../dunn.test/html/dunn.test.html">dunn.test</a></code> function from <span class="pkg">dunn.test</span>.
+</p>
+<p>The <code><a href="../../asbio/html/pairw.kw.html">pairw.kw</a></code> function from the <span class="pkg">asbio</span> package performs the Dunn test with the Bonferroni correction. The <code><a href="../../asbio/html/pairw.kw.html">pairw.kw</a></code> also provides a confidence interval for the difference in mean ranks between pairs of groups. The p-value results from <code>DunnTest</code> match the results from <code><a href="../../asbio/html/pairw.kw.html">pairw.kw</a></code>.
+</p>
+<p>The <code><a href="../../PMCMR/html/posthoc.kruskal.nemenyi.test.html">posthoc.kruskal.nemenyi.test</a></code> function from the <span class="pkg">PMCMR</span> package uses the &ldquo;Nemenyi&rdquo; (1963) method of multiple comparisons.
+</p>
+<p>The <code><a href="../../pgirmess/html/kruskalmc.html">kruskalmc</a></code> function from the <span class="pkg">pgirmess</span> package uses the method described by Siegel and Castellan (1988).
+</p>
+<p>It is not clear which method the <code><a href="../../agricolae/html/kruskal.html">kruskal</a></code> function from the <span class="pkg">agricolae</span> package uses. It does not seem to output p-values but it does allow for a wide variety of methods to control the experimentwise error rate.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Derek H. Ogle, <a href="mailto:derek@derekogle.com">derek@derekogle.com</a>, but this is largely a wrapper (see details) for <code><a href="../../dunn.test/html/dunn.test.html">dunn.test</a></code> in <span class="pkg">dunn.test</span> written by Alexis Dinno.
+</p>
+
+
+<h3>References</h3>
+
+<p>Dunn, O.J. 1964. Multiple comparisons using rank sums. Technometrics 6:241-252.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See <code><a href="../../stats/html/kruskal.test.html">kruskal.test</a></code>, <code><a href="../../dunn.test/html/dunn.test.html">dunn.test</a></code> in <span class="pkg">dunn.test</span>, <code><a href="../../PMCMR/html/posthoc.kruskal.nemenyi.test.html">posthoc.kruskal.nemenyi.test</a></code> in <span class="pkg">PMCMR</span>, <code><a href="../../pgirmess/html/kruskalmc.html">kruskalmc</a></code> in <span class="pkg">pgirmess</span>, and <code><a href="../../agricolae/html/kruskal.html">kruskal</a></code> in <span class="pkg">agricolae</span>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## pH in four ponds data from Zar (2010)
+ponds &lt;- data.frame(pond=as.factor(rep(1:4,each=8)),
+                    pH=c(7.68,7.69,7.70,7.70,7.72,7.73,7.73,7.76,
+                         7.71,7.73,7.74,7.74,7.78,7.78,7.80,7.81,
+                         7.74,7.75,7.77,7.78,7.80,7.81,7.84,NA,
+                         7.71,7.71,7.74,7.79,7.81,7.85,7.87,7.91))
+ponds2 &lt;- ponds[complete.cases(ponds),]
+
+# non-formula usage (default "holm" method)
+dunnTest(ponds2$pH,ponds2$pond)
+
+# formula usage (default "holm" method)
+dunnTest(pH~pond,data=ponds2)
+
+# other methods
+dunnTest(pH~pond,data=ponds2,method="bonferroni")
+dunnTest(pH~pond,data=ponds2,method="bh")
+dunnTest(pH~pond,data=ponds2,method="none")
+
+# one-sided
+dunnTest(pH~pond,data=ponds2,two.sided=FALSE)
+
+# warning message if incomplete cases were removed
+dunnTest(pH~pond,data=ponds)
+
+# print dunn.test results
+tmp &lt;- dunnTest(pH~pond,data=ponds2)
+print(tmp,dunn.test.results=TRUE)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FSA</em> version 0.8.23 <a href="00Index.html">Index</a>]</div>
+</body></html>

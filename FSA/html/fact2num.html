@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Converts &quot;numeric&quot; factor levels to numeric values.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for fact2num {FSA}"><tr><td>fact2num {FSA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Converts &quot;numeric&quot; factor levels to numeric values.</h2>
+
+<h3>Description</h3>
+
+<p>Converts &ldquo;numeric&rdquo; factor levels to numeric values.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+fact2num(object)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>A vector with &ldquo;numeric&rdquo; factor levels to be converted to numeric values.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A numeric vector.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Derek H. Ogle, <a href="mailto:derek@derekogle.com">derek@derekogle.com</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+junk &lt;- factor(c(1,7,2,4,3,10))
+str(junk)
+junk2 &lt;- fact2num(junk)
+str(junk2)
+
+## ONLY RUN IN INTERACTIVE MODE
+if (interactive()) {
+
+bad &lt;- factor(c("A","B","C"))
+# This will result in an error -- levels are not 'numeric'
+bad2 &lt;- fact2num(bad)
+
+}  ## END IF INTERACTIVE MODE
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FSA</em> version 0.8.23 <a href="00Index.html">Index</a>]</div>
+</body></html>

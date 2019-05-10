@@ -1,6 +1,6 @@
 Package: dimRed
 Title: A Framework for Dimensionality Reduction
-Version: 0.2.2
+Version: 0.2.3
 Authors@R: c(
     person("Guido", "Kraemer",
            email = "gkraemer@bgc-jena.mpg.de",
@@ -28,11 +28,11 @@ Collate: 'dimRedMethod-class.R' 'misc.R' 'dimRedData-class.R'
         'lle.R' 'loe.R' 'mds.R' 'mixColorSpaces.R' 'nmds.R' 'nnmf.R'
         'pca.R' 'plot.R' 'quality.R' 'rotate.R' 'soe.R' 'tsne.R'
         'umap.R'
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
 NeedsCompilation: yes
-Packaged: 2018-11-13 16:03:29 UTC; gkraemer
+Packaged: 2019-05-07 15:41:40 UTC; gkraemer
 Author: Guido Kraemer [aut, cre]
 Maintainer: Guido Kraemer <gkraemer@bgc-jena.mpg.de>
 Repository: CRAN
-Date/Publication: 2018-11-13 17:50:03 UTC
-Built: R 3.5.1; ; 2018-11-23 22:43:35 UTC; windows
+Date/Publication: 2019-05-08 08:10:07 UTC
+Built: R 3.6.0; ; 2019-05-09 10:00:19 UTC; windows

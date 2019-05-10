@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Constructs the correction-factor used when back-transforming...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for logbtcf {FSA}"><tr><td>logbtcf {FSA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Constructs the correction-factor used when back-transforming log-transformed values.</h2>
+
+<h3>Description</h3>
+
+<p>Constructs the correction-factor used when back-transforming log-transformed values according to Sprugel (1983). Sprugel's main formula &ndash; exp((syx^2)/2) &ndash; is used when syx is estimated for natural log transformed data. A correction for any base is obtained by multiplying the syx term by log_e(base) to give exp(((log_e(base)*syx)^2)/2). This more general formula is implemented here (if, of course, the base is exp(1) then the general formula reduces to the original specific formula).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+logbtcf(obj, base = exp(1))
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>obj</code></td>
+<td>
+<p>An object from <code>lm</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>base</code></td>
+<td>
+<p>A single numeric that indicates the base of the logarithm used.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A numeric value that is the correction factor according to Sprugel (1983).
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Derek H. Ogle, <a href="mailto:derek@derekogle.com">derek@derekogle.com</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Sprugel, D.G. 1983. Correcting for bias in log-transformed allometric equations. Ecology 64:209-210.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# toy data
+df &lt;- data.frame(y=rlnorm(10),x=rlnorm(10))
+df$logey &lt;- log(df$y)
+df$log10y &lt;- log10(df$y)
+df$logex &lt;- log(df$x)
+df$log10x &lt;- log10(df$x)
+
+# model and predictions on loge scale
+lme &lt;- lm(logey~logex,data=df)
+( ploge &lt;- predict(lme,data.frame(logex=log(10))) )
+( pe &lt;- exp(ploge) )
+( cfe &lt;- logbtcf(lme) )
+( cpe &lt;- cfe*pe )
+
+# model and predictions on log10 scale
+lm10 &lt;- lm(log10y~log10x,data=df)
+plog10 &lt;- predict(lm10,data.frame(log10x=log10(10)))
+p10 &lt;- 10^(plog10)
+( cf10 &lt;- logbtcf(lm10,10) )
+( cp10 &lt;- cf10*p10 )
+
+# cfe and cf10, cpe and cp10 should be equal
+all.equal(cfe,cf10)
+all.equal(cpe,cp10)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FSA</em> version 0.8.23 <a href="00Index.html">Index</a>]</div>
+</body></html>

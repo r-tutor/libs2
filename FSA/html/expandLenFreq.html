@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Expands a length frequency based on a subsample.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for expandLenFreq {FSA}"><tr><td>expandLenFreq {FSA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Expands a length frequency based on a subsample.</h2>
+
+<h3>Description</h3>
+
+<p>Creates a vector of lengths for the individuals not measured based on the lengths measured in a subsample of individuals.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+expandLenFreq(x, w, additional, startcat = NULL, total = additional +
+  length(x), decimals = decs$wdec, show.summary = TRUE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A numeric vector of length measurements.</p>
+</td></tr>
+<tr valign="top"><td><code>w</code></td>
+<td>
+<p>A number that indicates the width of length classes to create.</p>
+</td></tr>
+<tr valign="top"><td><code>additional</code></td>
+<td>
+<p>The number of individuals that were not measured in the sample (for which measurements should be determined).</p>
+</td></tr>
+<tr valign="top"><td><code>startcat</code></td>
+<td>
+<p>A number that indicates the beginning of the first length-class.</p>
+</td></tr>
+<tr valign="top"><td><code>total</code></td>
+<td>
+<p>The total number of individuals in the sample (including those that were measured in the subsample).</p>
+</td></tr>
+<tr valign="top"><td><code>decimals</code></td>
+<td>
+<p>A number that indicates the number of decimals used in the output vector of estimated lengths.</p>
+</td></tr>
+<tr valign="top"><td><code>show.summary</code></td>
+<td>
+<p>A logical that indicates whether a summary of the process should be shown at the end.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Optional arguments to be passed to <code><a href="lencat.html">lencat</a></code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Creates a vector of lengths for the individuals not measured based on the lengths measured in a subsample of individuals.  Length categories are created first that begin with the value in <code>startcat</code> (or the minimum observed value by default) and continue by values of <code>w</code> until a category value greater than the largest observed length in <code>x</code>.  Categories of different widths are not allowed.
+</p>
+<p>The resulting &ldquo;expanded&rdquo; lengths are created by allocating individuals to each length class based on the proportion of measured individuals in the subsample in that length class.  Individuals within a length class are then assigned a specific length within that length class based on a uniform distribution.  Because the expanded number of individuals in a length class is rounded down based on the measured number per length class, not all individuals will initially be assigned a length value.  The remaining individuals are assigned to a length class randomly according to weights based on the proportion of individuals in the measured length classes.  Finally, these individuals are randomly assigned a specific length within the respective length class from a uniform distribution, same as above.
+</p>
+<p>The resulting length assignments are rounded to the number of decimals shown in <code>decimal</code>.  If <code>decimals</code> is not set by the user then it will default to the same number of decimals shown in the <code>w</code> value.  Care is taken to make sure that the rounded result will not pass out of the given length category (i.e., will not be allowed to round up to the next length category).  Generally speaking, one will want to use more decimals then is shown in <code>w</code>.  For example, one may want to create length categories with a width of 1 inch (i.e., <code>w=1</code>) but have the results recorded as if measured to within 0.1 inch (i.e., <code>decimals=1</code>).
+</p>
+
+
+<h3>Value</h3>
+
+<p>Returns a vector that consists of measurements for the non-measured individuals in the entire sample.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Derek H. Ogle, <a href="mailto:derek@derekogle.com">derek@derekogle.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See <code><a href="expandCounts.html">expandCounts</a></code> for expanding more than just lengths or expanding lengths when there is a known number in each length bin.  See <code><a href="lencat.html">lencat</a></code> for creating length bins.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Set the random seed for reproducibility
+set.seed(15343437)
+
+## First example
+# random lengths measured to nearest 0.1 unit -- values in a vector
+len1 &lt;- round(runif(50,0.1,9.9),1)
+# assignment of integer lengths to 110 non-measured individuals
+new.len1a &lt;- expandLenFreq(len1,w=1,total=160)
+new.len1a
+# assignment of lengths to 0.1 to 110 non-measured individuals
+new.len1b &lt;- expandLenFreq(len1,w=1,total=160,decimals=1)
+new.len1b
+
+## Second example -- if values are in a data.frame
+# random lengths measured to nearest 0.1 unit
+len2 &lt;- data.frame(len=round(runif(50,10,117),1))
+# assignment of lengths to 0.1 for 140 non-measured indivs
+new.len2a &lt;- expandLenFreq(len2$len,w=10,total=190,decimals=1)
+new.len2a
+
+## Third example
+# hypothetically measured lengths
+len &lt;- c(6.7,6.9,7.3,7.4,7.5,8.2,8.7,8.9)
+# find lengths for unmeasured fish assuming a total of 30
+newlen1 &lt;- expandLenFreq(len,w=0.5,total=30,decimals=1)
+newlen1
+# set a starting length category
+newlen2 &lt;- expandLenFreq(len,w=0.5,startcat=6.2,total=30,decimals=1)
+newlen2
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FSA</em> version 0.8.23 <a href="00Index.html">Index</a>]</div>
+</body></html>
