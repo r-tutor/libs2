@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Shape palette from Tremmel (1995) (discrete)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for tremmel_shape_pal {ggthemes}"><tr><td>tremmel_shape_pal {ggthemes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Shape palette from Tremmel (1995) (discrete)</h2>
+
+<h3>Description</h3>
+
+<p>Based on experiments Tremmel (1995) suggests the following shape palettes:
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+tremmel_shape_pal(overlap = FALSE, alt = FALSE, n3alt = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>overlap</code></td>
+<td>
+<p>use an empty circle instead of a solid circle when
+<code>n == 2</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>alt, n3alt</code></td>
+<td>
+<p>If <code>TRUE</code>, then when <code>n == 3</code>,
+use a solid circle, plus sign and
+empty triangle. Otherwise use a solid circle, empty circle, and empty
+triangle.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>If two symbols, then use a solid circle and plus sign.
+</p>
+<p>If three symbols, then use a solid circle, empty circle, and an
+empty triangle. However, that set of symbols does not satisfy the
+requirement that each symbol should differ from the other symbols
+in the same feature dimension. A set of three symbols that
+satisfies this is a circle (curvature), plus sign (number of
+terminators), triangle (line orientation).
+</p>
+<p>This palette supports up to three values.
+If more than three groups of data, then separate the groups into
+different plots.
+</p>
+
+
+<h3>References</h3>
+
+<p>Tremmel, Lothar, (1995) &quot;The Visual Separability of Plotting Symbols in Scatterplots&quot;
+Journal of Computational and Graphical Statistics,
+<a href="http://www.jstor.org/stable/1390760">http://www.jstor.org/stable/1390760</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other shapes: <code><a href="circlefill_shape_pal.html">circlefill_shape_pal</a></code>,
+<code><a href="cleveland_shape_pal.html">cleveland_shape_pal</a></code>,
+<code><a href="scale_shape_circlefill.html">scale_shape_circlefill</a></code>,
+<code><a href="scale_shape_cleveland.html">scale_shape_cleveland</a></code>,
+<code><a href="scale_shape_tremmel.html">scale_shape_tremmel</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>ggthemes</em> version 4.2.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

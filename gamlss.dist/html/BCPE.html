@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Box-Cox Power Exponential distribution for fitting a GAMLSS</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for BCPE {gamlss.dist}"><tr><td>BCPE {gamlss.dist}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Box-Cox Power Exponential distribution for fitting a GAMLSS</h2>
+
+<h3>Description</h3>
+
+<p>This function defines the Box-Cox Power Exponential distribution, a four parameter distribution, for a <code>gamlss.family</code> object to be used for a  
+GAMLSS fitting using the function <code>gamlss()</code>.  The functions <code>dBCPE</code>, 
+<code>pBCPE</code>, <code>qBCPE</code> and <code>rBCPE</code> define the density, distribution function, quantile function and random
+generation for the Box-Cox Power Exponential distribution. 
+The function <code>checkBCPE</code> can be used, typically when a BCPE model is fitted, to check whether there exit a turning point 
+of the distribution close to zero. It give the number of values of the response below their minimum turning point and also 
+the maximum probability of the lower tail below minimum turning point.   
+[The function <code>Biventer()</code> is the original version of the function suitable only 
+for the untruncated BCPE distribution.] See Rigby and Stasinopoulos (2003) for details.
+The function <code>BCPEo</code> is identical to <code>BCPE</code> but with log link for mu.    
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+BCPE(mu.link = "identity", sigma.link = "log", nu.link = "identity",
+          tau.link = "log")
+BCPEo(mu.link = "log", sigma.link = "log", nu.link = "identity", 
+          tau.link = "log")
+BCPEuntr(mu.link = "identity", sigma.link = "log", nu.link = "identity", 
+          tau.link = "log")
+dBCPE(x, mu = 5, sigma = 0.1, nu = 1, tau = 2, log = FALSE)
+pBCPE(q, mu = 5, sigma = 0.1, nu = 1, tau = 2, lower.tail = TRUE, log.p = FALSE)
+qBCPE(p, mu = 5, sigma = 0.1, nu = 1, tau = 2, lower.tail = TRUE, log.p = FALSE)          
+rBCPE(n, mu = 5, sigma = 0.1, nu = 1, tau = 2)
+dBCPEo(x, mu = 5, sigma = 0.1, nu = 1, tau = 2, log = FALSE)
+pBCPEo(q, mu = 5, sigma = 0.1, nu = 1, tau = 2, lower.tail = TRUE, 
+       log.p = FALSE)
+qBCPEo(p, mu = 5, sigma = 0.1, nu = 1, tau = 2, lower.tail = TRUE, 
+       log.p = FALSE)          
+rBCPEo(n, mu = 5, sigma = 0.1, nu = 1, tau = 2)
+checkBCPE(obj = NULL, mu = 10, sigma = 0.1, nu = 0.5, tau = 2,...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>mu.link</code></td>
+<td>
+<p> Defines the <code>mu.link</code>, with &quot;identity&quot; link as the default for the <code>mu</code> parameter. Other links are &quot;inverse&quot;, &quot;log&quot; and &quot;own&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>sigma.link</code></td>
+<td>
+<p> Defines the  <code>sigma.link</code>, with &quot;log&quot; link as the default for the <code>sigma</code> parameter. Other links are &quot;inverse&quot;, &quot;identity&quot; and &quot;own&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>nu.link</code></td>
+<td>
+<p>Defines the  <code>nu.link</code>, with &quot;identity&quot; link as the default for the <code>nu</code> parameter. Other links are &quot;inverse&quot;, &quot;log&quot; and &quot;own&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>tau.link</code></td>
+<td>
+<p>Defines the  <code>tau.link</code>, with &quot;log&quot; link as the default for the <code>tau</code> parameter. Other links are &quot;logshifted&quot;, &quot;identity&quot; and &quot;own&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>x,q</code></td>
+<td>
+<p>vector of quantiles</p>
+</td></tr>
+<tr valign="top"><td><code>mu</code></td>
+<td>
+<p>vector of location parameter values </p>
+</td></tr>
+<tr valign="top"><td><code>sigma</code></td>
+<td>
+<p>vector of scale parameter values</p>
+</td></tr>
+<tr valign="top"><td><code>nu</code></td>
+<td>
+<p>vector of <code>nu</code> parameter values</p>
+</td></tr>
+<tr valign="top"><td><code>tau</code></td>
+<td>
+<p>vector of <code>tau</code> parameter values</p>
+</td></tr>
+<tr valign="top"><td><code>log, log.p</code></td>
+<td>
+<p> logical; if TRUE, probabilities p are given as log(p).</p>
+</td></tr>
+<tr valign="top"><td><code>lower.tail</code></td>
+<td>
+<p>logical; if TRUE (default), probabilities are P[X &lt;= x],
+otherwise, P[X &gt; x] </p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>vector of probabilities. </p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p> number of observations. If <code>length(n) &gt; 1</code>, the length is
+taken to be the number required</p>
+</td></tr>
+<tr valign="top"><td><code>obj</code></td>
+<td>
+<p>a gamlss BCPE family object  </p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>for extra arguments</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The probability density function of the untrucated Box Cox Power Exponential distribution, (<code>BCPE.untr</code>), is defined as 
+</p>
+<p style="text-align: center;"><i>f(y|mu,sigma,nu,tau)=(y^(nu-1)/mu^nu)*(tau/sigma)*exp(-0.5*|z/c|^tau)/(c*2^(1+1/tau)*Gamma(1/tau))</i></p>
+
+<p>where <i>c=[2^(-2 /tau)*Gamma(1/tau)/Gamma(3/tau)]^0.5</i>,
+where if <i>nu!=0</i> then <i>z=[(y/mu)^(nu)-1]/(nu*sigma)</i>
+else <i>z=log(y/mu)/sigma</i>, 
+for <i>y&gt;0</i>, <i>&mu;&gt;0</i>, <i>&sigma;&gt;0</i>, <i>nu=(-Inf,+Inf)</i> and <i>&tau;&gt;0</i>. 
+</p>
+<p>The Box-Cox Power Exponential, <code>BCPE</code>, adjusts the above density <i>f(y|mu,sigma,nu,tau</i> for the 
+truncation resulting from the condition <i>y&gt;0</i>. See Rigby and Stasinopoulos (2003) for details.   
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>BCPE()</code>  returns a <code>gamlss.family</code> object which can be used to fit a Box Cox Power Exponential distribution in the <code>gamlss()</code> function. 
+<code>dBCPE()</code> gives the density, <code>pBCPE()</code> gives the distribution
+function, <code>qBCPE()</code> gives the quantile function, and <code>rBCPE()</code>
+generates random deviates. 
+</p>
+
+
+<h3>Warning </h3>
+
+<p>The <code>BCPE.untr</code> distribution may be unsuitable for some combinations of the parameters (mainly for large <i>sigma</i>) 
+where the integrating constant is less than 0.99. A warning will be given if this is the case.
+</p>
+<p>The <code>BCPE</code> distribution is suitable for all combinations of the parameters within their ranges [i.e. <i>mu&gt;0, sigma&gt;0, nu=(-Inf,+Inf) and tau&gt;0</i> ]
+</p>
+
+
+<h3>Note</h3>
+
+<p><i>mu</i>, is the median of the distribution, <i>sigma</i> is approximately the coefficient of variation (for small <i>sigma</i> and moderate <code>nu&gt;0</code>), 
+<i>nu</i> controls the skewness and <i>tau</i> the kurtosis of the distribution </p>
+
+
+<h3>Author(s)</h3>
+
+<p>Mikis Stasinopoulos, Bob Rigby and Calliope Akantziliotou</p>
+
+
+<h3>References</h3>
+
+ 
+<p>Rigby, R. A. and  Stasinopoulos D. M. (2005). Generalized additive models for location, scale and shape,(with discussion), 
+<em>Appl. Statist.</em>, <b>54</b>, part 3, pp 507-554.
+</p>
+<p>Rigby, R. A. and Stasinopoulos, D. M. (2004). Smooth centile curves for skew and kurtotic data modelled using the Box-Cox Power
+Exponential distribution. <em>Statistics in Medicine</em>, <b>23</b>: 3053-3076.
+</p>
+<p>Stasinopoulos D. M. Rigby R. A. and Akantziliotou C. (2006) Instructions on how to use the GAMLSS package in R.
+Accompanying documentation in the current GAMLSS  help files, (see also  <a href="http://www.gamlss.org/">http://www.gamlss.org/</a>).
+</p>
+<p>Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location scale and shape (GAMLSS) in R.
+<em>Journal of Statistical Software</em>, Vol. <b>23</b>, Issue 7, Dec 2007, <a href="http://www.jstatsoft.org/v23/i07">http://www.jstatsoft.org/v23/i07</a>.
+</p>
+<p>Stasinopoulos D. M., Rigby R.A., Heller G., Voudouris V., and De Bastiani F., (2017)
+<em>Flexible Regression and Smoothing: Using GAMLSS in R</em>,  Chapman and Hall/CRC. 
+</p>
+
+
+<h3>See Also</h3>
+
+ <p><code><a href="gamlss.family.html">gamlss.family</a></code>, <code><a href="BCt.html">BCT</a></code> </p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# BCPE()   #
+# library(gamlss) 
+# data(abdom)
+#h&lt;-gamlss(y~cs(x,df=3), sigma.formula=~cs(x,1), family=BCPE, data=abdom) 
+#plot(h)
+plot(function(x)dBCPE(x, mu=5,sigma=.5,nu=1, tau=3), 0.0, 15, 
+ main = "The BCPE  density mu=5,sigma=.5,nu=1, tau=3")
+plot(function(x) pBCPE(x, mu=5,sigma=.5,nu=1, tau=3), 0.0, 15, 
+ main = "The BCPE  cdf mu=5, sigma=.5, nu=1, tau=3")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>gamlss.dist</em> version 5.1-4 <a href="00Index.html">Index</a>]</div>
+</body></html>

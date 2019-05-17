@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Cat Search Terms</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for Cats {googleVis}"><tr><td>Cats {googleVis}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+Cat Search Terms
+</h2>
+
+<h3>Description</h3>
+
+<p>A set of responses for search terms for cats
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>data(Cats)</pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 18 observations on the following 3 variables.
+</p>
+
+<dl>
+<dt><code>Phrase</code></dt><dd><p>Search term for cats</p>
+</dd>
+<dt><code>Size</code></dt><dd><p>Number of times term has been searched</p>
+</dd>
+<dt><code>Sentiment</code></dt><dd><p>Numeric value from 0-10 of sentiment of term</p>
+</dd>
+</dl>
+
+
+
+<h3>Examples</h3>
+
+<pre>
+data(Cats)
+plot(gvisWordTree(Cats, textvar = "Phrase"))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>googleVis</em> version 0.6.4 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -219,13 +219,14 @@ predictSurfaceSE.default	predictSurface
 print.Krig	print.Krig
 print.krig.image	fields-internal
 print.mKrig	mKrig
+print.mKrigSummary	mKrig
 print.qsreg	fields-internal
 print.spatialDesign	fields-internal
 print.spatialProcess	spatialProcess
+print.spatialProcessSummary	spatialProcess
 print.sreg	fields-internal
 print.summary.Krig	fields-internal
 print.summary.krig.image	fields-internal
-print.summary.spatialProcess	fields-internal
 print.summary.sreg	fields-internal
 print.summarySpatialDesign	fields-internal
 printGCVWarnings	fields-internal
@@ -300,7 +301,7 @@ summary.mKrig	mKrig
 summary.ncdf	summary.ncdf
 summary.qsreg	fields-internal
 summary.spatialDesign	fields-internal
-summary.spatialProcess	summary.Krig
+summary.spatialProcess	spatialProcess
 summary.sreg	fields-internal
 summaryGCV.Krig	fields-internal
 summaryGCV.sreg	fields-internal

@@ -1,0 +1,415 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Print and plot gvis objects</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for gvis Methods {googleVis}"><tr><td>gvis Methods {googleVis}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+Print and plot gvis objects
+</h2>
+
+<h3>Description</h3>
+
+<p>Methods to print and plot <code>gvis</code> objects
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>	
+## S3 method for class 'gvis'
+print(x, tag=NULL, file = "", ...)
+		
+## S3 method for class 'gvis'
+plot(x, tag=NULL,...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+
+<p>An object of class <code>gvis</code>, or a HTML file in case of
+plot.gvis. 
+</p>
+</td></tr>
+<tr valign="top"><td><code>tag</code></td>
+<td>
+<p>Default <code>NULL</code>. Name tag of the objects to be
+extracted from a gvis object. If tag is missing 
+then the values of <code>getOption("gvis.print.tag")</code>,
+<code>getOption("gvis.plot.tag")</code> will be used for <code>print.gvis</code>
+and <code>plot.gvis</code> respectively.  
+</p>
+<p>A complete list of available tags is given by the command
+<code>getOption("gvis.tags")</code>. 
+</p>
+<p>The default value of <code>gvis.print.tag</code> is <code>"html"</code>, which
+means <code>print.gvis</code> will show a complete web page with the
+visualisation, while the tag <code>"chart"</code> will present the code
+for the visualisation chart only. For more information see the
+details section.
+</p>
+<p>The default tag for <code>plot.gvis.tag</code> is <code>NULL</code>, which will
+result in R opening a browser window, while any tag which is not
+<code>NULL</code> will give the same behaviour as <code>print.gvis</code>,
+e.g. <code>tag='chart'</code> or setting <code>options(gvis.plot.tag='chart')</code>
+will produce the same output as <code>print(x, tag='chart')</code>.
+This behaviour is particular helpful when googleVis is used in
+scripts, like <code>knitr</code> or <code>R.rsp</code>. The plot commands can
+be used initially in an interactive mode and with one change in
+<code>options()</code> produce the HTML output required for a programmatic
+run of the script. See the example section below for a
+<code>knitr</code> case study.
+</p>
+<p><code>plot.gvis</code> ignores the argument <code>tag</code> it <code>x</code> is a
+HTML file name.
+</p>
+</td></tr>	
+<tr valign="top"><td><code>file</code></td>
+<td>
+
+<p>file name. If &quot;&quot; (the
+default), output will be printed to the standard output connection,
+the console unless redirected by <code><a href="../../base/html/sink.html">sink</a></code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>arguments passed on to <code><a href="../../base/html/cat.html">cat</a></code>
+(<code>print.gvis</code>) or <code><a href="../../utils/html/browseURL.html">browseURL</a></code> (<code>plot.gvis</code>).
+</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>An object of class &quot;<code>gvis</code>&quot; is a list containing at least the
+following components (tags):
+</p>
+
+<dl>
+<dt><code>type</code></dt><dd><p>Google visualisation type, e.g. 'MotionChart'</p>
+</dd>
+<dt><code>chartid</code></dt><dd><p>character id of the chart object. Unique chart
+ids are required to place several charts on the same page.
+</p>
+</dd>
+<dt><code>html</code></dt><dd><p>a list with the building blocks for a page
+</p>
+
+<dl>
+<dt><code>header</code></dt><dd><p>a character string of a html page header:
+<code>&lt;html&gt;...&lt;body&gt;</code>,</p>
+</dd>
+<dt><code>chart</code></dt><dd><p>a named character vector of the chart's building blocks:
+</p>
+
+<dl>
+<dt><code>jsHeader</code></dt><dd><p>Opening <code>&lt;script&gt;</code> tag and
+reference to Google's JavaScript library.
+</p>
+</dd>
+<dt><code>jsData</code></dt><dd><p>JavaScript function defining the input
+<code>data</code> as a JSON object.
+</p>
+</dd> 
+<dt><code>jsDrawChart</code></dt><dd><p>JavaScript function
+combing the data with the visualisation API and user
+options.
+</p>
+</dd>
+<dt><code>jsDisplayChart</code></dt><dd><p>JavaScript function calling the
+handler to display the chart.
+</p>
+</dd>
+<dt><code>jsFooter</code></dt><dd><p>End tag <code>&lt;/script&gt;</code>.
+</p>
+</dd>
+<dt><code>jsChart</code></dt><dd><p>Call of the <code>jsDisplayChart</code> 
+function.
+</p>
+</dd>
+<dt><code>divChart</code></dt><dd><p><code>&lt;div&gt;</code> container to embed the chart
+into the page.
+</p>
+</dd>
+</dl>
+   
+</dd>
+<dt><code>caption</code></dt><dd><p>character string of a standard caption,
+including data name and chart id.
+</p>
+</dd>	
+<dt><code>footer</code></dt><dd><p>character string of a html page footer:
+<code>&lt;/body&gt;...&lt;/html&gt;</code>, including the used R and googleVis version
+and link to Google's Terms of Use.</p>
+</dd>
+</dl>
+
+</dd>
+</dl>
+
+
+
+<h3>Value</h3>
+
+<table summary="R valueblock">
+<tr valign="top"><td><code><code>print.gvis</code></code></td>
+<td>
+<p> None (invisible <code>NULL</code>).</p>
+</td></tr>
+<tr valign="top"><td><code><code>plot.gvis</code></code></td>
+<td>
+<p>Returns the file name invisibly.</p>
+</td></tr>
+</table>
+
+
+<h3>Note</h3>
+
+<p>The <code>plot</code> command does not open a graphics device in the
+traditional way. Instead it creates HTML files in a temporary
+directory and uses the R HTTP server to display the output  
+of a <code>googleVis</code> function locally. 
+A browser with Flash and Internet connection is required.
+The displayed page includes a link (click on the chart id) to a
+further page, which shows the code of the chart for the user to copy
+and paste into her own page.
+</p>
+
+
+
+
+
+
+
+
+
+<h3>Author(s)</h3>
+
+<p>Markus Gesmann <a href="mailto:markus.gesmann@gmail.com">markus.gesmann@gmail.com</a>,
+</p>
+<p>Diego de Castillo <a href="mailto:decastillo@gmail.com">decastillo@gmail.com</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Please see also the package vignette for the usage of the googleVis
+package with RApache, brew, knitr and R.rsp.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See also <code><a href="../../base/html/cat.html">cat</a></code>, <code><a href="../../utils/html/browseURL.html">browseURL</a></code>,
+<code><a href="createGoogleGadget.html">createGoogleGadget</a></code> and <code><a href="gvisMerge.html">gvisMerge</a></code> for combining charts.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Show gvis options
+sapply(c("gvis.print.tag", "gvis.plot.tag", "gvis.tags"), getOption)
+
+M &lt;- gvisMotionChart(Fruits, "Fruit", "Year")
+str(M)
+## The output for a complete web page
+M
+
+## Access only the plot,
+M$html$chart
+
+## wrap it in cat and it becomes more readable,
+cat(unlist(M$html$chart))
+
+## or use the print function.
+print(M, tag="chart")
+
+## Extract the data as a JavaScript function.
+print(M, tag="jsData")
+
+## Display the visualisation.
+## A web browser with Internet connection and Flash is required.
+plot(M)
+
+## Combine with another chart, e.g. table
+#tbl &lt;- gvisTable(Fruits, options=list(height=220))
+#Mtbl &lt;- gvisMerge(M, tbl)
+#plot(Mtbl)
+
+
+## Example of using googleVis with knitr and markdown
+
+## Not run: 
+## Simple knitr/markdown file with googleVis
+knitrRmd &lt;-"
+# Markdown example with knitr and googleVis
+===========================================
+This is a little Markdown example file.
+Set the googleVis options first.
+In this case change the behaviour of plot.gvis
+```{r setOptions, message=FALSE}
+library(googleVis)
+op &lt;- options(gvis.plot.tag='chart')
+```
+The following plot statements will automatically return  the HTML
+required for the 'knitted' output. 
+
+## Combo chart
+```{r ComboExample, results='asis', tidy=FALSE}
+## Add the mean
+CityPopularity$Mean=mean(CityPopularity$Popularity)
+CC &lt;- gvisComboChart(CityPopularity, xvar='City',
+          yvar=c('Mean', 'Popularity'),
+          options=list(seriesType='bars',
+                       width=450, height=300,
+                       title='City Popularity',
+                       series='{0: {type:\"line\"}}'))
+plot(CC)
+```
+Example of gvisComboChart with R code shown above.
+
+## Place two charts next to each other
+```{r gvisMergeExample, results='asis', echo=FALSE}
+Geo &lt;- gvisGeoChart(Exports, locationvar='Country', colorvar='Profit', 
+                    options=list(height=300, width=350)) 
+Tbl &lt;- gvisTable(Exports, options=list(height=300, width=200))
+plot(gvisMerge(Geo, Tbl, horizontal=TRUE))
+``````
+Example of a gvisGeoChart with gvisTable and R code hidden.
+
+## Motion Chart
+```{r MotionChartExample, results='asis', tidy=FALSE}
+M &lt;- gvisMotionChart(Fruits, 'Fruit', 'Year',
+         options=list(width=400, height=350))
+plot(M)
+```
+Please note that the Motion Chart is only displayed when hosted on a
+web server, or is placed in a directory which has been added to the 
+trusted sources in the [security settings of Macromedia]
+(https://www.macromedia.com/support/documentation/en/flashplayer/help/settings_manager04.html). 
+See the googleVis package vignette for more details. 
+
+```{r resetOptions}
+## Set options back to original options
+options(op)
+```
+"
+
+## Write the content of knitrRmd into a Rmd-file, knit it and convert it
+## into a html output. Finally show the file with the R-help http
+## server, this will ensure that also the motion chart is visible.
+
+library(knitr)
+library(markdown)
+
+wd &lt;- getwd()
+setwd(tempdir())
+fn=tempfile()
+fn.Rmd &lt;- paste(fn, ".Rmd", sep="")
+fn.md &lt;- paste(fn, ".md", sep="")
+fn.html &lt;- paste(fn, "-out.html", sep="") 
+## Write R Markdown into a file
+cat(knitrRmd, file=fn.Rmd)
+render_markdown()
+knit(fn.Rmd, fn.md)
+knit2html(fn.md)
+
+## Open output in browser
+## Use plot.gvis which will use the R-help http server
+## The URL will start with http://127.0.0.1...
+## The HTML file will be copied into a temporary directory
+plot.gvis(fn.html)
+## Compare to browseURL, its URL will start with file://... the motion
+## chart is unlikely to be displayed because of Flash security
+## settings. See the googleVis vignette for more details. 
+browseURL(fn.html)
+setwd(wd)
+
+## End(Not run)
+
+## Not run: 
+## Updating the data of an existing googleVis web page
+
+## Suppose you have an existing web page in which you embedded a
+## motion chart with the id "mtnc".
+## Now you have a new set of data, but you would like to avoid
+## touching the html file again.
+## The idea is to write the data and JavaScript functions into separate
+## files and to refer to these in the html page.
+
+## In this example we call the chart id "mtnc"
+## To display the example we use the R HTTP server again, and
+## write the files into a temp directory
+
+myChartID &lt;- "mtnc"
+## baseURL should reflect your web address, e.g. http://myHomePage.com
+baseURL &lt;- sprintf("http://127.0.0.1:%s/custom/googleVis", tools:::httpdPort)
+wwwdir &lt;- tempdir() ## the www repository on your computer
+
+  
+## Create a motion chart
+M=gvisMotionChart(Fruits, "Fruit", "Year", chartid=myChartID)
+
+## Here is our plot again
+plot(M)
+
+## Write the data and functions into separate files:
+cat(M$html$chart['jsData'], file=file.path(wwwdir, "gvisData.js"))
+cat(M$html$chart[c('jsDrawChart', 'jsDisplayChart', 'jsChart')], 
+			    file=file.path(wwwdir, "gvisFunctions.js"))
+
+  
+## Create a html page with reference to the above
+## JavaScript files
+  
+html &lt;- sprintf('
+&lt;html&gt;
+  &lt;head&gt;
+  &lt;script type="text/javascript" src="https://www.google.com/jsapi"&gt;
+  &lt;/script&gt;
+  &lt;script type="text/javascript" src="%s/gvisFunctions.js"&gt;&lt;/script&gt;
+  &lt;script type="text/javascript" src="%s/gvisData.js"&gt;&lt;/script&gt;
+  &lt;script type="text/javascript"&gt;
+  displayChart%s()
+  &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;div id="%s" style="width: 600px; height: 500px;"&gt;&lt;/div&gt;
+  &lt;/body&gt;
+  &lt;/html&gt;
+  ', baseURL, baseURL, myChartID, myChartID)
+  
+## Write html scaffold into a file
+cat(html, file=file.path(wwwdir, paste("Chart", myChartID, ".html", sep="")))
+
+## Display the result via
+URL &lt;- paste(baseURL,"/Chart", myChartID, ".html", sep="")
+browseURL(URL)
+
+## Update the data, say the data should have shown North and South
+## instead of East and West as a location  
+FruitsUpdate &lt;- Fruits
+levels(FruitsUpdate$Location)=c("North", "South")
+
+Mupdate=gvisMotionChart(FruitsUpdate, "Fruit", "Year", chartid=myChartID)
+
+## Only update the file gvisData.js:
+cat(Mupdate$html$chart['jsData'], file=file.path(wwwdir, "gvisData.js"))
+
+## Redisplay the chart with the updated data
+browseURL(URL)
+
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>googleVis</em> version 0.6.4 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Theme Base</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for theme_base {ggthemes}"><tr><td>theme_base {ggthemes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Theme Base</h2>
+
+<h3>Description</h3>
+
+<p>Theme similar to the default settings of the &lsquo;base&rsquo; R graphics.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+theme_base(base_size = 16, base_family = "")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>base_size</code></td>
+<td>
+<p>base font size</p>
+</td></tr>
+<tr valign="top"><td><code>base_family</code></td>
+<td>
+<p>base font family</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p>Other themes: <code><a href="theme_clean.html">theme_clean</a></code>,
+<code><a href="theme_foundation.html">theme_foundation</a></code>,
+<code><a href="theme_igray.html">theme_igray</a></code>, <code><a href="theme_par.html">theme_par</a></code>,
+<code><a href="theme_solid.html">theme_solid</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library("ggplot2")
+
+p &lt;- ggplot(mtcars) + geom_point(aes(x = wt, y = mpg,
+     colour = factor(gear))) + facet_wrap(~am)
+p + theme_base()
+# Change values of par
+par(fg = "blue", bg = "gray", col.lab = "red", font.lab = 3)
+p + theme_base()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggthemes</em> version 4.2.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

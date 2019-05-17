@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: The zipf and zero adjusted zipf distributions for fitting a...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for ZIPF {gamlss.dist}"><tr><td>ZIPF {gamlss.dist}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>The zipf and zero adjusted zipf distributions for fitting a GAMLSS model</h2>
+
+<h3>Description</h3>
+
+<p>This function <code>ZIPF()</code> defines the zipf distribution, Johnson et. al., (2005), sections 11.2.20,  p 527-528. The zipf distribution is an one parameter distribution with long tails (a discete version of the Pareto distrbution).  The function <code>ZIPF()</code> creates a  <code>gamlss.family</code> object to be used in GAMLSS fitting. The functions <code>dZIPF</code>, <code>pZIPF</code>, <code>qZIPF</code> and <code>rZIPF</code> define the density, distribution function, quantile function and random generation for the zipf, <code>ZIPF()</code>, distribution. The function <code>zetaP()</code> defines the zeta function and it is based on the zeta function defined on the <code>VGAM</code> package of Thomas Yee, see Yee (2017). 
+</p>
+<p>The distribution zipf is defined on <i>y=1,2,3, ...,Inf</i>, the zero adjusted zipf permits values on  <i>y=0,1,2,3, ...,Inf</i>.  The function <code>ZAZIPF()</code> defines the zero adjusted zipf distribution.  The function <code>ZAZIPF()</code> creates a  <code>gamlss.family</code> object to be used in GAMLSS fitting. The functions <code>dZAZIPF</code>, <code>pZAZIPF</code>, <code>qZAZIPF</code> and <code>rZAZIPF</code> define the density, distribution function, quantile function and random generation for the zero adjusted zipf, <code>ZAZIPF()</code>, distribution.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ZIPF(mu.link = "log")
+dZIPF(x, mu = 1, log = FALSE)
+pZIPF(q, mu = 1, lower.tail = TRUE, log.p = FALSE)
+qZIPF(p, mu = 1, lower.tail = TRUE, log.p = FALSE, 
+       max.value = 10000)
+rZIPF(n, mu = 1, max.value = 10000)
+zetaP(x)
+ZAZIPF(mu.link = "log", sigma.link = "logit")
+dZAZIPF(x, mu = 0.5, sigma = 0.1, log = FALSE)
+pZAZIPF(q, mu = 0.5, sigma = 0.1, lower.tail = TRUE, 
+        log.p = FALSE)
+qZAZIPF(p, mu = 0.5, sigma = 0.1, lower.tail = TRUE, 
+       log.p = FALSE, max.value = 10000)
+rZAZIPF(n, mu = 0.5, sigma = 0.1, max.value = 10000)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>mu.link</code></td>
+<td>
+<p>the link function for the parameter <code>mu</code> with  default <code>log</code></p>
+</td></tr>
+<tr valign="top"><td><code>x,q</code></td>
+<td>
+<p>vectors of (non-negative integer) quantiles</p>
+</td></tr> 
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>vector of probabilities</p>
+</td></tr>
+<tr valign="top"><td><code>mu</code></td>
+<td>
+<p>vector of positive parameter</p>
+</td></tr>
+<tr valign="top"><td><code>log, log.p</code></td>
+<td>
+<p>logical; if <code>TRUE</code>, probabilities <code>p</code> are given as <code>log(p)</code></p>
+</td></tr>
+<tr valign="top"><td><code>lower.tail</code></td>
+<td>
+<p>logical; if <code>TRUE</code> (default), probabilities are <code>P[X &lt;= x]</code>, otherwise, <code>P[X &gt; x]</code></p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>number of random values to return</p>
+</td></tr>
+<tr valign="top"><td><code>max.value</code></td>
+<td>
+<p>a constant, set to the default value of 10000, It is used in the <code>q</code> function which numerically calculates how far the algorithm should look for q. Maybe for zipf data the values has to increase at a considerable computational cost.</p>
+</td></tr>
+<tr valign="top"><td><code>sigma.link</code></td>
+<td>
+<p>the link function for the parameter <code>aigma</code> with  default <code>logit</code></p>
+</td></tr>
+<tr valign="top"><td><code>sigma</code></td>
+<td>
+<p>a vector of probabilities of zero</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The probability density for the zipf distribution, <code>ZIPF</code>, is: 
+</p>
+<p style="text-align: center;"><i>f(y|mu)= y^{-(&mu;+1)}/&zeta;(&mu;+1)</i></p>
+ 
+<p>for <i>y=1,2, ...,Inf</i>, <i>&mu;&gt;0</i> and where <i>&zeta;()</i> is the (Reimann) zeta function.
+</p>
+<p>The distribution has mean <i>&zeta;(&mu;)/&zeta;(&mu;+1)</i> and variance <i>{&zeta;(&mu;+1)&zeta;(&mu;-1)-[&zeta;(&mu;)]^2 }/ [&zeta;(&mu;+1)]^2.</i> 
+</p>
+
+
+<h3>Value</h3>
+
+<p>The function <code>ZIPF()</code> returns a <code>gamlss.family</code> object which can be used to fit a zipf distribution in the <code>gamlss()</code> function.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Because the zipf distrbution  has very long tails the <code>max.value</code> in the <code>q</code> and <code>r</code>, may  need to increase.</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Mikis Stasinopoulos and Bob Rigby</p>
+
+
+<h3>References</h3>
+
+<p>N. L. Johnson, A. W. Kemp, and S. Kotz. (2005) Univariate Discrete Distributions.
+Wiley, New York, 3rd edition.
+</p>
+<p>Thomas W. Yee (2017). VGAM: Vector Generalized Linear and Additive Models. R
+package version 1.0-3. <a href="https://CRAN.R-project.org/package=VGAM">https://CRAN.R-project.org/package=VGAM</a>
+</p>
+<p>Rigby, R. A. and  Stasinopoulos D. M. (2005). Generalized additive models for location, scale and shape,(with discussion), 
+<em>Appl. Statist.</em>, <b>54</b>, part 3, pp 507-554.
+</p>
+<p>Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location scale and shape (GAMLSS) in R.
+<em>Journal of Statistical Software</em>, Vol. <b>23</b>, Issue 7, Dec 2007, <a href="http://www.jstatsoft.org/v23/i07">http://www.jstatsoft.org/v23/i07</a>.
+</p>
+<p>Stasinopoulos D. M., Rigby R.A., Heller G., Voudouris V., and De Bastiani F., (2017)
+<em>Flexible Regression and Smoothing: Using GAMLSS in R</em>,  Chapman and Hall/CRC.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="PO.html">PO</a></code>, <code><a href="LG.html">LG</a></code>, <code><a href="GEOM.html">GEOM</a></code>, <code><a href="YULE.html">YULE</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# ZIPF
+par(mfrow=c(2,2))
+y&lt;-seq(1,20,1)
+plot(y, dZIPF(y), type="h")
+q &lt;- seq(1, 20, 1)
+plot(q, pZIPF(q), type="h")
+p&lt;-seq(0.0001,0.999,0.05)
+plot(p , qZIPF(p), type="s")
+dat &lt;- rZIPF(100)
+hist(dat)
+# ZAZIPF
+y&lt;-seq(0,20,1)
+plot(y, dZAZIPF(y,  mu=.9, sigma=.1), type="h")
+q &lt;- seq(1, 20, 1)
+plot(q, pZAZIPF(q,  mu=.9, sigma=.1), type="h")
+p&lt;-seq(0.0001,0.999,0.05)
+plot(p, qZAZIPF(p,  mu=.9, sigma=.1), type="s")
+dat &lt;- rZAZIPF(100, mu=.9, sigma=.1)
+hist(dat)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>gamlss.dist</em> version 5.1-4 <a href="00Index.html">Index</a>]</div>
+</body></html>

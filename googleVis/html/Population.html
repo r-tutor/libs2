@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Population: googleVis example data set</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for Population {googleVis}"><tr><td>Population {googleVis}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+Population: googleVis example data set
+</h2>
+
+<h3>Description</h3>
+
+<p>Example data set to illustrate the use of the googleVis package.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>data(Population)</pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 195 observations on the following 7 variables.
+</p>
+
+<dl>
+<dt><code>Rank</code></dt><dd><p>a numeric vector with population ranking</p>
+</dd>
+<dt><code>Country</code></dt><dd><p>country name as character</p>
+</dd>
+<dt><code>Population</code></dt><dd><p>population</p>
+</dd>
+<dt><code>% of World Population</code></dt><dd><p>% of world population</p>
+</dd>
+<dt><code>Flag</code></dt><dd><p>html image-tag to wikipedia with country flag</p>
+</dd>
+<dt><code>Mode</code></dt><dd><p>logical test vector</p>
+</dd>
+<dt><code>Date</code></dt><dd><p>date test vector</p>
+</dd>
+</dl>
+
+
+
+<h3>Source</h3>
+
+<p>Sourced from Wikipedia (columns 1 to 5):
+<a href="https://en.wikipedia.org/wiki/List_of_countries_by_population">https://en.wikipedia.org/wiki/List_of_countries_by_population</a>,
+9 October 2010. 
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(Population)
+tbl &lt;- gvisTable(Population)
+
+## Not run: 
+plot(tbl)
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>googleVis</em> version 0.6.4 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: The Skew Power exponential (SEP) distribution for fitting a...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for SEP {gamlss.dist}"><tr><td>SEP {gamlss.dist}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>The Skew Power exponential (SEP) distribution for fitting a GAMLSS</h2>
+
+<h3>Description</h3>
+
+<p>This function defines the Skew Power exponential (SEP) distribution, a four parameter distribution, 
+for a <code>gamlss.family</code> object to be used for a  
+GAMLSS fitting using the function <code>gamlss()</code>.  The functions <code>dSEP</code>, 
+<code>pSEP</code>, <code>qSEP</code> and <code>rSEP</code> define the density, 
+distribution function, quantile function and random
+generation for the Skew Power exponential (SEP) distribution.   
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+SEP(mu.link = "identity", sigma.link = "log", nu.link = "identity", 
+    tau.link = "log")
+dSEP(x, mu = 0, sigma = 1, nu = 0, tau = 2, log = FALSE)
+pSEP(q, mu = 0, sigma = 1, nu = 0, tau = 2, lower.tail = TRUE, 
+     log.p = FALSE)
+qSEP(p, mu = 0, sigma = 1, nu = 0, tau = 2, lower.tail = TRUE, 
+     log.p = FALSE, lower.limit = mu - 5 * sigma, 
+     upper.limit = mu + 5 * sigma)
+rSEP(n, mu = 0, sigma = 1, nu = 0, tau = 2)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>mu.link</code></td>
+<td>
+<p>Defines the <code>mu.link</code>, with &quot;identity&quot; link as the default for the <code>mu</code> parameter. Other links are &quot;<i>1/mu^2</i>&quot; and &quot;log&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>sigma.link</code></td>
+<td>
+<p>  Defines the  <code>sigma.link</code>, with &quot;log&quot; link as the default for the <code>sigma</code> parameter. Other links are &quot;inverse&quot; and &quot;identity&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>nu.link</code></td>
+<td>
+<p>Defines the  <code>nu.link</code>, with &quot;identity&quot; link as the default for the <code>nu</code> parameter. Other links are &quot;<i>1/nu^2</i>&quot; and &quot;log&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>tau.link</code></td>
+<td>
+<p>Defines the  <code>tau.link</code>, with &quot;log&quot; link as the default for the <code>tau</code> parameter. Other links are &quot;<i>1/tau^2</i>&quot;, and &quot;identity</p>
+</td></tr>
+<tr valign="top"><td><code>x,q</code></td>
+<td>
+<p>vector of quantiles</p>
+</td></tr>
+<tr valign="top"><td><code>mu</code></td>
+<td>
+<p>vector of location parameter values </p>
+</td></tr>
+<tr valign="top"><td><code>sigma</code></td>
+<td>
+<p>vector of scale parameter values</p>
+</td></tr>
+<tr valign="top"><td><code>nu</code></td>
+<td>
+<p>vector of skewness <code>nu</code> parameter values</p>
+</td></tr>
+<tr valign="top"><td><code>tau</code></td>
+<td>
+<p>vector of kurtosis <code>tau</code> parameter values</p>
+</td></tr>
+<tr valign="top"><td><code>log, log.p</code></td>
+<td>
+<p> logical; if TRUE, probabilities p are given as log(p).</p>
+</td></tr>
+<tr valign="top"><td><code>lower.tail</code></td>
+<td>
+<p>logical; if TRUE (default), probabilities are P[X &lt;= x],
+otherwise, P[X &gt; x] </p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>vector of probabilities. </p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p> number of observations. If <code>length(n) &gt; 1</code>, the length is
+taken to be the number required</p>
+</td></tr> 
+<tr valign="top"><td><code>lower.limit</code></td>
+<td>
+<p>lower limit for the golden search to find quantiles from probabilities  </p>
+</td></tr>
+<tr valign="top"><td><code>upper.limit</code></td>
+<td>
+<p>upper limit for the golden search to find quantiles from probabilities </p>
+</td></tr>                 
+</table>
+
+
+<h3>Details</h3>
+
+   
+<p>The probability density function of the Skew Power exponential distribution, (<code>SEP</code>), is defined as 
+</p>
+<p style="text-align: center;"><i>f(y|mu,sigma,nu,tau)=(z/sigma)*pnorm(w)*dPE(z,0,1,tau)</i></p>
+
+<p>for <i>0&lt;y&lt;0</i>,
+<i>mu=(-Inf,+Inf)</i>,
+<i>sigma&gt;0</i>,
+<i>nu=(-Inf,+Inf)</i> and
+<i>tau&gt;0</i>. where <i>z=(y-mu)/(sigma)</i>, <i>w=sign(z)|z|^(t/2)
+*nu*sqrt(2/tau)</i>  and <i>dPE(z,0,1,tau)</i> is
+the pdf of an Exponential Power distribution.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>SEP()</code>  returns a <code>gamlss.family</code> object which can be used to fit the SEP distribution in the <code>gamlss()</code> function. 
+<code>dSEP()</code> gives the density, <code>pSEP()</code> gives the distribution
+function, <code>qSEP()</code> gives the quantile function, and <code>rSEP()</code>
+generates random deviates. 
+</p>
+
+
+<h3>Warning</h3>
+
+<p>The qSEP and rSEP are slow since they are relying on golden section for finding the quantiles</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Bob Rigby and Mikis Stasinopoulos <a href="mailto:mikis.stasinopoulos@gamlss.org">mikis.stasinopoulos@gamlss.org</a> </p>
+
+
+<h3>References</h3>
+
+<p>Diciccio, T. J. and Mondi A. C. (2004). Inferential Aspects of the Skew Exponential Power distribution.,
+<em>JASA</em>, <b>99</b>, 439-450.
+</p>
+<p>Rigby, R. A. and  Stasinopoulos D. M. (2005). Generalized additive models for location, scale and shape,(with discussion), 
+<em>Appl. Statist.</em>, <b>54</b>, part 3, pp 507-554.
+</p>
+<p>Stasinopoulos D. M. Rigby R. A. and Akantziliotou C. (2006) Instructions on how to use the GAMLSS package in R.
+Accompanying documentation in the current GAMLSS  help files, (see also  <a href="http://www.gamlss.org/">http://www.gamlss.org/</a>).  
+</p>
+<p>Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location scale and shape (GAMLSS) in R.
+<em>Journal of Statistical Software</em>, Vol. <b>23</b>, Issue 7, Dec 2007, <a href="http://www.jstatsoft.org/v23/i07">http://www.jstatsoft.org/v23/i07</a>.
+</p>
+<p>Stasinopoulos D. M., Rigby R.A., Heller G., Voudouris V., and De Bastiani F., (2017)
+<em>Flexible Regression and Smoothing: Using GAMLSS in R</em>,  Chapman and Hall/CRC. 
+</p>
+
+
+<h3>See Also</h3>
+
+ <p><code><a href="gamlss.family.html">gamlss.family</a></code>, <code><a href="JSU.html">JSU</a></code>, <code><a href="BCt.html">BCT</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+SEP()   # 
+plot(function(x)dSEP(x, mu=0,sigma=1, nu=1, tau=2), -5, 5, 
+ main = "The SEP  density mu=0,sigma=1,nu=1, tau=2")
+plot(function(x) pSEP(x, mu=0,sigma=1,nu=1, tau=2), -5, 5, 
+ main = "The BCPE  cdf mu=0, sigma=1, nu=1, tau=2")
+dat &lt;- rSEP(100,mu=10,sigma=1,nu=-1,tau=1.5)
+# library(gamlss)
+# gamlss(dat~1,family=SEP, control=gamlss.control(n.cyc=30))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>gamlss.dist</em> version 5.1-4 <a href="00Index.html">Index</a>]</div>
+</body></html>

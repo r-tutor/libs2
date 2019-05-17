@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Negative Binomial type II distribution for fitting a GAMLSS</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for NBII {gamlss.dist}"><tr><td>NBII {gamlss.dist}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Negative Binomial type II distribution for fitting a GAMLSS</h2>
+
+<h3>Description</h3>
+
+<p>The <code>NBII()</code> function defines the Negative Binomial type II distribution, a two parameter distribution, for a <code>gamlss.family</code> object to be used 
+in GAMLSS fitting using the function <code>gamlss()</code>.    
+The functions <code>dNBII</code>, <code>pNBII</code>, <code>qNBII</code> and <code>rNBII</code> define the density, distribution function, quantile function and random
+generation for the Negative Binomial type II, <code>NBII()</code>, distribution. 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+NBII(mu.link = "log", sigma.link = "log")
+dNBII(x, mu = 1, sigma = 1, log = FALSE)
+pNBII(q, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
+qNBII(p, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
+rNBII(n, mu = 1, sigma = 1)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>mu.link</code></td>
+<td>
+<p> Defines the <code>mu.link</code>, with &quot;log&quot; link as the default for the mu parameter</p>
+</td></tr>
+<tr valign="top"><td><code>sigma.link</code></td>
+<td>
+<p>Defines the  <code>sigma.link</code>, with &quot;log&quot; link as the default for the sigma parameter</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p> vector of (non-negative integer) quantiles</p>
+</td></tr>
+<tr valign="top"><td><code>mu</code></td>
+<td>
+<p>vector of positive means</p>
+</td></tr>
+<tr valign="top"><td><code>sigma</code></td>
+<td>
+<p>vector of positive despersion parameter</p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>vector of probabilities</p>
+</td></tr>
+<tr valign="top"><td><code>q</code></td>
+<td>
+<p>vector of quantiles</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>number of random values to return</p>
+</td></tr>
+<tr valign="top"><td><code>log, log.p</code></td>
+<td>
+<p>logical; if TRUE, probabilities p are given as log(p)</p>
+</td></tr>
+<tr valign="top"><td><code>lower.tail</code></td>
+<td>
+<p>logical; if TRUE (default), probabilities are P[X &lt;= x],
+otherwise, P[X &gt; x]</p>
+</td></tr>  
+</table>
+
+
+<h3>Details</h3>
+
+<p>Definition file for Negative Binomial type II distribution. 
+</p>
+<p style="text-align: center;"><i>P(Y=y|&mu;,&sigma;)=
+&Gamma;(y+&mu;/&sigma;) &sigma;^y / &Gamma;(&mu;/&sigma;)&Gamma;(y+1) (1+&sigma;)^{y+&mu;/&sigma;}</i></p>
+ 
+<p>for <i>y=0,1,2, ...,Inf</i>, <i>&mu;&gt;0</i> and <i>&sigma;&gt;0</i>. 
+This parameterization was used by Evans (1953)  and also by Johnson <em>et al.</em> (1993) p 200.
+</p>
+
+
+<h3>Value</h3>
+
+<p>returns a <code>gamlss.family</code> object which can be used to fit a Negative Binomial type II distribution in the <code>gamlss()</code> function.   
+</p>
+
+
+<h3>Note</h3>
+
+<p><i>mu</i> is the mean and <i>((1+sigma)*mu)**0.5</i>  is the standard deviation of the Negative Binomial type II distribution, so 
+<i>sigma</i> is a dispersion parameter</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Mikis Stasinopoulos <a href="mailto:mikis.stasinopoulos@gamlss.org">mikis.stasinopoulos@gamlss.org</a>, Bob Rigby and Calliope Akantziliotou</p>
+
+
+<h3>References</h3>
+
+ 
+<p>Evans, D. A. (1953). Experimental evidence concerning contagious distributions in ecology. <em>Biometrika</em>, <b>40</b>: 186-211.
+</p>
+<p>Johnson, N. L., Kotz, S. and Kemp, A. W. (1993). <em>Univariate Discrete Distributions</em>,
+2nd edn. Wiley, New York.
+</p>
+<p>Rigby, R. A. and  Stasinopoulos D. M. (2005). Generalized additive models for location, scale and shape,(with discussion), 
+<em>Appl. Statist.</em>, <b>54</b>, part 3, pp 507-554.
+</p>
+<p>Stasinopoulos D. M., Rigby R.A. and Akantziliotou C. (2006) Instructions on how to use the GAMLSS package in R.
+Accompanying documentation in the current GAMLSS  help files, (see also  <a href="http://www.gamlss.org/">http://www.gamlss.org/</a>). 
+</p>
+<p>Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location scale and shape (GAMLSS) in R.
+<em>Journal of Statistical Software</em>, Vol. <b>23</b>, Issue 7, Dec 2007, <a href="http://www.jstatsoft.org/v23/i07">http://www.jstatsoft.org/v23/i07</a>.
+</p>
+<p>Stasinopoulos D. M., Rigby R.A., Heller G., Voudouris V., and De Bastiani F., (2017)
+<em>Flexible Regression and Smoothing: Using GAMLSS in R</em>,  Chapman and Hall/CRC. 
+</p>
+
+
+<h3>See Also</h3>
+
+  <p><code><a href="gamlss.family.html">gamlss.family</a></code>, <code><a href="NBI.html">NBI</a></code>, <code><a href="PIG.html">PIG</a></code>, 
+<code><a href="SI.html">SI</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+NBII()  # gives information about the default links for the Negative Binomial type II distribution  
+# plotting the distribution
+plot(function(y) dNBII(y, mu = 10, sigma = 0.5 ), from=0, to=40, n=40+1, type="h")
+# creating random variables and plot them 
+tN &lt;- table(Ni &lt;- rNBII(1000, mu=5, sigma=0.5))
+r &lt;- barplot(tN, col='lightblue')
+# library(gamlss)
+# data(aids)
+# h&lt;-gamlss(y~cs(x,df=7)+qrt, family=NBII, data=aids) # fits a model 
+# plot(h)
+# pdf.plot(family=NBII, mu=10, sigma=0.5, min=0, max=40, step=1)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>gamlss.dist</em> version 5.1-4 <a href="00Index.html">Index</a>]</div>
+</body></html>

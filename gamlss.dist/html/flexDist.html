@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Non-parametric pdf from limited information data</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for flexDist {gamlss.dist}"><tr><td>flexDist {gamlss.dist}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+Non-parametric pdf from limited information data
+</h2>
+
+<h3>Description</h3>
+
+<p>This is an attempt to create a distribution function if the only existing information is the quantiles or expectiles of the distribution.  
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+flexDist(quantiles = list(values=c(-1.96,0,1.96), prob=c(0.05, .50, 0.95)), 
+         expectiles = list(), lambda = 10, 
+         kappa = 10, delta = 1e-07, order = 3, n.iter = 200, 
+         plot = TRUE, no.inter = 100, lower = NULL, 
+         upper = NULL, perc.quant = 0.3, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>quantiles</code></td>
+<td>
+<p>a list with components <code>values</code> and <code>prob</code></p>
+</td></tr>
+<tr valign="top"><td><code>expectiles</code></td>
+<td>
+<p>a list with components <code>values</code> and <code>prob</code></p>
+</td></tr>
+<tr valign="top"><td><code>lambda</code></td>
+<td>
+<p>smoothing parameter for the log-pdf</p>
+</td></tr>
+<tr valign="top"><td><code>kappa</code></td>
+<td>
+<p>smoothing parameter for log concavity</p>
+</td></tr>
+<tr valign="top"><td><code>delta</code></td>
+<td>
+<p>smoothing parameter for ridge penalty</p>
+</td></tr>
+<tr valign="top"><td><code>order</code></td>
+<td>
+<p>the order of the penalty for log-pdf</p>
+</td></tr>
+<tr valign="top"><td><code>n.iter</code></td>
+<td>
+<p>maximum number of iterations</p>
+</td></tr>
+<tr valign="top"><td><code>plot</code></td>
+<td>
+<p>whether to plot the result</p>
+</td></tr>
+<tr valign="top"><td><code>no.inter</code></td>
+<td>
+<p>How many discrete probabilities to evaluate</p>
+</td></tr>
+<tr valign="top"><td><code>lower</code></td>
+<td>
+<p>the lower value of the x</p>
+</td></tr>
+<tr valign="top"><td><code>upper</code></td>
+<td>
+<p>the upper value of the x</p>
+</td></tr>
+<tr valign="top"><td><code>perc.quant</code></td>
+<td>
+<p>how far from the quantile should go out to define the limit of x if not set by <code>lower</code> or <code>upper</code></p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>additional arguments</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Returns a list with components 
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>pdf</code></td>
+<td>
+<p>the hights of the fitted pdf, the sum of it multiplied by the Dx should add up to 1  i.e. <code>sum(object$pdf*diff(object$x)[1])</code> </p>
+</td></tr>
+<tr valign="top"><td><code>cdf</code></td>
+<td>
+<p>the fitted cdf</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>the values of x where the discretise distribution is defined</p>
+</td></tr>
+<tr valign="top"><td><code>pFun</code></td>
+<td>
+<p>the cdf of the fitted non-parametric distribution</p>
+</td></tr>
+<tr valign="top"><td><code>qFun</code></td>
+<td>
+<p>the inverse cdf function of the fitted non-parametric distribution</p>
+</td></tr>
+<tr valign="top"><td><code>rFun</code></td>
+<td>
+<p>a function to generate a random sample from the fitted non-parametric distribution</p>
+</td></tr>     
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Mikis Stasinopoulos, Paul Eilers, Bob Rigby and Vlasios Voudouris</p>
+
+
+<h3>References</h3>
+
+<p>Eilers, P. H. C.,  Voudouris, V.,  Rigby R. A.,  Stasinopoulos D. M. (2012)  Estimation of nonparametric density from sparse summary information, under review.
+</p>
+<p>Rigby, R. A. and Stasinopoulos D. M. (2005). Generalized additive models for location, scale and shape,(with discussion), Appl. Statist., 54, part 3, pp 507-554.
+</p>
+<p>Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location scale and shape (GAMLSS) in R. Journal of Statistical Software, Vol. 23, Issue 7, Dec 2007, http://www.jstatsoft.org/v23/i07.
+</p>
+<p>Stasinopoulos D. M., Rigby R.A., Heller G., Voudouris V., and De Bastiani F., (2017)
+<em>Flexible Regression and Smoothing: Using GAMLSS in R</em>,  Chapman and Hall/CRC. 
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../gamlss/html/histSmo.html">histSmo</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Normal
+r1&lt;-flexDist(quantiles=list(values=qNO(c(0.05, 0.25, 0.5,0.75, 0.95), mu=0, 
+             sigma=1), prob=c( 0.05, 0.25, 0.5,0.75,0.95 )), 
+             no.inter=200, lambda=10,  kappa=10, perc.quant=0.3)
+# GAMMA
+r1&lt;-flexDist(quantiles=list(values=qGA(c(0.05,0.25, 0.5,0.75,0.95), mu=1, 
+       sigma=.8), prob=c(0.05,0.25, 0.5,0.75,0.95)), 
+       expectiles=list(values=1, prob=0.5),  lambda=10, 
+       kappa=10, lower=0, upper=5)# 
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>gamlss.dist</em> version 5.1-4 <a href="00Index.html">Index</a>]</div>
+</body></html>

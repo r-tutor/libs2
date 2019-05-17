@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Clean ggplot theme</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for theme_clean {ggthemes}"><tr><td>theme_clean {ggthemes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Clean ggplot theme</h2>
+
+<h3>Description</h3>
+
+<p>Clean ggplot theme with no panel background, black axis lines
+and grey fill colour for chart elements.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+theme_clean(base_size = 12, base_family = "sans")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>base_size</code></td>
+<td>
+<p>Base font size.</p>
+</td></tr>
+<tr valign="top"><td><code>base_family</code></td>
+<td>
+<p>Base font family.</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Konrad Zdeb <a href="mailto:name.surname@me.com">name.surname@me.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other themes: <code><a href="theme_base.html">theme_base</a></code>,
+<code><a href="theme_foundation.html">theme_foundation</a></code>,
+<code><a href="theme_igray.html">theme_igray</a></code>, <code><a href="theme_par.html">theme_par</a></code>,
+<code><a href="theme_solid.html">theme_solid</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library("ggplot2")
+p &lt;- ggplot(mtcars, aes(x = wt, y = mpg, colour = factor(gear))) +
+  geom_point() +
+  facet_wrap(~am) +
+  geom_smooth(method = "lm", se = FALSE) +
+  theme_clean()
+p
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggthemes</em> version 4.2.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

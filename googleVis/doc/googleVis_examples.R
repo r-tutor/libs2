@@ -274,6 +274,10 @@ Timeline <- gvisTimeline(data=datTL,
                                       colors="['#cbb69d', '#603913', '#c69c6e']"))
 plot(Timeline)
 
+## ----WordTree, results='asis', tidy=FALSE--------------------------------
+wt1 <- gvisWordTree(Cats, textvar = "Phrase")
+plot(wt1)
+
 ## ----gvisMerge, results='asis', tidy=FALSE-------------------------------
 G <- gvisGeoChart(Exports, "Country", "Profit", 
                   options=list(width=300, height=300))

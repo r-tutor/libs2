@@ -57,8 +57,6 @@ cutree.phylo	cutree-methods
 cutree_1h.dendrogram	cutree_1h.dendrogram
 cutree_1k.dendrogram	cutree_1k.dendrogram
 cut_lower_fun	cut_lower_fun
-d3dendrogram	d3dendrogram
-d3dendro_options	d3dendro_options
 dendbackback	tanglegram
 dendextend	dendextend-package
 dendextend_cut_lower_fun	cut_lower_fun

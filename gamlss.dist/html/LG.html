@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Logarithmic and zero adjusted logarithmic distributions for...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for LG {gamlss.dist}"><tr><td>LG {gamlss.dist}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Logarithmic and zero adjusted logarithmic distributions for fitting a GAMLSS model</h2>
+
+<h3>Description</h3>
+
+<p>The function <code>LG</code> defines the logarithmic distribution, a one parameter distribution, for a <code>gamlss.family</code> object to be 
+used in GAMLSS fitting  using the function <code>gamlss()</code>. The functions <code>dLG</code>, <code>pLG</code>, <code>qLG</code> and <code>rLG</code> define the 
+density, distribution function, quantile function 
+and random generation for the logarithmic  , <code>LG()</code>, distribution. 
+</p>
+<p>The function <code>ZALG</code> defines the zero adjusted logarithmic  distribution, a two parameter distribution, for a <code>gamlss.family</code> object to be 
+used in GAMLSS fitting  using the function <code>gamlss()</code>. The functions <code>dZALG</code>, <code>pZALG</code>, <code>qZALG</code> and <code>rZALG</code> define the 
+density, distribution function, quantile function 
+and random generation for the inflated logarithmic , <code>ZALG()</code>, distribution. 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+LG(mu.link = "logit")
+dLG(x, mu = 0.5, log = FALSE)
+pLG(q, mu = 0.5, lower.tail = TRUE, log.p = FALSE)
+qLG(p, mu = 0.5, lower.tail = TRUE, log.p = FALSE, max.value = 10000)
+rLG(n, mu = 0.5)
+ZALG(mu.link = "logit", sigma.link = "logit")
+dZALG(x, mu = 0.5, sigma = 0.1, log = FALSE)
+pZALG(q, mu = 0.5, sigma = 0.1, lower.tail = TRUE, log.p = FALSE)
+qZALG(p, mu = 0.5, sigma = 0.1, lower.tail = TRUE, log.p = FALSE)
+rZALG(n, mu = 0.5, sigma = 0.1)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>mu.link</code></td>
+<td>
+<p>defines the <code>mu.link</code>, with <code>logit</code> link as the default for the <code>mu</code> parameter</p>
+</td></tr>
+<tr valign="top"><td><code>sigma.link</code></td>
+<td>
+<p>defines the <code>sigma.link</code>, with <code>logit</code> link as the default for the sigma parameter which in this case 
+is the probability at zero.</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p> vector of (non-negative integer)</p>
+</td></tr>
+<tr valign="top"><td><code>mu</code></td>
+<td>
+<p>vector of positive means</p>
+</td></tr>
+<tr valign="top"><td><code>sigma</code></td>
+<td>
+<p>vector of probabilities at zero</p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>vector of probabilities</p>
+</td></tr>
+<tr valign="top"><td><code>q</code></td>
+<td>
+<p>vector of quantiles</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>number of random values to return</p>
+</td></tr>
+<tr valign="top"><td><code>log, log.p</code></td>
+<td>
+<p>logical; if TRUE, probabilities p are given as log(p)</p>
+</td></tr>
+<tr valign="top"><td><code>lower.tail</code></td>
+<td>
+<p>logical; if TRUE (default), probabilities are P[X &lt;= x],
+otherwise, P[X &gt; x]</p>
+</td></tr>  
+<tr valign="top"><td><code>max.value</code></td>
+<td>
+<p>valued needed for the numerical calculation of the q-function</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>For the definition of the distributions see  Rigby and Stasinopoulos (2010) below.
+</p>
+<p>The parameterization of the logarithmic distribution in the function <code>LM</code> is
+</p>
+<p style="text-align: center;"><i>f(y|mu) = &alpha; &mu;^y / y </i></p>
+
+<p>where
+for <i>y&gt;=1</i> and <i>&mu;&gt;0</i> and </p>
+<p style="text-align: center;"><i>&alpha;= [log(1-&mu;)]^{-1}</i></p>
+
+
+
+<h3>Value</h3>
+
+<p>The function <code>LG</code> and <code>ZALG</code> return a <code>gamlss.family</code> object which can be used to fit a 
+logarithmic and a zero inflated logarithmic  distributions respectively  in the <code>gamlss()</code> function.  
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Mikis Stasinopoulos <a href="mailto:mikis.stasinopoulos@gamlss.org">mikis.stasinopoulos@gamlss.org</a>, Bob Rigby
+</p>
+
+
+<h3>References</h3>
+
+<p>Johnson, Norman Lloyd; Kemp, Adrienne W; Kotz, Samuel (2005). &quot;Chapter 7: Logarithmic and Lagrangian distributions&quot;. 
+Univariate discrete distributions (3 ed.). John Wiley &amp; Sons. ISBN 9780471272465.  
+</p>
+<p>Rigby, R. A. and  Stasinopoulos D. M. (2005). Generalized additive models for location, scale and shape,(with discussion), 
+<em>Appl. Statist.</em>, <b>54</b>, part 3, pp 507-554.
+</p>
+<p>Stasinopoulos D. M., Rigby R.A. and Akantziliotou C. (2006) Instructions on how to use the GAMLSS package in R.
+Accompanying documentation in the current GAMLSS  help files, (see also  <a href="http://www.gamlss.com/">http://www.gamlss.com/</a>).  
+</p>
+<p>Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location scale and shape (GAMLSS) in R.
+<em>Journal of Statistical Software</em>, Vol. <b>23</b>, Issue 7, Dec 2007, <a href="http://www.jstatsoft.org/v23/i07">http://www.jstatsoft.org/v23/i07</a>.
+</p>
+<p>Rigby, R. A.  and Stasinopoulos D. M. (2010) The gamlss.family distributions, (distributed with this package or see 
+<a href="http://www.gamlss.org/">http://www.gamlss.org/</a>) 
+</p>
+<p>Stasinopoulos D. M., Rigby R.A., Heller G., Voudouris V., and De Bastiani F., (2017)
+<em>Flexible Regression and Smoothing: Using GAMLSS in R</em>,  Chapman and Hall/CRC. 
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="gamlss.family.html">gamlss.family</a></code>, <code><a href="PO.html">PO</a></code>, <code><a href="ZAP.html">ZAP</a></code> 
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+LG() 
+ZAP()
+# creating data and plotting them 
+ dat &lt;- rLG(1000, mu=.3)
+   r &lt;- barplot(table(dat), col='lightblue')
+dat1 &lt;- rZALG(1000, mu=.3, sigma=.1)
+  r1 &lt;- barplot(table(dat1), col='lightblue')
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>gamlss.dist</em> version 5.1-4 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -65,8 +65,6 @@ cutree                  Cut a Tree (Dendrogram/hclust/phylo) into
                         Groups of Data
 cutree_1h.dendrogram    cutree for dendrogram (by 1 height only!)
 cutree_1k.dendrogram    cutree for dendrogram (by 1 k value only!)
-d3dendro_options        Get or set current defaults for d3dendrogram
-d3dendrogram            Plot dendrogram to webpage and view.
 dend_diff               Plots two trees side by side, highlighting
                         edges unique to each tree in red.
 dend_expend             Finds a "good" dendrogram for a dist

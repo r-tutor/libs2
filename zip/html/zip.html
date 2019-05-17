@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Compress Files into 'zip' Archives</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for zip {zip}"><tr><td>zip {zip}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Compress Files into 'zip' Archives</h2>
+
+<h3>Description</h3>
+
+<p><code>zipr</code> and <code>zip</code> both create a new zip archive file.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+zip(zipfile, files, recurse = TRUE, compression_level = 9)
+
+zipr(zipfile, files, recurse = TRUE, compression_level = 9)
+
+zip_append(zipfile, files, recurse = TRUE, compression_level = 9)
+
+zipr_append(zipfile, files, recurse = TRUE, compression_level = 9)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>zipfile</code></td>
+<td>
+<p>The zip file to create. If the file exists, <code>zip</code>
+overwrites it, but <code>zip_append</code> appends to it.</p>
+</td></tr>
+<tr valign="top"><td><code>files</code></td>
+<td>
+<p>List of file to add to the archive. See details below
+about absolute and relative path names.</p>
+</td></tr>
+<tr valign="top"><td><code>recurse</code></td>
+<td>
+<p>Whether to add the contents of directories recursively.</p>
+</td></tr>
+<tr valign="top"><td><code>compression_level</code></td>
+<td>
+<p>A number between 1 and 9. 9 compresses best,
+but it also takes the longest.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>zipr_append</code> and <code>zip_append</code> append compressed files to an
+existing 'zip' file.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The name of the created zip file, invisibly.
+</p>
+
+
+<h3>Permissions</h3>
+
+<p><code>zipr()</code> (and <code>zip()</code>, <code>zipr_append()</code>, etc.) add the permissions of
+the archived files and directories to the ZIP archive, on Unix systems.
+Most zip and unzip implementations support these, so they will be
+recovered after extracting the archive.
+</p>
+<p>Note, however that the owner and group (uid and gid) are currently
+omitted, even on Unix.
+</p>
+
+
+<h3>Relative paths</h3>
+
+<p>The different between <code>zipr</code> and <code>zip</code> is how they handle the relative
+paths of the input files.
+</p>
+<p>For <code>zip</code> (and <code>zip_append</code>), the root of the archive is supposed to
+be the current working directory. The paths of the files are fully kept
+in the archive. Absolute paths are also kept. Note that this might result
+non-portable archives: some zip tools do not handle zip archives that
+contain absolute file names, or file names that start with <code>..//</code> or
+<code>./</code>. This behavior is kept for compatibility, and we suggest that you
+use <code>zipr</code> and <code>zipr_append</code> for new code.
+</p>
+<p>E.g. for the following directory structure:</p>
+<pre>foo
+  bar
+    file1
+  bar2
+    file2
+foo2
+  file3
+</pre>
+<p>Assuming the current working directory is <code>foo</code>, the following zip
+entries are created by <code>zip</code>:</p>
+<pre>zip("x.zip", c("bar/file1", "bar2", "../foo2"))
+zip_list("x.zip")$filename
+#&gt; bar/file1
+#&gt; bar2
+#&gt; bar2/file2
+#&gt; ../foo2
+#&gt; ../foo2/file3
+</pre>
+<p>For <code>zipr</code> (and <code>zipr_append</code>), each specified file or directory in
+<code>files</code> is created as a top-level entry in the zip archive.
+We suggest that you use <code>zip</code> and <code>zip_append</code> for new code, as they
+don't create non-portable archives. For the same directory structure,
+these zip entries are created:</p>
+<pre>zipr("x.zip", c("bar/file1", "bar2", "../foo2"))
+zip_list("x.zip")$filename
+#&gt; file1
+#&gt; bar2
+#&gt; bar2/file2
+#&gt; foo2
+#&gt; foo2/file3
+</pre>
+<p>Because of the potential issues with <code>zip()</code> and <code>zip_append()</code>,
+they are now soft-deprecated, and their first use in the R session
+will trigger a reminder message. To suppress this message, you can
+use something like this:</p>
+<pre>withCallingHandlers(
+  zip::zip(...),
+  deprecated = function(e) NULL)
+</pre>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Some files to zip up
+dir.create(tmp &lt;- tempfile())
+cat("first file", file = file.path(tmp, "file1"))
+cat("second file", file = file.path(tmp, "file2"))
+
+zipfile &lt;- tempfile(fileext = ".zip")
+zipr(zipfile, tmp)
+
+## List contents
+zip_list(zipfile)
+
+## Add another file
+cat("third file", file = file.path(tmp, "file3"))
+zipr_append(zipfile, file.path(tmp, "file3"))
+zip_list(zipfile)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>zip</em> version 2.0.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

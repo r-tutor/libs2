@@ -1,3 +1,54 @@
+dendextend 1.12.0 (2019-05-11)
+----------------------------------------
+###OTHER NOTES
+* Move to RoxygenNote: 6.1.1
+* Remove dendextendRcpp from introduction.Rmd
+* Remove OLD (5 years old...) inst/doc/dendextend-tutorial.pdf
+* Remove d3dendrogram (this code was experimental and given the advances in ggdend and plotly, it is no longer useful. If anyone is curious about this code, you're welcome to find it in previous versions of dendextend under R/d3dendrogram.R). This also let's us remove the dependency on whisker.
+
+###BUG FIXES
+* find_k - add missing functions from fpc (So that pamk will work with no NOTEs)
+
+dendextend 1.11.0 (2019-05-10)
+----------------------------------------
+
+###UPDATED FUNCTIONS:
+* find_k - now imports pamk into dendextend so to remove the dependency on fpc (credit to the author is provided in the DESCRIPTION, and mention to the source function in the docs of find_k).
+
+###BUG FIXES
+* unbranch - before: unbranch(dend,k), for k > 1, moved the new roots (the roots of dend[[k]]) at the beginning of the new_dend. Hence, whenever k>1, the order of the leaves was changed;			that is, labels(dend) != labels(unbranch(dend,k)). now: the new roots, say there are K of them, are inserted at the positions (k,k+1,...,k+K-1), and so labels(dend) == labels(unbranch(dend,k)).
+		
+
+dendextend 1.10.0 (2019-03-15)
+----------------------------------------
+
+###NEW FUNCTIONS
+* pvclust_edges - extracting edge information from pvclust object based on hclust labels (Issues #83)
+
+###UPDATED FUNCTIONS:
+* cutree.default now works with any object that has an as.dendrogram method by default. (including agnes and diana)
+
+###OTHER NOTES
+* Added RNGversion("3.5.0") to tests so as to comply with the new R RNG change that is coming up in R 3.6.0.
+
+
+dendextend 1.9.0 (2018-10-19)
+----------------------------------------
+
+###OTHER NOTES
+   * Removed some old deprecated code relating to dendextendRcpp.
+   * Minor edits to the doc.
+
+###UPDATED FUNCTIONS:
+   * prune_leaf - now works properly with non-binary trees. The modified code in prune_leaf() now trim leaves from splits with more than 2 branches. This simply involves removing the list elements from the dendrogram that match the leaf_name to be removed. Also added tests to verify it works. (props @hypercompetent)
+   
+###BUG FIXES
+   * dend_diff - now works properly (props @jdetribol)
+   * Fix "S3 method lookup found 'as.phylo.dendrogram' on search path" by using @rawNamespace in roxygen.
+
+   
+   
+
 dendextend 1.8.0 (2018-04-28)
 ----------------------------------------
 

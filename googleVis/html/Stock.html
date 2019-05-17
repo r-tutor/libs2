@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Stock: googleVis example data set</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for Stock {googleVis}"><tr><td>Stock {googleVis}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+Stock: googleVis example data set
+</h2>
+
+<h3>Description</h3>
+
+<p>Example data set to illustrate the use of the googleVis package.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>data(Stock)</pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 12 observations on the following 5 variables.
+</p>
+
+<dl>
+<dt><code>Date</code></dt><dd><p>a Date</p>
+</dd>
+<dt><code>Device</code></dt><dd><p>a character vector</p>
+</dd>
+<dt><code>Value</code></dt><dd><p>a numeric vector</p>
+</dd>
+<dt><code>Title</code></dt><dd><p>a factor with levels <code>Bought pencils</code> <code>Out of stock</code></p>
+</dd>
+<dt><code>Annotation</code></dt><dd><p>a factor with levels <code>Bought 200k pencils</code> <code>Ran of stock on pens at 4pm</code></p>
+</dd>
+</dl>
+
+
+
+<h3>Source</h3>
+
+<p>Google Annotated Time Line  API:
+<a href="https://google-developers.appspot.com/chart/interactive/docs/gallery/annotatedtimeline.html">https://google-developers.appspot.com/chart/interactive/docs/gallery/annotatedtimeline.html</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Create data as used by Google in their annotated time line example
+
+ Date &lt;- as.Date(paste("2008-1-", 1:6, sep=""))
+ Pencils &lt;- c(3000, 14045, 5502, 75284, 41476, 333222)
+ Pencils.titles &lt;-c(rep(NA,4), 'Bought pencils', NA)
+ Pencils.annotation &lt;-c(rep(NA,4), 'Bought 200k pencils', NA)
+ Pens &lt;- c(40645, 20374, 50766, 14334, 66467, 39463)
+ Pens.titles &lt;- c(rep(NA, 3), 'Out of stock', NA, NA)
+ Pens.annotation &lt;- c(rep(NA, 3), 'Ran of out stock of pens at 4pm', NA, NA)
+
+ original.df=data.frame(Date, Pencils, Pencils.titles,
+                        Pencils.annotation, Pens, Pens.titles,
+                        Pens.annotation)  
+
+
+ Stock &lt;- reshape(original.df, idvar="Date", times=c("Pencils", "Pens"), 
+                  timevar="Device",
+                  varying=list(c("Pencils", "Pens"),
+                               c("Pencils.titles", "Pens.titles"),
+                               c("Pencils.annotation", "Pens.annotation")), 
+                   v.names=c("Value", "Title", "Annotation"),
+                   direction="long")
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>googleVis</em> version 0.6.4 <a href="00Index.html">Index</a>]</div>
+</body></html>

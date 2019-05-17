@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: A specific parameterization of the Weibull distribution for...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for WEI2 {gamlss.dist}"><tr><td>WEI2 {gamlss.dist}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>A specific parameterization of the  Weibull
+distribution for fitting a GAMLSS</h2>
+
+<h3>Description</h3>
+
+<p>The function <code>WEI2</code> can be used to define the Weibull distribution, a two parameter distribution, for a
+<code>gamlss.family</code> object to be used in GAMLSS fitting using the function <code>gamlss()</code>. 
+This is the parameterization of the Weibull distribution usually used in proportional hazard models and is defined in details below.
+[Note that the GAMLSS function <code>WEI</code> uses a 
+different parameterization for fitting the Weibull distribution.]
+The functions <code>dWEI2</code>, <code>pWEI2</code>, <code>qWEI2</code> and <code>rWEI2</code> define the density, distribution function, quantile function and random
+generation for the specific parameterization of the Weibull distribution. 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+WEI2(mu.link = "log", sigma.link = "log")
+dWEI2(x, mu = 1, sigma = 1, log = FALSE)
+pWEI2(q, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
+qWEI2(p, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
+rWEI2(n, mu = 1, sigma = 1)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>mu.link</code></td>
+<td>
+<p>Defines the <code>mu.link</code>, with &quot;log&quot; link as the default for the mu parameter, other links are  &quot;inverse&quot; and &quot;identity&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>sigma.link</code></td>
+<td>
+<p> Defines the  <code>sigma.link</code>, with &quot;log&quot; link as the default for the sigma parameter, other link is the &quot;inverse&quot; and &quot;identity&quot; </p>
+</td></tr>
+<tr valign="top"><td><code>x,q</code></td>
+<td>
+<p>vector of quantiles</p>
+</td></tr>
+<tr valign="top"><td><code>mu</code></td>
+<td>
+<p>vector of the mu parameter values </p>
+</td></tr>
+<tr valign="top"><td><code>sigma</code></td>
+<td>
+<p>vector of sigma parameter values</p>
+</td></tr>
+<tr valign="top"><td><code>log, log.p</code></td>
+<td>
+<p> logical; if TRUE, probabilities p are given as log(p).</p>
+</td></tr>
+<tr valign="top"><td><code>lower.tail</code></td>
+<td>
+<p>logical; if TRUE (default), probabilities are P[X &lt;= x],
+otherwise, P[X &gt; x] </p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>vector of probabilities. </p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p> number of observations. If <code>length(n) &gt; 1</code>, the length is
+taken to be the number required</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The parameterization of the function <code>WEI2</code> is given by
+</p>
+<p style="text-align: center;"><i>f(y|mu,sigma)= sigma*mu*y^(sigma-1)exp(-mu*y^sigma)</i></p>
+
+<p>for <i>y&gt;0</i>, <i>&mu;&gt;0</i> and <i>&sigma;&gt;0</i>.
+The GAMLSS functions <code>dWEI2</code>, <code>pWEI2</code>, <code>qWEI2</code>, and <code>rWEI2</code> can be used to provide the pdf, the cdf, the quantiles and
+random generated numbers for the Weibull distribution with argument <code>mu</code>, and <code>sigma</code>.
+[See the GAMLSS function <code>WEI</code> for a different parameterization of the Weibull.] 
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>WEI2()</code> returns a <code>gamlss.family</code> object which can be used to fit a Weibull distribution in the <code>gamlss()</code> function.
+<code>dWEI2()</code> gives the density, <code>pWEI2()</code> gives the distribution
+function, <code>qWEI2()</code> gives the quantile function, and <code>rWEI2()</code>
+generates random deviates. The latest functions are based on the equivalent <code>R</code> functions for Weibull distribution.
+</p>
+
+
+<h3>Warning </h3>
+
+<p>In <code>WEI2</code> the estimated parameters <code>mu</code> and <code>sigma</code> can be highly correlated so it is advisable to use the 
+<code>CG()</code> method for fitting  [as the RS() method can be veru slow in this situation.] </p>
+
+
+<h3>Note</h3>
+
+<p> The mean in <code>WEI2</code> is given by <i>mu^(-1/sigma)*gamma((1/sigma)+1)</i> and the variance
+<i>mu^{-2/sigma}*(gamma((2/sigma)+1)-gamma((1/sigma)+1)^2)</i> </p>
+
+
+<h3>Author(s)</h3>
+
+<p>Mikis Stasinopoulos <a href="mailto:mikis.stasinopoulos@gamlss.org">mikis.stasinopoulos@gamlss.org</a>, Bob Rigby  and Calliope Akantziliotou </p>
+
+
+<h3>References</h3>
+
+ 
+<p>Rigby, R. A. and  Stasinopoulos D. M. (2005). Generalized additive models for location, scale and shape,(with discussion), 
+<em>Appl. Statist.</em>, <b>54</b>, part 3, pp 507-554.
+</p>
+<p>Stasinopoulos D. M., Rigby R.A. and Akantziliotou C. (2006) Instructions on how to use the GAMLSS package in R.
+Accompanying documentation in the current GAMLSS  help files, (see also  <a href="http://www.gamlss.org/">http://www.gamlss.org/</a>). 
+</p>
+<p>Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location scale and shape (GAMLSS) in R.
+<em>Journal of Statistical Software</em>, Vol. <b>23</b>, Issue 7, Dec 2007, <a href="http://www.jstatsoft.org/v23/i07">http://www.jstatsoft.org/v23/i07</a>.
+</p>
+<p>Stasinopoulos D. M., Rigby R.A., Heller G., Voudouris V., and De Bastiani F., (2017)
+<em>Flexible Regression and Smoothing: Using GAMLSS in R</em>,  Chapman and Hall/CRC.
+</p>
+
+
+<h3>See Also</h3>
+
+  <p><code><a href="gamlss.family.html">gamlss.family</a></code>, <code><a href="WEI.html">WEI</a></code>,<code><a href="WEI3.html">WEI3</a></code>, </p>
+
+
+<h3>Examples</h3>
+
+<pre>
+WEI2()
+dat&lt;-rWEI(100, mu=.1, sigma=2)
+hist(dat)
+# library(gamlss)
+# gamlss(dat~1, family=WEI2, method=CG())
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>gamlss.dist</em> version 5.1-4 <a href="00Index.html">Index</a>]</div>
+</body></html>

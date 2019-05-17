@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Filled Circle Shape palette (discrete)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for circlefill_shape_pal {ggthemes}"><tr><td>circlefill_shape_pal {ggthemes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Filled Circle Shape palette (discrete)</h2>
+
+<h3>Description</h3>
+
+<p>Shape palette with circles varying by amount of fill. This uses
+the set of 3 circle fill values in Lewandowsky and Spence (1989):
+solid, hollow, half-filled, with two additional fill amounts:
+three-quarters, and one-quarter.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+circlefill_shape_pal()
+</pre>
+
+
+<h3>Details</h3>
+
+<p>This palette supports up to five values.
+</p>
+
+
+<h3>References</h3>
+
+<p>Lewandowsky, Stephan and Ian Spence (1989)
+&quot;Discriminating Strata in Scatterplots&quot;, Journal of
+the American Statistical Association, <a href="http://www.jstor.org/stable/2289649">http://www.jstor.org/stable/2289649</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other shapes: <code><a href="cleveland_shape_pal.html">cleveland_shape_pal</a></code>,
+<code><a href="scale_shape_circlefill.html">scale_shape_circlefill</a></code>,
+<code><a href="scale_shape_cleveland.html">scale_shape_cleveland</a></code>,
+<code><a href="scale_shape_tremmel.html">scale_shape_tremmel</a></code>,
+<code><a href="tremmel_shape_pal.html">tremmel_shape_pal</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library("ggplot2")
+
+p &lt;- ggplot(mtcars, aes(x = mpg, y = hp, shape = factor(cyl))) +
+ geom_point()
+
+p + scale_shape_tremmel()
+p + scale_shape_circlefill()
+p + scale_shape_cleveland()
+p + scale_shape_cleveland(overlap = TRUE)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggthemes</em> version 4.2.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

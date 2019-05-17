@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Tufte's Box Plot</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for geom_tufteboxplot {ggthemes}"><tr><td>geom_tufteboxplot {ggthemes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Tufte's Box Plot</h2>
+
+<h3>Description</h3>
+
+<p>Edward Tufte's revisions of the box plot as described in
+<em>The Visual Display of Quantitative Information</em>.
+This functions provides several box plot variants:
+</p>
+
+<ul>
+<li><p>A point indicating the median, a gap indicating the
+interquartile range, and lines for whiskers.
+</p>
+</li>
+<li><p>An offset line indicating the interquartile range
+and a gap indicating the median.
+</p>
+</li>
+<li><p>A line indicating the interquartile range,
+a gap indicating the median, and points indicating
+the minimum and maximum values
+</p>
+</li>
+<li><p>A  wide line indicating the interquartile range,
+a gap indicating the median, and lines indicating the minimum and
+maximum.
+</p>
+</li></ul>
+
+
+
+<h3>Usage</h3>
+
+<pre>
+geom_tufteboxplot(mapping = NULL, data = NULL, stat = "fivenumber",
+  position = "dodge", outlier.colour = "black", outlier.shape = 19,
+  outlier.size = 1.5, outlier.stroke = 0.5, voffset = 0.01,
+  hoffset = 0.005, na.rm = FALSE, show.legend = NA,
+  inherit.aes = TRUE, median.type = "point", whisker.type = "line",
+  ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>mapping</code></td>
+<td>
+<p>Set of aesthetic mappings created by <code><a href="../../ggplot2/html/aes.html">aes()</a></code> or
+<code><a href="../../ggplot2/html/aes_.html">aes_()</a></code>. If specified and <code>inherit.aes = TRUE</code> (the
+default), it is combined with the default mapping at the top level of the
+plot. You must supply <code>mapping</code> if there is no plot mapping.</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>The data to be displayed in this layer. There are three
+options:
+</p>
+<p>If <code>NULL</code>, the default, the data is inherited from the plot
+data as specified in the call to <code><a href="../../ggplot2/html/ggplot.html">ggplot()</a></code>.
+</p>
+<p>A <code>data.frame</code>, or other object, will override the plot
+data. All objects will be fortified to produce a data frame. See
+<code><a href="../../ggplot2/html/fortify.html">fortify()</a></code> for which variables will be created.
+</p>
+<p>A <code>function</code> will be called with a single argument,
+the plot data. The return value must be a <code>data.frame</code>, and
+will be used as the layer data.</p>
+</td></tr>
+<tr valign="top"><td><code>stat</code></td>
+<td>
+<p>The statistical transformation to use on the data for this
+layer, as a string.</p>
+</td></tr>
+<tr valign="top"><td><code>position</code></td>
+<td>
+<p>Position adjustment, either as a string, or the result of
+a call to a position adjustment function.</p>
+</td></tr>
+<tr valign="top"><td><code>outlier.colour</code></td>
+<td>
+<p>colour for outlying points</p>
+</td></tr>
+<tr valign="top"><td><code>outlier.shape</code></td>
+<td>
+<p>shape of outlying points</p>
+</td></tr>
+<tr valign="top"><td><code>outlier.size</code></td>
+<td>
+<p>size of outlying points</p>
+</td></tr>
+<tr valign="top"><td><code>outlier.stroke</code></td>
+<td>
+<p>stroke for outlying points</p>
+</td></tr>
+<tr valign="top"><td><code>voffset</code></td>
+<td>
+<p>controls the size of the gap in the line representing the
+median when <code>median.type = 'line'</code>. This is a fraction of the range
+of <code>y</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>hoffset</code></td>
+<td>
+<p>controls how much the interquartile line is offset from the
+whiskers when <code>median.type = 'line'</code>. This is a fraction of the
+range of <code>x</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>na.rm</code></td>
+<td>
+<p>If <code>FALSE</code>, the default, missing values are removed with
+a warning. If <code>TRUE</code>, missing values are silently removed.</p>
+</td></tr>
+<tr valign="top"><td><code>show.legend</code></td>
+<td>
+<p>logical. Should this layer be included in the legends?
+<code>NA</code>, the default, includes if any aesthetics are mapped.
+<code>FALSE</code> never includes, and <code>TRUE</code> always includes.
+It can also be a named logical vector to finely select the aesthetics to
+display.</p>
+</td></tr>
+<tr valign="top"><td><code>inherit.aes</code></td>
+<td>
+<p>If <code>FALSE</code>, overrides the default aesthetics,
+rather than combining with them. This is most useful for helper functions
+that define both data and aesthetics and shouldn't inherit behaviour from
+the default plot specification, e.g. <code><a href="../../ggplot2/html/borders.html">borders()</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>median.type</code></td>
+<td>
+<p>If <code>'point'</code>, then the median is represented by a
+point, and the interquartile range by a gap in the line. If
+<code>median.type='line'</code>, then the interquartile range is represented by
+a line, possibly offset, and the median by a gap in the line.</p>
+</td></tr>
+<tr valign="top"><td><code>whisker.type</code></td>
+<td>
+<p>If <code>'line'</code>, then whiskers are represented by lines.
+If <code>'point'</code>, then whiskers are represented by points at
+<code>ymin</code> and <code>ymax</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Other arguments passed on to <code><a href="../../ggplot2/html/layer.html">layer()</a></code>. These are
+often aesthetics, used to set an aesthetic to a fixed value, like
+<code>colour = "red"</code> or <code>size = 3</code>. They may also be parameters
+to the paired geom/stat.</p>
+</td></tr>
+</table>
+
+
+<h3>Aesthetics</h3>
+
+
+<ul>
+<li><p> x [required]
+</p>
+</li>
+<li><p> y [required]
+</p>
+</li>
+<li><p> colour
+</p>
+</li>
+<li><p> size
+</p>
+</li>
+<li><p> linetype
+</p>
+</li>
+<li><p> shape
+</p>
+</li>
+<li><p> fill
+</p>
+</li>
+<li><p> alpha
+</p>
+</li></ul>
+
+
+
+<h3>References</h3>
+
+<p>Tufte, Edward R. (2001) The Visual Display of
+Quantitative Information, Chapter 6.
+</p>
+<p>McGill, R., Tukey, J. W. and Larsen, W. A. (1978) Variations of
+box plots. The American Statistician 32, 12-16.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../ggplot2/html/geom_boxplot.html">geom_boxplot</a>()</code>
+</p>
+<p>Other geom tufte: <code><a href="geom_rangeframe.html">geom_rangeframe</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library("ggplot2")
+
+p &lt;- ggplot(mtcars, aes(factor(cyl), mpg))
+# with a point for the median and lines for whiskers
+p + geom_tufteboxplot()
+# with a line for the interquartile range and points for whiskers
+p + geom_tufteboxplot(median.type = "line", whisker.type = "point", hoffset = 0)
+# with a wide line for the interquartile range and lines for whiskers
+p + geom_tufteboxplot(median.type = "line", hoffset = 0, width = 3)
+# with an offset line for the interquartile range and lines for whiskers
+p + geom_tufteboxplot(median.type = "line")
+# combined with theme_tufte
+p + geom_tufteboxplot() +
+  theme_tufte() +
+  theme(axis.ticks.x = element_blank())
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggthemes</em> version 4.2.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,383 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Google Geo Chart with R</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for gvisGeoChart {googleVis}"><tr><td>gvisGeoChart {googleVis}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Google Geo Chart with R
+
+</h2>
+
+<h3>Description</h3>
+
+<p>The gvisGeoChart function reads a data.frame and creates text output
+referring to the Google Visualisation API, which can be included into a web
+page, or as a stand-alone page.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+gvisGeoChart(data, locationvar = "", colorvar = "", sizevar = "",
+  hovervar = "", options = list(), chartid)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a <code>data.frame</code>. The data has to have at least one column
+with location name (<code>locationvar</code>), value to be mapped to location. The
+format of the data varies depending on which display mode that you use:
+Regions or Markers.</p>
+</td></tr>
+<tr valign="top"><td><code>locationvar</code></td>
+<td>
+<p>column name of <code>data</code> with the geo locations to be
+analysed. The locations can be provide in two formats: </p>
+
+<dl>
+<dt>Format 1</dt><dd><p>'latitude:longitude'. See the example below.</p>
+</dd> <dt>Format
+2</dt><dd><p>Address, country name, region name locations, or US metropolitan area
+codes, see
+<a href="https://developers.google.com/adwords/api/docs/appendix/geotargeting?csw=1l">https://developers.google.com/adwords/api/docs/appendix/geotargeting?csw=1l</a>.
+This format works with the <code>dataMode</code> option set to either 'markers' or
+'regions'. The following formats are accepted: A specific address (for
+example, &quot;1600 Pennsylvania Ave&quot;). A country name as a string (for example,
+&quot;England&quot;), or an uppercase ISO-3166 code or its English text equivalent
+(for example, &quot;GB&quot; or &quot;United Kingdom&quot;).  An uppercase ISO-3166-2 region
+code name or its English text equivalent (for example, &quot;US-NJ&quot; or &quot;New
+Jersey&quot;).  </p>
+</dd> </dl>
+</td></tr>
+<tr valign="top"><td><code>colorvar</code></td>
+<td>
+<p>column name of <code>data</code> with the optional numeric column
+used to assign a color to this marker, based on the scale specified in the
+<code>colorAxis.colors</code> property. If this column is not present, all markers
+will be the same color. If the column is present, null values are not
+allowed. Values are scaled relative to each other, or absolutely to values
+specified in the <code>colorAxis.values</code> property.</p>
+</td></tr>
+<tr valign="top"><td><code>sizevar</code></td>
+<td>
+<p>only used for <code>displayMode='markers'</code>. Column name of
+<code>data</code> with the optional numeric column used to assign the marker size,
+relative to the other marker sizes. If this column is not present, the value
+from the previous column will be used (or default 'size, if no color column
+is provided as well). If the column is present, null valuesare not allowed.</p>
+</td></tr>
+<tr valign="top"><td><code>hovervar</code></td>
+<td>
+<p>column name of <code>data</code> with the additional string text
+displayed when the user hovers over this region.</p>
+</td></tr>
+<tr valign="top"><td><code>options</code></td>
+<td>
+<p>list of configuration options, see:
+</p>
+
+<p><a href="https://google-developers.appspot.com/chart/interactive/docs/gallery/geochart#Configuration_Options">https://google-developers.appspot.com/chart/interactive/docs/gallery/geochart#Configuration_Options</a></p>
+
+<p>The parameters can be set via a named list. The parameters have to map those
+of the Google documentation. 
+</p>
+
+<ul>
+<li><p>Boolean arguments are set to 
+either <code>TRUE</code> or <code>FALSE</code>, using the R syntax.
+
+</p>
+</li>
+<li><p>Google API parameters with a single value and with names that don't 
+include a &quot;.&quot; are set like one would do in R, that is 
+<code>options=list(width=200, height=300)</code>. 
+Exceptions to this rule are the width and height options for 
+<code><a href="gvisAnnotatedTimeLine.html">gvisAnnotatedTimeLine</a></code> and <code><a href="gvisAnnotationChart.html">gvisAnnotationChart</a></code>.
+For those two functions, width and height must be character strings of the 
+format <code>"Xpx"</code>, where <code>X</code> is a number, or <code>"automatic"</code>. 
+For example, 
+<code>options=list(width="200px", height="300px")</code>.
+
+</p>
+</li>
+<li><p>Google API parameters with names that don't include a &quot;.&quot;, but require 
+multivalues are set as a character, wrapped in &quot;[ ]&quot; and separated by commas, 
+e.g. 
+
+<code>options=list(colors="['#cbb69d', '#603913', '#c69c6e']")</code>
+
+</p>
+</li>
+<li><p>Google API parameters with names that do include a &quot;.&quot; present parameters with 
+several sub-options and have to be set as a character wrapped in &quot; &quot;.
+The values of those sub-options are set via parameter:value. Boolean values
+have to be stated as <code>'true'</code> or <code>'false'</code>. 
+For example the Google documentaion states the formating options for the 
+vertical axis and states the parameter as <code>vAxis.format</code>. 
+Then this paramter can be set in R as:
+
+<code>options=list(vAxis="{format:'#,###%'}")</code>. 
+
+</p>
+</li>
+<li><p>If several sub-options have to be set, e.g. 
+
+<code>titleTextStyle.color</code>, <code>titleTextStyle.fontName</code> and 
+<code>titleTextStyle.fontSize</code>, then those can be combined in one list item 
+such as:
+
+<code>options=list(titleTextStyle="{color:'red', fontName:'Courier', fontSize:16}")</code>
+
+</p>
+</li>
+<li><p>paramters that can have more than one value per sub-options are 
+wrapped in &quot;[ ]&quot;. For example to set the labels for left and right axes use:
+
+<code>options=list(vAxes="[{title:'val1'}, {title:'val2'}]")</code>
+
+</p>
+</li>
+<li><p><code>gvis.editor</code> a character label for an
+ on-page button that opens an in-page dialog box enabling
+users to edit, change and customise the chart. By default no
+value is given and therefore no button is displayed. 
+
+</p>
+</li></ul>
+
+<p>For more details see the Google API documentation and the R examples below.   </p>
+</td></tr>
+<tr valign="top"><td><code>chartid</code></td>
+<td>
+<p>character. If missing (default) a random chart id will be 
+generated based on chart type and <code><a href="../../base/html/tempfile.html">tempfile</a></code></p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>A geo chart is a map of a country, a continent, or a region with two modes:
+The region mode colorizes whole regions, such as countries, provinces, or
+states. The marker mode marks designated regions using bubbles that are
+scaled according to a value that you specify.
+</p>
+<p>A geo chart is rendered within the browser using SVG or VML. Note that the
+map is not scrollable or draggable.
+</p>
+
+
+<h3>Value</h3>
+
+<p>gvisGeoChart returns list 
+of <code><a href="../../base/html/class.html">class</a></code>
+&quot;<code>gvis</code>&quot; and &quot;<code>list</code>&quot;.   
+An object of class &quot;<code>gvis</code>&quot; is a list containing at least the
+following components:
+</p>
+
+<dl>
+<dt><code>type</code></dt><dd><p>Google visualisation type</p>
+</dd>
+<dt><code>chartid</code></dt><dd><p>character id of the chart object. Unique chart
+ids are required to place several charts on the same page.
+</p>
+</dd>
+<dt><code>html</code></dt><dd><p>a list with the building blocks for a page
+</p>
+
+<dl>
+<dt><code>header</code></dt><dd><p>a character string of a html page header:
+<code>&lt;html&gt;...&lt;body&gt;</code>,</p>
+</dd>
+<dt><code>chart</code></dt><dd><p>a named character vector of the chart's building blocks:
+</p>
+
+<dl>
+<dt><code>jsHeader</code></dt><dd><p>Opening <code>&lt;script&gt;</code> tag and
+reference to Google's JavaScript library.
+</p>
+</dd>
+<dt><code>jsData</code></dt><dd><p>JavaScript function defining the input
+<code>data</code> as a JSON object.
+</p>
+</dd> 
+<dt><code>jsDrawChart</code></dt><dd><p>JavaScript function combing the data with 
+the visualisation API and user options.
+</p>
+</dd>
+<dt><code>jsDisplayChart</code></dt><dd><p>JavaScript function calling the
+handler to display the chart.
+</p>
+</dd>
+<dt><code>jsFooter</code></dt><dd><p>End tag <code>&lt;/script&gt;</code>.
+</p>
+</dd>
+<dt><code>jsChart</code></dt><dd><p>Call of the <code>jsDisplayChart</code> function.
+</p>
+</dd>
+<dt><code>divChart</code></dt><dd><p><code>&lt;div&gt;</code> container to embed the chart
+into the page.
+</p>
+</dd>
+</dl>
+   
+</dd>
+<dt><code>caption</code></dt><dd><p>character string of a standard caption,
+including data name and chart id.
+</p>
+</dd>  
+<dt><code>footer</code></dt><dd><p>character string of a html page footer:
+<code>&lt;/body&gt;...&lt;/html&gt;</code>, including the used R and googleVis version
+and link to Google's Terms of Use.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+
+<h3>Author(s)</h3>
+
+<p>Markus Gesmann <a href="mailto:markus.gesmann@gmail.com">markus.gesmann@gmail.com</a>, 
+Diego de Castillo <a href="mailto:decastillo@gmail.com">decastillo@gmail.com</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Google Chart Tools API: 
+<a href="https://google-developers.appspot.com/chart/interactive/docs/gallery/geochart">https://google-developers.appspot.com/chart/interactive/docs/gallery/geochart</a></p>
+
+
+
+
+<h3>See Also</h3>
+
+<p>See also <code><a href="gvisMethods.html">print.gvis</a></code>, <code><a href="gvisMethods.html">plot.gvis</a></code> 
+for printing and plotting methods.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+## Please note that by default the googleVis plot command
+## will open a browser window and requires Internet
+## connection to display the visualisation.
+
+## Regions examples
+## The regions style fills entire regions (typically countries) with
+## colors corresponding to the values that you assign
+
+G1a &lt;- gvisGeoChart(Exports, locationvar='Country', colorvar='Profit') 
+
+plot(G1a)
+
+## Change projection
+G1b &lt;- gvisGeoChart(Exports, locationvar='Country', colorvar='Profit',
+                   options=list(projection="kavrayskiy-vii")) 
+
+plot(G1b)
+
+## Plot only Europe
+G2 &lt;- gvisGeoChart(Exports, "Country", "Profit",
+                   options=list(region="150"))
+
+plot(G2)
+
+
+## Example showing US data by state 
+require(datasets)
+
+states &lt;- data.frame(state.name, state.x77)
+G3 &lt;- gvisGeoChart(states, "state.name", "Illiteracy",
+                 options=list(region="US", displayMode="regions", 
+                              resolution="provinces",
+   	 width=600, height=400))
+plot(G3)
+
+## Markers Example
+## A marker style map renders bubble-shaped markers at specified
+## locations with the color and size that you specify.
+
+G4 &lt;- gvisGeoChart(CityPopularity, locationvar='City', colorvar='Popularity',
+                      options=list(region='US', height=350, 
+                                   displayMode='markers',
+				   colorAxis="{values:[200,400,600,800],
+                                   colors:[\'red', \'pink\', \'orange',\'green']}")
+                      ) 
+plot(G4)
+
+G5 &lt;- gvisGeoChart(Andrew, "LatLong", colorvar='Speed_kt',
+                   options=list(region="US"))
+plot(G5)
+
+
+G6 &lt;- gvisGeoChart(Andrew, "LatLong", sizevar='Speed_kt',
+                   colorvar="Pressure_mb", options=list(region="US"))
+plot(G6)
+
+## Create lat:long values and plot a map of Oceania
+## Set background colour to light-blue
+
+require(stats)
+data(quakes)
+head(quakes)
+quakes$latlong&lt;-paste(quakes$lat, quakes$long, sep=":")
+
+G7 &lt;- gvisGeoChart(quakes, "latlong", "depth", "mag",
+                   options=list(displayMode="Markers", region="009",
+                   colorAxis="{colors:['red', 'grey']}",
+                   backgroundColor="lightblue"))
+
+plot(G7)
+
+## Not run: 
+# Plot S&amp;P countries' credit rating sourced from Wikipedia
+# Use the hovervar to show the rating
+library(XML)
+url &lt;- "https://en.wikipedia.org/wiki/List_of_countries_by_credit_rating"
+x &lt;- readHTMLTable(readLines(url), which=3)
+levels(x$Rating) &lt;- substring(levels(x$Rating), 4, 
+                              nchar(levels(x$Rating)))
+x$Ranking &lt;- x$Rating
+levels(x$Ranking) &lt;- nlevels(x$Rating):1
+x$Ranking &lt;- as.character(x$Ranking)
+x$Rating &lt;- paste(x$Country, x$Rating, sep=": ")
+#### Create a geo chart
+G8 &lt;- gvisGeoChart(x, "Country", "Ranking", hovervar="Rating",
+                options=list(gvis.editor="S&amp;P", 
+                             colorAxis="{colors:['#91BFDB', '#FC8D59']}"))
+plot(G8)
+
+
+## Plot world wide earth quakes of the last 30 days with magnitude &gt;= 4.0 
+library(XML)
+## Get earthquake data of the last 30 days
+url &lt;- "https://ds.iris.edu/seismon/eventlist/index.phtml"
+eq &lt;- readHTMLTable(readLines(url),
+                    colClasses=c("factor", rep("numeric", 4), "factor"))$evTable
+                    names(eq) &lt;- c("DATE", "LAT", "LON", "MAG",
+                                   "DEPTH", "LOCATION_NAME", "IRIS_ID")
+##Format location data
+eq$loc=paste(eq$LAT, eq$LON, sep=":")                   
+G9 &lt;- gvisGeoChart(eq, "loc", "DEPTH", "MAG",
+                   options=list(displayMode="Markers", 
+                   colorAxis="{colors:['purple', 'red', 'orange', 'grey']}",
+                   backgroundColor="lightblue"), chartid="EQ")
+plot(G9)
+
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>googleVis</em> version 0.6.4 <a href="00Index.html">Index</a>]</div>
+</body></html>

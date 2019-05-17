@@ -1,0 +1,234 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: The Sinh-Arcsinh (SHASH) distribution for fitting a GAMLSS</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for SHASH {gamlss.dist}"><tr><td>SHASH {gamlss.dist}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>The Sinh-Arcsinh (SHASH) distribution for fitting a GAMLSS</h2>
+
+<h3>Description</h3>
+
+<p>The Sinh-Arcsinh (SHASH) distribution is a four parameter distribution, 
+for a <code>gamlss.family</code> object to be used for a  
+GAMLSS fitting using the function <code>gamlss()</code>.  The functions <code>dSHASH</code>, 
+<code>pSHASH</code>, <code>qSHASH</code> and <code>rSHASH</code> define the density, 
+distribution function, quantile function and random
+generation for the Sinh-Arcsinh (SHASH) distribution.   
+</p>
+<p>There are 3 different SHASH distributions implemented in GAMLSS. 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+SHASH(mu.link = "identity", sigma.link = "log", nu.link = "log", 
+      tau.link = "log")
+dSHASH(x, mu = 0, sigma = 1, nu = 0.5, tau = 0.5, log = FALSE)
+pSHASH(q, mu = 0, sigma = 1, nu = 0.5, tau = 0.5, lower.tail = TRUE, 
+     log.p = FALSE)
+qSHASH(p, mu = 0, sigma = 1, nu = 0.5, tau = 0.5, lower.tail = TRUE, 
+     log.p = FALSE)
+rSHASH(n, mu = 0, sigma = 1, nu = 0.5, tau = 0.5)
+
+SHASHo(mu.link = "identity", sigma.link = "log", nu.link = "identity", 
+      tau.link = "log")
+dSHASHo(x, mu = 0, sigma = 1, nu = 0, tau = 1, log = FALSE)
+pSHASHo(q, mu = 0, sigma = 1, nu = 0, tau = 1, lower.tail = TRUE, 
+     log.p = FALSE)
+qSHASHo(p, mu = 0, sigma = 1, nu = 0, tau = 1, lower.tail = TRUE, 
+     log.p = FALSE)
+rSHASHo(n, mu = 0, sigma = 1, nu = 0, tau = 1)
+
+SHASHo2(mu.link = "identity", sigma.link = "log", nu.link = "identity", 
+      tau.link = "log")
+dSHASHo2(x, mu = 0, sigma = 1, nu = 0, tau = 1, log = FALSE)
+pSHASHo2(q, mu = 0, sigma = 1, nu = 0, tau = 1, lower.tail = TRUE, 
+     log.p = FALSE)
+qSHASHo2(p, mu = 0, sigma = 1, nu = 0, tau = 1, lower.tail = TRUE, 
+     log.p = FALSE)
+rSHASHo2(n, mu = 0, sigma = 1, nu = 0, tau = 1)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>mu.link</code></td>
+<td>
+<p>Defines the <code>mu.link</code>, with &quot;identity&quot; link as the default for the <code>mu</code> parameter. </p>
+</td></tr>
+<tr valign="top"><td><code>sigma.link</code></td>
+<td>
+<p>  Defines the  <code>sigma.link</code>, with &quot;log&quot; link as the default for the <code>sigma</code> parameter. </p>
+</td></tr>
+<tr valign="top"><td><code>nu.link</code></td>
+<td>
+<p>Defines the  <code>nu.link</code>, with &quot;log&quot; link as the default for the <code>nu</code> parameter.</p>
+</td></tr>
+<tr valign="top"><td><code>tau.link</code></td>
+<td>
+<p>Defines the  <code>tau.link</code>, with &quot;log&quot; link as the default for the <code>tau</code> parameter.</p>
+</td></tr>
+<tr valign="top"><td><code>x,q</code></td>
+<td>
+<p>vector of quantiles</p>
+</td></tr>
+<tr valign="top"><td><code>mu</code></td>
+<td>
+<p>vector of location parameter values </p>
+</td></tr>
+<tr valign="top"><td><code>sigma</code></td>
+<td>
+<p>vector of scale parameter values</p>
+</td></tr>
+<tr valign="top"><td><code>nu</code></td>
+<td>
+<p>vector of skewness <code>nu</code> parameter values</p>
+</td></tr>
+<tr valign="top"><td><code>tau</code></td>
+<td>
+<p>vector of kurtosis <code>tau</code> parameter values</p>
+</td></tr>
+<tr valign="top"><td><code>log, log.p</code></td>
+<td>
+<p> logical; if TRUE, probabilities p are given as log(p).</p>
+</td></tr>
+<tr valign="top"><td><code>lower.tail</code></td>
+<td>
+<p>logical; if TRUE (default), probabilities are P[X &lt;= x],
+otherwise, P[X &gt; x] </p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>vector of probabilities. </p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p> number of observations. If <code>length(n) &gt; 1</code>, the length is
+taken to be the number required</p>
+</td></tr>      
+</table>
+
+
+<h3>Details</h3>
+
+   
+<p>The probability density function of the Sinh-Arcsinh distribution, (<code>SHASH</code>), Jones(2005), is defined as 
+</p>
+<p style="text-align: center;"><i>f(y|mu,sigma,nu,tau)=c/(sqrt(2*pi)*sigma*(1+z^2)^(1/2)) exp(-(r^2)/2)</i></p>
+
+<p>where 
+</p>
+<p style="text-align: center;"><i>r=0.5*[exp(tau*sinh^(-1)(z))-exp(-nu*sinh^(-1)(z))]</i></p>
+
+<p>and
+</p>
+<p style="text-align: center;"><i>c=0.5*[rho*exp(tau*sinh^(-1)(z))+ nu * exp(-nu*sinh^(-1)(z))]</i></p>
+
+<p>and  <i>z=(y-mu)/sigma</i>
+for <i>0&lt;y&lt;0</i>,
+<i>mu=(-Inf,+Inf)</i>,
+<i>sigma&gt;0</i>,
+<i>nu&gt;0</i> and
+<i>tau&gt;0</i>. 
+</p>
+<p>The parameters <i>mu</i> and <i>sigma</i> are the location  and scale of the distribution.
+The parameter <i>nu</i> determines the left hand tail of the distribution with <i>nu&gt;1</i> indicating a lighter tail  than the normal 
+and 
+<i>&nu;&lt;1</i> heavier tail than the normal. The parameter <i>tau</i>  determines the right hand tail  of the distribution in the same way.
+</p>
+<p>The second form of the Sinh-Arcsinh distribution can be found in Jones and Pewsey (2009, p.2) denoted by <code>SHASHo</code> and the probability density function is defined as,
+</p>
+<p style="text-align: center;"><i>f(y|mu,sigma,nu,tau)= (tau/sigma)* (c/sqrt(2*pi)) 1/(2*(1+z^2)^(1/2)) exp(-(r^2/2))</i></p>
+
+<p>where 
+</p>
+<p style="text-align: center;"><i>r= sinh(tau*asinh(z)-nu)</i></p>
+
+<p>and 
+</p>
+<p style="text-align: center;"><i>c= cosh(&tau; asinh(z)-&nu;)</i></p>
+
+<p>and  <i>z=(y-mu)/sigma</i>
+for <i>0&lt;y&lt;0</i>,
+<i>mu=(-Inf,+Inf)</i>,
+<i>sigma&gt;0</i>,
+<i>nu=(-Inf,+Inf)</i> and
+<i>tau&gt;0</i>. 
+</p>
+<p>The third form of the Sinh-Arcsinh distribution (Jones and Pewsey, 2009, p.8) divides the distribution by sigma for the density of the unstandardized variable. This distribution is denoted by <code>SHASHo2</code> and has pdf
+</p>
+<p style="text-align: center;"><i>f(y|&mu;,&sigma;,&nu;,&tau;)= (c/sigma)*(tau/((2 &pi;)^(1/2)))*(1/((1+z^2)^(1/2)))-exp(-r^2*0.5)</i></p>
+
+<p>where <i>z=(y-mu)/(sigma*tau)</i>, with <i>r</i> and <i>c</i> as for the pdf of the <code>SHASHo</code> distribution,
+for <i>0&lt;y&lt;0</i>,
+<i>mu=(-Inf,+Inf)</i>,
+<i>sigma&gt;0</i>,
+<i>nu=(-Inf,+Inf)</i> and
+<i>tau&gt;0</i>. 
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>SHASH()</code>  returns a <code>gamlss.family</code> object which can be used to fit the SHASH distribution in the <code>gamlss()</code> function. 
+<code>dSHASH()</code> gives the density, <code>pSHASH()</code> gives the distribution
+function, <code>qSHASH()</code> gives the quantile function, and <code>rSHASH()</code>
+generates random deviates. 
+</p>
+
+
+<h3>Warning</h3>
+
+<p>The qSHASH and rSHASH are slow since they are relying on golden section for finding the quantiles</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Bob Rigby, Mikis Stasinopoulos <a href="mailto:mikis.stasinopoulos@gamlss.org">mikis.stasinopoulos@gamlss.org</a> and Fiona McElduff</p>
+
+
+<h3>References</h3>
+
+<p>Jones, M. C. (2006) p 546-547 in the discussion of Rigby, R. A. and  Stasinopoulos D. M. (2005) 
+<em>Appl. Statist.</em>, <b>54</b>, part 3.
+</p>
+<p>Jones and Pewsey (2009) Sinh-arcsinh distributions. <em>Biometrika.</em> <b>96</b>(4), pp. 761?780. 
+</p>
+<p>Rigby, R. A. and  Stasinopoulos D. M. (2005). Generalized additive models for location, scale and shape,(with discussion), 
+<em>Appl. Statist.</em>, <b>54</b>, part 3, pp 507-554.
+</p>
+<p>Stasinopoulos D. M. Rigby R. A. and Akantziliotou C. (2006) Instructions on how to use the GAMLSS package in R.
+Accompanying documentation in the current GAMLSS  help files, (see also  <a href="http://www.gamlss.org/">http://www.gamlss.org/</a>).  
+</p>
+<p>Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location scale and shape (GAMLSS) in R.
+<em>Journal of Statistical Software</em>, Vol. <b>23</b>, Issue 7, Dec 2007, <a href="http://www.jstatsoft.org/v23/i07">http://www.jstatsoft.org/v23/i07</a>.
+</p>
+<p>Stasinopoulos D. M., Rigby R.A., Heller G., Voudouris V., and De Bastiani F., (2017)
+<em>Flexible Regression and Smoothing: Using GAMLSS in R</em>,  Chapman and Hall/CRC.
+</p>
+
+
+<h3>See Also</h3>
+
+  <p><code><a href="gamlss.family.html">gamlss.family</a></code>, <code><a href="JSU.html">JSU</a></code>, <code><a href="BCt.html">BCT</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+SHASH()   # 
+plot(function(x)dSHASH(x, mu=0,sigma=1, nu=1, tau=2), -5, 5, 
+ main = "The SHASH  density mu=0,sigma=1,nu=1, tau=2")
+plot(function(x) pSHASH(x, mu=0,sigma=1,nu=1, tau=2), -5, 5, 
+ main = "The BCPE  cdf mu=0, sigma=1, nu=1, tau=2")
+dat&lt;-rSHASH(100,mu=10,sigma=1,nu=1,tau=1.5)
+hist(dat)
+# library(gamlss)
+# gamlss(dat~1,family=SHASH, control=gamlss.control(n.cyc=30))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>gamlss.dist</em> version 5.1-4 <a href="00Index.html">Index</a>]</div>
+</body></html>

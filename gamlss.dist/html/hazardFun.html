@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Hazard functions for gamlss.family distributions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for hazardFun {gamlss.dist}"><tr><td>hazardFun {gamlss.dist}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Hazard functions for gamlss.family distributions</h2>
+
+<h3>Description</h3>
+
+<p>The function <code>hazardFun()</code> takes as an argument a <code>gamlss.family</code> object and creates the hazard function for it. The function <code>gen.hazard()</code> generates a hazard function called <code>hNAME</code> where <code>NAME</code> is a 
+<code>gamlss.family</code> i.e. <code>hGA()</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+hazardFun(family = "NO", ...)
+gen.hazard(family = "NO", ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>family</code></td>
+<td>
+<p>a <code>gamlss.family</code> object</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>for passing extra arguments</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A hazard function. 
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Mikis Stasinopoulos <a href="mailto:mikis.stasinopoulos@gamlss.org">mikis.stasinopoulos@gamlss.org</a>, Bob Rigby and Vlasios Voudouris</p>
+
+
+<h3>References</h3>
+
+<p>Rigby, R. A. and  Stasinopoulos D. M. (2005). Generalized additive models for location, scale and shape,(with discussion), 
+<em>Appl. Statist.</em>, <b>54</b>, part 3, pp 507-554.
+</p>
+<p>Stasinopoulos D. M., Rigby R.A. and Akantziliotou C. (2006) Instructions on how to use the GAMLSS package in R.
+Accompanying documentation in the current GAMLSS  help files, (see also  <a href="http://www.gamlss.org/">http://www.gamlss.org/</a>). 
+</p>
+<p>Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location scale and shape (GAMLSS) in R.
+<em>Journal of Statistical Software</em>, Vol. <b>23</b>, Issue 7, Dec 2007, <a href="http://www.jstatsoft.org/v23/i07">http://www.jstatsoft.org/v23/i07</a>.
+</p>
+<p>Stasinopoulos D. M., Rigby R.A., Heller G., Voudouris V., and De Bastiani F., (2017)
+<em>Flexible Regression and Smoothing: Using GAMLSS in R</em>,  Chapman and Hall/CRC. 
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="gamlss.family.html">gamlss.family</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+gen.hazard("WEI2")
+y&lt;-seq(0,10,by=0.01)
+plot(hWEI2(y, mu=1, sigma=1)~y, type="l", col="black", ylab="h(y)", ylim=c(0,2.5))
+lines(hWEI2(y, mu=1, sigma=1.2)~y, col="red",lt=2,lw=2)
+lines(hWEI2(y, mu=1, sigma=.5)~y, col="blue",lt=3,lw=2)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>gamlss.dist</em> version 5.1-4 <a href="00Index.html">Index</a>]</div>
+</body></html>

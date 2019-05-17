@@ -1,0 +1,363 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Google Motion Chart with R</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for gvisMotionChart {googleVis}"><tr><td>gvisMotionChart {googleVis}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Google Motion Chart with R
+
+</h2>
+
+<h3>Description</h3>
+
+<p>The gvisMotionChart function reads a data.frame and
+creates text output referring to the Google Visualisation API, 
+which can be included into a web page, or as a stand-alone page. 
+The actual chart is rendered by the web browser in Flash.
+A motion chart is a dynamic chart to explore several indicators over 
+time.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+gvisMotionChart(data, idvar = "id", timevar = "time", xvar = "",
+  yvar = "", colorvar = "", sizevar = "",
+  date.format = "%Y/%m/%d", options = list(), chartid)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a <code>data.frame</code>. The data has to have at least four
+columns with subject name (<code>idvar</code>), time (<code>timevar</code>) and
+two columns of numeric values. Further columns, numeric and
+character/factor are optional. The combination of <code>idvar</code> and
+<code>timevar</code> has to describe a unique row. The column names of the
+<code>idvar</code> and <code>timevar</code> have to be specified. Further
+columns, if not specified by the other arguments (<code>xvar, yvar,
+colorvar, sizevar</code>), will be assumed to be in the order of the 
+arguments.</p>
+</td></tr>
+<tr valign="top"><td><code>idvar</code></td>
+<td>
+<p>column name of <code>data</code> with the subject to be 
+analysed.</p>
+</td></tr>
+<tr valign="top"><td><code>timevar</code></td>
+<td>
+<p>column name of <code>data</code> which shows the time 
+dimension. The information has to be either numeric, of class 
+<code><a href="../../base/html/Dates.html">Date</a></code> or a character which follows the pattern  
+'YYYYWww' (e.g. '2010W04' for weekly data) or 'YYYYQq' 
+(e.g. '2010Q1' for quarterly data).</p>
+</td></tr>
+<tr valign="top"><td><code>xvar</code></td>
+<td>
+<p>column name of a numerical vector in <code>data</code> to be 
+plotted on the x-axis.</p>
+</td></tr>
+<tr valign="top"><td><code>yvar</code></td>
+<td>
+<p>column name of a numerical vector in <code>data</code> to be 
+plotted on the y-axis.</p>
+</td></tr>
+<tr valign="top"><td><code>colorvar</code></td>
+<td>
+<p>column name of data that identifies bubbles in the 
+same series. Use the same value to identify all bubbles that belong 
+to the same series; bubbles in the same series will be assigned the 
+same color. Series can be configured using the <code>series</code> option.</p>
+</td></tr>
+<tr valign="top"><td><code>sizevar</code></td>
+<td>
+<p>values in this column are mapped to actual pixel 
+values using the <code>sizeAxis</code> option.</p>
+</td></tr>
+<tr valign="top"><td><code>date.format</code></td>
+<td>
+<p>if <code>timevar</code> is of class <code><a href="../../base/html/Dates.html">Date</a></code> 
+then this argument specifies how the dates are reformatted to be 
+used by JavaScript.</p>
+</td></tr>
+<tr valign="top"><td><code>options</code></td>
+<td>
+<p>list of configuration options for Google Motion Chart.
+The options are documented in detail by Google online:
+</p>
+
+<p><a href="https://google-developers.appspot.com/chart/interactive/docs/gallery/motionchart#Configuration_Options">https://google-developers.appspot.com/chart/interactive/docs/gallery/motionchart#Configuration_Options</a></p>
+
+<p>The parameters can be set via a named list. The parameters have to map those
+of the Google documentation. 
+</p>
+
+<ul>
+<li><p>Boolean arguments are set to 
+either <code>TRUE</code> or <code>FALSE</code>, using the R syntax.
+
+</p>
+</li>
+<li><p>Google API parameters with a single value and with names that don't 
+include a &quot;.&quot; are set like one would do in R, that is 
+<code>options=list(width=200, height=300)</code>. 
+Exceptions to this rule are the width and height options for 
+<code><a href="gvisAnnotatedTimeLine.html">gvisAnnotatedTimeLine</a></code> and <code><a href="gvisAnnotationChart.html">gvisAnnotationChart</a></code>.
+For those two functions, width and height must be character strings of the 
+format <code>"Xpx"</code>, where <code>X</code> is a number, or <code>"automatic"</code>. 
+For example, 
+<code>options=list(width="200px", height="300px")</code>.
+
+</p>
+</li>
+<li><p>Google API parameters with names that don't include a &quot;.&quot;, but require 
+multivalues are set as a character, wrapped in &quot;[ ]&quot; and separated by commas, 
+e.g. 
+
+<code>options=list(colors="['#cbb69d', '#603913', '#c69c6e']")</code>
+
+</p>
+</li>
+<li><p>Google API parameters with names that do include a &quot;.&quot; present parameters with 
+several sub-options and have to be set as a character wrapped in &quot; &quot;.
+The values of those sub-options are set via parameter:value. Boolean values
+have to be stated as <code>'true'</code> or <code>'false'</code>. 
+For example the Google documentaion states the formating options for the 
+vertical axis and states the parameter as <code>vAxis.format</code>. 
+Then this paramter can be set in R as:
+
+<code>options=list(vAxis="{format:'#,###%'}")</code>. 
+
+</p>
+</li>
+<li><p>If several sub-options have to be set, e.g. 
+
+<code>titleTextStyle.color</code>, <code>titleTextStyle.fontName</code> and 
+<code>titleTextStyle.fontSize</code>, then those can be combined in one list item 
+such as:
+
+<code>options=list(titleTextStyle="{color:'red', fontName:'Courier', fontSize:16}")</code>
+
+</p>
+</li>
+<li><p>paramters that can have more than one value per sub-options are 
+wrapped in &quot;[ ]&quot;. For example to set the labels for left and right axes use:
+
+<code>options=list(vAxes="[{title:'val1'}, {title:'val2'}]")</code>
+
+</p>
+</li>
+<li><p><code>gvis.editor</code> a character label for an
+ on-page button that opens an in-page dialog box enabling
+users to edit, change and customise the chart. By default no
+value is given and therefore no button is displayed. 
+
+</p>
+</li></ul>
+
+<p>For more details see the Google API documentation and the R examples below.   </p>
+</td></tr>
+<tr valign="top"><td><code>chartid</code></td>
+<td>
+<p>character. If missing (default) a random chart id will be 
+generated based on chart type and <code><a href="../../base/html/tempfile.html">tempfile</a></code></p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>gvisMotionChart returns list 
+of <code><a href="../../base/html/class.html">class</a></code>
+&quot;<code>gvis</code>&quot; and &quot;<code>list</code>&quot;.   
+An object of class &quot;<code>gvis</code>&quot; is a list containing at least the
+following components:
+</p>
+
+<dl>
+<dt><code>type</code></dt><dd><p>Google visualisation type</p>
+</dd>
+<dt><code>chartid</code></dt><dd><p>character id of the chart object. Unique chart
+ids are required to place several charts on the same page.
+</p>
+</dd>
+<dt><code>html</code></dt><dd><p>a list with the building blocks for a page
+</p>
+
+<dl>
+<dt><code>header</code></dt><dd><p>a character string of a html page header:
+<code>&lt;html&gt;...&lt;body&gt;</code>,</p>
+</dd>
+<dt><code>chart</code></dt><dd><p>a named character vector of the chart's building blocks:
+</p>
+
+<dl>
+<dt><code>jsHeader</code></dt><dd><p>Opening <code>&lt;script&gt;</code> tag and
+reference to Google's JavaScript library.
+</p>
+</dd>
+<dt><code>jsData</code></dt><dd><p>JavaScript function defining the input
+<code>data</code> as a JSON object.
+</p>
+</dd> 
+<dt><code>jsDrawChart</code></dt><dd><p>JavaScript function combing the data with 
+the visualisation API and user options.
+</p>
+</dd>
+<dt><code>jsDisplayChart</code></dt><dd><p>JavaScript function calling the
+handler to display the chart.
+</p>
+</dd>
+<dt><code>jsFooter</code></dt><dd><p>End tag <code>&lt;/script&gt;</code>.
+</p>
+</dd>
+<dt><code>jsChart</code></dt><dd><p>Call of the <code>jsDisplayChart</code> function.
+</p>
+</dd>
+<dt><code>divChart</code></dt><dd><p><code>&lt;div&gt;</code> container to embed the chart
+into the page.
+</p>
+</dd>
+</dl>
+   
+</dd>
+<dt><code>caption</code></dt><dd><p>character string of a standard caption,
+including data name and chart id.
+</p>
+</dd>  
+<dt><code>footer</code></dt><dd><p>character string of a html page footer:
+<code>&lt;/body&gt;...&lt;/html&gt;</code>, including the used R and googleVis version
+and link to Google's Terms of Use.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+
+<h3>Warnings</h3>
+
+<p>Because of Flash security settings the chart 
+might not work correctly when accessed from a file location in the 
+browser (e.g., file:///c:/webhost/myhost/myviz.html) rather than 
+from a web server URL (e.g. https://www.myhost.com/myviz.html). 
+See the googleVis package vignette and the Macromedia web 
+site (<a href="https://www.macromedia.com/support/documentation/en/flashplayer/help/">https://www.macromedia.com/support/documentation/en/flashplayer/help/</a>) 
+for more details.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Please note that a <code>timevar</code> with values less than 100 will 
+be shown as years 19xx.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Markus Gesmann <a href="mailto:markus.gesmann@gmail.com">markus.gesmann@gmail.com</a>, 
+Diego de Castillo <a href="mailto:decastillo@gmail.com">decastillo@gmail.com</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Google Chart Tools API: 
+<a href="https://google-developers.appspot.com/chart/interactive/docs/gallery/motionchart">https://google-developers.appspot.com/chart/interactive/docs/gallery/motionchart</a></p>
+
+
+
+
+<h3>See Also</h3>
+
+<p>See also <code><a href="gvisMethods.html">print.gvis</a></code>, <code><a href="gvisMethods.html">plot.gvis</a></code> 
+for printing and plotting methods.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Please note that by default the googleVis plot command
+## will open a browser window and requires Flash and Internet
+## connection to display the visualisation.
+M1 &lt;- gvisMotionChart(Fruits, idvar="Fruit", timevar="Year")
+plot(M1)
+
+## Not run: 
+## Usage of date variable
+M2 &lt;- gvisMotionChart(Fruits, idvar="Fruit", timevar="Date",
+                      date.format = "\%Y\%m\%d") 
+                      plot(M2)
+                      
+## Display weekly data:
+M3 &lt;- gvisMotionChart(Fruits, "Fruit", "Date", date.format="\%YW\%W")
+plot(M3) 
+
+## End(Not run)
+## Options: no side panel on the right
+M4 &lt;- gvisMotionChart(Fruits,"Fruit", "Year",
+                      options=list(showSidePanel=FALSE))
+plot(M4)
+
+## Options: trails un-ticked
+M5 &lt;- gvisMotionChart(Fruits, "Fruit", "Year",
+                      options=list(state='{"showTrails":false};'))
+                      
+plot(M5)
+
+## You can change some of displaying settings via the browser,
+## e.g. the level of opacity of non-selected items, or the chart type.
+## The state string from the 'Advanced' tab can be used to set those
+## settings via R. Just copy and past the string from the browser into
+## the argument state of the options list.
+## Here is an example of a motion chart, with an initial line chart
+## displayed. Ensure that you have a newline at the start and end of
+## your settings string.
+
+myStateSettings &lt;-'
+{"xZoomedDataMin":1199145600000,"colorOption":"2",
+"duration":{"timeUnit":"Y","multiplier":1},"yLambda":1,
+"yAxisOption":"4","sizeOption":"_UNISIZE",
+"iconKeySettings":[],"xLambda":1,"nonSelectedAlpha":0,
+"xZoomedDataMax":1262304000000,"iconType":"LINE",
+"dimensions":{"iconDimensions":["dim0"]},
+"showTrails":false,"uniColorForNonSelected":false,
+"xAxisOption":"_TIME","orderedByX":false,"playDuration":15000,
+"xZoomedIn":false,"time":"2010","yZoomedDataMin":0,
+"yZoomedIn":false,"orderedByY":false,"yZoomedDataMax":100}
+'
+M6a &lt;- gvisMotionChart(Fruits, "Fruit", "Year", 
+                       options=list(state=myStateSettings))
+plot(M6a)
+
+## Newline set explicitly
+myStateSettings &lt;-'\n{"iconType":"LINE"}\n'
+M6b &lt;- gvisMotionChart(Fruits, "Fruit", "Year", 
+                       options=list(state=myStateSettings))
+plot(M6b)
+
+
+## Define which columns are used for the initial setup of the various
+## dimensions
+M7 &lt;- gvisMotionChart(Fruits, idvar="Fruit", timevar="Year",
+                      xvar="Profit", yvar="Expenses",
+                      colorvar="Location", sizevar="Sales")
+plot(M7)
+## For more information see:
+## https://developers.google.com/chart/interactive/docs/gallery/motionchart
+
+## See also the demo(WorldBank). It demonstrates how you can access
+## country level data from the World Bank to create Gapminder-like
+## plots.
+ 
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>googleVis</em> version 0.6.4 <a href="00Index.html">Index</a>]</div>
+</body></html>

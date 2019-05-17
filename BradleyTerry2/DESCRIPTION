@@ -1,5 +1,5 @@
 Package: BradleyTerry2
-Version: 1.0-9
+Version: 1.1-0
 Title: Bradley-Terry Models
 Authors@R: c(person("Heather", "Turner", role = c("aut", "cre"),
                     email = "ht@heatherturner.net"),
@@ -17,10 +17,10 @@ Encoding: UTF-8
 RoxygenNote: 6.1.1
 Language: en-GB
 NeedsCompilation: no
-Packaged: 2019-02-25 14:28:56 UTC; hturner
+Packaged: 2019-05-11 10:51:43 UTC; hturner
 Author: Heather Turner [aut, cre],
   David Firth [aut]
 Maintainer: Heather Turner <ht@heatherturner.net>
 Repository: CRAN
-Date/Publication: 2019-02-25 16:00:03 UTC
-Built: R 3.5.2; ; 2019-03-05 19:15:24 UTC; windows
+Date/Publication: 2019-05-11 11:30:02 UTC
+Built: R 3.6.0; ; 2019-05-12 23:38:25 UTC; windows

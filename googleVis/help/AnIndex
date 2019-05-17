@@ -1,6 +1,7 @@
 googleVis-package	googleVis-package
 Andrew	Andrew
 Cairo	Cairo
+Cats	Cats
 CityPopularity	CityPopularity
 createGoogleGadget	createGoogleGadget
 dino	dino
@@ -33,6 +34,7 @@ gvisSteppedAreaChart	gvisSteppedAreaChart
 gvisTable	gvisTable
 gvisTimeline	gvisTimeline
 gvisTreeMap	gvisTreeMap
+gvisWordTree	gvisWordTree
 OpenClose	OpenClose
 plot.gvis	gvisMethods
 Population	Population

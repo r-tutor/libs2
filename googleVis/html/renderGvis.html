@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: renderGvis</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for renderGvis {googleVis}"><tr><td>renderGvis {googleVis}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>renderGvis</h2>
+
+<h3>Description</h3>
+
+<p>This function lets you use googleVis charts as Shiny output. 
+Use it to wrap a googleVis-generating function that you assign to an 
+<code>output</code> element in <code>server.R</code>; then create an <code>htmlOutput</code> 
+with the same name in <code>ui.R</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+renderGvis(expr, env = parent.frame(), quoted = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>expr</code></td>
+<td>
+<p>An expression that returns a gvis object.</p>
+</td></tr>
+<tr valign="top"><td><code>env</code></td>
+<td>
+<p>The environment in which to evaluate <code>expr</code></p>
+</td></tr>
+<tr valign="top"><td><code>quoted</code></td>
+<td>
+<p>Is <code>expr</code> a quoted expression (with <code>quote()</code>)?
+This is useful if you want to save an expression in a variable.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Use a googleVis Chart as Shiny Output
+</p>
+
+
+<h3>Value</h3>
+
+<p>Returns a function that can be assigned to a Shiny <code>output</code> 
+element.
+</p>
+
+
+<h3>Details</h3>
+
+<p>More information about shiny is available online: 
+<a href="https://www.rstudio.com/shiny/">https://www.rstudio.com/shiny/</a>. 
+You find further examples with googleVis on shiny on mages' blog:
+<a href="https://magesblog.com/tags/shiny/">https://magesblog.com/tags/shiny/</a>
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Joe Cheng, <a href="mailto:joe@rstudio.com">joe@rstudio.com</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  
+## Not run: 
+# To run this example:
+shiny::runApp(system.file("shiny/", package="googleVis"))
+# server.R
+library(googleVis)
+
+shinyServer(function(input, output) {
+  datasetInput &lt;- reactive({
+    switch(input$dataset,
+           "rock" = rock,
+           "pressure" = pressure,
+           "cars" = cars)
+  })
+  
+  output$view &lt;- renderGvis({
+    gvisScatterChart(datasetInput(),
+                     options=list(title=paste('Data:',input$dataset)))
+  })
+})
+
+# ui.R
+shinyUI(pageWithSidebar(
+  headerPanel("googleVis on Shiny"),
+  sidebarPanel(
+    selectInput("dataset", "Choose a dataset:",
+                choices = c("rock", "pressure", "cars"))
+  ),
+  mainPanel(
+    htmlOutput("view")
+  )
+))
+
+## End(Not run)
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>googleVis</em> version 0.6.4 <a href="00Index.html">Index</a>]</div>
+</body></html>

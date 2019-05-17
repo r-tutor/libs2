@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Box-Cox t distribution for fitting a GAMLSS</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for BCT {gamlss.dist}"><tr><td>BCT {gamlss.dist}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Box-Cox t distribution for fitting a GAMLSS</h2>
+
+<h3>Description</h3>
+
+<p>The function <code>BCT()</code>  defines the Box-Cox t distribution, a four parameter distribution, 
+for a <code>gamlss.family</code> object to be used in GAMLSS fitting using the function <code>gamlss()</code>. The functions <code>dBCT</code>, 
+<code>pBCT</code>, <code>qBCT</code> and <code>rBCT</code> define the density, distribution function, quantile function and random
+generation for the Box-Cox t distribution.  
+[The function <code>BCTuntr()</code> is the original version of the function suitable only for the untruncated BCT distribution]. 
+See Rigby and Stasinopoulos (2003) for details. 
+The function <code>BCT</code> is identical to <code>BCT</code> but with log link for mu.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+BCT(mu.link = "identity", sigma.link = "log", nu.link = "identity", 
+          tau.link = "log")
+BCTo(mu.link = "log", sigma.link = "log", nu.link = "identity", 
+          tau.link = "log")
+BCTuntr(mu.link = "identity", sigma.link = "log", nu.link = "identity", 
+          tau.link = "log")
+dBCT(x, mu = 5, sigma = 0.1, nu = 1, tau = 2, log = FALSE)
+pBCT(q, mu = 5, sigma = 0.1, nu = 1, tau = 2, lower.tail = TRUE, log.p = FALSE)
+qBCT(p, mu = 5, sigma = 0.1, nu = 1, tau = 2, lower.tail = TRUE, log.p = FALSE)          
+rBCT(n, mu = 5, sigma = 0.1, nu = 1, tau = 2)
+dBCTo(x, mu = 5, sigma = 0.1, nu = 1, tau = 2, log = FALSE)
+pBCTo(q, mu = 5, sigma = 0.1, nu = 1, tau = 2, lower.tail = TRUE, log.p = FALSE)
+qBCTo(p, mu = 5, sigma = 0.1, nu = 1, tau = 2, lower.tail = TRUE, log.p = FALSE)          
+rBCTo(n, mu = 5, sigma = 0.1, nu = 1, tau = 2)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>mu.link</code></td>
+<td>
+<p>Defines the <code>mu.link</code>, with &quot;identity&quot; link as the default for the <code>mu</code> parameter. Other links are &quot;inverse&quot;, &quot;log&quot; and &quot;own&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>sigma.link</code></td>
+<td>
+<p>Defines the  <code>sigma.link</code>, with &quot;log&quot; link as the default for the <code>sigma</code> parameter. Other links are &quot;inverse&quot;,&quot;identity&quot;, &quot;own&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>nu.link</code></td>
+<td>
+<p>Defines the  <code>nu.link</code>, with &quot;identity&quot; link as the default for the <code>nu</code> parameter. Other links are &quot;inverse&quot;, &quot;log&quot;, &quot;own&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>tau.link</code></td>
+<td>
+<p>Defines the  <code>tau.link</code>, with &quot;log&quot; link as the default for the <code>tau</code> parameter. Other links are &quot;inverse&quot;, &quot;identity&quot; and &quot;own&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>x,q</code></td>
+<td>
+<p>vector of quantiles </p>
+</td></tr>
+<tr valign="top"><td><code>mu</code></td>
+<td>
+<p>vector of location parameter values</p>
+</td></tr>
+<tr valign="top"><td><code>sigma</code></td>
+<td>
+<p>vector of scale parameter values</p>
+</td></tr>
+<tr valign="top"><td><code>nu</code></td>
+<td>
+<p>vector of <code>nu</code> parameter values</p>
+</td></tr>
+<tr valign="top"><td><code>tau</code></td>
+<td>
+<p>vector of <code>tau</code> parameter values</p>
+</td></tr>
+<tr valign="top"><td><code>log, log.p</code></td>
+<td>
+<p> logical; if TRUE, probabilities p are given as log(p).</p>
+</td></tr>
+<tr valign="top"><td><code>lower.tail</code></td>
+<td>
+<p>logical; if TRUE (default), probabilities are P[X &lt;= x],
+otherwise, P[X &gt; x] </p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>vector of probabilities. </p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p> number of observations. If <code>length(n) &gt; 1</code>, the length is
+taken to be the number required</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The probability density function of the untruncated Box-Cox t distribution, <code>BCTuntr</code>, is given by 
+</p>
+<p style="text-align: center;"><i>f(y|mu,sigma,nu,tau)=(1/(y*sigma))*(&Gamma;((tau+1)/2)/(Gamma(1/2)*Gamma(tau/2)*tau^0.5))*(1+z^2/tau)^(-(tau+1)/2)</i></p>
+ 
+<p>where if <i>&nu;!=0</i> then  <i>z=[(y/mu)^(nu)-1]/(nu*sigma)</i> else <i>z=log(y/&mu;)/&sigma;</i>, 
+for <i>y&gt;0</i>, <i>&mu;&gt;0</i>, <i>&sigma;&gt;0</i>, <i>&nu;=(-Inf,+Inf)</i> and <i>&tau;&gt;0</i>. 
+</p>
+<p>The Box-Cox <em>t</em> distribution,   <code>BCT</code>, adjusts the above density <i>f(y|mu,sigma,nu,tau</i> for the 
+truncation resulting from the condition <i>y&gt;0</i>. See Rigby and Stasinopoulos (2003) for details.   
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>BCT()</code>  returns a <code>gamlss.family</code> object which can be used to fit a Box Cox-t distribution in the <code>gamlss()</code> function. 
+<code>dBCT()</code> gives the density, <code>pBCT()</code> gives the distribution
+function, <code>qBCT()</code> gives the quantile function, and <code>rBCT()</code>
+generates random deviates. 
+</p>
+
+
+<h3>Warning </h3>
+
+<p> The use <code>BCTuntr</code> distribution may be unsuitable for some combinations of the parameters (mainly for large <i>sigma</i>) 
+where the integrating constant is less than 0.99. A warning will be given if this is the case.
+</p>
+<p>The <code>BCT</code> distribution is suitable for all combinations of the parameters within their ranges 
+[i.e. <i>mu&gt;0, sigma&gt;0, nu=(-Inf,+Inf) and tau&gt;0</i> ]
+</p>
+
+
+<h3>Note</h3>
+
+ <p><i>mu</i> is the median of the distribution, <i>sigma*(tau/(tau-2))^0.5</i> 
+is approximate the coefficient of variation (for small <i>sigma</i> and moderate <code>nu&gt;0</code> and moderate or large <i>tau</i>), 
+<i>nu</i> controls the skewness and <i>tau</i> the kurtosis of the distribution 
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Mikis Stasinopoulos, Bob Rigby and Calliope Akantziliotou</p>
+
+
+<h3>References</h3>
+
+<p> Rigby, R. A. and  Stasinopoulos D. M. (2005). Generalized additive models for location, scale and shape,(with discussion), 
+<em>Appl. Statist.</em>, <b>54</b>, part 3, pp 507-554.
+</p>
+<p>Rigby, R.A. Stasinopoulos, D.M. (2006).   Using the Box-Cox <em>t</em> distribution in GAMLSS to mode skewnees and  and kurtosis.
+to appear in <em>Statistical Modelling</em>.
+</p>
+<p>Stasinopoulos, D. M. Rigby, R.A. and Akantziliotou C. (2006) Instructions on how to use the GAMLSS package in R.
+Accompanying documentation in the current GAMLSS  help files, (see also  <a href="http://www.gamlss.org/">http://www.gamlss.org/</a>).
+</p>
+<p>Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location scale and shape (GAMLSS) in R.
+<em>Journal of Statistical Software</em>, Vol. <b>23</b>, Issue 7, Dec 2007, <a href="http://www.jstatsoft.org/v23/i07">http://www.jstatsoft.org/v23/i07</a>.  
+</p>
+<p>Stasinopoulos D. M., Rigby R.A., Heller G., Voudouris V., and De Bastiani F., (2017)
+<em>Flexible Regression and Smoothing: Using GAMLSS in R</em>,  Chapman and Hall/CRC. 
+</p>
+
+
+<h3>See Also</h3>
+
+  <p><code><a href="gamlss.family.html">gamlss.family</a></code>, <code><a href="BCPE.html">BCPE</a></code>, <code><a href="BCCG.html">BCCG</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+BCT()   # gives information about the default links for the Box Cox t distribution
+# library(gamlss)
+#data(abdom)
+#h&lt;-gamlss(y~cs(x,df=3), sigma.formula=~cs(x,1), family=BCT, data=abdom) # 
+#plot(h)
+plot(function(x)dBCT(x, mu=5,sigma=.5,nu=1, tau=2), 0.0, 20, 
+ main = "The BCT  density mu=5,sigma=.5,nu=1, tau=2")
+plot(function(x) pBCT(x, mu=5,sigma=.5,nu=1, tau=2), 0.0, 20, 
+ main = "The BCT  cdf mu=5, sigma=.5, nu=1, tau=2")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>gamlss.dist</em> version 5.1-4 <a href="00Index.html">Index</a>]</div>
+</body></html>

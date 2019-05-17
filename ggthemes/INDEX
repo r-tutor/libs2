@@ -72,6 +72,7 @@ tableau_gradient_pal    Tableau colour gradient palettes (continuous)
 tableau_shape_pal       Tableau Shape Palettes (discrete)
 theme_base              Theme Base
 theme_calc              Theme Calc
+theme_clean             Clean ggplot theme
 theme_economist         ggplot color theme based on the Economist
 theme_excel             ggplot theme based on old Excel plots
 theme_excel_new         ggplot theme similar to current Excel plot

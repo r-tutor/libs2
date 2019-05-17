@@ -107,6 +107,7 @@ tableau_seq_gradient_pal	tableau_gradient_pal
 tableau_shape_pal	tableau_shape_pal
 theme_base	theme_base
 theme_calc	theme_calc
+theme_clean	theme_clean
 theme_economist	theme_economist
 theme_economist_white	theme_economist
 theme_excel	theme_excel

@@ -14,7 +14,6 @@ knitr::opts_chunk$set(
 
 ## ---- echo=FALSE, warning=FALSE, fig.align='center', fig.width=7, fig.height=7----
 suppressMessages(library(dendextend))
-# suppressMessages(library(dendextendRcpp))
 library(colorspace)
 
 dend1 <- c(1:5) %>% # take some data
@@ -856,9 +855,6 @@ Bk(dend1, dend2, k = 3)
 ## ---- warning=FALSE------------------------------------------------------
 Bk_plot(hc1, hc2, main = "WRONG Bk plot \n(due to the way cutree works with ties in hclust)", warn = FALSE)
 Bk_plot(dend1, dend2, main = "CORRECT Bk plot \n(based on dendrograms)")
-
-## ---- eval=FALSE---------------------------------------------------------
-#  install.packages("dendextendRcpp")
 
 ## ---- cache=FALSE--------------------------------------------------------
 sessionInfo()

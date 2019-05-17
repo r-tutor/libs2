@@ -1,0 +1,286 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Google Timeline Chart with R</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for gvisTimeline {googleVis}"><tr><td>gvisTimeline {googleVis}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Google Timeline Chart with R
+
+</h2>
+
+<h3>Description</h3>
+
+<p>A timeline is a chart that depicts how a set of resources are used 
+over time. One popular type of timeline is the Gantt chart.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+gvisTimeline(data, rowlabel = "", barlabel = "", start = "",
+  end = "", options = list(), chartid)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>data.frame that contains the data to be visualised</p>
+</td></tr>
+<tr valign="top"><td><code>rowlabel</code></td>
+<td>
+<p>a string that referes to the column name in 
+<code>data</code> for the row labels to be used</p>
+</td></tr>
+<tr valign="top"><td><code>barlabel</code></td>
+<td>
+<p>a string that referes to the column name in 
+<code>data</code> for the bar labels to be used</p>
+</td></tr>
+<tr valign="top"><td><code>start</code></td>
+<td>
+<p>number, date or datetime for the start dates</p>
+</td></tr>
+<tr valign="top"><td><code>end</code></td>
+<td>
+<p>number, date or datetime for the end dates</p>
+</td></tr>
+<tr valign="top"><td><code>options</code></td>
+<td>
+<p>list of configuration options.
+The options are documented in detail by Google online:
+</p>
+
+<p><a href="https://google-developers.appspot.com/chart/interactive/docs/gallery/timeline#Configuration_Options">https://google-developers.appspot.com/chart/interactive/docs/gallery/timeline#Configuration_Options</a></p>
+
+<p>The parameters can be set via a named list. The parameters have to map those
+of the Google documentation. 
+</p>
+
+<ul>
+<li><p>Boolean arguments are set to 
+either <code>TRUE</code> or <code>FALSE</code>, using the R syntax.
+
+</p>
+</li>
+<li><p>Google API parameters with a single value and with names that don't 
+include a &quot;.&quot; are set like one would do in R, that is 
+<code>options=list(width=200, height=300)</code>. 
+Exceptions to this rule are the width and height options for 
+<code><a href="gvisAnnotatedTimeLine.html">gvisAnnotatedTimeLine</a></code> and <code><a href="gvisAnnotationChart.html">gvisAnnotationChart</a></code>.
+For those two functions, width and height must be character strings of the 
+format <code>"Xpx"</code>, where <code>X</code> is a number, or <code>"automatic"</code>. 
+For example, 
+<code>options=list(width="200px", height="300px")</code>.
+
+</p>
+</li>
+<li><p>Google API parameters with names that don't include a &quot;.&quot;, but require 
+multivalues are set as a character, wrapped in &quot;[ ]&quot; and separated by commas, 
+e.g. 
+
+<code>options=list(colors="['#cbb69d', '#603913', '#c69c6e']")</code>
+
+</p>
+</li>
+<li><p>Google API parameters with names that do include a &quot;.&quot; present parameters with 
+several sub-options and have to be set as a character wrapped in &quot; &quot;.
+The values of those sub-options are set via parameter:value. Boolean values
+have to be stated as <code>'true'</code> or <code>'false'</code>. 
+For example the Google documentaion states the formating options for the 
+vertical axis and states the parameter as <code>vAxis.format</code>. 
+Then this paramter can be set in R as:
+
+<code>options=list(vAxis="{format:'#,###%'}")</code>. 
+
+</p>
+</li>
+<li><p>If several sub-options have to be set, e.g. 
+
+<code>titleTextStyle.color</code>, <code>titleTextStyle.fontName</code> and 
+<code>titleTextStyle.fontSize</code>, then those can be combined in one list item 
+such as:
+
+<code>options=list(titleTextStyle="{color:'red', fontName:'Courier', fontSize:16}")</code>
+
+</p>
+</li>
+<li><p>paramters that can have more than one value per sub-options are 
+wrapped in &quot;[ ]&quot;. For example to set the labels for left and right axes use:
+
+<code>options=list(vAxes="[{title:'val1'}, {title:'val2'}]")</code>
+
+</p>
+</li>
+<li><p><code>gvis.editor</code> a character label for an
+ on-page button that opens an in-page dialog box enabling
+users to edit, change and customise the chart. By default no
+value is given and therefore no button is displayed. 
+
+</p>
+</li></ul>
+
+<p>For more details see the Google API documentation and the R examples below.   </p>
+</td></tr>
+<tr valign="top"><td><code>chartid</code></td>
+<td>
+<p>character. If missing (default) a random chart id will be 
+generated based on chart type and <code><a href="../../base/html/tempfile.html">tempfile</a></code></p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>gvisTimeline returns list 
+of <code><a href="../../base/html/class.html">class</a></code>
+&quot;<code>gvis</code>&quot; and &quot;<code>list</code>&quot;.   
+An object of class &quot;<code>gvis</code>&quot; is a list containing at least the
+following components:
+</p>
+
+<dl>
+<dt><code>type</code></dt><dd><p>Google visualisation type</p>
+</dd>
+<dt><code>chartid</code></dt><dd><p>character id of the chart object. Unique chart
+ids are required to place several charts on the same page.
+</p>
+</dd>
+<dt><code>html</code></dt><dd><p>a list with the building blocks for a page
+</p>
+
+<dl>
+<dt><code>header</code></dt><dd><p>a character string of a html page header:
+<code>&lt;html&gt;...&lt;body&gt;</code>,</p>
+</dd>
+<dt><code>chart</code></dt><dd><p>a named character vector of the chart's building blocks:
+</p>
+
+<dl>
+<dt><code>jsHeader</code></dt><dd><p>Opening <code>&lt;script&gt;</code> tag and
+reference to Google's JavaScript library.
+</p>
+</dd>
+<dt><code>jsData</code></dt><dd><p>JavaScript function defining the input
+<code>data</code> as a JSON object.
+</p>
+</dd> 
+<dt><code>jsDrawChart</code></dt><dd><p>JavaScript function combing the data with 
+the visualisation API and user options.
+</p>
+</dd>
+<dt><code>jsDisplayChart</code></dt><dd><p>JavaScript function calling the
+handler to display the chart.
+</p>
+</dd>
+<dt><code>jsFooter</code></dt><dd><p>End tag <code>&lt;/script&gt;</code>.
+</p>
+</dd>
+<dt><code>jsChart</code></dt><dd><p>Call of the <code>jsDisplayChart</code> function.
+</p>
+</dd>
+<dt><code>divChart</code></dt><dd><p><code>&lt;div&gt;</code> container to embed the chart
+into the page.
+</p>
+</dd>
+</dl>
+   
+</dd>
+<dt><code>caption</code></dt><dd><p>character string of a standard caption,
+including data name and chart id.
+</p>
+</dd>  
+<dt><code>footer</code></dt><dd><p>character string of a html page footer:
+<code>&lt;/body&gt;...&lt;/html&gt;</code>, including the used R and googleVis version
+and link to Google's Terms of Use.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+
+<h3>Author(s)</h3>
+
+<p>Markus Gesmann <a href="mailto:markus.gesmann@gmail.com">markus.gesmann@gmail.com</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Google Chart Tools API: 
+<a href="https://google-developers.appspot.com/chart/interactive/docs/gallery/timeline">https://google-developers.appspot.com/chart/interactive/docs/gallery/timeline</a></p>
+
+
+
+
+<h3>Examples</h3>
+
+<pre>
+dat &lt;- data.frame(Term=c("1","2","3"),
+                  President=c("Whasington", "Adams", "Jefferson"),
+                  start=as.Date(x=c("1789-03-29", "1797-02-03", "1801-02-03")),
+                  end=as.Date(x=c("1797-02-03", "1801-02-03", "1809-02-03")))
+
+tl &lt;- gvisTimeline(data=dat[,-1], rowlabel="President", 
+                   start="start", end="end")
+plot(tl)
+
+tl &lt;- gvisTimeline(data=dat, barlabel="President", 
+                   start="start", end="end")
+plot(tl)
+
+tl &lt;- gvisTimeline(data=dat, rowlabel="President", 
+                   start="start", end="end",
+                   options=list(timeline="{showRowLabels:false}"))
+plot(tl)
+
+dat &lt;- data.frame(Position=c(rep("President", 3), rep("Vice", 3)),
+                  Name=c("Washington", "Adams", "Jefferson",
+                         "Adams", "Jefferson", "Burr"),
+                  start=as.Date(x=rep(c("1789-03-29", "1797-02-03", "1801-02-03"),2)),
+                  end=as.Date(x=rep(c("1797-02-03", "1801-02-03", "1809-02-03"),2)))
+
+tl &lt;- gvisTimeline(data=dat, rowlabel="Name",barlabel="Position", 
+                   start="start", end="end",
+                   options=list(timeline="{showRowLabels:true}"))
+plot(tl)
+
+tl &lt;- gvisTimeline(data=dat, rowlabel="Name",barlabel="Position", 
+                   start="start", end="end",
+                   options=list(timeline="{groupByRowLabel:false}",
+                                backgroundColor='#ffd', height=350,
+                                colors="['#cbb69d', '#603913', '#c69c6e']"))
+
+plot(tl)
+
+# Datetime example 
+dat &lt;- data.frame(Room=c("Room 1","Room 2","Room 3"),
+                  Language=c("English", "German", "French"),
+                  start=as.POSIXct(c("2014-03-14 14:00", "2014-03-14 15:00", 
+                                     "2014-03-14 14:30")),
+                 end=as.POSIXct(c("2014-03-14 15:00", "2014-03-14 16:00", 
+                                  "2014-03-14 15:30")))
+tl &lt;- gvisTimeline(data=dat, rowlabel="Language",
+                   start="start", end="end")
+plot(tl)
+
+## Not run: 
+require(timeline)
+data(ww2)
+timeline(ww2, ww2.events, event.spots=2, event.label='', event.above=FALSE)
+ww2$Person &lt;- gsub("\\n" ," ", ww2$Person)
+plot(gvisTimeline(ww2, barlabel="Person", rowlabel="Group",
+                  start="StartDate", end="EndDate",
+     options=list(width=600, height=350))
+)
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>googleVis</em> version 0.6.4 <a href="00Index.html">Index</a>]</div>
+</body></html>
