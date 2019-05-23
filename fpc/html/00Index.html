@@ -11,7 +11,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;fpc&rsquo; version 2.1-11.2</h2>
+</div><h2>Documentation for package &lsquo;fpc&rsquo; version 2.2-1</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 </ul>
@@ -39,6 +39,7 @@
 <a href="#S">S</a>
 <a href="#T">T</a>
 <a href="#U">U</a>
+<a href="#V">V</a>
 <a href="#W">W</a>
 <a href="#X">X</a>
 <a href="#Z">Z</a>
@@ -84,6 +85,8 @@
 <td>Recode nominal variables to binary variables</td></tr>
 <tr><td style="width: 25%;"><a href="cdbw.html">cdbw</a></td>
 <td>CDbw-index for cluster validation</td></tr>
+<tr><td style="width: 25%;"><a href="cgrestandard.html">cgrestandard</a></td>
+<td>Standardise cluster validation statistics by random clustering results</td></tr>
 <tr><td style="width: 25%;"><a href="kmeansCBI.html">claraCBI</a></td>
 <td>Interface functions for clustering methods</td></tr>
 <tr><td style="width: 25%;"><a href="classifdist.html">classifdist</a></td>
@@ -98,10 +101,16 @@
 <td>Jaccard similarity between logical vectors</td></tr>
 <tr><td style="width: 25%;"><a href="clusexpect.html">clusexpect</a></td>
 <td>Expected value of the number of times a fixed point cluster is found</td></tr>
+<tr><td style="width: 25%;"><a href="clustatsum.html">clustatsum</a></td>
+<td>Compute and format cluster validation statistics</td></tr>
+<tr><td style="width: 25%;"><a href="cluster.magazine.html">cluster.magazine</a></td>
+<td>Run many clustering methods on many numbers of clusters</td></tr>
 <tr><td style="width: 25%;"><a href="cluster.stats.html">cluster.stats</a></td>
 <td>Cluster validation statistics</td></tr>
 <tr><td style="width: 25%;"><a href="cluster.varstats.html">cluster.varstats</a></td>
 <td>Variablewise statistics for clusters</td></tr>
+<tr><td style="width: 25%;"><a href="clusterbenchstats.html">clusterbenchstats</a></td>
+<td>Run and validate many clusterings</td></tr>
 <tr><td style="width: 25%;"><a href="clusterboot.html">clusterboot</a></td>
 <td>Clusterwise cluster stability assessment by resampling</td></tr>
 <tr><td style="width: 25%;"><a href="clucols.html">clusym</a></td>
@@ -114,6 +123,8 @@
 <td>Misclassification probabilities in mixtures</td></tr>
 <tr><td style="width: 25%;"><a href="cov.wml.html">cov.wml</a></td>
 <td>Weighted Covariance Matrices (Maximum Likelihood)</td></tr>
+<tr><td style="width: 25%;"><a href="cqcluster.stats.html">cqcluster.stats</a></td>
+<td>Cluster validation statistics (version for use with clusterbenchstats</td></tr>
 <tr><td style="width: 25%;"><a href="cvnn.html">cvnn</a></td>
 <td>Cluster validation based on nearest neighbours</td></tr>
 <tr><td style="width: 25%;"><a href="cweight.html">cweight</a></td>
@@ -147,6 +158,8 @@
 <td>Interface functions for clustering methods</td></tr>
 <tr><td style="width: 25%;"><a href="kmeansCBI.html">distnoisemclustCBI</a></td>
 <td>Interface functions for clustering methods</td></tr>
+<tr><td style="width: 25%;"><a href="distrsimilarity.html">distrsimilarity</a></td>
+<td>Similarity of within-cluster distributions to normal and uniform</td></tr>
 <tr><td style="width: 25%;"><a href="kmeansCBI.html">disttrimkmeansCBI</a></td>
 <td>Interface functions for clustering methods</td></tr>
 <tr><td style="width: 25%;"><a href="dridgeline.html">dridgeline</a></td>
@@ -158,6 +171,8 @@
 <h2><a name="E">-- E --</a></h2>
 
 <table width="100%">
+<tr><td style="width: 25%;"><a href="kmeansCBI.html">emskewCBI</a></td>
+<td>Interface functions for clustering methods</td></tr>
 <tr><td style="width: 25%;"><a href="extract.mixturepars.html">extract.mixturepars</a></td>
 <td>Extract parameters for certain components from mclust</td></tr>
 </table>
@@ -287,6 +302,8 @@
 <td>Mahalanobis Fixed Point Clusters</td></tr>
 <tr><td style="width: 25%;"><a href="fixreg.html">plot.rfpc</a></td>
 <td>Linear Regression Fixed Point Clusters</td></tr>
+<tr><td style="width: 25%;"><a href="plot.valstat.html">plot.valstat</a></td>
+<td>Simulation-standardised plot and print of cluster validation statistics</td></tr>
 <tr><td style="width: 25%;"><a href="plotcluster.html">plotcluster</a></td>
 <td>Discriminant projection plot.</td></tr>
 <tr><td style="width: 25%;"><a href="dbscan.html">predict.dbscan</a></td>
@@ -295,6 +312,8 @@
 <td>Prediction strength for estimating number of clusters</td></tr>
 <tr><td style="width: 25%;"><a href="clusterboot.html">print.clboot</a></td>
 <td>Clusterwise cluster stability assessment by resampling</td></tr>
+<tr><td style="width: 25%;"><a href="clusterbenchstats.html">print.clusterbenchstats</a></td>
+<td>Run and validate many clusterings</td></tr>
 <tr><td style="width: 25%;"><a href="dbscan.html">print.dbscan</a></td>
 <td>DBSCAN density reachability and connectivity clustering</td></tr>
 <tr><td style="width: 25%;"><a href="fixmahal.html">print.mfpc</a></td>
@@ -303,12 +322,16 @@
 <td>Prediction strength for estimating number of clusters</td></tr>
 <tr><td style="width: 25%;"><a href="fixreg.html">print.rfpc</a></td>
 <td>Linear Regression Fixed Point Clusters</td></tr>
+<tr><td style="width: 25%;"><a href="cqcluster.stats.html">print.summary.cquality</a></td>
+<td>Cluster validation statistics (version for use with clusterbenchstats</td></tr>
 <tr><td style="width: 25%;"><a href="mergenormals.html">print.summary.mergenorm</a></td>
 <td>Clustering by merging Gaussian mixture components</td></tr>
 <tr><td style="width: 25%;"><a href="fixmahal.html">print.summary.mfpc</a></td>
 <td>Mahalanobis Fixed Point Clusters</td></tr>
 <tr><td style="width: 25%;"><a href="fixreg.html">print.summary.rfpc</a></td>
 <td>Linear Regression Fixed Point Clusters</td></tr>
+<tr><td style="width: 25%;"><a href="plot.valstat.html">print.valstat</a></td>
+<td>Simulation-standardised plot and print of cluster validation statistics</td></tr>
 <tr><td style="width: 25%;"><a href="cluster.varstats.html">print.varwisetables</a></td>
 <td>Variablewise statistics for clusters</td></tr>
 </table>
@@ -320,6 +343,8 @@
 <td>Random partition matrix</td></tr>
 <tr><td style="width: 25%;"><a href="randconf.html">randconf</a></td>
 <td>Generate a sample indicator vector</td></tr>
+<tr><td style="width: 25%;"><a href="randomclustersim.html">randomclustersim</a></td>
+<td>Simulation of validity indexes based on random clusterings</td></tr>
 <tr><td style="width: 25%;"><a href="regmix.html">regem</a></td>
 <td>Mixture Model ML for Clusterwise Linear Regression</td></tr>
 <tr><td style="width: 25%;"><a href="regmix.html">regmix</a></td>
@@ -345,6 +370,12 @@
 <td>Interface functions for clustering methods</td></tr>
 <tr><td style="width: 25%;"><a href="sseg.html">sseg</a></td>
 <td>Position in a similarity vector</td></tr>
+<tr><td style="width: 25%;"><a href="stupidkcentroids.html">stupidkcentroids</a></td>
+<td>Stupid k-centroids random clustering</td></tr>
+<tr><td style="width: 25%;"><a href="stupidknn.html">stupidknn</a></td>
+<td>Stupid nearest neighbour random clustering</td></tr>
+<tr><td style="width: 25%;"><a href="cqcluster.stats.html">summary.cquality</a></td>
+<td>Cluster validation statistics (version for use with clusterbenchstats</td></tr>
 <tr><td style="width: 25%;"><a href="mergenormals.html">summary.mergenorm</a></td>
 <td>Clustering by merging Gaussian mixture components</td></tr>
 <tr><td style="width: 25%;"><a href="fixmahal.html">summary.mfpc</a></td>
@@ -371,6 +402,13 @@
 <table width="100%">
 <tr><td style="width: 25%;"><a href="unimodal.ind.html">unimodal.ind</a></td>
 <td>Is a fitted denisity unimodal or not?</td></tr>
+</table>
+
+<h2><a name="V">-- V --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="valstat.object.html">valstat.object</a></td>
+<td>Cluster validation statistics - object</td></tr>
 </table>
 
 <h2><a name="W">-- W --</a></h2>

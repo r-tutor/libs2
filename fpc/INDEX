@@ -11,14 +11,21 @@ can                     Generation of the tuning constant for
                         regression fixed point clusters
 cat2bin                 Recode nominal variables to binary variables
 cdbw                    CDbw-index for cluster validation
+cgrestandard            Standardise cluster validation statistics by
+                        random clustering results
 classifdist             Classification of unclustered points
 clucols                 Sets of colours and symbols for cluster
                         plotting
 clujaccard              Jaccard similarity between logical vectors
 clusexpect              Expected value of the number of times a fixed
                         point cluster is found
+clustatsum              Compute and format cluster validation
+                        statistics
+cluster.magazine        Run many clustering methods on many numbers of
+                        clusters
 cluster.stats           Cluster validation statistics
 cluster.varstats        Variablewise statistics for clusters
+clusterbenchstats       Run and validate many clusterings
 clusterboot             Clusterwise cluster stability assessment by
                         resampling
 cmahal                  Generation of tuning constant for Mahalanobis
@@ -27,6 +34,8 @@ con.comp                Connectivity components of an undirected graph
 confusion               Misclassification probabilities in mixtures
 cov.wml                 Weighted Covariance Matrices (Maximum
                         Likelihood)
+cqcluster.stats         Cluster validation statistics (version for use
+                        with clusterbenchstats
 cvnn                    Cluster validation based on nearest neighbours
 cweight                 Weight function for AWC
 dbscan                  DBSCAN density reachability and connectivity
@@ -39,6 +48,8 @@ discrproj               Linear dimension reduction for classification
 distancefactor          Factor for dissimilarity of mixed type data
 distcritmulti           Distance based validity criteria for large data
                         sets
+distrsimilarity         Similarity of within-cluster distributions to
+                        normal and uniform
 dridgeline              Density along the ridgeline
 dudahart2               Duda-Hart test for splitting
 extract.mixturepars     Extract parameters for certain components from
@@ -83,12 +94,16 @@ pamk                    Partitioning around medoids with estimation of
                         number of clusters
 piridge                 Ridgeline Pi-function
 piridge.zeroes          Extrema of two-component Gaussian mixture
+plot.valstat            Simulation-standardised plot and print of
+                        cluster validation statistics
 plotcluster             Discriminant projection plot.
 prediction.strength     Prediction strength for estimating number of
                         clusters
 rFace                   "Face-shaped" clustered benchmark datasets
 randcmatrix             Random partition matrix
 randconf                Generate a sample indicator vector
+randomclustersim        Simulation of validity indexes based on random
+                        clusterings
 regmix                  Mixture Model ML for Clusterwise Linear
                         Regression
 ridgeline               Ridgeline computation
@@ -98,10 +113,13 @@ simmatrix               Extracting intersections between clusters from
 solvecov                Inversion of (possibly singular) symmetric
                         matrices
 sseg                    Position in a similarity vector
+stupidkcentroids        Stupid k-centroids random clustering
+stupidknn               Stupid nearest neighbour random clustering
 tdecomp                 Root of singularity-corrected eigenvalue
                         decomposition
 tonedata                Tone perception data
 unimodal.ind            Is a fitted denisity unimodal or not?
+valstat.object          Cluster validation statistics - object
 weightplots             Ordered posterior plots
 wfu                     Weight function (for Mahalabobis distances)
 xtable                  Partition crosstable with empty clusters

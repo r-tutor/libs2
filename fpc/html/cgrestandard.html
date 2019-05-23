@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Standardise cluster validation statistics by random...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for cgrestandard {fpc}"><tr><td>cgrestandard {fpc}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Standardise cluster validation statistics by random clustering results</h2>
+
+<h3>Description</h3>
+
+<p>Standardises cluster validity statistics as produced by
+<code><a href="clustatsum.html">clustatsum</a></code> relative to results that were achieved by
+random clusterings on the same data by
+<code><a href="randomclustersim.html">randomclustersim</a></code>. The aim is to make differences between
+values comparable between indexes, see Hennig (2017).
+</p>
+<p>This is mainly for use within <code><a href="clusterbenchstats.html">clusterbenchstats</a></code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+cgrestandard(clusum,clusim,G,percentage=FALSE,
+                               useallmethods=FALSE,
+                             useallg=FALSE, othernc=list())
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>clusum</code></td>
+<td>
+<p>object of class &quot;valstat&quot;, see <code><a href="clusterbenchstats.html">clusterbenchstats</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>clusim</code></td>
+<td>
+<p>list; output object of <code><a href="randomclustersim.html">randomclustersim</a></code>,
+see there.</p>
+</td></tr> 
+<tr valign="top"><td><code>G</code></td>
+<td>
+<p>vector of integers. Numbers of clusters to consider.</p>
+</td></tr>
+<tr valign="top"><td><code>percentage</code></td>
+<td>
+<p>logical. If <code>FALSE</code>, standardisation is done to
+mean zero and standard deviation 1 using the random clusterings. If
+<code>TRUE</code>, the output is the percentage of simulated values below
+the result (more precisely, this number plus one divided by the
+total plus one).</p>
+</td></tr>
+<tr valign="top"><td><code>useallmethods</code></td>
+<td>
+<p>logical. If <code>FALSE</code>, only random clustering
+results from <code>clusim</code> are used for standardisation. If
+<code>TRUE</code>, also clustering results from other methods as given in
+<code>clusum</code> are used.</p>
+</td></tr>
+<tr valign="top"><td><code>useallg</code></td>
+<td>
+<p>logical. If <code>TRUE</code>, standardisation uses results
+from all numbers of clusters in <code>G</code>. If <code>FALSE</code>,
+standardisation of results for a specific number of cluster only
+uses results from that number of clusters.</p>
+</td></tr> 
+<tr valign="top"><td><code>othernc</code></td>
+<td>
+<p>list of integer vectors of length 2. This allows the
+incorporation of methods that bring forth other numbers of clusters
+than those in <code>G</code>, for example because a method may have
+automatically estimated a number of clusters. The first number is
+the number of the clustering method (the order is determined by
+argument <code>clustermethod</code> in
+<code><a href="clusterbenchstats.html">clusterbenchstats</a></code>), the second number is the
+number of clusters. Results specified here are only standardised in
+<code>useallg=TRUE</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>cgrestandard</code> will add a statistic named <code>dmode</code> to the
+input set of validation statistics, which is defined as
+<code>0.75*dindex+0.25*highdgap</code>, aggregating these two closely
+related statistics, see <code><a href="clustatsum.html">clustatsum</a></code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>List of class <code>"valstat"</code>, see
+<code><a href="valstat.object.html">valstat.object</a></code>, with standardised results as
+explained above.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Christian Hennig
+<a href="mailto:christian.hennig@unibo.it">christian.hennig@unibo.it</a>
+<a href="https://www.unibo.it/sitoweb/christian.hennig/en/">https://www.unibo.it/sitoweb/christian.hennig/en/</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Hennig, C. (2017) Cluster validation by measurement of clustering
+characteristics relevant to the user. In C. H. Skiadas (ed.)
+<em>Proceedings of ASMDA 2017</em>, 501-520,
+<a href="https://arxiv.org/abs/1703.09282">https://arxiv.org/abs/1703.09282</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="valstat.object.html">valstat.object</a></code>, <code><a href="clusterbenchstats.html">clusterbenchstats</a></code>, <code><a href="stupidkcentroids.html">stupidkcentroids</a></code>, <code><a href="stupidknn.html">stupidknn</a></code>, <code><a href="clustatsum.html">clustatsum</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  
+  set.seed(20000)
+  options(digits=3)
+  face &lt;- rFace(10,dMoNo=2,dNoEy=0,p=2)
+  dif &lt;- dist(face)
+  clusum &lt;- list()
+  clusum[[2]] &lt;- list()
+  cl12 &lt;- kmeansCBI(face,2)
+  cl13 &lt;- kmeansCBI(face,3)
+  cl22 &lt;- claraCBI(face,2)
+  cl23 &lt;- claraCBI(face,2)
+  ccl12 &lt;- clustatsum(dif,cl12$partition)
+  ccl13 &lt;- clustatsum(dif,cl13$partition)
+  ccl22 &lt;- clustatsum(dif,cl22$partition)
+  ccl23 &lt;- clustatsum(dif,cl23$partition)
+  clusum[[1]] &lt;- list()
+  clusum[[1]][[2]] &lt;- ccl12
+  clusum[[1]][[3]] &lt;- ccl13
+  clusum[[2]][[2]] &lt;- ccl22
+  clusum[[2]][[3]] &lt;- ccl23
+  clusum$maxG &lt;- 3
+  clusum$minG &lt;- 2
+  clusum$method &lt;- c("kmeansCBI","claraCBI")
+  clusum$name &lt;- c("kmeansCBI","claraCBI")
+  clusim &lt;- randomclustersim(dist(face),G=2:3,nnruns=2,kmruns=2,monitor=FALSE)
+  cgr &lt;- cgrestandard(clusum,clusim,2:3)
+  cgr2 &lt;- cgrestandard(clusum,clusim,2:3,useallg=TRUE)
+  cgr3 &lt;- cgrestandard(clusum,clusim,2:3,percentage=TRUE)
+  print(str(cgr))
+  print(str(cgr2))
+  print(str(cgr3))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>fpc</em> version 2.2-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

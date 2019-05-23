@@ -1,3 +1,6 @@
+# FSA 0.8.24 17-May-19
+* Corrected misues of `\concept` in Rd files per CRAN request.
+
 # FSA 0.8.23 1-May-19
 * Reorganized `testthat` folder as suggested in `testthat` release notes.
 * Removed all uses of `Subset()` (replaced with `filterD()`).
