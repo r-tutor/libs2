@@ -10,7 +10,7 @@ MCMC-parcoord           Parallel coordinates plot of MCMC draws
 MCMC-recover            Compare MCMC estimates to "true" parameter
                         values
 MCMC-scatterplots       Scatterplots of MCMC draws
-MCMC-traces             Trace plot (time series plot) of MCMC draws
+MCMC-traces             Trace plots of MCMC draws
 PPC-discrete            PPCs for discrete outcomes
 PPC-distributions       PPC distributions
 PPC-errors              PPC errors
@@ -21,14 +21,16 @@ PPC-scatterplots        PPC scatterplots
 PPC-test-statistics     PPC test statistics
 available_ppc           Get or view the names of available plotting
                         functions
-bayesplot-colors        Set, get, or view color schemes
+bayesplot-colors        Set, get, or view *bayesplot* color schemes
 bayesplot-extractors    Extract quantities needed for plotting from
                         model objects
 bayesplot-helpers       Convenience functions for adding or changing
                         plot details
-bayesplot-package       Plots for Bayesian Models
+bayesplot-package       *bayesplot*: Plotting for Bayesian Models
 bayesplot_grid          Arrange plots in a grid
-bayesplot_theme_get     Get, set, and modify the active bayesplot theme
-pp_check                Posterior predictive checks (S3 generic and
-                        default method)
-theme_default           Default bayesplot plotting theme
+bayesplot_theme_get     Get, set, and modify the active *bayesplot*
+                        theme
+pp_check                Posterior (or prior) predictive checks (S3
+                        generic and default method)
+theme_default           Default *bayesplot* plotting theme
+tidy-params             Tidy parameter selection

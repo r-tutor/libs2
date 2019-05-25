@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
   out.width = "60%",
   fig.align = "center",
   comment = NA,
-  eval = params$EVAL
+  eval = if (isTRUE(exists("params"))) params$EVAL else FALSE
 )
 
 ## ---- pkgs, include=FALSE------------------------------------------------
@@ -39,8 +39,8 @@ schools_dat <- list(
 #  schools_mod_ncp <- stan_model("schools_mod_ncp.stan")
 
 ## ---- fit-models-hidden, results='hide', message=FALSE-------------------
-fit_cp <- sampling(schools_mod_cp, data = schools_dat, seed = 803214054, control = list(adapt_delta = 0.95))
-fit_ncp <- sampling(schools_mod_ncp, data = schools_dat, seed = 457721433, control = list(adapt_delta = 0.95))
+fit_cp <- sampling(schools_mod_cp, data = schools_dat, seed = 803214053, control = list(adapt_delta = 0.9))
+fit_ncp <- sampling(schools_mod_ncp, data = schools_dat, seed = 457721433, control = list(adapt_delta = 0.9))
 
 ## ---- extract-draws------------------------------------------------------
 # Extract posterior draws for later use
@@ -80,7 +80,8 @@ color_scheme_set("darkgray")
 mcmc_parcoord(posterior_cp, np = np_cp)
 
 ## ---- mcmc_pairs---------------------------------------------------------
-mcmc_pairs(posterior_cp, np = np_cp, pars = c("mu","tau","theta[1]"))
+mcmc_pairs(posterior_cp, np = np_cp, pars = c("mu","tau","theta[1]"), 
+           off_diag_args = list(size = 0.75))
 
 ## ---- mcmc_scatter-1-----------------------------------------------------
 # assign to an object so we can reuse later
@@ -88,7 +89,8 @@ scatter_theta_cp <- mcmc_scatter(
   posterior_cp, 
   pars = c("theta[1]", "tau"), 
   transform = list(tau = "log"), # can abbrev. 'transformations'
-  np = np_cp
+  np = np_cp, 
+  size = 1
 )
 scatter_theta_cp
 
@@ -97,7 +99,8 @@ scatter_eta_ncp <- mcmc_scatter(
   posterior_ncp, 
   pars = c("eta[1]", "tau"), 
   transform = list(tau = "log"), 
-  np = np_ncp
+  np = np_ncp, 
+  size = 1
 )
 scatter_eta_ncp
 
@@ -120,10 +123,11 @@ scatter_theta_ncp <- mcmc_scatter(
   posterior_ncp, 
   pars = c("theta[1]", "tau"), 
   transform = list(tau = "log"), 
-  np = np_ncp
+  np = np_ncp, 
+  size = 1
 )
 
-compare_cp_ncp(scatter_theta_cp, scatter_theta_ncp, ylim = c(-9, 4))
+compare_cp_ncp(scatter_theta_cp, scatter_theta_ncp, ylim = c(-8, 4))
 
 ## ---- mcmc_trace---------------------------------------------------------
 color_scheme_set("mix-brightblue-gray")
@@ -132,7 +136,7 @@ mcmc_trace(posterior_cp, pars = "tau", np = np_cp) +
 
 ## ----echo=FALSE----------------------------------------------------------
 #A check that the chosen window still relevant
-n_divergent_in_window <- np_cp %>% filter(Parameter == "divergent__" & Value == 1 & Iteration >= 350 & Iteration <= 500) %>% nrow()
+n_divergent_in_window <- np_cp %>% filter(Parameter == "divergent__" & Value == 1 & Iteration >= 50 & Iteration <= 200) %>% nrow()
 
 if(n_divergent_in_window < 6) {
   divergences <- np_cp %>% filter(Parameter == "divergent__" & Value == 1) %>% select(Iteration) %>% get("Iteration", .) %>% sort() %>% paste(collapse = ",")
@@ -140,7 +144,7 @@ if(n_divergent_in_window < 6) {
 }
 
 ## ---- mcmc_trace_zoom----------------------------------------------------
-mcmc_trace(posterior_cp, pars = "tau", np = np_cp, window = c(400,550)) + 
+mcmc_trace(posterior_cp, pars = "tau", np = np_cp, window = c(50,200)) + 
   xlab("Post-warmup iteration")
 
 ## ---- mcmc_nuts_divergence-----------------------------------------------

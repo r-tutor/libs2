@@ -12,12 +12,13 @@ knitr::opts_chunk$set(
   out.width = "60%",
   fig.align = "center",
   comment = NA,
-  eval = params$EVAL
+  eval = if (isTRUE(exists("params"))) params$EVAL else FALSE
 )
 
 ## ---- pkgs, include=FALSE------------------------------------------------
 library("ggplot2")
 library("rstanarm")
+set.seed(840)
 
 ## ---- eval=FALSE---------------------------------------------------------
 #  library("bayesplot")
@@ -28,22 +29,25 @@ library("rstanarm")
 head(roaches) # see help("rstanarm-datasets")
 roaches$roach100 <- roaches$roach1 / 100 # pre-treatment number of roaches (in 100s)
 
-## ---- roaches-model, results='hide', warning=FALSE, message=FALSE--------
+## ---- roaches-model-pois, message=FALSE----------------------------------
+# using rstanarm's default priors. For details ee the section on default 
+# weakly informative priors at https://mc-stan.org/rstanarm/articles/priors.html
 fit_poisson <- stan_glm(
   y ~ roach100 + treatment + senior,
   offset = log(exposure2),
   family = poisson(link = "log"),
   data = roaches,
-  seed = 1111
+  seed = 1111, 
+  refresh = 0 # suppresses all output as of v2.18.1 of rstan
 )
 
-## ---- print--------------------------------------------------------------
+## ---- print-pois---------------------------------------------------------
 print(fit_poisson)
 
-## ---- results='hide', warning=FALSE, message=FALSE-----------------------
+## ---- roaches-model-nb, message=FALSE------------------------------------
 fit_nb <- update(fit_poisson, family = "neg_binomial_2")
 
-## ---- print-2------------------------------------------------------------
+## ---- print-nb-----------------------------------------------------------
 print(fit_nb)
 
 ## ---- y------------------------------------------------------------------
@@ -59,6 +63,9 @@ dim(yrep_nb)
 color_scheme_set("brightblue")
 ppc_dens_overlay(y, yrep_poisson[1:50, ])
 
+## ----ppc_dens_overlay-2, message=FALSE, warning=FALSE--------------------
+ppc_dens_overlay(y, yrep_poisson[1:50, ]) + xlim(0, 150)
+
 ## ----ppc_hist, message=FALSE---------------------------------------------
 ppc_hist(y, yrep_poisson[1:5, ])
 
@@ -67,7 +74,7 @@ ppc_hist(y, yrep_nb[1:5, ])
 
 ## ----ppc_hist-nb-2, message=FALSE----------------------------------------
 ppc_hist(y, yrep_nb[1:5, ], binwidth = 20) + 
-  coord_cartesian(xlim = c(-1, 500))
+  coord_cartesian(xlim = c(-1, 300))
 
 ## ---- prop_zero----------------------------------------------------------
 prop_zero <- function(x) mean(x == 0)

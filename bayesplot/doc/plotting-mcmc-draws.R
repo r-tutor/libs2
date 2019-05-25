@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
   out.width = "60%",
   fig.align = "center",
   comment = NA,
-  eval = params$EVAL
+  eval = if (isTRUE(exists("params"))) params$EVAL else FALSE
 )
 
 ## ---- pkgs, include=FALSE------------------------------------------------
@@ -87,7 +87,10 @@ mcmc_scatter(posterior, pars = c("(Intercept)", "wt"),
              size = 1.5, alpha = 0.5)
 
 ## ---- mcmc_hex-----------------------------------------------------------
-mcmc_hex(posterior, pars = c("(Intercept)", "wt"))
+# requires hexbin package
+if (requireNamespace("hexbin", quietly = TRUE)) {
+  mcmc_hex(posterior, pars = c("(Intercept)", "wt"))
+}
 
 ## ---- mcmc_pairs, message=FALSE------------------------------------------
 color_scheme_set("pink")

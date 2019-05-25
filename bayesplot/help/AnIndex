@@ -70,6 +70,8 @@ mcmc_nuts_treedepth	MCMC-nuts
 mcmc_pairs	MCMC-scatterplots
 mcmc_parcoord	MCMC-parcoord
 mcmc_parcoord_data	MCMC-parcoord
+mcmc_rank_hist	MCMC-traces
+mcmc_rank_overlay	MCMC-traces
 mcmc_recover_hist	MCMC-recover
 mcmc_recover_intervals	MCMC-recover
 mcmc_recover_scatter	MCMC-recover
@@ -78,6 +80,7 @@ mcmc_rhat_data	MCMC-diagnostics
 mcmc_rhat_hist	MCMC-diagnostics
 mcmc_scatter	MCMC-scatterplots
 mcmc_trace	MCMC-traces
+mcmc_trace_data	MCMC-traces
 mcmc_trace_highlight	MCMC-traces
 mcmc_violin	MCMC-distributions
 neff_ratio	bayesplot-extractors
@@ -92,6 +95,8 @@ overlay_function	bayesplot-helpers
 pairs_condition	MCMC-scatterplots
 pairs_style_np	MCMC-scatterplots
 panel_bg	bayesplot-helpers
+param_glue	tidy-params
+param_range	tidy-params
 parcoord_style_np	MCMC-parcoord
 plot_bg	bayesplot-helpers
 PPC	PPC-overview
@@ -141,12 +146,15 @@ ppc_stat_grouped	PPC-test-statistics
 ppc_violin_grouped	PPC-distributions
 pp_check	pp_check
 pp_check.default	pp_check
+reexports	reexports
 rhat	bayesplot-extractors
 rhat.stanfit	bayesplot-extractors
 rhat.stanreg	bayesplot-extractors
 scatter_style_np	MCMC-scatterplots
 theme_default	theme_default
+tidy-params	tidy-params
 trace_style_np	MCMC-traces
+vars	reexports
 vline_0	bayesplot-helpers
 vline_at	bayesplot-helpers
 xaxis_text	bayesplot-helpers
