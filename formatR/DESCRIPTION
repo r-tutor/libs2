@@ -1,7 +1,7 @@
 Package: formatR
 Type: Package
 Title: Format R Code Automatically
-Version: 1.6
+Version: 1.7
 Authors@R: c(
     person("Yihui", "Xie", role = c("aut", "cre"), email = "xie@yihui.name", comment = c(ORCID = "0000-0003-0645-5666")),
     person("Eugene", "Ha", role = "ctb"),
@@ -22,12 +22,12 @@ VignetteBuilder: knitr
 RoxygenNote: 6.1.1
 Encoding: UTF-8
 NeedsCompilation: no
-Packaged: 2019-03-05 16:17:31 UTC; yihui
+Packaged: 2019-06-11 19:35:45 UTC; yihui
 Author: Yihui Xie [aut, cre] (<https://orcid.org/0000-0003-0645-5666>),
   Eugene Ha [ctb],
   Kohske Takahashi [ctb],
   Ed Lee [ctb]
 Maintainer: Yihui Xie <xie@yihui.name>
 Repository: CRAN
-Date/Publication: 2019-03-05 19:00:06 UTC
-Built: R 3.5.2; ; 2019-03-08 03:29:34 UTC; windows
+Date/Publication: 2019-06-11 20:00:03 UTC
+Built: R 3.6.0; ; 2019-06-13 03:55:03 UTC; windows

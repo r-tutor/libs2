@@ -175,12 +175,6 @@ tidy_eval(text = c("a<-1+1;a  # print the value", "matrix(rnorm(10),5)"))
 #  if (TRUE) {## comments
 #  }
 
-## ----bang-bang, tidy=FALSE, eval=FALSE------------------------------
-#  rlang::quo(mean(!! 1:10 * 2))
-
-## ----bang-bang, eval=FALSE------------------------------------------
-#  rlang::quo(mean(!! 1:10 * 2))
-
 ## -------------------------------------------------------------------
 deparse(parse(text = '1+2-3*4/5 # a comment'))
 
