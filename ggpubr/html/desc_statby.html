@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Descriptive statistics by groups</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for desc_statby {ggpubr}"><tr><td>desc_statby {ggpubr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Descriptive statistics by groups</h2>
+
+<h3>Description</h3>
+
+<p>Computes descriptive statistics by groups for a measure variable.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+desc_statby(data, measure.var, grps, ci = 0.95)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a data frame.</p>
+</td></tr>
+<tr valign="top"><td><code>measure.var</code></td>
+<td>
+<p>the name of a column containing the variable to be summarized.</p>
+</td></tr>
+<tr valign="top"><td><code>grps</code></td>
+<td>
+<p>a character vector containing grouping variables; e.g.: grps = c(&quot;grp1&quot;, &quot;grp2&quot;)</p>
+</td></tr>
+<tr valign="top"><td><code>ci</code></td>
+<td>
+<p>the percent range of the confidence interval (default is 0.95).</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A data frame containing descriptive statistics, such as:
+</p>
+
+<ul>
+<li> <p><strong>length</strong>: the number of elements in each group
+</p>
+</li>
+<li> <p><strong>min</strong>: minimum
+</p>
+</li>
+<li> <p><strong>max</strong>: maximum
+</p>
+</li>
+<li> <p><strong>median</strong>: median
+</p>
+</li>
+<li> <p><strong>mean</strong>: mean
+</p>
+</li>
+<li> <p><strong>iqr</strong>: interquartile range
+</p>
+</li>
+<li> <p><strong>mad</strong>: median absolute deviation (see ?MAD)
+</p>
+</li>
+<li> <p><strong>sd</strong>: standard deviation of the mean
+</p>
+</li>
+<li> <p><strong>se</strong>: standard error of the mean
+</p>
+</li>
+<li> <p><strong>ci</strong>: confidence interval of the mean
+</p>
+</li>
+<li> <p><strong>range</strong>: the range = max - min
+</p>
+</li>
+<li> <p><strong>cv</strong>: coefficient of variation, sd/mean
+</p>
+</li>
+<li> <p><strong>var</strong>: variance, sd^2
+</p>
+</li></ul>
+
+
+
+<h3>Examples</h3>
+
+<pre>
+# Load data
+data("ToothGrowth")
+
+# Descriptive statistics
+res &lt;- desc_statby(ToothGrowth, measure.var = "len",
+   grps = c("dose", "supp"))
+head(res[, 1:10])
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggpubr</em> version 0.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

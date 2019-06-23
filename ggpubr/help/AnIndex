@@ -19,6 +19,7 @@ fill_palette	set_palette
 font	font
 gene_citation	gene_citation
 geom_exec	geom_exec
+geom_signif	reexports
 get_legend	get_legend
 get_palette	get_palette
 ggadd	ggadd

@@ -1,3 +1,8 @@
+# gdtools 0.1.9
+
+* keep locale intact when using various gdtools functions (fix #51)
+* Reuse magick FONTCONFIG_PATH if exists
+
 # gdtools 0.1.8
 
 * Windows: update cairo stack to rwinlib/cairo v1.15.10

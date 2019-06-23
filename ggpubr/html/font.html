@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Change the Appearance of Titles and Axis Labels</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for font {ggpubr}"><tr><td>font {ggpubr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Change the Appearance of Titles and Axis Labels</h2>
+
+<h3>Description</h3>
+
+<p>Change the appearance of the main title, subtitle, caption, axis
+labels and text, as well as the legend title and texts. Wrapper around
+<code><a href="../../ggplot2/html/element_text.html">element_text</a>()</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+font(object, size = NULL, color = NULL, face = NULL, family = NULL,
+  ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>character string specifying the plot components. Allowed values
+include: </p>
+ <ul>
+<li> <p><code>"title"</code> for the main title </p>
+</li>
+<li>
+<p><code>"subtitle"</code> for the plot subtitle </p>
+</li>
+<li> <p><code>"caption"</code> for the plot
+caption </p>
+</li>
+<li> <p><code>"legend.title"</code> for the legend title </p>
+</li>
+<li>
+<p><code>"legend.text"</code> for the legend text </p>
+</li>
+<li> <p><code>"x", "xlab", or "x.title"</code>
+for x axis label </p>
+</li>
+<li> <p><code>"y", "ylab", or "y.title"</code> for y axis label </p>
+</li>
+<li>
+<p><code>"xy", "xylab", "xy.title" or "axis.title"</code> for both x and y axis
+labels </p>
+</li>
+<li> <p><code>"x.text"</code> for x axis texts (x axis tick labels) </p>
+</li>
+<li>
+<p><code>"y.text"</code> for y axis texts (y axis tick labels) </p>
+</li>
+<li> <p><code>"xy.text"</code>
+or <code>"axis.text"</code> for both x and y axis texts </p>
+</li></ul>
+</td></tr>
+<tr valign="top"><td><code>size</code></td>
+<td>
+<p>numeric value specifying the font size, (e.g.: <code>size = 12</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>color</code></td>
+<td>
+<p>character string specifying the font color, (e.g.: <code>color =
+"red"</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>face</code></td>
+<td>
+<p>the font face or style. Allowed values include one of
+<code>"plain", "bold", "italic", "bold.italic"</code>, (e.g.: <code>face =
+"bold.italic"</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>family</code></td>
+<td>
+<p>the font family.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>other arguments to pass to the function
+<code><a href="../../ggplot2/html/element_text.html">element_text</a>()</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Load data
+data("ToothGrowth")
+
+# Basic plot
+p &lt;- ggboxplot(ToothGrowth, x = "dose", y = "len", color = "dose",
+              title = "Box Plot created with ggpubr",
+              subtitle = "Length by dose",
+              caption = "Source: ggpubr",
+              xlab ="Dose (mg)", ylab = "Teeth length")
+p
+
+# Change the appearance of titles and labels
+p +
+ font("title", size = 14, color = "red", face = "bold.italic")+
+ font("subtitle", size = 10, color = "orange")+
+ font("caption", size = 10, color = "orange")+
+ font("xlab", size = 12, color = "blue")+
+ font("ylab", size = 12, color = "#993333")+
+ font("xy.text", size = 12, color = "gray", face = "bold")
+
+# Change the appearance of legend title and texts
+p +
+ font("legend.title", color = "blue", face = "bold")+
+ font("legend.text", color = "red")
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggpubr</em> version 0.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

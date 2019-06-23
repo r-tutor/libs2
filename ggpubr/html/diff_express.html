@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Differential gene expression analysis results</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for diff_express {ggpubr}"><tr><td>diff_express {ggpubr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Differential gene expression analysis results</h2>
+
+<h3>Description</h3>
+
+<p>Differential gene expression analysis results obtained from
+comparing the RNAseq data of two different cell populations using DESeq2
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+data("diff_express")
+</pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 36028 rows and 5 columns. </p>
+
+<dl>
+<dt><code>name</code></dt><dd><p>gene names</p>
+</dd> <dt><code>baseMean</code></dt><dd><p>mean expression
+signal across all samples</p>
+</dd> <dt><code>log2FoldChange</code></dt><dd><p>log2 fold change</p>
+</dd>
+<dt><code>padj</code></dt><dd><p>Adjusted p-value</p>
+</dd><dt><code>detection_call</code></dt><dd><p>a numeric
+vector specifying whether the genes is expressed (value = 1) or not (value = 0).</p>
+</dd></dl>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(diff_express)
+
+# Default plot
+ggmaplot(diff_express, main = expression("Group 1" %-&gt;% "Group 2"),
+   fdr = 0.05, fc = 2, size = 0.4,
+   palette = c("#B31B21", "#1465AC", "darkgray"),
+   genenames = as.vector(diff_express$name),
+   legend = "top", top = 20,
+   font.label = c("bold", 11),
+   font.legend = "bold",
+   font.main = "bold",
+   ggtheme = ggplot2::theme_minimal())
+
+# Add rectangle around labesl
+ggmaplot(diff_express, main = expression("Group 1" %-&gt;% "Group 2"),
+   fdr = 0.05, fc = 2, size = 0.4,
+   palette = c("#B31B21", "#1465AC", "darkgray"),
+   genenames = as.vector(diff_express$name),
+   legend = "top", top = 20,
+   font.label = c("bold", 11), label.rectangle = TRUE,
+   font.legend = "bold",
+   font.main = "bold",
+   ggtheme = ggplot2::theme_minimal())
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggpubr</em> version 0.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

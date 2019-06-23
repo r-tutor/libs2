@@ -1,7 +1,7 @@
 Type: Package
 Package: dbplyr
 Title: A 'dplyr' Back End for Databases
-Version: 1.4.1
+Version: 1.4.2
 Authors@R: 
     c(person(given = "Hadley",
              family = "Wickham",
@@ -52,11 +52,11 @@ Collate: 'utils.R' 'sql.R' 'escape.R' 'translate-sql-quantile.R'
         'verb-joins.R' 'verb-mutate.R' 'verb-pull.R' 'verb-select.R'
         'verb-set-ops.R' 'verb-summarise.R' 'verb-window.R' 'zzz.R'
 NeedsCompilation: no
-Packaged: 2019-06-05 22:21:20 UTC; hadley
+Packaged: 2019-06-17 19:32:57 UTC; hadley
 Author: Hadley Wickham [aut, cre],
   Edgar Ruiz [aut],
   RStudio [cph, fnd]
 Maintainer: Hadley Wickham <hadley@rstudio.com>
 Repository: CRAN
-Date/Publication: 2019-06-05 22:50:03 UTC
-Built: R 3.6.0; ; 2019-06-06 16:29:51 UTC; windows
+Date/Publication: 2019-06-17 20:00:04 UTC
+Built: R 3.6.0; ; 2019-06-20 14:56:32 UTC; windows

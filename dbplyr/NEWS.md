@@ -1,3 +1,10 @@
+# dbplyr 1.4.2
+
+* Fix bug when partially evaluating unquoting quosure containing a single 
+  symbol (#317)
+
+* Fixes for rlang and dpylr compatibility.
+
 # dbplyr 1.4.1
 
 Minor improvements to SQL generation

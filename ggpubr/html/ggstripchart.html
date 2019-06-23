@@ -1,0 +1,325 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Stripcharts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for ggstripchart {ggpubr}"><tr><td>ggstripchart {ggpubr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Stripcharts</h2>
+
+<h3>Description</h3>
+
+<p>Create a stripchart, also known as one dimensional scatter
+plots. These plots are suitable compared to box plots when sample sizes are
+small.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ggstripchart(data, x, y, combine = FALSE, merge = FALSE,
+  color = "black", fill = "white", palette = NULL, title = NULL,
+  xlab = NULL, ylab = NULL, facet.by = NULL, panel.labs = NULL,
+  short.panel.labs = TRUE, shape = 19, size = NULL, select = NULL,
+  remove = NULL, order = NULL, add = "mean_se",
+  add.params = list(), error.plot = "pointrange", label = NULL,
+  font.label = list(size = 11, color = "black"), label.select = NULL,
+  repel = FALSE, label.rectangle = FALSE, jitter = 0.2,
+  position = position_jitter(jitter), ggtheme = theme_pubr(), ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a data frame</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>character string containing the name of x variable.</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>character vector containing one or more variables to plot</p>
+</td></tr>
+<tr valign="top"><td><code>combine</code></td>
+<td>
+<p>logical value. Default is FALSE. Used only when y is a vector
+containing multiple variables to plot. If TRUE, create a multi-panel plot by
+combining the plot of y variables.</p>
+</td></tr>
+<tr valign="top"><td><code>merge</code></td>
+<td>
+<p>logical or character value. Default is FALSE. Used only when y is
+a vector containing multiple variables to plot. If TRUE, merge multiple y
+variables in the same plotting area. Allowed values include also &quot;asis&quot;
+(TRUE) and &quot;flip&quot;. If merge = &quot;flip&quot;, then y variables are used as x tick
+labels and the x variable is used as grouping variable.</p>
+</td></tr>
+<tr valign="top"><td><code>color</code></td>
+<td>
+<p>outline color.</p>
+</td></tr>
+<tr valign="top"><td><code>fill</code></td>
+<td>
+<p>fill color.</p>
+</td></tr>
+<tr valign="top"><td><code>palette</code></td>
+<td>
+<p>the color palette to be used for coloring or filling by groups.
+Allowed values include &quot;grey&quot; for grey color palettes; brewer palettes e.g.
+&quot;RdBu&quot;, &quot;Blues&quot;, ...; or custom color palette e.g. c(&quot;blue&quot;, &quot;red&quot;); and
+scientific journal palettes from ggsci R package, e.g.: &quot;npg&quot;, &quot;aaas&quot;,
+&quot;lancet&quot;, &quot;jco&quot;, &quot;ucscgb&quot;, &quot;uchicago&quot;, &quot;simpsons&quot; and &quot;rickandmorty&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>title</code></td>
+<td>
+<p>plot main title.</p>
+</td></tr>
+<tr valign="top"><td><code>xlab</code></td>
+<td>
+<p>character vector specifying x axis labels. Use xlab = FALSE to
+hide xlab.</p>
+</td></tr>
+<tr valign="top"><td><code>ylab</code></td>
+<td>
+<p>character vector specifying y axis labels. Use ylab = FALSE to
+hide ylab.</p>
+</td></tr>
+<tr valign="top"><td><code>facet.by</code></td>
+<td>
+<p>character vector, of length 1 or 2, specifying grouping
+variables for faceting the plot into multiple panels. Should be in the data.</p>
+</td></tr>
+<tr valign="top"><td><code>panel.labs</code></td>
+<td>
+<p>a list of one or two character vectors to modify facet panel
+labels. For example, panel.labs = list(sex = c(&quot;Male&quot;, &quot;Female&quot;)) specifies
+the labels for the &quot;sex&quot; variable. For two grouping variables, you can use
+for example panel.labs = list(sex = c(&quot;Male&quot;, &quot;Female&quot;), rx = c(&quot;Obs&quot;,
+&quot;Lev&quot;, &quot;Lev2&quot;) ).</p>
+</td></tr>
+<tr valign="top"><td><code>short.panel.labs</code></td>
+<td>
+<p>logical value. Default is TRUE. If TRUE, create short
+labels for panels by omitting variable names; in other words panels will be
+labelled only by variable grouping levels.</p>
+</td></tr>
+<tr valign="top"><td><code>shape</code></td>
+<td>
+<p>point shape</p>
+</td></tr>
+<tr valign="top"><td><code>size</code></td>
+<td>
+<p>Numeric value (e.g.: size = 1). change the size of points and
+outlines.</p>
+</td></tr>
+<tr valign="top"><td><code>select</code></td>
+<td>
+<p>character vector specifying which items to display.</p>
+</td></tr>
+<tr valign="top"><td><code>remove</code></td>
+<td>
+<p>character vector specifying which items to remove from the plot.</p>
+</td></tr>
+<tr valign="top"><td><code>order</code></td>
+<td>
+<p>character vector specifying the order of items.</p>
+</td></tr>
+<tr valign="top"><td><code>add</code></td>
+<td>
+<p>character vector for adding another plot element (e.g.: dot plot or
+error bars). Allowed values are one or the combination of: &quot;none&quot;,
+&quot;dotplot&quot;, &quot;jitter&quot;, &quot;boxplot&quot;, &quot;point&quot;, &quot;mean&quot;, &quot;mean_se&quot;, &quot;mean_sd&quot;,
+&quot;mean_ci&quot;, &quot;mean_range&quot;, &quot;median&quot;, &quot;median_iqr&quot;, &quot;median_mad&quot;,
+&quot;median_range&quot;; see ?desc_statby for more details.</p>
+</td></tr>
+<tr valign="top"><td><code>add.params</code></td>
+<td>
+<p>parameters (color, shape, size, fill, linetype) for the
+argument 'add'; e.g.: add.params = list(color = &quot;red&quot;).</p>
+</td></tr>
+<tr valign="top"><td><code>error.plot</code></td>
+<td>
+<p>plot type used to visualize error. Allowed values are one of
+c(&quot;pointrange&quot;, &quot;linerange&quot;, &quot;crossbar&quot;, &quot;errorbar&quot;, &quot;upper_errorbar&quot;,
+&quot;lower_errorbar&quot;, &quot;upper_pointrange&quot;, &quot;lower_pointrange&quot;, &quot;upper_linerange&quot;,
+&quot;lower_linerange&quot;). Default value is &quot;pointrange&quot; or &quot;errorbar&quot;. Used only
+when add != &quot;none&quot; and add contains one &quot;mean_*&quot; or &quot;med_*&quot; where &quot;*&quot; = sd,
+se, ....</p>
+</td></tr>
+<tr valign="top"><td><code>label</code></td>
+<td>
+<p>the name of the column containing point labels. Can be also a
+character vector with length = nrow(data).</p>
+</td></tr>
+<tr valign="top"><td><code>font.label</code></td>
+<td>
+<p>a list which can contain the combination of the following
+elements: the size (e.g.: 14), the style (e.g.: &quot;plain&quot;, &quot;bold&quot;, &quot;italic&quot;,
+&quot;bold.italic&quot;) and the color (e.g.: &quot;red&quot;) of labels. For example font.label
+= list(size = 14, face = &quot;bold&quot;, color =&quot;red&quot;). To specify only the size and
+the style, use font.label = list(size = 14, face = &quot;plain&quot;).</p>
+</td></tr>
+<tr valign="top"><td><code>label.select</code></td>
+<td>
+<p>can be of two formats: </p>
+ <ul>
+<li><p> a character vector
+specifying some labels to show. </p>
+</li>
+<li><p> a list containing one or the
+combination of the following components: </p>
+ <ul>
+<li> <p><code>top.up</code> and
+<code>top.down</code>: to display the labels  of the top up/down points. For
+example, <code>label.select = list(top.up = 10, top.down = 4)</code>. </p>
+</li>
+<li>
+<p><code>criteria</code>: to filter, for example, by x and y variabes values, use
+this: <code>label.select = list(criteria = "`y` &gt; 2 &amp; `y` &lt; 5 &amp; `x` %in%
+c('A', 'B')")</code>. </p>
+</li></ul>
+ </li></ul>
+</td></tr>
+<tr valign="top"><td><code>repel</code></td>
+<td>
+<p>a logical value, whether to use ggrepel to avoid overplotting
+text labels or not.</p>
+</td></tr>
+<tr valign="top"><td><code>label.rectangle</code></td>
+<td>
+<p>logical value. If TRUE, add rectangle underneath the
+text, making it easier to read.</p>
+</td></tr>
+<tr valign="top"><td><code>jitter</code></td>
+<td>
+<p>the amount of jitter.</p>
+</td></tr>
+<tr valign="top"><td><code>position</code></td>
+<td>
+<p>position adjustment, either as a string, or the result of a
+call to a position adjustment function. Used to adjust position for
+multiple groups.</p>
+</td></tr>
+<tr valign="top"><td><code>ggtheme</code></td>
+<td>
+<p>function, ggplot2 theme name. Default value is theme_pubr().
+Allowed values include ggplot2 official themes: theme_gray(), theme_bw(),
+theme_minimal(), theme_classic(), theme_void(), ....</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>other arguments to be passed to
+<code><a href="../../ggplot2/html/geom_jitter.html">geom_jitter</a></code>, <code><a href="ggpar.html">ggpar</a></code> and
+<code><a href="facet.html">facet</a></code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The plot can be easily customized using the function ggpar(). Read
+?ggpar for changing: </p>
+ <ul>
+<li><p> main title and axis labels: main,
+xlab, ylab </p>
+</li>
+<li><p> axis limits: xlim, ylim (e.g.: ylim = c(0, 30)) </p>
+</li>
+<li><p> axis
+scales: xscale, yscale (e.g.: yscale = &quot;log2&quot;) </p>
+</li>
+<li><p> color palettes:
+palette = &quot;Dark2&quot; or palette = c(&quot;gray&quot;, &quot;blue&quot;, &quot;red&quot;) </p>
+</li>
+<li><p> legend title,
+labels and position: legend = &quot;right&quot; </p>
+</li>
+<li><p> plot orientation : orientation
+= c(&quot;vertical&quot;, &quot;horizontal&quot;, &quot;reverse&quot;) </p>
+</li></ul>
+
+
+
+<h3>See Also</h3>
+
+<p><code><a href="ggpar.html">ggpar</a></code>, <code><a href="ggviolin.html">ggviolin</a></code>, <code><a href="ggdotplot.html">ggdotplot</a></code>
+and <code><a href="ggboxplot.html">ggboxplot</a></code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Load data
+data("ToothGrowth")
+df &lt;- ToothGrowth
+
+# Basic plot with summary statistics: mean_se
+# +++++++++++++++++++++++++++
+# Change point shapes by groups: "dose"
+ggstripchart(df, x = "dose", y = "len",
+   shape = "dose", size = 3,
+   add = "mean_se")
+
+# Use mean_sd
+# Change error.plot to "crossbar"
+ggstripchart(df, x = "dose", y = "len",
+   shape = "dose", size = 3,
+   add = "mean_sd", add.params = list(width = 0.5),
+   error.plot = "crossbar")
+
+
+
+# Add summary statistics
+# ++++++++++++++++++++++++++
+
+# Add box plot
+ggstripchart(df, x = "dose", y = "len",
+ shape = "dose", add = "boxplot")
+
+# Add violin + mean_sd
+ggstripchart(df, x = "dose", y = "len",
+ shape = "dose", add = c("violin", "mean_sd"))
+
+
+# Change colors
+# +++++++++++++++++++++++++++
+# Change colors by groups: dose
+# Use custom color palette
+ ggstripchart(df, "dose", "len",  shape = "dose",
+   color = "dose", palette = c("#00AFBB", "#E7B800", "#FC4E07"),
+   add = "mean_sd")
+
+
+
+# Plot with multiple groups
+# +++++++++++++++++++++
+# Change shape and color by a second group : "supp"
+ggstripchart(df, "dose", "len", shape = "supp",
+  color = "supp", palette = c("#00AFBB", "#E7B800"))
+
+# Adjust point position
+ggstripchart(df, "dose", "len", shape = "supp",
+  color = "supp", palette = c("#00AFBB", "#E7B800"),
+  position = position_dodge(0.8) )
+
+# You can also use position_jitterdodge()
+# but fill aesthetic is required
+ggstripchart(df, "dose", "len",  shape = "supp",
+   color = "supp", palette = c("#00AFBB", "#E7B800"),
+   position = position_jitterdodge() )
+
+# Add boxplot
+ggstripchart(df, "dose", "len", shape = "supp",
+ color = "supp", palette = c("#00AFBB", "#E7B800"),
+ add = "boxplot", add.params = list(color = "black") )
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggpubr</em> version 0.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

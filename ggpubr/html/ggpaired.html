@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Plot Paired Data</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for ggpaired {ggpubr}"><tr><td>ggpaired {ggpubr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Plot Paired Data</h2>
+
+<h3>Description</h3>
+
+<p>Plot paired data.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ggpaired(data, cond1, cond2, x = NULL, y = NULL, id = NULL,
+  color = "black", fill = "white", palette = NULL, width = 0.5,
+  point.size = 1.2, line.size = 0.5, line.color = "black",
+  title = NULL, xlab = "Condition", ylab = "Value",
+  facet.by = NULL, panel.labs = NULL, short.panel.labs = TRUE,
+  label = NULL, font.label = list(size = 11, color = "black"),
+  label.select = NULL, repel = FALSE, label.rectangle = FALSE,
+  ggtheme = theme_pubr(), ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a data frame</p>
+</td></tr>
+<tr valign="top"><td><code>cond1</code></td>
+<td>
+<p>variable name corresponding to the first condition.</p>
+</td></tr>
+<tr valign="top"><td><code>cond2</code></td>
+<td>
+<p>variable name corresponding to the second condition.</p>
+</td></tr>
+<tr valign="top"><td><code>x, y</code></td>
+<td>
+<p>x and y variables, where x is a grouping variable and y contains
+values for each group. Considered only when <code>cond1</code> and <code>cond2</code>
+are missing.</p>
+</td></tr>
+<tr valign="top"><td><code>id</code></td>
+<td>
+<p>variable name corresponding to paired samples' id. Used to connect
+paired points with lines.</p>
+</td></tr>
+<tr valign="top"><td><code>color</code></td>
+<td>
+<p>points and box plot colors. To color by conditions, use color =
+&quot;condition&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>fill</code></td>
+<td>
+<p>box plot fill color. To change fill color by conditions, use fill
+= &quot;condition&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>palette</code></td>
+<td>
+<p>the color palette to be used for coloring or filling by groups.
+Allowed values include &quot;grey&quot; for grey color palettes; brewer palettes e.g.
+&quot;RdBu&quot;, &quot;Blues&quot;, ...; or custom color palette e.g. c(&quot;blue&quot;, &quot;red&quot;); and
+scientific journal palettes from ggsci R package, e.g.: &quot;npg&quot;, &quot;aaas&quot;,
+&quot;lancet&quot;, &quot;jco&quot;, &quot;ucscgb&quot;, &quot;uchicago&quot;, &quot;simpsons&quot; and &quot;rickandmorty&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>width</code></td>
+<td>
+<p>box plot width.</p>
+</td></tr>
+<tr valign="top"><td><code>point.size, line.size</code></td>
+<td>
+<p>point and line size, respectively.</p>
+</td></tr>
+<tr valign="top"><td><code>line.color</code></td>
+<td>
+<p>line color.</p>
+</td></tr>
+<tr valign="top"><td><code>title</code></td>
+<td>
+<p>plot main title.</p>
+</td></tr>
+<tr valign="top"><td><code>xlab</code></td>
+<td>
+<p>character vector specifying x axis labels. Use xlab = FALSE to
+hide xlab.</p>
+</td></tr>
+<tr valign="top"><td><code>ylab</code></td>
+<td>
+<p>character vector specifying y axis labels. Use ylab = FALSE to
+hide ylab.</p>
+</td></tr>
+<tr valign="top"><td><code>facet.by</code></td>
+<td>
+<p>character vector, of length 1 or 2, specifying grouping
+variables for faceting the plot into multiple panels. Should be in the data.</p>
+</td></tr>
+<tr valign="top"><td><code>panel.labs</code></td>
+<td>
+<p>a list of one or two character vectors to modify facet panel
+labels. For example, panel.labs = list(sex = c(&quot;Male&quot;, &quot;Female&quot;)) specifies
+the labels for the &quot;sex&quot; variable. For two grouping variables, you can use
+for example panel.labs = list(sex = c(&quot;Male&quot;, &quot;Female&quot;), rx = c(&quot;Obs&quot;,
+&quot;Lev&quot;, &quot;Lev2&quot;) ).</p>
+</td></tr>
+<tr valign="top"><td><code>short.panel.labs</code></td>
+<td>
+<p>logical value. Default is TRUE. If TRUE, create short
+labels for panels by omitting variable names; in other words panels will be
+labelled only by variable grouping levels.</p>
+</td></tr>
+<tr valign="top"><td><code>label</code></td>
+<td>
+<p>the name of the column containing point labels. Can be also a
+character vector with length = nrow(data).</p>
+</td></tr>
+<tr valign="top"><td><code>font.label</code></td>
+<td>
+<p>a list which can contain the combination of the following
+elements: the size (e.g.: 14), the style (e.g.: &quot;plain&quot;, &quot;bold&quot;, &quot;italic&quot;,
+&quot;bold.italic&quot;) and the color (e.g.: &quot;red&quot;) of labels. For example font.label
+= list(size = 14, face = &quot;bold&quot;, color =&quot;red&quot;). To specify only the size and
+the style, use font.label = list(size = 14, face = &quot;plain&quot;).</p>
+</td></tr>
+<tr valign="top"><td><code>label.select</code></td>
+<td>
+<p>can be of two formats: </p>
+ <ul>
+<li><p> a character vector
+specifying some labels to show. </p>
+</li>
+<li><p> a list containing one or the
+combination of the following components: </p>
+ <ul>
+<li> <p><code>top.up</code> and
+<code>top.down</code>: to display the labels  of the top up/down points. For
+example, <code>label.select = list(top.up = 10, top.down = 4)</code>. </p>
+</li>
+<li>
+<p><code>criteria</code>: to filter, for example, by x and y variabes values, use
+this: <code>label.select = list(criteria = "`y` &gt; 2 &amp; `y` &lt; 5 &amp; `x` %in%
+c('A', 'B')")</code>. </p>
+</li></ul>
+ </li></ul>
+</td></tr>
+<tr valign="top"><td><code>repel</code></td>
+<td>
+<p>a logical value, whether to use ggrepel to avoid overplotting
+text labels or not.</p>
+</td></tr>
+<tr valign="top"><td><code>label.rectangle</code></td>
+<td>
+<p>logical value. If TRUE, add rectangle underneath the
+text, making it easier to read.</p>
+</td></tr>
+<tr valign="top"><td><code>ggtheme</code></td>
+<td>
+<p>function, ggplot2 theme name. Default value is theme_pubr().
+Allowed values include ggplot2 official themes: theme_gray(), theme_bw(),
+theme_minimal(), theme_classic(), theme_void(), ....</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>other arguments to be passed to be passed to <a href="ggpar.html">ggpar</a>().</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+# Example 1
+#::::::::::::::::::::::::::::::::::::::::::
+before &lt;-c(200.1, 190.9, 192.7, 213, 241.4, 196.9, 172.2, 185.5, 205.2, 193.7)
+after &lt;-c(392.9, 393.2, 345.1, 393, 434, 427.9, 422, 383.9, 392.3, 352.2)
+
+d &lt;- data.frame(before = before, after = after)
+ggpaired(d, cond1 = "before", cond2 = "after",
+    fill = "condition", palette = "jco")
+
+# Example 2
+#::::::::::::::::::::::::::::::::::::::::::
+ggpaired(ToothGrowth, x = "supp", y = "len",
+ color = "supp", line.color = "gray", line.size = 0.4,
+ palette = "npg")
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggpubr</em> version 0.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Remove a ggplot Component</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for rremove {ggpubr}"><tr><td>rremove {ggpubr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Remove a ggplot Component</h2>
+
+<h3>Description</h3>
+
+<p>Remove a specific component from a ggplot.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+rremove(object)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>character string specifying the plot components. Allowed values
+include: </p>
+
+<ul>
+<li> <p><code>"grid"</code> for both x and y grids
+</p>
+</li>
+<li> <p><code>"x.grid"</code> for x axis grids
+</p>
+</li>
+<li> <p><code>"y.grid"</code> for y axis grids
+</p>
+</li>
+<li> <p><code>"axis"</code> for both x and y axes
+</p>
+</li>
+<li> <p><code>"x.axis"</code> for x axis
+</p>
+</li>
+<li> <p><code>"y.axis"</code> for y axis
+</p>
+</li>
+<li> <p><code>"xlab", or "x.title"</code>
+for x axis label
+</p>
+</li>
+<li> <p><code>"ylab", or "y.title"</code> for y axis label
+</p>
+</li>
+<li> <p><code>"xylab", "xy.title" or "axis.title"</code> for both x and y axis
+labels
+</p>
+</li>
+<li> <p><code>"x.text"</code> for x axis texts (x axis tick labels)
+</p>
+</li>
+<li> <p><code>"y.text"</code> for y axis texts (y axis tick labels)
+</p>
+</li>
+<li> <p><code>"xy.text"</code> or <code>"axis.text"</code> for both x and y axis texts
+</p>
+</li>
+<li> <p><code>"ticks"</code> for both x and y ticks
+</p>
+</li>
+<li> <p><code>"x.ticks"</code> for x ticks
+</p>
+</li>
+<li> <p><code>"y.ticks"</code> for y ticks
+</p>
+</li>
+<li> <p><code>"legend.title"</code> for the legend title
+</p>
+</li>
+<li> <p><code>"legend"</code> for the legend
+</p>
+</li></ul>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Load data
+data("ToothGrowth")
+
+# Basic plot
+p &lt;- ggboxplot(ToothGrowth, x = "dose", y = "len",
+  ggtheme = theme_gray())
+p
+
+# Remove all grids
+p + rremove("grid")
+
+# Remove only x grids
+p + rremove("x.grid")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggpubr</em> version 0.2.1 <a href="00Index.html">Index</a>]</div>
+</body></html>
