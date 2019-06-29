@@ -18,11 +18,11 @@ variables before ordering with the <code>.funs</code> argument.
 <h3>Usage</h3>
 
 <pre>
-distinct_all(.tbl, .funs = list(), ...)
+distinct_all(.tbl, .funs = list(), ..., .keep_all = FALSE)
 
-distinct_at(.tbl, .vars, .funs = list(), ...)
+distinct_at(.tbl, .vars, .funs = list(), ..., .keep_all = FALSE)
 
-distinct_if(.tbl, .predicate, .funs = list(), ...)
+distinct_if(.tbl, .predicate, .funs = list(), ..., .keep_all = FALSE)
 </pre>
 
 
@@ -41,6 +41,12 @@ distinct_if(.tbl, .predicate, .funs = list(), ...)
 <td>
 <p>Additional arguments for the function calls in
 <code>.funs</code>. These are evaluated only once, with <a href="../../rlang/html/tidy-dots.html">tidy dots</a> support.</p>
+</td></tr>
+<tr valign="top"><td><code>.keep_all</code></td>
+<td>
+<p>If <code>TRUE</code>, keep all variables in <code>.data</code>.
+If a combination of <code>...</code> is not distinct, this keeps the
+first row of values.</p>
 </td></tr>
 <tr valign="top"><td><code>.vars</code></td>
 <td>
@@ -81,5 +87,5 @@ distinct_all(df, round)
 arrange_all(df, list(~round(.)))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>dplyr</em> version 0.8.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>dplyr</em> version 0.8.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -108,6 +108,16 @@ case_when(
   x %% 7 == 0 ~ 7,
   TRUE ~ NA_real_
 )
+
+# case_when() evaluates all RHS expressions, and then constructs its
+# result by extracting the selected (via the LHS expressions) parts.
+# In particular NaN are produced in this case:
+y &lt;- seq(-2, 2, by = .5)
+case_when(
+  y &gt;= 0 ~ sqrt(y),
+  TRUE   ~ y
+)
+
 # This throws an error as NA is logical not numeric
 ## Not run: 
 case_when(
@@ -169,5 +179,5 @@ starwars %&gt;%
   pull(type)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>dplyr</em> version 0.8.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>dplyr</em> version 0.8.2 <a href="00Index.html">Index</a>]</div>
 </body></html>
