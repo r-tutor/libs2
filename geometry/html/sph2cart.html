@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Transform spherical coordinates to Cartesian coordinates</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for sph2cart {geometry}"><tr><td>sph2cart {geometry}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Transform spherical coordinates to Cartesian coordinates</h2>
+
+<h3>Description</h3>
+
+<p>The inputs <code>theta</code>, <code>phi</code>, and <code>r</code> must be the same
+shape, or scalar.  If called with a single matrix argument then
+each row of <code>S</code> represents the spherical coordinate
+(<code>theta</code>, <code>phi</code>, <code>r</code>).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+sph2cart(theta, phi = NULL, r = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>theta</code></td>
+<td>
+<p>describes the angle relative to the positive x-axis.</p>
+</td></tr>
+<tr valign="top"><td><code>phi</code></td>
+<td>
+<p>is the angle relative to the xy-plane.</p>
+</td></tr>
+<tr valign="top"><td><code>r</code></td>
+<td>
+<p>is the distance to the origin <code>(0, 0, 0)</code>.
+</p>
+<p>If only a single return argument is requested then return a matrix
+<code>C</code> where each row represents one Cartesian coordinate
+(<code>x</code>, <code>y</code>, <code>z</code>).</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Kai Habel
+</p>
+<p>David Sterratt
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="cart2sph.html">cart2sph</a></code>, <code><a href="pol2cart.html">pol2cart</a></code>, <code><a href="cart2pol.html">cart2pol</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>geometry</em> version 0.4.1.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

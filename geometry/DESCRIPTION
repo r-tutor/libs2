@@ -19,7 +19,7 @@ Description: Makes the 'Qhull' library <http://www.qhull.org>
     support constrained Delaunay triangulations, or mesh generation of
     non-convex objects, but the package does include some R functions
     that allow for this.
-Version: 0.4.1
+Version: 0.4.1.1
 URL: https://davidcsterratt.github.io/geometry
 Date: 2019-03-27
 BugReports: https://github.com/davidcsterratt/geometry/issues
@@ -31,7 +31,7 @@ LinkingTo: Rcpp, RcppProgress
 Encoding: UTF-8
 Language: en-GB
 NeedsCompilation: yes
-Packaged: 2019-03-27 16:34:48 UTC; sterratt
+Packaged: 2019-07-02 06:56:38 UTC; ripley
 Author: Jean-Romain Roussel [cph, ctb] (wrote tsearch function with QuadTrees),
   C. B. Barber [cph],
   Kai Habel [cph, aut],
@@ -42,6 +42,8 @@ Author: Jean-Romain Roussel [cph, ctb] (wrote tsearch function with QuadTrees),
     (<https://orcid.org/0000-0001-9092-9099>)
 Maintainer: David C. Sterratt <david.c.sterratt@ed.ac.uk>
 Repository: CRAN
-Date/Publication: 2019-03-27 17:10:03 UTC
-Built: R 3.5.3; x86_64-w64-mingw32; 2019-03-28 17:34:59 UTC; windows
+Date/Publication: 2019-07-02 08:38:32 UTC
+X-CRAN-Comment: Orphaned and corrected on 2019-07-02 as misuse of
+        package= for PACKAGE= was not corrected despite reminder.
+Built: R 3.6.0; x86_64-w64-mingw32; 2019-07-02 13:18:57 UTC; windows
 Archs: i386, x64

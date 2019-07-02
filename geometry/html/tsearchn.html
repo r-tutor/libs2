@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Search for the enclosing Delaunay convex hull</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for tsearchn {geometry}"><tr><td>tsearchn {geometry}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Search for the enclosing Delaunay convex hull</h2>
+
+<h3>Description</h3>
+
+<p>For <code>t = delaunayn(x)</code>, where <code>x</code> is a set of points in <i>N</i>
+dimensions, <code>tsearchn(x, t, xi)</code> finds the index in <code>t</code>
+containing the points <code>xi</code>. For points outside the convex hull,
+<code>idx</code> is <code>NA</code>. <code>tsearchn</code> also returns the barycentric
+coordinates <code>p</code> of the enclosing triangles.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+tsearchn(x, t, xi, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>An <i>N</i>-column matrix, in which each row represents a
+point in <i>N</i>-dimensional space.</p>
+</td></tr>
+<tr valign="top"><td><code>t</code></td>
+<td>
+<p>A matrix with <i>N+1</i> columns. A row of <code>t</code>
+contains indices into <code>x</code> of the vertices of an
+<i>N</i>-dimensional simplex. <code>t</code> is usually the output of
+delaunayn.</p>
+</td></tr>
+<tr valign="top"><td><code>xi</code></td>
+<td>
+<p>An <i>M</i>-by-<i>N</i> matrix. The rows of <code>xi</code>
+represent <i>M</i> points in <i>N</i>-dimensional space whose
+positions in the mesh are being sought.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>If <code>x</code> is <code>NA</code> and the <code>t</code> is a
+<code>delaunayn</code> object produced by
+<code><a href="delaunayn.html">delaunayn</a></code> with the <code>full</code> option, then use the
+Qhull library to perform the search. Please note that this is
+experimental in geometry version 0.4.0 and is only partly tested
+for 3D hulls, and does not yet work for hulls of 4 dimensions and
+above.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list containing:
+</p>
+
+<dl>
+<dt><code>idx</code></dt><dd><p>An <i>M</i>-long vector containing the indices
+of the row of <code>t</code> in which each point in <code>xi</code> is found.</p>
+</dd>
+<dt><code>p</code></dt><dd><p>An <i>M</i>-by-<i>N+1</i> matrix containing the
+barycentric coordinates with respect to the enclosing simplex
+of each point in <code>xi</code>.</p>
+</dd></dl>
+
+
+
+<h3>Note</h3>
+
+<p>Based on the Octave function Copyright (C) 2007-2012 David
+Bateman.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>David Sterratt
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="tsearch.html">tsearch</a></code>, <code><a href="delaunayn.html">delaunayn</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>geometry</em> version 0.4.1.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

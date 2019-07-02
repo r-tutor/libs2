@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Circle distance function</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for mesh.dcircle {geometry}"><tr><td>mesh.dcircle {geometry}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Circle distance function</h2>
+
+<h3>Description</h3>
+
+<p>Signed distance from points <code>p</code> to boundary of circle to
+allow easy definition of regions in <code><a href="distmesh2d.html">distmesh2d</a></code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+mesh.dcircle(p, radius = 1, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>A matrix with 2 columns (3 in <code>mesh.dsphere</code>), each row
+representing a point in the plane.</p>
+</td></tr>
+<tr valign="top"><td><code>radius</code></td>
+<td>
+<p>radius of circle</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>additional arguments (not used)</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A vector of length <code>nrow(p)</code> containing the signed
+distances to the circle
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Raoul Grasman; translated from original Matlab sources of Per-Olof
+Persson.
+</p>
+
+
+<h3>References</h3>
+
+<p><a href="http://persson.berkeley.edu/distmesh/">http://persson.berkeley.edu/distmesh/</a>
+</p>
+<p><cite>P.-O. Persson, G. Strang, A Simple Mesh Generator in MATLAB. SIAM
+Review, Volume 46 (2), pp. 329-345, June 2004</cite>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="distmesh2d.html">distmesh2d</a></code>, <code><a href="mesh.drectangle.html">mesh.drectangle</a></code>,
+<code><a href="mesh.diff.html">mesh.diff</a></code>, <code><a href="mesh.diff.html">mesh.intersect</a></code>,
+<code><a href="mesh.diff.html">mesh.union</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+example(distmesh2d)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>geometry</em> version 0.4.1.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

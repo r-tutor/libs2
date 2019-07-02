@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Search for the enclosing Delaunay convex hull</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for tsearch {geometry}"><tr><td>tsearch {geometry}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Search for the enclosing Delaunay convex hull</h2>
+
+<h3>Description</h3>
+
+<p>For <code>t &lt;- delaunay(cbind(x, y))</code>, where <code>(x, y)</code> is a 2D set of
+points, <code>tsearch(x, y, t, xi, yi)</code> finds the index in <code>t</code>
+containing the points <code>(xi, yi)</code>.  For points outside the convex hull
+the index is <code>NA</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+tsearch(x, y, t, xi, yi, bary = FALSE, method = "quadtree")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>X-coordinates of triangulation points</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>Y-coordinates of triangulation points</p>
+</td></tr>
+<tr valign="top"><td><code>t</code></td>
+<td>
+<p>Triangulation, e.g. produced by <code>t &lt;-
+delaunayn(cbind(x, y))</code></p>
+</td></tr>
+<tr valign="top"><td><code>xi</code></td>
+<td>
+<p>X-coordinates of points to test</p>
+</td></tr>
+<tr valign="top"><td><code>yi</code></td>
+<td>
+<p>Y-coordinates of points to test</p>
+</td></tr>
+<tr valign="top"><td><code>bary</code></td>
+<td>
+<p>If <code>TRUE</code> return barycentric coordinates as well
+as index of triangle.</p>
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+<p>One of <code>"quadtree"</code> or <code>"orig"</code>. The
+Quadtree algorithm is much faster and new from version
+0.4.0. The <code>orig</code> option uses the tsearch algorithm adapted
+from Octave code. Its use is deprecated and it may be removed
+from a future version of the package.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>If <code>bary</code> is <code>FALSE</code>, the index in <code>t</code> containing the points 
+<code>(xi, yi)</code>.  For points outside the convex hull the index is <code>NA</code>. 
+If <code>bary</code> is <code>TRUE</code>, a list containing: 
+</p>
+
+<dl>
+<dt>list(&quot;idx&quot;)</dt><dd><p>the index in <code>t</code> containing the points <code>(xi, yi)</code></p>
+</dd>
+<dt>list(&quot;p&quot;)</dt><dd><p>a 3-column matrix containing the barycentric coordinates with 
+respect to the enclosing triangle of each point <code>(xi, yi)</code>.</p>
+</dd>
+</dl>
+
+
+
+<h3>Note</h3>
+
+<p>The original Octave function is Copyright (C) 2007-2012
+David Bateman
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Jean-Romain Roussel (Quadtree algorithm), David Sterratt (Octave-based implementation)
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="tsearchn.html">tsearchn</a></code>, <code><a href="delaunayn.html">delaunayn</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>geometry</em> version 0.4.1.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

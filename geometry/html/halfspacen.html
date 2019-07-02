@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Compute halfspace intersection about a point</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for halfspacen {geometry}"><tr><td>halfspacen {geometry}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Compute halfspace intersection about a point</h2>
+
+<h3>Description</h3>
+
+<p>Compute halfspace intersection about a point
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+halfspacen(p, fp, options = "Tv")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>An <i>M</i>-by-<i>N+1</i> matrix. Each row of <code>p</code>
+represents a halfspace by a <i>N</i>-dimensional normal to a
+hyperplane and the offset of the hyperplane.</p>
+</td></tr>
+<tr valign="top"><td><code>fp</code></td>
+<td>
+<p>A &ldquo;feasible&rdquo; point that is within the space
+contained within all the halfspaces.</p>
+</td></tr>
+<tr valign="top"><td><code>options</code></td>
+<td>
+<p>String containing extra options, separated by
+spaces, for the underlying Qhull command; see Qhull
+documentation at <a href="../doc/qhull/html/qhalf.html">../doc/qhull/html/qhalf.html</a>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A <i>N</i>-column matrix containing the intersection
+points of the hyperplanes <a href="../doc/qhull/html/qhalf.html">../doc/qhull/html/qhalf.html</a>.
+</p>
+
+
+<h3>Note</h3>
+
+<p><code>halfspacen</code> was introduced in geometry 0.4.0, and is
+still under development. It is worth checking results for
+unexpected behaviour.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>David Sterratt
+</p>
+
+
+<h3>References</h3>
+
+<p><cite>Barber, C.B., Dobkin, D.P., and Huhdanpaa, H.T.,
+&ldquo;The Quickhull algorithm for convex hulls,&rdquo; <em>ACM
+Trans. on Mathematical Software,</em> Dec 1996.</cite>
+</p>
+<p><a href="http://www.qhull.org">http://www.qhull.org</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="convhulln.html">convhulln</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+p &lt;- rbox(0, C=0.5)  # Generate points on a unit cube centered around the origin
+ch &lt;- convhulln(p, "n") # Generate convex hull, including normals to facets, with "n" option
+# Intersections of half planes
+# These points should be the same as the orginal points
+pn &lt;- halfspacen(ch$normals, c(0, 0, 0)) 
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>geometry</em> version 0.4.1.1 <a href="00Index.html">Index</a>]</div>
+</body></html>
