@@ -47,6 +47,14 @@ multi_role %>%
   update_role(sample, new_role = "flounder", old_role = "jellyfish") %>%
   summary()
 
+## ------------------------------------------------------------------------
+multi_role %>% 
+  add_role(HHV, new_role = "nocenter") %>% 
+  step_center(all_predictors(), -has_role("nocenter")) %>% 
+  prep(training = biomass, retain = TRUE) %>% 
+  juice() %>% 
+  head()
+
 ## ----x-none--------------------------------------------------------------
 recipe(biomass) %>% 
   summary()

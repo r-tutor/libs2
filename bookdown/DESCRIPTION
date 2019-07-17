@@ -1,13 +1,14 @@
 Package: bookdown
 Type: Package
 Title: Authoring Books and Technical Documents with R Markdown
-Version: 0.11
+Version: 0.12
 Authors@R: c(
     person("Yihui", "Xie", role = c("aut", "cre"), email = "xie@yihui.name", comment = c(ORCID = "0000-0003-0645-5666")),
     person("JJ", "Allaire", role = "ctb"),
     person("Albert", "Kim", role = "ctb"),
     person("Alessandro", "Samuel-Rosa", role = "ctb"),
     person("Andrzej", "Oles", role = "ctb"),
+    person("Atsushi", "Yasumoto", role = "ctb", comment = c(ORCID = "0000-0002-8335-495X")),
     person("Aust", "Frederik", role = "ctb", comment = c(ORCID = "0000-0003-4900-788X")),
     person("Bastiaan", "Quast", role = "ctb"),
     person("Ben", "Marwick", role = "ctb"),
@@ -63,12 +64,13 @@ LazyData: TRUE
 RoxygenNote: 6.1.1
 Encoding: UTF-8
 NeedsCompilation: no
-Packaged: 2019-05-28 19:20:41 UTC; yihui
+Packaged: 2019-07-11 18:03:49 UTC; yihui
 Author: Yihui Xie [aut, cre] (<https://orcid.org/0000-0003-0645-5666>),
   JJ Allaire [ctb],
   Albert Kim [ctb],
   Alessandro Samuel-Rosa [ctb],
   Andrzej Oles [ctb],
+  Atsushi Yasumoto [ctb] (<https://orcid.org/0000-0002-8335-495X>),
   Aust Frederik [ctb] (<https://orcid.org/0000-0003-4900-788X>),
   Bastiaan Quast [ctb],
   Ben Marwick [ctb],
@@ -112,5 +114,5 @@ Author: Yihui Xie [aut, cre] (<https://orcid.org/0000-0003-0645-5666>),
     inst/resources/AUTHORS),
   FriendCode Inc [cph, ctb] (The gitbook style, with modifications)
 Repository: CRAN
-Date/Publication: 2019-05-28 20:00:04 UTC
-Built: R 3.6.0; ; 2019-06-02 00:37:08 UTC; windows
+Date/Publication: 2019-07-11 18:32:40 UTC
+Built: R 3.6.1; ; 2019-07-17 12:51:57 UTC; windows

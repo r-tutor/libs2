@@ -42,8 +42,6 @@ Author: Jean-Romain Roussel [cph, ctb] (wrote tsearch function with QuadTrees),
     (<https://orcid.org/0000-0001-9092-9099>)
 Maintainer: David C. Sterratt <david.c.sterratt@ed.ac.uk>
 Repository: CRAN
-Date/Publication: 2019-07-02 08:38:32 UTC
-X-CRAN-Comment: Orphaned and corrected on 2019-07-02 as misuse of
-        package= for PACKAGE= was not corrected despite reminder.
-Built: R 3.6.0; x86_64-w64-mingw32; 2019-07-02 13:18:57 UTC; windows
+Date/Publication: 2019-07-02 10:38:36
+Built: R 3.6.1; x86_64-w64-mingw32; 2019-07-11 15:39:15 UTC; windows
 Archs: i386, x64

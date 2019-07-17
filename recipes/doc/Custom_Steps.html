@@ -20,7 +20,7 @@
 <style type="text/css" data-origin="pandoc">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -33,13 +33,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -327,6 +325,9 @@ code > span.fu { color: #900; font-weight: bold; }
 code > span.er { color: #a61717; background-color: #e3d2d2; } 
 </style>
 
+
+
+
 </head>
 
 <body>
@@ -365,16 +366,16 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <a class="sourceLine" id="cb1-13" data-line-number="13"><span class="co">#&gt; [31] &quot;step_lincomb&quot;       &quot;step_log&quot;           &quot;step_logit&quot;        </span></a>
 <a class="sourceLine" id="cb1-14" data-line-number="14"><span class="co">#&gt; [34] &quot;step_lowerimpute&quot;   &quot;step_meanimpute&quot;    &quot;step_medianimpute&quot; </span></a>
 <a class="sourceLine" id="cb1-15" data-line-number="15"><span class="co">#&gt; [37] &quot;step_modeimpute&quot;    &quot;step_mutate&quot;        &quot;step_naomit&quot;       </span></a>
-<a class="sourceLine" id="cb1-16" data-line-number="16"><span class="co">#&gt; [40] &quot;step_nnmf&quot;          &quot;step_novel&quot;         &quot;step_ns&quot;           </span></a>
-<a class="sourceLine" id="cb1-17" data-line-number="17"><span class="co">#&gt; [43] &quot;step_num2factor&quot;    &quot;step_nzv&quot;           &quot;step_ordinalscore&quot; </span></a>
-<a class="sourceLine" id="cb1-18" data-line-number="18"><span class="co">#&gt; [46] &quot;step_other&quot;         &quot;step_pca&quot;           &quot;step_pls&quot;          </span></a>
-<a class="sourceLine" id="cb1-19" data-line-number="19"><span class="co">#&gt; [49] &quot;step_poly&quot;          &quot;step_profile&quot;       &quot;step_range&quot;        </span></a>
-<a class="sourceLine" id="cb1-20" data-line-number="20"><span class="co">#&gt; [52] &quot;step_ratio&quot;         &quot;step_regex&quot;         &quot;step_relu&quot;         </span></a>
-<a class="sourceLine" id="cb1-21" data-line-number="21"><span class="co">#&gt; [55] &quot;step_rm&quot;            &quot;step_rollimpute&quot;    &quot;step_sample&quot;       </span></a>
-<a class="sourceLine" id="cb1-22" data-line-number="22"><span class="co">#&gt; [58] &quot;step_scale&quot;         &quot;step_shuffle&quot;       &quot;step_slice&quot;        </span></a>
-<a class="sourceLine" id="cb1-23" data-line-number="23"><span class="co">#&gt; [61] &quot;step_spatialsign&quot;   &quot;step_sqrt&quot;          &quot;step_string2factor&quot;</span></a>
-<a class="sourceLine" id="cb1-24" data-line-number="24"><span class="co">#&gt; [64] &quot;step_unorder&quot;       &quot;step_upsample&quot;      &quot;step_window&quot;       </span></a>
-<a class="sourceLine" id="cb1-25" data-line-number="25"><span class="co">#&gt; [67] &quot;step_zv&quot;</span></a></code></pre></div>
+<a class="sourceLine" id="cb1-16" data-line-number="16"><span class="co">#&gt; [40] &quot;step_nnmf&quot;          &quot;step_normalize&quot;     &quot;step_novel&quot;        </span></a>
+<a class="sourceLine" id="cb1-17" data-line-number="17"><span class="co">#&gt; [43] &quot;step_ns&quot;            &quot;step_num2factor&quot;    &quot;step_nzv&quot;          </span></a>
+<a class="sourceLine" id="cb1-18" data-line-number="18"><span class="co">#&gt; [46] &quot;step_ordinalscore&quot;  &quot;step_other&quot;         &quot;step_pca&quot;          </span></a>
+<a class="sourceLine" id="cb1-19" data-line-number="19"><span class="co">#&gt; [49] &quot;step_pls&quot;           &quot;step_poly&quot;          &quot;step_profile&quot;      </span></a>
+<a class="sourceLine" id="cb1-20" data-line-number="20"><span class="co">#&gt; [52] &quot;step_range&quot;         &quot;step_ratio&quot;         &quot;step_regex&quot;        </span></a>
+<a class="sourceLine" id="cb1-21" data-line-number="21"><span class="co">#&gt; [55] &quot;step_relu&quot;          &quot;step_rm&quot;            &quot;step_rollimpute&quot;   </span></a>
+<a class="sourceLine" id="cb1-22" data-line-number="22"><span class="co">#&gt; [58] &quot;step_sample&quot;        &quot;step_scale&quot;         &quot;step_shuffle&quot;      </span></a>
+<a class="sourceLine" id="cb1-23" data-line-number="23"><span class="co">#&gt; [61] &quot;step_slice&quot;         &quot;step_spatialsign&quot;   &quot;step_sqrt&quot;         </span></a>
+<a class="sourceLine" id="cb1-24" data-line-number="24"><span class="co">#&gt; [64] &quot;step_string2factor&quot; &quot;step_unknown&quot;       &quot;step_unorder&quot;      </span></a>
+<a class="sourceLine" id="cb1-25" data-line-number="25"><span class="co">#&gt; [67] &quot;step_upsample&quot;      &quot;step_window&quot;        &quot;step_zv&quot;</span></a></code></pre></div>
 <p>You might need to define your own operations; this page describes how to do that. If you are looking for good examples of existing steps, I would suggest looking at the code for <a href="https://github.com/tidymodels/recipes/blob/master/R/center.R">centering</a> or <a href="https://github.com/tidymodels/recipes/blob/master/R/pca.R">PCA</a> to start.</p>
 <p>For checks, the process is very similar. Notes on this are given at the end of this document.</p>
 <div id="a-new-step-definition" class="section level1">
@@ -418,9 +419,9 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <a class="sourceLine" id="cb4-9" data-line-number="9">  <span class="dt">id =</span> <span class="kw">rand_id</span>(<span class="st">&quot;percentile&quot;</span>)</a>
 <a class="sourceLine" id="cb4-10" data-line-number="10">  ) {</a>
 <a class="sourceLine" id="cb4-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb4-12" data-line-number="12">  ## The variable selectors are not immediately evaluated by using</a>
-<a class="sourceLine" id="cb4-13" data-line-number="13">  ##  the `quos` function in `rlang`. `ellipse_check` captures the</a>
-<a class="sourceLine" id="cb4-14" data-line-number="14">  ##  values and also checks to make sure that they are not empty.  </a>
+<a class="sourceLine" id="cb4-12" data-line-number="12">  <span class="co">## The variable selectors are not immediately evaluated by using</span></a>
+<a class="sourceLine" id="cb4-13" data-line-number="13">  <span class="co">##  the `quos` function in `rlang`. `ellipse_check` captures the</span></a>
+<a class="sourceLine" id="cb4-14" data-line-number="14">  <span class="co">##  values and also checks to make sure that they are not empty.  </span></a>
 <a class="sourceLine" id="cb4-15" data-line-number="15">  terms &lt;-<span class="st"> </span><span class="kw">ellipse_check</span>(...) </a>
 <a class="sourceLine" id="cb4-16" data-line-number="16"></a>
 <a class="sourceLine" id="cb4-17" data-line-number="17">  <span class="kw">add_step</span>(</a>
@@ -489,10 +490,10 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <a class="sourceLine" id="cb8-5" data-line-number="5"></a>
 <a class="sourceLine" id="cb8-6" data-line-number="6">prep.step_percentile &lt;-<span class="st"> </span><span class="cf">function</span>(x, training, <span class="dt">info =</span> <span class="ot">NULL</span>, ...) {</a>
 <a class="sourceLine" id="cb8-7" data-line-number="7">  col_names &lt;-<span class="st"> </span><span class="kw">terms_select</span>(<span class="dt">terms =</span> x<span class="op">$</span>terms, <span class="dt">info =</span> info) </a>
-<a class="sourceLine" id="cb8-8" data-line-number="8">  ## You can add error trapping for non-numeric data here and so on. See the</a>
-<a class="sourceLine" id="cb8-9" data-line-number="9">  ## `check_type` function to do this for basic types. </a>
+<a class="sourceLine" id="cb8-8" data-line-number="8">  <span class="co">## You can add error trapping for non-numeric data here and so on. See the</span></a>
+<a class="sourceLine" id="cb8-9" data-line-number="9">  <span class="co">## `check_type` function to do this for basic types. </span></a>
 <a class="sourceLine" id="cb8-10" data-line-number="10">  </a>
-<a class="sourceLine" id="cb8-11" data-line-number="11">  ## We'll use the names later so</a>
+<a class="sourceLine" id="cb8-11" data-line-number="11">  <span class="co">## We'll use the names later so</span></a>
 <a class="sourceLine" id="cb8-12" data-line-number="12">  <span class="cf">if</span> (x<span class="op">$</span>options<span class="op">$</span>names <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb8-13" data-line-number="13">    <span class="kw">stop</span>(<span class="st">&quot;`names` should be set to TRUE&quot;</span>, <span class="dt">call. =</span> <span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb8-14" data-line-number="14">  </a>
@@ -502,8 +503,8 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <a class="sourceLine" id="cb8-18" data-line-number="18">    ref_dist &lt;-<span class="st"> </span>purrr<span class="op">::</span><span class="kw">map</span>(training[, col_names],  get_pctl, <span class="dt">args =</span> x<span class="op">$</span>options)</a>
 <a class="sourceLine" id="cb8-19" data-line-number="19">  }</a>
 <a class="sourceLine" id="cb8-20" data-line-number="20"></a>
-<a class="sourceLine" id="cb8-21" data-line-number="21">  ## Use the constructor function to return the updated object. </a>
-<a class="sourceLine" id="cb8-22" data-line-number="22">  ## Note that `trained` is set to TRUE</a>
+<a class="sourceLine" id="cb8-21" data-line-number="21">  <span class="co">## Use the constructor function to return the updated object. </span></a>
+<a class="sourceLine" id="cb8-22" data-line-number="22">  <span class="co">## Note that `trained` is set to TRUE</span></a>
 <a class="sourceLine" id="cb8-23" data-line-number="23">  </a>
 <a class="sourceLine" id="cb8-24" data-line-number="24">  <span class="kw">step_percentile_new</span>(</a>
 <a class="sourceLine" id="cb8-25" data-line-number="25">    <span class="dt">terms =</span> x<span class="op">$</span>terms, </a>
@@ -523,32 +524,32 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="cf">function</span>(object, new_data, ...)</a></code></pre></div>
 <p>where <code>object</code> is the updated step function that has been through the corresponding <code>prep</code> code and <code>new_data</code> is a tibble of data to be processed.</p>
 <p>Here is the code to convert the new data to percentiles. Two initial helper functions handle the two cases (approximation or not). We always return a tibble as the output.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">## Two helper functions</a>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co">## Two helper functions</span></a>
 <a class="sourceLine" id="cb10-2" data-line-number="2">pctl_by_mean &lt;-<span class="st"> </span><span class="cf">function</span>(x, ref) <span class="kw">mean</span>(ref <span class="op">&lt;=</span><span class="st"> </span>x)</a>
 <a class="sourceLine" id="cb10-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb10-4" data-line-number="4">pctl_by_approx &lt;-<span class="st"> </span><span class="cf">function</span>(x, ref) {</a>
-<a class="sourceLine" id="cb10-5" data-line-number="5">  ## go from 1 column tibble to vector</a>
+<a class="sourceLine" id="cb10-5" data-line-number="5">  <span class="co">## go from 1 column tibble to vector</span></a>
 <a class="sourceLine" id="cb10-6" data-line-number="6">  x &lt;-<span class="st"> </span><span class="kw">getElement</span>(x, <span class="kw">names</span>(x))</a>
-<a class="sourceLine" id="cb10-7" data-line-number="7">  ## get the percentiles values from the names (e.g. &quot;10%&quot;)</a>
+<a class="sourceLine" id="cb10-7" data-line-number="7">  <span class="co">## get the percentiles values from the names (e.g. &quot;10%&quot;)</span></a>
 <a class="sourceLine" id="cb10-8" data-line-number="8">  p_grid &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">gsub</span>(<span class="st">&quot;%$&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="kw">names</span>(ref))) </a>
 <a class="sourceLine" id="cb10-9" data-line-number="9">  <span class="kw">approx</span>(<span class="dt">x =</span> ref, <span class="dt">y =</span> p_grid, <span class="dt">xout =</span> x)<span class="op">$</span>y<span class="op">/</span><span class="dv">100</span></a>
 <a class="sourceLine" id="cb10-10" data-line-number="10">}</a>
 <a class="sourceLine" id="cb10-11" data-line-number="11"></a>
 <a class="sourceLine" id="cb10-12" data-line-number="12">bake.step_percentile &lt;-<span class="st"> </span><span class="cf">function</span>(object, new_data, ...) {</a>
 <a class="sourceLine" id="cb10-13" data-line-number="13">  <span class="kw">require</span>(tibble)</a>
-<a class="sourceLine" id="cb10-14" data-line-number="14">  ## For illustration (and not speed), we will loop through the affected variables</a>
-<a class="sourceLine" id="cb10-15" data-line-number="15">  ## and do the computations</a>
+<a class="sourceLine" id="cb10-14" data-line-number="14">  <span class="co">## For illustration (and not speed), we will loop through the affected variables</span></a>
+<a class="sourceLine" id="cb10-15" data-line-number="15">  <span class="co">## and do the computations</span></a>
 <a class="sourceLine" id="cb10-16" data-line-number="16">  vars &lt;-<span class="st"> </span><span class="kw">names</span>(object<span class="op">$</span>ref_dist)</a>
 <a class="sourceLine" id="cb10-17" data-line-number="17">  </a>
 <a class="sourceLine" id="cb10-18" data-line-number="18">  <span class="cf">for</span> (i <span class="cf">in</span> vars) {</a>
 <a class="sourceLine" id="cb10-19" data-line-number="19">    <span class="cf">if</span> (<span class="op">!</span>object<span class="op">$</span>approx) {</a>
-<a class="sourceLine" id="cb10-20" data-line-number="20">      ## We can use `apply` since tibbles do not drop dimensions:</a>
+<a class="sourceLine" id="cb10-20" data-line-number="20">      <span class="co">## We can use `apply` since tibbles do not drop dimensions:</span></a>
 <a class="sourceLine" id="cb10-21" data-line-number="21">      new_data[, i] &lt;-<span class="st"> </span><span class="kw">apply</span>(new_data[, i], <span class="dv">1</span>, pctl_by_mean, </a>
 <a class="sourceLine" id="cb10-22" data-line-number="22">                            <span class="dt">ref =</span> object<span class="op">$</span>ref_dist[, i])</a>
 <a class="sourceLine" id="cb10-23" data-line-number="23">    } <span class="cf">else</span> </a>
 <a class="sourceLine" id="cb10-24" data-line-number="24">      new_data[, i] &lt;-<span class="st"> </span><span class="kw">pctl_by_approx</span>(new_data[, i], object<span class="op">$</span>ref_dist[[i]])</a>
 <a class="sourceLine" id="cb10-25" data-line-number="25">  }</a>
-<a class="sourceLine" id="cb10-26" data-line-number="26">  ## Always convert to tibbles on the way out</a>
+<a class="sourceLine" id="cb10-26" data-line-number="26">  <span class="co">## Always convert to tibbles on the way out</span></a>
 <a class="sourceLine" id="cb10-27" data-line-number="27">  <span class="kw">as_tibble</span>(new_data)</a>
 <a class="sourceLine" id="cb10-28" data-line-number="28">}</a></code></pre></div>
 </div>

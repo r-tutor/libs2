@@ -1,3 +1,7 @@
+# Version 1.9.4
+* Fixed factors being detected as integerish.
+* Fixed error message for name checks of vectors.
+
 # Version 1.9.3
 * New argument `extension` for `checkPathForOutput()` (#162).
 * Fixed handling of different NA types in all set functions (#158).

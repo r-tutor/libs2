@@ -36,5 +36,5 @@ NeedsCompilation: yes
 Packaged: 2019-06-29 16:35:20 UTC; thpe
 Repository: CRAN
 Date/Publication: 2019-06-29 21:20:03 UTC
-Built: R 3.6.0; x86_64-w64-mingw32; 2019-07-01 15:25:15 UTC; windows
+Built: R 3.6.1; x86_64-w64-mingw32; 2019-07-11 14:25:38 UTC; windows
 Archs: i386, x64

@@ -18,7 +18,8 @@ iris_rec <- recipe( ~ ., data = iris)
 summary(iris_rec)
 
 ## ----iris-ref-cell-------------------------------------------------------
-ref_cell <- iris_rec %>% 
+ref_cell <- 
+  iris_rec %>% 
   step_dummy(Species) %>%
   prep(training = iris, retain = TRUE)
 summary(ref_cell)
@@ -37,7 +38,8 @@ go_helmert["unordered"] <- "contr.helmert"
 options(contrasts = go_helmert)
 
 # now make dummy variables with new parameterization
-helmert <- iris_rec %>% 
+helmert <- 
+  iris_rec %>% 
   step_dummy(Species) %>%
   prep(training = iris, retain = TRUE)
 summary(helmert)
@@ -48,7 +50,8 @@ juice(helmert, original, starts_with("Species")) %>% distinct()
 options(contrasts = param)
 
 ## ----iris-2int-----------------------------------------------------------
-iris_int <- iris_rec %>%
+iris_int <- 
+  iris_rec %>%
   step_interact( ~ Sepal.Width:Sepal.Length) %>%
   prep(training = iris, retain = TRUE)
 summary(iris_int)
@@ -67,7 +70,8 @@ model.matrix(~ Species*Sepal.Length, data = iris) %>%
 #                     Species_virginica:Sepal.Length)
 
 ## ----iris-sel------------------------------------------------------------
-iris_int <- iris_rec %>% 
+iris_int <- 
+  iris_rec %>% 
   step_dummy(Species) %>%
   step_interact( ~ starts_with("Species"):Sepal.Length) %>%
   prep(training = iris, retain = TRUE)
@@ -83,7 +87,8 @@ summary(iris_int)
 iris_int
 
 ## ----iris-dont-----------------------------------------------------------
-iris_int <- iris_rec %>% 
+iris_int <- 
+  iris_rec %>% 
   step_interact( ~ Species:Sepal.Length) %>%
   prep(training = iris, retain = TRUE)
 summary(iris_int)
@@ -96,7 +101,8 @@ iris_rec %>%
   distinct()
 
 ## ----one-hot-two---------------------------------------------------------
-hot_reference <- iris_rec %>% 
+hot_reference <- 
+  iris_rec %>% 
   step_dummy(Species, one_hot = TRUE) %>%
   prep(training = iris, retain = TRUE) %>%
   juice(original, starts_with("Species")) %>%
@@ -107,7 +113,8 @@ hot_reference
 # from above
 options(contrasts = go_helmert)
 
-hot_helmert <- iris_rec %>% 
+hot_helmert <- 
+  iris_rec %>% 
   step_dummy(Species, one_hot = TRUE) %>%
   prep(training = iris, retain = TRUE) %>%
   juice(original, starts_with("Species")) %>%

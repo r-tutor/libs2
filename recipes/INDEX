@@ -31,7 +31,7 @@ step_arrange            Sort rows using dplyr
 step_bagimpute          Imputation via Bagged Trees
 step_bin2factor         Create a Factors from A Dummy Variable
 step_bs                 B-Spline Basis Functions
-step_center             Centering Numeric Data
+step_center             Centering numeric data
 step_classdist          Distances to Class Centroids
 step_corr               High Correlation Filter
 step_count              Create Counts of Patterns using Regular
@@ -68,6 +68,7 @@ step_modeimpute         Impute Nominal Data Using the Most Common Value
 step_mutate             Add new variables using 'mutate'
 step_naomit             Remove observations with missing values
 step_nnmf               NNMF Signal Extraction
+step_normalize          Center and scale numeric data
 step_novel              Simple Value Assignments for Novel Factor
                         Levels
 step_ns                 Nature Spline Basis Functions
@@ -95,6 +96,7 @@ step_slice              Filter rows by position using dplyr
 step_spatialsign        Spatial Sign Preprocessing
 step_sqrt               Square Root Transformation
 step_string2factor      Convert Strings to Factors
+step_unknown            Assign missing categories to "unknown"
 step_unorder            Convert Ordered Factors to Unordered Factors
 step_upsample           Up-Sample a Data Set Based on a Factor Variable
 step_window             Moving Window Functions
