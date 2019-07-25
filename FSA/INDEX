@@ -146,6 +146,8 @@ rcumsum                 Computes the prior to or reverse cumulative sum
                         of a vector.
 removal                 Population estimates for k-, 3-, or 2-pass
                         removal data.
+repeatedRows2Keep       Find non-repeated consecutive rows in a
+                        data.frame.
 residPlot               Construct a residual plot from lm or nls
                         objects.
 se                      Computes standard error of the mean.

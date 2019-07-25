@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: 'd3.js' Dependency for Version 4 Jetpack</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for d3_dep_jetpack {d3r}"><tr><td>d3_dep_jetpack {d3r}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>'d3.js' Dependency for Version 4 Jetpack</h2>
+
+<h3>Description</h3>
+
+<p>d3-jetpack is a set of nifty convenience wrappers that speed up
+your daily work with d3.js. Must be included after <code>d3_dep_v4()</code>.
+Learn more by reading <a href="https://github.com/gka/d3-jetpack">d3-jetpack</a>
+or by watching this <a href="https://www.youtube.com/watch?v=_5ky0AYq_Dg&amp;t=4s">YouTube</a>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+d3_dep_jetpack(offline = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>offline</code></td>
+<td>
+<p><code>logical</code> to specify whether to use
+a local copy of d3.js (<code>TRUE</code>) or use cdn (<code>FALSE</code>)</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p><code>htmltools::htmlDependency</code>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other 'd3' dependency functions: <code><a href="d3_dep_v3.html">d3_dep_v3</a></code>,
+<code><a href="d3_dep_v4.html">d3_dep_v4</a></code>, <code><a href="d3_dep_v5.html">d3_dep_v5</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+
+library(d3r)
+library(htmltools)
+
+tl &lt;- tagList(tags$script(HTML(sprintf(
+"
+var x = 5;
+
+var svg = d3.select('body')
+    .append('svg');
+
+svg.append('rect')
+    .at({
+        x: 100,
+        y: 100,
+        width: 100,
+        height: 100
+    })
+    .st({
+        fill: 'blue',
+        stroke: 'purple'
+    });
+"
+))), d3_dep_v4(), d3_dep_jetpack())
+browsable(tl)
+
+
+
+tl &lt;- tagList(tags$script(HTML(sprintf(
+ "
+ var svg = d3.select('body')
+     .append('svg');
+
+ test_data = [{x: 250, y: 250}, {x: 300, y: 300}, {x: 300, y: 100}];
+
+ svg.appendMany(test_data, 'circle')
+     .at({
+         cx: function(d){return d.x},
+         cy: function(d){return d.y},
+         r: 50
+     })
+     .st({
+         fill: 'purple',
+         stroke: 'blue'
+     });
+ "
+))), d3_dep_v4(), d3_dep_jetpack())
+
+browsable(tl)
+
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>d3r</em> version 0.8.6 <a href="00Index.html">Index</a>]</div>
+</body></html>

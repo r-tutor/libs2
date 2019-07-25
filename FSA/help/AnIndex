@@ -165,6 +165,7 @@ psdVal	psdVal
 purl2	knitUtil
 rcumsum	rcumsum
 removal	removal
+repeatedRows2Keep	repeatedRows2Keep
 reproInfo	knitUtil
 residPlot	residPlot
 residPlot.IVR	residPlot

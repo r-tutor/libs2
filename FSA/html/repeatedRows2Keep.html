@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Find non-repeated consecutive rows in a data.frame.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for repeatedRows2Keep {FSA}"><tr><td>repeatedRows2Keep {FSA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Find non-repeated consecutive rows in a data.frame.</h2>
+
+<h3>Description</h3>
+
+<p>Finds the rows in a data.frame that are not repeats of the row immediately above or below it.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+repeatedRows2Keep(df, cols2use = NULL, cols2ignore = NULL,
+  keep = c("first", "last"))
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>df</code></td>
+<td>
+<p>A data.frame.</p>
+</td></tr>
+<tr valign="top"><td><code>cols2use</code></td>
+<td>
+<p>A string or numeric vector that indicates columns in <code>df</code> to use. Negative numeric values will not use those columns. Cannot use both <code>cols2use</code> and <code>col2ignore</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>cols2ignore</code></td>
+<td>
+<p>A string or numeric vector that indicates columns in <code>df</code> to ignore. Cannot use both <code>cols2use</code> and <code>col2ignore</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>keep</code></td>
+<td>
+<p>A string that indicates whether the <code>first</code> (DEFAULT) or <code>last</code> row of consecutive repeated rows should be kept.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A single logical that indicates which rows of <code>df</code> to keep such that no consecutive rows (for the columns used) will be repeated.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Derek H. Ogle, <a href="mailto:derek@derekogle.com">derek@derekogle.com</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+test1 &lt;- data.frame(ID=1:10,
+                    KEEP=c("First","Last","Both","Both","Both",
+                           "Both","First","Neither","Last","Both"),
+                    V1=c("a","a","a","B","b","B","A","A","A","a"),
+                    V2=c("a","a","A","B","B","b","A","A","A","a"))
+keepFirst &lt;- repeatedRows2Keep(test1,cols2ignore=1:2)
+keepLast &lt;- repeatedRows2Keep(test1,cols2use=3:4,keep="last")
+data.frame(test1,keepFirst,keepLast)
+
+filterD(test1,keepFirst)  # should be all "First" or "Both" (7 items)
+filterD(test1,keepLast)   # should be all "Last" or "Both" (7 items)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>FSA</em> version 0.8.25 <a href="00Index.html">Index</a>]</div>
+</body></html>

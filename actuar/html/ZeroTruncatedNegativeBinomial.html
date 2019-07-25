@@ -86,7 +86,7 @@ The cumulative distribution function is
 binomial.
 </p>
 <p>The mean is <i>r(1-p)/(p(1-p^r))</i> and the variance is
-<i>[r(1-p)(1 - p^r(1 + r(1-p))]/[p(1-p^r)^2]</i>.
+<i>[r(1-p)(1 - (1 + r(1-p))p^r)]/[p(1-p^r)]^2</i>.
 </p>
 <p>In the terminology of Klugman et al. (2012), the zero-truncated
 negative binomial is a member of the <i>(a, b, 1)</i> class of
@@ -184,5 +184,5 @@ legend("topright", c("empirical", "theoretical"),
        lty = c(1, NA), lwd = 2, pch = c(NA, 19), col = c("black", "red"))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>actuar</em> version 2.3-1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>actuar</em> version 2.3-2 <a href="00Index.html">Index</a>]</div>
 </body></html>
