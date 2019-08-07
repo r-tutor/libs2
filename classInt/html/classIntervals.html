@@ -1,0 +1,374 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Choose univariate class intervals</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for classIntervals {classInt}"><tr><td>classIntervals {classInt}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Choose univariate class intervals</h2>
+
+<h3>Description</h3>
+
+<p>The function provides a uniform interface to finding class intervals for continuous numerical variables, for example for choosing colours or symbols for plotting. Class intervals are non-overlapping, and the classes are left-closed &mdash; see <code>findInterval</code>. Argument values to the style chosen are passed through the dot arguments. <code>classIntervals2shingle</code> converts a <code>classIntervals</code> object into a shingle. Labels generated in methods are like those found in <code><a href="../../base/html/cut.html">cut</a></code> unless cutlabels=FALSE.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+classIntervals(var, n, style = "quantile", rtimes = 3, ...,
+ intervalClosure = c("left", "right"), dataPrecision = NULL,
+ warnSmallN = TRUE, warnLargeN = TRUE, largeN = 3000L, samp_prop = 0.1,
+ gr = c("[", "]"))
+## S3 method for class 'classIntervals'
+plot(x, pal, ...) 
+## S3 method for class 'classIntervals'
+print(x, digits = getOption("digits"), ..., 
+ under="under", over="over", between="-", cutlabels=TRUE, unique=FALSE) 
+nPartitions(x) 
+classIntervals2shingle(x)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>var</code></td>
+<td>
+<p>a continuous numerical variable</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>number of classes required, if missing, <code>nclass.Sturges</code> is used; see also the &quot;dpih&quot; style for automatic choice of the number of classes</p>
+</td></tr>
+<tr valign="top"><td><code>style</code></td>
+<td>
+<p>chosen style: one of &quot;fixed&quot;, &quot;sd&quot;, &quot;equal&quot;, &quot;pretty&quot;, &quot;quantile&quot;, &quot;kmeans&quot;, &quot;hclust&quot;, &quot;bclust&quot;, &quot;fisher&quot;, &quot;jenks&quot; or &quot;dpih&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>rtimes</code></td>
+<td>
+<p>number of replications of var to catenate and jitter; may be used with styles &quot;kmeans&quot; or &quot;bclust&quot; in case they have difficulties reaching a classification</p>
+</td></tr>
+<tr valign="top"><td><code>intervalClosure</code></td>
+<td>
+<p>default &ldquo;left&rdquo;,  allows specification of whether partition intervals are closed on the left or the right (added by Richard Dunlap). Note that the sense of interval closure is hard-coded as &ldquo;right&rdquo;-closed when<code>style="jenks"</code> (see Details below).</p>
+</td></tr>
+<tr valign="top"><td><code>dataPrecision</code></td>
+<td>
+<p>default NULL, permits rounding of the interval endpoints (added by Richard Dunlap)</p>
+</td></tr>
+<tr valign="top"><td><code>warnSmallN</code></td>
+<td>
+<p>default TRUE, if FALSE, quietens warning for n &gt;= nobs</p>
+</td></tr>
+<tr valign="top"><td><code>warnLargeN</code></td>
+<td>
+<p>default TRUE, if FALSE large data handling not used</p>
+</td></tr>
+<tr valign="top"><td><code>largeN</code></td>
+<td>
+<p>default 3000L, the QGIS sampling threshold; over 3000, the observations presented to &quot;fisher&quot; and &quot;jenks&quot; are either a <code>samp_prop=</code> sample or a sample of 3000, whichever is larger</p>
+</td></tr>
+<tr valign="top"><td><code>samp_prop</code></td>
+<td>
+<p>default 0.1, QGIS 10% sampling proportion</p>
+</td></tr>
+<tr valign="top"><td><code>gr</code></td>
+<td>
+<p>default <code>c("[", "]")</code>, if the <span class="pkg">units</span> package is available, <code>units::units_options("group")</code> may be used directly to give the enclosing bracket style</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>arguments to be passed to the functions called in each style</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>&quot;classIntervals&quot; object for printing, conversion to shingle, or plotting</p>
+</td></tr>
+<tr valign="top"><td><code>under</code></td>
+<td>
+<p>character string value for &quot;under&quot; in printed table labels if cutlabels=FALSE</p>
+</td></tr>
+<tr valign="top"><td><code>over</code></td>
+<td>
+<p>character string value for &quot;over&quot; in printed table labels if cutlabels=FALSE</p>
+</td></tr>
+<tr valign="top"><td><code>between</code></td>
+<td>
+<p>character string value for &quot;between&quot; in printed table labels if cutlabels=FALSE</p>
+</td></tr>
+<tr valign="top"><td><code>digits</code></td>
+<td>
+<p>minimal number of significant digits in printed table labels</p>
+</td></tr>
+<tr valign="top"><td><code>cutlabels</code></td>
+<td>
+<p>default TRUE, use cut-style labels in printed table labels</p>
+</td></tr>
+<tr valign="top"><td><code>unique</code></td>
+<td>
+<p>default FALSE; if TRUE, collapse labels of single-value classes</p>
+</td></tr>
+<tr valign="top"><td><code>pal</code></td>
+<td>
+<p>a character vector of at least two colour names for colour coding the class intervals in an ECDF plot; <code>colorRampPalette</code> is used internally to create the correct number of colours</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The &quot;fixed&quot; style permits a &quot;classIntervals&quot; object to be specified with given breaks, set in the <code>fixedBreaks</code> argument; the length of <code>fixedBreaks</code> should be n+1; this style can be used to insert rounded break values.
+</p>
+<p>The &quot;sd&quot; style chooses breaks based on <code>pretty</code> of the centred and scaled variables, and may have a number of classes different from n; the returned <code>par=</code> includes the centre and scale values.
+</p>
+<p>The &quot;equal&quot; style divides the range of the variable into n parts.
+</p>
+<p>The &quot;pretty&quot; style chooses a number of breaks not necessarily equal to n using <code>pretty</code>, but likely to be legible; arguments to <code>pretty</code> may be passed through <code>...</code>.
+</p>
+<p>The &quot;quantile&quot; style provides quantile breaks; arguments to <code>quantile</code> may be passed through <code>...</code>.
+</p>
+<p>The &quot;kmeans&quot; style uses <code>kmeans</code> to generate the breaks; it may be anchored using <code>set.seed</code>; the <code>pars</code> attribute returns the kmeans object generated; if <code>kmeans</code> fails, a jittered input vector containing <code>rtimes</code> replications of <code>var</code> is tried &mdash; with few unique values in <code>var</code>, this can prove necessary; arguments to <code>kmeans</code> may be passed through <code>...</code>.
+</p>
+<p>The &quot;hclust&quot; style uses <code>hclust</code> to generate the breaks using hierarchical clustering; the <code>pars</code> attribute returns the hclust object generated, and can be used to find other breaks using <code>getHclustClassIntervals</code>; arguments to <code>hclust</code> may be passed through <code>...</code>.
+</p>
+<p>The &quot;bclust&quot; style uses <code>bclust</code> to generate the breaks using bagged clustering; it may be anchored using <code>set.seed</code>; the <code>pars</code> attribute returns the bclust object generated, and can be used to find other breaks using <code>getBclustClassIntervals</code>; if <code>bclust</code> fails, a jittered input vector containing <code>rtimes</code> replications of <code>var</code> is tried &mdash; with few unique values in <code>var</code>, this can prove necessary; arguments to <code>bclust</code> may be passed through <code>...</code>.
+</p>
+<p>The &quot;fisher&quot; style uses the algorithm proposed by W. D. Fisher (1958) and discussed by Slocum et al. (2005) as the Fisher-Jenks algorithm; added here thanks to Hisaji Ono. This style will subsample by default for more than 3000 observations. This style should always be preferred to &quot;jenks&quot; as it uses the original Fortran code and runs nested for-loops much faster.
+</p>
+<p>The &quot;jenks&quot; style has been ported from Jenks' code, and has been checked for consistency with ArcView, ArcGIS, and MapInfo (with some remaining differences); added here thanks to Hisaji Ono (originally reported as Basic, now seen as Fortran (<a href="http://www.irlogi.ie/wp-content/uploads/2016/11/NUIM_ChoroHarmful.pdf">http://www.irlogi.ie/wp-content/uploads/2016/11/NUIM_ChoroHarmful.pdf</a>, slides 26-27)). Note that the sense of interval closure is reversed from the other styles, and in this implementation has to be right-closed - use cutlabels=TRUE in <code>findColours</code> on the object returned to show the closure clearly, and use <code>findCols</code> to extract the classes for each value. This style will subsample by default for more than 3000 observations.
+</p>
+<p>The &quot;dpih&quot; style uses the <code>dpih()</code> function from <span class="pkg">KernSmooth</span> (Wand, 1995) implementing direct plug-in methodology to select the bin width of a histogram.
+</p>
+
+
+<h3>Value</h3>
+
+<p>an object of class &quot;classIntervals&quot;:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>var</code></td>
+<td>
+<p>the input variable</p>
+</td></tr>
+<tr valign="top"><td><code>brks</code></td>
+<td>
+<p>a vector of breaks</p>
+</td></tr>
+</table>
+<p>and attributes:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>style</code></td>
+<td>
+<p>the style used</p>
+</td></tr>
+<tr valign="top"><td><code>parameters</code></td>
+<td>
+<p>parameter values used in finding breaks</p>
+</td></tr>
+<tr valign="top"><td><code>nobs</code></td>
+<td>
+<p>number of different finite values in the input variable</p>
+</td></tr>
+<tr valign="top"><td><code>call</code></td>
+<td>
+<p>this function's call</p>
+</td></tr>
+<tr valign="top"><td><code>intervalClosure</code></td>
+<td>
+<p>string, whether closure is &ldquo;left&rdquo; or &ldquo;right&rdquo;</p>
+</td></tr>
+<tr valign="top"><td><code>dataPrecision</code></td>
+<td>
+<p>the data precision used for printing interval values in the legend returned by <code>findColours</code>, and in the <code>print</code> method for classIntervals objects. If intervalClosure is &ldquo;left&rdquo;, the value returned is <code>ceiling</code> of the data value multiplied by 10 to the dataPrecision power, divided by 10 to the dataPrecision power.</p>
+</td></tr>
+</table>
+
+
+<h3>Note</h3>
+
+<p>From version 0.1-11, the default representation has been changed to use <code>cutlabels=TRUE</code>, and representation within intervals has been corrected, thanks to Richard Dunlap. From version 0.1-15, the print method drops the calculation of the possible number of combinations of observations into classes, which generated warnings for n &gt; 170.</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Roger Bivand &lt;Roger.Bivand@nhh.no&gt;</p>
+
+
+<h3>References</h3>
+
+<p>Armstrong, M. P., Xiao, N., Bennett, D. A., 2003. &quot;Using genetic algorithms to create multicriteria class intervals for choropleth maps&quot;. Annals, Association of American Geographers, 93 (3), 595&ndash;623; 
+</p>
+<p>Jenks, G. F., Caspall, F. C., 1971. &quot;Error on choroplethic maps: definition, measurement, reduction&quot;. Annals, Association of American Geographers, 61 (2), 217&ndash;244; 
+</p>
+<p>Dent, B. D., 1999, Cartography: thematic map design. McGraw-Hill, Boston, 417 pp.; 
+</p>
+<p>Slocum TA, McMaster RB, Kessler FC, Howard HH 2005 Thematic Cartography and Geographic Visualization, Prentice Hall, Upper Saddle River NJ.; 
+</p>
+<p>Fisher, W. D. 1958 &quot;On grouping for maximum homogeneity&quot;, Journal of the American Statistical Association, 53, pp. 789&ndash;798 (<a href="http://lib.stat.cmu.edu/cmlib/src/cluster/fish.f">http://lib.stat.cmu.edu/cmlib/src/cluster/fish.f</a>)
+</p>
+<p>Wand, M. P. 1995. Data-based choice of histogram binwidth. The American Statistician, 51, 59-64.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="findColours.html">findColours</a></code>, <code><a href="findCols.html">findCols</a></code>, <code><a href="../../base/html/pretty.html">pretty</a></code>, <code><a href="../../stats/html/quantile.html">quantile</a></code>, <code><a href="../../stats/html/kmeans.html">kmeans</a></code>, <code><a href="../../stats/html/hclust.html">hclust</a></code>, <code><a href="../../e1071/html/bclust.html">bclust</a></code>, <code><a href="../../base/html/findInterval.html">findInterval</a></code>, <code><a href="../../grDevices/html/colorRamp.html">colorRamp</a></code>, <code><a href="../../grDevices/html/nclass.html">nclass</a></code>, <code><a href="../../lattice/html/shingle.html">shingle</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+if (!require("spData", quietly=TRUE)) {
+  message("spData package needed for examples")
+  run &lt;- FALSE
+} else {
+  run &lt;- TRUE
+}
+if (run) {
+data(jenks71, package="spData")
+pal1 &lt;- c("wheat1", "red3")
+opar &lt;- par(mfrow=c(2,3))
+plot(classIntervals(jenks71$jenks71, n=5, style="fixed",
+ fixedBreaks=c(15.57, 25, 50, 75, 100, 155.30)), pal=pal1, main="Fixed")
+plot(classIntervals(jenks71$jenks71, n=5, style="sd"), pal=pal1, main="Pretty standard deviations")
+plot(classIntervals(jenks71$jenks71, n=5, style="equal"), pal=pal1, main="Equal intervals")
+plot(classIntervals(jenks71$jenks71, n=5, style="quantile"), pal=pal1, main="Quantile")
+set.seed(1)
+plot(classIntervals(jenks71$jenks71, n=5, style="kmeans"), pal=pal1, main="K-means")
+plot(classIntervals(jenks71$jenks71, n=5, style="hclust", method="complete"),
+ pal=pal1, main="Complete cluster")
+}
+if (run) {
+plot(classIntervals(jenks71$jenks71, n=5, style="hclust", method="single"),
+ pal=pal1, main="Single cluster")
+set.seed(1)
+plot(classIntervals(jenks71$jenks71, n=5, style="bclust", verbose=FALSE),
+ pal=pal1, main="Bagged cluster")
+plot(classIntervals(jenks71$jenks71, n=5, style="fisher"), pal=pal1,
+ main="Fisher's method")
+plot(classIntervals(jenks71$jenks71, n=5, style="jenks"), pal=pal1,
+ main="Jenks' method")
+par(opar)
+}
+if (run) {
+print(classIntervals(jenks71$jenks71, n=5, style="fixed",
+ fixedBreaks=c(15.57, 25, 50, 75, 100, 155.30)))
+}
+if (run) {
+print(classIntervals(jenks71$jenks71, n=5, style="sd"))
+}
+if (run) {
+print(classIntervals(jenks71$jenks71, n=5, style="equal"))
+}
+if (run) {
+print(classIntervals(jenks71$jenks71, n=5, style="quantile"))
+}
+if (run) {
+set.seed(1)
+print(classIntervals(jenks71$jenks71, n=5, style="kmeans"))
+}
+if (run) {
+set.seed(1)
+print(classIntervals(jenks71$jenks71, n=5, style="kmeans", intervalClosure="right"))
+}
+if (run) {
+set.seed(1)
+print(classIntervals(jenks71$jenks71, n=5, style="kmeans", dataPrecision=0))
+}
+if (run) {
+set.seed(1)
+print(classIntervals(jenks71$jenks71, n=5, style="kmeans"), cutlabels=FALSE)
+}
+if (run) {
+print(classIntervals(jenks71$jenks71, n=5, style="hclust", method="complete"))
+}
+if (run) {
+print(classIntervals(jenks71$jenks71, n=5, style="hclust", method="single"))
+}
+if (run) {
+set.seed(1)
+print(classIntervals(jenks71$jenks71, n=5, style="bclust", verbose=FALSE))
+}
+if (run) {
+print(classIntervals(jenks71$jenks71, n=5, style="bclust",
+ hclust.method="complete", verbose=FALSE))
+}
+if (run) {
+print(classIntervals(jenks71$jenks71, n=5, style="fisher"))
+}
+if (run) {
+print(classIntervals(jenks71$jenks71, n=5, style="jenks"))
+}
+if (run) {
+print(classIntervals(jenks71$jenks71, style="dpih"))
+}
+if (run) {
+print(classIntervals(jenks71$jenks71, style="dpih", range.x=c(0, 160)))
+}
+x &lt;- c(0, 0, 0, 1, 2, 50)
+print(classIntervals(x, n=3, style="fisher"))
+print(classIntervals(x, n=3, style="jenks"))
+
+# Argument 'unique' will collapse the label of classes containing a 
+# single value. This is particularly useful for 'censored' variables
+# that contain for example many zeros. 
+
+data_censored&lt;-c(rep(0,10), rnorm(100, mean=20,sd=1),rep(26,10))
+plot(density(data_censored))
+cl2 &lt;- classIntervals(data_censored, n=5, style="jenks", dataPrecision=2)
+print(cl2, unique=FALSE)
+print(cl2, unique=TRUE)
+
+## Not run: 
+set.seed(1)
+n &lt;- 1e+05
+x &lt;- runif(n)
+classIntervals(x, n=5, style="sd")
+classIntervals(x, n=5, style="pretty")
+classIntervals(x, n=5, style="equal")
+classIntervals(x, n=5, style="quantile")
+# the class intervals found vary a little because of sampling
+classIntervals(x, n=5, style="kmeans")
+classIntervals(x, n=5, style="fisher")
+classIntervals(x, n=5, style="fisher")
+classIntervals(x, n=5, style="fisher")
+
+## End(Not run)
+have_units &lt;- FALSE
+if (require(units, quietly=TRUE)) have_units &lt;- TRUE
+if (have_units) {
+set.seed(1)
+x_units &lt;- set_units(sample(seq(1, 100, 0.25), 100), km/h)
+classIntervals(x_units, n=5, style="sd")
+}
+if (have_units) {
+classIntervals(x_units, n=5, style="pretty")
+}
+if (have_units) {
+classIntervals(x_units, n=5, style="equal")
+}
+if (have_units) {
+classIntervals(x_units, n=5, style="quantile")
+}
+if (have_units) {
+classIntervals(x_units, n=5, style="kmeans")
+}
+if (have_units) {
+classIntervals(x_units, n=5, style="fisher")
+}
+st &lt;- Sys.time()
+x_POSIXt &lt;- sample(st+((0:500)*3600), 100)
+fx &lt;- st+((0:5)*3600)*100
+classIntervals(x_POSIXt, style="fixed", fixedBreaks=fx)
+classIntervals(x_POSIXt, n=5, style="sd")
+classIntervals(x_POSIXt, n=5, style="pretty")
+classIntervals(x_POSIXt, n=5, style="equal")
+classIntervals(x_POSIXt, n=5, style="quantile")
+classIntervals(x_POSIXt, n=5, style="kmeans")
+classIntervals(x_POSIXt, n=5, style="fisher")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>classInt</em> version 0.4-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

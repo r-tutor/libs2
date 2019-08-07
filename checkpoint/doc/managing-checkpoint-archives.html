@@ -12,7 +12,7 @@
 
 <meta name="author" content="Andrie de Vries" />
 
-<meta name="date" content="2018-09-07" />
+<meta name="date" content="2019-07-16" />
 
 <title>Managing checkpoint snapshot archives</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Managing checkpoint snapshot archives</h1>
 <h4 class="author"><em>Andrie de Vries</em></h4>
-<h4 class="date"><em>2018-09-07</em></h4>
+<h4 class="date"><em>2019-07-16</em></h4>
 
 
 <div id="TOC">
@@ -133,14 +133,14 @@ oldLibPaths &lt;-<span class="st"> </span><span class="kw">.libPaths</span>()
 <pre><code>## [1] &quot;2015-04-26&quot;</code></pre>
 <p>You can get the full paths by including the argument <code>full.names=TRUE</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">checkpointArchives</span>(<span class="kw">tempdir</span>(), <span class="dt">full.names =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>## [1] &quot;C:/tmp/RtmpOIq91l/.checkpoint/2015-04-26&quot;</code></pre>
+<pre><code>## [1] &quot;C:/tmp/RtmpOWHA38/.checkpoint/2015-04-26&quot;</code></pre>
 <div id="working-with-access-dates" class="section level2">
 <h2><span class="header-section-number">2.1</span> Working with access dates</h2>
 <p>Every time you use <code>checkpoint()</code> the function places a small marker in the snapshot archive with the access date. In this way you can track when was the last time you actually used the snapshot archive.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Returns the date the snapshot was last accessed.</span>
 <span class="kw">getAccessDate</span>(<span class="kw">tempdir</span>())</code></pre></div>
-<pre><code>## C:/tmp/RtmpOIq91l/.checkpoint/2015-04-26 
-##                             &quot;2018-09-07&quot;</code></pre>
+<pre><code>## C:/tmp/RtmpOWHA38/.checkpoint/2015-04-26 
+##                             &quot;2019-07-16&quot;</code></pre>
 </div>
 <div id="removing-a-snapshot-from-local-disk" class="section level2">
 <h2><span class="header-section-number">2.2</span> Removing a snapshot from local disk</h2>
@@ -162,29 +162,29 @@ oldLibPaths &lt;-<span class="st"> </span><span class="kw">.libPaths</span>()
 <p>One of the side effects of <code>checkpoint()</code> is to create a log file that contains information about packages that get downloaded, as well as the download size.</p>
 <p>This file is stored in the checkpoint root folder, and is a csv file with column names, so you can read this with your favourite R function or other tools.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dir</span>(<span class="kw">file.path</span>(<span class="kw">tempdir</span>(), <span class="st">&quot;.checkpoint&quot;</span>))</code></pre></div>
-<pre><code>## [1] &quot;2015-04-26&quot;         &quot;R-3.5.1&quot;            &quot;checkpoint_log.csv&quot;</code></pre>
+<pre><code>## [1] &quot;2015-04-26&quot;         &quot;R-3.6.1&quot;            &quot;checkpoint_log.csv&quot;</code></pre>
 <p>Inspect the log file:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">log_file &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span class="kw">tempdir</span>(), <span class="st">&quot;.checkpoint&quot;</span>, <span class="st">&quot;checkpoint_log.csv&quot;</span>)
 log &lt;-<span class="st"> </span><span class="kw">read.csv</span>(log_file)
 <span class="kw">head</span>(log)</code></pre></div>
 <pre><code>##             timestamp snapshotDate   pkg bytes
-## 1 2018-09-07 14:06:40   2015-04-26 darts  7011</code></pre>
+## 1 2019-07-16 15:16:12   2015-04-26 darts  7011</code></pre>
 </div>
 <div id="resetting-the-checkpoint" class="section level1">
 <h1><span class="header-section-number">4</span> Resetting the checkpoint</h1>
 <p>In older versions of <code>checkpoint()</code> the only way to reset the effect of <code>checkpoint()</code> was to restart your R session.</p>
 <p>In v0.3.20 and above, you can use the function <code>unCheckpoint()</code>. This will reset you <code>.libPaths</code> to the user folder.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">.libPaths</span>()</code></pre></div>
-<pre><code>## [1] &quot;C:/tmp/RtmpOIq91l/.checkpoint/2015-04-26/lib/x86_64-w64-mingw32/3.5.1&quot;
-## [2] &quot;C:/tmp/RtmpOIq91l/.checkpoint/R-3.5.1&quot;                                
-## [3] &quot;C:/PROGRA~1/R/R-35~1.1/library&quot;</code></pre>
+<pre><code>## [1] &quot;C:/tmp/RtmpOWHA38/.checkpoint/2015-04-26/lib/x86_64-w64-mingw32/3.6.1&quot;
+## [2] &quot;C:/tmp/RtmpOWHA38/.checkpoint/R-3.6.1&quot;                                
+## [3] &quot;C:/PROGRA~1/R/R-36~1.1/library&quot;</code></pre>
 <p>Now use <code>unCheckpoint()</code> to reset your library paths</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Note this is still experimental</span>
 <span class="kw">unCheckpoint</span>(oldLibPaths)
 <span class="kw">.libPaths</span>()</code></pre></div>
-<pre><code>## [1] &quot;C:/tmp/Rtmp69rJVn/Rinst1e3c1470709e&quot;          
-## [2] &quot;C:/Users/richcala/Documents/R/win-library/3.5&quot;
-## [3] &quot;C:/Program Files/R/R-3.5.1/library&quot;</code></pre>
+<pre><code>## [1] &quot;C:/tmp/Rtmp8kkZSj/Rinst16983ba26bb1&quot;          
+## [2] &quot;C:/Users/richcala/Documents/R/win-library/3.6&quot;
+## [3] &quot;C:/Program Files/R/R-3.6.1/library&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## cleanup
 <span class="kw">unlink</span>(<span class="st">&quot;manifest.R&quot;</span>)
 <span class="kw">unlink</span>(<span class="kw">file.path</span>(<span class="kw">tempdir</span>(), <span class="st">&quot;managing_checkpoint_example_code.R&quot;</span>))

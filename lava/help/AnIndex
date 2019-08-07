@@ -214,6 +214,7 @@ moments	gof
 moments.lvm	gof
 multigroup	internal
 multinomial	multinomial
+multinomial.lvm	sim
 mvn.lvm	sim
 mvnmix	mvnmix
 na.pass0	internal

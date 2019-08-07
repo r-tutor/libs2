@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Indices for assessing class intervals</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for jenks.tests {classInt}"><tr><td>jenks.tests {classInt}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Indices for assessing class intervals</h2>
+
+<h3>Description</h3>
+
+<p>The function returns values of two indices for assessing class intervals: the goodness of variance fit measure, and the tabular accuracy index; optionally the overview accuracy index is also returned if the <code>area</code> argument is not missing.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+jenks.tests(clI, area)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>clI</code></td>
+<td>
+<p>a &quot;classIntervals&quot; object</p>
+</td></tr>
+<tr valign="top"><td><code>area</code></td>
+<td>
+<p>an optional vector of object areas if the overview accuracy index is also required</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The goodness of variance fit measure is given by Armstrong et al. (2003, p. 600) as:
+</p>
+<p style="text-align: center;"><i>GVF = 1 - \frac{&sum;_{j=1}^{k}&sum;_{i=1}^{N_j}{(z_{ij} - \bar{z}_j)}^2}{&sum;_{i=1}^{N}{(z_{i} - \bar{z})}^2}</i></p>
+
+<p>where the <i>z_{i}, i=1,&hellip;,N</i> are the observed values, <i>k</i> is the number of classes, <i>\bar{z}_j</i> the class mean for class <i>j</i>, and <i>N_j</i> the number of counties in class <i>j</i>.
+</p>
+<p>The tabular accuracy index is given by Armstrong et al. (2003, p. 600) as:
+</p>
+<p style="text-align: center;"><i>TAI = 1 - \frac{&sum;_{j=1}^{k}&sum;_{i=1}^{N_j}{|z_{ij} - \bar{z}_j|}}{&sum;_{i=1}^{N}{|z_{i} - \bar{z}|}}</i></p>
+
+<p>The overview accuracy index for polygon observations with known areas is given by Armstrong et al. (2003, p. 600) as:
+</p>
+<p style="text-align: center;"><i>OAI = 1 - \frac{&sum;_{j=1}^{k}&sum;_{i=1}^{N_j}{|z_{ij} - \bar{z}_j| a_{ij}}}{&sum;_{i=1}^{N}{|z_{i} - \bar{z}| a_i}}</i></p>
+
+<p>where <i>a_i, i=1,&hellip;,N</i> are the polygon areas, and as above the <i>a_{ij}</i> term is indexed over <i>j=1,&hellip;,k</i> classes, and <i>i=1,&hellip;,N_j</i> polygons in class <i>j</i>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a named vector of index values
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Roger Bivand &lt;Roger.Bivand@nhh.no&gt;</p>
+
+
+<h3>References</h3>
+
+<p>Armstrong, M. P., Xiao, N., Bennett, D. A., 2003. &quot;Using genetic algorithms to create multicriteria class intervals for choropleth maps&quot;. Annals, Association of American Geographers, 93 (3), 595&ndash;623; Jenks, G. F., Caspall, F. C., 1971. &quot;Error on choroplethic maps: definition, measurement, reduction&quot;. Annals, Association of American Geographers, 61 (2), 217&ndash;244</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="classIntervals.html">classIntervals</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+if (!require("spData", quietly=TRUE)) {
+  message("spData package needed for examples")
+  run &lt;- FALSE
+} else {
+  run &lt;- TRUE
+}
+if (run) {
+data(jenks71, package="spData")
+fix5 &lt;- classIntervals(jenks71$jenks71, n=5, style="fixed",
+ fixedBreaks=c(15.57, 25, 50, 75, 100, 155.30))
+print(jenks.tests(fix5, jenks71$area))
+}
+if (run) {
+q5 &lt;- classIntervals(jenks71$jenks71, n=5, style="quantile")
+print(jenks.tests(q5, jenks71$area))
+}
+if (run) {
+set.seed(1)
+k5 &lt;- classIntervals(jenks71$jenks71, n=5, style="kmeans")
+print(jenks.tests(k5, jenks71$area))
+}
+if (run) {
+h5 &lt;- classIntervals(jenks71$jenks71, n=5, style="hclust", method="complete")
+print(jenks.tests(h5, jenks71$area))
+}
+if (run) {
+print(jenks.tests(getHclustClassIntervals(h5, k=7), jenks71$area))
+}
+if (run) {
+print(jenks.tests(getHclustClassIntervals(h5, k=9), jenks71$area))
+}
+if (run) {
+set.seed(1)
+b5 &lt;- classIntervals(jenks71$jenks71, n=5, style="bclust")
+print(jenks.tests(b5, jenks71$area))
+}
+if (run) {
+print(jenks.tests(getBclustClassIntervals(b5, k=7), jenks71$area))
+}
+if (run) {
+print(jenks.tests(getBclustClassIntervals(b5, k=9), jenks71$area))
+}
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>classInt</em> version 0.4-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

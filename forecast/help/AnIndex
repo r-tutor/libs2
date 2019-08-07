@@ -62,6 +62,7 @@ fitted.ar	fitted.Arima
 fitted.Arima	fitted.Arima
 fitted.bats	fitted.Arima
 fitted.ets	fitted.Arima
+fitted.forecast_ARIMA	fitted.Arima
 fitted.fracdiff	fitted.Arima
 fitted.modelAR	fitted.Arima
 fitted.nnetar	fitted.Arima
@@ -73,6 +74,7 @@ forecast.baggedModel	forecast.baggedModel
 forecast.bats	forecast.bats
 forecast.default	forecast
 forecast.ets	forecast.ets
+forecast.forecast_ARIMA	forecast.Arima
 forecast.fracdiff	forecast.Arima
 forecast.HoltWinters	forecast.HoltWinters
 forecast.lm	forecast.lm
@@ -173,6 +175,7 @@ residuals.Arima	residuals.forecast
 residuals.bats	residuals.forecast
 residuals.ets	residuals.forecast
 residuals.forecast	residuals.forecast
+residuals.forecast_ARIMA	residuals.forecast
 residuals.fracdiff	residuals.forecast
 residuals.nnetar	residuals.forecast
 residuals.stlm	residuals.forecast
