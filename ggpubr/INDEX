@@ -49,6 +49,7 @@ rremove                 Remove a ggplot Component
 set_palette             Set Color Palette
 show_line_types         Line types available in R
 show_point_shapes       Point shapes available in R
+stat_bracket            Add Brackets with Labels to a GGPlot
 stat_chull              Plot convex hull of a set of points
 stat_compare_means      Add Mean Comparison P-values to a ggplot
 stat_conf_ellipse       Plot confidence ellipses.

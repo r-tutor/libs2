@@ -18,6 +18,7 @@ facet	facet
 fill_palette	set_palette
 font	font
 gene_citation	gene_citation
+geom_bracket	geom_bracket
 geom_exec	geom_exec
 geom_signif	reexports
 get_legend	get_legend
@@ -72,6 +73,7 @@ rremove	rremove
 set_palette	set_palette
 show_line_types	show_line_types
 show_point_shapes	show_point_shapes
+stat_bracket	geom_bracket
 stat_chull	stat_chull
 stat_compare_means	stat_compare_means
 stat_conf_ellipse	stat_conf_ellipse

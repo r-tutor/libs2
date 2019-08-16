@@ -1,11 +1,17 @@
 GeomShape               ggforce extensions to ggplot2
 facet_grid_paginate     Split facet_grid over multiple plots
+facet_matrix            Facet by different data columns
+facet_row               One-dimensional facets
 facet_stereo            Create a stereogram plot
 facet_wrap_paginate     Split facet_wrap over multiple plots
 facet_zoom              Facet data for zoom with context
 gather_set_data         Tidy data for use with geom_parallel_sets
 geom_arc                Arcs based on radius and radians
 geom_arc_bar            Arcs and wedges as polygons
+geom_autodensity        A distribution geoms that fills the panel and
+                        works with discrete and continuous data
+geom_autopoint          A point geom specialised for scatterplot
+                        matrices
 geom_bezier             Create quadratic or cubic bezier curves
 geom_bspline            B-splines based on control points
 geom_bspline_closed     Create closed b-spline shapes
@@ -29,10 +35,11 @@ geom_sina               Sina plot
 geom_spiro              Draw spirograms based on the radii of the
                         different "wheels" involved
 geom_voronoi            Voronoi tesselation and delaunay triangulation
-ggforce                 ggforce: Accelerating ggplot2
+ggforce-package         ggforce: Accelerating 'ggplot2'
 linear_trans            Create a custom linear transformation
 n_pages                 Determine the number of pages in a paginated
                         facet plot
+position_auto           Jitter based on scale types
 position_jitternormal   Jitter points with normally distributed random
                         noise
 power_trans             Create a power transformation object

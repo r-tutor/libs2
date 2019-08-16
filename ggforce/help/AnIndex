@@ -1,9 +1,15 @@
 ggforce-package	ggforce-package
+FacetCol	ggforce-extensions
 FacetGridPaginate	ggforce-extensions
+FacetMatrix	ggforce-extensions
+FacetRow	ggforce-extensions
 FacetStereo	ggforce-extensions
 FacetWrapPaginate	ggforce-extensions
 FacetZoom	ggforce-extensions
+facet_col	facet_row
 facet_grid_paginate	facet_grid_paginate
+facet_matrix	facet_matrix
+facet_row	facet_row
 facet_stereo	facet_stereo
 facet_wrap_paginate	facet_wrap_paginate
 facet_zoom	facet_zoom
@@ -11,6 +17,8 @@ gather_set_data	gather_set_data
 GeomArc	ggforce-extensions
 GeomArc0	ggforce-extensions
 GeomArcBar	ggforce-extensions
+GeomAutoarea	ggforce-extensions
+GeomAutorect	ggforce-extensions
 GeomBezier0	ggforce-extensions
 GeomBspline0	ggforce-extensions
 GeomBsplineClosed0	ggforce-extensions
@@ -26,6 +34,9 @@ geom_arc	geom_arc
 geom_arc0	geom_arc
 geom_arc2	geom_arc
 geom_arc_bar	geom_arc_bar
+geom_autodensity	geom_autohistogram
+geom_autohistogram	geom_autohistogram
+geom_autopoint	geom_autopoint
 geom_bezier	geom_bezier
 geom_bezier0	geom_bezier
 geom_bezier2	geom_bezier
@@ -66,7 +77,10 @@ ggforce-extensions	ggforce-extensions
 interpolateDataFrame	interpolateDataFrame
 linear_trans	linear_trans
 n_pages	n_pages
+PositionAuto	ggforce-extensions
+PositionFloatstack	ggforce-extensions
 PositionJitterNormal	ggforce-extensions
+position_auto	position_auto
 position_jitternormal	position_jitternormal
 power_trans	power_trans
 radial_trans	radial_trans
@@ -84,6 +98,8 @@ StatArc	ggforce-extensions
 StatArc0	ggforce-extensions
 StatArc2	ggforce-extensions
 StatArcBar	ggforce-extensions
+StatAutobin	ggforce-extensions
+StatAutodensity	ggforce-extensions
 StatBezier	ggforce-extensions
 StatBezier0	ggforce-extensions
 StatBezier2	ggforce-extensions

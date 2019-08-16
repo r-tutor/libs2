@@ -1,9 +1,26 @@
+# ggforce 0.3.0
+
+- Added `facet_matrix()` in order to facet different data columns into different
+  rows and columns in a grid, in order to make e.g. scatterplot matrices and 
+  pairs plot
+- Added `geom_autopoint()` and `position_auto()` to jitter points based on the
+  type of positional scales in the panel
+- Added `geom_autohistogram()` and `geom_autodensity()` for facilitating 
+  distribution plots along the diagonal in a `facet_matrix()` plot.
+- Added `facet_row()` and `facet_col` to have one-dimensional `facet_wrap()` 
+  with possibility of variable sizing.
+- Stats should now always keep the old group variable (potentially with 
+  something added), making them work with gganimate
+- Removed the *Visual Guide* vignette to reduce compilation time. See the
+  website for an overview of all functionality with compiled examples 
+  (https://ggforce.data-imaginist.com)
+
 # ggforce 0.2.2
 
 - Fixed a regression in `geom_sina()` where the computation would fail with a
   warning due to `tolower()` being masked (#134, #135).
 
-#ggforce 0.2.1
+# ggforce 0.2.1
 
 - Fixed a bug in the calculation of open and closed b-splines, where the
   interval would exceed the defined region and result in an out-of-bounds memory

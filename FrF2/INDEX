@@ -19,6 +19,8 @@ aliases                 Alias structure for fractional factorial
 block                   Statistical and algorithmic aspects of blocking
                         in FrF2
 blockpick               Function to show potential block assignments
+colpick                 Functions in support of Godolphin's approach
+                        for blocking designs
 compromise              Function to support estimability requests for
                         compromise designs
 cubePlot                Cube plot for three-factor-effects
