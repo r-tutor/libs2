@@ -26,6 +26,7 @@ clear.2fis	CatalogueAccessors
 clear.2fis.catlg	CatalogueAccessors
 clear.2fis.character	CatalogueAccessors
 colpick	godolphin
+colpickIV	godolphin
 compromise	compromise
 cubecorners	cubePlot
 cubedraw	cubePlot
@@ -42,6 +43,7 @@ double.des	utilitiesPB
 estimable	utilitiesCat
 estimable.2fis	estimable.2fis
 estimable.check	utilitiesCat
+FF_from_X	godolphin
 fold.design	fold.design
 formula2matrix	utilitiesCat
 FrF2	FrF2
@@ -60,6 +62,7 @@ intfind	IAPlot
 leftadjust	StructurePickers
 map2design	utilitiesCat
 mapcalc	utilitiesCat
+mapcalc.block	utilitiesCat
 mapcalc.distinct	utilitiesCat
 MEPlot	IAPlot
 MEPlot.default	IAPlot
@@ -103,6 +106,8 @@ WLP.catlg	CatalogueAccessors
 WLP.character	CatalogueAccessors
 words.all	utilitiesCat
 Xcalc	godolphin
+X_from_parts	godolphin
+X_from_profile	godolphin
 Yates	utilitiesCat
 YatesFly	utilitiesV
 [.catlg	CatalogueAccessors

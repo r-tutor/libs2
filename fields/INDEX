@@ -68,7 +68,7 @@ gcv.Krig                Finds profile likelihood and GCV estimates of
 grid list               Some simple functions for working with gridded
                         data and the grid format (grid.list) used in
                         fields.
-image.plot              Draws image plot with a legend strip for the
+image.plot              Draws an image plot with a legend strip for the
                         color scale based on either a regular grid or a
                         grid of quadrilaterals.
 image.smooth            Kernel smoother for irregular 2-d data

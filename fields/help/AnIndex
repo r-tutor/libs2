@@ -274,6 +274,7 @@ sim.mKrig.approx	sim.Krig
 sim.rf	sim.rf
 sim.spatialProcess	sim.Krig
 smooth.2d	smooth.2d
+snow.colors	tim.colors
 spam2full	spam2lz
 spam2spind	spam2lz
 spatialProcess	spatialProcess

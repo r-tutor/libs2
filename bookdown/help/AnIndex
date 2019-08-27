@@ -10,8 +10,11 @@ html_book	html_chapters
 html_chapters	html_chapters
 html_document2	html_document2
 kindlegen	kindlegen
+markdown_document2	html_document2
+odt_document2	html_document2
 pdf_book	pdf_book
 pdf_document2	html_document2
+powerpoint_presentation2	html_document2
 preview_chapter	render_book
 publish_book	publish_book
 render_book	render_book

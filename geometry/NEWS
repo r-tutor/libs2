@@ -1,3 +1,42 @@
+CHANGES IN VERSION 0.4.3 - Released 2019/08/16
+
+BUG FIXES
+
+* Fix for Issue #39: tsearchn() returns NA for some points within
+  triangle
+  https://github.com/davidcsterratt/geometry/issues/39
+  tsearchn() failed (=return NA) for some points that lie within the
+  triangulation. Thanks to Jan Lause (https://github.com/jlause) for
+  reporting the bug and Jean-Romain Roussel for providing the fix.
+
+* Fix for Issue #40: memory misuse in src/Rtsearchn.c
+  https://github.com/davidcsterratt/geometry/issues/40
+  In src/Rtsearchn.c 'idmap' was allocated with max_facet_id elements
+  but then a value to idmap[max_facet_id] was assigned, which was one
+  element beyond the end of that allocation, potentially clobbering
+  the memory allocation system.
+  Thanks to Bill Dunlap (https://github.com/BillDunlap) for reporting
+  this, and the suggested fix.
+
+* Fix for Issue #44: R_tmpnam()/free() causes crash in TERR
+  https://github.com/davidcsterratt/geometry/issues/44
+
+  Because TERR
+  (https://docs.tibco.com/products/tibco-enterprise-runtime-for-r) is
+  not compiled with gcc (it uses either the Intel or Microsoft C++
+  compiler) on Windows, calling free() in a package's DLL for memory
+  allocated with malloc() in TERR's own DLL causes a crash. The R API
+  function R_tmpnam() causes this problem in the geometry package.
+  Thanks to Bill Dunlap (https://github.com/BillDunlap) for reporting
+  this, and the suggested fix.
+
+ENHANCEMENT
+
+* Fix for Issue #42: Improve error reporting from Qhull
+  https://github.com/davidcsterratt/geometry/issues/42
+  Full error from Qhull is now returned, rather than just the first
+  two lines.
+
 CHANGES IN VERSION 0.4.2 - Released 2019/07/05
 
 BUG FIX
