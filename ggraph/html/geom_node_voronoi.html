@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Show nodes as voronoi tiles</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for geom_node_voronoi {ggraph}"><tr><td>geom_node_voronoi {ggraph}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Show nodes as voronoi tiles</h2>
+
+<h3>Description</h3>
+
+<p>This geom is equivalent in functionality to <code><a href="../../ggforce/html/geom_voronoi_tile.html">ggforce::geom_voronoi_tile()</a></code>
+and allows for plotting of nodes as tiles from a voronoi tesselation. As with
+<code><a href="../../ggforce/html/geom_voronoi_tile.html">ggforce::geom_voronoi_tile()</a></code> it is possible to restrict the size of the
+tile to a fixed radius, as well as round corners and expand/contract the
+tile.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+geom_node_voronoi(mapping = NULL, data = NULL, position = "identity",
+  show.legend = NA, bound = NULL, eps = 1e-09, max.radius = NULL,
+  normalize = FALSE, asp.ratio = 1, expand = 0, radius = 0, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>mapping</code></td>
+<td>
+<p>Set of aesthetic mappings created by <code><a href="../../ggplot2/html/aes.html">ggplot2::aes()</a></code>
+or <code><a href="../../ggplot2/html/aes_.html">ggplot2::aes_()</a></code>. By default x and y are mapped to x and y in
+the node data and group set to <code>-1</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>The data to be displayed in this layer. There are three
+options:
+</p>
+<p>If <code>NULL</code>, the default, the data is inherited from the plot
+data as specified in the call to <code><a href="../../ggplot2/html/ggplot.html">ggplot()</a></code>.
+</p>
+<p>A <code>data.frame</code>, or other object, will override the plot
+data. All objects will be fortified to produce a data frame. See
+<code><a href="../../ggplot2/html/fortify.html">fortify()</a></code> for which variables will be created.
+</p>
+<p>A <code>function</code> will be called with a single argument,
+the plot data. The return value must be a <code>data.frame</code>, and
+will be used as the layer data. A <code>function</code> can be created
+from a <code>formula</code> (e.g. <code>~ head(.x, 10)</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>position</code></td>
+<td>
+<p>Position adjustment, either as a string, or the result of
+a call to a position adjustment function.</p>
+</td></tr>
+<tr valign="top"><td><code>show.legend</code></td>
+<td>
+<p>logical. Should this layer be included in the legends?
+<code>NA</code>, the default, includes if any aesthetics are mapped.
+<code>FALSE</code> never includes, and <code>TRUE</code> always includes.
+It can also be a named logical vector to finely select the aesthetics to
+display.</p>
+</td></tr>
+<tr valign="top"><td><code>bound</code></td>
+<td>
+<p>The bounding rectangle for the tesselation or a custom polygon
+to clip the tesselation to. Defaults to <code>NULL</code> which creates a rectangle
+expanded 10% in all directions. If supplied as a bounding box it should be a
+vector giving the bounds in the following order: xmin, xmax, ymin, ymax. If
+supplied as a polygon it should either be a 2-column matrix or a data.frame
+containing an <code>x</code> and <code>y</code> column.</p>
+</td></tr>
+<tr valign="top"><td><code>eps</code></td>
+<td>
+<p>A value of epsilon used in testing whether a quantity is zero,
+mainly in the context of whether points are collinear. If anomalous errors
+arise, it is possible that these may averted by adjusting the value of eps
+upward or downward.</p>
+</td></tr>
+<tr valign="top"><td><code>max.radius</code></td>
+<td>
+<p>The maximum distance a tile can extend from the point of
+origin. Will in effect clip each tile to a circle centered at the point with
+the given radius. If <code>normalize = TRUE</code> the radius will be given relative to
+the normalized values</p>
+</td></tr>
+<tr valign="top"><td><code>normalize</code></td>
+<td>
+<p>Should coordinates be normalized prior to calculations. If
+<code>x</code> and <code>y</code> are in wildly different ranges it can lead to
+tesselation and triangulation that seems off when plotted without
+<code><a href="../../ggplot2/html/coord_fixed.html">ggplot2::coord_fixed()</a></code>. Normalization of coordinates solves this.
+The coordinates are transformed back after calculations.</p>
+</td></tr>
+<tr valign="top"><td><code>asp.ratio</code></td>
+<td>
+<p>If <code>normalize = TRUE</code> the x values will be multiplied by this
+amount after normalization.</p>
+</td></tr>
+<tr valign="top"><td><code>expand</code></td>
+<td>
+<p>A numeric or unit vector of length one, specifying the
+expansion amount. Negative values will result in contraction instead. If the
+value is given as a numeric it will be understood as a proportion of the
+plot area width.</p>
+</td></tr>
+<tr valign="top"><td><code>radius</code></td>
+<td>
+<p>As <code>expand</code> but specifying the corner radius.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Other arguments passed on to <code><a href="../../ggplot2/html/layer.html">layer()</a></code>. These are
+often aesthetics, used to set an aesthetic to a fixed value, like
+<code>colour = "red"</code> or <code>size = 3</code>. They may also be parameters
+to the paired geom/stat.</p>
+</td></tr>
+</table>
+
+
+<h3>Aesthetics</h3>
+
+<p><code>geom_node_voronoi</code> understand the following aesthetics. Bold aesthetics are
+automatically set, but can be overridden.
+</p>
+
+<ul>
+<li> <p><strong>x</strong>
+</p>
+</li>
+<li> <p><strong>y</strong>
+</p>
+</li>
+<li><p> alpha
+</p>
+</li>
+<li><p> colour
+</p>
+</li>
+<li><p> fill
+</p>
+</li>
+<li><p> shape
+</p>
+</li>
+<li><p> size
+</p>
+</li>
+<li><p> stroke
+</p>
+</li>
+<li><p> filter
+</p>
+</li></ul>
+
+
+
+<h3>Author(s)</h3>
+
+<p>Thomas Lin Pedersen
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other geom_node_*: <code><a href="geom_node_arc_bar.html">geom_node_arc_bar</a></code>,
+<code><a href="geom_node_circle.html">geom_node_circle</a></code>,
+<code><a href="geom_node_point.html">geom_node_point</a></code>,
+<code><a href="geom_node_range.html">geom_node_range</a></code>,
+<code><a href="geom_node_text.html">geom_node_text</a></code>,
+<code><a href="geom_node_tile.html">geom_node_tile</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+require(tidygraph)
+gr &lt;- create_notable('meredith') %&gt;%
+  mutate(group = sample(letters[1:4], n(), TRUE))
+
+ggraph(gr) +
+  geom_node_voronoi(aes(fill = group, colour = group), alpha = 0.3) +
+  geom_edge_link(alpha = 0.3) +
+  geom_node_point()
+
+# Use max.radius to make the tesselation more "node"-like
+ggraph(gr) +
+  geom_node_voronoi(aes(fill = group, colour = group), alpha = 0.3, max.radius = 1) +
+  geom_edge_link(alpha = 0.3) +
+  geom_node_point()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggraph</em> version 2.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

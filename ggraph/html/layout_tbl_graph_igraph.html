@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Use igraph layout algorithms for layout_tbl_graph</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for layout_tbl_graph_igraph {ggraph}"><tr><td>layout_tbl_graph_igraph {ggraph}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Use igraph layout algorithms for layout_tbl_graph</h2>
+
+<h3>Description</h3>
+
+<p>This layout function makes it easy to apply one of the layout algorithms
+supplied in igraph when plotting with ggraph. Layout names are auto completed
+so there is no need to write <code>layout_with_graphopt</code> or
+<code>layout_as_tree</code>, just <code>graphopt</code> and <code>tree</code> (though the
+former will also work if you want to be super explicit). Circular layout is
+only supported for tree-like layout (<code>tree</code> and <code>sugiyama</code>) and
+will throw an error when applied to other layouts.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+layout_tbl_graph_igraph(graph, algorithm, circular, offset = pi/2,
+  use.dummy = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>A <code>tbl_graph</code> object.</p>
+</td></tr>
+<tr valign="top"><td><code>algorithm</code></td>
+<td>
+<p>The type of layout algorithm to apply. See <em>Details</em> or
+<code><a href="../../igraph/html/layout_.html">igraph::layout_()</a></code> for links to the layouts supplied by igraph.</p>
+</td></tr>
+<tr valign="top"><td><code>circular</code></td>
+<td>
+<p>Logical. Should the layout be transformed to a circular
+representation. Defaults to <code>FALSE</code>. Only applicable to
+<code>algorithm = 'tree'</code> and <code>algorithm = 'sugiyama'</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>offset</code></td>
+<td>
+<p>If <code>circular = TRUE</code>, where should it begin. Defaults to
+<code>pi/2</code> which is equivalent to 12 o'clock.</p>
+</td></tr>
+<tr valign="top"><td><code>use.dummy</code></td>
+<td>
+<p>Logical. In the case of <code>algorithm = 'sugiyama'</code> should the
+dummy-infused graph be used rather than the original. Defaults to
+<code>FALSE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Arguments passed on to the respective layout functions</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>igraph provides a huge amount of possible layouts. They are all briefly
+described below:
+</p>
+<p><strong>Hierarchical layouts</strong>
+</p>
+
+<dl>
+<dt><code>tree</code></dt><dd><p>Uses the <em>Reingold-Tilford</em> algorithm to place the
+nodes below their parent with the parent centered above its children. See
+<code><a href="../../igraph/html/as_tree.html">igraph::as_tree()</a></code></p>
+</dd>
+<dt><code>sugiyama</code></dt><dd><p>Designed for directed acyclic graphs (that is,
+hierarchies where multiple parents are allowed) it minimizes the number of
+crossing edges. See <code><a href="../../igraph/html/with_sugiyama.html">igraph::with_sugiyama()</a></code></p>
+</dd>
+</dl>
+
+<p><strong>Standard layouts</strong>
+</p>
+
+<dl>
+<dt><code>bipartite</code></dt><dd><p>Minimize edge-crossings in a simple two-row (or
+column) layout for bipartite graphs. See <code><a href="../../igraph/html/as_bipartite.html">igraph::as_bipartite()</a></code></p>
+</dd>
+<dt><code>star</code></dt><dd><p>Place one node in the center and the rest equidistantly
+around it. See <code><a href="../../igraph/html/as_star.html">igraph::as_star()</a></code></p>
+</dd>
+<dt><code>circle</code></dt><dd><p>Place nodes in a circle in the order of their index.
+Consider using <code><a href="layout_tbl_graph_linear.html">layout_tbl_graph_linear()</a></code> with <code>circular=TRUE</code>
+for more control. See <code><a href="../../igraph/html/in_circle.html">igraph::in_circle()</a></code></p>
+</dd>
+<dt><code>nicely</code></dt><dd><p>Tries to pick an appropriate layout. See
+<code><a href="../../igraph/html/nicely.html">igraph::nicely()</a></code> for a description of the simple decision tree
+it uses</p>
+</dd>
+<dt><code>dh</code></dt><dd><p>Uses <em>Davidson and Harels</em> simulated annealing
+algorithm to place nodes. See <code><a href="../../igraph/html/with_dh.html">igraph::with_dh()</a></code></p>
+</dd>
+<dt><code>gem</code></dt><dd><p>Place nodes on the plane using the GEM force-directed
+layout algorithm. See <code><a href="../../igraph/html/with_gem.html">igraph::with_gem()</a></code></p>
+</dd>
+<dt><code>graphopt</code></dt><dd><p>Uses the Graphopt algorithm based on alternating
+attraction and repulsion to place nodes. See
+<code><a href="../../igraph/html/with_graphopt.html">igraph::with_graphopt()</a></code></p>
+</dd>
+<dt><code>grid</code></dt><dd><p>Place nodes on a rectangular grid. See
+<code><a href="../../igraph/html/on_grid.html">igraph::on_grid()</a></code></p>
+</dd>
+<dt><code>mds</code></dt><dd><p>Perform a multidimensional scaling of nodes using either
+the shortest path or a user supplied distance. See
+<code><a href="../../igraph/html/with_mds.html">igraph::with_mds()</a></code></p>
+</dd>
+<dt><code>sphere</code></dt><dd><p>Place nodes uniformly on a sphere - less relevant for
+2D visualizations of networks. See <code><a href="../../igraph/html/on_sphere.html">igraph::on_sphere()</a></code></p>
+</dd>
+<dt><code>randomly</code></dt><dd><p>Places nodes uniformly random. See
+<code><a href="../../igraph/html/randomly.html">igraph::randomly()</a></code></p>
+</dd>
+<dt><code>fr</code></dt><dd><p>Places nodes according to the force-directed algorithm of
+Fruchterman and Reingold. See <code><a href="../../igraph/html/with_fr.html">igraph::with_fr()</a></code></p>
+</dd>
+<dt><code>kk</code></dt><dd><p>Uses the spring-based algorithm by Kamada and Kawai to
+place nodes. See <code><a href="../../igraph/html/with_kk.html">igraph::with_kk()</a></code></p>
+</dd>
+<dt><code>drl</code></dt><dd><p>Uses the force directed algorithm from the DrL toolbox to
+place nodes. See <code><a href="../../igraph/html/with_drl.html">igraph::with_drl()</a></code></p>
+</dd>
+<dt><code>lgl</code></dt><dd><p>Uses the algorithm from Large Graph Layout to place
+nodes. See <code><a href="../../igraph/html/with_lgl.html">igraph::with_lgl()</a></code></p>
+</dd>
+</dl>
+
+
+
+<h3>Value</h3>
+
+<p>A data.frame with the columns <code>x</code>, <code>y</code>, <code>circular</code> as
+well as any information stored as node variables in the tbl_graph object.
+</p>
+
+
+<h3>Note</h3>
+
+<p>This function is not intended to be used directly but by setting
+<code>layout = 'igraph'</code> in <code><a href="ggraph.html">create_layout()</a></code>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other layout_tbl_graph_*: <code><a href="layout_tbl_graph_auto.html">layout_tbl_graph_auto</a></code>,
+<code><a href="layout_tbl_graph_backbone.html">layout_tbl_graph_backbone</a></code>,
+<code><a href="layout_tbl_graph_centrality.html">layout_tbl_graph_centrality</a></code>,
+<code><a href="layout_tbl_graph_circlepack.html">layout_tbl_graph_circlepack</a></code>,
+<code><a href="layout_tbl_graph_dendrogram.html">layout_tbl_graph_dendrogram</a></code>,
+<code><a href="layout_tbl_graph_eigen.html">layout_tbl_graph_eigen</a></code>,
+<code><a href="layout_tbl_graph_fabric.html">layout_tbl_graph_fabric</a></code>,
+<code><a href="layout_tbl_graph_focus.html">layout_tbl_graph_focus</a></code>,
+<code><a href="layout_tbl_graph_hive.html">layout_tbl_graph_hive</a></code>,
+<code><a href="layout_tbl_graph_linear.html">layout_tbl_graph_linear</a></code>,
+<code><a href="layout_tbl_graph_manual.html">layout_tbl_graph_manual</a></code>,
+<code><a href="layout_tbl_graph_matrix.html">layout_tbl_graph_matrix</a></code>,
+<code><a href="layout_tbl_graph_partition.html">layout_tbl_graph_partition</a></code>,
+<code><a href="layout_tbl_graph_pmds.html">layout_tbl_graph_pmds</a></code>,
+<code><a href="layout_tbl_graph_stress.html">layout_tbl_graph_stress</a></code>,
+<code><a href="layout_tbl_graph_treemap.html">layout_tbl_graph_treemap</a></code>,
+<code><a href="layout_tbl_graph_unrooted.html">layout_tbl_graph_unrooted</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>ggraph</em> version 2.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

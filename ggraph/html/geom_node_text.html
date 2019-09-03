@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Annotate nodes with text</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for geom_node_text {ggraph}"><tr><td>geom_node_text {ggraph}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Annotate nodes with text</h2>
+
+<h3>Description</h3>
+
+<p>These geoms are equivalent in functionality to <code><a href="../../ggplot2/html/geom_text.html">ggplot2::geom_text()</a></code> and
+<code><a href="../../ggplot2/html/geom_label.html">ggplot2::geom_label()</a></code> and allows for simple annotation of nodes.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+geom_node_text(mapping = NULL, data = NULL, position = "identity",
+  parse = FALSE, nudge_x = 0, nudge_y = 0, check_overlap = FALSE,
+  show.legend = NA, repel = FALSE, ...)
+
+geom_node_label(mapping = NULL, data = NULL, position = "identity",
+  parse = FALSE, nudge_x = 0, nudge_y = 0,
+  label.padding = unit(0.25, "lines"), label.r = unit(0.15, "lines"),
+  label.size = 0.25, show.legend = NA, repel = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>mapping</code></td>
+<td>
+<p>Set of aesthetic mappings created by <code><a href="../../ggplot2/html/aes.html">ggplot2::aes()</a></code>
+or <code><a href="../../ggplot2/html/aes_.html">ggplot2::aes_()</a></code>. By default x and y are mapped to x and y in
+the node data.</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>The data to be displayed in this layer. There are three
+options:
+</p>
+<p>If <code>NULL</code>, the default, the data is inherited from the plot
+data as specified in the call to <code><a href="../../ggplot2/html/ggplot.html">ggplot()</a></code>.
+</p>
+<p>A <code>data.frame</code>, or other object, will override the plot
+data. All objects will be fortified to produce a data frame. See
+<code><a href="../../ggplot2/html/fortify.html">fortify()</a></code> for which variables will be created.
+</p>
+<p>A <code>function</code> will be called with a single argument,
+the plot data. The return value must be a <code>data.frame</code>, and
+will be used as the layer data. A <code>function</code> can be created
+from a <code>formula</code> (e.g. <code>~ head(.x, 10)</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>position</code></td>
+<td>
+<p>Position adjustment, either as a string, or the result of
+a call to a position adjustment function.</p>
+</td></tr>
+<tr valign="top"><td><code>parse</code></td>
+<td>
+<p>If <code>TRUE</code>, the labels will be parsed into expressions and
+displayed as described in <code>?plotmath</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>nudge_x, nudge_y</code></td>
+<td>
+<p>Horizontal and vertical adjustment to nudge labels by.
+Useful for offsetting text from points, particularly on discrete scales.</p>
+</td></tr>
+<tr valign="top"><td><code>check_overlap</code></td>
+<td>
+<p>If <code>TRUE</code>, text that overlaps previous text in the
+same layer will not be plotted.</p>
+</td></tr>
+<tr valign="top"><td><code>show.legend</code></td>
+<td>
+<p>logical. Should this layer be included in the legends?
+<code>NA</code>, the default, includes if any aesthetics are mapped.
+<code>FALSE</code> never includes, and <code>TRUE</code> always includes.
+It can also be a named logical vector to finely select the aesthetics to
+display.</p>
+</td></tr>
+<tr valign="top"><td><code>repel</code></td>
+<td>
+<p>If <code>TRUE</code>, text labels will be repelled from each other
+to avoid overlapping, using the <code>GeomTextRepel</code> geom from the
+ggrepel package.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Other arguments passed on to <code><a href="../../ggplot2/html/layer.html">layer()</a></code>. These are
+often aesthetics, used to set an aesthetic to a fixed value, like
+<code>colour = "red"</code> or <code>size = 3</code>. They may also be parameters
+to the paired geom/stat.</p>
+</td></tr>
+<tr valign="top"><td><code>label.padding</code></td>
+<td>
+<p>Amount of padding around label. Defaults to 0.25 lines.</p>
+</td></tr>
+<tr valign="top"><td><code>label.r</code></td>
+<td>
+<p>Radius of rounded corners. Defaults to 0.15 lines.</p>
+</td></tr>
+<tr valign="top"><td><code>label.size</code></td>
+<td>
+<p>Size of label border, in mm.</p>
+</td></tr>
+</table>
+
+
+<h3>Aesthetics</h3>
+
+<p><code>geom_node_text</code> understands the following aesthetics. Bold aesthetics are
+automatically set, but can be overridden. Italic aesthetics are required but
+not set by default
+</p>
+
+<ul>
+<li> <p><strong>x</strong>
+</p>
+</li>
+<li> <p><strong>y</strong>
+</p>
+</li>
+<li> <p><em>label</em>
+</p>
+</li>
+<li><p> alpha
+</p>
+</li>
+<li><p> angle
+</p>
+</li>
+<li><p> colour
+</p>
+</li>
+<li><p> family
+</p>
+</li>
+<li><p> fontface
+</p>
+</li>
+<li><p> hjust
+</p>
+</li>
+<li><p> lineheight
+</p>
+</li>
+<li><p> size
+</p>
+</li>
+<li><p> vjust
+</p>
+</li></ul>
+
+
+
+<h3>Author(s)</h3>
+
+<p>Thomas Lin Pedersen
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other geom_node_*: <code><a href="geom_node_arc_bar.html">geom_node_arc_bar</a></code>,
+<code><a href="geom_node_circle.html">geom_node_circle</a></code>,
+<code><a href="geom_node_point.html">geom_node_point</a></code>,
+<code><a href="geom_node_range.html">geom_node_range</a></code>,
+<code><a href="geom_node_tile.html">geom_node_tile</a></code>,
+<code><a href="geom_node_voronoi.html">geom_node_voronoi</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+require(tidygraph)
+gr &lt;- create_notable('bull') %&gt;%
+  mutate(class = sample(letters[1:3], n(), replace = TRUE))
+
+ggraph(gr, 'stress') +
+  geom_node_point(aes(label = class))
+
+ggraph(gr, 'stress') +
+  geom_node_label(aes(label = class), repel = TRUE)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggraph</em> version 2.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

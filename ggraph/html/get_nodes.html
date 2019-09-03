@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create a node extractor function</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for get_nodes {ggraph}"><tr><td>get_nodes {ggraph}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create a node extractor function</h2>
+
+<h3>Description</h3>
+
+<p>This function returns another function that can extract nodes from a
+ggraph_layout object. As a ggraph_layout object is essentially a data.frame
+of nodes it might seem useless to provide this function, but since the node
+data is not necessarily available until after the <code>ggraph()</code> call it
+can be beneficial to be able to add information to the node data on a
+per-layer basis. Unlike <code><a href="get_edges.html">get_edges()</a></code> the use of <code>get_nodes</code> is not
+mandatory and is only required if additional data should be added to selected
+node layers.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+get_nodes(...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional data that should be cbind'ed together with the node
+data.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A data.frame with the node data as well of any additional data
+supplied through <code>...</code>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other extractors: <code><a href="get_con.html">get_con</a></code>,
+<code><a href="get_edges.html">get_edges</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>ggraph</em> version 2.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

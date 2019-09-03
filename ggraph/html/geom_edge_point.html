@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Draw edges as glyphs</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for geom_edge_point {ggraph}"><tr><td>geom_edge_point {ggraph}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Draw edges as glyphs</h2>
+
+<h3>Description</h3>
+
+<p>This geom draws edges as glyphs with their x-position defined by the
+x-position of the start node, and the y-position defined by the y-position of
+the end node. As such it will result in a matrix layout when used in
+conjunction with <code><a href="layout_tbl_graph_matrix.html">layout_tbl_graph_matrix()</a></code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+geom_edge_point(mapping = NULL, data = get_edges(),
+  position = "identity", mirror = FALSE, show.legend = NA, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>mapping</code></td>
+<td>
+<p>Set of aesthetic mappings created by <code><a href="../../ggplot2/html/aes.html">ggplot2::aes()</a></code>
+or <code><a href="../../ggplot2/html/aes_.html">ggplot2::aes_()</a></code>. By default x, y, xend, yend, group and
+circular are mapped to x, y, xend, yend, edge.id and circular in the edge
+data.</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>The return of a call to <code>get_edges()</code> or a data.frame
+giving edges in correct format (see details for for guidance on the format).
+See <code><a href="get_edges.html">get_edges()</a></code> for more details on edge extraction.</p>
+</td></tr>
+<tr valign="top"><td><code>position</code></td>
+<td>
+<p>Position adjustment, either as a string, or the result of
+a call to a position adjustment function.</p>
+</td></tr>
+<tr valign="top"><td><code>mirror</code></td>
+<td>
+<p>Logical. Should edge points be duplicated on both sides of the
+diagonal. Intended for undirected graphs. Default to <code>FALSE</code></p>
+</td></tr>
+<tr valign="top"><td><code>show.legend</code></td>
+<td>
+<p>logical. Should this layer be included in the legends?
+<code>NA</code>, the default, includes if any aesthetics are mapped.
+<code>FALSE</code> never includes, and <code>TRUE</code> always includes.
+It can also be a named logical vector to finely select the aesthetics to
+display.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Other arguments passed on to <code><a href="../../ggplot2/html/layer.html">layer()</a></code>. These are
+often aesthetics, used to set an aesthetic to a fixed value, like
+<code>colour = "red"</code> or <code>size = 3</code>. They may also be parameters
+to the paired geom/stat.</p>
+</td></tr>
+</table>
+
+
+<h3>Aesthetics</h3>
+
+<p><code>geom_edge_point</code> understands the following
+aesthetics. Bold aesthetics are automatically set, but can be overridden.
+</p>
+
+<ul>
+<li> <p><strong>x</strong>
+</p>
+</li>
+<li> <p><strong>y</strong>
+</p>
+</li>
+<li><p> edge_shape
+</p>
+</li>
+<li><p> edge_colour
+</p>
+</li>
+<li><p> edge_size
+</p>
+</li>
+<li><p> edge_alpha
+</p>
+</li>
+<li><p> filter
+</p>
+</li></ul>
+
+
+
+<h3>Edge aesthetic name expansion</h3>
+
+<p>In order to avoid excessive typing edge aesthetic names are
+automatically expanded. Because of this it is not necessary to write
+<code>edge_colour</code> within the <code>aes()</code> call as <code>colour</code> will
+automatically be renamed appropriately.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Thomas Lin Pedersen
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other geom_edge_*: <code><a href="geom_edge_arc.html">geom_edge_arc</a></code>,
+<code><a href="geom_edge_bend.html">geom_edge_bend</a></code>,
+<code><a href="geom_edge_density.html">geom_edge_density</a></code>,
+<code><a href="geom_edge_diagonal.html">geom_edge_diagonal</a></code>,
+<code><a href="geom_edge_elbow.html">geom_edge_elbow</a></code>,
+<code><a href="geom_edge_fan.html">geom_edge_fan</a></code>,
+<code><a href="geom_edge_hive.html">geom_edge_hive</a></code>,
+<code><a href="geom_edge_link.html">geom_edge_link</a></code>,
+<code><a href="geom_edge_loop.html">geom_edge_loop</a></code>,
+<code><a href="geom_edge_parallel.html">geom_edge_parallel</a></code>,
+<code><a href="geom_edge_span.html">geom_edge_span</a></code>,
+<code><a href="geom_edge_tile.html">geom_edge_tile</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+require(tidygraph)
+gr &lt;- create_notable('zachary') %&gt;%
+  mutate(group = group_infomap()) %&gt;%
+  morph(to_split, group) %&gt;%
+  activate(edges) %&gt;%
+  mutate(edge_group = as.character(.N()$group[1])) %&gt;%
+  unmorph()
+
+ggraph(gr, 'matrix', sort.by = node_rank_hclust()) +
+  geom_edge_point(aes(colour = edge_group), mirror = TRUE, edge_size = 3) +
+  scale_y_reverse() +
+  coord_fixed() +
+  labs(edge_colour = 'Infomap Cluster') +
+  ggtitle("Zachary' Karate Club")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggraph</em> version 2.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

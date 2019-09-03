@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: The class hierarchy of the flare visualization library</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for flare {ggraph}"><tr><td>flare {ggraph}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>The class hierarchy of the flare visualization library</h2>
+
+<h3>Description</h3>
+
+<p>This dataset contains the graph that describes the class hierarchy for the
+<a href="http://flare.prefuse.org">Flare</a> ActionScript visualization library. It
+contains both the class hierarchy as well as the import connections between
+classes. This dataset has been used extensively in the D3.js documentation
+and examples and are included here to make it easy to redo the examples in
+ggraph.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+flare
+</pre>
+
+
+<h3>Format</h3>
+
+<p>A list of three data.frames describing the software structure of
+flare:
+</p>
+
+<dl>
+<dt>edges</dt><dd><p>This data.frame maps the hierarchical structure of the class
+hierarchy as an edgelist, with the class in <code>from</code> being the superclass
+of the class in <code>to</code>.</p>
+</dd>
+<dt>vertices</dt><dd><p>This data.frame gives additional information on the classes.
+It contains the full name, size and short name of each class.</p>
+</dd>
+<dt>imports</dt><dd><p>This data.frame contains the class imports for each class
+implementation. The <code>from</code> column gives the importing class and the
+<code>to</code> column gives the import.</p>
+</dd>
+</dl>
+
+
+<h3>Source</h3>
+
+<p>The data have been adapted from the JSON downloaded from
+<a href="https://gist.github.com/mbostock/1044242#file-readme-flare-imports-json">https://gist.github.com/mbostock/1044242#file-readme-flare-imports-json</a>
+courtesy of Mike Bostock. The Flare framework is the work of the
+<a href="http://vis.berkeley.edu/">UC Berkeley Visualization Lab</a>.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>ggraph</em> version 2.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

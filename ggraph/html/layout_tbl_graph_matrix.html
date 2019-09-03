@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Place nodes on a diagonal</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for layout_tbl_graph_matrix {ggraph}"><tr><td>layout_tbl_graph_matrix {ggraph}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Place nodes on a diagonal</h2>
+
+<h3>Description</h3>
+
+<p>This layout puts all nodes on a diagonal, thus preparing the layout for use
+with <code><a href="geom_edge_point.html">geom_edge_point()</a></code> resulting in a matrix layout. While matrix
+layouts excel in scalability, the interpretation of the visual is very
+dependent on the sorting of the nodes. Different sorting algorithms have been
+implemented in <code>tidygraph</code> and these can be used directly. Behrisch
+<em>et al.</em> (2016) have provided a nice overview of some of the different
+sorting algorithms and what insight they might bring, along with a rundown of
+different patterns to look out for.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+layout_tbl_graph_matrix(graph, circular = FALSE, sort.by = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>An <code>tbl_graph</code> object</p>
+</td></tr>
+<tr valign="top"><td><code>circular</code></td>
+<td>
+<p>Ignored</p>
+</td></tr>
+<tr valign="top"><td><code>sort.by</code></td>
+<td>
+<p>An expression providing the sorting of the nodes. If <code>NULL</code>
+the nodes will be ordered by their index in the graph.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A data.frame with the columns <code>x</code>, <code>y</code>, <code>circular</code> as
+well as any information stored as node variables in the tbl_graph object.
+</p>
+
+
+<h3>References</h3>
+
+<p>Behrisch, M., Bach, B., Riche, N. H., Schreck, T., Fekete, J.-D. (2016).
+<em>Matrix Reordering Methods for Table and Network Visualization</em>.
+Computer Graphics Forum, 35: 693–716. <a href="http://doi.org/10.1111/cgf.12935">http://doi.org/10.1111/cgf.12935</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other layout_tbl_graph_*: <code><a href="layout_tbl_graph_auto.html">layout_tbl_graph_auto</a></code>,
+<code><a href="layout_tbl_graph_backbone.html">layout_tbl_graph_backbone</a></code>,
+<code><a href="layout_tbl_graph_centrality.html">layout_tbl_graph_centrality</a></code>,
+<code><a href="layout_tbl_graph_circlepack.html">layout_tbl_graph_circlepack</a></code>,
+<code><a href="layout_tbl_graph_dendrogram.html">layout_tbl_graph_dendrogram</a></code>,
+<code><a href="layout_tbl_graph_eigen.html">layout_tbl_graph_eigen</a></code>,
+<code><a href="layout_tbl_graph_fabric.html">layout_tbl_graph_fabric</a></code>,
+<code><a href="layout_tbl_graph_focus.html">layout_tbl_graph_focus</a></code>,
+<code><a href="layout_tbl_graph_hive.html">layout_tbl_graph_hive</a></code>,
+<code><a href="layout_tbl_graph_igraph.html">layout_tbl_graph_igraph</a></code>,
+<code><a href="layout_tbl_graph_linear.html">layout_tbl_graph_linear</a></code>,
+<code><a href="layout_tbl_graph_manual.html">layout_tbl_graph_manual</a></code>,
+<code><a href="layout_tbl_graph_partition.html">layout_tbl_graph_partition</a></code>,
+<code><a href="layout_tbl_graph_pmds.html">layout_tbl_graph_pmds</a></code>,
+<code><a href="layout_tbl_graph_stress.html">layout_tbl_graph_stress</a></code>,
+<code><a href="layout_tbl_graph_treemap.html">layout_tbl_graph_treemap</a></code>,
+<code><a href="layout_tbl_graph_unrooted.html">layout_tbl_graph_unrooted</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>ggraph</em> version 2.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

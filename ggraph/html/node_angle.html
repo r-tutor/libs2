@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Get the angle of nodes and edges</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for node_angle {ggraph}"><tr><td>node_angle {ggraph}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Get the angle of nodes and edges</h2>
+
+<h3>Description</h3>
+
+<p>These helper functions makes it easy to calculate the angle associated with
+nodes and edges. For nodes the angle is defined as the angle of the vector
+pointing towards the node position, and is thus mainly suited for circular
+layouts where it can be used to calculate the angle of labels. For edges it
+is simply the angle of the vector describing the edge.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+node_angle(x, y, degrees = TRUE)
+
+edge_angle(x, y, xend, yend, degrees = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x, y</code></td>
+<td>
+<p>A vector of positions</p>
+</td></tr>
+<tr valign="top"><td><code>degrees</code></td>
+<td>
+<p>Logical. Should the angle be returned in degree (<code>TRUE</code>)
+or radians (<code>FALSE</code>). Defaults to <code>TRUE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>xend, yend</code></td>
+<td>
+<p>The end position of the edge</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A vector with the angle of each node/edge
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+require(tidygraph)
+flareGraph &lt;- tbl_graph(flare$vertices, flare$edges)
+
+ggraph(flareGraph, 'dendrogram', circular = TRUE) +
+  geom_edge_diagonal0() +
+  geom_node_text(aes(filter = leaf, angle = node_angle(x, y), label = shortName),
+    hjust = 'outward', size = 2
+  ) +
+  expand_limits(x = c(-1.3, 1.3), y = c(-1.3, 1.3))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggraph</em> version 2.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

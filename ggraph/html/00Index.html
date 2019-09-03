@@ -11,7 +11,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;ggraph&rsquo; version 1.0.2</h2>
+</div><h2>Documentation for package &lsquo;ggraph&rsquo; version 2.0.0</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
@@ -23,7 +23,6 @@
 <p style="text-align: center;">
 <a href="# "> </a>
 <a href="#C">C</a>
-<a href="#D">D</a>
 <a href="#E">E</a>
 <a href="#F">F</a>
 <a href="#G">G</a>
@@ -32,16 +31,18 @@
 <a href="#L">L</a>
 <a href="#N">N</a>
 <a href="#P">P</a>
+<a href="#Q">Q</a>
 <a href="#R">R</a>
 <a href="#S">S</a>
 <a href="#T">T</a>
 <a href="#U">U</a>
 <a href="#W">W</a>
+<a href="#misc">misc</a>
 </p>
 
 <table width="100%">
 <tr><td style="width: 25%;"><a href="ggraph-package.html">ggraph-package</a></td>
-<td>ggraph: Grammar of Graph Graphics</td></tr>
+<td>ggraph: An Implementation of Grammar of Graphics for Graphs and Networks</td></tr>
 </table>
 
 <h2><a name="C">-- C --</a></h2>
@@ -49,34 +50,19 @@
 <table width="100%">
 <tr><td style="width: 25%;"><a href="geometry.html">circle</a></td>
 <td>Define simple shapes for line capping</td></tr>
-<tr><td style="width: 25%;"><a href="ggraph.html">createLayout</a></td>
-<td>Create a ggraph plot</td></tr>
 <tr><td style="width: 25%;"><a href="ggraph.html">create_layout</a></td>
 <td>Create a ggraph plot</td></tr>
 <tr><td style="width: 25%;"><a href="ggraph.html">create_layout.default</a></td>
 <td>Create a ggraph plot</td></tr>
-<tr><td style="width: 25%;"><a href="ggraph.html">create_layout.dendrogram</a></td>
+<tr><td style="width: 25%;"><a href="ggraph.html">create_layout.layout_ggraph</a></td>
 <td>Create a ggraph plot</td></tr>
-<tr><td style="width: 25%;"><a href="ggraph.html">create_layout.hclust</a></td>
+<tr><td style="width: 25%;"><a href="ggraph.html">create_layout.tbl_graph</a></td>
 <td>Create a ggraph plot</td></tr>
-<tr><td style="width: 25%;"><a href="ggraph.html">create_layout.igraph</a></td>
-<td>Create a ggraph plot</td></tr>
-<tr><td style="width: 25%;"><a href="ggraph.html">create_layout.network</a></td>
-<td>Create a ggraph plot</td></tr>
-</table>
-
-<h2><a name="D">-- D --</a></h2>
-
-<table width="100%">
-<tr><td style="width: 25%;"><a href="den_to_igraph.html">den_to_igraph</a></td>
-<td>Convert a dendrogram into an igraph object</td></tr>
 </table>
 
 <h2><a name="E">-- E --</a></h2>
 
 <table width="100%">
-<tr><td style="width: 25%;"><a href="node_angle.html">eAngle</a></td>
-<td>Get the angle of nodes and edges</td></tr>
 <tr><td style="width: 25%;"><a href="node_angle.html">edge_angle</a></td>
 <td>Get the angle of nodes and edges</td></tr>
 <tr><td style="width: 25%;"><a href="geometry.html">ellipsis</a></td>
@@ -99,26 +85,28 @@
 <h2><a name="G">-- G --</a></h2>
 
 <table width="100%">
-<tr><td style="width: 25%;"><a href="get_con.html">gCon</a></td>
-<td>Create a connection extractor function</td></tr>
-<tr><td style="width: 25%;"><a href="get_edges.html">gEdges</a></td>
-<td>Create edge extractor function</td></tr>
 <tr><td style="width: 25%;"><a href="geometry.html">geometry</a></td>
 <td>Define simple shapes for line capping</td></tr>
 <tr><td style="width: 25%;"><a href="geom_axis_hive.html">geom_axis_hive</a></td>
 <td>Draw rectangular bars and labels on hive axes</td></tr>
 <tr><td style="width: 25%;"><a href="geom_conn_bundle.html">geom_conn_bundle</a></td>
-<td>Create heirarchical edge bundles between node connections</td></tr>
+<td>Create hierarchical edge bundles between node connections</td></tr>
 <tr><td style="width: 25%;"><a href="geom_conn_bundle.html">geom_conn_bundle0</a></td>
-<td>Create heirarchical edge bundles between node connections</td></tr>
+<td>Create hierarchical edge bundles between node connections</td></tr>
 <tr><td style="width: 25%;"><a href="geom_conn_bundle.html">geom_conn_bundle2</a></td>
-<td>Create heirarchical edge bundles between node connections</td></tr>
+<td>Create hierarchical edge bundles between node connections</td></tr>
 <tr><td style="width: 25%;"><a href="geom_edge_arc.html">geom_edge_arc</a></td>
 <td>Draw edges as Arcs</td></tr>
 <tr><td style="width: 25%;"><a href="geom_edge_arc.html">geom_edge_arc0</a></td>
 <td>Draw edges as Arcs</td></tr>
 <tr><td style="width: 25%;"><a href="geom_edge_arc.html">geom_edge_arc2</a></td>
 <td>Draw edges as Arcs</td></tr>
+<tr><td style="width: 25%;"><a href="geom_edge_bend.html">geom_edge_bend</a></td>
+<td>Draw edges as diagonals</td></tr>
+<tr><td style="width: 25%;"><a href="geom_edge_bend.html">geom_edge_bend0</a></td>
+<td>Draw edges as diagonals</td></tr>
+<tr><td style="width: 25%;"><a href="geom_edge_bend.html">geom_edge_bend2</a></td>
+<td>Draw edges as diagonals</td></tr>
 <tr><td style="width: 25%;"><a href="geom_edge_density.html">geom_edge_density</a></td>
 <td>Show edges as a density map</td></tr>
 <tr><td style="width: 25%;"><a href="geom_edge_diagonal.html">geom_edge_diagonal</a></td>
@@ -155,22 +143,38 @@
 <td>Draw edges as diagonals</td></tr>
 <tr><td style="width: 25%;"><a href="geom_edge_loop.html">geom_edge_loop0</a></td>
 <td>Draw edges as diagonals</td></tr>
+<tr><td style="width: 25%;"><a href="geom_edge_parallel.html">geom_edge_parallel</a></td>
+<td>Draw multi edges as parallel lines</td></tr>
+<tr><td style="width: 25%;"><a href="geom_edge_parallel.html">geom_edge_parallel0</a></td>
+<td>Draw multi edges as parallel lines</td></tr>
+<tr><td style="width: 25%;"><a href="geom_edge_parallel.html">geom_edge_parallel2</a></td>
+<td>Draw multi edges as parallel lines</td></tr>
+<tr><td style="width: 25%;"><a href="geom_edge_point.html">geom_edge_point</a></td>
+<td>Draw edges as glyphs</td></tr>
+<tr><td style="width: 25%;"><a href="geom_edge_span.html">geom_edge_span</a></td>
+<td>Draw edges as vertical spans</td></tr>
+<tr><td style="width: 25%;"><a href="geom_edge_span.html">geom_edge_span0</a></td>
+<td>Draw edges as vertical spans</td></tr>
+<tr><td style="width: 25%;"><a href="geom_edge_span.html">geom_edge_span2</a></td>
+<td>Draw edges as vertical spans</td></tr>
+<tr><td style="width: 25%;"><a href="geom_edge_tile.html">geom_edge_tile</a></td>
+<td>Draw edges as glyphs</td></tr>
 <tr><td style="width: 25%;"><a href="geom_node_arc_bar.html">geom_node_arc_bar</a></td>
-<td>Show nodes as circles</td></tr>
+<td>Show nodes as thick arcs</td></tr>
 <tr><td style="width: 25%;"><a href="geom_node_circle.html">geom_node_circle</a></td>
 <td>Show nodes as circles</td></tr>
 <tr><td style="width: 25%;"><a href="geom_node_text.html">geom_node_label</a></td>
 <td>Annotate nodes with text</td></tr>
 <tr><td style="width: 25%;"><a href="geom_node_point.html">geom_node_point</a></td>
 <td>Show nodes as points</td></tr>
+<tr><td style="width: 25%;"><a href="geom_node_range.html">geom_node_range</a></td>
+<td>Show nodes as a line spanning a horizontal range</td></tr>
 <tr><td style="width: 25%;"><a href="geom_node_text.html">geom_node_text</a></td>
 <td>Annotate nodes with text</td></tr>
 <tr><td style="width: 25%;"><a href="geom_node_tile.html">geom_node_tile</a></td>
 <td>Draw the rectangles in a treemap</td></tr>
-<tr><td style="width: 25%;"><a href="geom_node_tile.html">geom_node_treemap</a></td>
-<td>Draw the rectangles in a treemap</td></tr>
-<tr><td style="width: 25%;"><a href="geom_node_tile.html">geom_treemap</a></td>
-<td>Draw the rectangles in a treemap</td></tr>
+<tr><td style="width: 25%;"><a href="geom_node_voronoi.html">geom_node_voronoi</a></td>
+<td>Show nodes as voronoi tiles</td></tr>
 <tr><td style="width: 25%;"><a href="get_con.html">get_con</a></td>
 <td>Create a connection extractor function</td></tr>
 <tr><td style="width: 25%;"><a href="get_edges.html">get_edges</a></td>
@@ -206,51 +210,57 @@
 <table width="100%">
 <tr><td style="width: 25%;"><a href="geometry.html">label_rect</a></td>
 <td>Define simple shapes for line capping</td></tr>
-<tr><td style="width: 25%;"><a href="ggraph.html">layout_dendrogram</a></td>
-<td>Create a ggraph plot</td></tr>
-<tr><td style="width: 25%;"><a href="layout_dendrogram_dendrogram.html">layout_dendrogram_auto</a></td>
-<td>Dendrogram layout for layout_dendrogram</td></tr>
-<tr><td style="width: 25%;"><a href="layout_dendrogram_dendrogram.html">layout_dendrogram_dendrogram</a></td>
-<td>Dendrogram layout for layout_dendrogram</td></tr>
-<tr><td style="width: 25%;"><a href="layout_dendrogram_even.html">layout_dendrogram_even</a></td>
-<td>Even layout for layout_dendrogram</td></tr>
 <tr><td style="width: 25%;"><a href="ggraph.html">layout_ggraph</a></td>
 <td>Create a ggraph plot</td></tr>
-<tr><td style="width: 25%;"><a href="ggraph.html">layout_hclust</a></td>
+<tr><td style="width: 25%;"><a href="ggraph.html">layout_tbl_graph</a></td>
 <td>Create a ggraph plot</td></tr>
-<tr><td style="width: 25%;"><a href="ggraph.html">layout_igraph</a></td>
-<td>Create a ggraph plot</td></tr>
-<tr><td style="width: 25%;"><a href="layout_igraph_igraph.html">layout_igraph_auto</a></td>
-<td>Use igraph layout algorithms for layout_igraph</td></tr>
-<tr><td style="width: 25%;"><a href="layout_igraph_circlepack.html">layout_igraph_circlepack</a></td>
+<tr><td style="width: 25%;"><a href="layout_tbl_graph_auto.html">layout_tbl_graph_auto</a></td>
+<td>Automatically pick a layout based on graph type</td></tr>
+<tr><td style="width: 25%;"><a href="layout_tbl_graph_backbone.html">layout_tbl_graph_backbone</a></td>
+<td>Place node to emphasize group structure</td></tr>
+<tr><td style="width: 25%;"><a href="layout_tbl_graph_centrality.html">layout_tbl_graph_centrality</a></td>
+<td>Place nodes in circles according to centrality measure</td></tr>
+<tr><td style="width: 25%;"><a href="layout_tbl_graph_circlepack.html">layout_tbl_graph_circlepack</a></td>
 <td>Calculate nodes as circles packed within their parent circle</td></tr>
-<tr><td style="width: 25%;"><a href="layout_igraph_dendrogram.html">layout_igraph_dendrogram</a></td>
-<td>Apply a dendrogram layout to layout_igraph</td></tr>
-<tr><td style="width: 25%;"><a href="layout_igraph_hive.html">layout_igraph_hive</a></td>
+<tr><td style="width: 25%;"><a href="layout_tbl_graph_dendrogram.html">layout_tbl_graph_dendrogram</a></td>
+<td>Apply a dendrogram layout to layout_tbl_graph</td></tr>
+<tr><td style="width: 25%;"><a href="layout_tbl_graph_eigen.html">layout_tbl_graph_eigen</a></td>
+<td>Place nodes according to their eigenvalues</td></tr>
+<tr><td style="width: 25%;"><a href="layout_tbl_graph_fabric.html">layout_tbl_graph_fabric</a></td>
+<td>Create a fabric layout</td></tr>
+<tr><td style="width: 25%;"><a href="layout_tbl_graph_focus.html">layout_tbl_graph_focus</a></td>
+<td>Place nodes in circles based on distance to a specific node</td></tr>
+<tr><td style="width: 25%;"><a href="layout_tbl_graph_hive.html">layout_tbl_graph_hive</a></td>
 <td>Place nodes in a Hive Plot layout</td></tr>
-<tr><td style="width: 25%;"><a href="layout_igraph_igraph.html">layout_igraph_igraph</a></td>
-<td>Use igraph layout algorithms for layout_igraph</td></tr>
-<tr><td style="width: 25%;"><a href="layout_igraph_linear.html">layout_igraph_linear</a></td>
+<tr><td style="width: 25%;"><a href="layout_tbl_graph_igraph.html">layout_tbl_graph_igraph</a></td>
+<td>Use igraph layout algorithms for layout_tbl_graph</td></tr>
+<tr><td style="width: 25%;"><a href="layout_tbl_graph_linear.html">layout_tbl_graph_linear</a></td>
 <td>Place nodes on a line or circle</td></tr>
-<tr><td style="width: 25%;"><a href="layout_igraph_manual.html">layout_igraph_manual</a></td>
-<td>Manually specify a layout for layout_igraph</td></tr>
-<tr><td style="width: 25%;"><a href="layout_igraph_partition.html">layout_igraph_partition</a></td>
+<tr><td style="width: 25%;"><a href="layout_tbl_graph_manual.html">layout_tbl_graph_manual</a></td>
+<td>Manually specify a layout for layout_tbl_graph</td></tr>
+<tr><td style="width: 25%;"><a href="layout_tbl_graph_matrix.html">layout_tbl_graph_matrix</a></td>
+<td>Place nodes on a diagonal</td></tr>
+<tr><td style="width: 25%;"><a href="layout_tbl_graph_partition.html">layout_tbl_graph_partition</a></td>
 <td>Calculate nodes as areas dividing their parent</td></tr>
-<tr><td style="width: 25%;"><a href="layout_igraph_treemap.html">layout_igraph_treemap</a></td>
-<td>Calculate nodes as rectangels subdividing that of their parent</td></tr>
-<tr><td style="width: 25%;"><a href="ggraph.html">layout_network</a></td>
-<td>Create a ggraph plot</td></tr>
+<tr><td style="width: 25%;"><a href="layout_tbl_graph_pmds.html">layout_tbl_graph_pmds</a></td>
+<td>Place nodes based on a multidimensional scaling of a set of pivot nodes</td></tr>
+<tr><td style="width: 25%;"><a href="layout_tbl_graph_stress.html">layout_tbl_graph_sparse_stress</a></td>
+<td>Place nodes using stress majorisation</td></tr>
+<tr><td style="width: 25%;"><a href="layout_tbl_graph_stress.html">layout_tbl_graph_stress</a></td>
+<td>Place nodes using stress majorisation</td></tr>
+<tr><td style="width: 25%;"><a href="layout_tbl_graph_treemap.html">layout_tbl_graph_treemap</a></td>
+<td>Calculate nodes as rectangles subdividing that of their parent</td></tr>
+<tr><td style="width: 25%;"><a href="layout_tbl_graph_unrooted.html">layout_tbl_graph_unrooted</a></td>
+<td>Create an unrooted layout using equal-angle or equal-daylight</td></tr>
 </table>
 
 <h2><a name="N">-- N --</a></h2>
 
 <table width="100%">
-<tr><td style="width: 25%;"><a href="node_angle.html">nAngle</a></td>
-<td>Get the angle of nodes and edges</td></tr>
-<tr><td style="width: 25%;"><a href="network_to_igraph.html">network_to_igraph</a></td>
-<td>Coerce network to igraph</td></tr>
 <tr><td style="width: 25%;"><a href="node_angle.html">node_angle</a></td>
 <td>Get the angle of nodes and edges</td></tr>
+<tr><td style="width: 25%;"><a href="layout_tbl_graph_fabric.html">node_rank_fabric</a></td>
+<td>Create a fabric layout</td></tr>
 </table>
 
 <h2><a name="P">-- P --</a></h2>
@@ -258,6 +268,13 @@
 <table width="100%">
 <tr><td style="width: 25%;"><a href="pack_circles.html">pack_circles</a></td>
 <td>Pack circles together</td></tr>
+</table>
+
+<h2><a name="Q">-- Q --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="qgraph.html">qgraph</a></td>
+<td>Quickplot wrapper for networks</td></tr>
 </table>
 
 <h2><a name="R">-- R --</a></h2>
@@ -423,16 +440,8 @@
 <td>A theme tuned for graph visualizations</td></tr>
 <tr><td style="width: 25%;"><a href="theme_graph.html">th_foreground</a></td>
 <td>A theme tuned for graph visualizations</td></tr>
-<tr><td style="width: 25%;"><a href="tree_apply.html">treeApply</a></td>
-<td>Apply a function recursively to a tree</td></tr>
-<tr><td style="width: 25%;"><a href="tree_apply.html">tree_apply</a></td>
-<td>Apply a function recursively to a tree</td></tr>
-<tr><td style="width: 25%;"><a href="tree_apply.html">tree_apply.default</a></td>
-<td>Apply a function recursively to a tree</td></tr>
-<tr><td style="width: 25%;"><a href="tree_apply.html">tree_apply.dendrogram</a></td>
-<td>Apply a function recursively to a tree</td></tr>
-<tr><td style="width: 25%;"><a href="tree_apply.html">tree_apply.igraph</a></td>
-<td>Apply a function recursively to a tree</td></tr>
+<tr><td style="width: 25%;"><a href="theme_graph.html">th_no_axes</a></td>
+<td>A theme tuned for graph visualizations</td></tr>
 </table>
 
 <h2><a name="U">-- U --</a></h2>
@@ -447,5 +456,12 @@
 <table width="100%">
 <tr><td style="width: 25%;"><a href="whigs.html">whigs</a></td>
 <td>Membership network of American Whigs</td></tr>
+</table>
+
+<h2><a name="misc">-- misc --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="ggraph-package.html">_PACKAGE</a></td>
+<td>ggraph: An Implementation of Grammar of Graphics for Graphs and Networks</td></tr>
 </table>
 </body></html>

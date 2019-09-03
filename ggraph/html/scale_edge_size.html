@@ -1,0 +1,211 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Edge size scales</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for scale_edge_size {ggraph}"><tr><td>scale_edge_size {ggraph}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Edge size scales</h2>
+
+<h3>Description</h3>
+
+<p>This set of scales defines new size scales for edge geoms equivalent to the
+ones already defined by ggplot2. See <code><a href="../../ggplot2/html/scale_size.html">ggplot2::scale_size()</a></code> for
+more information. The different geoms will know whether to use edge scales or
+the standard scales so it is not necessary to write <code>edge_size</code> in
+the call to the geom - just use <code>size</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+scale_edge_size_continuous(..., range = c(1, 6))
+
+scale_edge_radius(..., range = c(1, 6))
+
+scale_edge_size(..., range = c(1, 6))
+
+scale_edge_size_discrete(..., range = c(2, 6))
+
+scale_edge_size_area(..., max_size = 6)
+
+scale_edge_size_manual(..., values)
+
+scale_edge_size_identity(..., guide = "none")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Arguments passed on to <code>continuous_scale</code>
+</p>
+
+<dl>
+<dt>name</dt><dd><p>The name of the scale. Used as the axis or legend title. If
+<code>waiver()</code>, the default, the name of the scale is taken from the first
+mapping used for that aesthetic. If <code>NULL</code>, the legend title will be
+omitted.</p>
+</dd>
+<dt>breaks</dt><dd><p>One of:
+</p>
+
+<ul>
+<li> <p><code>NULL</code> for no breaks
+</p>
+</li>
+<li> <p><code>waiver()</code> for the default breaks computed by the
+transformation object
+</p>
+</li>
+<li><p> A numeric vector of positions
+</p>
+</li>
+<li><p> A function that takes the limits as input and returns breaks
+as output
+</p>
+</li></ul>
+</dd>
+<dt>minor_breaks</dt><dd><p>One of:
+</p>
+
+<ul>
+<li> <p><code>NULL</code> for no minor breaks
+</p>
+</li>
+<li> <p><code>waiver()</code> for the default breaks (one minor break between
+each major break)
+</p>
+</li>
+<li><p> A numeric vector of positions
+</p>
+</li>
+<li><p> A function that given the limits returns a vector of minor breaks.
+</p>
+</li></ul>
+</dd>
+<dt>labels</dt><dd><p>One of:
+</p>
+
+<ul>
+<li> <p><code>NULL</code> for no labels
+</p>
+</li>
+<li> <p><code>waiver()</code> for the default labels computed by the
+transformation object
+</p>
+</li>
+<li><p> A character vector giving labels (must be same length as <code>breaks</code>)
+</p>
+</li>
+<li><p> A function that takes the breaks as input and returns labels
+as output
+</p>
+</li></ul>
+</dd>
+<dt>limits</dt><dd><p>One of:
+</p>
+
+<ul>
+<li> <p><code>NULL</code> to use the default scale range
+</p>
+</li>
+<li><p> A numeric vector of length two providing limits of the scale.
+Use <code>NA</code> to refer to the existing minimum or maximum
+</p>
+</li>
+<li><p> A function that accepts the existing (automatic) limits and returns
+new limits
+</p>
+</li></ul>
+</dd>
+<dt>oob</dt><dd><p>Function that handles limits outside of the scale limits
+(out of bounds). The default replaces out of bounds values with <code>NA</code>.</p>
+</dd>
+<dt>na.value</dt><dd><p>Missing values will be replaced with this value.</p>
+</dd>
+<dt>trans</dt><dd><p>Either the name of a transformation object, or the
+object itself. Built-in transformations include &quot;asn&quot;, &quot;atanh&quot;,
+&quot;boxcox&quot;, &quot;date&quot;, &quot;exp&quot;, &quot;hms&quot;, &quot;identity&quot;, &quot;log&quot;, &quot;log10&quot;, &quot;log1p&quot;, &quot;log2&quot;,
+&quot;logit&quot;, &quot;modulus&quot;, &quot;probability&quot;, &quot;probit&quot;, &quot;pseudo_log&quot;, &quot;reciprocal&quot;,
+&quot;reverse&quot;, &quot;sqrt&quot; and &quot;time&quot;.
+</p>
+<p>A transformation object bundles together a transform, its inverse,
+and methods for generating breaks and labels. Transformation objects
+are defined in the scales package, and are called <code>name_trans</code>, e.g.
+<code><a href="../../scales/html/boxcox_trans.html">scales::boxcox_trans()</a></code>. You can create your own
+transformation with <code><a href="../../scales/html/trans_new.html">scales::trans_new()</a></code>.</p>
+</dd>
+<dt>guide</dt><dd><p>A function used to create a guide or its name. See
+<code><a href="../../ggplot2/html/guides.html">guides()</a></code> for more info.</p>
+</dd>
+<dt>position</dt><dd><p>The position of the axis. &quot;left&quot; or &quot;right&quot; for vertical
+scales, &quot;top&quot; or &quot;bottom&quot; for horizontal scales</p>
+</dd>
+<dt>super</dt><dd><p>The super class to use for the constructed scale</p>
+</dd>
+<dt>expand</dt><dd><p>Vector of range expansion constants used to add some
+padding around the data, to ensure that they are placed some distance
+away from the axes. Use the convenience function <code><a href="../../ggplot2/html/expand_scale.html">expand_scale()</a></code>
+to generate the values for the <code>expand</code> argument. The defaults are to
+expand the scale by 5% on each side for continuous variables, and by
+0.6 units on each side for discrete variables.</p>
+</dd>
+</dl>
+</td></tr>
+<tr valign="top"><td><code>range</code></td>
+<td>
+<p>a numeric vector of length 2 that specifies the minimum and
+maximum size of the plotting symbol after transformation.</p>
+</td></tr>
+<tr valign="top"><td><code>max_size</code></td>
+<td>
+<p>Size of largest points.</p>
+</td></tr>
+<tr valign="top"><td><code>values</code></td>
+<td>
+<p>a set of aesthetic values to map data values to. If this
+is a named vector, then the values will be matched based on the names.
+If unnamed, values will be matched in order (usually alphabetical) with
+the limits of the scale. Any data values that don't match will be
+given <code>na.value</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>guide</code></td>
+<td>
+<p>A function used to create a guide or its name. See
+<code><a href="../../ggplot2/html/guides.html">guides()</a></code> for more info.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A ggproto object inheriting from <code>Scale</code>
+</p>
+
+
+<h3>Note</h3>
+
+<p>In ggplot2 size conflates both line width and point size into one
+scale. In ggraph there is also a width scale (<code><a href="scale_edge_width.html">scale_edge_width()</a></code>)
+that is used for linewidth. As edges are often represented by lines the width
+scale is the most common.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other scale_edge_*: <code><a href="scale_edge_alpha.html">scale_edge_alpha</a></code>,
+<code><a href="scale_edge_colour.html">scale_edge_colour</a></code>,
+<code><a href="scale_edge_fill.html">scale_edge_fill</a></code>,
+<code><a href="scale_edge_linetype.html">scale_edge_linetype</a></code>,
+<code><a href="scale_edge_shape.html">scale_edge_shape</a></code>,
+<code><a href="scale_edge_width.html">scale_edge_width</a></code>,
+<code><a href="scale_label_size.html">scale_label_size</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>ggraph</em> version 2.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

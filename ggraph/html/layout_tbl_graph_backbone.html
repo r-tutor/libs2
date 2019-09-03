@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Place node to emphasize group structure</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for layout_tbl_graph_backbone {ggraph}"><tr><td>layout_tbl_graph_backbone {ggraph}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Place node to emphasize group structure</h2>
+
+<h3>Description</h3>
+
+<p>This layout is optimised for drawing small-world types of graphs often found
+in social networks, where distinct groups are still highly connected to the
+remaining graph. Typical layouts struggle with this as they attempt to
+minimise the edge length of all edges equally. The backbone layout is based
+on weighing edges based on how well they hold together communities. The end
+result is that communities tend to stick together despite high
+interconnectivity.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+layout_tbl_graph_backbone(graph, keep = 0.2, circular = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>A tbl_graph object</p>
+</td></tr>
+<tr valign="top"><td><code>keep</code></td>
+<td>
+<p>The fraction of edges to use for creating the backbone</p>
+</td></tr>
+<tr valign="top"><td><code>circular</code></td>
+<td>
+<p>ignored</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A data.frame with the columns <code>x</code>, <code>y</code>, <code>circular</code> as
+well as any information stored as node variables in the tbl_graph object.
+Further an edge attribute called <code>backbone</code> is added giving whether the edge
+was selected as backbone.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>The underlying algorithm is implemented in the graphlayouts package
+by David Schoch
+</p>
+
+
+<h3>References</h3>
+
+<p>Nocaj, A., Ortmann, M., &amp; Brandes, U. (2015). <em>Untangling the hairballs of
+multi-centered, small-world online social media networks.</em> Journal of Graph
+Algorithms and Applications: JGAA, 19(2), 595-618.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other layout_tbl_graph_*: <code><a href="layout_tbl_graph_auto.html">layout_tbl_graph_auto</a></code>,
+<code><a href="layout_tbl_graph_centrality.html">layout_tbl_graph_centrality</a></code>,
+<code><a href="layout_tbl_graph_circlepack.html">layout_tbl_graph_circlepack</a></code>,
+<code><a href="layout_tbl_graph_dendrogram.html">layout_tbl_graph_dendrogram</a></code>,
+<code><a href="layout_tbl_graph_eigen.html">layout_tbl_graph_eigen</a></code>,
+<code><a href="layout_tbl_graph_fabric.html">layout_tbl_graph_fabric</a></code>,
+<code><a href="layout_tbl_graph_focus.html">layout_tbl_graph_focus</a></code>,
+<code><a href="layout_tbl_graph_hive.html">layout_tbl_graph_hive</a></code>,
+<code><a href="layout_tbl_graph_igraph.html">layout_tbl_graph_igraph</a></code>,
+<code><a href="layout_tbl_graph_linear.html">layout_tbl_graph_linear</a></code>,
+<code><a href="layout_tbl_graph_manual.html">layout_tbl_graph_manual</a></code>,
+<code><a href="layout_tbl_graph_matrix.html">layout_tbl_graph_matrix</a></code>,
+<code><a href="layout_tbl_graph_partition.html">layout_tbl_graph_partition</a></code>,
+<code><a href="layout_tbl_graph_pmds.html">layout_tbl_graph_pmds</a></code>,
+<code><a href="layout_tbl_graph_stress.html">layout_tbl_graph_stress</a></code>,
+<code><a href="layout_tbl_graph_treemap.html">layout_tbl_graph_treemap</a></code>,
+<code><a href="layout_tbl_graph_unrooted.html">layout_tbl_graph_unrooted</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>ggraph</em> version 2.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

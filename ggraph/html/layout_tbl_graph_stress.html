@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Place nodes using stress majorisation</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for layout_tbl_graph_stress {ggraph}"><tr><td>layout_tbl_graph_stress {ggraph}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Place nodes using stress majorisation</h2>
+
+<h3>Description</h3>
+
+<p>This layout is related to the stress-minimization algorithm known as
+Kamada-Kawai (avalaiable as the 'kk' layout), but uses another optimization
+strategy. It generally have better runtime, quality, and stability compared
+to the Kamada-Kawai layout and is thus generally preferred. The sparse
+version of the layout have better performance (especially on larger networks)
+at the expense of layout quality, but will generally outperform many other
+algorithms for large graphs in both runtime and quality (e.g. the 'drl'
+layout from igraph).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+layout_tbl_graph_stress(graph, weights = NULL, niter = 500,
+  tolerance = 1e-04, mds = TRUE, bbox = 50, circular = FALSE)
+
+layout_tbl_graph_sparse_stress(graph, pivots, weights = NULL,
+  niter = 500, circular = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>a tbl_graph object</p>
+</td></tr>
+<tr valign="top"><td><code>weights</code></td>
+<td>
+<p>An expression evaluated on the edge data to provide edge
+weights for the layout. Currently ignored for the sparse version</p>
+</td></tr>
+<tr valign="top"><td><code>niter</code></td>
+<td>
+<p>number of iterations during stress optimization</p>
+</td></tr>
+<tr valign="top"><td><code>tolerance</code></td>
+<td>
+<p>stopping criterion for stress optimization</p>
+</td></tr>
+<tr valign="top"><td><code>mds</code></td>
+<td>
+<p>should an MDS layout be used as initial layout (default: TRUE)</p>
+</td></tr>
+<tr valign="top"><td><code>bbox</code></td>
+<td>
+<p>constrain dimension of output. Only relevant to determine the
+placement of disconnected graphs.</p>
+</td></tr>
+<tr valign="top"><td><code>circular</code></td>
+<td>
+<p>ignored</p>
+</td></tr>
+<tr valign="top"><td><code>pivots</code></td>
+<td>
+<p>The number of pivot nodes.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A data.frame with the columns <code>x</code>, <code>y</code>, <code>circular</code> as
+well as any information stored as node variables in the tbl_graph object.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>The underlying algorithm is implemented in the graphlayouts package
+by David Schoch
+</p>
+
+
+<h3>References</h3>
+
+<p>Gansner, E. R., Koren, Y., &amp; North, S. (2004). <em>Graph drawing by stress
+majorization.</em> In International Symposium on Graph Drawing (pp. 239-250). Springer, Berlin, Heidelberg.
+</p>
+<p>Ortmann, M. and Klimenta, M. and Brandes, U. (2016). <em>A Sparse Stress Model.</em> https://arxiv.org/pdf/1608.08909.pdf
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other layout_tbl_graph_*: <code><a href="layout_tbl_graph_auto.html">layout_tbl_graph_auto</a></code>,
+<code><a href="layout_tbl_graph_backbone.html">layout_tbl_graph_backbone</a></code>,
+<code><a href="layout_tbl_graph_centrality.html">layout_tbl_graph_centrality</a></code>,
+<code><a href="layout_tbl_graph_circlepack.html">layout_tbl_graph_circlepack</a></code>,
+<code><a href="layout_tbl_graph_dendrogram.html">layout_tbl_graph_dendrogram</a></code>,
+<code><a href="layout_tbl_graph_eigen.html">layout_tbl_graph_eigen</a></code>,
+<code><a href="layout_tbl_graph_fabric.html">layout_tbl_graph_fabric</a></code>,
+<code><a href="layout_tbl_graph_focus.html">layout_tbl_graph_focus</a></code>,
+<code><a href="layout_tbl_graph_hive.html">layout_tbl_graph_hive</a></code>,
+<code><a href="layout_tbl_graph_igraph.html">layout_tbl_graph_igraph</a></code>,
+<code><a href="layout_tbl_graph_linear.html">layout_tbl_graph_linear</a></code>,
+<code><a href="layout_tbl_graph_manual.html">layout_tbl_graph_manual</a></code>,
+<code><a href="layout_tbl_graph_matrix.html">layout_tbl_graph_matrix</a></code>,
+<code><a href="layout_tbl_graph_partition.html">layout_tbl_graph_partition</a></code>,
+<code><a href="layout_tbl_graph_pmds.html">layout_tbl_graph_pmds</a></code>,
+<code><a href="layout_tbl_graph_treemap.html">layout_tbl_graph_treemap</a></code>,
+<code><a href="layout_tbl_graph_unrooted.html">layout_tbl_graph_unrooted</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>ggraph</em> version 2.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>
