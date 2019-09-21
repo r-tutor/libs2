@@ -50,12 +50,15 @@ set_palette             Set Color Palette
 show_line_types         Line types available in R
 show_point_shapes       Point shapes available in R
 stat_bracket            Add Brackets with Labels to a GGPlot
+stat_central_tendency   Add Central Tendency Measures to a GGPLot
 stat_chull              Plot convex hull of a set of points
 stat_compare_means      Add Mean Comparison P-values to a ggplot
 stat_conf_ellipse       Plot confidence ellipses.
 stat_cor                Add Correlation Coefficients with P-values to a
                         Scatter Plot
 stat_mean               Draw group mean points
+stat_overlay_normal_density
+                        Overlay Normal Density Plot
 stat_pvalue_manual      Add Manually P-values to a ggplot
 stat_regline_equation   Add Regression Line Equation and R-Square to a
                         GGPLOT.

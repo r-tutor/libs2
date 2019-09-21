@@ -7,6 +7,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -94,7 +95,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -408,9 +409,12 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <p>Note that the methods listed above are the only ones that can be used to select variables inside the steps. Also, minus signs can be used to deselect variables.</p>
 <p>For our data, we can add an operation to impute the predictors. There are many ways to do this and <code>recipes</code> includes a few steps for this purpose:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">grep</span>(<span class="st">&quot;impute$&quot;</span>, <span class="kw">ls</span>(<span class="st">&quot;package:recipes&quot;</span>), <span class="dt">value =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt; [1] &quot;step_bagimpute&quot;    &quot;step_knnimpute&quot;    &quot;step_lowerimpute&quot; </span></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt; [4] &quot;step_meanimpute&quot;   &quot;step_medianimpute&quot; &quot;step_modeimpute&quot;  </span></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt; [7] &quot;step_rollimpute&quot;</span></a></code></pre></div>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt;  [1] &quot;step_bagimpute&quot;          &quot;step_knnimpute&quot;         </span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt;  [3] &quot;step_lowerimpute&quot;        &quot;step_meanimpute&quot;        </span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt;  [5] &quot;step_medianimpute&quot;       &quot;step_modeimpute&quot;        </span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt;  [7] &quot;step_rollimpute&quot;         &quot;tunable.step_bagimpute&quot; </span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt;  [9] &quot;tunable.step_knnimpute&quot;  &quot;tunable.step_meanimpute&quot;</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt; [11] &quot;tunable.step_rollimpute&quot;</span></a></code></pre></div>
 <p>Here, <em>K</em>-nearest neighbor imputation will be used. This works for both numeric and non-numeric predictors and defaults <em>K</em> to five To do this, it selects all predictors and then removes those that are numeric:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">imputed &lt;-<span class="st"> </span>rec_obj <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb6-2" data-line-number="2"><span class="st">  </span><span class="kw">step_knnimpute</span>(<span class="kw">all_predictors</span>()) </a>
@@ -425,7 +429,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb6-12" data-line-number="12"><span class="co">#&gt; Operations:</span></a>
 <a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-14" data-line-number="14"><span class="co">#&gt; 5-nearest neighbor imputation for all_predictors</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-14" data-line-number="14"><span class="co">#&gt; K-nearest neighbor imputation for all_predictors</span></a></code></pre></div>
 <p>It is important to realize that the <em>specific</em> variables have not been declared yet (as shown when the recipe is printed above). In some preprocessing steps, variables will be added or removed from the current list of possible variables.</p>
 <p>Since some predictors are categorical in nature (i.e. nominal), it would make sense to convert these factor predictors into numeric dummy variables (aka indicator variables) using <code>step_dummy</code>. To do this, the step selects all predictors then removes those that are numeric:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">ind_vars &lt;-<span class="st"> </span>imputed <span class="op">%&gt;%</span></a>
@@ -441,7 +445,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt; Operations:</span></a>
 <a class="sourceLine" id="cb7-13" data-line-number="13"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb7-14" data-line-number="14"><span class="co">#&gt; 5-nearest neighbor imputation for all_predictors</span></a>
+<a class="sourceLine" id="cb7-14" data-line-number="14"><span class="co">#&gt; K-nearest neighbor imputation for all_predictors</span></a>
 <a class="sourceLine" id="cb7-15" data-line-number="15"><span class="co">#&gt; Dummy variables from all_predictors, -, all_numeric()</span></a></code></pre></div>
 <p>At this point in the recipe, all of the predictor should be encoded as numeric, we can further add more steps to center and scale them:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">standardized &lt;-<span class="st"> </span>ind_vars <span class="op">%&gt;%</span></a>
@@ -458,7 +462,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <a class="sourceLine" id="cb8-12" data-line-number="12"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb8-13" data-line-number="13"><span class="co">#&gt; Operations:</span></a>
 <a class="sourceLine" id="cb8-14" data-line-number="14"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb8-15" data-line-number="15"><span class="co">#&gt; 5-nearest neighbor imputation for all_predictors</span></a>
+<a class="sourceLine" id="cb8-15" data-line-number="15"><span class="co">#&gt; K-nearest neighbor imputation for all_predictors</span></a>
 <a class="sourceLine" id="cb8-16" data-line-number="16"><span class="co">#&gt; Dummy variables from all_predictors, -, all_numeric()</span></a>
 <a class="sourceLine" id="cb8-17" data-line-number="17"><span class="co">#&gt; Centering for all_predictors</span></a>
 <a class="sourceLine" id="cb8-18" data-line-number="18"><span class="co">#&gt; Scaling for all_predictors</span></a></code></pre></div>
@@ -477,7 +481,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <a class="sourceLine" id="cb9-12" data-line-number="12"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb9-13" data-line-number="13"><span class="co">#&gt; Operations:</span></a>
 <a class="sourceLine" id="cb9-14" data-line-number="14"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb9-15" data-line-number="15"><span class="co">#&gt; 5-nearest neighbor imputation for Home, Time, Age, Marital, Records, ... [trained]</span></a>
+<a class="sourceLine" id="cb9-15" data-line-number="15"><span class="co">#&gt; K-nearest neighbor imputation for Home, Time, Age, Marital, Records, ... [trained]</span></a>
 <a class="sourceLine" id="cb9-16" data-line-number="16"><span class="co">#&gt; Dummy variables from Home, Marital, Records, Job [trained]</span></a>
 <a class="sourceLine" id="cb9-17" data-line-number="17"><span class="co">#&gt; Centering for Seniority, Time, Age, Expenses, ... [trained]</span></a>
 <a class="sourceLine" id="cb9-18" data-line-number="18"><span class="co">#&gt; Scaling for Seniority, Time, Age, Expenses, ... [trained]</span></a></code></pre></div>
@@ -527,20 +531,22 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 #&gt; [19] &quot;step_holiday&quot;       &quot;step_hyperbolic&quot;    &quot;step_ica&quot;          
 #&gt; [22] &quot;step_integer&quot;       &quot;step_interact&quot;      &quot;step_intercept&quot;    
 #&gt; [25] &quot;step_inverse&quot;       &quot;step_invlogit&quot;      &quot;step_isomap&quot;       
-#&gt; [28] &quot;step_knnimpute&quot;     &quot;step_kpca&quot;          &quot;step_lag&quot;          
-#&gt; [31] &quot;step_lincomb&quot;       &quot;step_log&quot;           &quot;step_logit&quot;        
-#&gt; [34] &quot;step_lowerimpute&quot;   &quot;step_meanimpute&quot;    &quot;step_medianimpute&quot; 
-#&gt; [37] &quot;step_modeimpute&quot;    &quot;step_mutate&quot;        &quot;step_naomit&quot;       
-#&gt; [40] &quot;step_nnmf&quot;          &quot;step_normalize&quot;     &quot;step_novel&quot;        
-#&gt; [43] &quot;step_ns&quot;            &quot;step_num2factor&quot;    &quot;step_nzv&quot;          
-#&gt; [46] &quot;step_ordinalscore&quot;  &quot;step_other&quot;         &quot;step_pca&quot;          
-#&gt; [49] &quot;step_pls&quot;           &quot;step_poly&quot;          &quot;step_profile&quot;      
-#&gt; [52] &quot;step_range&quot;         &quot;step_ratio&quot;         &quot;step_regex&quot;        
-#&gt; [55] &quot;step_relu&quot;          &quot;step_rm&quot;            &quot;step_rollimpute&quot;   
-#&gt; [58] &quot;step_sample&quot;        &quot;step_scale&quot;         &quot;step_shuffle&quot;      
-#&gt; [61] &quot;step_slice&quot;         &quot;step_spatialsign&quot;   &quot;step_sqrt&quot;         
-#&gt; [64] &quot;step_string2factor&quot; &quot;step_unknown&quot;       &quot;step_unorder&quot;      
-#&gt; [67] &quot;step_upsample&quot;      &quot;step_window&quot;        &quot;step_zv&quot;</code></pre>
+#&gt; [28] &quot;step_knnimpute&quot;     &quot;step_kpca&quot;          &quot;step_kpca_poly&quot;    
+#&gt; [31] &quot;step_kpca_rbf&quot;      &quot;step_lag&quot;           &quot;step_lincomb&quot;      
+#&gt; [34] &quot;step_log&quot;           &quot;step_logit&quot;         &quot;step_lowerimpute&quot;  
+#&gt; [37] &quot;step_meanimpute&quot;    &quot;step_medianimpute&quot;  &quot;step_modeimpute&quot;   
+#&gt; [40] &quot;step_mutate&quot;        &quot;step_mutate_at&quot;     &quot;step_naomit&quot;       
+#&gt; [43] &quot;step_nnmf&quot;          &quot;step_normalize&quot;     &quot;step_novel&quot;        
+#&gt; [46] &quot;step_ns&quot;            &quot;step_num2factor&quot;    &quot;step_nzv&quot;          
+#&gt; [49] &quot;step_ordinalscore&quot;  &quot;step_other&quot;         &quot;step_pca&quot;          
+#&gt; [52] &quot;step_pls&quot;           &quot;step_poly&quot;          &quot;step_profile&quot;      
+#&gt; [55] &quot;step_range&quot;         &quot;step_ratio&quot;         &quot;step_regex&quot;        
+#&gt; [58] &quot;step_relu&quot;          &quot;step_rename&quot;        &quot;step_rename_at&quot;    
+#&gt; [61] &quot;step_rm&quot;            &quot;step_rollimpute&quot;    &quot;step_sample&quot;       
+#&gt; [64] &quot;step_scale&quot;         &quot;step_shuffle&quot;       &quot;step_slice&quot;        
+#&gt; [67] &quot;step_spatialsign&quot;   &quot;step_sqrt&quot;          &quot;step_string2factor&quot;
+#&gt; [70] &quot;step_unknown&quot;       &quot;step_unorder&quot;       &quot;step_upsample&quot;     
+#&gt; [73] &quot;step_window&quot;        &quot;step_zv&quot;</code></pre>
 </div>
 <div id="checks" class="section level2">
 <h2>Checks</h2>
@@ -549,8 +555,8 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">trained_rec &lt;-<span class="st"> </span>trained_rec <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb13-2" data-line-number="2"><span class="st">  </span><span class="kw">check_missing</span>(<span class="kw">contains</span>(<span class="st">&quot;Marital&quot;</span>))</a></code></pre></div>
 <p>Currently, <code>recipes</code> includes:</p>
-<pre><code>#&gt; [1] &quot;check_cols&quot;    &quot;check_missing&quot; &quot;check_name&quot;    &quot;check_range&quot;  
-#&gt; [5] &quot;check_type&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;check_cols&quot;       &quot;check_missing&quot;    &quot;check_name&quot;      
+#&gt; [4] &quot;check_new_values&quot; &quot;check_range&quot;      &quot;check_type&quot;</code></pre>
 </div>
 
 <script type="text/javascript">
@@ -573,6 +579,9 @@ window.onload = function() {
   }
 }
 </script>
+
+
+<!-- code folding -->
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

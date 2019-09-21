@@ -30,6 +30,9 @@ elect80	elect80
 elect80_lw	elect80
 elev	elev
 getisord	getisord
+go_x	getisord
+go_xyz	getisord
+go_y	getisord
 grain	grain
 hawaii	hawaii
 hopkins	hopkins
@@ -67,6 +70,3 @@ wheat	wheat
 world	world
 worldbank_df	worldbank_df
 wrld	world
-x	getisord
-xyz	getisord
-y	getisord

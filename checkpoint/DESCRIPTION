@@ -15,11 +15,11 @@ Description: The goal of checkpoint is to solve the problem of package
     server (<https://mran.microsoft.com/>). Immediately after completion
     of the rsync mirror process, the process takes a snapshot, thus creating the
     archive. Snapshot archives exist starting from 2014-09-17.
-Version: 0.4.6
-Date: 2019-07-15
-Author: Microsoft Corporation
-Maintainer: Hong Ooi <hongooi@microsoft.com>
-Copyright: Microsoft
+Version: 0.4.7
+Authors@R: c(
+    person("Hong", "Ooi", , "hongooi@microsoft.com", role=c("aut", "cre")),
+    person("Microsoft", role="cph")
+    )
 License: GPL-2
 URL: https://github.com/RevolutionAnalytics/checkpoint
 BugReports: https://www.github.com/RevolutionAnalytics/checkpoint/issues
@@ -27,9 +27,12 @@ Imports: utils
 Depends: R(>= 3.0.0)
 Suggests: knitr, rmarkdown, testthat(>= 0.9), MASS, darts, mockery, cli
 VignetteBuilder: knitr
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
 NeedsCompilation: no
-Packaged: 2019-07-16 22:16:13 UTC; richcala
+Packaged: 2019-09-08 21:10:09 UTC; hongo
+Author: Hong Ooi [aut, cre],
+  Microsoft [cph]
+Maintainer: Hong Ooi <hongooi@microsoft.com>
 Repository: CRAN
-Date/Publication: 2019-07-27 22:00:09 UTC
-Built: R 3.6.1; ; 2019-08-03 00:03:57 UTC; windows
+Date/Publication: 2019-09-08 21:30:02 UTC
+Built: R 3.6.1; ; 2019-09-14 07:17:34 UTC; windows

@@ -13,7 +13,7 @@ cycle_hire_osm
 eire: eire.coords.utm eire.df eire.nb eire.polys.utm
 elect80: dll e80_queen elect80 elect80_lw k4
 elev
-getisord: x xyz y
+getisord: go_x go_xyz go_y
 grain
 hawaii
 hopkins

@@ -14,6 +14,7 @@ check	step
 check_cols	check_cols
 check_missing	check_missing
 check_name	check_name
+check_new_values	check_new_values
 check_range	check_range
 check_type	check_type
 covers	covers
@@ -34,6 +35,8 @@ fixed.default	fixed
 fixed.factor	fixed
 fixed.numeric	fixed
 fixed.POSIXct	fixed
+format_ch_vec	format_ch_vec
+format_selectors	format_ch_vec
 formula.recipe	formula.recipe
 fully_trained	fully_trained
 has_role	has_role
@@ -99,6 +102,8 @@ step_invlogit	step_invlogit
 step_isomap	step_isomap
 step_knnimpute	step_knnimpute
 step_kpca	step_kpca
+step_kpca_poly	step_kpca_poly
+step_kpca_rbf	step_kpca_rbf
 step_lag	step_lag
 step_lincomb	step_lincomb
 step_log	step_log
@@ -108,6 +113,7 @@ step_meanimpute	step_meanimpute
 step_medianimpute	step_medianimpute
 step_modeimpute	step_modeimpute
 step_mutate	step_mutate
+step_mutate_at	step_mutate_at
 step_naomit	step_naomit
 step_nnmf	step_nnmf
 step_normalize	step_normalize
@@ -125,6 +131,8 @@ step_range	step_range
 step_ratio	step_ratio
 step_regex	step_regex
 step_relu	step_relu
+step_rename	step_rename
+step_rename_at	step_rename_at
 step_rm	step_rm
 step_rollimpute	step_rollimpute
 step_sample	step_sample
@@ -176,6 +184,8 @@ tidy.step_invlogit	step_invlogit
 tidy.step_isomap	step_isomap
 tidy.step_knnimpute	step_knnimpute
 tidy.step_kpca	step_kpca
+tidy.step_kpca_poly	step_kpca_poly
+tidy.step_kpca_rbf	step_kpca_rbf
 tidy.step_lincomb	step_lincomb
 tidy.step_log	step_log
 tidy.step_logit	step_logit
@@ -184,6 +194,7 @@ tidy.step_meanimpute	step_meanimpute
 tidy.step_medianimpute	step_medianimpute
 tidy.step_modeimpute	step_modeimpute
 tidy.step_mutate	step_mutate
+tidy.step_mutate_at	step_mutate
 tidy.step_naomit	step_naomit
 tidy.step_nnmf	step_nnmf
 tidy.step_normalize	step_normalize
@@ -201,6 +212,8 @@ tidy.step_range	step_range
 tidy.step_ratio	step_ratio
 tidy.step_regex	step_regex
 tidy.step_relu	step_relu
+tidy.step_rename	step_rename
+tidy.step_rename_at	step_rename
 tidy.step_rm	step_rm
 tidy.step_rollimpute	step_rollimpute
 tidy.step_sample	step_sample
@@ -216,6 +229,28 @@ tidy.step_upsample	step_upsample
 tidy.step_window	step_window
 tidy.step_YeoJohnson	step_YeoJohnson
 tidy.step_zv	step_zv
+tunable.step	tunable.step
+tunable.step_bagimpute	tunable.step
+tunable.step_bs	tunable.step
+tunable.step_corr	tunable.step
+tunable.step_discretize	tunable.step
+tunable.step_downsample	tunable.step
+tunable.step_ica	tunable.step
+tunable.step_isomap	tunable.step
+tunable.step_knnimpute	tunable.step
+tunable.step_kpca_poly	tunable.step
+tunable.step_kpca_rbf	tunable.step
+tunable.step_meanimpute	tunable.step
+tunable.step_nnmf	tunable.step
+tunable.step_ns	tunable.step
+tunable.step_nzv	tunable.step
+tunable.step_other	tunable.step
+tunable.step_pca	tunable.step
+tunable.step_pls	tunable.step
+tunable.step_poly	tunable.step
+tunable.step_rollimpute	tunable.step
+tunable.step_upsample	tunable.step
+tunable.step_window	tunable.step
 update.step	update.step
 update_role	roles
 yj_trans	recipes-internal

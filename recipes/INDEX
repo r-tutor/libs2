@@ -4,6 +4,7 @@ bake                    Apply a Trained Data Recipe
 biomass                 Biomass Data
 check_cols              Check if all Columns are Present
 check_missing           Check for Missing Values
+check_new_values        Check for Missing Values
 check_range             Check Range Consistency
 covers                  Raw Cover Type Data
 credit_data             Credit Data
@@ -56,6 +57,9 @@ step_invlogit           Inverse Logit Transformation
 step_isomap             Isomap Embedding
 step_knnimpute          Imputation via K-Nearest Neighbors
 step_kpca               Kernel PCA Signal Extraction
+step_kpca_poly          Polynomial Kernel PCA Signal Extraction
+step_kpca_rbf           Radial Basis Function Kernel PCA Signal
+                        Extraction
 step_lag                Create a lagged predictor
 step_lincomb            Linear Combination Filter
 step_log                Logarithmic Transformation
@@ -66,6 +70,7 @@ step_meanimpute         Impute Numeric Data Using the Mean
 step_medianimpute       Impute Numeric Data Using the Median
 step_modeimpute         Impute Nominal Data Using the Most Common Value
 step_mutate             Add new variables using 'mutate'
+step_mutate_at          Mutate multiple columns
 step_naomit             Remove observations with missing values
 step_nnmf               NNMF Signal Extraction
 step_normalize          Center and scale numeric data
@@ -86,6 +91,8 @@ step_regex              Create Dummy Variables using Regular
                         Expressions
 step_relu               Apply (Smoothed) Rectified Linear
                         Transformation
+step_rename             Rename variables by name
+step_rename_at          Rename multiple columns
 step_rm                 General Variable Filter
 step_rollimpute         Impute Numeric Data Using a Rolling Window
                         Statistic

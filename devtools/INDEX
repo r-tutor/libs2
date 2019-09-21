@@ -12,11 +12,11 @@ check_man               Check documentation, as 'R CMD check' does.
 check_rhub              Run CRAN checks for package on R-hub
 check_win               Build windows binary package.
 clean_vignettes         Clean built vignettes.
+create                  Create a package
 dev_mode                Activate and deactivate development mode.
+dev_sitrep              Report package development situation
 devtools                Package development tools for R.
 document                Use roxygen to document a package.
-dr_devtools             Diagnose potential devtools issues
-dr_github               Diagnose potential GitHub issues
 install                 Install a local development package.
 install_deps            Install package dependencies if needed.
 lint                    Lint all source files in a package.

@@ -74,11 +74,13 @@ set_palette	set_palette
 show_line_types	show_line_types
 show_point_shapes	show_point_shapes
 stat_bracket	geom_bracket
+stat_central_tendency	stat_central_tendency
 stat_chull	stat_chull
 stat_compare_means	stat_compare_means
 stat_conf_ellipse	stat_conf_ellipse
 stat_cor	stat_cor
 stat_mean	stat_mean
+stat_overlay_normal_density	stat_overlay_normal_density
 stat_pvalue_manual	stat_pvalue_manual
 stat_regline_equation	stat_regline_equation
 stat_stars	stat_stars
