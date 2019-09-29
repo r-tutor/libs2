@@ -11,8 +11,7 @@
 
 <p>The <code>nslookup</code> function is similar to <code>nsl</code> but works on all platforms
 and can resolve ipv6 addresses if supported by the OS. Default behavior raises an
-error if lookup fails. The <code>has_internet</code> function tests the internet
-connection by resolving a random address.
+error if lookup fails.
 </p>
 
 
@@ -47,6 +46,14 @@ has_internet()
 </table>
 
 
+<h3>Details</h3>
+
+<p>The <code>has_internet</code> function tests for internet connectivity by performing a
+dns lookup. If a proxy server is detected, it will also check for connectivity by
+connecting via the proxy.
+</p>
+
+
 <h3>Examples</h3>
 
 <pre>
@@ -57,5 +64,5 @@ nslookup("www.r-project.org")
 nslookup("ipv6.test-ipv6.com", ipv4_only = FALSE, error = FALSE)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>curl</em> version 4.0 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>curl</em> version 4.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -19,7 +19,7 @@ line breaks.
 
 <pre>
 send_mail(mail_from, mail_rcpt, message, smtp_server = "localhost",
-  verbose = TRUE, ...)
+  use_ssl = FALSE, verbose = TRUE, ...)
 </pre>
 
 
@@ -43,6 +43,10 @@ message, including sender/recipient/subject headers. See example.</p>
 <tr valign="top"><td><code>smtp_server</code></td>
 <td>
 <p>address of the SMTP server without the <code>smtp://</code> part</p>
+</td></tr>
+<tr valign="top"><td><code>use_ssl</code></td>
+<td>
+<p>connect with the smtp server over TLS. Gmail requires this.</p>
 </td></tr>
 <tr valign="top"><td><code>verbose</code></td>
 <td>
@@ -78,5 +82,5 @@ send_mail(sender, recipients, smtp_server = 'smtp.mailgun.org',
   message = message, username = username, password = password)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>curl</em> version 4.0 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>curl</em> version 4.2 <a href="00Index.html">Index</a>]</div>
 </body></html>
