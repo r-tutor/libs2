@@ -1,7 +1,7 @@
 Package: bookdown
 Type: Package
 Title: Authoring Books and Technical Documents with R Markdown
-Version: 0.13
+Version: 0.14
 Authors@R: c(
     person("Yihui", "Xie", role = c("aut", "cre"), email = "xie@yihui.name", comment = c(ORCID = "0000-0003-0645-5666")),
     person("JJ", "Allaire", role = "ctb"),
@@ -25,6 +25,7 @@ Authors@R: c(
     person("Jeff", "Allen", role = "ctb"),
     person("Jennifer", "Bryan", role = "ctb"),
     person("Jonathan", "McPhers", role = "ctb"),
+    person("JooYoung", "Seo", role="ctb", comment = c(ORCID = "0000-0002-4064-6012")),
     person("Junwen", "Huang", role = "ctb"),
     person("Kevin", "Cheung", role = "ctb"),
     person("Kevin", "Ushey", role = "ctb"),
@@ -37,6 +38,7 @@ Authors@R: c(
     person("Michal", "Bojanowski", role = "ctb"),
     person("Noam", "Ross", role = "ctb"),
     person("Peter", "Hickey", role = "ctb"),
+    person("Romain", "Lesur", role = "ctb", comment = c(ORCID = "0000-0002-0721-5595")),
     person("Sahir", "Bhatnagar", role = "ctb"),
     person("Steve", "Simpson", role = "ctb"),
     person("Thierry", "Onkelinx", role = "ctb", comment = c(ORCID = "0000-0001-8804-4216")),
@@ -45,6 +47,7 @@ Authors@R: c(
     person("Zhuoer", "Dong", role = "ctb"),
     person(family = "RStudio Inc", role = "cph"),
     person("Bartek", "Szopka", role = "ctb", comment = "The jQuery Highlight plugin"),
+    person("Zeno", "Rocha", role = "cph", comment = "clipboard.js library"),
     person(family = "jQuery Foundation", role = "cph", comment = "jQuery library"),
     person(family = "jQuery contributors", role = c("ctb", "cph"), comment = "jQuery library; authors listed in inst/resources/AUTHORS"),
     person(family = "MathQuill contributors", role = "ctb", comment = "The MathQuill library; authors listed in inst/resources/AUTHORS"),
@@ -64,7 +67,7 @@ LazyData: TRUE
 RoxygenNote: 6.1.1
 Encoding: UTF-8
 NeedsCompilation: no
-Packaged: 2019-08-20 21:43:21 UTC; yihui
+Packaged: 2019-10-01 03:16:12 UTC; yihui
 Author: Yihui Xie [aut, cre] (<https://orcid.org/0000-0003-0645-5666>),
   JJ Allaire [ctb],
   Albert Kim [ctb],
@@ -87,6 +90,7 @@ Author: Yihui Xie [aut, cre] (<https://orcid.org/0000-0003-0645-5666>),
   Jeff Allen [ctb],
   Jennifer Bryan [ctb],
   Jonathan McPhers [ctb],
+  JooYoung Seo [ctb] (<https://orcid.org/0000-0002-4064-6012>),
   Junwen Huang [ctb],
   Kevin Cheung [ctb],
   Kevin Ushey [ctb],
@@ -99,6 +103,7 @@ Author: Yihui Xie [aut, cre] (<https://orcid.org/0000-0003-0645-5666>),
   Michal Bojanowski [ctb],
   Noam Ross [ctb],
   Peter Hickey [ctb],
+  Romain Lesur [ctb] (<https://orcid.org/0000-0002-0721-5595>),
   Sahir Bhatnagar [ctb],
   Steve Simpson [ctb],
   Thierry Onkelinx [ctb] (<https://orcid.org/0000-0001-8804-4216>),
@@ -107,6 +112,7 @@ Author: Yihui Xie [aut, cre] (<https://orcid.org/0000-0003-0645-5666>),
   Zhuoer Dong [ctb],
   RStudio Inc [cph],
   Bartek Szopka [ctb] (The jQuery Highlight plugin),
+  Zeno Rocha [cph] (clipboard.js library),
   jQuery Foundation [cph] (jQuery library),
   jQuery contributors [ctb, cph] (jQuery library; authors listed in
     inst/resources/AUTHORS),
@@ -114,5 +120,5 @@ Author: Yihui Xie [aut, cre] (<https://orcid.org/0000-0003-0645-5666>),
     inst/resources/AUTHORS),
   FriendCode Inc [cph, ctb] (The gitbook style, with modifications)
 Repository: CRAN
-Date/Publication: 2019-08-21 15:10:06 UTC
-Built: R 3.6.1; ; 2019-08-25 09:08:45 UTC; windows
+Date/Publication: 2019-10-01 18:20:13 UTC
+Built: R 3.6.1; ; 2019-10-03 09:25:07 UTC; windows

@@ -1,8 +1,14 @@
+# CHANGES IN blogdown VERSION 0.16
+
+## MINOR CHANGES
+
+- Added tests for some utility functions (thanks, @novica, #405).
+
 # CHANGES IN blogdown VERSION 0.15
 
 ## BUG FIXES
 
-- _Insert Image_ addin now works correctly on windows. (thanks, @filippogambarota, @cderv, #397)
+- _Insert Image_ addin now works correctly on windows (thanks, @filippogambarota @cderv, #397).
 
 # CHANGES IN blogdown VERSION 0.14
 

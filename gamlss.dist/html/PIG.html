@@ -10,14 +10,15 @@
 <h3>Description</h3>
 
 <p>The <code>PIG()</code> function defines the Poisson-inverse Gaussian distribution, a two parameter distribution, for a <code>gamlss.family</code> object to be used 
-in GAMLSS fitting using the function <code>gamlss()</code>.    
-The functions <code>dPIG</code>, <code>pPIG</code>, <code>qPIG</code> and <code>rPIG</code> define the density, distribution function, quantile function and random
-generation for the Poisson-inverse Gaussian <code>PIG()</code>, distribution. 
+in GAMLSS fitting using the function <code>gamlss()</code>.   The <code>PIG2()</code> function  is a repametrization of <code>PIG()</code> where <code>mu</code> and <code>sigma</code> are orthogonal see Heller <em>et al.</em> (2018).  
+</p>
+<p>The functions <code>dPIG</code>, <code>pPIG</code>, <code>qPIG</code> and <code>rPIG</code> define the density, distribution function, quantile function and random
+generation for the Poisson-inverse Gaussian <code>PIG()</code>, distribution.  Also codedPIG2, <code>pPIG2</code>, <code>qPIG2</code> and <code>rPIG2</code> are the equivalent functions for codePIG2()
 </p>
 <p>The functions <code>ZAPIG()</code> and <code>ZIPIG()</code> are the zero adjusted (hurdle) and zero inflated versions of the  Poisson-inverse Gaussian distribution, respectively. That is three  parameter distributions. 
 </p>
 <p>The functions <code>dZAPIG</code>, <code>dZIPIG</code>, <code>pZAPIG</code>,<code>pZIPIG</code>, <code>qZAPIG</code> <code>qZIPIG</code>  <code>rZAPIG</code> and  <code>rZIPIG</code> define the probability,  cumulative, quantile  and random
-generation functions for the zero adjusted and zero inflated  beta negative binomial distributions, <code>ZAPIG()</code>, <code>ZIPIG()</code>, respectively.
+generation functions for the zero adjusted and zero inflated  Poisson Inverse Gaussian distributions, <code>ZAPIG()</code>, <code>ZIPIG()</code>, respectively.
 </p>
 
 
@@ -30,6 +31,13 @@ pPIG(q, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE)
 qPIG(p, mu = 1, sigma = 1, lower.tail = TRUE, log.p = FALSE, 
      max.value = 10000)
 rPIG(n, mu = 1, sigma = 1, max.value = 10000)
+
+PIG2(mu.link = "log", sigma.link = "log")
+dPIG2(x, mu=0.5, sigma=0.02, log = FALSE)
+pPIG2(q, mu=0.5, sigma=0.02, lower.tail = TRUE, log.p = FALSE)
+qPIG2(p, mu=0.5, sigma=0.02, lower.tail = TRUE, log.p = FALSE, 
+     max.value = 10000)
+rPIG2(n, mu=0.5, sigma=0.02)
 
 ZIPIG(mu.link = "log", sigma.link = "log", nu.link = "logit")
 dZIPIG(x, mu = 1, sigma = 1, nu = 0.3, log = FALSE)
@@ -72,7 +80,7 @@ rZAPIG(n, mu = 1, sigma = 1, nu = 0.3, max.value = 10000)
 </td></tr>
 <tr valign="top"><td><code>sigma</code></td>
 <td>
-<p>vector of positive despersion parameter</p>
+<p>vector of positive dispersion parameter</p>
 </td></tr>
 <tr valign="top"><td><code>nu</code></td>
 <td>
@@ -136,11 +144,17 @@ is also a special case of the Sichel distribution <code>SI()</code> when  <i>&nu
 <p>Dean, C., Lawless,  J. F. and Willmot,  G. E., A mixed poisson-inverse-Gaussian regression model, <em>Canadian J. Statist.</em>,
 <b>17</b>, 2, pp 171-181
 </p>
+<p>Heller, G. Z., Couturier, D.L. and Heritier, S. R. (2018) Beyond mean modelling: Bias due to misspecification of dispersion in Poisson-inverse Gaussian regression
+<em>Biometrical Journal</em>, <b>2</b>, pp 333-342.
+</p>
 <p>Rigby, R. A. and  Stasinopoulos D. M. (2005). Generalized additive models for location, scale and shape,(with discussion), 
 <em>Appl. Statist.</em>, <b>54</b>, part 3, pp 507-554.
 </p>
+<p>Rigby, R. A., Stasinopoulos, D. M.,  Heller, G. Z.,  and De Bastiani, F. (2019)
+Distributions for modeling location, scale, and shape: Using GAMLSS in R, Chapman and Hall/CRC. An older version can be found in <a href="http://www.gamlss.com/">http://www.gamlss.com/</a>.
+</p>
 <p>Stasinopoulos D. M., Rigby R.A. and Akantziliotou C. (2006) Instructions on how to use the GAMLSS package in R.
-Accompanying documentation in the current GAMLSS  help files, (see also  <a href="http://www.gamlss.org/">http://www.gamlss.org/</a>).
+Accompanying documentation in the current GAMLSS  help files, (see also  <a href="http://www.gamlss.com/">http://www.gamlss.com/</a>).
 </p>
 <p>Stasinopoulos D. M. Rigby R.A. (2007) Generalized additive models for location scale and shape (GAMLSS) in R.
 <em>Journal of Statistical Software</em>, Vol. <b>23</b>, Issue 7, Dec 2007, <a href="http://www.jstatsoft.org/v23/i07">http://www.jstatsoft.org/v23/i07</a>. 
@@ -174,5 +188,5 @@ ZIPIG()
 ZAPIG()
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>gamlss.dist</em> version 5.1-4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>gamlss.dist</em> version 5.1-5 <a href="00Index.html">Index</a>]</div>
 </body></html>

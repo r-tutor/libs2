@@ -19,6 +19,7 @@ preview_chapter	render_book
 publish_book	publish_book
 render_book	render_book
 resolve_refs_html	resolve_refs_html
+rtf_document2	html_document2
 serve_book	serve_book
 tufte_book2	html_document2
 tufte_handout2	html_document2
