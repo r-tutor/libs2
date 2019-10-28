@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Add a ordinal, nominal, or logical scale to a ggvis object.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for scale_ordinal {ggvis}"><tr><td>scale_ordinal {ggvis}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Add a ordinal, nominal, or logical scale to a ggvis object.</h2>
+
+<h3>Description</h3>
+
+<p>Ordinal, nominal, and logical scales are all categorical, and are treated
+similarly by ggvis.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+scale_ordinal(vis, property, domain = NULL, range = NULL,
+  reverse = NULL, round = NULL, points = NULL, padding = NULL,
+  sort = NULL, name = property, label = NULL, override = NULL)
+
+scale_nominal(vis, property, domain = NULL, range = NULL,
+  reverse = NULL, round = NULL, points = NULL, padding = NULL,
+  sort = NULL, name = property, label = NULL, override = NULL)
+
+scale_logical(vis, property, domain = NULL, range = NULL,
+  reverse = NULL, round = NULL, points = NULL, padding = NULL,
+  sort = NULL, name = property, label = NULL, override = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>vis</code></td>
+<td>
+<p>A ggvis object.</p>
+</td></tr>
+<tr valign="top"><td><code>property</code></td>
+<td>
+<p>The name of a property, such as &quot;x&quot;, &quot;y&quot;, &quot;fill&quot;, &quot;stroke&quot;, etc.</p>
+</td></tr>
+<tr valign="top"><td><code>domain</code></td>
+<td>
+<p>The domain of the scale, representing the set of data values.
+For ordinal scales, a character vector; for quantitative scales, a numeric
+vector of length two. Either value (but not both) may be NA, in which
+case <code>domainMin</code> or <code>domainMax</code> is set. For dynamic scales, this
+can also be a reactive which returns the appropriate type of vector.</p>
+</td></tr>
+<tr valign="top"><td><code>range</code></td>
+<td>
+<p>The range of the scale, representing the set of visual values.
+For numeric values, the range can take the form of a two-element array with
+minimum and maximum values. For ordinal data, the range may by an array of
+desired output values, which are mapped to elements in the specified
+domain. The following range literals are also available: &quot;width&quot;, &quot;height&quot;,
+&quot;shapes&quot;, &quot;category10&quot;, &quot;category20&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>reverse</code></td>
+<td>
+<p>If true, flips the scale range.</p>
+</td></tr>
+<tr valign="top"><td><code>round</code></td>
+<td>
+<p>If true, rounds numeric output values to integers. This can be
+helpful for snapping to the pixel grid.</p>
+</td></tr>
+<tr valign="top"><td><code>points</code></td>
+<td>
+<p>If <code>TRUE</code> (default), distributes the ordinal values over a
+quantitative range at uniformly spaced points. The spacing of the points
+can be adjusted using the padding property. If <code>FALSE</code>, the ordinal
+scale will construct evenly-spaced bands, rather than points. Note that
+if any mark is added with a <code><a href="band.html">band</a>()</code> prop, then the scale for
+that prop will automatically have <code>points</code> set to <code>FALSE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>padding</code></td>
+<td>
+<p>Applies spacing among ordinal elements in the scale range.
+The actual effect depends on how the scale is configured. If the points
+parameter is true, the padding value is interpreted as a multiple of the
+spacing between points. A reasonable value is 1.0, such that the first and
+last point will be offset from the minimum and maximum value by half the
+distance between points. Otherwise, padding is typically in the range
+[0, 1] and corresponds to the fraction of space in the range interval to
+allocate to padding. A value of 0.5 means that the range band width will
+be equal to the padding width. For positional (x and y) scales, the default
+padding is 0.1. For other scales, the default padding is 0.5.</p>
+</td></tr>
+<tr valign="top"><td><code>sort</code></td>
+<td>
+<p>If <code>TRUE</code>, the values in the scale domain will be sorted
+according to their natural order. Default is <code>FALSE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>name</code></td>
+<td>
+<p>Name of the scale, such as &quot;x&quot;, &quot;y&quot;, &quot;fill&quot;, etc. Can also be an
+arbitrary name like &quot;foo&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>label</code></td>
+<td>
+<p>Label for the scale. Used for axis or legend titles.</p>
+</td></tr>
+<tr valign="top"><td><code>override</code></td>
+<td>
+<p>Should the domain specified by this ggvis_scale object
+override other ggvis_scale objects for the same scale? Useful when domain is
+manually specified. For example, by default, the domain of the scale
+will contain the range of the data, but when this is TRUE, the specified
+domain will override, and the domain can be smaller than the range of the
+data. If <code>FALSE</code>, the <code>domain</code> will not behave this way. If
+left <code>NULL</code>, then it will be treated as <code>TRUE</code> whenever
+<code>domain</code> is non-NULL.</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="scales.html">scales</a></code>, <code><a href="scale_numeric.html">scale_numeric</a></code>,
+<a href="https://github.com/trifacta/vega/wiki/Scales#ordinal-scale-properties">https://github.com/trifacta/vega/wiki/Scales#ordinal-scale-properties</a>,
+<a href="https://github.com/mbostock/d3/wiki/Ordinal-Scales">https://github.com/mbostock/d3/wiki/Ordinal-Scales</a>
+</p>
+<p>Other scales: <code><a href="scale_datetime.html">scale_datetime</a></code>,
+<code><a href="scale_numeric.html">scale_numeric</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+p &lt;- PlantGrowth %&gt;% ggvis(~group, ~weight) %&gt;% layer_points()
+
+p
+p %&gt;% scale_nominal("x", padding = 0)
+p %&gt;% scale_nominal("x", padding = 1)
+
+p %&gt;% scale_nominal("x", reverse = TRUE)
+
+p &lt;- ToothGrowth %&gt;% group_by(supp) %&gt;%
+  ggvis(~len, fill = ~supp) %&gt;%
+  layer_histograms(width = 4, stack = TRUE)
+
+# Control range of fill scale
+p %&gt;% scale_nominal("fill", range = c("pink", "lightblue"))
+
+# There's no default range when the data is categorical but the output range
+# is continuous, as in the case of opacity. In these cases, you can
+# manually specify the range for the scale.
+mtcars %&gt;% ggvis(x = ~wt, y = ~mpg, opacity = ~factor(cyl)) %&gt;%
+  layer_points() %&gt;%
+  scale_nominal("opacity", range = c(0.2, 1))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggvis</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

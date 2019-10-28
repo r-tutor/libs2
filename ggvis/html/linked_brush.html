@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create a linked brush object.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for linked_brush {ggvis}"><tr><td>linked_brush {ggvis}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create a linked brush object.</h2>
+
+<h3>Description</h3>
+
+<p>A linked brush has two sides: input and output
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+linked_brush(keys, fill = "red")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>keys</code></td>
+<td>
+<p>vector of all possible keys, if known.</p>
+</td></tr>
+<tr valign="top"><td><code>fill</code></td>
+<td>
+<p>brush colour</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A list with components:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>input</code></td>
+<td>
+<p>A function that takes a visualisation as an argument and
+adds an input brush to that plot</p>
+</td></tr>
+<tr valign="top"><td><code>selected</code></td>
+<td>
+<p>A reactive providing a logical vector that describes
+which points are under the brush</p>
+</td></tr>
+<tr valign="top"><td><code>fill</code></td>
+<td>
+<p>A reactive that gives the fill colour of points under the
+brush</p>
+</td></tr>
+</table>
+
+
+<h3>Note</h3>
+
+<p><code>linked_brush</code> is very new and is likely to change substantially
+in the future
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+lb &lt;- linked_brush(keys = 1:nrow(mtcars), "red")
+
+# Change the colour of the points
+mtcars %&gt;%
+ ggvis(~disp, ~mpg) %&gt;%
+ layer_points(fill := lb$fill, size.brush := 400) %&gt;%
+ lb$input()
+
+# Display one layer with all points and another layer with selected points
+library(shiny)
+mtcars %&gt;%
+ ggvis(~disp, ~mpg) %&gt;%
+ layer_points(size.brush := 400) %&gt;%
+ lb$input() %&gt;%
+ layer_points(fill := "red", data = reactive(mtcars[lb$selected(), ]))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggvis</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Display binned data</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for layer_histograms {ggvis}"><tr><td>layer_histograms {ggvis}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Display binned data</h2>
+
+<h3>Description</h3>
+
+<p>Display binned data
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+layer_histograms(vis, ..., width = NULL, center = NULL,
+  boundary = NULL, closed = c("right", "left"), stack = TRUE,
+  binwidth)
+
+layer_freqpolys(vis, ..., width = NULL, center = NULL,
+  boundary = NULL, closed = c("right", "left"), binwidth)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>vis</code></td>
+<td>
+<p>Visualisation to modify</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Visual properties used to override defaults.</p>
+</td></tr>
+<tr valign="top"><td><code>width</code></td>
+<td>
+<p>The width of the bins. The default is <code>NULL</code>, which yields
+30 bins that cover the range of the data. You should always override this
+value, exploring multiple widths to find the best to illustrate the stories
+in your data.</p>
+</td></tr>
+<tr valign="top"><td><code>center</code></td>
+<td>
+<p>The center of one of the bins.  Note that if center is above or
+below the range of the data, things will be shifted by an appropriate
+number of <code>width</code>s. To center on integers, for example, use
+<code>width=1</code> and <code>center=0</code>, even if <code>0</code> is outside the range
+of the data.  At most one of <code>center</code> and <code>boundary</code> may be
+specified.</p>
+</td></tr>
+<tr valign="top"><td><code>boundary</code></td>
+<td>
+<p>A boundary between two bins. As with <code>center</code>, things
+are shifted when <code>boundary</code> is outside the range of the data. For
+example, to center on integers, use <code>width = 1</code> and <code>boundary =
+0.5</code>, even if <code>1</code> is outside the range of the data.  At most one of
+<code>center</code> and <code>boundary</code> may be specified.</p>
+</td></tr>
+<tr valign="top"><td><code>closed</code></td>
+<td>
+<p>One of <code>"right"</code> or <code>"left"</code> indicating whether right
+or left edges of bins are included in the bin.</p>
+</td></tr>
+<tr valign="top"><td><code>stack</code></td>
+<td>
+<p>If <code>TRUE</code>, will automatically stack overlapping bars.</p>
+</td></tr>
+<tr valign="top"><td><code>binwidth</code></td>
+<td>
+<p>Deprecated; use <code>width</code> instead.</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="layer_bars.html">layer_bars</a></code> For bar graphs of counts at each unique
+x value, in contrast to a histogram's bins along x ranges.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create histograms and frequency polygons with layers
+mtcars %&gt;% ggvis(~mpg) %&gt;% layer_histograms()
+mtcars %&gt;% ggvis(~mpg) %&gt;% layer_histograms(width = 2)
+mtcars %&gt;% ggvis(~mpg) %&gt;% layer_freqpolys(width = 2)
+
+# These are equivalent to combining compute_bin with the corresponding
+# mark
+mtcars %&gt;% compute_bin(~mpg) %&gt;% ggvis(~x_, ~count_) %&gt;% layer_paths()
+
+# With grouping
+mtcars %&gt;% ggvis(~mpg, fill = ~factor(cyl)) %&gt;% group_by(cyl) %&gt;%
+  layer_histograms(width = 2)
+mtcars %&gt;% ggvis(~mpg, stroke = ~factor(cyl)) %&gt;% group_by(cyl) %&gt;%
+  layer_freqpolys(width = 2)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggvis</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

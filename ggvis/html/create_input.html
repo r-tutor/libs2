@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create a new interactive &quot;input&quot; object.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for create_input {ggvis}"><tr><td>create_input {ggvis}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create a new interactive &quot;input&quot; object.</h2>
+
+<h3>Description</h3>
+
+<p>An interactive input object is a reactive expression which wraps a reactive
+value. When the plot is rendered, an observer is created which pushes values
+into the reactive value in response to changes of an input object. Those
+changes invalidate the reactive expression, which will return the value,
+optionally passed through a mapping function.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+create_input(id = rand_id("input_"), default = NULL, map = identity,
+  controls = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>id</code></td>
+<td>
+<p>The name of the input object in the Shiny app, such as
+&quot;slider_1338869&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>default</code></td>
+<td>
+<p>The default (starting) value for the input.</p>
+</td></tr>
+<tr valign="top"><td><code>map</code></td>
+<td>
+<p>A mapping function. Defaults to <code>identity</code>, which simply
+returns the value unchanged.</p>
+</td></tr>
+<tr valign="top"><td><code>controls</code></td>
+<td>
+<p>A Shiny HTML tag object representing the UI for the controls.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This function is designed to be used by authors of new types of interactive
+inputs. If you are a ggvis user, please use one of the more specific input
+functions starting with the <code>input_</code>.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>ggvis</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

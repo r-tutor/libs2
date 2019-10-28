@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Define padding.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for padding {ggvis}"><tr><td>padding {ggvis}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Define padding.</h2>
+
+<h3>Description</h3>
+
+<p>Define padding.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+padding(top = NULL, right = NULL, bottom = NULL, left = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>top, right, bottom, left</code></td>
+<td>
+<p>Amount of padding on each border. Can either
+be a single number, &quot;auto&quot;, or &quot;strict&quot;</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+p &lt;- mtcars %&gt;% ggvis(~wt, ~mpg) %&gt;% layer_points()
+p %&gt;% set_options(padding = padding())
+p %&gt;% set_options(padding = padding(10, 10, 10, 10))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggvis</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

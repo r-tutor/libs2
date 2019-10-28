@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Automatically group data by grouping variables</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for auto_group {ggvis}"><tr><td>auto_group {ggvis}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Automatically group data by grouping variables</h2>
+
+<h3>Description</h3>
+
+<p>Use <code>auto_group</code> to group up a dataset on all categorical variables
+specified by props, and have each piece rendered by the same mark.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+auto_group(vis, exclude = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>vis</code></td>
+<td>
+<p>The ggvis visualisation to modify.</p>
+</td></tr>
+<tr valign="top"><td><code>exclude</code></td>
+<td>
+<p>A vector containing names of props to exclude from auto grouping.
+It is often useful to exclude <code>c("x", "y")</code>, when one of those variables
+is categorical.</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p>To manually specify grouping variables, see <code><a href="group_by.html">group_by</a></code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# One line
+mtcars %&gt;% ggvis(~disp, ~mpg, stroke = ~factor(cyl)) %&gt;% layer_paths()
+# One line for each level of cyl
+mtcars %&gt;% ggvis(~disp, ~mpg, stroke = ~factor(cyl)) %&gt;% group_by(cyl) %&gt;%
+  layer_paths()
+mtcars %&gt;% ggvis(~disp, ~mpg, stroke = ~factor(cyl)) %&gt;% auto_group() %&gt;%
+  layer_paths()
+
+# The grouping column can already be stored as a factor
+mtcars2 &lt;- mtcars
+mtcars2$cyl &lt;- factor(mtcars2$cyl)
+mtcars2 %&gt;% ggvis(~disp, ~mpg, stroke = ~cyl) %&gt;% auto_group() %&gt;%
+  layer_paths()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggvis</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create a subvisualisation.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for subvis {ggvis}"><tr><td>subvis {ggvis}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create a subvisualisation.</h2>
+
+<h3>Description</h3>
+
+<p>Create a subvisualisation.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+subvis(vis, ..., data = NULL, width = NULL, height = NULL)
+</pre>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Examples don't work yet
+## Not run: 
+library(dplyr, warn.conflicts = FALSE)
+
+small &lt;- nasaweather::atmos %&gt;%
+  filter(lat &lt;= -11.217391, long &lt;= -106.287, year == 1995) %&gt;%
+  group_by(long, lat)
+small %&gt;%
+  ggvis(~long, ~lat) %&gt;%
+  layer_points()
+
+small %&gt;%
+  ggvis(~long, ~lat) %&gt;%
+  subvis(width := 100, height := 100, stroke := "red") %&gt;%
+    layer_points(~month, ~ozone)
+
+small %&gt;%
+  ggvis(~long, ~lat) %&gt;%
+  subvis(width := 100, height := 100, stroke := "red") %&gt;%
+    layer_points(~month, ~ozone) %&gt;%
+    add_axis("x", ticks = 3) %&gt;%
+    add_axis("y", ticks = 3)
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggvis</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

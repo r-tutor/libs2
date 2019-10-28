@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create an interactive slider.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for input_slider {ggvis}"><tr><td>input_slider {ggvis}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create an interactive slider.</h2>
+
+<h3>Description</h3>
+
+<p>Create an interactive slider.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+input_slider(min, max, value = (min + max)/2, step = NULL,
+  round = FALSE, format = NULL, locale = "us", ticks = TRUE,
+  animate = FALSE, sep = ",", pre = NULL, post = NULL,
+  label = "", id = rand_id("slider_"), map = identity)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>min</code></td>
+<td>
+<p>The minimum value (inclusive) that can be selected.</p>
+</td></tr>
+<tr valign="top"><td><code>max</code></td>
+<td>
+<p>The maximum value (inclusive) that can be selected.</p>
+</td></tr>
+<tr valign="top"><td><code>value</code></td>
+<td>
+<p>The initial value of the slider. A numeric vector of length one
+will create a regular slider; a numeric vector of length two will create a
+double-ended range slider. A warning will be issued if the value doesn't
+fit between <code>min</code> and <code>max</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>step</code></td>
+<td>
+<p>Specifies the interval between each selectable value on the
+slider (if <code>NULL</code>, a heuristic is used to determine the step size). If
+the values are dates, <code>step</code> is in days; if the values are times
+(POSIXt), <code>step</code> is in seconds.</p>
+</td></tr>
+<tr valign="top"><td><code>round</code></td>
+<td>
+<p><code>TRUE</code> to round all values to the nearest integer;
+<code>FALSE</code> if no rounding is desired; or an integer to round to that
+number of digits (for example, 1 will round to the nearest 10, and -2 will
+round to the nearest .01). Any rounding will be applied after snapping to
+the nearest step.</p>
+</td></tr>
+<tr valign="top"><td><code>format</code></td>
+<td>
+<p>Deprecated.</p>
+</td></tr>
+<tr valign="top"><td><code>locale</code></td>
+<td>
+<p>Deprecated.</p>
+</td></tr>
+<tr valign="top"><td><code>ticks</code></td>
+<td>
+<p><code>FALSE</code> to hide tick marks, <code>TRUE</code> to show them
+according to some simple heuristics.</p>
+</td></tr>
+<tr valign="top"><td><code>animate</code></td>
+<td>
+<p><code>TRUE</code> to show simple animation controls with default
+settings; <code>FALSE</code> not to; or a custom settings list, such as those
+created using <code><a href="../../shiny/html/sliderInput.html">animationOptions</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>sep</code></td>
+<td>
+<p>Separator between thousands places in numbers.</p>
+</td></tr>
+<tr valign="top"><td><code>pre</code></td>
+<td>
+<p>A prefix string to put in front of the value.</p>
+</td></tr>
+<tr valign="top"><td><code>post</code></td>
+<td>
+<p>A suffix string to put after the value.</p>
+</td></tr>
+<tr valign="top"><td><code>label</code></td>
+<td>
+<p>Display label for the control, or <code>NULL</code> for no label.</p>
+</td></tr>
+<tr valign="top"><td><code>id</code></td>
+<td>
+<p>A unique identifier for this input. Usually generated
+automatically.</p>
+</td></tr>
+<tr valign="top"><td><code>map</code></td>
+<td>
+<p>A function with single argument <code>x</code>, the value of the
+control on the client. Returns a modified value.</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p>Other interactive input: <code><a href="input_checkbox.html">input_checkbox</a></code>,
+<code><a href="input_select.html">input_select</a></code>, <code><a href="input_text.html">input_text</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+input_slider(0, 100)
+input_slider(0, 100, label = "binwidth")
+input_slider(0, 100, value = 50)
+
+# Supply two values to value to make a double-ended sliders
+input_slider(0, 100, c(25, 75))
+
+# You can use map to transform the outputs
+input_slider(-5, 5, label = "Log scale", map = function(x) 10 ^ x)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggvis</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

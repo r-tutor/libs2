@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Display data with bars (a barchart).</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for layer_bars {ggvis}"><tr><td>layer_bars {ggvis}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Display data with bars (a barchart).</h2>
+
+<h3>Description</h3>
+
+<p>This will add bars to a plot. The exact behavior is complicated because
+the term bar chart is used to describe four important variations on a theme.
+The action of <code>layer_bars</code> depends on two factors: whether or not a
+<code>y</code> prop has been specified, and whether the <code>x</code> props is
+continuous or categorical.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+layer_bars(vis, ..., stack = TRUE, width = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>vis</code></td>
+<td>
+<p>Visualisation to modify</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Visual properties used to override defaults.</p>
+</td></tr>
+<tr valign="top"><td><code>stack</code></td>
+<td>
+<p>If there are multiple bars to be drawn at an x location, should
+the bars be stacked? If FALSE, the bars will be overplotted on each other.</p>
+</td></tr>
+<tr valign="top"><td><code>width</code></td>
+<td>
+<p>Width of each bar. When x is continuous, this controls the width
+in the same units as x. When x is categorical, this controls the width as a
+proportion of the spacing between items (default is 0.9).</p>
+</td></tr>
+</table>
+
+
+<h3>Visualisations</h3>
+
+<p>If no y prop has been specified, then this will count the number of entries
+at each unique x value. There will be one bar at each unique x value, and
+the y value (or height) of each bar will represent the count at that x value.
+</p>
+<p>If a y prop has been specified, then those y values will be used as weights
+for a weighted count at each unique x value. If no x values appear more than
+once in the data, then the end result is a plot where the height of the bar
+at each x value is simply the y value. However, if an x value appear more
+than once in the data, then this will sum up the y values at each x.
+</p>
+<p>If the x variable is continuous, then a continuous x axis will be used, and
+the width of each bar is by default equal to the resolution of the data &ndash;
+that is, the smallest difference between any two x values.
+</p>
+<p>If the x variable is categorical, then a categorical x axis will be used. By
+default, the width of each bar is 0.9 times the space between the items.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="layer_histograms.html">layer_histograms</a></code> For bar graphs of counts at each unique
+x value, in contrast to a histogram's bins along x ranges.
+</p>
+<p><code><a href="compute_count.html">compute_count</a></code> and <code><a href="compute_tabulate.html">compute_tabulate</a></code> for
+more information on how data is transformed.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Discrete x: bar graph of counts at each x value
+cocaine %&gt;% ggvis(~state) %&gt;% layer_bars()
+# Continuous x: bar graph of counts at unique locations
+cocaine %&gt;% ggvis(~month) %&gt;% layer_bars()
+
+# Use y prop to weight by additional variable. This is also useful
+# if you have pretabulated data
+cocaine %&gt;% ggvis(~state, ~weight) %&gt;% layer_bars()
+cocaine %&gt;% ggvis(~month, ~weight) %&gt;% layer_bars()
+
+# For continuous x, layer_bars is useful when the variable has a few
+# unique values that you want to preserve. If you have many unique
+# values and you want to bin, use layer_histogram
+cocaine %&gt;% ggvis(~price) %&gt;% layer_bars()
+cocaine %&gt;% ggvis(~price) %&gt;% layer_histograms(width = 100)
+
+# If you have unique x values, you can use layer_bars() as an alternative
+# to layer_points()
+pressure %&gt;% ggvis(~temperature, ~pressure) %&gt;% layer_points()
+pressure %&gt;% ggvis(~temperature, ~pressure) %&gt;% layer_bars()
+
+# When x is continuous, width controls the width in x units
+pressure %&gt;% ggvis(~temperature, ~pressure) %&gt;% layer_bars(width = 10)
+# When x is categorical, width is proportional to spacing between bars
+pressure %&gt;% ggvis(~factor(temperature), ~pressure) %&gt;%
+  layer_bars(width = 0.5)
+
+# Stacked bars
+# If grouping var is continuous, you need to manually specify grouping
+ToothGrowth %&gt;% group_by(dose) %&gt;%
+  ggvis(x = ~supp, y = ~len, fill = ~dose) %&gt;% layer_bars()
+# If grouping var is categorical, grouping is done automatically
+cocaine %&gt;% ggvis(x = ~state, fill = ~as.factor(month)) %&gt;%
+  layer_bars()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggvis</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

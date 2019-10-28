@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Align positions using length.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for compute_align {ggvis}"><tr><td>compute_align {ggvis}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Align positions using length.</h2>
+
+<h3>Description</h3>
+
+<p>This compute function is often used in conjunction with
+<code><a href="compute_count.html">compute_count</a></code>, when used on data with a continuous x variable.
+By default, the computed width will be equal to the resolution of the data,
+or, in other words the smallest difference between two values in the data.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+compute_align(x, var, length = NULL, align = 0.5, dir = "x")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>Dataset-like object to align. Built-in methods for data frames,
+grouped data frames and ggvis visualisations.</p>
+</td></tr>
+<tr valign="top"><td><code>var</code></td>
+<td>
+<p>Name of variable to compute width of.</p>
+</td></tr>
+<tr valign="top"><td><code>length</code></td>
+<td>
+<p>An absolute length to use. If <code>NULL</code> (the default), the
+width will be equivalent to the resolution of the data.</p>
+</td></tr>
+<tr valign="top"><td><code>align</code></td>
+<td>
+<p>Where does the existing variable fall on the new bins?
+0 = left edge, 0.5 = center, 1 = right edge.</p>
+</td></tr>
+<tr valign="top"><td><code>dir</code></td>
+<td>
+<p>Direction, i.e. <code>"x"</code> or <code>"y"</code>. Used to generate
+variable names in output.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>An absolute width for each x can be specified by using the <code>width</code>
+argument. If <code>width</code> is NULL (the default), it will use the resolution
+of the data as the width.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The original data frame, with additional columns:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>'dir'min_</code></td>
+<td>
+<p>left boundary of bin</p>
+</td></tr>
+<tr valign="top"><td><code>'dir'max_</code></td>
+<td>
+<p>right boundary of bin</p>
+</td></tr>
+<tr valign="top"><td><code>'dir'len_</code></td>
+<td>
+<p>width of bin</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="compute_bin.html">compute_bin</a></code> For counting cases within ranges of
+a continuous variable.
+</p>
+<p><code><a href="compute_count.html">compute_count</a></code> For counting cases at specific values
+of a variable.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+mtcars %&gt;% compute_count(~disp) %&gt;% compute_align(~x_)
+mtcars %&gt;% compute_count(~mpg) %&gt;% compute_align(~x_)
+
+# Use a specific width
+pressure %&gt;% compute_count(~temperature) %&gt;% compute_align(~x_)
+pressure %&gt;% compute_count(~temperature) %&gt;% compute_align(~x_, length = 5)
+
+# It doesn't matter whether you transform inside or outside of a vis
+mtcars %&gt;% compute_count(~cyl, ~wt) %&gt;%
+  compute_align(~x_, length = .5) %&gt;%
+  ggvis(x = ~xmin_, x2 = ~xmax_, y = ~count_, y2 = 0) %&gt;%
+  layer_rects()
+
+mtcars %&gt;%
+  ggvis(x = ~xmin_, x2 = ~xmax_, y = ~count_, y2 = 0) %&gt;%
+  compute_count(~cyl, ~wt) %&gt;%
+  compute_align(~x_) %&gt;%
+  layer_rects()
+
+# Varying align
+mtcars %&gt;%
+  ggvis(x = ~xmin_, x2 = ~xmax_, y = ~count_, y2 = 0) %&gt;%
+  compute_count(~cyl, ~wt) %&gt;%
+  compute_align(~x_, length = 0.5, align = input_slider(0, 1)) %&gt;%
+  layer_rects()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggvis</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

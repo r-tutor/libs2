@@ -16,6 +16,7 @@ c_bintocomp	parts
 c_comptobin	parts
 c_conjugate	parts
 c_durfee	parts
+c_multiset	parts
 c_nextblockpart	parts
 c_nextdiffpart	parts
 c_nextpart	parts
@@ -39,6 +40,8 @@ islastdiffpart	nextpart
 islastpart	nextpart
 islastrestrictedpart	nextpart
 listParts	setparts
+mset	parts
+multiset	parts
 nextblockpart	nextpart
 nextcomposition	nextpart
 nextdiffpart	nextpart
@@ -62,3 +65,5 @@ setparts	setparts
 summary.partition	summary.partition
 tobin	bin
 todec	bin
+vec_to_eq	setparts
+vec_to_set	setparts

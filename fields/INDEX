@@ -58,6 +58,8 @@ cover.design            Computes Space-Filling "Coverage" designs using
                         Swapping Algorithm
 drape.plot              Perspective plot draped with colors in the
                         facets.
+envelopePlot            Add a shaded the region between two functions
+                        to an existing plot
 fields                  fields - tools for spatial data
 fields.diagonalize2     Fields supporting functions
 fields.hints            fields - graphics hints

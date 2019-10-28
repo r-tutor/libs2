@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Overlay model predictions or a smooth curve.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for layer_model_predictions {ggvis}"><tr><td>layer_model_predictions {ggvis}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Overlay model predictions or a smooth curve.</h2>
+
+<h3>Description</h3>
+
+<p><code>layer_model_predictions</code> fits a model to the data and draw it with
+<code>layer_paths</code> and, optionally, <code>layer_ribbons</code>.
+<code>layer_smooths</code> is a special case of layering model predictions where
+the model is a smooth loess curve whose smoothness is controlled by the
+<code>span</code> parameter.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+layer_model_predictions(vis, ..., model, formula = NULL,
+  model_args = NULL, se = FALSE, domain = NULL)
+
+layer_smooths(vis, ..., span = 0.75, se = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>vis</code></td>
+<td>
+<p>Visualisation to modify</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Visual properties. Stroke properties control only affect line,
+fill properties only affect standard error band.</p>
+</td></tr>
+<tr valign="top"><td><code>model</code></td>
+<td>
+<p>Name of the model as a string, e.g. <code>"loess"</code>, <code>"lm"</code>,
+or <code>"MASS::rlm"</code>. Must be the name of a function that produces a
+standard model object with a <code><a href="../../stats/html/predict.html">predict</a></code> method. For
+<code>layer_smooth</code> this is always &quot;loess&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>formula</code></td>
+<td>
+<p>Model formula. If not supplied, guessed from the visual
+properties, constructing <code>y ~ x</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>model_args</code></td>
+<td>
+<p>A list of additional arguments passed on to the
+<code>model</code> function.</p>
+</td></tr>
+<tr valign="top"><td><code>se</code></td>
+<td>
+<p>Also display a point-wise standard error band? Defaults to
+<code>FALSE</code> because interpretation is non-trivial.</p>
+</td></tr>
+<tr valign="top"><td><code>domain</code></td>
+<td>
+<p>If <code>NULL</code> (the default), the domain of the predicted
+values will be the same as the domain of the prediction variable in the
+data. It can also be a two-element numeric vector specifying the min and
+max.</p>
+</td></tr>
+<tr valign="top"><td><code>span</code></td>
+<td>
+<p>For <code>layer_smooth</code>, the span of the loess smoother.</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+mtcars %&gt;% ggvis(~wt, ~mpg) %&gt;% layer_smooths()
+mtcars %&gt;% ggvis(~wt, ~mpg) %&gt;% layer_smooths(se = TRUE)
+
+# Use group by to display multiple smoothes
+mtcars %&gt;% ggvis(~wt, ~mpg) %&gt;% group_by(cyl) %&gt;% layer_smooths()
+
+# Control appearance with props
+mtcars %&gt;% ggvis(~wt, ~mpg) %&gt;%
+  layer_smooths(se = TRUE, stroke := "red", fill := "red", strokeWidth := 5)
+
+# Control the wiggliness with span. Default is 0.75
+mtcars %&gt;% ggvis(~wt, ~mpg) %&gt;% layer_points() %&gt;%
+  layer_smooths(span = 0.2)
+mtcars %&gt;% ggvis(~wt, ~mpg) %&gt;% layer_points() %&gt;%
+  layer_smooths(span = 1)
+# Map to an input to modify interactively
+mtcars %&gt;% ggvis(~wt, ~mpg) %&gt;% layer_points() %&gt;%
+  layer_smooths(span = input_slider(0.2, 1))
+
+# Use other modelling functions with layer_model_predictions
+mtcars %&gt;% ggvis(~wt, ~mpg) %&gt;%
+  layer_points() %&gt;%
+  layer_model_predictions(model = "lm") %&gt;%
+  layer_model_predictions(model = "MASS::rlm", stroke := "red")
+
+# Custom domain for predictions
+mtcars %&gt;% ggvis(~wt, ~mpg) %&gt;% layer_points() %&gt;%
+  layer_model_predictions(model = "lm", domain = c(0, 8))
+mtcars %&gt;% ggvis(~wt, ~mpg) %&gt;% layer_points() %&gt;%
+  layer_model_predictions(model = "lm",
+    domain = input_slider(0, 10, value = c(1, 4)))
+
+# layer_smooths() is just compute_smooth() + layer_paths()
+# Run loess or other model outside of a visualisation to see what variables
+# you get.
+mtcars %&gt;% compute_smooth(mpg ~ wt)
+mtcars %&gt;% compute_model_prediction(mpg ~ wt, model = "lm")
+
+mtcars %&gt;%
+  ggvis(~wt, ~mpg) %&gt;%
+  layer_points() %&gt;%
+  compute_smooth(mpg ~ wt) %&gt;%
+  layer_paths(~pred_, ~resp_, strokeWidth := 2)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggvis</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

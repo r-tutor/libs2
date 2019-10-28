@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Bin data along a continuous variable</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for compute_bin {ggvis}"><tr><td>compute_bin {ggvis}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Bin data along a continuous variable</h2>
+
+<h3>Description</h3>
+
+<p>Bin data along a continuous variable
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+compute_bin(x, x_var, w_var = NULL, width = NULL, center = NULL,
+  boundary = NULL, closed = c("right", "left"), pad = FALSE,
+  binwidth)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>Dataset-like object to bin. Built-in methods for data frames,
+grouped data frames and ggvis visualisations.</p>
+</td></tr>
+<tr valign="top"><td><code>x_var, w_var</code></td>
+<td>
+<p>Names of x and weight variables. The x variable must be
+continuous.</p>
+</td></tr>
+<tr valign="top"><td><code>width</code></td>
+<td>
+<p>The width of the bins. The default is <code>NULL</code>, which yields
+30 bins that cover the range of the data. You should always override this
+value, exploring multiple widths to find the best to illustrate the stories
+in your data.</p>
+</td></tr>
+<tr valign="top"><td><code>center</code></td>
+<td>
+<p>The center of one of the bins.  Note that if center is above or
+below the range of the data, things will be shifted by an appropriate
+number of <code>width</code>s. To center on integers, for example, use
+<code>width=1</code> and <code>center=0</code>, even if <code>0</code> is outside the range
+of the data.  At most one of <code>center</code> and <code>boundary</code> may be
+specified.</p>
+</td></tr>
+<tr valign="top"><td><code>boundary</code></td>
+<td>
+<p>A boundary between two bins. As with <code>center</code>, things
+are shifted when <code>boundary</code> is outside the range of the data. For
+example, to center on integers, use <code>width = 1</code> and <code>boundary =
+0.5</code>, even if <code>1</code> is outside the range of the data.  At most one of
+<code>center</code> and <code>boundary</code> may be specified.</p>
+</td></tr>
+<tr valign="top"><td><code>closed</code></td>
+<td>
+<p>One of <code>"right"</code> or <code>"left"</code> indicating whether right
+or left edges of bins are included in the bin.</p>
+</td></tr>
+<tr valign="top"><td><code>pad</code></td>
+<td>
+<p>If <code>TRUE</code>, adds empty bins at either end of x. This ensures
+frequency polygons touch 0. Defaults to <code>FALSE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>binwidth</code></td>
+<td>
+<p>Deprecated; use <code>width</code> instead.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A data frame with columns:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>count_</code></td>
+<td>
+<p>the number of points</p>
+</td></tr>
+<tr valign="top"><td><code>x_</code></td>
+<td>
+<p>mid-point of bin</p>
+</td></tr>
+<tr valign="top"><td><code>xmin_</code></td>
+<td>
+<p>left boundary of bin</p>
+</td></tr>
+<tr valign="top"><td><code>xmax_</code></td>
+<td>
+<p>right boundary of bin</p>
+</td></tr>
+<tr valign="top"><td><code>width_</code></td>
+<td>
+<p>width of bin</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="compute_count.html">compute_count</a></code> For counting cases at specific locations
+of a continuous variable. This is useful when the variable is continuous
+but the data is granular.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+mtcars %&gt;% compute_bin(~mpg)
+mtcars %&gt;% compute_bin(~mpg, width = 10)
+mtcars %&gt;% group_by(cyl) %&gt;% compute_bin(~mpg, width = 10)
+
+# It doesn't matter whether you transform inside or outside of a vis
+mtcars %&gt;% compute_bin(~mpg) %&gt;% ggvis(~x_, ~count_) %&gt;% layer_paths()
+mtcars %&gt;% ggvis(~ x_, ~ count_) %&gt;% compute_bin(~mpg) %&gt;% layer_paths()
+
+# Missing values get own bin
+mtcars2 &lt;- mtcars
+mtcars2$mpg[sample(32, 5)] &lt;- NA
+mtcars2 %&gt;% compute_bin(~mpg, width = 10)
+
+# But are currently silently dropped in histograms
+mtcars2 %&gt;% ggvis() %&gt;% layer_histograms(~mpg)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggvis</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

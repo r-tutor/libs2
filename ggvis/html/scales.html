@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Add a scale to a ggvis plot</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for scales {ggvis}"><tr><td>scales {ggvis}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Add a scale to a ggvis plot</h2>
+
+<h3>Description</h3>
+
+<p>This creates a scale object for a given scale and variable type, and adds it
+to a ggvis plot. The scale object is populated with default settings, which
+depend on the scale (e.g. fill, x, opacity) and the type of variable (e.g.
+numeric, nominal, ordinal). Any settings that are passed in as arguments
+will override the defaults.
+</p>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>vis</code></td>
+<td>
+<p>A ggvis object.</p>
+</td></tr>
+<tr valign="top"><td><code>scale</code></td>
+<td>
+<p>The name of a scale, such as &quot;x&quot;, &quot;y&quot;, &quot;fill&quot;, &quot;stroke&quot;, etc.</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>A variable type. One of &quot;numeric&quot;, &quot;nominal&quot;, &quot;ordinal&quot;,
+&quot;logical&quot;, &quot;datetime&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>other arguments passed to the scale function. See the help for
+<code><a href="scale_numeric.html">scale_numeric</a></code>, <code><a href="scale_ordinal.html">scale_ordinal</a></code> and
+<code><a href="scale_datetime.html">scale_datetime</a></code> for more details. For example, you might
+supply <code>trans = "log"</code> to create a log scale.</p>
+</td></tr>
+<tr valign="top"><td><code>name</code></td>
+<td>
+<p>If <code>NULL</code>, the default, the scale name is the same as
+<code>scale</code>. Set this to a custom name to create multiple scales for
+stroke or fill, or (god forbid) a secondary y scale.</p>
+</td></tr>
+</table>
+
+
+<h3>Scale selection</h3>
+
+<p>ggvis supports the following types of scales. Typical uses for each scale
+type are listed below:
+</p>
+
+<ul>
+<li><p> numeric For continuous numeric values.
+</p>
+</li>
+<li><p> nominal For character vectors and factors.
+</p>
+</li>
+<li><p> ordinal For ordered factors (these presently behave the same as
+nominal).
+</p>
+</li>
+<li><p> logical For logical (TRUE/FALSE) values.
+</p>
+</li>
+<li><p> datetime For dates and date-times.
+</p>
+</li></ul>
+
+<p>Each type has a corresponding function: <code>scale_numeric</code>,
+<code>scale_nominal</code>, and so on.
+</p>
+<p>The scale types for ggvis are mapped to scale types for Vega, which include
+&quot;ordinal&quot;, &quot;quantitative&quot;, and &quot;time&quot;. See <code><a href="ggvis_scale.html">ggvis_scale</a></code> for more
+details.
+</p>
+<p>Given a scale and type, the range is selected based on the combination of the
+<code>scale</code> and <code>type</code>. For example, you get a different range of
+colours depending on whether the data is numeric, ordinal, or nominal. Some
+scales also set other properties. For example, nominal/ordinal position
+scales also add some padding so that points are spaced away from plot edges.
+</p>
+<p>Not all combinations have an existing default scale. If you use a
+combination that does not have an existing combination, it may suggest
+you're displaying the data in a suboptimal way. For example, there is
+no default for a numeric shape scale, because there's no obvious way to
+map continuous values to discrete shapes.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+p &lt;- mtcars %&gt;%
+  ggvis(x = ~wt, y = ~mpg, fill = ~factor(cyl), stroke = ~hp) %&gt;%
+  layer_points()
+
+p %&gt;% scale_numeric("x")
+p %&gt;% scale_numeric("stroke")
+p %&gt;% scale_nominal("fill")
+
+# You can also supply additional arguments or override the defaults
+p %&gt;% scale_numeric("x", trans = "log")
+p %&gt;% scale_numeric("stroke", range = c("red", "blue"))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggvis</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

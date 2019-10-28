@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create interactive control to select one (or more options)...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for input_select {ggvis}"><tr><td>input_select {ggvis}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create interactive control to select one (or more options) from a list.</h2>
+
+<h3>Description</h3>
+
+
+<ul>
+<li> <p><code>input_radiobuttons</code> only ever selects one value
+</p>
+</li>
+<li> <p><code>input_checkboxgroup</code> can alway select multiple values
+</p>
+</li>
+<li> <p><code>input_select</code> can select only one if <code>multiple = FALSE</code>,
+otherwise the user can select multiple by using modifier keys
+</p>
+</li></ul>
+
+
+
+<h3>Usage</h3>
+
+<pre>
+input_select(choices, selected = NULL, multiple = FALSE, label = "",
+  id = rand_id("select_"), map = identity, selectize = FALSE)
+
+input_radiobuttons(choices, selected = NULL, label = "",
+  id = rand_id("radio_"), map = identity)
+
+input_checkboxgroup(choices, selected = NULL, label = "",
+  id = rand_id("radio_"), map = identity)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>choices</code></td>
+<td>
+<p>List of values to select from. If elements of the list are
+named, then that name rather than the value is displayed to the user.
+This can also be a named list whose elements are (either named or
+unnamed) lists or vectors. If this is the case, the outermost names
+will be used as the &quot;optgroup&quot; label for the elements in the respective
+sublist. This allows you to group and label similar choices. See the
+example section for a small demo of this feature.</p>
+</td></tr>
+<tr valign="top"><td><code>selected</code></td>
+<td>
+<p>The initially selected value (or multiple values if
+<code>multiple = TRUE</code>). If not specified then defaults to the first value
+for single-select lists and no values for multiple select lists.</p>
+</td></tr>
+<tr valign="top"><td><code>multiple</code></td>
+<td>
+<p>Is selection of multiple items allowed?</p>
+</td></tr>
+<tr valign="top"><td><code>label</code></td>
+<td>
+<p>Display label for the control, or <code>NULL</code> for no label.</p>
+</td></tr>
+<tr valign="top"><td><code>id</code></td>
+<td>
+<p>A unique identifier for this input. Usually generated
+automatically.</p>
+</td></tr>
+<tr valign="top"><td><code>map</code></td>
+<td>
+<p>A function with single argument <code>x</code>, the value of the
+control on the client. Returns a modified value.</p>
+</td></tr>
+<tr valign="top"><td><code>selectize</code></td>
+<td>
+<p>Whether to use <span class="pkg">selectize.js</span> or not.</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p>Other interactive input: <code><a href="input_checkbox.html">input_checkbox</a></code>,
+<code><a href="input_slider.html">input_slider</a></code>, <code><a href="input_text.html">input_text</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Dropdown
+input_select(c("a", "b", "c"))
+input_select(c("a", "b", "c"), multiple = TRUE)
+input_select(c("a", "b", "c"), selected = "c")
+
+# If you want to select variable names, you need to convert
+# the output of the input to a name with map so that they get
+# computed correctly
+input_select(names(mtcars), map = as.name)
+
+# Radio buttons
+input_radiobuttons(choices = c("Linear" = "lm", "LOESS" = "loess"),
+                   label = "Model type")
+input_radiobuttons(choices = c("Linear" = "lm", "LOESS" = "loess"),
+                   selected = "loess",
+                   label = "Model type")
+
+# Used in layer_model_predictions
+mtcars %&gt;% ggvis(~wt, ~mpg) %&gt;%
+  layer_model_predictions(model = input_radiobuttons(
+    choices = c("Linear" = "lm", "LOESS" = "loess"),
+    selected = "loess",
+    label = "Model type"))
+
+# Checkbox group
+mtcars %&gt;% ggvis(x = ~wt, y = ~mpg) %&gt;%
+  layer_points(
+    fill := input_checkboxgroup(
+      choices = c("Red" = "r", "Green" = "g", "Blue" = "b"),
+      label = "Point color components",
+      map = function(val) {
+        rgb(0.8 * "r" %in% val, 0.8 * "g" %in% val, 0.8 * "b" %in% val)
+      }
+    )
+  )
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggvis</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

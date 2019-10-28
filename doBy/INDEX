@@ -1,4 +1,6 @@
+.rhsf2list              Convert right hand sided formula to a list
 by-lapply               Formula based version of lapply.
+by-lmby                 List of lm objects with a common model
 by-order                Ordering (sorting) rows of a data frame
 by-sample               Sampling from a data frame
 by-split                Split a data frame
@@ -25,8 +27,10 @@ descStat                Computing simple descriptive statistics of a
                         numeric vector.
 esticon                 Contrasts for lm, glm, lme, and geeglm objects
 fatacid                 Fish oil in pig food
+fev                     Forced expiratory volume in children
 firstlastobs            Locate the index of the first/last unique value
 is-estimable            Determines if contrasts are estimable.
+linest                  Compute linear estimates
 linest-get              Auxillary functions for computing lsmeans,
                         contrasts etc
 linest-matrix           Linear estimates matrix
@@ -39,7 +43,7 @@ recodeVar               Recode values of a vector
 renameCol               Rename columns in a matrix or a dataframe.
 subSeq                  Find sub-sequences of identical elements in a
                         vector.
-summary.esticon_class   Compute linear estimates
+taylor                  Taylor expansion (one dimension)
 timeSinceEvent          Calculate "time since event" in a vector.
 which.maxn              Where are the n largest or n smallest elements
                         in a numeric vector ?

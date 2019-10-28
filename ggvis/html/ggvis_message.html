@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Send a message to ggvis running on client</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for ggvis_message {ggvis}"><tr><td>ggvis_message {ggvis}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Send a message to ggvis running on client</h2>
+
+<h3>Description</h3>
+
+<p>This will be sent to the client and passed to a handler in ggvis.messages on
+the client side. The handler is specified by <code>type</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ggvis_message(session, type, data = NULL, id = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>session</code></td>
+<td>
+<p>A session object.</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>A string representing the type of the message.</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>An object (typically a list) containing information for the client.</p>
+</td></tr>
+<tr valign="top"><td><code>id</code></td>
+<td>
+<p>A unique identifier for ggvis message handler (optional).</p>
+</td></tr>
+</table>
+
+<hr /><div style="text-align: center;">[Package <em>ggvis</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

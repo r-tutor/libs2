@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Transformation: density estimate</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for layer_densities {ggvis}"><tr><td>layer_densities {ggvis}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Transformation: density estimate</h2>
+
+<h3>Description</h3>
+
+<p><code>transform_density</code> is a data transformation that computes a kernel
+density estimate from a dataset. <code>layer_density</code> combines
+<code>transform_density</code> with <code>mark_path</code> and <code>mark_area</code>
+to display a smooth line and its standard errror.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+layer_densities(vis, ..., kernel = "gaussian", adjust = 1,
+  density_args = list(), area = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>vis</code></td>
+<td>
+<p>The visualisation to modify</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Visual properties, passed on to <code><a href="props.html">props</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>kernel</code></td>
+<td>
+<p>Smoothing kernel. See <code><a href="../../stats/html/density.html">density</a></code> for details.</p>
+</td></tr>
+<tr valign="top"><td><code>adjust</code></td>
+<td>
+<p>Multiple the default bandwidth by this amount. Useful for
+controlling wiggliness of density.</p>
+</td></tr>
+<tr valign="top"><td><code>density_args</code></td>
+<td>
+<p>Other arguments passed on to
+<code><a href="compute_density.html">compute_density</a></code> and thence to <code><a href="../../stats/html/density.html">density</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>area</code></td>
+<td>
+<p>Should there be a shaded region drawn under the curve?</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Basic density estimate
+faithful %&gt;% ggvis(~waiting) %&gt;% layer_densities()
+faithful %&gt;% ggvis(~waiting) %&gt;% layer_densities(area = FALSE)
+
+# Control bandwidth with adjust
+faithful %&gt;% ggvis(~waiting) %&gt;% layer_densities(adjust = .25)
+faithful %&gt;% ggvis(~waiting) %&gt;%
+  layer_densities(adjust = input_slider(0.1, 5))
+
+# Control stroke and fill
+faithful %&gt;% ggvis(~waiting) %&gt;%
+  layer_densities(stroke := "red", fill := "red")
+
+# With groups
+PlantGrowth %&gt;% ggvis(~weight, fill = ~group) %&gt;% group_by(group) %&gt;%
+  layer_densities()
+PlantGrowth %&gt;% ggvis(~weight, stroke = ~group) %&gt;% group_by(group) %&gt;%
+  layer_densities(strokeWidth := 3, area = FALSE)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggvis</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

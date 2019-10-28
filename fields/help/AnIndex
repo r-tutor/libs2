@@ -58,6 +58,7 @@ drape.color	drape.plot
 drape.plot	drape.plot
 dyadic.2check	fields-internal
 dyadic.check	fields-internal
+envelopePlot	envelopePlot
 evlpoly	FORTRAN.internal
 evlpoly2	FORTRAN.internal
 Exp.cov	exp.cov
@@ -259,6 +260,7 @@ rdist.earth	rdist.earth
 rdist.earth.vec	rdist.earth
 rdist.vec	rdist
 RdistC	registeredC
+RdistEarth	rdist.earth
 REML.test	REML.test
 resid.Krig	Krig
 ribbon.plot	ribbon.plot

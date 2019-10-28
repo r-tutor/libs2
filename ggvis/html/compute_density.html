@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Compute density of data.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for compute_density {ggvis}"><tr><td>compute_density {ggvis}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Compute density of data.</h2>
+
+<h3>Description</h3>
+
+<p>Compute density of data.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+compute_density(x, x_var, w_var = NULL, kernel = "gaussian",
+  trim = FALSE, n = 256L, na.rm = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>Dataset (data frame, <code>grouped_df</code> or ggvis) object to work
+with.</p>
+</td></tr>
+<tr valign="top"><td><code>x_var, w_var</code></td>
+<td>
+<p>Names of variables to use for x position, and for
+weights.</p>
+</td></tr>
+<tr valign="top"><td><code>kernel</code></td>
+<td>
+<p>Smoothing kernel. See <code><a href="../../stats/html/density.html">density</a></code> for details.</p>
+</td></tr>
+<tr valign="top"><td><code>trim</code></td>
+<td>
+<p>If <code>TRUE</code>, the default, density estimates are trimmed to the
+actual range of the data.  If <code>FALSE</code>, they are extended by the
+default 3 bandwidths (as specified by the <code>cut</code> parameter to
+<code><a href="../../stats/html/density.html">density</a></code>).</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>Number of points (along x) to use in the density estimate.</p>
+</td></tr>
+<tr valign="top"><td><code>na.rm</code></td>
+<td>
+<p>If <code>TRUE</code> missing values will be silently removed,
+otherwise they will be removed with a warning.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments passed on to <code><a href="../../stats/html/density.html">density</a></code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A data frame with columns:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>pred_</code></td>
+<td>
+<p>regularly spaced grid of <code>n</code> locations</p>
+</td></tr>
+<tr valign="top"><td><code>resp_</code></td>
+<td>
+<p>density estimate</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+mtcars %&gt;% compute_density(~mpg, n = 5)
+mtcars %&gt;% group_by(cyl) %&gt;% compute_density(~mpg, n = 5)
+mtcars %&gt;% ggvis(~mpg) %&gt;% compute_density(~mpg, n = 5) %&gt;%
+  layer_points(~pred_, ~resp_)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggvis</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Handlers and interactive inputs for plot sizing.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for handle_resize {ggvis}"><tr><td>handle_resize {ggvis}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Handlers and interactive inputs for plot sizing.</h2>
+
+<h3>Description</h3>
+
+<p>Handlers and interactive inputs for plot sizing.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+handle_resize(vis, on_resize)
+
+plot_width(vis)
+
+plot_height(vis)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>vis</code></td>
+<td>
+<p>Visualisation to listen to.</p>
+</td></tr>
+<tr valign="top"><td><code>on_resize</code></td>
+<td>
+<p>Callback function with arguments:
+</p>
+
+<dl>
+<dt>width,height</dt><dd><p>Width and height in pixels</p>
+</dd>
+<dt>padding</dt><dd><p>A named list of four components giving the padding in
+each direction</p>
+</dd>
+<dt>session</dt><dd><p>The session, used to communicate with the browser</p>
+</dd>
+</dl>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+# This example just prints out the current dimensions to the console
+mtcars %&gt;% ggvis(~mpg, ~wt) %&gt;%
+  layer_points() %&gt;%
+  handle_resize(function(width, height, ...) cat(width, "x", height, "\n"))
+
+# Use plot_width() and plot_height() to dynamically get the plot size
+# inside the plot.
+mtcars %&gt;% ggvis(~mpg, ~wt) %&gt;% layer_text(text := plot_width())
+mtcars %&gt;% ggvis(~mpg, ~wt) %&gt;% layer_text(text := plot_height())
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggvis</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -11,7 +11,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;doBy&rsquo; version 4.6-2</h2>
+</div><h2>Documentation for package &lsquo;doBy&rsquo; version 4.6-3</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
@@ -38,7 +38,9 @@
 <a href="#R">R</a>
 <a href="#S">S</a>
 <a href="#T">T</a>
+<a href="#V">V</a>
 <a href="#W">W</a>
+<a href="#misc">misc</a>
 </p>
 
 
@@ -60,6 +62,8 @@
 <td>budworm data</td></tr>
 <tr><td style="width: 25%;"><a href="by-lapply.html">by-lapply</a></td>
 <td>Formula based version of lapply.</td></tr>
+<tr><td style="width: 25%;"><a href="by-lmby.html">by-lmby</a></td>
+<td>List of lm objects with a common model</td></tr>
 <tr><td style="width: 25%;"><a href="by-order.html">by-order</a></td>
 <td>Ordering (sorting) rows of a data frame</td></tr>
 <tr><td style="width: 25%;"><a href="by-sample.html">by-sample</a></td>
@@ -87,6 +91,12 @@
 <td>Contrasts for lm, glm, lme, and geeglm objects</td></tr>
 <tr><td style="width: 25%;"><a href="linest.html">coef.linest_class</a></td>
 <td>Compute linear estimates</td></tr>
+<tr><td style="width: 25%;"><a href="by-lmby.html">coef.lmBy</a></td>
+<td>List of lm objects with a common model</td></tr>
+<tr><td style="width: 25%;"><a href="by-lmby.html">coef.summary_lmBy</a></td>
+<td>List of lm objects with a common model</td></tr>
+<tr><td style="width: 25%;"><a href="esticon.html">confint.esticon_class</a></td>
+<td>Contrasts for lm, glm, lme, and geeglm objects</td></tr>
 <tr><td style="width: 25%;"><a href="linest.html">confint.linest_class</a></td>
 <td>Compute linear estimates</td></tr>
 <tr><td style="width: 25%;"><a href="data-crimeRate.html">crimeRate</a></td>
@@ -152,6 +162,8 @@
 <table width="100%">
 <tr><td style="width: 25%;"><a href="fatacid.html">fatacid</a></td>
 <td>Fish oil in pig food</td></tr>
+<tr><td style="width: 25%;"><a href="fev.html">fev</a></td>
+<td>Forced expiratory volume in children</td></tr>
 <tr><td style="width: 25%;"><a href="firstlastobs.html">firstlastobs</a></td>
 <td>Locate the index of the first/last unique value</td></tr>
 <tr><td style="width: 25%;"><a href="firstlastobs.html">firstobs</a></td>
@@ -160,11 +172,15 @@
 <td>Locate the index of the first/last unique value</td></tr>
 <tr><td style="width: 25%;"><a href="firstlastobs.html">firstobs.formula</a></td>
 <td>Locate the index of the first/last unique value</td></tr>
+<tr><td style="width: 25%;"><a href="by-lmby.html">fitted.lmBy</a></td>
+<td>List of lm objects with a common model</td></tr>
 </table>
 
 <h2><a name="G">-- G --</a></h2>
 
 <table width="100%">
+<tr><td style="width: 25%;"><a href="by-lmby.html">getBy</a></td>
+<td>List of lm objects with a common model</td></tr>
 <tr><td style="width: 25%;"><a href="linest-get.html">get_contrasts</a></td>
 <td>Auxillary functions for computing lsmeans, contrasts etc</td></tr>
 <tr><td style="width: 25%;"><a href="linest-get.html">get_contrasts.default</a></td>
@@ -240,6 +256,8 @@
 <td>Compute linear estimates</td></tr>
 <tr><td style="width: 25%;"><a href="linest.html">linest.merMod</a></td>
 <td>Compute linear estimates</td></tr>
+<tr><td style="width: 25%;"><a href="by-lmby.html">lmBy</a></td>
+<td>List of lm objects with a common model</td></tr>
 <tr><td style="width: 25%;"><a href="ls-means.html">ls-means</a></td>
 <td>Compute LS-means (aka population means or marginal means)</td></tr>
 <tr><td style="width: 25%;"><a href="ls-means.html">LSmeans</a></td>
@@ -297,6 +315,8 @@
 <td>Recode values of a vector</td></tr>
 <tr><td style="width: 25%;"><a href="renameCol.html">renameCol</a></td>
 <td>Rename columns in a matrix or a dataframe.</td></tr>
+<tr><td style="width: 25%;"><a href="by-lmby.html">residuals.lmBy</a></td>
+<td>List of lm objects with a common model</td></tr>
 </table>
 
 <h2><a name="S">-- S --</a></h2>
@@ -314,10 +334,12 @@
 <td>Find sub-sequences of identical elements in a vector.</td></tr>
 <tr><td style="width: 25%;"><a href="by-subset.html">subsetBy</a></td>
 <td>Finds subsets of a dataframe which is split by variables in a formula.</td></tr>
-<tr><td style="width: 25%;"><a href="linest.html">summary.esticon_class</a></td>
-<td>Compute linear estimates</td></tr>
+<tr><td style="width: 25%;"><a href="esticon.html">summary.esticon_class</a></td>
+<td>Contrasts for lm, glm, lme, and geeglm objects</td></tr>
 <tr><td style="width: 25%;"><a href="linest.html">summary.linest_class</a></td>
 <td>Compute linear estimates</td></tr>
+<tr><td style="width: 25%;"><a href="by-lmby.html">summary.lmBy</a></td>
+<td>List of lm objects with a common model</td></tr>
 <tr><td style="width: 25%;"><a href="by-summary.html">summaryBy</a></td>
 <td>Function to calculate groupwise summary statistics</td></tr>
 </table>
@@ -325,10 +347,23 @@
 <h2><a name="T">-- T --</a></h2>
 
 <table width="100%">
+<tr><td style="width: 25%;"><a href="taylor.html">taylor</a></td>
+<td>Taylor expansion (one dimension)</td></tr>
+<tr><td style="width: 25%;"><a href="esticon.html">tidy.esticon_class</a></td>
+<td>Contrasts for lm, glm, lme, and geeglm objects</td></tr>
+<tr><td style="width: 25%;"><a href="linest.html">tidy.linest_class</a></td>
+<td>Compute linear estimates</td></tr>
 <tr><td style="width: 25%;"><a href="timeSinceEvent.html">timeSinceEvent</a></td>
 <td>Calculate "time since event" in a vector.</td></tr>
 <tr><td style="width: 25%;"><a href="by-transform.html">transformBy</a></td>
 <td>Function to make groupwise transformations</td></tr>
+</table>
+
+<h2><a name="V">-- V --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="esticon.html">vcov.esticon_class</a></td>
+<td>Contrasts for lm, glm, lme, and geeglm objects</td></tr>
 </table>
 
 <h2><a name="W">-- W --</a></h2>
@@ -338,5 +373,12 @@
 <td>Where are the n largest or n smallest elements in a numeric vector ?</td></tr>
 <tr><td style="width: 25%;"><a href="which.maxn.html">which.minn</a></td>
 <td>Where are the n largest or n smallest elements in a numeric vector ?</td></tr>
+</table>
+
+<h2><a name="misc">-- misc --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="dot-rhsf2list.html">.rhsf2list</a></td>
+<td>Convert right hand sided formula to a list</td></tr>
 </table>
 </body></html>

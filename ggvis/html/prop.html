@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create a property.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for prop {ggvis}"><tr><td>prop {ggvis}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create a property.</h2>
+
+<h3>Description</h3>
+
+<p>Properties are used to describe the visual properties of <a href="marks.html">marks</a>.
+You create a single property defintion with <code>prop</code>, and manage
+sets of named properties with <code><a href="props.html">props</a></code> (which also provides
+shortcuts for creating the most common kind of properties)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+prop(property, x, scale = NULL, offset = NULL, mult = NULL,
+  env = parent.frame(), event = NULL, label = NULL)
+
+is.prop(x)
+
+is.prop_constant(x)
+
+is.prop_variable(x)
+
+is.prop_reactive(x)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>property</code></td>
+<td>
+<p>A property, like &quot;x&quot;, &quot;x2&quot;, &quot;y&quot;, &quot;fill&quot;, and so on.</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>The value of the property. This can be an atomic vector
+(a constant), a name or quoted call (a variable), a single-sided
+formula (a constant or variable depending on its contents), or a delayed
+reactive (which can be either variable or constant).</p>
+</td></tr>
+<tr valign="top"><td><code>scale</code></td>
+<td>
+<p>If <code>NULL</code>, automatically determine behavior by the kind of
+value (constant, variable, or reactive).
+If <code>TRUE</code> use the default scale associated with property.
+If <code>FALSE</code>, do not scale the value.
+Otherwise supply a string to select a custom scale.
+If <code>x</code> is an interactive input, then this defaults to the scale
+parameter of the input.</p>
+</td></tr>
+<tr valign="top"><td><code>offset, mult</code></td>
+<td>
+<p>Additive and multiplicate pixel offset used to adjust
+scaled values. These are useful if you want to place labels offset from
+points.</p>
+</td></tr>
+<tr valign="top"><td><code>env</code></td>
+<td>
+<p>If <code>x</code> is a quoted call this provides the environment in
+which to look for variables not in the data. You should not need this in
+ordinary operation.</p>
+</td></tr>
+<tr valign="top"><td><code>event</code></td>
+<td>
+<p>An event to which this property applies. One of &quot;update&quot;,
+&quot;enter&quot;, &quot;exit&quot;, &quot;hover&quot;, &quot;brush&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>label</code></td>
+<td>
+<p>A label for this prop to use for reporting errors.</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="props.html">props</a></code> to manage multiple properties and to
+succintly create the most common types.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+prop("x", 1)
+prop("x", ~1)
+prop("fill", quote(cyl))
+prop("fill", ~cyl)
+prop("x", input_slider(0, 100))
+
+# If you have a variable name as a string
+var &lt;- "cyl"
+prop("x", as.name(var))
+
+# Use a custom scale
+prop("y", quote(cyl), scale = "y-2")
+
+# Don't scale variable (i.e. it already makes sense in the visual space)
+prop("fill", ~colour, scale = FALSE)
+
+# Use a constant, but scaled
+prop("x", 5, scale = TRUE)
+
+# Use other events
+prop("y", quote(cyl), scale = "y-2")
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggvis</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

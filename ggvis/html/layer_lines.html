@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Layer lines on a plot.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for layer_lines {ggvis}"><tr><td>layer_lines {ggvis}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Layer lines on a plot.</h2>
+
+<h3>Description</h3>
+
+<p><code>layer_lines</code> differs from <code>layer_paths</code> in that <code>layer_lines</code>
+sorts the data on the x variable, so the line will always proceed from left
+to right, whereas <code>layer_paths</code> will draw a line in whatever order
+appears in the data.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+layer_lines(vis, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>vis</code></td>
+<td>
+<p>Visualisation to modify.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Visual properties.</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="marks.html">layer_paths</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+mtcars %&gt;% ggvis(~wt, ~mpg, stroke = ~factor(cyl)) %&gt;% layer_lines()
+
+# Equivalent to
+mtcars %&gt;% ggvis(~wt, ~mpg, stroke = ~factor(cyl)) %&gt;%
+  group_by(cyl) %&gt;% dplyr::arrange(wt) %&gt;% layer_paths()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggvis</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>
