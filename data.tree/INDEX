@@ -48,6 +48,8 @@ as.Node.party           Convert a a 'party' from the partykit package
                         to a 'data.tree' structure.
 as.Node.phylo           Convert a 'phylo' object from the ape package
                         to a 'Node'
+as.Node.rpart           Convert an 'rpart' object to a 'data.tree'
+                        structure
 as.data.frame.Node      Convert a 'data.tree' structure to a
                         'data.frame'
 as.dendrogram.Node      Convert a 'Node' to a 'dendrogram'

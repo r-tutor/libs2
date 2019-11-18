@@ -58,8 +58,8 @@ survival probabilities. Only available for
 </td></tr>
 <tr valign="top"><td><code>cause</code></td>
 <td>
-<p>The cause for predicting the cause-specific cumulative
-incidence function in competing risk models.</p>
+<p>For competing risk models. The event of interest for which predictions of the absolute risks are obtained by evaluating the cause-specific cumulative
+incidence functions at  <code>times</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>intervals</code></td>
 <td>
@@ -150,7 +150,7 @@ summary(fit0,times=c(1,5,10,12),percent=TRUE,intervals=TRUE)
 sx &lt;- summary(fit0,times=c(1,5,10,12),percent=TRUE,intervals=TRUE)
 print(sx,digits=3)
 
-## show cumulative incidences (1-survival)
+## show absolute risks, i.e., cumulative incidences (1-survival)
 summary(fit0,times=c(1,5,10,12),surv=FALSE,percent=TRUE,intervals=TRUE)
 
 # Stratified Kaplan-Meier
@@ -185,7 +185,7 @@ print(summary(fit4,
 print(summary(fit4,
               times=c(1,5,10),
               newdata=data.frame(age=c(20,50,70),sex=c("female","male","male")),
-              intervals=TRUE,collapse=TRUE,
+              intervals=TRUE,
               percent=TRUE),digits=3)
 
 ## assess results from summary
@@ -213,5 +213,5 @@ sumfit$table[[2]] # cause 2
 # '
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>prodlim</em> version 2018.04.18 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>prodlim</em> version 2019.11.13 <a href="00Index.html">Index</a>]</div>
 </body></html>

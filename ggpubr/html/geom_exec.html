@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Execute ggplot2 functions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for geom_exec {ggpubr}"><tr><td>geom_exec {ggpubr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Execute ggplot2 functions</h2>
+
+<h3>Description</h3>
+
+<p>A helper function used by ggpubr functions to execute any geom_*
+functions in ggplot2. Useful only when you want to call a geom_* function
+without carrying about the arguments to put in aes(). Basic users of ggpubr
+don't need this function.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+geom_exec(geomfunc = NULL, data = NULL, position = NULL, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>geomfunc</code></td>
+<td>
+<p>a ggplot2 function (e.g.: geom_point)</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a data frame to be used for mapping</p>
+</td></tr>
+<tr valign="top"><td><code>position</code></td>
+<td>
+<p>Position adjustment, either as a string, or the result of a
+call to a position adjustment function.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>arguments accepted by the function</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>return a plot if geomfunc!=Null or a list(option, mapping) if
+geomfunc = NULL.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+ggplot() + geom_exec(geom_point, data = mtcars,
+    x = "mpg", y = "wt", size = "cyl", color = "cyl")
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggpubr</em> version 0.2.4 <a href="00Index.html">Index</a>]</div>
+</body></html>

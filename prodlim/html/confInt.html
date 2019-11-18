@@ -6,7 +6,7 @@
 <table width="100%" summary="page for confInt {prodlim}"><tr><td>confInt {prodlim}</td><td style="text-align: right;">R Documentation</td></tr></table>
 
 <h2>Add point-wise confidence limits to the graphs of Kaplan-Meier and
-Aalen-Johansen estimates of survival and cumulative incidence.</h2>
+Aalen-Johansen estimates.</h2>
 
 <h3>Description</h3>
 
@@ -17,8 +17,8 @@ Aalen-Johansen estimates of survival and cumulative incidence.</h2>
 <h3>Usage</h3>
 
 <pre>
-confInt(x, times, newdata, type, citype, cause, col, lty, lwd, density = 55,
-  ...)
+confInt(x, times, newdata, type, citype, cause, col, lty, lwd,
+  density = 55, ...)
 </pre>
 
 
@@ -40,8 +40,8 @@ function.</p>
 </td></tr>
 <tr valign="top"><td><code>type</code></td>
 <td>
-<p>Either <code>"cuminc"</code> or <code>"survival"</code> passed to
-summary.prodlim as <code>surv=ifelse(type=="cuminc",FALSE,TRUE)</code>.</p>
+<p>Either <code>"risk"</code> (AKA <code>"cuminc"</code>) or <code>"survival"</code> passed to
+summary.prodlim as <code>surv=ifelse(type=="risk",FALSE,TRUE)</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>citype</code></td>
 <td>
@@ -103,5 +103,5 @@ as <code>Confint.arg</code> in the call to <code>plot.prodlim</code>.
 <code><a href="markTime.html">markTime</a></code>
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>prodlim</em> version 2018.04.18 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>prodlim</em> version 2019.11.13 <a href="00Index.html">Index</a>]</div>
 </body></html>

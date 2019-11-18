@@ -14,8 +14,7 @@ backGround              Background and grid color control.
 checkCauses             Check availability of a cause in competing risk
                         settings
 confInt                 Add point-wise confidence limits to the graphs
-                        of Kaplan-Meier and Aalen-Johansen estimates of
-                        survival and cumulative incidence.
+                        of Kaplan-Meier and Aalen-Johansen estimates.
 crModel                 Competing risks model for simulation
 dimColor                Dim a given color to a specified density
 getEvent                Extract a column from an event history object.

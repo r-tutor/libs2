@@ -1,7 +1,7 @@
 Package: bookdown
 Type: Package
 Title: Authoring Books and Technical Documents with R Markdown
-Version: 0.14
+Version: 0.15
 Authors@R: c(
     person("Yihui", "Xie", role = c("aut", "cre"), email = "xie@yihui.name", comment = c(ORCID = "0000-0003-0645-5666")),
     person("JJ", "Allaire", role = "ctb"),
@@ -67,7 +67,7 @@ LazyData: TRUE
 RoxygenNote: 6.1.1
 Encoding: UTF-8
 NeedsCompilation: no
-Packaged: 2019-10-01 03:16:12 UTC; yihui
+Packaged: 2019-11-12 16:49:09 UTC; yihui
 Author: Yihui Xie [aut, cre] (<https://orcid.org/0000-0003-0645-5666>),
   JJ Allaire [ctb],
   Albert Kim [ctb],
@@ -120,5 +120,5 @@ Author: Yihui Xie [aut, cre] (<https://orcid.org/0000-0003-0645-5666>),
     inst/resources/AUTHORS),
   FriendCode Inc [cph, ctb] (The gitbook style, with modifications)
 Repository: CRAN
-Date/Publication: 2019-10-01 18:20:13 UTC
-Built: R 3.6.1; ; 2019-10-03 09:25:07 UTC; windows
+Date/Publication: 2019-11-12 18:10:07 UTC
+Built: R 3.6.1; ; 2019-11-18 02:23:15 UTC; windows

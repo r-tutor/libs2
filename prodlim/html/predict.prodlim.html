@@ -19,8 +19,8 @@ covariate constellations.
 <pre>
 ## S3 method for class 'prodlim'
 predict(object, times, newdata, level.chaos = 1,
-  type = c("surv", "cuminc", "list"), mode = "list", bytime = FALSE,
-  cause, ...)
+  type = c("surv", "risk", "cuminc", "list"), mode = "list",
+  bytime = FALSE, cause, ...)
 </pre>
 
 
@@ -48,20 +48,20 @@ time and newdata; &lsquo;1&rsquo; only by time; &lsquo;2&rsquo; no sorting at al
 </td></tr>
 <tr valign="top"><td><code>type</code></td>
 <td>
-<p>Choice between &quot;surv&quot;,&quot;cuminc&quot;,&quot;list&quot;:
+<p>Choice between &quot;surv&quot;,&quot;risk&quot;,&quot;cuminc&quot;,&quot;list&quot;:
 </p>
 <p>&quot;surv&quot;: predict survival probabilities only survival models
 </p>
-<p>&quot;cuminc&quot;: predict cumulative incidences only competing risk models
+<p>&quot;risk&quot;/&quot;cuminc&quot;: predict absolute risk, i.e., cumulative incidence function.
 </p>
 <p>&quot;list&quot;: find the indices corresponding to times and newdata. See value.
 </p>
-<p>Defaults to &quot;surv&quot; for two-state models and to &quot;cuminc&quot; for competing risk
+<p>Defaults to &quot;surv&quot; for two-state models and to &quot;risk&quot; for competing risk
 models.</p>
 </td></tr>
 <tr valign="top"><td><code>mode</code></td>
 <td>
-<p>Only for <code>type=="surv"</code> and <code>type=="cuminc"</code>. Can
+<p>Only for <code>type=="surv"</code> and <code>type=="risk"</code>. Can
 either be &quot;list&quot; or &quot;matrix&quot;. For &quot;matrix&quot; the predicted probabilities will
 be returned in matrix form.</p>
 </td></tr>
@@ -75,9 +75,9 @@ given.</p>
 <tr valign="top"><td><code>cause</code></td>
 <td>
 <p>Character (other classes are converted with <code>as.character</code>).
-The cause for predicting the cause-specific cumulative
-incidence function in competing risk models, that is the absolute risk of 
-<code>cause</code> events between time zero and <code>times</code> .</p>
+The cause for predicting the absolute risk of an event, i.e., the cause-specific cumulative
+incidence function, in competing risk models. At any time after time zero this is the absolute risk of 
+an event of type <code>cause</code> to occur between time zero and <code>times</code> .</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
@@ -98,7 +98,7 @@ summarized and used for inverse of probability of censoring weighting.
 <p><code>type=="surv"</code> A list or a matrix with survival probabilities
 for all times and all newdata.
 </p>
-<p><code>type=="cuminc"</code> A list or a matrix with cumulative incidences for all
+<p><code>type=="risk"</code> or <code>type=="cuminc"</code> A list or a matrix with cumulative incidences for all
 times and all newdata.
 </p>
 <p><code>type=="list"</code> A list with the following components:
@@ -170,5 +170,5 @@ predict(mfit,times=c(-1,0,10,100,1000,10000),newdata=dat[18:21,],mode="matrix",b
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>prodlim</em> version 2018.04.18 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>prodlim</em> version 2019.11.13 <a href="00Index.html">Index</a>]</div>
 </body></html>

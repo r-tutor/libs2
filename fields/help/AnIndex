@@ -52,6 +52,8 @@ ddfind	FORTRAN.internal
 describe	fields-internal
 designer.colors	tim.colors
 discretize.image	grid.list
+distMatHaversin	registeredC
+distMatHaversin2	registeredC
 dmaket	FORTRAN.internal
 double.exp	fields-internal
 drape.color	drape.plot

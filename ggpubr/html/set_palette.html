@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Set Color Palette</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for set_palette {ggpubr}"><tr><td>set_palette {ggpubr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Set Color Palette</h2>
+
+<h3>Description</h3>
+
+ <ul>
+<li> <p><code>change_palette(), set_palette()</code>: Change
+both color and fill palettes. </p>
+</li>
+<li> <p><code>color_palette()</code>: change color
+palette only. </p>
+</li>
+<li> <p><code>fill_palette()</code>: change fill palette only.
+</p>
+</li></ul>
+
+
+
+<h3>Usage</h3>
+
+<pre>
+set_palette(p, palette)
+
+change_palette(p, palette)
+
+color_palette(palette = NULL, ...)
+
+fill_palette(palette = NULL, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>a ggplot</p>
+</td></tr>
+<tr valign="top"><td><code>palette</code></td>
+<td>
+<p>Color palette. Allowed values include: </p>
+ <ul>
+<li>
+<p><strong>Grey color palettes</strong>: &quot;grey&quot; or &quot;gray&quot;; </p>
+</li>
+<li> <p><strong>RColorBrewer
+palettes</strong>, see <code><a href="../../RColorBrewer/html/brewer.pal.html">brewer.pal</a></code> and details section.
+Examples of palette names include: &quot;RdBu&quot;, &quot;Blues&quot;, &quot;Dark2&quot;, &quot;Set2&quot;, ...;
+</p>
+</li>
+<li> <p><strong>Custom color palettes</strong>. For example, palette = c(&quot;#00AFBB&quot;,
+&quot;#E7B800&quot;, &quot;#FC4E07&quot;); </p>
+</li>
+<li> <p><strong>ggsci scientific journal palettes</strong>,
+e.g.: &quot;npg&quot;, &quot;aaas&quot;, &quot;lancet&quot;, &quot;jco&quot;, &quot;ucscgb&quot;, &quot;uchicago&quot;, &quot;simpsons&quot; and
+&quot;rickandmorty&quot;. </p>
+</li></ul>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>other arguments passed to ggplot2 scale_color_xxx() and
+scale_fill_xxx() functions.</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p><a href="get_palette.html">get_palette</a>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Load data
+data("ToothGrowth")
+df &lt;- ToothGrowth
+
+# Basic plot
+p &lt;- ggboxplot(df, x = "dose", y = "len",
+   color = "dose")
+p
+
+# Change the color palette
+set_palette(p, "jco")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggpubr</em> version 0.2.4 <a href="00Index.html">Index</a>]</div>
+</body></html>

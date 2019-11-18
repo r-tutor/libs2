@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Evaluates a design.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for eval.design {AlgDesign}"><tr><td>eval.design {AlgDesign}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Evaluates a design.</h2>
+
+<h3>Description</h3>
+
+<p>A design is evaluated.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+eval.design(frml,design,confounding=FALSE,variances=TRUE,center=FALSE,X=NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>frml</code></td>
+<td>
+<p>The formula used to create the design.</p>
+</td></tr>
+<tr valign="top"><td><code>design</code></td>
+<td>
+<p>The design, which may be the design part of the output of optFederov().</p>
+</td></tr>
+<tr valign="top"><td><code>confounding</code></td>
+<td>
+<p>If confounding=TRUE, the confounding patterns will be shown.</p>
+</td></tr> 
+<tr valign="top"><td><code>variances</code></td>
+<td>
+<p>If TRUE, the variances each term will be output.</p>
+</td></tr>
+<tr valign="top"><td><code>center</code></td>
+<td>
+<p>If TRUE, numeric variables will be centered before frml is applied.</p>
+</td></tr>
+<tr valign="top"><td><code>X</code></td>
+<td>
+<p>X is either the matrix describing the prediction space for I or for G, the 
+the candidate set from which the design was chosen. They are often
+the same.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<table summary="R valueblock">
+<tr valign="top"><td><code>confounding</code></td>
+<td>
+<p>A matrix. The columns of which give the regression coefficients of
+each variable regressed on the others. If <i>C</i> is the confounding matrix, then 
+<i>-ZC</i> is a matrix of residuals of the variables regressed on the other variables.</p>
+</td></tr>
+<tr valign="top"><td><code>determinant</code></td>
+<td>
+<p><i>(det(M/N)^(1/k)</i>, where <i>M=Z'Z/N</i>, and Z is 
+the model expanded <i>N x k</i> design matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>A</code></td>
+<td>
+<p>The average coefficient variance: <i>trace(Mi)/k</i>, where <i>Mi</i> is the 
+inverse of <i>M</i>.</p>
+</td></tr>
+<tr valign="top"><td><code>I</code></td>
+<td>
+<p>The average prediction variance over X, which can be shown to be 
+<i>trace((X'X*Mi)/N</i>.</p>
+</td></tr> 
+<tr valign="top"><td><code>Ge</code></td>
+<td>
+<p>The minimax normalized variance over X, expressed as an efficiency with respect 
+to the optimal approximate theory design. It is defined as <i>k/max(d)</i>, where 
+<i>max(d)</i> is the maximum normalized variance over <i>X</i> &ndash; i.e. the max of 
+<i>x'(Mi)x</i>, over all rows <i>x'</i> of <i>X</i>.</p>
+</td></tr>
+<tr valign="top"><td><code>Dea</code></td>
+<td>
+<p>A lower bound on <code>D</code> efficiency for approximate theory designs. It is 
+equal to <i>exp(1-1/Ge)</i>.</p>
+</td></tr>
+<tr valign="top"><td><code>diagonality</code></td>
+<td>
+<p>The diagonality of the design, excluding the constant, if any. Diagonality
+is defined as <i>(|M1|/prod(diag(M1)))^(1/k)</i>, where 
+<i>M1</i> is <i>M</i> with first column and row deleted when there is a constant.</p>
+</td></tr>
+<tr valign="top"><td><code>gmean.variances</code></td>
+<td>
+<p>The geometric mean of the coefficient variances.</p>
+</td></tr>
+</table>
+
+
+<h3>Note</h3>
+
+<p>I, Ge and Dea are calculated only when X is input.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Bob Wheeler <a href="mailto:bwheelerg@gmail.com">bwheelerg@gmail.com</a>
+</p>
+<p>Please cite this program as follows:
+</p>
+<p>Wheeler, R.E. (2004). eval.design. <em>AlgDesign</em>. The R project for statistical computing <a href="https://www.r-project.org/">https://www.r-project.org/</a>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>AlgDesign</em> version 1.1-7.3.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

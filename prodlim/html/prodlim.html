@@ -9,8 +9,6 @@
 
 <h3>Description</h3>
 
-<p>Functions for estimating probabilities from right censored data
-</p>
 <p>Nonparametric estimation in event history analysis. Featuring fast
 algorithms and user friendly syntax adapted from the survival package.  The
 product limit algorithm is used for right censored data; the
@@ -130,8 +128,8 @@ includes all the L and R endpoints of the observed intervals.</p>
 <tr valign="top"><td><code>type</code></td>
 <td>
 <p>In two state models either <code>"surv"</code> for the Kaplan-Meier estimate of the survival
-function or <code>"cuminc"</code> for 1-Kaplan-Meier. Default is <code>"surv"</code> when <code>reverse==FALSE</code> and <code>"cuminc"</code> when <code>reverse==TRUE</code>.
-In competing risks models it has to be <code>"cuminc"</code>
+function or <code>"risk"</code> for 1-Kaplan-Meier. Default is <code>"surv"</code> when <code>reverse==FALSE</code> and <code>"risk"</code> when <code>reverse==TRUE</code>.
+In competing risks models it has to be <code>"risk"</code>
 Aalen-Johansen estimate of the cumulative incidence function.</p>
 </td></tr>
 </table>
@@ -166,11 +164,8 @@ formula is replaced by the formula of Ying \&amp; Wei (1994).
 <p>(3) Competing risk models can be specified via <code><a href="Hist.html">Hist</a></code> response
 objects in <code>formula</code>.
 </p>
-<p>The Aalen-Johansen estimator is applied for estimating the cumulative
-incidence functions for all causes.  The advantage over the function
-<code>cuminc</code> of the cmprsk package are user-friendly model specification
-via <code><a href="Hist.html">Hist</a></code> and sophisticated print, summary, predict and plot
-methods.
+<p>The Aalen-Johansen estimator is applied for estimating the absolute risk of the competing causes, i.e., the cumulative
+incidence functions.
 </p>
 <p>Under construction:
 </p>
@@ -221,7 +216,7 @@ estimate for dependent failure time observations
 <h3>See Also</h3>
 
 <p><code><a href="predict.prodlim.html">predictSurv</a></code>, <code><a href="predictSurvIndividual.html">predictSurvIndividual</a></code>,
-<code><a href="predict.prodlim.html">predictCuminc</a></code>, <code><a href="Hist.html">Hist</a></code>, <code><a href="neighborhood.html">neighborhood</a></code>,
+<code><a href="predict.prodlim.html">predictAbsrisk</a></code>, <code><a href="Hist.html">Hist</a></code>, <code><a href="neighborhood.html">neighborhood</a></code>,
 <code><a href="../../survival/html/Surv.html">Surv</a></code>, <code><a href="../../survival/html/survfit.html">survfit</a></code>, <code><a href="../../survival/html/strata.html">strata</a></code>,
 </p>
 
@@ -328,5 +323,5 @@ plot(fitd)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>prodlim</em> version 2018.04.18 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>prodlim</em> version 2019.11.13 <a href="00Index.html">Index</a>]</div>
 </body></html>

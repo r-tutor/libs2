@@ -17,8 +17,9 @@ Kaplan-Meier and Aalen-Johansen plots.</h2>
 <h3>Usage</h3>
 
 <pre>
-atRisk(x, newdata, times, line, col, labelcol = NULL, interspace, cex, labels,
-  title = "", titlecol = NULL, pos, adj, dist, adjust.labels = TRUE, ...)
+atRisk(x, newdata, times, line, col, labelcol = NULL, interspace, cex,
+  labels, title = "", titlecol = NULL, pos, adj, dist,
+  adjust.labels = TRUE, show.censored = FALSE, ...)
 </pre>
 
 
@@ -90,6 +91,10 @@ most atrisk row from the inner plotting region: par()$mgp[2].</p>
 <td>
 <p>If <code>TRUE</code> the labels are left adjusted.</p>
 </td></tr>
+<tr valign="top"><td><code>show.censored</code></td>
+<td>
+<p>If <code>TRUE</code> the cumulative number of subjects lost to follow up is shown in parentheses.</p>
+</td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
 <p>Further arguments that are passed to the function
@@ -123,5 +128,5 @@ as <code>atRisk.arg</code> in the call to <code>plot.prodlim</code>.
 <code><a href="markTime.html">markTime</a></code>
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>prodlim</em> version 2018.04.18 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>prodlim</em> version 2019.11.13 <a href="00Index.html">Index</a>]</div>
 </body></html>

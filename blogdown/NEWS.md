@@ -1,3 +1,9 @@
+# CHANGES IN blogdown VERSION 0.17
+
+## BUG FIXES
+
+- The "New Post" addin in RStudio works with page bundle archetypes now (thanks, @malcolmbarrett and @apreshill, #414).
+
 # CHANGES IN blogdown VERSION 0.16
 
 ## MINOR CHANGES

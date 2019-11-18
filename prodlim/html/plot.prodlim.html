@@ -9,7 +9,7 @@
 
 <h3>Description</h3>
 
-<p>Function to plot survival and cumulative incidence curves against time.
+<p>Function to plot survival probabilities or absolute risks (cumulative incidence function) against time.
 </p>
 
 
@@ -17,11 +17,12 @@
 
 <pre>
 ## S3 method for class 'prodlim'
-plot(x, type, cause, select, newdata, add = FALSE, col, lty,
-  lwd, ylim, xlim, ylab, xlab = "Time", timeconverter, legend = TRUE,
-  logrank = FALSE, marktime = FALSE, confint = TRUE, automar,
-  atrisk = ifelse(add, FALSE, TRUE), timeOrigin = 0, axes = TRUE,
-  background = TRUE, percent = TRUE, minAtrisk = 0, limit = 10, ...)
+plot(x, type, cause, select, newdata, add = FALSE, col,
+  lty, lwd, ylim, xlim, ylab, xlab = "Time", timeconverter,
+  legend = TRUE, logrank = FALSE, marktime = FALSE, confint = TRUE,
+  automar, atrisk = ifelse(add, FALSE, TRUE), timeOrigin = 0,
+  axes = TRUE, background = TRUE, percent = TRUE, minAtrisk = 0,
+  limit = 10, ...)
 </pre>
 
 
@@ -35,25 +36,25 @@ plot(x, type, cause, select, newdata, add = FALSE, col, lty,
 </td></tr>
 <tr valign="top"><td><code>type</code></td>
 <td>
-<p>Either <code>"surv"</code> or <code>"cuminc"</code> controls what</p>
+<p>Either <code>"surv"</code> or <code>"risk"</code> AKA <code>"cuminc"</code>. Controls what
+part of the object is plotted.  Defaults to <code>object$type</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>cause</code></td>
 <td>
-<p>Character (other classes are converted with <code>as.character</code>).
-<code>cause</code> determines the cause of the cumulative incidence
-function.  Currently one cause is allowed at a time, but you can
+<p>For competing risk models. Character (other classes are converted with <code>as.character</code>).
+The argument <code>cause</code> determines the event of interest. Currently one cause is allowed at a time, but you can
 call the function again with <code>add=TRUE</code> to add the lines of the other
-causes.</p>
+causes. Also, if <code>cause="stacked"</code> is specified the absolute risks of all causes are stacked.</p>
 </td></tr>
 <tr valign="top"><td><code>select</code></td>
 <td>
 <p>Select which lines to plot. This can be used when
 there are many strata or many competing risks to select a
 subset of the lines.  However, a more clean way to select
-covariate stratat is to use argument <code>newdata</code>.  Another
-application is when there are many competing risks and it is
-desired (for the stacked plot) to stack and show only a subset
-of the cumulative incidence functions.</p>
+covariate strata is to use the argument <code>newdata</code>. Another
+application is when there are several competing risks and the 
+stacked plot (<code>cause="stacked"</code>) should only show a selected subset
+of the available causes.</p>
 </td></tr>
 <tr valign="top"><td><code>newdata</code></td>
 <td>
@@ -95,7 +96,7 @@ to show curves. When omitted element <code>X</code> of object
 </td></tr>
 <tr valign="top"><td><code>timeconverter</code></td>
 <td>
-<p>The strings are allowed:
+<p>The following options are supported:
 &quot;days2years&quot; (conversion factor: 1/365.25)
 &quot;months2years&quot; (conversion factor: 1/12)
 &quot;days2months&quot; (conversion factor 1/30.4368499)
@@ -250,7 +251,7 @@ dat &lt;- SimSurv(100)
 ### marginal Kaplan-Meier estimator
 kmfit &lt;- prodlim(Hist(time, status) ~ 1, data = dat)
 plot(kmfit)
-
+plot(kmfit,atrisk.show.censored=1L,atrisk.at=seq(0,12,3))
 plot(kmfit,timeconverter="years2months")
 
 # change time range
@@ -260,7 +261,7 @@ plot(kmfit,xlim=c(0,4))
 plot(kmfit,percent=FALSE)
 
 # mortality instead of survival
-plot(kmfit,type="cuminc")
+plot(kmfit,type="risk")
 
 # change axis label and position of ticks
 plot(kmfit,
@@ -303,7 +304,7 @@ plot(kmfit,
 
 ### Kaplan-Meier in discrete strata
 kmfitX &lt;- prodlim(Hist(time, status) ~ X1, data = dat)
-plot(kmfitX)
+plot(kmfitX,atrisk.show.censored=1L)
 # move legend
 plot(kmfitX,legend.x="bottomleft",atRisk.cex=1.3,
      atrisk.title="No. subjects")
@@ -380,6 +381,7 @@ with(datCR,plot(Hist(time,event)))
 ### marginal Aalen-Johansen estimator
 ajfit &lt;- prodlim(Hist(time, event) ~ 1, data = datCR)
 plot(ajfit) # same as plot(ajfit,cause=1)
+plot(ajfit,atrisk.show.censored=1L)
 
 # cause 2
 plot(ajfit,cause=2)
@@ -420,5 +422,5 @@ plot(ajfitX,
  
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>prodlim</em> version 2018.04.18 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>prodlim</em> version 2019.11.13 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -13,6 +13,7 @@ as.Node.dendrogram	as.Node.dendrogram
 as.Node.list	as.Node.list
 as.Node.party	as.Node.party
 as.Node.phylo	as.Node.phylo
+as.Node.rpart	as.Node.rpart
 as.phylo.Node	as.phylo.Node
 averageBranchingFactor	averageBranchingFactor
 CheckNameReservedWord	CheckNameReservedWord
@@ -48,6 +49,7 @@ plot.Node	ToDiagrammeRGraph
 print.Node	print.Node
 Prune	Prune
 Revert	Revert
+s3_register	s3_register
 Set	Set
 SetEdgeStyle	ToDiagrammeRGraph
 SetFormat	SetFormat

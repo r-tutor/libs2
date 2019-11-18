@@ -28,6 +28,7 @@ plot.prodlim	plot.prodlim
 plotCompetingRiskModel	plotCompetingRiskModel
 plotIllnessDeathModel	plotIllnessDeathModel
 predict.prodlim	predict.prodlim
+predictAbsrisk	predict.prodlim
 predictCuminc	predict.prodlim
 predictSurv	predict.prodlim
 predictSurvIndividual	predictSurvIndividual

@@ -1,0 +1,232 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Optimal design blocking</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for optBlock {AlgDesign}"><tr><td>optBlock {AlgDesign}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Optimal design blocking</h2>
+
+<h3>Description</h3>
+
+<p>Blocking of experimental designs using various criteria.</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+
+optBlock(frml,withinData,blocksizes,rows=NULL,wholeBlockData=NULL,center=FALSE,
+	nRepeats=5,criterion="D",args=FALSE)
+
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>frml</code></td>
+<td>
+<p>This may be omitted if <code>data</code> is the fully model expanded candidate list.
+If present it should be a formula starting with <code>~</code> which describes the model using
+variable names from <code>data</code>. It may be <code>~</code>. if all variables from <code>data</code> are to be 
+used linearly. It may also be <i>~.^p</i>, where p is an integer. In addition to the usual 
+operators, quad(), cubic() and cubicS() may be used to expand variables from <code>data</code> 
+into polynomial models.</p>
+</td></tr>
+<tr valign="top"><td><code>withinData</code></td>
+<td>
+<p>A matrix or data.frame describing the variables. If the columns are not 
+named, they will be assumed to have the names X1,X2, etc. Although data may be input as
+global variables used in frml, it is preferable to input it here. The number of rows in <code>withinData</code>
+must be at least as large as the sum of the number of terms plus the number of blocks.</p>
+</td></tr>
+<tr valign="top"><td><code>blocksizes</code></td>
+<td>
+<p>A vector giving the block sizes for each block. The length of <code>blocksizes</code>
+specifies the number of blocks.</p>
+</td></tr>
+<tr valign="top"><td><code>rows</code></td>
+<td>
+<p>Row numbers (not rownames) of withinData rows to be used as a starting blocked design.</p>
+</td></tr>
+<tr valign="top"><td><code>wholeBlockData</code></td>
+<td>
+<p>A matrix or data.frame describing the whole block variables. The number of
+rows should equal the length of blocksizes. Each row should
+correspond to the settings of the whole block variable in a block.</p>
+</td></tr>
+<tr valign="top"><td><code>center</code></td>
+<td>
+<p>If TRUE, the withinData and wholeBlockData will be centered.</p>
+</td></tr>
+<tr valign="top"><td><code>nRepeats</code></td>
+<td>
+<p>The number of times the entire process is repeated.</p>
+</td></tr>
+<tr valign="top"><td><code>criterion</code></td>
+<td>
+<p>&quot;D&quot;:D-criterion: &quot;OB&quot;,&quot;OBS&quot;: orthogonal blocks, unscaled and scaled; &quot;Dp&quot;,&quot;Dpc&quot;: 
+Product of block determinants, uncentered and centered.</p>
+</td></tr>
+<tr valign="top"><td><code>args</code></td>
+<td>
+<p>If TRUE, the actual arguments to the function including the starting random number
+seed should be output.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Cook and Nachtsheim (1989) developed a blocking algorithm using the D criterion, which not only finds blocks, but attempts to optimize the design itself. The package Dopt, converted by V.N. Venables, implements this technology &ndash; unfortunately there seem to be bugs in the FORTRAN code. 
+</p>
+<p>This function uses various criteria to block either pre-existing designs or to creates a new blocked design from a candidate list. There may be interactions between whole plot and within plot factors, and it may be used to produce multistratum blocked designs. 
+</p>
+<p>The algebraic expressions used here for the D criterion are quite different than those used by either Cook and Nachtshim or Goos and Vandebroek. They are described in <em>Comments on algorithmic design</em>, a paper accompanying this package.
+</p>
+<p>Although the D criterion produces good designs for all blocks, the allocation for individual blocks can often be improved upon by the use of either the Dp or Dpc criterion, which optimize the product of the determinants of the individual blocks. The Dp criterion uses uncentered blocks, the Dpc uses centered blocks. 
+</p>
+<p>Blocking may also be done using the orthogonal blocking procedure of Nguyen. This comes in two flavors OB and OBS which differ in that for OBS, the columns of S are scaled by division with the sample variance of the data, thus deemphasizing squared and other large terms.
+</p>
+<p>Blocking may be done when whole plot factors interact with within plot factors. Split plot experiments are sometimes of this nature. Goos and Vandebroek (2003) developed a procedure for this problem which algorithmically blocks using a candidate list and the ratio between the whole and within variances. Trinca and Gilmour (2001) give an algorithm which does not depend on the ratio of the variances. The present procedure assumes that the whole blocks and their factors, have been decided upon in advance. It makes no assumptions about the ratio between whole and within variances. 
+</p>
+<p>A vignette giving further details is availble. To access it, type
+</p>
+<p>vignette(&quot;AlgDesign&quot;)
+</p>
+
+
+<h3>Value</h3>
+
+<table summary="R valueblock">
+<tr valign="top"><td><code>D</code></td>
+<td>
+<p><i>det(M)^(1/k)</i>, where <i>det(M)</i> is the
+determinant of the normalized dispersion matrix <i>M</i> &ndash;
+i.e. <i>M=X'X/N</i>, where each row of X has had the appropriate block mean subtracted.</p>
+</td></tr>
+<tr valign="top"><td><code>Dp (Dpc)</code></td>
+<td>
+<p><i>[prod (det(Mi)^(1/k)]^(1/b)</i>, 
+where <i>det(Mi)</i> is the determinant of the normalized dispersion matrix 
+for the uncentered (centered) block submatrix of <i>X</i>, and <i>b</i> is the number of blocks. The
+normalization is with respect to the number of observations in each block.</p>
+</td></tr>
+<tr valign="top"><td><code>diagonality or SS</code></td>
+<td>
+<p>The diagonality is <i>(|M|/P)^{1/k}</i>, where P is the product of the diagonal
+elements of M. The SS is the sum of squares of S when the OB criterion is used.</p>
+</td></tr>
+<tr valign="top"><td><code>Blocks</code></td>
+<td>
+<p>A list of the blocks, labeled B1, B2, etc.</p>
+</td></tr>
+<tr valign="top"><td><code>design</code></td>
+<td>
+<p>A data.frame. The design with blocks stacked in order.</p>
+</td></tr>
+<tr valign="top"><td><code>rows</code></td>
+<td>
+<p>Numeric row numbers of the design rows corresponding to the withinData rows.</p>
+</td></tr> 
+<tr valign="top"><td><code>args</code></td>
+<td>
+<p>A list of the actual arguments used in this call.</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Bob Wheeler <a href="mailto:bwheelerg@gmail.com">bwheelerg@gmail.com</a>
+</p>
+<p>Please cite this program as follows:
+</p>
+<p>Wheeler, R.E. (2004). optBlock. <em>AlgDesign</em>. The R project for statistical computing <a href="https://www.r-project.org/">https://www.r-project.org/</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Atkinson, A.C. and Donev, A.N. (1989). The construction of exact D-optimum experimental designs with application to blocking response surface designs. <em>Biometrika</em>. 76. 515-526.
+</p>
+<p>Cook, R.D. and Nachtsheim, C.J. (1989). Computer-aided blocking of factorial and response-surface designs. <em>Technometrics.</em> 31-3. 339-346.
+</p>
+<p>Goos, P. and Vandebroek, M. (2003). D-optimal split-plot designs with given numbers and sizes of whole plots. <em>Technometrics.</em> 45-3. 235-245.
+</p>
+<p>Nguyen, Nam-Ky. (2001). Cutting experimental designs into blocks. <em>AusNZJSt</em>. 43-3. 367-374.
+</p>
+<p>Trinca, L.A. and Gilmour, S.G. (2000). An algorithm for arranging response surface designs in small blocks. <em>Computational Statistics and Data Analysis</em>. 33. 25-43.
+</p>
+<p>Trinca, L.A. and Gilmour, S.G. (2001). Multistratum response surface designs. <em>Technometrics</em>. 43-1. 25-33.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Blocking the design for a quadratic polynomial in three variables into two 
+# seven trial blocks:
+
+dat&lt;-gen.factorial(3,3,varNames=c("A","B","C"))
+desD&lt;-optFederov(~quad(.),dat,nTrials=14,eval=TRUE) # Choose an optimum 14 trail design.
+optBlock(~quad(.),desD$design,c(7,7))
+
+# Letting optBlock() search the dat candidate list instead of first choosing a 
+# 14 trial design.
+optBlock(~quad(.),dat,c(7,7))
+
+
+# A block design for 7 treatments in 7 blocks of size 3. Note how withinData 
+# is recycled to fill out the blocksize requirements.
+
+BIB&lt;-optBlock(~.,withinData=factor(1:7),blocksizes=rep(3,7))
+
+# This is a balanced incomplete block design as may be seen from:
+
+crossprod(table(BIB$rows,c(rep(1:7, rep(3,7)))))
+
+# A partially balanced incomplete block design with two associate classes:
+
+tr&lt;-factor(1:9)
+PBIB&lt;-optBlock(~.,withinData=tr,blocksizes=rep(3,9))
+
+crossprod(table(PBIB$rows,c(rep(1:9, rep(3,9)))))
+
+
+# Two fractions of a 2^(4-1).
+
+dat&lt;-gen.factorial(2,4)
+od&lt;-optBlock(~.,dat,c(8,8)) 
+
+# The blocks are not themselves orthogonal even though the entire design is optimal.
+
+bk&lt;-data.matrix(od$Blocks$B1)
+t(bk)%*%bk 
+
+# Better blocks may be obtained as follows, but note that they are not generally 
+# the fractions that would be obtained by confounding the third order interaction.
+
+od&lt;-optBlock(~.,dat,c(8,8),criterion="Dpc",nR=10)
+bk&lt;-data.matrix(od$Blocks$B1)
+t(bk)%*%bk
+
+# Blocking with whole plot factors. Note that the 27 rows of within are recycled 
+# to make the 54 trial blocked design. 
+
+within&lt;-expand.grid(A=c(-1,0,1),B=c(-1,0,1),C=c(-1,0,1))
+whole&lt;-expand.grid(D=factor(1:3),E=factor(1:3))
+od&lt;-optBlock(~D+E*(quad(A,B,C)),withinData=within,blocksizes=rep(6,9),wholeBlockData=whole)
+
+# Either withinData, or wholeBlockData may be an approximate theory optimial design 
+# produced by optFederov() for nTrials. The first column in the optFederov() output 
+# design, named "Rep..", is used to replicate the trials. 
+
+within&lt;-optFederov(~quad(A,B,C),within,nT=54,approx=TRUE)
+od&lt;-optBlock(~D+E*(quad(A,B,C)),withinData=within$design,blocksizes=rep(6,9),wholeBlockData=whole)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>AlgDesign</em> version 1.1-7.3.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

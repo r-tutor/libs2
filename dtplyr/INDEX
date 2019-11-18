@@ -1,5 +1,6 @@
+collect.dtplyr_step     Force computation of a lazy data.table
 dtplyr-package          dtplyr: Data Table Back-End for 'dplyr'
-grouped_dt              A grouped data table.
-join.tbl_dt             Join data table tbls.
-src_dt                  A local data table source.
-tbl_dt                  Create a data table tbl.
+group_modify.dtplyr_step
+                        Modify a lazy_dt in place
+lazy_dt                 Create a "lazy" data.table for use with dplyr
+                        verbs
