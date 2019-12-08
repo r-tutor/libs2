@@ -1,0 +1,271 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Visualize Multiple Factor Analysis</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for fviz_mfa {factoextra}"><tr><td>fviz_mfa {factoextra}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Visualize Multiple Factor Analysis</h2>
+
+<h3>Description</h3>
+
+<p>Multiple factor analysis (MFA) is used to analyze a data set in 
+which individuals are described by several sets of variables (quantitative 
+and/or qualitative) structured into groups. fviz_mfa() provides
+ggplot2-based elegant visualization of MFA outputs from the R function: MFA
+[FactoMineR].<br /><br /> </p>
+ <ul>
+<li><p>fviz_mfa_ind(): Graph of individuals 
+</p>
+</li>
+<li><p>fviz_mfa_var(): Graph of variables </p>
+</li>
+<li><p>fviz_mfa_axes(): Graph of 
+partial axes </p>
+</li>
+<li><p>fviz_mfa(): An alias of fviz_mfa_ind(res.mfa, partial = 
+&quot;all&quot;) </p>
+</li>
+<li><p>fviz_mfa_quali_biplot(): Biplot of individuals and qualitative
+variables </p>
+</li></ul>
+
+
+
+<h3>Usage</h3>
+
+<pre>
+fviz_mfa_ind(X, axes = c(1, 2), geom = c("point", "text"),
+  repel = FALSE, habillage = "none", palette = NULL,
+  addEllipses = FALSE, col.ind = "blue", col.ind.sup = "darkblue",
+  alpha.ind = 1, shape.ind = 19, col.quali.var.sup = "black",
+  select.ind = list(name = NULL, cos2 = NULL, contrib = NULL),
+  partial = NULL, col.partial = "group", ...)
+
+fviz_mfa_quali_biplot(X, axes = c(1, 2), geom = c("point", "text"),
+  repel = repel,
+  title = "Biplot of individuals and qualitative variables - MFA", ...)
+
+fviz_mfa_var(X, choice = c("quanti.var", "group", "quali.var"),
+  axes = c(1, 2), geom = c("point", "text"), repel = FALSE,
+  habillage = "none", col.var = "red", alpha.var = 1,
+  shape.var = 17, col.var.sup = "darkgreen", palette = NULL,
+  select.var = list(name = NULL, cos2 = NULL, contrib = NULL), ...)
+
+fviz_mfa_axes(X, axes = c(1, 2), geom = c("arrow", "text"),
+  col.axes = NULL, alpha.axes = 1, col.circle = "grey70",
+  select.axes = list(name = NULL, contrib = NULL), repel = FALSE, ...)
+
+fviz_mfa(X, partial = "all", ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>X</code></td>
+<td>
+<p>an object of class MFA [FactoMineR].</p>
+</td></tr>
+<tr valign="top"><td><code>axes</code></td>
+<td>
+<p>a numeric vector of length 2 specifying the dimensions to be 
+plotted.</p>
+</td></tr>
+<tr valign="top"><td><code>geom</code></td>
+<td>
+<p>a text specifying the geometry to be used for the graph. Allowed 
+values are the combination of <code>c("point", "arrow", "text")</code>. Use 
+<code>"point"</code> (to show only points); <code>"text"</code> to show only labels; 
+<code>c("point", "text")</code> or <code>c("arrow", "text")</code> to show arrows and 
+texts. Using <code>c("arrow", "text")</code> is sensible only for the graph of 
+variables.</p>
+</td></tr>
+<tr valign="top"><td><code>repel</code></td>
+<td>
+<p>a boolean, whether to use ggrepel to avoid overplotting text 
+labels or not.</p>
+</td></tr>
+<tr valign="top"><td><code>habillage</code></td>
+<td>
+<p>an optional factor variable for coloring the observations by 
+groups. Default value is &quot;none&quot;. If X is an MFA object from FactoMineR 
+package, habillage can also specify the index of the factor variable in the 
+data.</p>
+</td></tr>
+<tr valign="top"><td><code>palette</code></td>
+<td>
+<p>the color palette to be used for coloring or filling by
+groups. Allowed values include &quot;grey&quot; for grey color palettes; brewer
+palettes e.g. &quot;RdBu&quot;, &quot;Blues&quot;, ...; or custom color palette e.g. c(&quot;blue&quot;,
+&quot;red&quot;); and scientific journal palettes from ggsci R package, e.g.: &quot;npg&quot;,
+&quot;aaas&quot;, &quot;lancet&quot;, &quot;jco&quot;, &quot;ucscgb&quot;, &quot;uchicago&quot;, &quot;simpsons&quot; and
+&quot;rickandmorty&quot;. Can be also a numeric vector of length(groups); in this
+case a basic color palette is created using the function
+<a href="../../grDevices/html/palette.html">palette</a>.</p>
+</td></tr>
+<tr valign="top"><td><code>addEllipses</code></td>
+<td>
+<p>logical value. If TRUE, draws ellipses around the 
+individuals when habillage != &quot;none&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>col.ind, col.var, col.axes</code></td>
+<td>
+<p>color for individuals, variables and col.axes 
+respectively. Can be a continuous variable or a factor variable. Possible
+values include also : &quot;cos2&quot;, &quot;contrib&quot;, &quot;coord&quot;, &quot;x&quot; or &quot;y&quot;. In this case,
+the colors for individuals/variables are automatically controlled by their
+qualities (&quot;cos2&quot;), contributions (&quot;contrib&quot;), coordinates (x^2 + y^2 ,
+&quot;coord&quot;), x values(&quot;x&quot;) or y values(&quot;y&quot;). To use automatic coloring (by
+cos2, contrib, ....), make sure that habillage =&quot;none&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>col.ind.sup</code></td>
+<td>
+<p>color for supplementary individuals</p>
+</td></tr>
+<tr valign="top"><td><code>alpha.ind, alpha.var, alpha.axes</code></td>
+<td>
+<p>controls the transparency of individual,
+variable, group and axes colors, respectively. The value can variate from 0 
+(total transparency) to 1 (no transparency). Default value is 1. Possible 
+values include also : &quot;cos2&quot;, &quot;contrib&quot;, &quot;coord&quot;, &quot;x&quot; or &quot;y&quot;. In this case, 
+the transparency for individual/variable colors are automatically controlled
+by their qualities (&quot;cos2&quot;), contributions (&quot;contrib&quot;), coordinates (x^2 + 
+y^2 , &quot;coord&quot;), x values(&quot;x&quot;) or y values(&quot;y&quot;). To use this, make sure that 
+habillage =&quot;none&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>shape.ind, shape.var</code></td>
+<td>
+<p>point shapes of individuals, variables, groups and 
+axes</p>
+</td></tr>
+<tr valign="top"><td><code>col.quali.var.sup</code></td>
+<td>
+<p>color for supplementary qualitative variables. 
+Default is &quot;black&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>select.ind, select.var, select.axes</code></td>
+<td>
+<p>a selection of individuals/partial 
+individuals/ variables/groups/axes to be drawn. Allowed values are NULL or a
+list containing the arguments name, cos2 or contrib: </p>
+ <ul>
+<li><p> name is
+a character vector containing individuals/variables to be drawn </p>
+</li>
+<li><p> cos2 
+if cos2 is in [0, 1], ex: 0.6, then individuals/variables with a cos2 &gt; 0.6 
+are drawn. if cos2 &gt; 1, ex: 5, then the top 5 individuals/variables with the
+highest cos2 are drawn. </p>
+</li>
+<li><p> contrib if contrib &gt; 1, ex: 5,  then the top 5
+individuals/variables with the highest cos2 are drawn </p>
+</li></ul>
+</td></tr>
+<tr valign="top"><td><code>partial</code></td>
+<td>
+<p>list of the individuals for which the partial points should be 
+drawn. (by default, partial = NULL and no partial points are drawn). Use 
+partial = &quot;All&quot; to visualize partial points for all individuals.</p>
+</td></tr>
+<tr valign="top"><td><code>col.partial</code></td>
+<td>
+<p>color for partial individuals. By default, points are 
+colored according to the groups.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Arguments to be passed to the function fviz()</p>
+</td></tr>
+<tr valign="top"><td><code>title</code></td>
+<td>
+<p>the title of the graph</p>
+</td></tr>
+<tr valign="top"><td><code>choice</code></td>
+<td>
+<p>the graph to plot. Allowed values include one of c(&quot;quanti.var&quot;,
+&quot;quali.var&quot;, &quot;group&quot;) for plotting quantitative variables, qualitative 
+variables and group of variables, respectively.</p>
+</td></tr>
+<tr valign="top"><td><code>col.var.sup</code></td>
+<td>
+<p>color for supplementary variables.</p>
+</td></tr>
+<tr valign="top"><td><code>col.circle</code></td>
+<td>
+<p>a color for the correlation circle. Used only when X is a 
+PCA output.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a ggplot2 plot
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Fabian Mundt <a href="mailto:f.mundt@inventionate.de">f.mundt@inventionate.de</a>
+</p>
+<p>Alboukadel Kassambara <a href="mailto:alboukadel.kassambara@gmail.com">alboukadel.kassambara@gmail.com</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>http://www.sthda.com/english/
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Compute Multiple Factor Analysis
+library("FactoMineR")
+data(wine)
+res.mfa &lt;- MFA(wine, group=c(2,5,3,10,9,2), type=c("n",rep("s",5)),
+               ncp=5, name.group=c("orig","olf","vis","olfag","gust","ens"),
+               num.group.sup=c(1,6), graph=FALSE)
+               
+# Eigenvalues/variances of dimensions
+fviz_screeplot(res.mfa)
+# Group of variables
+fviz_mfa_var(res.mfa, "group")
+# Quantitative variables
+fviz_mfa_var(res.mfa, "quanti.var", palette = "jco", 
+  col.var.sup = "violet", repel = TRUE)
+# Graph of individuals colored by cos2
+fviz_mfa_ind(res.mfa, col.ind = "cos2", 
+  gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
+  repel = TRUE)
+# Partial individuals
+fviz_mfa_ind(res.mfa, partial = "all") 
+# Partial axes
+fviz_mfa_axes(res.mfa)
+
+
+# Graph of categorical variable categories
+# ++++++++++++++++++++++++++++++++++++++++
+data(poison)
+res.mfa &lt;- MFA(poison, group=c(2,2,5,6), type=c("s","n","n","n"),
+               name.group=c("desc","desc2","symptom","eat"),
+               num.group.sup=1:2, graph=FALSE)
+
+# Plot of qualitative variables
+fviz_mfa_var(res.mfa, "quali.var")
+ 
+ 
+
+# Biplot of categorical variable categories and individuals
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ # Use repel = TRUE to avoid overplotting
+grp &lt;- as.factor(poison[, "Vomiting"])
+fviz_mfa_quali_biplot(res.mfa, repel = FALSE, col.var = "#E7B800",
+   habillage = grp, addEllipses = TRUE, ellipse.level = 0.95)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>factoextra</em> version 1.0.6 <a href="00Index.html">Index</a>]</div>
+</body></html>

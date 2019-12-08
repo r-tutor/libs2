@@ -61,9 +61,9 @@ lp_ncp <- log_posterior(fit_ncp)
 np_ncp <- nuts_params(fit_ncp)
 
 ## ----echo=FALSE, warning=FALSE-------------------------------------------
-# On rare ocasions, the fits may not be illustrative. Currently the seed is
+# On rare occasions, the fits may not be illustrative. Currently the seed is
 # fixed, but if something in Stan changes and the fixed seeds produce unexpected
-# results (which sould be rare), we want to know.
+# results (which should be rare), we want to know.
 n_divergent_cp <- np_cp %>% filter(Parameter == "divergent__" & Value == 1) %>% nrow()
 n_divergent_ncp <- np_ncp %>% filter(Parameter == "divergent__" & Value == 1) %>% nrow()
 
@@ -164,7 +164,7 @@ fit_ncp_2 <- sampling(schools_mod_ncp, data = schools_dat,
                       control = list(adapt_delta = 0.999), seed = 843256842)
 
 ## ----echo=FALSE, warning=FALSE-------------------------------------------
-# On rare ocasions, the fits may not be illustrative. Currently the seed is fixed, but if something in Stan changes and the fixed seeds produce unexpected results (which sould be rare), we want to know.
+# On rare occasions, the fits may not be illustrative. Currently the seed is fixed, but if something in Stan changes and the fixed seeds produce unexpected results (which should be rare), we want to know.
 n_divergent_cp_2 <- fit_cp_2 %>% nuts_params() %>% filter(Parameter == "divergent__" & Value == 1) %>% nrow()
 n_divergent_ncp_2 <- fit_ncp_2 %>% nuts_params() %>% filter(Parameter == "divergent__" & Value == 1) %>% nrow()
 

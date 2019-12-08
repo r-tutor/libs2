@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Extract the results for rows/columns - CA</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for get_ca {factoextra}"><tr><td>get_ca {factoextra}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Extract the results for rows/columns - CA</h2>
+
+<h3>Description</h3>
+
+<p>Extract all the results (coordinates, squared cosine, contributions and inertia) 
+for the active row/column variables from Correspondence Analysis (CA) outputs.<br /><br />
+</p>
+
+<ul>
+<li><p> get_ca(): Extract the results for rows and columns
+</p>
+</li>
+<li><p> get_ca_row(): Extract the results for rows only
+</p>
+</li>
+<li><p> get_ca_col(): Extract the results for columns only
+</p>
+</li></ul>
+
+
+
+<h3>Usage</h3>
+
+<pre>
+get_ca(res.ca, element = c("row", "col"))
+
+get_ca_col(res.ca)
+
+get_ca_row(res.ca)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>res.ca</code></td>
+<td>
+<p>an object of class CA [FactoMineR], ca [ca], coa [ade4];
+correspondence [MASS].</p>
+</td></tr>
+<tr valign="top"><td><code>element</code></td>
+<td>
+<p>the element to subset from the output. Possible values are &quot;row&quot; or &quot;col&quot;.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a list of matrices containing the results for the active rows/columns including : 
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>coord</code></td>
+<td>
+<p>coordinates for the rows/columns</p>
+</td></tr>
+<tr valign="top"><td><code>cos2</code></td>
+<td>
+<p>cos2 for the rows/columns</p>
+</td></tr>
+<tr valign="top"><td><code>contrib</code></td>
+<td>
+<p>contributions of the rows/columns</p>
+</td></tr>
+<tr valign="top"><td><code>inertia</code></td>
+<td>
+<p>inertia of the rows/columns</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Alboukadel Kassambara <a href="mailto:alboukadel.kassambara@gmail.com">alboukadel.kassambara@gmail.com</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>http://www.sthda.com
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+# Install and load FactoMineR to compute CA
+# install.packages("FactoMineR")
+ library("FactoMineR")
+ data("housetasks")
+ res.ca &lt;- CA(housetasks, graph = FALSE)
+ 
+# Result for column variables
+ col &lt;- get_ca_col(res.ca)
+ col # print
+ head(col$coord) # column coordinates
+ head(col$cos2) # column cos2
+ head(col$contrib) # column contributions
+ 
+# Result for row variables
+ row &lt;- get_ca_row(res.ca)
+ row # print
+ head(row$coord) # row coordinates
+ head(row$cos2) # row cos2
+ head(row$contrib) # row contributions
+ 
+ # You can also use the function get_ca()
+ get_ca(res.ca, "row") # Results for rows
+ get_ca(res.ca, "col") # Results for columns
+ 
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>factoextra</em> version 1.0.6 <a href="00Index.html">Index</a>]</div>
+</body></html>

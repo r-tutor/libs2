@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Delaunay triangulation in N dimensions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for delaunayn {geometry}"><tr><td>delaunayn {geometry}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Delaunay triangulation in N dimensions</h2>
+
+<h3>Description</h3>
+
+<p>The Delaunay triangulation is a tessellation of the convex hull of
+the points such that no <i>N</i>-sphere defined by the <i>N</i>-
+triangles contains any other points from the set.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+delaunayn(p, options = NULL, output.options = NULL, full = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>An <i>M</i>-by-<i>N</i> matrix whose rows represent <i>M</i>
+points in <i>N</i>-dimensional space.</p>
+</td></tr>
+<tr valign="top"><td><code>options</code></td>
+<td>
+<p>String containing extra control options for the
+underlying Qhull command; see the Qhull documentation
+(<a href="../doc/qhull/html/qdelaun.html">../doc/qhull/html/qdelaun.html</a>) for the available
+options. 
+</p>
+<p>The <code>Qbb</code> option is always passed to Qhull. The remaining
+default options are <code>Qcc Qc Qt Qz</code> for <i>N&lt;4</i> and
+<code>Qcc Qc Qt Qx</code> for <i>N&gt;=4</i>. If neither of the <code>QJ</code>
+or <code>Qt</code> options are supplied, the <code>Qt</code> option is
+passed to Qhull. The <code>Qt</code> option ensures all Delaunay
+regions are simplical (e.g., triangles in 2D). See
+<a href="../doc/qhull/html/qdelaun.html">../doc/qhull/html/qdelaun.html</a> for more details. Contrary
+to the Qhull documentation, no degenerate (zero area) regions
+are returned with the <code>Qt</code> option since the R function
+removes them from the triangulation.
+</p>
+<p><em>If <code>options</code> is specified, the default options are
+overridden.</em> It is recommended to use <code>output.options</code> for
+options controlling the outputs.</p>
+</td></tr>
+<tr valign="top"><td><code>output.options</code></td>
+<td>
+<p>String containing Qhull options to control
+output. Currently <code>Fn</code> (neighbours) and <code>Fa</code> (areas)
+are supported. Causes an object of  return value for details. If
+<code>output.options</code> is <code>TRUE</code>, select all supported
+options.</p>
+</td></tr>
+<tr valign="top"><td><code>full</code></td>
+<td>
+<p>Deprecated and will be removed in a future release.
+Adds options <code>Fa</code> and <code>Fn</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>If <code>output.options</code> is <code>NULL</code> (the default),
+return the Delaunay triangulation as a matrix with <i>M</i> rows
+and <i>N+1</i> columns in which each row contains a set of
+indices to the input points <code>p</code>. Thus each row describes a
+simplex of dimension <i>N</i>, e.g. a triangle in 2D or a
+tetrahedron in 3D.
+</p>
+<p>If the <code>output.options</code> argument is <code>TRUE</code> or is a
+string containing <code>Fn</code> or <code>Fa</code>, return a list with
+class <code>delaunayn</code> comprising the named elements:
+</p>
+
+<dl>
+<dt><code>tri</code></dt><dd><p>The Delaunay triangulation described above</p>
+</dd>
+<dt><code>areas</code></dt><dd><p>If <code>TRUE</code> or if <code>Fa</code> is specified, an
+<i>M</i>-dimensional vector containing the generalised area of
+each simplex (e.g. in 2D the areas of triangles; in 3D the volumes
+of tetrahedra). See <a href="../doc/qhull/html/qh-optf.html#Fa">../doc/qhull/html/qh-optf.html#Fa</a>.</p>
+</dd>
+<dt><code>neighbours</code></dt><dd><p>If <code>TRUE</code> or if <code>Fn</code> is specified,
+a list of  neighbours of each simplex.
+See <a href="../doc/qhull/html/qh-optf.html#Fn">../doc/qhull/html/qh-optf.html#Fn</a></p>
+</dd> 
+</dl>
+
+
+
+<h3>Note</h3>
+
+<p>This function interfaces the Qhull library and is a port
+from Octave (<a href="http://www.octave.org">http://www.octave.org</a>) to R. Qhull computes
+convex hulls, Delaunay triangulations, halfspace intersections
+about a point, Voronoi diagrams, furthest-site Delaunay
+triangulations, and furthest-site Voronoi diagrams. It runs in
+2D, 3D, 4D, and higher dimensions. It implements the
+Quickhull algorithm for computing the convex hull. Qhull handles
+round-off errors from floating point arithmetic. It computes
+volumes, surface areas, and approximations to the convex
+hull. See the Qhull documentation included in this distribution
+(the doc directory <a href="../doc/qhull/index.html">../doc/qhull/index.html</a>).
+</p>
+<p>Qhull does not support constrained Delaunay triangulations, triangulation
+of non-convex surfaces, mesh generation of non-convex objects, or
+medium-sized inputs in 9D and higher. A rudimentary algorithm for mesh
+generation in non-convex regions using Delaunay triangulation is
+implemented in <a href="distmesh2d.html">distmesh2d</a> (currently only 2D).
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Raoul Grasman and Robert B. Gramacy; based on the
+corresponding Octave sources of Kai Habel.
+</p>
+
+
+<h3>References</h3>
+
+<p><cite>Barber, C.B., Dobkin, D.P., and Huhdanpaa, H.T.,
+&ldquo;The Quickhull algorithm for convex hulls,&rdquo; <em>ACM Trans. on
+Mathematical Software,</em> Dec 1996.</cite>
+</p>
+<p><a href="http://www.qhull.org">http://www.qhull.org</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../tripack/html/tri.mesh.html">tri.mesh</a></code>, <code><a href="convhulln.html">convhulln</a></code>,
+<code><a href="surf.tri.html">surf.tri</a></code>, <code><a href="distmesh2d.html">distmesh2d</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+# example delaunayn
+d &lt;- c(-1,1)
+pc &lt;- as.matrix(rbind(expand.grid(d,d,d),0))
+tc &lt;- delaunayn(pc)
+
+# example tetramesh
+## Not run: 
+rgl::rgl.viewpoint(60)
+rgl::rgl.light(120,60)
+tetramesh(tc,pc, alpha=0.9)
+
+## End(Not run)
+
+tc1 &lt;- delaunayn(pc, output.options="Fa")
+## sum of generalised areas is total volume of cube
+sum(tc1$areas)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>geometry</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

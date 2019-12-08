@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: TBATS model (Exponential smoothing state space model with...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for tbats {forecast}"><tr><td>tbats {forecast}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>TBATS model (Exponential smoothing state space model with Box-Cox
+transformation, ARMA errors, Trend and Seasonal components)</h2>
+
+<h3>Description</h3>
+
+<p>Fits a TBATS model applied to <code>y</code>, as described in De Livera, Hyndman &amp;
+Snyder (2011). Parallel processing is used by default to speed up the
+computations.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+tbats(
+  y,
+  use.box.cox = NULL,
+  use.trend = NULL,
+  use.damped.trend = NULL,
+  seasonal.periods = NULL,
+  use.arma.errors = TRUE,
+  use.parallel = length(y) &gt; 1000,
+  num.cores = 2,
+  bc.lower = 0,
+  bc.upper = 1,
+  biasadj = FALSE,
+  model = NULL,
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>The time series to be forecast. Can be <code>numeric</code>, <code>msts</code>
+or <code>ts</code>. Only univariate time series are supported.</p>
+</td></tr>
+<tr valign="top"><td><code>use.box.cox</code></td>
+<td>
+<p><code>TRUE/FALSE</code> indicates whether to use the Box-Cox
+transformation or not. If <code>NULL</code> then both are tried and the best fit
+is selected by AIC.</p>
+</td></tr>
+<tr valign="top"><td><code>use.trend</code></td>
+<td>
+<p><code>TRUE/FALSE</code> indicates whether to include a trend or
+not. If <code>NULL</code> then both are tried and the best fit is selected by AIC.</p>
+</td></tr>
+<tr valign="top"><td><code>use.damped.trend</code></td>
+<td>
+<p><code>TRUE/FALSE</code> indicates whether to include a
+damping parameter in the trend or not. If <code>NULL</code> then both are tried
+and the best fit is selected by AIC.</p>
+</td></tr>
+<tr valign="top"><td><code>seasonal.periods</code></td>
+<td>
+<p>If <code>y</code> is <code>numeric</code> then seasonal periods
+can be specified with this parameter.</p>
+</td></tr>
+<tr valign="top"><td><code>use.arma.errors</code></td>
+<td>
+<p><code>TRUE/FALSE</code> indicates whether to include ARMA
+errors or not. If <code>TRUE</code> the best fit is selected by AIC. If
+<code>FALSE</code> then the selection algorithm does not consider ARMA errors.</p>
+</td></tr>
+<tr valign="top"><td><code>use.parallel</code></td>
+<td>
+<p><code>TRUE/FALSE</code> indicates whether or not to use
+parallel processing.</p>
+</td></tr>
+<tr valign="top"><td><code>num.cores</code></td>
+<td>
+<p>The number of parallel processes to be used if using
+parallel processing. If <code>NULL</code> then the number of logical cores is
+detected and all available cores are used.</p>
+</td></tr>
+<tr valign="top"><td><code>bc.lower</code></td>
+<td>
+<p>The lower limit (inclusive) for the Box-Cox transformation.</p>
+</td></tr>
+<tr valign="top"><td><code>bc.upper</code></td>
+<td>
+<p>The upper limit (inclusive) for the Box-Cox transformation.</p>
+</td></tr>
+<tr valign="top"><td><code>biasadj</code></td>
+<td>
+<p>Use adjusted back-transformed mean for Box-Cox
+transformations. If TRUE, point forecasts and fitted values are mean
+forecast. Otherwise, these points can be considered the median of the
+forecast densities.</p>
+</td></tr>
+<tr valign="top"><td><code>model</code></td>
+<td>
+<p>Output from a previous call to <code>tbats</code>. If model is
+passed, this same model is fitted to <code>y</code> without re-estimating any
+parameters.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments to be passed to <code>auto.arima</code> when
+choose an ARMA(p, q) model for the errors. (Note that xreg will be ignored,
+as will any arguments concerning seasonality and differencing, but arguments
+controlling the values of p and q will be used.)</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>An object with class <code>c("tbats", "bats")</code>. The generic accessor
+functions <code>fitted.values</code> and <code>residuals</code> extract useful features
+of the value returned by <code>bats</code> and associated functions. The fitted
+model is designated TBATS(omega, p,q, phi, &lt;m1,k1&gt;,...,&lt;mJ,kJ&gt;) where omega
+is the Box-Cox parameter and phi is the damping parameter; the error is
+modelled as an ARMA(p,q) process and m1,...,mJ list the seasonal periods
+used in the model and k1,...,kJ are the corresponding number of Fourier
+terms used for each seasonality.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Slava Razbash and Rob J Hyndman
+</p>
+
+
+<h3>References</h3>
+
+<p>De Livera, A.M., Hyndman, R.J., &amp; Snyder, R. D. (2011),
+Forecasting time series with complex seasonal patterns using exponential
+smoothing, <em>Journal of the American Statistical Association</em>,
+<b>106</b>(496), 1513-1527.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="tbats.components.html">tbats.components</a></code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+## Not run: 
+fit &lt;- tbats(USAccDeaths)
+plot(forecast(fit))
+
+taylor.fit &lt;- tbats(taylor)
+plot(forecast(taylor.fit))
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>forecast</em> version 8.10 <a href="00Index.html">Index</a>]</div>
+</body></html>

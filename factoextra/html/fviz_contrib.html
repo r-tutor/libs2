@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Visualize the contributions of row/column elements</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for fviz_contrib {factoextra}"><tr><td>fviz_contrib {factoextra}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Visualize the contributions of row/column elements</h2>
+
+<h3>Description</h3>
+
+<p>This function can be used to visualize the contribution of rows/columns
+from the results of Principal Component Analysis (PCA),
+Correspondence Analysis (CA), Multiple Correspondence Analysis (MCA), Factor Analysis of Mixed Data (FAMD),
+and Multiple Factor Analysis (MFA) functions.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+fviz_contrib(X, choice = c("row", "col", "var", "ind", "quanti.var",
+  "quali.var", "group", "partial.axes"), axes = 1, fill = "steelblue",
+  color = "steelblue", sort.val = c("desc", "asc", "none"),
+  top = Inf, xtickslab.rt = 45, ggtheme = theme_minimal(), ...)
+
+fviz_pca_contrib(X, choice = c("var", "ind"), axes = 1,
+  fill = "steelblue", color = "steelblue", sortcontrib = c("desc",
+  "asc", "none"), top = Inf, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>X</code></td>
+<td>
+<p>an object of class PCA, CA, MCA, FAMD, MFA and HMFA [FactoMineR];
+prcomp and princomp [stats]; dudi, pca, coa and acm [ade4]; ca [ca
+package].</p>
+</td></tr>
+<tr valign="top"><td><code>choice</code></td>
+<td>
+<p>allowed values are &quot;row&quot; and &quot;col&quot; for CA;  &quot;var&quot; and &quot;ind&quot; for
+PCA or MCA; &quot;var&quot;, &quot;ind&quot;, &quot;quanti.var&quot;, &quot;quali.var&quot; and &quot;group&quot; for FAMD, MFA and HMFA.</p>
+</td></tr>
+<tr valign="top"><td><code>axes</code></td>
+<td>
+<p>a numeric vector specifying the dimension(s) of interest.</p>
+</td></tr>
+<tr valign="top"><td><code>fill</code></td>
+<td>
+<p>a fill color for the bar plot.</p>
+</td></tr>
+<tr valign="top"><td><code>color</code></td>
+<td>
+<p>an outline color for the bar plot.</p>
+</td></tr>
+<tr valign="top"><td><code>sort.val</code></td>
+<td>
+<p>a string specifying whether the value should be sorted. 
+Allowed values are &quot;none&quot; (no sorting), &quot;asc&quot; (for ascending) or &quot;desc&quot; (for descending).</p>
+</td></tr>
+<tr valign="top"><td><code>top</code></td>
+<td>
+<p>a numeric value specifying the number of top elements to be shown.</p>
+</td></tr>
+<tr valign="top"><td><code>xtickslab.rt</code></td>
+<td>
+<p>Same as x.text.angle and y.text.angle,
+respectively. Will be deprecated in the near future.</p>
+</td></tr>
+<tr valign="top"><td><code>ggtheme</code></td>
+<td>
+<p>function, ggplot2 theme name. Default value is theme_pubr().
+Allowed values include ggplot2 official themes: theme_gray(), theme_bw(),
+theme_minimal(), theme_classic(), theme_void(), ....</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>other arguments to be passed to the function <a href="../../ggpubr/html/ggpar.html">ggpar</a>.</p>
+</td></tr>
+<tr valign="top"><td><code>sortcontrib</code></td>
+<td>
+<p>see the argument sort.val</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The function fviz_contrib() creates a barplot of row/column contributions.
+A reference dashed line is also shown on the barplot. This reference line
+corresponds to the expected value if the contribution where uniform.<br /><br />
+For a given dimension, any row/column with a contribution above the reference line could be
+considered as important in contributing to the dimension.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a ggplot2 plot
+</p>
+
+
+<h3>Functions</h3>
+
+
+<ul>
+<li> <p><code>fviz_pca_contrib</code>: deprecated function. Use fviz_contrib()
+</p>
+</li></ul>
+
+
+<h3>Author(s)</h3>
+
+<p>Alboukadel Kassambara <a href="mailto:alboukadel.kassambara@gmail.com">alboukadel.kassambara@gmail.com</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>http://www.sthda.com/english/
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+# Principal component analysis
+# ++++++++++++++++++++++++++
+data(decathlon2)
+decathlon2.active &lt;- decathlon2[1:23, 1:10]
+res.pca &lt;- prcomp(decathlon2.active,  scale = TRUE)
+
+# variable contributions on axis 1
+fviz_contrib(res.pca, choice="var", axes = 1, top = 10 )
+
+# Change theme and color
+fviz_contrib(res.pca, choice="var", axes = 1,
+         fill = "lightgray", color = "black") +
+         theme_minimal() +
+         theme(axis.text.x = element_text(angle=45))
+
+# Variable contributions on axis 2
+fviz_contrib(res.pca, choice="var", axes = 2)
+# Variable contributions on axes 1 + 2
+fviz_contrib(res.pca, choice="var", axes = 1:2)
+
+# Contributions of individuals on axis 1
+fviz_contrib(res.pca, choice="ind", axes = 1)
+
+## Not run: 
+# Correspondence Analysis
+# ++++++++++++++++++++++++++
+# Install and load FactoMineR to compute CA
+# install.packages("FactoMineR")
+library("FactoMineR")
+data("housetasks")
+res.ca &lt;- CA(housetasks, graph = FALSE)
+
+# Visualize row contributions on axes 1
+fviz_contrib(res.ca, choice ="row", axes = 1)
+# Visualize column contributions on axes 1
+fviz_contrib(res.ca, choice ="col", axes = 1)
+
+# Multiple Correspondence Analysis
+# +++++++++++++++++++++++++++++++++
+library(FactoMineR)
+data(poison)
+res.mca &lt;- MCA(poison, quanti.sup = 1:2,
+              quali.sup = 3:4, graph=FALSE)
+
+# Visualize individual contributions on axes 1
+fviz_contrib(res.mca, choice ="ind", axes = 1)
+# Visualize variable categorie contributions on axes 1
+fviz_contrib(res.mca, choice ="var", axes = 1)
+
+# Multiple Factor Analysis
+# ++++++++++++++++++++++++
+library(FactoMineR)
+data(poison)
+res.mfa &lt;- MFA(poison, group=c(2,2,5,6), type=c("s","n","n","n"),
+               name.group=c("desc","desc2","symptom","eat"),
+               num.group.sup=1:2, graph=FALSE)
+
+# Visualize individual contributions on axes 1
+fviz_contrib(res.mfa, choice ="ind", axes = 1, top = 20)
+# Visualize catecorical variable categorie contributions on axes 1
+fviz_contrib(res.mfa, choice ="quali.var", axes = 1)
+
+## End(Not run)
+
+ 
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>factoextra</em> version 1.0.6 <a href="00Index.html">Index</a>]</div>
+</body></html>

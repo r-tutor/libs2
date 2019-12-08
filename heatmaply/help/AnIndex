@@ -3,6 +3,7 @@ BrBG	RColorBrewer_colors
 BuGn	RColorBrewer_colors
 BuPu	RColorBrewer_colors
 cool_warm	RColorBrewer_colors
+ggheatmap	ggheatmap
 ggplot_side_color_plot	ggplot_side_color_plot
 GnBu	RColorBrewer_colors
 Greens	RColorBrewer_colors

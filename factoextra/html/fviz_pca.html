@@ -1,0 +1,313 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Visualize Principal Component Analysis</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for fviz_pca {factoextra}"><tr><td>fviz_pca {factoextra}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Visualize Principal Component Analysis</h2>
+
+<h3>Description</h3>
+
+<p>Principal component analysis (PCA) reduces the dimensionality of
+multivariate data, to two or three that can be visualized graphically with 
+minimal loss of information. fviz_pca() provides ggplot2-based elegant 
+visualization of PCA outputs from: i) prcomp and princomp [in built-in R 
+stats], ii) PCA [in FactoMineR], iii) dudi.pca [in ade4] and epPCA 
+[ExPosition]. Read more: 
+<a href="http://www.sthda.com/english/wiki/factominer-and-factoextra-principal-component-analysis-visualization-r-software-and-data-mining">Principal
+Component Analysis</a>
+</p>
+ <ul>
+<li><p>fviz_pca_ind(): Graph of individuals </p>
+</li>
+<li><p>fviz_pca_var():
+Graph of variables </p>
+</li>
+<li><p>fviz_pca_biplot(): Biplot of individuals and 
+variables </p>
+</li>
+<li><p>fviz_pca(): An alias of fviz_pca_biplot() </p>
+</li></ul>
+
+<p>Note that, <code>fviz_pca_xxx()</code> functions are wrapper arround the core
+function <code><a href="fviz.html">fviz</a>()</code>, whih is also a wrapper arround the
+function <code><a href="../../ggpubr/html/ggscatter.html">ggscatter</a>()</code> [in ggpubr]. Therfore, further arguments, to be
+passed to the function <code><a href="fviz.html">fviz</a>()</code> and <code><a href="../../ggpubr/html/ggscatter.html">ggscatter</a>()</code>, can be specified in
+<code><a href="fviz_pca.html">fviz_pca_ind</a>()</code> and <code><a href="fviz_pca.html">fviz_pca_var</a>()</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+fviz_pca(X, ...)
+
+fviz_pca_ind(X, axes = c(1, 2), geom = c("point", "text"),
+  geom.ind = geom, repel = FALSE, habillage = "none",
+  palette = NULL, addEllipses = FALSE, col.ind = "black",
+  fill.ind = "white", col.ind.sup = "blue", alpha.ind = 1,
+  select.ind = list(name = NULL, cos2 = NULL, contrib = NULL), ...)
+
+fviz_pca_var(X, axes = c(1, 2), geom = c("arrow", "text"),
+  geom.var = geom, repel = FALSE, col.var = "black",
+  fill.var = "white", alpha.var = 1, col.quanti.sup = "blue",
+  col.circle = "grey70", select.var = list(name = NULL, cos2 = NULL,
+  contrib = NULL), ...)
+
+fviz_pca_biplot(X, axes = c(1, 2), geom = c("point", "text"),
+  geom.ind = geom, geom.var = c("arrow", "text"), col.ind = "black",
+  fill.ind = "white", col.var = "steelblue", fill.var = "white",
+  gradient.cols = NULL, label = "all", invisible = "none",
+  repel = FALSE, habillage = "none", palette = NULL,
+  addEllipses = FALSE, title = "PCA - Biplot", ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>X</code></td>
+<td>
+<p>an object of class PCA [FactoMineR]; prcomp and princomp [stats]; 
+dudi and pca [ade4]; expOutput/epPCA [ExPosition].</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments. </p>
+ <ul>
+<li><p> in fviz_pca_ind() and 
+fviz_pca_var(): Additional arguments are passed to the functions fviz() and
+ggpubr::ggpar(). </p>
+</li>
+<li><p> in fviz_pca_biplot() and fviz_pca(): Additional 
+arguments are passed to fviz_pca_ind() and fviz_pca_var().</p>
+</li></ul>
+</td></tr>
+<tr valign="top"><td><code>axes</code></td>
+<td>
+<p>a numeric vector of length 2 specifying the dimensions to be 
+plotted.</p>
+</td></tr>
+<tr valign="top"><td><code>geom</code></td>
+<td>
+<p>a text specifying the geometry to be used for the graph. Allowed 
+values are the combination of <code>c("point", "arrow", "text")</code>. Use 
+<code>"point"</code> (to show only points); <code>"text"</code> to show only labels; 
+<code>c("point", "text")</code> or <code>c("arrow", "text")</code> to show arrows and 
+texts. Using <code>c("arrow", "text")</code> is sensible only for the graph of 
+variables.</p>
+</td></tr>
+<tr valign="top"><td><code>geom.ind, geom.var</code></td>
+<td>
+<p>as <code>geom</code> but for individuals and variables, 
+respectively. Default is geom.ind = c(&quot;point&quot;, &quot;text), geom.var = 
+c(&quot;arrow&quot;, &quot;text&quot;).</p>
+</td></tr>
+<tr valign="top"><td><code>repel</code></td>
+<td>
+<p>a boolean, whether to use ggrepel to avoid overplotting text 
+labels or not.</p>
+</td></tr>
+<tr valign="top"><td><code>habillage</code></td>
+<td>
+<p>an optional factor variable for coloring the observations by
+groups. Default value is &quot;none&quot;. If X is a PCA object from FactoMineR 
+package, habillage can also specify the supplementary qualitative variable 
+(by its index or name) to be used for coloring individuals by groups (see 
+?PCA in FactoMineR).</p>
+</td></tr>
+<tr valign="top"><td><code>palette</code></td>
+<td>
+<p>the color palette to be used for coloring or filling by
+groups. Allowed values include &quot;grey&quot; for grey color palettes; brewer
+palettes e.g. &quot;RdBu&quot;, &quot;Blues&quot;, ...; or custom color palette e.g. c(&quot;blue&quot;,
+&quot;red&quot;); and scientific journal palettes from ggsci R package, e.g.: &quot;npg&quot;,
+&quot;aaas&quot;, &quot;lancet&quot;, &quot;jco&quot;, &quot;ucscgb&quot;, &quot;uchicago&quot;, &quot;simpsons&quot; and
+&quot;rickandmorty&quot;. Can be also a numeric vector of length(groups); in this
+case a basic color palette is created using the function
+<a href="../../grDevices/html/palette.html">palette</a>.</p>
+</td></tr>
+<tr valign="top"><td><code>addEllipses</code></td>
+<td>
+<p>logical value. If TRUE, draws ellipses around the 
+individuals when habillage != &quot;none&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>col.ind, col.var</code></td>
+<td>
+<p>color for individuals and variables, respectively. Can
+be a continuous variable or a factor variable. Possible values include also
+: &quot;cos2&quot;, &quot;contrib&quot;, &quot;coord&quot;, &quot;x&quot; or &quot;y&quot;. In this case, the colors for 
+individuals/variables are automatically controlled by their qualities of 
+representation (&quot;cos2&quot;), contributions (&quot;contrib&quot;), coordinates (x^2+y^2, 
+&quot;coord&quot;), x values (&quot;x&quot;) or y values (&quot;y&quot;). To use automatic coloring (by 
+cos2, contrib, ....), make sure that habillage =&quot;none&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>fill.ind, fill.var</code></td>
+<td>
+<p>same as col.ind and col.var but for the fill color.</p>
+</td></tr>
+<tr valign="top"><td><code>col.ind.sup</code></td>
+<td>
+<p>color for supplementary individuals</p>
+</td></tr>
+<tr valign="top"><td><code>alpha.ind, alpha.var</code></td>
+<td>
+<p>controls the transparency of individual and 
+variable colors, respectively. The value can variate from 0 (total 
+transparency) to 1 (no transparency). Default value is 1. Possible values 
+include also : &quot;cos2&quot;, &quot;contrib&quot;, &quot;coord&quot;, &quot;x&quot; or &quot;y&quot;. In this case, the 
+transparency for the individual/variable colors are automatically 
+controlled by their qualities (&quot;cos2&quot;), contributions (&quot;contrib&quot;), 
+coordinates (x^2+y^2, &quot;coord&quot;), x values(&quot;x&quot;) or y values(&quot;y&quot;). To use 
+this, make sure that habillage =&quot;none&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>select.ind, select.var</code></td>
+<td>
+<p>a selection of individuals/variables to be 
+drawn. Allowed values are NULL or a list containing the arguments name, 
+cos2 or contrib: </p>
+ <ul>
+<li><p> name: is a character vector containing 
+individuals/variables to be drawn </p>
+</li>
+<li><p> cos2: if cos2 is in [0, 1], ex: 
+0.6, then individuals/variables with a cos2 &gt; 0.6 are drawn. if cos2 &gt; 1, 
+ex: 5, then the top 5 individuals/variables with the highest cos2 are 
+drawn. </p>
+</li>
+<li><p> contrib: if contrib &gt; 1, ex: 5,  then the top 5 
+individuals/variables with the highest contrib are drawn </p>
+</li></ul>
+</td></tr>
+<tr valign="top"><td><code>col.quanti.sup</code></td>
+<td>
+<p>a color for the quantitative supplementary variables.</p>
+</td></tr>
+<tr valign="top"><td><code>col.circle</code></td>
+<td>
+<p>a color for the correlation circle. Used only when X is a 
+PCA output.</p>
+</td></tr>
+<tr valign="top"><td><code>gradient.cols</code></td>
+<td>
+<p>vector of colors to use for n-colour gradient. Allowed
+values include brewer and ggsci color palettes.</p>
+</td></tr>
+<tr valign="top"><td><code>label</code></td>
+<td>
+<p>a text specifying the elements to be labelled. Default value is 
+&quot;all&quot;. Allowed values are &quot;none&quot; or the combination of c(&quot;ind&quot;, &quot;ind.sup&quot;, 
+&quot;quali&quot;, &quot;var&quot;, &quot;quanti.sup&quot;). &quot;ind&quot; can be used to label only active 
+individuals. &quot;ind.sup&quot; is for supplementary individuals. &quot;quali&quot; is for 
+supplementary qualitative variables. &quot;var&quot; is for active variables. 
+&quot;quanti.sup&quot; is for quantitative supplementary variables.</p>
+</td></tr>
+<tr valign="top"><td><code>invisible</code></td>
+<td>
+<p>a text specifying the elements to be hidden on the plot. 
+Default value is &quot;none&quot;. Allowed values are the combination of c(&quot;ind&quot;, 
+&quot;ind.sup&quot;, &quot;quali&quot;, &quot;var&quot;, &quot;quanti.sup&quot;).</p>
+</td></tr>
+<tr valign="top"><td><code>title</code></td>
+<td>
+<p>the title of the graph</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a ggplot
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Alboukadel Kassambara <a href="mailto:alboukadel.kassambara@gmail.com">alboukadel.kassambara@gmail.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="fviz_ca.html">fviz_ca</a></code>, <code><a href="fviz_mca.html">fviz_mca</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+# Principal component analysis
+# ++++++++++++++++++++++++++++++
+data(iris)
+res.pca &lt;- prcomp(iris[, -5],  scale = TRUE)
+
+# Graph of individuals
+# +++++++++++++++++++++
+
+# Default plot
+# Use repel = TRUE to avoid overplotting (slow if many points)
+fviz_pca_ind(res.pca, col.ind = "#00AFBB",
+   repel = TRUE)
+
+ 
+# 1. Control automatically the color of individuals 
+   # using the "cos2" or the contributions "contrib"
+   # cos2 = the quality of the individuals on the factor map
+# 2. To keep only point or text use geom = "point" or geom = "text".
+# 3. Change themes using ggtheme: http://www.sthda.com/english/wiki/ggplot2-themes
+
+fviz_pca_ind(res.pca, col.ind="cos2", geom = "point",
+   gradient.cols = c("white", "#2E9FDF", "#FC4E07" ))
+
+# Color individuals by groups, add concentration ellipses
+# Change group colors using RColorBrewer color palettes
+# Read more: http://www.sthda.com/english/wiki/ggplot2-colors
+# Remove labels: label = "none".
+fviz_pca_ind(res.pca, label="none", habillage=iris$Species,
+     addEllipses=TRUE, ellipse.level=0.95, palette = "Dark2")
+             
+     
+# Change group colors manually
+# Read more: http://www.sthda.com/english/wiki/ggplot2-colors
+fviz_pca_ind(res.pca, label="none", habillage=iris$Species,
+     addEllipses=TRUE, ellipse.level=0.95,
+     palette = c("#999999", "#E69F00", "#56B4E9"))
+      
+# Select and visualize some individuals (ind) with select.ind argument.
+ # - ind with cos2 &gt;= 0.96: select.ind = list(cos2 = 0.96)
+ # - Top 20 ind according to the cos2: select.ind = list(cos2 = 20)
+ # - Top 20 contributing individuals: select.ind = list(contrib = 20)
+ # - Select ind by names: select.ind = list(name = c("23", "42", "119") )
+ 
+ # Example: Select the top 40 according to the cos2
+fviz_pca_ind(res.pca, select.ind = list(cos2 = 40))
+
+ 
+# Graph of variables
+# ++++++++++++++++++++++++++++
+  
+# Default plot
+fviz_pca_var(res.pca, col.var = "steelblue")
+ 
+# Control variable colors using their contributions
+fviz_pca_var(res.pca, col.var = "contrib", 
+   gradient.cols = c("white", "blue", "red"),
+   ggtheme = theme_minimal())
+ 
+    
+# Biplot of individuals and variables
+# ++++++++++++++++++++++++++
+# Keep only the labels for variables
+# Change the color by groups, add ellipses
+fviz_pca_biplot(res.pca, label = "var", habillage=iris$Species,
+               addEllipses=TRUE, ellipse.level=0.95,
+               ggtheme = theme_minimal())
+
+ 
+ 
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>factoextra</em> version 1.0.6 <a href="00Index.html">Index</a>]</div>
+</body></html>

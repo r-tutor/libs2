@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Add supplementary data to a plot</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for fviz_add {factoextra}"><tr><td>fviz_add {factoextra}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Add supplementary data to a plot</h2>
+
+<h3>Description</h3>
+
+<p>Add supplementary data to a plot
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+fviz_add(ggp, df, axes = c(1, 2), geom = c("point", "arrow"),
+  color = "blue", addlabel = TRUE, labelsize = 4, pointsize = 2,
+  shape = 19, linetype = "dashed", repel = FALSE, font.family = "",
+  ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>ggp</code></td>
+<td>
+<p>a ggplot2 plot.</p>
+</td></tr>
+<tr valign="top"><td><code>df</code></td>
+<td>
+<p>a data frame containing the x and y coordinates</p>
+</td></tr>
+<tr valign="top"><td><code>axes</code></td>
+<td>
+<p>a numeric vector of length 2 specifying the components to be plotted.</p>
+</td></tr>
+<tr valign="top"><td><code>geom</code></td>
+<td>
+<p>a character specifying the geometry to be used for the graph
+Allowed values are &quot;point&quot; or &quot;arrow&quot; or &quot;text&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>color</code></td>
+<td>
+<p>the color to be used</p>
+</td></tr>
+<tr valign="top"><td><code>addlabel</code></td>
+<td>
+<p>a logical value. If TRUE, labels are added</p>
+</td></tr>
+<tr valign="top"><td><code>labelsize</code></td>
+<td>
+<p>the size of labels. Default value is 4</p>
+</td></tr>
+<tr valign="top"><td><code>pointsize</code></td>
+<td>
+<p>the size of points</p>
+</td></tr>
+<tr valign="top"><td><code>shape</code></td>
+<td>
+<p>point shape when geom =&quot;point&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>linetype</code></td>
+<td>
+<p>the linetype to be used when geom =&quot;arrow&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>repel</code></td>
+<td>
+<p>a boolean, whether to use ggrepel to avoid overplotting text 
+labels or not.</p>
+</td></tr>
+<tr valign="top"><td><code>font.family</code></td>
+<td>
+<p>character vector specifying font family.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments, not used</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a ggplot2 plot
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Alboukadel Kassambara <a href="mailto:alboukadel.kassambara@gmail.com">alboukadel.kassambara@gmail.com</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>http://www.sthda.com
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+# Principal component analysis
+data(decathlon2)
+decathlon2.active &lt;- decathlon2[1:23, 1:10]
+res.pca &lt;- prcomp(decathlon2.active,  scale = TRUE)
+
+# Visualize variables
+p &lt;- fviz_pca_var(res.pca)
+print(p)
+
+# Add supplementary variables
+coord &lt;- data.frame(PC1 = c(-0.7, 0.9), PC2 = c(0.25, -0.07))
+rownames(coord) &lt;- c("Rank", "Points")
+print(coord)
+fviz_add(p, coord, color ="blue", geom="arrow") 
+ 
+ 
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>factoextra</em> version 1.0.6 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Simulation from a time series model</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for simulate.ets {forecast}"><tr><td>simulate.ets {forecast}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Simulation from a time series model</h2>
+
+<h3>Description</h3>
+
+<p>Returns a time series based on the model object <code>object</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'ets'
+simulate(
+  object,
+  nsim = length(object$x),
+  seed = NULL,
+  future = TRUE,
+  bootstrap = FALSE,
+  innov = NULL,
+  ...
+)
+
+## S3 method for class 'Arima'
+simulate(
+  object,
+  nsim = length(object$x),
+  seed = NULL,
+  xreg = NULL,
+  future = TRUE,
+  bootstrap = FALSE,
+  innov = NULL,
+  lambda = object$lambda,
+  ...
+)
+
+## S3 method for class 'ar'
+simulate(
+  object,
+  nsim = object$n.used,
+  seed = NULL,
+  future = TRUE,
+  bootstrap = FALSE,
+  innov = NULL,
+  ...
+)
+
+## S3 method for class 'lagwalk'
+simulate(
+  object,
+  nsim = length(object$x),
+  seed = NULL,
+  future = TRUE,
+  bootstrap = FALSE,
+  innov = NULL,
+  lambda = object$lambda,
+  ...
+)
+
+## S3 method for class 'fracdiff'
+simulate(
+  object,
+  nsim = object$n,
+  seed = NULL,
+  future = TRUE,
+  bootstrap = FALSE,
+  innov = NULL,
+  ...
+)
+
+## S3 method for class 'nnetar'
+simulate(
+  object,
+  nsim = length(object$x),
+  seed = NULL,
+  xreg = NULL,
+  future = TRUE,
+  bootstrap = FALSE,
+  innov = NULL,
+  lambda = object$lambda,
+  ...
+)
+
+## S3 method for class 'modelAR'
+simulate(
+  object,
+  nsim = length(object$x),
+  seed = NULL,
+  xreg = NULL,
+  future = TRUE,
+  bootstrap = FALSE,
+  innov = NULL,
+  lambda = object$lambda,
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>An object of class &quot;<code>ets</code>&quot;, &quot;<code>Arima</code>&quot;, &quot;<code>ar</code>&quot;
+or &quot;<code>nnetar</code>&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>nsim</code></td>
+<td>
+<p>Number of periods for the simulated series. Ignored if either
+<code>xreg</code> or <code>innov</code> are not <code>NULL</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>seed</code></td>
+<td>
+<p>Either <code>NULL</code> or an integer that will be used in a call to
+<code><a href="../../base/html/set.seed.html">set.seed</a></code> before simulating the time series. The default,
+<code>NULL</code>, will not change the random generator state.</p>
+</td></tr>
+<tr valign="top"><td><code>future</code></td>
+<td>
+<p>Produce sample paths that are future to and conditional on the
+data in <code>object</code>. Otherwise simulate unconditionally.</p>
+</td></tr>
+<tr valign="top"><td><code>bootstrap</code></td>
+<td>
+<p>Do simulation using resampled errors rather than normally
+distributed errors or errors provided as <code>innov</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>innov</code></td>
+<td>
+<p>A vector of innovations to use as the error series. Ignored if
+<code>bootstrap==TRUE</code>. If not <code>NULL</code>, the value of <code>nsim</code> is set
+to length of <code>innov</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Other arguments, not currently used.</p>
+</td></tr>
+<tr valign="top"><td><code>xreg</code></td>
+<td>
+<p>New values of <code>xreg</code> to be used for forecasting. The value
+of <code>nsim</code> is set to the number of rows of <code>xreg</code> if it is not
+<code>NULL</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>lambda</code></td>
+<td>
+<p>Box-Cox transformation parameter. If <code>lambda="auto"</code>,
+then a transformation is automatically selected using <code>BoxCox.lambda</code>.
+The transformation is ignored if NULL. Otherwise,
+data transformed before model is estimated.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>With <code>simulate.Arima()</code>, the <code>object</code> should be produced by
+<code><a href="Arima.html">Arima</a></code> or <code><a href="auto.arima.html">auto.arima</a></code>, rather than
+<code><a href="../../stats/html/arima.html">arima</a></code>. By default, the error series is assumed normally
+distributed and generated using <code><a href="../../stats/html/rnorm.html">rnorm</a></code>. If <code>innov</code>
+is present, it is used instead. If <code>bootstrap=TRUE</code> and
+<code>innov=NULL</code>, the residuals are resampled instead.
+</p>
+<p>When <code>future=TRUE</code>, the sample paths are conditional on the data. When
+<code>future=FALSE</code> and the model is stationary, the sample paths do not
+depend on the data at all. When <code>future=FALSE</code> and the model is
+non-stationary, the location of the sample paths is arbitrary, so they all
+start at the value of the first observation.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of class &quot;<code>ts</code>&quot;.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Rob J Hyndman
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="ets.html">ets</a></code>, <code><a href="Arima.html">Arima</a></code>, <code><a href="auto.arima.html">auto.arima</a></code>,
+<code><a href="../../stats/html/ar.html">ar</a></code>, <code><a href="arfima.html">arfima</a></code>, <code><a href="nnetar.html">nnetar</a></code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+fit &lt;- ets(USAccDeaths)
+plot(USAccDeaths, xlim=c(1973,1982))
+lines(simulate(fit, 36), col="red")
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>forecast</em> version 8.10 <a href="00Index.html">Index</a>]</div>
+</body></html>

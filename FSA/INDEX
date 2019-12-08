@@ -122,6 +122,8 @@ mrClosed                Estimate initial population size for single or
 nlsTracePlot            Adds model fits from nls iterations to active
                         plot.
 oddeven                 Determine if a number is odd or even.
+peek                    Peek into (show a subset of) a data frame or
+                        matrix.
 perc                    Computes the percentage of values in a vector
                         less than or greater than (and equal to) some
                         value.

@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Histogram with optional normal and kernel density functions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for gghistogram {forecast}"><tr><td>gghistogram {forecast}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Histogram with optional normal and kernel density functions</h2>
+
+<h3>Description</h3>
+
+<p>Plots a histogram and density estimates using ggplot.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+gghistogram(
+  x,
+  add.normal = FALSE,
+  add.kde = FALSE,
+  add.rug = TRUE,
+  bins,
+  boundary = 0
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a numerical vector.</p>
+</td></tr>
+<tr valign="top"><td><code>add.normal</code></td>
+<td>
+<p>Add a normal density function for comparison</p>
+</td></tr>
+<tr valign="top"><td><code>add.kde</code></td>
+<td>
+<p>Add a kernel density estimate for comparison</p>
+</td></tr>
+<tr valign="top"><td><code>add.rug</code></td>
+<td>
+<p>Add a rug plot on the horizontal axis</p>
+</td></tr>
+<tr valign="top"><td><code>bins</code></td>
+<td>
+<p>The number of bins to use for the histogram. Selected by default
+using the Friedman-Diaconis rule given by <code><a href="../../grDevices/html/nclass.FD.html">nclass.FD</a></code></p>
+</td></tr>
+<tr valign="top"><td><code>boundary</code></td>
+<td>
+<p>A boundary between two bins.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Not used (for consistency with lag.plot)</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>None.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Rob J Hyndman
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../graphics/html/hist.html">hist</a></code>, <code><a href="../../ggplot2/html/geom_histogram.html">geom_histogram</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+gghistogram(lynx, add.kde=TRUE)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>forecast</em> version 8.10 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Forecast seasonal index</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for sindexf {forecast}"><tr><td>sindexf {forecast}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Forecast seasonal index</h2>
+
+<h3>Description</h3>
+
+<p>Returns vector containing the seasonal index for <code>h</code> future periods. If
+the seasonal index is non-periodic, it uses the last values of the index.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+sindexf(object, h)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>Output from <code><a href="../../stats/html/decompose.html">decompose</a></code> or
+<a href="../../stats/html/stl.html">stl</a>.</p>
+</td></tr>
+<tr valign="top"><td><code>h</code></td>
+<td>
+<p>Number of periods ahead to forecast</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Time series
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Rob J Hyndman
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+uk.stl &lt;- stl(UKDriverDeaths,"periodic")
+uk.sa &lt;- seasadj(uk.stl)
+uk.fcast &lt;- holt(uk.sa,36)
+seasf &lt;- sindexf(uk.stl,36)
+uk.fcast$mean &lt;- uk.fcast$mean + seasf
+uk.fcast$lower &lt;- uk.fcast$lower + cbind(seasf,seasf)
+uk.fcast$upper &lt;- uk.fcast$upper + cbind(seasf,seasf)
+uk.fcast$x &lt;- UKDriverDeaths
+plot(uk.fcast,main="Forecasts from Holt's method with seasonal adjustment")
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>forecast</em> version 8.10 <a href="00Index.html">Index</a>]</div>
+</body></html>

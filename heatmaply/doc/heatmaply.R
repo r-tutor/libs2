@@ -1,9 +1,9 @@
 ## ---- echo = FALSE, message = FALSE--------------------------------------
-library(heatmaply)
-library(knitr)
+library("heatmaply")
+library("knitr")
 knitr::opts_chunk$set(
-   # cache = TRUE,
-   dpi = 60,
+  # cache = TRUE,
+  dpi = 60,
   comment = "#>",
   tidy = FALSE)
 
@@ -29,56 +29,84 @@ knitr::opts_chunk$set(
 library("heatmaply")
 
 ## ------------------------------------------------------------------------
-library(heatmaply)
+library("heatmaply")
 heatmaply(mtcars)
 
 ## ------------------------------------------------------------------------
 heatmaply(mtcars, xlab = "Features", ylab = "Cars", 
-		main = "An example of title and xlab/ylab",
-		margins = c(60,100,40,20))
+  main = "An example of title and xlab/ylab")
 
 ## ------------------------------------------------------------------------
-heatmaply(cor(mtcars), margins = c(40, 40),
-          k_col = 2, k_row = 2,
-          limits = c(-1,1))
-# Better to use:
-# heatmaply_cor(cor(mtcars), margins = c(40, 40),
-#           k_col = 2, k_row = 2)
-
-
-## ------------------------------------------------------------------------
-heatmaply(mtcars, xlab = "Features", ylab = "Cars", 
-          scale = "column",
-		main = "Data transformation using 'scale'",
-		margins = c(60,100,40,20))
-
-## ------------------------------------------------------------------------
-heatmaply(normalize(mtcars), xlab = "Features", ylab = "Cars", 
-		main = "Data transformation using 'normalize'",
-		margins = c(60,100,40,20))
-
-## ------------------------------------------------------------------------
-heatmaply(percentize(mtcars), xlab = "Features", ylab = "Cars", 
-		main = "Data transformation using 'percentize'",
-		margins = c(60,100,40,20))
+heatmaply_cor(
+  cor(mtcars),
+  xlab = "Features",
+  ylab = "Features",
+  k_col = 2,
+  k_row = 2
+)
 
 ## ------------------------------------------------------------------------
 
-library(heatmaply)
+r <- cor(mtcars)
+## We use this function to calculate a matrix of p-values from correlation tests
+## https://stackoverflow.com/a/13112337/4747043
+cor.test.p <- function(x){
+    FUN <- function(x, y) cor.test(x, y)[["p.value"]]
+    z <- outer(
+      colnames(x), 
+      colnames(x), 
+      Vectorize(function(i,j) FUN(x[,i], x[,j]))
+    )
+    dimnames(z) <- list(colnames(x), colnames(x))
+    z
+}
+p <- cor.test.p(mtcars)
 
-heatmaply(is.na10(airquality), grid_gap = 1, 
-          showticklabels = c(T,F),
-            k_col =3, k_row = 3,
-            margins = c(55, 30), 
-            colors = c("grey80", "grey20"))
-# Better to use:
-# heatmaply_na(airquality, k_col =3, k_row = 3,
-            # margins = c(55, 30))
+heatmaply_cor(
+  r,
+  node_type = "scatter",
+  point_size_mat = -log10(p), 
+  point_size_name = "-log10(p-value)",
+  label_names = c("x", "y", "Correlation")
+)
+
+## ------------------------------------------------------------------------
+heatmaply(
+  mtcars, 
+  xlab = "Features",
+  ylab = "Cars", 
+  scale = "column",
+  main = "Data transformation using 'scale'"
+)
+
+## ------------------------------------------------------------------------
+heatmaply(
+  normalize(mtcars),
+  xlab = "Features",
+  ylab = "Cars", 
+  main = "Data transformation using 'normalize'"
+)
+
+## ------------------------------------------------------------------------
+heatmaply(
+  percentize(mtcars),
+  xlab = "Features",
+  ylab = "Cars", 
+  main = "Data transformation using 'percentize'"
+)
+
+## ------------------------------------------------------------------------
+heatmaply_na(
+  airquality[1:30, ],
+  showticklabels = c(TRUE, FALSE),
+  k_col = 3,
+  k_row = 3
+)
 
 
-# warning - using grid_color cannot handle a large matrix!
-# airquality[1:10,] %>% is.na10 %>% 
-#   heatmaply(color = c("white","black"), grid_color = "grey",
+# warning - using grid_color cannot handle a large matrix! For example:
+# airquality[1:10, ] %>% is.na10 %>% 
+#   heatmaply(color = c("white", "black"), grid_color = "grey",
 #             k_col =3, k_row = 3,
 #             margins = c(40, 50)) 
 # airquality %>% is.na10 %>% 
@@ -89,84 +117,113 @@ heatmaply(is.na10(airquality), grid_gap = 1,
 
 
 ## ------------------------------------------------------------------------
-# divergent_viridis_magma <- c(rev(viridis(100, begin = 0.3)), magma(100, begin = 0.3))
-# rwb <- colorRampPalette(colors = c("darkred", "white", "darkgreen"))
-# library(RColorBrewer)
-# # display.brewer.pal(11, "BrBG")
-# BrBG <- colorRampPalette(brewer.pal(11, "BrBG"))
-# Spectral <- colorRampPalette(brewer.pal(11, "Spectral"))
-
-heatmaply(cor(mtcars), margins = c(40, 40),
-          k_col = 2, k_row = 2,
-          colors = BrBG,
-          limits = c(-1,1))
-# Better to use:
-# heatmaply_cor(cor(mtcars), margins = c(40, 40),
-#           k_col = 2, k_row = 2)
+heatmaply_cor(
+  cor(mtcars),
+  k_col = 2, 
+  k_row = 2
+)
 
 
 ## ---- eval = FALSE-------------------------------------------------------
-#  heatmaply(percentize(mtcars), margins = c(40, 130),
-#            colors = heat.colors(100))
+#  heatmaply(
+#    percentize(mtcars),
+#    colors = heat.colors(100)
+#  )
 
 ## ------------------------------------------------------------------------
-heatmaply(mtcars, margins = c(40, 130), 
-          scale_fill_gradient_fun = ggplot2::scale_fill_gradient2(low = "blue", high = "red", midpoint = 200, limits = c(0, 500)))
+heatmaply(
+  mtcars,
+  scale_fill_gradient_fun = ggplot2::scale_fill_gradient2(
+    low = "blue", 
+    high = "red", 
+    midpoint = 200, 
+    limits = c(0, 500)
+  )
+)
 
 
 ## ------------------------------------------------------------------------
 # The default of heatmaply:
-heatmaply(percentize(mtcars)[1:10,], margins = c(40, 130),
-          seriate = "OLO")
+heatmaply(
+  percentize(mtcars)[1:10, ],
+  seriate = "OLO"
+)
 
 ## ------------------------------------------------------------------------
 # Similar to OLO but less optimal (since it is a heuristic)
-heatmaply(percentize(mtcars)[1:10,], margin = c(40, 130),
-          seriate = "GW")
+heatmaply(
+  percentize(mtcars)[1:10, ],
+  seriate = "GW"
+)
 
 ## ------------------------------------------------------------------------
 # the default by gplots::heatmaply.2
-heatmaply(percentize(mtcars)[1:10,], margins = c(40, 130),
-          seriate = "mean")
+heatmaply(
+  percentize(mtcars)[1:10, ],
+  seriate = "mean"
+)
 
 ## ------------------------------------------------------------------------
 # the default output from hclust
-heatmaply(percentize(mtcars)[1:10,],  margins = c(40, 130),
-          seriate = "none")
+heatmaply(
+  percentize(mtcars)[1:10, ],
+  seriate = "none"
+)
 
 ## ------------------------------------------------------------------------
 
 x  <- as.matrix(datasets::mtcars)
 
 # now let's spice up the dendrograms a bit:
-library(dendextend)
+library("dendextend")
 
-row_dend  <- x %>% dist %>% hclust %>% as.dendrogram %>%
-   set("branches_k_color", k = 3) %>% set("branches_lwd", c(1,3)) %>%
-   ladderize
-#    rotate_DendSer(ser_weight = dist(x))
-col_dend  <- x %>% t %>% dist %>% hclust %>% as.dendrogram %>%
-   set("branches_k_color", k = 2) %>% set("branches_lwd", c(1,2)) %>%
-   ladderize
+row_dend  <- x %>% 
+  dist %>% 
+  hclust %>% 
+  as.dendrogram %>%
+  set("branches_k_color", k = 3) %>% 
+  set("branches_lwd", c(1, 3)) %>%
+  ladderize
+# rotate_DendSer(ser_weight = dist(x))
+col_dend  <- x %>% 
+  t %>% 
+  dist %>% 
+  hclust %>% 
+  as.dendrogram %>%
+  set("branches_k_color", k = 2) %>% 
+  set("branches_lwd", c(1, 2)) %>%
+  ladderize
 #    rotate_DendSer(ser_weight = dist(t(x)))
 
-heatmaply(percentize(x), Rowv = row_dend, Colv = col_dend)
+heatmaply(
+  percentize(x),
+  Rowv = row_dend,
+  Colv = col_dend
+)
 
 
 
 ## ------------------------------------------------------------------------
 x  <- as.matrix(datasets::mtcars)
-gplots::heatmap.2(x, trace = "none", col = viridis(100), key = FALSE)
+gplots::heatmap.2(
+  x,
+  trace = "none",
+  col = viridis(100),
+  key = FALSE
+)
 
 ## ---- eval = FALSE-------------------------------------------------------
-#  library(heatmaply)
-#  heatmaply(x, seriate = "mean")
+#  heatmaply(
+#    x,
+#    seriate = "mean"
+#  )
 
 ## ------------------------------------------------------------------------
-library(heatmaply)
-heatmaply(x, seriate = "mean", 
-          row_dend_left = TRUE, plot_method = "plotly",
-          margins = c(40,NA,NA,NA))
+heatmaply(x,
+  seriate = "mean", 
+  row_dend_left = TRUE,
+  plot_method = "plotly"
+)
 
 ## ------------------------------------------------------------------------
 # Example for using RowSideColors
@@ -174,61 +231,67 @@ heatmaply(x, seriate = "mean",
 x  <- as.matrix(datasets::mtcars)
 rc <- colorspace::rainbow_hcl(nrow(x))
 
-library(gplots)
-library(viridis)
-heatmap.2(x, trace = "none", col = viridis(100),
-          RowSideColors=rc, key = FALSE)
+library("gplots")
+library("viridis")
+heatmap.2(
+  x,
+  trace = "none",
+  col = viridis(100),
+  RowSideColors = rc,
+  key = FALSE
+)
 
 
 ## ---- eval = FALSE-------------------------------------------------------
-#  heatmaply(x, seriate = "mean",
-#            RowSideColors=rc)
-#  
-#  # heatmaply(x, seriate = "mean",
-#  #           RowSideColors=factor(rc))
-#  
-#  
+#  heatmaply(
+#    x,
+#    seriate = "mean",
+#    RowSideColors = rc
+#  )
 
 ## ------------------------------------------------------------------------
-heatmaply(x[,-c(8,9)], seriate = "mean",
-          col_side_colors = c(rep(0,5), rep(1,4)),
-          row_side_colors = x[,8:9])
+heatmaply(
+  x[, -c(8, 9)],
+  seriate = "mean",
+  col_side_colors = c(rep(0, 5), rep(1, 4)),
+  row_side_colors = x[, 8:9]
+)
 
 
-## ---- eval = FALSE-------------------------------------------------------
-#  
-#  # library(microbenchmark)
-#  #
-#  #
-#  # library(heatmaply)
-#  # x <- matrix(1:1000, 500, 2)
-#  #
-#  # microbenchmark(
-#  #   heatmaply(x, hclustfun = stats::hclust),
-#  #   heatmaply(x, hclustfun = fastcluster::hclust),
-#  #   times = 10
-#  # )
-#  #
-#  # x <- matrix(1:1000, 1000, 2)
-#  # microbenchmark(
-#  #   stats::hclust(dist(x)),
-#  #   fastcluster::hclust(dist(x)),
-#  #   times = 10
-#  # )
-#  
-#  
+## ------------------------------------------------------------------------
+heatmaply(
+  mtcars,
+  cellnote = mtcars
+)
+
+## ------------------------------------------------------------------------
+mat <- mtcars
+mat[] <- paste("This cell is", rownames(mat))
+mat[] <- lapply(colnames(mat), function(colname) {
+    paste0(mat[, colname], ", ", colname)
+})
+heatmaply(
+  mtcars,
+  custom_hovertext = mat
+)
+
+## ------------------------------------------------------------------------
+ggheatmap(
+  mtcars,
+  scale = "column",
+  row_side_colors = mtcars[, c("cyl", "gear")]
+)
 
 ## ---- eval = FALSE-------------------------------------------------------
 #  dir.create("folder")
-#  library(heatmaply)
 #  heatmaply(mtcars, file = "folder/heatmaply_plot.html")
 #  browseURL("folder/heatmaply_plot.html")
 
 ## ---- eval = FALSE-------------------------------------------------------
 #  dir.create("folder")
-#  library(heatmaply)
 #  # Before the first time using this code you may need to first run:
-#  # webshot::install_phantomjs()
+#  # webshot::install_phantomjs() or to install
+#  # [plotly's orca](https://github.com/plotly/orca) program.
 #  heatmaply(mtcars, file = "folder/heatmaply_plot.png")
 #  browseURL("folder/heatmaply_plot.png")
 
@@ -237,6 +300,29 @@ heatmaply(x[,-c(8,9)], seriate = "mean",
 #  tmp <- heatmaply(mtcars, file = "folder/heatmaply_plot.png")
 #  rm(tmp)
 
-## ---- cache=FALSE--------------------------------------------------------
+## ---- eval = FALSE-------------------------------------------------------
+#  
+#  library("microbenchmark")
+#  
+#  
+#  library("heatmaply")
+#  x <- matrix(1:1000, 500, 2)
+#  
+#  microbenchmark(
+#    heatmaply(x, hclustfun = stats::hclust),
+#    heatmaply(x, hclustfun = fastcluster::hclust),
+#    times = 10
+#  )
+#  
+#  x <- matrix(1:1000, 1000, 2)
+#  microbenchmark(
+#    stats::hclust(dist(x)),
+#    fastcluster::hclust(dist(x)),
+#    times = 10
+#  )
+#  
+#  
+
+## ---- cache = FALSE------------------------------------------------------
 sessionInfo()
 

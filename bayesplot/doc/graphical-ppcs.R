@@ -30,7 +30,7 @@ head(roaches) # see help("rstanarm-datasets")
 roaches$roach100 <- roaches$roach1 / 100 # pre-treatment number of roaches (in 100s)
 
 ## ---- roaches-model-pois, message=FALSE----------------------------------
-# using rstanarm's default priors. For details ee the section on default 
+# using rstanarm's default priors. For details see the section on default
 # weakly informative priors at https://mc-stan.org/rstanarm/articles/priors.html
 fit_poisson <- stan_glm(
   y ~ roach100 + treatment + senior,

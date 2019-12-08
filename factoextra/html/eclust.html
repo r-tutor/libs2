@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Visual enhancement of clustering analysis</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for eclust {factoextra}"><tr><td>eclust {factoextra}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Visual enhancement of clustering analysis</h2>
+
+<h3>Description</h3>
+
+<p>Provides solution for enhancing the workflow of clustering
+analyses and ggplot2-based elegant data visualization. Read more: 
+<a href="http://www.sthda.com/english/wiki/visual-enhancement-of-clustering-analysis-unsupervised-machine-learning">Visual enhancement of clustering analysis</a>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+eclust(x, FUNcluster = c("kmeans", "pam", "clara", "fanny", "hclust",
+  "agnes", "diana"), k = NULL, k.max = 10, stand = FALSE,
+  graph = TRUE, hc_metric = "euclidean", hc_method = "ward.D2",
+  gap_maxSE = list(method = "firstSEmax", SE.factor = 1), nboot = 100,
+  verbose = interactive(), seed = 123, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>numeric vector, data matrix or data frame</p>
+</td></tr>
+<tr valign="top"><td><code>FUNcluster</code></td>
+<td>
+<p>a clustering function including &quot;kmeans&quot;, &quot;pam&quot;, &quot;clara&quot;, 
+&quot;fanny&quot;, &quot;hclust&quot;, &quot;agnes&quot; and &quot;diana&quot;. Abbreviation is allowed.</p>
+</td></tr>
+<tr valign="top"><td><code>k</code></td>
+<td>
+<p>the number of clusters to be generated. If NULL, the gap statistic 
+is used to estimate the appropriate number of clusters. In the case of 
+kmeans, k can be either the number of clusters, or a set of initial 
+(distinct) cluster centers.</p>
+</td></tr>
+<tr valign="top"><td><code>k.max</code></td>
+<td>
+<p>the maximum number of clusters to consider, must be at least 
+two.</p>
+</td></tr>
+<tr valign="top"><td><code>stand</code></td>
+<td>
+<p>logical value; default is FALSE. If TRUE, then the data will be 
+standardized using the function scale(). Measurements are standardized for 
+each variable (column), by subtracting the variable's mean value and 
+dividing by the variable's standard deviation.</p>
+</td></tr>
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>logical value. If TRUE, cluster plot is displayed.</p>
+</td></tr>
+<tr valign="top"><td><code>hc_metric</code></td>
+<td>
+<p>character string specifying the metric to be used for 
+calculating dissimilarities between observations. Allowed values are those 
+accepted by the function dist() [including &quot;euclidean&quot;, &quot;manhattan&quot;, 
+&quot;maximum&quot;, &quot;canberra&quot;, &quot;binary&quot;, &quot;minkowski&quot;] and correlation based 
+distance measures [&quot;pearson&quot;, &quot;spearman&quot; or &quot;kendall&quot;]. Used only when 
+FUNcluster is a hierarchical clustering function such as one of &quot;hclust&quot;, 
+&quot;agnes&quot; or &quot;diana&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>hc_method</code></td>
+<td>
+<p>the agglomeration method to be used (?hclust): &quot;ward.D&quot;, 
+&quot;ward.D2&quot;, &quot;single&quot;, &quot;complete&quot;, &quot;average&quot;, ...</p>
+</td></tr>
+<tr valign="top"><td><code>gap_maxSE</code></td>
+<td>
+<p>a list containing the parameters (method and SE.factor) for 
+determining the location of the maximum of the gap statistic (Read the 
+documentation ?cluster::maxSE).</p>
+</td></tr>
+<tr valign="top"><td><code>nboot</code></td>
+<td>
+<p>integer, number of Monte Carlo (&quot;bootstrap&quot;) samples. Used only 
+for determining the number of clusters using gap statistic.</p>
+</td></tr>
+<tr valign="top"><td><code>verbose</code></td>
+<td>
+<p>logical value. If TRUE, the result of progress is printed.</p>
+</td></tr>
+<tr valign="top"><td><code>seed</code></td>
+<td>
+<p>integer used for seeding the random number generator.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>other arguments to be passed to FUNcluster.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Returns an object of class &quot;eclust&quot; containing the result of the 
+standard function used (e.g., kmeans, pam, hclust, agnes, diana, etc.).
+</p>
+<p>It includes also: </p>
+ <ul>
+<li><p> cluster: the cluster assignement of 
+observations after cutting the tree </p>
+</li>
+<li><p> nbclust: the number of clusters 
+</p>
+</li>
+<li><p> silinfo: the silhouette information of observations, including 
+$widths (silhouette width values of each observation), $clus.avg.widths 
+(average silhouette width of each cluster) and $avg.width (average width of
+all clusters) </p>
+</li>
+<li><p> size: the size of clusters </p>
+</li>
+<li><p> data: a matrix 
+containing the original or the standardized data (if stand = TRUE) </p>
+</li></ul>
+<p> The 
+&quot;eclust&quot; class has method for fviz_silhouette(), fviz_dend(), 
+fviz_cluster().
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Alboukadel Kassambara <a href="mailto:alboukadel.kassambara@gmail.com">alboukadel.kassambara@gmail.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="fviz_silhouette.html">fviz_silhouette</a></code>, <code><a href="fviz_dend.html">fviz_dend</a></code>, 
+<code><a href="fviz_cluster.html">fviz_cluster</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Load and scale data
+data("USArrests")
+df &lt;- scale(USArrests)
+
+# Enhanced k-means clustering
+# nboot &gt;= 500 is recommended
+res.km &lt;- eclust(df, "kmeans", nboot = 2)
+# Silhouette plot
+fviz_silhouette(res.km)
+# Optimal number of clusters using gap statistics
+res.km$nbclust
+# Print result
+ res.km
+ 
+## Not run: 
+ # Enhanced hierarchical clustering
+ res.hc &lt;- eclust(df, "hclust", nboot = 2) # compute hclust
+  fviz_dend(res.hc) # dendrogam
+  fviz_silhouette(res.hc) # silhouette plot
+
+## End(Not run)
+ 
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>factoextra</em> version 1.0.6 <a href="00Index.html">Index</a>]</div>
+</body></html>

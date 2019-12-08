@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Plot Model-Based Clustering Results using ggplot2</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for fviz_mclust {factoextra}"><tr><td>fviz_mclust {factoextra}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Plot Model-Based Clustering Results using ggplot2</h2>
+
+<h3>Description</h3>
+
+<p>Plots the classification, the uncertainty and the BIC values returned by the Mclust() function.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+fviz_mclust(object, what = c("classification", "uncertainty", "BIC"),
+  ellipse.type = "norm", ellipse.level = 0.4,
+  ggtheme = theme_classic(), ...)
+
+fviz_mclust_bic(object, model.names = NULL, shape = 19,
+  color = "model", palette = NULL, legend = NULL,
+  main = "Model selection", xlab = "Number of components",
+  ylab = "BIC", ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>an object of class Mclust</p>
+</td></tr>
+<tr valign="top"><td><code>what</code></td>
+<td>
+<p>choose from one of the following three options: &quot;classification&quot; (default), &quot;uncertainty&quot; and &quot;BIC&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>ellipse.type</code></td>
+<td>
+<p>Character specifying frame type. Possible values are
+'convex', 'confidence' or types supported by
+<code><a href="../../ggplot2/html/stat_ellipse.html">stat_ellipse</a></code> including one of c(&quot;t&quot;, &quot;norm&quot;,
+&quot;euclid&quot;).</p>
+</td></tr>
+<tr valign="top"><td><code>ellipse.level</code></td>
+<td>
+<p>the size of the concentration ellipse in normal
+probability. Passed for <code>ggplot2::stat_ellipse</code> 's level. Ignored in
+'convex'. Default value is 0.95.</p>
+</td></tr>
+<tr valign="top"><td><code>ggtheme</code></td>
+<td>
+<p>function, ggplot2 theme name. Default value is theme_pubr().
+Allowed values include ggplot2 official themes: theme_gray(), theme_bw(),
+theme_minimal(), theme_classic(), theme_void(), ....</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>other arguments to be passed to the functions <a href="fviz_cluster.html">fviz_cluster</a> and <a href="../../ggpubr/html/ggpar.html">ggpar</a>.</p>
+</td></tr>
+<tr valign="top"><td><code>model.names</code></td>
+<td>
+<p>one or more model names corresponding to models fit in object. The default
+is to plot the BIC for all of the models fit.</p>
+</td></tr>
+<tr valign="top"><td><code>shape</code></td>
+<td>
+<p>point shape. To change point shape by model names use shape = &quot;model&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>color</code></td>
+<td>
+<p>point and line color.</p>
+</td></tr>
+<tr valign="top"><td><code>palette</code></td>
+<td>
+<p>the color palette to be used for coloring or filling by
+groups. Allowed values include &quot;grey&quot; for grey color palettes; brewer
+palettes e.g. &quot;RdBu&quot;, &quot;Blues&quot;, ...; or custom color palette e.g. c(&quot;blue&quot;,
+&quot;red&quot;); and scientific journal palettes from ggsci R package, e.g.: &quot;npg&quot;,
+&quot;aaas&quot;, &quot;lancet&quot;, &quot;jco&quot;, &quot;ucscgb&quot;, &quot;uchicago&quot;, &quot;simpsons&quot; and
+&quot;rickandmorty&quot;. Can be also a numeric vector of length(groups); in this
+case a basic color palette is created using the function
+<a href="../../grDevices/html/palette.html">palette</a>.</p>
+</td></tr>
+<tr valign="top"><td><code>legend</code></td>
+<td>
+<p>character specifying legend position. Allowed values are one of
+c(&quot;top&quot;, &quot;bottom&quot;, &quot;left&quot;, &quot;right&quot;, &quot;none&quot;). To remove the legend use
+legend = &quot;none&quot;. Legend position can be also specified using a numeric
+vector c(x, y); see details section.</p>
+</td></tr>
+<tr valign="top"><td><code>main</code></td>
+<td>
+<p>plot main title.</p>
+</td></tr>
+<tr valign="top"><td><code>xlab</code></td>
+<td>
+<p>character vector specifying x axis labels. Use xlab = FALSE to
+hide xlab.</p>
+</td></tr>
+<tr valign="top"><td><code>ylab</code></td>
+<td>
+<p>character vector specifying y axis labels. Use ylab = FALSE to
+hide ylab.</p>
+</td></tr>
+</table>
+
+
+<h3>Functions</h3>
+
+
+<ul>
+<li> <p><code>fviz_mclust</code>: Plots classification and uncertainty.
+</p>
+</li>
+<li> <p><code>fviz_mclust_bic</code>: Plots the BIC values.
+</p>
+</li></ul>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+if(require("mclust")){
+
+# Compute model-based-clustering 
+require("mclust")
+data("diabetes")
+mc &lt;- Mclust(diabetes[, -1])
+
+# Visaulize BIC values
+fviz_mclust_bic(mc)
+
+# Visualize classification
+fviz_mclust(mc, "classification", geom = "point")
+}
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>factoextra</em> version 1.0.6 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Compute external- or 'cross'- product of 3D vectors.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for extprod3d {geometry}"><tr><td>extprod3d {geometry}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Compute external- or &lsquo;cross&rsquo;- product of 3D vectors.</h2>
+
+<h3>Description</h3>
+
+<p>Computes the external product </p>
+<p style="text-align: center;"><i> (x2 * y3 - x3 * y2, x3 * y1 - x1 *
+y3, x1 * y2 - x2 * y1) </i></p>
+<p style="text-align: center;"><i> (x2 * y3 - x3 * y2, x3 * y1 - x1 * y3,
+x1 * y2 - x2 * y1) </i></p>
+<p style="text-align: center;"><i> (x2 * y3 - x3 * y2, x3 * y1 - x1 * y3, x1 *
+y2 - x2 * y1) </i></p>
+<p> of the 3D vectors in <b>x</b> and <b>y</b>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+extprod3d(x, y, drop = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p><code>n</code>-by-3 matrix. Each row is one <b>x</b>-vector</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p><code>n</code>-by-3 matrix. Each row is one <b>y</b>-vector</p>
+</td></tr>
+<tr valign="top"><td><code>drop</code></td>
+<td>
+<p>logical. If <code>TRUE</code> and if the inputs are one row
+matrices or vectors, then delete the dimensions of the array
+returned.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>If <code>n</code> is greater than 1 or <code>drop</code> is
+<code>FALSE</code>, <code>n</code>-by-3 matrix; if <code>n</code> is 1 and
+<code>drop</code> is <code>TRUE</code>, a vector of length 3.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Raoul Grasman
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../base/html/drop.html">drop</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>geometry</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

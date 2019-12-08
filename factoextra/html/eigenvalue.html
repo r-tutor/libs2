@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Extract and visualize the eigenvalues/variances of dimensions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for eigenvalue {factoextra}"><tr><td>eigenvalue {factoextra}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Extract and visualize the eigenvalues/variances of dimensions</h2>
+
+<h3>Description</h3>
+
+<p>Eigenvalues correspond to the amount of the variation explained 
+by each principal component (PC). 
+</p>
+ <ul>
+<li><p>get_eig(): Extract the eigenvalues/variances of the 
+principal dimensions </p>
+</li>
+<li><p>fviz_eig(): Plot the eigenvalues/variances 
+against the number of dimensions </p>
+</li>
+<li><p>get_eigenvalue(): an alias of 
+get_eig() </p>
+</li>
+<li><p>fviz_screeplot(): an alias of fviz_eig() </p>
+</li></ul>
+
+<p>These functions support the results of Principal Component Analysis (PCA), 
+Correspondence Analysis (CA), Multiple Correspondence Analysis (MCA), Factor Analysis of Mixed Data (FAMD),
+Multiple Factor Analysis (MFA) and Hierarchical Multiple Factor Analysis 
+(HMFA) functions.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+get_eig(X)
+
+get_eigenvalue(X)
+
+fviz_eig(X, choice = c("variance", "eigenvalue"), geom = c("bar",
+  "line"), barfill = "steelblue", barcolor = "steelblue",
+  linecolor = "black", ncp = 10, addlabels = FALSE, hjust = 0,
+  main = NULL, xlab = NULL, ylab = NULL, ggtheme = theme_minimal(),
+  ...)
+
+fviz_screeplot(...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>X</code></td>
+<td>
+<p>an object of class PCA, CA, MCA, FAMD, MFA and HMFA [FactoMineR]; prcomp 
+and princomp [stats]; dudi, pca, coa and acm [ade4]; ca and mjca [ca 
+package].</p>
+</td></tr>
+<tr valign="top"><td><code>choice</code></td>
+<td>
+<p>a text specifying the data to be plotted. Allowed values are 
+&quot;variance&quot; or &quot;eigenvalue&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>geom</code></td>
+<td>
+<p>a text specifying the geometry to be used for the graph. Allowed 
+values are &quot;bar&quot; for barplot, &quot;line&quot; for lineplot or c(&quot;bar&quot;, &quot;line&quot;) to use
+both types.</p>
+</td></tr>
+<tr valign="top"><td><code>barfill</code></td>
+<td>
+<p>fill color for bar plot.</p>
+</td></tr>
+<tr valign="top"><td><code>barcolor</code></td>
+<td>
+<p>outline color for bar plot.</p>
+</td></tr>
+<tr valign="top"><td><code>linecolor</code></td>
+<td>
+<p>color for line plot (when geom contains &quot;line&quot;).</p>
+</td></tr>
+<tr valign="top"><td><code>ncp</code></td>
+<td>
+<p>a numeric value specifying the number of dimensions to be shown.</p>
+</td></tr>
+<tr valign="top"><td><code>addlabels</code></td>
+<td>
+<p>logical value. If TRUE, labels are added at the top of bars 
+or points showing the information retained by each dimension.</p>
+</td></tr>
+<tr valign="top"><td><code>hjust</code></td>
+<td>
+<p>horizontal adjustment of the labels.</p>
+</td></tr>
+<tr valign="top"><td><code>main, xlab, ylab</code></td>
+<td>
+<p>plot main and axis titles.</p>
+</td></tr>
+<tr valign="top"><td><code>ggtheme</code></td>
+<td>
+<p>function, ggplot2 theme name. Default value is theme_pubr().
+Allowed values include ggplot2 official themes: theme_gray(), theme_bw(),
+theme_minimal(), theme_classic(), theme_void(), ....</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>optional arguments to be passed to the function <a href="../../ggpubr/html/ggpar.html">ggpar</a>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+ <ul>
+<li><p>get_eig() (or get_eigenvalue()): returns a data.frame 
+containing 3 columns: the eigenvalues, the percentage of variance and  the 
+cumulative percentage of variance retained by each dimension. 
+</p>
+</li>
+<li><p>fviz_eig() (or fviz_screeplot()): returns a ggplot2 </p>
+</li></ul>
+
+
+
+<h3>Author(s)</h3>
+
+<p>Alboukadel Kassambara <a href="mailto:alboukadel.kassambara@gmail.com">alboukadel.kassambara@gmail.com</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>http://www.sthda.com/english/
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="fviz_pca.html">fviz_pca</a></code>, <code><a href="fviz_ca.html">fviz_ca</a></code>,
+<code><a href="fviz_mca.html">fviz_mca</a></code>, <code><a href="fviz_mfa.html">fviz_mfa</a></code>, <code><a href="fviz_hmfa.html">fviz_hmfa</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Principal Component Analysis
+# ++++++++++++++++++++++++++
+data(iris)
+res.pca &lt;- prcomp(iris[, -5],  scale = TRUE)
+
+# Extract eigenvalues/variances
+get_eig(res.pca)
+
+# Default plot
+fviz_eig(res.pca, addlabels = TRUE, ylim = c(0, 85))
+  
+# Scree plot - Eigenvalues
+fviz_eig(res.pca, choice = "eigenvalue", addlabels=TRUE)
+
+# Use only bar  or line plot: geom = "bar" or geom = "line"
+fviz_eig(res.pca, geom="line")
+ 
+## Not run:          
+# Correspondence Analysis
+# +++++++++++++++++++++++++++++++++
+library(FactoMineR)
+data(housetasks)
+res.ca &lt;- CA(housetasks, graph = FALSE)
+get_eig(res.ca)
+fviz_eig(res.ca, linecolor = "#FC4E07",
+   barcolor = "#00AFBB", barfill = "#00AFBB")
+
+# Multiple Correspondence Analysis
+# +++++++++++++++++++++++++++++++++
+library(FactoMineR)
+data(poison)
+res.mca &lt;- MCA(poison, quanti.sup = 1:2, 
+              quali.sup = 3:4, graph=FALSE)
+get_eig(res.mca)
+fviz_eig(res.mca, linecolor = "#FC4E07",
+   barcolor = "#2E9FDF", barfill = "#2E9FDF")
+
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>factoextra</em> version 1.0.6 <a href="00Index.html">Index</a>]</div>
+</body></html>

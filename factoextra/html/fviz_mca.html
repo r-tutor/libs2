@@ -1,0 +1,366 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Visualize Multiple Correspondence Analysis</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for fviz_mca {factoextra}"><tr><td>fviz_mca {factoextra}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Visualize Multiple Correspondence Analysis</h2>
+
+<h3>Description</h3>
+
+<p>Multiple Correspondence Analysis (MCA) is an extension of simple 
+CA to analyse a data table containing more than two categorical variables. 
+fviz_mca() provides ggplot2-based elegant visualization of MCA outputs from 
+the R functions: MCA [in FactoMineR], acm [in ade4], and expOutput/epMCA [in
+ExPosition]. Read more: 
+<a href="http://www.sthda.com/english/wiki/multiple-correspondence-analysis-essentials-interpretation-and-application-to-investigate-the-associations-between-categories-of-multiple-qualitative-variables-r-software-and-data-mining">Multiple
+Correspondence Analysis Essentials.</a>
+</p>
+ <ul>
+<li><p>fviz_mca_ind(): Graph of individuals </p>
+</li>
+<li><p>fviz_mca_var(): 
+Graph of variables </p>
+</li>
+<li><p>fviz_mca_biplot(): Biplot of individuals and 
+variables </p>
+</li>
+<li><p>fviz_mca(): An alias of fviz_mca_biplot()</p>
+</li></ul>
+
+
+
+<h3>Usage</h3>
+
+<pre>
+fviz_mca_ind(X, axes = c(1, 2), geom = c("point", "text"),
+  geom.ind = geom, repel = FALSE, habillage = "none",
+  palette = NULL, addEllipses = FALSE, col.ind = "blue",
+  col.ind.sup = "darkblue", alpha.ind = 1, shape.ind = 19,
+  map = "symmetric", select.ind = list(name = NULL, cos2 = NULL,
+  contrib = NULL), ...)
+
+fviz_mca_var(X, choice = c("var.cat", "mca.cor", "var", "quanti.sup"),
+  axes = c(1, 2), geom = c("point", "text"), geom.var = geom,
+  repel = FALSE, col.var = "red", alpha.var = 1, shape.var = 17,
+  col.quanti.sup = "blue", col.quali.sup = "darkgreen",
+  map = "symmetric", select.var = list(name = NULL, cos2 = NULL,
+  contrib = NULL), ...)
+
+fviz_mca_biplot(X, axes = c(1, 2), geom = c("point", "text"),
+  geom.ind = geom, geom.var = geom, repel = FALSE, label = "all",
+  invisible = "none", habillage = "none", addEllipses = FALSE,
+  palette = NULL, arrows = c(FALSE, FALSE), map = "symmetric",
+  title = "MCA - Biplot", ...)
+
+fviz_mca(X, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>X</code></td>
+<td>
+<p>an object of class MCA [FactoMineR], acm [ade4] and expOutput/epMCA
+[ExPosition].</p>
+</td></tr>
+<tr valign="top"><td><code>axes</code></td>
+<td>
+<p>a numeric vector of length 2 specifying the dimensions to be 
+plotted.</p>
+</td></tr>
+<tr valign="top"><td><code>geom</code></td>
+<td>
+<p>a text specifying the geometry to be used for the graph. Allowed 
+values are the combination of <code>c("point", "arrow", "text")</code>. Use 
+<code>"point"</code> (to show only points); <code>"text"</code> to show only labels; 
+<code>c("point", "text")</code> or <code>c("arrow", "text")</code> to show arrows and 
+texts. Using <code>c("arrow", "text")</code> is sensible only for the graph of 
+variables.</p>
+</td></tr>
+<tr valign="top"><td><code>geom.ind, geom.var</code></td>
+<td>
+<p>as <code>geom</code> but for individuals and variables,
+respectively. Default is geom.ind = c(&quot;point&quot;, &quot;text), geom.var =
+c(&quot;point&quot;, &quot;text&quot;).</p>
+</td></tr>
+<tr valign="top"><td><code>repel</code></td>
+<td>
+<p>a boolean, whether to use ggrepel to avoid overplotting text 
+labels or not.</p>
+</td></tr>
+<tr valign="top"><td><code>habillage</code></td>
+<td>
+<p>an optional factor variable for coloring the observations by 
+groups. Default value is &quot;none&quot;. If X is an MCA object from FactoMineR 
+package, habillage can also specify the index of the factor variable in the 
+data.</p>
+</td></tr>
+<tr valign="top"><td><code>palette</code></td>
+<td>
+<p>the color palette to be used for coloring or filling by
+groups. Allowed values include &quot;grey&quot; for grey color palettes; brewer
+palettes e.g. &quot;RdBu&quot;, &quot;Blues&quot;, ...; or custom color palette e.g. c(&quot;blue&quot;,
+&quot;red&quot;); and scientific journal palettes from ggsci R package, e.g.: &quot;npg&quot;,
+&quot;aaas&quot;, &quot;lancet&quot;, &quot;jco&quot;, &quot;ucscgb&quot;, &quot;uchicago&quot;, &quot;simpsons&quot; and
+&quot;rickandmorty&quot;. Can be also a numeric vector of length(groups); in this
+case a basic color palette is created using the function
+<a href="../../grDevices/html/palette.html">palette</a>.</p>
+</td></tr>
+<tr valign="top"><td><code>addEllipses</code></td>
+<td>
+<p>logical value. If TRUE, draws ellipses around the 
+individuals when habillage != &quot;none&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>col.ind, col.var</code></td>
+<td>
+<p>color for individuals and variables, respectively. Can 
+be a continuous variable or a factor variable. Possible values include also
+: &quot;cos2&quot;, &quot;contrib&quot;, &quot;coord&quot;, &quot;x&quot; or &quot;y&quot;. In this case, the colors for
+individuals/variables are automatically controlled by their qualities
+(&quot;cos2&quot;), contributions (&quot;contrib&quot;), coordinates (x^2 + y^2 , &quot;coord&quot;), x
+values(&quot;x&quot;) or y values(&quot;y&quot;). To use automatic coloring (by cos2, contrib,
+....), make sure that habillage =&quot;none&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>col.ind.sup</code></td>
+<td>
+<p>color for supplementary individuals</p>
+</td></tr>
+<tr valign="top"><td><code>alpha.ind, alpha.var</code></td>
+<td>
+<p>controls the transparency of individual and 
+variable colors, respectively. The value can variate from 0 (total 
+transparency) to 1 (no transparency). Default value is 1. Possible values 
+include also : &quot;cos2&quot;, &quot;contrib&quot;, &quot;coord&quot;, &quot;x&quot; or &quot;y&quot;. In this case, the 
+transparency for individual/variable colors are automatically controlled by 
+their qualities (&quot;cos2&quot;), contributions (&quot;contrib&quot;), coordinates (x^2 + y^2 
+, &quot;coord&quot;), x values(&quot;x&quot;) or y values(&quot;y&quot;). To use this, make sure that 
+habillage =&quot;none&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>shape.ind, shape.var</code></td>
+<td>
+<p>point shapes of individuals and variables.</p>
+</td></tr>
+<tr valign="top"><td><code>map</code></td>
+<td>
+<p>character string specifying the map type. Allowed options include: 
+&quot;symmetric&quot;, &quot;rowprincipal&quot;, &quot;colprincipal&quot;, &quot;symbiplot&quot;, &quot;rowgab&quot;, 
+&quot;colgab&quot;, &quot;rowgreen&quot; and &quot;colgreen&quot;. See details</p>
+</td></tr>
+<tr valign="top"><td><code>select.ind, select.var</code></td>
+<td>
+<p>a selection of individuals/variables to be drawn.
+Allowed values are NULL or a list containing the arguments name, cos2 or 
+contrib: </p>
+ <ul>
+<li><p> name is a character vector containing 
+individuals/variables to be drawn </p>
+</li>
+<li><p> cos2 if cos2 is in [0, 1], ex: 0.6, 
+then individuals/variables with a cos2 &gt; 0.6 are drawn. if cos2 &gt; 1, ex: 5, 
+then the top 5 individuals/variables with the highest cos2 are drawn. </p>
+</li>
+<li> 
+<p>contrib if contrib &gt; 1, ex: 5,  then the top 5 individuals/variables with 
+the highest contrib are drawn </p>
+</li></ul>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments. </p>
+ <ul>
+<li><p> in fviz_mca_ind(), 
+fviz_mca_var() and fviz_mca_cor(): Additional arguments are passed to the 
+functions fviz() and ggpubr::ggpar(). </p>
+</li>
+<li><p> in fviz_mca_biplot() and 
+fviz_mca(): Additional arguments are passed to fviz_mca_ind() and 
+fviz_mca_var().</p>
+</li></ul>
+</td></tr>
+<tr valign="top"><td><code>choice</code></td>
+<td>
+<p>the graph to plot. Allowed values include: i) &quot;var&quot; and 
+&quot;mca.cor&quot; for plotting the correlation between variables and principal 
+dimensions; ii) &quot;var.cat&quot; for variable categories and iii) &quot;quanti.sup&quot; for
+the supplementary quantitative variables.</p>
+</td></tr>
+<tr valign="top"><td><code>col.quanti.sup, col.quali.sup</code></td>
+<td>
+<p>a color for the quantitative/qualitative 
+supplementary variables.</p>
+</td></tr>
+<tr valign="top"><td><code>label</code></td>
+<td>
+<p>a text specifying the elements to be labelled. Default value is 
+&quot;all&quot;. Allowed values are &quot;none&quot; or the combination of c(&quot;ind&quot;, 
+&quot;ind.sup&quot;,&quot;var&quot;, &quot;quali.sup&quot;,  &quot;quanti.sup&quot;). &quot;ind&quot; can be used to label 
+only active individuals. &quot;ind.sup&quot; is for supplementary individuals. &quot;var&quot; 
+is for active variable categories. &quot;quali.sup&quot; is for supplementary 
+qualitative variable categories. &quot;quanti.sup&quot; is for quantitative 
+supplementary variables.</p>
+</td></tr>
+<tr valign="top"><td><code>invisible</code></td>
+<td>
+<p>a text specifying the elements to be hidden on the plot. 
+Default value is &quot;none&quot;. Allowed values are the combination of c(&quot;ind&quot;, 
+&quot;ind.sup&quot;,&quot;var&quot;, &quot;quali.sup&quot;,  &quot;quanti.sup&quot;).</p>
+</td></tr>
+<tr valign="top"><td><code>arrows</code></td>
+<td>
+<p>Vector of two logicals specifying if the plot should contain 
+points (FALSE, default) or arrows (TRUE). First value sets the rows and the 
+second value sets the columns.</p>
+</td></tr>
+<tr valign="top"><td><code>title</code></td>
+<td>
+<p>the title of the graph</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The default plot of MCA is a &quot;symmetric&quot; plot in which both rows and 
+columns are in principal coordinates. In this situation, it's not possible 
+to interpret the distance between row points and column points. To overcome 
+this problem, the simplest way is to make an asymmetric plot. The argument 
+&quot;map&quot; can be used to change the plot type. For more explanation, read the 
+details section of fviz_ca documentation.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a ggplot
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Alboukadel Kassambara <a href="mailto:alboukadel.kassambara@gmail.com">alboukadel.kassambara@gmail.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="get_mca.html">get_mca</a></code>, <code><a href="fviz_pca.html">fviz_pca</a></code>, <code><a href="fviz_ca.html">fviz_ca</a></code>,
+<code><a href="fviz_mfa.html">fviz_mfa</a></code>, <code><a href="fviz_hmfa.html">fviz_hmfa</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Multiple Correspondence Analysis
+# ++++++++++++++++++++++++++++++
+# Install and load FactoMineR to compute MCA
+# install.packages("FactoMineR")
+library("FactoMineR")
+data(poison)
+poison.active &lt;- poison[1:55, 5:15]
+head(poison.active)
+res.mca &lt;- MCA(poison.active, graph=FALSE)
+
+# Graph of individuals
+# +++++++++++++++++++++
+
+# Default Plot
+# Color of individuals: col.ind = "steelblue"
+fviz_mca_ind(res.mca, col.ind = "steelblue")
+
+# 1. Control automatically the color of individuals 
+   # using the "cos2" or the contributions "contrib"
+   # cos2 = the quality of the individuals on the factor map
+# 2. To keep only point or text use geom = "point" or geom = "text".
+# 3. Change themes: http://www.sthda.com/english/wiki/ggplot2-themes
+
+fviz_mca_ind(res.mca, col.ind = "cos2", repel = TRUE)
+
+## Not run:      
+# You can also control the transparency 
+# of the color by the cos2
+fviz_mca_ind(res.mca, alpha.ind="cos2") 
+
+## End(Not run)
+     
+# Color individuals by groups, add concentration ellipses
+# Remove labels: label = "none".
+grp &lt;- as.factor(poison.active[, "Vomiting"])
+p &lt;- fviz_mca_ind(res.mca, label="none", habillage=grp,
+       addEllipses=TRUE, ellipse.level=0.95)
+print(p)
+      
+    
+# Change group colors using RColorBrewer color palettes
+# Read more: http://www.sthda.com/english/wiki/ggplot2-colors
+p + scale_color_brewer(palette="Dark2") +
+    scale_fill_brewer(palette="Dark2") 
+     
+# Change group colors manually
+# Read more: http://www.sthda.com/english/wiki/ggplot2-colors
+p + scale_color_manual(values=c("#999999", "#E69F00"))+
+ scale_fill_manual(values=c("#999999", "#E69F00"))
+             
+             
+# Select and visualize some individuals (ind) with select.ind argument.
+ # - ind with cos2 &gt;= 0.4: select.ind = list(cos2 = 0.4)
+ # - Top 20 ind according to the cos2: select.ind = list(cos2 = 20)
+ # - Top 20 contributing individuals: select.ind = list(contrib = 20)
+ # - Select ind by names: select.ind = list(name = c("44", "38", "53",  "39") )
+ 
+# Example: Select the top 40 according to the cos2
+fviz_mca_ind(res.mca, select.ind = list(cos2 = 20))
+
+ 
+# Graph of variable categories
+# ++++++++++++++++++++++++++++
+# Default plot: use repel = TRUE to avoid overplotting
+fviz_mca_var(res.mca, col.var = "#FC4E07")
+
+# Control variable colors using their contributions
+# use repel = TRUE to avoid overplotting
+fviz_mca_var(res.mca, col.var = "contrib",
+  gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"))
+        
+    
+# Biplot
+# ++++++++++++++++++++++++++
+grp &lt;- as.factor(poison.active[, "Vomiting"])
+fviz_mca_biplot(res.mca, repel = TRUE, col.var = "#E7B800",
+ habillage = grp, addEllipses = TRUE, ellipse.level = 0.95)
+ 
+ ## Not run: 
+# Keep only the labels for variable categories: 
+fviz_mca_biplot(res.mca, label ="var")
+
+# Keep only labels for individuals
+fviz_mca_biplot(res.mca, label ="ind")
+
+# Hide variable categories
+fviz_mca_biplot(res.mca, invisible ="var")
+
+# Hide individuals
+fviz_mca_biplot(res.mca, invisible ="ind")
+
+# Control automatically the color of individuals using the cos2
+fviz_mca_biplot(res.mca, label ="var", col.ind="cos2")
+       
+# Change the color by groups, add ellipses
+fviz_mca_biplot(res.mca, label="var", col.var ="blue",
+   habillage=grp, addEllipses=TRUE, ellipse.level=0.95)
+               
+# Select the top 30 contributing individuals
+# And the top 10 variables
+fviz_mca_biplot(res.mca,  
+               select.ind = list(contrib = 30),
+               select.var = list(contrib = 10)) 
+
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>factoextra</em> version 1.0.6 <a href="00Index.html">Index</a>]</div>
+</body></html>

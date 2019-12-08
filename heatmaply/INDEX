@@ -1,4 +1,5 @@
 RColorBrewer_colors     RColorBrewer color Ramp Palette
+ggheatmap               ggplot heatmap equivalent to heatmaply
 ggplot_side_color_plot
                         Side color plots for heatmaps
 heatmaply               Cluster heatmap based on plotly

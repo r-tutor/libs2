@@ -130,6 +130,7 @@ nlsTracePlot	nlsTracePlot
 oddeven	oddeven
 paletteChoices	chooseColors
 pcumsum	rcumsum
+peek	peek
 perc	perc
 PikeNY	PikeNY
 PikeNYPartial1	PikeNYPartial1

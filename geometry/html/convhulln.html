@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Compute smallest convex hull that encloses a set of points</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for convhulln {geometry}"><tr><td>convhulln {geometry}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Compute smallest convex hull that encloses a set of points</h2>
+
+<h3>Description</h3>
+
+<p>Returns information about the smallest convex complex of a set of
+input points in <i>N</i>-dimensional space (the convex hull of the
+points). By default, indices to points forming the facets of the
+hull are returned; optionally normals to the facets and the
+generalised surface area and volume can be returned. This function
+interfaces the <a href="http://www.qhull.org">Qhull</a> library.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+convhulln(p, options = "Tv", output.options = NULL,
+  return.non.triangulated.facets = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>An <i>M</i>-by-<i>N</i> matrix. The rows of <code>p</code>
+represent <i>M</i> points in <i>N</i>-dimensional space.</p>
+</td></tr>
+<tr valign="top"><td><code>options</code></td>
+<td>
+<p>String containing extra options for the underlying
+Qhull command; see details below and Qhull documentation at
+<a href="../doc/qhull/html/qconvex.html#synopsis">../doc/qhull/html/qconvex.html#synopsis</a>.</p>
+</td></tr>
+<tr valign="top"><td><code>output.options</code></td>
+<td>
+<p>String containing Qhull options to generate
+extra output. Currently <code>n</code> (normals) and <code>FA</code>
+(generalised areas and volumes) are supported; see
+&lsquo;Value&rsquo; for details. If <code>output.options</code> is
+<code>TRUE</code>, select all supported options.</p>
+</td></tr>
+<tr valign="top"><td><code>return.non.triangulated.facets</code></td>
+<td>
+<p>logical defining whether the
+output facets should be triangulated; <code>FALSE</code> by default.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>By default (<code>return.non.triangulated.facets</code> is
+<code>FALSE</code>), return an <i>M</i>-by-<i>N</i> matrix in which each
+row contains the indices of the points in <code>p</code> forming an
+<i>N-1</i>-dimensional facet. e.g In 3 dimensions, there are 3
+indices in each row describing the vertices of 2-dimensional
+triangles.
+</p>
+<p>If <code>return.non.triangulated.facets</code> is <code>TRUE</code> then the
+number of columns equals the maximum number of vertices in a
+facet, and each row defines a polygon corresponding to a facet
+of the convex hull with its vertices followed by <code>NA</code>s
+until the end of the row.
+</p>
+<p>If the <code>output.options</code> or <code>options</code> argument contains
+<code>FA</code> or <code>n</code>, return a list with class <code>convhulln</code>
+comprising the named elements:
+</p>
+
+<dl>
+<dt><code>p</code></dt><dd><p>The points passed to <code>convnhulln</code></p>
+</dd>
+<dt><code>hull</code></dt><dd><p>The convex hull, represented as a matrix indexing <code>p</code>, as
+described above</p>
+</dd>
+<dt><code>area</code></dt><dd><p>If <code>FA</code> is specified, the generalised area of
+the hull. This is the surface area of a 3D hull or the length of
+the perimeter of a 2D hull.
+See <a href="../doc/qhull/html/qh-optf.html#FA">../doc/qhull/html/qh-optf.html#FA</a>.</p>
+</dd>
+<dt><code>vol</code></dt><dd><p>If <code>FA</code> is specified, the generalised volume of
+the hull. This is volume of a 3D hull or the area of a 2D hull.
+See <a href="../doc/qhull/html/qh-optf.html#FA">../doc/qhull/html/qh-optf.html#FA</a>. </p>
+</dd>
+<dt><code>normals</code></dt><dd><p>If <code>n</code> is specified, this is a matrix
+hyperplane normals with offsets. See <a href="../doc/qhull/html/qh-opto.html#n">../doc/qhull/html/qh-opto.html#n</a>.</p>
+</dd>
+</dl>
+
+
+
+<h3>Note</h3>
+
+<p>This function was originally a port of the
+<a href="http://www.octave.org">Octave</a> convhulln function written
+by Kai Habel.
+</p>
+<p>See further notes in <code><a href="delaunayn.html">delaunayn</a></code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Raoul Grasman, Robert B. Gramacy, Pavlo Mozharovskyi and
+David Sterratt <a href="mailto:david.c.sterratt@ed.ac.uk">david.c.sterratt@ed.ac.uk</a>
+</p>
+
+
+<h3>References</h3>
+
+<p><cite>Barber, C.B., Dobkin, D.P., and Huhdanpaa, H.T.,
+&ldquo;The Quickhull algorithm for convex hulls,&rdquo; <em>ACM
+Trans. on Mathematical Software,</em> Dec 1996.</cite>
+</p>
+<p><a href="http://www.qhull.org">http://www.qhull.org</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="intersectn.html">intersectn</a></code>, <code><a href="delaunayn.html">delaunayn</a></code>,
+<code><a href="surf.tri.html">surf.tri</a></code>, <code><a href="../../tripack/html/convex.hull.html">convex.hull</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Points in a sphere
+ps &lt;- matrix(rnorm(3000), ncol=3)  
+ps &lt;- sqrt(3)*ps/drop(sqrt((ps^2) %*% rep(1, 3)))
+ts.surf &lt;- t(convhulln(ps))  # see the qhull documentations for the options
+## Not run: 
+rgl.triangles(ps[ts.surf,1],ps[ts.surf,2],ps[ts.surf,3],col="blue",alpha=.2)
+for(i in 1:(8*360)) rgl.viewpoint(i/8)
+
+## End(Not run)
+
+## Square
+pq &lt;- rbox(0, C=0.5, D=2)
+# Return indices only
+convhulln(pq)
+# Return convhulln object with normals, generalised area and volume
+ch &lt;- convhulln(pq, output.options=TRUE)
+plot(ch)
+
+## Cube
+pc &lt;- rbox(0, C=0.5, D=3)
+# Return indices of triangles on surface
+convhulln(pc)
+# Return indices of squares on surface
+convhulln(pc, return.non.triangulated.facets=TRUE)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>geometry</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -6,6 +6,7 @@ bell                    Bell Numbers
 catalan                 Catalan Numbers
 cf2num                  Generalized Continous Fractions
 chinese                 Chinese Remainder Theorem
+collatz                 Collatz Sequences
 contFrac                Continous Fractions
 coprime                 Coprimality
 div                     Integer Division
@@ -26,7 +27,7 @@ legendre_sym            Legendre and Jacobi Symbol
 mersenne                Mersenne Numbers
 miller_rabin            Miller-Rabin Test
 mod                     Modulo Operator
-modinv                  Modular Inverse
+modinv                  Modular Inverse and Square Root
 modlin                  Modular Linear Equation Solver
 modlog                  Modular (or: Discrete) Logarithm
 modpower                Power Function modulo m

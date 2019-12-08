@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Forecasting using a bagged model</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for baggedModel {forecast}"><tr><td>baggedModel {forecast}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Forecasting using a bagged model</h2>
+
+<h3>Description</h3>
+
+<p>The bagged model forecasting method.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+baggedModel(y, bootstrapped_series = bld.mbb.bootstrap(y, 100), fn = ets, ...)
+
+baggedETS(y, bootstrapped_series = bld.mbb.bootstrap(y, 100), ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>A numeric vector or time series of class <code>ts</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>bootstrapped_series</code></td>
+<td>
+<p>bootstrapped versions of y.</p>
+</td></tr>
+<tr valign="top"><td><code>fn</code></td>
+<td>
+<p>the forecast function to use. Default is <code><a href="ets.html">ets</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Other arguments passed to the forecast function.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This function implements the bagged model forecasting method described in
+Bergmeir et al. By default, the <code><a href="ets.html">ets</a></code> function is applied to all
+bootstrapped series. Base models other than <code><a href="ets.html">ets</a></code> can be given by the
+parameter <code>fn</code>. Using the default parameters, the function
+<code><a href="bld.mbb.bootstrap.html">bld.mbb.bootstrap</a></code> is used to calculate the bootstrapped series
+with the Box-Cox and Loess-based decomposition (BLD) bootstrap. The function
+<code><a href="forecast.baggedModel.html">forecast.baggedModel</a></code> can then be used to calculate forecasts.
+</p>
+<p><code>baggedETS</code> is a wrapper for <code>baggedModel</code>, setting <code>fn</code> to &quot;ets&quot;.
+This function is included for backwards compatibility only, and may be
+deprecated in the future.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Returns an object of class &quot;<code>baggedModel</code>&quot;.
+</p>
+<p>The function <code>print</code> is used to obtain and print a summary of the
+results.
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>models</code></td>
+<td>
+<p>A list containing the fitted ensemble models.</p>
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+<p>The function for producing a forecastable model.</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>The original time series.</p>
+</td></tr>
+<tr valign="top"><td><code>bootstrapped_series</code></td>
+<td>
+<p>The bootstrapped series.</p>
+</td></tr>
+<tr valign="top"><td><code>modelargs</code></td>
+<td>
+<p>The arguments passed through to <code>fn</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>fitted</code></td>
+<td>
+<p>Fitted values (one-step forecasts). The
+mean of the fitted values is calculated over the ensemble.</p>
+</td></tr>
+<tr valign="top"><td><code>residuals</code></td>
+<td>
+<p>Original values minus fitted values.</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Christoph Bergmeir, Fotios Petropoulos
+</p>
+
+
+<h3>References</h3>
+
+<p>Bergmeir, C., R. J. Hyndman, and J. M. Benitez (2016). Bagging
+Exponential Smoothing Methods using STL Decomposition and Box-Cox
+Transformation. International Journal of Forecasting 32, 303-312.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+fit &lt;- baggedModel(WWWusage)
+fcast &lt;- forecast(fit)
+plot(fcast)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>forecast</em> version 8.10 <a href="00Index.html">Index</a>]</div>
+</body></html>

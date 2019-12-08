@@ -1,15 +1,15 @@
-CCTable11.1a            Cochran and Cox design
-GVTable1                Goos Vandebroek Table 1
-GVTable3                Goos Vandebroek Table 3
-TGTable3                Trinca Gilmour Table 3
-TGTable5                Trinca Gilmour Table 5
+optBlock                Optimal design blocking
+CCTable11.1a            Illustrative blocked design
 efficient.rounding      Efficient Rounding
 eval.blockdesign        Evaluates a blocked design.
 eval.design             Evaluates a design.
 expand.formula          Expanding a formula
+optFederov              Optimal design
 gen.factorial           Generates a full factorial design
 gen.mixture             Generate mixture
+GVTable1                Illustrative blocked design
+GVTable3                Illustrative blocked design
 model.matrix.formula    Builds a model matrix
-optBlock                Optimal design blocking
-optFederov              Optimal design
 optMonteCarlo           Optimal design via Monte Carlo
+TGTable3                Illustrative blocked design
+TGTable5                Illustrative blocked design

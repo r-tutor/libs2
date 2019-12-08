@@ -6,6 +6,7 @@ bracelet	necklace
 catalan	catalan
 cf2num	cf2num
 chinese	chinese
+collatz	collatz
 contFrac	contFrac
 coprime	coprime
 div	div
@@ -39,6 +40,7 @@ modlin	modlin
 modlog	modlog
 modorder	modpower
 modpower	modpower
+modsqrt	modinv
 moebius	moebius
 necklace	necklace
 nextPrime	nextprime

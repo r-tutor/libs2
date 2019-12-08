@@ -1,3 +1,17 @@
+dendextend 1.13.2 (2019-11-27)
+----------------------------------------
+
+###UPDATED FUNCTIONS:
+* tanglegram - new argument "common_subtrees_color_lines_default_single_leaf_color", to control the default color of connecting the two dendrograms (from black to grey, and can now be controled). Props to DBradley27 (https://github.com/DBradley27)
+
+###OTHER NOTES
+- improved docs:
+   - dist.dendlist
+   - moved from d3heatmap to heatmaply in the vignette
+- Started using pkgdown :)
+- Fixed testthat failure due to RNG changes in R (test for pvclust)
+- minor doc fixes to comply with CRAN. (jumped from 1.12.0 to 1.13.2)
+
 dendextend 1.12.0 (2019-05-11)
 ----------------------------------------
 ###OTHER NOTES

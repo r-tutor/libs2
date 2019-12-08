@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: ggplot heatmap equivalent to heatmaply</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for ggheatmap {heatmaply}"><tr><td>ggheatmap {heatmaply}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>ggplot heatmap equivalent to heatmaply</h2>
+
+<h3>Description</h3>
+
+<p>This function produces a ggplot analogue of heatmaply figures 
+using <a href="../../egg/html/ggarrange.html">ggarrange</a>. This function may not always support the same
+set of features as , and exporting the heatmaply object with, for example,
+<a href="../../plotly/html/orca.html">orca</a> or <code>heatmaply(mtcars, file = "foo.png")</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ggheatmap(..., widths = NULL, heights = NULL, row_dend_left = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Passed to <a href="heatmaply.html">heatmaply</a></p>
+</td></tr>
+<tr valign="top"><td><code>widths, heights</code></td>
+<td>
+<p>Relative widths and heights of plots.</p>
+</td></tr>
+<tr valign="top"><td><code>row_dend_left</code></td>
+<td>
+<p>Logical argument controlling whether the row 
+dendrogram is placed on the left of the plot.</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+ggheatmap(mtcars)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>heatmaply</em> version 1.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

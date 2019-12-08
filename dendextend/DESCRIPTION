@@ -1,8 +1,8 @@
 Package: dendextend
 Type: Package
 Title: Extending 'dendrogram' Functionality in R
-Version: 1.12.0
-Date: 2019-05-11
+Version: 1.13.2
+Date: 2019-11-27
 Authors@R: c(person("Tal", "Galili", role = c("aut", "cre", "cph"), email =
     "tal.galili@gmail.com", comment = "https://www.r-statistics.com"),
     person("Yoav", "Benjamini", email = "ybenja@tau.ac.il",role = "ths"),
@@ -44,7 +44,8 @@ Authors@R: c(person("Tal", "Galili", role = c("aut", "cre", "cph"), email =
     "https://github.com/jdetribol", role = "ctb"), 
     person("Ben", "Ho", role = "ctb", email = "ben.ho@sickkids.ca", comment = "https://github.com/SplitInf"),
     person("Samuel", "Perreault", role = "ctb", email = "samuel.perreault.3@ulaval.ca", comment = "https://github.com/samperochkin"),
-    person("Christian", "Hennig", role = "ctb", email = "c.hennig@ucl.ac.uk", comment = "http://www.homepages.ucl.ac.uk/~ucakche/"))
+    person("Christian", "Hennig", role = "ctb", email = "c.hennig@ucl.ac.uk", comment = "http://www.homepages.ucl.ac.uk/~ucakche/"),
+    person("David", "Bradley", role = "ctb", comment = "https://github.com/DBradley27"))
 Description: Offers a set of functions for extending
     'dendrogram' objects in R, letting you visualize and compare trees of
     'hierarchical clusterings'. You can (1) Adjust a tree's graphical parameters
@@ -60,14 +61,16 @@ Enhances: ggdendro, dendroextras, Hmisc, data.table, rpart
 VignetteBuilder: knitr
 LazyData: true
 License: GPL-2 | GPL-3
-URL: https://github.com/talgalili/dendextend/,
+URL: http://talgalili.github.io/dendextend/,
+        https://github.com/talgalili/dendextend/,
         https://cran.r-project.org/package=dendextend,
         https://www.r-statistics.com/tag/dendextend/,
         https://academic.oup.com/bioinformatics/article/31/22/3718/240978/dendextend-an-R-package-for-visualizing-adjusting
 BugReports: https://github.com/talgalili/dendextend/issues
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.1
+Encoding: UTF-8
 NeedsCompilation: no
-Packaged: 2019-05-11 11:59:11 UTC; junior
+Packaged: 2019-11-27 20:03:02 UTC; talgalili
 Author: Tal Galili [aut, cre, cph] (https://www.r-statistics.com),
   Yoav Benjamini [ths],
   Gavin Simpson [ctb],
@@ -95,8 +98,9 @@ Author: Tal Galili [aut, cre, cph] (https://www.r-statistics.com),
   jdetribol [ctb] (https://github.com/jdetribol),
   Ben Ho [ctb] (https://github.com/SplitInf),
   Samuel Perreault [ctb] (https://github.com/samperochkin),
-  Christian Hennig [ctb] (http://www.homepages.ucl.ac.uk/~ucakche/)
+  Christian Hennig [ctb] (http://www.homepages.ucl.ac.uk/~ucakche/),
+  David Bradley [ctb] (https://github.com/DBradley27)
 Maintainer: Tal Galili <tal.galili@gmail.com>
 Repository: CRAN
-Date/Publication: 2019-05-11 12:30:03 UTC
-Built: R 3.6.0; ; 2019-05-12 23:35:41 UTC; windows
+Date/Publication: 2019-12-02 20:00:06 UTC
+Built: R 3.6.1; ; 2019-12-03 18:08:53 UTC; windows

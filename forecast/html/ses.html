@@ -1,0 +1,256 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Exponential smoothing forecasts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for ses {forecast}"><tr><td>ses {forecast}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Exponential smoothing forecasts</h2>
+
+<h3>Description</h3>
+
+<p>Returns forecasts and other information for exponential smoothing forecasts
+applied to <code>y</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ses(
+  y,
+  h = 10,
+  level = c(80, 95),
+  fan = FALSE,
+  initial = c("optimal", "simple"),
+  alpha = NULL,
+  lambda = NULL,
+  biasadj = FALSE,
+  x = y,
+  ...
+)
+
+holt(
+  y,
+  h = 10,
+  damped = FALSE,
+  level = c(80, 95),
+  fan = FALSE,
+  initial = c("optimal", "simple"),
+  exponential = FALSE,
+  alpha = NULL,
+  beta = NULL,
+  phi = NULL,
+  lambda = NULL,
+  biasadj = FALSE,
+  x = y,
+  ...
+)
+
+hw(
+  y,
+  h = 2 * frequency(x),
+  seasonal = c("additive", "multiplicative"),
+  damped = FALSE,
+  level = c(80, 95),
+  fan = FALSE,
+  initial = c("optimal", "simple"),
+  exponential = FALSE,
+  alpha = NULL,
+  beta = NULL,
+  gamma = NULL,
+  phi = NULL,
+  lambda = NULL,
+  biasadj = FALSE,
+  x = y,
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>a numeric vector or time series of class <code>ts</code></p>
+</td></tr>
+<tr valign="top"><td><code>h</code></td>
+<td>
+<p>Number of periods for forecasting.</p>
+</td></tr>
+<tr valign="top"><td><code>level</code></td>
+<td>
+<p>Confidence level for prediction intervals.</p>
+</td></tr>
+<tr valign="top"><td><code>fan</code></td>
+<td>
+<p>If TRUE, level is set to seq(51,99,by=3). This is suitable for
+fan plots.</p>
+</td></tr>
+<tr valign="top"><td><code>initial</code></td>
+<td>
+<p>Method used for selecting initial state values. If
+<code>optimal</code>, the initial values are optimized along with the smoothing
+parameters using <code><a href="ets.html">ets</a></code>. If <code>simple</code>, the initial values are
+set to values obtained using simple calculations on the first few
+observations. See Hyndman &amp; Athanasopoulos (2014) for details.</p>
+</td></tr>
+<tr valign="top"><td><code>alpha</code></td>
+<td>
+<p>Value of smoothing parameter for the level. If <code>NULL</code>, it
+will be estimated.</p>
+</td></tr>
+<tr valign="top"><td><code>lambda</code></td>
+<td>
+<p>Box-Cox transformation parameter. If <code>lambda="auto"</code>,
+then a transformation is automatically selected using <code>BoxCox.lambda</code>.
+The transformation is ignored if NULL. Otherwise,
+data transformed before model is estimated.</p>
+</td></tr>
+<tr valign="top"><td><code>biasadj</code></td>
+<td>
+<p>Use adjusted back-transformed mean for Box-Cox
+transformations. If transformed data is used to produce forecasts and fitted values,
+a regular back transformation will result in median forecasts. If biasadj is TRUE,
+an adjustment will be made to produce mean forecasts and fitted values.</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>Deprecated. Included for backwards compatibility.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Other arguments passed to <code>forecast.ets</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>damped</code></td>
+<td>
+<p>If TRUE, use a damped trend.</p>
+</td></tr>
+<tr valign="top"><td><code>exponential</code></td>
+<td>
+<p>If TRUE, an exponential trend is fitted. Otherwise, the
+trend is (locally) linear.</p>
+</td></tr>
+<tr valign="top"><td><code>beta</code></td>
+<td>
+<p>Value of smoothing parameter for the trend. If <code>NULL</code>, it
+will be estimated.</p>
+</td></tr>
+<tr valign="top"><td><code>phi</code></td>
+<td>
+<p>Value of damping parameter if <code>damped=TRUE</code>. If <code>NULL</code>,
+it will be estimated.</p>
+</td></tr>
+<tr valign="top"><td><code>seasonal</code></td>
+<td>
+<p>Type of seasonality in <code>hw</code> model. &quot;additive&quot; or
+&quot;multiplicative&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>gamma</code></td>
+<td>
+<p>Value of smoothing parameter for the seasonal component. If
+<code>NULL</code>, it will be estimated.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>ses, holt and hw are simply convenient wrapper functions for
+<code>forecast(ets(...))</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of class &quot;<code>forecast</code>&quot;.
+</p>
+<p>The function <code>summary</code> is used to obtain and print a summary of the
+results, while the function <code>plot</code> produces a plot of the forecasts and
+prediction intervals.
+</p>
+<p>The generic accessor functions <code>fitted.values</code> and <code>residuals</code>
+extract useful features of the value returned by <code>ets</code> and associated
+functions.
+</p>
+<p>An object of class <code>"forecast"</code> is a list containing at least the
+following elements: </p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>model</code></td>
+<td>
+<p>A list containing information about the
+fitted model</p>
+</td></tr> <tr valign="top"><td><code>method</code></td>
+<td>
+<p>The name of the forecasting method as a
+character string</p>
+</td></tr> <tr valign="top"><td><code>mean</code></td>
+<td>
+<p>Point forecasts as a time series</p>
+</td></tr>
+<tr valign="top"><td><code>lower</code></td>
+<td>
+<p>Lower limits for prediction intervals</p>
+</td></tr> <tr valign="top"><td><code>upper</code></td>
+<td>
+<p>Upper
+limits for prediction intervals</p>
+</td></tr> <tr valign="top"><td><code>level</code></td>
+<td>
+<p>The confidence values
+associated with the prediction intervals</p>
+</td></tr> <tr valign="top"><td><code>x</code></td>
+<td>
+<p>The original time series
+(either <code>object</code> itself or the time series used to create the model
+stored as <code>object</code>).</p>
+</td></tr> <tr valign="top"><td><code>residuals</code></td>
+<td>
+<p>Residuals from the fitted
+model.</p>
+</td></tr> <tr valign="top"><td><code>fitted</code></td>
+<td>
+<p>Fitted values (one-step forecasts)</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Rob J Hyndman
+</p>
+
+
+<h3>References</h3>
+
+<p>Hyndman, R.J., Koehler, A.B., Ord, J.K., Snyder, R.D. (2008)
+<em>Forecasting with exponential smoothing: the state space approach</em>,
+Springer-Verlag: New York. <a href="http://www.exponentialsmoothing.net">http://www.exponentialsmoothing.net</a>.
+</p>
+<p>Hyndman and Athanasopoulos (2018) <em>Forecasting: principles
+and practice</em>, 2nd edition, OTexts: Melbourne, Australia.
+<a href="https://OTexts.org/fpp2/">https://OTexts.org/fpp2/</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="ets.html">ets</a></code>, <code><a href="../../stats/html/HoltWinters.html">HoltWinters</a></code>,
+<code><a href="naive.html">rwf</a></code>, <code><a href="../../stats/html/arima.html">arima</a></code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+fcast &lt;- holt(airmiles)
+plot(fcast)
+deaths.fcast &lt;- hw(USAccDeaths,h=48)
+plot(deaths.fcast)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>forecast</em> version 8.10 <a href="00Index.html">Index</a>]</div>
+</body></html>

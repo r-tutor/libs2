@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Test if points lie in convex hull</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for inhulln {geometry}"><tr><td>inhulln {geometry}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Test if points lie in convex hull</h2>
+
+<h3>Description</h3>
+
+<p>Tests if a set of points lies within a convex hull, returning a
+boolean vector in which each element is <code>TRUE</code> if the
+corresponding point lies within the hull and <code>FALSE</code> if it
+lies outwith the hull or on one of its facets.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inhulln(ch, p)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>ch</code></td>
+<td>
+<p>Convex hull produced using <code><a href="convhulln.html">convhulln</a></code></p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>An <i>M</i>-by-<i>N</i> matrix of points to test. The rows
+of <code>p</code> represent <i>M</i> points in <i>N</i>-dimensional
+space.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A boolean vector with <i>M</i> elements
+</p>
+
+
+<h3>Note</h3>
+
+<p><code>inhulln</code> was introduced in geometry 0.4.0, and is
+still under development. It is worth checking results for
+unexpected behaviour.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>David Sterratt
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="convhulln.html">convhulln</a></code>, <code>point.in.polygon</code> in <span class="pkg">sp</span>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+p &lt;- cbind(c(-1, -1, 1), c(-1, 1, -1))
+ch &lt;- convhulln(p)
+## First point should be in the hull; last two outside
+inhulln(ch, rbind(c(-0.5, -0.5),
+                  c( 1  ,  1),
+                  c(10  ,  0)))
+
+## Test hypercube
+p &lt;- rbox(D=4, B=1)
+ch &lt;- convhulln(p)
+tp &lt;-  cbind(seq(-1.9, 1.9, by=0.2), 0, 0, 0)
+pin &lt;- inhulln(ch, tp)
+## Points on x-axis should be in box only betw,een -1 and 1
+pin == (tp[,1] &lt; 1 &amp; tp[,1] &gt; -1)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>geometry</em> version 0.4.5 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Extract components from a time series decomposition</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for seasonal {forecast}"><tr><td>seasonal {forecast}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Extract components from a time series decomposition</h2>
+
+<h3>Description</h3>
+
+<p>Returns a univariate time series equal to either a seasonal component,
+trend-cycle component or remainder component from a time series
+decomposition.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+seasonal(object)
+
+trendcycle(object)
+
+remainder(object)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>Object created by <code><a href="../../stats/html/decompose.html">decompose</a></code>,
+<code><a href="../../stats/html/stl.html">stl</a></code> or <code><a href="tbats.html">tbats</a></code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Univariate time series.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Rob J Hyndman
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../stats/html/stl.html">stl</a></code>, <code><a href="../../stats/html/decompose.html">decompose</a></code>,
+<code><a href="tbats.html">tbats</a></code>, <code><a href="seasadj.html">seasadj</a></code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+plot(USAccDeaths)
+fit &lt;- stl(USAccDeaths, s.window="periodic")
+lines(trendcycle(fit),col="red")
+
+library(ggplot2)
+autoplot(cbind(
+	    Data=USAccDeaths,
+	    Seasonal=seasonal(fit),
+  	  Trend=trendcycle(fit),
+	    Remainder=remainder(fit)),
+    facets=TRUE) +
+  ylab("") + xlab("Year")
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>forecast</em> version 8.10 <a href="00Index.html">Index</a>]</div>
+</body></html>

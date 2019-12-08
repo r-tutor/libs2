@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Enhanced Visualization of Dendrogram</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for fviz_dend {factoextra}"><tr><td>fviz_dend {factoextra}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Enhanced Visualization of Dendrogram</h2>
+
+<h3>Description</h3>
+
+<p>Draws easily beautiful dendrograms using either R base plot or 
+ggplot2. Provides also an option for drawing a circular dendrogram and 
+phylogenic trees.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+fviz_dend(x, k = NULL, h = NULL, k_colors = NULL, palette = NULL,
+  show_labels = TRUE, color_labels_by_k = TRUE, label_cols = NULL,
+  labels_track_height = NULL, repel = FALSE, lwd = 0.7,
+  type = c("rectangle", "circular", "phylogenic"),
+  phylo_layout = "layout.auto", rect = FALSE, rect_border = "gray",
+  rect_lty = 2, rect_fill = FALSE, lower_rect, horiz = FALSE,
+  cex = 0.8, main = "Cluster Dendrogram", xlab = "",
+  ylab = "Height", sub = NULL, ggtheme = theme_classic(), ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>an object of class dendrogram, hclust, agnes, diana, hcut, 
+hkmeans or HCPC (FactoMineR).</p>
+</td></tr>
+<tr valign="top"><td><code>k</code></td>
+<td>
+<p>the number of groups for cutting the tree.</p>
+</td></tr>
+<tr valign="top"><td><code>h</code></td>
+<td>
+<p>a numeric value. Cut the dendrogram by cutting at height h. (k 
+overrides h)</p>
+</td></tr>
+<tr valign="top"><td><code>k_colors, palette</code></td>
+<td>
+<p>a vector containing colors to be used for the groups.
+It should contains k number of colors. Allowed values include also &quot;grey&quot; 
+for grey color palettes; brewer palettes e.g. &quot;RdBu&quot;, &quot;Blues&quot;, ...;  and 
+scientific journal palettes from ggsci R package, e.g.: &quot;npg&quot;, &quot;aaas&quot;, 
+&quot;lancet&quot;, &quot;jco&quot;, &quot;ucscgb&quot;, &quot;uchicago&quot;, &quot;simpsons&quot; and &quot;rickandmorty&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>show_labels</code></td>
+<td>
+<p>a logical value. If TRUE, leaf labels are shown. Default 
+value is TRUE.</p>
+</td></tr>
+<tr valign="top"><td><code>color_labels_by_k</code></td>
+<td>
+<p>logical value. If TRUE, labels are colored 
+automatically by group when k != NULL.</p>
+</td></tr>
+<tr valign="top"><td><code>label_cols</code></td>
+<td>
+<p>a vector containing the colors for labels.</p>
+</td></tr>
+<tr valign="top"><td><code>labels_track_height</code></td>
+<td>
+<p>a positive numeric value for adjusting the room for the 
+labels. Used only when type = &quot;rectangle&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>repel</code></td>
+<td>
+<p>logical value. Use repel = TRUE to avoid label overplotting when
+type = &quot;phylogenic&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>lwd</code></td>
+<td>
+<p>a numeric value specifying branches and rectangle line width.</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>type of plot. Allowed values are one of &quot;rectangle&quot;, &quot;triangle&quot;, 
+&quot;circular&quot;, &quot;phylogenic&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>phylo_layout</code></td>
+<td>
+<p>the layout to be used for phylogenic trees. Default value
+is &quot;layout.auto&quot;. Allowed values include: 
+<code><a href="../../igraph/html/layout.auto.html">layout.auto</a></code>, <code><a href="../../igraph/html/layout_with_drl.html">layout_with_drl</a></code>, 
+<code><a href="../../igraph/html/layout_as_tree.html">layout_as_tree</a></code>, <code><a href="../../igraph/html/layout.gem.html">layout.gem</a></code>,
+<code><a href="../../igraph/html/layout.mds.html">layout.mds</a></code> and <code><a href="../../igraph/html/layout_with_lgl.html">layout_with_lgl</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>rect</code></td>
+<td>
+<p>logical value specifying whether to add a rectangle around 
+groups. Used only when k != NULL.</p>
+</td></tr>
+<tr valign="top"><td><code>rect_border, rect_lty</code></td>
+<td>
+<p>border color and line type for rectangles.</p>
+</td></tr>
+<tr valign="top"><td><code>rect_fill</code></td>
+<td>
+<p>a logical value. If TRUE, fill the rectangle.</p>
+</td></tr>
+<tr valign="top"><td><code>lower_rect</code></td>
+<td>
+<p>a value of how low should the lower part of the rectangle 
+around clusters. Ignored when rect = FALSE.</p>
+</td></tr>
+<tr valign="top"><td><code>horiz</code></td>
+<td>
+<p>a logical value. If TRUE, an horizontal dendrogram is drawn.</p>
+</td></tr>
+<tr valign="top"><td><code>cex</code></td>
+<td>
+<p>size of labels</p>
+</td></tr>
+<tr valign="top"><td><code>main, xlab, ylab</code></td>
+<td>
+<p>main and axis titles</p>
+</td></tr>
+<tr valign="top"><td><code>sub</code></td>
+<td>
+<p>Plot subtitle. If NULL, the method used hierarchical clustering is
+shown. To remove the subtitle use sub = &quot;&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>ggtheme</code></td>
+<td>
+<p>function, ggplot2 theme name. Default value is 
+theme_classic(). Allowed values include ggplot2 official themes: 
+theme_gray(), theme_bw(), theme_minimal(), theme_classic(), theme_void(), 
+....</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>other arguments to be passed to the function plot.dendrogram()</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>an object of class fviz_dend which is a ggplot with the attributes 
+&quot;dendrogram&quot; accessible using attr(x, &quot;dendrogram&quot;), where x is the result 
+of fviz_dend().
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+# Load and scale the data
+data(USArrests)
+df &lt;- scale(USArrests)
+
+# Hierarchical clustering
+res.hc &lt;- hclust(dist(df))
+
+# Default plot
+fviz_dend(res.hc)
+
+# Cut the tree
+fviz_dend(res.hc, cex = 0.5, k = 4, color_labels_by_k = TRUE)
+
+# Don't color labels, add rectangles
+fviz_dend(res.hc, cex = 0.5, k = 4, 
+ color_labels_by_k = FALSE, rect = TRUE)
+ 
+# Change the color of tree using black color for all groups
+# Change rectangle border colors
+fviz_dend(res.hc, rect = TRUE, k_colors ="black",
+rect_border = 2:5, rect_lty = 1)
+
+# Customized color for groups
+fviz_dend(res.hc, k = 4, 
+ k_colors = c("#1B9E77", "#D95F02", "#7570B3", "#E7298A"))
+ 
+ 
+ # Color labels using k-means clusters
+ km.clust &lt;- kmeans(df, 4)$cluster
+ fviz_dend(res.hc, k = 4, 
+   k_colors = c("blue", "green3", "red", "black"),
+   label_cols =  km.clust[res.hc$order], cex = 0.6)
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>factoextra</em> version 1.0.6 <a href="00Index.html">Index</a>]</div>
+</body></html>
