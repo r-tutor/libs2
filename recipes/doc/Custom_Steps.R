@@ -1,4 +1,4 @@
-## ----ex_setup, include=FALSE---------------------------------------------
+## ----ex_setup, include=FALSE--------------------------------------------------
 knitr::opts_chunk$set(
   message = FALSE,
   digits = 3,
@@ -7,25 +7,26 @@ knitr::opts_chunk$set(
   )
 options(digits = 3)
 
-## ----step_list-----------------------------------------------------------
+## ----step_list----------------------------------------------------------------
 library(recipes)
 ls("package:recipes", pattern = "^step_")
 
-## ----initial-------------------------------------------------------------
+## ----initial------------------------------------------------------------------
+library(modeldata)
 data(biomass)
 str(biomass)
 
 biomass_tr <- biomass[biomass$dataset == "Training",]
 biomass_te <- biomass[biomass$dataset == "Testing",]
 
-## ----carbon_dist, fig.width=6, fig.height=4.25,  out.width = '100%'------
+## ----carbon_dist, fig.width=6, fig.height=4.25,  out.width = '100%'-----------
 library(ggplot2)
 theme_set(theme_bw())
 ggplot(biomass_tr, aes(x = carbon)) + 
   geom_histogram(binwidth = 5, col = "blue", fill = "blue", alpha = .5) + 
   geom_vline(xintercept = biomass_te$carbon[1], lty = 2)
 
-## ----initial_def---------------------------------------------------------
+## ----initial_def--------------------------------------------------------------
 step_percentile <- function(
   recipe, ..., 
   role = NA, 
@@ -57,7 +58,7 @@ step_percentile <- function(
   )
 }
 
-## ----initialize----------------------------------------------------------
+## ----initialize---------------------------------------------------------------
 step_percentile_new <- 
   function(terms, role, trained, ref_dist, approx, options, skip, id) {
     step(
@@ -73,12 +74,12 @@ step_percentile_new <-
     )
   }
 
-## ----prep_1, eval = FALSE------------------------------------------------
+## ----prep_1, eval = FALSE-----------------------------------------------------
 #  prep.step_percentile <- function(x, training, info = NULL, ...) {
 #    col_names <- terms_select(terms = x$terms, info = info)
 #  }
 
-## ----prep_2--------------------------------------------------------------
+## ----prep_2-------------------------------------------------------------------
 get_pctl <- function(x, args) {
   args$x <- x
   do.call("quantile", args)
@@ -114,7 +115,7 @@ prep.step_percentile <- function(x, training, info = NULL, ...) {
   )
 }
 
-## ----bake----------------------------------------------------------------
+## ----bake---------------------------------------------------------------------
 ## Two helper functions
 pctl_by_mean <- function(x, ref) mean(ref <= x)
 
@@ -144,7 +145,7 @@ bake.step_percentile <- function(object, new_data, ...) {
   as_tibble(new_data)
 }
 
-## ----example-------------------------------------------------------------
+## ----example------------------------------------------------------------------
 library(purrr)
 rec_obj <- 
   recipe(HHV ~ ., data = biomass_tr[, -(1:2)]) %>%

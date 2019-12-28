@@ -1,4 +1,4 @@
-## ----ex_setup, include=FALSE---------------------------------------------
+## ----ex_setup, include=FALSE--------------------------------------------------
 knitr::opts_chunk$set(
   message = FALSE,
   digits = 3,
@@ -7,26 +7,28 @@ knitr::opts_chunk$set(
   )
 options(digits = 3)
 
-## ----credit--------------------------------------------------------------
+## ----credit-------------------------------------------------------------------
 library(recipes)
+library(modeldata)
+
 data("credit_data")
 str(credit_data)
 
 rec <- recipe(Status ~ Seniority + Time + Age + Records, data = credit_data)
 rec
 
-## ----var_info_orig-------------------------------------------------------
+## ----var_info_orig------------------------------------------------------------
 summary(rec, original = TRUE)
 
-## ----dummy_1-------------------------------------------------------------
+## ----dummy_1------------------------------------------------------------------
 dummied <- rec %>% step_dummy(all_nominal())
 
-## ----dummy_2-------------------------------------------------------------
+## ----dummy_2------------------------------------------------------------------
 dummied <- rec %>% step_dummy(Records) # or
 dummied <- rec %>% step_dummy(all_nominal(), - Status) # or
 dummied <- rec %>% step_dummy(all_nominal(), - all_outcomes()) 
 
-## ----dummy_3-------------------------------------------------------------
+## ----dummy_3------------------------------------------------------------------
 dummied <- prep(dummied, training = credit_data)
 with_dummy <- bake(dummied, new_data = credit_data)
 with_dummy

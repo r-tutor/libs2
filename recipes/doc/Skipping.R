@@ -1,4 +1,4 @@
-## ----ex_setup, include=FALSE---------------------------------------------
+## ----ex_setup, include=FALSE--------------------------------------------------
 knitr::opts_chunk$set(
   message = FALSE,
   digits = 3,
@@ -8,12 +8,12 @@ knitr::opts_chunk$set(
 options(digits = 3)
 library(recipes)
 
-## ----car-pca-------------------------------------------------------------
+## ----car-pca------------------------------------------------------------------
 library(recipes)
 car_recipe <- recipe(mpg ~ ., data = mtcars) %>%
   step_log(disp, skip = TRUE) %>%
   step_center(all_predictors()) %>%
-  prep(training = mtcars, retain = TRUE)
+  prep(training = mtcars)
 
 # These *should* produce the same results (as they do for `hp`)
 juice(car_recipe) %>% head() %>% select(disp, hp)

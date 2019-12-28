@@ -1,13 +1,10 @@
-Smithsonian             Smithsonian Museums
 add_step                Add a New Operation to the Current Recipe
 bake                    Apply a Trained Data Recipe
-biomass                 Biomass Data
+check_class             Check Variable Class
 check_cols              Check if all Columns are Present
 check_missing           Check for Missing Values
-check_new_values        Check for Missing Values
+check_new_values        Check for New Values
 check_range             Check Range Consistency
-covers                  Raw Cover Type Data
-credit_data             Credit Data
 detect_step             Detect if a particular step or check is used in
                         a recipe
 discretize              Discretize Numeric Variables
@@ -16,7 +13,6 @@ fully_trained           Check to see if a recipe is trained/prepared
 has_role                Role Selection
 juice                   Extract Finalized Training Set
 names0                  Naming Tools
-okc                     OkCupid Data
 prep                    Train a Data Recipe
 prepper                 Wrapper function for preparing recipes within
                         resampling

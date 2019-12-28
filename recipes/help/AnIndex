@@ -1,4 +1,3 @@
-recipes-package	recipes
 %>%	reexports
 add_check	add_step
 add_role	roles
@@ -9,16 +8,14 @@ all_outcomes	has_role
 all_predictors	has_role
 bake	bake
 bake.recipe	bake
-biomass	biomass
 check	step
+check_class	check_class
 check_cols	check_cols
 check_missing	check_missing
 check_name	check_name
 check_new_values	check_new_values
 check_range	check_range
 check_type	check_type
-covers	covers
-credit_data	credit_data
 current_info	has_role
 denom_vars	step_ratio
 detect_step	detect_step
@@ -45,7 +42,6 @@ imp_vars	step_bagimpute
 is_trained	recipes-internal
 juice	juice
 names0	names0
-okc	okc
 predict.discretize	discretize
 prep	prep
 prep.recipe	prep
@@ -71,8 +67,8 @@ reexports	reexports
 remove_role	roles
 roles	roles
 sel2char	recipes-internal
+selection	selections
 selections	selections
-Smithsonian	Smithsonian
 step	step
 step_arrange	step_arrange
 step_bagimpute	step_bagimpute
@@ -152,6 +148,7 @@ summary.recipe	summary.recipe
 terms_select	terms_select
 tidy	reexports
 tidy.check	tidy.recipe
+tidy.check_class	check_class
 tidy.check_cols	check_cols
 tidy.check_missing	check_missing
 tidy.check_range	check_range
