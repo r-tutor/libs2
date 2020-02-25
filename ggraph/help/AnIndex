@@ -1,4 +1,6 @@
 ggraph-package	ggraph-package
+autograph	autograph
+autograph.default	autograph
 circle	geometry
 collect_connections	internal_extractors
 collect_edges	internal_extractors

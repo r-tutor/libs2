@@ -2,8 +2,8 @@ Package: gamlss.dist
 Type: Package
 Title: Distributions for Generalized Additive Models for Location Scale
         and Shape
-Version: 5.1-5
-Date: 2019-10-04
+Version: 5.1-6
+Date: 2020-02-03
 Authors@R: c(person("Mikis", "Stasinopoulos", role = c("aut", "cre", "cph"), 
            email = "d.stasinopoulos@londonmet.ac.uk"),
            person("Robert", "Rigby", role = c("aut"), email = "r.rigby@londonmet.ac.uk"), 
@@ -45,7 +45,7 @@ Author: Mikis Stasinopoulos [aut, cre, cph],
   Stanislaus Stadlmann [ctb]
 Maintainer: Mikis Stasinopoulos <d.stasinopoulos@londonmet.ac.uk>
 NeedsCompilation: yes
-Packaged: 2019-10-04 14:00:00 UTC; dimitriosstasinopoulos
-Date/Publication: 2019-10-04 15:10:06 UTC
-Built: R 3.6.1; x86_64-w64-mingw32; 2019-10-06 15:54:42 UTC; windows
+Packaged: 2020-02-03 13:23:55 UTC; dimitriosstasinopoulos
+Date/Publication: 2020-02-03 15:20:06 UTC
+Built: R 3.6.2; x86_64-w64-mingw32; 2020-02-22 02:19:38 UTC; windows
 Archs: i386, x64

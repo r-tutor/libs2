@@ -1,6 +1,6 @@
 Package: FSA
-Version: 0.8.26
-Date: 2019-11-22
+Version: 0.8.27
+Date: 2020-2-2
 Title: Simple Fisheries Stock Assessment Methods
 Description: A variety of simple fish stock assessment methods.
     Detailed vignettes are available on the fishR website <http://derekogle.com/fishR/>.
@@ -17,18 +17,17 @@ License: GPL (>= 2)
 LazyData: true
 Depends: R (>= 3.5.0)
 Imports: graphics, grDevices, stats, tools, utils, car, dplyr,
-        dunn.test, epitools, gplots, lmtest, plotrix, plyr, sciplot,
-        withr
+        dunn.test, epitools, lmtest, plotrix, plyr, sciplot, withr
 Suggests: DescTools, fishmethods, FSAdata, knitr, marked, nlme,
         nlstools, pkgdown, psych, Rcapture, testthat, rmarkdown
 Encoding: UTF-8
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 NeedsCompilation: no
-Packaged: 2019-11-22 19:20:39 UTC; dogle
+Packaged: 2020-02-03 19:56:20 UTC; dogle
 Author: Derek Ogle [aut, cre] (<https://orcid.org/0000-0002-0370-9299>),
   Powell Wheeler [aut],
   Alexis Dinno [aut] (Provided base functionality of dunnTest())
 Maintainer: Derek Ogle <derek@derekogle.com>
 Repository: CRAN
-Date/Publication: 2019-11-22 20:20:03 UTC
-Built: R 3.6.1; ; 2019-12-04 03:40:29 UTC; windows
+Date/Publication: 2020-02-03 21:20:02 UTC
+Built: R 3.6.2; ; 2020-02-22 09:12:33 UTC; windows

@@ -12,7 +12,6 @@ assertAccess	checkAccess
 assertArray	checkArray
 assertAtomic	checkAtomic
 assertAtomicVector	checkAtomicVector
-assertBit	checkBit
 assertCharacter	checkCharacter
 assertChoice	checkChoice
 assertClass	checkClass
@@ -63,7 +62,6 @@ assert_access	checkAccess
 assert_array	checkArray
 assert_atomic	checkAtomic
 assert_atomic_vector	checkAtomicVector
-assert_bit	checkBit
 assert_character	checkCharacter
 assert_choice	checkChoice
 assert_class	checkClass
@@ -113,7 +111,6 @@ checkAccess	checkAccess
 checkArray	checkArray
 checkAtomic	checkAtomic
 checkAtomicVector	checkAtomicVector
-checkBit	checkBit
 checkCharacter	checkCharacter
 checkChoice	checkChoice
 checkClass	checkClass
@@ -164,7 +161,6 @@ check_access	checkAccess
 check_array	checkArray
 check_atomic	checkAtomic
 check_atomic_vector	checkAtomicVector
-check_bit	checkBit
 check_character	checkCharacter
 check_choice	checkChoice
 check_class	checkClass
@@ -212,7 +208,6 @@ expect_access	checkAccess
 expect_array	checkArray
 expect_atomic	checkAtomic
 expect_atomic_vector	checkAtomicVector
-expect_bit	checkBit
 expect_character	checkCharacter
 expect_choice	checkChoice
 expect_class	checkClass
@@ -267,12 +262,12 @@ qexpect	qassert
 qexpectr	qassertr
 qtest	qassert
 qtestr	qassertr
+register_test_backend	register_test_backend
 reportAssertions	AssertCollection
 testAccess	checkAccess
 testArray	checkArray
 testAtomic	checkAtomic
 testAtomicVector	checkAtomicVector
-testBit	checkBit
 testCharacter	checkCharacter
 testChoice	checkChoice
 testClass	checkClass
@@ -322,7 +317,6 @@ test_access	checkAccess
 test_array	checkArray
 test_atomic	checkAtomic
 test_atomic_vector	checkAtomicVector
-test_bit	checkBit
 test_character	checkCharacter
 test_choice	checkChoice
 test_class	checkClass

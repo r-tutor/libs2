@@ -2,7 +2,9 @@ bssn-package	bssn-package
 bssn	bssn
 dbssn	bssn
 EMbssn	EMbssn
+enzyme	enzyme
 Fbssn	reliabilitybssn
+FMshnReg	FMshnReg
 kurtbssn	momentsbssn
 meanbssn	momentsbssn
 mmmeth	bssn

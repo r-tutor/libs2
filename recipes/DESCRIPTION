@@ -1,6 +1,6 @@
 Package: recipes
 Title: Preprocessing Tools to Create Design Matrices
-Version: 0.1.8
+Version: 0.1.9
 Authors@R: c(
     person(given = "Max",    family = "Kuhn",    email = "max@rstudio.com",    role = c("aut", "cre")),
     person(given = "Hadley", family = "Wickham", email = "hadley@rstudio.com", role = c("aut")),
@@ -24,13 +24,13 @@ License: GPL-2
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.0.1.9000
+RoxygenNote: 7.0.2.9000
 NeedsCompilation: no
-Packaged: 2019-12-18 11:23:58 UTC; max
+Packaged: 2020-01-05 21:51:32 UTC; max
 Author: Max Kuhn [aut, cre],
   Hadley Wickham [aut],
   RStudio [cph]
 Maintainer: Max Kuhn <max@rstudio.com>
 Repository: CRAN
-Date/Publication: 2019-12-18 15:40:02 UTC
-Built: R 3.6.2; ; 2019-12-21 09:39:52 UTC; windows
+Date/Publication: 2020-01-07 20:20:08 UTC
+Built: R 3.6.2; ; 2020-02-22 07:57:45 UTC; windows

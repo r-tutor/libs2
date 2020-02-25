@@ -187,6 +187,7 @@ mutate_node_attrs	mutate_node_attrs
 mutate_node_attrs_ws	mutate_node_attrs_ws
 node_aes	node_aes
 node_data	node_data
+node_edge_aes_data	node_edge_aes_data
 node_list_1	node_list_1
 node_list_2	node_list_2
 nudge_node_positions_ws	nudge_node_positions_ws

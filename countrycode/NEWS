@@ -1,5 +1,14 @@
-Version 1.01.0 (2018-10-26)
----------------------------
+Version 1.1.1 (2020-02-08)
+--------------------------
+
+* Bug: Typo prevented users for using "p4n" as origin code
+* Fixed bad icao.region codes (Thanks to @espinielli)
+* Added country name "United Arab Republic" and its regex (Thanks to Gina Reynolds)
+* Added SOM to wb code (Thanks to Fabian Besche)
+* Added Vietnam to codelist_panel
+
+Version 1.1.0 (2018-10-26)
+--------------------------
 
 * Gleditsch and Ward codes (Thanks to Altaf Ali)
 * V-Dem 8 country codes (panel and cross-section)

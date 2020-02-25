@@ -1,4 +1,3 @@
-FSA-package	FSA
 .onAttach	FSA-internals
 addZeroCatch	addZeroCatch
 ageBias	ageBias
@@ -101,6 +100,7 @@ iLegendHelp	FSA-internals
 iListSpecies	FSA-internals
 iMakeColor	FSA-internals
 iPlotExists	FSA-internals
+iRichColors	FSA-internals
 is.CapHist	capHistSum
 is.even	oddeven
 is.odd	oddeven

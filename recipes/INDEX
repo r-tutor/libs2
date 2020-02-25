@@ -85,6 +85,7 @@ step_range              Scaling Numeric Data to a Specific Range
 step_ratio              Ratio Variable Creation
 step_regex              Create Dummy Variables using Regular
                         Expressions
+step_relevel            Relevel factors to a desired level
 step_relu               Apply (Smoothed) Rectified Linear
                         Transformation
 step_rename             Rename variables by name

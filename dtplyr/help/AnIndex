@@ -6,6 +6,8 @@ collect.dtplyr_step	collect
 compute.dtplyr_step	collect
 dtplyr	dtplyr-package
 grouped_dt	lazy_dt
+group_by.dtplyr_step	single_table
 group_modify.dtplyr_step	group_modify.dtplyr_step
 lazy_dt	lazy_dt
+single_table	single_table
 tbl_dt	lazy_dt

@@ -1,8 +1,8 @@
-## ---- echo = TRUE, message = FALSE---------------------------------------
+## ---- echo = TRUE, message = FALSE--------------------------------------------
 library(DRR)
 set.seed(123)
 
-## ---- echo = TRUE, warning = FALSE, error = FALSE------------------------
+## ---- echo = TRUE, warning = FALSE, error = FALSE-----------------------------
 data(iris)
 
 in_data <- iris[, 1:4]
@@ -20,7 +20,7 @@ t3 <- system.time(drr.3 <- drr(my_data, fastkrr = 5, verbose = FALSE))
 t4 <- system.time(drr.4 <- drr(my_data, fastkrr = 2, fastcv = TRUE,
                                verbose = FALSE))
 
-## ---- echo = FALSE, results = "hold"-------------------------------------
+## ---- echo = FALSE, results = "hold"------------------------------------------
 pairs(my_data,           gap = 0, main = "iris")
 pairs(pca$x,             gap = 0, main = "pca")
 pairs(drr.1$fitted.data, gap = 0, main = "drr.1")
@@ -28,7 +28,7 @@ pairs(drr.2$fitted.data, gap = 0, main = "drr.2")
 pairs(drr.3$fitted.data, gap = 0, main = "drr.3")
 pairs(drr.4$fitted.data, gap = 0, main = "drr.4")
 
-## ---- echo = TRUE, tidy = TRUE-------------------------------------------
+## ---- echo = TRUE, tidy = TRUE------------------------------------------------
 rmse <- matrix(NA_real_, nrow = 5, ncol = nvars,
                dimnames = list(c("pca", "drr.1", "drr.2", "drr.3", "drr.4"),
                                seq_len(nvars)))
@@ -59,9 +59,9 @@ for (i in seq_len(nvars)){
         ) ^ 2) )
 }
 
-## ---- echo = FALSE-------------------------------------------------------
+## ---- echo = FALSE------------------------------------------------------------
 print(rmse)
 
-## ---- echo = FALSE-------------------------------------------------------
+## ---- echo = FALSE------------------------------------------------------------
 print(rbind(pca = t0, drr.1 = t1, drr.2 = t2, drr.3 = t3, drr.4 = t4)[, 1:3])
 

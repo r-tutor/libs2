@@ -4,3 +4,4 @@ group_modify.dtplyr_step
                         Modify a lazy_dt in place
 lazy_dt                 Create a "lazy" data.table for use with dplyr
                         verbs
+single_table            Single table operations

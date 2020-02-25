@@ -1,6 +1,6 @@
 Package: spData
 Title: Datasets for Spatial Analysis
-Version: 0.3.2
+Version: 0.3.3
 Authors@R: c(person("Roger", "Bivand", role = "aut", email="Roger.Bivand@nhh.no", comment = c(ORCID = "0000-0003-2392-6140")),
     person("Jakub", "Nowosad", role = c("aut", "cre"), email="nowosad.jakub@gmail.com", comment = c(ORCID = "0000-0002-1057-3721")),
     person("Robin", "Lovelace", role = "aut", comment = c(ORCID = "0000-0001-5679-6536")),
@@ -14,16 +14,17 @@ Description: Diverse spatial datasets for demonstrating, benchmarking and teachi
     Some of the datasets are designed to illustrate specific analysis techniques.
     cycle_hire() and cycle_hire_osm(), for example, is designed to illustrate point pattern analysis techniques.
 Depends: R (>= 3.3.0)
-Suggests: foreign, maptools, raster, rgdal, sf, sp, spDataLarge (>=
-        0.3.0), spdep, spatialreg
+Imports: sp, raster
+Suggests: foreign, maptools, rgdal, sf, spDataLarge (>= 0.3.0), spdep,
+        spatialreg
 License: CC0
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 LazyData: true
 URL: https://nowosad.github.io/spData/
 BugReports: https://github.com/Nowosad/spData/issues
 Additional_repositories: https://nowosad.github.io/drat
 NeedsCompilation: no
-Packaged: 2019-09-19 11:13:43 UTC; jn
+Packaged: 2020-02-11 09:46:52 UTC; jn
 Author: Roger Bivand [aut] (<https://orcid.org/0000-0003-2392-6140>),
   Jakub Nowosad [aut, cre] (<https://orcid.org/0000-0002-1057-3721>),
   Robin Lovelace [aut] (<https://orcid.org/0000-0001-5679-6536>),
@@ -31,5 +32,5 @@ Author: Roger Bivand [aut] (<https://orcid.org/0000-0003-2392-6140>),
   Greg Snow [ctb] (author of the state.vbm dataset)
 Maintainer: Jakub Nowosad <nowosad.jakub@gmail.com>
 Repository: CRAN
-Date/Publication: 2019-09-19 12:10:02 UTC
-Built: R 3.6.1; ; 2019-09-20 23:35:55 UTC; windows
+Date/Publication: 2020-02-11 13:00:02 UTC
+Built: R 3.6.2; ; 2020-02-22 04:09:10 UTC; windows

@@ -8,7 +8,7 @@ check                   Build and check a package, cleaning up
                         automatically on success.
 check_failures          Parses R CMD check log file for ERRORs,
                         WARNINGs and NOTEs
-check_man               Check documentation, as 'R CMD check' does.
+check_man               Check documentation, as R CMD check does.
 check_rhub              Run CRAN checks for package on R-hub
 check_win               Build windows binary package.
 clean_vignettes         Clean built vignettes.

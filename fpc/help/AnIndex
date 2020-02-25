@@ -45,7 +45,6 @@ disthclustCBI	kmeansCBI
 disthclusttreeCBI	kmeansCBI
 distnoisemclustCBI	kmeansCBI
 distrsimilarity	distrsimilarity
-disttrimkmeansCBI	kmeansCBI
 dridgeline	dridgeline
 dudahart2	dudahart2
 emskewCBI	kmeansCBI
@@ -120,7 +119,9 @@ simmatrix	simmatrix
 solvecov	solvecov
 speccCBI	kmeansCBI
 sseg	sseg
+stupidkaven	stupidkaven
 stupidkcentroids	stupidkcentroids
+stupidkfn	stupidkfn
 stupidknn	stupidknn
 summary.cquality	cqcluster.stats
 summary.mergenorm	mergenormals
@@ -129,7 +130,6 @@ summary.rfpc	fixreg
 tclustCBI	kmeansCBI
 tdecomp	tdecomp
 tonedata	tonedata
-trimkmeansCBI	kmeansCBI
 unimodal.ind	unimodal.ind
 valstat.object	valstat.object
 weightplots	weightplots

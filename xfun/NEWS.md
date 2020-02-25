@@ -1,3 +1,7 @@
+# CHANGES IN xfun VERSION 0.12
+
+- Added a new function `split_lines()`.
+
 # CHANGES IN xfun VERSION 0.11
 
 ## BUG FIXES

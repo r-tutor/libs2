@@ -92,7 +92,7 @@ delete_graph_actions    Delete one or more graph actions stored within
 delete_loop_edges_ws    Delete all loop edges associated with a
                         selection of nodes
 delete_node             Delete a node from an existing graph object
-delete_nodes_ws         Delete all selected nodes in a node selection
+delete_nodes_ws         Delete all nodes in a node selection
 deselect_edges          Deselect any selected edges in a graph
 deselect_nodes          Deselect any selected nodes in a graph
 display_metagraph       Display a property graph's underlying model
@@ -107,7 +107,7 @@ edge_data               Insert edge data attributes during edge
 edge_list_1             Edge list - Version 1.
 edge_list_2             Edge list - Version 2.
 export_csv              Export a graph to CSV files
-export_graph            Export a graph to various file formats
+export_graph            Export a graph to various image formats
 filter_graph_series     Subset a graph series object
 from_adj_matrix         Create a graph using an adjacency matrix
 from_igraph             Convert an igraph graph to a DiagrammeR one
@@ -161,7 +161,8 @@ get_degree_total        Get total degree values for all nodes
 get_dice_similarity     Get Dice similarity coefficient scores
 get_eccentricity        Get node eccentricities
 get_edge_attrs          Get edge attribute values
-get_edge_attrs_ws       Get edge attribute values
+get_edge_attrs_ws       Get edge attribute values from a selection of
+                        edges
 get_edge_count_w_multiedge
                         Get count of edge definitions where multiple
                         edges occur
@@ -172,7 +173,7 @@ get_edge_ids            Get a vector of edge ID values
 get_edge_info           Get detailed information on edges
 get_edges               Get node IDs associated with edges
 get_eigen_centrality    Get the eigen centrality for all nodes
-get_girth               Get graph girth
+get_girth               Get the graph girth
 get_global_graph_attr_info
                         Get global graph attributes
 get_graph_actions       Get information on any available graph actions
@@ -257,6 +258,7 @@ node_aes                Insert node aesthetic attributes during node
                         creation
 node_data               Insert node data attributes during node
                         creation
+node_edge_aes_data      Options for node and edge aesthetics and data
 node_list_1             Node list - Version 1.
 node_list_2             Node list - Version 2.
 nudge_node_positions_ws
@@ -273,14 +275,13 @@ renderGrViz             Widget render function for use in Shiny
 render_graph            Render the graph in various formats
 render_graph_from_graph_series
                         Render a graph available in a series
-reorder_graph_actions   Trigger the execution of a series of graph
-                        actions
+reorder_graph_actions   Reorder the stored series of graph actions
 replace_in_spec         Razor-like template for diagram specification
 rescale_edge_attrs      Rescale numeric edge attribute values
 rescale_node_attrs      Rescale numeric node attribute values
 rev_edge_dir            Reverse the direction of all edges in a graph
 rev_edge_dir_ws         Reverse the direction of selected edges in a
-                        graph
+                        graph using an edge selection
 save_graph              Save a graph or graph series to disk
 select_edges            Select edges in a graph
 select_edges_by_edge_id
@@ -295,7 +296,7 @@ select_nodes            Select nodes in a graph
 select_nodes_by_degree
                         Select nodes in the graph based on their degree
                         values
-select_nodes_by_id      Select nodes in a graph by ID values
+select_nodes_by_id      Select nodes in a graph by their ID values
 select_nodes_in_neighborhood
                         Select nodes based on a walk distance from a
                         specified node
@@ -322,7 +323,8 @@ transform_to_complement_graph
 transform_to_min_spanning_tree
                         Get a minimum spanning tree subgraph
 transform_to_subgraph_ws
-                        Create a subgraph using node/edge selection
+                        Create a subgraph using a node or edge
+                        selection
 trav_both               Traverse from one or more selected nodes onto
                         neighboring nodes
 trav_both_edge          Traverse from one or more selected nodes onto
@@ -333,7 +335,7 @@ trav_in_edge            Traverse from one or more selected nodes onto
                         adjacent, inward edges
 trav_in_node            Traverse from one or more selected edges onto
                         adjacent, inward nodes
-trav_in_until           Traverse inward node-by_node until stopping
+trav_in_until           Traverse inward node-by-node until stopping
                         conditions are met
 trav_out                Traverse from one or more selected nodes onto
                         adjacent, outward nodes
@@ -341,7 +343,7 @@ trav_out_edge           Traverse from one or more selected nodes onto
                         adjacent, outward edges
 trav_out_node           Traverse from one or more selected edges onto
                         adjacent, outward nodes
-trav_out_until          Traverse outward node-by_node until stopping
+trav_out_until          Traverse outward node-by-node until stopping
                         conditions are met
 trav_reverse_edge       Traverse to any reverse edges
 trigger_graph_actions   Trigger the execution of a series of graph

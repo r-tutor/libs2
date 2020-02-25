@@ -59,11 +59,11 @@ easter	easter
 ets	ets
 findfrequency	findfrequency
 fitted.ar	fitted.Arima
+fitted.ARFIMA	fitted.Arima
 fitted.Arima	fitted.Arima
 fitted.bats	fitted.Arima
 fitted.ets	fitted.Arima
 fitted.forecast_ARIMA	fitted.Arima
-fitted.fracdiff	fitted.Arima
 fitted.modelAR	fitted.Arima
 fitted.nnetar	fitted.Arima
 fitted.tbats	fitted.Arima
@@ -171,12 +171,12 @@ print.tbats	tbats
 reexports	reexports
 remainder	seasonal
 residuals.ar	residuals.forecast
+residuals.ARFIMA	residuals.forecast
 residuals.Arima	residuals.forecast
 residuals.bats	residuals.forecast
 residuals.ets	residuals.forecast
 residuals.forecast	residuals.forecast
 residuals.forecast_ARIMA	residuals.forecast
-residuals.fracdiff	residuals.forecast
 residuals.nnetar	residuals.forecast
 residuals.stlm	residuals.forecast
 residuals.tbats	residuals.forecast

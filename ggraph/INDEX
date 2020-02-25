@@ -1,3 +1,4 @@
+autograph               Quickplot wrapper for networks
 facet_edges             Create small multiples based on edge attributes
 facet_graph             Create a grid of small multiples by node and/or
                         edge attributes
@@ -80,7 +81,6 @@ layout_tbl_graph_unrooted
                         equal-daylight
 node_angle              Get the angle of nodes and edges
 pack_circles            Pack circles together
-qgraph                  Quickplot wrapper for networks
 scale_edge_alpha        Edge alpha scales
 scale_edge_colour       Edge colour scales
 scale_edge_fill         Edge fill scales

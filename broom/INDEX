@@ -23,8 +23,6 @@ augment.lm              Augment data with information from a(n) lm
                         object
 augment.lmRob           Augment a(n) lmRob object
 augment.loess           Tidy a(n) loess object
-augment.mjoint          Augment data with information from a(n) mjoint
-                        object
 augment.nlrq            Tidy a(n) nlrq object
 augment.nls             Augment data with information from a(n) nls
                         object
@@ -91,7 +89,6 @@ glance.lavaan           Glance at a(n) lavaan object
 glance.lm               Glance at a(n) lm object
 glance.lmRob            Glance at a(n) lmRob object
 glance.lmodel2          Glance at a(n) lmodel2 object
-glance.mjoint           Glance at a(n) mjoint object
 glance.muhaz            Glance at a(n) muhaz object
 glance.multinom         Glance at a(n) multinom object
 glance.nlrq             Glance at a(n) nlrq object
@@ -178,7 +175,6 @@ tidy.lmRob              Tidy a(n) lmRob object
 tidy.lmodel2            Tidy a(n) lmodel2 object
 tidy.manova             Tidy a(n) manova object
 tidy.map                Tidy a(n) map object
-tidy.mjoint             Tidy a(n) mjoint object
 tidy.mle2               Tidy a(n) mle2 object
 tidy.muhaz              Tidy a(n) muhaz object
 tidy.multinom           Tidying methods for multinomial logistic

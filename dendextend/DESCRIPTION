@@ -1,8 +1,8 @@
 Package: dendextend
 Type: Package
 Title: Extending 'dendrogram' Functionality in R
-Version: 1.13.2
-Date: 2019-11-27
+Version: 1.13.3
+Date: 2020-02-07
 Authors@R: c(person("Tal", "Galili", role = c("aut", "cre", "cph"), email =
     "tal.galili@gmail.com", comment = "https://www.r-statistics.com"),
     person("Yoav", "Benjamini", email = "ybenja@tau.ac.il",role = "ths"),
@@ -67,10 +67,10 @@ URL: http://talgalili.github.io/dendextend/,
         https://www.r-statistics.com/tag/dendextend/,
         https://academic.oup.com/bioinformatics/article/31/22/3718/240978/dendextend-an-R-package-for-visualizing-adjusting
 BugReports: https://github.com/talgalili/dendextend/issues
-RoxygenNote: 7.0.1
+RoxygenNote: 7.0.2
 Encoding: UTF-8
 NeedsCompilation: no
-Packaged: 2019-11-27 20:03:02 UTC; talgalili
+Packaged: 2020-02-07 15:59:27 UTC; talgalili
 Author: Tal Galili [aut, cre, cph] (https://www.r-statistics.com),
   Yoav Benjamini [ths],
   Gavin Simpson [ctb],
@@ -102,5 +102,5 @@ Author: Tal Galili [aut, cre, cph] (https://www.r-statistics.com),
   David Bradley [ctb] (https://github.com/DBradley27)
 Maintainer: Tal Galili <tal.galili@gmail.com>
 Repository: CRAN
-Date/Publication: 2019-12-02 20:00:06 UTC
-Built: R 3.6.1; ; 2019-12-03 18:08:53 UTC; windows
+Date/Publication: 2020-02-08 19:10:06 UTC
+Built: R 3.6.2; ; 2020-02-22 07:58:30 UTC; windows

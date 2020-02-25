@@ -1,10 +1,10 @@
 Package: bit
-Type: Package
 Title: A Class for Vectors of 1-Bit Booleans
-Version: 1.1-14
-Date: 2018-04-11
-Author: Jens Oehlschlägel <Jens.Oehlschlaegel@truecluster.com>
-Maintainer: Jens Oehlschlägel <Jens.Oehlschlaegel@truecluster.com>
+Version: 1.1-15.2
+Date: 2020-01-14
+Authors@R: c(person("Jens", "Oehlschlägel", role = c('aut', 'cre'),
+	             email = "Jens.Oehlschlaegel@truecluster.com"),
+             person("Brian", "Ripley", role = 'ctb'))
 Depends: R (>= 2.9.2)
 Description: True boolean datatype (no NAs), 
   coercion from and to logicals, integers and integer subscripts; 
@@ -30,10 +30,16 @@ License: GPL-2
 LazyLoad: yes
 ByteCompile: yes
 Encoding: UTF-8
-URL: http://ff.r-forge.r-project.org/
 NeedsCompilation: yes
-Packaged: 2018-05-27 20:28:22 UTC; jens
+Packaged: 2020-02-09 13:51:41 UTC; ripley
+Author: Jens Oehlschlägel [aut, cre],
+  Brian Ripley [ctb]
+Maintainer: ORPHANED
+X-CRAN-Original-Maintainer: Jens Oehlschlägel
+        <Jens.Oehlschlaegel@truecluster.com>
+X-CRAN-Comment: Orphaned on 2020-01-13 as check errors were not
+        corrected.
 Repository: CRAN
-Date/Publication: 2018-05-29 16:56:33 UTC
-Built: R 3.5.0; x86_64-w64-mingw32; 2018-05-31 20:23:23 UTC; windows
+Date/Publication: 2020-02-10 10:06:33 UTC
+Built: R 3.6.2; x86_64-w64-mingw32; 2020-02-10 23:31:33 UTC; windows
 Archs: i386, x64

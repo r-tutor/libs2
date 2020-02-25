@@ -113,7 +113,9 @@ simmatrix               Extracting intersections between clusters from
 solvecov                Inversion of (possibly singular) symmetric
                         matrices
 sseg                    Position in a similarity vector
+stupidkaven             Stupid average dissimilarity random clustering
 stupidkcentroids        Stupid k-centroids random clustering
+stupidkfn               Stupid farthest neighbour random clustering
 stupidknn               Stupid nearest neighbour random clustering
 tdecomp                 Root of singularity-corrected eigenvalue
                         decomposition

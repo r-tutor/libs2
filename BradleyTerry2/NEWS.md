@@ -1,3 +1,9 @@
+Changes in BradleyTerry2 1.1-1
+==============================
+
+ * improve the way `BTm` finds variables passed to `outcome`, `player1` etc, so that it works when run in a separate environment.
+ * convert old tests to unit tests.
+
 Changes in BradleyTerry2 1.1-0
 ==============================
 

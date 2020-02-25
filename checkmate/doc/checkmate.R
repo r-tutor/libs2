@@ -1,7 +1,7 @@
-## ----include=FALSE-------------------------------------------------------
+## ----include=FALSE------------------------------------------------------------
 library(checkmate)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 fact <- function(n, method = "stirling") {
   if (length(n) != 1)
     stop("Argument 'n' must have length 1")
@@ -31,7 +31,7 @@ fact <- function(n, method = "stirling") {
     sqrt(2 * pi * n) * (n / exp(1))^n
 }
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 fact <- function(n, method = "stirling") {
   assertCount(n)
   assertChoice(method, c("stirling", "factorial"))
@@ -42,7 +42,7 @@ fact <- function(n, method = "stirling") {
     sqrt(2 * pi * n) * (n / exp(1))^n
 }
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 f <- function(x) {
   assert(
     checkClass(x, "foo"),
@@ -50,13 +50,13 @@ f <- function(x) {
   )
 }
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  # file: tests/test-all.R
 #  library(testthat)
 #  library(checkmate) # for testthat extensions
 #  test_check("mypkg")
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
 #  test_that("checkmate is a sweet extension for testthat", {
 #    x = runif(100)
 #    expect_numeric(x, len = 100, any.missing = FALSE, lower = 0, upper = 1)
@@ -64,7 +64,7 @@ f <- function(x) {
 #    qexpect(x, "N100[0,1]")
 #  })
 
-## ----dev="svg",fig.width=6,fig.height=4,dependson="init",eval=requireNamespace("microbenchmark", quietly = TRUE)----
+## ----fig.width=6,fig.height=4,dependson="init",eval=requireNamespace("microbenchmark", quietly = TRUE)----
 library(checkmate)
 library(ggplot2)
 library(microbenchmark)
@@ -77,7 +77,7 @@ mb = microbenchmark(r(x), cm(x), cmq(x))
 print(mb)
 autoplot(mb)
 
-## ----dev="svg",fig.width=6,fig.height=4,eval=requireNamespace("microbenchmark", quietly = TRUE)----
+## ----fig.width=6,fig.height=4,eval=requireNamespace("microbenchmark", quietly = TRUE)----
 x = runif(1000)
 r = function(x) stopifnot(is.numeric(x), length(x) == 1000, all(!is.na(x) & x >= 0 & x <= 1))
 cm = function(x) assertNumeric(x, len = 1000, any.missing = FALSE, lower = 0, upper = 1)
@@ -86,7 +86,7 @@ mb = microbenchmark(r(x), cm(x), cmq(x))
 print(mb)
 autoplot(mb)
 
-## ----dev="svg",fig.width=6,fig.height=4,eval=requireNamespace("microbenchmark", quietly = TRUE)----
+## ----fig.width=6,fig.height=4,eval=requireNamespace("microbenchmark", quietly = TRUE)----
 x = sample(letters, 10000, replace = TRUE)
 r = function(x) stopifnot(is.character(x), !any(is.na(x)), all(nchar(x) > 0))
 cm = function(x) assertCharacter(x, any.missing = FALSE, min.chars = 1)
@@ -95,7 +95,7 @@ mb = microbenchmark(r(x), cm(x), cmq(x))
 print(mb)
 autoplot(mb)
 
-## ----dev="svg",fig.width=6,fig.height=4,eval=requireNamespace("microbenchmark", quietly = TRUE)----
+## ----fig.width=6,fig.height=4,eval=requireNamespace("microbenchmark", quietly = TRUE)----
 N = 10000
 x = data.frame(a = runif(N), b = sample(letters[1:5], N, replace = TRUE), c = sample(c(FALSE, TRUE), N, replace = TRUE))
 r = function(x) is.data.frame(x) && !any(sapply(x, function(x) any(is.na(x))))
@@ -111,7 +111,7 @@ mb = microbenchmark(r(x), cm(x), cmq(x))
 print(mb)
 autoplot(mb)
 
-## ----dev="svg",fig.width=6,fig.height=4,eval=requireNamespace("microbenchmark", quietly = TRUE)----
+## ----fig.width=6,fig.height=4,eval=requireNamespace("microbenchmark", quietly = TRUE)----
 N = 10000
 x.altrep = seq_len(N) # this is an ALTREP in R version >= 3.5.0
 x.sexp = c(x.altrep)  # this is a regular SEXP OTOH
@@ -121,7 +121,7 @@ mb = microbenchmark(r(x.sexp), cm(x.sexp), r(x.altrep), cm(x.altrep))
 print(mb)
 autoplot(mb)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 checkSquareMatrix = function(x, mode = NULL) {
   # check functions must return TRUE on success
   # and a custom error message otherwise
@@ -139,7 +139,7 @@ checkSquareMatrix(X)
 checkSquareMatrix(X, mode = "character")
 checkSquareMatrix(X[1:2, ])
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # For assertions:
 assert_square_matrix = assertSquareMatrix = makeAssertionFunction(checkSquareMatrix)
 print(assertSquareMatrix)
@@ -152,14 +152,14 @@ print(testSquareMatrix)
 expect_square_matrix = makeExpectationFunction(checkSquareMatrix)
 print(expect_square_matrix)
 
-## ---- eval = FALSE, hilang = "c"-----------------------------------------
+## ---- eval = FALSE, hilang = "c"----------------------------------------------
 #  SEXP qassert(SEXP x, const char *rule, const char *name);
 #  Rboolean qtest(SEXP x, const char *rule);
 
-## ---- eval = FALSE, hilang = "c"-----------------------------------------
+## ---- eval = FALSE, hilang = "c"----------------------------------------------
 #  #include <checkmate.h>
 #  #include <checkmate_stub.c>
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 sessionInfo()
 

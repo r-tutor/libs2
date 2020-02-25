@@ -1,0 +1,5 @@
+ais                     Australian institute of sport data
+dssmn                   Skew Scale Mixtures of Normal Distributions
+ssmn-package            Skew Scale Mixtures of Normal Distributions
+ssmn.est                EM algorithm for Skew Scale Mixtures of Normal
+                        Distributions

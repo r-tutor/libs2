@@ -41,7 +41,7 @@ dshw                    Double-Seasonal Holt-Winters Forecasting
 easter                  Easter holidays in each season
 ets                     Exponential smoothing state space model
 findfrequency           Find dominant frequency of a time series
-fitted.fracdiff         h-step in-sample forecasts for time series
+fitted.ARFIMA           h-step in-sample forecasts for time series
                         models.
 forecast                Forecasting time series
 forecast-package        Forecasting Functions for Time Series and

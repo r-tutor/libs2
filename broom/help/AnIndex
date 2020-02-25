@@ -22,7 +22,6 @@ augment.lmRob	augment.lmRob
 augment.loess	augment.loess
 augment.Mclust	augment.Mclust
 augment.merMod	lme4_tidiers
-augment.mjoint	augment.mjoint
 augment.nlrq	augment.nlrq
 augment.nls	augment.nls
 augment.NULL	null_tidiers
@@ -109,7 +108,6 @@ glance.lmRob	glance.lmRob
 glance.matrix	matrix_tidiers
 glance.Mclust	glance.Mclust
 glance.merMod	lme4_tidiers
-glance.mjoint	glance.mjoint
 glance.muhaz	glance.muhaz
 glance.multinom	glance.multinom
 glance.nlrq	glance.nlrq
@@ -145,7 +143,6 @@ htest_tidiers	tidy.htest
 insert_NAs	insert_NAs
 irlba_tidiers	tidy_irlba
 ivreg_tidiers	tidy.ivreg
-joinerml_tidiers	tidy.mjoint
 kappa_tidiers	tidy.kappa
 kde_tidiers	tidy.kde
 Kendall_tidiers	tidy.Kendall
@@ -165,7 +162,6 @@ matrix_tidiers	matrix_tidiers
 mclust_tidiers	tidy.Mclust
 mcmc_tidiers	mcmc_tidiers
 mgcv_tidiers	mgcv_tidy_gam
-mjoint_tidiers	tidy.mjoint
 mle2_tidiers	tidy.mle2
 muhaz_tidiers	tidy.muhaz
 multcomp_tidiers	tidy.glht
@@ -275,7 +271,6 @@ tidy.map	tidy.map
 tidy.matrix	matrix_tidiers
 tidy.Mclust	tidy.Mclust
 tidy.merMod	lme4_tidiers
-tidy.mjoint	tidy.mjoint
 tidy.mle2	tidy.mle2
 tidy.muhaz	tidy.muhaz
 tidy.multinom	tidy.multinom

@@ -1,6 +1,6 @@
 Package: DRR
 Title: Dimensionality Reduction via Regression
-Version: 0.0.3
+Version: 0.0.4
 Authors@R: person("Guido", "Kraemer", email = "gkraemer@bgc-jena.mpg.de", role = c("aut","cre"))
 Description: An Implementation of Dimensionality Reduction
     via Regression using Kernel Ridge Regression.
@@ -12,11 +12,11 @@ Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
 LazyData: true
 Depends: kernlab, CVST, Matrix
-RoxygenNote: 6.0.1
+RoxygenNote: 7.0.2
 NeedsCompilation: no
-Packaged: 2018-01-05 21:52:34 UTC; gkraemer
+Packaged: 2020-02-12 12:31:48 UTC; gkraemer
 Author: Guido Kraemer [aut, cre]
 Maintainer: Guido Kraemer <gkraemer@bgc-jena.mpg.de>
 Repository: CRAN
-Date/Publication: 2018-01-06 22:34:19 UTC
-Built: R 3.5.0; ; 2018-06-22 09:59:36 UTC; windows
+Date/Publication: 2020-02-12 13:10:06 UTC
+Built: R 3.6.2; ; 2020-02-22 04:55:33 UTC; windows

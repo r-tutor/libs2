@@ -1,3 +1,9 @@
+# FSA 0.8.27 2-Feb-20
+* Now using ROxygen2  7.0.2.
+# Removed dependency on `gplots` package as it is now orphaned. Required adding `iRichColors()` internal function.
+* `lwCompPreds()`: Removed `\dots` from arguments as it was not in usage (per request from CRAN on 3-Feb-20).
+* `repeatedRows2Keep()`: Modified. Now makes comparisons as if `NA`s are regular values.
+
 # FSA 0.8.26 22-Nov-19
 * Changed to depending on `R >=3.5.0`, because that is the latest version required by a package (i.e., `car`) that FSA imports or suggests. Used the "check_r_versions_of_package_dependencies" shiny app by "ateucher" (on Github) to help determine this.
 * Removed `asbio` package from suggests as it hung up Travis-CI build (because of the need for the TCLTK package).

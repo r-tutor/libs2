@@ -7,6 +7,7 @@ calibre	calibre
 clean_book	clean_book
 epub_book	epub_book
 gitbook	gitbook
+github_document2	html_document2
 html_book	html_chapters
 html_chapters	html_chapters
 html_document2	html_document2

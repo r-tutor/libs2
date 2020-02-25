@@ -1,3 +1,13 @@
+# Version 2.0.0
+* Expectations now optionally support the package `tinytest`.
+  `tinytest` is used as backend if it is attached, otherwise checkmate defaults
+  to `testthat`.
+  There is now also a vignette on how to setup `checkmate` for `tinytest`.
+* Coercion now only affects double vectors.
+* Improved error message for type detection in `*List`.
+* Removed `*Bit`, the `bit` package is orphaned.
+* Fixed documentation.
+
 # Version 1.9.4
 * Fixed factors being detected as integerish.
 * Fixed error message for name checks of vectors.

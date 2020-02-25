@@ -1,0 +1,33 @@
+AP_affinity_propagation
+                        Affinity propagation clustering
+AP_preferenceRange      Affinity propagation preference range
+Clara_Medoids           Clustering large applications
+Cluster_Medoids         Partitioning around medoids
+GMM                     Gaussian Mixture Model clustering
+KMeans_arma             k-means using the Armadillo library
+KMeans_rcpp             k-means using RcppArmadillo
+MiniBatchKmeans         Mini-batch-k-means using RcppArmadillo
+Optimal_Clusters_GMM    Optimal number of Clusters for the gaussian
+                        mixture models
+Optimal_Clusters_KMeans
+                        Optimal number of Clusters for Kmeans or
+                        Mini-Batch-Kmeans
+Optimal_Clusters_Medoids
+                        Optimal number of Clusters for the partitioning
+                        around Medoids functions
+Silhouette_Dissimilarity_Plot
+                        Plot of silhouette widths or dissimilarities
+center_scale            Function to scale and/or center the data
+dietary_survey_IBS      Synthetic data using a dietary survey of
+                        patients with irritable bowel syndrome (IBS)
+distance_matrix         Distance matrix calculation
+external_validation     external clustering validation
+mushroom                The mushroom data
+plot_2d                 2-dimensional plots
+predict_GMM             Prediction function for a Gaussian Mixture
+                        Model object
+predict_KMeans          Prediction function for the k-means
+predict_MBatchKMeans    Prediction function for Mini-Batch-k-means
+predict_Medoids         Predictions for the Medoid functions
+soybean                 The soybean (large) data set from the UCI
+                        repository

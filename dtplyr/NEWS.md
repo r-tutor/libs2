@@ -1,3 +1,21 @@
+# dtplyr 1.0.1
+
+* Better handling for `.data` and `.env` pronouns (#138).
+
+* dplyr verbs now work with `NULL` inputs (#129).
+
+* joins do better job at determining output variables in the presence of 
+  duplicated outputs (#128). When joining based on different variables in `x` 
+  and `y`, joins consistently preserve column from `x`, not `y` (#137).
+
+* `lazy_dt()` objects now have a useful `glimpse()` method (#132).
+
+* `group_by()` now has an `arrange` parameter which, if set to `FALSE`, sets 
+  the data.table translation to use `by` rather than `keyby` (#85).
+
+* `rename()` now works without `data.table` attached, as intended 
+  (@michaelchirico, #123).
+
 # dtplyr 1.0.0
 
 *   Converted from eager approach to lazy approach. You now must use `lazy_dt()`
@@ -16,12 +34,12 @@
 
 * Joins now pass `...` on to data.table's merge method (#41).
 
-* `ungroup()` now copies it's input (@christophsax, #54).
+* `ungroup()` now copies its input (@christophsax, #54).
 
 * `mutate()` preserves grouping (@christophsax, #17).
 
 * `if_else()` and `coalesce()` are mapped to data.table's `fifelse()` and 
-  `fcoalesce()` respectively (@michaelchirico, #112)
+  `fcoalesce()` respectively (@michaelchirico, #112).
 
 # dtplyr 0.0.3
 

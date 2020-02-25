@@ -126,6 +126,7 @@ step_profile	step_profile
 step_range	step_range
 step_ratio	step_ratio
 step_regex	step_regex
+step_relevel	step_relevel
 step_relu	step_relu
 step_rename	step_rename
 step_rename_at	step_rename_at
@@ -208,6 +209,7 @@ tidy.step_profile	step_profile
 tidy.step_range	step_range
 tidy.step_ratio	step_ratio
 tidy.step_regex	step_regex
+tidy.step_relevel	step_relevel
 tidy.step_relu	step_relu
 tidy.step_rename	step_rename
 tidy.step_rename_at	step_rename
