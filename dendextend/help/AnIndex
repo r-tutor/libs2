@@ -86,7 +86,6 @@ flatten.dendrogram	flatten.dendrogram
 flip_leaves	flip_leaves
 FM_index	FM_index
 FM_index_permutation	FM_index_permutation
-FM_index_profdpm	FM_index_profdpm
 FM_index_R	FM_index_R
 get_branches_heights	get_branches_heights
 get_childrens_heights	get_childrens_heights

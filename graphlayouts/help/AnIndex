@@ -1,4 +1,3 @@
-graphlayouts-package	graphlayouts
 annotate_circle	annotate_circle
 draw_circle	draw_circle
 graphlayouts	graphlayouts
@@ -7,10 +6,12 @@ layout_as_backbone	layout_backbone
 layout_as_dynamic	layout_dynamic
 layout_backbone	layout_backbone
 layout_centrality	layout_centrality
+layout_constrained_stress	layout_constrained_stress
 layout_dynamic	layout_dynamic
 layout_focus	layout_focus
 layout_igraph_backbone	layout_backbone
 layout_igraph_centrality	layout_centrality
+layout_igraph_constrained_stress	layout_constrained_stress
 layout_igraph_eigen	layout_spectral
 layout_igraph_focus	layout_focus
 layout_igraph_pmds	layout_pmds
@@ -24,6 +25,7 @@ layout_sparse_stress	layout_sparse_stress
 layout_spectral	layout_spectral
 layout_stress	layout_stress
 layout_with_centrality	layout_centrality
+layout_with_constrained_stress	layout_constrained_stress
 layout_with_eigen	layout_spectral
 layout_with_focus	layout_focus
 layout_with_pmds	layout_pmds

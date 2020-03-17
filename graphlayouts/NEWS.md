@@ -1,3 +1,12 @@
+# graphlayouts 0.6.0
+
+* added `layout_with_constrained_stress()`
+* added fixed random seed for stress (stress is deterministic and produces same layout up to translation/rotation)
+* speedup of `layout_with_sparse_stress()` and `layout_with_pmds()` by "smarter" distance calculation
+* speedup of `layout_with_sparse_stress()` by using precomputed distances in `layout_with_pmds()`
+* speedup of `layout_with_stress()` by dynamically switching to `layout_with_pmds()` during initialisation for large graphs
+
+
 # graphlayouts 0.5.0
 
 * **BREAKING CHANGE**: removed `qgraph()`. Now part of `ggraph`.

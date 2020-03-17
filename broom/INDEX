@@ -12,7 +12,6 @@ augment.factanal        Augment data with information from a(n)
 augment.felm            Augment data with information from a(n) felm
                         object
 augment.glm             Augment a(n) glm object
-augment.glmRob          Augment a(n) glmRob object
 augment.htest           Augment data with information from a(n) htest
                         object
 augment.ivreg           Augment data with information from a(n) ivreg
@@ -21,7 +20,6 @@ augment.kmeans          Augment data with information from a(n) kmeans
                         object
 augment.lm              Augment data with information from a(n) lm
                         object
-augment.lmRob           Augment a(n) lmRob object
 augment.loess           Tidy a(n) loess object
 augment.nlrq            Tidy a(n) nlrq object
 augment.nls             Augment data with information from a(n) nls
@@ -80,14 +78,12 @@ glance.fitdistr         Glance at a(n) fitdistr object
 glance.gam              Glance at a(n) gam object
 glance.garch            Tidy a(n) garch object
 glance.glm              Glance at a(n) glm object
-glance.glmRob           Glance at a(n) glmRob object
 glance.glmnet           Glance at a(n) glmnet object
 glance.gmm              Glance at a(n) gmm object
 glance.ivreg            Glance at a(n) ivreg object
 glance.kmeans           Glance at a(n) kmeans object
 glance.lavaan           Glance at a(n) lavaan object
 glance.lm               Glance at a(n) lm object
-glance.lmRob            Glance at a(n) lmRob object
 glance.lmodel2          Glance at a(n) lmodel2 object
 glance.muhaz            Glance at a(n) muhaz object
 glance.multinom         Glance at a(n) multinom object
@@ -161,7 +157,6 @@ tidy.garch              Tidy a(n) garch object
 tidy.geeglm             Tidy a(n) geeglm object
 tidy.glht               Tidy a(n) glht object
 tidy.glm                Tidy a(n) glm object
-tidy.glmRob             Tidy a(n) glmRob object
 tidy.glmnet             Tidy a(n) glmnet object
 tidy.gmm                Tidy a(n) gmm object
 tidy.htest              Tidy/glance a(n) htest object
@@ -171,7 +166,6 @@ tidy.kde                Tidy a(n) kde object
 tidy.kmeans             Tidy a(n) kmeans object
 tidy.lavaan             Tidy a(n) lavaan object
 tidy.lm                 Tidy a(n) lm object
-tidy.lmRob              Tidy a(n) lmRob object
 tidy.lmodel2            Tidy a(n) lmodel2 object
 tidy.manova             Tidy a(n) manova object
 tidy.map                Tidy a(n) map object

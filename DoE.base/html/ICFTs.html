@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Function for calculating interaction contribution frequency...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for ICFTs {DoE.base}"><tr><td>ICFTs {DoE.base}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+Function for calculating interaction contribution frequency tables
+</h2>
+
+<h3>Description</h3>
+
+<p>Function ICFTs calculates interaction contribution frequency tables, 
+function ICFT does the same for an entire (usually small) design with more detail.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ICFTs(design, digits = 3, resk.only = TRUE, kmin = NULL, kmax = ncol(design), 
+   detail = FALSE, with.blocks = FALSE, conc = TRUE)
+ICFT(design, digits = 3, with.blocks = FALSE, conc = TRUE, recode=TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>design</code></td>
+<td>
+<p>a factorial design. This can either be a matrix or a data frame
+in which all columns are experimental factors, or a special data frame
+of class <code><a href="class-design.html">design</a></code>, which may also include response data.<br />
+In any case, the design should be a factorial design;
+the functions are not useful for quantitative designs (like e.g. latin hypercube samples).
+</p>
+</td></tr>
+<tr valign="top"><td><code>digits</code></td>
+<td>
+<p>integer; number of digits to round to</p>
+</td></tr>
+<tr valign="top"><td><code>resk.only</code></td>
+<td>
+<p>logical; if <code>all</code> is <code>TRUE</code>, should only full resolution projections be considered? 
+Choosing <code>FALSE</code> may cause very long run times.</p>
+</td></tr>
+<tr valign="top"><td><code>kmin</code></td>
+<td>
+<p>integer; purpose is to continue an earlier run with additional larger projections</p>
+</td></tr>
+<tr valign="top"><td><code>kmax</code></td>
+<td>
+<p>integer; limit on projection sizes to consider</p>
+</td></tr>
+<tr valign="top"><td><code>detail</code></td>
+<td>
+<p>logical indicating whether calculation details 
+are to be returned (see Groemping 2016). These will not be needed
+for normal use of the outcome, but may be interesting for special situations.
+</p>
+</td></tr>
+<tr valign="top"><td><code>with.blocks</code></td>
+<td>
+<p>a logical, indicating whether or not an existing block factor
+is to be included into word counting. This option is ignored if <code>design</code>
+is not of class <code>design</code>.<br />
+Per default, an existing block factor is ignored.<br />
+For designs without a block factor, the option does not have an effect.<br />
+If the design is blocked, and <code>with.blocks</code>
+is <code>TRUE</code>, the block factor is treated like any other factor.</p>
+</td></tr>
+<tr valign="top"><td><code>conc</code></td>
+<td>
+<p>logical indicating whether ambiguities should be resolved 
+concentrating the contribution on as few individual values as possible (default) 
+or distributing it as evenly as possible (if <code>FALSE</code>)</p>
+</td></tr>
+<tr valign="top"><td><code>recode</code></td>
+<td>
+
+<p>logical indicating whether or not to recode each column into normalized orthogonal 
+coding with function <code><a href="generalized.word.length.html">contr.XuWu</a></code>;<br />
+if set to FALSE, it is the users responsibility to provide a design in a 
+<em>normalized orthogonal</em> coding of choice
+</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The functions work for factors only and are not intended
+for quantitative variables. 
+</p>
+<p>Function <code>ICFTs</code> decomposes the projected $a_k$ values (most often: projected $a_3$ values) 
+into single degree of freedom contributions from the respective $k$ factor interaction.   
+</p>
+<p>Function <code>ICFT</code> decomposes the all-factor interaction of the design given to it; 
+it is intended for deep-dive investigations.
+</p>
+<p>The ICFT itself is independent of the choice of normalized orthogonal coding, as are the 
+singular values and the matrix of left singular vectors; in case of several identical 
+singular values, the left singular vectors are not uniquely determined but are subject to 
+arbitrary rotation. The right singular vectors depend on the choice of normalized orthogonal 
+coding. They represent the directions of coefficient vectors for which the interaction contributions 
+indicate the bias potential for the intercept (see Groemping 2016 for the maths behind this).
+</p>
+
+
+<h3>Value</h3>
+
+<p>Function <code>ICFTs</code> returns a list of lists with a component for 
+each projection size considered. Each such component contains the following entries: 
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>ICFT</code></td>
+<td>
+<p>interaction contribution frequency table for the projection size</p>
+</td></tr>
+<tr valign="top"><td><code>ICs </code></td>
+<td>
+<p>individual interaction contributions (if requested by option <code>detail</code>)</p>
+</td></tr>
+<tr valign="top"><td><code>sv2s </code></td>
+<td>
+<p>squared singular values (if requested by option <code>detail</code>)</p>
+</td></tr>
+<tr valign="top"><td><code>mean.u2s </code></td>
+<td>
+<p>squared column means of left-singular vectors (if requested by option <code>detail</code>)</p>
+</td></tr>
+</table>
+<p>Function <code>ICFT</code> returns a list with the following components: 
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>ICFT</code></td>
+<td>
+<p>interaction contribution frequency table for the projection size</p>
+</td></tr>
+<tr valign="top"><td><code>ICs </code></td>
+<td>
+<p>Average R^2 frequency table for the projection size</p>
+</td></tr>
+<tr valign="top"><td><code>sv2s </code></td>
+<td>
+<p>squared singular values of the model matrix</p>
+</td></tr>
+<tr valign="top"><td><code>mean.u2s </code></td>
+<td>
+<p>squared column means of left-singular vectors in the rotated version (concentrated or even)</p>
+</td></tr>
+<tr valign="top"><td><code>mm</code></td>
+<td>
+<p>model matrix of the interaction</p>
+</td></tr>
+<tr valign="top"><td><code>u</code></td>
+<td>
+<p>(left singular vectors corresponding to the rotated version of ICFT (concentrated or even); 
+these do not depend on the coding underlying the model matrix</p>
+</td></tr>   
+<tr valign="top"><td><code>v</code></td>
+<td>
+<p>(right singular vectors corresponding to the rotated version of ICFT (concentrated or even); 
+these depend on the coding underlying the model matrix</p>
+</td></tr>   
+<tr valign="top"><td><code>c.worst</code></td>
+<td>
+<p>(<code>v%*%c.worst</code> is the worst case parameter vector for the model matrix <code>mm</code> 
+in terms of bias of the average response for estimation of the intercept 
+caused by the interaction under consideration</p>
+</td></tr>   
+</table>
+
+
+<h3>Warning </h3>
+
+<p>The functions have been checked on the types of designs for which
+they are intended (especially orthogonal arrays produced with oa.design).
+They may produce meaningless results for some other types of designs.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p> Ulrike Groemping </p>
+
+
+<h3>References</h3>
+
+<p>Groemping, U. (2017). An Interaction-Based Decomposition of Generalized Word Counts Suited to Assessing 
+Combinatorial Equivalence of Factorial Designs. <em>Reports in Mathematics, Physics and Chemistry</em>, 
+Report 1/2017. <a href="http://www1.beuth-hochschule.de/FB_II/reports/Report-2017-001.pdf">http://www1.beuth-hochschule.de/FB_II/reports/Report-2017-001.pdf</a>,
+Department II, Beuth University of Applied Sciences, Berlin.
+</p>
+<p>Groemping, U. (2018). Coding Invariance in Factorial Linear Models and a New Tool for Assessing 
+Combinatorial Equivalence of Factorial Designs. 
+<em>Journal of Statistical Planning and Inference</em> <b>193</b>, 1-14. 
+<a href="https://doi.org/10.1016/j.jspi.2017.07.004">https://doi.org/10.1016/j.jspi.2017.07.004</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p> See also <code><a href="GWLP.html">GWLP</a></code> and <code><a href="generalized.word.length.html">generalized.word.length</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+   oa24.bad &lt;- oa.design(L24.2.13.3.1.4.1, columns=c(1,2,14,15))
+   oa24.good &lt;- oa.design(L24.2.13.3.1.4.1, columns=c(3,10,14,15))
+   ## resolution is III in both cases, but the bad one has more words of length 3
+   GWLP(oa24.bad)[4:5]
+   ICFTs(oa24.bad)
+   ICFTs(oa24.bad, conc=FALSE)
+   GWLP(oa24.good)[4:5]
+   ICFTs(oa24.good)
+   ICFTs(oa24.good, conc=FALSE)
+   ICFTs(oa24.good, resk.only=FALSE)
+   
+   ICFT(L18[,c(1,4,6)])
+   ICFT(L18[,c(1,4,6)], conc=FALSE)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DoE.base</em> version 1.1-4 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -8,8 +8,6 @@ DendSer.dendrogram      Tries to run DendSer on a dendrogram
 FM_index                Calculating Fowlkes-Mallows Index
 FM_index_R              Calculating Fowlkes-Mallows index in R
 FM_index_permutation    Calculating Fowlkes-Mallows Index under H0
-FM_index_profdpm        Calculating Fowlkes-Mallows index using the
-                        profdpm R package
 all.equal.dendrogram    Global Comparison of two (or more) dendrograms
 all_couple_rotations_at_k
                         Rotate tree branches for k

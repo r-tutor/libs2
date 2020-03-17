@@ -12,13 +12,11 @@ augment.decomposed.ts	augment.decomposed.ts
 augment.factanal	augment.factanal
 augment.felm	augment.felm
 augment.glm	augment.glm
-augment.glmRob	augment.glmRob
 augment.htest	augment.htest
 augment.ivreg	augment.ivreg
 augment.kmeans	augment.kmeans
 augment.lm	augment.lm
 augment.lme	nlme_tidiers
-augment.lmRob	augment.lmRob
 augment.loess	augment.loess
 augment.Mclust	augment.Mclust
 augment.merMod	lme4_tidiers
@@ -94,7 +92,6 @@ glance.gam	mgcv_glance_gam
 glance.garch	glance.garch
 glance.glm	glance.glm
 glance.glmnet	glance.glmnet
-glance.glmRob	glance.glmRob
 glance.gmm	glance.gmm
 glance.htest	tidy.htest
 glance.ivreg	glance.ivreg
@@ -104,7 +101,6 @@ glance.list	list_tidiers
 glance.lm	glance.lm
 glance.lme	nlme_tidiers
 glance.lmodel2	glance.lmodel2
-glance.lmRob	glance.lmRob
 glance.matrix	matrix_tidiers
 glance.Mclust	glance.Mclust
 glance.merMod	lme4_tidiers
@@ -184,7 +180,6 @@ rcorr_tidiers	tidy.rcorr
 reexports	reexports
 ridgelm_tidiers	tidy.ridgelm
 rlm_tidiers	glance.rlm
-robust_tidiers	tidy.lmRob
 roc_tidiers	tidy.roc
 rowwise_df_tidiers	rowwise_df_tidiers
 rqs_tidiers	tidy.rqs
@@ -247,7 +242,6 @@ tidy.geeglm	geeglm_tidiers
 tidy.glht	tidy.glht
 tidy.glm	tidy.glm
 tidy.glmnet	tidy.glmnet
-tidy.glmRob	tidy.glmRob
 tidy.gmm	tidy.gmm
 tidy.htest	tidy.htest
 tidy.irlba	tidy_irlba
@@ -263,7 +257,6 @@ tidy.list	list_tidiers
 tidy.lm	tidy.lm
 tidy.lme	nlme_tidiers
 tidy.lmodel2	tidy.lmodel2
-tidy.lmRob	tidy.lmRob
 tidy.logical	vector_tidiers
 tidy.lsmobj	emmeans_tidiers
 tidy.manova	tidy.manova

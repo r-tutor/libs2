@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Factorize integer numbers and factors</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for factorize {DoE.base}"><tr><td>factorize {DoE.base}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+Factorize integer numbers and factors
+</h2>
+
+<h3>Description</h3>
+
+<p>Methods to factorize integer numbers into primes or factors 
+into pseudo factors with integer numbers of levels
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+
+## S3 method for class 'factor'
+factorize(x, name = deparse(substitute(x)), extension = letters,
+    drop = FALSE, sep = "", ...)
+## S3 method for class 'design'
+factorize(x, extension = letters, sep = ".", long=FALSE, ...)
+## S3 method for class 'data.frame'
+factorize(x, extension = letters, sep = ".", long=FALSE, ...)
+
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>factor<br />
+OR data frame of class <code>design</code>
+OR data frame </p>
+</td></tr>
+<tr valign="top"><td><code>name</code></td>
+<td>
+<p>name to use for prefixing the pseudo factors</p>
+</td></tr>
+<tr valign="top"><td><code>extension</code></td>
+<td>
+<p>extensions to use for postfixing the pseudo factors</p>
+</td></tr>
+<tr valign="top"><td><code>drop</code></td>
+<td>
+<p>TRUE: have a vector only in case of just one pseudo factor </p>
+</td></tr>
+<tr valign="top"><td><code>sep</code></td>
+<td>
+<p>separation between name and postfix for pseudo factors</p>
+</td></tr>
+<tr valign="top"><td><code>long</code></td>
+<td>
+<p>TRUE: create a complete matrix of pseudofactors; 
+FALSE: only create the named numbers of levels </p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p> currently not used</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>These functions are used for blocking full factorials. 
+The method for class <code>factors</code> is a modification of the analogous method 
+from package <span class="pkg">conf.design</span>, the other two are convenience versions for designs 
+and data frames.
+</p>
+
+
+<h3>Value</h3>
+
+<p>All three methods return a matrix of pseudo factors (in case <code>long=TRUE</code>) 
+or a named numeric vector of numbers of levels of the pseudo factors 
+(for the default <code>long=FALSE</code>). 
+</p>
+
+
+<h3>Note</h3>
+
+<p>There may be conflicts with functions from packages <span class="pkg">conf.design</span> or <span class="pkg">sfsmisc</span>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Ulrike Groemping; Bill Venables authored the original of factorize.factor.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>The function from package <span class="pkg">conf.design</span>: <code><a href="../../conf.design/html/factorize.html">factorize</a></code><br />
+The function from package <span class="pkg">sfsmisc</span>: <code><a href="../../sfsmisc/html/factorize.html">factorize</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+factorize(12)
+factorize(c(2,2,3,3,6))
+factorize(fac.design(nlevels=c(2,2,3,3,6)))
+unlist(factorize(c(2,2,3,3,6)))
+factorize(undesign(fac.design(nlevels=c(2,2,3,3,6))))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>DoE.base</em> version 1.1-4 <a href="00Index.html">Index</a>]</div>
+</body></html>

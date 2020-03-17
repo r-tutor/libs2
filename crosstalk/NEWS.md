@@ -1,3 +1,9 @@
+## crosstalk 1.1.0
+
+* `shiny` and `ggplot2` are now Suggested packages instead of Imported packages.
+
+* Upgrade to Bootstrap v3.4.1 and jQuery v3.4.1.
+
 ## crosstalk 1.0.1
 
 * `selection_factor` behavior was no longer correct with ggplot2 2.2.0, which

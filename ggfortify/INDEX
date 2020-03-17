@@ -37,9 +37,9 @@ autoplot.tsmodel        Autoplot time series models (like AR, ARIMA)
 autoplot.varprd         Autoplot 'vars::varprd'
 cbind_wraps             Wrapper for cbind
 check_names             Check data names are equal with expected
-confint.acf             Calcurate confidence interval for 'stats::acf'
+confint.acf             Calculate confidence interval for 'stats::acf'
 deprecate.warning       Show deprecate warning
-fitted.ar               Calcurate fitted values for 'stats::ar'
+fitted.ar               Calculate fitted values for 'stats::ar'
 flatten                 Flatten dataframe contains matrix
 fortify.MSM.lm          Convert 'MSwM::MSM.lm' to 'data.frame'
 fortify.RasterCommon    Convert 'raster' to 'data.frame'
@@ -110,7 +110,7 @@ print,ggmultiplot-method
                         Generic print function for 'ggmultiplot'
 rbind_ts                Rbind original and predicted time-series-like
                         instances as fortified 'data.frame'
-residuals.ar            Calcurate residuals for 'stats::ar'
+residuals.ar            Calculate residuals for 'stats::ar'
 show,ggmultiplot-method
                         Generic show function for 'ggmultiplot'
 support_autoplot        Check if passed object is supported by

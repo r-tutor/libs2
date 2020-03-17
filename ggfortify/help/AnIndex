@@ -1,4 +1,3 @@
-ggfortify-package	ggfortify
 +,ggmultiplot,ANY-method	plus-ggmultiplot-ANY-method
 apply_facets	apply_facets
 apply_grid	apply_grid

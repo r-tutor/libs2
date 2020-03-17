@@ -1,8 +1,8 @@
 Package: dendextend
 Type: Package
 Title: Extending 'dendrogram' Functionality in R
-Version: 1.13.3
-Date: 2020-02-07
+Version: 1.13.4
+Date: 2020-02-28
 Authors@R: c(person("Tal", "Galili", role = c("aut", "cre", "cph"), email =
     "tal.galili@gmail.com", comment = "https://www.r-statistics.com"),
     person("Yoav", "Benjamini", email = "ybenja@tau.ac.il",role = "ths"),
@@ -54,9 +54,9 @@ Description: Offers a set of functions for extending
 Depends: R (>= 3.0.0)
 Imports: utils, stats, datasets, magrittr (>= 1.0.1), ggplot2, viridis
 Suggests: knitr, rmarkdown, testthat, seriation, colorspace, ape,
-        profdpm, microbenchmark, gplots, heatmaply, d3heatmap,
-        dynamicTreeCut, pvclust, corrplot, DendSer, MASS, cluster, fpc,
-        circlize (>= 0.2.5), covr
+        microbenchmark, gplots, heatmaply, d3heatmap, dynamicTreeCut,
+        pvclust, corrplot, DendSer, MASS, cluster, fpc, circlize (>=
+        0.2.5), covr
 Enhances: ggdendro, dendroextras, Hmisc, data.table, rpart
 VignetteBuilder: knitr
 LazyData: true
@@ -70,7 +70,7 @@ BugReports: https://github.com/talgalili/dendextend/issues
 RoxygenNote: 7.0.2
 Encoding: UTF-8
 NeedsCompilation: no
-Packaged: 2020-02-07 15:59:27 UTC; talgalili
+Packaged: 2020-02-28 19:51:09 UTC; talgalili
 Author: Tal Galili [aut, cre, cph] (https://www.r-statistics.com),
   Yoav Benjamini [ths],
   Gavin Simpson [ctb],
@@ -102,5 +102,5 @@ Author: Tal Galili [aut, cre, cph] (https://www.r-statistics.com),
   David Bradley [ctb] (https://github.com/DBradley27)
 Maintainer: Tal Galili <tal.galili@gmail.com>
 Repository: CRAN
-Date/Publication: 2020-02-08 19:10:06 UTC
-Built: R 3.6.2; ; 2020-02-22 07:58:30 UTC; windows
+Date/Publication: 2020-02-28 22:40:26 UTC
+Built: R 3.6.3; ; 2020-03-12 18:33:33 UTC; windows

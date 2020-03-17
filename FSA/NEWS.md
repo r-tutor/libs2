@@ -1,6 +1,23 @@
+# FSA 0.8.30 9-Mar-20
+* Started using `rhub::check_for_cran()` for checking before sending to CRAN.
+* Updated tests for `Summarize()` and `ksTest()` that used `data.frame()`. This should have been done with v0.8.28.
+* Fixed errors for tests in `ksTest()` that were identified using R-hub.
+* Removed all links to documentation in non-dependent or non-suggested packages. This removes a note from R-hub.
+* `fishR()`: Modified. Changed base URL to `https:` (from `http:`). Added `open=`, primarily to allow not opening a browser during testing.
+
+# FSA 0.8.29 8-Mar-20
+* Removed dependency on `epitools` package as it may soon be orphaned. See changes to `binCI()` and `poiCI()` outlined below.
+* `binCI()`: Modified. Added internal functions that are based on (but not identical to) functions in the `epitools` package which will possibly be deprecated soon (per note from CRAN on 7-Mar-20).
+* `poiCI()`: Modified. Added internal functions that are based on (but not identical to) functions in the `epitools` package which will possibly be deprecated soon (per note from CRAN on 7-Mar-20).
+
+# FSA 0.8.28 28-Feb-20
+* `fitPlot()`: Modified. Changed so that lines are plotted after the points in the IVR versions.
+* `ksTest()`: Modified. Changed documentation examples to handle R's new way of handling `stringsAsFactors=` (per request from CRAN on 27-Feb-20).
+* `psdAdd()`: Modified. Changed testing to handle R's new way of handling `stringsAsFactors=` (per request from CRAN on 27-Feb-20).
+
 # FSA 0.8.27 2-Feb-20
-* Now using ROxygen2  7.0.2.
-# Removed dependency on `gplots` package as it is now orphaned. Required adding `iRichColors()` internal function.
+* Now using ROxygen2 7.0.2.
+* Removed dependency on `gplots` package as it is now orphaned. Required adding `iRichColors()` internal function.
 * `lwCompPreds()`: Removed `\dots` from arguments as it was not in usage (per request from CRAN on 3-Feb-20).
 * `repeatedRows2Keep()`: Modified. Now makes comparisons as if `NA`s are regular values.
 

@@ -1,7 +1,7 @@
 Package: bookdown
 Type: Package
 Title: Authoring Books and Technical Documents with R Markdown
-Version: 0.17
+Version: 0.18
 Authors@R: c(
     person("Yihui", "Xie", role = c("aut", "cre"), email = "xie@yihui.name", comment = c(ORCID = "0000-0003-0645-5666")),
     person("JJ", "Allaire", role = "ctb"),
@@ -47,7 +47,7 @@ Authors@R: c(
     person("Vincent", "Fulco", role = "ctb"),
     person("Yixuan", "Qiu", role = "ctb"),
     person("Zhuoer", "Dong", role = "ctb"),
-    person(family = "RStudio Inc", role = "cph"),
+    person(family = "RStudio, PBC", role = "cph"),
     person("Bartek", "Szopka", role = "ctb", comment = "The jQuery Highlight plugin"),
     person("Zeno", "Rocha", role = "cph", comment = "clipboard.js library"),
     person(family = "jQuery Foundation", role = "cph", comment = "jQuery library"),
@@ -58,7 +58,7 @@ Authors@R: c(
 Maintainer: Yihui Xie <xie@yihui.name>
 Description: Output formats and utilities for authoring books and technical documents with R Markdown.
 License: GPL-3
-Imports: htmltools (>= 0.3.6), knitr (>= 1.22), rmarkdown (>= 1.12),
+Imports: htmltools (>= 0.3.6), knitr (>= 1.22), rmarkdown (>= 2.0),
         xfun (>= 0.6), tinytex (>= 0.12)
 Suggests: htmlwidgets, rstudioapi, miniUI, rsconnect (>= 0.4.3), servr
         (>= 0.13), shiny, testit (>= 0.9), tufte, webshot
@@ -69,7 +69,7 @@ LazyData: TRUE
 RoxygenNote: 7.0.2
 Encoding: UTF-8
 NeedsCompilation: no
-Packaged: 2020-01-10 22:44:05 UTC; yihui
+Packaged: 2020-03-05 05:12:55 UTC; yihui
 Author: Yihui Xie [aut, cre] (<https://orcid.org/0000-0003-0645-5666>),
   JJ Allaire [ctb],
   Albert Kim [ctb],
@@ -114,7 +114,7 @@ Author: Yihui Xie [aut, cre] (<https://orcid.org/0000-0003-0645-5666>),
   Vincent Fulco [ctb],
   Yixuan Qiu [ctb],
   Zhuoer Dong [ctb],
-  RStudio Inc [cph],
+  RStudio, PBC [cph],
   Bartek Szopka [ctb] (The jQuery Highlight plugin),
   Zeno Rocha [cph] (clipboard.js library),
   jQuery Foundation [cph] (jQuery library),
@@ -124,5 +124,5 @@ Author: Yihui Xie [aut, cre] (<https://orcid.org/0000-0003-0645-5666>),
     inst/resources/AUTHORS),
   FriendCode Inc [cph, ctb] (The gitbook style, with modifications)
 Repository: CRAN
-Date/Publication: 2020-01-11 06:00:14 UTC
-Built: R 3.6.2; ; 2020-02-22 04:50:54 UTC; windows
+Date/Publication: 2020-03-05 06:00:02 UTC
+Built: R 3.6.3; ; 2020-03-12 10:18:02 UTC; windows
