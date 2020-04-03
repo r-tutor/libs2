@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Moving-average smoothing</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for ma {forecast}"><tr><td>ma {forecast}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Moving-average smoothing</h2>
+
+<h3>Description</h3>
+
+<p><code>ma</code> computes a simple moving average smoother of a given time series.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ma(x, order, centre = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>Univariate time series</p>
+</td></tr>
+<tr valign="top"><td><code>order</code></td>
+<td>
+<p>Order of moving average smoother</p>
+</td></tr>
+<tr valign="top"><td><code>centre</code></td>
+<td>
+<p>If TRUE, then the moving average is centred for even orders.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The moving average smoother averages the nearest <code>order</code> periods of
+each observation. As neighbouring observations of a time series are likely
+to be similar in value, averaging eliminates some of the randomness in the
+data, leaving a smooth trend-cycle component. </p>
+<p style="text-align: center;"><i>T[t]=1/m(y[t-k]+y[t-k+1]+&hellip;+y[t]+&hellip;+y[t+k-1]+y[t+k])</i></p>
+<p> where
+<i>k=(m-1)/2</i>
+</p>
+<p>When an even <code>order</code> is specified, the observations averaged will
+include one more observation from the future than the past (k is rounded
+up). If centre is TRUE, the value from two moving averages (where k is
+rounded up and down respectively) are averaged, centering the moving
+average.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Numerical time series object containing the simple moving average
+smoothed values.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Rob J Hyndman
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../stats/html/decompose.html">decompose</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+plot(wineind)
+sm &lt;- ma(wineind,order=12)
+lines(sm,col="red")
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>forecast</em> version 8.12 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -5,10 +5,10 @@ citEntry(entry = "Manual",
         author = personList(as.person("A. C. Del Re")),
        journal = "R Package",
           year = "2013",
-       url = "http://cran.r-project.org/web/packages/compute.es",
+       url = "https://cran.r-project.org/package=compute.es",
 
    textVersion = paste("AC Del Re (2013).",
                        "compute.es: Compute Effect Sizes.",
                        "R package version 0.2-2.",
-                       "URL http://cran.r-project.org/web/packages/compute.es")
+                       "URL https://cran.r-project.org/package=compute.es")
 )

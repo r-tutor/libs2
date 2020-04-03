@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Box-Cox and Loess-based decomposition bootstrap.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for bld.mbb.bootstrap {forecast}"><tr><td>bld.mbb.bootstrap {forecast}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Box-Cox and Loess-based decomposition bootstrap.</h2>
+
+<h3>Description</h3>
+
+<p>Generates bootstrapped versions of a time series using the Box-Cox and
+Loess-based decomposition bootstrap.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+bld.mbb.bootstrap(x, num, block_size = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>Original time series.</p>
+</td></tr>
+<tr valign="top"><td><code>num</code></td>
+<td>
+<p>Number of bootstrapped versions to generate.</p>
+</td></tr>
+<tr valign="top"><td><code>block_size</code></td>
+<td>
+<p>Block size for the moving block bootstrap.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The procedure is described in Bergmeir et al. Box-Cox decomposition is
+applied, together with STL or Loess (for non-seasonal time series), and the
+remainder is bootstrapped using a moving block bootstrap.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list with bootstrapped versions of the series. The first series in
+the list is the original series.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Christoph Bergmeir, Fotios Petropoulos
+</p>
+
+
+<h3>References</h3>
+
+<p>Bergmeir, C., R. J. Hyndman, and J. M. Benitez (2016). Bagging
+Exponential Smoothing Methods using STL Decomposition and Box-Cox
+Transformation. International Journal of Forecasting 32, 303-312.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="baggedModel.html">baggedETS</a></code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+bootstrapped_series &lt;- bld.mbb.bootstrap(WWWusage, 100)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>forecast</em> version 8.12 <a href="00Index.html">Index</a>]</div>
+</body></html>

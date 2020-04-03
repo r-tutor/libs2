@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Residuals for various time series models</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for residuals.forecast {forecast}"><tr><td>residuals.forecast {forecast}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Residuals for various time series models</h2>
+
+<h3>Description</h3>
+
+<p>Returns time series of residuals from a fitted model.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'forecast'
+residuals(object, type = c("innovation", "response"), ...)
+
+## S3 method for class 'ar'
+residuals(object, type = c("innovation", "response"), ...)
+
+## S3 method for class 'Arima'
+residuals(object, type = c("innovation", "response", "regression"), h = 1, ...)
+
+## S3 method for class 'bats'
+residuals(object, type = c("innovation", "response"), h = 1, ...)
+
+## S3 method for class 'tbats'
+residuals(object, type = c("innovation", "response"), h = 1, ...)
+
+## S3 method for class 'ets'
+residuals(object, type = c("innovation", "response"), h = 1, ...)
+
+## S3 method for class 'ARFIMA'
+residuals(object, type = c("innovation", "response"), ...)
+
+## S3 method for class 'nnetar'
+residuals(object, type = c("innovation", "response"), h = 1, ...)
+
+## S3 method for class 'stlm'
+residuals(object, type = c("innovation", "response"), ...)
+
+## S3 method for class 'tslm'
+residuals(object, type = c("innovation", "response", "deviance"), ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>An object containing a time series model of class <code>ar</code>,
+<code>Arima</code>, <code>bats</code>, <code>ets</code>, <code>arfima</code>, <code>nnetar</code> or
+<code>stlm</code>.
+If <code>object</code> is of class <code>forecast</code>, then the function will return
+<code>object$residuals</code> if it exists, otherwise it returns the differences between
+the observations and their fitted values.</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>Type of residual.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Other arguments not used.</p>
+</td></tr>
+<tr valign="top"><td><code>h</code></td>
+<td>
+<p>If <code>type='response'</code>, then the fitted values are computed for
+<code>h</code>-step forecasts.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Innovation residuals correspond to the white noise process that drives the
+evolution of the time series model. Response residuals are the difference
+between the observations and the fitted values (equivalent to <code>h</code>-step
+forecasts). For functions with no <code>h</code> argument, <code>h=1</code>. For
+homoscedastic models, the innovation residuals and the response residuals
+for <code>h=1</code> are identical. Regression residuals are available for
+regression models with ARIMA errors, and are equal to the original data
+minus the effect of the regression variables. If there are no regression
+variables, the errors will be identical to the original series (possibly
+adjusted to have zero mean).  <code>arima.errors</code> is a deprecated function
+which is identical to <code>residuals.Arima(object, type="regression")</code>.
+For <code>nnetar</code> objects, when <code>type="innovations"</code> and <code>lambda</code> is used, a
+matrix of time-series consisting of the residuals from each of the fitted neural networks is returned.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A <code>ts</code> object.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Rob J Hyndman
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="fitted.Arima.html">fitted.Arima</a></code>, <code><a href="checkresiduals.html">checkresiduals</a></code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+fit &lt;- Arima(lynx,order=c(4,0,0), lambda=0.5)
+
+plot(residuals(fit))
+plot(residuals(fit, type='response'))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>forecast</em> version 8.12 <a href="00Index.html">Index</a>]</div>
+</body></html>

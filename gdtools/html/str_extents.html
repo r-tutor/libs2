@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Compute string extents.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for str_extents {gdtools}"><tr><td>str_extents {gdtools}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Compute string extents.</h2>
+
+<h3>Description</h3>
+
+<p>Determines the width and height of a bounding box that's big enough
+to (just) enclose the provided text.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+str_extents(x, fontname = "sans", fontsize = 12, bold = FALSE,
+  italic = FALSE, fontfile = "")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>Character vector of strings to measure</p>
+</td></tr>
+<tr valign="top"><td><code>fontname</code></td>
+<td>
+<p>Font name</p>
+</td></tr>
+<tr valign="top"><td><code>fontsize</code></td>
+<td>
+<p>Font size</p>
+</td></tr>
+<tr valign="top"><td><code>bold, italic</code></td>
+<td>
+<p>Is text bold/italic?</p>
+</td></tr>
+<tr valign="top"><td><code>fontfile</code></td>
+<td>
+<p>Font file</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+str_extents(letters)
+str_extents("Hello World!", bold = TRUE, italic = FALSE,
+  fontname = "sans", fontsize = 12)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>gdtools</em> version 0.2.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

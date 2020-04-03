@@ -1,0 +1,232 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Exponential smoothing state space model</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for ets {forecast}"><tr><td>ets {forecast}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Exponential smoothing state space model</h2>
+
+<h3>Description</h3>
+
+<p>Returns ets model applied to <code>y</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ets(
+  y,
+  model = "ZZZ",
+  damped = NULL,
+  alpha = NULL,
+  beta = NULL,
+  gamma = NULL,
+  phi = NULL,
+  additive.only = FALSE,
+  lambda = NULL,
+  biasadj = FALSE,
+  lower = c(rep(1e-04, 3), 0.8),
+  upper = c(rep(0.9999, 3), 0.98),
+  opt.crit = c("lik", "amse", "mse", "sigma", "mae"),
+  nmse = 3,
+  bounds = c("both", "usual", "admissible"),
+  ic = c("aicc", "aic", "bic"),
+  restrict = TRUE,
+  allow.multiplicative.trend = FALSE,
+  use.initial.values = FALSE,
+  na.action = c("na.contiguous", "na.interp", "na.fail"),
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>a numeric vector or time series of class <code>ts</code></p>
+</td></tr>
+<tr valign="top"><td><code>model</code></td>
+<td>
+<p>Usually a three-character string identifying method using the
+framework terminology of Hyndman et al. (2002) and Hyndman et al. (2008).
+The first letter denotes the error type (&quot;A&quot;, &quot;M&quot; or &quot;Z&quot;); the second letter
+denotes the trend type (&quot;N&quot;,&quot;A&quot;,&quot;M&quot; or &quot;Z&quot;); and the third letter denotes
+the season type (&quot;N&quot;,&quot;A&quot;,&quot;M&quot; or &quot;Z&quot;). In all cases, &quot;N&quot;=none, &quot;A&quot;=additive,
+&quot;M&quot;=multiplicative and &quot;Z&quot;=automatically selected. So, for example, &quot;ANN&quot; is
+simple exponential smoothing with additive errors, &quot;MAM&quot; is multiplicative
+Holt-Winters' method with multiplicative errors, and so on.
+</p>
+<p>It is also possible for the model to be of class <code>"ets"</code>, and equal to
+the output from a previous call to <code>ets</code>. In this case, the same model
+is fitted to <code>y</code> without re-estimating any smoothing parameters. See
+also the <code>use.initial.values</code> argument.</p>
+</td></tr>
+<tr valign="top"><td><code>damped</code></td>
+<td>
+<p>If TRUE, use a damped trend (either additive or
+multiplicative). If NULL, both damped and non-damped trends will be tried
+and the best model (according to the information criterion <code>ic</code>)
+returned.</p>
+</td></tr>
+<tr valign="top"><td><code>alpha</code></td>
+<td>
+<p>Value of alpha. If NULL, it is estimated.</p>
+</td></tr>
+<tr valign="top"><td><code>beta</code></td>
+<td>
+<p>Value of beta. If NULL, it is estimated.</p>
+</td></tr>
+<tr valign="top"><td><code>gamma</code></td>
+<td>
+<p>Value of gamma. If NULL, it is estimated.</p>
+</td></tr>
+<tr valign="top"><td><code>phi</code></td>
+<td>
+<p>Value of phi. If NULL, it is estimated.</p>
+</td></tr>
+<tr valign="top"><td><code>additive.only</code></td>
+<td>
+<p>If TRUE, will only consider additive models. Default is
+FALSE.</p>
+</td></tr>
+<tr valign="top"><td><code>lambda</code></td>
+<td>
+<p>Box-Cox transformation parameter. If <code>lambda="auto"</code>,
+then a transformation is automatically selected using <code>BoxCox.lambda</code>.
+The transformation is ignored if NULL. Otherwise,
+data transformed before model is estimated. When <code>lambda</code> is specified,
+<code>additive.only</code> is set to <code>TRUE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>biasadj</code></td>
+<td>
+<p>Use adjusted back-transformed mean for Box-Cox
+transformations. If transformed data is used to produce forecasts and fitted values,
+a regular back transformation will result in median forecasts. If biasadj is TRUE,
+an adjustment will be made to produce mean forecasts and fitted values.</p>
+</td></tr>
+<tr valign="top"><td><code>lower</code></td>
+<td>
+<p>Lower bounds for the parameters (alpha, beta, gamma, phi)</p>
+</td></tr>
+<tr valign="top"><td><code>upper</code></td>
+<td>
+<p>Upper bounds for the parameters (alpha, beta, gamma, phi)</p>
+</td></tr>
+<tr valign="top"><td><code>opt.crit</code></td>
+<td>
+<p>Optimization criterion. One of &quot;mse&quot; (Mean Square Error),
+&quot;amse&quot; (Average MSE over first <code>nmse</code> forecast horizons), &quot;sigma&quot;
+(Standard deviation of residuals), &quot;mae&quot; (Mean of absolute residuals), or
+&quot;lik&quot; (Log-likelihood, the default).</p>
+</td></tr>
+<tr valign="top"><td><code>nmse</code></td>
+<td>
+<p>Number of steps for average multistep MSE (1&lt;=<code>nmse</code>&lt;=30).</p>
+</td></tr>
+<tr valign="top"><td><code>bounds</code></td>
+<td>
+<p>Type of parameter space to impose: <code>"usual" </code> indicates
+all parameters must lie between specified lower and upper bounds;
+<code>"admissible"</code> indicates parameters must lie in the admissible space;
+<code>"both"</code> (default) takes the intersection of these regions.</p>
+</td></tr>
+<tr valign="top"><td><code>ic</code></td>
+<td>
+<p>Information criterion to be used in model selection.</p>
+</td></tr>
+<tr valign="top"><td><code>restrict</code></td>
+<td>
+<p>If <code>TRUE</code> (default), the models with infinite variance
+will not be allowed.</p>
+</td></tr>
+<tr valign="top"><td><code>allow.multiplicative.trend</code></td>
+<td>
+<p>If <code>TRUE</code>, models with multiplicative
+trend are allowed when searching for a model. Otherwise, the model space
+excludes them. This argument is ignored if a multiplicative trend model is
+explicitly requested (e.g., using <code>model="MMN"</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>use.initial.values</code></td>
+<td>
+<p>If <code>TRUE</code> and <code>model</code> is of class
+<code>"ets"</code>, then the initial values in the model are also not
+re-estimated.</p>
+</td></tr>
+<tr valign="top"><td><code>na.action</code></td>
+<td>
+<p>A function which indicates what should happen when the data
+contains NA values. By default, the largest contiguous portion of the
+time-series will be used.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Other undocumented arguments.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Based on the classification of methods as described in Hyndman et al (2008).
+</p>
+<p>The methodology is fully automatic. The only required argument for ets is
+the time series. The model is chosen automatically if not specified. This
+methodology performed extremely well on the M3-competition data. (See
+Hyndman, et al, 2002, below.)
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of class &quot;<code>ets</code>&quot;.
+</p>
+<p>The generic accessor functions <code>fitted.values</code> and <code>residuals</code>
+extract useful features of the value returned by <code>ets</code> and associated
+functions.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Rob J Hyndman
+</p>
+
+
+<h3>References</h3>
+
+<p>Hyndman, R.J., Koehler, A.B., Snyder, R.D., and Grose, S. (2002)
+&quot;A state space framework for automatic forecasting using exponential
+smoothing methods&quot;, <em>International J. Forecasting</em>, <b>18</b>(3),
+439&ndash;454.
+</p>
+<p>Hyndman, R.J., Akram, Md., and Archibald, B. (2008) &quot;The admissible
+parameter space for exponential smoothing models&quot;. <em>Annals of
+Statistical Mathematics</em>, <b>60</b>(2), 407&ndash;426.
+</p>
+<p>Hyndman, R.J., Koehler, A.B., Ord, J.K., and Snyder, R.D. (2008)
+<em>Forecasting with exponential smoothing: the state space approach</em>,
+Springer-Verlag. <a href="http://www.exponentialsmoothing.net">http://www.exponentialsmoothing.net</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../stats/html/HoltWinters.html">HoltWinters</a></code>, <code><a href="naive.html">rwf</a></code>,
+<code><a href="Arima.html">Arima</a></code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+fit &lt;- ets(USAccDeaths)
+plot(forecast(fit))
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>forecast</em> version 8.12 <a href="00Index.html">Index</a>]</div>
+</body></html>

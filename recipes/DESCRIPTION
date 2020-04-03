@@ -1,6 +1,6 @@
 Package: recipes
 Title: Preprocessing Tools to Create Design Matrices
-Version: 0.1.9
+Version: 0.1.10
 Authors@R: c(
     person(given = "Max",    family = "Kuhn",    email = "max@rstudio.com",    role = c("aut", "cre")),
     person(given = "Hadley", family = "Wickham", email = "hadley@rstudio.com", role = c("aut")),
@@ -11,7 +11,8 @@ Description: An extensible framework to create and preprocess
     be estimated from an initial data set and then applied to 
     other data sets. The resulting design matrices can then be used 
     as inputs into statistical or machine learning models. 
-URL: https://github.com/tidymodels/recipes
+URL: https://github.com/tidymodels/recipes,
+        https://tidymodels.github.io/recipes/
 BugReports: https://github.com/tidymodels/recipes/issues
 Depends: R (>= 3.1), dplyr
 Imports: generics, glue, gower, ipred, lubridate, magrittr, Matrix,
@@ -26,11 +27,11 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.0.2.9000
 NeedsCompilation: no
-Packaged: 2020-01-05 21:51:32 UTC; max
+Packaged: 2020-03-17 03:59:24 UTC; max
 Author: Max Kuhn [aut, cre],
   Hadley Wickham [aut],
   RStudio [cph]
 Maintainer: Max Kuhn <max@rstudio.com>
 Repository: CRAN
-Date/Publication: 2020-01-07 20:20:08 UTC
-Built: R 3.6.2; ; 2020-02-22 07:57:45 UTC; windows
+Date/Publication: 2020-03-18 14:50:09 UTC
+Built: R 3.6.3; ; 2020-03-30 20:20:02 UTC; windows

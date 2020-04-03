@@ -92,7 +92,7 @@ prep.step_percentile <- function(x, training, info = NULL, ...) {
   
   ## We'll use the names later so
   if (x$options$names == FALSE)
-    stop("`names` should be set to TRUE", call. = FALSE)
+    rlang::abort("`names` should be set to TRUE")
   
   if (!x$approx) {
     ref_dist <- training[, col_names]

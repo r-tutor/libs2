@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Mean Forecast</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for meanf {forecast}"><tr><td>meanf {forecast}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Mean Forecast</h2>
+
+<h3>Description</h3>
+
+<p>Returns forecasts and prediction intervals for an iid model applied to y.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+meanf(
+  y,
+  h = 10,
+  level = c(80, 95),
+  fan = FALSE,
+  lambda = NULL,
+  biasadj = FALSE,
+  bootstrap = FALSE,
+  npaths = 5000,
+  x = y
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>a numeric vector or time series of class <code>ts</code></p>
+</td></tr>
+<tr valign="top"><td><code>h</code></td>
+<td>
+<p>Number of periods for forecasting</p>
+</td></tr>
+<tr valign="top"><td><code>level</code></td>
+<td>
+<p>Confidence levels for prediction intervals.</p>
+</td></tr>
+<tr valign="top"><td><code>fan</code></td>
+<td>
+<p>If TRUE, level is set to seq(51,99,by=3). This is suitable for
+fan plots.</p>
+</td></tr>
+<tr valign="top"><td><code>lambda</code></td>
+<td>
+<p>Box-Cox transformation parameter. If <code>lambda="auto"</code>,
+then a transformation is automatically selected using <code>BoxCox.lambda</code>.
+The transformation is ignored if NULL. Otherwise,
+data transformed before model is estimated.</p>
+</td></tr>
+<tr valign="top"><td><code>biasadj</code></td>
+<td>
+<p>Use adjusted back-transformed mean for Box-Cox
+transformations. If transformed data is used to produce forecasts and fitted values,
+a regular back transformation will result in median forecasts. If biasadj is TRUE,
+an adjustment will be made to produce mean forecasts and fitted values.</p>
+</td></tr>
+<tr valign="top"><td><code>bootstrap</code></td>
+<td>
+<p>If TRUE, use a bootstrap method to compute prediction intervals.
+Otherwise, assume a normal distribution.</p>
+</td></tr>
+<tr valign="top"><td><code>npaths</code></td>
+<td>
+<p>Number of bootstrapped sample paths to use if <code>bootstrap==TRUE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>Deprecated. Included for backwards compatibility.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The iid model is </p>
+<p style="text-align: center;"><i>Y[t]=mu + Z[t]</i></p>
+<p> where <i>Z[t]</i>
+is a normal iid error. Forecasts are given by </p>
+<p style="text-align: center;"><i>Y[n+h]=mu</i></p>
+
+<p>where <i>mu</i> is estimated by the sample mean.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of class &quot;<code>forecast</code>&quot;.
+</p>
+<p>The function <code>summary</code> is used to obtain and print a summary of the
+results, while the function <code>plot</code> produces a plot of the forecasts and
+prediction intervals.
+</p>
+<p>The generic accessor functions <code>fitted.values</code> and <code>residuals</code>
+extract useful features of the value returned by <code>meanf</code>.
+</p>
+<p>An object of class <code>"forecast"</code> is a list containing at least the
+following elements: </p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>model</code></td>
+<td>
+<p>A list containing information about the
+fitted model</p>
+</td></tr> <tr valign="top"><td><code>method</code></td>
+<td>
+<p>The name of the forecasting method as a
+character string</p>
+</td></tr> <tr valign="top"><td><code>mean</code></td>
+<td>
+<p>Point forecasts as a time series</p>
+</td></tr>
+<tr valign="top"><td><code>lower</code></td>
+<td>
+<p>Lower limits for prediction intervals</p>
+</td></tr> <tr valign="top"><td><code>upper</code></td>
+<td>
+<p>Upper
+limits for prediction intervals</p>
+</td></tr> <tr valign="top"><td><code>level</code></td>
+<td>
+<p>The confidence values
+associated with the prediction intervals</p>
+</td></tr> <tr valign="top"><td><code>x</code></td>
+<td>
+<p>The original time series
+(either <code>object</code> itself or the time series used to create the model
+stored as <code>object</code>).</p>
+</td></tr> <tr valign="top"><td><code>residuals</code></td>
+<td>
+<p>Residuals from the fitted model.
+That is x minus fitted values.</p>
+</td></tr> <tr valign="top"><td><code>fitted</code></td>
+<td>
+<p>Fitted values (one-step
+forecasts)</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Rob J Hyndman
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="naive.html">rwf</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+nile.fcast &lt;- meanf(Nile, h=10)
+plot(nile.fcast)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>forecast</em> version 8.12 <a href="00Index.html">Index</a>]</div>
+</body></html>

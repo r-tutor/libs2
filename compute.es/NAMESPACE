@@ -1,5 +1,6 @@
 #NAMESPACE file 
-
+importFrom("stats", "pnorm", "pt", "qnorm", "qt")
 
 # Export all names
-exportPattern(".")
+#exportPattern(".")
+ exportPattern("^[^\\.]")
