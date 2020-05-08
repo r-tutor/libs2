@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Change Axis Scale: log2, log10 and more</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for axis_scale {ggpubr}"><tr><td>axis_scale {ggpubr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Change Axis Scale: log2, log10 and more</h2>
+
+<h3>Description</h3>
+
+<p>Change axis scale.
+</p>
+
+<ul>
+<li> <p><code>xscale</code>: change x axis scale.
+</p>
+</li>
+<li> <p><code>yscale</code>: change y axis scale.
+</p>
+</li></ul>
+
+
+
+<h3>Usage</h3>
+
+<pre>
+xscale(.scale, .format = FALSE)
+
+yscale(.scale, .format = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>.scale</code></td>
+<td>
+<p>axis scale. Allowed values are one of c(&quot;none&quot;, &quot;log2&quot;, &quot;log10&quot;,
+&quot;sqrt&quot;, &quot;percent&quot;, &quot;dollar&quot;, &quot;scientific&quot;); e.g.: .scale=&quot;log2&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>.format</code></td>
+<td>
+<p>ogical value. If TRUE, axis tick mark labels will be formatted
+when .scale  = &quot;log2&quot; or &quot;log10&quot;.</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Basic scatter plots
+data(cars)
+p &lt;- ggscatter(cars, x = "speed", y = "dist")
+p
+
+# Set log scale
+p + yscale("log2", .format = TRUE)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggpubr</em> version 0.3.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

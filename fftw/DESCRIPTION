@@ -20,5 +20,5 @@ Author: Olaf Mersmann [aut],
 Maintainer: Uwe Ligges <ligges@statistik.tu-dortmund.de>
 Repository: CRAN
 Date/Publication: 2020-02-24 17:30:09 UTC
-Built: R 3.6.2; x86_64-w64-mingw32; 2020-02-26 14:17:33 UTC; windows
+Built: R 4.0.0; x86_64-w64-mingw32; 2020-04-26 14:10:44 UTC; windows
 Archs: i386, x64

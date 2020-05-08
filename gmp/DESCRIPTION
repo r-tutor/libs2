@@ -20,5 +20,5 @@ NeedsCompilation: yes
 Packaged: 2020-01-22 09:50:28 UTC; antoine
 Repository: CRAN
 Date/Publication: 2020-01-24 14:30:07 UTC
-Built: R 3.6.2; x86_64-w64-mingw32; 2020-02-22 02:19:54 UTC; windows
+Built: R 4.0.0; x86_64-w64-mingw32; 2020-05-02 18:49:12 UTC; windows
 Archs: i386, x64

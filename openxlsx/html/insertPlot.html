@@ -9,7 +9,7 @@
 
 <h3>Description</h3>
 
-<p>The current plot is saved to a temporary image file using dev.copy.  
+<p>The current plot is saved to a temporary image file using dev.copy.
 This file is then written to the workbook using insertImage.
 </p>
 
@@ -98,22 +98,25 @@ insertPlot(
 wb &lt;- createWorkbook()
 
 ## Add a worksheet
-addWorksheet(wb, "Sheet 1", gridLines = FALSE) 
+addWorksheet(wb, "Sheet 1", gridLines = FALSE)
 
 ## create plot objects
 require(ggplot2)
-p1 &lt;- qplot(mpg, data=mtcars, geom="density",
-  fill=as.factor(gear), alpha=I(.5), main="Distribution of Gas Mileage")
+p1 &lt;- qplot(mpg,
+  data = mtcars, geom = "density",
+  fill = as.factor(gear), alpha = I(.5), main = "Distribution of Gas Mileage"
+)
 p2 &lt;- qplot(age, circumference,
-  data = Orange, geom = c("point", "line"), colour = Tree)
+  data = Orange, geom = c("point", "line"), colour = Tree
+)
 
 ## Insert currently displayed plot to sheet 1, row 1, column 1
-print(p1) #plot needs to be showing
+print(p1) # plot needs to be showing
 insertPlot(wb, 1, width = 5, height = 3.5, fileType = "png", units = "in")
 
 ## Insert plot 2
 print(p2)
-insertPlot(wb, 1, xy = c("J", 2), width = 16, height = 10,  fileType = "png", units = "cm")
+insertPlot(wb, 1, xy = c("J", 2), width = 16, height = 10, fileType = "png", units = "cm")
 
 ## Save workbook
 saveWorkbook(wb, "insertPlotExample.xlsx", overwrite = TRUE)
@@ -121,5 +124,5 @@ saveWorkbook(wb, "insertPlotExample.xlsx", overwrite = TRUE)
 ## End(Not run)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>openxlsx</em> version 4.1.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>openxlsx</em> version 4.1.5 <a href="00Index.html">Index</a>]</div>
 </body></html>

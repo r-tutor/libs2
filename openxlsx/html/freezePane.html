@@ -76,14 +76,17 @@ addWorksheet(wb, "Sheet 3")
 addWorksheet(wb, "Sheet 4")
 
 ## Freeze Panes
-freezePane(wb, "Sheet 1" ,  firstActiveRow = 5,  firstActiveCol = 3)
-freezePane(wb, "Sheet 2", firstCol = TRUE)  ## shortcut to firstActiveCol = 2
-freezePane(wb, 3, firstRow = TRUE)  ## shortcut to firstActiveRow = 2
+freezePane(wb, "Sheet 1", firstActiveRow = 5, firstActiveCol = 3)
+freezePane(wb, "Sheet 2", firstCol = TRUE) ## shortcut to firstActiveCol = 2
+freezePane(wb, 3, firstRow = TRUE) ## shortcut to firstActiveRow = 2
 freezePane(wb, 4, firstActiveRow = 1, firstActiveCol = "D")
- 
+
 ## Save workbook
-## Not run: saveWorkbook(wb, "freezePaneExample.xlsx", overwrite = TRUE)
+## Not run: 
+saveWorkbook(wb, "freezePaneExample.xlsx", overwrite = TRUE)
+
+## End(Not run)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>openxlsx</em> version 4.1.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>openxlsx</em> version 4.1.5 <a href="00Index.html">Index</a>]</div>
 </body></html>

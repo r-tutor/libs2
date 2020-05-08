@@ -32,5 +32,5 @@ Repository/R-Forge/DateTimeStamp: 2019-05-26 18:21:12
 Date/Publication: 2019-05-26 19:40:04 UTC
 NeedsCompilation: yes
 Packaged: 2019-05-26 18:33:33 UTC; rforge
-Built: R 3.6.0; x86_64-w64-mingw32; 2019-05-29 01:30:33 UTC; windows
+Built: R 4.0.0; x86_64-w64-mingw32; 2020-05-02 22:01:16 UTC; windows
 Archs: i386, x64

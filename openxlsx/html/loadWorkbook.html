@@ -9,7 +9,7 @@
 
 <h3>Description</h3>
 
-<p>loadWorkbook returns a workbook object conserving styles and 
+<p>loadWorkbook returns a workbook object conserving styles and
 formatting of the original .xlsx file.
 </p>
 
@@ -61,17 +61,19 @@ loadWorkbook(file, xlsxFile = NULL, isUnzipped = FALSE)
 
 <pre>
 ## load existing workbook from package folder
-wb &lt;- loadWorkbook(file = system.file("extdata","loadExample.xlsx", package= "openxlsx"))
-names(wb)  #list worksheets
+wb &lt;- loadWorkbook(file = system.file("extdata", "loadExample.xlsx", package = "openxlsx"))
+names(wb) # list worksheets
 wb ## view object
 ## Add a worksheet
 addWorksheet(wb, "A new worksheet")
 
 ## Save workbook
-## Not run: saveWorkbook(wb, "loadExample.xlsx", overwrite = TRUE)
+## Not run: 
+saveWorkbook(wb, "loadExample.xlsx", overwrite = TRUE)
 
+## End(Not run)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>openxlsx</em> version 4.1.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>openxlsx</em> version 4.1.5 <a href="00Index.html">Index</a>]</div>
 </body></html>

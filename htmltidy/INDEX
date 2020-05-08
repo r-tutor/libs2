@@ -1,0 +1,9 @@
+highlight_styles        List available HTML/XML highlight styles
+htmltidy                Tidy Up and Test XPath Queries on HTML and XML
+                        Content
+renderXmlview           Widget render function for use in Shiny
+tidy_html.response      Tidy or "Pretty Print" HTML/XHTML Documents
+xml_tree_view           HTML/XML tree viewer
+xml_view                HTML/XML pretty printer and viewer
+xmltreeview-shiny       Shiny bindings for xmltreeview
+xmlviewOutput           Widget output function for use in Shiny

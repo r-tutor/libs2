@@ -79,6 +79,7 @@ step_center	step_center
 step_classdist	step_classdist
 step_corr	step_corr
 step_count	step_count
+step_cut	step_cut
 step_date	step_date
 step_depth	step_depth
 step_discretize	step_discretize
@@ -164,6 +165,7 @@ tidy.step_center	step_center
 tidy.step_classdist	step_classdist
 tidy.step_corr	step_corr
 tidy.step_count	step_count
+tidy.step_cut	step_cut
 tidy.step_date	step_date
 tidy.step_depth	step_depth
 tidy.step_discretize	step_discretize

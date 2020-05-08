@@ -29,6 +29,8 @@ estimable.2fis          Statistical and algorithmic aspects of
                         estimable in FrF2
 fold.design             Function to create a foldover for 2-level
                         fractional factorials
+makecatlg               Function for creating a class catlg catalogue
+                        from a vector of generators
 pb                      Function to generate non-regular fractional
                         factorial screening designs
 splitpick               Functions to find split-plot or left-adjusted

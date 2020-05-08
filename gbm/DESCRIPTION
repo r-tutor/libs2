@@ -40,5 +40,5 @@ Author: Brandon Greenwell [aut, cre] (<https://orcid.org/0000-0002-8120-0084>),
 Maintainer: Brandon Greenwell <greenwell.brandon@gmail.com>
 Repository: CRAN
 Date/Publication: 2019-01-14 15:00:03 UTC
-Built: R 3.5.2; x86_64-w64-mingw32; 2019-01-18 03:01:01 UTC; windows
+Built: R 4.0.0; x86_64-w64-mingw32; 2020-05-02 21:41:20 UTC; windows
 Archs: i386, x64

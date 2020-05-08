@@ -31,5 +31,5 @@ Author: Hadley Wickham [cre],
 Maintainer: Hadley Wickham <hadley@rstudio.com>
 Repository: CRAN
 Date/Publication: 2019-12-15 16:10:05 UTC
-Built: R 3.6.1; x86_64-w64-mingw32; 2019-12-16 15:12:11 UTC; windows
+Built: R 4.0.0; x86_64-w64-mingw32; 2020-04-26 13:27:37 UTC; windows
 Archs: i386, x64

@@ -31,5 +31,5 @@ Author: Jeroen Ooms [aut, cre],
 Maintainer: Jeroen Ooms <jeroen@berkeley.edu>
 Repository: CRAN
 Date/Publication: 2018-12-15 16:20:03 UTC
-Built: R 3.5.1; x86_64-w64-mingw32; 2018-12-18 19:41:37 UTC; windows
+Built: R 4.0.0; x86_64-w64-mingw32; 2020-05-02 19:13:32 UTC; windows
 Archs: i386, x64

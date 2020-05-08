@@ -139,7 +139,7 @@ or one of colours(). If fontColour is NULL, the workbook base font colours is us
 </td></tr>
 <tr valign="top"><td><code>borderColour</code></td>
 <td>
-<p>Colour of cell border vector the same length as the number of sides specified in &quot;border&quot; 
+<p>Colour of cell border vector the same length as the number of sides specified in &quot;border&quot;
 A valid colour (belonging to colours()) or a valid hex colour beginning with &quot;#&quot;</p>
 </td></tr>
 <tr valign="top"><td><code>borderStyle</code></td>
@@ -194,7 +194,7 @@ A valid colour (belonging to colours()) or a valid hex colour beginning with &qu
 <tr valign="top"><td><code>bgFill</code></td>
 <td>
 <p>Cell background fill colour.
-A valid colour (belonging to colours()) or a valid hex colour beginning with &quot;#&quot;. 
+A valid colour (belonging to colours()) or a valid hex colour beginning with &quot;#&quot;.
 &ndash;  <b>Use for conditional formatting styles only.</b></p>
 </td></tr>
 <tr valign="top"><td><code>fgFill</code></td>
@@ -308,22 +308,26 @@ options("openxlsx.borderColour" = "#4F80BD")
 options("openxlsx.borderStyle" = "thin")
 
 ## Size 18 Arial, Bold, left horz. aligned, fill colour #1A33CC, all borders,
-style &lt;- createStyle(fontSize = 18, fontName = "Arial",
-  textDecoration = "bold", halign = "left", fgFill = "#1A33CC", border= "TopBottomLeftRight")
+style &lt;- createStyle(
+  fontSize = 18, fontName = "Arial",
+  textDecoration = "bold", halign = "left", fgFill = "#1A33CC", border = "TopBottomLeftRight"
+)
 
 ## Red, size 24, Bold, italic, underline, center aligned Font, bottom border
-style &lt;- createStyle(fontSize = 24, fontColour = rgb(1,0,0),
-   textDecoration = c("bold", "italic", "underline"), 
-   halign = "center", valign = "center", border = "Bottom")
- 
+style &lt;- createStyle(
+  fontSize = 24, fontColour = rgb(1, 0, 0),
+  textDecoration = c("bold", "italic", "underline"),
+  halign = "center", valign = "center", border = "Bottom"
+)
+
 # borderColour is recycled for each border or all colours can be supplied
 
 # colour is recycled 3 times for "Top", "Bottom" &amp; "Right" sides.
-createStyle(border = "TopBottomRight", borderColour = "red") 
+createStyle(border = "TopBottomRight", borderColour = "red")
 
 # supply all colours
-createStyle(border = "TopBottomLeft", borderColour = c("red","yellow", "green"))
+createStyle(border = "TopBottomLeft", borderColour = c("red", "yellow", "green"))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>openxlsx</em> version 4.1.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>openxlsx</em> version 4.1.5 <a href="00Index.html">Index</a>]</div>
 </body></html>

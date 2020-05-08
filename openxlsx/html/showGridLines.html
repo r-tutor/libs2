@@ -47,12 +47,15 @@ showGridLines(wb, sheet, showGridLines = FALSE)
 <h3>Examples</h3>
 
 <pre>
-wb &lt;- loadWorkbook(file = system.file("extdata","loadExample.xlsx", package = "openxlsx"))
+wb &lt;- loadWorkbook(file = system.file("extdata", "loadExample.xlsx", package = "openxlsx"))
 names(wb) ## list worksheets in workbook
 showGridLines(wb, 1, showGridLines = FALSE)
 showGridLines(wb, "testing", showGridLines = FALSE)
-## Not run: saveWorkbook(wb, "showGridLinesExample.xlsx", overwrite = TRUE)
+## Not run: 
+saveWorkbook(wb, "showGridLinesExample.xlsx", overwrite = TRUE)
+
+## End(Not run)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>openxlsx</em> version 4.1.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>openxlsx</em> version 4.1.5 <a href="00Index.html">Index</a>]</div>
 </body></html>

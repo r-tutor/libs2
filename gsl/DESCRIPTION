@@ -20,5 +20,5 @@ Author: Robin K. S. Hankin [aut, cre] (<https://orcid.org/0000-0001-5982-0415>),
   Duncan Murdoch [ctb] (qrng functions)
 Repository: CRAN
 Date/Publication: 2019-03-25 09:10:03 UTC
-Built: R 3.5.3; x86_64-w64-mingw32; 2019-03-28 17:36:07 UTC; windows
+Built: R 4.0.0; x86_64-w64-mingw32; 2020-04-26 13:30:58 UTC; windows
 Archs: i386, x64

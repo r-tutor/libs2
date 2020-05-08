@@ -41,5 +41,5 @@ X-CRAN-Comment: Orphaned on 2020-01-13 as check errors were not
         corrected.
 Repository: CRAN
 Date/Publication: 2020-02-10 10:06:33 UTC
-Built: R 3.6.2; x86_64-w64-mingw32; 2020-02-10 23:31:33 UTC; windows
+Built: R 4.0.0; x86_64-w64-mingw32; 2020-04-26 13:25:39 UTC; windows
 Archs: i386, x64

@@ -49,7 +49,7 @@ addStyle(wb, sheet, style, rows, cols, gridExpand = FALSE, stack = FALSE)
 </td></tr>
 <tr valign="top"><td><code>stack</code></td>
 <td>
-<p>If <code>TRUE</code> the new style is merged with any existing cell styles.  If FALSE, any 
+<p>If <code>TRUE</code> the new style is merged with any existing cell styles.  If FALSE, any
 existing style is replaced by the new style.</p>
 </td></tr>
 </table>
@@ -78,24 +78,28 @@ existing style is replaced by the new style.</p>
 wb &lt;- createWorkbook("My name here")
 
 ## Add a worksheets
-addWorksheet(wb, "Expenditure", gridLines = FALSE) 
+addWorksheet(wb, "Expenditure", gridLines = FALSE)
 
-##write data to worksheet 1
+## write data to worksheet 1
 writeData(wb, sheet = 1, USPersonalExpenditure, rowNames = TRUE)
 
 ## create and add a style to the column headers
-headerStyle &lt;- createStyle(fontSize = 14, fontColour = "#FFFFFF", halign = "center",
-                        fgFill = "#4F81BD", border="TopBottom", borderColour = "#4F81BD")
+headerStyle &lt;- createStyle(
+  fontSize = 14, fontColour = "#FFFFFF", halign = "center",
+  fgFill = "#4F81BD", border = "TopBottom", borderColour = "#4F81BD"
+)
 
 addStyle(wb, sheet = 1, headerStyle, rows = 1, cols = 1:6, gridExpand = TRUE)
 
-## style for body 
-bodyStyle &lt;- createStyle(border="TopBottom", borderColour = "#4F81BD")
+## style for body
+bodyStyle &lt;- createStyle(border = "TopBottom", borderColour = "#4F81BD")
 addStyle(wb, sheet = 1, bodyStyle, rows = 2:6, cols = 1:6, gridExpand = TRUE)
-setColWidths(wb, 1, cols=1, widths = 21) ## set column width for row names column
+setColWidths(wb, 1, cols = 1, widths = 21) ## set column width for row names column
+## Not run: 
+saveWorkbook(wb, "addStyleExample.xlsx", overwrite = TRUE)
 
-## Not run: saveWorkbook(wb, "addStyleExample.xlsx", overwrite = TRUE)
+## End(Not run)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>openxlsx</em> version 4.1.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>openxlsx</em> version 4.1.5 <a href="00Index.html">Index</a>]</div>
 </body></html>

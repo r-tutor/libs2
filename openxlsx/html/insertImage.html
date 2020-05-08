@@ -96,14 +96,17 @@ addWorksheet(wb, "Sheet 2")
 addWorksheet(wb, "Sheet 3")
 
 ## Insert images
-img &lt;- system.file("extdata","einstein.jpg", package = "openxlsx")
-insertImage(wb, "Sheet 1", img, startRow = 5,  startCol = 3, width = 6, height = 5)
-insertImage(wb, 2, img, startRow = 2,  startCol = 2)
-insertImage(wb, 3 , img, width = 15, height = 12, startRow = 3, startCol = "G", units = "cm")
- 
+img &lt;- system.file("extdata", "einstein.jpg", package = "openxlsx")
+insertImage(wb, "Sheet 1", img, startRow = 5, startCol = 3, width = 6, height = 5)
+insertImage(wb, 2, img, startRow = 2, startCol = 2)
+insertImage(wb, 3, img, width = 15, height = 12, startRow = 3, startCol = "G", units = "cm")
+
 ## Save workbook
-## Not run: saveWorkbook(wb, "insertImageExample.xlsx", overwrite = TRUE)
+## Not run: 
+saveWorkbook(wb, "insertImageExample.xlsx", overwrite = TRUE)
+
+## End(Not run)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>openxlsx</em> version 4.1.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>openxlsx</em> version 4.1.5 <a href="00Index.html">Index</a>]</div>
 </body></html>

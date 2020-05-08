@@ -61,17 +61,20 @@ setRowHeights(wb, sheet, rows, heights)
 wb &lt;- createWorkbook()
 
 ## Add a worksheet
-addWorksheet(wb, "Sheet 1") 
+addWorksheet(wb, "Sheet 1")
 
 ## set row heights
-setRowHeights(wb, 1, rows = c(1,4,22,2,19), heights = c(24,28,32,42,33))
+setRowHeights(wb, 1, rows = c(1, 4, 22, 2, 19), heights = c(24, 28, 32, 42, 33))
 
 ## overwrite row 1 height
 setRowHeights(wb, 1, rows = 1, heights = 40)
 
 ## Save workbook
-## Not run: saveWorkbook(wb, "setRowHeightsExample.xlsx", overwrite = TRUE)
+## Not run: 
+saveWorkbook(wb, "setRowHeightsExample.xlsx", overwrite = TRUE)
+
+## End(Not run)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>openxlsx</em> version 4.1.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>openxlsx</em> version 4.1.5 <a href="00Index.html">Index</a>]</div>
 </body></html>

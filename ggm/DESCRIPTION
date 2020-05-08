@@ -12,4 +12,4 @@ NeedsCompilation: no
 Repository: CRAN
 Packaged: 2020-02-14 16:50:01 UTC; gmm
 Date/Publication: 2020-02-16 14:00:02 UTC
-Built: R 3.6.2; ; 2020-02-22 04:47:27 UTC; windows
+Built: R 4.0.0; ; 2020-05-02 23:02:04 UTC; windows

@@ -75,15 +75,19 @@ createWorkbook(
 wb &lt;- createWorkbook()
 
 ## Save workbook to working directory
-## Not run: saveWorkbook(wb, file = "createWorkbookExample.xlsx", overwrite = TRUE)
+## Not run: 
+saveWorkbook(wb, file = "createWorkbookExample.xlsx", overwrite = TRUE)
+
+## End(Not run)
 
 ## Set Workbook properties
-wb &lt;- createWorkbook(creator = "Me"
-, title = "title here"
-, subject = "this &amp; that"
-, category = "something")
-
+wb &lt;- createWorkbook(
+  creator = "Me",
+  title = "title here",
+  subject = "this &amp; that",
+  category = "something"
+)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>openxlsx</em> version 4.1.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>openxlsx</em> version 4.1.5 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -58,10 +58,12 @@ writeData(wb, sheet = 1, x = iris)
 pageBreak(wb, sheet = 1, i = 10, type = "row")
 pageBreak(wb, sheet = 1, i = 20, type = "row")
 pageBreak(wb, sheet = 1, i = 2, type = "column")
+## Not run: 
+saveWorkbook(wb, "pageBreakExample.xlsx", TRUE)
 
-## Not run: saveWorkbook(wb, "pageBreakExample.xlsx", TRUE)
+## End(Not run)
 ## In Excel: View tab -&gt; Page Break Preview
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>openxlsx</em> version 4.1.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>openxlsx</em> version 4.1.5 <a href="00Index.html">Index</a>]</div>
 </body></html>

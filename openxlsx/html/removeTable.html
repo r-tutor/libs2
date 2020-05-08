@@ -68,10 +68,12 @@ writeDataTable(wb, sheet = 1, x = iris, tableName = "iris", startCol = 1)
 getTables(wb, sheet = 1)
 removeTable(wb = wb, sheet = 1, table = "iris")
 writeDataTable(wb, sheet = 1, x = iris, tableName = "iris", startCol = 1)
+## Not run: 
+saveWorkbook(wb = wb, file = "removeTableExample.xlsx", overwrite = TRUE)
 
-## Not run: saveWorkbook(wb = wb, file = "removeTableExample.xlsx", overwrite = TRUE)
- 
+## End(Not run)
+
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>openxlsx</em> version 4.1.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>openxlsx</em> version 4.1.5 <a href="00Index.html">Index</a>]</div>
 </body></html>

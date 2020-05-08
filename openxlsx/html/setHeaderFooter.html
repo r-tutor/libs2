@@ -124,31 +124,40 @@ writeData(wb, 2, 1:400)
 writeData(wb, 3, 3:400)
 writeData(wb, 4, 3:400)
 
-setHeaderFooter(wb, sheet = "S1",  
-                header = c("ODD HEAD LEFT", "ODD HEAD CENTER", "ODD HEAD RIGHT"),
-                footer = c("ODD FOOT RIGHT", "ODD FOOT CENTER", "ODD FOOT RIGHT"),
-                evenHeader = c("EVEN HEAD LEFT", "EVEN HEAD CENTER", "EVEN HEAD RIGHT"),
-                evenFooter = c("EVEN FOOT RIGHT", "EVEN FOOT CENTER", "EVEN FOOT RIGHT"),
-                firstHeader = c("TOP", "OF FIRST", "PAGE"),
-                firstFooter = c("BOTTOM", "OF FIRST", "PAGE"))
+setHeaderFooter(wb,
+  sheet = "S1",
+  header = c("ODD HEAD LEFT", "ODD HEAD CENTER", "ODD HEAD RIGHT"),
+  footer = c("ODD FOOT RIGHT", "ODD FOOT CENTER", "ODD FOOT RIGHT"),
+  evenHeader = c("EVEN HEAD LEFT", "EVEN HEAD CENTER", "EVEN HEAD RIGHT"),
+  evenFooter = c("EVEN FOOT RIGHT", "EVEN FOOT CENTER", "EVEN FOOT RIGHT"),
+  firstHeader = c("TOP", "OF FIRST", "PAGE"),
+  firstFooter = c("BOTTOM", "OF FIRST", "PAGE")
+)
 
-setHeaderFooter(wb, sheet = 2,  
-                header = c("&amp;[Date]", "ALL HEAD CENTER 2", "&amp;[Page] / &amp;[Pages]"),
-                footer = c("&amp;[Path]&amp;[File]", NA, "&amp;[Tab]"),
-                firstHeader = c(NA, "Center Header of First Page", NA),
-                firstFooter = c(NA, "Center Footer of First Page", NA))
+setHeaderFooter(wb,
+  sheet = 2,
+  header = c("&amp;[Date]", "ALL HEAD CENTER 2", "&amp;[Page] / &amp;[Pages]"),
+  footer = c("&amp;[Path]&amp;[File]", NA, "&amp;[Tab]"),
+  firstHeader = c(NA, "Center Header of First Page", NA),
+  firstFooter = c(NA, "Center Footer of First Page", NA)
+)
 
-setHeaderFooter(wb, sheet = 3,  
-                header = c("ALL HEAD LEFT 2", "ALL HEAD CENTER 2", "ALL HEAD RIGHT 2"),
-                footer = c("ALL FOOT RIGHT 2", "ALL FOOT CENTER 2", "ALL FOOT RIGHT 2"))
+setHeaderFooter(wb,
+  sheet = 3,
+  header = c("ALL HEAD LEFT 2", "ALL HEAD CENTER 2", "ALL HEAD RIGHT 2"),
+  footer = c("ALL FOOT RIGHT 2", "ALL FOOT CENTER 2", "ALL FOOT RIGHT 2")
+)
 
-setHeaderFooter(wb, sheet = 4,  
-                firstHeader = c("FIRST ONLY L", NA, "FIRST ONLY R"),
-                firstFooter = c("FIRST ONLY L", NA, "FIRST ONLY R"))
+setHeaderFooter(wb,
+  sheet = 4,
+  firstHeader = c("FIRST ONLY L", NA, "FIRST ONLY R"),
+  firstFooter = c("FIRST ONLY L", NA, "FIRST ONLY R")
+)
+## Not run: 
+saveWorkbook(wb, "setHeaderFooterExample.xlsx", overwrite = TRUE)
 
-
-## Not run: saveWorkbook(wb, "setHeaderFooterExample.xlsx", overwrite = TRUE)
+## End(Not run)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>openxlsx</em> version 4.1.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>openxlsx</em> version 4.1.5 <a href="00Index.html">Index</a>]</div>
 </body></html>

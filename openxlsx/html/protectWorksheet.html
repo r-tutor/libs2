@@ -133,20 +133,21 @@ protectWorksheet(
 <pre>
 wb &lt;- createWorkbook()
 addWorksheet(wb, "S1")
-writeDataTable(wb, 1, x = iris[1:30,])
+writeDataTable(wb, 1, x = iris[1:30, ])
 # Formatting cells / columns is allowed , but inserting / deleting columns is protected:
-protectWorksheet(wb, "S1", protect = TRUE, 
-                  lockFormattingCells = FALSE, lockFormattingColumns = FALSE, 
-                  lockInsertingColumns = TRUE, lockDeletingColumns = TRUE)
+protectWorksheet(wb, "S1",
+  protect = TRUE,
+  lockFormattingCells = FALSE, lockFormattingColumns = FALSE,
+  lockInsertingColumns = TRUE, lockDeletingColumns = TRUE
+)
 
 # Remove the protection
 protectWorksheet(wb, "S1", protect = FALSE)
-
 ## Not run: 
 saveWorkbook(wb, "pageSetupExample.xlsx", overwrite = TRUE)
 
 ## End(Not run)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>openxlsx</em> version 4.1.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>openxlsx</em> version 4.1.5 <a href="00Index.html">Index</a>]</div>
 </body></html>

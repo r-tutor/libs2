@@ -372,15 +372,16 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <p>The packages contains a data set used to predict whether a person will pay back a bank loan. It has 13 predictor columns and a factor variable <code>Status</code> (the outcome). We will first separate the data into a training and test set:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(recipes)</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(rsample)</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">library</span>(modeldata)</span>
-<span id="cb1-4"><a href="#cb1-4"></a></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">data</span>(<span class="st">&quot;credit_data&quot;</span>)</span>
-<span id="cb1-6"><a href="#cb1-6"></a></span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="kw">set.seed</span>(<span class="dv">55</span>)</span>
-<span id="cb1-8"><a href="#cb1-8"></a>train_test_split &lt;-<span class="st"> </span><span class="kw">initial_split</span>(credit_data)</span>
-<span id="cb1-9"><a href="#cb1-9"></a></span>
-<span id="cb1-10"><a href="#cb1-10"></a>credit_train &lt;-<span class="st"> </span><span class="kw">training</span>(train_test_split)</span>
-<span id="cb1-11"><a href="#cb1-11"></a>credit_test &lt;-<span class="st"> </span><span class="kw">testing</span>(train_test_split)</span></code></pre></div>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="co">#&gt; Warning: package &#39;rsample&#39; was built under R version 3.6.2</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">library</span>(modeldata)</span>
+<span id="cb1-5"><a href="#cb1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="kw">data</span>(<span class="st">&quot;credit_data&quot;</span>)</span>
+<span id="cb1-7"><a href="#cb1-7"></a></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="kw">set.seed</span>(<span class="dv">55</span>)</span>
+<span id="cb1-9"><a href="#cb1-9"></a>train_test_split &lt;-<span class="st"> </span><span class="kw">initial_split</span>(credit_data)</span>
+<span id="cb1-10"><a href="#cb1-10"></a></span>
+<span id="cb1-11"><a href="#cb1-11"></a>credit_train &lt;-<span class="st"> </span><span class="kw">training</span>(train_test_split)</span>
+<span id="cb1-12"><a href="#cb1-12"></a>credit_test &lt;-<span class="st"> </span><span class="kw">testing</span>(train_test_split)</span></code></pre></div>
 <p>Note that there are some missing values in these data:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">vapply</span>(credit_train, <span class="cf">function</span>(x) <span class="kw">mean</span>(<span class="op">!</span><span class="kw">is.na</span>(x)), <span class="kw">numeric</span>(<span class="dv">1</span>))</span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="co">#&gt;    Status Seniority      Home      Time       Age   Marital   Records       Job </span></span>
@@ -538,28 +539,29 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <pre><code>#&gt;  [1] &quot;step_BoxCox&quot;        &quot;step_YeoJohnson&quot;    &quot;step_arrange&quot;      
 #&gt;  [4] &quot;step_bagimpute&quot;     &quot;step_bin2factor&quot;    &quot;step_bs&quot;           
 #&gt;  [7] &quot;step_center&quot;        &quot;step_classdist&quot;     &quot;step_corr&quot;         
-#&gt; [10] &quot;step_count&quot;         &quot;step_date&quot;          &quot;step_depth&quot;        
-#&gt; [13] &quot;step_discretize&quot;    &quot;step_downsample&quot;    &quot;step_dummy&quot;        
-#&gt; [16] &quot;step_factor2string&quot; &quot;step_filter&quot;        &quot;step_geodist&quot;      
-#&gt; [19] &quot;step_holiday&quot;       &quot;step_hyperbolic&quot;    &quot;step_ica&quot;          
-#&gt; [22] &quot;step_integer&quot;       &quot;step_interact&quot;      &quot;step_intercept&quot;    
-#&gt; [25] &quot;step_inverse&quot;       &quot;step_invlogit&quot;      &quot;step_isomap&quot;       
-#&gt; [28] &quot;step_knnimpute&quot;     &quot;step_kpca&quot;          &quot;step_kpca_poly&quot;    
-#&gt; [31] &quot;step_kpca_rbf&quot;      &quot;step_lag&quot;           &quot;step_lincomb&quot;      
-#&gt; [34] &quot;step_log&quot;           &quot;step_logit&quot;         &quot;step_lowerimpute&quot;  
-#&gt; [37] &quot;step_meanimpute&quot;    &quot;step_medianimpute&quot;  &quot;step_modeimpute&quot;   
-#&gt; [40] &quot;step_mutate&quot;        &quot;step_mutate_at&quot;     &quot;step_naomit&quot;       
-#&gt; [43] &quot;step_nnmf&quot;          &quot;step_normalize&quot;     &quot;step_novel&quot;        
-#&gt; [46] &quot;step_ns&quot;            &quot;step_num2factor&quot;    &quot;step_nzv&quot;          
-#&gt; [49] &quot;step_ordinalscore&quot;  &quot;step_other&quot;         &quot;step_pca&quot;          
-#&gt; [52] &quot;step_pls&quot;           &quot;step_poly&quot;          &quot;step_profile&quot;      
-#&gt; [55] &quot;step_range&quot;         &quot;step_ratio&quot;         &quot;step_regex&quot;        
-#&gt; [58] &quot;step_relevel&quot;       &quot;step_relu&quot;          &quot;step_rename&quot;       
-#&gt; [61] &quot;step_rename_at&quot;     &quot;step_rm&quot;            &quot;step_rollimpute&quot;   
-#&gt; [64] &quot;step_sample&quot;        &quot;step_scale&quot;         &quot;step_shuffle&quot;      
-#&gt; [67] &quot;step_slice&quot;         &quot;step_spatialsign&quot;   &quot;step_sqrt&quot;         
-#&gt; [70] &quot;step_string2factor&quot; &quot;step_unknown&quot;       &quot;step_unorder&quot;      
-#&gt; [73] &quot;step_upsample&quot;      &quot;step_window&quot;        &quot;step_zv&quot;</code></pre>
+#&gt; [10] &quot;step_count&quot;         &quot;step_cut&quot;           &quot;step_date&quot;         
+#&gt; [13] &quot;step_depth&quot;         &quot;step_discretize&quot;    &quot;step_downsample&quot;   
+#&gt; [16] &quot;step_dummy&quot;         &quot;step_factor2string&quot; &quot;step_filter&quot;       
+#&gt; [19] &quot;step_geodist&quot;       &quot;step_holiday&quot;       &quot;step_hyperbolic&quot;   
+#&gt; [22] &quot;step_ica&quot;           &quot;step_integer&quot;       &quot;step_interact&quot;     
+#&gt; [25] &quot;step_intercept&quot;     &quot;step_inverse&quot;       &quot;step_invlogit&quot;     
+#&gt; [28] &quot;step_isomap&quot;        &quot;step_knnimpute&quot;     &quot;step_kpca&quot;         
+#&gt; [31] &quot;step_kpca_poly&quot;     &quot;step_kpca_rbf&quot;      &quot;step_lag&quot;          
+#&gt; [34] &quot;step_lincomb&quot;       &quot;step_log&quot;           &quot;step_logit&quot;        
+#&gt; [37] &quot;step_lowerimpute&quot;   &quot;step_meanimpute&quot;    &quot;step_medianimpute&quot; 
+#&gt; [40] &quot;step_modeimpute&quot;    &quot;step_mutate&quot;        &quot;step_mutate_at&quot;    
+#&gt; [43] &quot;step_naomit&quot;        &quot;step_nnmf&quot;          &quot;step_normalize&quot;    
+#&gt; [46] &quot;step_novel&quot;         &quot;step_ns&quot;            &quot;step_num2factor&quot;   
+#&gt; [49] &quot;step_nzv&quot;           &quot;step_ordinalscore&quot;  &quot;step_other&quot;        
+#&gt; [52] &quot;step_pca&quot;           &quot;step_pls&quot;           &quot;step_poly&quot;         
+#&gt; [55] &quot;step_profile&quot;       &quot;step_range&quot;         &quot;step_ratio&quot;        
+#&gt; [58] &quot;step_regex&quot;         &quot;step_relevel&quot;       &quot;step_relu&quot;         
+#&gt; [61] &quot;step_rename&quot;        &quot;step_rename_at&quot;     &quot;step_rm&quot;           
+#&gt; [64] &quot;step_rollimpute&quot;    &quot;step_sample&quot;        &quot;step_scale&quot;        
+#&gt; [67] &quot;step_shuffle&quot;       &quot;step_slice&quot;         &quot;step_spatialsign&quot;  
+#&gt; [70] &quot;step_sqrt&quot;          &quot;step_string2factor&quot; &quot;step_unknown&quot;      
+#&gt; [73] &quot;step_unorder&quot;       &quot;step_upsample&quot;      &quot;step_window&quot;       
+#&gt; [76] &quot;step_zv&quot;</code></pre>
 </div>
 <div id="checks" class="section level2">
 <h2>Checks</h2>

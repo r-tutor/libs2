@@ -12,5 +12,5 @@ Description: Fast implementation of hierarchical clustering
 Packaged: 2012-08-21 17:18:30 UTC; plangfelder
 Repository: CRAN
 Date/Publication: 2012-08-21 18:23:43
-Built: R 3.5.0; x86_64-w64-mingw32; 2018-04-21 03:25:15 UTC; windows
+Built: R 4.0.0; x86_64-w64-mingw32; 2020-04-26 13:39:53 UTC; windows
 Archs: i386, x64

@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: MA-plot from means and log fold changes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for ggmaplot {ggpubr}"><tr><td>ggmaplot {ggpubr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>MA-plot from means and log fold changes</h2>
+
+<h3>Description</h3>
+
+<p>Make MA-plot which is a scatter plot of log2 fold changes (on
+the y-axis) versus the mean expression signal (on the x-axis).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ggmaplot(
+  data,
+  fdr = 0.05,
+  fc = 1.5,
+  genenames = NULL,
+  detection_call = NULL,
+  size = NULL,
+  font.label = c(12, "plain", "black"),
+  label.rectangle = FALSE,
+  palette = c("#B31B21", "#1465AC", "darkgray"),
+  top = 15,
+  select.top.method = c("padj", "fc"),
+  main = NULL,
+  xlab = "Log2 mean expression",
+  ylab = "Log2 fold change",
+  ggtheme = theme_classic(),
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>an object of class DESeqResults, get_diff, DE_Results, matrix or
+data frame containing the columns baseMean, log2FoldChange, and padj. Rows
+are genes. </p>
+ <ul>
+<li><p> baseMean: the mean expression of genes in the
+two groups. </p>
+</li>
+<li><p> log2FoldChange: the log2 fold changes of group 2 compared
+to group 1 </p>
+</li>
+<li><p> padj: the adjusted p-value of the used statiscal test. </p>
+</li></ul>
+</td></tr>
+<tr valign="top"><td><code>fdr</code></td>
+<td>
+<p>Accepted false discovery rate for considering genes as
+differentially expressed.</p>
+</td></tr>
+<tr valign="top"><td><code>fc</code></td>
+<td>
+<p>the fold change threshold. Only genes with a fold change &gt;= fc and
+padj &lt;= fdr are considered as significantly differentially expressed.</p>
+</td></tr>
+<tr valign="top"><td><code>genenames</code></td>
+<td>
+<p>a character vector of length nrow(data) specifying gene
+names corresponding to each row. Used for point labels.</p>
+</td></tr>
+<tr valign="top"><td><code>detection_call</code></td>
+<td>
+<p>a numeric vector with length = nrow(data), specifying
+if the genes is expressed (value = 1) or not (value = 0). For example
+detection_call = c(1, 1, 0, 1, 0, 1). Default is NULL. If detection_call
+column is available in data, it will be used.</p>
+</td></tr>
+<tr valign="top"><td><code>size</code></td>
+<td>
+<p>points size.</p>
+</td></tr>
+<tr valign="top"><td><code>font.label</code></td>
+<td>
+<p>a vector of length 3 indicating respectively the size
+(e.g.: 14), the style (e.g.: &quot;plain&quot;, &quot;bold&quot;, &quot;italic&quot;, &quot;bold.italic&quot;) and
+the color (e.g.: &quot;red&quot;) of point labels. For example <em>font.label =
+c(14, &quot;bold&quot;, &quot;red&quot;)</em>.</p>
+</td></tr>
+<tr valign="top"><td><code>label.rectangle</code></td>
+<td>
+<p>logical value. If TRUE, add rectangle underneath the
+text, making it easier to read.</p>
+</td></tr>
+<tr valign="top"><td><code>palette</code></td>
+<td>
+<p>the color palette to be used for coloring or filling by groups.
+Allowed values include &quot;grey&quot; for grey color palettes; brewer palettes e.g.
+&quot;RdBu&quot;, &quot;Blues&quot;, ...; or custom color palette e.g. c(&quot;blue&quot;, &quot;red&quot;); and
+scientific journal palettes from ggsci R package, e.g.: &quot;npg&quot;, &quot;aaas&quot;,
+&quot;lancet&quot;, &quot;jco&quot;, &quot;ucscgb&quot;, &quot;uchicago&quot;, &quot;simpsons&quot; and &quot;rickandmorty&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>top</code></td>
+<td>
+<p>the number of top genes to be shown on the plot. Use top = 0 to hide to gene labels.</p>
+</td></tr>
+<tr valign="top"><td><code>select.top.method</code></td>
+<td>
+<p>methods to be used for selecting top genes. Allowed
+values include &quot;padj&quot; and &quot;fc&quot; for selecting by adjusted p values or fold
+changes, respectively.</p>
+</td></tr>
+<tr valign="top"><td><code>main</code></td>
+<td>
+<p>plot main title.</p>
+</td></tr>
+<tr valign="top"><td><code>xlab</code></td>
+<td>
+<p>character vector specifying x axis labels. Use xlab = FALSE to
+hide xlab.</p>
+</td></tr>
+<tr valign="top"><td><code>ylab</code></td>
+<td>
+<p>character vector specifying y axis labels. Use ylab = FALSE to
+hide ylab.</p>
+</td></tr>
+<tr valign="top"><td><code>ggtheme</code></td>
+<td>
+<p>function, ggplot2 theme name. Default value is theme_pubr().
+Allowed values include ggplot2 official themes: theme_gray(), theme_bw(),
+theme_minimal(), theme_classic(), theme_void(), ....</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>other arguments to be passed to <code><a href="ggpar.html">ggpar</a></code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>returns a ggplot.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(diff_express)
+
+# Default plot
+ggmaplot(diff_express, main = expression("Group 1" %-&gt;% "Group 2"),
+   fdr = 0.05, fc = 2, size = 0.4,
+   palette = c("#B31B21", "#1465AC", "darkgray"),
+   genenames = as.vector(diff_express$name),
+   legend = "top", top = 20,
+   font.label = c("bold", 11),
+   font.legend = "bold",
+   font.main = "bold",
+   ggtheme = ggplot2::theme_minimal())
+
+# Add rectangle around labels
+ggmaplot(diff_express, main = expression("Group 1" %-&gt;% "Group 2"),
+   fdr = 0.05, fc = 2, size = 0.4,
+   palette = c("#B31B21", "#1465AC", "darkgray"),
+   genenames = as.vector(diff_express$name),
+   legend = "top", top = 20,
+   font.label = c("bold", 11), label.rectangle = TRUE,
+   font.legend = "bold",
+   font.main = "bold",
+   ggtheme = ggplot2::theme_minimal())
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggpubr</em> version 0.3.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

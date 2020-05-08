@@ -39,5 +39,5 @@ NeedsCompilation: yes
 Packaged: 2019-06-10 20:42:03 UTC; tymek
 Repository: CRAN
 Date/Publication: 2019-06-10 21:40:05 UTC
-Built: R 3.6.0; x86_64-w64-mingw32; 2019-06-11 13:31:22 UTC; windows
+Built: R 4.0.0; x86_64-w64-mingw32; 2020-05-02 18:58:59 UTC; windows
 Archs: i386, x64

@@ -73,10 +73,12 @@ s2 &lt;- createStyle(fontSize = 9, fontColour = "black")
 c2 &lt;- createComment(comment = c("This Part Bold red\n\n", "This part black"), style = c(s1, s2))
 c2
 
-writeComment(wb, 1, col = 6 , row = 3, comment = c2)
+writeComment(wb, 1, col = 6, row = 3, comment = c2)
+## Not run: 
+saveWorkbook(wb, file = "writeCommentExample.xlsx", overwrite = TRUE)
 
-## Not run: saveWorkbook(wb, file = "writeCommentExample.xlsx", overwrite = TRUE)
+## End(Not run)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>openxlsx</em> version 4.1.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>openxlsx</em> version 4.1.5 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -15,5 +15,5 @@ Packaged: 2019-11-29 02:18:18 UTC; Jerome
 Repository: CRAN
 Date/Publication: 2019-11-29 06:10:14 UTC
 NeedsCompilation: yes
-Built: R 3.6.1; x86_64-w64-mingw32; 2019-12-03 18:04:51 UTC; windows
+Built: R 4.0.0; x86_64-w64-mingw32; 2020-04-26 13:27:45 UTC; windows
 Archs: i386, x64

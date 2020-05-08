@@ -54,12 +54,15 @@ removeRowHeights(wb, sheet, rows)
 
 <pre>
 ## Create a new workbook
-wb &lt;- loadWorkbook(file = system.file("extdata","loadExample.xlsx", package = "openxlsx"))
+wb &lt;- loadWorkbook(file = system.file("extdata", "loadExample.xlsx", package = "openxlsx"))
 
 ## remove any custom row heights in rows 1 to 10
 removeRowHeights(wb, 1, rows = 1:10)
-## Not run: saveWorkbook(wb, "removeRowHeightsExample.xlsx", overwrite = TRUE)
+## Not run: 
+saveWorkbook(wb, "removeRowHeightsExample.xlsx", overwrite = TRUE)
+
+## End(Not run)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>openxlsx</em> version 4.1.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>openxlsx</em> version 4.1.5 <a href="00Index.html">Index</a>]</div>
 </body></html>

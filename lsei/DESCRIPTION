@@ -1,7 +1,7 @@
 Package: lsei
 Title: Solving Least Squares or Quadratic Programming Problems under
         Equality/Inequality Constraints
-Version: 1.2-0
+Version: 1.2-0.1
 Date: 2017-10-22
 Authors@R: c(
     person("Yong", "Wang", email = "yongwang@auckland.ac.nz", 
@@ -19,12 +19,15 @@ Description: It contains functions that solve least squares linear
 License: GPL (>= 2)
 URL: https://www.stat.auckland.ac.nz/~yongwang
 NeedsCompilation: yes
-Packaged: 2017-10-23 01:14:30 UTC; yong
+Packaged: 2020-05-03 21:04:39 UTC; ripley
 Author: Yong Wang [aut, cre],
   Charles L. Lawson [aut],
   Richard J. Hanson [aut]
-Maintainer: Yong Wang <yongwang@auckland.ac.nz>
+Maintainer: ORPHANED
 Repository: CRAN
-Date/Publication: 2017-10-23 07:22:58 UTC
-Built: R 3.5.0; x86_64-w64-mingw32; 2018-04-21 04:23:19 UTC; windows
+Date/Publication: 2020-05-06 10:02:36 UTC
+X-CRAN-Original-Maintainer: Yong Wang <yongwang@auckland.ac.nz>
+X-CRAN-Comment: Orphaned and corrected on 2020-05-06 as check problems
+        were not corrected despite reminders.
+Built: R 4.0.0; x86_64-w64-mingw32; 2020-05-08 12:34:02 UTC; windows
 Archs: i386, x64

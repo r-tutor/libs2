@@ -46,11 +46,13 @@ addWorksheet(wb, "Sheet 1")
 
 ## specify region
 writeData(wb, sheet = 1, x = iris, startCol = 1, startRow = 1)
-createNamedRegion(wb = wb,
-                  sheet = 1,
-                  name = "iris",
-                  rows = 1:(nrow(iris)+1),
-                  cols = 1:ncol(iris))
+createNamedRegion(
+  wb = wb,
+  sheet = 1,
+  name = "iris",
+  rows = 1:(nrow(iris) + 1),
+  cols = 1:ncol(iris)
+)
 
 
 ## using writeData 'name' argument to create a named region
@@ -69,8 +71,9 @@ head(df)
 
 df &lt;- read.xlsx(out_file, namedRegion = "iris2")
 head(df)
+
 ## End(Not run)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>openxlsx</em> version 4.1.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>openxlsx</em> version 4.1.5 <a href="00Index.html">Index</a>]</div>
 </body></html>

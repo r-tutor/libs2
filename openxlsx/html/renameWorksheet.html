@@ -69,11 +69,14 @@ names(wb) &lt;- c("A", "B", "C")
 ## Rename worksheet 1 &amp; 3
 renameWorksheet(wb, 1, "New name for sheet 1")
 names(wb)[[1]] &lt;- "New name for sheet 1"
-names(wb)[[3]] &lt;-  "A better name"
+names(wb)[[3]] &lt;- "A better name"
 
 ## Save workbook
-## Not run: saveWorkbook(wb, "renameWorksheetExample.xlsx", overwrite = TRUE)
+## Not run: 
+saveWorkbook(wb, "renameWorksheetExample.xlsx", overwrite = TRUE)
+
+## End(Not run)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>openxlsx</em> version 4.1.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>openxlsx</em> version 4.1.5 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -13,19 +13,19 @@ Authors@R: c(
 Description: Standardize country names, convert them into one of
     eleven coding schemes, convert between coding schemes, and
     assign region descriptors.
-Version: 1.1.1
+Version: 1.1.2
 URL: https://github.com/vincentarelbundock/countrycode
-Date: 2020-02-08
+Date: 2020-04-22
 Depends: R (>= 2.10)
 Suggests: testthat (>= 0.5)
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
 NeedsCompilation: no
-Packaged: 2020-02-08 13:58:03 UTC; vincent
+Packaged: 2020-04-22 12:36:56 UTC; vincent-imac
 Author: Vincent Arel-Bundock [aut, cre]
     (<https://orcid.org/0000-0003-2042-7063>),
   CJ Yetman [ctb] (<https://orcid.org/0000-0001-5099-9500>),
   Nils Enevoldsen [ctb] (<https://orcid.org/0000-0001-7195-4117>)
 Maintainer: Vincent Arel-Bundock <vincent.arel-bundock@umontreal.ca>
 Repository: CRAN
-Date/Publication: 2020-02-08 14:20:02 UTC
-Built: R 3.6.2; ; 2020-02-22 02:19:02 UTC; windows
+Date/Publication: 2020-04-22 13:12:13 UTC
+Built: R 4.0.0; ; 2020-05-02 19:26:14 UTC; windows

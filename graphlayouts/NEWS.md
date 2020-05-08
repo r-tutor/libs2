@@ -1,3 +1,9 @@
+# graphlayouts 0.7.0
+
+* added `layout_as_multilevel()` for multilevel networks
+* added `layout_with_stress3D()` and `layout_with_constrained_stress3D()` for 3D layouts
+* fixed  crash in `layout_as_backbone()` when the graph has loops (#32)
+
 # graphlayouts 0.6.0
 
 * added `layout_with_constrained_stress()`

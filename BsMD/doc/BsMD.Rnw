@@ -31,7 +31,7 @@ Discrimination \hfill}
 %\SweaveOpts{engine=R,eps=TRUE,pdf=TRUE,width=5,height=3,strip.white="true"}
 \setkeys{Gin}{width=\textwidth}
 \title{Using the \textsf{BsMD} Package for Bayesian Screening and Model 
-    Discrimination\footnote{\pkg{BsMD} current version: 2013.0510}}
+    Discrimination\footnote{\pkg{BsMD} current version: \Sexpr{packageVersion("BsMD")} }}
 \author{Ernesto Barrios Zamudio \\
     \texttt{ebarrios@itam.mx} \\ [1ex]
     \bf Instituto Tecnol\'{o}gico Aut\'{o}nomo de M\'{e}xico}

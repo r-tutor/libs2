@@ -11,13 +11,13 @@ congruent
 cycle_hire
 cycle_hire_osm
 eire: eire.coords.utm eire.df eire.nb eire.polys.utm
-elect80: dll e80_queen elect80 elect80_lw k4
+elect80
 elev
 getisord: go_x go_xyz go_y
 grain
 hawaii
 hopkins
-house: LO_nb house trMat
+house
 huddersfield
 incongruent
 jenks71

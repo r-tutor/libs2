@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 
 
@@ -18,9 +18,9 @@
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -30,14 +30,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -46,9 +48,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -94,7 +96,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -115,9 +117,6 @@ padding-right: 2em;
 font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 font-size: 14px;
 line-height: 1.35;
-}
-#header {
-text-align: center;
 }
 #TOC {
 clear: both;
@@ -286,7 +285,8 @@ code > span.st { color: #d14; }
 code > span.co { color: #888888; font-style: italic; } 
 code > span.ot { color: #007020; } 
 code > span.al { color: #ff0000; font-weight: bold; } 
-code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
 </style>
 
 
@@ -303,23 +303,26 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 
 
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(systemfonts)</a></code></pre></div>
-<p>Most of the functionality in systemfonts is intended to be used from compiled code to help e.g. graphic devices to resolve font specifications to a font file prior to rendering. systemfonts provide key functionality to get called at the C level using the <code>R_getCCallable()</code> function. The systemfonts namespace must be loaded for this to work, so be sure to import e.g. <code>match_font()</code> in the package namespace. For more information about this interface see <a href="https://cran.r-project.org/doc/manuals/R-exts.html#Registering-native-routines"><em>Registering native routines</em></a> in <em>Writing R Extensions</em>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(systemfonts)</span></code></pre></div>
+<p>Most of the functionality in systemfonts is intended to be used from compiled code to help e.g. graphic devices to resolve font specifications to a font file prior to rendering. systemfonts provide key functionality to get called at the C level using the <code>R_getCCallable()</code> function. The systemfonts namespace must be loaded for this to work, so be sure to import e.g. <code>match_font()</code> in the package namespace. For more information about this interface see <a href="https://cran.r-project.org/doc/manuals/R-exts.html#Registering-native-routines"><em>Registering native routines</em></a> in <em>Writing R Extensions</em>.</p>
 <div id="font-matching" class="section level2">
 <h2>Font matching</h2>
 <p>The C equivalent of the <code>match_font()</code> R function is <code>locate_font()</code> with the following signature:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="dt">int</span> locate_font(<span class="dt">const</span> <span class="dt">char</span> *family, <span class="dt">int</span> italic, <span class="dt">int</span> bold, <span class="dt">char</span> *path, <span class="dt">int</span> max_path_length)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1"></a><span class="dt">int</span> locate_font(<span class="dt">const</span> <span class="dt">char</span> *family, <span class="dt">int</span> italic, <span class="dt">int</span> bold, <span class="dt">char</span> *path, <span class="dt">int</span> max_path_length)</span></code></pre></div>
 <p>It takes a UTF-8 encoded string with the font family name, an int setting both italic and bold styles along with a char pointer to be filled with the located path and the maximum length it can hold. The return value is an int giving the index of the font in the font file.</p>
 <p>The best way to use the function in a package is to wrap it in a function to avoid fetching it multiple times, e.g.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="dt">static</span> <span class="dt">int</span> locate_font(<span class="dt">const</span> <span class="dt">char</span> *family, <span class="dt">int</span> italic, <span class="dt">int</span> bold, <span class="dt">char</span> *path, <span class="dt">int</span> max_path_length) {</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">  <span class="dt">static</span> <span class="dt">int</span> (*p_locate_font)(<span class="dt">const</span> <span class="dt">char</span> *family, <span class="dt">int</span> italic, <span class="dt">int</span> bold, <span class="dt">char</span> *path, <span class="dt">int</span> max_path_length) = NULL;</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">  <span class="cf">if</span> (p_locate_font == NULL) {</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">    p_locate_font = (<span class="dt">int</span>(*)(<span class="dt">const</span> <span class="dt">char</span> *, <span class="dt">int</span>, <span class="dt">int</span>, <span class="dt">char</span> *, <span class="dt">int</span>)) R_GetCCallable(<span class="st">&quot;systemfonts&quot;</span>, <span class="st">&quot;locate_font&quot;</span>);</a>
-<a class="sourceLine" id="cb3-5" data-line-number="5">  }</a>
-<a class="sourceLine" id="cb3-6" data-line-number="6">  <span class="cf">return</span> p_locate_font(family, italic, bold, path, max_path_length);</a>
-<a class="sourceLine" id="cb3-7" data-line-number="7">}</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1"></a><span class="dt">static</span> <span class="dt">int</span> locate_font(<span class="dt">const</span> <span class="dt">char</span> *family, <span class="dt">int</span> italic, <span class="dt">int</span> bold, <span class="dt">char</span> *path, <span class="dt">int</span> max_path_length) {</span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="dt">static</span> <span class="dt">int</span> (*p_locate_font)(<span class="dt">const</span> <span class="dt">char</span> *family, <span class="dt">int</span> italic, <span class="dt">int</span> bold, <span class="dt">char</span> *path, <span class="dt">int</span> max_path_length) = NULL;</span>
+<span id="cb3-3"><a href="#cb3-3"></a>  <span class="cf">if</span> (p_locate_font == NULL) {</span>
+<span id="cb3-4"><a href="#cb3-4"></a>    p_locate_font = (<span class="dt">int</span>(*)(<span class="dt">const</span> <span class="dt">char</span> *, <span class="dt">int</span>, <span class="dt">int</span>, <span class="dt">char</span> *, <span class="dt">int</span>)) R_GetCCallable(<span class="st">&quot;systemfonts&quot;</span>, <span class="st">&quot;locate_font&quot;</span>);</span>
+<span id="cb3-5"><a href="#cb3-5"></a>  }</span>
+<span id="cb3-6"><a href="#cb3-6"></a>  <span class="cf">return</span> p_locate_font(family, italic, bold, path, max_path_length);</span>
+<span id="cb3-7"><a href="#cb3-7"></a>}</span></code></pre></div>
 </div>
 
+
+
+<!-- code folding -->
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

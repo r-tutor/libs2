@@ -25,5 +25,5 @@ Author: Romain Francois [aut, cre],
 Maintainer: Romain Francois <romain@r-enthusiasts.com>
 Repository: CRAN
 Date/Publication: 2020-01-02 19:48:23 UTC
-Built: R 3.6.2; x86_64-w64-mingw32; 2020-02-22 04:08:53 UTC; windows
+Built: R 4.0.0; x86_64-w64-mingw32; 2020-05-02 21:37:55 UTC; windows
 Archs: i386, x64

@@ -33,6 +33,7 @@ step_classdist          Distances to Class Centroids
 step_corr               High Correlation Filter
 step_count              Create Counts of Patterns using Regular
                         Expressions
+step_cut                Cut a numeric variable into a factor
 step_date               Date Feature Generator
 step_depth              Data Depths
 step_discretize         Discretize Numeric Variables

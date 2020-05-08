@@ -45,8 +45,8 @@ is.maximal              Find Maximal Itemsets
 is.redundant            Find Redundant Rules
 is.significant          Find Significant Rules
 is.superset             Find Super and Subsets
-itemCoding              Item Coding - Handling Item Labels and Column
-                        IDs
+itemCoding              Item Coding - Conversion between Item Labels
+                        and Column IDs
 itemFrequency           Getting Frequency/Support for Single Items
 itemFrequencyPlot       Creating a Item Frequencies/Support Bar Plot
 itemMatrix-class        Class itemMatrix - Sparse Binary Incidence

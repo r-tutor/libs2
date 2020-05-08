@@ -25,6 +25,7 @@ circ.mat	utilitiesPB
 clear.2fis	CatalogueAccessors
 clear.2fis.catlg	CatalogueAccessors
 clear.2fis.character	CatalogueAccessors
+clear2fis_from_profile	godolphin
 colpick	godolphin
 colpickIV	godolphin
 compromise	compromise
@@ -60,6 +61,7 @@ IAPlot.design	IAPlot
 indexcalc	utilitiesV
 intfind	IAPlot
 leftadjust	StructurePickers
+makecatlg	makecatlg
 map2design	utilitiesCat
 mapcalc	utilitiesCat
 mapcalc.block	utilitiesCat

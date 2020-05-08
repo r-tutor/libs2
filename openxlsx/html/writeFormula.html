@@ -9,7 +9,7 @@
 
 <h3>Description</h3>
 
-<p>Write a a character vector containing Excel formula to a worksheet
+<p>Write a a character vector containing Excel formula to a worksheet.
 </p>
 
 
@@ -52,6 +52,31 @@ writeFormula(wb, sheet, x, startCol = 1, startRow = 1, xy = NULL)
 </table>
 
 
+<h3>Details</h3>
+
+<p>Currently only the english version of functions are supported. Please don't use the local translation.
+The examples below show a small list of possible formulas:
+</p>
+
+<ul>
+<li><p>SUM(B2:B4)
+</p>
+</li>
+<li><p>AVERAGE(B2:B4)
+</p>
+</li>
+<li><p>MIN(B2:B4)
+</p>
+</li>
+<li><p>MAX(B2:B4)
+</p>
+</li>
+<li><p>...
+</p>
+</li></ul>
+
+
+
 <h3>Author(s)</h3>
 
 <p>Alexander Walker
@@ -85,11 +110,13 @@ writeFormula(wb, 1, x = "A2 + B2", startCol = 10, startRow = 10)
 
 ## 2. - As a data.frame column with class "formula" using writeData
 
-df &lt;- data.frame(x=1:3,
-                 y = 1:3,
-                 z = paste(paste0("A", 1:3+1L), paste0("B", 1:3+1L), sep = " + "),
-                 z2 = sprintf("ADDRESS(1,%s)", 1:3),
-                 stringsAsFactors = FALSE)
+df &lt;- data.frame(
+  x = 1:3,
+  y = 1:3,
+  z = paste(paste0("A", 1:3 + 1L), paste0("B", 1:3 + 1L), sep = " + "),
+  z2 = sprintf("ADDRESS(1,%s)", 1:3),
+  stringsAsFactors = FALSE
+)
 
 class(df$z) &lt;- c(class(df$z), "formula")
 class(df$z2) &lt;- c(class(df$z2), "formula")
@@ -107,17 +134,26 @@ class(v2) &lt;- c(class(v2), "formula")
 writeData(wb, sheet = 2, x = v2, startCol = 10, startRow = 2)
 
 ## Save workbook
-## Not run: saveWorkbook(wb, "writeFormulaExample.xlsx", overwrite = TRUE)
+## Not run: 
+saveWorkbook(wb, "writeFormulaExample.xlsx", overwrite = TRUE)
+
+## End(Not run)
 
 
-## Writing internal hyperlinks
+## 4. - Writing internal hyperlinks
+
 wb &lt;- createWorkbook()
 addWorksheet(wb, "Sheet1")
 addWorksheet(wb, "Sheet2")
 writeFormula(wb, "Sheet1", x = '=HYPERLINK("#Sheet2!B3", "Text to Display - Link to Sheet2")')
-## Not run: saveWorkbook(wb, "writeFormulaHyperlinkExample.xlsx", overwrite = TRUE)
+
+## Save workbook
+## Not run: 
+saveWorkbook(wb, "writeFormulaHyperlinkExample.xlsx", overwrite = TRUE)
+
+## End(Not run)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>openxlsx</em> version 4.1.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>openxlsx</em> version 4.1.5 <a href="00Index.html">Index</a>]</div>
 </body></html>

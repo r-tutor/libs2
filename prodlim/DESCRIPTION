@@ -16,5 +16,5 @@ RoxygenNote: 6.1.1
 NeedsCompilation: yes
 Repository: CRAN
 Date/Publication: 2019-11-17 12:40:02 UTC
-Built: R 3.6.1; x86_64-w64-mingw32; 2019-11-18 02:22:49 UTC; windows
+Built: R 4.0.0; x86_64-w64-mingw32; 2020-05-02 23:00:31 UTC; windows
 Archs: i386, x64

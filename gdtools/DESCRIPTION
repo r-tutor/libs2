@@ -33,5 +33,5 @@ Author: David Gohel [aut, cre],
 Maintainer: David Gohel <david.gohel@ardata.fr>
 Repository: CRAN
 Date/Publication: 2020-04-03 12:40:02 UTC
-Built: R 3.6.2; x86_64-w64-mingw32; 2020-04-03 20:59:21 UTC; windows
+Built: R 4.0.0; x86_64-w64-mingw32; 2020-05-02 18:51:19 UTC; windows
 Archs: i386, x64

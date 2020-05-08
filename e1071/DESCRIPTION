@@ -30,5 +30,5 @@ Author: David Meyer [aut, cre],
 Maintainer: David Meyer <David.Meyer@R-project.org>
 Repository: CRAN
 Date/Publication: 2019-11-26 18:29:09 UTC
-Built: R 3.6.1; x86_64-w64-mingw32; 2019-12-03 21:20:31 UTC; windows
+Built: R 4.0.0; x86_64-w64-mingw32; 2020-05-02 18:49:09 UTC; windows
 Archs: i386, x64

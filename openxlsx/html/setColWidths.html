@@ -94,21 +94,24 @@ recycled to the length of cols.</p>
 wb &lt;- createWorkbook()
 
 ## Add a worksheet
-addWorksheet(wb, "Sheet 1") 
+addWorksheet(wb, "Sheet 1")
 
 
 ## set col widths
-setColWidths(wb, 1, cols = c(1,4,6,7,9), widths = c(16,15,12,18,33))
+setColWidths(wb, 1, cols = c(1, 4, 6, 7, 9), widths = c(16, 15, 12, 18, 33))
 
 ## auto columns
 addWorksheet(wb, "Sheet 2")
 writeData(wb, sheet = 2, x = iris)
 setColWidths(wb, sheet = 2, cols = 1:5, widths = "auto")
-  
+
 ## Save workbook
-## Not run: saveWorkbook(wb, "setColWidthsExample.xlsx", overwrite = TRUE)
+## Not run: 
+saveWorkbook(wb, "setColWidthsExample.xlsx", overwrite = TRUE)
+
+## End(Not run)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>openxlsx</em> version 4.1.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>openxlsx</em> version 4.1.5 <a href="00Index.html">Index</a>]</div>
 </body></html>

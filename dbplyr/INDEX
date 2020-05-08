@@ -11,6 +11,6 @@ memdb_frame             Create a database table in temporary in-memory
                         database.
 remote_name             Metadata about a remote table
 sql                     SQL escaping.
-src_dbi                 dplyr backend for any DBI-compatible database
+tbl.src_dbi             Use dplyr verbs with a remote database table
 translate_sql           Translate an expression to sql.
 window_order            Override window order and frame

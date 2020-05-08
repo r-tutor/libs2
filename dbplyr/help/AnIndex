@@ -37,7 +37,6 @@ is.sql	sql
 join.tbl_sql	join.tbl_sql
 join_query	sql_build
 lahman	lahman
-lahman_df	lahman
 lahman_mysql	lahman
 lahman_postgres	lahman
 lahman_sqlite	lahman
@@ -86,6 +85,8 @@ sql_build	sql_build
 sql_call2	sql_expr
 sql_cast	sql_variant
 sql_cot	sql_variant
+sql_escape_date	sql_escape_logical
+sql_escape_datetime	sql_escape_logical
 sql_escape_logical	sql_escape_logical
 sql_expr	sql_expr
 sql_infix	sql_variant
@@ -106,8 +107,8 @@ src_dbi	src_dbi
 src_memdb	memdb_frame
 src_sql	src_sql
 src_test	testing
-tbl.src_dbi	src_dbi
-tbl_dbi	src_dbi
+tbl.src_dbi	tbl.src_dbi
+tbl_dbi	tbl.src_dbi
 tbl_lazy	tbl_lazy
 tbl_memdb	memdb_frame
 tbl_sql	tbl_sql
