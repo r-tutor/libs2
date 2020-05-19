@@ -39,7 +39,6 @@ reroute                 Change terminal nodes of edges
 sampling_games          Graph games based on direct sampling
 search_graph            Search a graph with depth first and breath
                         first
-tidygraph-package       tidygraph: A Tidy API for Graph Manipulation
 type_games              Graph games based on different node types
 with_graph              Evaluate a tidygraph algorithm in the context
                         of a graph

@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Greatest Common Divisor (GCD) and Least Common Multiple (LCM)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for gcd.bigz {gmp}"><tr><td>gcd.bigz {gmp}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Greatest Common Divisor (GCD) and Least Common Multiple (LCM)</h2>
+
+<h3>Description</h3>
+
+<p>Compute the greatest common divisor (GCD) and least common multiple
+(LCM) of two (big) integers.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'bigz'
+gcd(a, b)
+lcm.bigz(a, b)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>a,b</code></td>
+<td>
+<p>Either integer, numeric, <code><a href="biginteger.html">bigz</a></code> or a string
+value; if a string, either starting with <code>0x</code> for hexadecimal,
+<code>0b</code> for binary or without prefix for decimal values.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>An element of class bigz
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Antoine Lucas</p>
+
+
+<h3>References</h3>
+
+<p>The GNU MP Library, see <a href="http://gmplib.org">http://gmplib.org</a></p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="gcdex.html">gcdex</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+gcd.bigz(210,342) # or also
+lcm.bigz(210,342)
+a &lt;- 210 ; b &lt;- 342
+stopifnot(gcd.bigz(a,b) * lcm.bigz(a,b) == a * b)
+
+## or
+(a &lt;- as.bigz("82696155787249022588"))
+(b &lt;- as.bigz("65175989479756205392"))
+gcd(a,b) # 4
+stopifnot(gcd(a,b) * lcm.bigz(a,b) == a * b)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>gmp</em> version 0.5-14 <a href="00Index.html">Index</a>]</div>
+</body></html>

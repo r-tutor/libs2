@@ -1,3 +1,21 @@
+# tidygraph 1.2.0
+
+* graph description now recognise undirected trees
+* Added pkgdown site at https://tidygraph.data-imaginist.com
+* Prepare tidygraph for dplyr 1.0.0 (#118 and #119)
+* Add possibility of controlling which column in `nodes` are used for matching
+  if the `to` and `from` columns in edges are character vectors during 
+  construction (#89)
+* `bind_graph()` now accepts a list of graphs as its first argument (#88)
+* Add `graph_modularity()` for calculating modularity contingent on a node 
+  grouping (#97)
+* Edge weights are now handled more consistently to avoid igraph using a 
+  possible `weight` edge attribute. `weights = NULL` will always mean that no
+  edge weight is used (#106).
+* Neighborhood graph in `map_local()` and siblings will now contain a 
+  `.central_node` node attribute that will identify the node from which the 
+  local graph has been calculated (#107)
+
 # tidygraph 1.1.2
 
 * Compatibility with `dplyr` 0.8

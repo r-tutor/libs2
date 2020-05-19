@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Gene expression signatures for p53 mutation status in 250...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for breastcancer {doBy}"><tr><td>breastcancer {doBy}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Gene expression signatures for p53 mutation status in 250 breast cancer
+samples</h2>
+
+<h3>Description</h3>
+
+<p>Perturbations of the p53 pathway are associated with more aggressive and
+therapeutically refractory tumours. We preprocessed the data using Robust
+Multichip Analysis (RMA). Dataset has been truncated to the 1000 most
+informative genes (as selected by Wilcoxon test statistics) to simplify
+computation. The genes have been standardised to have zero mean and unit
+variance (i.e. z-scored).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+breastcancer
+</pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 250 observations on 1001 variables. The
+first 1000 columns are numerical variables; the last column
+(named <code>code</code>) is a factor with levels <code>case</code> and
+<code>control</code>.
+</p>
+
+
+<h3>Details</h3>
+
+<p>The factor <code>code</code> defines whether there was a mutation in the p53
+sequence (code=case) or not (code=control).
+</p>
+
+
+<h3>Source</h3>
+
+<p>Dr. Chris Holmes, c.holmes at stats
+dot. ox . ac .uk
+</p>
+
+
+<h3>References</h3>
+
+<p>Miller et al (2005, PubMed
+ID:16141321)
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+data(breastcancer)
+bc &lt;- breastcancer
+pairs(bc[,1:5], col=bc$code)
+
+train &lt;- sample(1:nrow(bc), 50)
+table(bc$code[train])
+library(MASS)
+z &lt;- lda(code ~ ., data=bc, prior = c(1,1)/2, subset = train)
+pc &lt;- predict(z, bc[-train, ])$class
+pc
+bc[-train, "code"]
+table(pc, bc[-train, "code"])
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>doBy</em> version 4.6.6 <a href="00Index.html">Index</a>]</div>
+</body></html>

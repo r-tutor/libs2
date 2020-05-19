@@ -1,7 +1,7 @@
 Package: systemfonts
 Type: Package
 Title: System Native Font Finding
-Version: 0.2.1
+Version: 0.2.2
 Authors@R: 
     c(person(given = "Thomas Lin",
              family = "Pedersen",
@@ -31,19 +31,19 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.0
-SystemRequirements: C++11
+SystemRequirements: C++11, fontconfig, freetype2
 Suggests: testthat (>= 2.1.0), covr, knitr, rmarkdown, tools
 VignetteBuilder: knitr
 URL: https://github.com/r-lib/systemfonts
 BugReports: https://github.com/r-lib/systemfonts/issues
 NeedsCompilation: yes
-Packaged: 2020-04-28 17:32:33 UTC; thomas
+Packaged: 2020-05-13 08:41:59 UTC; thomas
 Author: Thomas Lin Pedersen [aut, cre]
     (<https://orcid.org/0000-0002-5147-4711>),
   Jeroen Ooms [aut] (<https://orcid.org/0000-0002-4035-0289>),
   Devon Govett [aut] (Author of font-manager),
   RStudio [cph]
 Repository: CRAN
-Date/Publication: 2020-04-29 15:30:02 UTC
-Built: R 4.0.0; x86_64-w64-mingw32; 2020-05-02 14:19:21 UTC; windows
+Date/Publication: 2020-05-14 19:50:02 UTC
+Built: R 4.0.0; x86_64-w64-mingw32; 2020-05-15 14:46:02 UTC; windows
 Archs: i386, x64

@@ -1,3 +1,9 @@
+# systemfonts 0.2.2
+
+* Fix remaining valgrind issues by fixing the included font-manager code
+* Rewrite the text shaping algorithm to make it more future proof
+* Work around a nasty freetype bug in their cache subsystem
+
 # systemfonts 0.2.1
 
 * Various fixes to the correctness of compiled code

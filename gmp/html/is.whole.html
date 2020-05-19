@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Whole (&quot;Integer&quot;) Numbers</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for is.whole {gmp}"><tr><td>is.whole {gmp}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Whole (&quot;Integer&quot;) Numbers</h2>
+
+<h3>Description</h3>
+
+<p>Check which elements of <code>x[]</code> are integer valued aka
+&ldquo;whole&rdquo; numbers.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+is.whole(x)
+## Default S3 method:
+is.whole(x)
+## S3 method for class 'bigz'
+is.whole(x)
+## S3 method for class 'bigq'
+is.whole(x)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>any <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> vector</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>logical vector of the same length as <code>x</code>, indicating where
+<code>x[.]</code> is integer valued.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Martin Maechler</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../base/html/integer.html">is.integer</a>(x)</code> (<span class="pkg">base</span> package) checks for the
+<em>internal</em> mode or class; not if <code>x[i]</code> are integer valued.
+</p>
+<p>The <code><a href="../../Rmpfr/html/is.whole.html">is.whole</a>()</code> method for &quot;mpfr&quot; numbers.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+ is.integer(3) # FALSE, it's internally a double
+ is.whole(3)   # TRUE
+ ## integer valued complex numbers  (two FALSE) :
+ is.whole(c(7, 1 + 1i, 1.2, 3.4i, 7i))
+ is.whole(factorialZ(20)^(10:12)) ## "bigz" are *always* whole numbers
+ q &lt;- c(as.bigz(36)^50 / as.bigz(30)^40, 3, factorialZ(30:31), 12.25)
+ is.whole(q) # F T T T F
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>gmp</em> version 0.5-14 <a href="00Index.html">Index</a>]</div>
+</body></html>

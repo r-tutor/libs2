@@ -46,6 +46,8 @@ renameCol               Rename columns in a matrix or a dataframe.
 subSeq                  Find sub-sequences of identical elements in a
                         vector.
 taylor                  Taylor expansion (one dimension)
+tidy-esticon            Tidy an esticon object
+tidy-linest             Tidy a linest object
 timeSinceEvent          Calculate "time since event" in a vector.
 which.maxn              Where are the n largest or n smallest elements
                         in a numeric vector ?

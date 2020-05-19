@@ -2,8 +2,8 @@ Package: ClusterR
 Type: Package
 Title: Gaussian Mixture Models, K-Means, Mini-Batch-Kmeans, K-Medoids
         and Affinity Propagation Clustering
-Version: 1.2.1
-Date: 2019-11-28
+Version: 1.2.2
+Date: 2020-05-12
 Authors@R: c( person("Lampros", "Mouselimis", email = "mouselimislampros@gmail.com", role = c("aut", "cre")), person("Conrad", "Sanderson", role = "cph", comment = "Author of the C++ Armadillo library"), person("Ryan", "Curtin", role = "cph", comment = "Author of the C++ Armadillo library"), person("Siddharth", "Agrawal", role = "cph", comment = "Author of the C code of the Mini-Batch-Kmeans algorithm (https://github.com/siddharth-agrawal/Mini-Batch-K-Means)"), person("Brendan", "Frey", email = "frey@psi.toronto.edu", role = "cph", comment = "Author of the matlab code of the Affinity propagation algorithm (for commercial use please contact the author of the matlab code)"), person("Delbert", "Dueck", role = "cph", comment = "Author of the matlab code of the Affinity propagation algorithm") )  
 Maintainer: Lampros Mouselimis <mouselimislampros@gmail.com>
 BugReports: https://github.com/mlampros/ClusterR/issues
@@ -26,9 +26,9 @@ Imports: Rcpp (>= 0.12.5), graphics, grDevices, utils, stats, gmp,
 LinkingTo: Rcpp, RcppArmadillo (>= 0.9.1)
 Suggests: OpenImageR, FD, testthat, covr, knitr, rmarkdown
 VignetteBuilder: knitr
-RoxygenNote: 6.1.0
+RoxygenNote: 7.1.0
 NeedsCompilation: yes
-Packaged: 2019-11-28 15:55:34 UTC; lampros
+Packaged: 2020-05-12 08:25:58 UTC; lampros
 Author: Lampros Mouselimis [aut, cre],
   Conrad Sanderson [cph] (Author of the C++ Armadillo library),
   Ryan Curtin [cph] (Author of the C++ Armadillo library),
@@ -41,6 +41,6 @@ Author: Lampros Mouselimis [aut, cre],
   Delbert Dueck [cph] (Author of the matlab code of the Affinity
     propagation algorithm)
 Repository: CRAN
-Date/Publication: 2019-11-29 19:50:13 UTC
-Built: R 4.0.0; x86_64-w64-mingw32; 2020-05-03 00:56:27 UTC; windows
+Date/Publication: 2020-05-12 09:10:03 UTC
+Built: R 4.0.0; x86_64-w64-mingw32; 2020-05-16 01:20:43 UTC; windows
 Archs: i386, x64

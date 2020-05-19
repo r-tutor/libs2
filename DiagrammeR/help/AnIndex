@@ -92,7 +92,6 @@ get_agg_degree_total	get_agg_degree_total
 get_all_connected_nodes	get_all_connected_nodes
 get_alpha_centrality	get_alpha_centrality
 get_articulation_points	get_articulation_points
-get_attr_dfs	get_attr_dfs
 get_authority_centrality	get_authority_centrality
 get_betweenness	get_betweenness
 get_bridging	get_bridging
@@ -219,8 +218,6 @@ select_nodes_by_degree	select_nodes_by_degree
 select_nodes_by_id	select_nodes_by_id
 select_nodes_in_neighborhood	select_nodes_in_neighborhood
 set_cache	set_cache
-set_df_as_edge_attr	set_df_as_edge_attr
-set_df_as_node_attr	set_df_as_node_attr
 set_edge_attrs	set_edge_attrs
 set_edge_attrs_ws	set_edge_attrs_ws
 set_edge_attr_to_display	set_edge_attr_to_display

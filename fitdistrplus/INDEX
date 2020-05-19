@@ -34,6 +34,8 @@ mgedist                 Maximum goodness-of-fit fit of univariate
 mledist                 Maximum likelihood fit of univariate
                         distributions
 mmedist                 Matching moment fit of univariate distributions
+msedist                 Maximum spacing estimation of univariate
+                        distributions
 plotdist                Plot of empirical and theoretical distributions
                         for non-censored data
 plotdistcens            Plot of empirical and theoretical distributions

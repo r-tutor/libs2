@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Heat development in cement under hardening.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for haldCement {doBy}"><tr><td>haldCement {doBy}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Heat development in cement under hardening.</h2>
+
+<h3>Description</h3>
+
+<p>Heat development in cement under hardening related to the chemical
+composition.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+haldCement
+</pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 13 observations on the following 5 variables.
+</p>
+
+<dl>
+<dt><code>x1</code></dt><dd><p>Percentage (weight) of [3Ca0][Al2O3]</p>
+</dd>
+<dt><code>x2</code></dt><dd><p>Percentage (weight) of [3Cao][SiO2]</p>
+</dd>
+<dt><code>x3</code></dt><dd><p>Percentage (weight) of [4Ca0][Al2O3][Fe03]</p>
+</dd>
+<dt><code>x4</code></dt><dd><p>Percentage (weight) of [2Cao][SiO2]</p>
+</dd>
+<dt><code>y</code></dt><dd><p>Heat development measured in calories per
+gram cement after 180 days</p>
+</dd>
+</dl>
+
+
+
+<h3>References</h3>
+
+<p>Anders Hald (1949); Statistiske Metoder; Akademisk Forlag (in
+Danish), page 509.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+data(haldCement)
+
+if( interactive() ){
+pairs( haldCement )
+}
+m &lt;- lm( y ~ x1 + x2 + x3 + x4, data=haldCement )
+summary( m )
+
+# Notice: The model explains practically all variation in data;
+# yet none of the explanatory variables appear to be statistically
+# significant.
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>doBy</em> version 4.6.6 <a href="00Index.html">Index</a>]</div>
+</body></html>

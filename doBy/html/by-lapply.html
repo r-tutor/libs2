@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Formula based version of lapply.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for by-lapply {doBy}"><tr><td>by-lapply {doBy}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Formula based version of lapply.</h2>
+
+<h3>Description</h3>
+
+<p>This function is a wrapper for calling lapply on the
+list resulting from first calling splitBy.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+lapply_by(data, formula, FUN = mean)
+
+lapplyBy(formula, data = parent.frame(), FUN)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>A dataframe.</p>
+</td></tr>
+<tr valign="top"><td><code>formula</code></td>
+<td>
+<p>A formula describing how data should be split.</p>
+</td></tr>
+<tr valign="top"><td><code>FUN</code></td>
+<td>
+<p>A function to be applied to each element in the splitted
+list, see 'Examples' below.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A list.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Søren Højsgaard, <a href="mailto:sorenh@math.aau.dk">sorenh@math.aau.dk</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="by-lapply.html">lapplyBy</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(dietox)
+
+## Calculate weekwise feed efficiency = weight gain / feed intake
+dietox &lt;- orderBy(~Pig + Time, data=dietox)
+v &lt;- lapplyBy(~Pig, data=dietox,
+              function(d) c(NA, diff(d$Weight) / diff(d$Feed)))
+dietox$FE &lt;- unlist(v)
+
+## Technically this is the same as 
+dietox &lt;- orderBy(~Pig + Time, data=dietox)
+wdata &lt;- splitBy(~Pig, data=dietox)
+v &lt;- lapply(wdata, function(d) c(NA, diff(d$Weight)/diff(d$Feed)))
+dietox$FE &lt;- unlist(v)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>doBy</em> version 4.6.6 <a href="00Index.html">Index</a>]</div>
+</body></html>

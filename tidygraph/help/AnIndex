@@ -130,6 +130,7 @@ graph_join	graph_join
 graph_mean_dist	graph_measures
 graph_measures	graph_measures
 graph_min_cut	graph_measures
+graph_modularity	graph_measures
 graph_motif_count	graph_measures
 graph_mutual_count	graph_measures
 graph_order	graph_measures
@@ -142,10 +143,13 @@ groups	reexports
 group_biconnected_component	group_graph
 group_by	reexports
 group_components	group_graph
+group_data	reexports
 group_edge_betweenness	group_graph
 group_fast_greedy	group_graph
 group_graph	group_graph
+group_indices	reexports
 group_infomap	group_graph
+group_keys	reexports
 group_label_prop	group_graph
 group_leading_eigen	group_graph
 group_louvain	group_graph
@@ -285,6 +289,7 @@ semi_join	reexports
 slice	reexports
 starts_with	reexports
 tbl_graph	tbl_graph
+tbl_vars	reexports
 tidygraph	tidygraph-package
 top_n	reexports
 to_bfs_tree	morphers

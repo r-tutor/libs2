@@ -1,0 +1,219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Large Sized Integer Values</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for bigz {gmp}"><tr><td>bigz {gmp}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Large Sized Integer Values</h2>
+
+<h3>Description</h3>
+
+<p>Class <code>"bigz"</code> encodes arbitrarily large integers (via GMP).
+A simple S3 class (internally a <code><a href="../../base/html/raw.html">raw</a></code> vector), it has been
+registered as formal (S4) class (via <code><a href="../../methods/html/setOldClass.html">setOldClass</a></code>), too.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+as.bigz(a, mod = NA)
+## S3 method for class 'bigz'
+as.character(x, b = 10, ...)
+
+is.bigz(x)
+## S3 method for class 'bigz'
+is.na(x)
+## S3 method for class 'bigz'
+print(x, quote=FALSE, initLine = is.null(modulus(x)), ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>a</code></td>
+<td>
+<p>either <code><a href="../../base/html/integer.html">integer</a></code>, <code><a href="../../base/html/numeric.html">numeric</a></code> (i.e.,
+<code><a href="../../base/html/double.html">double</a></code>) or <code><a href="../../base/html/character.html">character</a></code> vector.
+</p>
+<p>If character: the strings either start with <code>0x</code> for hexadecimal, <code>0b</code> for
+binary, <code>0</code> for octal, or without a <code>0*</code> prefix for decimal values.
+Formatting errors are signalled as with <code><a href="../../base/html/stop.html">stop</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>b</code></td>
+<td>
+<p>base: from 2 to 36</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a &ldquo;big integer number&rdquo; (vector), of class <code>"bigz"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>additional arguments passed to methods</p>
+</td></tr>
+<tr valign="top"><td><code>mod</code></td>
+<td>
+<p>an integer, numeric, string or bigz of the internal modulus, see below.</p>
+</td></tr>
+<tr valign="top"><td><code>quote</code></td>
+<td>
+<p>(for printing:) logical indicating if the numbers
+should be quoted (as characters are);  the default used to be
+<code>TRUE</code> (implicitly) till 2011.</p>
+</td></tr>
+<tr valign="top"><td><code>initLine</code></td>
+<td>
+<p>(for printing:) logical indicating if an
+<b>init</b>ial line (with the class and length or dimension) should
+be printed.  The default prints it for those cases where the class
+is not easily discernable from the print output.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Bigz's are integers of arbitrary, but given length (means: only
+restricted by the host memory).  Basic arithmetic operations can be performed
+on bigzs as addition, subtraction, multiplication, division, modulation
+(remainder of division), power, multiplicative inverse, calculating of the
+greatest common divisor, test whether the integer is prime and other operations
+needed when performing standard cryptographic operations.
+</p>
+<p>For a review of basic arithmetics, see <code><a href="add.biginteger.html">add.bigz</a></code>.
+</p>
+<p>Comparison are supported, i.e., <code>"=="</code>, <code>"!="</code>,
+<code>"&lt;"</code>, <code>"&lt;="</code>, <code>"&gt;"</code>, and <code>"&gt;="</code>.
+</p>
+<p>Objects of class <code>"bigz"</code> may have a &ldquo;modulus&rdquo;, accessible
+via <code><a href="modulus.html">modulus</a>()</code>, currently as an attribute <code>mod</code>.
+When the object has such a modulus <i>m</i>, arithmetic is performed
+<em>&ldquo;modulo m&rdquo;</em>, mathematically &ldquo;within the
+ring <i>Z/mZ</i>&rdquo;.  For many operations, this means
+</p>
+<pre>   result &lt;- mod.bigz(result, m)  ## == result %% m
+</pre>
+<p>is called after performing the arithmetic operation and the result
+will have the attribute <code>mod</code> set accordingly.
+This however does not apply, e.g., for <code>/</code>, where
+<i>a / b =  a b^(-1)</i> and
+<i>b^(-1)</i> is the <em>multiplicate inverse</em> of <i>b</i>
+with respect to ring arithmetic, or <code><a href="../../base/html/NA.html">NA</a></code> with a warning
+when the inverse does not exist.  The warning can be turned off via
+<code>options("gmp:warnModMismatch" = FALSE)</code>
+</p>
+<p>Powers of bigzs can only be performed, if either a modulus is going to
+be applied to the result bigz or if the exponent fits into an integer
+value.  So, if you want to calculate a power in a finite group
+(&ldquo;modulo c&rdquo;), for large <i>c</i> do not use
+<code>a ^ b %% c</code>, but rather <code>as.bigz(a,c) ^ b</code>.
+</p>
+<p>The following rules for the result's modulus apply when performing
+arithmetic operations on <code>bigz</code>s:
+</p>
+
+<ul>
+<li><p> If none of the operand has a modulus set, the result will not have a modulus.
+</p>
+</li>
+<li><p> If both operands have a different modulus, the result will not have a
+modulus, except in case of <code><a href="add.biginteger.html">mod.bigz</a></code>, where the second operand's
+value is used.
+</p>
+</li>
+<li><p> If only one of the operands has a modulus or both have a common (the
+same), it is set and used for the arithmetic operations, except in
+case of <code>mod.bigz</code>, where the second operand's value is used.
+</p>
+</li></ul>
+
+
+
+<h3>Value</h3>
+
+<p>An <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> object of (S3) class <code>"bigz"</code>, representing the argument
+(<code>x</code> or <code>a</code>).
+</p>
+
+
+<h3>Note</h3>
+
+<pre>
+    x &lt;- as.bigz(1234567890123456789012345678901234567890)
+  </pre>
+<p>will not work as <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> converts the number to a double, losing precision
+and only then convert to a <code>"bigz"</code> object.
+</p>
+<p>Instead, use the syntax
+</p>
+<pre>
+    x &lt;- as.bigz("1234567890123456789012345678901234567890")
+  </pre>
+
+
+<h3>Author(s)</h3>
+
+<p>Immanuel Scholz</p>
+
+
+<h3>References</h3>
+
+<p>The GNU MP Library, see <a href="http://gmplib.org">http://gmplib.org</a></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## 1+1=2
+a &lt;- as.bigz(1)
+a + a
+
+## Two non-small Mersenne primes:
+two &lt;- as.bigz(2)
+p1 &lt;- two^107 -1 ; isprime(p1); p1
+p2 &lt;- two^127 -1 ; isprime(p2); p2
+
+
+## Calculate c = x^e mod n
+## --------------------------------------------------------------------
+x &lt;- as.bigz("0x123456789abcdef") # my secret message
+e &lt;- as.bigz(3) # something smelling like a dangerous public RSA exponent
+(n &lt;- p1 * p2) #  a product of two primes
+as.character(n, b=16)# as both primes were Mersenne's..
+
+## recreate the three numbers above [for demo below]:
+n. &lt;- n; x. &lt;- x; e. &lt;- e # save
+Rev &lt;- function() { n &lt;&lt;- n.; x &lt;&lt;- x.; e &lt;&lt;- e.}
+
+# first way to do it right
+modulus(x) &lt;- n
+c &lt;- x ^ e ; c ; Rev()
+
+# similar second way (makes more sense if you reuse e) to do it right
+modulus(e) &lt;- n
+c2 &lt;- x ^ e
+stopifnot(identical(c2, c), is.bigz(c2)) ; Rev()
+
+# third way to do it right
+c3 &lt;- x ^ as.bigz(e, n) ; stopifnot(identical(c3, c))
+
+# fourth way to do it right
+c4 &lt;- as.bigz(x, n) ^ e ; stopifnot(identical(c4, c))
+
+# WRONG! (although very beautiful. Ok only for very small 'e' as here)
+cc &lt;- x ^ e %% n
+cc == c
+
+# Return result in hexa
+as.character(c, b=16)
+
+# Depict the "S4-class" bigz, i.e., the formal (S4) methods:
+if(require("Rmpfr")) # mostly interesting there
+  showMethods(class="bigz")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>gmp</em> version 0.5-14 <a href="00Index.html">Index</a>]</div>
+</body></html>

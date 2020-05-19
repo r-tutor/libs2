@@ -37,6 +37,8 @@ mle	mledist
 mledist	mledist
 mme	mmedist
 mmedist	mmedist
+mse	msedist
+msedist	msedist
 plot.bootdist	bootdist
 plot.bootdistcens	bootdistcens
 plot.fitdist	fitdist

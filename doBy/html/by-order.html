@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Ordering (sorting) rows of a data frame</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for by-order {doBy}"><tr><td>by-order {doBy}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Ordering (sorting) rows of a data frame</h2>
+
+<h3>Description</h3>
+
+<p>Ordering (sorting) rows of a data frame by the certain
+variables in the data frame. This function is essentially a
+wrapper for the <code>order()</code> function - the important
+difference being that variables to order by can be given by a
+model formula.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+order_by(data, formula)
+
+orderBy(formula, data)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>A dataframe</p>
+</td></tr>
+<tr valign="top"><td><code>formula</code></td>
+<td>
+<p>The right hand side of a formula</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The sign of the terms in the formula determines whether
+sorting should be ascending or decreasing; see examples below
+</p>
+
+
+<h3>Value</h3>
+
+<p>The ordered data frame
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Søren Højsgaard, <a href="mailto:sorenh@math.aau.dk">sorenh@math.aau.dk</a> and Kevin
+Wright
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="by-transform.html">transformBy</a></code>, <code><a href="by-split.html">splitBy</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+orderBy(~ conc + Treatment, CO2)
+## Sort decreasingly by conc
+orderBy(~ - conc + Treatment, CO2)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>doBy</em> version 4.6.6 <a href="00Index.html">Index</a>]</div>
+</body></html>
