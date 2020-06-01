@@ -164,7 +164,16 @@ mcmc_hist(posterior, pars = c("wt", "sigma"))
 If we want to plot `log(sigma)` rather than `sigma` we can either 
 transform the draws in advance or use the `transformations` argument.
 
-```{r, mcmc_hist-transform, message=FALSE}
+<!-- ```{r, mcmc_hist-transform, message=FALSE} -->
+<!-- color_scheme_set("blue") -->
+<!-- mcmc_hist(posterior, pars = c("wt", "sigma"),  -->
+<!--           transformations = list("sigma" = "log")) -->
+<!-- ``` -->
+
+
+```{r, mcmc_hist-transform, message=FALSE, eval=FALSE}
+# not evaluated to reduce vignette size for CRAN
+# full version available at mc-stan.org/bayesplot/articles
 color_scheme_set("blue")
 mcmc_hist(posterior, pars = c("wt", "sigma"), 
           transformations = list("sigma" = "log"))
@@ -261,7 +270,16 @@ if (requireNamespace("hexbin", quietly = TRUE)) {
 In addition to `mcmc_scatter` and `mcmc_hex`, __bayesplot__ now provides
 an `mcmc_pairs` function for creating pairs plots with more than two parameters.
 
-```{r, mcmc_pairs, message=FALSE}
+<!-- ```{r, mcmc_pairs, message=FALSE} -->
+<!-- color_scheme_set("pink") -->
+<!-- mcmc_pairs(posterior, pars = c("(Intercept)", "wt", "sigma"), -->
+<!--            off_diag_args = list(size = 1.5)) -->
+<!-- ``` -->
+
+
+```{r, mcmc_pairs, message=FALSE, eval=FALSE}
+# not evaluated to reduce vignette size for CRAN
+# full version available at mc-stan.org/bayesplot/articles
 color_scheme_set("pink")
 mcmc_pairs(posterior, pars = c("(Intercept)", "wt", "sigma"),
            off_diag_args = list(size = 1.5))
@@ -325,7 +343,16 @@ by side, and `strip.position="left"` moves the facet labels to the y-axis
 The [`"viridis"` color scheme](https://CRAN.R-project.org/package=viridis) is
 also useful for trace plots because it is comprised of very distinct colors:
 
-```{r, viridis-scheme}
+<!-- ```{r, viridis-scheme, eval=FALSE} -->
+<!-- # not evaluated to reduce vignette size for CRAN -->
+<!-- # full version available at mc-stan.org/bayesplot/articles -->
+<!-- color_scheme_set("viridis") -->
+<!-- mcmc_trace(posterior, pars = "(Intercept)") -->
+<!-- ``` -->
+
+```{r, viridis-scheme, eval=FALSE}
+# not evaluated to reduce vignette size for CRAN
+# full version available at mc-stan.org/bayesplot/articles
 color_scheme_set("viridis")
 mcmc_trace(posterior, pars = "(Intercept)")
 ```

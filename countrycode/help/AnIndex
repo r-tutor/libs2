@@ -3,3 +3,6 @@ cldr_examples	cldr_examples
 codelist	codelist
 codelist_panel	codelist_panel
 countrycode	countrycode
+countryname	countryname
+countryname_dict	countryname_dict
+guess_field	guess_field

@@ -1,4 +1,5 @@
 dbplyr-package	dbplyr-package
+%>%	reexports
 add_op_single	lazy_ops
 anti_join.tbl_lazy	join.tbl_sql
 arrange.tbl_lazy	arrange.tbl_lazy
@@ -57,6 +58,7 @@ op_single	lazy_ops
 op_sort	lazy_ops
 op_vars	lazy_ops
 partial_eval	partial_eval
+reexports	reexports
 remote_con	remote_name
 remote_name	remote_name
 remote_query	remote_name
@@ -88,6 +90,7 @@ sql_cot	sql_variant
 sql_escape_date	sql_escape_logical
 sql_escape_datetime	sql_escape_logical
 sql_escape_logical	sql_escape_logical
+sql_escape_raw	sql_escape_logical
 sql_expr	sql_expr
 sql_infix	sql_variant
 sql_log	sql_variant

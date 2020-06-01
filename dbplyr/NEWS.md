@@ -1,3 +1,27 @@
+# dbplyr 1.4.4
+
+* Internally `DBI::dbExecute()` now uses `immediate = TRUE`; this improves
+  support for session-scoped temporary tables in MS SQL (@krlmlr, #438).
+
+* Subqueries with `ORDER BY` use `TOP 9223372036854775807` instead of 
+  `TOP 100 PERCENT` on SQL Server for compatibility with Azure Data Warehouse 
+  (#337, @alexkyllo).
+
+* `escape()` now supports `blob` vectors using new `sql_escape_raw()` 
+  generic. It enables using [blob](https://blob.tidyverse.org/) variables in 
+  dplyr verbs, for example to filter nvarchar values by UTF-16 blobs
+  (see https://github.com/r-dbi/DBI/issues/215#issuecomment-356376133). 
+  (@okhoma, #433)
+
+* Added `setOldClass()` calls for `"ident"` and `"ident_q"` classes for 
+  compatibility with dplyr 1.0.0 (#448, @krlmlr).
+
+* Postgres `str_detect()` translation uses same argument names as stringr,
+  and gains a `negate` argument (#444).
+
+* `semi_join()` and `anti_join()` now correctly support the `sql_on` argument 
+  (#443, @krlmlr).
+
 # dbplyr 1.4.3
 
 * dbplyr now uses RPostgres (instead of RPostgreSQL) and RMariaDB (instead of 

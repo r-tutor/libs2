@@ -21,6 +21,8 @@ new_site	hugo_cmd
 serve_site	serve_site
 shortcode	shortcode
 shortcodes	shortcode
+shortcode_close	shortcode
 shortcode_html	shortcode
+shortcode_open	shortcode
 stop_server	serve_site
 update_hugo	install_hugo
