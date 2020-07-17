@@ -49,6 +49,8 @@ get_xlevels.default	linest-get
 get_xlevels.mer	linest-get
 get_xlevels.merMod	linest-get
 haldCement	haldCement
+interaction-plot	interaction-plot
+interaction_plot	interaction-plot
 internal	doBy-internal
 is-estimable	is-estimable
 is_estimable	is-estimable

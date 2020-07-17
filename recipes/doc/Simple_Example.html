@@ -372,16 +372,15 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <p>The packages contains a data set used to predict whether a person will pay back a bank loan. It has 13 predictor columns and a factor variable <code>Status</code> (the outcome). We will first separate the data into a training and test set:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(recipes)</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(rsample)</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="co">#&gt; Warning: package &#39;rsample&#39; was built under R version 3.6.2</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">library</span>(modeldata)</span>
-<span id="cb1-5"><a href="#cb1-5"></a></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="kw">data</span>(<span class="st">&quot;credit_data&quot;</span>)</span>
-<span id="cb1-7"><a href="#cb1-7"></a></span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="kw">set.seed</span>(<span class="dv">55</span>)</span>
-<span id="cb1-9"><a href="#cb1-9"></a>train_test_split &lt;-<span class="st"> </span><span class="kw">initial_split</span>(credit_data)</span>
-<span id="cb1-10"><a href="#cb1-10"></a></span>
-<span id="cb1-11"><a href="#cb1-11"></a>credit_train &lt;-<span class="st"> </span><span class="kw">training</span>(train_test_split)</span>
-<span id="cb1-12"><a href="#cb1-12"></a>credit_test &lt;-<span class="st"> </span><span class="kw">testing</span>(train_test_split)</span></code></pre></div>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">library</span>(modeldata)</span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">data</span>(<span class="st">&quot;credit_data&quot;</span>)</span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="kw">set.seed</span>(<span class="dv">55</span>)</span>
+<span id="cb1-8"><a href="#cb1-8"></a>train_test_split &lt;-<span class="st"> </span><span class="kw">initial_split</span>(credit_data)</span>
+<span id="cb1-9"><a href="#cb1-9"></a></span>
+<span id="cb1-10"><a href="#cb1-10"></a>credit_train &lt;-<span class="st"> </span><span class="kw">training</span>(train_test_split)</span>
+<span id="cb1-11"><a href="#cb1-11"></a>credit_test &lt;-<span class="st"> </span><span class="kw">testing</span>(train_test_split)</span></code></pre></div>
 <p>Note that there are some missing values in these data:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">vapply</span>(credit_train, <span class="cf">function</span>(x) <span class="kw">mean</span>(<span class="op">!</span><span class="kw">is.na</span>(x)), <span class="kw">numeric</span>(<span class="dv">1</span>))</span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="co">#&gt;    Status Seniority      Home      Time       Age   Marital   Records       Job </span></span>
@@ -444,7 +443,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <span id="cb6-11"><a href="#cb6-11"></a><span class="co">#&gt; </span></span>
 <span id="cb6-12"><a href="#cb6-12"></a><span class="co">#&gt; Operations:</span></span>
 <span id="cb6-13"><a href="#cb6-13"></a><span class="co">#&gt; </span></span>
-<span id="cb6-14"><a href="#cb6-14"></a><span class="co">#&gt; K-nearest neighbor imputation for all_predictors</span></span></code></pre></div>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="co">#&gt; K-nearest neighbor imputation for all_predictors()</span></span></code></pre></div>
 <p>It is important to realize that the <em>specific</em> variables have not been declared yet (as shown when the recipe is printed above). In some preprocessing steps, variables will be added or removed from the current list of possible variables.</p>
 <p>Since some predictors are categorical in nature (i.e. nominal), it would make sense to convert these factor predictors into numeric dummy variables (aka indicator variables) using <code>step_dummy</code>. To do this, the step selects all predictors then removes those that are numeric:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>ind_vars &lt;-<span class="st"> </span>imputed <span class="op">%&gt;%</span></span>
@@ -460,8 +459,8 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <span id="cb7-11"><a href="#cb7-11"></a><span class="co">#&gt; </span></span>
 <span id="cb7-12"><a href="#cb7-12"></a><span class="co">#&gt; Operations:</span></span>
 <span id="cb7-13"><a href="#cb7-13"></a><span class="co">#&gt; </span></span>
-<span id="cb7-14"><a href="#cb7-14"></a><span class="co">#&gt; K-nearest neighbor imputation for all_predictors</span></span>
-<span id="cb7-15"><a href="#cb7-15"></a><span class="co">#&gt; Dummy variables from all_predictors, -, all_numeric()</span></span></code></pre></div>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="co">#&gt; K-nearest neighbor imputation for all_predictors()</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a><span class="co">#&gt; Dummy variables from all_predictors(), -all_numeric()</span></span></code></pre></div>
 <p>At this point in the recipe, all of the predictor should be encoded as numeric, we can further add more steps to center and scale them:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>standardized &lt;-<span class="st"> </span>ind_vars <span class="op">%&gt;%</span></span>
 <span id="cb8-2"><a href="#cb8-2"></a><span class="st">  </span><span class="kw">step_center</span>(<span class="kw">all_predictors</span>())  <span class="op">%&gt;%</span></span>
@@ -477,10 +476,10 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <span id="cb8-12"><a href="#cb8-12"></a><span class="co">#&gt; </span></span>
 <span id="cb8-13"><a href="#cb8-13"></a><span class="co">#&gt; Operations:</span></span>
 <span id="cb8-14"><a href="#cb8-14"></a><span class="co">#&gt; </span></span>
-<span id="cb8-15"><a href="#cb8-15"></a><span class="co">#&gt; K-nearest neighbor imputation for all_predictors</span></span>
-<span id="cb8-16"><a href="#cb8-16"></a><span class="co">#&gt; Dummy variables from all_predictors, -, all_numeric()</span></span>
-<span id="cb8-17"><a href="#cb8-17"></a><span class="co">#&gt; Centering for all_predictors</span></span>
-<span id="cb8-18"><a href="#cb8-18"></a><span class="co">#&gt; Scaling for all_predictors</span></span></code></pre></div>
+<span id="cb8-15"><a href="#cb8-15"></a><span class="co">#&gt; K-nearest neighbor imputation for all_predictors()</span></span>
+<span id="cb8-16"><a href="#cb8-16"></a><span class="co">#&gt; Dummy variables from all_predictors(), -all_numeric()</span></span>
+<span id="cb8-17"><a href="#cb8-17"></a><span class="co">#&gt; Centering for all_predictors()</span></span>
+<span id="cb8-18"><a href="#cb8-18"></a><span class="co">#&gt; Scaling for all_predictors()</span></span></code></pre></div>
 <p>If these are the only preprocessing steps for the predictors, we can now estimate the means and standard deviations from the training set. The <code>prep</code> function is used with a recipe and a data set:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>trained_rec &lt;-<span class="st"> </span><span class="kw">prep</span>(standardized, <span class="dt">training =</span> credit_train)</span>
 <span id="cb9-2"><a href="#cb9-2"></a>trained_rec</span>

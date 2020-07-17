@@ -1,3 +1,8 @@
+# systemfonts 0.2.3
+
+* Replace the buggy Freetype cache subsystem with own implementation
+* Fix indexing bug in `glyph_metrics()`
+
 # systemfonts 0.2.2
 
 * Fix remaining valgrind issues by fixing the included font-manager code

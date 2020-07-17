@@ -22,7 +22,6 @@ gbmDoFold	gbmCrossVal
 getCVgroup	gbm-internals
 getStratify	gbm-internals
 getVarNames	gbm-internals
-grid.arrange	grid.arrange
 guessDist	gbm-internals
 interact.gbm	interact.gbm
 ir.measure.auc	gbm.roc.area
@@ -40,8 +39,6 @@ quantile.rug	quantile.rug
 reconstructGBMdata	reconstructGBMdata
 relative.influence	relative.influence
 show.gbm	print.gbm
-shrink.gbm	shrink.gbm
-shrink.gbm.pred	shrink.gbm.pred
 summary.gbm	summary.gbm
 test.gbm	test.gbm
 test.relative.influence	test.gbm

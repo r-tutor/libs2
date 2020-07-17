@@ -1,4 +1,3 @@
-actuar-deprecated	actuar-deprecated
 adjCoef	adjCoef
 aggregate.portfolio	simul.summaries
 aggregateDist	aggregateDist
@@ -13,6 +12,7 @@ CTE	CTE
 CTE.aggregateDist	CTE
 dburr	Burr
 dental	dental
+dfpareto	FellerPareto
 dgenbeta	GeneralizedBeta
 dgenpareto	GeneralizedPareto
 dgumbel	Gumbel
@@ -34,7 +34,9 @@ dlogarithmic	Logarithmic
 dparalogis	Paralogistic
 dpareto	Pareto
 dpareto1	SingleParameterPareto
-dpareto2	Pareto
+dpareto2	Pareto2
+dpareto3	Pareto3
+dpareto4	Pareto4
 dpearson6	TransformedBeta
 dphtype	PhaseType
 dpig	PoissonInverseGaussian
@@ -58,6 +60,7 @@ emm.default	emm
 emm.grouped.data	emm
 ExponentialSupp	ExponentialSupp
 Extract.grouped.data	Extract.grouped.data
+FellerPareto	FellerPareto
 frequency.portfolio	simul.summaries
 GammaSupp	GammaSupp
 gdental	gdental
@@ -81,13 +84,13 @@ levbeta	BetaMoments
 levburr	Burr
 levchisq	ChisqSupp
 levexp	ExponentialSupp
+levfpareto	FellerPareto
 levgamma	GammaSupp
 levgenbeta	GeneralizedBeta
 levgenpareto	GeneralizedPareto
 levinvburr	InverseBurr
 levinvexp	InverseExponential
 levinvgamma	InverseGamma
-levinvGauss	actuar-deprecated
 levinvgauss	InverseGaussian
 levinvparalogis	InverseParalogistic
 levinvpareto	InversePareto
@@ -100,7 +103,9 @@ levlnorm	LognormalMoments
 levparalogis	Paralogistic
 levpareto	Pareto
 levpareto1	SingleParameterPareto
-levpareto2	Pareto
+levpareto2	Pareto2
+levpareto3	Pareto3
+levpareto4	Pareto4
 levpearson6	TransformedBeta
 levtrbeta	TransformedBeta
 levtrgamma	TransformedGamma
@@ -119,6 +124,7 @@ mde	mde
 mean.aggregateDist	aggregateDist
 mean.grouped.data	mean.grouped.data
 mexp	ExponentialSupp
+mfpareto	FellerPareto
 mgamma	GammaSupp
 mgenbeta	GeneralizedBeta
 mgenpareto	GeneralizedPareto
@@ -127,7 +133,6 @@ mgfexp	ExponentialSupp
 mgfgamma	GammaSupp
 mgfgumbel	Gumbel
 mgfinvgamma	InverseGamma
-mgfinvGauss	actuar-deprecated
 mgfinvgauss	InverseGaussian
 mgfnorm	NormalSupp
 mgfphtype	PhaseType
@@ -136,7 +141,6 @@ mgumbel	Gumbel
 minvburr	InverseBurr
 minvexp	InverseExponential
 minvgamma	InverseGamma
-minvGauss	actuar-deprecated
 minvgauss	InverseGaussian
 minvparalogis	InverseParalogistic
 minvpareto	InversePareto
@@ -150,7 +154,9 @@ mnorm	NormalSupp
 mparalogis	Paralogistic
 mpareto	Pareto
 mpareto1	SingleParameterPareto
-mpareto2	Pareto
+mpareto2	Pareto2
+mpareto3	Pareto3
+mpareto4	Pareto4
 mpearson6	TransformedBeta
 mphtype	PhaseType
 mtrbeta	TransformedBeta
@@ -163,9 +169,12 @@ ogive.default	ogive
 ogive.grouped.data	ogive
 Paralogistic	Paralogistic
 Pareto	Pareto
-pareto2	Pareto
+Pareto2	Pareto2
+Pareto3	Pareto3
+Pareto4	Pareto4
 pburr	Burr
 Pearson6	TransformedBeta
+pfpareto	FellerPareto
 pgenbeta	GeneralizedBeta
 pgenpareto	GeneralizedPareto
 pgumbel	Gumbel
@@ -191,7 +200,9 @@ PoissonInverseGaussian	PoissonInverseGaussian
 pparalogis	Paralogistic
 ppareto	Pareto
 ppareto1	SingleParameterPareto
-ppareto2	Pareto
+ppareto2	Pareto2
+ppareto3	Pareto3
+ppareto4	Pareto4
 ppearson6	TransformedBeta
 pphtype	PhaseType
 ppig	PoissonInverseGaussian
@@ -215,6 +226,7 @@ pztgeom	ZeroTruncatedGeometric
 pztnbinom	ZeroTruncatedNegativeBinomial
 pztpois	ZeroTruncatedPoisson
 qburr	Burr
+qfpareto	FellerPareto
 qgenbeta	GeneralizedBeta
 qgenpareto	GeneralizedPareto
 qgumbel	Gumbel
@@ -233,7 +245,9 @@ qlogarithmic	Logarithmic
 qparalogis	Paralogistic
 qpareto	Pareto
 qpareto1	SingleParameterPareto
-qpareto2	Pareto
+qpareto2	Pareto2
+qpareto3	Pareto3
+qpareto4	Pareto4
 qpearson6	TransformedBeta
 qpig	PoissonInverseGaussian
 qpoisinvgauss	PoissonInverseGaussian
@@ -255,6 +269,7 @@ rcomphierarc	simul
 rcomphierarc.summaries	simul.summaries
 rcompound	rcompound
 rcomppois	rcompound
+rfpareto	FellerPareto
 rgenbeta	GeneralizedBeta
 rgenpareto	GeneralizedPareto
 rgumbel	Gumbel
@@ -274,7 +289,9 @@ rmixture	rmixture
 rparalogis	Paralogistic
 rpareto	Pareto
 rpareto1	SingleParameterPareto
-rpareto2	Pareto
+rpareto2	Pareto2
+rpareto3	Pareto3
+rpareto4	Pareto4
 rpearson6	TransformedBeta
 rphtype	PhaseType
 rpig	PoissonInverseGaussian

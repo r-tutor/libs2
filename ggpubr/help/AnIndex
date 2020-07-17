@@ -1,4 +1,4 @@
-%>%	reexports
+%>%	pipe
 add_summary	add_summary
 annotate_figure	annotate_figure
 as_ggplot	as_ggplot
@@ -12,6 +12,7 @@ clean_theme	theme_pubr
 colnames_style	ggtexttable
 color_palette	set_palette
 compare_means	compare_means
+create_aes	create_aes
 desc_statby	desc_statby
 diff_express	diff_express
 drawDetails.splitText	ggparagraph
@@ -21,7 +22,8 @@ font	font
 gene_citation	gene_citation
 geom_bracket	geom_bracket
 geom_exec	geom_exec
-geom_signif	reexports
+geom_signif	geom_signif
+get_breaks	get_breaks
 get_legend	get_legend
 get_palette	get_palette
 get_summary_stats	reexports
@@ -63,10 +65,13 @@ mean_ci	add_summary
 mean_range	add_summary
 mean_sd	add_summary
 mean_se_	add_summary
+median_hilow_	add_summary
 median_iqr	add_summary
 median_mad	add_summary
+median_q1q3	add_summary
 median_range	add_summary
 mutate	reexports
+print.ggscatterhist	ggscatterhist
 print.ggsummarystats	ggsummarystats
 print.ggsummarystats_list	ggsummarystats
 reexports	reexports
@@ -92,8 +97,18 @@ stat_regline_equation	stat_regline_equation
 stat_stars	stat_stars
 table_cell_bg	ggtexttable
 table_cell_font	ggtexttable
+tab_add_border	ggtexttable
+tab_add_footnote	ggtexttable
+tab_add_hline	ggtexttable
+tab_add_title	ggtexttable
+tab_add_vline	ggtexttable
+tab_cell_crossout	ggtexttable
+tab_ncol	ggtexttable
+tab_nrow	ggtexttable
+tbody_add_border	ggtexttable
 tbody_style	ggtexttable
 text_grob	text_grob
+thead_add_border	ggtexttable
 theme_classic2	theme_pubr
 theme_cleveland	ggdotchart
 theme_pubclean	theme_pubr

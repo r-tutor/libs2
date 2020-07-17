@@ -8,6 +8,7 @@ ExponentialSupp         Moments and Moment Generating Function of the
                         Exponential Distribution
 Extract.grouped.data    Extract or Replace Parts of a Grouped Data
                         Object
+FellerPareto            The Feller Pareto Distribution
 GammaSupp               Moments and Moment Generating Function of the
                         Gamma Distribution
 GeneralizedBeta         The Generalized Beta Distribution
@@ -31,6 +32,9 @@ NormalSupp              Moments and Moment generating function of the
                         Normal Distribution
 Paralogistic            The Paralogistic Distribution
 Pareto                  The Pareto Distribution
+Pareto2                 The Pareto II Distribution
+Pareto3                 The Pareto III Distribution
+Pareto4                 The Pareto IV Distribution
 PoissonInverseGaussian
                         The Poisson-Inverse Gaussian Distribution
 SingleParameterPareto   The Single-parameter Pareto Distribution
@@ -56,7 +60,6 @@ ZeroTruncatedNegativeBinomial
                         The Zero-Truncated Negative Binomial
                         Distribution
 ZeroTruncatedPoisson    The Zero-Truncated Poisson Distribution
-actuar-deprecated       Deprecated Functions in Package 'actuar'
 adjCoef                 Adjustment Coefficient
 aggregateDist           Aggregate Claim Amount Distribution
 betaint                 The "Beta Integral"

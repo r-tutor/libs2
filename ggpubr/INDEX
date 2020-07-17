@@ -6,12 +6,14 @@ background_image        Add Background Image to ggplot2
 bgcolor                 Change ggplot Panel Background Color
 border                  Set ggplot Panel Border Line
 compare_means           Comparison of Means
+create_aes              Create Aes Mapping from a List
 desc_statby             Descriptive statistics by groups
 diff_express            Differential gene expression analysis results
 facet                   Facet a ggplot into Multiple Panels
 font                    Change the Appearance of Titles and Axis Labels
 gene_citation           Gene Citation Index
 geom_exec               Execute ggplot2 functions
+get_breaks              Easy Break Creation for Numeric Axes
 get_legend              Extract Legends from a ggplot object
 get_palette             Generate Color Palettes
 ggadd                   Add Summary Statistics or a Geom onto a ggplot

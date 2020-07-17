@@ -24,7 +24,6 @@ gvisGauge               Google Gauge with R
 gvisGeoChart            Google Geo Chart with R
 gvisGeoMap              Google Geo Map with R
 gvisHistogram           Google Histogram Chart with R
-gvisIntensityMap        Google Intensity Map with R
 gvisLineChart           Google Line Chart with R
 gvisMap                 Google Maps with R
 gvisMerge               Merge two googleVis charts into one gvis-object

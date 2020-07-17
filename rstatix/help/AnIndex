@@ -1,4 +1,4 @@
-%>%	reexports
+%>%	pipe
 add_significance	add_significance
 add_xy_position	get_pvalue_position
 add_x_position	get_pvalue_position
@@ -72,7 +72,7 @@ kruskal_test	kruskal_test
 levene_test	levene_test
 mahalanobis_distance	mahalanobis_distance
 make_clean_names	make_clean_names
-Manova	reexports
+Manova	Manova
 mcnemar_test	mcnemar_test
 mshapiro_test	shapiro_test
 multinom_test	multinom_test

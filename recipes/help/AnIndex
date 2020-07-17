@@ -230,6 +230,7 @@ tidy.step_upsample	step_upsample
 tidy.step_window	step_window
 tidy.step_YeoJohnson	step_YeoJohnson
 tidy.step_zv	step_zv
+tunable.check	tunable.step
 tunable.step	tunable.step
 tunable.step_bagimpute	tunable.step
 tunable.step_bs	tunable.step

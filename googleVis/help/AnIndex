@@ -21,7 +21,6 @@ gvisGauge	gvisGauge
 gvisGeoChart	gvisGeoChart
 gvisGeoMap	gvisGeoMap
 gvisHistogram	gvisHistogram
-gvisIntensityMap	gvisIntensityMap
 gvisLineChart	gvisLineChart
 gvisMap	gvisMap
 gvisMerge	gvisMerge

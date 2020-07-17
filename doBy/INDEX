@@ -29,6 +29,7 @@ fatacid                 Fish oil in pig food
 fev                     Forced expiratory volume in children
 firstlastobs            Locate the index of the first/last unique value
 haldCement              Heat development in cement under hardening.
+interaction-plot        Two-way interaction plot
 is-estimable            Determines if contrasts are estimable.
 linest                  Compute linear estimates
 linest-get              Auxillary functions for computing lsmeans,

@@ -17,8 +17,5 @@ print.gbm               Print model summary
 quantile.rug            Quantile rug plot
 reconstructGBMdata      Reconstruct a GBM's Source Data
 relative.influence      Methods for estimating relative influence
-shrink.gbm              L1 shrinkage of the predictor variables in a
-                        GBM
-shrink.gbm.pred         Predictions from a shrunked GBM
 summary.gbm             Summary of a gbm object
 test.gbm                Test the 'gbm' package.

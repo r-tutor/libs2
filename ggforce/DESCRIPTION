@@ -1,7 +1,7 @@
 Package: ggforce
 Type: Package
 Title: Accelerating 'ggplot2'
-Version: 0.3.1
+Version: 0.3.2
 Authors@R: 
     c(person(given = "Thomas Lin",
              family = "Pedersen",
@@ -16,7 +16,8 @@ Description: The aim of 'ggplot2' is to aid in visual data investigations. This
     'ggforce' aims to be a collection of mainly new stats and geoms that fills
     this gap. All additional functionality is aimed to come through the official
     extension system so using 'ggforce' should be a stable experience.
-URL: https://ggforce.data-imaginist.com
+URL: https://ggforce.data-imaginist.com,
+        https://github.com/thomasp85/ggforce
 BugReports: https://github.com/thomasp85/ggforce/issues
 License: MIT + file LICENSE
 LazyData: TRUE
@@ -26,8 +27,9 @@ Imports: Rcpp (>= 0.12.2), grid, scales, MASS, tweenr (>= 0.1.5),
         gtable, rlang, polyclip, stats, grDevices, tidyselect, withr,
         utils
 LinkingTo: Rcpp, RcppEigen
-RoxygenNote: 6.1.1
-Suggests: sessioninfo, concaveman, deldir, reshape2, units (>= 0.4-6)
+RoxygenNote: 7.1.0.9000
+Suggests: sessioninfo, concaveman, deldir, reshape2, units (>= 0.4-6),
+        covr
 Collate: 'RcppExports.R' 'aaa.R' 'shape.R' 'arc_bar.R' 'arc.R'
         'autodensity.R' 'autohistogram.R' 'autopoint.R' 'bezier.R'
         'bspline.R' 'bspline_closed.R' 'circle.R' 'diagonal.R'
@@ -39,13 +41,13 @@ Collate: 'RcppExports.R' 'aaa.R' 'shape.R' 'arc_bar.R' 'arc.R'
         'parallel_sets.R' 'position-jitternormal.R' 'position_auto.R'
         'position_floatstack.R' 'regon.R' 'scale-depth.R'
         'scale-unit.R' 'sina.R' 'spiro.R' 'themes.R' 'trans.R'
-        'trans_linear.R' 'utilities.R' 'voronoi.R'
+        'trans_linear.R' 'utilities.R' 'voronoi.R' 'zzz.R'
 NeedsCompilation: yes
-Packaged: 2019-08-20 07:57:53 UTC; thomas
+Packaged: 2020-06-23 08:56:52 UTC; thomas
 Author: Thomas Lin Pedersen [cre, aut]
     (<https://orcid.org/0000-0002-5147-4711>),
   RStudio [cph]
 Repository: CRAN
-Date/Publication: 2019-08-20 09:50:05 UTC
-Built: R 4.0.0; x86_64-w64-mingw32; 2020-05-03 00:53:38 UTC; windows
+Date/Publication: 2020-06-23 09:40:02 UTC
+Built: R 4.0.2; x86_64-w64-mingw32; 2020-07-10 06:46:52 UTC; windows
 Archs: i386, x64

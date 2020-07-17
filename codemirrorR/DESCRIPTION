@@ -25,10 +25,6 @@ Imports: htmltools, htmlwidgets
 RoxygenNote: 4.1.1.9001
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
-Author: Marijn Haverbeke [aut, cph] (CodeMirror library in htmlwidgets/lib,
-    http://codemirror.net/),
-  Kent Russell [aut, cre] (R interface)
-Built: R 3.2.5; ; 2016-05-16 19:48:52 UTC; windows
 RemoteType: github
 RemoteHost: api.github.com
 RemoteRepo: codemirrorR
@@ -39,3 +35,9 @@ GithubRepo: codemirrorR
 GithubUsername: timelyportfolio
 GithubRef: master
 GithubSHA1: c35f60e6008fe3d4fc8081b7edb37d9ce4775838
+NeedsCompilation: no
+Packaged: 2020-06-16 15:30:02 UTC; Aubur
+Author: Marijn Haverbeke [aut, cph] (CodeMirror library in htmlwidgets/lib,
+    http://codemirror.net/),
+  Kent Russell [aut, cre] (R interface)
+Built: R 4.0.0; ; 2020-06-16 15:30:06 UTC; windows

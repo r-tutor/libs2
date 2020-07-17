@@ -11,7 +11,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;actuar&rsquo; version 2.3-3</h2>
+</div><h2>Documentation for package &lsquo;actuar&rsquo; version 3.0-0</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
@@ -53,8 +53,6 @@
 <h2><a name="A">-- A --</a></h2>
 
 <table width="100%">
-<tr><td style="width: 25%;"><a href="actuar-deprecated.html">actuar-deprecated</a></td>
-<td>Deprecated Functions in Package 'actuar'</td></tr>
 <tr><td style="width: 25%;"><a href="adjCoef.html">adjCoef</a></td>
 <td>Adjustment Coefficient</td></tr>
 <tr><td style="width: 25%;"><a href="simul.summaries.html">aggregate.portfolio</a></td>
@@ -98,6 +96,8 @@
 <td>The Burr Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="dental.html">dental</a></td>
 <td>Individual Dental Claims Data Set</td></tr>
+<tr><td style="width: 25%;"><a href="FellerPareto.html">dfpareto</a></td>
+<td>The Feller Pareto Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="GeneralizedBeta.html">dgenbeta</a></td>
 <td>The Generalized Beta Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="GeneralizedPareto.html">dgenpareto</a></td>
@@ -140,8 +140,12 @@
 <td>The Pareto Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="SingleParameterPareto.html">dpareto1</a></td>
 <td>The Single-parameter Pareto Distribution</td></tr>
-<tr><td style="width: 25%;"><a href="Pareto.html">dpareto2</a></td>
-<td>The Pareto Distribution</td></tr>
+<tr><td style="width: 25%;"><a href="Pareto2.html">dpareto2</a></td>
+<td>The Pareto II Distribution</td></tr>
+<tr><td style="width: 25%;"><a href="Pareto3.html">dpareto3</a></td>
+<td>The Pareto III Distribution</td></tr>
+<tr><td style="width: 25%;"><a href="Pareto4.html">dpareto4</a></td>
+<td>The Pareto IV Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="TransformedBeta.html">dpearson6</a></td>
 <td>The Transformed Beta Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="PhaseType.html">dphtype</a></td>
@@ -198,6 +202,8 @@
 <h2><a name="F">-- F --</a></h2>
 
 <table width="100%">
+<tr><td style="width: 25%;"><a href="FellerPareto.html">FellerPareto</a></td>
+<td>The Feller Pareto Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="simul.summaries.html">frequency.portfolio</a></td>
 <td>Summary Statistics of a Portfolio</td></tr>
 </table>
@@ -269,6 +275,8 @@
 <td>Moments and Moment Generating Function of the (non-central) Chi-Squared Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="ExponentialSupp.html">levexp</a></td>
 <td>Moments and Moment Generating Function of the Exponential Distribution</td></tr>
+<tr><td style="width: 25%;"><a href="FellerPareto.html">levfpareto</a></td>
+<td>The Feller Pareto Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="GammaSupp.html">levgamma</a></td>
 <td>Moments and Moment Generating Function of the Gamma Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="GeneralizedBeta.html">levgenbeta</a></td>
@@ -281,8 +289,6 @@
 <td>The Inverse Exponential Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="InverseGamma.html">levinvgamma</a></td>
 <td>The Inverse Gamma Distribution</td></tr>
-<tr><td style="width: 25%;"><a href="actuar-deprecated.html">levinvGauss</a></td>
-<td>Deprecated Functions in Package 'actuar'</td></tr>
 <tr><td style="width: 25%;"><a href="InverseGaussian.html">levinvgauss</a></td>
 <td>The Inverse Gaussian Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="InverseParalogistic.html">levinvparalogis</a></td>
@@ -307,8 +313,12 @@
 <td>The Pareto Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="SingleParameterPareto.html">levpareto1</a></td>
 <td>The Single-parameter Pareto Distribution</td></tr>
-<tr><td style="width: 25%;"><a href="Pareto.html">levpareto2</a></td>
-<td>The Pareto Distribution</td></tr>
+<tr><td style="width: 25%;"><a href="Pareto2.html">levpareto2</a></td>
+<td>The Pareto II Distribution</td></tr>
+<tr><td style="width: 25%;"><a href="Pareto3.html">levpareto3</a></td>
+<td>The Pareto III Distribution</td></tr>
+<tr><td style="width: 25%;"><a href="Pareto4.html">levpareto4</a></td>
+<td>The Pareto IV Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="TransformedBeta.html">levpearson6</a></td>
 <td>The Transformed Beta Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="TransformedBeta.html">levtrbeta</a></td>
@@ -350,6 +360,8 @@
 <td>Arithmetic Mean</td></tr>
 <tr><td style="width: 25%;"><a href="ExponentialSupp.html">mexp</a></td>
 <td>Moments and Moment Generating Function of the Exponential Distribution</td></tr>
+<tr><td style="width: 25%;"><a href="FellerPareto.html">mfpareto</a></td>
+<td>The Feller Pareto Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="GammaSupp.html">mgamma</a></td>
 <td>Moments and Moment Generating Function of the Gamma Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="GeneralizedBeta.html">mgenbeta</a></td>
@@ -366,8 +378,6 @@
 <td>The Gumbel Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="InverseGamma.html">mgfinvgamma</a></td>
 <td>The Inverse Gamma Distribution</td></tr>
-<tr><td style="width: 25%;"><a href="actuar-deprecated.html">mgfinvGauss</a></td>
-<td>Deprecated Functions in Package 'actuar'</td></tr>
 <tr><td style="width: 25%;"><a href="InverseGaussian.html">mgfinvgauss</a></td>
 <td>The Inverse Gaussian Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="NormalSupp.html">mgfnorm</a></td>
@@ -384,8 +394,6 @@
 <td>The Inverse Exponential Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="InverseGamma.html">minvgamma</a></td>
 <td>The Inverse Gamma Distribution</td></tr>
-<tr><td style="width: 25%;"><a href="actuar-deprecated.html">minvGauss</a></td>
-<td>Deprecated Functions in Package 'actuar'</td></tr>
 <tr><td style="width: 25%;"><a href="InverseGaussian.html">minvgauss</a></td>
 <td>The Inverse Gaussian Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="InverseParalogistic.html">minvparalogis</a></td>
@@ -412,8 +420,12 @@
 <td>The Pareto Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="SingleParameterPareto.html">mpareto1</a></td>
 <td>The Single-parameter Pareto Distribution</td></tr>
-<tr><td style="width: 25%;"><a href="Pareto.html">mpareto2</a></td>
-<td>The Pareto Distribution</td></tr>
+<tr><td style="width: 25%;"><a href="Pareto2.html">mpareto2</a></td>
+<td>The Pareto II Distribution</td></tr>
+<tr><td style="width: 25%;"><a href="Pareto3.html">mpareto3</a></td>
+<td>The Pareto III Distribution</td></tr>
+<tr><td style="width: 25%;"><a href="Pareto4.html">mpareto4</a></td>
+<td>The Pareto IV Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="TransformedBeta.html">mpearson6</a></td>
 <td>The Transformed Beta Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="PhaseType.html">mphtype</a></td>
@@ -453,12 +465,18 @@
 <td>The Paralogistic Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="Pareto.html">Pareto</a></td>
 <td>The Pareto Distribution</td></tr>
-<tr><td style="width: 25%;"><a href="Pareto.html">pareto2</a></td>
-<td>The Pareto Distribution</td></tr>
+<tr><td style="width: 25%;"><a href="Pareto2.html">Pareto2</a></td>
+<td>The Pareto II Distribution</td></tr>
+<tr><td style="width: 25%;"><a href="Pareto3.html">Pareto3</a></td>
+<td>The Pareto III Distribution</td></tr>
+<tr><td style="width: 25%;"><a href="Pareto4.html">Pareto4</a></td>
+<td>The Pareto IV Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="Burr.html">pburr</a></td>
 <td>The Burr Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="TransformedBeta.html">Pearson6</a></td>
 <td>The Transformed Beta Distribution</td></tr>
+<tr><td style="width: 25%;"><a href="FellerPareto.html">pfpareto</a></td>
+<td>The Feller Pareto Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="GeneralizedBeta.html">pgenbeta</a></td>
 <td>The Generalized Beta Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="GeneralizedPareto.html">pgenpareto</a></td>
@@ -509,8 +527,12 @@
 <td>The Pareto Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="SingleParameterPareto.html">ppareto1</a></td>
 <td>The Single-parameter Pareto Distribution</td></tr>
-<tr><td style="width: 25%;"><a href="Pareto.html">ppareto2</a></td>
-<td>The Pareto Distribution</td></tr>
+<tr><td style="width: 25%;"><a href="Pareto2.html">ppareto2</a></td>
+<td>The Pareto II Distribution</td></tr>
+<tr><td style="width: 25%;"><a href="Pareto3.html">ppareto3</a></td>
+<td>The Pareto III Distribution</td></tr>
+<tr><td style="width: 25%;"><a href="Pareto4.html">ppareto4</a></td>
+<td>The Pareto IV Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="TransformedBeta.html">ppearson6</a></td>
 <td>The Transformed Beta Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="PhaseType.html">pphtype</a></td>
@@ -562,6 +584,8 @@
 <table width="100%">
 <tr><td style="width: 25%;"><a href="Burr.html">qburr</a></td>
 <td>The Burr Distribution</td></tr>
+<tr><td style="width: 25%;"><a href="FellerPareto.html">qfpareto</a></td>
+<td>The Feller Pareto Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="GeneralizedBeta.html">qgenbeta</a></td>
 <td>The Generalized Beta Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="GeneralizedPareto.html">qgenpareto</a></td>
@@ -598,8 +622,12 @@
 <td>The Pareto Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="SingleParameterPareto.html">qpareto1</a></td>
 <td>The Single-parameter Pareto Distribution</td></tr>
-<tr><td style="width: 25%;"><a href="Pareto.html">qpareto2</a></td>
-<td>The Pareto Distribution</td></tr>
+<tr><td style="width: 25%;"><a href="Pareto2.html">qpareto2</a></td>
+<td>The Pareto II Distribution</td></tr>
+<tr><td style="width: 25%;"><a href="Pareto3.html">qpareto3</a></td>
+<td>The Pareto III Distribution</td></tr>
+<tr><td style="width: 25%;"><a href="Pareto4.html">qpareto4</a></td>
+<td>The Pareto IV Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="TransformedBeta.html">qpearson6</a></td>
 <td>The Transformed Beta Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="PoissonInverseGaussian.html">qpig</a></td>
@@ -647,6 +675,8 @@
 <td>Simulation from Compound Models</td></tr>
 <tr><td style="width: 25%;"><a href="rcompound.html">rcomppois</a></td>
 <td>Simulation from Compound Models</td></tr>
+<tr><td style="width: 25%;"><a href="FellerPareto.html">rfpareto</a></td>
+<td>The Feller Pareto Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="GeneralizedBeta.html">rgenbeta</a></td>
 <td>The Generalized Beta Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="GeneralizedPareto.html">rgenpareto</a></td>
@@ -685,8 +715,12 @@
 <td>The Pareto Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="SingleParameterPareto.html">rpareto1</a></td>
 <td>The Single-parameter Pareto Distribution</td></tr>
-<tr><td style="width: 25%;"><a href="Pareto.html">rpareto2</a></td>
-<td>The Pareto Distribution</td></tr>
+<tr><td style="width: 25%;"><a href="Pareto2.html">rpareto2</a></td>
+<td>The Pareto II Distribution</td></tr>
+<tr><td style="width: 25%;"><a href="Pareto3.html">rpareto3</a></td>
+<td>The Pareto III Distribution</td></tr>
+<tr><td style="width: 25%;"><a href="Pareto4.html">rpareto4</a></td>
+<td>The Pareto IV Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="TransformedBeta.html">rpearson6</a></td>
 <td>The Transformed Beta Distribution</td></tr>
 <tr><td style="width: 25%;"><a href="PhaseType.html">rphtype</a></td>

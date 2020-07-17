@@ -1,7 +1,7 @@
 Package: rstatix
 Type: Package
 Title: Pipe-Friendly Framework for Basic Statistical Tests
-Version: 0.5.0
+Version: 0.6.0
 Authors@R: c(
     person("Alboukadel", "Kassambara", role = c("aut", "cre"), email = "alboukadel.kassambara@gmail.com"))
 Description: Provides a simple and intuitive pipe-friendly framework, coherent with the 'tidyverse' design philosophy, 
@@ -17,9 +17,9 @@ License: GPL-2
 LazyData: TRUE
 Encoding: UTF-8
 Depends: R (>= 3.3.0)
-Imports: stats, utils, tidyr (>= 1.0.0), purrr, broom, rlang (>=
-        0.3.1), tibble (>= 2.1.3), dplyr (>= 0.7.1), magrittr,
-        corrplot, tidyselect (>= 1.0.0), car
+Imports: stats, utils, tidyr (>= 1.0.0), purrr, broom (>= 0.5.6), rlang
+        (>= 0.3.1), tibble (>= 2.1.3), dplyr (>= 0.7.1), magrittr,
+        corrplot, tidyselect (>= 1.0.0), car, generics (>= 0.0.2)
 Suggests: knitr, rmarkdown, ggpubr, graphics, emmeans, coin, boot,
         testthat, spelling
 URL: https://rpkgs.datanovia.com/rstatix/
@@ -42,13 +42,13 @@ Collate: 'utilities.R' 'add_significance.R' 'adjust_pvalue.R'
         'make_clean_names.R' 'mcnemar_test.R' 'multinom_test.R'
         'outliers.R' 'p_value.R' 'prop_test.R' 'prop_trend_test.R'
         'reexports.R' 'sample_n_by.R' 'shapiro_test.R' 'sign_test.R'
-        'tukey_hsd.R' 'welch_anova_test.R' 'wilcox_effsize.R'
-        'wilcox_test.R'
+        'tukey_hsd.R' 'utils-manova.R' 'utils-pipe.R'
+        'welch_anova_test.R' 'wilcox_effsize.R' 'wilcox_test.R'
 Language: en-US
 NeedsCompilation: no
-Packaged: 2020-04-28 10:20:25 UTC; kassambara
+Packaged: 2020-06-18 19:53:46 UTC; kassambara
 Author: Alboukadel Kassambara [aut, cre]
 Maintainer: Alboukadel Kassambara <alboukadel.kassambara@gmail.com>
 Repository: CRAN
-Date/Publication: 2020-04-28 10:40:02 UTC
-Built: R 4.0.0; ; 2020-05-02 14:18:40 UTC; windows
+Date/Publication: 2020-06-18 20:20:02 UTC
+Built: R 4.0.2; ; 2020-07-10 06:05:58 UTC; windows

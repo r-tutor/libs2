@@ -1,3 +1,17 @@
+# rstatix 0.6.0
+   
+## Minor changes
+   
+- Adapted to upcoming broom v0.7.0 release (#49)
+- New argument `stack` added in `get_y_position()` to compute p-values y position for stacked bar plots ([#48](https://github.com/kassambara/rstatix/issues/48)).
+- `wilcox_test()`: Now, if `detailed = TRUE`,  an estimate of the location parameter (Only present if argument detailed = TRUE). This corresponds to the pseudomedian (for one-sample case) or to the difference of the location parameter (for two-samples case) ([#45](https://github.com/kassambara/rstatix/issues/45)).
+
+## Bug fixes
+   
+- `anova_test()` function: Changing R default contrast setting (`contr.treatment`) into orthogonal contrasts (`contr.sum`) to have comparable results to SPSS when users define the model using formula (@benediktclaus, [#40](https://github.com/kassambara/rstatix/issues/40)).
+- Now, the option `type = "quantile"` of `get_summary_stats()` works properly (@Boyoron, [#39](https://github.com/kassambara/rstatix/issues/39)).
+
+
 # rstatix 0.5.0
   
 ## New features

@@ -1,7 +1,7 @@
 Package: bookdown
 Type: Package
 Title: Authoring Books and Technical Documents with R Markdown
-Version: 0.19
+Version: 0.20
 Authors@R: c(
     person("Yihui", "Xie", role = c("aut", "cre"), email = "xie@yihui.name", comment = c(ORCID = "0000-0003-0645-5666")),
     person("JJ", "Allaire", role = "ctb"),
@@ -58,7 +58,7 @@ Authors@R: c(
 Maintainer: Yihui Xie <xie@yihui.name>
 Description: Output formats and utilities for authoring books and technical documents with R Markdown.
 License: GPL-3
-Imports: htmltools (>= 0.3.6), knitr (>= 1.22), rmarkdown (>= 2.0),
+Imports: htmltools (>= 0.3.6), knitr (>= 1.22), rmarkdown (>= 2.3),
         xfun (>= 0.6), tinytex (>= 0.12)
 Suggests: htmlwidgets, rstudioapi, miniUI, rsconnect (>= 0.4.3), servr
         (>= 0.13), shiny, testit (>= 0.9), tufte, webshot
@@ -69,7 +69,7 @@ LazyData: TRUE
 RoxygenNote: 7.1.0
 Encoding: UTF-8
 NeedsCompilation: no
-Packaged: 2020-05-15 03:56:38 UTC; yihui
+Packaged: 2020-06-23 20:20:03 UTC; yihui
 Author: Yihui Xie [aut, cre] (<https://orcid.org/0000-0003-0645-5666>),
   JJ Allaire [ctb],
   Albert Kim [ctb],
@@ -124,5 +124,5 @@ Author: Yihui Xie [aut, cre] (<https://orcid.org/0000-0003-0645-5666>),
     inst/resources/AUTHORS),
   FriendCode Inc [cph, ctb] (The gitbook style, with modifications)
 Repository: CRAN
-Date/Publication: 2020-05-15 05:50:30 UTC
-Built: R 4.0.0; ; 2020-05-15 14:42:33 UTC; windows
+Date/Publication: 2020-06-23 21:00:02 UTC
+Built: R 4.0.2; ; 2020-07-10 01:50:08 UTC; windows

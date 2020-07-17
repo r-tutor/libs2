@@ -120,9 +120,13 @@ solvecov	solvecov
 speccCBI	kmeansCBI
 sseg	sseg
 stupidkaven	stupidkaven
+stupidkavenCBI	kmeansCBI
 stupidkcentroids	stupidkcentroids
+stupidkcentroidsCBI	kmeansCBI
 stupidkfn	stupidkfn
+stupidkfnCBI	kmeansCBI
 stupidknn	stupidknn
+stupidknnCBI	kmeansCBI
 summary.cquality	cqcluster.stats
 summary.mergenorm	mergenormals
 summary.mfpc	fixmahal
