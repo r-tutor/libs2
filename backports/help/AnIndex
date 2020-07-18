@@ -27,4 +27,5 @@ startsWith	startsWith
 strrep	strrep
 trimws	trimws
 URLencode	URLencode
+vignetteInfo	vignetteInfo
 warningCondition	warningCondition
