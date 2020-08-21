@@ -58,6 +58,7 @@ cummean	cumall
 current_vars	select_vars
 cur_column	context
 cur_data	context
+cur_data_all	context
 cur_group	context
 cur_group_id	context
 cur_group_rows	context

@@ -10,7 +10,6 @@ aregImpute	aregImpute
 aregTran	Hmisc-internal
 arrGrob	ggMisc
 as.character.mChoice	mChoice
-as.data.frame.ffdflabel	ffCompress
 as.data.frame.impute	Hmisc-internal
 as.data.frame.labelled	label
 as.data.frame.roundN	Hmisc-internal
@@ -116,7 +115,6 @@ event.chart	event.chart
 event.convert	event.convert
 event.history	event.history
 expr.tree	Hmisc-internal
-ffCompress	ffCompress
 fillin	Hmisc-internal
 find.matches	find.matches
 first.word	first.word
@@ -290,6 +288,7 @@ minor.tick	minor.tick
 monotone	transace
 monthDays	yearDays
 mtitle	mtitle
+multEventChart	popower
 multLines	multLines
 na.delete	na.delete
 na.detail.response	na.detail.response
@@ -418,6 +417,8 @@ print.transcan	transcan
 print.varclus	varclus
 prList	label
 prn	prnz
+propsPO	popower
+propsTrans	popower
 prselect	prselect
 prType	Misc
 pstamp	pstamp
@@ -585,7 +586,6 @@ zoom	Hmisc-internal
 [.Cbind	xYplot
 [.describe	describe
 [.discrete	discrete
-[.ffdflabel	ffCompress
 [.impute	impute
 [.labelled	label
 [.mChoice	mChoice

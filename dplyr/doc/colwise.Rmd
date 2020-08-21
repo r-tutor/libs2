@@ -21,7 +21,7 @@ It's often useful to perform the same operation on multiple columns, but copying
 ```{r, eval = FALSE}
 df %>% 
   group_by(g1, g2) %>% 
-  summarise(a = mean(a), b = mean(b), c = mean(c), d = mean(c))
+  summarise(a = mean(a), b = mean(b), c = mean(c), d = mean(d))
 ```
 
 (If you're trying to compute `mean(a, b, c, d)` for each row, instead see `vignette("rowwise")`)
@@ -92,18 +92,18 @@ min_max <- list(
 starwars %>% summarise(across(where(is.numeric), min_max))
 ```
 
-Control how the names are created with the `.names` argument which takes a [glue](http://glue.tidyverse.org/) spec:
+Control how the names are created with the `.names` argument which takes a [glue](https://glue.tidyverse.org/) spec:
 
 ```{r}
-starwars %>% summarise(across(where(is.numeric), min_max, .names = "{fn}.{col}"))
+starwars %>% summarise(across(where(is.numeric), min_max, .names = "{.fn}.{.col}"))
 ```
 
 If you'd prefer all summaries with the same function to be grouped together, you'll have to expand the calls yourself:
 
 ```{r}
 starwars %>% summarise(
-  across(where(is.numeric), ~min(.x, na.rm = TRUE), .names = "min_{col}"),
-  across(where(is.numeric), ~max(.x, na.rm = TRUE), .names = "max_{col}")
+  across(where(is.numeric), ~min(.x, na.rm = TRUE), .names = "min_{.col}"),
+  across(where(is.numeric), ~max(.x, na.rm = TRUE), .names = "max_{.col}")
 )
 ```
 

@@ -3,7 +3,7 @@ Rscript_call            Call a function in a new R session via
                         'Rscript()'
 attr                    Obtain an attribute of an object without
                         partial matching
-base64_encode           Encode data into the base64 encoding.
+base64_encode           Encode/decode data into/from base64 encoding.
 base64_uri              Generate the Data URI for a file
 cache_rds               Cache the value of an R expression to an RDS
                         file

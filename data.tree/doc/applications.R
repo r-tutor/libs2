@@ -1,4 +1,4 @@
-## ----echo=F--------------------------------------------------------------
+## ----echo=F-------------------------------------------------------------------
 ### get knitr just the way we like it
 
 knitr::opts_chunk$set(
@@ -10,7 +10,7 @@ knitr::opts_chunk$set(
 )
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 library(treemap)
 data(GNI2014)
 treemap(GNI2014,
@@ -19,31 +19,31 @@ treemap(GNI2014,
        vColor="GNI",
        type="value")
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 library(data.tree)
 GNI2014$continent <- as.character(GNI2014$continent)
 GNI2014$pathString <- paste("world", GNI2014$continent, GNI2014$country, sep = "/")
 tree <- as.Node(GNI2014[,])
 print(tree, pruneMethod = "dist", limit = 20)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 
 tree$Europe$Switzerland$population
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 northAm <- tree$`North America`
 Sort(northAm, "GNI", decreasing = TRUE)
 print(northAm, "iso3", "population", "GNI", limit = 12)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 maxGNI <- Aggregate(tree, "GNI", max)
 #same thing, in a more traditional way:
 maxGNI <- max(sapply(tree$leaves, function(x) x$GNI))
 
 tree$Get("name", filterFun = function(x) x$isLeaf && x$GNI == maxGNI)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 tree$Do(function(x) {
         x$population <- Aggregate(node = x,
         attribute = "population",
@@ -51,23 +51,23 @@ tree$Do(function(x) {
         }, 
      traversal = "post-order")
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 Sort(tree, attribute = "population", decreasing = TRUE, recursive = TRUE)
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 tree$Do(function(x) x$cumPop <- Cumulate(x, "population", sum))
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 print(tree, "population", "cumPop", pruneMethod = "dist", limit = 20)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 
 tree$Do(function(x) x$origCount <- x$count)
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 
 myPruneFun <- function(x, cutoff = 0.9, maxCountries = 7) {
   if (isNotLeaf(x)) return (TRUE)
@@ -76,11 +76,11 @@ myPruneFun <- function(x, cutoff = 0.9, maxCountries = 7) {
 }
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 treeClone <- Clone(tree, pruneFun = myPruneFun)
 print(treeClone$Oceania, "population", pruneMethod = "simple", limit = 20)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 
 treeClone$Do(function(x) {
   missing <- x$population - sum(sapply(x$children, function(x) x$population))
@@ -98,7 +98,7 @@ filterFun = function(x) x$level == 2
 print(treeClone$Oceania, "population", pruneMethod = "simple", limit = 20)
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 df <- ToDataFrameTable(treeClone, "iso3", "country", "continent", "population", "GNI")
 
 treemap(df,
@@ -108,16 +108,16 @@ treemap(df,
         type="value")
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 plot(as.dendrogram(treeClone, heightAttribute = "population"))
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 fileName <- system.file("extdata", "portfolio.csv", package="data.tree")
 pfodf <- read.csv(fileName, stringsAsFactors = FALSE)
 head(pfodf)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 pfodf$pathString <- paste("portfolio", 
                           pfodf$AssetCategory, 
                           pfodf$AssetClass, 
@@ -127,22 +127,22 @@ pfodf$pathString <- paste("portfolio",
 pfo <- as.Node(pfodf)
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 t <- Traverse(pfo, traversal = "post-order")
 Do(t, function(x) x$Weight <- Aggregate(node = x, attribute = "Weight", aggFun = sum))
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 
 Do(t, function(x) x$WeightOfParent <- x$Weight / x$parent$Weight)
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 
 pfo$Do(function(x) x$Duration <- ifelse(is.null(x$Duration), 0, x$Duration), filterFun = isLeaf)
 Do(t, function(x) x$Duration <- Aggregate(x, function(x) x$WeightOfParent * x$Duration, sum))
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 SetFormat(pfo, "WeightOfParent", function(x) FormatPercent(x, digits = 1))
 SetFormat(pfo, "Weight", FormatPercent)
 
@@ -155,7 +155,7 @@ FormatDuration <- function(x) {
 SetFormat(pfo, "Duration", FormatDuration)
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 
 #Print
 print(pfo, 
@@ -165,19 +165,19 @@ print(pfo,
       filterFun = function(x) !x$isLeaf)
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 IsPure <- function(data) {
   length(unique(data[,ncol(data)])) == 1
 }
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 Entropy <- function( vls ) {
   res <- vls/sum(vls) * log2(vls/sum(vls))
   res[vls == 0] <- 0
   -sum(res)
 }
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 
 InformationGain <- function( tble ) {
   entropyBefore <- Entropy(colSums(tble))
@@ -187,7 +187,7 @@ InformationGain <- function( tble ) {
   return (informationGain)
 }
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 TrainID3 <- function(node, data) {
     
   node$obsCount <- nrow(data)
@@ -232,19 +232,19 @@ TrainID3 <- function(node, data) {
 
 }
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 library(data.tree)
 data(mushroom)
 mushroom
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 
 tree <- Node$new("mushroom")
 TrainID3(tree, mushroom)
 print(tree, "feature", "obsCount")
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 
 Predict <- function(tree, features) {
   if (tree$children[[1]]$isLeaf) return (tree$children[[1]]$name)
@@ -253,18 +253,18 @@ Predict <- function(tree, features) {
 }
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 Predict(tree, c(color = 'red', 
                 size = 'large', 
                 points = 'yes')
         )
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 fileName <- system.file("extdata", "jennylind.yaml", package="data.tree")
 cat(readChar(fileName, file.info(fileName)$size))
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 
 library(data.tree)
 library(yaml)
@@ -272,7 +272,7 @@ lol <- yaml.load_file(fileName)
 jl <- as.Node(lol)
 print(jl, "type", "payoff", "p")
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 
 payoff <- function(node) {
   if (node$type == 'chance') node$payoff <- sum(sapply(node$children, function(child) child$payoff * child$p))
@@ -282,7 +282,7 @@ payoff <- function(node) {
 jl$Do(payoff, traversal = "post-order", filterFun = isNotLeaf)
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 decision <- function(x) {
   po <- sapply(x$children, function(child) child$payoff)
   x$decision <- names(po[po == x$payoff])
@@ -292,7 +292,7 @@ jl$Do(decision, filterFun = function(x) x$type == 'decision')
 
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 
 GetNodeLabel <- function(node) switch(node$type, 
                                       terminal = paste0( '$ ', format(node$payoff, scientific = FALSE, big.mark = ",")),
@@ -313,35 +313,35 @@ GetNodeShape <- function(node) switch(node$type, decision = "box", chance = "cir
 SetEdgeStyle(jl, fontname = 'helvetica', label = GetEdgeLabel)
 SetNodeStyle(jl, fontname = 'helvetica', label = GetNodeLabel, shape = GetNodeShape)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 jl$Do(function(x) SetEdgeStyle(x, color = "red", inherit = FALSE), 
       filterFun = function(x) !x$isRoot && x$parent$type == "decision" && x$parent$decision == x$name)
 
 
 
-## ---- eval = FALSE-------------------------------------------------------
+## ---- eval = FALSE------------------------------------------------------------
 #  SetGraphStyle(jl, rankdir = "LR")
 #  plot(jl)
 #  
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 fileName <- system.file("extdata", "flare.json", package="data.tree")
 flareJSON <- readChar(fileName, file.info(fileName)$size)
 cat(substr(flareJSON, 1, 300))
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 library(jsonlite)
 flareLoL <- fromJSON(file(fileName),
                      simplifyDataFrame = FALSE
                      )
 
 flareTree <- as.Node(flareLoL, mode = "explicit", check = "no-warn")
-flareTree$fieldsAll
+flareTree$attributesAll
 print(flareTree, "size", limit = 30)
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 
 flare_df <- ToDataFrameTable(flareTree, 
                              className = function(x) x$parent$name, 
@@ -350,7 +350,7 @@ flare_df <- ToDataFrameTable(flareTree,
 head(flare_df)
 
 
-## ---- eval = FALSE-------------------------------------------------------
+## ---- eval = FALSE------------------------------------------------------------
 #  
 #  devtools::install_github("jcheng5/bubbles@6724e43f5e")
 #  library(scales)
@@ -368,7 +368,7 @@ head(flare_df)
 #    width = 800
 #  )
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 path <- ".."
 files <- list.files(path = path, 
                     recursive = TRUE,
@@ -385,14 +385,14 @@ df <- data.frame(
 print(head(df)[c(1,2,3,4)], row.names = FALSE)
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 
 fileStructure <- as.Node(df, pathName = "filename")
 fileStructure$leafCount / (fileStructure$totalCount - fileStructure$leafCount)
 print(fileStructure, "mode", "size", limit = 25)
 
 
-## ---- eval = FALSE-------------------------------------------------------
+## ---- eval = FALSE------------------------------------------------------------
 #  
 #  #This requires listviewer, which is available only on github
 #  devtools::install_github("timelyportfolio/listviewer")
@@ -403,7 +403,7 @@ print(fileStructure, "mode", "size", limit = 25)
 #  jsonedit(l)
 #  
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 
 #' @param children the number of children each population member has
 #' @param probSex the probability of the sex of a descendant
@@ -471,22 +471,22 @@ GenerateChildrenTree <- function(children = 2,
 }
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 
 tree <- GenerateChildrenTree()
 print(tree, "sex", "feature", "develop", limit = 20)
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 tree$totalCount
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 length(Traverse(tree, filterFun = function(x) x$feature))
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 length(Traverse(tree, filterFun = function(x) x$sex == 1 && x$develop))
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 FreqLastGen <- function(tree) {
   l <- tree$leaves
   sum(sapply(l, function(x) x$feature))/length(l)
@@ -495,13 +495,13 @@ FreqLastGen <- function(tree) {
 FreqLastGen(tree)
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 system.time(x <- sapply(1:100, function(x) FreqLastGen(GenerateChildrenTree())))
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 hist(x, probability = TRUE, main = "Frequency of feature in last generation")
 
-## ---- eval = FALSE-------------------------------------------------------
+## ---- eval = FALSE------------------------------------------------------------
 #  library(foreach)
 #  library(doParallel)
 #  registerDoParallel(makeCluster(3))
@@ -510,17 +510,17 @@ hist(x, probability = TRUE, main = "Frequency of feature in last generation")
 #  system.time(x <- foreach (i = 1:100, .packages = "data.tree") %dopar% FreqLastGen(GenerateChildrenTree()))
 #  stopImplicitCluster()
 
-## ---- echo = FALSE-------------------------------------------------------
+## ---- echo = FALSE------------------------------------------------------------
 
 print(c(user = 0.07, system = 0.02, elapsed = 1.40))
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 
-fields <- expand.grid(letters[1:3], 1:3)
-fields
+attributes <- expand.grid(letters[1:3], 1:3)
+attributes
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 ttt <- Node$new("ttt")
 
 #consider rotation, so first move is explicit
@@ -536,13 +536,13 @@ ttt$Set(player = 1, filterFun = isLeaf)
 
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 AddPossibleMoves <- function(node) {
   t <- Traverse(node, traversal = "ancestor", filterFun = isNotRoot)
   
-  available <- rownames(fields)[!rownames(fields) %in% Get(t, "f")]
+  available <- rownames(attributes)[!rownames(attributes) %in% Get(t, "f")]
   for (f in available) {
-    child <- node$AddChild(paste0(fields[f, 1], fields[f, 2]))
+    child <- node$AddChild(paste0(attributes[f, 1], attributes[f, 2]))
     child$f <- as.numeric(f)
     child$player <- ifelse(node$player == 1, 2, 1)
     hasWon <- HasWon(child)
@@ -560,7 +560,7 @@ AddPossibleMoves <- function(node) {
 }
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 HasWon <- function(node) {
   t <- Traverse(node, traversal = "ancestor", filterFun = function(x) !x$isRoot && x$player == node$player)
   mine <- Get(t, "f")
@@ -575,37 +575,37 @@ HasWon <- function(node) {
 }
 
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  system.time(for (child in ttt$children) AddPossibleMoves(child))
 
-## ---- echo= FALSE--------------------------------------------------------
+## ---- echo= FALSE-------------------------------------------------------------
 c(user = 345.645, system = 3.245, elapsed = 346.445)
 
-## ---- eval = FALSE-------------------------------------------------------
+## ---- eval = FALSE------------------------------------------------------------
 #  ttt$leafCount
 
-## ---- echo = FALSE-------------------------------------------------------
+## ---- echo = FALSE------------------------------------------------------------
 89796
 
-## ---- eval = FALSE-------------------------------------------------------
+## ---- eval = FALSE------------------------------------------------------------
 #  ttt$totalCount
 
-## ---- echo = FALSE-------------------------------------------------------
+## ---- echo = FALSE------------------------------------------------------------
 203716
 
-## ---- eval = FALSE-------------------------------------------------------
+## ---- eval = FALSE------------------------------------------------------------
 #  mean(ttt$Get(function(x) x$level - 1, filterFun = isLeaf))
 
-## ---- echo = FALSE-------------------------------------------------------
+## ---- echo = FALSE------------------------------------------------------------
 8.400775
 
-## ---- eval = FALSE-------------------------------------------------------
+## ---- eval = FALSE------------------------------------------------------------
 #  ttt$averageBranchingFactor
 
-## ---- echo = FALSE-------------------------------------------------------
+## ---- echo = FALSE------------------------------------------------------------
 1.788229
 
-## ---- eval = FALSE-------------------------------------------------------
+## ---- eval = FALSE------------------------------------------------------------
 #  
 #  winnerOne <- Traverse(ttt, filterFun = function(x) x$isLeaf && x$result == 1)
 #  winnerTwo <- Traverse(ttt, filterFun = function(x) x$isLeaf && x$result == 2)
@@ -613,10 +613,10 @@ c(user = 345.645, system = 3.245, elapsed = 346.445)
 #  
 #  c(winnerOne = length(winnerOne), winnerTwo = length(winnerTwo), ties = length(ties))
 
-## ---- echo=FALSE---------------------------------------------------------
+## ---- echo=FALSE--------------------------------------------------------------
 c(winnerOne = 39588, winnerTwo = 21408, ties = 28800)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 
 PrintBoard <- function(node) {
   mineV <- rep(0, 9)
@@ -639,18 +639,18 @@ PrintBoard <- function(node) {
 }
 
 
-## ---- eval = FALSE-------------------------------------------------------
+## ---- eval = FALSE------------------------------------------------------------
 #  
 #  PrintBoard(ties[[1]])
 #  
 
-## ---- echo = FALSE-------------------------------------------------------
+## ---- echo = FALSE------------------------------------------------------------
 mt <- matrix(c("O2", "X3", "O4", "X5", "O6", "X7", "X1", "O8", "X9"), nrow = 3, ncol = 3, byrow = TRUE)
 rownames(mt) <- letters[1:3]
 colnames(mt) <- as.character(1:3)
 mt
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  
 #  
 #  AnalyseTicTacToe <- function(subtree) {
@@ -678,14 +678,14 @@ mt
 #                  .packages = "data.tree") %dopar% AnalyseTicTacToe(child)
 #  )
 
-## ---- echo= FALSE--------------------------------------------------------
+## ---- echo= FALSE-------------------------------------------------------------
 c(user = 0.05, system = 0.04, elapsed = 116.86)
 
-## ---- eval = FALSE-------------------------------------------------------
+## ---- eval = FALSE------------------------------------------------------------
 #  stopImplicitCluster()
 #  # 4. aggregate results
 #  rowSums(sapply(x, c))
 
-## ---- echo=FALSE---------------------------------------------------------
+## ---- echo=FALSE--------------------------------------------------------------
 c(winnerOne = 39588, winnerTwo = 21408, ties = 28800)
 

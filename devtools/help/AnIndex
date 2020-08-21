@@ -28,8 +28,6 @@ dev_packages	dev_packages
 dev_package_deps	remote-reexports
 dev_sitrep	dev_sitrep
 document	document
-dr_devtools	devtools-deprecated
-dr_github	devtools-deprecated
 find_rtools	reexports
 github_pat	github_pat
 github_pull	reexports

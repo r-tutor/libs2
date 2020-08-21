@@ -1,14 +1,25 @@
 # All changes to data.tree are documented here.
 
-# Version 0.7.11
+## Version 1.0.0
+- IMPROVE: Replaced dependency on stringr by dependency on stringi, which make data.tree even more light-weight
+- CHANGE: Node serialization changed. In many cases, you might still be able to load previously saved data.tree objects, but then they do not correspond to the latest version.
+- CHANGE: New reserved words for Node: attributes and attributesAll
+- NOTE: Node$fields and Node$fieldsAll will be deprecated in the next version. Use Node$attributes and Node$attributesAll instead
+- REMOVE: Deprecated Node$FindNode has been removed (use FindeNode(node, ...) instead)
+- IMPROVE: Node is now fully documented, (thx to roxygen2 for supporting R6)
+- CHANGE: data.tree now depends on R 3.5
+- FIX: adjusted sample data that didn't support correct handling of active bindings
+- IMPROVE: Adding reserved word check to FromDataFrameNetwork (#147 thx to wkumler)
+
+## Version 0.7.11
 - IMPROVE: diagrammeR is now only suggested, so data.tree is much more lightweight if plotting is not needed (#143 thx to Russ Hyde)
 - FIX: plot now also works with quotations in names (#137 thx to thotal)
 - IMPROVE: as.list and other conversions to list now contain pruneFun argument (#142)
 
-# Version 0.7.10
+## Version 0.7.10
 - IMPROVE: various spell errors fixed in vignettes
 
-# Version 0.7.9
+## Version 0.7.9
 - FIX: Bug in as.data.frame.Node: NA for certain lists slots (#135)
 - FIX: Get prints Null as NA by default (#128)
 

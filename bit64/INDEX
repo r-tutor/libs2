@@ -1,4 +1,5 @@
 [.integer64             Extract or Replace Parts of an integer64 vector
+all.equal.integer64     Test if two integer64 vectors are all.equal
 as.character.integer64
                         Coerce from integer64
 as.data.frame.integer64
@@ -10,7 +11,7 @@ benchmark64             Function for measuring algorithmic performance
 benchmark64.data        Results of performance measurement on a Core i7
                         Lenovo T410 8 GB RAM under Windows 7 64bit
 bit64-package           A S3 class for vectors of 64bit integers
-bit64S3                 Tunrning base R functions into S3 generics for
+bit64S3                 Turning base R functions into S3 generics for
                         bit64
 c.integer64             Concatenating integer64 vectors
 cache                   Atomic Caching
@@ -33,6 +34,7 @@ ramsort.integer64       Low-level intger64 methods for in-RAM sorting
                         and ordering
 rank.integer64          Sample Ranks from integer64
 rep.integer64           Replicate elements of integer64 vectors
+runif64                 integer64: random numbers
 seq.integer64           integer64: Sequence Generation
 sort.integer64          High-level intger64 methods for sorting and
                         ordering

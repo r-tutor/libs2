@@ -23,34 +23,44 @@ admin1_region_choropleth
 calculate_percent_change
                         Calculate the percentage change between two
                         choroplethr dataframes.
-choroplethr             Create a choropleth
-choroplethr_acs         Create a choropleth from ACS data.
 choroplethr_animate     Animate a list of choropleths
 choroplethr_wdi         Create a country-level choropleth using data
                         from the World Bank's World Development
                         Indicators (WDI)
+congress116.regions     A data.frame containing geographic metadata
+                        about the Congressional Districts of the 116th
+                        US Congress
 continental_us_states   A vector of the names of US Continental US
                         States.
 country_choropleth      Create a country-level choropleth
 county_choropleth       Create a choropleth of US Counties
 county_choropleth_acs   Create a US County choropleth from ACS data
-county_zoom_choropleth
-                        Create a choropleth of USA Counties, with
-                        sensible defaults, that zooms on counties.
+df_congress116_demographics
+                        A data.frame containing demographic statistics
+                        about the 116th Congressional Districts
+df_congress116_party    A data.frame containing party affiliation data
+                        about the Congressional Districts of 116th US
+                        Congress
 df_county_demographics
                         A data.frame containing demographic statistics
                         for each county in the United States.
 df_japan_census         A data.frame containing basic demographic
                         information about Japan.
+df_ny_tract_demographics
+                        A data.frame containing demographic statistics
+                        for each Census Tract in New York State.
 df_pop_country          A data.frame containing population estimates
                         for Countries in 2012.
 df_pop_county           A data.frame containing population estimates
                         for US Counties in 2012.
+df_pop_ny_tract         A data.frame containing population estimates
+                        for all Census Tracts in New York State in
+                        2012.
 df_pop_state            A data.frame containing population estimates
                         for US States in 2012.
 df_president            A data.frame containing election results from
                         the 2012 US Presidential election.
-df_president_ts         A data.frame containing all US presdiential
+df_president_ts         A data.frame containing all US presidential
                         election results from 1789 to 2012
 df_state_age_2010       A data.frame containing median age estimates
                         for US states in 2010
@@ -59,10 +69,15 @@ df_state_age_2015       A data.frame containing median age estimates
 df_state_demographics   A data.frame containing demographic statistics
                         for each state plus the District of Columbia.
 double_map              Place two maps side by side
+filter_to_voting_congressional_districts
+                        Remove non-voting Congressional Districts from
+                        a data.frame
 get_acs_data            Returns a list representing American Community
                         Survey (ACS) estimates
-get_acs_df              Returns a data.frame representing US Census
-                        American Community Survey (ACS) estimates.
+get_congressional_district_demographics
+                        Get a handful of demographic variables on US
+                        Congressional Districts from the US Census
+                        Bureau as a data.frame.
 get_county_demographics
                         Get a handful of demographic variables on US
                         Counties from the US Census Bureau as a
@@ -80,5 +95,6 @@ state_choropleth        Create a choropleth of US States
 state_choropleth_acs    Create a US State choropleth from ACS data
 tract_choropleth        Create a choropleth of Census Tracts in a
                         particular state.
-zip_map                 Create a map visualizing US ZIP codes with
-                        sensible defaults
+visualize_df_by_race_ethnicity_party
+                        Create box plots to visualize race and
+                        ethnicity by party

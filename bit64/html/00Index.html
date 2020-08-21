@@ -11,9 +11,10 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;bit64&rsquo; version 0.9-7.1</h2>
+</div><h2>Documentation for package &lsquo;bit64&rsquo; version 4.0.2</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
+<li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
 <li><a href="../NEWS">Package NEWS</a>.</li>
 </ul>
 
@@ -56,6 +57,8 @@
 <table width="100%">
 <tr><td style="width: 25%;"><a href="format.integer64.html">abs.integer64</a></td>
 <td>Unary operators and functions for integer64 vectors</td></tr>
+<tr><td style="width: 25%;"><a href="all.equal.integer64.html">all.equal.integer64</a></td>
+<td>Test if two integer64 vectors are all.equal</td></tr>
 <tr><td style="width: 25%;"><a href="sum.integer64.html">all.integer64</a></td>
 <td>Summary functions for integer64 vectors</td></tr>
 <tr><td style="width: 25%;"><a href="sum.integer64.html">any.integer64</a></td>
@@ -75,6 +78,8 @@
 <tr><td style="width: 25%;"><a href="as.character.integer64.html">as.integer.integer64</a></td>
 <td>Coerce from integer64</td></tr>
 <tr><td style="width: 25%;"><a href="as.integer64.character.html">as.integer64</a></td>
+<td>Coerce to integer64</td></tr>
+<tr><td style="width: 25%;"><a href="as.integer64.character.html">as.integer64.bitstring</a></td>
 <td>Coerce to integer64</td></tr>
 <tr><td style="width: 25%;"><a href="as.integer64.character.html">as.integer64.character</a></td>
 <td>Coerce to integer64</td></tr>
@@ -108,7 +113,7 @@
 <tr><td style="width: 25%;"><a href="bit64-package.html">bit64</a></td>
 <td>A S3 class for vectors of 64bit integers</td></tr>
 <tr><td style="width: 25%;"><a href="bit64S3.html">bit64S3</a></td>
-<td>Tunrning base R functions into S3 generics for bit64</td></tr>
+<td>Turning base R functions into S3 generics for bit64</td></tr>
 </table>
 
 <h2><a name="C">-- C --</a></h2>
@@ -224,11 +229,11 @@
 <tr><td style="width: 25%;"><a href="bit64-package.html">integer64</a></td>
 <td>A S3 class for vectors of 64bit integers</td></tr>
 <tr><td style="width: 25%;"><a href="bit64S3.html">is.double</a></td>
-<td>Tunrning base R functions into S3 generics for bit64</td></tr>
+<td>Turning base R functions into S3 generics for bit64</td></tr>
 <tr><td style="width: 25%;"><a href="bit64S3.html">is.double.default</a></td>
-<td>Tunrning base R functions into S3 generics for bit64</td></tr>
+<td>Turning base R functions into S3 generics for bit64</td></tr>
 <tr><td style="width: 25%;"><a href="bit64S3.html">is.double.integer64</a></td>
-<td>Tunrning base R functions into S3 generics for bit64</td></tr>
+<td>Turning base R functions into S3 generics for bit64</td></tr>
 <tr><td style="width: 25%;"><a href="format.integer64.html">is.finite.integer64</a></td>
 <td>Unary operators and functions for integer64 vectors</td></tr>
 <tr><td style="width: 25%;"><a href="format.integer64.html">is.infinite.integer64</a></td>
@@ -282,9 +287,9 @@
 
 <table width="100%">
 <tr><td style="width: 25%;"><a href="bit64S3.html">match</a></td>
-<td>Tunrning base R functions into S3 generics for bit64</td></tr>
+<td>Turning base R functions into S3 generics for bit64</td></tr>
 <tr><td style="width: 25%;"><a href="bit64S3.html">match.default</a></td>
-<td>Tunrning base R functions into S3 generics for bit64</td></tr>
+<td>Turning base R functions into S3 generics for bit64</td></tr>
 <tr><td style="width: 25%;"><a href="match.integer64.html">match.integer64</a></td>
 <td>64-bit integer matching</td></tr>
 <tr><td style="width: 25%;"><a href="sum.integer64.html">max.integer64</a></td>
@@ -328,9 +333,9 @@
 <tr><td style="width: 25%;"><a href="optimizer64.data.html">optimizer64.data</a></td>
 <td>Results of performance measurement on a Core i7 Lenovo T410 8 GB RAM under Windows 7 64bit</td></tr>
 <tr><td style="width: 25%;"><a href="bit64S3.html">order</a></td>
-<td>Tunrning base R functions into S3 generics for bit64</td></tr>
+<td>Turning base R functions into S3 generics for bit64</td></tr>
 <tr><td style="width: 25%;"><a href="bit64S3.html">order.default</a></td>
-<td>Tunrning base R functions into S3 generics for bit64</td></tr>
+<td>Turning base R functions into S3 generics for bit64</td></tr>
 <tr><td style="width: 25%;"><a href="sort.integer64.html">order.integer64</a></td>
 <td>High-level intger64 methods for sorting and ordering</td></tr>
 <tr><td style="width: 25%;"><a href="hashcache.html">ordercache</a></td>
@@ -388,6 +393,8 @@
 <td>(P)ercent (Rank)s</td></tr>
 <tr><td style="width: 25%;"><a href="prank.html">prank.integer64</a></td>
 <td>(P)ercent (Rank)s</td></tr>
+<tr><td style="width: 25%;"><a href="as.character.integer64.html">print.bitstring</a></td>
+<td>Coerce from integer64</td></tr>
 <tr><td style="width: 25%;"><a href="cache.html">print.cache</a></td>
 <td>Atomic Caching</td></tr>
 <tr><td style="width: 25%;"><a href="bit64-package.html">print.integer64</a></td>
@@ -431,9 +438,9 @@
 <tr><td style="width: 25%;"><a href="sum.integer64.html">range.integer64</a></td>
 <td>Summary functions for integer64 vectors</td></tr>
 <tr><td style="width: 25%;"><a href="bit64S3.html">rank</a></td>
-<td>Tunrning base R functions into S3 generics for bit64</td></tr>
+<td>Turning base R functions into S3 generics for bit64</td></tr>
 <tr><td style="width: 25%;"><a href="bit64S3.html">rank.default</a></td>
-<td>Tunrning base R functions into S3 generics for bit64</td></tr>
+<td>Turning base R functions into S3 generics for bit64</td></tr>
 <tr><td style="width: 25%;"><a href="rank.integer64.html">rank.integer64</a></td>
 <td>Sample Ranks from integer64</td></tr>
 <tr><td style="width: 25%;"><a href="c.integer64.html">rbind.integer64</a></td>
@@ -444,6 +451,8 @@
 <td>Replicate elements of integer64 vectors</td></tr>
 <tr><td style="width: 25%;"><a href="format.integer64.html">round.integer64</a></td>
 <td>Unary operators and functions for integer64 vectors</td></tr>
+<tr><td style="width: 25%;"><a href="runif64.html">runif64</a></td>
+<td>integer64: random numbers</td></tr>
 </table>
 
 <h2><a name="S">-- S --</a></h2>
@@ -525,8 +534,6 @@
 <td>Searching and other uses of sorting for 64bit integers</td></tr>
 <tr><td style="width: 25%;"><a href="format.integer64.html">sqrt.integer64</a></td>
 <td>Unary operators and functions for integer64 vectors</td></tr>
-<tr><td style="width: 25%;"><a href="cache.html">still.identical</a></td>
-<td>Atomic Caching</td></tr>
 <tr><td style="width: 25%;"><a href="bit64-package.html">str.integer64</a></td>
 <td>A S3 class for vectors of 64bit integers</td></tr>
 <tr><td style="width: 25%;"><a href="sum.integer64.html">sum.integer64</a></td>
@@ -578,9 +585,9 @@
 <tr><td style="width: 25%;"><a href="xor.integer64.html">%/%.integer64</a></td>
 <td>Binary operators for integer64 vectors</td></tr>
 <tr><td style="width: 25%;"><a href="bit64S3.html">%in%</a></td>
-<td>Tunrning base R functions into S3 generics for bit64</td></tr>
+<td>Turning base R functions into S3 generics for bit64</td></tr>
 <tr><td style="width: 25%;"><a href="bit64S3.html">%in%.default</a></td>
-<td>Tunrning base R functions into S3 generics for bit64</td></tr>
+<td>Turning base R functions into S3 generics for bit64</td></tr>
 <tr><td style="width: 25%;"><a href="match.integer64.html">%in%.integer64</a></td>
 <td>64-bit integer matching</td></tr>
 <tr><td style="width: 25%;"><a href="xor.integer64.html">&amp;.integer64</a></td>
@@ -594,11 +601,11 @@
 <tr><td style="width: 25%;"><a href="xor.integer64.html">/.integer64</a></td>
 <td>Binary operators for integer64 vectors</td></tr>
 <tr><td style="width: 25%;"><a href="bit64S3.html">:</a></td>
-<td>Tunrning base R functions into S3 generics for bit64</td></tr>
+<td>Turning base R functions into S3 generics for bit64</td></tr>
 <tr><td style="width: 25%;"><a href="bit64S3.html">:.default</a></td>
-<td>Tunrning base R functions into S3 generics for bit64</td></tr>
+<td>Turning base R functions into S3 generics for bit64</td></tr>
 <tr><td style="width: 25%;"><a href="bit64S3.html">:.integer64</a></td>
-<td>Tunrning base R functions into S3 generics for bit64</td></tr>
+<td>Turning base R functions into S3 generics for bit64</td></tr>
 <tr><td style="width: 25%;"><a href="xor.integer64.html">&lt;.integer64</a></td>
 <td>Binary operators for integer64 vectors</td></tr>
 <tr><td style="width: 25%;"><a href="xor.integer64.html">&lt;=.integer64</a></td>

@@ -1,6 +1,7 @@
 $.xfun_strict_list	strict_list
 as_strict_list	strict_list
 attr	attr
+base64_decode	base64_encode
 base64_encode	base64_encode
 base64_uri	base64_uri
 cache_rds	cache_rds

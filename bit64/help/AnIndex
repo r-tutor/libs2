@@ -20,6 +20,7 @@ bit64-package	bit64-package
 >.integer64	xor.integer64
 >=.integer64	xor.integer64
 abs.integer64	format.integer64
+all.equal.integer64	all.equal.integer64
 all.integer64	sum.integer64
 any.integer64	sum.integer64
 as.bitstring	as.character.integer64
@@ -30,6 +31,7 @@ as.double.integer64	as.character.integer64
 as.factor.integer64	as.character.integer64
 as.integer.integer64	as.character.integer64
 as.integer64	as.integer64.character
+as.integer64.bitstring	as.integer64.character
 as.integer64.character	as.integer64.character
 as.integer64.double	as.integer64.character
 as.integer64.factor	as.integer64.character
@@ -153,6 +155,7 @@ orderupo.integer64	sortnut
 plusclass	plusclass
 prank	prank
 prank.integer64	prank
+print.bitstring	as.character.integer64
 print.cache	cache
 print.integer64	bit64-package
 prod.integer64	sum.integer64
@@ -176,6 +179,7 @@ rbind.integer64	c.integer64
 remcache	cache
 rep.integer64	rep.integer64
 round.integer64	format.integer64
+runif64	runif64
 scale.integer64	format.integer64
 seq.integer64	seq.integer64
 setcache	cache
@@ -214,7 +218,6 @@ sorttab.integer64	sortnut
 sortuni	sortnut
 sortuni.integer64	sortnut
 sqrt.integer64	format.integer64
-still.identical	cache
 str.integer64	bit64-package
 sum.integer64	sum.integer64
 summary.integer64	qtile

@@ -1,3 +1,13 @@
+		 CHANGES IN servr VERSION 0.18
+
+BUG FIXES
+
+- Fixed the malformed Accept-Ranges header (thanks, @JasonPunyon, #47).
+
+MINOR CHANGES
+
+- `servr::random_port()` looks for an available port quietly via `httpuv::startServer(quiet = TRUE)`. This requires **httpuv** >= v1.5.2.
+
 		 CHANGES IN servr VERSION 0.17
 
 NEW FEATURES

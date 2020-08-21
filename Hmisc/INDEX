@@ -60,7 +60,6 @@ escapeRegex             Escapes any characters that would have special
 event.chart             Flexible Event Chart for Time-to-Event Data
 event.convert           Event Conversion for Time-to-Event Data
 event.history           Produces event.history graph for survival data
-ffCompress              Transform Data Frame Into a Compact 'ff' Object
 find.matches            Find Close Matches
 first.word              First Word in a String or Expression
 format.df               Format a Data Frame or Matrix for LaTeX or HTML
@@ -70,7 +69,7 @@ gbayes                  Gaussian Bayesian Posterior and Predictive
 getHdata                Download and Install Datasets for 'Hmisc',
                         'rms', and Statistical Modeling
 getRs                   Interact with github rscripts Project
-getZip                  Open a Zip File From a URL.
+getZip                  Open a Zip File From a URL
 ggfreqScatter           Frequency Scatterplot
 hdquantile              Harrell-Davis Distribution-Free Quantile
                         Estimator
