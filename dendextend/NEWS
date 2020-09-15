@@ -1,3 +1,18 @@
+dendextend 1.14.0 (2020-08-25)
+----------------------------------------
+
+###UPDATED FUNCTIONS:
+* ggdend - now supports type='triangle' (prop @houyunhuang)
+
+###BUG FIXES
+* find_dendrogram - make the function deal with more edge cases, added tests, and fix the documentation to match what the function does.
+* Fix warning "checkRd: (5) dendextend-package.Rd:0-15: Must have a \description"
+* Fix: "Found the following (possibly) invalid URLs:"
+###OTHER NOTES
+- update pkgdown website
+
+
+
 dendextend 1.13.4 (2020-02-28)
 ----------------------------------------
 

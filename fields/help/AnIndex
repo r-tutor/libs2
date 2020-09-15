@@ -15,6 +15,8 @@ cat.matrix	fields-internal
 cat.to.list	fields-internal
 ceiling2	fields-internal
 ChicagoO3	ozone
+circulantEmbedding	sim.rf
+circulantEmbeddingSetup	sim.rf
 CO.elev	CO
 CO.elevGrid	CO
 CO.Grid	CO
@@ -148,6 +150,7 @@ Krig.ynew	fields-internal
 larry.colors	tim.colors
 lennon	lennon
 make.surface.grid	grid.list
+makeMultiIndex	grid.list
 makePredictionPoints	fields-internal
 makeSimulationGrid	fields-internal
 makeSimulationGrid2	fields-internal
@@ -277,6 +280,7 @@ sim.krig.image	fields-internal
 sim.mKrig.approx	sim.Krig
 sim.rf	sim.rf
 sim.spatialProcess	sim.Krig
+simSpatialData	sim.Krig
 smooth.2d	smooth.2d
 snow.colors	tim.colors
 spam2full	spam2lz

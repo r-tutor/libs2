@@ -1,3 +1,16 @@
+# systemfonts 0.3.1
+
+* Fixed warnings on CRAN LTO machine
+
+# systemfonts 0.3.0
+
+* Added `get_cached_face()` so that other packages might retrieve FT_Face 
+  objects from the cache.
+* Adapted cpp11
+* Add infrastructe for setting OpenType font features on a registered font with
+  either `register_font()` or the new `register_variant()`, along with the 
+  `font_feature()` function.
+
 # systemfonts 0.2.3
 
 * Replace the buggy Freetype cache subsystem with own implementation

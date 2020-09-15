@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Forecasting using BATS and TBATS models</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for forecast.bats {forecast}"><tr><td>forecast.bats {forecast}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Forecasting using BATS and TBATS models</h2>
+
+<h3>Description</h3>
+
+<p>Forecasts <code>h</code> steps ahead with a BATS model. Prediction intervals are
+also produced.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'bats'
+forecast(object, h, level = c(80, 95), fan = FALSE, biasadj = NULL, ...)
+
+## S3 method for class 'tbats'
+forecast(object, h, level = c(80, 95), fan = FALSE, biasadj = NULL, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>An object of class &quot;<code>bats</code>&quot;. Usually the result of a call
+to <code><a href="bats.html">bats</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>h</code></td>
+<td>
+<p>Number of periods for forecasting. Default value is twice the
+largest seasonal period (for seasonal data) or ten (for non-seasonal data).</p>
+</td></tr>
+<tr valign="top"><td><code>level</code></td>
+<td>
+<p>Confidence level for prediction intervals.</p>
+</td></tr>
+<tr valign="top"><td><code>fan</code></td>
+<td>
+<p>If TRUE, level is set to <code>seq(51,99,by=3)</code>. This is suitable
+for fan plots.</p>
+</td></tr>
+<tr valign="top"><td><code>biasadj</code></td>
+<td>
+<p>Use adjusted back-transformed mean for Box-Cox
+transformations. If TRUE, point forecasts and fitted values are mean
+forecast. Otherwise, these points can be considered the median of the
+forecast densities.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Other arguments, currently ignored.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>An object of class &quot;<code>forecast</code>&quot;.
+</p>
+<p>The function <code>summary</code> is used to obtain and print a summary of the
+results, while the function <code>plot</code> produces a plot of the forecasts and
+prediction intervals.
+</p>
+<p>The generic accessor functions <code>fitted.values</code> and <code>residuals</code>
+extract useful features of the value returned by <code>forecast.bats</code>.
+</p>
+<p>An object of class <code>"forecast"</code> is a list containing at least the
+following elements: </p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>model</code></td>
+<td>
+<p>A copy of the <code>bats</code> object</p>
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+<p>The name of the forecasting method as a character string</p>
+</td></tr>
+<tr valign="top"><td><code>mean</code></td>
+<td>
+<p>Point forecasts as a time series</p>
+</td></tr> <tr valign="top"><td><code>lower</code></td>
+<td>
+<p>Lower limits for
+prediction intervals</p>
+</td></tr> <tr valign="top"><td><code>upper</code></td>
+<td>
+<p>Upper limits for prediction intervals</p>
+</td></tr>
+<tr valign="top"><td><code>level</code></td>
+<td>
+<p>The confidence values associated with the prediction intervals</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>The original time series (either <code>object</code> itself or the time
+series used to create the model stored as <code>object</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>residuals</code></td>
+<td>
+<p>Residuals from the fitted model.</p>
+</td></tr> <tr valign="top"><td><code>fitted</code></td>
+<td>
+<p>Fitted
+values (one-step forecasts)</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Slava Razbash and Rob J Hyndman
+</p>
+
+
+<h3>References</h3>
+
+<p>De Livera, A.M., Hyndman, R.J., &amp; Snyder, R. D. (2011),
+Forecasting time series with complex seasonal patterns using exponential
+smoothing, <em>Journal of the American Statistical Association</em>,
+<b>106</b>(496), 1513-1527.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="bats.html">bats</a></code>, <code><a href="tbats.html">tbats</a></code>,<code><a href="forecast.ets.html">forecast.ets</a></code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+## Not run: 
+fit &lt;- bats(USAccDeaths)
+plot(forecast(fit))
+
+taylor.fit &lt;- bats(taylor)
+plot(forecast(taylor.fit))
+
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>forecast</em> version 8.13 <a href="00Index.html">Index</a>]</div>
+</body></html>

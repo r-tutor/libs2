@@ -1,5 +1,5 @@
-cowplot-package	cowplot
 add_sub	add_sub
+agg_null_device	png_null_device
 align_margin	align_margin
 align_plots	align_plots
 as_grob	as_grob

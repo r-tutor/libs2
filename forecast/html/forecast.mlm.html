@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Forecast a multiple linear model with possible time series...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for forecast.mlm {forecast}"><tr><td>forecast.mlm {forecast}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Forecast a multiple linear model with possible time series components</h2>
+
+<h3>Description</h3>
+
+<p><code>forecast.mlm</code> is used to predict multiple linear models, especially
+those involving trend and seasonality components.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'mlm'
+forecast(
+  object,
+  newdata,
+  h = 10,
+  level = c(80, 95),
+  fan = FALSE,
+  lambda = object$lambda,
+  biasadj = NULL,
+  ts = TRUE,
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>Object of class &quot;mlm&quot;, usually the result of a call to
+<code><a href="../../stats/html/lm.html">lm</a></code> or <code><a href="tslm.html">tslm</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>newdata</code></td>
+<td>
+<p>An optional data frame in which to look for variables with
+which to predict. If omitted, it is assumed that the only variables are
+trend and season, and <code>h</code> forecasts are produced.</p>
+</td></tr>
+<tr valign="top"><td><code>h</code></td>
+<td>
+<p>Number of periods for forecasting. Ignored if <code>newdata</code>
+present.</p>
+</td></tr>
+<tr valign="top"><td><code>level</code></td>
+<td>
+<p>Confidence level for prediction intervals.</p>
+</td></tr>
+<tr valign="top"><td><code>fan</code></td>
+<td>
+<p>If <code>TRUE</code>, level is set to seq(51,99,by=3). This is suitable
+for fan plots.</p>
+</td></tr>
+<tr valign="top"><td><code>lambda</code></td>
+<td>
+<p>Box-Cox transformation parameter. If <code>lambda="auto"</code>,
+then a transformation is automatically selected using <code>BoxCox.lambda</code>.
+The transformation is ignored if NULL. Otherwise,
+data transformed before model is estimated.</p>
+</td></tr>
+<tr valign="top"><td><code>biasadj</code></td>
+<td>
+<p>Use adjusted back-transformed mean for Box-Cox
+transformations. If transformed data is used to produce forecasts and fitted values,
+a regular back transformation will result in median forecasts. If biasadj is TRUE,
+an adjustment will be made to produce mean forecasts and fitted values.</p>
+</td></tr>
+<tr valign="top"><td><code>ts</code></td>
+<td>
+<p>If <code>TRUE</code>, the forecasts will be treated as time series
+provided the original data is a time series; the <code>newdata</code> will be
+interpreted as related to the subsequent time periods. If <code>FALSE</code>, any
+time series attributes of the original data will be ignored.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Other arguments passed to <code><a href="forecast.lm.html">forecast.lm</a>()</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>forecast.mlm</code> is largely a wrapper for
+<code><a href="forecast.lm.html">forecast.lm</a>()</code> except that it allows forecasts to be
+generated on multiple series. Also, the output is reformatted into a
+<code>mforecast</code> object.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of class &quot;<code>mforecast</code>&quot;.
+</p>
+<p>The function <code>summary</code> is used to obtain and print a summary of the
+results, while the function <code>plot</code> produces a plot of the forecasts and
+prediction intervals.
+</p>
+<p>The generic accessor functions <code>fitted.values</code> and <code>residuals</code>
+extract useful features of the value returned by <code>forecast.lm</code>.
+</p>
+<p>An object of class <code>"mforecast"</code> is a list containing at least the
+following elements: </p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>model</code></td>
+<td>
+<p>A list containing information about the
+fitted model</p>
+</td></tr> <tr valign="top"><td><code>method</code></td>
+<td>
+<p>The name of the forecasting method as a
+character string</p>
+</td></tr> <tr valign="top"><td><code>mean</code></td>
+<td>
+<p>Point forecasts as a multivariate time series</p>
+</td></tr>
+<tr valign="top"><td><code>lower</code></td>
+<td>
+<p>Lower limits for prediction intervals of each series</p>
+</td></tr>
+<tr valign="top"><td><code>upper</code></td>
+<td>
+<p>Upper limits for prediction intervals of each series</p>
+</td></tr>
+<tr valign="top"><td><code>level</code></td>
+<td>
+<p>The confidence values associated with the prediction intervals</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>The historical data for the response variable.</p>
+</td></tr>
+<tr valign="top"><td><code>residuals</code></td>
+<td>
+<p>Residuals from the fitted model. That is x minus fitted
+values.</p>
+</td></tr> <tr valign="top"><td><code>fitted</code></td>
+<td>
+<p>Fitted values</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Mitchell O'Hara-Wild
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="tslm.html">tslm</a></code>, <code><a href="forecast.lm.html">forecast.lm</a></code>,
+<code><a href="../../stats/html/lm.html">lm</a></code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+lungDeaths &lt;- cbind(mdeaths, fdeaths)
+fit &lt;- tslm(lungDeaths ~ trend + season)
+fcast &lt;- forecast(fit, h=10)
+
+carPower &lt;- as.matrix(mtcars[,c("qsec","hp")])
+carmpg &lt;- mtcars[,"mpg"]
+fit &lt;- lm(carPower ~ carmpg)
+fcast &lt;- forecast(fit, newdata=data.frame(carmpg=30))
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>forecast</em> version 8.13 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,4 +1,4 @@
-## ---- echo = FALSE, message = FALSE, warning=FALSE-----------------------
+## ---- echo = FALSE, message = FALSE, warning=FALSE----------------------------
 library(dendextend)
 library(knitr)
 knitr::opts_chunk$set(
@@ -8,11 +8,11 @@ knitr::opts_chunk$set(
   # comment = "#>",
   tidy = FALSE)
 
-# http://stackoverflow.com/questions/24091735/why-pandoc-does-not-retrieve-the-image-file
+# https://stackoverflow.com/questions/24091735/why-pandoc-does-not-retrieve-the-image-file
 # < ! -- rmarkdown v1 -->
 
 
-## ---- fig.show='hold', fig.width=8, fig.height=3-------------------------
+## ---- fig.show='hold', fig.width=8, fig.height=3------------------------------
 # install.packages("dendextend")
 library(dendextend)
 
@@ -31,7 +31,7 @@ labels_colors(dend) <- 1:5
 labels_colors(dend) 
 plot(dend, main = "A color for every state")
 
-## ---- fig.show='hold', fig.width=8, fig.height=3-------------------------
+## ---- fig.show='hold', fig.width=8, fig.height=3------------------------------
 # install.packages("dendextend")
 library(dendextend)
 
@@ -57,7 +57,7 @@ labels_colors(dend) <- colors_to_use
 labels_colors(dend) 
 plot(dend, main = "A color for every Species")
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
  # define dendrogram object to play with:
  hc <- hclust(dist(USArrests[1:5,]), "ave")
  dend <- as.dendrogram(hc)
@@ -76,7 +76,7 @@ plot(dend, main = "A color for every Species")
  # labels_colors(dend)  <- get_leaves_branches_col(dend)
  plot(dend)
 
-## ---- fig.show='hold', fig.width=8, fig.height=3-------------------------
+## ---- fig.show='hold', fig.width=8, fig.height=3------------------------------
 # install.packages("dendextend")
 library(dendextend)
 
@@ -91,7 +91,7 @@ par(mfrow = c(1,2))
 plot(dend1, main = "Colored branches")
 plot(dend2, main = "Colored labels")
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # install.packages("dendextend")
 library(dendextend)
 
@@ -103,7 +103,7 @@ labels(dend)
 labels(dend) <- 1:5
 labels(dend)
 
-## ---- fig.show='hold', fig.width=8, fig.height=4-------------------------
+## ---- fig.show='hold', fig.width=8, fig.height=4------------------------------
 # install.packages("dendextend")
 library(dendextend)
 
@@ -122,7 +122,7 @@ dend <- set(dend, "labels_cex", 2)
 get_leaves_nodePar(dend)[[1]]
 plot(dend, main = "A larger font for labels")
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # install.packages("dendextend")
 library(dendextend)
 
@@ -135,7 +135,7 @@ get_nodes_attr(dend, "midpoint")
 # Perhaps also for the height:
 get_nodes_attr(dend, "height")
 
-## ---- echo = FALSE-------------------------------------------------------
+## ---- echo = FALSE------------------------------------------------------------
 test0 <- structure(c(0.641122711554543, 1.23425751165366, -0.325822271157288, 
 -0.452769780259602, 0.0544008811521789, -0.419431342616865, -0.972784235576774, 
 -1.08436301942649, 0.80835607360689, 0.265694432492288, -0.394391484747309, 
@@ -698,7 +698,7 @@ NA), .Dim = c(23L, 96L), .Dimnames = list(c("varA", "varB", "varC",
 "var13", "var14", "var15", "var16", "var17")))
 
 
-## ---- eval = FALSE-------------------------------------------------------
+## ---- eval = FALSE------------------------------------------------------------
 #  
 #  test <- test0
 #  rnames <- test[,1]
@@ -771,11 +771,11 @@ NA), .Dim = c(23L, 96L), .Dimnames = list(c("varA", "varB", "varC",
 #  		
 #  
 
-## ---- eval = FALSE-------------------------------------------------------
+## ---- eval = FALSE------------------------------------------------------------
 #  dendextend::assign_dendextend_options()
 #  # This populates the dendextend::dendextend_options() space
 
-## ---- fig.width=10, fig.height=10----------------------------------------
+## ---- fig.width=10, fig.height=10---------------------------------------------
 # install.packages("dendextend")
 # install.packages("circlize")
 library(dendextend)
@@ -796,12 +796,12 @@ par(mar = rep(0,4))
 circlize_dendrogram(dend, labels_track_height = NA, dend_track_height = .3) 
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 hc <- hclust(dist(USArrests[1:4,]), "ave")
 dend <- as.dendrogram(hc)
 heights_per_k.dendrogram(dend)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 aa1 <- c(2,4,6,8)
 bb1 <- c(1,3,7,11)
 aa2 <- c(3,6,9,12)
@@ -817,7 +817,7 @@ dend2 <- assign_values_to_leaves_edgePar(dend=dend, value = col_aa_red, edgePar 
 plot(dend2)
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 ## mtcars example
 
 # Create the dend:
@@ -857,7 +857,7 @@ colored_bars(cbind(k234[,3:1], col_car_type), dend, rowLabels = c(paste0("k = ",
 legend("topleft", legend = levels(car_type), fill = cols_4)
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 
 # Create the dend:
 hc <- hclust(dist(USArrests), "ave")

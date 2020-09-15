@@ -2,9 +2,9 @@ library(shiny)
 library(colourpicker)
 
 share <- list(
-  title = "colourInput()",
-  url = "http://daattali.com/shiny/colourInput/",
-  image = "http://daattali.com/shiny/img/colourinput.png",
+  title = "{colourpicker} package",
+  url = "https://daattali.com/shiny/colourInput/",
+  image = "https://daattali.com/shiny/img/colourinput.png",
   description = "An input control that allows users to select colours in Shiny apps",
   twitter_user = "daattali"
 )
@@ -23,22 +23,19 @@ shinyApp(
       tags$meta(property = "og:description", content = share$description),
 
       # Twitter summary cards
-      tags$meta(name = "twitter:card", content = "summary"),
+      tags$meta(name = "twitter:card", content = "summary_large_image"),
       tags$meta(name = "twitter:site", content = paste0("@", share$twitter_user)),
       tags$meta(name = "twitter:creator", content = paste0("@", share$twitter_user)),
       tags$meta(name = "twitter:title", content = share$title),
       tags$meta(name = "twitter:description", content = share$description),
       tags$meta(name = "twitter:image", content = share$image)
     ),
-    tags$a(
-      href="https://github.com/daattali/colourpicker",
-      tags$img(style="position: absolute; top: 0; right: 0; border: 0;",
-               src="github-gray-right.png",
-               alt="Fork me on GitHub")
-    ),
+
+    shinydisconnect::disconnectMessage2(),
+
     div(id = "header",
         div(id = "title",
-            "colourInput"
+            "{colourpicker} package"
         ),
         div(id = "subtitle",
             "An input control that allows users to select colours in Shiny apps"),
@@ -46,10 +43,10 @@ shinyApp(
             "By",
             tags$a(href = "http://deanattali.com/", "Dean Attali"),
             HTML("&bull;"),
-            "Package available",
+            "Code",
             tags$a(href = "https://github.com/daattali/colourpicker", "on GitHub"),
             HTML("&bull;"),
-            tags$a(href = "http://daattali.com/shiny/", "More apps"), "by Dean"
+            tags$a(href = "https://github.com/sponsors/daattali", "Support my work"), "❤"
         )
     ),
     div(
@@ -82,11 +79,13 @@ shinyApp(
         div(class = "title", "Allow Transparent"),
         div(class = "output", "Selected colour:",
             textOutput("valueTransparent", inline = TRUE)),
-        colourInput("colTransparent", NULL, "#00FF0080", allowTransparent = TRUE),
+        colourInput("colTransparent", NULL, "#00FF0080", allowTransparent = TRUE,
+                    closeOnClick = TRUE),
         tags$pre(HTML(paste0(
           'colourInput(<br>',
           '  "col", NULL, "#00FF0080",<br>',
-          '  allowTransparent = TRUE)'
+          '  allowTransparent = TRUE,<br>',
+          '  closeOnClick = TRUE)'
         )))
       ),
 
@@ -95,12 +94,14 @@ shinyApp(
         div(class = "title", "Return colour name"),
         div(class = "output", "Selected colour:",
             textOutput("valueName", inline = TRUE)),
-        colourInput("colName", NULL, "green", returnName = TRUE, palette = "limited"),
+        colourInput("colName", NULL, "green", returnName = TRUE,
+                    palette = "limited", closeOnClick = TRUE),
         tags$pre(HTML(paste0(
           'colourInput(<br>',
           '  "col", NULL, "green",<br>',
           '  returnName = TRUE, <br>',
-          '  palette = "limited")'
+          '  palette = "limited",<br>',
+          '  closeOnClick = TRUE)'
         )))
       ),
 
@@ -133,7 +134,7 @@ shinyApp(
           '    "white", "black", "red",<br>',
           '    "#DDD", "blue",<br>',
           '    "#0000FFA0", "#0000FF30",<br>',
-          '    "rgb(255, 255, 0)"'
+          '    "rgb(255, 255, 0)"))'
         )))
       ),
 
@@ -151,6 +152,7 @@ shinyApp(
                            c("square", "limited")),
         checkboxInput("allowTransparent", "Allow transparent", FALSE),
         checkboxInput("returnName", "Return R colour name", FALSE),
+        checkboxInput("closeOnClick", "Close on click", FALSE),
         actionButton("update", "Update")
       ),
 
@@ -181,7 +183,8 @@ shinyApp(
                         value = input$text, showColour = input$showColour,
                         palette = input$palette,
                         allowTransparent = input$allowTransparent,
-                        returnName = input$returnName)
+                        returnName = input$returnName,
+                        closeOnClick = input$closeOnClick)
     })
 
     # show plot based on colours selected

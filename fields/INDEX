@@ -51,6 +51,8 @@ as.image                Creates image from irregular x,y,z
 as.surface              Creates an "surface" object from grid values.
 bplot                   boxplot
 bplot.xy                Boxplots for conditional distribution
+circulantEmbedding      Efficiently Simulates a Stationary 1 and 2D
+                        Gaussian random fields
 colorbar.plot           Adds color scale strips to an existing plot.
 compactToMat            Convert Matrix from Compact Vector to Standard
                         Form
@@ -118,7 +120,6 @@ ribbon.plot             Adds to an existing plot, a ribbon of color,
                         based on values from a color scale, along a
                         sequence of line segments.
 set.panel               Specify a panel of plots
-sim.rf                  Simulates a Stationary Gaussian random field
 sim.spatialProcess      Conditional simulation of a spatial process
 smooth.2d               Kernel smoother for irregular 2-d data
 spatialProcess          Estimates a spatial process model.

@@ -9,7 +9,8 @@ axis_canvas             Generates a canvas onto which one can draw
                         axis-like objects.
 background_grid         Add/modify/remove the background grid in a
                         ggplot2 plot
-cowplot                 cowplot.
+cowplot                 Streamlined Plot Theme and Plot Annotations for
+                        'ggplot2'
 draw_figure_label       Add a label to a figure
 draw_grob               Draw a grob.
 draw_image              Draw an image
@@ -26,7 +27,7 @@ get_y_axis              Get plot axes
 ggdraw                  Set up a drawing layer on top of a ggplot
 ggsave2                 Cowplot reimplementation of 'ggsave()'.
 gtable_remove_grobs     Remove named elements from gtable
-gtable_squash_cols      Set the width of given colums to 0.
+gtable_squash_cols      Set the width of given columns to 0.
 gtable_squash_rows      Set the height of given rows to 0.
 insert_xaxis_grob       Insert an axis-like grob on either side of a
                         plot panel in a ggplot2 plot.

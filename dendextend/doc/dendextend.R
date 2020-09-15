@@ -1,4 +1,4 @@
-## ---- echo = FALSE, message = FALSE--------------------------------------
+## ---- echo = FALSE, message = FALSE-------------------------------------------
 library(dendextend)
 library(knitr)
 knitr::opts_chunk$set(
@@ -8,7 +8,7 @@ knitr::opts_chunk$set(
   comment = "#>",
   tidy = FALSE)
 
-# http://stackoverflow.com/questions/24091735/why-pandoc-does-not-retrieve-the-image-file
+# https://stackoverflow.com/questions/24091735/why-pandoc-does-not-retrieve-the-image-file
 # < ! -- rmarkdown v1 -->
 
 
@@ -50,10 +50,10 @@ tanglegram(dendlist(dend1, dend2), margin_inner = 9,
 
 
 
-## ---- echo=FALSE---------------------------------------------------------
+## ---- echo=FALSE--------------------------------------------------------------
 
 c(person("Tal", "Galili", role = c("aut", "cre", "cph"), email =
-    "tal.galili@gmail.com", comment = "http://www.r-statistics.com"),
+    "tal.galili@gmail.com", comment = "https://www.r-statistics.com"),
     person("Gavin", "Simpson", role = "ctb"), person("Gregory","Jefferis", role
     = "ctb", email = "jefferis@gmail.com",
     comment ="imported code from his dendroextras package"),
@@ -71,44 +71,44 @@ c(person("Tal", "Galili", role = c("aut", "cre", "cph"), email =
     person("Yoav", "Benjamini", role = "ths"))
 
 
-## ---- eval = FALSE-------------------------------------------------------
+## ---- eval = FALSE------------------------------------------------------------
 #  d1 <- c(1:5) # some data
 #  d2 <- dist(d1)
 #  d3 <- hclust(d2, method = "average")
 #  dend <- as.dendrogram(d3)
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  dend <- as.dendrogram(hclust(dist(c(1:5)), method = "average"))
 
-## ---- eval = FALSE-------------------------------------------------------
+## ---- eval = FALSE------------------------------------------------------------
 #  dend <- c(1:5) %>% # take the a vector from 1 to 5
 #           dist %>% # calculate a distance matrix,
 #           hclust(method = "average") %>% # on it compute hierarchical clustering using the "average" method,
 #           as.dendrogram # and lastly, turn that object into a dendrogram.
 
-## ---- fig.width=4, fig.height=3------------------------------------------
+## ---- fig.width=4, fig.height=3-----------------------------------------------
 # Create a dend:
 dend <- 1:2 %>% dist %>% hclust %>% as.dendrogram
 # and plot it:
 dend %>% plot
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 dend %>% unclass %>% str
 dend %>% class
 
-## ---- fig.width=4, fig.height=3------------------------------------------
+## ---- fig.width=4, fig.height=3-----------------------------------------------
 # Create a dend:
 dend <- 1:5 %>% dist %>% hclust %>% as.dendrogram
 # Plot it:
 dend %>% plot
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 dend %>% labels # get the labels of the tree
 dend %>% nleaves # get the number of leaves of the tree
 dend %>% nnodes # get the number of nodes in the tree (including leaves)
 dend %>% head # A combination of "str" with "head"
 
-## ---- echo=FALSE, fig.height=5-------------------------------------------
+## ---- echo=FALSE, fig.height=5------------------------------------------------
 # Create a dend:
 dend <- 1:5 %>% dist %>% hclust %>% as.dendrogram
 
@@ -127,7 +127,7 @@ for(i in 1:(nrow(xy)-1)) {
 points(xy, pch = 19, cex = 3)
 text(xy, labels = 1:nnodes(dend),cex = 1.2, col = "white") #, adj = c(0.4,0.4))
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # Create a dend:
 dend <- 1:5 %>% dist %>% hclust %>% as.dendrogram
 # Get various attributes
@@ -141,7 +141,7 @@ dend %>% get_nodes_attr("label") # what is the label on this node
 dend %>% get_nodes_attr("nodePar") # empty (for now...)
 dend %>% get_nodes_attr("edgePar") # empty (for now...)
 
-## ---- fig.show='hold', fig.width=8, fig.height=3-------------------------
+## ---- fig.show='hold', fig.width=8, fig.height=3------------------------------
 dend13 <- c(1:3) %>% # take some data
          dist %>% # calculate a distance matrix, 
          hclust(method = "average") %>% # on it compute hierarchical clustering using the "average" method, 
@@ -154,27 +154,27 @@ dend13 %>% plot(main="dend13")
 dend15 %>% plot(main="dend15")
 # we could have also used plot(dend)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # get the labels:
 dend15 %>% labels
 # this is just like labels(dend)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # change the labels, and then print them:
 dend15 %>% set("labels", c(111:115)) %>% labels
 # could also be done using:
 # labels(dend) <- c(111:115)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 dend15 %>% labels
 dend15 %>% set("labels_to_char") %>% labels
 
-## ---- fig.width=8, fig.height=3------------------------------------------
+## ---- fig.width=8, fig.height=3-----------------------------------------------
 par(mfrow = c(1,2))
 dend15 %>% set("labels_col", "blue") %>% plot(main = "Change label's color") # change color 
 dend15 %>% set("labels_cex", 2) %>% plot(main = "Change label's size") # change color 
 
-## ---- fig.width=8, fig.height=3------------------------------------------
+## ---- fig.width=8, fig.height=3-----------------------------------------------
 # Produce a more complex dendrogram:
 dend15_2 <- dend15 %>% 
    set("labels", c(111:115)) %>%    # change labels
@@ -185,13 +185,13 @@ par(mfrow = c(1,2))
 dend15 %>% plot(main = "Before")
 dend15_2 %>% plot(main = "After")
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # looking at only the left-most node of the "after tree":
 dend15_2[[1]][[1]] %>% unclass %>% str 
 # looking at only the nodePar attributes in this sub-tree:
 dend15_2[[1]][[1]] %>% get_nodes_attr("nodePar") 
 
-## ---- fig.width=8, fig.height=3------------------------------------------
+## ---- fig.width=8, fig.height=3-----------------------------------------------
 par(mfrow = c(1,2))
 dend15 %>% set("labels_cex", 2) %>% set("labels_col", value = c(3,4)) %>% 
    plot(main = "Recycles color \nfrom left to right")
@@ -199,7 +199,7 @@ dend15 %>% set("labels_cex", 2) %>% set("labels_col", value = c(3,4), k=2) %>%
    plot(main = "Color labels \nper cluster")
 abline(h = 2, lty = 2)
 
-## ---- fig.width=10, fig.height=6-----------------------------------------
+## ---- fig.width=10, fig.height=6----------------------------------------------
 par(mfrow = c(2,3))
 dend13 %>% set("nodes_pch", 19) %>% plot(main = "(1) Show the\n nodes (as a dot)") #1
 dend13 %>% set("nodes_pch", 19) %>% set("nodes_cex", 2) %>% 
@@ -213,18 +213,18 @@ dend13 %>% set("leaves_pch", 19) %>% set("leaves_cex", 2) %>%
 dend13 %>% set("leaves_pch", 19) %>% set("leaves_cex", 2) %>% set("leaves_col", 3) %>% 
    plot(main = "(6) Show (larger+colored)\n leaves") #6
 
-## ---- fig.width=8, fig.height=4------------------------------------------
+## ---- fig.width=8, fig.height=4-----------------------------------------------
 par(mfrow = c(1,2))
 dend15 %>% set("nodes_pch", c(19,1,4)) %>% set("nodes_cex", c(2,1,2)) %>% set("nodes_col", c(3,4)) %>% 
    plot(main = "Adjust nodes")
 dend15 %>% set("leaves_pch", c(19,1,4)) %>% set("leaves_cex", c(2,1,2)) %>% set("leaves_col", c(3,4)) %>%
    plot(main = "Adjust nodes\n(but only for leaves)")
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 dend15 %>% set("nodes_pch", c(19,1,4)) %>%
    set("nodes_cex", c(2,1,2)) %>% set("nodes_col", c(3,4)) %>% get_nodes_attr("nodePar")
 
-## ---- fig.width=10, fig.height=3-----------------------------------------
+## ---- fig.width=10, fig.height=3----------------------------------------------
 par(mfrow = c(1,3))
 dend13 %>% set("leaves_pch", 19) %>% set("leaves_cex", 2) %>% set("leaves_col", 2) %>% # adjust the leaves
    hang.dendrogram %>% # hang the leaves
@@ -237,11 +237,11 @@ dend13 %>% set("leaves_pch", 19) %>% set("leaves_cex", 2) %>% set("leaves_col", 
    hang.dendrogram(hang = -1) %>% # un-hanging the leaves
    plot(main = "Not hanging a tree")
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 dend13 %>% get_leaves_attr("height")
 dend13 %>% hang.dendrogram %>% get_leaves_attr("height")
 
-## ---- fig.width=10, fig.height=3-----------------------------------------
+## ---- fig.width=10, fig.height=3----------------------------------------------
 par(mfrow = c(1,3))
 dend13 %>% plot(main = "First tree", ylim = c(0,3))
 dend13 %>% 
@@ -251,13 +251,13 @@ dend13 %>%
    raise.dendrogram (1) %>% 
    plot(main = "One point higher", ylim = c(0,3))
 
-## ---- fig.width=10, fig.height=3-----------------------------------------
+## ---- fig.width=10, fig.height=3----------------------------------------------
 par(mfrow = c(1,3))
 dend13 %>% set("branches_lwd", 4) %>% plot(main = "Thick branches")
 dend13 %>% set("branches_lty", 3) %>% plot(main = "Dashed branches")
 dend13 %>% set("branches_col", 2) %>% plot(main = "Red branches")
 
-## ---- fig.width=4, fig.height=3------------------------------------------
+## ---- fig.width=4, fig.height=3-----------------------------------------------
 # Produce a more complex dendrogram:
 dend15 %>% 
    set("branches_lwd", c(4,1)) %>%    
@@ -265,21 +265,21 @@ dend15 %>%
    set("branches_col", c(1,2,3)) %>% 
    plot(main = "Complex branches", edge.root = TRUE)
 
-## ---- fig.width=8, fig.height=3------------------------------------------
+## ---- fig.width=8, fig.height=3-----------------------------------------------
 par(mfrow = c(1,2))
 dend15 %>% set("branches_k_color", k = 3) %>% plot(main = "Nice defaults")
 dend15 %>% set("branches_k_color", value = 3:1, k = 3) %>% 
    plot(main = "Controlling branches' colors\n(via clustering)")
 # This is like using the `color_branches` function
 
-## ---- fig.width=8, fig.height=3------------------------------------------
+## ---- fig.width=8, fig.height=3-----------------------------------------------
 par(mfrow = c(1,2))
 dend15 %>% set("by_labels_branches_col", value = c(1,4)) %>% 
    plot(main = "Adjust the branch\n if ALL (default) of its\n labels are in the list")
 dend15 %>% set("by_labels_branches_col", value = c(1,4), type = "any") %>% 
    plot(main = "Adjust the branch\n if ANY of its\n labels are in the list")
 
-## ---- fig.width=10, fig.height=3-----------------------------------------
+## ---- fig.width=10, fig.height=3----------------------------------------------
 # Using "Inf" in "TF_values" means to let the parameters stay as they are.
 par(mfrow = c(1,3))
 dend15 %>% set("by_labels_branches_col", value = c(1,4), TF_values = c(3,Inf)) %>% 
@@ -289,7 +289,7 @@ dend15 %>% set("by_labels_branches_lwd", value = c(1,4), TF_values = c(8,1)) %>%
 dend15 %>% set("by_labels_branches_lty", value = c(1,4), TF_values = c(3,Inf)) %>% 
    plot(main = "Change line type")
 
-## ---- fig.width=8, fig.height=3------------------------------------------
+## ---- fig.width=8, fig.height=3-----------------------------------------------
 
 dat <- iris[1:20,-5]
 hca <- hclust(dist(dat))
@@ -303,7 +303,7 @@ dend %>% highlight_branches_lwd %>% plot(main = "Emphasizing line-width")
 dend %>% highlight_branches %>% plot(main = "Emphasizing color\n and line-width")
 
 
-## ---- fig.width=8, fig.height=4------------------------------------------
+## ---- fig.width=8, fig.height=4-----------------------------------------------
 
 library(viridis)
 par(mfrow = c(1,3))
@@ -325,7 +325,7 @@ dl <- dendlist(dend, dend2) %>% set("highlight_branches_col")
 tanglegram(dl, sort = TRUE, common_subtrees_color_lines = FALSE, highlight_distinct_edges  = FALSE)
 
 
-## ---- fig.width=10, fig.height=3-----------------------------------------
+## ---- fig.width=10, fig.height=3----------------------------------------------
 par(mfrow = c(1,3))
 dend15 %>% 
    set("labels_colors") %>% 
@@ -342,7 +342,7 @@ dend15 %>%
    rotate(5:1) %>% # the fifth label to go first is "4"
    plot(main = "Rotated tree\n based on order")
 
-## ---- fig.width=12, fig.height=6-----------------------------------------
+## ---- fig.width=12, fig.height=6----------------------------------------------
 dend110 <- c(1, 3:5, 7,9,10) %>% dist %>% hclust(method = "average") %>% 
    as.dendrogram %>% color_labels %>% color_branches
 
@@ -351,7 +351,7 @@ dend110 %>% plot(main = "Original tree")
 dend110 %>% sort %>% plot(main = "labels sort")
 dend110 %>% sort(type = "nodes") %>% plot(main = "nodes (ladderize) sort")
 
-## ---- fig.width=10, fig.height=3-----------------------------------------
+## ---- fig.width=10, fig.height=3----------------------------------------------
 par(mfrow = c(1,3))
 dend15 %>% plot(main = "First tree", ylim = c(0,3))
 dend15 %>% 
@@ -361,7 +361,7 @@ dend15 %>%
    unbranch(2) %>% 
    plot(main = "Unbranched tree (2)", ylim = c(0,3))
 
-## ---- fig.width=7, fig.height=3------------------------------------------
+## ---- fig.width=7, fig.height=3-----------------------------------------------
 par(mfrow = c(1,2))
 dend15 %>% set("labels_colors") %>% 
    plot(main = "First tree", ylim = c(0,3))
@@ -369,13 +369,13 @@ dend15 %>% set("labels_colors") %>%
    prune(c("1","5")) %>% 
    plot(main = "Prunned tree", ylim = c(0,3))
 
-## ---- fig.width=7, fig.height=3------------------------------------------
+## ---- fig.width=7, fig.height=3-----------------------------------------------
 par(mfrow = c(1,2))
 dend_intersected <- intersect_trees(dend13, dend15)
 dend_intersected[[1]] %>% plot
 dend_intersected[[2]] %>% plot
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # ladderize is like sort(..., type = "node")
 dend <- iris[1:5,-5] %>% dist %>% hclust %>% as.dendrogram
 par(mfrow = c(1,3))
@@ -383,7 +383,7 @@ dend %>% ladderize %>%  plot(horiz = TRUE); abline(v = .2, col = 2, lty = 2)
 dend %>% collapse_branch(tol = 0.2) %>% ladderize %>% plot(horiz = TRUE)
 dend %>% collapse_branch(tol = 0.2) %>% ladderize %>% hang.dendrogram(hang = 0) %>% plot(horiz = TRUE)
 
-## ---- fig.width=6, fig.height=3------------------------------------------
+## ---- fig.width=6, fig.height=3-----------------------------------------------
 layout(t(c(1,1,1,2,2)))
 
 dend15 %>% set("branches_k_color") %>% plot
@@ -395,7 +395,7 @@ dend15 %>% rect.dendrogram(k=3, horiz = TRUE,
                            border = 8, lty = 5, lwd = 2)
 
 
-## ---- fig.width=4, fig.height=4------------------------------------------
+## ---- fig.width=4, fig.height=4-----------------------------------------------
 is_odd <- ifelse(labels(dend15) %% 2, 2,3)
 is_345 <- ifelse(labels(dend15) > 2, 3,4)
 is_12 <- ifelse(labels(dend15) <= 2, 3,4)
@@ -413,7 +413,7 @@ colored_bars(colors = the_bars, dend = dend15, sort_by_labels_order = FALSE)
 # from the same data.frame as dend was created from. Thus, the default 
 # sort_by_labels_order = TRUE would make more sense.
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 
 dend_mtcars <- mtcars[, c("mpg", "disp")] %>% dist %>% hclust(method = "average") %>% as.dendrogram
 
@@ -423,7 +423,7 @@ the_bars <- ifelse(mtcars$am, "grey", "gold")
 colored_bars(colors = the_bars, dend = dend_mtcars, rowLabels = "am")
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # Create a complex dend:
 dend <- iris[1:30,-5] %>% dist %>% hclust %>% as.dendrogram %>%
    set("branches_k_color", k=3) %>% set("branches_lwd", c(1.5,1,1.5)) %>%
@@ -444,7 +444,7 @@ ggplot(ggd1, horiz = TRUE, theme = NULL) # horiz plot (and let's remove theme) i
 # The text doesn't look so great, so let's remove it:
 ggplot(ggd1, labels = FALSE) + scale_y_reverse(expand = c(0.2, 0)) + coord_polar(theta="x")
 
-## ---- fig.width=7, fig.height=3------------------------------------------
+## ---- fig.width=7, fig.height=3-----------------------------------------------
 if(require(DendSer)) {
    par(mfrow = c(1,2))
    DendSer.dendrogram(dend15)
@@ -453,7 +453,7 @@ if(require(DendSer)) {
    dend15 %>% color_branches %>% rotate_DendSer %>%   plot
 }
 
-## ---- message=FALSE, fig.width=7, fig.height=7---------------------------
+## ---- message=FALSE, fig.width=7, fig.height=7--------------------------------
 library(gplots)
 
 x  <- as.matrix(datasets::mtcars)
@@ -472,7 +472,7 @@ Colv  <- x %>% t %>% dist %>% hclust %>% as.dendrogram %>%
 
 heatmap.2(x, Rowv = Rowv, Colv = Colv)
 
-## ---- message=FALSE, eval = FALSE----------------------------------------
+## ---- message=FALSE, eval = FALSE---------------------------------------------
 #  
 #  # library(NMF)
 #  #
@@ -493,9 +493,9 @@ heatmap.2(x, Rowv = Rowv, Colv = Colv)
 #  
 #  
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 x  <- as.matrix(datasets::mtcars)
-# d3heatmap(x)
+# heatmaply(x)
 # now let's spice up the dendrograms a bit:
 Rowv  <- x %>% dist %>% hclust %>% as.dendrogram %>%
    set("branches_k_color", k = 3) %>% set("branches_lwd", 4) %>%
@@ -506,11 +506,11 @@ Colv  <- x %>% t %>% dist %>% hclust %>% as.dendrogram %>%
    ladderize
 #    rotate_DendSer(ser_weight = dist(t(x)))
 
-## ---- message=FALSE, cache = FALSE, eval = FALSE-------------------------
+## ---- message=FALSE, cache = FALSE, eval = FALSE------------------------------
 #  library(heatmaply)
 #  heatmaply(x, Rowv = Rowv, Colv = Colv)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # let's get the clusters
 library(dynamicTreeCut)
 data(iris)
@@ -540,7 +540,7 @@ colored_bars(clusters, dend, sort_by_labels_order = FALSE)
 # here we used sort_by_labels_order = FALSE since the clusters were already sorted based on the dendrogram's order
 
 
-## ---- message=FALSE, fig.width=9, results='hide'-------------------------
+## ---- message=FALSE, fig.width=9, results='hide'------------------------------
 par(mfrow = c(1,2))
 
 library(pvclust)
@@ -560,7 +560,7 @@ result %>% as.dendrogram %>%
 result %>% text
 result %>% pvrect
 
-## ---- fig.height=8, fig.width=8------------------------------------------
+## ---- fig.height=8, fig.width=8-----------------------------------------------
 par(mfrow = c(2,2))
 
 # with a modified dendrogram of pvrect
@@ -583,7 +583,7 @@ dend %>%
 result %>% text
 result %>% pvrect(alpha=0.95)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 library(circlize)
 
 dend <- iris[1:40,-5] %>% dist %>% hclust %>% as.dendrogram %>%
@@ -597,7 +597,7 @@ circlize_dendrogram(dend)
 # circlize_dendrogram(dend, labels = FALSE)
 # circlize_dendrogram(dend, facing = "inside", labels = FALSE)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # dend <- iris[1:40,-5] %>% dist %>% hclust %>% as.dendrogram %>%
 #    set("branches_k_color", k=3) %>% set("branches_lwd", c(5,2,1.5)) %>%
 #    set("branches_lty", c(1,1,3,1,1,2)) %>%
@@ -622,7 +622,7 @@ circos.clear()
 
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 dend15 <- c(1:5) %>% dist %>% hclust(method = "average") %>% as.dendrogram
 dend15 <- dend15 %>% set("labels_to_char")
 dend51 <- dend15 %>% set("labels", as.character(5:1)) %>% match_order_by_labels(dend15)
@@ -630,7 +630,7 @@ dends_15_51 <- dendlist(dend15, dend51)
 dends_15_51
 head(dends_15_51)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # example 1
 x <- 1:5 %>% dist %>% hclust %>% as.dendrogram
 y <- set(x, "labels", 5:1)
@@ -640,44 +640,44 @@ dend1 <- 1:10 %>% dist %>% hclust %>% as.dendrogram
 dend2 <- dend1 %>% set("labels", c(1,3,2,4, 5:10) )
 dend_diff(dend1, dend2)
 
-## ---- fig.width=5, fig.height=3------------------------------------------
+## ---- fig.width=5, fig.height=3-----------------------------------------------
 tanglegram(dends_15_51)
 # Same as using:
 # plot(dends_15_51) # since there is a plot method for dendlist
 # and also: 
 # tanglegram(dend15, dend51)
 
-## ---- fig.width=5, fig.height=3------------------------------------------
+## ---- fig.width=5, fig.height=3-----------------------------------------------
 tanglegram(dends_15_51, common_subtrees_color_branches = TRUE)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 dends_15_51 %>% entanglement # lower is better
 # dends_15_51 %>% untangle(method = "DendSer") %>% entanglement # lower is better
 dends_15_51 %>% untangle(method = "step1side") %>% entanglement # lower is better
 
-## ---- fig.width=5, fig.height=3------------------------------------------
+## ---- fig.width=5, fig.height=3-----------------------------------------------
 dends_15_51 %>% untangle(method = "step1side") %>% 
    tanglegram(common_subtrees_color_branches = TRUE)
 
-## ---- fig.width=5, fig.height=3------------------------------------------
+## ---- fig.width=5, fig.height=3-----------------------------------------------
 x <- dends_15_51 
 x %>% plot(main = paste("entanglement =", round(entanglement(x), 2)))
 
-## ---- fig.width=5, fig.height=3------------------------------------------
+## ---- fig.width=5, fig.height=3-----------------------------------------------
 # x <- dends_15_51 %>% untangle(method = "DendSer") 
 x <- dends_15_51 %>% untangle(method = "ladderize") 
 x %>% plot(main = paste("entanglement =", round(entanglement(x), 2)))
 
-## ---- fig.width=5, fig.height=3------------------------------------------
+## ---- fig.width=5, fig.height=3-----------------------------------------------
 set.seed(3958)
 x <- dends_15_51 %>% untangle(method = "random", R = 10) 
 x %>% plot(main = paste("entanglement =", round(entanglement(x), 2)))
 
-## ---- fig.width=5, fig.height=3------------------------------------------
+## ---- fig.width=5, fig.height=3-----------------------------------------------
 x <- dends_15_51 %>% untangle(method = "step2side") 
 x %>% plot(main = paste("entanglement =", round(entanglement(x), 2)))
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 set.seed(23235)
 ss <- sample(1:150, 10 )
 dend1 <- iris[ss,-5] %>% dist %>% hclust("com") %>% as.dendrogram
@@ -694,7 +694,7 @@ plot(dend3, main = "Average")
 plot(dend4, main = "Centroid")
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 all.equal(dend1, dend1)
 all.equal(dend1, dend2)
 all.equal(dend1, dend2, use.edge.length = FALSE)
@@ -708,7 +708,7 @@ all.equal(dendlist(dend1, dend1, dend1))
 all.equal(dend1234)
 all.equal(dend1234, use.edge.length = FALSE)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 x <- 1:5 %>% dist %>% hclust %>% as.dendrogram
 y <- set(x, "labels", 5:1)
 
@@ -717,14 +717,14 @@ dend_diff(x,y)
 
 dist.dendlist(dend1234)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 cor.dendlist(dend1234)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 library(corrplot)
 corrplot(cor.dendlist(dend1234), "pie", "lower")
 
-## ---- fig.width=5, fig.height=3------------------------------------------
+## ---- fig.width=5, fig.height=3-----------------------------------------------
 # same subtrees, so there is no need to color the branches
 dend1234 %>% tanglegram(which = c(2,3)) 
 # Here the branches colors are very helpful:
@@ -732,13 +732,13 @@ dend1234 %>% tanglegram(which = c(1,2),
                         common_subtrees_color_branches = TRUE)
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 cor_bakers_gamma(dend15, dend51)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 cor_bakers_gamma(dend15, dend15)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 set.seed(23235)
 the_cor <- cor_bakers_gamma(dend15, dend15)
 the_cor2 <- cor_bakers_gamma(dend15, dend51)
@@ -765,7 +765,7 @@ title(sub = paste("One sided p-value:",
                   " ; cor2 =",  round(sum(the_cor2 < cor_bakers_gamma_results)/ R, 4)
                   ))
 
-## ---- warning=FALSE------------------------------------------------------
+## ---- warning=FALSE-----------------------------------------------------------
 
 dend1 <- dend15
 dend2 <- dend51
@@ -815,10 +815,10 @@ legend("topleft", legend =c("95% CI", "Baker's Gamma Index"), fill = c(3,2))
 
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 cor_cophenetic(dend15, dend51)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 hc1 <- hclust(dist(iris[,-5]), "com")
 hc2 <- hclust(dist(iris[,-5]), "single")
 
@@ -831,13 +831,13 @@ FM_index(cutree(hc1, k=3), cutree(hc2, k=3))
 # Using the R code:
 FM_index_R(cutree(hc1, k=3), cutree(hc2, k=3))
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 FM_index(cutree(hc1, k=3), cutree(hc2, k=3)) 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 0.4462 + 1.645 * sqrt(6.464092e-05)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 set.seed(23235)
 ss <- TRUE # sample(1:150, 30 ) # TRUE #
 hc1 <- hclust(dist(iris[ss,-5]), "com")
@@ -850,10 +850,10 @@ dend2 <- as.dendrogram(hc2)
 Bk(hc1, hc2, k = 3)
 Bk(dend1, dend2, k = 3)
 
-## ---- warning=FALSE------------------------------------------------------
+## ---- warning=FALSE-----------------------------------------------------------
 Bk_plot(hc1, hc2, main = "WRONG Bk plot \n(due to the way cutree works with ties in hclust)", warn = FALSE)
 Bk_plot(dend1, dend2, main = "CORRECT Bk plot \n(based on dendrograms)")
 
-## ---- cache=FALSE--------------------------------------------------------
+## ---- cache=FALSE-------------------------------------------------------------
 sessionInfo()
 

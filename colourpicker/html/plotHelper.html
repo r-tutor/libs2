@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Plot colour helper</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for plotHelper {colourpicker}"><tr><td>plotHelper {colourpicker}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Plot colour helper</h2>
+
+<h3>Description</h3>
+
+<p>Allows you to interactively pick combinations of colours, to help you
+choose colours to use in your plots. The plot updates in real-time as you
+pick colours.<br /><br />
+If you often find yourself spending a lot of time re-creating
+the same plot over and over with different colours to try to find the best
+colours, then the Plot Colour Helper can help you immensely.<br /><br />
+<strong>Important:</strong> The colours you pick will be available as a variable
+called <code>CPCOLS</code>, so you can use <code>CPCOLS</code> in your plot code. See the
+example below.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+plotHelper(code = "", colours = NULL, returnCode = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>code</code></td>
+<td>
+<p>Code for a plot. You can use the variable <code>CPCOLS</code> in this
+code to refer to the colours that you will pick. If you do not provide any
+code, the plot helper will initialize with sample code. The code can be
+provided as text or as R code.</p>
+</td></tr>
+<tr valign="top"><td><code>colours</code></td>
+<td>
+<p>A vector of colours to use as the initial colours in the tool,
+or an integer. If an integer is provided instead of colours, the tool will load
+with that number of colours, and default colours will be used initially.
+If you do not provide this parameter, the tool will attempt to guess how many
+colours are needed in the <code>code</code> and initialize that many colours.</p>
+</td></tr>
+<tr valign="top"><td><code>returnCode</code></td>
+<td>
+<p>If <code>TRUE</code>, return the plot code and the <code>CPCOLS</code>
+variable as text. If <code>FALSE</code> (default), return the vector of selected
+colours.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>There are many keyboard shortcuts to help you be more efficient. For example,
+pressing <em>spacebar</em> adds a new colour, <em>left</em>/<em>right</em> keys
+let you navigate between the selected colours, <em>1-9</em> let you select any
+of the first 9 colours. For a full list of keyboard shortcuts, click on
+<em>Show keyboard shortcuts</em>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>When this function is called using <code>plotHelper()</code>, the chosen
+colours are returned as a vector of colours. When this is run as an RStudio
+addin (through the <em>Addins</em> menu), the resulting code that includes the
+colour vector gets inserted into the R document. As a side effect,
+<code>CPCOLS</code> gets assigned in the global environment to the value of the
+selected colours.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+if (interactive()) {
+  cols &lt;- plotHelper()
+  cols &lt;- plotHelper(colours = c("red", "blue"))
+  cols &lt;- plotHelper(colours = 5)
+
+  library(ggplot2)
+  cols &lt;- plotHelper(ggplot(mtcars, aes(mpg,wt)) +
+                     geom_point(aes(col = as.factor(cyl)))+
+                     scale_colour_manual(values = CPCOLS))
+}
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>colourpicker</em> version 1.1.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,6 +1,6 @@
 Package: zip
 Title: Cross-Platform 'zip' Compression
-Version: 2.1.0
+Version: 2.1.1
 Author: Gábor Csárdi, Kuba Podgórski, Rich Geldreich
 Maintainer: Gábor Csárdi <csardi.gabor@gmail.com>
 Description: Cross-Platform 'zip' Compression Library. A replacement
@@ -15,8 +15,8 @@ Config/testthat/edition: 3
 Suggests: covr, processx, R6, testthat, withr
 Encoding: UTF-8
 NeedsCompilation: yes
-Packaged: 2020-08-10 16:16:09 UTC; gaborcsardi
+Packaged: 2020-08-26 09:19:33 UTC; gaborcsardi
 Repository: CRAN
-Date/Publication: 2020-08-10 20:10:03 UTC
-Built: R 4.0.2; x86_64-w64-mingw32; 2020-08-19 13:47:32 UTC; windows
+Date/Publication: 2020-08-27 16:00:02 UTC
+Built: R 4.0.2; x86_64-w64-mingw32; 2020-09-09 19:25:13 UTC; windows
 Archs: i386, x64

@@ -1,4 +1,4 @@
-## ---- echo = FALSE, message = FALSE, warning=FALSE-----------------------
+## ---- echo = FALSE, message = FALSE, warning=FALSE----------------------------
 library(dendextend)
 library(knitr)
 knitr::opts_chunk$set(
@@ -9,18 +9,18 @@ knitr::opts_chunk$set(
   # comment = "#>",
   tidy = FALSE)
 
-# http://stackoverflow.com/questions/24091735/why-pandoc-does-not-retrieve-the-image-file
+# https://stackoverflow.com/questions/24091735/why-pandoc-does-not-retrieve-the-image-file
 # < ! -- rmarkdown v1 -->
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 iris <- datasets::iris
 iris2 <- iris[,-5]
 species_labels <- iris[,5]
 library(colorspace) # get nice colors
 species_col <- rev(rainbow_hcl(3))[as.numeric(species_labels)]
 
-## ---- fig.width=9, fig.height=9, fig.show='hold'-------------------------
+## ---- fig.width=9, fig.height=9, fig.show='hold'------------------------------
 # Plot a SPLOM:
 pairs(iris2, col = species_col,
       lower.panel = NULL,
@@ -34,7 +34,7 @@ legend(x = 0.05, y = 0.4, cex = 2,
 par(xpd = NA)
 
 
-## ---- fig.height=3-------------------------------------------------------
+## ---- fig.height=3------------------------------------------------------------
 # http://blog.safaribooksonline.com/2014/03/31/mastering-parallel-coordinate-charts-r/
 par(las = 1, mar = c(4.5, 3, 3, 2) + 0.1, cex = .8)
 MASS::parcoord(iris2, col = species_col, var.label = TRUE, lwd = 2)
@@ -49,7 +49,7 @@ legend(x = 1.75, y = -.25, cex = 1,
 par(xpd = NA)
 
 
-## ---- fig.height = 10, fig.width=7---------------------------------------
+## ---- fig.height = 10, fig.width=7--------------------------------------------
 
 d_iris <- dist(iris2) # method="man" # is a bit better
 hc_iris <- hclust(d_iris, method = "complete")
@@ -91,12 +91,12 @@ legend("topleft", legend = iris_species, fill = rainbow_hcl(3))
 # is.integer(labels(dend)) # this could cause problems...
 # is.character(labels(dend)) # labels are no longer "integer"
 
-## ---- fig.width=7, fig.height=7------------------------------------------
+## ---- fig.width=7, fig.height=7-----------------------------------------------
 # Requires that the circlize package will be installed
 par(mar = rep(0,4))
 circlize_dendrogram(dend)
 
-## ---- echo=FALSE, eval=FALSE---------------------------------------------
+## ---- echo=FALSE, eval=FALSE--------------------------------------------------
 #  # some_col_func <- function(n, top_color = "red4") {
 #  #   seq_cols <- c("#F7FCFD", "#E0ECF4", "#BFD3E6", "#9EBCDA", "#8C96C6", "#8C6BB1",
 #  #                 "#88419D", "#810F7C")
@@ -104,7 +104,7 @@ circlize_dendrogram(dend)
 #  # }
 #  
 
-## ---- fig.width=9, fig.height=9------------------------------------------
+## ---- fig.width=9, fig.height=9-----------------------------------------------
 
 some_col_func <- function(n) rev(colorspace::heat_hcl(n, c = c(80, 30), l = c(30, 90), power = c(1/5, 1.5)))
 
@@ -127,16 +127,12 @@ gplots::heatmap.2(as.matrix(iris2),
 
 
 
-## ---- cache = FALSE, eval = FALSE----------------------------------------
-#  d3heatmap::d3heatmap(as.matrix(iris2),
+## ---- cache = FALSE, eval = FALSE---------------------------------------------
+#  heatmaply::heatmaply(as.matrix(iris2),
 #            dendrogram = "row",
-#            Rowv = dend,
-#            colors = "Greens",
-#            # scale = "row",
-#            width = 600,
-#            show_grid = FALSE)
+#            Rowv = dend)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 
 hclust_methods <- c("ward.D", "single", "complete", "average", "mcquitty", 
         "median", "centroid", "ward.D2")
@@ -148,16 +144,16 @@ for(i in seq_along(hclust_methods)) {
 names(iris_dendlist) <- hclust_methods
 iris_dendlist
 
-## ---- fig.width=8, fig.height=8------------------------------------------
+## ---- fig.width=8, fig.height=8-----------------------------------------------
 iris_dendlist_cor <- cor.dendlist(iris_dendlist)
 iris_dendlist_cor
 corrplot::corrplot(iris_dendlist_cor, "pie", "lower")
 
-## ---- fig.width=8, fig.height=8------------------------------------------
+## ---- fig.width=8, fig.height=8-----------------------------------------------
 iris_dendlist_cor_spearman <- cor.dendlist(iris_dendlist, method_coef = "spearman")
 corrplot::corrplot(iris_dendlist_cor_spearman, "pie", "lower")
 
-## ---- fig.height=5-------------------------------------------------------
+## ---- fig.height=5------------------------------------------------------------
 # The `which` parameter allows us to pick the elements in the list to compare
 iris_dendlist %>% dendlist(which = c(1,8)) %>% ladderize %>% 
    set("branches_k_color", k=3) %>% 
@@ -165,45 +161,45 @@ iris_dendlist %>% dendlist(which = c(1,8)) %>% ladderize %>%
    # set("clear_branches") %>% #otherwise the single lines are not black, since they retain the previous color from the branches_k_color.
    tanglegram(faster = TRUE) # (common_subtrees_color_branches = TRUE)
 
-## ---- fig.height=5-------------------------------------------------------
+## ---- fig.height=5------------------------------------------------------------
 # The `which` parameter allows us to pick the elements in the list to compare
 iris_dendlist %>% dendlist(which = c(1,4)) %>% ladderize %>% 
    set("branches_k_color", k=2) %>% 
    # untangle(method = "step1side", k_seq = 3:20) %>%
    tanglegram(faster = TRUE) # (common_subtrees_color_branches = TRUE)
 
-## ---- fig.height=5-------------------------------------------------------
+## ---- fig.height=5------------------------------------------------------------
 # The `which` parameter allows us to pick the elements in the list to compare
 iris_dendlist %>% dendlist(which = c(1,4)) %>% ladderize %>% 
    # untangle(method = "step1side", k_seq = 3:20) %>%
    set("rank_branches") %>%
    tanglegram(common_subtrees_color_branches = TRUE)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 length(unique(common_subtrees_clusters(iris_dendlist[[1]], iris_dendlist[[4]]))[-1])
 # -1 at the end is because we are ignoring the "0" subtree, which indicates leaves that are singletons.
 
-## ---- fig.height=5-------------------------------------------------------
+## ---- fig.height=5------------------------------------------------------------
 iris_dendlist %>% dendlist(which = c(3,4)) %>% ladderize %>% 
    untangle(method = "step1side", k_seq = 2:6) %>%
    set("branches_k_color", k=2) %>% 
    tanglegram(faster = TRUE) # (common_subtrees_color_branches = TRUE)
 
-## ---- fig.height=15------------------------------------------------------
+## ---- fig.height=15-----------------------------------------------------------
 par(mfrow = c(4,2))
 for(i in 1:8) {
    iris_dendlist[[i]] %>% set("branches_k_color", k=2) %>% plot(axes = FALSE, horiz = TRUE)
    title(names(iris_dendlist)[i])
 }
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 iris_dendlist_cor2 <- cor.dendlist(iris_dendlist, method = "common")
 iris_dendlist_cor2
 
-## ---- fig.width=5, fig.height=5------------------------------------------
+## ---- fig.width=5, fig.height=5-----------------------------------------------
 # corrplot::corrplot(iris_dendlist_cor2, "pie", "lower")
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 
 get_ordered_3_clusters <- function(dend) {
    cutree(dend, k = 3)[order.dendrogram(dend)]
@@ -219,31 +215,31 @@ dotchart(sort(clusters_performance), xlim = c(0.7,1),
          main = "Perormance of clustering algorithms \n in detecting the 3 species",
          pch = 19)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 train <- dendextend::khan$train
 test <- dendextend::khan$test
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 d_train <- train %>% dist %>% hclust %>% as.dendrogram
 d_test <- test %>% dist %>% hclust %>% as.dendrogram
 d_train_test <- dendlist(train = d_train, test = d_test)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 d_train_test %>% cor.dendlist
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 d_train_test %>% cor.dendlist(method_coef = "spearman")
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 Bk_plot(d_train, d_test, k = 2:30, xlim = c(2,30))
 
-## ---- fig.width=8, fig.height=5------------------------------------------
+## ---- fig.width=8, fig.height=5-----------------------------------------------
 pre_tang_d_train_test <- d_train_test %>% ladderize %>% # untangle %>%
    set("branches_k_color", k = 7)
 train_branches_colors <- get_leaves_branches_col(pre_tang_d_train_test$train)
 pre_tang_d_train_test %>% tanglegram(fast = TRUE, color_lines = train_branches_colors)
 
-## ---- echo = FALSE-------------------------------------------------------
+## ---- echo = FALSE------------------------------------------------------------
 # dput(d_train_test_common)
 d_train_test_common <- structure(list(train = structure(list(structure(list(structure(171L, label = "491565", members = 1L, height = 0, leaf = TRUE), 
     structure(178L, label = "505491", members = 1L, height = 0, leaf = TRUE)), members = 2L, midpoint = 0.5, height = 7.1369942952198), 
@@ -275,20 +271,20 @@ d_train_test_common <- structure(list(train = structure(list(structure(list(stru
             structure(112L, label = "307660", members = 1L, height = 0, leaf = TRUE)), members = 2L, midpoint = 0.5, height = 3.6486307417989)), members = 14, midpoint = 8.0625, height = 18.2331742971431, class = "dendrogram")), class = "dendlist", .Names = c("train", 
 "test"))
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # This was calculated before
 # d_train_test_common <- d_train_test %>% prune_common_subtrees.dendlist
 # d_train_test_common
 d_train_test_common %>% untangle %>%  tanglegram(common_subtrees_color_branches = TRUE)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 d_train_test %>% nleaves
 d_train_test_common %>% nleaves
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 votes.repub <- cluster::votes.repub
 
-## ---- fig.height=5-------------------------------------------------------
+## ---- fig.height=5------------------------------------------------------------
 years <- as.numeric(gsub("X", "", colnames(votes.repub)))
 
 par(las = 2, mar = c(4.5, 3, 3, 2) + 0.1, cex = .8)
@@ -300,7 +296,7 @@ axis(2)
 # Add Title
 title("Votes for Republican Candidate\n in Presidential Elections \n (each line is a country - over the years)")
 
-## ---- fig.width=9, fig.height=9------------------------------------------
+## ---- fig.width=9, fig.height=9-----------------------------------------------
 arcsin_transformation <- function(x) asin(x/100)
 
 dend_NA <- votes.repub %>% is.na %>%
@@ -333,7 +329,7 @@ gplots::heatmap.2(as.matrix(votes.repub),
          )
           # RowSideColors = rev(labels_colors(dend)), # to add nice colored strips		
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 
 hclust_methods <- c("ward.D", "single", "complete", "average", "mcquitty", 
         "median", "centroid", "ward.D2")
@@ -346,10 +342,10 @@ for(i in seq_along(hclust_methods)) {
 names(votes.repub_dendlist) <- hclust_methods
 # votes.repub_dendlist
 
-## ---- fig.width=8, fig.height=8------------------------------------------
+## ---- fig.width=8, fig.height=8-----------------------------------------------
 corrplot::corrplot(cor.dendlist(votes.repub_dendlist), "pie", "lower")
 
-## ---- echo=FALSE, fig.width=9, fig.height=9------------------------------
+## ---- echo=FALSE, fig.width=9, fig.height=9-----------------------------------
 arcsin_transformation <- function(x) asin(x/100)
 
 dend_NA <- votes.repub %>% is.na %>%
@@ -382,7 +378,7 @@ gplots::heatmap.2(as.matrix(votes.repub),
          )
           # RowSideColors = rev(labels_colors(dend)), # to add nice colored strips		
 
-## ---- echo=FALSE---------------------------------------------------------
+## ---- echo=FALSE--------------------------------------------------------------
 
 ord1 <- c("North Carolina", "Virginia", "Tennessee", "Kentucky", "Maryland", 
 "Delaware", "Oklahoma", "Missouri", "New Mexico", "Oregon", "Washington", 
@@ -409,7 +405,7 @@ ord2 <- c("North Carolina", "Virginia", "Tennessee", "Oklahoma", "Kentucky",
 # dput(lapply(dends, labels)[[2]])
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 dend_com <- votes.repub %>% arcsin_transformation %>%
    dist %>% hclust(method = "com") %>% as.dendrogram %>%
    rotate(labels(dend_NA)) %>%
@@ -428,7 +424,7 @@ dends <- dendlist(complete = dend_com, average = dend_ave) # %>% untangle("step2
 dends  %>% tanglegram(margin_inner = 7)
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 animals <- cluster::animals
 
 colnames(animals) <- c("warm-blooded", 
@@ -438,7 +434,7 @@ colnames(animals) <- c("warm-blooded",
                        "live in groups",
                        "have hair")
 
-## ---- fig.width=9, fig.height=9------------------------------------------
+## ---- fig.width=9, fig.height=9-----------------------------------------------
 
 dend_r <- animals %>% dist(method = "man") %>% hclust(method = "ward.D") %>% as.dendrogram %>% ladderize %>%
     color_branches(k=4)
@@ -470,7 +466,7 @@ gplots::heatmap.2(as.matrix(animals-1),
          )
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 
 hclust_methods <- c("ward.D", "single", "complete", "average", "mcquitty", 
         "median", "centroid", "ward.D2")
@@ -484,11 +480,11 @@ for(i in seq_along(hclust_methods)) {
 names(animals_dendlist) <- hclust_methods
 # votes.repub_dendlist
 
-## ---- fig.width=8, fig.height=8------------------------------------------
+## ---- fig.width=8, fig.height=8-----------------------------------------------
 cophenetic_cors <- cor.dendlist(animals_dendlist)
 corrplot::corrplot(cophenetic_cors, "pie", "lower")
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 remove_median <- dendlist(animals_dendlist, which = c(1:8)[-6] )
 FM_cors <- cor.dendlist(remove_median, method = "FM_index", k = 4)
 corrplot::corrplot(FM_cors, "pie", "lower")

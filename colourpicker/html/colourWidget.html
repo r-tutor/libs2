@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create a colour picker htmlwidget</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for colourWidget {colourpicker}"><tr><td>colourWidget {colourpicker}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create a colour picker htmlwidget</h2>
+
+<h3>Description</h3>
+
+<p>Create a colour picker htmlwidget. This is not terribly useful right now
+since you can use the more powerful <code><a href="colourInput.html">colourInput</a></code>
+in Shiny apps and Rmarkdown documents, but this gives you an htmlwidget
+version of that colour picker.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+colourWidget(
+  value = "white",
+  showColour = c("both", "text", "background"),
+  palette = c("square", "limited"),
+  allowedCols = NULL,
+  allowTransparent = FALSE,
+  returnName = FALSE,
+  closeOnClick = FALSE,
+  width = "300px",
+  height = "35px",
+  elementId = NULL
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>value</code></td>
+<td>
+<p>Initial value (can be a colour name or HEX code)</p>
+</td></tr>
+<tr valign="top"><td><code>showColour</code></td>
+<td>
+<p>Whether to show the chosen colour as text inside the input,
+as the background colour of the input, or both (default).</p>
+</td></tr>
+<tr valign="top"><td><code>palette</code></td>
+<td>
+<p>The type of colour palette to allow the user to select colours
+from. <code>square</code> (default) shows a square colour palette that allows the
+user to choose any colour, while <code>limited</code> only gives the user a
+predefined list of colours to choose from.</p>
+</td></tr>
+<tr valign="top"><td><code>allowedCols</code></td>
+<td>
+<p>A list of colours that the user can choose from. Only
+applicable when <code>palette == "limited"</code>. The <code>limited</code> palette
+uses a default list of 40 colours if <code>allowedCols</code> is not defined. If
+the colour specified in <code>value</code> is not in the list, the default colour
+will revert to black.</p>
+</td></tr>
+<tr valign="top"><td><code>allowTransparent</code></td>
+<td>
+<p>If <code>TRUE</code>, enables a slider to choose an alpha
+(transparency) value for the colour. When a colour with opacity is
+chosen, the return value is an 8-digit HEX code.</p>
+</td></tr>
+<tr valign="top"><td><code>returnName</code></td>
+<td>
+<p>If <code>TRUE</code>, then return the name of an R colour instead
+of a HEX value when possible.</p>
+</td></tr>
+<tr valign="top"><td><code>closeOnClick</code></td>
+<td>
+<p>If <code>TRUE</code>, then the colour selection panel will close
+immediately after selecting a colour.</p>
+</td></tr>
+<tr valign="top"><td><code>width</code></td>
+<td>
+<p>Custom width for the input field.</p>
+</td></tr>
+<tr valign="top"><td><code>height</code></td>
+<td>
+<p>Custom height for the input field.</p>
+</td></tr>
+<tr valign="top"><td><code>elementId</code></td>
+<td>
+<p>Use an explicit element ID for the widget (rather than an
+automatically generated one).</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+colourWidget()
+colourWidget("red", palette = "limited", allowedCols = c("yellow", "red", "#123ABC"))
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>colourpicker</em> version 1.1.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

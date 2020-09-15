@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Colour picker gadget</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for colourPicker {colourpicker}"><tr><td>colourPicker {colourpicker}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Colour picker gadget</h2>
+
+<h3>Description</h3>
+
+<p>This gadget lets you choose colours easily. You can select multiple colours,
+and you can either choose any RGB colour, or browse through R colours.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+colourPicker(numCols = 3)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>numCols</code></td>
+<td>
+<p>The number of colours to select when the gadget launches (you
+can add and remove more colours from the app itself too)</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Vector of selected colours
+</p>
+
+
+<h3>Note</h3>
+
+<p>This gadget returns a vector of colours that can be assigned to
+a variable. If instead you want to get a text representation of the colours
+that can embedded into code, use the addin from the RStudio Addins menu.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+if (interactive()) {
+  cols &lt;- colourPicker(5)
+}
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>colourpicker</em> version 1.1.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

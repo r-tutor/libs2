@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Diebold-Mariano test for predictive accuracy</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for dm.test {forecast}"><tr><td>dm.test {forecast}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Diebold-Mariano test for predictive accuracy</h2>
+
+<h3>Description</h3>
+
+<p>The Diebold-Mariano test compares the forecast accuracy of two forecast
+methods.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+dm.test(
+  e1,
+  e2,
+  alternative = c("two.sided", "less", "greater"),
+  h = 1,
+  power = 2
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>e1</code></td>
+<td>
+<p>Forecast errors from method 1.</p>
+</td></tr>
+<tr valign="top"><td><code>e2</code></td>
+<td>
+<p>Forecast errors from method 2.</p>
+</td></tr>
+<tr valign="top"><td><code>alternative</code></td>
+<td>
+<p>a character string specifying the alternative hypothesis,
+must be one of <code>"two.sided"</code> (default), <code>"greater"</code> or
+<code>"less"</code>.  You can specify just the initial letter.</p>
+</td></tr>
+<tr valign="top"><td><code>h</code></td>
+<td>
+<p>The forecast horizon used in calculating <code>e1</code> and <code>e2</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>power</code></td>
+<td>
+<p>The power used in the loss function. Usually 1 or 2.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This function implements the modified test proposed by Harvey, Leybourne and
+Newbold (1997). The null hypothesis is that the two methods have the same
+forecast accuracy. For <code>alternative="less"</code>, the alternative hypothesis
+is that method 2 is less accurate than method 1. For
+<code>alternative="greater"</code>, the alternative hypothesis is that method 2 is
+more accurate than method 1. For <code>alternative="two.sided"</code>, the
+alternative hypothesis is that method 1 and method 2 have different levels
+of accuracy.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list with class <code>"htest"</code> containing the following
+components: </p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>statistic</code></td>
+<td>
+<p>the value of the DM-statistic.</p>
+</td></tr>
+<tr valign="top"><td><code>parameter</code></td>
+<td>
+<p>the forecast horizon and loss function power used in the
+test.</p>
+</td></tr> <tr valign="top"><td><code>alternative</code></td>
+<td>
+<p>a character string describing the alternative
+hypothesis.</p>
+</td></tr> <tr valign="top"><td><code>p.value</code></td>
+<td>
+<p>the p-value for the test.</p>
+</td></tr> <tr valign="top"><td><code>method</code></td>
+<td>
+<p>a
+character string with the value &quot;Diebold-Mariano Test&quot;.</p>
+</td></tr> <tr valign="top"><td><code>data.name</code></td>
+<td>
+<p>a
+character vector giving the names of the two error series.</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>George Athanasopoulos
+</p>
+
+
+<h3>References</h3>
+
+<p>Diebold, F.X. and Mariano, R.S. (1995) Comparing predictive
+accuracy. <em>Journal of Business and Economic Statistics</em>, <b>13</b>,
+253-263.
+</p>
+<p>Harvey, D., Leybourne, S., &amp; Newbold, P. (1997). Testing the equality of
+prediction mean squared errors. <em>International Journal of forecasting</em>,
+<b>13</b>(2), 281-291.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+# Test on in-sample one-step forecasts
+f1 &lt;- ets(WWWusage)
+f2 &lt;- auto.arima(WWWusage)
+accuracy(f1)
+accuracy(f2)
+dm.test(residuals(f1),residuals(f2),h=1)
+
+# Test on out-of-sample one-step forecasts
+f1 &lt;- ets(WWWusage[1:80])
+f2 &lt;- auto.arima(WWWusage[1:80])
+f1.out &lt;- ets(WWWusage[81:100],model=f1)
+f2.out &lt;- Arima(WWWusage[81:100],model=f2)
+accuracy(f1.out)
+accuracy(f2.out)
+dm.test(residuals(f1.out),residuals(f2.out),h=1)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>forecast</em> version 8.13 <a href="00Index.html">Index</a>]</div>
+</body></html>

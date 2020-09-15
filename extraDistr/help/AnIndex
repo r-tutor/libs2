@@ -1,4 +1,3 @@
-extraDistr-package	extraDistr
 Bernoulli	Bernoulli
 BetaBinom	BetaBinom
 BetaNegBinom	BetaNegBinom
@@ -25,6 +24,7 @@ ddunif	DiscreteUniform
 ddweibull	DiscreteWeibull
 dfatigue	BirnbaumSaunders
 dfrechet	Frechet
+dgbeta	NSBeta
 dgev	GEV
 dgompertz	Gompertz
 dgpd	GPD

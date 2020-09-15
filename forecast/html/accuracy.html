@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Accuracy measures for a forecast model</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for accuracy {forecast}"><tr><td>accuracy {forecast}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Accuracy measures for a forecast model</h2>
+
+<h3>Description</h3>
+
+<p>Returns range of summary measures of the forecast accuracy. If <code>x</code> is
+provided, the function measures test set forecast accuracy
+based on <code>x-f</code>. If <code>x</code> is not provided, the function only produces
+training set accuracy measures of the forecasts based on
+<code>f["x"]-fitted(f)</code>. All measures are defined and discussed in Hyndman
+and Koehler (2006).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+accuracy(object, ...)
+
+## Default S3 method:
+accuracy(object, x, test = NULL, d = NULL, D = NULL, f = NULL, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>An object of class &ldquo;<code>forecast</code>&rdquo;, or a numerical vector
+containing forecasts. It will also work with <code>Arima</code>, <code>ets</code> and
+<code>lm</code> objects if <code>x</code> is omitted &ndash; in which case training set accuracy
+measures are returned.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments depending on the specific method.</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>An optional numerical vector containing actual values of the same
+length as object, or a time series overlapping with the times of <code>f</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>test</code></td>
+<td>
+<p>Indicator of which elements of <code>x</code> and <code>f</code> to test. If
+<code>test</code> is <code>NULL</code>, all elements are used. Otherwise test is a
+numeric vector containing the indices of the elements to use in the test.</p>
+</td></tr>
+<tr valign="top"><td><code>d</code></td>
+<td>
+<p>An integer indicating the number of lag-1 differences to be used
+for the denominator in MASE calculation. Default value is 1 for non-seasonal
+series and 0 for seasonal series.</p>
+</td></tr>
+<tr valign="top"><td><code>D</code></td>
+<td>
+<p>An integer indicating the number of seasonal differences to be used
+for the denominator in MASE calculation. Default value is 0 for non-seasonal
+series and 1 for seasonal series.</p>
+</td></tr>
+<tr valign="top"><td><code>f</code></td>
+<td>
+<p>Deprecated. Please use 'object' instead.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The measures calculated are:
+</p>
+
+<ul>
+<li><p> ME: Mean Error
+</p>
+</li>
+<li><p> RMSE: Root Mean Squared Error
+</p>
+</li>
+<li><p> MAE: Mean Absolute Error
+</p>
+</li>
+<li><p> MPE: Mean Percentage Error
+</p>
+</li>
+<li><p> MAPE: Mean Absolute Percentage Error
+</p>
+</li>
+<li><p> MASE: Mean Absolute Scaled Error
+</p>
+</li>
+<li><p> ACF1: Autocorrelation of errors at lag 1.
+</p>
+</li></ul>
+
+<p>By default, the MASE calculation is scaled using MAE of training set naive
+forecasts for non-seasonal time series, training set seasonal naive forecasts
+for seasonal time series and training set mean forecasts for non-time series data.
+If <code>f</code> is a numerical vector rather than a <code>forecast</code> object, the MASE
+will not be returned as the training data will not be available.
+</p>
+<p>See Hyndman and Koehler (2006) and Hyndman and Athanasopoulos (2014, Section
+2.5) for further details.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Matrix giving forecast accuracy measures.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Rob J Hyndman
+</p>
+
+
+<h3>References</h3>
+
+<p>Hyndman, R.J. and Koehler, A.B. (2006) &quot;Another look at measures
+of forecast accuracy&quot;. <em>International Journal of Forecasting</em>,
+<b>22</b>(4), 679-688. Hyndman, R.J. and Athanasopoulos, G. (2018)
+&quot;Forecasting: principles and practice&quot;, 2nd ed., OTexts, Melbourne, Australia.
+Section 3.4 &quot;Evaluating forecast accuracy&quot;.
+<a href="https://otexts.com/fpp2/accuracy.html">https://otexts.com/fpp2/accuracy.html</a>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+fit1 &lt;- rwf(EuStockMarkets[1:200, 1], h = 100)
+fit2 &lt;- meanf(EuStockMarkets[1:200, 1], h = 100)
+accuracy(fit1)
+accuracy(fit2)
+accuracy(fit1, EuStockMarkets[201:300, 1])
+accuracy(fit2, EuStockMarkets[201:300, 1])
+plot(fit1)
+lines(EuStockMarkets[1:300, 1])
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>forecast</em> version 8.13 <a href="00Index.html">Index</a>]</div>
+</body></html>

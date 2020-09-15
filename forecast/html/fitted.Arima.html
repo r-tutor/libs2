@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: h-step in-sample forecasts for time series models.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for fitted.ARFIMA {forecast}"><tr><td>fitted.ARFIMA {forecast}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>h-step in-sample forecasts for time series models.</h2>
+
+<h3>Description</h3>
+
+<p>Returns h-step forecasts for the data used in fitting the model.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'ARFIMA'
+fitted(object, h = 1, ...)
+
+## S3 method for class 'Arima'
+fitted(object, h = 1, ...)
+
+## S3 method for class 'ar'
+fitted(object, ...)
+
+## S3 method for class 'bats'
+fitted(object, h = 1, ...)
+
+## S3 method for class 'ets'
+fitted(object, h = 1, ...)
+
+## S3 method for class 'modelAR'
+fitted(object, h = 1, ...)
+
+## S3 method for class 'nnetar'
+fitted(object, h = 1, ...)
+
+## S3 method for class 'tbats'
+fitted(object, h = 1, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>An object of class &quot;<code>Arima</code>&quot;, &quot;<code>bats</code>&quot;,
+&quot;<code>tbats</code>&quot;, &quot;<code>ets</code>&quot; or &quot;<code>nnetar</code>&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>h</code></td>
+<td>
+<p>The number of steps to forecast ahead.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Other arguments.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A time series of the h-step forecasts.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Rob J Hyndman &amp; Mitchell O'Hara-Wild
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="forecast.Arima.html">forecast.Arima</a></code>, <code><a href="forecast.bats.html">forecast.bats</a></code>,
+<code><a href="forecast.bats.html">forecast.tbats</a></code>, <code><a href="forecast.ets.html">forecast.ets</a></code>,
+<code><a href="forecast.nnetar.html">forecast.nnetar</a></code>, <code><a href="residuals.forecast.html">residuals.Arima</a></code>,
+<code><a href="residuals.forecast.html">residuals.bats</a></code>, <code><a href="residuals.forecast.html">residuals.tbats</a></code>,
+<code><a href="residuals.forecast.html">residuals.ets</a></code>, <code><a href="residuals.forecast.html">residuals.nnetar</a></code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+fit &lt;- ets(WWWusage)
+plot(WWWusage)
+lines(fitted(fit), col='red')
+lines(fitted(fit, h=2), col='green')
+lines(fitted(fit, h=3), col='blue')
+legend("topleft", legend=paste("h =",1:3), col=2:4, lty=1)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>forecast</em> version 8.13 <a href="00Index.html">Index</a>]</div>
+</body></html>

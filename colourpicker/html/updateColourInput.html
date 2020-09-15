@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Change the value of a colour input</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for updateColourInput {colourpicker}"><tr><td>updateColourInput {colourpicker}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Change the value of a colour input</h2>
+
+<h3>Description</h3>
+
+<p>Change the value of a colour input on the client.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+updateColourInput(
+  session,
+  inputId,
+  label = NULL,
+  value = NULL,
+  showColour = NULL,
+  palette = NULL,
+  allowedCols = NULL,
+  allowTransparent = NULL,
+  returnName = NULL,
+  closeOnClick = NULL
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>session</code></td>
+<td>
+<p>The <code>session</code> object passed to function given to <code>shinyServer</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>inputId</code></td>
+<td>
+<p>The id of the colour input object.</p>
+</td></tr>
+<tr valign="top"><td><code>label</code></td>
+<td>
+<p>The label to set for the input object.</p>
+</td></tr>
+<tr valign="top"><td><code>value</code></td>
+<td>
+<p>The value to set for the input object.</p>
+</td></tr>
+<tr valign="top"><td><code>showColour</code></td>
+<td>
+<p>Whether to show the chosen colour as text inside the input,
+as the background colour of the input, or both (default).</p>
+</td></tr>
+<tr valign="top"><td><code>palette</code></td>
+<td>
+<p>The type of colour palette to allow the user to select colours
+from. <code>square</code> (default) shows a square colour palette that allows the
+user to choose any colour, while <code>limited</code> only gives the user a
+predefined list of colours to choose from.</p>
+</td></tr>
+<tr valign="top"><td><code>allowedCols</code></td>
+<td>
+<p>A list of colours that the user can choose from. Only
+applicable when <code>palette == "limited"</code>. The <code>limited</code> palette
+uses a default list of 40 colours if <code>allowedCols</code> is not defined. If
+the colour specified in <code>value</code> is not in the list, the default colour
+will revert to black.</p>
+</td></tr>
+<tr valign="top"><td><code>allowTransparent</code></td>
+<td>
+<p>If <code>TRUE</code>, enables a slider to choose an alpha
+(transparency) value for the colour. When a colour with opacity is
+chosen, the return value is an 8-digit HEX code.</p>
+</td></tr>
+<tr valign="top"><td><code>returnName</code></td>
+<td>
+<p>If <code>TRUE</code>, then return the name of an R colour instead
+of a HEX value when possible.</p>
+</td></tr>
+<tr valign="top"><td><code>closeOnClick</code></td>
+<td>
+<p>If <code>TRUE</code>, then the colour selection panel will close
+immediately after selecting a colour.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The update function sends a message to the client, telling it to change
+the settings of a colour input object.<br />
+This function works similarly to the update functions provided by shiny.<br />
+Any argument with <code>NULL</code> values will be ignored.
+</p>
+
+
+<h3>Note</h3>
+
+<p>See <a href="https://daattali.com/shiny/colourInput/">https://daattali.com/shiny/colourInput/</a>
+for a live demo.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="colourInput.html">colourInput</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+if (interactive()) {
+  library(shiny)
+  shinyApp(
+    ui = fluidPage(
+      div("Selected colour:", textOutput("value", inline = TRUE)),
+      colourInput("col", "Choose colour", "red"),
+      h3("Update colour input"),
+      textInput("text", "New colour: (colour name or HEX value)"),
+      selectInput("showColour", "Show colour",
+        c("both", "text", "background")),
+      checkboxInput("allowTransparent", "Allow transparent", FALSE),
+      checkboxInput("returnName", "Return R colour name", FALSE),
+      actionButton("btn", "Update")
+    ),
+    server = function(input, output, session) {
+      observeEvent(input$btn, {
+        updateColourInput(session, "col",
+          value = input$text, showColour = input$showColour,
+          allowTransparent = input$allowTransparent,
+          returnName = input$returnName)
+      })
+      output$value &lt;- renderText(input$col)
+    }
+  )
+}
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>colourpicker</em> version 1.1.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

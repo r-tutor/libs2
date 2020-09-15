@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create a colour input control</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for colourInput {colourpicker}"><tr><td>colourInput {colourpicker}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create a colour input control</h2>
+
+<h3>Description</h3>
+
+<p>Create an input control to select a colour.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+colourInput(
+  inputId,
+  label,
+  value = "white",
+  showColour = c("both", "text", "background"),
+  palette = c("square", "limited"),
+  allowedCols = NULL,
+  allowTransparent = FALSE,
+  returnName = FALSE,
+  closeOnClick = FALSE
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>inputId</code></td>
+<td>
+<p>The <code>input</code> slot that will be used to access the value.</p>
+</td></tr>
+<tr valign="top"><td><code>label</code></td>
+<td>
+<p>Display label for the control, or '<code>NULL</code> for no label.</p>
+</td></tr>
+<tr valign="top"><td><code>value</code></td>
+<td>
+<p>Initial value (can be a colour name or HEX code)</p>
+</td></tr>
+<tr valign="top"><td><code>showColour</code></td>
+<td>
+<p>Whether to show the chosen colour as text inside the input,
+as the background colour of the input, or both (default).</p>
+</td></tr>
+<tr valign="top"><td><code>palette</code></td>
+<td>
+<p>The type of colour palette to allow the user to select colours
+from. <code>square</code> (default) shows a square colour palette that allows the
+user to choose any colour, while <code>limited</code> only gives the user a
+predefined list of colours to choose from.</p>
+</td></tr>
+<tr valign="top"><td><code>allowedCols</code></td>
+<td>
+<p>A list of colours that the user can choose from. Only
+applicable when <code>palette == "limited"</code>. The <code>limited</code> palette
+uses a default list of 40 colours if <code>allowedCols</code> is not defined. If
+the colour specified in <code>value</code> is not in the list, the default colour
+will revert to black.</p>
+</td></tr>
+<tr valign="top"><td><code>allowTransparent</code></td>
+<td>
+<p>If <code>TRUE</code>, enables a slider to choose an alpha
+(transparency) value for the colour. When a colour with opacity is
+chosen, the return value is an 8-digit HEX code.</p>
+</td></tr>
+<tr valign="top"><td><code>returnName</code></td>
+<td>
+<p>If <code>TRUE</code>, then return the name of an R colour instead
+of a HEX value when possible.</p>
+</td></tr>
+<tr valign="top"><td><code>closeOnClick</code></td>
+<td>
+<p>If <code>TRUE</code>, then the colour selection panel will close
+immediately after selecting a colour.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>A colour input allows users to select a colour by clicking on the desired
+colour, or by entering a valid colour in the input box. Colours can be
+specified as either names (&quot;blue&quot;), HEX codes (&quot;#0000FF&quot;), RGB codes
+(&quot;rgb(0, 0, 255)&quot;), or HSL codes (&quot;hsl(240, 100, 50)&quot;). Use
+<code>allowTransparent = TRUE</code> to allow selecting semi-transparent colours.
+The return value is a HEX value by default, but you can use the
+<code>returnName = TRUE</code> parameter to get an R colour name instead
+(only when an R colour exists for the selected colour).
+</p>
+<p>When <code>allowTransparent = TRUE</code>, the user can type into the input field
+any RGBA value, HSLA value, or 8-digit HEX with alpha channel You can also use
+any of these values as the <code>value</code> argument as the initial value of the
+input.
+</p>
+
+
+<h3>Note</h3>
+
+<p>See <a href="https://daattali.com/shiny/colourInput/">https://daattali.com/shiny/colourInput/</a>
+for a live demo.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="updateColourInput.html">updateColourInput</a></code>
+<code><a href="colourPicker.html">colourPicker</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+if (interactive()) {
+  # Example 1
+  library(shiny)
+  shinyApp(
+    ui = fluidPage(
+      colourInput("col", "Choose colour", "red"),
+      plotOutput("plot")
+    ),
+    server = function(input, output, session) {
+      output$plot &lt;- renderPlot({
+        plot(1:10, col = input$col)
+      })
+    }
+  )
+
+  # Example 2
+  library(shiny)
+  shinyApp(
+    ui = fluidPage(
+      strong("Selected colour:", textOutput("value", inline = TRUE)),
+      colourInput("col", "Choose colour", "red"),
+      h3("Update colour input"),
+      textInput("text", "New colour: (colour name or HEX value)"),
+      selectInput("showColour", "Show colour",
+        c("both", "text", "background")),
+      selectInput("palette", "Colour palette",
+        c("square", "limited")),
+      checkboxInput("allowTransparent", "Allow transparent", FALSE),
+      checkboxInput("returnName", "Return R colour name", FALSE),
+      actionButton("btn", "Update")
+    ),
+    server = function(input, output, session) {
+      observeEvent(input$btn, {
+        updateColourInput(session, "col",
+          value = input$text, showColour = input$showColour,
+          allowTransparent = input$allowTransparent,
+          palette = input$palette,
+          returnName = input$returnName)
+      })
+      output$value &lt;- renderText(input$col)
+    }
+  )
+}
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>colourpicker</em> version 1.1.0 <a href="00Index.html">Index</a>]</div>
+</body></html>
