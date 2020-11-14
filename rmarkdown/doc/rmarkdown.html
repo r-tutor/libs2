@@ -27,22 +27,54 @@ document.addEventListener('DOMContentLoaded', function(e) {
   }
 });
 </script>
-<script>// Hide empty <a> tag within highlighted CodeBlock for screen reader accessibility (see https://github.com/jgm/pandoc/issues/6352#issuecomment-626106786) -->
-// v0.0.1
-// Written by JooYoung Seo (jooyoung@psu.edu) and Atsushi Yasumoto on June 1st, 2020.
-
+<style type="text/css">
+a.anchor-section {margin-left: 10px; visibility: hidden; color: inherit;}
+a.anchor-section::before {content: '#';}
+.hasAnchor:hover a.anchor-section {visibility: visible;}
+</style>
+<script>// Anchor sections v1.0 written by Atsushi Yasumoto on Oct 3rd, 2020.
 document.addEventListener('DOMContentLoaded', function() {
-  const codeList = document.getElementsByClassName("sourceCode");
-  for (var i = 0; i < codeList.length; i++) {
-    var linkList = codeList[i].getElementsByTagName('a');
-    for (var j = 0; j < linkList.length; j++) {
-      if (linkList[j].innerHTML === "") {
-        linkList[j].setAttribute('aria-hidden', 'true');
-      }
-    }
+  // Do nothing if AnchorJS is used
+  if (typeof window.anchors === 'object' && anchors.hasOwnProperty('hasAnchorJSLink')) {
+    return;
   }
+
+  const h = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+
+  // Do nothing if sections are already anchored
+  if (Array.from(h).some(x => x.classList.contains('hasAnchor'))) {
+    return null;
+  }
+
+  // Use section id when pandoc runs with --section-divs
+  const section_id = function(x) {
+    return ((x.classList.contains('section') || (x.tagName === 'SECTION'))
+            ? x.id : '');
+  };
+
+  // Add anchors
+  h.forEach(function(x) {
+    const id = x.id || section_id(x.parentElement);
+    if (id === '') {
+      return null;
+    }
+    let anchor = document.createElement('a');
+    anchor.href = '#' + id;
+    anchor.classList = ['anchor-section'];
+    x.classList.add('hasAnchor');
+    x.appendChild(anchor);
+  });
 });
 </script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 
 
@@ -281,7 +313,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <h1>Cheatsheets</h1>
 <p><a href="https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf"><img data-uri="https://www.rstudio.com/wp-content/uploads/2018/08/rmarkdown-2.0.png" alt="R Markdown cheatsheet" width="450" style="padding: 0 15px; float: right;" /></a></p>
 <p>The <a href="https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf">R Markdown cheatsheet</a> is a one page (two-sided) reference guide you can download as a quick reference while you work.</p>
-<p>The <a href="https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf">R Markdown Reference</a> is a five page guide that lists each of the options from markdown, knitr, and pandoc that you can use to customize your R Markdown documents.</p>
+<p>The <a href="https://rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf">R Markdown Reference</a> is a five page guide that lists each of the options from markdown, knitr, and pandoc that you can use to customize your R Markdown documents.</p>
 <p>You can access both files from within the RStudio IDE:</p>
 <ul>
 <li><p>R Markdown Cheat Sheet: <em>Help &gt; Cheatsheets &gt; R Markdown Cheat Sheet</em>,</p></li>

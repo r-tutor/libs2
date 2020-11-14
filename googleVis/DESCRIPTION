@@ -1,8 +1,8 @@
 Package: googleVis
 Type: Package
 Title: R Interface to Google Charts
-Version: 0.6.6
-Date: 2020-07-08
+Version: 0.6.9
+Date: 2020-11-05
 Authors@R: c(person("Markus", "Gesmann", role = c("aut", "cre"),
     email = "markus.gesmann@googlemail.com"),
     person("Diego", "de Castillo", role = "aut",
@@ -19,7 +19,7 @@ Description: R interface to Google's chart tools, allowing users
 Depends: R (>= 3.0.2)
 Imports: methods, jsonlite, utils
 Suggests: shiny (>= 0.4.0), httpuv (>= 1.2.0), knitr (>= 1.5),
-        knitcitations, rmarkdown, markdown, data.table
+        rmarkdown, markdown, data.table
 License: GPL (>= 2)
 URL: https://github.com/mages/googleVis#googlevis
 BugReports: https://github.com/mages/googleVis/issues
@@ -28,12 +28,12 @@ LazyData: yes
 VignetteBuilder: knitr, rmarkdown
 RoxygenNote: 7.1.1
 NeedsCompilation: no
-Packaged: 2020-07-08 12:42:36 UTC; mages
+Packaged: 2020-11-05 16:28:09 UTC; mages
 Author: Markus Gesmann [aut, cre],
   Diego de Castillo [aut],
   Joe Cheng [ctb],
   Ashley Baldry [ctb]
 Maintainer: Markus Gesmann <markus.gesmann@googlemail.com>
 Repository: CRAN
-Date/Publication: 2020-07-08 13:10:08 UTC
-Built: R 4.0.2; ; 2020-07-09 17:33:14 UTC; windows
+Date/Publication: 2020-11-05 17:00:03 UTC
+Built: R 4.0.3; ; 2020-11-09 01:22:24 UTC; windows

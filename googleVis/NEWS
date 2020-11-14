@@ -1,4 +1,27 @@
-googleVis 0.6.6 [2020-07-08]
+googleVis 0.6.9 [2020-11-05]
+----------------------------
+
+Changes
+
+ o Fixed URLs to comply with CRAN checks
+ 
+
+googleVis 0.6.8 [2020-11-03]
+----------------------------
+
+Changes
+
+ o Fixed URLs to comply with CRAN checks
+ 
+
+googleVis 0.6.7 [2020-10-27]
+----------------------------
+
+Changes
+
+ o Removed dependency on package knitcitations
+
+ googleVis 0.6.6 [2020-07-08]
 ----------------------------
 
 Changes

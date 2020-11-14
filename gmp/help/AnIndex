@@ -48,6 +48,7 @@ asNumeric,ANY-method	asNumeric
 asNumeric,bigq-method	asNumeric
 asNumeric,bigz-method	asNumeric
 asNumeric-methods	asNumeric
+BernoulliQ	BernoulliQ
 biginteger_as	biginteger
 biginteger_as_character	biginteger
 bigq	bigrational
@@ -65,6 +66,8 @@ crossprod.bigz	matrix
 crossprod.default	matrix
 cumsum.bigq	cumsum
 cumsum.bigz	cumsum
+c_bigq	bigrational
+c_bigz	biginteger
 denominator	bigrational
 denominator<-	bigrational
 dim.bigq	matrix
@@ -131,6 +134,8 @@ modulus<-	modulus
 modulus<-.bigz	modulus
 mul.bigq	operators_bigq
 mul.bigz	add.biginteger
+NA_bigq_	bigrational
+NA_bigz_	biginteger
 ncol.bigq	matrix
 ncol.bigz	matrix
 nextprime	nextprime
@@ -154,6 +159,9 @@ rbind.bigq	matrix
 rbind.bigz	matrix
 rep.bigq	extract
 rep.bigz	extract
+round.bigq	roundQ
+round0	roundQ
+roundQ	roundQ
 sign.bigq	comp.bigq
 sign.bigz	comp.biginteger
 sizeinbase	sizeinbase

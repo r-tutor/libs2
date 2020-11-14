@@ -29,6 +29,7 @@ autoplot.map            Autoplot 'maps::map'
 autoplot.matrix         Plot 'base::matrix'
 autoplot.pca_common     Autoplot PCA-likes
 autoplot.performance    Autoplot 'ROCR::performance'
+autoplot.silhouette     Autoplot silhouette instances
 autoplot.spec           Autoplot 'stats::spec'
 autoplot.stepfun        Plot 'stats::stepfun'
 autoplot.survfit        Autoplot 'survival::survfit'
@@ -66,6 +67,7 @@ fortify.performance     Convert 'ROCR::performance' objects to
                         'data.frame'
 fortify.prcomp          Convert 'stats::prcomp', 'stats::princomp' to
                         'data.frame'
+fortify.silhouette      Convert 'cluster::silhouette' to 'data.frame'
 fortify.spec            Convert 'stats::spec' to 'data.frame'
 fortify.stepfun         Convert 'stats::stepfun' to 'data.frame'
 fortify.survfit         Convert 'survival::survfit' to 'data.frame'

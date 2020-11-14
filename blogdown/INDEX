@@ -1,6 +1,7 @@
 blogdown                The 'blogdown' package
 build_dir               Build all Rmd files under a directory
 build_site              Build a website
+bundle_site             Convert post files to leaf bundles
 dep_path                A helper function to return a dependency path
                         name
 find_yaml               Find posts containing the specified metadata
@@ -9,6 +10,9 @@ html_page               An R Markdown output format for 'blogdown' web
 hugo_cmd                Run Hugo commands
 install_hugo            Install Hugo
 install_theme           Install a Hugo theme from Github
+md5sum_filter           Look for files that have been possibly modified
+read_toml               Read and write TOML data (Tom's Obvious Markup
+                        Language)
 serve_site              Live preview a site
 shortcode               Helper functions to write Hugo shortcodes using
                         the R syntax

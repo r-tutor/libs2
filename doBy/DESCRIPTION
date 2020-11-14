@@ -1,5 +1,5 @@
 Package: doBy
-Version: 4.6.7
+Version: 4.6.8
 Title: Groupwise Statistics, LSmeans, Linear Contrasts, Utilities
 Author: Søren Højsgaard <sorenh@math.aau.dk> and Ulrich Halekoh
     <uhalekoh@health.sdu.dk>
@@ -11,7 +11,6 @@ Description: Contains:
     3) Miscellaneous other utilities.
 Encoding: UTF-8
 VignetteBuilder: knitr
-URL: http://people.math.aau.dk/~sorenh/software/doBy/
 ZipData: no
 LazyData: true
 License: GPL (>= 2)
@@ -21,7 +20,7 @@ Imports: pbkrtest (>= 0.4-8.1), MASS, Matrix, magrittr, Deriv, tibble,
 Suggests: multcomp, geepack, lme4, survival, knitr
 RoxygenNote: 7.1.1
 NeedsCompilation: no
-Packaged: 2020-07-07 22:03:04 UTC; sorenh
+Packaged: 2020-11-10 05:21:45 UTC; sorenh
 Repository: CRAN
-Date/Publication: 2020-07-08 06:20:33 UTC
-Built: R 4.0.2; ; 2020-07-09 17:32:35 UTC; windows
+Date/Publication: 2020-11-10 11:20:02 UTC
+Built: R 4.0.3; ; 2020-11-14 03:54:32 UTC; windows

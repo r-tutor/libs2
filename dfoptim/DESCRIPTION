@@ -3,17 +3,16 @@ Type: Package
 Title: Derivative-Free Optimization
 Description: Derivative-Free optimization algorithms. These algorithms do not require gradient information. More importantly, they can be used to solve non-smooth optimization problems.
 Depends: R (>= 2.10.1)
-Version: 2018.2-1
-Date: 2018-02-18
-Author: Ravi Varadhan, Johns Hopkins University, and Hans W. Borchers,
-        ABB Corporate Research.
+Version: 2020.10-1
+Date: 2020-10-19
+Author: Ravi Varadhan[aut, cre], Johns Hopkins University, Hans W. Borchers[aut],
+        ABB Corporate Research, and Vincent Bechard[aut], HEC Montreal (Montreal University)
 Maintainer: Ravi Varadhan <ravi.varadhan@jhu.edu>
-URL:
-        http://www.jhsph.edu/agingandhealth/People/Faculty_personal_pages/Varadhan.html
+URL: https://coah.jhu.edu/people/Faculty_personal_Pages/Varadhan.html
 License: GPL (>= 2)
 LazyLoad: yes
 Repository: CRAN
 NeedsCompilation: no
-Packaged: 2018-04-01 23:02:47 UTC; rvaradhan
-Date/Publication: 2018-04-02 09:37:48 UTC
-Built: R 4.0.0; ; 2020-04-26 13:40:02 UTC; windows
+Packaged: 2020-10-19 21:43:04 UTC; rvaradhan
+Date/Publication: 2020-10-20 16:40:02 UTC
+Built: R 4.0.3; ; 2020-10-22 23:00:30 UTC; windows

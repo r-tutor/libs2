@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Update a recipe step</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for update.step {recipes}"><tr><td>update.step {recipes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Update a recipe step</h2>
+
+<h3>Description</h3>
+
+<p>This <code>step</code> method for <code>update()</code> takes named arguments as <code>...</code> who's values
+will replace the elements of the same name in the actual step.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'step'
+update(object, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>A recipe <code>step</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Key-value pairs where the keys match up with names of elements
+in the step, and the values are the new values to update the step with.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>For a step to be updated, it must not already have been trained. Otherwise,
+conflicting information can arise between the data returned from
+<code>bake(object, new_data = NULL)</code> and the information in the step.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(modeldata)
+data(biomass)
+
+biomass_tr &lt;- biomass[biomass$dataset == "Training",]
+biomass_te &lt;- biomass[biomass$dataset == "Testing",]
+
+# Create a recipe using step_bs() with degree = 3
+rec &lt;- recipe(
+  HHV ~ carbon + hydrogen + oxygen + nitrogen + sulfur,
+  data = biomass_tr
+) %&gt;%
+  step_bs(carbon, hydrogen, degree = 3)
+
+# Update the step to use degree = 4
+rec2 &lt;- rec
+rec2$steps[[1]] &lt;- update(rec2$steps[[1]], degree = 4)
+
+# Prep both recipes
+rec_prepped  &lt;- prep(rec, training = biomass_tr)
+rec2_prepped &lt;- prep(rec2, training = biomass_tr)
+
+# Juice both to see what changed
+bake(rec_prepped,  new_data = NULL)
+bake(rec2_prepped, new_data = NULL)
+
+# Cannot update a recipe step that has been trained!
+## Not run: 
+update(rec_prepped$steps[[1]], degree = 4)
+
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>recipes</em> version 0.1.15 <a href="00Index.html">Index</a>]</div>
+</body></html>

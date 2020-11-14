@@ -1,6 +1,12 @@
 useDynLib(lsei, .registration = TRUE)
-export(nnls, pnnls, ldp, lsei, lsi, hfti, qp, pnnqp, indx, matMaxs)
 
-##    testing
-# S3method(coef, lsqr)
-# export(dsqrt2,mysum)
+export(hfti)
+export(indx)
+export(ldp)
+export(lsei)
+export(lsi)
+export(matMaxs)
+export(nnls)
+export(pnnls)
+export(pnnqp)
+export(qp)

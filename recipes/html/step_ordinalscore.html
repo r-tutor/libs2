@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Convert Ordinal Factors to Numeric Scores</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for step_ordinalscore {recipes}"><tr><td>step_ordinalscore {recipes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Convert Ordinal Factors to Numeric Scores</h2>
+
+<h3>Description</h3>
+
+<p><code>step_ordinalscore</code> creates a <em>specification</em> of a
+recipe step that will convert ordinal factor variables into
+numeric scores.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+step_ordinalscore(
+  recipe,
+  ...,
+  role = NA,
+  trained = FALSE,
+  columns = NULL,
+  convert = as.numeric,
+  skip = FALSE,
+  id = rand_id("ordinalscore")
+)
+
+## S3 method for class 'step_ordinalscore'
+tidy(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>recipe</code></td>
+<td>
+<p>A recipe object. The step will be added to the
+sequence of operations for this recipe.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>One or more selector functions to choose which
+variables are affected by the step. See <code><a href="selections.html">selections()</a></code>
+for more details. For the <code>tidy</code> method, these are not
+currently used.</p>
+</td></tr>
+<tr valign="top"><td><code>role</code></td>
+<td>
+<p>Not used by this step since no new variables are
+created.</p>
+</td></tr>
+<tr valign="top"><td><code>trained</code></td>
+<td>
+<p>A logical to indicate if the quantities for
+preprocessing have been estimated.</p>
+</td></tr>
+<tr valign="top"><td><code>columns</code></td>
+<td>
+<p>A character string of variables that will be
+converted. This is <code>NULL</code> until computed by
+<code><a href="prep.html">prep.recipe()</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>convert</code></td>
+<td>
+<p>A function that takes an ordinal factor vector
+as an input and outputs a single numeric variable.</p>
+</td></tr>
+<tr valign="top"><td><code>skip</code></td>
+<td>
+<p>A logical. Should the step be skipped when the
+recipe is baked by <code><a href="bake.html">bake.recipe()</a></code>? While all operations are baked
+when <code><a href="prep.html">prep.recipe()</a></code> is run, some operations may not be able to be
+conducted on new data (e.g. processing the outcome variable(s)).
+Care should be taken when using <code>skip = TRUE</code> as it may affect
+the computations for subsequent operations</p>
+</td></tr>
+<tr valign="top"><td><code>id</code></td>
+<td>
+<p>A character string that is unique to this step to identify it.</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A <code>step_ordinalscore</code> object.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Dummy variables from ordered factors with <code>C</code>
+levels will create polynomial basis functions with <code>C-1</code>
+terms. As an alternative, this step can be used to translate the
+ordered levels into a single numeric vector of values that
+represent (subjective) scores. By default, the translation uses
+a linear scale (1, 2, 3, ... <code>C</code>) but custom score
+functions can also be used (see the example below).
+</p>
+
+
+<h3>Value</h3>
+
+<p>An updated version of <code>recipe</code> with the new step
+added to the sequence of existing steps (if any). For the
+<code>tidy</code> method, a tibble with columns <code>terms</code> (the
+columns that will be affected).
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+fail_lvls &lt;- c("meh", "annoying", "really_bad")
+
+ord_data &lt;-
+  data.frame(item = c("paperclip", "twitter", "airbag"),
+             fail_severity = factor(fail_lvls,
+                                    levels = fail_lvls,
+                                    ordered = TRUE))
+
+model.matrix(~fail_severity, data = ord_data)
+
+linear_values &lt;- recipe(~ item + fail_severity, data = ord_data) %&gt;%
+  step_dummy(item) %&gt;%
+  step_ordinalscore(fail_severity)
+
+linear_values &lt;- prep(linear_values, training = ord_data)
+
+bake(linear_values, new_data = NULL, everything())
+
+custom &lt;- function(x) {
+  new_values &lt;- c(1, 3, 7)
+  new_values[as.numeric(x)]
+}
+
+nonlin_scores &lt;- recipe(~ item + fail_severity, data = ord_data) %&gt;%
+  step_dummy(item) %&gt;%
+  step_ordinalscore(fail_severity, convert = custom)
+
+tidy(nonlin_scores, number = 2)
+
+nonlin_scores &lt;- prep(nonlin_scores, training = ord_data)
+
+bake(nonlin_scores, new_data = NULL, everything())
+
+tidy(nonlin_scores, number = 2)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>recipes</em> version 0.1.15 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -11,7 +11,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;broom&rsquo; version 0.7.0</h2>
+</div><h2>Documentation for package &lsquo;broom&rsquo; version 0.7.2</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
@@ -105,6 +105,8 @@
 <td>Augment data with information from a(n) mfx object</td></tr>
 <tr><td style="width: 25%;"><a href="augment.mjoint.html">augment.mjoint</a></td>
 <td>Augment data with information from a(n) mjoint object</td></tr>
+<tr><td style="width: 25%;"><a href="augment.mlogit.html">augment.mlogit</a></td>
+<td>Augment data with information from a(n) mlogit object</td></tr>
 <tr><td style="width: 25%;"><a href="augment.mfx.html">augment.negbinmfx</a></td>
 <td>Augment data with information from a(n) mfx object</td></tr>
 <tr><td style="width: 25%;"><a href="augment.nlrq.html">augment.nlrq</a></td>
@@ -146,7 +148,7 @@
 <tr><td style="width: 25%;"><a href="augment.survreg.html">augment.survreg</a></td>
 <td>Augment data with information from a(n) survreg object</td></tr>
 <tr><td style="width: 25%;"><a href="augment_columns.html">augment_columns</a></td>
-<td>add fitted values, residuals, and other common outputs to an augment call</td></tr>
+<td>Add fitted values, residuals, and other common outputs to an augment call</td></tr>
 </table>
 
 <h2><a name="B">-- B --</a></h2>
@@ -229,7 +231,7 @@
 <h2><a name="G">-- G --</a></h2>
 
 <table width="100%">
-<tr><td style="width: 25%;"><a href="tidy.Gam.html">gam_tidiers</a></td>
+<tr><td style="width: 25%;"><a href="tidy.gam.html">gam_tidiers</a></td>
 <td>Tidy a(n) gam object</td></tr>
 <tr><td style="width: 25%;"><a href="tidy.garch.html">garch_tidiers</a></td>
 <td>Tidy a(n) garch object</td></tr>
@@ -257,6 +259,8 @@
 <td>Glance at a(n) clm object</td></tr>
 <tr><td style="width: 25%;"><a href="glance.clmm.html">glance.clmm</a></td>
 <td>Glance at a(n) clmm object</td></tr>
+<tr><td style="width: 25%;"><a href="glance.coeftest.html">glance.coeftest</a></td>
+<td>Glance at a(n) coeftest object</td></tr>
 <tr><td style="width: 25%;"><a href="glance.coxph.html">glance.coxph</a></td>
 <td>Glance at a(n) coxph object</td></tr>
 <tr><td style="width: 25%;"><a href="glance.cv.glmnet.html">glance.cv.glmnet</a></td>
@@ -277,7 +281,7 @@
 <td>Glance at a(n) fitdistr object</td></tr>
 <tr><td style="width: 25%;"><a href="glance.fixest.html">glance.fixest</a></td>
 <td>Glance at a(n) fixest object</td></tr>
-<tr><td style="width: 25%;"><a href="glance.Gam.html">glance.gam</a></td>
+<tr><td style="width: 25%;"><a href="glance.gam.html">glance.gam</a></td>
 <td>Glance at a(n) gam object</td></tr>
 <tr><td style="width: 25%;"><a href="glance.garch.html">glance.garch</a></td>
 <td>Tidy a(n) garch object</td></tr>
@@ -311,12 +315,16 @@
 <td>Glance at a(n) lmrob object</td></tr>
 <tr><td style="width: 25%;"><a href="glance.mfx.html">glance.logitmfx</a></td>
 <td>Glance at a(n) mfx object</td></tr>
+<tr><td style="width: 25%;"><a href="glance.margins.html">glance.margins</a></td>
+<td>Glance at a(n) margins object</td></tr>
 <tr><td style="width: 25%;"><a href="glance.Mclust.html">glance.Mclust</a></td>
 <td>Glance at a(n) Mclust object</td></tr>
 <tr><td style="width: 25%;"><a href="glance.mfx.html">glance.mfx</a></td>
 <td>Glance at a(n) mfx object</td></tr>
 <tr><td style="width: 25%;"><a href="glance.mjoint.html">glance.mjoint</a></td>
 <td>Glance at a(n) mjoint object</td></tr>
+<tr><td style="width: 25%;"><a href="glance.mlogit.html">glance.mlogit</a></td>
+<td>Glance at a(n) mlogit object</td></tr>
 <tr><td style="width: 25%;"><a href="glance.muhaz.html">glance.muhaz</a></td>
 <td>Glance at a(n) muhaz object</td></tr>
 <tr><td style="width: 25%;"><a href="glance.multinom.html">glance.multinom</a></td>
@@ -453,16 +461,20 @@
 <table width="100%">
 <tr><td style="width: 25%;"><a href="tidy.map.html">maps_tidiers</a></td>
 <td>Tidy a(n) map object</td></tr>
+<tr><td style="width: 25%;"><a href="tidy.margins.html">margins_tidiers</a></td>
+<td>Tidy a(n) margins object</td></tr>
 <tr><td style="width: 25%;"><a href="tidy.Mclust.html">mclust_tidiers</a></td>
 <td>Tidy a(n) Mclust object</td></tr>
 <tr><td style="width: 25%;"><a href="tidy.mediate.html">mediate_tidiers</a></td>
 <td>Tidy a(n) mediate object</td></tr>
-<tr><td style="width: 25%;"><a href="tidy.Gam.html">mgcv_tidiers</a></td>
+<tr><td style="width: 25%;"><a href="tidy.gam.html">mgcv_tidiers</a></td>
 <td>Tidy a(n) gam object</td></tr>
 <tr><td style="width: 25%;"><a href="tidy.mjoint.html">mjoint_tidiers</a></td>
 <td>Tidy a(n) mjoint object</td></tr>
 <tr><td style="width: 25%;"><a href="tidy.mle2.html">mle2_tidiers</a></td>
 <td>Tidy a(n) mle2 object</td></tr>
+<tr><td style="width: 25%;"><a href="tidy.mlogit.html">mlogit_tidiers</a></td>
+<td>Tidying methods for logit models</td></tr>
 <tr><td style="width: 25%;"><a href="tidy.muhaz.html">muhaz_tidiers</a></td>
 <td>Tidy a(n) muhaz object</td></tr>
 <tr><td style="width: 25%;"><a href="tidy.glht.html">multcomp_tidiers</a></td>
@@ -658,7 +670,7 @@
 <td>Tidy a(n) fixest object</td></tr>
 <tr><td style="width: 25%;"><a href="tidy.ftable.html">tidy.ftable</a></td>
 <td>(Deprecated) Tidy ftable objects</td></tr>
-<tr><td style="width: 25%;"><a href="tidy.Gam.html">tidy.gam</a></td>
+<tr><td style="width: 25%;"><a href="tidy.gam.html">tidy.gam</a></td>
 <td>Tidy a(n) gam object</td></tr>
 <tr><td style="width: 25%;"><a href="tidy.gamlss.html">tidy.gamlss</a></td>
 <td>Tidy a(n) gamlss object</td></tr>
@@ -720,6 +732,8 @@
 <td>Tidy a(n) manova object</td></tr>
 <tr><td style="width: 25%;"><a href="tidy.map.html">tidy.map</a></td>
 <td>Tidy a(n) map object</td></tr>
+<tr><td style="width: 25%;"><a href="tidy.margins.html">tidy.margins</a></td>
+<td>Tidy a(n) margins object</td></tr>
 <tr><td style="width: 25%;"><a href="tidy.Mclust.html">tidy.Mclust</a></td>
 <td>Tidy a(n) Mclust object</td></tr>
 <tr><td style="width: 25%;"><a href="tidy.mediate.html">tidy.mediate</a></td>
@@ -732,6 +746,8 @@
 <td>Tidy a(n) mle2 object</td></tr>
 <tr><td style="width: 25%;"><a href="tidy.mlm.html">tidy.mlm</a></td>
 <td>Tidy a(n) mlm object</td></tr>
+<tr><td style="width: 25%;"><a href="tidy.mlogit.html">tidy.mlogit</a></td>
+<td>Tidying methods for logit models</td></tr>
 <tr><td style="width: 25%;"><a href="tidy.muhaz.html">tidy.muhaz</a></td>
 <td>Tidy a(n) muhaz object</td></tr>
 <tr><td style="width: 25%;"><a href="tidy.multinom.html">tidy.multinom</a></td>

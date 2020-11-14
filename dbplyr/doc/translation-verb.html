@@ -27,6 +27,54 @@ document.addEventListener('DOMContentLoaded', function(e) {
   }
 });
 </script>
+<style type="text/css">
+a.anchor-section {margin-left: 10px; visibility: hidden; color: inherit;}
+a.anchor-section::before {content: '#';}
+.hasAnchor:hover a.anchor-section {visibility: visible;}
+</style>
+<script>// Anchor sections v1.0 written by Atsushi Yasumoto on Oct 3rd, 2020.
+document.addEventListener('DOMContentLoaded', function() {
+  // Do nothing if AnchorJS is used
+  if (typeof window.anchors === 'object' && anchors.hasOwnProperty('hasAnchorJSLink')) {
+    return;
+  }
+
+  const h = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+
+  // Do nothing if sections are already anchored
+  if (Array.from(h).some(x => x.classList.contains('hasAnchor'))) {
+    return null;
+  }
+
+  // Use section id when pandoc runs with --section-divs
+  const section_id = function(x) {
+    return ((x.classList.contains('section') || (x.tagName === 'SECTION'))
+            ? x.id : '');
+  };
+
+  // Add anchors
+  h.forEach(function(x) {
+    const id = x.id || section_id(x.parentElement);
+    if (id === '') {
+      return null;
+    }
+    let anchor = document.createElement('a');
+    anchor.href = '#' + id;
+    anchor.classList = ['anchor-section'];
+    x.classList.add('hasAnchor');
+    x.appendChild(anchor);
+  });
+});
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -317,50 +365,50 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <p>There are two parts to dbplyr SQL translation: translating dplyr verbs, and translating expressions within those verbs. This vignette describes how entire verbs are translated; <code>vignette(&quot;translate-function&quot;)</code> describes how individual expressions within those verbs are translated.</p>
 <p>All dplyr verbs generate a <code>SELECT</code> statement. To demonstrate we’ll make a temporary database with a couple of tables</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(dplyr)</span>
-<span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a>con &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbConnect</span>(RSQLite<span class="op">::</span><span class="kw">SQLite</span>(), <span class="st">&quot;:memory:&quot;</span>)</span>
-<span id="cb1-4"><a href="#cb1-4"></a>flights &lt;-<span class="st"> </span><span class="kw">copy_to</span>(con, nycflights13<span class="op">::</span>flights)</span>
-<span id="cb1-5"><a href="#cb1-5"></a>airports &lt;-<span class="st"> </span><span class="kw">copy_to</span>(con, nycflights13<span class="op">::</span>airports)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> DBI<span class="sc">::</span><span class="fu">dbConnect</span>(RSQLite<span class="sc">::</span><span class="fu">SQLite</span>(), <span class="st">&quot;:memory:&quot;</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>flights <span class="ot">&lt;-</span> <span class="fu">copy_to</span>(con, nycflights13<span class="sc">::</span>flights)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>airports <span class="ot">&lt;-</span> <span class="fu">copy_to</span>(con, nycflights13<span class="sc">::</span>airports)</span></code></pre></div>
 <div id="single-table-verbs" class="section level2">
 <h2>Single table verbs</h2>
 <ul>
 <li><p><code>select()</code> and <code>mutate()</code> modify the <code>SELECT</code> clause:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>flights <span class="op">%&gt;%</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="st">  </span><span class="kw">select</span>(<span class="kw">contains</span>(<span class="st">&quot;delay&quot;</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="st">  </span><span class="kw">show_query</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">contains</span>(<span class="st">&quot;delay&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">show_query</span>()</span></code></pre></div>
 <pre><code>## &lt;SQL&gt;
 ## SELECT `dep_delay`, `arr_delay`
 ## FROM `nycflights13::flights`</code></pre>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>flights <span class="op">%&gt;%</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="st">  </span><span class="kw">select</span>(distance, air_time) <span class="op">%&gt;%</span><span class="st">  </span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">speed =</span> distance <span class="op">/</span><span class="st"> </span>(air_time <span class="op">/</span><span class="st"> </span><span class="dv">60</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="st">  </span><span class="kw">show_query</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(distance, air_time) <span class="sc">%&gt;%</span>  </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">speed =</span> distance <span class="sc">/</span> (air_time <span class="sc">/</span> <span class="dv">60</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">show_query</span>()</span></code></pre></div>
 <pre><code>## &lt;SQL&gt;
 ## SELECT `distance`, `air_time`, `distance` / (`air_time` / 60.0) AS `speed`
 ## FROM `nycflights13::flights`</code></pre>
 <p>(As you can see here, the generated SQL isn’t always as minimal as you might generate by hand.)</p></li>
 <li><p><code>filter()</code> generates a <code>WHERE</code> clause:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>flights <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="st">  </span><span class="kw">filter</span>(month <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, day <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="st">  </span><span class="kw">show_query</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(month <span class="sc">==</span> <span class="dv">1</span>, day <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">show_query</span>()</span></code></pre></div>
 <pre><code>## &lt;SQL&gt;
 ## SELECT *
 ## FROM `nycflights13::flights`
 ## WHERE ((`month` = 1.0) AND (`day` = 1.0))</code></pre></li>
 <li><p><code>arrange()</code> generates an <code>ORDER BY</code> clause:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>flights <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="st">  </span><span class="kw">arrange</span>(carrier, <span class="kw">desc</span>(arr_delay)) <span class="op">%&gt;%</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="st">  </span><span class="kw">show_query</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(carrier, <span class="fu">desc</span>(arr_delay)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">show_query</span>()</span></code></pre></div>
 <pre><code>## &lt;SQL&gt;
 ## SELECT *
 ## FROM `nycflights13::flights`
 ## ORDER BY `carrier`, `arr_delay` DESC</code></pre></li>
 <li><p><code>summarise()</code> and <code>group_by()</code> work together to generate a <code>GROUP BY</code> clause:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>flights <span class="op">%&gt;%</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="st">  </span><span class="kw">group_by</span>(month, day) <span class="op">%&gt;%</span></span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">delay =</span> <span class="kw">mean</span>(dep_delay)) <span class="op">%&gt;%</span></span>
-<span id="cb10-4"><a href="#cb10-4"></a><span class="st">  </span><span class="kw">show_query</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(month, day) <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">delay =</span> <span class="fu">mean</span>(dep_delay)) <span class="sc">%&gt;%</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">show_query</span>()</span></code></pre></div>
 <pre><code>## &lt;SQL&gt;
 ## SELECT `month`, `day`, AVG(`dep_delay`) AS `delay`
 ## FROM `nycflights13::flights`
@@ -371,8 +419,8 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <h2>Dual table verbs</h2>
 <table>
 <colgroup>
-<col width="23%"></col>
-<col width="76%"></col>
+<col width="23%" />
+<col width="76%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -428,7 +476,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <ul>
 <li><p><code>sql_build()</code> recurses over the lazy op data structure building up query objects (<code>select_query()</code>, <code>join_query()</code>, <code>set_op_query()</code> etc) that represent the different subtypes of <code>SELECT</code> queries that we might generate.</p></li>
 <li><p><code>sql_optimise()</code> takes a pass over these SQL objects, looking for potential optimisations. Currently this only involves removing subqueries where possible.</p></li>
-<li><p><code>sql_render()</code> calls an SQL generation function (<code>sql_select()</code>, <code>sql_join()</code>, <code>sql_subquery()</code>, <code>sql_semijoin()</code> etc) to produce the actual SQL. Each of these functions is a generic, taking the connection as an argument, so that the details can be customised for different databases.</p></li>
+<li><p><code>sql_render()</code> calls an SQL generation function (<code>sql_query_select()</code>, <code>sql_query_join()</code>, <code>sql_query_semi_join()</code>, <code>sql_query_set_op()</code>, …) to produce the actual SQL. Each of these functions is a generic, taking the connection as an argument, so that the translation can be customised for different databases.</p></li>
 </ul>
 </div>
 

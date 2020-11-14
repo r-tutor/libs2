@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Collapse Some Categorical Levels</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for step_other {recipes}"><tr><td>step_other {recipes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Collapse Some Categorical Levels</h2>
+
+<h3>Description</h3>
+
+<p><code>step_other</code> creates a <em>specification</em> of a recipe
+step that will potentially pool infrequently occurring values
+into an &quot;other&quot; category.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+step_other(
+  recipe,
+  ...,
+  role = NA,
+  trained = FALSE,
+  threshold = 0.05,
+  other = "other",
+  objects = NULL,
+  skip = FALSE,
+  id = rand_id("other")
+)
+
+## S3 method for class 'step_other'
+tidy(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>recipe</code></td>
+<td>
+<p>A recipe object. The step will be added to the
+sequence of operations for this recipe.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>One or more selector functions to choose which
+variables that will potentially be reduced. See
+<code><a href="selections.html">selections()</a></code> for more details. For the <code>tidy</code>
+method, these are not currently used.</p>
+</td></tr>
+<tr valign="top"><td><code>role</code></td>
+<td>
+<p>Not used by this step since no new variables are
+created.</p>
+</td></tr>
+<tr valign="top"><td><code>trained</code></td>
+<td>
+<p>A logical to indicate if the quantities for
+preprocessing have been estimated.</p>
+</td></tr>
+<tr valign="top"><td><code>threshold</code></td>
+<td>
+<p>A numeric value between 0 and 1 or an integer greater or
+equal to one.  If it's less than one then factor levels whose rate of
+occurrence in the training set are below <code>threshold</code> will be &quot;othered&quot;. If
+it's greater or equal to one then it's treated as a frequency and factor
+levels that occur less then <code>threshold</code> times will be &quot;othered&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>other</code></td>
+<td>
+<p>A single character value for the &quot;other&quot; category.</p>
+</td></tr>
+<tr valign="top"><td><code>objects</code></td>
+<td>
+<p>A list of objects that contain the information
+to pool infrequent levels that is determined by
+<code><a href="prep.html">prep.recipe()</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>skip</code></td>
+<td>
+<p>A logical. Should the step be skipped when the
+recipe is baked by <code><a href="bake.html">bake.recipe()</a></code>? While all operations are baked
+when <code><a href="prep.html">prep.recipe()</a></code> is run, some operations may not be able to be
+conducted on new data (e.g. processing the outcome variable(s)).
+Care should be taken when using <code>skip = TRUE</code> as it may affect
+the computations for subsequent operations</p>
+</td></tr>
+<tr valign="top"><td><code>id</code></td>
+<td>
+<p>A character string that is unique to this step to identify it.</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A <code>step_other</code> object.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The overall proportion (or total counts) of the categories are
+computed. The &quot;other&quot; category is used in place of any categorical levels
+whose individual proportion (or frequency) in the training set is less than
+<code>threshold</code>.
+</p>
+<p>If no pooling is done the data are unmodified (although character data may
+be changed to factors based on the value of <code>strings_as_factors</code> in
+<code><a href="prep.html">prep.recipe()</a></code>). Otherwise, a factor is always returned with
+different factor levels.
+</p>
+<p>If <code>threshold</code> is less than the largest category proportion, all levels
+except for the most frequent are collapsed to the <code>other</code> level.
+</p>
+<p>If the retained categories include the value of <code>other</code>, an error is
+thrown. If <code>other</code> is in the list of discarded levels, no error
+occurs.
+</p>
+<p>If no pooling is done, novel factor levels are converted to missing. If
+pooling is needed, they will be placed into the other category.
+</p>
+<p>When data to be processed contains novel levels (i.e., not
+contained in the training set), the other category is assigned.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An updated version of <code>recipe</code> with the new step
+added to the sequence of existing steps (if any). For the
+<code>tidy</code> method, a tibble with columns <code>terms</code> (the
+columns that will be affected) and <code>retained</code> (the factor
+levels that were not pulled into &quot;other&quot;)
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="step_factor2string.html">step_factor2string()</a></code>, <code><a href="step_string2factor.html">step_string2factor()</a></code>,
+<code><a href="names0.html">dummy_names()</a></code>, <code><a href="step_regex.html">step_regex()</a></code>, <code><a href="step_count.html">step_count()</a></code>,
+<code><a href="step_ordinalscore.html">step_ordinalscore()</a></code>, <code><a href="step_unorder.html">step_unorder()</a></code>, <code><a href="step_novel.html">step_novel()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(modeldata)
+data(okc)
+
+set.seed(19)
+in_train &lt;- sample(1:nrow(okc), size = 30000)
+
+okc_tr &lt;- okc[ in_train,]
+okc_te &lt;- okc[-in_train,]
+
+rec &lt;- recipe(~ diet + location, data = okc_tr)
+
+
+rec &lt;- rec %&gt;%
+  step_other(diet, location, threshold = .1, other = "other values")
+rec &lt;- prep(rec, training = okc_tr)
+
+collapsed &lt;- bake(rec, okc_te)
+table(okc_te$diet, collapsed$diet, useNA = "always")
+
+tidy(rec, number = 1)
+
+# novel levels are also "othered"
+tahiti &lt;- okc[1,]
+tahiti$location &lt;- "a magical place"
+bake(rec, tahiti)
+
+# threshold as a frequency
+rec &lt;- recipe(~ diet + location, data = okc_tr)
+
+rec &lt;- rec %&gt;%
+  step_other(diet, location, threshold = 2000, other = "other values")
+rec &lt;- prep(rec, training = okc_tr)
+
+tidy(rec, number = 1)
+# compare it to
+# okc_tr %&gt;% count(diet, sort = TRUE) %&gt;% top_n(4)
+# okc_tr %&gt;% count(location, sort = TRUE) %&gt;% top_n(3)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>recipes</em> version 0.1.15 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Box-Cox Transformation for Non-Negative Data</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for step_BoxCox {recipes}"><tr><td>step_BoxCox {recipes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Box-Cox Transformation for Non-Negative Data</h2>
+
+<h3>Description</h3>
+
+<p><code>step_BoxCox</code> creates a <em>specification</em> of a recipe
+step that will transform data using a simple Box-Cox
+transformation.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+step_BoxCox(
+  recipe,
+  ...,
+  role = NA,
+  trained = FALSE,
+  lambdas = NULL,
+  limits = c(-5, 5),
+  num_unique = 5,
+  skip = FALSE,
+  id = rand_id("BoxCox")
+)
+
+## S3 method for class 'step_BoxCox'
+tidy(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>recipe</code></td>
+<td>
+<p>A recipe object. The step will be added to the
+sequence of operations for this recipe.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>One or more selector functions to choose which
+variables are affected by the step. See <code><a href="selections.html">selections()</a></code>
+for more details. For the <code>tidy</code> method, these are not
+currently used.</p>
+</td></tr>
+<tr valign="top"><td><code>role</code></td>
+<td>
+<p>Not used by this step since no new variables are
+created.</p>
+</td></tr>
+<tr valign="top"><td><code>trained</code></td>
+<td>
+<p>A logical to indicate if the quantities for
+preprocessing have been estimated.</p>
+</td></tr>
+<tr valign="top"><td><code>lambdas</code></td>
+<td>
+<p>A numeric vector of transformation values. This
+is <code>NULL</code> until computed by <code><a href="prep.html">prep.recipe()</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>limits</code></td>
+<td>
+<p>A length 2 numeric vector defining the range to
+compute the transformation parameter lambda.</p>
+</td></tr>
+<tr valign="top"><td><code>num_unique</code></td>
+<td>
+<p>An integer where data that have less possible
+values will not be evaluated for a transformation.</p>
+</td></tr>
+<tr valign="top"><td><code>skip</code></td>
+<td>
+<p>A logical. Should the step be skipped when the
+recipe is baked by <code><a href="bake.html">bake.recipe()</a></code>? While all operations are baked
+when <code><a href="prep.html">prep.recipe()</a></code> is run, some operations may not be able to be
+conducted on new data (e.g. processing the outcome variable(s)).
+Care should be taken when using <code>skip = TRUE</code> as it may affect
+the computations for subsequent operations</p>
+</td></tr>
+<tr valign="top"><td><code>id</code></td>
+<td>
+<p>A character string that is unique to this step to identify it.</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A <code>step_BoxCox</code> object.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The Box-Cox transformation, which requires a strictly
+positive variable, can be used to rescale a variable to be more
+similar to a normal distribution. In this package, the partial
+log-likelihood function is directly optimized within a
+reasonable set of transformation values (which can be changed by
+the user).
+</p>
+<p>This transformation is typically done on the outcome variable
+using the residuals for a statistical model (such as ordinary
+least squares). Here, a simple null model (intercept only) is
+used to apply the transformation to the <em>predictor</em>
+variables individually. This can have the effect of making the
+variable distributions more symmetric.
+</p>
+<p>If the transformation parameters are estimated to be very
+closed to the bounds, or if the optimization fails, a value of
+<code>NA</code> is used and no transformation is applied.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An updated version of <code>recipe</code> with the new step
+added to the sequence of existing steps (if any). For the
+<code>tidy</code> method, a tibble with columns <code>terms</code> (the
+selectors or variables selected) and <code>value</code> (the
+lambda estimate).
+</p>
+
+
+<h3>References</h3>
+
+<p>Sakia, R. M. (1992). The Box-Cox transformation technique:
+A review. <em>The Statistician</em>, 169-178..
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="step_YeoJohnson.html">step_YeoJohnson()</a></code> <code><a href="recipe.html">recipe()</a></code>
+<code><a href="prep.html">prep.recipe()</a></code> <code><a href="bake.html">bake.recipe()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+rec &lt;- recipe(~ ., data = as.data.frame(state.x77))
+
+bc_trans &lt;- step_BoxCox(rec, all_numeric())
+
+bc_estimates &lt;- prep(bc_trans, training = as.data.frame(state.x77))
+
+bc_data &lt;- bake(bc_estimates, as.data.frame(state.x77))
+
+plot(density(state.x77[, "Illiteracy"]), main = "before")
+plot(density(bc_data$Illiteracy), main = "after")
+
+tidy(bc_trans, number = 1)
+tidy(bc_estimates, number = 1)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>recipes</em> version 0.1.15 <a href="00Index.html">Index</a>]</div>
+</body></html>

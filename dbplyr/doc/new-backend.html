@@ -27,6 +27,54 @@ document.addEventListener('DOMContentLoaded', function(e) {
   }
 });
 </script>
+<style type="text/css">
+a.anchor-section {margin-left: 10px; visibility: hidden; color: inherit;}
+a.anchor-section::before {content: '#';}
+.hasAnchor:hover a.anchor-section {visibility: visible;}
+</style>
+<script>// Anchor sections v1.0 written by Atsushi Yasumoto on Oct 3rd, 2020.
+document.addEventListener('DOMContentLoaded', function() {
+  // Do nothing if AnchorJS is used
+  if (typeof window.anchors === 'object' && anchors.hasOwnProperty('hasAnchorJSLink')) {
+    return;
+  }
+
+  const h = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+
+  // Do nothing if sections are already anchored
+  if (Array.from(h).some(x => x.classList.contains('hasAnchor'))) {
+    return null;
+  }
+
+  // Use section id when pandoc runs with --section-divs
+  const section_id = function(x) {
+    return ((x.classList.contains('section') || (x.tagName === 'SECTION'))
+            ? x.id : '');
+  };
+
+  // Add anchors
+  h.forEach(function(x) {
+    const id = x.id || section_id(x.parentElement);
+    if (id === '') {
+      return null;
+    }
+    let anchor = document.createElement('a');
+    anchor.href = '#' + id;
+    anchor.classList = ['anchor-section'];
+    x.classList.add('hasAnchor');
+    x.appendChild(anchor);
+  });
+});
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -318,44 +366,43 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <p>This document describes how to add a new SQL backend to dbplyr. To begin:</p>
 <ul>
 <li><p>Ensure that you have a DBI compliant database backend. If not, you’ll need to first create it by following the instructions in <code>vignette(&quot;backend&quot;, package = &quot;DBI&quot;)</code>.</p></li>
-<li><p>You’ll need a working knowledge of S3. Make sure that you’re <a href="http://adv-r.had.co.nz/OO-essentials.html#s3">familiar with the basics</a> before you start.</p></li>
+<li><p>You’ll need a working knowledge of S3. Make sure that you’re <a href="https://adv-r.hadley.nz/s3.html">familiar with the basics</a> before you start.</p></li>
 </ul>
 <p>This document is still a work in progress, but it will hopefully get you started. I’d also strongly recommend reading the bundled source code for <a href="https://github.com/tidyverse/dbplyr/blob/master/R/backend-sqlite.R">SQLite</a>, <a href="https://github.com/tidyverse/dbplyr/blob/master/R/backend-mysql.R">MySQL</a>, and <a href="https://github.com/tidyverse/dbplyr/blob/master/R/backend-postgres.R">PostgreSQL</a>.</p>
 <div id="first-steps" class="section level2">
 <h2>First steps</h2>
 <p>For interactive exploitation, attach dplyr and DBI. If you’re creating a package, you’ll need to import dplyr and DBI.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(dplyr)</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(DBI)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DBI)</span></code></pre></div>
 <p>Check that you can create a tbl from a connection, like:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>con &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbConnect</span>(RSQLite<span class="op">::</span><span class="kw">SQLite</span>(), <span class="dt">path =</span> <span class="st">&quot;:memory:&quot;</span>)</span>
-<span id="cb2-2"><a href="#cb2-2"></a>DBI<span class="op">::</span><span class="kw">dbWriteTable</span>(con, <span class="st">&quot;mtcars&quot;</span>, mtcars)</span>
-<span id="cb2-3"><a href="#cb2-3"></a></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="kw">tbl</span>(con, <span class="st">&quot;mtcars&quot;</span>)</span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="co">#&gt; # Source:   table&lt;mtcars&gt; [?? x 11]</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a><span class="co">#&gt; # Database: sqlite 3.30.1 []</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a><span class="co">#&gt;     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a><span class="co">#&gt; 1  21       6   160   110  3.9   2.62  16.5     0     1     4     4</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a><span class="co">#&gt; 2  21       6   160   110  3.9   2.88  17.0     0     1     4     4</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a><span class="co">#&gt; 3  22.8     4   108    93  3.85  2.32  18.6     1     1     4     1</span></span>
-<span id="cb2-12"><a href="#cb2-12"></a><span class="co">#&gt; 4  21.4     6   258   110  3.08  3.22  19.4     1     0     3     1</span></span>
-<span id="cb2-13"><a href="#cb2-13"></a><span class="co">#&gt; # … with more rows</span></span></code></pre></div>
-<p>If you can’t, this likely indicates some problem with the DBI methods. Use <a href="https://github.com/rstats-db/DBItest">DBItest</a> to narrow down the problem.</p>
-<p>Now is a good time to implement a method for <code>db_desc()</code>. This should briefly describe the connection, typically formatting the information returned from <code>dbGetInfo()</code>. This is what dbplyr does for Postgres connections:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">#&#39; @export</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>db_desc.PostgreSQLConnection &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</span>
-<span id="cb3-3"><a href="#cb3-3"></a>  info &lt;-<span class="st"> </span><span class="kw">dbGetInfo</span>(x)</span>
-<span id="cb3-4"><a href="#cb3-4"></a>  host &lt;-<span class="st"> </span><span class="cf">if</span> (info<span class="op">$</span>host <span class="op">==</span><span class="st"> &quot;&quot;</span>) <span class="st">&quot;localhost&quot;</span> <span class="cf">else</span> info<span class="op">$</span>host</span>
-<span id="cb3-5"><a href="#cb3-5"></a></span>
-<span id="cb3-6"><a href="#cb3-6"></a>  <span class="kw">paste0</span>(<span class="st">&quot;postgres &quot;</span>, info<span class="op">$</span>serverVersion, <span class="st">&quot; [&quot;</span>, info<span class="op">$</span>user, <span class="st">&quot;@&quot;</span>,</span>
-<span id="cb3-7"><a href="#cb3-7"></a>    host, <span class="st">&quot;:&quot;</span>, info<span class="op">$</span>port, <span class="st">&quot;/&quot;</span>, info<span class="op">$</span>dbname, <span class="st">&quot;]&quot;</span>)</span>
-<span id="cb3-8"><a href="#cb3-8"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> DBI<span class="sc">::</span><span class="fu">dbConnect</span>(RSQLite<span class="sc">::</span><span class="fu">SQLite</span>(), <span class="at">path =</span> <span class="st">&quot;:memory:&quot;</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>DBI<span class="sc">::</span><span class="fu">dbWriteTable</span>(con, <span class="st">&quot;mtcars&quot;</span>, mtcars)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl</span>(con, <span class="st">&quot;mtcars&quot;</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # Source:   table&lt;mtcars&gt; [?? x 11]</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # Database: sqlite 3.30.1 []</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1  21       6   160   110  3.9   2.62  16.5     0     1     4     4</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2  21       6   160   110  3.9   2.88  17.0     0     1     4     4</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3  22.8     4   108    93  3.85  2.32  18.6     1     1     4     1</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4  21.4     6   258   110  3.08  3.22  19.4     1     0     3     1</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with more rows</span></span></code></pre></div>
+<p>If you can’t, this likely indicates some problem with the DBI methods. Use <a href="https://github.com/r-dbi/DBItest">DBItest</a> to narrow down the problem.</p>
+</div>
+<div id="write-your-first-method" class="section level2">
+<h2>Write your first method</h2>
+<p>The first method of your dbplyr backend should always be for the <code>dbplyr_edition()</code> generic:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @importFrom dbplyr dbplyr_edition</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @export</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>dbplyr_edition.myConnectionClass <span class="ot">&lt;-</span> <span class="cf">function</span>(con) 2L</span></code></pre></div>
+<p>This declares that your package uses version 2 of the API, which is the version that this vignette documents.</p>
 </div>
 <div id="copying-computing-collecting-and-collapsing" class="section level2">
 <h2>Copying, computing, collecting and collapsing</h2>
-<p>Next, check that <code>copy_to()</code>, <code>collapse()</code>, <code>compute()</code>, and <code>collect()</code> work.</p>
+<p>Next, check that <code>copy_to()</code>, <code>collapse()</code>, <code>compute()</code>, and <code>collect()</code> work:</p>
 <ul>
-<li><p>If <code>copy_to()</code> fails, it’s likely you need a method for <code>db_write_table()</code>, <code>db_create_indexes()</code> or <code>db_analyze()</code>.</p></li>
+<li><p>If <code>copy_to()</code> fails, you probably need a method for <code>sql_table_analyze()</code> or <code>sql_table_index()</code>. If <code>copy_to()</code> fails during creation of the tbl, you may need a method for <code>sql_query_fields()</code>.</p></li>
 <li><p>If <code>collapse()</code> fails, your database has a non-standard way of constructing subqueries. Add a method for <code>sql_subquery()</code>.</p></li>
 <li><p>If <code>compute()</code> fails, your database has a non-standard way of saving queries in temporary tables. Add a method for <code>db_save_query()</code>.</p></li>
 </ul>
@@ -367,10 +414,10 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <h3>Verbs</h3>
 <p>Check that SQL translation for the key verbs work:</p>
 <ul>
-<li><code>summarise()</code>, <code>mutate()</code>, <code>filter()</code> etc: powered by <code>sql_select()</code></li>
-<li><code>left_join()</code>, <code>inner_join()</code>: powered by <code>sql_join()</code></li>
-<li><code>semi_join()</code>, <code>anti_join()</code>: powered by <code>sql_semi_join()</code></li>
-<li><code>union()</code>, <code>intersect()</code>, <code>setdiff()</code>: powered by <code>sql_set_op()</code></li>
+<li><code>summarise()</code>, <code>mutate()</code>, <code>filter()</code> etc: powered by <code>sql_query_select()</code></li>
+<li><code>left_join()</code>, <code>inner_join()</code>: powered by <code>sql_query_join()</code></li>
+<li><code>semi_join()</code>, <code>anti_join()</code>: powered by <code>sql_query_semi_join()</code></li>
+<li><code>union()</code>, <code>intersect()</code>, <code>setdiff()</code>: powered by <code>sql_query_set_op()</code></li>
 </ul>
 </div>
 <div id="vectors" class="section level3">

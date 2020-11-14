@@ -1,6 +1,7 @@
 SCB                     Average age in Sweden
 addHtmlTableStyle       Add/set css and other style options
 concatHtmlTables        Function for concatenating 'htmlTable()'s
+getHtmlTableStyle       Get style options for object
 getHtmlTableTheme       Retrieve the 'htmlTable()' theme list
 hasHtmlTableStyle       Check if object has a style set to it
 htmlTable               Output an HTML table

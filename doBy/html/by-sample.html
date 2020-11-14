@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Sampling from a data frame</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for by-sample {doBy}"><tr><td>by-sample {doBy}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Sampling from a data frame</h2>
+
+<h3>Description</h3>
+
+<p>A data frame is split according to some variables in a
+formula, and a sample of a certain fraction of each is drawn.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+sample_by(data, formula, frac = 0.1, replace = FALSE, systematic = FALSE)
+
+sampleBy(
+  formula,
+  frac = 0.1,
+  replace = FALSE,
+  data = parent.frame(),
+  systematic = FALSE
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>A data frame.</p>
+</td></tr>
+<tr valign="top"><td><code>formula</code></td>
+<td>
+<p>A formula defining the grouping of the data frame.</p>
+</td></tr>
+<tr valign="top"><td><code>frac</code></td>
+<td>
+<p>The part of data to be sampled.</p>
+</td></tr>
+<tr valign="top"><td><code>replace</code></td>
+<td>
+<p>Is the sampling with replacement.</p>
+</td></tr>
+<tr valign="top"><td><code>systematic</code></td>
+<td>
+<p>Should sampling be systematic.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>If systematic=FALSE (default) then frac gives the fraction
+of data sampled. If systematic=TRUE and frac=.2 then every 1/.2
+i.e. every 5th observation is taken out.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A dataframe.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="by-summary.html">summaryBy</a></code>, <code><a href="by-order.html">orderBy</a></code>,
+<code><a href="by-split.html">splitBy</a></code>, <code><a href="by-transform.html">transformBy</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data(dietox)
+sampleBy(formula = ~ Evit + Cu, frac=.1, data = dietox)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>doBy</em> version 4.6.8 <a href="00Index.html">Index</a>]</div>
+</body></html>

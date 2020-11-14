@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Wrapper function for preparing recipes within resampling</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for prepper {recipes}"><tr><td>prepper {recipes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Wrapper function for preparing recipes within resampling</h2>
+
+<h3>Description</h3>
+
+<p>When working with the <span class="pkg">rsample</span> package, a simple recipe
+must be <em>prepared</em> using the <code>prep</code>
+function first. When using recipes with <span class="pkg">rsample</span> it
+is helpful to have a function that can prepare a recipe
+across a series of <code>split</code> objects that are produced
+in this package. <code>prepper</code> is a wrapper function
+around <code>prep</code> that can be used to do
+this. See the vignette on &quot;Recipes and rsample&quot; for an
+example.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+prepper(split_obj, recipe, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>split_obj</code></td>
+<td>
+<p>An <code>rplit</code> object</p>
+</td></tr>
+<tr valign="top"><td><code>recipe</code></td>
+<td>
+<p>An untrained <code>recipe</code> object.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Arguments to pass to <code>prep</code> such as <code>verbose</code> or <code>retain</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>prepper()</code> sets the underlying <code>prep()</code> argument <code>fresh</code> to <code>TRUE</code>.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>recipes</em> version 0.1.15 <a href="00Index.html">Index</a>]</div>
+</body></html>

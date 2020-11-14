@@ -1,7 +1,7 @@
 Package: blogdown
 Type: Package
 Title: Create Blogs and Websites with R Markdown
-Version: 0.20
+Version: 0.21
 Authors@R: c(
     person("Yihui", "Xie", role = c("aut", "cre"), email = "xie@yihui.name", comment = c(ORCID = "0000-0003-0645-5666")),
     person("Beilei", "Bian", role = "ctb"),
@@ -20,22 +20,22 @@ Authors@R: c(
     )
 Description: Write blog posts and web pages in R Markdown. This package supports
     the static site generator 'Hugo' (<https://gohugo.io>) best, and it also
-    supports 'Jekyll' (<http://jekyllrb.com>) and 'Hexo' (<https://hexo.io>).
+    supports 'Jekyll' (<https://jekyllrb.com>) and 'Hexo' (<https://hexo.io>).
 License: GPL-3
-Imports: rmarkdown (>= 1.16), bookdown (>= 0.14), knitr (>= 1.25),
-        htmltools, yaml (>= 2.1.19), httpuv (>= 1.4.0), xfun (>= 0.10),
-        servr (>= 0.15)
+Imports: rmarkdown (>= 2.4), bookdown (>= 0.14), knitr (>= 1.25),
+        htmltools, yaml (>= 2.1.19), httpuv (>= 1.4.0), later, xfun (>=
+        0.18), servr (>= 0.19)
 Suggests: testit, shiny, miniUI, stringr, rstudioapi, tools, processx,
-        later, whoami
+        whoami
 LazyData: true
 URL: https://github.com/rstudio/blogdown
 BugReports: https://github.com/rstudio/blogdown/issues
 SystemRequirements: Hugo (<https://gohugo.io>) and Pandoc
         (<https://pandoc.org>)
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 Encoding: UTF-8
 NeedsCompilation: no
-Packaged: 2020-06-23 19:06:38 UTC; yihui
+Packaged: 2020-10-11 06:59:22 UTC; yihui
 Author: Yihui Xie [aut, cre] (<https://orcid.org/0000-0003-0645-5666>),
   Beilei Bian [ctb],
   Forest Fang [ctb],
@@ -51,5 +51,5 @@ Author: Yihui Xie [aut, cre] (<https://orcid.org/0000-0003-0645-5666>),
   RStudio, PBC [cph]
 Maintainer: Yihui Xie <xie@yihui.name>
 Repository: CRAN
-Date/Publication: 2020-06-23 20:00:11 UTC
-Built: R 4.0.2; ; 2020-07-10 03:58:27 UTC; windows
+Date/Publication: 2020-10-11 07:20:02 UTC
+Built: R 4.0.3; ; 2020-11-09 09:48:44 UTC; windows

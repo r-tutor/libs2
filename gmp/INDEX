@@ -1,5 +1,6 @@
 ==.bigq                 Relational Operators
 ==.bigz                 Relational Operators
+BernoulliQ              Exact Bernoulli Numbers
 Eulerian                Eulerian and Stirling Numbers of First and
                         Second Kind
 Oakley                  RFC 2409 Oakley Groups - Parameters for
@@ -34,6 +35,7 @@ modulus                 Modulus of a Big Integer
 nextprime               Next Prime Number
 outer                   Base Functions in 'gmp'-ified Versions
 powm                    Exponentiation function
+roundQ                  Rounding Big Rationals ("bigq") to Decimals
 sizeinbase              Compute size of a bigz in a base
 solve.bigz              Solve a system of equation
 urand.bigz              Generate a random number

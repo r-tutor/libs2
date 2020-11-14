@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Tidy the Result of a Recipe</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for tidy.recipe {recipes}"><tr><td>tidy.recipe {recipes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Tidy the Result of a Recipe</h2>
+
+<h3>Description</h3>
+
+<p><code>tidy</code> will return a data frame that contains information
+regarding a recipe or operation within the recipe (when a <code>tidy</code>
+method for the operation exists).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'recipe'
+tidy(x, number = NA, id = NA, ...)
+
+## S3 method for class 'step'
+tidy(x, ...)
+
+## S3 method for class 'check'
+tidy(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A <code>recipe</code> object (trained or otherwise).</p>
+</td></tr>
+<tr valign="top"><td><code>number</code></td>
+<td>
+<p>An integer or <code>NA</code>. If missing and <code>id</code> is not provided,
+the return value is a list of the operations in the recipe.
+If a number is  given, a <code>tidy</code> method is executed for that operation
+in the recipe (if it exists). <code>number</code> must not be provided if
+<code>id</code> is.</p>
+</td></tr>
+<tr valign="top"><td><code>id</code></td>
+<td>
+<p>A character string or <code>NA</code>. If missing and <code>number</code> is not provided,
+the return value is a list of the operations in the recipe.
+If a character string is given, a <code>tidy</code> method is executed for that
+operation in the recipe (if it exists). <code>id</code> must not be provided
+if <code>number</code> is.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Not currently used.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A tibble with columns that would vary depending on what
+<code>tidy</code> method is executed. When <code>number</code> and <code>id</code> are <code>NA</code>, a
+tibble with columns <code>number</code> (the operation iteration),
+<code>operation</code> (either &quot;step&quot; or &quot;check&quot;),
+<code>type</code> (the method, e.g. &quot;nzv&quot;, &quot;center&quot;), a logical
+column called <code>trained</code> for whether the operation has been
+estimated using <code>prep</code>, a logical for <code>skip</code>, and a character column <code>id</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(modeldata)
+data(okc)
+
+okc_rec &lt;- recipe(~ ., data = okc) %&gt;%
+  step_other(all_nominal(), threshold = 0.05, other = "another") %&gt;%
+  step_date(date, features = "dow") %&gt;%
+  step_center(all_numeric()) %&gt;%
+  step_dummy(all_nominal()) %&gt;%
+  check_cols(starts_with("date"), age, height)
+
+tidy(okc_rec)
+
+tidy(okc_rec, number = 2)
+tidy(okc_rec, number = 3)
+
+okc_rec_trained &lt;- prep(okc_rec, training = okc)
+
+tidy(okc_rec_trained)
+tidy(okc_rec_trained, number = 3)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>recipes</em> version 0.1.15 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -4,7 +4,7 @@ beets                   beets data
 breastcancer            Gene expression signatures for p53 mutation
                         status in 250 breast cancer samples
 budworm                 budworm data
-by-lapply               Formula based version of lapply.
+by-lapply               Formula based version of lapply and sapply
 by-lmby                 List of lm objects with a common model
 by-order                Ordering (sorting) rows of a data frame
 by-sample               Sampling from a data frame
@@ -20,6 +20,7 @@ codstom                 Diet of Atlantic cod in the Gulf of St.
 crimeRate               crimeRate
 cropyield               Yield from Danish agricultural production of
                         grain and root crop.
+data-mathmark           Mathematics marks for students
 descStat                Computing simple descriptive statistics of a
                         numeric vector.
 dietox                  Growth curves of pigs in a 3x3 factorial
@@ -44,7 +45,7 @@ parseGroupFormula       Extract components from a formula with
 potatoes                Weight and size of 20 potatoes
 recodeVar               Recode values of a vector
 renameCol               Rename columns in a matrix or a dataframe.
-subSeq                  Find sub-sequences of identical elements in a
+sub_seq                 Find sub-sequences of identical elements in a
                         vector.
 taylor                  Taylor expansion (one dimension)
 tidy-esticon            Tidy an esticon object

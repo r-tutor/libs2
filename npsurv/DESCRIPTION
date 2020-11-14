@@ -1,21 +1,24 @@
 Package: npsurv
 Title: Nonparametric Survival Analysis
-Version: 0.4-0.1
-Date: 2017-10-13
+Version: 0.5-0
+Date: 2020-09-19
 Author: Yong Wang
-Maintainer: ORPHANED
+Maintainer: Yong Wang <yongwang@auckland.ac.nz>
 Depends: lsei
 Imports: methods
-Description: Contains functions for non-parametric survival analysis of
-	     exact and interval-censored observations. 
+Description: Non-parametric survival analysis of exact and
+	     interval-censored observations. The methods implemented
+	     are developed by Wang (2007)
+	     <doi:10.1111/j.1467-9868.2007.00583.x>, Wang (2008)
+	     <doi:10.1016/j.csda.2007.10.018>, Wang and Taylor (2013)
+	     <doi:10.1007/s11222-012-9341-9> and Wang and Fani (2018)
+	     <doi:10.1007/s11222-017-9724-z>.
+Encoding: UTF-8
 License: GPL (>= 2)
-URL: https://www.stat.auckland.ac.nz/~yongwang
+URL: https://www.stat.auckland.ac.nz/~yongwang/
+RoxygenNote: 7.1.1
 NeedsCompilation: no
-Packaged: 2020-05-06 11:39:49 UTC; ripley
+Packaged: 2020-09-19 02:02:58 UTC; yong
 Repository: CRAN
-Date/Publication: 2020-05-06 12:01:11 UTC
-X-CRAN-Original-Maintainer: Yong Wang <yongwang@auckland.ac.nz>
-X-CRAN-Comment: Orphaned on 2020-05-06 as requires 'lsei'
- .
- which is orphaned and by the same non-maintainer.
-Built: R 4.0.0; ; 2020-05-08 12:40:55 UTC; windows
+Date/Publication: 2020-09-20 14:40:11 UTC
+Built: R 4.0.3; ; 2020-10-15 19:44:10 UTC; windows

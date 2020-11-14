@@ -1,3 +1,45 @@
+# CHANGES IN blogdown VERSION 0.21
+
+## NEW FEATURES
+
+- The `Knit` button in RStudio finally works with **blogdown** now. My apologies to those who have desperately clicked the `Knit` button or pressed `Ctrl + Shift + K` in vain over the years. I completely underestimated the power of your muscle memory.
+
+- Added a global R option `blogdown.knit.on_save` to control whether to knit R Markdown documents on save. By default, it is `TRUE`. If you do not want to knit a document as you save it, you may set `options(blogdown.knit.on_save = FALSE)` in your `.Rprofile`. If this option is not set initially, it will be set to `FALSE` after you click the `Knit` button in RStudio.
+
+- `blogdown::build_site()` no longer recompiles R Markdown files by default, because it may be expensive and often undesirable to compile Rmd files that have been compiled before. If you do want to recompile Rmd files, you may use `blogdown::build_site(build_rmd = TRUE)`. See the help page `?blogdown::build_site` for more information.
+
+- Added a helper function `blogdown::bundle_site()` to move post files into leaf bundles in a website, e.g., from `content/foo/bar/hello-world.Rmd` to `content/foo/bar/hello-world/index.Rmd`.
+
+- Exported the (previously internal) function `blogdown::md5sum_filter` function (#341). See its potential application on the help page `?blogdown::build_site`.
+
+- Similarly, the function `blogdown::timestamp_filter()` has been exported and documented.
+
+- If a theme contains Hugo modules (e.g., the former hugo-academic theme), the modules will be resolved at the time when a theme is installed, which means users will not need to install Go or GIT to work with themes that contain Hugo modules.
+
+- Added a new function `hugo_available()` to check if Hugo with a minimal version is available.
+
+- Added functions `read_toml()` and `write_toml()` to read/write TOML data, and functions `toml2yaml()` and `yaml2toml()` to convert data between TOML and YAML. See their help pages for details.
+
+- Added the `keep_md` argument to `blogdown::html_page()` (thanks, @lazappi, #445).
+
+## MAJOR CHANGES
+
+- When creating a new site with `blogdown::new_site()`, the theme `gcushen/hugo-academic` is automatically redirected to `wowchemy/starter-academic`, because the original Github repo has moved and become a repo of Hugo modules.
+
+- The default value of the global option `blogdown.new_bundle` was changed from `FALSE` to `TRUE` if the site is built through Hugo >= v0.32. This means new posts will be created as leaf bundles, i.e., of the form `path/post-filename/index.md` instead of `path/post-filename.md` (the extension `.md` may also be `.Rmd` or `.Rmarkdown`). If you are not familiar with Hugo's page bundles, please see the documentation at: https://gohugo.io/content-management/page-bundles/. Using page bundles makes it much easier to manage resources like images. Without page bundles, these resources have to be placed under the `static/` directory, and cannot live together with posts under the `content/` directory. If you do not like this change, you may still set `options(blogdown.new_bundle = FALSE)` in your `.Rprofile`. If you do like page bundles and want to convert old posts into bundles, the function `blogdown::bundle_site()` may be helpful.
+
+- For page bundles, the `index_files/` and `index_cache/` folders are no longer moved to the `static/` directory (for other types of posts, these folders are still moved). Consequently, _you should not ignore `"_files$"` in the `ignoreFiles` field_ in your `config.toml` or `config.yaml` any more.
+
+- When opening a **blogdown** project in RStudio, `blogdown::serve_site()` will be automatically called, so you will get the preview of the site immediately. If you do not like this behavior, you may set `options(blogdown.serve_site.startup = FALSE)` in your `.Rprofile`.
+
+- The global option `blogdown.generator.server` has been deprecated. Now `blogdown::serve_site()` always use the Hugo server (which corresponds to `options(blogdown.generator.server = TRUE)` in previous version of **blogdown**), instead of the server created via the **servr** package (which corresponds to the default `options(blogdown.generator.server = FALSE)` before). The Hugo server is much faster, and also supports navigating to the output web page of which you are currently editing the source document. Note that the option `blogdown.hugo.server` is still supported (for setting command-line arguments for `hugo server`), and its default value is `c('-D', '-F', '--navigateToChanged')`.
+
+## MINOR CHANGES
+
+- The command-line argument `--navigateToChanged` is passed to `hugo server` by default now if the Hugo version is not older than 0.25. If you start a Hugo server to serve and watch the site, it will automatically navigate to the page corresponding to the changed file.
+
+- Images `tn.png` and `screenshot.png` under the `images/` directory of a theme will be deleted in `blogdown::install_theme()` because these are screenshots of a theme and don't affect the theme's function.
+
 # CHANGES IN blogdown VERSION 0.20
 
 ## BUG FIXES

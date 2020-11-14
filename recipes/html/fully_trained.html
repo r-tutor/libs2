@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Check to see if a recipe is trained/prepared</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for fully_trained {recipes}"><tr><td>fully_trained {recipes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Check to see if a recipe is trained/prepared</h2>
+
+<h3>Description</h3>
+
+<p>Check to see if a recipe is trained/prepared
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+fully_trained(x)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A recipe</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A logical which is true if all of the recipe steps have been run
+through <code>prep</code>. If no steps have been added to the recipe, <code>TRUE</code> is
+returned only if the recipe has been prepped.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+rec &lt;- recipe(Species ~ ., data = iris) %&gt;%
+  step_center(all_numeric())
+
+rec %&gt;% fully_trained()
+
+
+rec %&gt;% prep(training = iris) %&gt;% fully_trained()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>recipes</em> version 0.1.15 <a href="00Index.html">Index</a>]</div>
+</body></html>

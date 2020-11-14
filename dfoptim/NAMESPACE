@@ -5,5 +5,6 @@
 # Public routines
 export(hjk, hjkb)
 export(nmk, nmkb)
-
+export(mads)
+importFrom("stats", "runif")
 # S4 Methods

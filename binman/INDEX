@@ -1,9 +1,9 @@
 app_dir                 Get application directory
 assign_directory        Assign directory
-binman                  binman.
+binman                  binman
 download_files          Download binaries
 list_versions           List app versions
-noproc_dlfiles          Dont post process
+noproc_dlfiles          Do not post process
 predl_bitbucket_downloads
                         Pre download bitbucket downloads
 predl_github_assets     Pre download Github assets

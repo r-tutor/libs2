@@ -28,6 +28,7 @@ augment.logitmfx	augment.mfx
 augment.Mclust	augment.Mclust
 augment.mfx	augment.mfx
 augment.mjoint	augment.mjoint
+augment.mlogit	augment.mlogit
 augment.negbinmfx	augment.mfx
 augment.nlrq	augment.nlrq
 augment.nls	augment.nls
@@ -76,7 +77,7 @@ felm_tidiers	tidy.felm
 finish_glance	finish_glance
 fitdistr_tidiers	tidy.fitdistr
 fix_data_frame	fix_data_frame
-gam_tidiers	tidy.Gam
+gam_tidiers	tidy.gam
 garch_tidiers	tidy.garch
 geeglm_tidiers	tidy.geeglm
 geepack_tidiers	tidy.geeglm
@@ -91,6 +92,7 @@ glance.binDesign	glance.binDesign
 glance.cch	glance.cch
 glance.clm	glance.clm
 glance.clmm	glance.clmm
+glance.coeftest	glance.coeftest
 glance.coxph	glance.coxph
 glance.cv.glmnet	glance.cv.glmnet
 glance.data.frame	data.frame_tidiers
@@ -101,7 +103,7 @@ glance.factanal	glance.factanal
 glance.felm	glance.felm
 glance.fitdistr	glance.fitdistr
 glance.fixest	glance.fixest
-glance.gam	glance.Gam
+glance.gam	glance.gam
 glance.garch	glance.garch
 glance.geeglm	glance.geeglm
 glance.glm	glance.glm
@@ -118,9 +120,11 @@ glance.lmodel2	glance.lmodel2
 glance.lmRob	glance.lmRob
 glance.lmrob	glance.robustbase.lmrob
 glance.logitmfx	glance.mfx
+glance.margins	glance.margins
 glance.Mclust	glance.Mclust
 glance.mfx	glance.mfx
 glance.mjoint	glance.mjoint
+glance.mlogit	glance.mlogit
 glance.muhaz	glance.muhaz
 glance.multinom	glance.multinom
 glance.negbinmfx	glance.mfx
@@ -174,11 +178,13 @@ lmtest_tidiers	tidy.coeftest
 lm_tidiers	tidy.lm
 loess_tidiers	augment.loess
 maps_tidiers	tidy.map
+margins_tidiers	tidy.margins
 mclust_tidiers	tidy.Mclust
 mediate_tidiers	tidy.mediate
-mgcv_tidiers	tidy.Gam
+mgcv_tidiers	tidy.gam
 mjoint_tidiers	tidy.mjoint
 mle2_tidiers	tidy.mle2
+mlogit_tidiers	tidy.mlogit
 muhaz_tidiers	tidy.muhaz
 multcomp_tidiers	tidy.glht
 multinom_tidiers	tidy.multinom
@@ -261,7 +267,7 @@ tidy.felm	tidy.felm
 tidy.fitdistr	tidy.fitdistr
 tidy.fixest	tidy.fixest
 tidy.ftable	tidy.ftable
-tidy.gam	tidy.Gam
+tidy.gam	tidy.gam
 tidy.gamlss	tidy.gamlss
 tidy.garch	tidy.garch
 tidy.geeglm	tidy.geeglm
@@ -292,12 +298,14 @@ tidy.logitmfx	tidy.mfx
 tidy.lsmobj	tidy.lsmobj
 tidy.manova	tidy.manova
 tidy.map	tidy.map
+tidy.margins	tidy.margins
 tidy.Mclust	tidy.Mclust
 tidy.mediate	tidy.mediate
 tidy.mfx	tidy.mfx
 tidy.mjoint	tidy.mjoint
 tidy.mle2	tidy.mle2
 tidy.mlm	tidy.mlm
+tidy.mlogit	tidy.mlogit
 tidy.muhaz	tidy.muhaz
 tidy.multinom	tidy.multinom
 tidy.negbinmfx	tidy.mfx

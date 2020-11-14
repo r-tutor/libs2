@@ -27,6 +27,54 @@ document.addEventListener('DOMContentLoaded', function(e) {
   }
 });
 </script>
+<style type="text/css">
+a.anchor-section {margin-left: 10px; visibility: hidden; color: inherit;}
+a.anchor-section::before {content: '#';}
+.hasAnchor:hover a.anchor-section {visibility: visible;}
+</style>
+<script>// Anchor sections v1.0 written by Atsushi Yasumoto on Oct 3rd, 2020.
+document.addEventListener('DOMContentLoaded', function() {
+  // Do nothing if AnchorJS is used
+  if (typeof window.anchors === 'object' && anchors.hasOwnProperty('hasAnchorJSLink')) {
+    return;
+  }
+
+  const h = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+
+  // Do nothing if sections are already anchored
+  if (Array.from(h).some(x => x.classList.contains('hasAnchor'))) {
+    return null;
+  }
+
+  // Use section id when pandoc runs with --section-divs
+  const section_id = function(x) {
+    return ((x.classList.contains('section') || (x.tagName === 'SECTION'))
+            ? x.id : '');
+  };
+
+  // Add anchors
+  h.forEach(function(x) {
+    const id = x.id || section_id(x.parentElement);
+    if (id === '') {
+      return null;
+    }
+    let anchor = document.createElement('a');
+    anchor.href = '#' + id;
+    anchor.classList = ['anchor-section'];
+    x.classList.add('hasAnchor');
+    x.appendChild(anchor);
+  });
+});
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -316,41 +364,41 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 
 <p>There are two parts to dbplyr SQL translation: translating dplyr verbs, and translating expressions within those verbs. This vignette describes how individual expressions (function calls) are translated; <code>vignette(&quot;translate-verb&quot;)</code> describes how entire verbs are translated.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(dbplyr)</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(dplyr)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dbplyr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
 <p><code>dbplyr::translate_sql()</code> powers translation of individual function calls, and I’ll use it extensively in this vignette to show what’s happening. You shouldn’t need to use it ordinary code as dbplyr takes care of the translation automatically.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">translate_sql</span>((x <span class="op">+</span><span class="st"> </span>y) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)</span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="co">#&gt; &lt;SQL&gt; (`x` + `y`) / 2.0</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">translate_sql</span>((x <span class="sc">+</span> y) <span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;SQL&gt; (`x` + `y`) / 2.0</span></span></code></pre></div>
 <p><code>translate_sql()</code> takes an optional <code>con</code> parameter. If not supplied, this causes dplyr to generate (approximately) SQL-92 compliant SQL. If supplied, dplyr uses <code>sql_translate_env()</code> to look up a custom environment which makes it possible for different databases to generate slightly different SQL: see <code>vignette(&quot;new-backend&quot;)</code> for more details. You can use the various simulate helpers to see the translations used by different backends:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">translate_sql</span>(x <span class="op">^</span><span class="st"> </span>2L)</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="co">#&gt; &lt;SQL&gt; POWER(`x`, 2)</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">translate_sql</span>(x <span class="op">^</span><span class="st"> </span>2L, <span class="dt">con =</span> <span class="kw">simulate_sqlite</span>())</span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="co">#&gt; &lt;SQL&gt; POWER(`x`, 2)</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="kw">translate_sql</span>(x <span class="op">^</span><span class="st"> </span>2L, <span class="dt">con =</span> <span class="kw">simulate_access</span>())</span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="co">#&gt; &lt;SQL&gt; `x` ^ 2</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">translate_sql</span>(x <span class="sc">^</span> 2L)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;SQL&gt; POWER(`x`, 2)</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">translate_sql</span>(x <span class="sc">^</span> 2L, <span class="at">con =</span> <span class="fu">simulate_sqlite</span>())</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;SQL&gt; POWER(`x`, 2)</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">translate_sql</span>(x <span class="sc">^</span> 2L, <span class="at">con =</span> <span class="fu">simulate_access</span>())</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;SQL&gt; `x` ^ 2</span></span></code></pre></div>
 <p>Perfect translation is not possible because databases don’t have all the functions that R does. The goal of dplyr is to provide a semantic rather than a literal translation: what you mean, rather than precisely what is done. In fact, even for functions that exist both in databases and R, you shouldn’t expect results to be identical; database programmers have different priorities than R core programmers. For example, in R in order to get a higher level of numerical accuracy, <code>mean()</code> loops through the data twice. R’s <code>mean()</code> also provides a <code>trim</code> option for computing trimmed means; this is something that databases do not provide.</p>
-<p>If you’re interested in how <code>translate_sql()</code> is implemented, the basic techniques that underlie the implementation of <code>translate_sql()</code> are described in <a href="http://adv-r.hadley.nz/translation.html">“Advanced R”</a>.</p>
+<p>If you’re interested in how <code>translate_sql()</code> is implemented, the basic techniques that underlie the implementation of <code>translate_sql()</code> are described in <a href="https://adv-r.hadley.nz/translation.html">“Advanced R”</a>.</p>
 <div id="basic-differences" class="section level2">
 <h2>Basic differences</h2>
 <p>The following examples work through some of the basic differences between R and SQL.</p>
 <ul>
 <li><p><code>&quot;</code> and <code>&#39;</code> mean different things</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># In SQLite variable names are escaped by double quotes:</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">translate_sql</span>(x)</span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt; &lt;SQL&gt; `x`</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="co"># And strings are escaped by single quotes</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="kw">translate_sql</span>(<span class="st">&quot;x&quot;</span>)</span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="co">#&gt; &lt;SQL&gt; &#39;x&#39;</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In SQLite variable names are escaped by double quotes:</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">translate_sql</span>(x)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;SQL&gt; `x`</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># And strings are escaped by single quotes</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">translate_sql</span>(<span class="st">&quot;x&quot;</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;SQL&gt; &#39;x&#39;</span></span></code></pre></div></li>
 <li><p>And some functions have different argument orders:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">translate_sql</span>(<span class="kw">substr</span>(x, <span class="dv">5</span>, <span class="dv">10</span>))</span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="co">#&gt; &lt;SQL&gt; SUBSTR(`x`, 5, 6)</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">translate_sql</span>(<span class="kw">log</span>(x, <span class="dv">10</span>))</span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="co">#&gt; &lt;SQL&gt; LOG(10.0, `x`)</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">translate_sql</span>(<span class="fu">substr</span>(x, <span class="dv">5</span>, <span class="dv">10</span>))</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;SQL&gt; SUBSTR(`x`, 5, 6)</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">translate_sql</span>(<span class="fu">log</span>(x, <span class="dv">10</span>))</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;SQL&gt; LOG(10.0, `x`)</span></span></code></pre></div></li>
 <li><p>R and SQL have different defaults for integers and reals. In R, 1 is a real, and 1L is an integer. In SQL, 1 is an integer, and 1.0 is a real</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">translate_sql</span>(<span class="dv">1</span>)</span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="co">#&gt; &lt;SQL&gt; 1.0</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="kw">translate_sql</span>(1L)</span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt; &lt;SQL&gt; 1</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">translate_sql</span>(<span class="dv">1</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;SQL&gt; 1.0</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">translate_sql</span>(1L)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;SQL&gt; 1</span></span></code></pre></div></li>
 </ul>
 </div>
 <div id="known-functions" class="section level2">
@@ -368,31 +416,31 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 </div>
 <div id="modulo-arithmetic" class="section level2">
 <h2>Modulo arithmetic</h2>
-<p>dbplyr translates <code>%%</code> and <code>%/%</code> to their SQL equivalents but note that they are not precisely the same: most databases use truncated division where the modulo operator takes the sign of the dividend, where R using the mathematically preferred floored division with the modulo sign taking the sign of the divisor.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>df &lt;-<span class="st"> </span><span class="kw">tibble</span>(</span>
-<span id="cb7-2"><a href="#cb7-2"></a>  <span class="dt">x =</span> <span class="kw">c</span>(10L, 10L, <span class="op">-</span>10L, <span class="op">-</span>10L), </span>
-<span id="cb7-3"><a href="#cb7-3"></a>  <span class="dt">y =</span> <span class="kw">c</span>(3L, <span class="op">-</span>3L, 3L, <span class="op">-</span>3L)</span>
-<span id="cb7-4"><a href="#cb7-4"></a>)</span>
-<span id="cb7-5"><a href="#cb7-5"></a>mf &lt;-<span class="st"> </span><span class="kw">tbl_memdb</span>(df)</span>
-<span id="cb7-6"><a href="#cb7-6"></a></span>
-<span id="cb7-7"><a href="#cb7-7"></a>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(x <span class="op">%%</span><span class="st"> </span>y, x <span class="op">%/%</span><span class="st"> </span>y)</span>
-<span id="cb7-8"><a href="#cb7-8"></a><span class="co">#&gt; # A tibble: 4 x 4</span></span>
-<span id="cb7-9"><a href="#cb7-9"></a><span class="co">#&gt;       x     y `x%%y` `x%/%y`</span></span>
-<span id="cb7-10"><a href="#cb7-10"></a><span class="co">#&gt;   &lt;int&gt; &lt;int&gt;  &lt;int&gt;   &lt;int&gt;</span></span>
-<span id="cb7-11"><a href="#cb7-11"></a><span class="co">#&gt; 1    10     3      1       3</span></span>
-<span id="cb7-12"><a href="#cb7-12"></a><span class="co">#&gt; 2    10    -3     -2      -4</span></span>
-<span id="cb7-13"><a href="#cb7-13"></a><span class="co">#&gt; 3   -10     3      2      -4</span></span>
-<span id="cb7-14"><a href="#cb7-14"></a><span class="co">#&gt; 4   -10    -3     -1       3</span></span>
-<span id="cb7-15"><a href="#cb7-15"></a></span>
-<span id="cb7-16"><a href="#cb7-16"></a>mf <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(x <span class="op">%%</span><span class="st"> </span>y, x <span class="op">%/%</span><span class="st"> </span>y)</span>
-<span id="cb7-17"><a href="#cb7-17"></a><span class="co">#&gt; # Source:   lazy query [?? x 4]</span></span>
-<span id="cb7-18"><a href="#cb7-18"></a><span class="co">#&gt; # Database: sqlite 3.30.1 [:memory:]</span></span>
-<span id="cb7-19"><a href="#cb7-19"></a><span class="co">#&gt;       x     y `x%%y` `x%/%y`</span></span>
-<span id="cb7-20"><a href="#cb7-20"></a><span class="co">#&gt;   &lt;int&gt; &lt;int&gt;  &lt;int&gt;   &lt;int&gt;</span></span>
-<span id="cb7-21"><a href="#cb7-21"></a><span class="co">#&gt; 1    10     3      1       3</span></span>
-<span id="cb7-22"><a href="#cb7-22"></a><span class="co">#&gt; 2    10    -3      1      -3</span></span>
-<span id="cb7-23"><a href="#cb7-23"></a><span class="co">#&gt; 3   -10     3     -1      -3</span></span>
-<span id="cb7-24"><a href="#cb7-24"></a><span class="co">#&gt; 4   -10    -3     -1       3</span></span></code></pre></div>
+<p>dbplyr translates <code>%%</code> to the SQL equivalents but note that it’s not precisely the same: most databases use truncated division where the modulo operator takes the sign of the dividend, where R using the mathematically preferred floored division with the modulo sign taking the sign of the divisor.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">c</span>(10L, 10L, <span class="sc">-</span>10L, <span class="sc">-</span>10L), </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">c</span>(3L, <span class="sc">-</span>3L, 3L, <span class="sc">-</span>3L)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>mf <span class="ot">&lt;-</span> <span class="fu">tbl_memdb</span>(df)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(x <span class="sc">%%</span> y)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 4 x 3</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       x     y `x%%y`</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;int&gt; &lt;int&gt;  &lt;int&gt;</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    10     3      1</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    10    -3     -2</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3   -10     3      2</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4   -10    -3     -1</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>mf <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(x <span class="sc">%%</span> y)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # Source:   lazy query [?? x 3]</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # Database: sqlite 3.30.1 [:memory:]</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       x     y `x%%y`</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;int&gt; &lt;int&gt;  &lt;int&gt;</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    10     3      1</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    10    -3      1</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3   -10     3     -1</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4   -10    -3     -1</span></span></code></pre></div>
+<p>dbplyr no longer translates <code>%/%</code> because there’s no robust cross-database translation available.</p>
 <div id="logical-comparisons" class="section level3">
 <h3>Logical comparisons</h3>
 <ul>
@@ -403,24 +451,24 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <div id="aggregation" class="section level3">
 <h3>Aggregation</h3>
 <p>All database provide translation for the basic aggregations: <code>mean()</code>, <code>sum()</code>, <code>min()</code>, <code>max()</code>, <code>sd()</code>, <code>var()</code>. Databases automatically drop NULLs (their equivalent of missing values) whereas in R you have to ask nicely. The aggregation functions warn you about this important difference:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">translate_sql</span>(<span class="kw">mean</span>(x))</span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="co">#&gt; Warning: Missing values are always removed in SQL.</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="co">#&gt; Use `AVG(x, na.rm = TRUE)` to silence this warning</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="co">#&gt; This warning is displayed only once per session.</span></span>
-<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#&gt; &lt;SQL&gt; AVG(`x`) OVER ()</span></span>
-<span id="cb8-6"><a href="#cb8-6"></a><span class="kw">translate_sql</span>(<span class="kw">mean</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</span>
-<span id="cb8-7"><a href="#cb8-7"></a><span class="co">#&gt; &lt;SQL&gt; AVG(`x`) OVER ()</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">translate_sql</span>(<span class="fu">mean</span>(x))</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: Missing values are always removed in SQL.</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Use `AVG(x, na.rm = TRUE)` to silence this warning</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; This warning is displayed only once per session.</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;SQL&gt; AVG(`x`) OVER ()</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">translate_sql</span>(<span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;SQL&gt; AVG(`x`) OVER ()</span></span></code></pre></div>
 <p>Note that, by default, <code>translate()</code> assumes that the call is inside a <code>mutate()</code> or <code>filter()</code> and generates a window translation. If you want to see the equivalent <code>summarise()</code>/aggregation translation, use <code>window = FALSE</code>:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">translate_sql</span>(<span class="kw">mean</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), <span class="dt">window =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="co">#&gt; &lt;SQL&gt; AVG(`x`)</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">translate_sql</span>(<span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">window =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;SQL&gt; AVG(`x`)</span></span></code></pre></div>
 </div>
 <div id="conditional-evaluation" class="section level3">
 <h3>Conditional evaluation</h3>
 <p><code>if</code> and <code>switch()</code> are translate to <code>CASE WHEN</code>:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">translate_sql</span>(<span class="cf">if</span> (x <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span>) <span class="st">&quot;big&quot;</span> <span class="cf">else</span> <span class="st">&quot;small&quot;</span>)</span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="co">#&gt; &lt;SQL&gt; CASE WHEN (`x` &gt; 5.0) THEN (&#39;big&#39;) WHEN NOT(`x` &gt; 5.0) THEN (&#39;small&#39;) </span><span class="re">END</span></span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="kw">translate_sql</span>(<span class="cf">switch</span>(x, <span class="dt">a =</span> 1L, <span class="dt">b =</span> 2L, 3L))</span>
-<span id="cb10-4"><a href="#cb10-4"></a><span class="co">#&gt; &lt;SQL&gt; CASE `x` WHEN (&#39;a&#39;) THEN (1) WHEN (&#39;b&#39;) THEN (2) ELSE (3) </span><span class="re">END</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">translate_sql</span>(<span class="cf">if</span> (x <span class="sc">&gt;</span> <span class="dv">5</span>) <span class="st">&quot;big&quot;</span> <span class="cf">else</span> <span class="st">&quot;small&quot;</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;SQL&gt; CASE WHEN (`x` &gt; 5.0) THEN (&#39;big&#39;) WHEN NOT(`x` &gt; 5.0) THEN (&#39;small&#39;) </span><span class="re">END</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">translate_sql</span>(<span class="cf">switch</span>(x, <span class="at">a =</span> 1L, <span class="at">b =</span> 2L, 3L))</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;SQL&gt; CASE `x` WHEN (&#39;a&#39;) THEN (1) WHEN (&#39;b&#39;) THEN (2) ELSE (3) </span><span class="re">END</span></span></code></pre></div>
 </div>
 <div id="string-manipulation" class="section level3">
 <h3>String manipulation</h3>
@@ -435,11 +483,11 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 </div>
 <div id="unknown-functions" class="section level2">
 <h2>Unknown functions</h2>
-<p>Any function that dplyr doesn’t know how to convert is left as is. This means that database functions that are not covered by dplyr can be used directly via <code>translate_sql()</code>. Here a couple of examples that will work with <a href="http://www.sqlite.org/lang_corefunc.html">SQLite</a>:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">translate_sql</span>(<span class="kw">glob</span>(x, y))</span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="co">#&gt; &lt;SQL&gt; glob(`x`, `y`)</span></span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="kw">translate_sql</span>(x <span class="op">%like%</span><span class="st"> &quot;ab%&quot;</span>)</span>
-<span id="cb11-4"><a href="#cb11-4"></a><span class="co">#&gt; &lt;SQL&gt; `x` like &#39;ab%&#39;</span></span></code></pre></div>
+<p>Any function that dplyr doesn’t know how to convert is left as is. This means that database functions that are not covered by dplyr can be used directly via <code>translate_sql()</code>. Here a couple of examples that will work with <a href="https://www.sqlite.org/lang_corefunc.html">SQLite</a>:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">translate_sql</span>(<span class="fu">glob</span>(x, y))</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;SQL&gt; glob(`x`, `y`)</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">translate_sql</span>(x <span class="sc">%like%</span> <span class="st">&quot;ab%&quot;</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;SQL&gt; `x` like &#39;ab%&#39;</span></span></code></pre></div>
 <p>See <code>vignette(&quot;sql&quot;)</code> for more details.</p>
 </div>
 <div id="window-functions" class="section level2">
@@ -460,19 +508,19 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <p>dplyr generates the frame clause based on whether your using a recycled aggregate or a cumulative aggregate.</p></li>
 </ul>
 <p>To see how individual window functions are translated to SQL, we can again use <code>translate_sql()</code>:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">translate_sql</span>(<span class="kw">mean</span>(G))</span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="co">#&gt; &lt;SQL&gt; AVG(`G`) OVER ()</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a><span class="kw">translate_sql</span>(<span class="kw">rank</span>(G))</span>
-<span id="cb12-4"><a href="#cb12-4"></a><span class="co">#&gt; &lt;SQL&gt; RANK() OVER (ORDER BY `G`)</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a><span class="kw">translate_sql</span>(<span class="kw">ntile</span>(G, <span class="dv">2</span>))</span>
-<span id="cb12-6"><a href="#cb12-6"></a><span class="co">#&gt; &lt;SQL&gt; NTILE(2) OVER (ORDER BY `G`)</span></span>
-<span id="cb12-7"><a href="#cb12-7"></a><span class="kw">translate_sql</span>(<span class="kw">lag</span>(G))</span>
-<span id="cb12-8"><a href="#cb12-8"></a><span class="co">#&gt; &lt;SQL&gt; LAG(`G`, 1, NULL) OVER ()</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">translate_sql</span>(<span class="fu">mean</span>(G))</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;SQL&gt; AVG(`G`) OVER ()</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">translate_sql</span>(<span class="fu">rank</span>(G))</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;SQL&gt; RANK() OVER (ORDER BY `G`)</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">translate_sql</span>(<span class="fu">ntile</span>(G, <span class="dv">2</span>))</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;SQL&gt; NTILE(2) OVER (ORDER BY `G`)</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="fu">translate_sql</span>(<span class="fu">lag</span>(G))</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;SQL&gt; LAG(`G`, 1, NULL) OVER ()</span></span></code></pre></div>
 <p>If the tbl has been grouped or arranged previously in the pipeline, then dplyr will use that information to set the “partition by” and “order by” clauses. For interactive exploration, you can achieve the same effect by setting the <code>vars_group</code> and <code>vars_order</code> arguments to <code>translate_sql()</code></p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">translate_sql</span>(<span class="kw">cummean</span>(G), <span class="dt">vars_order =</span> <span class="st">&quot;year&quot;</span>)</span>
-<span id="cb13-2"><a href="#cb13-2"></a><span class="co">#&gt; &lt;SQL&gt; AVG(`G`) OVER (ORDER BY `year` ROWS UNBOUNDED PRECEDING)</span></span>
-<span id="cb13-3"><a href="#cb13-3"></a><span class="kw">translate_sql</span>(<span class="kw">rank</span>(), <span class="dt">vars_group =</span> <span class="st">&quot;ID&quot;</span>)</span>
-<span id="cb13-4"><a href="#cb13-4"></a><span class="co">#&gt; &lt;SQL&gt; RANK() OVER (PARTITION BY `ID`)</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">translate_sql</span>(<span class="fu">cummean</span>(G), <span class="at">vars_order =</span> <span class="st">&quot;year&quot;</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;SQL&gt; AVG(`G`) OVER (ORDER BY `year` ROWS UNBOUNDED PRECEDING)</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">translate_sql</span>(<span class="fu">rank</span>(), <span class="at">vars_group =</span> <span class="st">&quot;ID&quot;</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;SQL&gt; RANK() OVER (PARTITION BY `ID`)</span></span></code></pre></div>
 <p>There are some challenges when translating window functions between R and SQL, because dplyr tries to keep the window functions as similar as possible to both the existing R analogues and to the SQL functions. This means that there are three ways to control the order clause depending on which window function you’re using:</p>
 <ul>
 <li><p>For ranking functions, the ordering variable is the first argument: <code>rank(x)</code>, <code>ntile(y, 2)</code>. If omitted or <code>NULL</code>, will use the default ordering associated with the tbl (as set by <code>arrange()</code>).</p></li>
@@ -480,11 +528,11 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <li><p>Aggregates implemented in dplyr (<code>lead</code>, <code>lag</code>, <code>nth_value</code>, <code>first_value</code>, <code>last_value</code>) have an <code>order_by</code> argument. Supply it to override the default ordering.</p></li>
 </ul>
 <p>The three options are illustrated in the snippet below:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">mutate</span>(players,</span>
-<span id="cb14-2"><a href="#cb14-2"></a>  <span class="kw">min_rank</span>(yearID),</span>
-<span id="cb14-3"><a href="#cb14-3"></a>  <span class="kw">order_by</span>(yearID, <span class="kw">cumsum</span>(G)),</span>
-<span id="cb14-4"><a href="#cb14-4"></a>  <span class="kw">lead</span>(G, <span class="dt">order_by =</span> yearID)</span>
-<span id="cb14-5"><a href="#cb14-5"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(players,</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">min_rank</span>(yearID),</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">order_by</span>(yearID, <span class="fu">cumsum</span>(G)),</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lead</span>(G, <span class="at">order_by =</span> yearID)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>Currently there is no way to order by multiple variables, except by setting the default ordering with <code>arrange()</code>. This will be added in a future release.</p>
 </div>
 

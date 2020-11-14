@@ -2,6 +2,12 @@
   dfoptim                                                               NEWS
 ------------------------------------------------------------------------------
 
+Changes in version 2020.10-1 (2020-10-19)
+
+    o Added a new derivative free optimizer called MADS: mesh-adaptive direct solver (contributed by Vincent Bechard of Montreal University)
+
+    o In Nelder-Mead, changed the `sgrad' computation back to the original cross-product rather than the (correct) inverse, since this seems to provide better performance
+
 Changes in version 2018.2-1 (2018-4-01)
 	o Set oshrink=1 to enable "restarting" of Nelder-Mead due to stagnation (thanks to Simon Wessing)
 

@@ -1,6 +1,7 @@
 addHtmlTableStyle	addStyles
 appendHtmlTableStyle	addStyles
 concatHtmlTables	concatHtmlTables
+getHtmlTableStyle	getHtmlTableStyle
 getHtmlTableTheme	getHtmlTableTheme
 hasHtmlTableStyle	hasHtmlTableStyle
 htmlTable	htmlTable
@@ -15,6 +16,7 @@ knit_print.htmlTable	htmlTable
 knit_print.interactiveTable	interactiveTable
 outputInt	outputInt
 prAddCells	prAddCells
+prAddEmptySpacerCell	prAddEmptySpacerCell
 prAddSemicolon2StrEnd	prAddSemicolon2StrEnd
 prAttr4RgroupAdd	prAttr4RgroupAdd
 prBindDataListIntoColumns	prBindDataListIntoColumns

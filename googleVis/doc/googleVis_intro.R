@@ -1,6 +1,5 @@
 ## ----options, echo=FALSE, warning=FALSE, message=FALSE------------------------
 library(knitr)
-library(knitcitations)
 Rpackage <- function (pkg) {sprintf("*%s*", pkg)}
 CRANpkg <- function (pkg){
     cran <- "https://CRAN.R-project.org/package"

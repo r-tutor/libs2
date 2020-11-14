@@ -1,3 +1,15 @@
+		 CHANGES IN servr VERSION 0.20
+
+MINOR CHANGES
+
+- `server_config()` will add a leading `/` to `baseurl` if it has not already been included.
+
+		 CHANGES IN servr VERSION 0.19
+
+MINOR CHANGES
+
+- `server_config()` also returns the `daemon` value in the list.
+
 		 CHANGES IN servr VERSION 0.18
 
 BUG FIXES

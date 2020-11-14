@@ -1,6 +1,6 @@
 Package: binman
 Title: A Binary Download Manager
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: c(
     person("John", "Harrison", , "johndharrison0@gmail.com",
     role = "aut", comment = "original author"),
@@ -17,16 +17,16 @@ LazyData: true
 Suggests: testthat, covr, knitr, rmarkdown
 Imports: rappdirs, yaml, httr, jsonlite, xml2, utils, stats,
         assertthat, semver
-URL: https://github.com/ropensci/binman
-URLNote: https://github.com/ropensci/binman
+URL: https://docs.ropensci.org/binman/,
+        https://github.com/ropensci/binman
 BugReports: https://github.com/ropensci/binman/issues
-RoxygenNote: 6.0.1
+RoxygenNote: 7.1.1
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2018-07-17 23:07:40 UTC; jkim
+Packaged: 2020-10-02 20:55:29 UTC; jkim
 Author: John Harrison [aut] (original author),
   Ju Yeong Kim [cre] (rOpenSci maintainer)
 Maintainer: Ju Yeong Kim <jkim2345@fredhutch.org>
 Repository: CRAN
-Date/Publication: 2018-07-18 22:40:08 UTC
-Built: R 4.0.0; ; 2020-05-02 23:17:22 UTC; windows
+Date/Publication: 2020-10-02 21:22:05 UTC
+Built: R 4.0.3; ; 2020-11-09 08:57:44 UTC; windows

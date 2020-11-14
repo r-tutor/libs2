@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Rename variables by name</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for step_rename {recipes}"><tr><td>step_rename {recipes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Rename variables by name</h2>
+
+<h3>Description</h3>
+
+<p><code>step_rename</code> creates a <em>specification</em> of a recipe step that will add
+variables using <code><a href="../../dplyr/html/rename.html">dplyr::rename()</a></code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+step_rename(
+  recipe,
+  ...,
+  role = "predictor",
+  trained = FALSE,
+  inputs = NULL,
+  skip = FALSE,
+  id = rand_id("rename")
+)
+
+## S3 method for class 'step_rename'
+tidy(x, ...)
+
+## S3 method for class 'step_rename_at'
+tidy(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>recipe</code></td>
+<td>
+<p>A recipe object. The step will be added to the
+sequence of operations for this recipe.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>One or more unquoted expressions separated by commas. See
+<code><a href="../../dplyr/html/rename.html">dplyr::rename()</a></code> where the convention is <strong><code>new_name = old_name</code></strong>.</p>
+</td></tr>
+<tr valign="top"><td><code>role</code></td>
+<td>
+<p>For model terms created by this step, what analysis role should
+they be assigned? By default, the function assumes that the new dimension
+columns created by the original variables will be used as predictors in a
+model.</p>
+</td></tr>
+<tr valign="top"><td><code>trained</code></td>
+<td>
+<p>A logical to indicate if the quantities for
+preprocessing have been estimated.</p>
+</td></tr>
+<tr valign="top"><td><code>inputs</code></td>
+<td>
+<p>Quosure(s) of <code>...</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>skip</code></td>
+<td>
+<p>A logical. Should the step be skipped when the
+recipe is baked by <code><a href="bake.html">bake.recipe()</a></code>? While all operations are baked
+when <code><a href="prep.html">prep.recipe()</a></code> is run, some operations may not be able to be
+conducted on new data (e.g. processing the outcome variable(s)).
+Care should be taken when using <code>skip = TRUE</code> as it may affect
+the computations for subsequent operations</p>
+</td></tr>
+<tr valign="top"><td><code>id</code></td>
+<td>
+<p>A character string that is unique to this step to identify it.</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A <code>step_rename</code> object</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>When an object in the user's global environment is referenced in
+the expression defining the new variable(s), it is a good idea to use
+quasiquotation (e.g. <code style="white-space: pre;">!!</code>) to embed the value of the object in the
+expression (to be portable between sessions).
+</p>
+
+
+<h3>Value</h3>
+
+<p>An updated version of <code>recipe</code> with the new step added to the
+sequence of existing steps (if any). For the <code>tidy</code> method, a tibble with
+columns <code>values</code> which contains the <code>rename</code> expressions as character
+strings (and are not reparsable).
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+recipe( ~ ., data = iris) %&gt;%
+  step_rename(Sepal_Width = Sepal.Width) %&gt;%
+  prep() %&gt;%
+  bake(new_data = NULL) %&gt;%
+  slice(1:5)
+
+vars &lt;- c(var1 = "cyl", var2 = "am")
+car_rec &lt;-
+  recipe(~ ., data = mtcars) %&gt;%
+  step_rename(!!vars)
+
+car_rec %&gt;%
+  prep() %&gt;%
+  bake(new_data = NULL)
+
+car_rec %&gt;%
+  tidy(number = 1)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>recipes</em> version 0.1.15 <a href="00Index.html">Index</a>]</div>
+</body></html>

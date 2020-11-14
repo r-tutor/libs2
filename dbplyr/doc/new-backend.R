@@ -13,12 +13,7 @@ DBI::dbWriteTable(con, "mtcars", mtcars)
 tbl(con, "mtcars")
 
 ## -----------------------------------------------------------------------------
+#' @importFrom dbplyr dbplyr_edition
 #' @export
-db_desc.PostgreSQLConnection <- function(x) {
-  info <- dbGetInfo(x)
-  host <- if (info$host == "") "localhost" else info$host
-
-  paste0("postgres ", info$serverVersion, " [", info$user, "@",
-    host, ":", info$port, "/", info$dbname, "]")
-}
+dbplyr_edition.myConnectionClass <- function(con) 2L
 

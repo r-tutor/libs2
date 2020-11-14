@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Methods for Selecting Variables in Step Functions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for selections {recipes}"><tr><td>selections {recipes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Methods for Selecting Variables in Step Functions</h2>
+
+<h3>Description</h3>
+
+<p>When selecting variables or model terms in <code>step</code>
+functions, <code>dplyr</code>-like tools are used. The <em>selector</em> functions
+can choose variables based on their name, current role, data
+type, or any combination of these. The selectors are passed as
+any other argument to the step. If the variables are explicitly
+stated in the step function, this might be similar to:
+</p>
+<pre>
+  recipe( ~ ., data = USArrests) %&gt;%
+    step_pca(Murder, Assault, UrbanPop, Rape, num_comp = 3)
+</pre>
+<p>The first four arguments indicate which variables should be
+used in the PCA while the last argument is a specific argument
+to <code><a href="step_pca.html">step_pca()</a></code>.
+</p>
+<p>Note that:
+</p>
+
+<ol>
+<li><p> These arguments are not evaluated until the <code>prep</code>
+function for the step is executed.
+</p>
+</li>
+<li><p> The <code>dplyr</code>-like syntax allows for negative signs to
+exclude variables (e.g. <code>-Murder</code>) and the set of selectors will
+processed in order.
+</p>
+</li>
+<li><p> A leading exclusion in these arguments (e.g. <code>-Murder</code>)
+has the effect of adding all variables to the list except the
+excluded variable(s).
+</p>
+</li></ol>
+
+<p>Also, select helpers from the <code>tidyselect</code> package can also be used:
+<code><a href="../../tidyselect/html/starts_with.html">tidyselect::starts_with()</a></code>, <code><a href="../../tidyselect/html/starts_with.html">tidyselect::ends_with()</a></code>,
+<code><a href="../../tidyselect/html/starts_with.html">tidyselect::contains()</a></code>, <code><a href="../../tidyselect/html/starts_with.html">tidyselect::matches()</a></code>,
+<code><a href="../../tidyselect/html/starts_with.html">tidyselect::num_range()</a></code>, <code><a href="../../tidyselect/html/everything.html">tidyselect::everything()</a></code>,
+<code><a href="../../tidyselect/html/one_of.html">tidyselect::one_of()</a></code>, <code><a href="../../tidyselect/html/all_of.html">tidyselect::all_of()</a></code>, and
+<code><a href="../../tidyselect/html/all_of.html">tidyselect::any_of()</a></code>
+</p>
+<p>For example:
+</p>
+<pre>
+  recipe(Species ~ ., data = iris) %&gt;%
+    step_center(starts_with("Sepal"), -contains("Width"))
+</pre>
+<p>would only select <code>Sepal.Length</code>
+</p>
+<p>Columns of the design matrix that may not exist when the step
+is coded can also be selected. For example, when using
+<code>step_pca()</code>, the number of columns created by feature extraction
+may not be known when subsequent steps are defined. In this
+case, using <code>matches("^PC")</code> will select all of the columns
+whose names start with &quot;PC&quot; <em>once those columns are created</em>.
+</p>
+<p>There are sets of recipes specific functions that can be used to select
+variables based on their role or type: <code><a href="has_role.html">has_role()</a></code> and
+<code><a href="has_role.html">has_type()</a></code>. For convenience, there are also functions that are
+more specific: <code><a href="has_role.html">all_numeric()</a></code>, <code><a href="has_role.html">all_nominal()</a></code>,
+<code><a href="has_role.html">all_predictors()</a></code>, and <code><a href="has_role.html">all_outcomes()</a></code>. These can be used in
+conjunction with the previous functions described for selecting
+variables using their names:
+</p>
+<pre>
+  data(biomass)
+  recipe(HHV ~ ., data = biomass) %&gt;%
+    step_center(all_numeric(), -all_outcomes())
+</pre>
+<p>This results in all the numeric predictors: carbon, hydrogen,
+oxygen, nitrogen, and sulfur.
+</p>
+<p>If a role for a variable has not been defined, it will never be
+selected using role-specific selectors.
+</p>
+<p>Selectors can be used in <code><a href="step_interact.html">step_interact()</a></code> in similar ways but
+must be embedded in a model formula (as opposed to a sequence
+of selectors). For example, the interaction specification
+could be <code>~ starts_with("Species"):Sepal.Width</code>. This can be
+useful if <code>Species</code> was converted to dummy variables
+previously using <code><a href="step_dummy.html">step_dummy()</a></code>. The implementation of
+<code>step_interact()</code> is special, and is more restricted than
+the other step functions. Only the selector functions from
+recipes and tidyselect are allowed. User defined selector functions
+will not be recognized. Additionally, the tidyselect domain specific
+language is not recognized here, meaning that <code>&amp;</code>, <code>|</code>, <code>!</code>, and <code>-</code>
+will not work.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>recipes</em> version 0.1.15 <a href="00Index.html">Index</a>]</div>
+</body></html>

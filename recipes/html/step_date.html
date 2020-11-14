@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Date Feature Generator</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for step_date {recipes}"><tr><td>step_date {recipes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Date Feature Generator</h2>
+
+<h3>Description</h3>
+
+<p><code>step_date</code> creates a <em>specification</em> of a recipe
+step that will convert date data into one or more factor or
+numeric variables.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+step_date(
+  recipe,
+  ...,
+  role = "predictor",
+  trained = FALSE,
+  features = c("dow", "month", "year"),
+  abbr = TRUE,
+  label = TRUE,
+  ordinal = FALSE,
+  columns = NULL,
+  skip = FALSE,
+  id = rand_id("date")
+)
+
+## S3 method for class 'step_date'
+tidy(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>recipe</code></td>
+<td>
+<p>A recipe object. The step will be added to the
+sequence of operations for this recipe.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>One or more selector functions to choose which
+variables that will be used to create the new variables. The
+selected variables should have class <code>Date</code> or
+<code>POSIXct</code>. See <code><a href="selections.html">selections()</a></code> for more details.
+For the <code>tidy</code> method, these are not currently used.</p>
+</td></tr>
+<tr valign="top"><td><code>role</code></td>
+<td>
+<p>For model terms created by this step, what analysis
+role should they be assigned?. By default, the function assumes
+that the new variable columns created by the original variables
+will be used as predictors in a model.</p>
+</td></tr>
+<tr valign="top"><td><code>trained</code></td>
+<td>
+<p>A logical to indicate if the quantities for
+preprocessing have been estimated.</p>
+</td></tr>
+<tr valign="top"><td><code>features</code></td>
+<td>
+<p>A character string that includes at least one
+of the following values: <code>month</code>, <code>dow</code> (day of week),
+<code>doy</code> (day of year), <code>week</code>, <code>month</code>,
+<code>decimal</code> (decimal date, e.g. 2002.197), <code>quarter</code>,
+<code>semester</code>, <code>year</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>abbr</code></td>
+<td>
+<p>A logical. Only available for features <code>month</code>
+or <code>dow</code>. <code>FALSE</code> will display the day of the week as
+an ordered factor of character strings, such as &quot;Sunday&quot;.
+<code>TRUE</code> will display an abbreviated version of the label,
+such as &quot;Sun&quot;. <code>abbr</code> is disregarded if <code>label = FALSE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>label</code></td>
+<td>
+<p>A logical. Only available for features
+<code>month</code> or <code>dow</code>. <code>TRUE</code> will display the day of
+the week as an ordered factor of character strings, such as
+&quot;Sunday.&quot; <code>FALSE</code> will display the day of the week as a
+number.</p>
+</td></tr>
+<tr valign="top"><td><code>ordinal</code></td>
+<td>
+<p>A logical: should factors be ordered? Only
+available for features <code>month</code> or <code>dow</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>columns</code></td>
+<td>
+<p>A character string of variables that will be
+used as inputs. This field is a placeholder and will be
+populated once <code><a href="prep.html">prep.recipe()</a></code> is used.</p>
+</td></tr>
+<tr valign="top"><td><code>skip</code></td>
+<td>
+<p>A logical. Should the step be skipped when the
+recipe is baked by <code><a href="bake.html">bake.recipe()</a></code>? While all operations are baked
+when <code><a href="prep.html">prep.recipe()</a></code> is run, some operations may not be able to be
+conducted on new data (e.g. processing the outcome variable(s)).
+Care should be taken when using <code>skip = TRUE</code> as it may affect
+the computations for subsequent operations</p>
+</td></tr>
+<tr valign="top"><td><code>id</code></td>
+<td>
+<p>A character string that is unique to this step to identify it.</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A <code>step_date</code> object.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Unlike other steps, <code>step_date</code> does <em>not</em>
+remove the original date variables. <code><a href="step_rm.html">step_rm()</a></code> can be
+used for this purpose.
+</p>
+
+
+<h3>Value</h3>
+
+<p>For <code>step_date</code>, an updated version of recipe with
+the new step added to the sequence of existing steps (if any).
+For the <code>tidy</code> method, a tibble with columns <code>terms</code>
+(the selectors or variables selected), <code>value</code> (the feature
+names), and <code>ordinal</code> (a logical).
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="step_holiday.html">step_holiday()</a></code> <code><a href="step_rm.html">step_rm()</a></code>
+<code><a href="recipe.html">recipe()</a></code> <code><a href="prep.html">prep.recipe()</a></code>
+<code><a href="bake.html">bake.recipe()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(lubridate)
+
+examples &lt;- data.frame(Dan = ymd("2002-03-04") + days(1:10),
+                       Stefan = ymd("2006-01-13") + days(1:10))
+date_rec &lt;- recipe(~ Dan + Stefan, examples) %&gt;%
+   step_date(all_predictors())
+
+tidy(date_rec, number = 1)
+
+date_rec &lt;- prep(date_rec, training = examples)
+
+date_values &lt;- bake(date_rec, new_data = examples)
+date_values
+
+tidy(date_rec, number = 1)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>recipes</em> version 0.1.15 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -10,6 +10,8 @@ get_decennial           Obtain data and feature geometry for the
                         decennial Census
 get_estimates           Get data from the US Census Bureau Population
                         Estimates APIs
+get_pums                Load data from the American Community Survey
+                        Public Use Microdata Series API
 load_variables          Load variables from a decennial Census or
                         American Community Survey dataset to search in
                         R
@@ -20,9 +22,12 @@ moe_prop                Calculate the margin of error for a derived
 moe_ratio               Calculate the margin of error for a derived
                         ratio
 moe_sum                 Calculate the margin of error for a derived sum
+pums_variables          Dataset with PUMS variables and codes
 significance            Evaluate whether the difference in two
                         estimates is statistically significant.
 state_laea              State geometry with Alaska and Hawaii shifted
                         and re-scaled
 tidycensus              Return tidy data frames from the US Census
                         Bureau API
+to_survey               Convert a data frame returned by get_pums() to
+                        a survey object

@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Detect if a particular step or check is used in a recipe</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for detect_step {recipes}"><tr><td>detect_step {recipes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Detect if a particular step or check is used in a recipe</h2>
+
+<h3>Description</h3>
+
+<p>Detect if a particular step or check is used in a recipe
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+detect_step(recipe, name)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>recipe</code></td>
+<td>
+<p>A recipe to check.</p>
+</td></tr>
+<tr valign="top"><td><code>name</code></td>
+<td>
+<p>Character name of a step or check, omitted the prefix. That is,
+to check if <code>step_intercept</code> is present, use <code>name = intercept</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Logical indicating if recipes contains given step.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+rec &lt;- recipe(Species ~ ., data = iris) %&gt;%
+  step_intercept()
+
+detect_step(rec, "step_intercept")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>recipes</em> version 0.1.15 <a href="00Index.html">Index</a>]</div>
+</body></html>

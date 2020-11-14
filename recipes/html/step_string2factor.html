@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Convert Strings to Factors</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for step_string2factor {recipes}"><tr><td>step_string2factor {recipes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Convert Strings to Factors</h2>
+
+<h3>Description</h3>
+
+<p><code>step_string2factor</code> will convert one or more character
+vectors to factors (ordered or unordered).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+step_string2factor(
+  recipe,
+  ...,
+  role = NA,
+  trained = FALSE,
+  levels = NULL,
+  ordered = FALSE,
+  skip = FALSE,
+  id = rand_id("string2factor")
+)
+
+## S3 method for class 'step_string2factor'
+tidy(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>recipe</code></td>
+<td>
+<p>A recipe object. The step will be added to the
+sequence of operations for this recipe.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>One or more selector functions to choose which
+variables will be converted to factors. See
+<code><a href="selections.html">selections()</a></code> for more details. For the <code>tidy</code>
+method, these are not currently used.</p>
+</td></tr>
+<tr valign="top"><td><code>role</code></td>
+<td>
+<p>Not used by this step since no new variables are
+created.</p>
+</td></tr>
+<tr valign="top"><td><code>trained</code></td>
+<td>
+<p>A logical to indicate if the quantities for
+preprocessing have been estimated.</p>
+</td></tr>
+<tr valign="top"><td><code>levels</code></td>
+<td>
+<p>An options specification of the levels to be used
+for the new factor. If left <code>NULL</code>, the sorted unique
+values present when <code>bake</code> is called will be used.</p>
+</td></tr>
+<tr valign="top"><td><code>ordered</code></td>
+<td>
+<p>A single logical value; should the factor(s) be
+ordered?</p>
+</td></tr>
+<tr valign="top"><td><code>skip</code></td>
+<td>
+<p>A logical. Should the step be skipped when the
+recipe is baked by <code><a href="bake.html">bake.recipe()</a></code>? While all operations are baked
+when <code><a href="prep.html">prep.recipe()</a></code> is run, some operations may not be able to be
+conducted on new data (e.g. processing the outcome variable(s)).
+Care should be taken when using <code>skip = TRUE</code> as it may affect
+the computations for subsequent operations</p>
+</td></tr>
+<tr valign="top"><td><code>id</code></td>
+<td>
+<p>A character string that is unique to this step to identify it.</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A <code>step_string2factor</code> object.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>If <code>levels</code> is given, <code>step_string2factor</code> will
+convert all variables affected by this step to have the same
+levels.
+</p>
+<p>Also, note that <code>prep</code> has an option <code>strings_as_factors</code> that
+defaults to <code>TRUE</code>. This should be changed so that raw character
+data will be applied to <code>step_string2factor</code>. However, this step
+can also take existing factors (but will leave them as-is).
+</p>
+
+
+<h3>Value</h3>
+
+<p>An updated version of <code>recipe</code> with the new step
+added to the sequence of existing steps (if any). For the
+<code>tidy</code> method, a tibble with columns <code>terms</code> (the
+selectors or variables selected) and <code>ordered</code>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="step_factor2string.html">step_factor2string()</a></code> <code><a href="step_dummy.html">step_dummy()</a></code> <code><a href="step_other.html">step_other()</a></code>
+<code><a href="step_novel.html">step_novel()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(modeldata)
+data(okc)
+
+rec &lt;- recipe(~ diet + location, data = okc)
+
+make_factor &lt;- rec %&gt;%
+  step_string2factor(diet)
+make_factor &lt;- prep(make_factor,
+                    training = okc,
+                    strings_as_factors = FALSE)
+
+# note that `diet` is a factor
+bake(make_factor, new_data = NULL) %&gt;% head
+okc %&gt;% head
+tidy(make_factor, number = 1)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>recipes</em> version 0.1.15 <a href="00Index.html">Index</a>]</div>
+</body></html>

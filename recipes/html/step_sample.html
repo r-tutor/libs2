@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Sample rows using dplyr</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for step_sample {recipes}"><tr><td>step_sample {recipes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Sample rows using dplyr</h2>
+
+<h3>Description</h3>
+
+<p><code>step_sample</code> creates a <em>specification</em> of a recipe step
+that will sample rows using <code><a href="../../dplyr/html/sample_n.html">dplyr::sample_n()</a></code> or
+<code><a href="../../dplyr/html/sample_n.html">dplyr::sample_frac()</a></code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+step_sample(
+  recipe,
+  ...,
+  role = NA,
+  trained = FALSE,
+  size = NULL,
+  replace = FALSE,
+  skip = TRUE,
+  id = rand_id("sample")
+)
+
+## S3 method for class 'step_sample'
+tidy(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>recipe</code></td>
+<td>
+<p>A recipe object. The step will be added to the
+sequence of operations for this recipe.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Argument ignored; included for consistency with other step
+specification functions. For the <code>tidy</code>
+method, these are not currently used.</p>
+</td></tr>
+<tr valign="top"><td><code>role</code></td>
+<td>
+<p>Not used by this step since no new variables are
+created.</p>
+</td></tr>
+<tr valign="top"><td><code>trained</code></td>
+<td>
+<p>A logical to indicate if the quantities for
+preprocessing have been estimated.</p>
+</td></tr>
+<tr valign="top"><td><code>size</code></td>
+<td>
+<p>An integer or fraction. If the value is within (0, 1),
+<code><a href="../../dplyr/html/sample_n.html">dplyr::sample_frac()</a></code> is applied to the data. If an integer
+value of 1 or greater is used, <code><a href="../../dplyr/html/sample_n.html">dplyr::sample_n()</a></code> is applied.
+The default of <code>NULL</code> uses <code><a href="../../dplyr/html/sample_n.html">dplyr::sample_n()</a></code> with the size
+of the training set (or smaller for smaller <code>new_data</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>replace</code></td>
+<td>
+<p>Sample with or without replacement?</p>
+</td></tr>
+<tr valign="top"><td><code>skip</code></td>
+<td>
+<p>A logical. Should the step be skipped when the
+recipe is baked by <code><a href="bake.html">bake.recipe()</a></code>? While all operations are baked
+when <code><a href="prep.html">prep.recipe()</a></code> is run, some operations may not be able to be
+conducted on new data (e.g. processing the outcome variable(s)).
+Care should be taken when using <code>skip = FALSE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>id</code></td>
+<td>
+<p>A character string that is unique to this step to identify it.</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A <code>step_sample</code> object</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>An updated version of <code>recipe</code> with the new step
+added to the sequence of existing steps (if any). For the
+<code>tidy</code> method, a tibble with columns <code>size</code>, <code>replace</code>,
+and <code>id</code>.
+</p>
+
+
+<h3>Row Filtering</h3>
+
+<p>This step can entirely remove observations (rows of data), which can have
+unintended and/or problematic consequences when applying the step to new
+data later via <code><a href="bake.html">bake.recipe()</a></code>. Consider whether <code>skip = TRUE</code> or
+<code>skip = FALSE</code> is more appropriate in any given use case. In most instances
+that affect the rows of the data being predicted, this step probably should
+not be applied at all; instead, execute operations like this outside and
+before starting a preprocessing <code><a href="recipe.html">recipe()</a></code>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="step_filter.html">step_filter()</a></code> <code><a href="step_naomit.html">step_naomit()</a></code> <code><a href="step_slice.html">step_slice()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+# Uses `sample_n`
+recipe( ~ ., data = mtcars) %&gt;%
+  step_sample(size = 1) %&gt;%
+  prep(training = mtcars) %&gt;%
+  bake(new_data = NULL) %&gt;%
+  nrow()
+
+# Uses `sample_frac`
+recipe( ~ ., data = mtcars) %&gt;%
+  step_sample(size = 0.9999) %&gt;%
+  prep(training = mtcars) %&gt;%
+  bake(new_data = NULL) %&gt;%
+  nrow()
+
+# Uses `sample_n` and returns _at maximum_ 20 samples.
+smaller_cars &lt;-
+  recipe( ~ ., data = mtcars) %&gt;%
+  step_sample() %&gt;%
+  prep(training = mtcars %&gt;% slice(1:20))
+
+bake(smaller_cars, new_data = NULL) %&gt;% nrow()
+bake(smaller_cars, new_data = mtcars %&gt;% slice(21:32)) %&gt;% nrow()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>recipes</em> version 0.1.15 <a href="00Index.html">Index</a>]</div>
+</body></html>

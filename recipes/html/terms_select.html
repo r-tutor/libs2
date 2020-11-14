@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Select Terms in a Step Function.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for terms_select {recipes}"><tr><td>terms_select {recipes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Select Terms in a Step Function.</h2>
+
+<h3>Description</h3>
+
+<p>This function bakes the step function selectors and might be
+useful when creating custom steps.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+terms_select(terms, info, empty_fun = abort_selection)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>terms</code></td>
+<td>
+<p>A list of formulas whose right-hand side contains
+quoted expressions. See <code><a href="../../rlang/html/nse-defuse.html">rlang::quos()</a></code> for examples.</p>
+</td></tr>
+<tr valign="top"><td><code>info</code></td>
+<td>
+<p>A tibble with columns <code>variable</code>, <code>type</code>, <code>role</code>,
+and <code>source</code> that represent the current state of the data. The
+function <code><a href="summary.recipe.html">summary.recipe()</a></code> can be used to get this information
+from a recipe.</p>
+</td></tr>
+<tr valign="top"><td><code>empty_fun</code></td>
+<td>
+<p>A function to execute when no terms are selected by the
+step. The default function throws an error with a message.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A character string of column names or an error of there
+are no selectors or if no variables are selected.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="recipe.html">recipe()</a></code> <code><a href="summary.recipe.html">summary.recipe()</a></code>
+<code><a href="prep.html">prep.recipe()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(rlang)
+library(modeldata)
+data(okc)
+rec &lt;- recipe(~ ., data = okc)
+info &lt;- summary(rec)
+terms_select(info = info, quos(all_predictors()))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>recipes</em> version 0.1.15 <a href="00Index.html">Index</a>]</div>
+</body></html>

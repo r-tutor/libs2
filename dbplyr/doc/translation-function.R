@@ -35,9 +35,8 @@ df <- tibble(
 )
 mf <- tbl_memdb(df)
 
-df %>% mutate(x %% y, x %/% y)
-
-mf %>% mutate(x %% y, x %/% y)
+df %>% mutate(x %% y)
+mf %>% mutate(x %% y)
 
 ## -----------------------------------------------------------------------------
 translate_sql(mean(x))

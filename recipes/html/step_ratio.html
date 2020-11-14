@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Ratio Variable Creation</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for step_ratio {recipes}"><tr><td>step_ratio {recipes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Ratio Variable Creation</h2>
+
+<h3>Description</h3>
+
+<p><code>step_ratio</code> creates a <em>specification</em> of a recipe
+step that will create one or more ratios out of numeric
+variables.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+step_ratio(
+  recipe,
+  ...,
+  role = "predictor",
+  trained = FALSE,
+  denom = denom_vars(),
+  naming = function(numer, denom) make.names(paste(numer, denom, sep = "_o_")),
+  columns = NULL,
+  skip = FALSE,
+  id = rand_id("ratio")
+)
+
+denom_vars(...)
+
+## S3 method for class 'step_ratio'
+tidy(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>recipe</code></td>
+<td>
+<p>A recipe object. The step will be added to the
+sequence of operations for this recipe.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>One or more selector functions to choose which
+variables will be used in the <em>numerator</em> of the ratio.
+When used with <code>denom_vars</code>, the dots indicate which
+variables are used in the <em>denominator</em>. See
+<code><a href="selections.html">selections()</a></code> for more details. For the <code>tidy</code>
+method, these are not currently used.</p>
+</td></tr>
+<tr valign="top"><td><code>role</code></td>
+<td>
+<p>For terms created by this step, what analysis role
+should they be assigned?. By default, the function assumes that
+the newly created ratios created by the original variables will
+be used as predictors in a model.</p>
+</td></tr>
+<tr valign="top"><td><code>trained</code></td>
+<td>
+<p>A logical to indicate if the quantities for
+preprocessing have been estimated.</p>
+</td></tr>
+<tr valign="top"><td><code>denom</code></td>
+<td>
+<p>A call to <code>denom_vars</code> to specify which
+variables are used in the denominator that can include specific
+variable names separated by commas or different selectors (see
+<code><a href="selections.html">selections()</a></code>). If a column is included in both lists
+to be numerator and denominator, it will be removed from the
+listing.</p>
+</td></tr>
+<tr valign="top"><td><code>naming</code></td>
+<td>
+<p>A function that defines the naming convention for
+new ratio columns.</p>
+</td></tr>
+<tr valign="top"><td><code>columns</code></td>
+<td>
+<p>The column names used in the ratios. This
+argument is not populated until <code><a href="prep.html">prep.recipe()</a></code> is
+executed.</p>
+</td></tr>
+<tr valign="top"><td><code>skip</code></td>
+<td>
+<p>A logical. Should the step be skipped when the
+recipe is baked by <code><a href="bake.html">bake.recipe()</a></code>? While all operations are baked
+when <code><a href="prep.html">prep.recipe()</a></code> is run, some operations may not be able to be
+conducted on new data (e.g. processing the outcome variable(s)).
+Care should be taken when using <code>skip = TRUE</code> as it may affect
+the computations for subsequent operations</p>
+</td></tr>
+<tr valign="top"><td><code>id</code></td>
+<td>
+<p>A character string that is unique to this step to identify it.</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A <code>step_ratio</code> object</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>An updated version of <code>recipe</code> with the new step
+added to the sequence of existing steps (if any). For the
+<code>tidy</code> method, a tibble with columns <code>terms</code> (the
+selectors or variables selected) and <code>denom</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(recipes)
+library(modeldata)
+data(biomass)
+
+biomass$total &lt;- apply(biomass[, 3:7], 1, sum)
+biomass_tr &lt;- biomass[biomass$dataset == "Training",]
+biomass_te &lt;- biomass[biomass$dataset == "Testing",]
+
+rec &lt;- recipe(HHV ~ carbon + hydrogen + oxygen + nitrogen +
+                    sulfur + total,
+              data = biomass_tr)
+
+ratio_recipe &lt;- rec %&gt;%
+  # all predictors over total
+  step_ratio(all_predictors(), denom = denom_vars(total)) %&gt;%
+  # get rid of the original predictors
+  step_rm(all_predictors(), -ends_with("total"))
+
+ratio_recipe &lt;- prep(ratio_recipe, training = biomass_tr)
+
+ratio_data &lt;- bake(ratio_recipe, biomass_te)
+ratio_data
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>recipes</em> version 0.1.15 <a href="00Index.html">Index</a>]</div>
+</body></html>

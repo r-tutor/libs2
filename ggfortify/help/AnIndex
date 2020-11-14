@@ -33,6 +33,7 @@ autoplot.performance	autoplot.performance
 autoplot.prcomp	autoplot.pca_common
 autoplot.princomp	autoplot.pca_common
 autoplot.RasterCommon	autoplot.RasterCommon
+autoplot.silhouette	autoplot.silhouette
 autoplot.SpatialCommon	autoplot.SpatialCommon
 autoplot.spec	autoplot.spec
 autoplot.stepfun	autoplot.stepfun
@@ -78,6 +79,7 @@ fortify.performance	fortify.performance
 fortify.prcomp	fortify.prcomp
 fortify.princomp	fortify.prcomp
 fortify.RasterCommon	fortify.RasterCommon
+fortify.silhouette	fortify.silhouette
 fortify.SpatialCommon	fortify.SpatialCommon
 fortify.spec	fortify.spec
 fortify.stepfun	fortify.stepfun

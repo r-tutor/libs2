@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Near-Zero Variance Filter</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for step_nzv {recipes}"><tr><td>step_nzv {recipes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Near-Zero Variance Filter</h2>
+
+<h3>Description</h3>
+
+<p><code>step_nzv</code> creates a <em>specification</em> of a recipe step
+that will potentially remove variables that are highly sparse
+and unbalanced.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+step_nzv(
+  recipe,
+  ...,
+  role = NA,
+  trained = FALSE,
+  freq_cut = 95/5,
+  unique_cut = 10,
+  options = list(freq_cut = 95/5, unique_cut = 10),
+  removals = NULL,
+  skip = FALSE,
+  id = rand_id("nzv")
+)
+
+## S3 method for class 'step_nzv'
+tidy(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>recipe</code></td>
+<td>
+<p>A recipe object. The step will be added to the
+sequence of operations for this recipe.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>One or more selector functions to choose which
+variables that will be evaluated by the filtering. See
+<code><a href="selections.html">selections()</a></code> for more details. For the <code>tidy</code>
+method, these are not currently used.</p>
+</td></tr>
+<tr valign="top"><td><code>role</code></td>
+<td>
+<p>Not used by this step since no new variables are
+created.</p>
+</td></tr>
+<tr valign="top"><td><code>trained</code></td>
+<td>
+<p>A logical to indicate if the quantities for
+preprocessing have been estimated.</p>
+</td></tr>
+<tr valign="top"><td><code>freq_cut, unique_cut</code></td>
+<td>
+<p>Numeric parameters for the filtering process. See
+the Details section below.</p>
+</td></tr>
+<tr valign="top"><td><code>options</code></td>
+<td>
+<p>A list of options for the filter (see Details
+below).</p>
+</td></tr>
+<tr valign="top"><td><code>removals</code></td>
+<td>
+<p>A character string that contains the names of
+columns that should be removed. These values are not determined
+until <code><a href="prep.html">prep.recipe()</a></code> is called.</p>
+</td></tr>
+<tr valign="top"><td><code>skip</code></td>
+<td>
+<p>A logical. Should the step be skipped when the
+recipe is baked by <code><a href="bake.html">bake.recipe()</a></code>? While all operations are baked
+when <code><a href="prep.html">prep.recipe()</a></code> is run, some operations may not be able to be
+conducted on new data (e.g. processing the outcome variable(s)).
+Care should be taken when using <code>skip = TRUE</code> as it may affect
+the computations for subsequent operations</p>
+</td></tr>
+<tr valign="top"><td><code>id</code></td>
+<td>
+<p>A character string that is unique to this step to identify it.</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A <code>step_nzv</code> object.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This step diagnoses predictors that have one unique
+value (i.e. are zero variance predictors) or predictors that have
+both of the following characteristics:
+</p>
+
+<ol>
+<li><p> they have very few unique values relative to the number
+of samples and
+</p>
+</li>
+<li><p> the ratio of the frequency of the most common value to
+the frequency of the second most common value is large.
+</p>
+</li></ol>
+
+<p>For example, an example of near-zero variance predictor is one
+that, for 1000 samples, has two distinct values and 999 of them
+are a single value.
+</p>
+<p>To be flagged, first, the frequency of the most prevalent value
+over the second most frequent value (called the &quot;frequency
+ratio&quot;) must be above <code>freq_cut</code>. Secondly, the &quot;percent of
+unique values,&quot; the number of unique values divided by the total
+number of samples (times 100), must also be below
+<code>unique_cut</code>.
+</p>
+<p>In the above example, the frequency ratio is 999 and the unique
+value percent is 0.2%.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An updated version of <code>recipe</code> with the new step
+added to the sequence of existing steps (if any). For the
+<code>tidy</code> method, a tibble with columns <code>terms</code> which
+is the columns that will be removed.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="step_corr.html">step_corr()</a></code> <code><a href="recipe.html">recipe()</a></code>
+<code><a href="prep.html">prep.recipe()</a></code> <code><a href="bake.html">bake.recipe()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(modeldata)
+data(biomass)
+
+biomass$sparse &lt;- c(1, rep(0, nrow(biomass) - 1))
+
+biomass_tr &lt;- biomass[biomass$dataset == "Training",]
+biomass_te &lt;- biomass[biomass$dataset == "Testing",]
+
+rec &lt;- recipe(HHV ~ carbon + hydrogen + oxygen +
+                    nitrogen + sulfur + sparse,
+              data = biomass_tr)
+
+nzv_filter &lt;- rec %&gt;%
+  step_nzv(all_predictors())
+
+filter_obj &lt;- prep(nzv_filter, training = biomass_tr)
+
+filtered_te &lt;- bake(filter_obj, biomass_te)
+any(names(filtered_te) == "sparse")
+
+tidy(nzv_filter, number = 1)
+tidy(filter_obj, number = 1)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>recipes</em> version 0.1.15 <a href="00Index.html">Index</a>]</div>
+</body></html>

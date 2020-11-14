@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Check for Missing Values</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for check_missing {recipes}"><tr><td>check_missing {recipes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Check for Missing Values</h2>
+
+<h3>Description</h3>
+
+<p><code>check_missing</code> creates a <em>specification</em> of a recipe
+operation that will check if variables contain missing values.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+check_missing(
+  recipe,
+  ...,
+  role = NA,
+  trained = FALSE,
+  columns = NULL,
+  skip = FALSE,
+  id = rand_id("missing")
+)
+
+## S3 method for class 'check_missing'
+tidy(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>recipe</code></td>
+<td>
+<p>A recipe object. The check will be added to the
+sequence of operations for this recipe.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>One or more selector functions to choose which
+variables are checked in the check See <code><a href="selections.html">selections()</a></code>
+for more details. For the <code>tidy</code> method, these are not
+currently used.</p>
+</td></tr>
+<tr valign="top"><td><code>role</code></td>
+<td>
+<p>Not used by this check since no new variables are
+created.</p>
+</td></tr>
+<tr valign="top"><td><code>trained</code></td>
+<td>
+<p>A logical for whether the selectors in <code>...</code>
+have been resolved by <code><a href="prep.html">prep()</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>columns</code></td>
+<td>
+<p>A character string of variable names that will
+be populated (eventually) by the terms argument.</p>
+</td></tr>
+<tr valign="top"><td><code>skip</code></td>
+<td>
+<p>A logical. Should the check be skipped when the
+recipe is baked by <code><a href="bake.html">bake.recipe()</a></code>? While all operations are baked
+when <code><a href="prep.html">prep.recipe()</a></code> is run, some operations may not be able to be
+conducted on new data (e.g. processing the outcome variable(s)).
+Care should be taken when using <code>skip = TRUE</code> as it may affect
+the computations for subsequent operations.</p>
+</td></tr>
+<tr valign="top"><td><code>id</code></td>
+<td>
+<p>A character string that is unique to this step to identify it.</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A <code>check_missing</code> object.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This check will break the <code>bake</code> function if any of the checked
+columns does contain <code>NA</code> values. If the check passes, nothing is changed
+to the data.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An updated version of <code>recipe</code> with the new check
+added to the sequence of existing operations (if any). For the
+<code>tidy</code> method, a tibble with columns <code>terms</code> (the
+selectors or variables selected).
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(modeldata)
+data(credit_data)
+is.na(credit_data) %&gt;% colSums()
+
+# If the test passes, `new_data` is returned unaltered
+recipe(credit_data) %&gt;%
+  check_missing(Age, Expenses) %&gt;%
+  prep() %&gt;%
+  bake(credit_data)
+
+# If your training set doesn't pass, prep() will stop with an error
+
+## Not run: 
+recipe(credit_data)  %&gt;%
+  check_missing(Income) %&gt;%
+  prep()
+
+## End(Not run)
+
+# If `new_data` contain missing values, the check will stop bake()
+
+train_data &lt;- credit_data %&gt;% dplyr::filter(Income &gt; 150)
+test_data  &lt;- credit_data %&gt;% dplyr::filter(Income &lt;= 150 | is.na(Income))
+
+rp &lt;- recipe(train_data) %&gt;%
+  check_missing(Income) %&gt;%
+  prep()
+
+bake(rp, train_data)
+## Not run: 
+bake(rp, test_data)
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>recipes</em> version 0.1.15 <a href="00Index.html">Index</a>]</div>
+</body></html>

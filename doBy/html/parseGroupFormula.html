@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Extract components from a formula with &quot;conditioning bar&quot;</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for parseGroupFormula {doBy}"><tr><td>parseGroupFormula {doBy}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Extract components from a formula with &quot;conditioning bar&quot;</h2>
+
+<h3>Description</h3>
+
+<p>Extract components from a formula with the form
+<code>y ~ x1 + ... + xn | g1 + ... + gm</code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+parseGroupFormula(form)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>form</code></td>
+<td>
+<p>A formula of the form <code>y ~ x1 + ... + xn | g1 + ... + gm</code></p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>If the formula is <code>y ~ x1 + x2 | g1 + g2</code> the result is
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>model</code></td>
+<td>
+<p><code>y ~ x1 + x2</code></p>
+</td></tr> <tr valign="top"><td><code>groups</code></td>
+<td>
+<p><code> g1 + g2</code></p>
+</td></tr>
+<tr valign="top"><td><code>groupFormula</code></td>
+<td>
+<p><code>~ g1 + g2</code></p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Søren Højsgaard, <a href="mailto:sorenh@math.aau.dk">sorenh@math.aau.dk</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+gf &lt;- parseGroupFormula(y ~ x1 + x2 | g1 + g2)
+gf 
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>doBy</em> version 4.6.8 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Check Variable Class</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for check_class {recipes}"><tr><td>check_class {recipes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Check Variable Class</h2>
+
+<h3>Description</h3>
+
+<p><code>check_class</code> creates a <em>specification</em> of a recipe
+check that will check if a variable is of a designated class.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+check_class(
+  recipe,
+  ...,
+  role = NA,
+  trained = FALSE,
+  class_nm = NULL,
+  allow_additional = FALSE,
+  skip = FALSE,
+  class_list = NULL,
+  id = rand_id("class")
+)
+
+## S3 method for class 'check_class'
+tidy(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>recipe</code></td>
+<td>
+<p>A recipe object. The check will be added to the
+sequence of operations for this recipe.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>One or more selector functions to choose which
+variables are affected by the check. See <code><a href="selections.html">selections()</a></code>
+for more details. For the <code>tidy</code> method, these are not
+currently used.</p>
+</td></tr>
+<tr valign="top"><td><code>role</code></td>
+<td>
+<p>Not used by this check since no new variables are
+created.</p>
+</td></tr>
+<tr valign="top"><td><code>trained</code></td>
+<td>
+<p>A logical to indicate if the quantities for
+preprocessing have been estimated.</p>
+</td></tr>
+<tr valign="top"><td><code>class_nm</code></td>
+<td>
+<p>A character vector that will be used in <code>inherits</code> to
+check the class. If <code>NULL</code> the classes will be learned in <code>prep</code>.
+Can contain more than one class.</p>
+</td></tr>
+<tr valign="top"><td><code>allow_additional</code></td>
+<td>
+<p>If <code>TRUE</code> a variable is allowed to
+have additional classes to the one(s) that are checked.</p>
+</td></tr>
+<tr valign="top"><td><code>skip</code></td>
+<td>
+<p>A logical. Should the check be skipped when the
+recipe is baked by <code><a href="bake.html">bake.recipe()</a></code>? While all operations are baked
+when <code><a href="prep.html">prep.recipe()</a></code> is run, some operations may not be able to be
+conducted on new data (e.g. processing the outcome variable(s)).
+Care should be taken when using <code>skip = TRUE</code> as it may affect
+the computations for subsequent operations.</p>
+</td></tr>
+<tr valign="top"><td><code>class_list</code></td>
+<td>
+<p>A named list of column classes. This is
+<code>NULL</code> until computed by <code><a href="prep.html">prep.recipe()</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>id</code></td>
+<td>
+<p>A character string that is unique to this step to identify it.</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A <code>check_class</code> object.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This function can check the classes of the variables
+in two ways. When the <code>class</code> argument is provided
+it will check if all the variables specified are of the
+given class. If this argument is <code>NULL</code>, the check will
+learn the classes of each of the specified variables in <code>prep</code>.
+Both ways will break <code>bake</code> if the variables are not of
+the requested class. If a variable has multiple
+classes in <code>prep</code>, all the classes are checked. Please note
+that in <code>prep</code> the argument <code>strings_as_factors</code> defaults to
+<code>TRUE</code>. If the train set contains character variables
+the check will be break <code>bake</code> when <code>strings_as_factors</code> is
+<code>TRUE</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An updated version of <code>recipe</code> with the new check
+added to the sequence of existing steps (if any). For the
+<code>tidy</code> method, a tibble with columns <code>terms</code> (the
+selectors or variables selected) and <code>value</code> (the type).
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="recipe.html">recipe()</a></code> <code><a href="prep.html">prep.recipe()</a></code>
+<code><a href="bake.html">bake.recipe()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(dplyr)
+library(modeldata)
+data(okc)
+
+# Learn the classes on the train set
+train &lt;- okc[1:1000, ]
+test  &lt;- okc[1001:2000, ]
+recipe(train, age ~ . ) %&gt;%
+  check_class(everything()) %&gt;%
+  prep(train, strings_as_factors = FALSE) %&gt;%
+  bake(test)
+
+# Manual specification
+recipe(train, age ~ .) %&gt;%
+  check_class(age, class_nm = "integer") %&gt;%
+  check_class(diet, location, class_nm = "character") %&gt;%
+  check_class(date, class_nm = "Date") %&gt;%
+  prep(train, strings_as_factors = FALSE) %&gt;%
+  bake(test)
+
+# By default only the classes that are specified
+#   are allowed.
+x_df &lt;- tibble(time = c(Sys.time() - 60, Sys.time()))
+x_df$time %&gt;% class()
+## Not run: 
+recipe(x_df) %&gt;%
+  check_class(time, class_nm = "POSIXt") %&gt;%
+  prep(x_df) %&gt;%
+  bake_(x_df)
+
+## End(Not run)
+
+# Use allow_additional = TRUE if you are fine with it
+recipe(x_df) %&gt;%
+  check_class(time, class_nm = "POSIXt", allow_additional = TRUE) %&gt;%
+  prep(x_df) %&gt;%
+  bake(x_df)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>recipes</em> version 0.1.15 <a href="00Index.html">Index</a>]</div>
+</body></html>

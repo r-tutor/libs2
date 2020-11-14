@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Orthogonal Polynomial Basis Functions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for step_poly {recipes}"><tr><td>step_poly {recipes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Orthogonal Polynomial Basis Functions</h2>
+
+<h3>Description</h3>
+
+<p><code>step_poly</code> creates a <em>specification</em> of a recipe
+step that will create new columns that are basis expansions of
+variables using orthogonal polynomials.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+step_poly(
+  recipe,
+  ...,
+  role = "predictor",
+  trained = FALSE,
+  objects = NULL,
+  degree = 2,
+  options = list(),
+  skip = FALSE,
+  id = rand_id("poly")
+)
+
+## S3 method for class 'step_poly'
+tidy(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>recipe</code></td>
+<td>
+<p>A recipe object. The step will be added to the
+sequence of operations for this recipe.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>One or more selector functions to choose which
+variables are affected by the step. See <code><a href="selections.html">selections()</a></code>
+for more details.  For the <code>tidy</code> method, these are not
+currently used.</p>
+</td></tr>
+<tr valign="top"><td><code>role</code></td>
+<td>
+<p>For model terms created by this step, what analysis
+role should they be assigned?. By default, the function assumes
+that the new columns created from the original variables will be
+used as predictors in a model.</p>
+</td></tr>
+<tr valign="top"><td><code>trained</code></td>
+<td>
+<p>A logical to indicate if the quantities for
+preprocessing have been estimated.</p>
+</td></tr>
+<tr valign="top"><td><code>objects</code></td>
+<td>
+<p>A list of <code><a href="../../stats/html/poly.html">stats::poly()</a></code> objects
+created once the step has been trained.</p>
+</td></tr>
+<tr valign="top"><td><code>degree</code></td>
+<td>
+<p>The polynomial degree (an integer).</p>
+</td></tr>
+<tr valign="top"><td><code>options</code></td>
+<td>
+<p>A list of options for <code><a href="../../stats/html/poly.html">stats::poly()</a></code>
+which should not include <code>x</code>, <code>degree</code>, or <code>simple</code>. Note that
+the option <code>raw = TRUE</code> will produce the regular polynomial
+values (not orthogonalized).</p>
+</td></tr>
+<tr valign="top"><td><code>skip</code></td>
+<td>
+<p>A logical. Should the step be skipped when the
+recipe is baked by <code><a href="bake.html">bake.recipe()</a></code>? While all operations are baked
+when <code><a href="prep.html">prep.recipe()</a></code> is run, some operations may not be able to be
+conducted on new data (e.g. processing the outcome variable(s)).
+Care should be taken when using <code>skip = TRUE</code> as it may affect
+the computations for subsequent operations</p>
+</td></tr>
+<tr valign="top"><td><code>id</code></td>
+<td>
+<p>A character string that is unique to this step to identify it.</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A <code>step_poly</code> object.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>step_poly</code> can new features from a single
+variable that enable fitting routines to model this variable in
+a nonlinear manner. The extent of the possible nonlinearity is
+determined by the <code>degree</code> argument of
+<code><a href="../../stats/html/poly.html">stats::poly()</a></code>. The original variables are removed
+from the data and new columns are added. The naming convention
+for the new variables is <code>varname_poly_1</code> and so on.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An updated version of <code>recipe</code> with the new step
+added to the sequence of existing steps (if any). For the
+<code>tidy</code> method, a tibble with columns <code>terms</code> (the
+columns that will be affected) and <code>degree</code>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="step_ns.html">step_ns()</a></code> <code><a href="recipe.html">recipe()</a></code>
+<code><a href="prep.html">prep.recipe()</a></code> <code><a href="bake.html">bake.recipe()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(modeldata)
+data(biomass)
+
+biomass_tr &lt;- biomass[biomass$dataset == "Training",]
+biomass_te &lt;- biomass[biomass$dataset == "Testing",]
+
+rec &lt;- recipe(HHV ~ carbon + hydrogen + oxygen + nitrogen + sulfur,
+              data = biomass_tr)
+
+quadratic &lt;- rec %&gt;%
+  step_poly(carbon, hydrogen)
+quadratic &lt;- prep(quadratic, training = biomass_tr)
+
+expanded &lt;- bake(quadratic, biomass_te)
+expanded
+
+tidy(quadratic, number = 1)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>recipes</em> version 0.1.15 <a href="00Index.html">Index</a>]</div>
+</body></html>

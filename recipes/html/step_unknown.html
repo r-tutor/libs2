@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Assign missing categories to &quot;unknown&quot;</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for step_unknown {recipes}"><tr><td>step_unknown {recipes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Assign missing categories to &quot;unknown&quot;</h2>
+
+<h3>Description</h3>
+
+<p><code>step_unknown</code> creates a <em>specification</em> of a recipe
+step that will assign a missing value in a factor level to&quot;unknown&quot;.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+step_unknown(
+  recipe,
+  ...,
+  role = NA,
+  trained = FALSE,
+  new_level = "unknown",
+  objects = NULL,
+  skip = FALSE,
+  id = rand_id("unknown")
+)
+
+## S3 method for class 'step_unknown'
+tidy(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>recipe</code></td>
+<td>
+<p>A recipe object. The step will be added to the
+sequence of operations for this recipe.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>One or more selector functions to choose which
+variables that will be affected by the step. These variables
+should be character or factor types. See <code><a href="selections.html">selections()</a></code> for more
+details. For the <code>tidy</code> method, these are not currently used.</p>
+</td></tr>
+<tr valign="top"><td><code>role</code></td>
+<td>
+<p>Not used by this step since no new variables are
+created.</p>
+</td></tr>
+<tr valign="top"><td><code>trained</code></td>
+<td>
+<p>A logical to indicate if the quantities for
+preprocessing have been estimated.</p>
+</td></tr>
+<tr valign="top"><td><code>new_level</code></td>
+<td>
+<p>A single character value that will be assigned
+to new factor levels.</p>
+</td></tr>
+<tr valign="top"><td><code>objects</code></td>
+<td>
+<p>A list of objects that contain the information
+on factor levels that will be determined by <code><a href="prep.html">prep.recipe()</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>skip</code></td>
+<td>
+<p>A logical. Should the step be skipped when the
+recipe is baked by <code><a href="bake.html">bake.recipe()</a></code>? While all operations are baked
+when <code><a href="prep.html">prep.recipe()</a></code> is run, some operations may not be able to be
+conducted on new data (e.g. processing the outcome variable(s)).
+Care should be taken when using <code>skip = TRUE</code> as it may affect
+the computations for subsequent operations</p>
+</td></tr>
+<tr valign="top"><td><code>id</code></td>
+<td>
+<p>A character string that is unique to this step to identify it.</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A <code>step_unknown</code> object.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The selected variables are adjusted to have a new
+level (given by <code>new_level</code>) that is placed in the last
+position.
+</p>
+<p>Note that if the original columns are character, they will be
+converted to factors by this step.
+</p>
+<p>If <code>new_level</code> is already in the data given to <code>prep</code>, an error
+is thrown.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An updated version of <code>recipe</code> with the new step
+added to the sequence of existing steps (if any). For the
+<code>tidy</code> method, a tibble with columns <code>terms</code> (the
+columns that will be affected) and <code>value</code> (the factor
+levels that is used for the new value)
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="step_factor2string.html">step_factor2string()</a></code>, <code><a href="step_string2factor.html">step_string2factor()</a></code>,
+<code><a href="names0.html">dummy_names()</a></code>, <code><a href="step_regex.html">step_regex()</a></code>, <code><a href="step_count.html">step_count()</a></code>,
+<code><a href="step_ordinalscore.html">step_ordinalscore()</a></code>, <code><a href="step_unorder.html">step_unorder()</a></code>, <code><a href="step_other.html">step_other()</a></code>, <code><a href="step_novel.html">step_novel()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(modeldata)
+data(okc)
+
+rec &lt;-
+  recipe(~ diet + location, data = okc) %&gt;%
+  step_unknown(diet, new_level = "unknown diet") %&gt;%
+  step_unknown(location, new_level = "unknown location") %&gt;%
+  prep()
+
+table(bake(rec, new_data = NULL) %&gt;% pull(diet),
+      okc %&gt;% pull(diet),
+      useNA = "always") %&gt;%
+  as.data.frame() %&gt;%
+  dplyr::filter(Freq &gt; 0)
+
+tidy(rec, number = 1)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>recipes</em> version 0.1.15 <a href="00Index.html">Index</a>]</div>
+</body></html>

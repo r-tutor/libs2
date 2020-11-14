@@ -24,6 +24,7 @@ confint.esticon_class	esticon
 confint.linest_class	linest
 crimeRate	crimeRate
 cropyield	cropyield
+data-mathmark	data-mathmark
 descStat	descStat
 dietox	dietox
 doby.xtabs	doBy-internal
@@ -49,11 +50,13 @@ get_xlevels.default	linest-get
 get_xlevels.mer	linest-get
 get_xlevels.merMod	linest-get
 haldCement	haldCement
+head.splitByData	by-split
 interaction-plot	interaction-plot
 interaction_plot	interaction-plot
 internal	doBy-internal
 is-estimable	is-estimable
 is_estimable	is-estimable
+is_grouped	sub_seq
 lapplyBy	by-lapply
 lapply_by	by-lapply
 lastobs	firstlastobs
@@ -78,8 +81,11 @@ ls-means	ls-means
 LSmeans	ls-means
 LSmeans.default	ls-means
 LSmeans.lmerMod	ls-means
+math	data-mathmark
+mathmark	data-mathmark
 matrix2dataFrame2	doBy-internal
 milkman	milkman
+milkman_rdm1	milkman
 NIRmilk	NIRmilk
 null-basis	null-basis
 null_basis	null-basis
@@ -100,8 +106,11 @@ print.summary_lmBy	doBy-internal
 recodeVar	recodeVar
 renameCol	renameCol
 residuals.lmBy	by-lmby
+rle2	sub_seq
 sampleBy	by-sample
 sample_by	by-sample
+sapplyBy	by-lapply
+sapply_by	by-lapply
 set_covariate_val	linest-get
 set_xlevels	linest-get
 specialize	doBy-internal
@@ -109,9 +118,10 @@ splitBy	by-split
 splitByOLD	doBy-internal
 split_by	by-split
 subsAttr2	doBy-internal
-subSeq	subSeq
+subSeq	sub_seq
 subsetBy	by-subset
 subset_by	by-subset
+sub_seq	sub_seq
 summary.esticon_class	esticon
 summary.linest_class	linest
 summary.linest_matrix_class	doBy-internal
@@ -119,6 +129,7 @@ summary.lmBy	by-lmby
 summaryBy	by-summary
 summaryByOLD	doBy-internal
 summary_by	by-summary
+tail.splitByData	by-split
 taylor	taylor
 tidy-esticon	tidy-esticon
 tidy-linest	tidy-linest

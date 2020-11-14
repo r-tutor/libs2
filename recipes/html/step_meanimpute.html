@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Impute Numeric Data Using the Mean</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for step_meanimpute {recipes}"><tr><td>step_meanimpute {recipes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Impute Numeric Data Using the Mean</h2>
+
+<h3>Description</h3>
+
+<p><code>step_meanimpute</code> creates a <em>specification</em> of a recipe step that will
+substitute missing values of numeric variables by the training set mean of
+those variables.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+step_meanimpute(
+  recipe,
+  ...,
+  role = NA,
+  trained = FALSE,
+  means = NULL,
+  trim = 0,
+  skip = FALSE,
+  id = rand_id("meanimpute")
+)
+
+## S3 method for class 'step_meanimpute'
+tidy(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>recipe</code></td>
+<td>
+<p>A recipe object. The step will be added to the
+sequence of operations for this recipe.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>One or more selector functions to choose which variables are
+affected by the step. See <code><a href="selections.html">selections()</a></code> for more details. For the <code>tidy</code>
+method, these are not currently used.</p>
+</td></tr>
+<tr valign="top"><td><code>role</code></td>
+<td>
+<p>Not used by this step since no new variables are created.</p>
+</td></tr>
+<tr valign="top"><td><code>trained</code></td>
+<td>
+<p>A logical to indicate if the quantities for
+preprocessing have been estimated.</p>
+</td></tr>
+<tr valign="top"><td><code>means</code></td>
+<td>
+<p>A named numeric vector of means. This is <code>NULL</code> until computed
+by <code><a href="prep.html">prep.recipe()</a></code>. Note that, if the original data are integers, the mean
+will be converted to an integer to maintain the same data type.</p>
+</td></tr>
+<tr valign="top"><td><code>trim</code></td>
+<td>
+<p>The fraction (0 to 0.5) of observations to be trimmed from each
+end of the variables before the mean is computed. Values of trim outside
+that range are taken as the nearest endpoint.</p>
+</td></tr>
+<tr valign="top"><td><code>skip</code></td>
+<td>
+<p>A logical. Should the step be skipped when the
+recipe is baked by <code><a href="bake.html">bake.recipe()</a></code>? While all operations are baked
+when <code><a href="prep.html">prep.recipe()</a></code> is run, some operations may not be able to be
+conducted on new data (e.g. processing the outcome variable(s)).
+Care should be taken when using <code>skip = TRUE</code> as it may affect
+the computations for subsequent operations</p>
+</td></tr>
+<tr valign="top"><td><code>id</code></td>
+<td>
+<p>A character string that is unique to this step to identify it.</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A <code>step_meanimpute</code> object.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>step_meanimpute</code> estimates the variable means from the data used
+in the <code>training</code> argument of <code>prep.recipe</code>. <code>bake.recipe</code> then applies the
+new values to new data sets using these averages.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An updated version of <code>recipe</code> with the new step added to the
+sequence of existing steps (if any). For the <code>tidy</code> method, a tibble with
+columns <code>terms</code> (the selectors or variables selected) and <code>model</code> (the mean
+value).
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(modeldata)
+data("credit_data")
+
+## missing data per column
+vapply(credit_data, function(x) mean(is.na(x)), c(num = 0))
+
+set.seed(342)
+in_training &lt;- sample(1:nrow(credit_data), 2000)
+
+credit_tr &lt;- credit_data[ in_training, ]
+credit_te &lt;- credit_data[-in_training, ]
+missing_examples &lt;- c(14, 394, 565)
+
+rec &lt;- recipe(Price ~ ., data = credit_tr)
+
+impute_rec &lt;- rec %&gt;%
+  step_meanimpute(Income, Assets, Debt)
+
+imp_models &lt;- prep(impute_rec, training = credit_tr)
+
+imputed_te &lt;- bake(imp_models, new_data = credit_te, everything())
+
+credit_te[missing_examples,]
+imputed_te[missing_examples, names(credit_te)]
+
+tidy(impute_rec, number = 1)
+tidy(imp_models, number = 1)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>recipes</em> version 0.1.15 <a href="00Index.html">Index</a>]</div>
+</body></html>

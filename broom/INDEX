@@ -41,6 +41,8 @@ augment.mfx             Augment data with information from a(n) mfx
                         object
 augment.mjoint          Augment data with information from a(n) mjoint
                         object
+augment.mlogit          Augment data with information from a(n) mlogit
+                        object
 augment.nlrq            Tidy a(n) nlrq object
 augment.nls             Augment data with information from a(n) nls
                         object
@@ -71,7 +73,7 @@ augment.stl             Augment data with information from a(n) stl
                         object
 augment.survreg         Augment data with information from a(n) survreg
                         object
-augment_columns         add fitted values, residuals, and other common
+augment_columns         Add fitted values, residuals, and other common
                         outputs to an augment call
 bootstrap               Set up bootstrap replicates of a dplyr
                         operation
@@ -95,6 +97,7 @@ glance.binDesign        Glance at a(n) binDesign object
 glance.cch              Glance at a(n) cch object
 glance.clm              Glance at a(n) clm object
 glance.clmm             Glance at a(n) clmm object
+glance.coeftest         Glance at a(n) coeftest object
 glance.coxph            Glance at a(n) coxph object
 glance.cv.glmnet        Glance at a(n) cv.glmnet object
 glance.drc              Glance at a(n) drc object
@@ -117,8 +120,10 @@ glance.lm               Glance at a(n) lm object
 glance.lmRob            Glance at a(n) lmRob object
 glance.lmodel2          Glance at a(n) lmodel2 object
 glance.lmrob            Glance at a(n) lmrob object
+glance.margins          Glance at a(n) margins object
 glance.mfx              Glance at a(n) mfx object
 glance.mjoint           Glance at a(n) mjoint object
+glance.mlogit           Glance at a(n) mlogit object
 glance.muhaz            Glance at a(n) muhaz object
 glance.multinom         Glance at a(n) multinom object
 glance.nlrq             Glance at a(n) nlrq object
@@ -211,11 +216,13 @@ tidy.lmrob              Tidy a(n) lmrob object
 tidy.lsmobj             Tidy a(n) lsmobj object
 tidy.manova             Tidy a(n) manova object
 tidy.map                Tidy a(n) map object
+tidy.margins            Tidy a(n) margins object
 tidy.mediate            Tidy a(n) mediate object
 tidy.mfx                Tidy a(n) mfx object
 tidy.mjoint             Tidy a(n) mjoint object
 tidy.mle2               Tidy a(n) mle2 object
 tidy.mlm                Tidy a(n) mlm object
+tidy.mlogit             Tidying methods for logit models
 tidy.muhaz              Tidy a(n) muhaz object
 tidy.multinom           Tidying methods for multinomial logistic
                         regression models

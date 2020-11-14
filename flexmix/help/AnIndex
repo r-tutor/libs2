@@ -71,6 +71,7 @@ FLXgetK,FLXMRfix-method	flexmix-internal
 FLXgetModelmatrix	flexmix-internal
 FLXgetModelmatrix,FLXM-method	flexmix-internal
 FLXgetModelmatrix,FLXMCmvcombi-method	flexmix-internal
+FLXgetModelmatrix,FLXMCsparse-method	flexmix-internal
 FLXgetModelmatrix,FLXMRcondlogit-method	flexmix-internal
 FLXgetModelmatrix,FLXMRfix-method	flexmix-internal
 FLXgetModelmatrix,FLXMRlmc-method	flexmix-internal
@@ -113,6 +114,7 @@ FLXMCmvcombi	FLXMCmvcombi
 FLXMCmvnorm	FLXmclust
 FLXMCmvpois	FLXMCmvpois
 FLXMCnorm1	FLXmclust
+FLXMCsparse-class	FLXmodel-class
 FLXMR-class	FLXmodel-class
 FLXMRcondlogit	FLXMRcondlogit
 FLXMRfix-class	flexmix-internal

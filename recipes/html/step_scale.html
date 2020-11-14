@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Scaling Numeric Data</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for step_scale {recipes}"><tr><td>step_scale {recipes}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Scaling Numeric Data</h2>
+
+<h3>Description</h3>
+
+<p><code>step_scale</code> creates a <em>specification</em> of a recipe
+step that will normalize numeric data to have a standard
+deviation of one.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+step_scale(
+  recipe,
+  ...,
+  role = NA,
+  trained = FALSE,
+  sds = NULL,
+  factor = 1,
+  na_rm = TRUE,
+  skip = FALSE,
+  id = rand_id("scale")
+)
+
+## S3 method for class 'step_scale'
+tidy(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>recipe</code></td>
+<td>
+<p>A recipe object. The step will be added to the
+sequence of operations for this recipe.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>One or more selector functions to choose which
+variables are affected by the step. See <code><a href="selections.html">selections()</a></code>
+for more details. For the <code>tidy</code> method, these are not
+currently used.</p>
+</td></tr>
+<tr valign="top"><td><code>role</code></td>
+<td>
+<p>Not used by this step since no new variables are
+created.</p>
+</td></tr>
+<tr valign="top"><td><code>trained</code></td>
+<td>
+<p>A logical to indicate if the quantities for
+preprocessing have been estimated.</p>
+</td></tr>
+<tr valign="top"><td><code>sds</code></td>
+<td>
+<p>A named numeric vector of standard deviations. This
+is <code>NULL</code> until computed by <code><a href="prep.html">prep.recipe()</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>factor</code></td>
+<td>
+<p>A numeric value of either 1 or 2 that scales the
+numeric inputs by one or two standard deviations. By dividing
+by two standard deviations, the coefficients attached to
+continuous predictors can be interpreted the same way as with
+binary inputs. Defaults to <code>1</code>. More in reference below.</p>
+</td></tr>
+<tr valign="top"><td><code>na_rm</code></td>
+<td>
+<p>A logical value indicating whether <code>NA</code>
+values should be removed when computing the standard deviation.</p>
+</td></tr>
+<tr valign="top"><td><code>skip</code></td>
+<td>
+<p>A logical. Should the step be skipped when the
+recipe is baked by <code><a href="bake.html">bake.recipe()</a></code>? While all operations are baked
+when <code><a href="prep.html">prep.recipe()</a></code> is run, some operations may not be able to be
+conducted on new data (e.g. processing the outcome variable(s)).
+Care should be taken when using <code>skip = TRUE</code> as it may affect
+the computations for subsequent operations</p>
+</td></tr>
+<tr valign="top"><td><code>id</code></td>
+<td>
+<p>A character string that is unique to this step to identify it.</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A <code>step_scale</code> object.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Scaling data means that the standard deviation of a
+variable is divided out of the data. <code>step_scale</code> estimates
+the variable standard deviations from the data used in the
+<code>training</code> argument of <code>prep.recipe</code>.
+<code>bake.recipe</code> then applies the scaling to new data sets
+using these standard deviations.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An updated version of <code>recipe</code> with the new step
+added to the sequence of existing steps (if any). For the
+<code>tidy</code> method, a tibble with columns <code>terms</code> (the
+selectors or variables selected) and <code>value</code> (the
+standard deviations).
+</p>
+
+
+<h3>References</h3>
+
+<p>Gelman, A. (2007) &quot;Scaling regression inputs by
+dividing by two standard deviations.&quot; Unpublished. Source:
+<a href="http://www.stat.columbia.edu/~gelman/research/unpublished/standardizing.pdf">http://www.stat.columbia.edu/~gelman/research/unpublished/standardizing.pdf</a>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(modeldata)
+data(biomass)
+
+biomass_tr &lt;- biomass[biomass$dataset == "Training",]
+biomass_te &lt;- biomass[biomass$dataset == "Testing",]
+
+rec &lt;- recipe(HHV ~ carbon + hydrogen + oxygen + nitrogen + sulfur,
+              data = biomass_tr)
+
+scaled_trans &lt;- rec %&gt;%
+  step_scale(carbon, hydrogen)
+
+scaled_obj &lt;- prep(scaled_trans, training = biomass_tr)
+
+transformed_te &lt;- bake(scaled_obj, biomass_te)
+
+biomass_te[1:10, names(transformed_te)]
+transformed_te
+tidy(scaled_trans, number = 1)
+tidy(scaled_obj, number = 1)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>recipes</em> version 0.1.15 <a href="00Index.html">Index</a>]</div>
+</body></html>
