@@ -111,6 +111,7 @@ equalBins	equalBins
 errbar	errbar
 escapeBS	escapeRegex
 escapeRegex	escapeRegex
+estSeqSim	estSeqSim
 event.chart	event.chart
 event.convert	event.convert
 event.history	event.history
@@ -153,6 +154,7 @@ gbayes2	gbayes
 gbayesMixPost	gbayes
 gbayesMixPowerNP	gbayes
 gbayesMixPredNoData	gbayes
+gbayesSeqSim	gbayesSeqSim
 get2rowHeads	Hmisc-internal
 getHdata	getHdata
 getLatestSource	Misc
@@ -319,6 +321,7 @@ optionsCmds	Hmisc-internal
 ordGridFun	Hmisc-internal
 ordTestpo	summary.formula
 outerText	Misc
+pairUpDiff	pairUpDiff
 panel.bpplot	panel.bpplot
 panel.Dotplot	xYplot
 panel.Ecdf	Ecdf

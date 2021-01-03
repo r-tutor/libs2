@@ -5,7 +5,7 @@ county_laea             County geometry with Alaska and Hawaii shifted
 fips_codes              Dataset with FIPS codes for US states and
                         counties
 get_acs                 Obtain data and feature geometry for the
-                        five-year American Community Survey
+                        American Community Survey
 get_decennial           Obtain data and feature geometry for the
                         decennial Census
 get_estimates           Get data from the US Census Bureau Population

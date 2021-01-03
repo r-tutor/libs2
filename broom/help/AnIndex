@@ -12,7 +12,6 @@ augment.data.frame	data.frame_tidiers
 augment.decomposed.ts	augment.decomposed.ts
 augment.drc	augment.drc
 augment.factanal	augment.factanal
-augment.felm	augment.felm
 augment.fixest	augment.fixest
 augment.glm	augment.glm
 augment.glmRob	augment.glmRob
@@ -73,7 +72,6 @@ emmeans_tidiers	tidy.lsmobj
 epiR_tidiers	tidy.epi.2by2
 ergm_tidiers	tidy.ergm
 factanal_tidiers	tidy.factanal
-felm_tidiers	tidy.felm
 finish_glance	finish_glance
 fitdistr_tidiers	tidy.fitdistr
 fix_data_frame	fix_data_frame
@@ -100,7 +98,6 @@ glance.drc	glance.drc
 glance.durbinWatsonTest	durbinWatsonTest_tidiers
 glance.ergm	glance.ergm
 glance.factanal	glance.factanal
-glance.felm	glance.felm
 glance.fitdistr	glance.fitdistr
 glance.fixest	glance.fixest
 glance.gam	glance.gam
@@ -148,6 +145,7 @@ glance.sarlm	glance.sarlm
 glance.smooth.spline	glance.smooth.spline
 glance.speedglm	glance.speedglm
 glance.speedlm	glance.speedlm
+glance.summary.lm	glance.summary.lm
 glance.summaryDefault	summary_tidiers
 glance.survdiff	glance.survdiff
 glance.survexp	glance.survexp
@@ -171,7 +169,6 @@ kmeans_tidiers	tidy.kmeans
 ks_tidiers	tidy.kde
 lavaan_tidiers	tidy.lavaan
 leaps_tidiers	tidy.regsubsets
-lfe_tidiers	tidy.felm
 list_tidiers	list_tidiers
 lmodel2_tidiers	tidy.lmodel2
 lmtest_tidiers	tidy.coeftest
@@ -263,7 +260,6 @@ tidy.emmGrid	tidy.emmGrid
 tidy.epi.2by2	tidy.epi.2by2
 tidy.ergm	tidy.ergm
 tidy.factanal	tidy.factanal
-tidy.felm	tidy.felm
 tidy.fitdistr	tidy.fitdistr
 tidy.fixest	tidy.fixest
 tidy.ftable	tidy.ftable
@@ -345,6 +341,7 @@ tidy.spec	tidy.spec
 tidy.speedglm	tidy.speedglm
 tidy.speedlm	tidy.speedlm
 tidy.summary.glht	tidy.summary.glht
+tidy.summary.lm	tidy.summary.lm
 tidy.summaryDefault	summary_tidiers
 tidy.summary_emm	tidy.summary_emm
 tidy.survdiff	tidy.survdiff

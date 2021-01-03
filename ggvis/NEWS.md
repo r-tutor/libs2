@@ -1,3 +1,7 @@
+# ggvis 0.4.7
+
+* Switched from lazyeval to tidy eval (#487).
+
 # ggvis 0.4.6
 
 * Fixed #483: Basic example did not work in R 4.0. (#485)

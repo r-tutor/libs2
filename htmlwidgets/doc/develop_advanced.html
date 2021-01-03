@@ -330,7 +330,7 @@ hr {
         keep_vec_names = keep_vec_names, json_verbatim = TRUE, 
         ...)
 }
-&lt;bytecode: 0x7f95e30252a8&gt;
+&lt;bytecode: 0x7feac2c686a8&gt;
 </code></pre>
 
 <p>For example, we convert data frames to JSON by columns instead of rows (the latter is <code>jsonlite::toJSON</code>&#39;s default). If you want to change the default values of any arguments, you can attach an attribute <code>TOJSON_ARGS</code> to the widget data to be passed to <code>createWidget()</code>, e.g.</p>
@@ -406,12 +406,14 @@ hr {
 
 <p>Typically the HTML &ldquo;housing&rdquo; for a widget is just a <code>&lt;div&gt;</code> element, and this is correspondingly the default behavior for new widgets that don&#39;t specify otherwise. However, sometimes you need a different element type. For example, the <a href="https://github.com/htmlwidgets/sparkline">sparkline</a> widget requires a <code>&lt;span&gt;</code> element so implements the following custom HTML generation function:</p>
 
-<pre><code class="r">sparkline_html &lt;- function(id, style, class, ...){
+<pre><code class="r">widget_html.sparkline &lt;- function(id, style, class, ...){
   tags$span(id = id, class = class)
 }
 </code></pre>
 
-<p>Note that this function is looked up within the package implementing the widget by the convention <code>widgetname_html</code> so it need not be formally exported from your package or otherwise registered with <strong>htmlwidgets</strong>.</p>
+<p>Note that this function is looked up within the package implementing the widget by the convention <code>widget_html.<em>widgetname</em></code> so it need not be formally exported from your package or otherwise registered with <strong>htmlwidgets</strong>.</p>
+
+<p>(<strong>htmlwidgets</strong> 1.5.2 and earlier used a convention of <code><em>widgetname</em>_html</code>. This is still supported for now, but the new <code>widget_html.<em>widgetname</em></code> convention is recommended going forward, as it seems less likely to lead to false positives.)</p>
 
 <p>Most widgets won&#39;t need a custom HTML function but if you need to generate custom HTML for your widget (e.g. you need an <code>&lt;input&gt;</code> or a <code>&lt;span&gt;</code> rather than a <code>&lt;div&gt;</code>) then you should use the <strong>htmltools</strong> package (as demonstrated by the code above).</p>
 

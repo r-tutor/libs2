@@ -57,6 +57,7 @@ equalBins               Multicolumn Formating
 errbar                  Plot Error Bars
 escapeRegex             Escapes any characters that would have special
                         meaning in a reqular expression.
+estSeqSim               estSeqSim
 event.chart             Flexible Event Chart for Time-to-Event Data
 event.convert           Event Conversion for Time-to-Event Data
 event.history           Produces event.history graph for survival data
@@ -66,6 +67,7 @@ format.df               Format a Data Frame or Matrix for LaTeX or HTML
 format.pval             Format P Values
 gbayes                  Gaussian Bayesian Posterior and Predictive
                         Distributions
+gbayesSeqSim            gbayesSeqSim
 getHdata                Download and Install Datasets for 'Hmisc',
                         'rms', and Statistical Modeling
 getRs                   Interact with github rscripts Project
@@ -114,6 +116,7 @@ nobsY                   Compute Number of Observations for Left Hand
                         Side of Formula
 nstr                    Creates a string of arbitry length
 num.intercepts          Extract number of intercepts
+pairUpDiff              pairUpDiff
 panel.bpplot            Box-Percentile Panel Function for Trellis
 partition               Patitions an object into different sets
 pc1                     First Principal Component

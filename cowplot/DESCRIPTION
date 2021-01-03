@@ -1,6 +1,6 @@
 Package: cowplot
 Title: Streamlined Plot Theme and Plot Annotations for 'ggplot2'
-Version: 1.1.0
+Version: 1.1.1
 Authors@R: 
     person(
       given = "Claus O.",
@@ -37,9 +37,9 @@ Collate: 'add_sub.R' 'align_plots.R' 'as_grob.R' 'as_gtable.R'
 RoxygenNote: 7.1.1
 Encoding: UTF-8
 NeedsCompilation: no
-Packaged: 2020-09-07 20:52:03 UTC; clauswilke
+Packaged: 2020-12-15 18:32:06 UTC; clauswilke
 Author: Claus O. Wilke [aut, cre] (<https://orcid.org/0000-0002-7470-9261>)
 Maintainer: Claus O. Wilke <wilke@austin.utexas.edu>
 Repository: CRAN
-Date/Publication: 2020-09-08 07:30:10 UTC
-Built: R 4.0.2; ; 2020-09-09 16:43:11 UTC; windows
+Date/Publication: 2020-12-30 14:30:02 UTC
+Built: R 4.0.3; ; 2021-01-03 03:25:21 UTC; windows

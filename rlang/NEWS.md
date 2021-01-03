@@ -1,4 +1,26 @@
 
+# rlang 0.4.8
+
+* Backtraces now include native stacks (e.g. from C code) when the
+  [winch](https://r-prof.github.io/winch/) package is installed and
+  `rlang_trace_use_winch` is set to `TRUE` (@krlmlr).
+
+* Compatibility with upcoming testthat 3 and magrittr 2 releases.
+
+* `get_env()` now returns the proper environment with primitive
+  functions, i.e. the base namespace rather than the base environment
+  (r-lib/downlit#32).
+
+* `entrace()` no longer handles non-rlang errors that carry a
+  backtrace. This improves compatibility with packages like callr.
+
+* Backtraces of unhandled errors are now displayed without truncation
+  in non-interactive sessions (#856).
+
+* `is_interactive()` no longer consults "rstudio.notebook.executing"
+  option (#1031).
+
+
 # rlang 0.4.7
 
 * `cnd_muffle()` now returns `FALSE` instead of failing if the

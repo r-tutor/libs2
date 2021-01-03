@@ -1,6 +1,6 @@
 Package: Hmisc
-Version: 4.4-1
-Date: 2020-08-10
+Version: 4.4-2
+Date: 2020-11-25
 Title: Harrell Miscellaneous
 Author: Frank E Harrell Jr <fh@fharrell.com>, with
   contributions from Charles Dupont and many others.
@@ -23,8 +23,8 @@ URL: https://hbiostat.org/R/Hmisc/, https://github.com/harrelfe/Hmisc/
 Encoding: UTF-8
 RoxygenNote: 7.1.1
 NeedsCompilation: yes
-Packaged: 2020-08-10 12:34:23 UTC; harrelfe
+Packaged: 2020-11-27 22:05:50 UTC; harrelfe
 Repository: CRAN
-Date/Publication: 2020-08-10 22:02:11 UTC
-Built: R 4.0.2; x86_64-w64-mingw32; 2020-08-19 23:35:22 UTC; windows
+Date/Publication: 2020-11-29 06:00:16 UTC
+Built: R 4.0.3; x86_64-w64-mingw32; 2020-12-31 02:26:27 UTC; windows
 Archs: i386, x64

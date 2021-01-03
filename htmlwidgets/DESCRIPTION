@@ -1,7 +1,7 @@
 Package: htmlwidgets
 Type: Package
 Title: HTML Widgets for R
-Version: 1.5.2
+Version: 1.5.3
 Authors@R: c(
     person("Ramnath", "Vaidyanathan", role = c("aut", "cph")),
     person("Yihui", "Xie", role = c("aut")),
@@ -9,6 +9,7 @@ Authors@R: c(
     person("Joe", "Cheng", role = c("aut"), email = "joe@rstudio.com"),
     person("Carson", "Sievert", role = c("aut", "cre"), email = "carson@rstudio.com", comment = c(ORCID = "0000-0002-4958-2844")),
     person("Kenton", "Russell", role = c("aut", "cph")),
+    person("Ellis", "Hughes", role = c("ctb")),
     person(family = "RStudio", role = "cph")
     )
 Description: A framework for creating HTML widgets that render in various
@@ -17,21 +18,22 @@ Description: A framework for creating HTML widgets that render in various
 License: MIT + file LICENSE
 VignetteBuilder: knitr
 Imports: grDevices, htmltools (>= 0.3), jsonlite (>= 0.9.16), yaml
-Suggests: knitr (>= 1.8), rmarkdown
+Suggests: knitr (>= 1.8), rmarkdown, testthat
 Enhances: shiny (>= 1.1)
 URL: https://github.com/ramnathv/htmlwidgets
 BugReports: https://github.com/ramnathv/htmlwidgets/issues
 RoxygenNote: 7.1.1
 NeedsCompilation: no
-Packaged: 2020-10-03 15:06:05 UTC; cpsievert
+Packaged: 2020-12-10 16:43:45 UTC; cpsievert
 Author: Ramnath Vaidyanathan [aut, cph],
   Yihui Xie [aut],
   JJ Allaire [aut],
   Joe Cheng [aut],
   Carson Sievert [aut, cre] (<https://orcid.org/0000-0002-4958-2844>),
   Kenton Russell [aut, cph],
+  Ellis Hughes [ctb],
   RStudio [cph]
 Maintainer: Carson Sievert <carson@rstudio.com>
 Repository: CRAN
-Date/Publication: 2020-10-03 22:00:02 UTC
-Built: R 4.0.3; ; 2020-11-09 06:07:25 UTC; windows
+Date/Publication: 2020-12-10 17:30:02 UTC
+Built: R 4.0.3; ; 2020-12-30 19:50:11 UTC; windows

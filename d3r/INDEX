@@ -3,6 +3,7 @@ d3_dep_jetpack          'd3.js' Dependency for Version 4 Jetpack
 d3_dep_v3               'd3.js' Dependency for Version 3
 d3_dep_v4               'd3.js' Dependency for Version 4
 d3_dep_v5               'd3.js' Dependency for Version 5
+d3_dep_v6               'd3.js' Dependency for Version 6
 d3_igraph               Convert 'igraph' to 'd3.js'
 d3_json                 Create 'JSON' that 'd3.js' Expects
 d3_nest                 Convert a 'data.frame' to a 'd3.js' Hierarchy

@@ -458,8 +458,8 @@ shinyApp(ui = ui, server = server)
 <p>This method is highly recommended as it ensures that you get started with the right file structure. Here&#39;s an example that assumes you want to create a widget named &#39;mywidget&#39; in a new package of the same name:</p>
 
 <pre><code class="r">devtools::create(&quot;mywidget&quot;)               # create package using devtools
-setwd(&quot;mywidget&quot;)                          # navigate to package dir
 htmlwidgets::scaffoldWidget(&quot;mywidget&quot;)    # create widget scaffolding
+devtools::document()                       # roxygenize, so NAMESPACE is updated
 devtools::install()                        # install the package so we can try it
 </code></pre>
 

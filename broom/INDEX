@@ -14,8 +14,6 @@ augment.drc             Augment data with information from a(n) drc
                         object
 augment.factanal        Augment data with information from a(n)
                         factanal object
-augment.felm            Augment data with information from a(n) felm
-                        object
 augment.fixest          Augment data with information from a(n) fixest
                         object
 augment.glm             Augment data with information from a(n) glm
@@ -103,7 +101,6 @@ glance.cv.glmnet        Glance at a(n) cv.glmnet object
 glance.drc              Glance at a(n) drc object
 glance.ergm             Glance at a(n) ergm object
 glance.factanal         Glance at a(n) factanal object
-glance.felm             Glance at a(n) felm object
 glance.fitdistr         Glance at a(n) fitdistr object
 glance.fixest           Glance at a(n) fixest object
 glance.gam              Glance at a(n) gam object
@@ -142,6 +139,7 @@ glance.sarlm            Glance at a(n) spatialreg object
 glance.smooth.spline    Tidy a(n) smooth.spine object
 glance.speedglm         Glance at a(n) speedglm object
 glance.speedlm          Glance at a(n) speedlm object
+glance.summary.lm       Glance at a(n) summary.lm object
 glance.survdiff         Glance at a(n) survdiff object
 glance.survexp          Glance at a(n) survexp object
 glance.survfit          Glance at a(n) survfit object
@@ -188,7 +186,6 @@ tidy.emmGrid            Tidy a(n) emmGrid object
 tidy.epi.2by2           Tidy a(n) epi.2by2 object
 tidy.ergm               Tidy a(n) ergm object
 tidy.factanal           Tidy a(n) factanal object
-tidy.felm               Tidy a(n) felm object
 tidy.fitdistr           Tidy a(n) fitdistr object
 tidy.fixest             Tidy a(n) fixest object
 tidy.ftable             (Deprecated) Tidy ftable objects
@@ -253,6 +250,7 @@ tidy.spec               Tidy a(n) spec object
 tidy.speedglm           Tidy a(n) speedglm object
 tidy.speedlm            Tidy a(n) speedlm object
 tidy.summary.glht       Tidy a(n) summary.glht object
+tidy.summary.lm         Tidy a(n) summary.lm object
 tidy.summary_emm        Tidy a(n) summary_emm object
 tidy.survdiff           Tidy a(n) survdiff object
 tidy.survexp            Tidy a(n) survexp object

@@ -1,4 +1,3 @@
-config-package	config
 config	config
 get	get
 is_active	is_active
