@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Dunn's Test of Multiple Comparisons</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for dunn_test {rstatix}"><tr><td>dunn_test {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Dunn's Test of Multiple Comparisons</h2>
+
+<h3>Description</h3>
+
+<p>Performs Dunn's test for pairwise multiple comparisons of the
+ranked data. The mean rank of the different groups is compared. Used for
+post-hoc test following Kruskal-Wallis test.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+dunn_test(data, formula, p.adjust.method = "holm", detailed = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a data.frame containing the variables in the formula.</p>
+</td></tr>
+<tr valign="top"><td><code>formula</code></td>
+<td>
+<p>a formula of the form <code>x ~ group</code> where <code>x</code> is a
+numeric variable giving the data values and <code>group</code> is a factor with
+one or multiple levels giving the corresponding groups. For example,
+<code>formula = TP53 ~ cancer_group</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>p.adjust.method</code></td>
+<td>
+<p>method to adjust p values for multiple comparisons.
+Used when pairwise comparisons are performed. Allowed values include &quot;holm&quot;,
+&quot;hochberg&quot;, &quot;hommel&quot;, &quot;bonferroni&quot;, &quot;BH&quot;, &quot;BY&quot;, &quot;fdr&quot;, &quot;none&quot;. If you don't
+want to adjust the p value (not recommended), use p.adjust.method = &quot;none&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>detailed</code></td>
+<td>
+<p>logical value. Default is FALSE. If TRUE, a detailed result is
+shown.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>DunnTest performs the post hoc pairwise multiple comparisons
+procedure appropriate to follow up a Kruskal-Wallis test, which is a
+non-parametric analog of the one-way ANOVA. The Wilcoxon rank sum test,
+itself a non-parametric analog of the unpaired t-test, is possibly
+intuitive, but inappropriate as a post hoc pairwise test, because (1) it
+fails to retain the dependent ranking that produced the Kruskal-Wallis test
+statistic, and (2) it does not incorporate the pooled variance estimate
+implied by the null hypothesis of the Kruskal-Wallis test.
+</p>
+
+
+<h3>Value</h3>
+
+<p>return a data frame with some of the following columns: </p>
+
+<ul>
+<li> <p><code>.y.</code>: the y (outcome) variable used in the test. </p>
+</li>
+<li>
+<p><code>group1,group2</code>: the compared groups in the pairwise tests. </p>
+</li>
+<li>
+<p><code>n1,n2</code>: Sample counts. </p>
+</li>
+<li> <p><code>estimate</code>: mean ranks difference.
+</p>
+</li>
+<li> <p><code>estimate1, estimate2</code>: show the mean rank values of
+the two groups, respectively.
+</p>
+</li>
+<li> <p><code>statistic</code>: Test statistic (z-value) used to compute the
+p-value. </p>
+</li>
+<li> <p><code>p</code>: p-value. </p>
+</li>
+<li> <p><code>p.adj</code>: the adjusted p-value.
+</p>
+</li>
+<li> <p><code>method</code>: the statistical test used to compare groups. </p>
+</li>
+<li>
+<p><code>p.signif, p.adj.signif</code>: the significance level of p-values and
+adjusted p-values, respectively. </p>
+</li></ul>
+
+<p>The <strong>returned object has an attribute called args</strong>, which is a list
+holding the test arguments.
+</p>
+
+
+<h3>References</h3>
+
+<p>Dunn, O. J. (1964) Multiple comparisons using rank sums
+Technometrics, 6(3):241-252.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Simple test
+ToothGrowth %&gt;% dunn_test(len ~ dose)
+
+# Grouped data
+ToothGrowth %&gt;%
+  group_by(supp) %&gt;%
+  dunn_test(len ~ dose)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

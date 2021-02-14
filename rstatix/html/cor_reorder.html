@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Reorder Correlation Matrix</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for cor_reorder {rstatix}"><tr><td>cor_reorder {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Reorder Correlation Matrix</h2>
+
+<h3>Description</h3>
+
+<p>reorder correlation matrix, according to the coefficients,
+using the hierarchical clustering method.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+cor_reorder(x)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a correlation matrix. Particularly, an object of class <code>cor_mat</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a data frame
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="cor_mat.html">cor_mat</a>()</code>, <code><a href="cor_reshape.html">cor_gather</a>()</code>, <code><a href="cor_reshape.html">cor_spread</a>()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Compute correlation matrix
+#::::::::::::::::::::::::::::::::::::::::::
+cor.mat &lt;- mtcars %&gt;%
+  select(mpg, disp, hp, drat, wt, qsec) %&gt;%
+  cor_mat()
+
+# Reorder by correlation and get p-values
+#::::::::::::::::::::::::::::::::::::::::::
+# Reorder
+cor.mat %&gt;%
+  cor_reorder()
+# Get p-values of the reordered cor_mat
+cor.mat %&gt;%
+  cor_reorder() %&gt;%
+  cor_get_pval()
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

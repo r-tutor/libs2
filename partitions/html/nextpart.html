@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Next partition</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for nextpart {partitions}"><tr><td>nextpart {partitions}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Next partition</h2>
+
+<h3>Description</h3>
+
+<p>Given a partition, return the &ldquo;next&rdquo; one; or determine whether
+it is the last one.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+  nextpart(part, check=TRUE)
+islastpart(part)
+ firstpart(n)
+  nextdiffpart(part, check=TRUE)
+islastdiffpart(part)
+ firstdiffpart(n)
+  nextrestrictedpart(part, check=TRUE)
+islastrestrictedpart(part)
+ firstrestrictedpart(n, m, include.zero=TRUE)
+  nextblockpart(part, f, n=sum(part), include.fewer=FALSE, check=TRUE)
+islastblockpart(part, f, n=NULL     , include.fewer=FALSE)
+ firstblockpart(      f, n=NULL     , include.fewer=FALSE)
+  nextcomposition(comp, restricted, include.zero=TRUE, check=TRUE)
+islastcomposition(comp, restricted, include.zero=TRUE)
+ firstcomposition(n,    m=NULL    , include.zero=TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>part,comp</code></td>
+<td>
+<p>A partition or composition</p>
+</td></tr>
+<tr valign="top"><td><code>check</code></td>
+<td>
+<p>Boolean, with default <code>TRUE</code> meaning to carry out
+various safety checks; the <code>next()</code> functions use <code>C</code>
+calls which might crash the session with some inputs</p>
+</td></tr>
+<tr valign="top"><td><code>f, n, include.fewer, m, include.zero</code></td>
+<td>
+<p>Other arguments as per the
+vectorized version</p>
+</td></tr>
+<tr valign="top"><td><code>restricted</code></td>
+<td>
+<p>In function <code>nextcomposition()</code> and
+<code>islastcomposition()</code>, Boolean, with <code>TRUE</code> meaning to
+consider compositions of fixed length [eg, to iterate through the
+columns of <code>compositions(6,3)</code>],  and
+<code>FALSE</code> meaning to consider compositions of any length [eg to
+iterate through the columns of <code>compositions(6)</code>]</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>These functions are intended to enumerate partitions one at a time,
+eliminating the need to store a huge matrix.  This is useful for
+optimization over large domains and makes it possible to investigate
+larger partitions than is possible with the vectorized codes.
+</p>
+<p>The idea is to use a <code>first...()</code> function to generate the first
+partition, then iterate using a <code>next...()</code> function, stopping when
+the <code>islast...()</code> function returns <code>TRUE</code>.
+</p>
+<p>An example is given below, in which the &ldquo;scrabble&rdquo; problem is
+solved;  note the small size of the sample space.   More examples are
+given in the <code>tests/aab.R</code> file.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Functions <code>nextpart()</code> and <code>nextdiffpart()</code> require a vector
+of the right length: they require and return a partition padded with
+zeros.  Functions <code>nextrestrictedpart()</code> and
+<code>nextblockpart()</code> work with partitions of the specified length.
+Function <code>nextcomposition()</code> truncates any zeros at the end of
+the composition.  This behaviour is inherited from the <code>C</code> code.
+</p>
+<p>In functions <code>nextcomposition()</code> and <code>firstcomposition()</code>,
+argument <code>include.zero</code> is ignored if <code>restricted</code> is
+<code>FALSE</code>.
+</p>
+<p>I must say that the performance of these functions is terrible;
+they are much much slower than their vectorized equivalents.  The
+magnitude of the difference is much larger than I expected.  Heigh
+ho.  Frankly you would better off working directly in <code>C</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Robin K. S. Hankin</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="parts.html">parts</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+# Do the optimization in scrabble vignette, one partition at a time:
+# (but with a smaller letter bag)
+scrabble &lt;- c(a=9 , b=2 , c=2 , d=4 , e=12 , f=2 , g=3)
+
+f &lt;- function(a){prod(choose(scrabble,a))/choose(sum(scrabble),7)}
+bestsofar &lt;- 0
+a &lt;- firstblockpart(scrabble,7)
+while(!islastpart(a)){
+  jj &lt;- f(a)
+  if(jj&gt;bestsofar){
+    bestsofar &lt;- jj
+    bestpart &lt;- a
+  }
+  a &lt;- nextblockpart(a,scrabble) 
+}
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>partitions</em> version 1.10-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

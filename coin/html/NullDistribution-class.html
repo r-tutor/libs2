@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Class '&quot;NullDistribution&quot;' and its subclasses</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for NullDistribution-class {coin}"><tr><td>NullDistribution-class {coin}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Class <code>"NullDistribution"</code> and its subclasses</h2>
+
+<h3>Description</h3>
+
+<p>Objects of class <code>"NullDistribution"</code> and its subclasses
+<code>"ApproxNullDistribution"</code>, <code>"AsymptNullDistribution"</code> and
+<code>"ExactNullDistribution"</code> represent the reference distribution.
+</p>
+
+
+<h3>Objects from the Class</h3>
+
+<p>Objects can be created by calls of the form </p>
+<pre>     new("NullDistribution", \dots),
+
+     new("ApproxNullDistribution", \dots),
+
+     new("AsymptNullDistribution", \dots)</pre>
+<p>and </p>
+<pre>     new("ExactNullDistribution", \dots).</pre>
+
+
+<h3>Slots</h3>
+
+<p>For objects of classes <code>"NullDistribution"</code>,
+<code>"ApproxNullDistribution"</code>, <code>"AsymptNullDistribution"</code> or
+<code>"ExactNullDistribution"</code>:
+</p>
+
+<dl>
+<dt><code>name</code>:</dt><dd>
+<p>Object of class <code>"character"</code>.  The name of the reference
+distribution.
+</p>
+</dd>
+<dt><code>p</code>:</dt><dd>
+<p>Object of class <code>"function"</code>.  The distribution function of the
+reference distribution.
+</p>
+</dd>
+<dt><code>pvalue</code>:</dt><dd>
+<p>Object of class <code>"function"</code>.  The <i>p</i>-value function of the
+reference distribution.
+</p>
+</dd>
+<dt><code>parameters</code>:</dt><dd>
+<p>Object of class <code>"list"</code>.  Additional parameters.
+</p>
+</dd>
+<dt><code>support</code>:</dt><dd>
+<p>Object of class <code>"function"</code>.  The support of the reference
+distribution.
+</p>
+</dd>
+<dt><code>d</code>:</dt><dd>
+<p>Object of class <code>"function"</code>.  The density function of the reference
+distribution.
+</p>
+</dd>
+<dt><code>q</code>:</dt><dd>
+<p>Object of class <code>"function"</code>.  The quantile function of the reference
+distribution.
+</p>
+</dd>
+<dt><code>midpvalue</code>:</dt><dd>
+<p>Object of class <code>"function"</code>.  The mid-<i>p</i>-value function of the
+reference distribution.
+</p>
+</dd>
+<dt><code>pvalueinterval</code>:</dt><dd>
+<p>Object of class <code>"function"</code>.  The <i>p</i>-value interval function of
+the reference distribution.
+</p>
+</dd>
+<dt><code>size</code>:</dt><dd>
+<p>Object of class <code>"function"</code>.  The size function of the reference
+distribution.
+</p>
+</dd>
+</dl>
+
+<p>Additionally, for objects of classes <code>"ApproxNullDistribution"</code> or
+<code>"AsymptNullDistribution"</code>:
+</p>
+
+<dl>
+<dt><code>seed</code>:</dt><dd>
+<p>Object of class <code>"integer"</code>.  The random number generator state
+(i.e., the value of <code>.Random.seed</code>).
+</p>
+</dd>
+</dl>
+
+<p>Additionally, for objects of class <code>"ApproxNullDistribution"</code>:
+</p>
+
+<dl>
+<dt><code>nresample</code>:</dt><dd>
+<p>Object of class <code>"numeric"</code>.  The number of Monte Carlo replicates.
+</p>
+</dd>
+</dl>
+
+
+
+<h3>Extends</h3>
+
+<p>For objects of class <code>"NullDistribution"</code>: <br />
+Class <code>"<a href="PValue-class.html">PValue</a>"</code>, directly.
+</p>
+<p>For objects of classes <code>"ApproxNullDistribution"</code>,
+<code>"AsymptNullDistribution"</code> or <code>"ExactNullDistribution"</code>: <br />
+Class <code>"NullDistribution"</code>, directly. <br />
+Class <code>"<a href="PValue-class.html">PValue</a>"</code>, by class <code>"NullDistribution"</code>,
+distance 2.
+</p>
+
+
+<h3>Known Subclasses</h3>
+
+<p>For objects of class <code>"NullDistribution"</code>: <br />
+Class <code>"ApproxNullDistribution"</code>, directly. <br />
+Class <code>"AsymptNullDistribution"</code>, directly. <br />
+Class <code>"ExactNullDistribution"</code>, directly.
+</p>
+
+
+<h3>Methods</h3>
+
+
+<dl>
+<dt>dperm</dt><dd>
+<p><code>signature(object = "NullDistribution")</code>: See the documentation for
+<code><a href="PermutationDistribution-methods.html">dperm</a></code> for details.
+</p>
+</dd>
+<dt>midpvalue</dt><dd>
+<p><code>signature(object = "NullDistribution")</code>: See the documentation for
+<code><a href="pvalue-methods.html">midpvalue</a></code> for details.
+</p>
+</dd>
+<dt>midpvalue</dt><dd>
+<p><code>signature(object = "ApproxNullDistribution")</code>: See the documentation
+for <code><a href="pvalue-methods.html">midpvalue</a></code> for details.
+</p>
+</dd>
+<dt>pperm</dt><dd>
+<p><code>signature(object = "NullDistribution")</code>: See the documentation for
+<code><a href="PermutationDistribution-methods.html">pperm</a></code> for details.
+</p>
+</dd>
+<dt>pvalue</dt><dd>
+<p><code>signature(object = "NullDistribution")</code>: See the documentation for
+<code><a href="pvalue-methods.html">pvalue</a></code> for details.
+</p>
+</dd>
+<dt>pvalue</dt><dd>
+<p><code>signature(object = "ApproxNullDistribution")</code>: See the documentation
+for <code><a href="pvalue-methods.html">pvalue</a></code> for details.
+</p>
+</dd>
+<dt>pvalue_interval</dt><dd>
+<p><code>signature(object = "NullDistribution")</code>: See the documentation for
+<code><a href="pvalue-methods.html">pvalue_interval</a></code> for details.
+</p>
+</dd>
+<dt>qperm</dt><dd>
+<p><code>signature(object = "NullDistribution")</code>: See the documentation for
+<code><a href="PermutationDistribution-methods.html">qperm</a></code> for details.
+</p>
+</dd>
+<dt>rperm</dt><dd>
+<p><code>signature(object = "NullDistribution")</code>: See the documentation for
+<code><a href="PermutationDistribution-methods.html">rperm</a></code> for details.
+</p>
+</dd>
+<dt>size</dt><dd>
+<p><code>signature(object = "NullDistribution")</code>: See the documentation for
+<code><a href="pvalue-methods.html">size</a></code> for details.
+</p>
+</dd>
+<dt>support</dt><dd>
+<p><code>signature(object = "NullDistribution")</code>: See the documentation for
+<code><a href="PermutationDistribution-methods.html">support</a></code> for details.
+</p>
+</dd>
+</dl>
+
+
+<hr /><div style="text-align: center;">[Package <em>coin</em> version 1.4-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

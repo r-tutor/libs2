@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Rotating Rats</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for rotarod {coin}"><tr><td>rotarod {coin}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Rotating Rats</h2>
+
+<h3>Description</h3>
+
+<p>The endurance time of 24 rats in two groups on a rotating cylinder.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>rotarod</pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 24 observations on 2 variables.
+</p>
+
+<dl>
+<dt><code>time</code></dt><dd>
+<p>endurance time (seconds).
+</p>
+</dd>
+<dt><code>group</code></dt><dd>
+<p>a factor with levels <code>"control"</code> and <code>"treatment"</code>.
+</p>
+</dd>
+</dl>
+
+
+
+<h3>Details</h3>
+
+<p>The rats were randomly assigned to receive a fixed oral dose of a centrally
+acting muscle relaxant (<code>"treatment"</code>) or a saline solvent
+(<code>"control"</code>).  The animals were placed on a rotating cylinder and the
+endurance time of each rat, i.e., the length of time each rat remained on the
+cylinder, was measured up to a maximum of 300 seconds.
+</p>
+<p>This dataset is the basis of a comparison of 11 different software
+implementations of the Wilcoxon-Mann-Whitney test presented in Bergmann,
+Ludbrook and Spooren (2000).
+</p>
+
+
+<h3>Note</h3>
+
+<p>The empirical variance in the control group is 0 and the group medians are
+identical.  The exact conditional <i>p</i>-values are 0.0373 (two-sided) and
+0.0186 (one-sided).  The asymptotic two-sided <i>p</i>-value (corrected for
+ties) is 0.0147.
+</p>
+
+
+<h3>Source</h3>
+
+<p>Bergmann, R., Ludbrook, J. and Spooren, W. P. J. M.  (2000).  Different
+outcomes of the Wilcoxon-Mann-Whitney test from different statistics packages.
+<em>The American Statistician</em> <b>54</b>(1), 72&ndash;77.
+doi: <a href="https://doi.org/10.1080/00031305.2000.10474513">10.1080/00031305.2000.10474513</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## One-sided exact Wilcoxon-Mann-Whitney test (p = 0.0186)
+wilcox_test(time ~ group, data = rotarod, distribution = "exact",
+            alternative = "greater")
+
+## Two-sided exact Wilcoxon-Mann-Whitney test (p = 0.0373)
+wilcox_test(time ~ group, data = rotarod, distribution = "exact")
+
+## Two-sided asymptotic Wilcoxon-Mann-Whitney test (p = 0.0147)
+wilcox_test(time ~ group, data = rotarod)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>coin</em> version 1.4-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

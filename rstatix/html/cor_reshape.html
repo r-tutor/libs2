@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Reshape Correlation Data</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for cor_gather {rstatix}"><tr><td>cor_gather {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Reshape Correlation Data</h2>
+
+<h3>Description</h3>
+
+<p>Reshape correlation analysis results. Key functions: </p>
+
+<ul>
+<li> <p><code>cor_gather()</code>: takes a correlation matrix and collapses (i.e. melt) it into a paired list
+(long format). </p>
+</li>
+<li> <p><code>cor_spread()</code>: spread a long correlation data format across
+multiple columns. Particularly, it takes the results of <code><a href="cor_test.html">cor_test</a></code>
+and transforms it into a correlation matrix. </p>
+</li></ul>
+
+
+
+<h3>Usage</h3>
+
+<pre>
+cor_gather(data, drop.na = TRUE)
+
+cor_spread(data, value = "cor")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a data frame or matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>drop.na</code></td>
+<td>
+<p>logical. If TRUE, drop rows containing missing values after gathering the data.</p>
+</td></tr>
+<tr valign="top"><td><code>value</code></td>
+<td>
+<p>column name containing the value to spread.</p>
+</td></tr>
+</table>
+
+
+<h3>Functions</h3>
+
+
+<ul>
+<li> <p><code>cor_gather</code>: takes a correlation matrix and collapses (or melt) it into long
+format data frame (paired list)
+</p>
+</li>
+<li> <p><code>cor_spread</code>: spread a long correlation data frame into wide
+format. Expects the columns &quot;var1&quot;, &quot;var2&quot; and &quot;cor&quot; in the data.
+(correlation matrix).
+</p>
+</li></ul>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="cor_mat.html">cor_mat</a>()</code>, <code><a href="cor_reorder.html">cor_reorder</a>()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Data preparation
+#::::::::::::::::::::::::::::::::::::::::::
+mydata &lt;- mtcars %&gt;%
+  select(mpg, disp, hp, drat, wt, qsec)
+head(mydata, 3)
+
+# Reshape a correlation matrix
+#::::::::::::::::::::::::::::::::::::::::::
+# Compute a correlation matrix
+cor.mat &lt;- mydata %&gt;% cor_mat()
+cor.mat
+
+# Collapse the correlation matrix into long format
+# paired list data frame
+long.format &lt;- cor.mat %&gt;% cor_gather()
+long.format
+
+# Spread a correlation data format
+#::::::::::::::::::::::::::::::::::::::::::
+# Spread the correlation coefficient value
+long.format %&gt;% cor_spread(value = "cor")
+# Spread the p-value
+long.format %&gt;% cor_spread(value = "p")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

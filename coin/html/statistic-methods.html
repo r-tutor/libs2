@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Extraction of the Test Statistic and the Linear Statistic</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for statistic-methods {coin}"><tr><td>statistic-methods {coin}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Extraction of the Test Statistic and the Linear Statistic</h2>
+
+<h3>Description</h3>
+
+<p>Methods for extraction of the test statistic and the linear statistic.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S4 method for signature 'IndependenceLinearStatistic'
+statistic(object, type = c("test", "linear", "centered", "standardized"),
+          partial = FALSE, ...)
+## S4 method for signature 'IndependenceTestStatistic'
+statistic(object, type = c("test", "linear", "centered", "standardized"),
+          partial = FALSE, ...)
+## S4 method for signature 'IndependenceTest'
+statistic(object, type = c("test", "linear", "centered", "standardized"),
+          partial = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+
+<p>an object from which the test statistic or the linear statistic can be
+extracted.
+</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+
+<p>a character string indicating the type of statistic: either <code>"test"</code>
+(default) for the test statistic, <code>"linear"</code> for the unstandardized
+linear statistic, <code>"centered"</code> for the centered linear statistic or
+<code>"standardized"</code> for the standardized linear statistic.
+</p>
+</td></tr>
+<tr valign="top"><td><code>partial</code></td>
+<td>
+
+<p>a logical indicating that the partial linear statistic for each block should
+be extracted.  Defaults to <code>FALSE</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+
+<p>further arguments (currently ignored).
+</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The method <code>statistic</code> extracts the univariate test statistic or the,
+possibly multivariate, linear statistic in its unstandardized, centered or
+standardized form.
+</p>
+<p>The test statistic (<code>type = "test"</code>) is returned by default.  The
+unstandardized, centered or standardized linear statistic is obtained by
+setting <code>type</code> to <code>"linear"</code>, <code>"centered"</code> or
+<code>"standardized"</code>, respectively.  For tests of conditional independence
+within blocks, the partial linear statistic for each block is obtained by
+setting <code>partial = TRUE</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The test statistic or the unstandardized, centered or standardized linear
+statistic extracted from <code>object</code>.  A numeric vector, matrix or array.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Example data
+dta &lt;- data.frame(
+    y = gl(4, 5),
+    x = gl(5, 4)
+)
+
+## Asymptotic Cochran-Mantel-Haenszel Test
+ct &lt;- cmh_test(y ~ x, data = dta)
+
+## Test statistic
+statistic(ct)
+
+## The unstandardized linear statistic...
+statistic(ct, type = "linear")
+
+## ...is identical to the contingency table
+xtabs(~ x + y, data = dta)
+
+## The centered linear statistic...
+statistic(ct, type = "centered")
+
+## ...is identical to
+statistic(ct, type = "linear") - expectation(ct)
+
+## The standardized linear statistic, illustrating departures from the null
+## hypothesis of independence...
+statistic(ct, type = "standardized")
+
+## ...is identical to
+(statistic(ct, type = "linear") - expectation(ct)) / sqrt(variance(ct))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>coin</em> version 1.4-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

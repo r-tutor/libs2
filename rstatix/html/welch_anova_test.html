@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Welch One-Way ANOVA Test</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for welch_anova_test {rstatix}"><tr><td>welch_anova_test {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Welch One-Way ANOVA Test</h2>
+
+<h3>Description</h3>
+
+<p>Tests for equal means in a one-way design (not assuming equal
+variance). A wrapper around the base function
+<code><a href="../../stats/html/oneway.test.html">oneway.test</a>()</code>. This is is an alternative to the
+standard one-way ANOVA in the situation where the homogeneity of variance
+assumption is violated.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+welch_anova_test(data, formula)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a data frame containing the variables in the formula.</p>
+</td></tr>
+<tr valign="top"><td><code>formula</code></td>
+<td>
+<p>a formula specifying the ANOVA model similar to aov. Can be of
+the form y ~ group where y is a numeric variable giving the data values and
+group is a factor with one or multiple levels giving the corresponding
+groups. For example, formula = TP53 ~ cancer_group.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>return a data frame with the following columns: </p>
+ <ul>
+<li>
+<p><code>.y.</code>: the y variable used in the test. </p>
+</li>
+<li> <p><code>n</code>: sample count.
+</p>
+</li>
+<li> <p><code>statistic</code>: the value of the test statistic. </p>
+</li>
+<li> <p><code>p</code>:
+p-value. </p>
+</li>
+<li> <p><code>method</code>: the statistical test used to compare groups.</p>
+</li></ul>
+
+
+
+<h3>Examples</h3>
+
+<pre>
+# Load data
+#:::::::::::::::::::::::::::::::::::::::
+data("ToothGrowth")
+df &lt;- ToothGrowth
+df$dose &lt;- as.factor(df$dose)
+
+# Welch one-way ANOVA test (not assuming equal variance)
+#:::::::::::::::::::::::::::::::::::::::::
+df %&gt;% welch_anova_test(len ~ dose)
+
+# Grouped data
+#:::::::::::::::::::::::::::::::::::::::::
+df %&gt;%
+  group_by(supp) %&gt;%
+  welch_anova_test(len ~ dose)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

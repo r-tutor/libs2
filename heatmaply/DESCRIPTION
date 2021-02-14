@@ -1,8 +1,8 @@
 Package: heatmaply
 Type: Package
-Title: Interactive Cluster Heat Maps Using 'plotly'
-Version: 1.1.1
-Date: 2020-08-24
+Title: Interactive Cluster Heat Maps Using 'plotly' and 'ggplot2'
+Version: 1.2.1
+Date: 2021-02-02
 Authors@R: c(
     person("Tal", "Galili", role = c("aut", "cre", "cph"), email = "tal.galili@gmail.com", comment = "https://www.r-statistics.com"),
     person("Alan", "O'Callaghan", comment = "https://github.com/Alanocallaghan",role = "aut"),
@@ -20,7 +20,7 @@ Description: Create interactive cluster 'heatmaps' that can be saved as a stand-
     of specific value by hovering the mouse over a cell, as well as zooming into
     a region of the 'heatmap' by dragging a rectangle around the relevant area.
     This work is based on the 'ggplot2' and 'plotly.js' engine. It produces
-    similar 'heatmaps' as 'heatmap.2' with the advantage of speed
+    similar 'heatmaps' to 'heatmap.2' with the advantage of speed
     ('plotly.js' is able to handle larger size matrix), the ability to zoom from
     the 'dendrogram' panes, and the placing of factor variables in the sides of the
     'heatmap'.
@@ -41,12 +41,12 @@ LazyData: true
 RoxygenNote: 7.1.1
 Encoding: UTF-8
 NeedsCompilation: no
-Packaged: 2020-08-24 09:35:07 UTC; talgalili
+Packaged: 2021-02-02 07:31:03 UTC; talgalili
 Author: Tal Galili [aut, cre, cph] (https://www.r-statistics.com),
   Alan O'Callaghan [aut] (https://github.com/Alanocallaghan),
   Jonathan Sidi [ctb] (https://github.com/yonicd),
   Yoav Benjamini [ths]
 Maintainer: Tal Galili <tal.galili@gmail.com>
 Repository: CRAN
-Date/Publication: 2020-08-25 06:40:12 UTC
-Built: R 4.0.2; ; 2020-09-10 03:23:57 UTC; windows
+Date/Publication: 2021-02-02 10:50:07 UTC
+Built: R 4.0.3; ; 2021-02-08 14:27:18 UTC; windows

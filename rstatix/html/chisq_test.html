@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Chi-squared Test for Count Data</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for chisq_test {rstatix}"><tr><td>chisq_test {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Chi-squared Test for Count Data</h2>
+
+<h3>Description</h3>
+
+<p>Performs chi-squared tests, including goodness-of-fit,
+homogeneity and independence tests.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+chisq_test(
+  x,
+  y = NULL,
+  correct = TRUE,
+  p = rep(1/length(x), length(x)),
+  rescale.p = FALSE,
+  simulate.p.value = FALSE,
+  B = 2000
+)
+
+pairwise_chisq_gof_test(x, p.adjust.method = "holm", ...)
+
+pairwise_chisq_test_against_p(
+  x,
+  p = rep(1/length(x), length(x)),
+  p.adjust.method = "holm",
+  ...
+)
+
+chisq_descriptives(res.chisq)
+
+expected_freq(res.chisq)
+
+observed_freq(res.chisq)
+
+pearson_residuals(res.chisq)
+
+std_residuals(res.chisq)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a numeric vector or matrix. <code>x</code> and <code>y</code> can also
+both be factors.</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>a numeric vector; ignored if <code>x</code> is a matrix.  If
+<code>x</code> is a factor, <code>y</code> should be a factor of the same length.</p>
+</td></tr>
+<tr valign="top"><td><code>correct</code></td>
+<td>
+<p>a logical indicating whether to apply continuity
+correction when computing the test statistic for 2 by 2 tables: one
+half is subtracted from all <i>|O - E|</i> differences; however, the
+correction will not be bigger than the differences themselves.  No correction
+is done if <code>simulate.p.value = TRUE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>a vector of probabilities of the same length of <code>x</code>.
+An error is given if any entry of <code>p</code> is negative.</p>
+</td></tr>
+<tr valign="top"><td><code>rescale.p</code></td>
+<td>
+<p>a logical scalar; if TRUE then <code>p</code> is rescaled
+(if necessary) to sum to 1.  If <code>rescale.p</code> is FALSE, and
+<code>p</code> does not sum to 1, an error is given.</p>
+</td></tr>
+<tr valign="top"><td><code>simulate.p.value</code></td>
+<td>
+<p>a logical indicating whether to compute
+p-values by Monte Carlo simulation.</p>
+</td></tr>
+<tr valign="top"><td><code>B</code></td>
+<td>
+<p>an integer specifying the number of replicates used in the
+Monte Carlo test.</p>
+</td></tr>
+<tr valign="top"><td><code>p.adjust.method</code></td>
+<td>
+<p>method to adjust p values for multiple comparisons.
+Used when pairwise comparisons are performed. Allowed values include &quot;holm&quot;,
+&quot;hochberg&quot;, &quot;hommel&quot;, &quot;bonferroni&quot;, &quot;BH&quot;, &quot;BY&quot;, &quot;fdr&quot;, &quot;none&quot;. If you don't
+want to adjust the p value (not recommended), use p.adjust.method = &quot;none&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>other arguments passed to the function <code>{chisq_test}()</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>res.chisq</code></td>
+<td>
+<p>an object of class <code>chisq_test</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>return a data frame with some the following columns: </p>
+ <ul>
+<li>
+<p><code>n</code>: the number of participants. </p>
+</li>
+<li> <p><code>group, group1, group2</code>:
+the categories or groups being compared. </p>
+</li>
+<li> <p><code>statistic</code>: the value
+of Pearson's chi-squared test statistic. </p>
+</li>
+<li> <p><code>df</code>: the degrees of
+freedom of the approximate chi-squared distribution of the test statistic.
+NA if the p-value is computed by Monte Carlo simulation. </p>
+</li>
+<li> <p><code>p</code>:
+p-value. </p>
+</li>
+<li> <p><code>p.adj</code>: the adjusted p-value. </p>
+</li>
+<li> <p><code>method</code>: the
+used statistical test. </p>
+</li>
+<li> <p><code>p.signif, p.adj.signif</code>: the significance
+level of p-values and adjusted p-values, respectively. </p>
+</li>
+<li>
+<p><code>observed</code>: observed counts. </p>
+</li>
+<li>
+<p><code>expected</code>: the expected counts under the null hypothesis.
+</p>
+</li></ul>
+
+<p>The <strong>returned object has an attribute called args</strong>, which is a list
+holding the test arguments.
+</p>
+
+
+<h3>Functions</h3>
+
+
+<ul>
+<li> <p><code>chisq_test</code>: performs chi-square tests including goodness-of-fit,
+homogeneity and independence tests.
+</p>
+</li>
+<li> <p><code>pairwise_chisq_gof_test</code>: perform pairwise comparisons between groups following a global
+chi-square goodness of fit test.
+</p>
+</li>
+<li> <p><code>pairwise_chisq_test_against_p</code>: perform pairwise comparisons after a global
+chi-squared test for given probabilities. For each group, the observed and
+the expected proportions are shown. Each group is compared to the sum of
+all others.
+</p>
+</li>
+<li> <p><code>chisq_descriptives</code>: returns the descriptive statistics of the chi-square
+test. These include, observed and expected frequencies, proportions,
+residuals and standardized residuals.
+</p>
+</li>
+<li> <p><code>expected_freq</code>: returns the expected counts from the chi-square test result.
+</p>
+</li>
+<li> <p><code>observed_freq</code>: returns the observed counts from the chi-square test result.
+</p>
+</li>
+<li> <p><code>pearson_residuals</code>: returns the Pearson residuals, <code>(observed - expected) / sqrt(expected)</code>.
+</p>
+</li>
+<li> <p><code>std_residuals</code>: returns the standardized residuals
+</p>
+</li></ul>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Chi-square goodness of fit test
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tulip &lt;- c(red = 81, yellow = 50, white = 27)
+# Q1: Are the colors equally common?
+chisq_test(tulip)
+pairwise_chisq_gof_test(tulip)
+# Q2: comparing observed to expected proportions
+chisq_test(tulip, p = c(1/2, 1/3, 1/6))
+pairwise_chisq_test_against_p(tulip, p = c(0.5, 0.33, 0.17))
+
+# Homogeneity of proportions between groups
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# Data: Titanic
+xtab &lt;- as.table(rbind(
+  c(203, 118, 178, 212),
+  c(122, 167, 528, 673)
+))
+dimnames(xtab) &lt;- list(
+  Survived = c("Yes", "No"),
+  Class = c("1st", "2nd", "3rd", "Crew")
+)
+xtab
+# Chi-square test
+chisq_test(xtab)
+# Compare the proportion of survived between groups
+pairwise_prop_test(xtab)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

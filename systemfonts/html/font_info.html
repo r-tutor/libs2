@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Query font-specific information</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for font_info {systemfonts}"><tr><td>font_info {systemfonts}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Query font-specific information</h2>
+
+<h3>Description</h3>
+
+<p>Get general information about a font, relative to a given size. Size specific
+measures will be returned in pixel units. The function is vectorised to the
+length of the longest argument.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+font_info(
+  family = "",
+  italic = FALSE,
+  bold = FALSE,
+  size = 12,
+  res = 72,
+  path = NULL,
+  index = 0
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>family</code></td>
+<td>
+<p>The name of the font family</p>
+</td></tr>
+<tr valign="top"><td><code>italic</code></td>
+<td>
+<p>logicals indicating the font style</p>
+</td></tr>
+<tr valign="top"><td><code>bold</code></td>
+<td>
+<p>logicals indicating the font style</p>
+</td></tr>
+<tr valign="top"><td><code>size</code></td>
+<td>
+<p>The pointsize of the font to use for size related measures</p>
+</td></tr>
+<tr valign="top"><td><code>res</code></td>
+<td>
+<p>The ppi of the size related mesures</p>
+</td></tr>
+<tr valign="top"><td><code>path, index</code></td>
+<td>
+<p>path an index of a font file to circumvent lookup based on
+family and style</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A data.frame giving info on the requested font + size combinations. The
+data.frame will contain the following columns:
+</p>
+
+<dl>
+<dt>path</dt><dd><p>The path to the font file</p>
+</dd>
+<dt>index</dt><dd><p>The 0-based index of the font in the fontfile</p>
+</dd>
+<dt>family</dt><dd><p>The family name of the font</p>
+</dd>
+<dt>style</dt><dd><p>The style name of the font</p>
+</dd>
+<dt>italic</dt><dd><p>A logical giving if the font is italic</p>
+</dd>
+<dt>bold</dt><dd><p>A logical giving if the font is bold</p>
+</dd>
+<dt>monospace</dt><dd><p>A logical giving if the font is monospace</p>
+</dd>
+<dt>weight</dt><dd><p>A factor giving the weight of the font</p>
+</dd>
+<dt>width</dt><dd><p>A factor giving the width of the font</p>
+</dd>
+<dt>kerning</dt><dd><p>A logical giving if the font supports kerning</p>
+</dd>
+<dt>color</dt><dd><p>A logical giving if the font has color glyphs</p>
+</dd>
+<dt>scalable</dt><dd><p>A logical giving if the font is scalable</p>
+</dd>
+<dt>vertical</dt><dd><p>A logical giving if the font is vertical</p>
+</dd>
+<dt>n_glyphs</dt><dd><p>The number of glyphs in the font</p>
+</dd>
+<dt>n_sizes</dt><dd><p>The number of predefined sizes in the font</p>
+</dd>
+<dt>n_charmaps</dt><dd><p>The number of character mappings in the font file</p>
+</dd>
+<dt>bbox</dt><dd><p>A bounding box large enough to contain any of the glyphs in the font</p>
+</dd>
+<dt>max_ascend</dt><dd><p>The maximum ascend of the tallest glyph in the font</p>
+</dd>
+<dt>max_descent</dt><dd><p>The maximum descend of the most descending glyph in the font</p>
+</dd>
+<dt>max_advance_width</dt><dd><p>The maximum horizontal advance a glyph can make</p>
+</dd>
+<dt>max_advance_height</dt><dd><p>The maximum vertical advance a glyph can make</p>
+</dd>
+<dt>lineheight</dt><dd><p>The height of a single line of text in the font</p>
+</dd>
+<dt>underline_pos</dt><dd><p>The position of a potential underlining segment</p>
+</dd>
+<dt>underline_size</dt><dd><p>The width the the underline</p>
+</dd>
+</dl>
+
+
+
+<h3>Examples</h3>
+
+<pre>
+font_info('serif')
+
+# Avoid lookup if font file is already known
+sans &lt;- match_font('sans')
+font_info(path = sans$path, index = sans$index)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>systemfonts</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

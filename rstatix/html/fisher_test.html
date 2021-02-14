@@ -1,0 +1,244 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Fisher's Exact Test for Count Data</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for fisher_test {rstatix}"><tr><td>fisher_test {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Fisher's Exact Test for Count Data</h2>
+
+<h3>Description</h3>
+
+<p>Performs Fisher's exact test for testing the null of independence
+of rows and columns in a contingency table.
+</p>
+<p>Wrappers around the R base function <code><a href="../../stats/html/fisher.test.html">fisher.test</a>()</code> but
+have the advantage of performing pairwise and row-wise fisher tests, the
+post-hoc tests following a significant chi-square test of homogeneity for 2xc
+and rx2 contingency tables.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+fisher_test(
+  xtab,
+  workspace = 2e+05,
+  alternative = "two.sided",
+  conf.int = TRUE,
+  conf.level = 0.95,
+  simulate.p.value = FALSE,
+  B = 2000,
+  detailed = FALSE,
+  ...
+)
+
+pairwise_fisher_test(xtab, p.adjust.method = "holm", detailed = FALSE, ...)
+
+row_wise_fisher_test(xtab, p.adjust.method = "holm", detailed = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>xtab</code></td>
+<td>
+<p>a contingency table in a matrix form.</p>
+</td></tr>
+<tr valign="top"><td><code>workspace</code></td>
+<td>
+<p>an integer specifying the size of the workspace
+used in the network algorithm.  In units of 4 bytes.  Only used for
+non-simulated p-values larger than <i>2 by 2</i> tables.
+Since <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> version 3.5.0, this also increases the internal stack size
+which allows larger problems to be solved, however sometimes needing
+hours.  In such cases, <code>simulate.p.values=TRUE</code> may be more
+reasonable.</p>
+</td></tr>
+<tr valign="top"><td><code>alternative</code></td>
+<td>
+<p>indicates the alternative hypothesis and must be
+one of <code>"two.sided"</code>, <code>"greater"</code> or <code>"less"</code>.
+You can specify just the initial letter.  Only used in the
+<i>2 by 2</i> case.</p>
+</td></tr>
+<tr valign="top"><td><code>conf.int</code></td>
+<td>
+<p>logical indicating if a confidence interval for the
+odds ratio in a <i>2 by 2</i> table should be
+computed (and returned).</p>
+</td></tr>
+<tr valign="top"><td><code>conf.level</code></td>
+<td>
+<p>confidence level for the returned confidence
+interval.  Only used in the <i>2 by 2</i> case and if
+<code>conf.int = TRUE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>simulate.p.value</code></td>
+<td>
+<p>a logical indicating whether to compute
+p-values by Monte Carlo simulation, in larger than <i>2 by 2</i> tables.</p>
+</td></tr>
+<tr valign="top"><td><code>B</code></td>
+<td>
+<p>an integer specifying the number of replicates used in the
+Monte Carlo test.</p>
+</td></tr>
+<tr valign="top"><td><code>detailed</code></td>
+<td>
+<p>logical value. Default is FALSE. If TRUE, a detailed result is
+shown.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Other arguments passed to the function <code>fisher_test()</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>p.adjust.method</code></td>
+<td>
+<p>method to adjust p values for multiple comparisons.
+Used when pairwise comparisons are performed. Allowed values include &quot;holm&quot;,
+&quot;hochberg&quot;, &quot;hommel&quot;, &quot;bonferroni&quot;, &quot;BH&quot;, &quot;BY&quot;, &quot;fdr&quot;, &quot;none&quot;. If you don't
+want to adjust the p value (not recommended), use p.adjust.method = &quot;none&quot;.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>return a data frame with some the following columns: </p>
+ <ul>
+<li>
+<p><code>group</code>: the categories in the row-wise proportion tests. </p>
+</li>
+<li>
+<p><code>p</code>: p-value. </p>
+</li>
+<li> <p><code>p.adj</code>: the adjusted p-value. </p>
+</li>
+<li>
+<p><code>method</code>: the used statistical test. </p>
+</li>
+<li> <p><code>p.signif,
+ p.adj.signif</code>: the significance level of p-values and adjusted p-values,
+respectively. </p>
+</li>
+<li> <p><code>estimate</code>: an estimate of the odds ratio. Only
+present in the 2 by 2 case. </p>
+</li>
+<li> <p><code>alternative</code>: a character string
+describing the alternative hypothesis. </p>
+</li>
+<li> <p><code>conf.low,conf.high</code>: a
+confidence interval for the odds ratio. Only present in the 2 by 2 case and
+if argument conf.int = TRUE.</p>
+</li></ul>
+
+<p>The <strong>returned object has an attribute called args</strong>, which is a list
+holding the test arguments.
+</p>
+
+
+<h3>Functions</h3>
+
+
+<ul>
+<li> <p><code>fisher_test</code>: performs Fisher's exact test for testing the null of
+independence of rows and columns in a contingency table with fixed
+marginals. Wrapper around the function <code><a href="../../stats/html/fisher.test.html">fisher.test</a>()</code>.
+</p>
+</li>
+<li> <p><code>pairwise_fisher_test</code>: pairwise comparisons between proportions, a post-hoc
+tests following a significant Fisher's exact test of homogeneity for 2xc
+design.
+</p>
+</li>
+<li> <p><code>row_wise_fisher_test</code>: performs row-wise Fisher's exact test of count data, a post-hoc tests following a significant chi-square test
+of homogeneity for rx2 contingency table. The test is conducted for each category (row).
+</p>
+</li></ul>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+# Comparing two proportions
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# Data: frequencies of smokers between two groups
+xtab &lt;- as.table(rbind(c(490, 10), c(400, 100)))
+dimnames(xtab) &lt;- list(
+  group = c("grp1", "grp2"),
+  smoker = c("yes", "no")
+)
+xtab
+# compare the proportion of smokers
+fisher_test(xtab, detailed = TRUE)
+
+# Homogeneity of proportions between groups
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# H0: the proportion of smokers is similar in the four groups
+# Ha:  this proportion is different in at least one of the populations.
+#
+# Data preparation
+grp.size &lt;- c( 106, 113, 156, 102 )
+smokers  &lt;- c( 50, 100, 139, 80 )
+no.smokers &lt;- grp.size - smokers
+xtab &lt;- as.table(rbind(
+  smokers,
+  no.smokers
+))
+dimnames(xtab) &lt;- list(
+  Smokers = c("Yes", "No"),
+  Groups = c("grp1", "grp2", "grp3", "grp4")
+)
+xtab
+
+# Compare the proportions of smokers between groups
+fisher_test(xtab, detailed = TRUE)
+
+# Pairwise comparison between groups
+pairwise_fisher_test(xtab)
+
+
+# Pairwise proportion tests
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# Data: Titanic
+xtab &lt;- as.table(rbind(
+  c(122, 167, 528, 673),
+  c(203, 118, 178, 212)
+))
+dimnames(xtab) &lt;- list(
+  Survived = c("No", "Yes"),
+  Class = c("1st", "2nd", "3rd", "Crew")
+)
+xtab
+# Compare the proportion of survived between groups
+pairwise_fisher_test(xtab)
+
+# Row-wise proportion tests
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# Data: Titanic
+xtab &lt;- as.table(rbind(
+  c(180, 145), c(179, 106),
+  c(510, 196), c(862, 23)
+))
+dimnames(xtab) &lt;- list(
+  Class = c("1st", "2nd", "3rd", "Crew"),
+  Gender = c("Male", "Female")
+)
+xtab
+# Compare the proportion of males and females in each category
+row_wise_fisher_test(xtab)
+
+# A r x c table  Agresti (2002, p. 57) Job Satisfaction
+Job &lt;- matrix(c(1,2,1,0, 3,3,6,1, 10,10,14,9, 6,7,12,11), 4, 4,
+              dimnames = list(income = c("&lt; 15k", "15-25k", "25-40k", "&gt; 40k"),
+                             satisfaction = c("VeryD", "LittleD", "ModerateS", "VeryS")))
+fisher_test(Job)
+fisher_test(Job, simulate.p.value = TRUE, B = 1e5)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

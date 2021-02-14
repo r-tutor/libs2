@@ -1,5 +1,4 @@
-#ifndef SYSTEMFONTS_H
-#define SYSTEMFONTS_H
+#pragma once
 
 #define R_NO_REMAP
 
@@ -74,5 +73,38 @@ static inline int string_shape(const char* string, const char* fontfile, int ind
   }
   return p_string_shape(string, fontfile, index, size, res, x, y, max_length);
 }
-
-#endif
+// Get the file and index of a fallback font for the given string based on the
+// given font and index
+static inline FontSettings get_fallback(const char *string, const char *path, int index) {
+  static FontSettings (*p_get_fallback)(const char*, const char*, int) = NULL;
+  if (p_get_fallback == NULL) {
+    p_get_fallback = (FontSettings (*)(const char*, const char*, int)) R_GetCCallable("systemfonts", "get_fallback");
+  }
+  return p_get_fallback(string, path, index);
+}
+// Get the weight of the font as encoded in the OTT/2 table
+static inline int get_font_weight(const char *path, int index) {
+  static int (*p_get_weight)(const char*, int) = NULL;
+  if (p_get_weight == NULL) {
+    p_get_weight = (int (*)(const char*, int)) R_GetCCallable("systemfonts", "font_weight");
+  }
+  return p_get_weight(path, index);
+}
+// Get the family name of the font as encoded in the font file. The name is 
+// written to the family argument, not exceeding `max_length`
+static inline int get_font_family(const char *path, int index, char* family, int max_length) {
+  static int (*p_get_family)(const char*, int, char*, int) = NULL;
+  if (p_get_family == NULL) {
+    p_get_family = (int (*)(const char*, int, char*, int)) R_GetCCallable("systemfonts", "font_family");
+  }
+  return p_get_family(path, index, family, max_length);
+}
+// Get the location of emojis written to the embedding array. A 0 indicate that
+// the codepoint is not to be treated as emoji, a 1 indicate that it should,
+static inline void detect_emoji_embedding(const uint32_t* string, int n, int* embedding, const char *path, int index) {
+  static void (*p_detect_emoji_embedding)(const uint32_t*, int, int*, const char*, int) = NULL;
+  if (p_detect_emoji_embedding == NULL) {
+    p_detect_emoji_embedding = (void (*)(const uint32_t*, int, int*, const char*, int)) R_GetCCallable("systemfonts", "detect_emoji_embedding");
+  }
+  return p_detect_emoji_embedding(string, n, embedding, path, index);
+}

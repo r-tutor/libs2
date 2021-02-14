@@ -1,0 +1,260 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: T-test</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for t_test {rstatix}"><tr><td>t_test {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>T-test</h2>
+
+<h3>Description</h3>
+
+<p>Provides a pipe-friendly framework to performs one and two sample
+t-tests. Read more: <a href="https://www.datanovia.com/en/lessons/t-test-in-r/">T-test in R</a>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+t_test(
+  data,
+  formula,
+  comparisons = NULL,
+  ref.group = NULL,
+  p.adjust.method = "holm",
+  paired = FALSE,
+  var.equal = FALSE,
+  alternative = "two.sided",
+  mu = 0,
+  conf.level = 0.95,
+  detailed = FALSE
+)
+
+pairwise_t_test(
+  data,
+  formula,
+  comparisons = NULL,
+  ref.group = NULL,
+  p.adjust.method = "holm",
+  paired = FALSE,
+  pool.sd = !paired,
+  detailed = FALSE,
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a data.frame containing the variables in the formula.</p>
+</td></tr>
+<tr valign="top"><td><code>formula</code></td>
+<td>
+<p>a formula of the form <code>x ~ group</code> where <code>x</code> is a
+numeric variable giving the data values and <code>group</code> is a factor with
+one or multiple levels giving the corresponding groups. For example,
+<code>formula = TP53 ~ cancer_group</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>comparisons</code></td>
+<td>
+<p>A list of length-2 vectors specifying the groups of
+interest to be compared. For example to compare groups &quot;A&quot; vs &quot;B&quot; and &quot;B&quot; vs
+&quot;C&quot;, the argument is as follow: <code>comparisons = list(c("A", "B"), c("B",
+"C"))</code></p>
+</td></tr>
+<tr valign="top"><td><code>ref.group</code></td>
+<td>
+<p>a character string specifying the reference group. If
+specified, for a given grouping variable, each of the group levels will be
+compared to the reference group (i.e. control group).
+</p>
+<p>If <code>ref.group = "all"</code>, pairwise two sample tests are performed for
+comparing each grouping variable levels against all (i.e. basemean).</p>
+</td></tr>
+<tr valign="top"><td><code>p.adjust.method</code></td>
+<td>
+<p>method to adjust p values for multiple comparisons.
+Used when pairwise comparisons are performed. Allowed values include &quot;holm&quot;,
+&quot;hochberg&quot;, &quot;hommel&quot;, &quot;bonferroni&quot;, &quot;BH&quot;, &quot;BY&quot;, &quot;fdr&quot;, &quot;none&quot;. If you don't
+want to adjust the p value (not recommended), use p.adjust.method = &quot;none&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>paired</code></td>
+<td>
+<p>a logical indicating whether you want a paired test.</p>
+</td></tr>
+<tr valign="top"><td><code>var.equal</code></td>
+<td>
+<p>a logical variable indicating whether to treat the
+two variances as being equal. If <code>TRUE</code> then the pooled
+variance is used to estimate the variance otherwise the Welch
+(or Satterthwaite) approximation to the degrees of freedom is used.</p>
+</td></tr>
+<tr valign="top"><td><code>alternative</code></td>
+<td>
+<p>a character string specifying the alternative
+hypothesis, must be one of <code>"two.sided"</code> (default),
+<code>"greater"</code> or <code>"less"</code>.  You can specify just the initial
+letter.</p>
+</td></tr>
+<tr valign="top"><td><code>mu</code></td>
+<td>
+<p>a number specifying an optional parameter used to form the null hypothesis.</p>
+</td></tr>
+<tr valign="top"><td><code>conf.level</code></td>
+<td>
+<p>confidence level of the interval.</p>
+</td></tr>
+<tr valign="top"><td><code>detailed</code></td>
+<td>
+<p>logical value. Default is FALSE. If TRUE, a detailed result is
+shown.</p>
+</td></tr>
+<tr valign="top"><td><code>pool.sd</code></td>
+<td>
+<p>logical value used in the function <code>pairwise_t_test()</code>.
+Switch to allow/disallow the use of a pooled SD.
+</p>
+<p>The <code>pool.sd = TRUE</code> (default) calculates a common SD for all groups
+and uses that for all comparisons (this can be useful if some groups are
+small). This method does not actually call t.test, so extra arguments are
+ignored. Pooling does not generalize to paired tests so pool.sd and paired
+cannot both be TRUE.
+</p>
+<p>If <code>pool.sd = FALSE</code> the standard two sample t-test is applied to all
+possible pairs of groups. This method calls the <code>t.test()</code>, so extra
+arguments, such as <code>var.equal</code> are accepted.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>other arguments to be passed to the function
+<code><a href="../../stats/html/t.test.html">t.test</a></code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>- If a list of comparisons is specified, the result of the pairwise tests is
+filtered to keep only the comparisons of interest. The p-value is adjusted
+after filtering.
+</p>
+<p>- For a grouped data, if pairwise test is performed, then the p-values are
+adjusted for each group level independently.
+</p>
+
+
+<h3>Value</h3>
+
+<p>return a data frame with some the following columns: </p>
+ <ul>
+<li>
+<p><code>.y.</code>: the y variable used in the test. </p>
+</li>
+<li> <p><code>group1,group2</code>: the
+compared groups in the pairwise tests. </p>
+</li>
+<li> <p><code>n,n1,n2</code>: Sample counts.
+</p>
+</li>
+<li> <p><code>statistic</code>: Test statistic used to compute the p-value. </p>
+</li>
+<li>
+<p><code>df</code>: degrees of freedom. </p>
+</li>
+<li> <p><code>p</code>: p-value. </p>
+</li>
+<li> <p><code>p.adj</code>:
+the adjusted p-value. </p>
+</li>
+<li> <p><code>method</code>: the statistical test used to
+compare groups. </p>
+</li>
+<li> <p><code>p.signif, p.adj.signif</code>: the significance level
+of p-values and adjusted p-values, respectively. </p>
+</li>
+<li> <p><code>estimate</code>:
+estimate of the effect size. It corresponds to the estimated mean or
+difference in means depending on whether it was a one-sample test or a
+two-sample test. </p>
+</li>
+<li> <p><code>estimate1, estimate2</code>: show the mean values of
+the two groups, respectively, for independent samples t-tests. </p>
+</li>
+<li>
+<p><code>alternative</code>: a character string describing the alternative
+hypothesis. </p>
+</li>
+<li> <p><code>conf.low,conf.high</code>: Lower and upper bound on a
+confidence interval. </p>
+</li></ul>
+
+<p>The <strong>returned object has an attribute called args</strong>, which is a list
+holding the test arguments.
+</p>
+
+
+<h3>Functions</h3>
+
+
+<ul>
+<li> <p><code>t_test</code>: t test
+</p>
+</li>
+<li> <p><code>pairwise_t_test</code>: performs pairwise two sample t-test. Wrapper around the R
+base function <code><a href="../../stats/html/pairwise.t.test.html">pairwise.t.test</a></code>.
+</p>
+</li></ul>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Load data
+#:::::::::::::::::::::::::::::::::::::::
+data("ToothGrowth")
+df &lt;- ToothGrowth
+
+# One-sample test
+#:::::::::::::::::::::::::::::::::::::::::
+df %&gt;% t_test(len ~ 1, mu = 0)
+
+
+# Two-samples unpaired test
+#:::::::::::::::::::::::::::::::::::::::::
+df %&gt;% t_test(len ~ supp)
+
+# Two-samples paired test
+#:::::::::::::::::::::::::::::::::::::::::
+df %&gt;% t_test (len ~ supp, paired = TRUE)
+
+# Compare supp levels after grouping the data by "dose"
+#::::::::::::::::::::::::::::::::::::::::
+df %&gt;%
+  group_by(dose) %&gt;%
+  t_test(data =., len ~ supp) %&gt;%
+  adjust_pvalue(method = "bonferroni") %&gt;%
+  add_significance("p.adj")
+
+# pairwise comparisons
+#::::::::::::::::::::::::::::::::::::::::
+# As dose contains more than two levels ==&gt;
+# pairwise test is automatically performed.
+df %&gt;% t_test(len ~ dose)
+
+# Comparison against reference group
+#::::::::::::::::::::::::::::::::::::::::
+# each level is compared to the ref group
+df %&gt;% t_test(len ~ dose, ref.group = "0.5")
+
+# Comparison against all
+#::::::::::::::::::::::::::::::::::::::::
+df %&gt;% t_test(len ~ dose, ref.group = "all")
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

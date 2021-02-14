@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Split a Data Frame into Subset</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for df_split_by {rstatix}"><tr><td>df_split_by {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Split a Data Frame into Subset</h2>
+
+<h3>Description</h3>
+
+<p>Split a data frame by groups into subsets or data panel. Very
+similar to the function <code><a href="df_nest_by.html">df_nest_by</a>()</code>. The only difference is
+that, it adds label to each data subset. Labels are the combination of the
+grouping variable levels. The column holding labels are named &quot;label&quot;.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+df_split_by(
+  data,
+  ...,
+  vars = NULL,
+  label_col = "label",
+  labeller = df_label_both,
+  sep = c(", ", ":")
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a data frame</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>One or more unquoted expressions (or variable names) separated by
+commas. Used as grouping variables.</p>
+</td></tr>
+<tr valign="top"><td><code>vars</code></td>
+<td>
+<p>a character vector containing the grouping variables of interest.</p>
+</td></tr>
+<tr valign="top"><td><code>label_col</code></td>
+<td>
+<p>column to hold the label of the data subsets. Default column
+name is &quot;label&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>labeller</code></td>
+<td>
+<p>A function that takes a data frame, the grouping variables,
+label_col and label_sep arguments, and add labels into the data frame.
+Example of possible values are: <code><a href="df_label_value.html">df_label_both</a>()</code> and
+<code><a href="df_label_value.html">df_label_value</a>()</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>sep</code></td>
+<td>
+<p>String separating labelling variables and values. Should be of
+length 2 in the function <code>df_label_both()</code>. 1) One sep is used to
+separate groups, for example ','; 2) The other sep between group name and
+levels; for example ':'.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A tbl with one row per unique combination of the grouping variables.
+The first columns are the grouping variables, followed by a list column of
+tibbles with matching rows of the remaining columns, and a column named
+label, containing labels.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+# Split a data frame
+# :::::::::::::::::::::::::::::::::::::::::::::::::
+# Create a grouped data
+res &lt;- ToothGrowth %&gt;%
+  df_split_by(dose, supp)
+res
+
+# Show subsets
+res$data
+
+# Add panel/subset labels
+res &lt;- ToothGrowth %&gt;%
+  df_split_by(dose, supp)
+res
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Generalized Maximally Selected Statistics</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for MaximallySelectedStatisticsTests {coin}"><tr><td>MaximallySelectedStatisticsTests {coin}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Generalized Maximally Selected Statistics</h2>
+
+<h3>Description</h3>
+
+<p>Testing the independence of two sets of variables measured on arbitrary scales
+against cutpoint alternatives.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'formula'
+maxstat_test(formula, data, subset = NULL, weights = NULL, ...)
+## S3 method for class 'table'
+maxstat_test(object, ...)
+## S3 method for class 'IndependenceProblem'
+maxstat_test(object, teststat = c("maximum", "quadratic"),
+             distribution = c("asymptotic", "approximate", "none"),
+             minprob = 0.1, maxprob = 1 - minprob, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>formula</code></td>
+<td>
+
+<p>a formula of the form <code>y1 + ... + yq ~ x1 + ... + xp | block</code> where
+<code>y1</code>, ..., <code>yq</code> and <code>x1</code>, ..., <code>xp</code> are measured on
+arbitrary scales (nominal, ordinal or continuous with or without censoring)
+and <code>block</code> is an optional factor for stratification.
+</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+
+<p>an optional data frame containing the variables in the model formula.
+</p>
+</td></tr>
+<tr valign="top"><td><code>subset</code></td>
+<td>
+
+<p>an optional vector specifying a subset of observations to be used.  Defaults
+to <code>NULL</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>weights</code></td>
+<td>
+
+<p>an optional formula of the form <code>~ w</code> defining integer valued case
+weights for each observation.  Defaults to <code>NULL</code>, implying equal
+weight for all observations.
+</p>
+</td></tr>
+<tr valign="top"><td><code>object</code></td>
+<td>
+
+<p>an object inheriting from classes <code>"table"</code> or
+<code>"<a href="IndependenceProblem-class.html">IndependenceProblem</a>"</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>teststat</code></td>
+<td>
+
+<p>a character, the type of test statistic to be applied: either a maximum
+statistic (<code>"maximum"</code>, default) or a quadratic form
+(<code>"quadratic"</code>).
+</p>
+</td></tr>
+<tr valign="top"><td><code>distribution</code></td>
+<td>
+
+<p>a character, the conditional null distribution of the test statistic can be
+approximated by its asymptotic distribution (<code>"asymptotic"</code>, default)
+or via Monte Carlo resampling (<code>"approximate"</code>).  Alternatively, the
+functions <code><a href="NullDistribution.html">asymptotic</a></code> or <code><a href="NullDistribution.html">approximate</a></code> can be used.
+Computation of the null distribution can be suppressed by specifying
+<code>"none"</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>minprob</code></td>
+<td>
+
+<p>a numeric, a fraction between 0 and 0.5 specifying that cutpoints only
+greater than the <code>minprob</code> <i>*</i> 100% quantile of <code>x1</code>,
+..., <code>xp</code> are considered.  Defaults to <code>0.1</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>maxprob</code></td>
+<td>
+
+<p>a numeric, a fraction between 0.5 and 1 specifying that cutpoints only
+smaller than the <code>maxprob</code> <i>*</i> 100% quantile of <code>x1</code>,
+..., <code>xp</code> are considered.  Defaults to <code>1 - minprob</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+
+<p>further arguments to be passed to <code><a href="IndependenceTest.html">independence_test</a></code>.
+</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>maxstat_test</code> provides generalized maximally selected statistics.  The
+family of maximally selected statistics encompasses a large collection of
+procedures used for the estimation of simple cutpoint models including, but
+not limited to, maximally selected <i>chi^2</i> statistics, maximally
+selected Cochran-Armitage statistics, maximally selected rank statistics and
+maximally selected statistics for multiple covariates.  A general description
+of these methods is given by Hothorn and Zeileis (2008).
+</p>
+<p>The null hypothesis of independence, or conditional independence given
+<code>block</code>, between <code>y1</code>, ..., <code>yq</code> and <code>x1</code>, ...,
+<code>xp</code> is tested against cutpoint alternatives.  All possible partitions
+into two groups are evaluated for each unordered covariate <code>x1</code>, ...,
+<code>xp</code>, whereas only order-preserving binary partitions are evaluated for
+ordered or numeric covariates.  The cutpoint is then a set of levels defining
+one of the two groups.
+</p>
+<p>If both response and covariate is univariable, say <code>y1</code> and <code>x1</code>,
+this procedure is known as maximally selected <i>chi^2</i> statistics
+(Miller and Siegmund, 1982) when <code>y1</code> is a binary factor and <code>x1</code> is
+a numeric variable, and as maximally selected rank statistics when <code>y1</code>
+is a rank transformed numeric variable and <code>x1</code> is a numeric variable
+(Lausen and Schumacher, 1992).  Lausen <em>et al.</em> (2004) introduced
+maximally selected statistics for a univariable numeric response and multiple
+numeric covariates <code>x1</code>, ..., <code>xp</code>.
+</p>
+<p>If, say, <code>y1</code> and/or <code>x1</code> are ordered factors, the default scores,
+<code>1:nlevels(y1)</code> and <code>1:nlevels(x1)</code> respectively, can be altered
+using the <code>scores</code> argument (see <code><a href="IndependenceTest.html">independence_test</a></code>); this
+argument can also be used to coerce nominal factors to class <code>"ordered"</code>.
+If both, say, <code>y1</code> and <code>x1</code> are ordered factors, a linear-by-linear
+association test is computed and the direction of the alternative hypothesis
+can be specified using the <code>alternative</code> argument.  The particular
+extension to the case of a univariable ordered response and a univariable
+numeric covariate was given by Betensky and Rabinowitz (1999) and
+is known as maximally selected Cochran-Armitage statistics.
+</p>
+<p>The conditional null distribution of the test statistic is used to obtain
+<i>p</i>-values and an asymptotic approximation of the exact distribution is
+used by default (<code>distribution = "asymptotic"</code>).  Alternatively, the
+distribution can be approximated via Monte Carlo resampling by setting
+<code>distribution</code> to <code>"approximate"</code>.  See <code><a href="NullDistribution.html">asymptotic</a></code> and
+<code><a href="NullDistribution.html">approximate</a></code> for details.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object inheriting from class <code>"<a href="IndependenceTest-class.html">IndependenceTest</a>"</code>.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Starting with <span class="pkg">coin</span> version 1.1-0, maximum statistics and quadratic forms
+can no longer be specified using <code>teststat = "maxtype"</code> and
+<code>teststat = "quadtype"</code> respectively (as was used in versions prior to
+0.4-5).
+</p>
+
+
+<h3>References</h3>
+
+<p>Betensky, R. A. and Rabinowitz, D.  (1999).  Maximally selected
+<i>chi^2</i> statistics for <i>k x 2</i> tables.
+<em>Biometrics</em> <b>55</b>(1), 317&ndash;320.
+doi: <a href="https://doi.org/10.1111/j.0006-341X.1999.00317.x">10.1111/j.0006-341X.1999.00317.x</a>
+</p>
+<p>Hothorn, T. and Lausen, B.  (2003).  On the exact distribution of maximally
+selected rank statistics.  <em>Computational Statistics &amp; Data Analysis</em>
+<b>43</b>(2), 121&ndash;137.  doi: <a href="https://doi.org/10.1016/S0167-9473(02)00225-6">10.1016/S0167-9473(02)00225-6</a>
+</p>
+<p>Hothorn, T. and Zeileis, A.  (2008).  Generalized maximally selected
+statistics.  <em>Biometrics</em> <b>64</b>(4), 1263&ndash;1269.
+doi: <a href="https://doi.org/10.1111/j.1541-0420.2008.00995.x">10.1111/j.1541-0420.2008.00995.x</a>
+</p>
+<p>Lausen, B., Hothorn, T., Bretz, F. and Schumacher, M.  (2004).  Assessment of
+optimal selected prognostic factors.  <em>Biometrical Journal</em> <b>46</b>(3),
+364&ndash;374.  doi: <a href="https://doi.org/10.1002/bimj.200310030">10.1002/bimj.200310030</a>
+</p>
+<p>Lausen, B. and Schumacher, M.  (1992).  Maximally selected rank statistics.
+<em>Biometrics</em> <b>48</b>(1), 73&ndash;85.  doi: <a href="https://doi.org/10.2307/2532740">10.2307/2532740</a>
+</p>
+<p>Miller, R. and Siegmund, D.  (1982).  Maximally selected chi square
+statistics.  <em>Biometrics</em> <b>38</b>(4), 1011&ndash;1016.
+doi: <a href="https://doi.org/10.2307/2529881">10.2307/2529881</a>
+</p>
+<p>Müller, J. and Hothorn, T.  (2004).  Maximally selected
+two-sample statistics as a new tool for the identification and assessment of
+habitat factors with an application to breeding bird communities in oak
+forests.  <em>European Journal of Forest Research</em> <b>123</b>(3), 219&ndash;228.
+doi: <a href="https://doi.org/10.1007/s10342-004-0035-5">10.1007/s10342-004-0035-5</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+## Tree pipit data (Mueller and Hothorn, 2004)
+## Asymptotic maximally selected statistics
+maxstat_test(counts ~ coverstorey, data = treepipit)
+
+## Asymptotic maximally selected statistics
+## Note: all covariates simultaneously
+mt &lt;- maxstat_test(counts ~ ., data = treepipit)
+mt@estimates$estimate
+
+
+## Malignant arrythmias data (Hothorn and Lausen, 2003, Sec. 7.2)
+## Asymptotic maximally selected statistics
+maxstat_test(Surv(time, event) ~  EF, data = hohnloser,
+             ytrafo = function(data)
+                 trafo(data, surv_trafo = function(y)
+                     logrank_trafo(y, ties.method = "Hothorn-Lausen")))
+
+
+## Breast cancer data (Hothorn and Lausen, 2003, Sec. 7.3)
+## Asymptotic maximally selected statistics
+data("sphase", package = "TH.data")
+maxstat_test(Surv(RFS, event) ~  SPF, data = sphase,
+             ytrafo = function(data)
+                 trafo(data, surv_trafo = function(y)
+                     logrank_trafo(y, ties.method = "Hothorn-Lausen")))
+
+
+## Job satisfaction data (Agresti, 2002, p. 288, Tab. 7.8)
+## Asymptotic maximally selected statistics
+maxstat_test(jobsatisfaction)
+
+## Asymptotic maximally selected statistics
+## Note: 'Job.Satisfaction' and 'Income' as ordinal
+maxstat_test(jobsatisfaction,
+             scores = list("Job.Satisfaction" = 1:4,
+                           "Income" = 1:4))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>coin</em> version 1.4-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

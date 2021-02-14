@@ -1,5 +1,6 @@
 systemfonts-package	systemfonts-package
 clear_registry	register_font
+font_fallback	font_fallback
 font_feature	font_feature
 font_info	font_info
 get_fallback	get_fallback

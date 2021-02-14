@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Sundry binary functionality</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for bin {partitions}"><tr><td>bin {partitions}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Sundry binary functionality</h2>
+
+<h3>Description</h3>
+
+<p>Utilities to convert things to binary
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+tobin(n, len, check=TRUE)
+todec(bin)
+comptobin(comp, check=TRUE)
+bintocomp(bin,  use.C=TRUE, check=TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>Integer, to be converted to binary by function <code>tobin()</code></p>
+</td></tr>
+<tr valign="top"><td><code>len</code></td>
+<td>
+<p>Length of the binary vector returned by function
+<code>tobin()</code></p>
+</td></tr>
+<tr valign="top"><td><code>bin</code></td>
+<td>
+<p>Binary: a vector of <code>0</code>s and <code>1</code>s</p>
+</td></tr>
+<tr valign="top"><td><code>comp</code></td>
+<td>
+<p>A composition</p>
+</td></tr>
+<tr valign="top"><td><code>check</code></td>
+<td>
+<p>Boolean, with default <code>TRUE</code> meaning to perform
+various checks</p>
+</td></tr>
+<tr valign="top"><td><code>use.C</code></td>
+<td>
+<p>Boolean, with default <code>TRUE</code> meaning to use
+<code>C</code></p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>These functions are not really intended for the end user; they are
+used in <code>nextcomposition()</code>.
+</p>
+
+<ul>
+<li><p> Function <code>tobin()</code> converts integer <code>n</code> to a binary
+string of length <code>len</code>
+</p>
+</li>
+<li><p> Function <code>todec()</code> converts a binary string to decimal,
+so <code>todec(tobin(n,i))==n</code>, provided <code>i</code> is big enough
+</p>
+</li>
+<li><p> Function <code>comptobin()</code> converts a composition to binary
+</p>
+</li>
+<li><p> Function <code>bintocomp()</code> converts a binary string to a
+composition
+</p>
+</li></ul>
+
+
+
+<h3>Author(s)</h3>
+
+<p>Robin K. S. Hankin</p>
+
+
+<h3>References</h3>
+
+<p>Wikipedia contributors, 2020. &ldquo;Composition (combinatorics) &mdash; Wikipedia, The Free Encyclopedia&rdquo;,
+<a href="https://en.wikipedia.org/w/index.php?title=Composition_(combinatorics)&amp;oldid=944285378">https://en.wikipedia.org/w/index.php?title=Composition_(combinatorics)&amp;oldid=944285378</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+tobin(10,5)
+todec(tobin(10,5))
+comptobin(c(1,1,4))
+bintocomp(c(1,1,0,0,1,1,1,1))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>partitions</em> version 1.10-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

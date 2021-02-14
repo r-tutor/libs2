@@ -14,7 +14,11 @@ augment.drc             Augment data with information from a(n) drc
                         object
 augment.factanal        Augment data with information from a(n)
                         factanal object
+augment.felm            Augment data with information from a(n) felm
+                        object
 augment.fixest          Augment data with information from a(n) fixest
+                        object
+augment.gam             Augment data with information from a(n) gam
                         object
 augment.glm             Augment data with information from a(n) glm
                         object
@@ -86,6 +90,7 @@ fix_data_frame          Ensure an object is a data frame, with rownames
                         moved into a column
 glance.Arima            Glance at a(n) Arima object
 glance.Mclust           Glance at a(n) Mclust object
+glance.Rchoice          Glance at a(n) Rchoice object
 glance.aareg            Glance at a(n) aareg object
 glance.aov              Glance at a(n) lm object
 glance.betamfx          Glance at a(n) betamfx object
@@ -97,10 +102,12 @@ glance.clm              Glance at a(n) clm object
 glance.clmm             Glance at a(n) clmm object
 glance.coeftest         Glance at a(n) coeftest object
 glance.coxph            Glance at a(n) coxph object
+glance.crr              Glance at a(n) crr object
 glance.cv.glmnet        Glance at a(n) cv.glmnet object
 glance.drc              Glance at a(n) drc object
 glance.ergm             Glance at a(n) ergm object
 glance.factanal         Glance at a(n) factanal object
+glance.felm             Glance at a(n) felm object
 glance.fitdistr         Glance at a(n) fitdistr object
 glance.fixest           Glance at a(n) fixest object
 glance.gam              Glance at a(n) gam object
@@ -146,7 +153,9 @@ glance.survfit          Glance at a(n) survfit object
 glance.survreg          Glance at a(n) survreg object
 glance.svyglm           Glance at a(n) svyglm object
 glance.svyolr           Glance at a(n) svyolr object
+glance.varest           Glance at a(n) varest object
 glance_optim            Tidy a(n) optim object masquerading as list
+leveneTest_tidiers      Tidy/glance a(n) leveneTest object
 list_tidiers            Tidying methods for lists / returned values
                         that are not S3 objects
 null_tidiers            Tidiers for NULL inputs
@@ -157,6 +166,7 @@ summary_tidiers         (Deprecated) Tidy summaryDefault objects
 tidy.Arima              Tidy a(n) Arima object
 tidy.Kendall            Tidy a(n) Kendall object
 tidy.Mclust             Tidy a(n) Mclust object
+tidy.Rchoice            Tidy a(n) Rchoice object
 tidy.TukeyHSD           Tidy a(n) TukeyHSD object
 tidy.aareg              Tidy a(n) aareg object
 tidy.acf                Tidy a(n) acf object
@@ -178,6 +188,7 @@ tidy.coeftest           Tidy a(n) coeftest object
 tidy.confint.glht       Tidy a(n) confint.glht object
 tidy.confusionMatrix    Tidy a(n) confusionMatrix object
 tidy.coxph              Tidy a(n) coxph object
+tidy.crr                Tidy a(n) cmprsk object
 tidy.cv.glmnet          Tidy a(n) cv.glmnet object
 tidy.density            (Deprecated) Tidy density objects
 tidy.dist               (Deprecated) Tidy dist objects
@@ -186,6 +197,7 @@ tidy.emmGrid            Tidy a(n) emmGrid object
 tidy.epi.2by2           Tidy a(n) epi.2by2 object
 tidy.ergm               Tidy a(n) ergm object
 tidy.factanal           Tidy a(n) factanal object
+tidy.felm               Tidy a(n) felm object
 tidy.fitdistr           Tidy a(n) fitdistr object
 tidy.fixest             Tidy a(n) fixest object
 tidy.ftable             (Deprecated) Tidy ftable objects
@@ -261,6 +273,7 @@ tidy.svyolr             Tidy a(n) svyolr object
 tidy.systemfit          Tidy a(n) systemfit object
 tidy.table              Tidy a(n) table object
 tidy.ts                 Tidy a(n) ts object
+tidy.varest             Tidy a(n) varest object
 tidy.zoo                Tidy a(n) zoo object
 tidy_irlba              Tidy a(n) irlba object masquerading as list
 tidy_optim              Tidy a(n) optim object masquerading as list

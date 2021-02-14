@@ -39,6 +39,7 @@ covariance	expectation-methods
 covariance,CovarianceMatrix-method	expectation-methods
 covariance,IndependenceLinearStatistic-method	expectation-methods
 covariance,IndependenceTest-method	expectation-methods
+covariance,QuadTypeIndependenceTestStatistic-method	expectation-methods
 covariance-methods	expectation-methods
 CovarianceMatrix-class	VarCovar-class
 CWD	CWD
@@ -85,6 +86,7 @@ initialize,CovarianceMatrix-method	VarCovar-class
 initialize,IndependenceLinearStatistic-method	IndependenceLinearStatistic-class
 initialize,IndependenceProblem-method	IndependenceProblem-class
 initialize,IndependenceTestProblem-method	IndependenceTestProblem-class
+initialize,IndependenceTestStatistic-method	IndependenceTestStatistic-class
 initialize,MaxTypeIndependenceTestStatistic-method	IndependenceTestStatistic-class
 initialize,QuadTypeIndependenceTestStatistic-method	IndependenceTestStatistic-class
 initialize,ScalarIndependenceTestStatistic-method	IndependenceTestStatistic-class

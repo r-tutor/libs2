@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Income and Job Satisfaction</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for jobsatisfaction {coin}"><tr><td>jobsatisfaction {coin}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Income and Job Satisfaction</h2>
+
+<h3>Description</h3>
+
+<p>Income and job satisfaction by gender.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>jobsatisfaction</pre>
+
+
+<h3>Format</h3>
+
+<p>A contingency table with 104 observations on 3 variables.
+</p>
+
+<dl>
+<dt><code>Income</code></dt><dd>
+<p>a factor with levels <code>"&lt;5000"</code>, <code>"5000-15000"</code>,
+<code>"15000-25000"</code> and <code>"&gt;25000"</code>.
+</p>
+</dd>
+<dt><code>Job.Satisfaction</code></dt><dd>
+<p>a factor with levels <code>"Very Dissatisfied"</code>,
+<code>"A Little Satisfied"</code>, <code>"Moderately Satisfied"</code> and
+<code>"Very Satisfied"</code>.
+</p>
+</dd>
+<dt><code>Gender</code></dt><dd>
+<p>a factor with levels <code>"Female"</code> and <code>"Male"</code>.
+</p>
+</dd>
+</dl>
+
+
+
+<h3>Details</h3>
+
+<p>This data set was given in Agresti (2002, p. 288, Tab. 7.8).  Winell and
+Lindbäck (2018) used the data to demonstrate a
+score-independent test for ordered categorical data.
+</p>
+
+
+<h3>Source</h3>
+
+<p>Agresti, A.  (2002).  <em>Categorical Data Analysis</em>, Second Edition.
+Hoboken, New Jersey: John Wiley &amp; Sons.
+</p>
+
+
+<h3>References</h3>
+
+<p>Winell, H. and Lindbäck, J.  (2018).  A general
+score-independent test for order-restricted inference.  <em>Statistics in
+Medicine</em> <b>37</b>(21), 3078&ndash;3090.  doi: <a href="https://doi.org/10.1002/sim.7690">10.1002/sim.7690</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Approximative (Monte Carlo) linear-by-linear association test
+lbl_test(jobsatisfaction, distribution = approximate(nresample = 10000))
+
+## Not run: 
+## Approximative (Monte Carlo) score-independent test
+## Winell and Lindbaeck (2018)
+(it &lt;- independence_test(jobsatisfaction,
+                         distribution = approximate(nresample = 10000),
+                         xtrafo = function(data)
+                             trafo(data, factor_trafo = function(x)
+                                 zheng_trafo(as.ordered(x))),
+                         ytrafo = function(data)
+                             trafo(data, factor_trafo = function(y)
+                                 zheng_trafo(as.ordered(y)))))
+
+## Extract the "best" set of scores
+ss &lt;- statistic(it, type = "standardized")
+idx &lt;- which(abs(ss) == max(abs(ss)), arr.ind = TRUE)
+ss[idx[1], idx[2], drop = FALSE]
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>coin</em> version 1.4-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -30,6 +30,7 @@ legend_move	bayesplot-helpers
 legend_none	bayesplot-helpers
 legend_text	bayesplot-helpers
 log_posterior	bayesplot-extractors
+log_posterior.CmdStanMCMC	bayesplot-extractors
 log_posterior.stanfit	bayesplot-extractors
 log_posterior.stanreg	bayesplot-extractors
 MCMC	MCMC-overview
@@ -84,10 +85,12 @@ mcmc_trace_data	MCMC-traces
 mcmc_trace_highlight	MCMC-traces
 mcmc_violin	MCMC-distributions
 neff_ratio	bayesplot-extractors
+neff_ratio.CmdStanMCMC	bayesplot-extractors
 neff_ratio.stanfit	bayesplot-extractors
 neff_ratio.stanreg	bayesplot-extractors
 NUTS	MCMC-nuts
 nuts_params	bayesplot-extractors
+nuts_params.CmdStanMCMC	bayesplot-extractors
 nuts_params.list	bayesplot-extractors
 nuts_params.stanfit	bayesplot-extractors
 nuts_params.stanreg	bayesplot-extractors
@@ -100,6 +103,7 @@ param_range	tidy-params
 parcoord_style_np	MCMC-parcoord
 plot_bg	bayesplot-helpers
 PPC	PPC-overview
+PPC-censoring	PPC-censoring
 PPC-discrete	PPC-discrete
 PPC-distributions	PPC-distributions
 PPC-errors	PPC-errors
@@ -114,7 +118,9 @@ ppc_boxplot	PPC-distributions
 ppc_data	PPC-distributions
 ppc_dens	PPC-distributions
 ppc_dens_overlay	PPC-distributions
+ppc_dens_overlay_grouped	PPC-distributions
 ppc_ecdf_overlay	PPC-distributions
+ppc_ecdf_overlay_grouped	PPC-distributions
 ppc_error_binned	PPC-errors
 ppc_error_hist	PPC-errors
 ppc_error_hist_grouped	PPC-errors
@@ -127,8 +133,10 @@ ppc_hist	PPC-distributions
 ppc_intervals	PPC-intervals
 ppc_intervals_data	PPC-intervals
 ppc_intervals_grouped	PPC-intervals
+ppc_km_overlay	PPC-censoring
 ppc_loo_intervals	PPC-loo
 ppc_loo_pit	PPC-loo
+ppc_loo_pit_data	PPC-loo
 ppc_loo_pit_overlay	PPC-loo
 ppc_loo_pit_qq	PPC-loo
 ppc_loo_ribbon	PPC-loo
@@ -148,6 +156,7 @@ pp_check	pp_check
 pp_check.default	pp_check
 reexports	reexports
 rhat	bayesplot-extractors
+rhat.CmdStanMCMC	bayesplot-extractors
 rhat.stanfit	bayesplot-extractors
 rhat.stanreg	bayesplot-extractors
 scatter_style_np	MCMC-scatterplots

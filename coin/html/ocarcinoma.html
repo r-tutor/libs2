@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Ovarian Carcinoma</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for ocarcinoma {coin}"><tr><td>ocarcinoma {coin}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Ovarian Carcinoma</h2>
+
+<h3>Description</h3>
+
+<p>Survival times of 35 women suffering from ovarian carcinoma at stadium II and
+IIA.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>ocarcinoma</pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 35 observations on 3 variables.
+</p>
+
+<dl>
+<dt><code>time</code></dt><dd>
+<p>time (days).
+</p>
+</dd>
+<dt><code>stadium</code></dt><dd>
+<p>a factor with levels <code>"II"</code> and <code>"IIA"</code>.
+</p>
+</dd>
+<dt><code>event</code></dt><dd>
+<p>status indicator for <code>time</code>: <code>FALSE</code> for right-censored
+observations and <code>TRUE</code> otherwise.
+</p>
+</dd>
+</dl>
+
+
+
+<h3>Details</h3>
+
+<p>Data from Fleming <em>et al.</em> (1980) and Fleming, Green and Harrington
+(1984).  Reanalysed in Schumacher and Schulgen (2002).
+</p>
+
+
+<h3>Source</h3>
+
+<p>Fleming, T. R., Green, S. J. and Harrington, D. P.  (1984).  Considerations
+for monitoring and evaluating treatment effects in clinical trials.
+<em>Controlled Clinical Trials</em> <b>5</b>(1), 55&ndash;66.
+doi: <a href="https://doi.org/10.1016/0197-2456(84)90150-8">10.1016/0197-2456(84)90150-8</a>
+</p>
+<p>Fleming, T. R., O'Fallon, J. R., O'Brien, P. C. and Harrington, D. P.  (1980).
+Modified Kolmogorov-Smirnov test procedures with application to arbitrarily
+right-censored data.  <em>Biometrics</em> <b>36</b>(4), 607&ndash;625.
+doi: <a href="https://doi.org/10.2307/2556114">10.2307/2556114</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Schumacher, M. and Schulgen, G.  (2002).  <em>Methodik Klinischer Studien:
+Methodische Grundlagen der Planung, Durchführung und
+Auswertung</em>.  Heidelberg: Springer.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Exact logrank test
+lt &lt;- logrank_test(Surv(time, event) ~ stadium, data = ocarcinoma,
+                   distribution = "exact")
+
+## Test statistic
+statistic(lt)
+
+## P-value
+pvalue(lt)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>coin</em> version 1.4-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

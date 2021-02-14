@@ -12,6 +12,7 @@ eval_data_col           Evaluate data column
 flea                    Historical data used for classification
                         examples.
 fn_switch               Function switch
+geom_stripped_rows      Alternating Background Colour
 getPlot                 Subset a 'ggmatrix' object
 ggally_autopoint        Scatterplot for continuous and categorical
                         variables
@@ -55,6 +56,7 @@ ggally_trends           Trends line plot
 ggbivariate             Display an outcome using several potential
                         explanatory variables
 ggcoef                  Model coefficients with 'broom' and 'ggplot2'
+ggcoef_model            Plot model coefficients
 ggcorr                  Correlation matrix
 ggduo                   'ggplot2' generalized pairs plot for two
                         columns sets of data
@@ -114,6 +116,6 @@ uppertriangle           Rearrange dataset as the preparation of
                         'ggscatmat' function
 v1_ggmatrix_theme       Modify a 'ggmatrix' object by adding an
                         'ggplot2' object to all
-vig_ggally              View 'GGally' vignettes
+vig_ggally              View GGally vignettes
 wrap_fn_with_param_arg
                         Wrap a function with different parameter values

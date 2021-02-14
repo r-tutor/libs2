@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Class '&quot;VarCovar&quot;' and its subclasses</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for VarCovar-class {coin}"><tr><td>VarCovar-class {coin}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Class <code>"VarCovar"</code> and its subclasses</h2>
+
+<h3>Description</h3>
+
+<p>Objects of class <code>"VarCovar"</code> and its subclasses
+<code>"CovarianceMatrix"</code> and <code>"Variance"</code> represent the covariance and
+variance, respectively, of the linear statistic.
+</p>
+
+
+<h3>Objects from the Class</h3>
+
+<p>Class <code>"VarCovar"</code> is a <em>virtual</em> class defined as the class union
+of <code>"CovarianceMatrix"</code> and <code>"Variance"</code>, so objects cannot be
+created from it directly.
+</p>
+<p>Objects can be created by calls of the form </p>
+<pre>     new("CovarianceMatrix", covariance, \dots)</pre>
+<p>and </p>
+<pre>     new("Variance", variance, \dots)</pre>
+<p>where <code>covariance</code> is a covariance matrix and <code>variance</code> is numeric
+vector containing the diagonal elements of the covariance matrix.
+</p>
+
+
+<h3>Slots</h3>
+
+<p>For objects of class <code>"CovarianceMatrix"</code>:
+</p>
+
+<dl>
+<dt><code>covariance</code>:</dt><dd>
+<p>Object of class <code>"matrix"</code>.  The covariance matrix.
+</p>
+</dd>
+</dl>
+
+<p>For objects of class <code>"Variance"</code>:
+</p>
+
+<dl>
+<dt><code>variance</code>:</dt><dd>
+<p>Object of class <code>"numeric"</code>.  The diagonal elements of the
+covariance matrix.
+</p>
+</dd>
+</dl>
+
+
+
+<h3>Extends</h3>
+
+<p>For objects of classes <code>"CovarianceMatrix"</code> or <code>"Variance"</code>: <br />
+Class <code>"VarCovar"</code>, directly.
+</p>
+
+
+<h3>Known Subclasses</h3>
+
+<p>For objects of class <code>"VarCovar"</code>: <br />
+Class <code>"CovarianceMatrix"</code>, directly. <br />
+Class <code>"Variance"</code>, directly.
+</p>
+
+
+<h3>Methods</h3>
+
+
+<dl>
+<dt>covariance</dt><dd>
+<p><code>signature(object = "CovarianceMatrix")</code>: See the documentation for
+<code><a href="expectation-methods.html">covariance</a></code> for details.
+</p>
+</dd>
+<dt>initialize</dt><dd>
+<p><code>signature(.Object = "CovarianceMatrix")</code>: See the documentation for
+<code><a href="../../methods/html/new.html">initialize</a></code> (in package <span class="pkg">methods</span>) for
+details.
+</p>
+</dd>
+<dt>initialize</dt><dd>
+<p><code>signature(.Object = "Variance")</code>: See the documentation for
+<code><a href="../../methods/html/new.html">initialize</a></code> (in package <span class="pkg">methods</span>) for
+details.
+</p>
+</dd>
+<dt>variance</dt><dd>
+<p><code>signature(object = "CovarianceMatrix")</code>: See the documentation for
+<code><a href="expectation-methods.html">variance</a></code> for details.
+</p>
+</dd>
+<dt>variance</dt><dd>
+<p><code>signature(object = "Variance")</code>: See the documentation for
+<code><a href="expectation-methods.html">variance</a></code> for details.
+</p>
+</dd>
+</dl>
+
+
+
+<h3>Note</h3>
+
+<p>Starting with <span class="pkg">coin</span> version 1.4-0, this class is deprecated.  <strong>It
+will be made defunct and removed in a future release.</strong>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>coin</em> version 1.4-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Class '&quot;IndependenceTest&quot;' and its subclasses</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for IndependenceTest-class {coin}"><tr><td>IndependenceTest-class {coin}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Class <code>"IndependenceTest"</code> and its subclasses</h2>
+
+<h3>Description</h3>
+
+<p>Objects of class <code>"IndependenceTest"</code> and its subclasses
+<code>"MaxTypeIndependenceTest"</code>, <code>"QuadTypeIndependenceTest"</code>,
+<code>"ScalarIndependenceTest"</code> and <code>"ScalarIndependenceTestConfint"</code>
+represent an independence test including its original and transformed data
+structure, linear statistic, test statistic and reference distribution.
+</p>
+
+
+<h3>Objects from the Class</h3>
+
+<p>Objects can be created by calls of the form </p>
+<pre>    new("IndependenceTest", \dots),
+
+    new("MaxTypeIndependenceTest", \dots),
+
+    new("QuadTypeIndependenceTest", \dots),
+
+    new("ScalarIndependenceTest", \dots)</pre>
+<p>and </p>
+<pre>    new("ScalarIndependenceTestConfint", \dots).</pre>
+
+
+<h3>Slots</h3>
+
+<p>For objects of classes <code>"IndependenceTest"</code>,
+<code>"MaxTypeIndependenceTest"</code>, <code>"QuadTypeIndependenceTest"</code>,
+<code>"ScalarIndependenceTest"</code> or <code>"ScalarIndependenceTestConfint"</code>:
+</p>
+
+<dl>
+<dt><code>distribution</code>:</dt><dd>
+<p>Object of class <code>"<a href="PValue-class.html">PValue</a>"</code>.  The reference
+distribution.
+</p>
+</dd>
+<dt><code>statistic</code>:</dt><dd>
+<p>Object of class <code>"<a href="IndependenceTestStatistic-class.html">IndependenceTestStatistic</a>"</code>.  The
+test statistic, the linear statistic, and the transformed and original
+data structures.
+</p>
+</dd>
+<dt><code>estimates</code>:</dt><dd>
+<p>Object of class <code>"list"</code>.  The estimated parameters.
+</p>
+</dd>
+<dt><code>method</code>:</dt><dd>
+<p>Object of class <code>"character"</code>.  The test method.
+</p>
+</dd>
+<dt><code>call</code>:</dt><dd>
+<p>Object of class <code>"call"</code>.  The matched call.
+</p>
+</dd>
+</dl>
+
+<p>Additionally, for objects of classes <code>"ScalarIndependenceTest"</code> or
+<code>"ScalarIndependenceTestConfint"</code>:
+</p>
+
+<dl>
+<dt><code>parameter</code>:</dt><dd>
+<p>Object of class <code>"character"</code>.  The tested parameter.
+</p>
+</dd>
+<dt><code>nullvalue</code>:</dt><dd>
+<p>Object of class <code>"numeric"</code>.  The hypothesized value of the null
+hypothesis.
+</p>
+</dd>
+</dl>
+
+<p>Additionally, for objects of class <code>"ScalarIndependenceTestConfint"</code>:
+</p>
+
+<dl>
+<dt><code>confint</code>:</dt><dd>
+<p>Object of class <code>"function"</code>.  The confidence interval function.
+</p>
+</dd>
+<dt><code>conf.level</code>:</dt><dd>
+<p>Object of class <code>"numeric"</code>.  The confidence level.
+</p>
+</dd>
+</dl>
+
+
+
+<h3>Extends</h3>
+
+<p>For objects of classes <code>"MaxTypeIndependenceTest"</code>,
+<code>"QuadTypeIndependenceTest"</code> or <code>"ScalarIndependenceTest"</code>: <br />
+Class <code>"IndependenceTest"</code>, directly.
+</p>
+<p>For objects of class <code>"ScalarIndependenceTestConfint"</code>: <br />
+Class <code>"ScalarIndependenceTest"</code>, directly. <br />
+Class <code>"IndependenceTest"</code>, by class <code>"ScalarIndependenceTest"</code>,
+distance 2.
+</p>
+
+
+<h3>Known Subclasses</h3>
+
+<p>For objects of class <code>"IndependenceTest"</code>: <br />
+Class <code>"MaxTypeIndependenceTest"</code>, directly. <br />
+Class <code>"QuadTypeIndependenceTest"</code>, directly. <br />
+Class <code>"ScalarIndependenceTest"</code>, directly. <br />
+Class <code>"ScalarIndependenceTestConfint"</code>, by class
+<code>"ScalarIndependenceTest"</code>, distance 2.
+</p>
+<p>For objects of class <code>"ScalarIndependenceTest"</code>: <br />
+Class <code>"ScalarIndependenceTestConfint"</code>, directly.
+</p>
+
+
+<h3>Methods</h3>
+
+
+<dl>
+<dt>confint</dt><dd>
+<p><code>signature(object = "IndependenceTest")</code>: See the documentation for
+<code><a href="../../stats4/html/confint-methods.html">confint-methods</a></code> (in package <span class="pkg">stats4</span>) for details.
+</p>
+</dd>
+<dt>confint</dt><dd>
+<p><code>signature(object = "ScalarIndependenceTestConfint")</code>: See the
+documentation for <code><a href="../../stats4/html/confint-methods.html">confint-methods</a></code> (in package
+<span class="pkg">stats4</span>) for details.
+</p>
+</dd>
+<dt>covariance</dt><dd>
+<p><code>signature(object = "IndependenceTest")</code>: See the documentation for
+<code><a href="expectation-methods.html">covariance</a></code> for details.
+</p>
+</dd>
+<dt>dperm</dt><dd>
+<p><code>signature(object = "IndependenceTest")</code>: See the documentation for
+<code><a href="PermutationDistribution-methods.html">dperm</a></code> for details.
+</p>
+</dd>
+<dt>expectation</dt><dd>
+<p><code>signature(object = "IndependenceTest")</code>: See the documentation for
+<code><a href="expectation-methods.html">expectation</a></code> for details.
+</p>
+</dd>
+<dt>midpvalue</dt><dd>
+<p><code>signature(object = "IndependenceTest")</code>: See the documentation for
+<code><a href="pvalue-methods.html">midpvalue</a></code> for details.
+</p>
+</dd>
+<dt>pperm</dt><dd>
+<p><code>signature(object = "IndependenceTest")</code>: See the documentation for
+<code><a href="PermutationDistribution-methods.html">pperm</a></code> for details.
+</p>
+</dd>
+<dt>pvalue</dt><dd>
+<p><code>signature(object = "IndependenceTest")</code>: See the documentation for
+<code><a href="pvalue-methods.html">pvalue</a></code> for details.
+</p>
+</dd>
+<dt>pvalue_interval</dt><dd>
+<p><code>signature(object = "IndependenceTest")</code>: See the documentation for
+<code><a href="pvalue-methods.html">pvalue_interval</a></code> for details.
+</p>
+</dd>
+<dt>qperm</dt><dd>
+<p><code>signature(object = "IndependenceTest")</code>: See the documentation for
+<code><a href="PermutationDistribution-methods.html">qperm</a></code> for details.
+</p>
+</dd>
+<dt>rperm</dt><dd>
+<p><code>signature(object = "IndependenceTest")</code>: See the documentation for
+<code><a href="PermutationDistribution-methods.html">rperm</a></code> for details.
+</p>
+</dd>
+<dt>show</dt><dd>
+<p><code>signature(object = "IndependenceTest")</code>: See the documentation for
+<code><a href="../../methods/html/show.html">show</a></code> (in package <span class="pkg">methods</span>) for details.
+</p>
+</dd>
+<dt>show</dt><dd>
+<p><code>signature(object = "MaxTypeIndependenceTest")</code>: See the
+documentation for <code><a href="../../methods/html/show.html">show</a></code> (in package <span class="pkg">methods</span>)
+for details.
+</p>
+</dd>
+<dt>show</dt><dd>
+<p><code>signature(object = "QuadTypeIndependenceTest")</code>: See the
+documentation for <code><a href="../../methods/html/show.html">show</a></code> (in package <span class="pkg">methods</span>)
+for details.
+</p>
+</dd>
+<dt>show</dt><dd>
+<p><code>signature(object = "ScalarIndependenceTest")</code>: See the documentation
+for <code><a href="../../methods/html/show.html">show</a></code> (in package <span class="pkg">methods</span>) for details.
+</p>
+</dd>
+<dt>show</dt><dd>
+<p><code>signature(object = "ScalarIndependenceTestConfint")</code>: See the
+documentation for <code><a href="../../methods/html/show.html">show</a></code> (in package <span class="pkg">methods</span>)
+for details.
+</p>
+</dd>
+<dt>size</dt><dd>
+<p><code>signature(object = "IndependenceTest")</code>: See the documentation for
+<code><a href="pvalue-methods.html">size</a></code> for details.
+</p>
+</dd>
+<dt>statistic</dt><dd>
+<p><code>signature(object = "IndependenceTest")</code>: See the documentation for
+<code><a href="statistic-methods.html">statistic</a></code> for details.
+</p>
+</dd>
+<dt>support</dt><dd>
+<p><code>signature(object = "IndependenceTest")</code>: See the documentation for
+<code><a href="PermutationDistribution-methods.html">support</a></code> for details.
+</p>
+</dd>
+<dt>variance</dt><dd>
+<p><code>signature(object = "IndependenceTest")</code>: See the documentation for
+<code><a href="expectation-methods.html">variance</a></code> for details.
+</p>
+</dd>
+</dl>
+
+
+<hr /><div style="text-align: center;">[Package <em>coin</em> version 1.4-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

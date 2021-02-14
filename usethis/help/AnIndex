@@ -28,6 +28,7 @@ edit_r_buildignore	edit
 edit_r_environ	edit
 edit_r_makevars	edit
 edit_r_profile	edit
+edit_template	edit_file
 gh_token_help	github-token
 github-token	github-token
 github_actions	github_actions
@@ -162,6 +163,7 @@ use_package_doc	use_package_doc
 use_partial_warnings	rprofile-helper
 use_pipe	use_pipe
 use_pkgdown	use_pkgdown
+use_pkgdown_github_pages	use_pkgdown
 use_pkgdown_travis	use_pkgdown
 use_proprietary_license	licenses
 use_r	use_r
@@ -190,7 +192,6 @@ use_tidy_github	tidyverse
 use_tidy_github_actions	tidyverse
 use_tidy_issue_template	tidyverse
 use_tidy_labels	use_github_labels
-use_tidy_pkgdown	tidyverse
 use_tidy_release_test_env	tidyverse
 use_tidy_style	tidyverse
 use_tidy_support	tidyverse

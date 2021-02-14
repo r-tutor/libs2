@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create Nice Summary Tables of ANOVA Results</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for anova_summary {rstatix}"><tr><td>anova_summary {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create Nice Summary Tables of ANOVA Results</h2>
+
+<h3>Description</h3>
+
+<p>Create beautiful summary tables of ANOVA test results obtained
+from either <code><a href="../../car/html/Anova.html">Anova</a>()</code> or <code><a href="../../stats/html/aov.html">aov</a>()</code>.
+</p>
+<p>The results include ANOVA table, generalized effect size and some assumption
+checks.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+anova_summary(object, effect.size = "ges", detailed = FALSE, observed = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>an object of returned by either <code><a href="../../car/html/Anova.html">Anova</a>()</code>, or
+<code><a href="../../stats/html/aov.html">aov</a>()</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>effect.size</code></td>
+<td>
+<p>the effect size to compute and to show in the ANOVA
+results. Allowed values can be either &quot;ges&quot; (generalized eta squared) or
+&quot;pes&quot; (partial eta squared) or both. Default is &quot;ges&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>detailed</code></td>
+<td>
+<p>If TRUE, returns extra information (sums of squares columns,
+intercept row, etc.) in the ANOVA table.</p>
+</td></tr>
+<tr valign="top"><td><code>observed</code></td>
+<td>
+<p>Variables that are observed (i.e, measured) as compared to
+experimentally manipulated. The default effect size reported (generalized
+eta-squared) requires correct specification of the observed variables.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>return an object of class <code>anova_test</code> a data frame containing
+the ANOVA table for independent measures ANOVA. However, for repeated/mixed
+measures ANOVA, it is a list containing the following components are
+returned:
+</p>
+ <ul>
+<li> <p><strong>ANOVA</strong>: a data frame containing ANOVA results </p>
+</li>
+<li>
+<p><strong>Mauchly's Test for Sphericity</strong>: If any within-Ss variables with more
+than 2 levels are present, a data frame containing the results of Mauchly's
+test for Sphericity. Only reported for effects that have more than 2 levels
+because sphericity necessarily holds for effects with only 2 levels. </p>
+</li>
+<li>
+<p><strong>Sphericity Corrections</strong>: If any within-Ss variables are present, a
+data frame containing the Greenhouse-Geisser and Huynh-Feldt epsilon values,
+and corresponding corrected p-values. </p>
+</li></ul>
+
+<p>The <strong>returned object might have an attribute</strong> called <code>args</code> if
+you compute ANOVA using the function <code><a href="anova_test.html">anova_test</a>()</code>. The attribute <code>args</code> is a
+list holding the arguments used to fit the ANOVA model, including: data, dv,
+within, between, type, model, etc.
+</p>
+<p>The following abbreviations are used in the different results tables:
+</p>
+ <ul>
+<li><p> DFn	Degrees of Freedom in the numerator (i.e. DF effect).
+</p>
+</li>
+<li><p> DFd	Degrees of Freedom in the denominator (i.e., DF error). </p>
+</li>
+<li>
+<p>SSn	Sum of Squares in the numerator (i.e., SS effect). </p>
+</li>
+<li><p> SSd	Sum of
+Squares in the denominator (i.e.,SS error). </p>
+</li>
+<li><p> F	F-value. </p>
+</li>
+<li><p> p	p-value
+(probability of the data given the null hypothesis). </p>
+</li>
+<li><p> p&lt;.05	Highlights
+p-values less than the traditional alpha level of .05. </p>
+</li>
+<li><p> ges	Generalized
+Eta-Squared measure of effect size. </p>
+</li>
+<li><p> GGe	Greenhouse-Geisser epsilon.
+</p>
+</li>
+<li><p> p[GGe]	p-value after correction using Greenhouse-Geisser epsilon.
+</p>
+</li>
+<li><p> p[GGe]&lt;.05	Highlights p-values (after correction using
+Greenhouse-Geisser epsilon) less than the traditional alpha level of .05.
+</p>
+</li>
+<li><p> HFe	Huynh-Feldt epsilon. </p>
+</li>
+<li><p> p[HFe]	p-value after correction using
+Huynh-Feldt epsilon. </p>
+</li>
+<li><p> p[HFe]&lt;.05	Highlights p-values (after correction
+using Huynh-Feldt epsilon) less than the traditional alpha level of .05.
+</p>
+</li>
+<li><p> W	Mauchly's W statistic </p>
+</li></ul>
+
+
+
+<h3>Author(s)</h3>
+
+<p>Alboukadel Kassambara, <a href="mailto:alboukadel.kassambara@gmail.com">alboukadel.kassambara@gmail.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="anova_test.html">anova_test</a>()</code>, <code><a href="factorial_design.html">factorial_design</a>()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Load data
+#:::::::::::::::::::::::::::::::::::::::
+data("ToothGrowth")
+df &lt;- ToothGrowth
+df$dose &lt;- as.factor(df$dose)
+
+# Independent measures ANOVA
+#:::::::::::::::::::::::::::::::::::::::::
+# Compute ANOVA and display the summary
+res.anova &lt;- Anova(lm(len ~ dose*supp, data = df))
+anova_summary(res.anova)
+
+# Display both SSn and SSd using detailed = TRUE
+# Show generalized eta squared using effect.size = "ges"
+anova_summary(res.anova, detailed = TRUE, effect.size = "ges")
+
+# Show partial eta squared using effect.size = "pes"
+anova_summary(res.anova, detailed = TRUE, effect.size = "pes")
+
+# Repeated measures designs using car::Anova()
+#:::::::::::::::::::::::::::::::::::::::::
+# Prepare the data
+df$id &lt;- as.factor(rep(1:10, 6)) # Add individuals ids
+head(df)
+
+# Easily perform repeated measures ANOVA using the car package
+design &lt;- factorial_design(df, dv = len, wid = id, within = c(supp, dose))
+res.anova &lt;- Anova(design$model, idata = design$idata, idesign = design$idesign, type = 3)
+anova_summary(res.anova)
+
+# Repeated measures designs using stats::Aov()
+#:::::::::::::::::::::::::::::::::::::::::
+res.anova &lt;- aov(len ~ dose*supp + Error(id/(supp*dose)), data = df)
+anova_summary(res.anova)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

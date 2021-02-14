@@ -57,8 +57,10 @@ games_howell_test	games_howell_test
 gather	reexports
 get_anova_table	anova_test
 get_comparisons	get_comparisons
+get_description	get_test_label
 get_emmeans	emmeans_test
 get_mode	get_mode
+get_n	get_test_label
 get_pwc_label	get_test_label
 get_summary_stats	get_summary_stats
 get_test_label	get_test_label
@@ -104,6 +106,7 @@ p_mark_significant	p_value
 p_names	p_value
 p_round	p_value
 reexports	reexports
+remove_ns	remove_ns
 reorder_levels	factors
 replace_lower_triangle	replace_triangle
 replace_triangle	replace_triangle

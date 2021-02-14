@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Extraction of the Expectation, Variance and Covariance of the...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for expectation-methods {coin}"><tr><td>expectation-methods {coin}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Extraction of the Expectation, Variance and Covariance of the Linear
+Statistic</h2>
+
+<h3>Description</h3>
+
+<p>Methods for extraction of the expectation, variance and covariance of the
+linear statistic.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S4 method for signature 'IndependenceLinearStatistic'
+expectation(object, partial = FALSE, ...)
+## S4 method for signature 'IndependenceTest'
+expectation(object, partial = FALSE, ...)
+
+## S4 method for signature 'Variance'
+variance(object, ...)
+## S4 method for signature 'CovarianceMatrix'
+variance(object, ...)
+## S4 method for signature 'IndependenceLinearStatistic'
+variance(object, partial = FALSE, ...)
+## S4 method for signature 'IndependenceTest'
+variance(object, partial = FALSE, ...)
+
+## S4 method for signature 'CovarianceMatrix'
+covariance(object, ...)
+## S4 method for signature 'IndependenceLinearStatistic'
+covariance(object, invert = FALSE, partial = FALSE, ...)
+## S4 method for signature 'QuadTypeIndependenceTestStatistic'
+covariance(object, invert = FALSE, partial = FALSE, ...)
+## S4 method for signature 'IndependenceTest'
+covariance(object, invert = FALSE, partial = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+
+<p>an object from which the expectation, variance or covariance of the linear
+statistic can be extracted.
+</p>
+</td></tr>
+<tr valign="top"><td><code>partial</code></td>
+<td>
+
+<p>a logical indicating that the partial result for each block should be
+extracted.  Defaults to <code>FALSE</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>invert</code></td>
+<td>
+
+<p>a logical indicating that the Moore-Penrose inverse of the covariance should
+be extracted.  Defaults to <code>FALSE</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+
+<p>further arguments (currently ignored).
+</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The methods <code>expectation</code>, <code>variance</code> and <code>covariance</code> extract
+the expectation, variance and covariance, respectively, of the linear
+statistic.
+</p>
+<p>For tests of conditional independence within blocks, the partial result for
+each block is obtained by setting <code>partial = TRUE</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The expectation, variance or covariance of the linear statistic extracted from
+<code>object</code>.  A matrix or array.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Example data
+dta &lt;- data.frame(
+    y = gl(3, 2),
+    x = sample(gl(3, 2))
+)
+
+## Asymptotic Cochran-Mantel-Haenszel Test
+ct &lt;- cmh_test(y ~ x, data = dta)
+
+## The linear statistic, i.e., the contingency table...
+(T &lt;- statistic(ct, type = "linear"))
+
+## ...and its expectation...
+(mu &lt;- expectation(ct))
+
+## ...and variance...
+(sigma &lt;- variance(ct))
+
+## ...and covariance...
+(Sigma &lt;- covariance(ct))
+
+## ...and its inverse
+(SigmaPlus &lt;- covariance(ct, invert = TRUE))
+
+## The standardized contingency table...
+(T - mu) / sqrt(sigma)
+
+## ...is identical to the standardized linear statistic
+statistic(ct, type = "standardized")
+
+## The quadratic form...
+U &lt;- as.vector(T - mu)
+U %*% SigmaPlus %*% U
+
+## ...is identical to the test statistic
+statistic(ct, type = "test")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>coin</em> version 1.4-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

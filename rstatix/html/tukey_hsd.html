@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Tukey Honest Significant Differences</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for tukey_hsd {rstatix}"><tr><td>tukey_hsd {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Tukey Honest Significant Differences</h2>
+
+<h3>Description</h3>
+
+<p>Provides a pipe-friendly framework to performs Tukey post-hoc
+tests. Wrapper around the function <code><a href="../../stats/html/TukeyHSD.html">TukeyHSD</a>()</code>. It is
+essentially a t-test that corrects for multiple testing.
+</p>
+<p>Can handle different inputs formats: aov, lm, formula.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+tukey_hsd(x, ...)
+
+## Default S3 method:
+tukey_hsd(x, ...)
+
+## S3 method for class 'lm'
+tukey_hsd(x, ...)
+
+## S3 method for class 'data.frame'
+tukey_hsd(x, formula, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>an object of class <code>aov</code>, <code>lm</code> or <code>data.frame</code>
+containing the variables used in the formula.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>other arguments passed to the function
+<code><a href="../../stats/html/TukeyHSD.html">TukeyHSD</a>()</code>. These include: </p>
+ <ul>
+<li>
+<p><strong>which</strong>: A character vector listing terms in the fitted model for
+which the intervals should be calculated. Defaults to all the terms. </p>
+</li>
+<li>
+<p><strong>ordered</strong>: A logical value indicating if the levels of the factor
+should be ordered according to increasing average in the sample before
+taking differences. If ordered is true then the calculated differences in
+the means will all be positive. The significant differences will be those
+for which the lwr end point is positive. </p>
+</li></ul>
+</td></tr>
+<tr valign="top"><td><code>formula</code></td>
+<td>
+<p>a formula of the form <code>x ~ group</code> where <code>x</code> is a
+numeric variable giving the data values and <code>group</code> is a factor with
+one or multiple levels giving the corresponding groups. For example,
+<code>formula = TP53 ~ cancer_group</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a data.frame containing the variables in the formula.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a tibble data frame containing the results of the different
+comparisons.
+</p>
+
+
+<h3>Methods (by class)</h3>
+
+
+<ul>
+<li> <p><code>default</code>: performs tukey post-hoc test from <code>aov()</code> results.
+</p>
+</li>
+<li> <p><code>lm</code>: performs tukey post-hoc test from <code>lm()</code> model.
+</p>
+</li>
+<li> <p><code>data.frame</code>: performs tukey post-hoc tests using data and formula as
+inputs. ANOVA will be automatically performed using the function
+<code><a href="../../stats/html/aov.html">aov</a>()</code>
+</p>
+</li></ul>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Data preparation
+df &lt;- ToothGrowth
+df$dose &lt;- as.factor(df$dose)
+# Tukey HSD from ANOVA results
+aov(len ~ dose, data = df) %&gt;% tukey_hsd()
+
+# two-way anova with interaction
+aov(len ~ dose*supp, data = df) %&gt;% tukey_hsd()
+
+# Tukey HSD from lm() results
+lm(len ~ dose, data = df) %&gt;% tukey_hsd()
+
+# Tukey HSD from data frame and formula
+tukey_hsd(df, len ~ dose)
+
+# Tukey HSD using grouped data
+df %&gt;%
+  group_by(supp) %&gt;%
+  tukey_hsd(len ~ dose)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

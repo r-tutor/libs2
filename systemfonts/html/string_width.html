@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Calculate the width of a string, ignoring new-lines</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for string_width {systemfonts}"><tr><td>string_width {systemfonts}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Calculate the width of a string, ignoring new-lines</h2>
+
+<h3>Description</h3>
+
+<p>This is a very simple alternative to <code><a href="shape_string.html">shape_string()</a></code> that simply calculates
+the width of strings without taking any newline into account. As such it is
+suitable to calculate the width of words or lines that has already been
+splitted by <code style="white-space: pre;">\n</code>. Input is recycled to the length of <code>strings</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+string_width(
+  strings,
+  family = "",
+  italic = FALSE,
+  bold = FALSE,
+  size = 12,
+  res = 72,
+  include_bearing = TRUE,
+  path = NULL,
+  index = 0
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>strings</code></td>
+<td>
+<p>A character vector of strings</p>
+</td></tr>
+<tr valign="top"><td><code>family</code></td>
+<td>
+<p>The name of the font family</p>
+</td></tr>
+<tr valign="top"><td><code>italic</code></td>
+<td>
+<p>logicals indicating the font style</p>
+</td></tr>
+<tr valign="top"><td><code>bold</code></td>
+<td>
+<p>logicals indicating the font style</p>
+</td></tr>
+<tr valign="top"><td><code>size</code></td>
+<td>
+<p>The pointsize of the font to use for size related measures</p>
+</td></tr>
+<tr valign="top"><td><code>res</code></td>
+<td>
+<p>The ppi of the size related mesures</p>
+</td></tr>
+<tr valign="top"><td><code>include_bearing</code></td>
+<td>
+<p>Logical, should left and right bearing be included in
+the string width?</p>
+</td></tr>
+<tr valign="top"><td><code>path</code></td>
+<td>
+<p>path an index of a font file to circumvent lookup based on
+family and style</p>
+</td></tr>
+<tr valign="top"><td><code>index</code></td>
+<td>
+<p>path an index of a font file to circumvent lookup based on
+family and style</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A numeric vector giving the width of the strings in pixels. Use the
+provided <code>res</code> value to convert it into absolute values.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+strings &lt;- c('A short string', 'A very very looong string')
+string_width(strings)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>systemfonts</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Remove Non-Significant from Statistical Tests</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for remove_ns {rstatix}"><tr><td>remove_ns {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Remove Non-Significant from Statistical Tests</h2>
+
+<h3>Description</h3>
+
+<p>Filter out non-significant (NS) p-values from a statistical
+test. Can detect automatically p-value columns
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+remove_ns(stat.test, col = NULL, signif.cutoff = 0.05)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>stat.test</code></td>
+<td>
+<p>statistical test results returned by <code>rstatix</code>
+functions or any data frame containing a p-value column.</p>
+</td></tr>
+<tr valign="top"><td><code>col</code></td>
+<td>
+<p>(optional) character specifying the column containing the p-value
+or the significance information, to be used for the filtering step.
+Possible values include: <code>"p"</code>, <code>"p.adj"</code>, <code>"p.signif"</code>,
+<code>"p.adj.signif"</code>. If missing, the function will automatically look for
+p.adj.signif, p.adj, p.signif, p in this order.</p>
+</td></tr>
+<tr valign="top"><td><code>signif.cutoff</code></td>
+<td>
+<p>the significance cutoff; default is 0.05. Significance
+is declared at <code>p-value &lt;= signif.cutoff</code></p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a data frame
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Statistical test
+stat.test &lt;- PlantGrowth %&gt;% wilcox_test(weight ~ group)
+# Remove ns: automatic detection of p-value columns
+stat.test %&gt;% remove_ns()
+# Remove ns by the column p
+stat.test %&gt;% remove_ns(col ="p")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

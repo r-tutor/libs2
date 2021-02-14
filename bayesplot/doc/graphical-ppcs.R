@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
   eval = if (isTRUE(exists("params"))) params$EVAL else FALSE
 )
 
-## ---- pkgs, include=FALSE-----------------------------------------------------
+## ----pkgs, include=FALSE------------------------------------------------------
 library("ggplot2")
 library("rstanarm")
 set.seed(840)
@@ -25,11 +25,11 @@ set.seed(840)
 #  library("ggplot2")
 #  library("rstanarm")
 
-## ---- roaches-data------------------------------------------------------------
+## ----roaches-data-------------------------------------------------------------
 head(roaches) # see help("rstanarm-datasets")
 roaches$roach100 <- roaches$roach1 / 100 # pre-treatment number of roaches (in 100s)
 
-## ---- roaches-model-pois, message=FALSE---------------------------------------
+## ----roaches-model-pois, message=FALSE----------------------------------------
 # using rstanarm's default priors. For details see the section on default
 # weakly informative priors at https://mc-stan.org/rstanarm/articles/priors.html
 fit_poisson <- stan_glm(
@@ -41,19 +41,19 @@ fit_poisson <- stan_glm(
   refresh = 0 # suppresses all output as of v2.18.1 of rstan
 )
 
-## ---- print-pois--------------------------------------------------------------
+## ----print-pois---------------------------------------------------------------
 print(fit_poisson)
 
-## ---- roaches-model-nb, message=FALSE-----------------------------------------
+## ----roaches-model-nb, message=FALSE------------------------------------------
 fit_nb <- update(fit_poisson, family = "neg_binomial_2")
 
-## ---- print-nb----------------------------------------------------------------
+## ----print-nb-----------------------------------------------------------------
 print(fit_nb)
 
-## ---- y-----------------------------------------------------------------------
+## ----y------------------------------------------------------------------------
 y <- roaches$y
 
-## ---- yrep--------------------------------------------------------------------
+## ----yrep---------------------------------------------------------------------
 yrep_poisson <- posterior_predict(fit_poisson, draws = 500)
 yrep_nb <- posterior_predict(fit_nb, draws = 500)
 dim(yrep_poisson)
@@ -76,7 +76,7 @@ ppc_hist(y, yrep_nb[1:5, ])
 ppc_hist(y, yrep_nb[1:5, ], binwidth = 20) + 
   coord_cartesian(xlim = c(-1, 300))
 
-## ---- prop_zero---------------------------------------------------------------
+## ----prop_zero----------------------------------------------------------------
 prop_zero <- function(x) mean(x == 0)
 prop_zero(y) # check proportion of zeros in y
 
@@ -92,16 +92,16 @@ ppc_stat(y, yrep_nb, stat = "max")
 ppc_stat(y, yrep_nb, stat = "max", binwidth = 100) + 
   coord_cartesian(xlim = c(-1, 5000))
 
-## ---- available_ppc-----------------------------------------------------------
+## ----available_ppc------------------------------------------------------------
 available_ppc()
 
-## ---- available_ppc-grouped---------------------------------------------------
+## ----available_ppc-grouped----------------------------------------------------
 available_ppc(pattern = "_grouped")
 
 ## ----ppc_stat_grouped, message=FALSE------------------------------------------
 ppc_stat_grouped(y, yrep_nb, group = roaches$treatment, stat = "prop_zero")
 
-## ---- pp_check.foo------------------------------------------------------------
+## ----pp_check.foo-------------------------------------------------------------
 # @param object An object of class "foo".
 # @param type The type of plot.
 # @param ... Optional arguments passed on to the bayesplot plotting function.
@@ -120,15 +120,15 @@ pp_check.foo <- function(object, type = c("multiple", "overlaid"), ...) {
   }
 }
 
-## ---- foo-object--------------------------------------------------------------
+## ----foo-object---------------------------------------------------------------
 x <- list(y = rnorm(200), yrep = matrix(rnorm(1e5), nrow = 500, ncol = 200))
 class(x) <- "foo"
 
-## ---- pp_check-1, message=FALSE-----------------------------------------------
+## ----pp_check-1, message=FALSE------------------------------------------------
 color_scheme_set("purple")
 pp_check(x, type = "multiple", binwidth = 0.3)
 
-## ---- pp_check-2--------------------------------------------------------------
+## ----pp_check-2---------------------------------------------------------------
 color_scheme_set("darkgray")
 pp_check(x, type = "overlaid")
 

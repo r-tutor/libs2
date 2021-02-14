@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Effect Size for ANOVA</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for eta_squared {rstatix}"><tr><td>eta_squared {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Effect Size for ANOVA</h2>
+
+<h3>Description</h3>
+
+<p>Compute eta-squared and partial eta-squared for all terms in an
+ANOVA model.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+eta_squared(model)
+
+partial_eta_squared(model)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>model</code></td>
+<td>
+<p>an object of class aov or anova.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a numeric vector with the effect size statistics
+</p>
+
+
+<h3>Functions</h3>
+
+
+<ul>
+<li> <p><code>eta_squared</code>: compute eta squared
+</p>
+</li>
+<li> <p><code>partial_eta_squared</code>: compute partial eta squared.
+</p>
+</li></ul>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Data preparation
+df &lt;- ToothGrowth
+df$dose &lt;- as.factor(df$dose)
+
+# Compute ANOVA
+res.aov &lt;- aov(len ~ supp*dose, data = df)
+summary(res.aov)
+
+# Effect size
+eta_squared(res.aov)
+partial_eta_squared(res.aov)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

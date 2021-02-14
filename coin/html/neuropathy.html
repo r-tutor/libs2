@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Acute Painful Diabetic Neuropathy</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for neuropathy {coin}"><tr><td>neuropathy {coin}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Acute Painful Diabetic Neuropathy</h2>
+
+<h3>Description</h3>
+
+<p>The logarithm of the ratio of pain scores measured at baseline and after four
+weeks in a control group and a treatment group.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>neuropathy</pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 58 observations on 2 variables.
+</p>
+
+<dl>
+<dt><code>pain</code></dt><dd>
+<p>pain scores: ln(baseline / final).
+</p>
+</dd>
+<dt><code>group</code></dt><dd>
+<p>a factor with levels <code>"control"</code> and <code>"treat"</code>.
+</p>
+</dd>
+</dl>
+
+
+
+<h3>Details</h3>
+
+<p>Data from Conover and Salsburg (1988, Tab. 1).
+</p>
+
+
+<h3>Source</h3>
+
+<p>Conover, W. J. and Salsburg, D. S.  (1988).  Locally most powerful tests for
+detecting treatment effects when only a subset of patients can be expected to
+&ldquo;respond&rdquo; to treatment.  <em>Biometrics</em> <b>44</b>(1), 189&ndash;196.
+doi: <a href="https://doi.org/10.2307/2531906">10.2307/2531906</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Conover and Salsburg (1988, Tab. 2)
+
+## One-sided approximative Fisher-Pitman test
+oneway_test(pain ~ group, data = neuropathy,
+            alternative = "less",
+            distribution = approximate(nresample = 10000))
+
+## One-sided approximative Wilcoxon-Mann-Whitney test
+wilcox_test(pain ~ group, data = neuropathy,
+            alternative = "less",
+            distribution = approximate(nresample = 10000))
+
+## One-sided approximative Conover-Salsburg test
+oneway_test(pain ~ group, data = neuropathy,
+            alternative = "less",
+            distribution = approximate(nresample = 10000),
+            ytrafo = function(data)
+                trafo(data, numeric_trafo = consal_trafo))
+
+## One-sided approximative maximum test for a range of 'a' values
+it &lt;- independence_test(pain ~ group, data = neuropathy,
+                        alternative = "less",
+                        distribution = approximate(nresample = 10000),
+                        ytrafo = function(data)
+                            trafo(data, numeric_trafo = function(y)
+                                consal_trafo(y, a = 2:7)))
+pvalue(it, method = "single-step")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>coin</em> version 1.4-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -42,15 +42,30 @@ min_max <- list(
   max = ~max(.x, na.rm = TRUE)
 )
 starwars %>% summarise(across(where(is.numeric), min_max))
+starwars %>% summarise(across(c(height, mass, birth_year), min_max))
 
 ## -----------------------------------------------------------------------------
 starwars %>% summarise(across(where(is.numeric), min_max, .names = "{.fn}.{.col}"))
+starwars %>% summarise(across(c(height, mass, birth_year), min_max, .names = "{.fn}.{.col}"))
 
 ## -----------------------------------------------------------------------------
 starwars %>% summarise(
-  across(where(is.numeric), ~min(.x, na.rm = TRUE), .names = "min_{.col}"),
-  across(where(is.numeric), ~max(.x, na.rm = TRUE), .names = "max_{.col}")
+  across(c(height, mass, birth_year), ~min(.x, na.rm = TRUE), .names = "min_{.col}"),
+  across(c(height, mass, birth_year), ~max(.x, na.rm = TRUE), .names = "max_{.col}")
 )
+
+## -----------------------------------------------------------------------------
+starwars %>% summarise(
+  tibble(
+    across(where(is.numeric), ~min(.x, na.rm = TRUE), .names = "min_{.col}"),
+    across(where(is.numeric), ~max(.x, na.rm = TRUE), .names = "max_{.col}")  
+  )
+)
+
+## -----------------------------------------------------------------------------
+starwars %>% 
+  summarise(across(where(is.numeric), min_max, .names = "{.fn}.{.col}")) %>% 
+  relocate(starts_with("min"))
 
 ## -----------------------------------------------------------------------------
 df <- tibble(x = 1:3, y = 3:5, z = 5:7)
@@ -73,6 +88,12 @@ df %>%
   summarise(n = n(), across(where(is.numeric) & !n, sd))
 
 ## -----------------------------------------------------------------------------
+df %>% 
+  summarise(
+    tibble(n = n(), across(where(is.numeric), sd))
+  )
+
+## -----------------------------------------------------------------------------
 rescale01 <- function(x) {
   rng <- range(x, na.rm = TRUE)
   (x - rng[1]) / (rng[2] - rng[1])
@@ -81,13 +102,21 @@ df <- tibble(x = 1:4, y = rnorm(4))
 df %>% mutate(across(where(is.numeric), rescale01))
 
 ## -----------------------------------------------------------------------------
-starwars %>% filter(across(everything(), ~ !is.na(.x)))
-
-## -----------------------------------------------------------------------------
 starwars %>% distinct(across(contains("color")))
 
 ## -----------------------------------------------------------------------------
 starwars %>% count(across(contains("color")), sort = TRUE)
+
+## -----------------------------------------------------------------------------
+starwars %>% 
+  filter(if_any(everything(), ~ !is.na(.x)))
+
+## -----------------------------------------------------------------------------
+starwars %>% 
+  filter(if_all(everything(), ~ !is.na(.x)))
+
+## -----------------------------------------------------------------------------
+starwars %>% filter(across(everything(), ~ !is.na(.x)))
 
 ## ---- eval = FALSE------------------------------------------------------------
 #  df %>%
@@ -115,11 +144,10 @@ df %>% mutate(across(everything(), mean))
 df <- tibble(x = c("a", "b"), y = c(1, 1), z = c(-1, 1))
 
 # Find all rows where EVERY numeric variable is greater than zero
-df %>% filter(across(where(is.numeric), ~ .x > 0))
+df %>% filter(if_all(where(is.numeric), ~ .x > 0))
 
 # Find all rows where ANY numeric variable is greater than zero
-rowAny <- function(x) rowSums(x) > 0
-df %>% filter(rowAny(across(where(is.numeric), ~ .x > 0)))
+df %>% filter(if_any(where(is.numeric), ~ .x > 0))
 
 ## -----------------------------------------------------------------------------
 df <- tibble(x = 2, y = 4, z = 8)

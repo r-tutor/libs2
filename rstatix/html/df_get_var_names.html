@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Get User Specified Variable Names</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for df_get_var_names {rstatix}"><tr><td>df_get_var_names {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Get User Specified Variable Names</h2>
+
+<h3>Description</h3>
+
+<p>Returns user specified variable names. Supports standard and non standard evaluation.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+df_get_var_names(data, ..., vars = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a data frame</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>One or more unquoted expressions (or variable names) separated by
+commas. Used to select a variable of interest.</p>
+</td></tr>
+<tr valign="top"><td><code>vars</code></td>
+<td>
+<p>a character vector containing the variable names of interest.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a character vector
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+# Non standard evaluation
+ToothGrowth %&gt;%
+ df_get_var_names(dose, len)
+
+# Standard evaluation
+ToothGrowth %&gt;%
+ df_get_var_names(vars = c("len", "dose"))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

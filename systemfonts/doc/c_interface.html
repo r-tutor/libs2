@@ -44,6 +44,15 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
@@ -132,6 +141,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   }
 })();
 </script>
+
 
 
 
@@ -418,6 +428,44 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <span id="cb8-6"><a href="#cb8-6"></a>  <span class="dt">int</span> * error</span>
 <span id="cb8-7"><a href="#cb8-7"></a>)</span></code></pre></div>
 <p>Freetype uses reference counting to keep track of objects and the count is increased by a call to <code>get_cached_face()</code>. It is the responsiblity of the caller to decrease it once the face is no longer needed using <code>FT_Done_Face()</code>.</p>
+</div>
+<div id="font-fallback" class="section level2">
+<h2>Font fallback</h2>
+<p>When rendering text it is not given that all the requested characters have a glyph in the given font. While one can elect to render a “missing glyph” glyph (often either an empty square or a questionmark in a tilted square) a better approach is often to find a font substitute that does contain the character and use that for rendering it. This function allows you to find a fallback font for a given string and font. The string should be stripped of characters that you already know how to render. The fallback font is returned as a FontSettings object, though features are always empty.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb9-1"><a href="#cb9-1"></a>FontSettings get_fallback(</span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="dt">const</span> <span class="dt">char</span>* string,</span>
+<span id="cb9-3"><a href="#cb9-3"></a>  <span class="dt">const</span> <span class="dt">char</span>* path,</span>
+<span id="cb9-4"><a href="#cb9-4"></a>  <span class="dt">int</span> index</span>
+<span id="cb9-5"><a href="#cb9-5"></a>)</span></code></pre></div>
+</div>
+<div id="font-weight" class="section level2">
+<h2>Font Weight</h2>
+<p>When encoding text with CSS it may be necessary to know the exact weight of the font given by a file so that it may be reflected in the style sheet. This function takes a path and an index and returns the weight (100-900 in steps of 100) or 0 if it is undefined by the font.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb10-1"><a href="#cb10-1"></a><span class="dt">int</span> get_font_weight(</span>
+<span id="cb10-2"><a href="#cb10-2"></a>  <span class="dt">const</span> <span class="dt">char</span>* path,</span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="dt">int</span> index</span>
+<span id="cb10-4"><a href="#cb10-4"></a>)</span></code></pre></div>
+</div>
+<div id="family-name" class="section level2">
+<h2>Family name</h2>
+<p>It may be beneficial to know the family name from a given path and index into a font. This can be obtained with <code>get_font_family()</code> which will write the name to the provided <code>char*</code> argument. It will return 0 if it was somehow unsuccessful.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb11-1"><a href="#cb11-1"></a><span class="dt">int</span> get_font_family(</span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="dt">const</span> <span class="dt">char</span>* path,</span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="dt">int</span> index,</span>
+<span id="cb11-4"><a href="#cb11-4"></a>  <span class="dt">char</span>* family,</span>
+<span id="cb11-5"><a href="#cb11-5"></a>  <span class="dt">int</span> max_length</span>
+<span id="cb11-6"><a href="#cb11-6"></a>)</span></code></pre></div>
+</div>
+<div id="emoji-location" class="section level2">
+<h2>Emoji location</h2>
+<p>Figuring out which character in a string should be treated as an emoji is non-trivial due to the existence of emojis with text representation default etc. systemfonts allow you to get the embedding of emojis in a string based on the correct rules.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb12-1"><a href="#cb12-1"></a><span class="dt">void</span> detect_emoji_embedding(</span>
+<span id="cb12-2"><a href="#cb12-2"></a>  <span class="dt">const</span> <span class="dt">uint32_t</span>* string, </span>
+<span id="cb12-3"><a href="#cb12-3"></a>  <span class="dt">int</span> n, </span>
+<span id="cb12-4"><a href="#cb12-4"></a>  <span class="dt">int</span>* embedding, </span>
+<span id="cb12-5"><a href="#cb12-5"></a>  <span class="dt">const</span> <span class="dt">char</span> *path, </span>
+<span id="cb12-6"><a href="#cb12-6"></a>  <span class="dt">int</span> index</span>
+<span id="cb12-7"><a href="#cb12-7"></a>)</span></code></pre></div>
 </div>
 
 

@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Exact Binomial Test</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for binom_test {rstatix}"><tr><td>binom_test {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Exact Binomial Test</h2>
+
+<h3>Description</h3>
+
+<p>Performs exact binomial test and pairwise comparisons following a
+significant exact multinomial test. Wrapper around the R base function
+<code>link[stats]{binom.test}()</code> that returns a data frame as a result.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+binom_test(
+  x,
+  n,
+  p = 0.5,
+  alternative = "two.sided",
+  conf.level = 0.95,
+  detailed = FALSE
+)
+
+pairwise_binom_test(
+  x,
+  p.adjust.method = "holm",
+  alternative = "two.sided",
+  conf.level = 0.95
+)
+
+pairwise_binom_test_against_p(
+  x,
+  p = rep(1/length(x), length(x)),
+  p.adjust.method = "holm",
+  alternative = "two.sided",
+  conf.level = 0.95
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>numeric vector containing the counts.</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>number of trials; ignored if <code>x</code> has length 2.</p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>a vector of probabilities of success. The length of p must be the
+same as the number of groups specified by x, and its elements must be
+greater than 0 and less than 1.</p>
+</td></tr>
+<tr valign="top"><td><code>alternative</code></td>
+<td>
+<p>indicates the alternative hypothesis and must be
+one of <code>"two.sided"</code>, <code>"greater"</code> or <code>"less"</code>.
+You can specify just the initial letter.</p>
+</td></tr>
+<tr valign="top"><td><code>conf.level</code></td>
+<td>
+<p>confidence level for the returned confidence
+interval.</p>
+</td></tr>
+<tr valign="top"><td><code>detailed</code></td>
+<td>
+<p>logical value. Default is FALSE. If TRUE, a detailed result is
+shown.</p>
+</td></tr>
+<tr valign="top"><td><code>p.adjust.method</code></td>
+<td>
+<p>method to adjust p values for multiple comparisons.
+Used when pairwise comparisons are performed. Allowed values include &quot;holm&quot;,
+&quot;hochberg&quot;, &quot;hommel&quot;, &quot;bonferroni&quot;, &quot;BH&quot;, &quot;BY&quot;, &quot;fdr&quot;, &quot;none&quot;. If you don't
+want to adjust the p value (not recommended), use p.adjust.method = &quot;none&quot;.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>return a data frame containing the p-value and its significance. with
+some the following columns: </p>
+ <ul>
+<li> <p><code>group, group1, group2</code>:
+the categories or groups being compared. </p>
+</li>
+<li> <p><code>statistic</code>: the number
+of successes. </p>
+</li>
+<li> <p><code>parameter</code>: the number of trials. </p>
+</li>
+<li> <p><code>p</code>:
+p-value of the test. </p>
+</li>
+<li> <p><code>p.adj</code>: the adjusted p-value. </p>
+</li>
+<li>
+<p><code>method</code>: the used statistical test. </p>
+</li>
+<li> <p><code>p.signif,
+ p.adj.signif</code>: the significance level of p-values and adjusted p-values,
+respectively. </p>
+</li>
+<li> <p><code>estimate</code>: the estimated probability of success.
+</p>
+</li>
+<li> <p><code>alternative</code>: a character string describing the alternative
+hypothesis. </p>
+</li>
+<li> <p><code>conf.low,conf.high</code>: Lower and upper bound on a
+confidence interval  for the probability of success.</p>
+</li></ul>
+
+<p>The <strong>returned object has an attribute called args</strong>, which is a list
+holding the test arguments.
+</p>
+
+
+<h3>Functions</h3>
+
+
+<ul>
+<li> <p><code>binom_test</code>: performs exact binomial test. Wrapper around the R
+base function <code><a href="../../stats/html/binom.test.html">binom.test</a></code> that returns a dataframe as a
+result.
+</p>
+</li>
+<li> <p><code>pairwise_binom_test</code>: performs pairwise comparisons (binomial test)
+following a significant exact multinomial test.
+</p>
+</li>
+<li> <p><code>pairwise_binom_test_against_p</code>: performs pairwise comparisons (binomial test)
+following a significant exact multinomial test for given probabilities.
+</p>
+</li></ul>
+
+
+<h3>See Also</h3>
+
+<p><a href="multinom_test.html">multinom_test</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Exact binomial test
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# Data: 160 mice with cancer including 95 male and 65 female
+# Q1: Does cancer affect more males than females?
+binom_test(x = 95, n = 160)
+# =&gt; yes, there are a significant difference
+
+
+# Q2: compare the observed proportion of males
+# to an expected proportion (p = 3/5)
+binom_test(x = 95, n = 160, p = 3/5)
+# =&gt; there are no significant difference
+
+# Multinomial test
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# Data
+tulip &lt;- c(red = 81, yellow = 50, white = 27)
+# Question 1: are the color equally common ?
+# this is a test of homogeneity
+res &lt;- multinom_test(tulip)
+res
+attr(res, "descriptives")
+
+# Pairwise comparisons between groups
+pairwise_binom_test(tulip, p.adjust.method = "bonferroni")
+
+
+# Question 2: comparing observed to expected proportions
+# this is a goodness-of-fit test
+expected.p &lt;- c(red = 0.5, yellow = 0.33, white = 0.17)
+res &lt;- multinom_test(tulip, expected.p)
+res
+attr(res, "descriptives")
+
+# Pairwise comparisons against a given probabilities
+pairwise_binom_test_against_p(tulip, expected.p)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

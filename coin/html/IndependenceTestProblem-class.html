@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Class '&quot;IndependenceTestProblem&quot;'</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for IndependenceTestProblem-class {coin}"><tr><td>IndependenceTestProblem-class {coin}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Class <code>"IndependenceTestProblem"</code></h2>
+
+<h3>Description</h3>
+
+<p>Objects of class <code>"IndependenceTestProblem"</code> represent the transformed
+and original data structures corresponding to an independence problem.
+</p>
+
+
+<h3>Objects from the Class</h3>
+
+<p>Objects can be created by calls of the form </p>
+<pre>     new("IndependenceTestProblem", object, xtrafo = trafo, ytrafo = trafo, \dots)</pre>
+<p>where <code>object</code> is an object of class
+<code>"<a href="IndependenceProblem-class.html">IndependenceProblem</a>"</code>, <code>xtrafo</code> is the regression
+function <i>g(X)</i> and <code>ytrafo</code> is the influence function
+<i>h(Y)</i>.
+</p>
+
+
+<h3>Slots</h3>
+
+
+<dl>
+<dt><code>xtrans</code>:</dt><dd>
+<p>Object of class <code>"matrix"</code>.  The transformed <code>x</code>.
+</p>
+</dd>
+<dt><code>ytrans</code>:</dt><dd>
+<p>Object of class <code>"matrix"</code>.  The transformed <code>y</code>.
+</p>
+</dd>
+<dt><code>xtrafo</code>:</dt><dd>
+<p>Object of class <code>"function"</code>.  The regression function for <code>x</code>.
+</p>
+</dd>
+<dt><code>ytrafo</code>:</dt><dd>
+<p>Object of class <code>"function"</code>.  The influence function for <code>y</code>.
+</p>
+</dd>
+<dt><code>x</code>:</dt><dd>
+<p>Object of class <code>"data.frame"</code>.  The variables <code>x</code>.
+</p>
+</dd>
+<dt><code>y</code>:</dt><dd>
+<p>Object of class <code>"data.frame"</code>.  The variables <code>y</code>.
+</p>
+</dd>
+<dt><code>block</code>:</dt><dd>
+<p>Object of class <code>"factor"</code>.  The block structure.
+</p>
+</dd>
+<dt><code>weights</code>:</dt><dd>
+<p>Object of class <code>"numeric"</code>.  The case weights.
+</p>
+</dd>
+</dl>
+
+
+
+<h3>Extends</h3>
+
+<p>Class <code>"<a href="IndependenceProblem-class.html">IndependenceProblem</a>"</code>, directly.
+</p>
+
+
+<h3>Known Subclasses</h3>
+
+<p>Class <code>"<a href="IndependenceLinearStatistic-class.html">IndependenceLinearStatistic</a>"</code>, directly. <br />
+Class <code>"<a href="IndependenceTestStatistic-class.html">IndependenceTestStatistic</a>"</code>, by class
+<code>"<a href="IndependenceLinearStatistic-class.html">IndependenceLinearStatistic</a>"</code>, distance 2. <br />
+Class <code>"<a href="IndependenceTestStatistic-class.html">MaxTypeIndependenceTestStatistic</a>"</code>, by class
+<code>"<a href="IndependenceTestStatistic-class.html">IndependenceTestStatistic</a>"</code>, distance 3. <br />
+Class <code>"<a href="IndependenceTestStatistic-class.html">QuadTypeIndependenceTestStatistic</a>"</code>, by class
+<code>"<a href="IndependenceTestStatistic-class.html">IndependenceTestStatistic</a>"</code>, distance 3. <br />
+Class <code>"<a href="IndependenceTestStatistic-class.html">ScalarIndependenceTestStatistic</a>"</code>, by class
+<code>"<a href="IndependenceTestStatistic-class.html">IndependenceTestStatistic</a>"</code>, distance 3.
+</p>
+
+
+<h3>Methods</h3>
+
+
+<dl>
+<dt>initialize</dt><dd>
+<p><code>signature(.Object = "IndependenceTestProblem")</code>: See the
+documentation for <code><a href="../../methods/html/new.html">initialize</a></code> (in
+package <span class="pkg">methods</span>) for details.
+</p>
+</dd>
+</dl>
+
+
+<hr /><div style="text-align: center;">[Package <em>coin</em> version 1.4-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Define OpenType font feature settings</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for font_feature {systemfonts}"><tr><td>font_feature {systemfonts}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Define OpenType font feature settings</h2>
+
+<h3>Description</h3>
+
+<p>This function encapsulates the specification of OpenType font features. Some
+specific features have named arguments, but all available features can be
+set by using its specific 4-letter tag For a list of the 4-letter tags
+available see e.g. the overview on
+<a href="https://en.wikipedia.org/wiki/List_of_typographic_features">Wikipedia</a>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+font_feature(ligatures = NULL, letters = NULL, numbers = NULL, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>ligatures</code></td>
+<td>
+<p>Settings related to ligatures. One or more types of
+ligatures to turn on (see details).</p>
+</td></tr>
+<tr valign="top"><td><code>letters</code></td>
+<td>
+<p>Settings related to the appearance of single
+letters (as opposed to ligatures that substitutes multiple letters). See
+details for supported values.</p>
+</td></tr>
+<tr valign="top"><td><code>numbers</code></td>
+<td>
+<p>Settings related to the appearance of numbers. See details for
+supported values.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>key-value pairs with the key being the 4-letter tag and the value
+being the setting (usually <code>TRUE</code> to turn it on).</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>OpenType features are defined by a 4-letter tag along with an integer value.
+Often that value is a simple <code>0</code> (off) or <code>1</code> (on), but some features support
+additional values, e.g. stylistic alternates (<code>salt</code>) where a font may
+provide multiple variants of a letter and the value will be used to chose
+which one to use.
+</p>
+<p>Common features related to appearance may be given with a long form name to
+either the <code>ligatures</code>, <code>letters</code>, or <code>numbers</code> argument to avoid remembering
+the often arbitrary 4-letter tag. Providing a long form name is the same as
+setting the tag to <code>1</code> and can thus not be used to set tags to other values.
+</p>
+<p>The possible long form names are given below with the tag in parenthesis:
+</p>
+<p><strong>Ligatures</strong>
+</p>
+
+<ul>
+<li> <p><code>standard</code> (<em>liga</em>): Turns on standard multiple letter substitution
+</p>
+</li>
+<li> <p><code>historical</code> (<em>hlig</em>): Use obsolete historical ligatures
+</p>
+</li>
+<li> <p><code>contextual</code> (<em>clig</em>): Apply secondary ligatures based on the character
+patterns surrounding the potential ligature
+</p>
+</li>
+<li> <p><code>discretionary</code> (<em>dlig</em>): Use ornamental ligatures
+</p>
+</li></ul>
+
+<p><strong>Letters</strong>
+</p>
+
+<ul>
+<li> <p><code>swash</code> (<em>cswh</em>): Use contextual swashes (ornamental decorations)
+</p>
+</li>
+<li> <p><code>alternates</code> (<em>calt</em>): Use alternate letter forms based on the sourrounding
+pattern
+</p>
+</li>
+<li> <p><code>historical</code> (<em>hist</em>): Use obsolete historical forms of the letters
+</p>
+</li>
+<li> <p><code>localized</code> (<em>locl</em>): Use alternate forms preferred by the script language
+</p>
+</li>
+<li> <p><code>randomize</code> (<em>rand</em>): Use random variants of the letters (e.g. to mimick
+handwriting)
+</p>
+</li>
+<li> <p><code>alt_annotation</code> (<em>nalt</em>): Use alternate annotations (e.g. circled digits)
+</p>
+</li>
+<li> <p><code>stylistic</code> (<em>salt</em>): Use a stylistic alternative form of the letter
+</p>
+</li>
+<li> <p><code>subscript</code> (<em>subs</em>): Set letter in subscript
+</p>
+</li>
+<li> <p><code>superscript</code> (<em>sups</em>): Set letter in superscript
+</p>
+</li>
+<li> <p><code>titling</code> (<em>titl</em>): Use letter forms well suited for large text and titles
+</p>
+</li>
+<li> <p><code>small_caps</code> (<em>smcp</em>): Use small caps variants of the letters
+</p>
+</li></ul>
+
+<p><strong>Numbers</strong>
+</p>
+
+<ul>
+<li> <p><code>lining</code> (<em>lnum</em>): Use number variants that rest on the baseline
+</p>
+</li>
+<li> <p><code>oldstyle</code> (<em>onum</em>): Use old style numbers that use descender and ascender
+for various numbers
+</p>
+</li>
+<li> <p><code>proportional</code> (<em>pnum</em>): Let numbers take up width based on the visual
+width of the glyph
+</p>
+</li>
+<li> <p><code>tabular</code> (<em>tnum</em>): Enforce all numbers to take up the same width
+</p>
+</li>
+<li> <p><code>fractions</code> (<em>frac</em>): Convert numbers separated by <code>/</code> into a fraction
+glyph
+</p>
+</li>
+<li> <p><code>fractions_alt</code> (<em>afrc</em>): Use alternate fraction form with a horizontal
+divider
+</p>
+</li></ul>
+
+
+
+<h3>Value</h3>
+
+<p>A <code>font_feature</code> object
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+font_feature(letters = "stylistic", numbers = c("lining", "tabular"))
+
+# Use the tag directly to access additional stylistic variants
+font_feature(numbers = c("lining", "tabular"), salt = 2)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>systemfonts</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

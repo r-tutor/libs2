@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
   eval = if (isTRUE(exists("params"))) params$EVAL else FALSE
 )
 
-## ---- pkgs, include=FALSE-----------------------------------------------------
+## ----pkgs, include=FALSE------------------------------------------------------
 library("ggplot2")
 library("rstanarm")
 
@@ -24,7 +24,7 @@ library("rstanarm")
 #  library("ggplot2")
 #  library("rstanarm")
 
-## ---- mtcars------------------------------------------------------------------
+## ----mtcars-------------------------------------------------------------------
 head(mtcars) # see help("mtcars")
 
 ## ---- eval=FALSE--------------------------------------------------------------
@@ -36,19 +36,19 @@ head(mtcars) # see help("mtcars")
 ## ----stan_glm, include=FALSE--------------------------------------------------
 fit <- stan_glm(mpg ~ ., data = mtcars, QR = TRUE, seed = 1111)
 
-## ---- print-fit, echo=FALSE---------------------------------------------------
+## ----print-fit, echo=FALSE----------------------------------------------------
 print(fit)
 
-## ---- get-draws---------------------------------------------------------------
+## ----get-draws----------------------------------------------------------------
 posterior <- as.array(fit)
 dim(posterior)
 dimnames(posterior)
 
-## ---- mcmc_intervals----------------------------------------------------------
+## ----mcmc_intervals-----------------------------------------------------------
 color_scheme_set("red")
 mcmc_intervals(posterior, pars = c("cyl", "drat", "am", "sigma"))
 
-## ---- mcmc_areas--------------------------------------------------------------
+## ----mcmc_areas---------------------------------------------------------------
 mcmc_areas(
   posterior, 
   pars = c("cyl", "drat", "am", "sigma"),
@@ -57,65 +57,65 @@ mcmc_areas(
   point_est = "mean"
 )
 
-## ---- mcmc_hist, message=FALSE------------------------------------------------
+## ----mcmc_hist, message=FALSE-------------------------------------------------
 color_scheme_set("green")
 mcmc_hist(posterior, pars = c("wt", "sigma"))
 
-## ---- mcmc_hist-transform, message=FALSE, eval=FALSE--------------------------
+## ----mcmc_hist-transform, message=FALSE, eval=FALSE---------------------------
 #  # not evaluated to reduce vignette size for CRAN
 #  # full version available at mc-stan.org/bayesplot/articles
 #  color_scheme_set("blue")
 #  mcmc_hist(posterior, pars = c("wt", "sigma"),
 #            transformations = list("sigma" = "log"))
 
-## ---- mcmc_hist_by_chain, message=FALSE---------------------------------------
+## ----mcmc_hist_by_chain, message=FALSE----------------------------------------
 color_scheme_set("brightblue")
 mcmc_hist_by_chain(posterior, pars = c("wt", "sigma"))
 
-## ---- mcmc_dens, message=FALSE------------------------------------------------
+## ----mcmc_dens, message=FALSE-------------------------------------------------
 color_scheme_set("purple")
 mcmc_dens(posterior, pars = c("wt", "sigma"))
 
-## ---- mcmc_dens_overlay, message=FALSE----------------------------------------
+## ----mcmc_dens_overlay, message=FALSE-----------------------------------------
 mcmc_dens_overlay(posterior, pars = c("wt", "sigma"))
 
-## ---- mcmc_violin-------------------------------------------------------------
+## ----mcmc_violin--------------------------------------------------------------
 color_scheme_set("teal")
 mcmc_violin(posterior, pars = c("wt", "sigma"), probs = c(0.1, 0.5, 0.9))
 
-## ---- mcmc_scatter------------------------------------------------------------
+## ----mcmc_scatter-------------------------------------------------------------
 color_scheme_set("gray")
 mcmc_scatter(posterior, pars = c("(Intercept)", "wt"), 
              size = 1.5, alpha = 0.5)
 
-## ---- mcmc_hex----------------------------------------------------------------
+## ----mcmc_hex-----------------------------------------------------------------
 # requires hexbin package
 if (requireNamespace("hexbin", quietly = TRUE)) {
   mcmc_hex(posterior, pars = c("(Intercept)", "wt"))
 }
 
-## ---- mcmc_pairs, message=FALSE, eval=FALSE-----------------------------------
+## ----mcmc_pairs, message=FALSE, eval=FALSE------------------------------------
 #  # not evaluated to reduce vignette size for CRAN
 #  # full version available at mc-stan.org/bayesplot/articles
 #  color_scheme_set("pink")
 #  mcmc_pairs(posterior, pars = c("(Intercept)", "wt", "sigma"),
 #             off_diag_args = list(size = 1.5))
 
-## ---- mcmc_trace--------------------------------------------------------------
+## ----mcmc_trace---------------------------------------------------------------
 color_scheme_set("blue")
 mcmc_trace(posterior, pars = c("wt", "sigma"))
 
-## ---- change-scheme-----------------------------------------------------------
+## ----change-scheme------------------------------------------------------------
 color_scheme_set("mix-blue-red")
 mcmc_trace(posterior, pars = c("wt", "sigma"), 
            facet_args = list(ncol = 1, strip.position = "left"))
 
-## ---- viridis-scheme, eval=FALSE----------------------------------------------
+## ----viridis-scheme, eval=FALSE-----------------------------------------------
 #  # not evaluated to reduce vignette size for CRAN
 #  # full version available at mc-stan.org/bayesplot/articles
 #  color_scheme_set("viridis")
 #  mcmc_trace(posterior, pars = "(Intercept)")
 
-## ---- mcmc_trace_highlight----------------------------------------------------
+## ----mcmc_trace_highlight-----------------------------------------------------
 mcmc_trace_highlight(posterior, pars = "sigma", highlight = 3)
 

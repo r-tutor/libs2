@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Replace Lower and Upper Triangular Part of a Matrix</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for replace_triangle {rstatix}"><tr><td>replace_triangle {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Replace Lower and Upper Triangular Part of a Matrix</h2>
+
+<h3>Description</h3>
+
+<p>Replace the lower or the upper triangular part of a
+(correlation) matrix.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+replace_triangle(x, triangle = c("lower", "upper"), by = "", diagonal = FALSE)
+
+replace_upper_triangle(x, by = "", diagonal = FALSE)
+
+replace_lower_triangle(x, by = "", diagonal = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a (correlation) matrix</p>
+</td></tr>
+<tr valign="top"><td><code>triangle</code></td>
+<td>
+<p>the triangle to replace. Allowed values are one of
+&quot;upper&quot; and &quot;lower&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>by</code></td>
+<td>
+<p>a replacement argument. Appropriate values are either &quot;&quot; or NA. Used to replace
+the upper, lower or the diagonal part of the matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>diagonal</code></td>
+<td>
+<p>logical. Default is FALSE. If TRUE, the matrix diagonal is
+included.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>an object of class <code>cor_mat_tri</code>, which is a data frame
+</p>
+
+
+<h3>Functions</h3>
+
+
+<ul>
+<li> <p><code>replace_triangle</code>: replaces the specified triangle by empty or NA.
+</p>
+</li>
+<li> <p><code>replace_upper_triangle</code>: replaces the upper triangular part of a matrix.
+Returns an object of class <code>lower_tri</code>.
+</p>
+</li>
+<li> <p><code>replace_lower_triangle</code>: replaces the lower triangular part of a matrix.
+Returns an object of class <code>lower_tri</code>
+</p>
+</li></ul>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="pull_triangle.html">pull_triangle</a>()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Compute correlation matrix and pull triangles
+#::::::::::::::::::::::::::::::::::::::::::
+# Correlation matrix
+ cor.mat &lt;- mtcars %&gt;%
+   select(mpg, disp, hp, drat, wt, qsec) %&gt;%
+   cor_mat()
+ cor.mat
+
+ # Replace upper triangle by NA
+#::::::::::::::::::::::::::::::::::::::::::
+cor.mat %&gt;% replace_upper_triangle(by = NA)
+
+
+# Replace upper triangle by NA and reshape the
+# correlation matrix to have unique combinations of variables
+#::::::::::::::::::::::::::::::::::::::::::
+cor.mat %&gt;%
+  replace_upper_triangle(by = NA) %&gt;%
+  cor_gather()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

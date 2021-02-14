@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Unaided Distance Vision</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for vision {coin}"><tr><td>vision {coin}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Unaided Distance Vision</h2>
+
+<h3>Description</h3>
+
+<p>Assessment of unaided distance vision of women in Britain.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>vision</pre>
+
+
+<h3>Format</h3>
+
+<p>A contingency table with 7477 observations on 2 variables.
+</p>
+
+<dl>
+<dt><code>Right.Eye</code></dt><dd>
+<p>a factor with levels <code>"Highest Grade"</code>, <code>"Second Grade"</code>,
+<code>"Third Grade"</code> and <code>"Lowest Grade"</code>.
+</p>
+</dd>
+<dt><code>Left.Eye</code></dt><dd>
+<p>a factor with levels <code>"Highest Grade"</code>,  <code>"Second Grade"</code>,
+<code>"Third Grade"</code> and <code>"Lowest Grade"</code>.
+</p>
+</dd>
+</dl>
+
+
+
+<h3>Details</h3>
+
+<p>Paired ordered categorical data from case-records of eye-testing of 7477 women
+aged 30&ndash;39 years employed by Royal Ordnance Factories in Britain during
+1943&ndash;46, as given by Stuart (1953).
+</p>
+<p>This data set was used by Stuart (1955) to illustrate a test of marginal
+homogeneity.  Winell and Lindbäck (2018) also used the data,
+demonstrating a score-independent test for ordered categorical data.
+</p>
+
+
+<h3>Source</h3>
+
+<p>Stuart, A.  (1953).  The estimation and comparison of strengths of association
+in contingency tables.  <em>Biometrika</em> <b>40</b>(1/2), 105&ndash;110.
+doi: <a href="https://doi.org/10.2307/2333101">10.2307/2333101</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Stuart, A.  (1955).  A test for homogeneity of the marginal distributions in a
+two-way classification.  <em>Biometrika</em> <b>42</b>(3/4), 412&ndash;416.
+doi: <a href="https://doi.org/10.1093/biomet/42.3-4.412">10.1093/biomet/42.3-4.412</a>
+</p>
+<p>Winell, H. and Lindbäck, J.  (2018).  A general
+score-independent test for order-restricted inference.  <em>Statistics in
+Medicine</em> <b>37</b>(21), 3078&ndash;3090.  doi: <a href="https://doi.org/10.1002/sim.7690">10.1002/sim.7690</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Asymptotic Stuart test (Q = 11.96)
+diag(vision) &lt;- 0 # speed-up
+mh_test(vision)
+
+## Asymptotic score-independent test
+## Winell and Lindbaeck (2018)
+(st &lt;- symmetry_test(vision,
+                     ytrafo = function(data)
+                         trafo(data, factor_trafo = function(y)
+                             zheng_trafo(as.ordered(y)))))
+ss &lt;- statistic(st, type = "standardized")
+idx &lt;- which(abs(ss) == max(abs(ss)), arr.ind = TRUE)
+ss[idx[1], idx[2], drop = FALSE]
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>coin</em> version 1.4-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

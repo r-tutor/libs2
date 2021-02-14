@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Gastrointestinal Tumor Study Group</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for GTSG {coin}"><tr><td>GTSG {coin}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Gastrointestinal Tumor Study Group</h2>
+
+<h3>Description</h3>
+
+<p>A randomized clinical trial in gastric cancer.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>GTSG</pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 90 observations on 3 variables.
+</p>
+
+<dl>
+<dt><code>time</code></dt><dd>
+<p>survival time (days).
+</p>
+</dd>
+<dt><code>event</code></dt><dd>
+<p>status indicator for <code>time</code>: <code>0</code> for right-censored observations
+and <code>1</code> otherwise.
+</p>
+</dd>
+<dt><code>group</code></dt><dd>
+<p>a factor with levels <code>"Chemotherapy+Radiation"</code> and
+<code>"Chemotherapy"</code>.
+</p>
+</dd>
+</dl>
+
+
+
+<h3>Details</h3>
+
+<p>A clinical trial comparing chemotherapy alone versus a combination of
+chemotherapy and radiation therapy in the treatment of locally advanced,
+nonresectable gastric carcinoma.
+</p>
+
+
+<h3>Note</h3>
+
+<p>There is substantial separation between the estimated survival distributions
+at 8 to 10 months, but by month 26 the distributions intersect.
+</p>
+
+
+<h3>Source</h3>
+
+<p>Stablein, D. M., Carter, W. H., Jr. and Novak, J. W.  (1981).  Analysis of
+survival data with nonproportional hazard functions.  <em>Controlled
+Clinical Trials</em> <b>2</b>(2), 149&ndash;159.  doi: <a href="https://doi.org/10.1016/0197-2456(81)90005-2">10.1016/0197-2456(81)90005-2</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Moreau, T., Maccario, J., Lellouch, J. and Huber, C.  (1992).  Weighted log
+rank statistics for comparing two distributions.  <em>Biometrika</em>
+<b>79</b>(1), 195&ndash;198.  doi: <a href="https://doi.org/10.1093/biomet/79.1.195">10.1093/biomet/79.1.195</a>
+</p>
+<p>Shen, W. and Le, C. T.  (2000).  Linear rank tests for censored survival data.
+<em>Communications in Statistics &ndash; Simulation and Computation</em>
+<b>29</b>(1), 21&ndash;36.  doi: <a href="https://doi.org/10.1080/03610910008813599">10.1080/03610910008813599</a>
+</p>
+<p>Tubert-Bitter, P., Kramar, A., Chalé, J. J. and Moureau, T.
+(1994).  Linear rank tests for comparing survival in two groups with crossing
+hazards.  <em>Computational Statistics &amp; Data Analysis</em> <b>18</b>(5),
+547&ndash;559.  doi: <a href="https://doi.org/10.1016/0167-9473(94)90084-1">10.1016/0167-9473(94)90084-1</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Plot Kaplan-Meier estimates
+plot(survfit(Surv(time / (365.25 / 12), event) ~ group, data = GTSG),
+     lty = 1:2, ylab = "% Survival", xlab = "Survival Time in Months")
+legend("topright", lty = 1:2,
+       c("Chemotherapy+Radiation", "Chemotherapy"), bty = "n")
+
+## Asymptotic logrank test
+logrank_test(Surv(time, event) ~ group, data = GTSG)
+
+## Asymptotic Prentice test
+logrank_test(Surv(time, event) ~ group, data = GTSG, type = "Prentice")
+
+## Asymptotic test against Weibull-type alternatives (Moreau et al., 1992)
+moreau_weight &lt;- function(time, n.risk, n.event)
+    1 + log(-log(cumprod(n.risk / (n.risk + n.event))))
+
+independence_test(Surv(time, event) ~ group, data = GTSG,
+                  ytrafo = function(data)
+                      trafo(data, surv_trafo = function(y)
+                          logrank_trafo(y, weight = moreau_weight)))
+
+## Asymptotic test against crossing-curve alternatives (Shen and Le, 2000)
+shen_trafo &lt;- function(x)
+    ansari_trafo(logrank_trafo(x, type = "Prentice"))
+
+independence_test(Surv(time, event) ~ group, data = GTSG,
+                  ytrafo = function(data)
+                      trafo(data, surv_trafo = shen_trafo))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>coin</em> version 1.4-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

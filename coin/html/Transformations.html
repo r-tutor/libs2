@@ -1,0 +1,352 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Functions for Data Transformation</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for Transformations {coin}"><tr><td>Transformations {coin}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Functions for Data Transformation</h2>
+
+<h3>Description</h3>
+
+<p>Transformations for factors and numeric variables.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+id_trafo(x)
+rank_trafo(x, ties.method = c("mid-ranks", "random"))
+normal_trafo(x, ties.method = c("mid-ranks", "average-scores"))
+median_trafo(x, mid.score = c("0", "0.5", "1"))
+savage_trafo(x, ties.method = c("mid-ranks", "average-scores"))
+consal_trafo(x, ties.method = c("mid-ranks", "average-scores"), a = 5)
+koziol_trafo(x, ties.method = c("mid-ranks", "average-scores"), j = 1)
+klotz_trafo(x, ties.method = c("mid-ranks", "average-scores"))
+mood_trafo(x, ties.method = c("mid-ranks", "average-scores"))
+ansari_trafo(x, ties.method = c("mid-ranks", "average-scores"))
+fligner_trafo(x, ties.method = c("mid-ranks", "average-scores"))
+logrank_trafo(x, ties.method = c("mid-ranks", "Hothorn-Lausen",
+                                 "average-scores"),
+              weight = logrank_weight, ...)
+logrank_weight(time, n.risk, n.event,
+               type = c("logrank", "Gehan-Breslow", "Tarone-Ware",
+                        "Peto-Peto", "Prentice", "Prentice-Marek",
+                        "Andersen-Borgan-Gill-Keiding", "Fleming-Harrington",
+                        "Gaugler-Kim-Liao", "Self"),
+               rho = NULL, gamma = NULL)
+f_trafo(x)
+of_trafo(x, scores = NULL)
+zheng_trafo(x, increment = 0.1)
+maxstat_trafo(x, minprob = 0.1, maxprob = 1 - minprob)
+fmaxstat_trafo(x, minprob = 0.1, maxprob = 1 - minprob)
+ofmaxstat_trafo(x, minprob = 0.1, maxprob = 1 - minprob)
+trafo(data, numeric_trafo = id_trafo, factor_trafo = f_trafo,
+      ordered_trafo = of_trafo, surv_trafo = logrank_trafo,
+      var_trafo = NULL, block = NULL)
+mcp_trafo(...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+
+<p>an object of class <code>"numeric"</code>, <code>"factor"</code>, <code>"ordered"</code> or
+<code>"Surv"</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>ties.method</code></td>
+<td>
+
+<p>a character, the method used to handle ties.  The score generating function
+either uses the mid-ranks (<code>"mid-ranks"</code>, default) or, in the case of
+<code>rank_trafo</code>, randomly broken ties (<code>"random"</code>).  Alternatively,
+the average of the scores resulting from applying the score generating
+function to randomly broken ties are used (<code>"average-scores"</code>).  See
+<code><a href="SurvivalTests.html">logrank_test</a></code> for a detailed description of the methods used in
+<code>logrank_trafo</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>mid.score</code></td>
+<td>
+
+<p>a character, the score assigned to observations exactly equal to the median:
+either 0 (<code>"0"</code>, default), 0.5 (<code>"0.5"</code>) or 1 (<code>"1"</code>); see
+<code><a href="LocationTests.html">median_test</a></code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>a</code></td>
+<td>
+
+<p>a numeric vector, the values taken as the constant <i>a</i> in the
+Conover-Salsburg scores.  Defaults to <code>5</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>j</code></td>
+<td>
+
+<p>a numeric, the value taken as the constant <i>j</i> in the Koziol-Nemec
+scores.  Defaults to <code>1</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>weight</code></td>
+<td>
+
+<p>a function where the first three arguments must correspond to <code>time</code>,
+<code>n.risk</code>, and <code>n.event</code> given below.  Defaults to
+<code>logrank_weight</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>time</code></td>
+<td>
+
+<p>a numeric vector, the ordered distinct time points.
+</p>
+</td></tr>
+<tr valign="top"><td><code>n.risk</code></td>
+<td>
+
+<p>a numeric vector, the number of subjects at risk at each time point
+specified in <code>time</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>n.event</code></td>
+<td>
+
+<p>a numeric vector, the number of events at each time point specified in
+<code>time</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+
+<p>a character, one of <code>"logrank"</code> (default), <code>"Gehan-Breslow"</code>,
+<code>"Tarone-Ware"</code>, <code>"Peto-Peto"</code>, <code>"Prentice"</code>,
+<code>"Prentice-Marek"</code>, <code>"Andersen-Borgan-Gill-Keiding"</code>,
+<code>"Fleming-Harrington"</code>, <code>"Gaugler-Kim-Liao"</code> or <code>"Self"</code>; see
+<code><a href="SurvivalTests.html">logrank_test</a></code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>rho</code></td>
+<td>
+
+<p>a numeric vector, the <i>&rho;</i> constant when <code>type</code> is
+<code>"Tarone-Ware"</code>, <code>"Fleming-Harrington"</code>, <code>"Gaugler-Kim-Liao"</code>
+or <code>"Self"</code>; see <code><a href="SurvivalTests.html">logrank_test</a></code>.  Defaults to <code>NULL</code>,
+implying <code>0.5</code> for <code>type = "Tarone-Ware"</code> and <code>0</code> otherwise.
+</p>
+</td></tr>
+<tr valign="top"><td><code>gamma</code></td>
+<td>
+
+<p>a numeric vector, the <i>&gamma;</i> constant when <code>type</code> is
+<code>"Fleming-Harrington"</code>, <code>"Gaugler-Kim-Liao"</code> or <code>"Self"</code>; see
+<code><a href="SurvivalTests.html">logrank_test</a></code>.  Defaults to <code>NULL</code>, implying <code>0</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>scores</code></td>
+<td>
+
+<p>a numeric vector or list, the scores corresponding to each level of an
+ordered factor.  Defaults to <code>NULL</code>, implying <code>1:nlevels(x)</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>increment</code></td>
+<td>
+
+<p>a numeric, the score increment between the order-restricted sets of scores.
+A fraction greater than 0, but smaller than or equal to 1.  Defaults to
+<code>0.1</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>minprob</code></td>
+<td>
+
+<p>a numeric, a fraction between 0 and 0.5; see <code><a href="MaximallySelectedStatisticsTests.html">maxstat_test</a></code>.
+Defaults to <code>0.1</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>maxprob</code></td>
+<td>
+
+<p>a numeric, a fraction between 0.5 and 1; see <code><a href="MaximallySelectedStatisticsTests.html">maxstat_test</a></code>.
+Defaults to <code>1 - minprob</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+
+<p>an object of class <code>"data.frame"</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>numeric_trafo</code></td>
+<td>
+
+<p>a function to be applied to elements of class <code>"numeric"</code> in
+<code>data</code>, returning a matrix with <code>nrow(data)</code> rows and an arbitrary
+number of columns.  Defaults to <code>id_trafo</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>factor_trafo</code></td>
+<td>
+
+<p>a function to be applied to elements of class <code>"factor"</code> in
+<code>data</code>, returning a matrix with <code>nrow(data)</code> rows and an arbitrary
+number of columns.  Defaults to <code>f_trafo</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>ordered_trafo</code></td>
+<td>
+
+<p>a function to be applied to elements of class <code>"ordered"</code> in
+<code>data</code>, returning a matrix with <code>nrow(data)</code> rows and an arbitrary
+number of columns.  Defaults to <code>of_trafo</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>surv_trafo</code></td>
+<td>
+
+<p>a function to be applied to elements of class <code>"Surv"</code> in <code>data</code>,
+returning a matrix with <code>nrow(data)</code> rows and an arbitrary number of
+columns.  Defaults to <code>logrank_trafo</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>var_trafo</code></td>
+<td>
+
+<p>an optional named list of functions to be applied to the corresponding
+variables in <code>data</code>.  Defaults to <code>NULL</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>block</code></td>
+<td>
+
+<p>an optional factor whose levels are interpreted as blocks.  <code>trafo</code> is
+applied to each level of <code>block</code> separately.  Defaults to <code>NULL</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+
+<p><code>logrank_trafo()</code>: further arguments to be passed to <code>weight</code>.
+
+<code>mcp_trafo()</code>: factor name and contrast matrix (as matrix or character)
+in a <span class="samp">tag = value</span> format for multiple comparisons based on a single
+unordered factor; see <code><a href="../../multcomp/html/glht.html">mcp</a></code> in package
+<span class="pkg">multcomp</span>.
+</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The utility functions documented here are used to define specialized test
+procedures.
+</p>
+<p><code>id_trafo</code> is the identity transformation.
+</p>
+<p><code>rank_trafo</code>, <code>normal_trafo</code>, <code>median_trafo</code>,
+<code>savage_trafo</code>, <code>consal_trafo</code> and <code>koziol_trafo</code> compute rank
+scores, normal scores, median scores, Savage scores, Conover-Salsburg scores
+(see <code><a href="neuropathy.html">neuropathy</a></code>) and Koziol-Nemec scores, respectively, for
+location problems.
+</p>
+<p><code>klotz_trafo</code>, <code>mood_trafo</code>, <code>ansari_trafo</code> and
+<code>fligner_trafo</code> compute Klotz scores, Mood scores, Ansari-Bradley scores
+and Fligner-Killeen scores, respectively, for scale problems.
+</p>
+<p><code>logrank_trafo</code> computes weighted logrank scores for right-censored data,
+allowing for a user-defined weight function through the <code>weight</code> argument
+(see <code><a href="GTSG.html">GTSG</a></code>).
+</p>
+<p><code>f_trafo</code> computes dummy matrices for factors and <code>of_trafo</code> assigns
+scores to ordered factors.  For ordered factors with two levels, the scores
+are normalized to the <i>[0, 1]</i> range.  <code>zheng_trafo</code> computes a
+finite collection of order-restricted scores for ordered factors (see
+<code><a href="jobsatisfaction.html">jobsatisfaction</a></code>, <code><a href="malformations.html">malformations</a></code> and
+<code><a href="vision.html">vision</a></code>).
+</p>
+<p><code>maxstat_trafo</code>, <code>fmaxstat_trafo</code> and <code>ofmaxstat_trafo</code> compute
+scores for cutpoint problems (see <code><a href="MaximallySelectedStatisticsTests.html">maxstat_test</a></code>).
+</p>
+<p><code>trafo</code> applies its arguments to the elements of <code>data</code> according to
+the classes of the elements.  A <code>trafo</code> function with modified default
+arguments is usually supplied to <code><a href="IndependenceTest.html">independence_test</a></code> via the
+<code>xtrafo</code> or <code>ytrafo</code> arguments.  Fine tuning, i.e., different
+transformations for different variables, is possible by supplying a named list
+of functions to the <code>var_trafo</code> argument.
+</p>
+<p><code>mcp_trafo</code> computes contrast matrices for factors.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A numeric vector or matrix with <code>nrow(x)</code> rows and an arbitrary number of
+columns.  For <code>trafo</code>, a named matrix with <code>nrow(data)</code> rows and an
+arbitrary number of columns.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Starting with <span class="pkg">coin</span> version 1.1-0, all transformation functions are now
+passing through missing values (i.e., <code><a href="../../base/html/NA.html">NA</a></code>s).  Furthermore,
+<code>median_trafo</code> and <code>logrank_trafo</code> are now <em>increasing</em>
+functions (in conformity with most other transformations in this package).
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Dummy matrix, two-sample problem (only one column)
+f_trafo(gl(2, 3))
+
+## Dummy matrix, K-sample problem (K columns)
+x &lt;- gl(3, 2)
+f_trafo(x)
+
+## Score matrix
+ox &lt;- as.ordered(x)
+of_trafo(ox)
+of_trafo(ox, scores = c(1, 3:4))
+of_trafo(ox, scores = list(s1 = 1:3, s2 = c(1, 3:4)))
+zheng_trafo(ox, increment = 1/3)
+
+## Normal scores
+y &lt;- runif(6)
+normal_trafo(y)
+
+## All together now
+trafo(data.frame(x = x, ox = ox, y = y), numeric_trafo = normal_trafo)
+
+## The same, but allows for fine-tuning
+trafo(data.frame(x = x, ox = ox, y = y), var_trafo = list(y = normal_trafo))
+
+## Transformations for maximally selected statistics
+maxstat_trafo(y)
+fmaxstat_trafo(x)
+ofmaxstat_trafo(ox)
+
+## Apply transformation blockwise (as in the Friedman test)
+trafo(data.frame(y = 1:20), numeric_trafo = rank_trafo, block = gl(4, 5))
+
+## Multiple comparisons
+dta &lt;- data.frame(x)
+mcp_trafo(x = "Tukey")(dta)
+
+## The same, but useful when specific contrasts are desired
+K &lt;- rbind("2 - 1" = c(-1,  1, 0),
+           "3 - 1" = c(-1,  0, 1),
+           "3 - 2" = c( 0, -1, 1))
+mcp_trafo(x = K)(dta)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>coin</em> version 1.4-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

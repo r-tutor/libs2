@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Genetic Components of Alcoholism</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for alpha {coin}"><tr><td>alpha {coin}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Genetic Components of Alcoholism</h2>
+
+<h3>Description</h3>
+
+<p>Levels of expressed alpha synuclein mRNA in three groups of allele lengths of
+NACP-REP1.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>alpha</pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 97 observations on 2 variables.
+</p>
+
+<dl>
+<dt><code>alength</code></dt><dd>
+<p>allele length, a factor with levels <code>"short"</code>, <code>"intermediate"</code>
+and <code>"long"</code>.
+</p>
+</dd>
+<dt><code>elevel</code></dt><dd>
+<p>expression levels of alpha synuclein mRNA.
+</p>
+</dd>
+</dl>
+
+
+
+<h3>Details</h3>
+
+<p>Various studies have linked alcohol dependence phenotypes to chromosome 4.
+One candidate gene is NACP (non-amyloid component of plaques), coding for
+alpha synuclein.  Bönsch <em>et al.</em> (2005) found longer
+alleles of NACP-REP1 in alcohol-dependent patients compared with healthy
+controls and reported that the allele lengths show some association with
+levels of expressed alpha synuclein mRNA.
+</p>
+
+
+<h3>Source</h3>
+
+<p>Bönsch, D., Lederer, T., Reulbach, U., Hothorn, T., Kornhuber,
+J. and Bleich, S.  (2005).  Joint analysis of the <em>NACP</em>-REP1 marker
+within the alpha synuclein gene concludes association with alcohol dependence.
+<em>Human Molecular Genetics</em> <b>14</b>(7), 967&ndash;971.
+doi: <a href="https://doi.org/10.1093/hmg/ddi090">10.1093/hmg/ddi090</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Hothorn, T., Hornik, K., van de Wiel, M. A. and Zeileis, A.  (2006).  A Lego
+system for conditional inference.  <em>The American Statistician</em>
+<b>60</b>(3), 257&ndash;263.  doi: <a href="https://doi.org/10.1198/000313006X118430">10.1198/000313006X118430</a>
+</p>
+<p>Winell, H. and Lindbäck, J.  (2018).  A general
+score-independent test for order-restricted inference.  <em>Statistics in
+Medicine</em> <b>37</b>(21), 3078&ndash;3090.  doi: <a href="https://doi.org/10.1002/sim.7690">10.1002/sim.7690</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Boxplots
+boxplot(elevel ~ alength, data = alpha)
+
+## Asymptotic Kruskal-Wallis test
+kruskal_test(elevel ~ alength, data = alpha)
+
+## Asymptotic Kruskal-Wallis test using midpoint scores
+kruskal_test(elevel ~ alength, data = alpha,
+             scores = list(alength = c(2, 7, 11)))
+
+## Asymptotic score-independent test
+## Winell and Lindbaeck (2018)
+(it &lt;- independence_test(elevel ~ alength, data = alpha,
+                         ytrafo = function(data)
+                             trafo(data, numeric_trafo = rank_trafo), 
+                         xtrafo = function(data)
+                             trafo(data, factor_trafo = function(x)
+                                 zheng_trafo(as.ordered(x)))))
+
+## Extract the "best" set of scores
+ss &lt;- statistic(it, type = "standardized")
+idx &lt;- which(abs(ss) == max(abs(ss)), arr.ind = TRUE)
+ss[idx[1], idx[2], drop = FALSE]
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>coin</em> version 1.4-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

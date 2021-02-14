@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: General Information on the 'coin' Package</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for coin-package {coin}"><tr><td>coin-package {coin}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>General Information on the <span class="pkg">coin</span> Package</h2>
+
+<h3>Description</h3>
+
+<p>The <span class="pkg">coin</span> package provides an implementation of a general framework for
+conditional inference procedures commonly known as <em>permutation tests</em>.
+The framework was developed by Strasser and Weber (1999) and is based on a
+multivariate linear statistic and its conditional expectation, covariance and
+limiting distribution.  These results are utilized to construct tests of
+independence between two sets of variables.
+</p>
+<p>The package does not only provide a flexible implementation of the abstract
+framework, but also provides a large set of convenience functions implementing
+well-known as well as lesser-known classical and non-classical test procedures
+within the framework.  Many of the tests presented in prominent text books,
+such as Hollander and Wolfe (1999) or Agresti (2002), are immediately
+available or can be implemented without much effort.  Examples include linear
+rank statistics for the two- and <i>K</i>-sample location and scale problem
+against ordered and unordered alternatives including post-hoc tests for
+arbitrary contrasts, tests of independence for contingency tables, two- and
+<i>K</i>-sample tests for censored data, tests of independence between two
+continuous variables as well as tests of marginal homogeneity and symmetry.
+Approximations of the exact null distribution via the limiting distribution or
+conditional Monte Carlo resampling are available for every test procedure,
+while the exact null distribution is currently available for univariate
+two-sample problems only.
+</p>
+<p>The salient parts of the Strasser-Weber framework are elucidated by Hothorn
+<em>et al.</em> (2006) and a thorough description of the software implementation
+is given by Hothorn <em>et al.</em> (2008).
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>This package is authored by <br />
+Torsten Hothorn &lt;Torsten.Hothorn@R-project.org&gt;, <br />
+Kurt Hornik &lt;Kurt.Hornik@R-project.org&gt;, <br />
+Mark A. van de Wiel &lt;Mark.vdWiel@vumc.nl&gt;, <br />
+Henric Winell &lt;Henric.Winell@statistics.uu.se&gt; and <br />
+Achim Zeileis &lt;Achim.Zeileis@R-project.org&gt;.
+</p>
+
+
+<h3>References</h3>
+
+<p>Agresti, A.  (2002).  <em>Categorical Data Analysis</em>, Second Edition.
+Hoboken, New Jersey: John Wiley &amp; Sons.
+</p>
+<p>Hollander, M. and Wolfe, D. A.  (1999).  <em>Nonparametric Statistical
+Methods</em>, Second Edition.  New York: John Wiley &amp; Sons.
+</p>
+<p>Hothorn, T., Hornik, K., van de Wiel, M. A. and Zeileis, A.  (2006).  A Lego
+system for conditional inference.  <em>The American Statistician</em>
+<b>60</b>(3), 257&ndash;263.  doi: <a href="https://doi.org/10.1198/000313006X118430">10.1198/000313006X118430</a>
+</p>
+<p>Hothorn, T., Hornik, K., van de Wiel, M. A. and Zeileis, A.  (2008).
+Implementing a class of permutation tests: The coin package.  <em>Journal of
+Statistical Software</em> <b>28</b>(8), 1&ndash;23.  doi: <a href="https://doi.org/10.18637/jss.v028.i08">10.18637/jss.v028.i08</a>
+</p>
+<p>Strasser, H. and Weber, C.  (1999).  On the asymptotic theory of permutation
+statistics.  <em>Mathematical Methods of Statistics</em> <b>8</b>(2), 220&ndash;250.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+## Generate doxygen documentation if you are interested in the internals:
+## Download source package into a temporary directory
+tmpdir &lt;- tempdir()
+tgz &lt;- download.packages("coin", destdir = tmpdir, type = "source")[2]
+## Extract contents
+untar(tgz, exdir = tmpdir)
+## Run doxygen (assuming it is installed)
+wd &lt;- setwd(file.path(tmpdir, "coin"))
+system("doxygen inst/doxygen.cfg")
+setwd(wd)
+## Have fun!
+browseURL(file.path(tmpdir, "coin", "inst",
+                    "documentation", "html", "index.html"))
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>coin</em> version 1.4-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

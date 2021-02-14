@@ -2,6 +2,8 @@
 library("heatmaply")
 library("knitr")
 knitr::opts_chunk$set(
+  warning=FALSE, # because of a bug in plotly: https://github.com/ropensci/plotly/issues/1670
+  # see also: https://github.com/talgalili/heatmaply/issues/226
   # cache = TRUE,
   dpi = 60,
   comment = "#>",
@@ -17,13 +19,10 @@ knitr::opts_chunk$set(
 ## ---- eval = FALSE------------------------------------------------------------
 #  # You'll need devtools
 #  install.packages.2 <- function (pkg) if (!require(pkg)) install.packages(pkg);
-#  install.packages.2('devtools')
-#  # make sure you have Rtools installed first! if not, then run:
-#  #install.packages('installr'); install.Rtools()
+#  install.packages.2('remotes')
 #  
-#  devtools::install_github("ropensci/plotly")
-#  devtools::install_github('talgalili/heatmaply')
-#  
+#  remotes::install_github("ropensci/plotly")
+#  remotes::install_github('talgalili/heatmaply')
 
 ## -----------------------------------------------------------------------------
 library("heatmaply")
@@ -70,22 +69,22 @@ heatmaply_cor(
   label_names = c("x", "y", "Correlation")
 )
 
-## -----------------------------------------------------------------------------
-heatmaply(
-  mtcars, 
-  xlab = "Features",
-  ylab = "Cars", 
-  scale = "column",
-  main = "Data transformation using 'scale'"
-)
+## ---- eval = F----------------------------------------------------------------
+#  heatmaply(
+#    mtcars,
+#    xlab = "Features",
+#    ylab = "Cars",
+#    scale = "column",
+#    main = "Data transformation using 'scale'"
+#  )
 
-## -----------------------------------------------------------------------------
-heatmaply(
-  normalize(mtcars),
-  xlab = "Features",
-  ylab = "Cars", 
-  main = "Data transformation using 'normalize'"
-)
+## ---- eval = F----------------------------------------------------------------
+#  heatmaply(
+#    normalize(mtcars),
+#    xlab = "Features",
+#    ylab = "Cars",
+#    main = "Data transformation using 'normalize'"
+#  )
 
 ## -----------------------------------------------------------------------------
 heatmaply(
@@ -116,13 +115,13 @@ heatmaply_na(
 # 
 
 
-## -----------------------------------------------------------------------------
-heatmaply_cor(
-  cor(mtcars),
-  k_col = 2, 
-  k_row = 2
-)
-
+## ---- eval = F----------------------------------------------------------------
+#  heatmaply_cor(
+#    cor(mtcars),
+#    k_col = 2,
+#    k_row = 2
+#  )
+#  
 
 ## ---- eval = FALSE------------------------------------------------------------
 #  heatmaply(
@@ -149,26 +148,26 @@ heatmaply(
   seriate = "OLO"
 )
 
-## -----------------------------------------------------------------------------
-# Similar to OLO but less optimal (since it is a heuristic)
-heatmaply(
-  percentize(mtcars)[1:10, ],
-  seriate = "GW"
-)
+## ---- eval = F----------------------------------------------------------------
+#  # Similar to OLO but less optimal (since it is a heuristic)
+#  heatmaply(
+#    percentize(mtcars)[1:10, ],
+#    seriate = "GW"
+#  )
 
-## -----------------------------------------------------------------------------
-# the default by gplots::heatmaply.2
-heatmaply(
-  percentize(mtcars)[1:10, ],
-  seriate = "mean"
-)
+## ---- eval = F----------------------------------------------------------------
+#  # the default by gplots::heatmaply.2
+#  heatmaply(
+#    percentize(mtcars)[1:10, ],
+#    seriate = "mean"
+#  )
 
-## -----------------------------------------------------------------------------
-# the default output from hclust
-heatmaply(
-  percentize(mtcars)[1:10, ],
-  seriate = "none"
-)
+## ---- eval = F----------------------------------------------------------------
+#  # the default output from hclust
+#  heatmaply(
+#    percentize(mtcars)[1:10, ],
+#    seriate = "none"
+#  )
 
 ## -----------------------------------------------------------------------------
 

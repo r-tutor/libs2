@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Compute Mahalanobis Distance and Flag Multivariate Outliers</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for mahalanobis_distance {rstatix}"><tr><td>mahalanobis_distance {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Compute Mahalanobis Distance and Flag Multivariate Outliers</h2>
+
+<h3>Description</h3>
+
+<p>Pipe-friendly wrapper around to the function
+<code><a href="../../stats/html/mahalanobis.html">mahalanobis</a>()</code>, which returns the squared
+Mahalanobis distance of all rows in x. Compared to the base function, it
+automatically flags multivariate outliers.
+</p>
+<p>Mahalanobis distance is a common metric used to identify multivariate
+outliers. The larger the value of Mahalanobis distance, the more unusual the
+data point (i.e., the more likely it is to be a multivariate outlier).
+</p>
+<p>The distance tells us how far an observation is from the center of the cloud, taking into
+account the shape (covariance) of the cloud as well.
+</p>
+<p>To detect outliers, the calculated Mahalanobis distance is compared against
+a chi-square (X^2) distribution with degrees of freedom equal to the number
+of dependent (outcome) variables and an alpha level of 0.001.
+</p>
+<p>The threshold to declare a multivariate outlier is determined using the
+function <code>qchisq(0.999, df) </code>, where df is the degree of freedom (i.e.,
+the number of dependent variable used in the computation).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+mahalanobis_distance(data, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a data frame. Columns are variables.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>One unquoted expressions (or variable name). Used to select a
+variable of interest. Can be also used to ignore a variable that are not
+needed for the computation. For example specify <code>-id</code> to ignore the id
+column.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Returns the input data frame with two additional columns: 1)
+&quot;mahal.dist&quot;: Mahalanobis distance values; and 2) &quot;is.outlier&quot;: logical
+values specifying whether a given observation is a multivariate outlier
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+# Compute mahalonobis distance and flag outliers if any
+iris %&gt;%
+  doo(~mahalanobis_distance(.))
+
+# Compute distance by groups and filter outliers
+iris %&gt;%
+ group_by(Species) %&gt;%
+ doo(~mahalanobis_distance(.)) %&gt;%
+ filter(is.outlier == TRUE)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

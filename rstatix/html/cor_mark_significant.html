@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Add Significance Levels To a Correlation Matrix</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for cor_mark_significant {rstatix}"><tr><td>cor_mark_significant {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Add Significance Levels To a Correlation Matrix</h2>
+
+<h3>Description</h3>
+
+<p>Combines correlation coefficients and significance levels in a
+correlation matrix data.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+cor_mark_significant(
+  x,
+  cutpoints = c(0, 1e-04, 0.001, 0.01, 0.05, 1),
+  symbols = c("****", "***", "**", "*", "")
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>an object of class <code><a href="cor_mat.html">cor_mat</a>()</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>cutpoints</code></td>
+<td>
+<p>numeric vector used for intervals.</p>
+</td></tr>
+<tr valign="top"><td><code>symbols</code></td>
+<td>
+<p>character vector, one shorter than cutpoints, used as
+significance symbols.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a data frame containing the lower triangular part of the correlation
+matrix marked by significance symbols.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+mtcars %&gt;%
+  select(mpg, disp, hp, drat, wt, qsec) %&gt;%
+  cor_mat() %&gt;%
+  cor_mark_significant()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

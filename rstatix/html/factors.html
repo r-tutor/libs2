@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Factors</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for convert_as_factor {rstatix}"><tr><td>convert_as_factor {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Factors</h2>
+
+<h3>Description</h3>
+
+<p>Provides pipe-friendly functions to convert simultaneously
+multiple variables into a factor variable.
+</p>
+<p>Helper functions are also available to set the reference level and the
+levels order.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+convert_as_factor(data, ..., vars = NULL, make.valid.levels = FALSE)
+
+set_ref_level(data, name, ref)
+
+reorder_levels(data, name, order)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a data frame</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>one unquoted expressions (or variable name) specifying the name of
+the variables you want to convert into factor. Alternative to the argument
+<code>vars</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>vars</code></td>
+<td>
+<p>a character vector specifying the variables to convert into
+factor.</p>
+</td></tr>
+<tr valign="top"><td><code>make.valid.levels</code></td>
+<td>
+<p>logical. Default is FALSE. If TRUE, converts the
+variable to factor and add a leading character (x) if starting with a digit.</p>
+</td></tr>
+<tr valign="top"><td><code>name</code></td>
+<td>
+<p>a factor variable name. Can be unquoted. For example, use
+<code>group</code> or <code>"group"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>ref</code></td>
+<td>
+<p>the reference level.</p>
+</td></tr>
+<tr valign="top"><td><code>order</code></td>
+<td>
+<p>a character vector specifying the order of the factor levels</p>
+</td></tr>
+</table>
+
+
+<h3>Functions</h3>
+
+
+<ul>
+<li> <p><code>convert_as_factor</code>: Convert one or multiple variables into factor.
+</p>
+</li>
+<li> <p><code>set_ref_level</code>: Change a factor reference level or group.
+</p>
+</li>
+<li> <p><code>reorder_levels</code>: Change the order of a factor levels
+</p>
+</li></ul>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create a demo data
+df &lt;- tibble(
+  group = c("a", "a", "b", "b", "c", "c"),
+  time = c("t1", "t2", "t1", "t2", "t1", "t2"),
+  value = c(5, 6, 1, 3, 4, 5)
+)
+df
+# Convert group and time into factor variable
+result &lt;- df %&gt;% convert_as_factor(group, time)
+result
+# Show group levels
+levels(result$group)
+
+# Set c as the reference level (the first one)
+result &lt;- result %&gt;%
+  set_ref_level("group", ref = "c")
+levels(result$group)
+
+# Set the order of levels
+result &lt;- result %&gt;%
+  reorder_levels("group", order = c("b", "c", "a"))
+levels(result$group)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Maternal Drinking and Congenital Sex Organ Malformation</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for malformations {coin}"><tr><td>malformations {coin}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Maternal Drinking and Congenital Sex Organ Malformation</h2>
+
+<h3>Description</h3>
+
+<p>A subset of data from a study on the relationship between maternal alcohol
+consumption and congenital malformations.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>malformations</pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 32574 observations on 2 variables.
+</p>
+
+<dl>
+<dt><code>consumption</code></dt><dd>
+<p>alcohol consumption, an ordered factor with levels <code>"0"</code>,
+<code>"&lt;1"</code>, <code>"1-2"</code>, <code>"3-5"</code> and <code>"&gt;=6"</code>.
+</p>
+</dd>
+<dt><code>malformation</code></dt><dd>
+<p>congenital sex organ malformation, a factor with levels <code>"Present"</code>
+and <code>"Absent"</code>.
+</p>
+</dd>
+</dl>
+
+
+
+<h3>Details</h3>
+
+<p>Data from a prospective study undertaken to determine whether moderate or
+light drinking during the first trimester of pregnancy increases the risk for
+congenital malformations (Mills and Graubard, 1987).  The subset given here
+concerns only sex organ malformation (Mills and Graubard, 1987, Tab. 4).
+</p>
+<p>This data set was used by Graubard and Korn (1987) to illustrate that
+different choices of scores for ordinal variables can lead to conflicting
+conclusions.  Zheng (2008) also used the data, demonstrating two different
+score-independent tests for ordered categorical data; see also Winell and
+Lindbäck (2018).
+</p>
+
+
+<h3>Source</h3>
+
+<p>Mills, J. L. and Graubard, B. I.  (1987).  Is moderate drinking during
+pregnancy associated with an increased risk for malformations?
+<em>Pediatrics</em> <b>80</b>(3), 309&ndash;314.
+</p>
+
+
+<h3>References</h3>
+
+<p>Graubard, B. I. and Korn, E. L.  (1987).  Choice of column scores for testing
+independence in ordered <i>2 x K</i> contingency tables.
+<em>Biometrics</em> <b>43</b>(2), 471&ndash;476.  doi: <a href="https://doi.org/10.2307/2531828">10.2307/2531828</a>
+</p>
+<p>Winell, H. and Lindbäck, J.  (2018).  A general
+score-independent test for order-restricted inference.  <em>Statistics in
+Medicine</em> <b>37</b>(21), 3078&ndash;3090.  doi: <a href="https://doi.org/10.1002/sim.7690">10.1002/sim.7690</a>
+</p>
+<p>Zheng, G.  (2008).  Analysis of ordered categorical data: Two
+score-independent approaches.  <em>Biometrics</em> <b>64</b>(4), 1276–-1279.
+doi: <a href="https://doi.org/10.1111/j.1541-0420.2008.00992.x">10.1111/j.1541-0420.2008.00992.x</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Graubard and Korn (1987, Tab. 3)
+
+## One-sided approximative (Monte Carlo) Cochran-Armitage test
+## Note: midpoint scores (p &lt; 0.05)
+midpoints &lt;- c(0, 0.5, 1.5, 4.0, 7.0)
+chisq_test(malformation ~ consumption, data = malformations,
+           distribution = approximate(nresample = 1000),
+           alternative = "greater",
+           scores = list(consumption = midpoints))
+
+## One-sided approximative (Monte Carlo) Cochran-Armitage test
+## Note: midrank scores (p &gt; 0.05)
+midranks &lt;- c(8557.5, 24375.5, 32013.0, 32473.0, 32555.5)
+chisq_test(malformation ~ consumption, data = malformations,
+           distribution = approximate(nresample = 1000),
+           alternative = "greater",
+           scores = list(consumption = midranks))
+
+## One-sided approximative (Monte Carlo) Cochran-Armitage test
+## Note: equally spaced scores (p &gt; 0.05)
+chisq_test(malformation ~ consumption, data = malformations,
+           distribution = approximate(nresample = 1000),
+           alternative = "greater")
+
+## Not run: 
+## One-sided approximative (Monte Carlo) score-independent test
+## Winell and Lindbaeck (2018)
+(it &lt;- independence_test(malformation ~ consumption, data = malformations,
+                         distribution = approximate(nresample = 1000,
+                                                    parallel = "snow",
+                                                    ncpus = 8),
+                         alternative = "greater",
+                         xtrafo = function(data)
+                             trafo(data, ordered_trafo = zheng_trafo)))
+
+## Extract the "best" set of scores
+ss &lt;- statistic(it, type = "standardized")
+idx &lt;- which(ss == max(ss), arr.ind = TRUE)
+ss[idx[1], idx[2], drop = FALSE]
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>coin</em> version 1.4-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

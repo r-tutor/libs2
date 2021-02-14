@@ -1,0 +1,458 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Two- and K-Sample Tests for Censored Data</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for SurvivalTests {coin}"><tr><td>SurvivalTests {coin}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Two- and <i>K</i>-Sample Tests for Censored Data</h2>
+
+<h3>Description</h3>
+
+<p>Testing the equality of the survival distributions in two or more independent
+groups.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'formula'
+logrank_test(formula, data, subset = NULL, weights = NULL, ...)
+## S3 method for class 'IndependenceProblem'
+logrank_test(object, ties.method = c("mid-ranks", "Hothorn-Lausen",
+                                     "average-scores"),
+             type = c("logrank", "Gehan-Breslow", "Tarone-Ware",
+                      "Peto-Peto", "Prentice", "Prentice-Marek",
+                      "Andersen-Borgan-Gill-Keiding",
+                      "Fleming-Harrington", "Gaugler-Kim-Liao", "Self"),
+             rho = NULL, gamma = NULL, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>formula</code></td>
+<td>
+
+<p>a formula of the form <code>y ~ x | block</code> where <code>y</code> is a survival
+object (see <code><a href="../../survival/html/Surv.html">Surv</a></code> in package <span class="pkg">survival</span>),
+<code>x</code> is a factor and <code>block</code> is an optional factor for
+stratification.
+</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+
+<p>an optional data frame containing the variables in the model formula.
+</p>
+</td></tr>
+<tr valign="top"><td><code>subset</code></td>
+<td>
+
+<p>an optional vector specifying a subset of observations to be used.  Defaults
+to <code>NULL</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>weights</code></td>
+<td>
+
+<p>an optional formula of the form <code>~ w</code> defining integer valued case
+weights for each observation.  Defaults to <code>NULL</code>, implying equal
+weight for all observations.
+</p>
+</td></tr>
+<tr valign="top"><td><code>object</code></td>
+<td>
+
+<p>an object inheriting from class <code>"<a href="IndependenceProblem-class.html">IndependenceProblem</a>"</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>ties.method</code></td>
+<td>
+
+<p>a character, the method used to handle ties: the score generating function
+either uses mid-ranks (<code>"mid-ranks"</code>, default), the Hothorn-Lausen
+method (<code>"Hothorn-Lausen"</code>) or averages the scores of randomly broken
+ties (<code>"average-scores"</code>); see &lsquo;Details&rsquo;.
+</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+
+<p>a character, the type of test: either <code>"logrank"</code> (default),
+<code>"Gehan-Breslow"</code>, <code>"Tarone-Ware"</code>, <code>"Peto-Peto"</code>,
+<code>"Prentice"</code>, <code>"Prentice-Marek"</code>,
+<code>"Andersen-Borgan-Gill-Keiding"</code>, <code>"Fleming-Harrington"</code>,
+<code>"Gaugler-Kim-Liao"</code> or <code>"Self"</code>; see
+&lsquo;Details&rsquo;.
+</p>
+</td></tr>
+<tr valign="top"><td><code>rho</code></td>
+<td>
+
+<p>a numeric, the <i>&rho;</i> constant when <code>type</code> is <code>"Tarone-Ware"</code>,
+<code>"Fleming-Harrington"</code>, <code>"Gaugler-Kim-Liao"</code> or <code>"Self"</code>; see
+&lsquo;Details&rsquo;.  Defaults to <code>NULL</code>, implying <code>0.5</code> for
+<code>type = "Tarone-Ware"</code> and <code>0</code> otherwise.
+</p>
+</td></tr>
+<tr valign="top"><td><code>gamma</code></td>
+<td>
+
+<p>a numeric, the <i>&gamma;</i> constant when <code>type</code> is
+<code>"Fleming-Harrington"</code>, <code>"Gaugler-Kim-Liao"</code> or <code>"Self"</code>; see
+&lsquo;Details&rsquo;.  Defaults to <code>NULL</code>, implying <code>0</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+
+<p>further arguments to be passed to <code><a href="IndependenceTest.html">independence_test</a></code>.
+</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>logrank_test</code> provides the weighted logrank test reformulated as a
+linear rank test.  The family of weighted logrank tests encompasses a large
+collection of tests commonly used in the analysis of survival data including,
+but not limited to, the standard (unweighted) logrank test, the Gehan-Breslow
+test, the Tarone-Ware class of tests, the Peto-Peto test, the Prentice test,
+the Prentice-Marek test, the Andersen-Borgan-Gill-Keiding test, the
+Fleming-Harrington class of tests, the Gaugler-Kim-Liao class of tests and the
+Self class of tests.  A general description of these methods is given by Klein
+and Moeschberger (2003, Ch. 7).  See Letón and Zuluaga (2001) for
+the linear rank test formulation.
+</p>
+<p>The null hypothesis of equality, or conditional equality given <code>block</code>,
+of the survival distribution of <code>y</code> in the groups defined by <code>x</code> is
+tested.  In the two-sample case, the two-sided null hypothesis is <i>H_0: theta = 1</i>, where <i>&theta; = &lambda;_2 / &lambda;_1</i>
+and <i>&lambda;_s</i> is the hazard rate in the <i>s</i>th sample.  In case
+<code>alternative = "less"</code>, the null hypothesis is <i>H_0: theta &gt;= 1</i>, i.e., the survival is lower in sample 1 than in sample
+2.  When <code>alternative = "greater"</code>, the null hypothesis is <i>H_0: theta &lt;= 1</i>, i.e., the survival is higher in sample 1
+than in sample 2.
+</p>
+<p>If <code>x</code> is an ordered factor, the default scores, <code>1:nlevels(x)</code>, can
+be altered using the <code>scores</code> argument (see
+<code><a href="IndependenceTest.html">independence_test</a></code>); this argument can also be used to coerce
+nominal factors to class <code>"ordered"</code>.  In this case, a linear-by-linear
+association test is computed and the direction of the alternative hypothesis
+can be specified using the <code>alternative</code> argument.  This type of
+extension of the standard logrank test was given by Tarone (1975) and later
+generalized to general weights by Tarone and Ware (1977).
+</p>
+<p>Let <i>(t_i, &delta;_i)</i>, <i>i = 1, 2, &hellip;, n</i>, represent a
+right-censored random sample of size <i>n</i>, where <i>t_i</i> is the observed
+survival time and <i>&delta;_i</i> is the status indicator (<i>&delta;_i</i> is 0
+for right-censored observations and 1 otherwise).  To allow for ties in the
+data, let <i>t_(1) &lt; t_(2) &lt; &hellip; &lt;
+    t_(m)</i> represent the <i>m</i>, <i>m &le; n</i>, ordered distinct event times.
+At time <i>t_(k)</i>, <i>k = 1, 2, &hellip;, m</i>, the number of events
+and the number of subjects at risk are given by <i>d_k = sum(i = 1, &hellip;, n)
+    I(t_i = t_(k) | delta_i = 1)</i> and <i>n_k = n - r_k</i>, respectively, where
+<i>r_k</i> depends on the ties handling method.
+</p>
+<p>Three different methods of handling ties are available using
+<code>ties.method</code>: mid-ranks (<code>"mid-ranks"</code>, default), the
+Hothorn-Lausen method (<code>"Hothorn-Lausen"</code>) and average-scores
+(<code>"average-scores"</code>).  The first and last method are discussed and
+contrasted by Callaert (2003), whereas the second method is defined in Hothorn
+and Lausen (2003).  The mid-ranks method leads to
+</p>
+<p style="text-align: center;"><i>
+    r_k = sum(i = 1, &hellip;, n) I(t_i &lt; t_(k))
+  </i></p>
+
+<p>whereas the Hothorn-Lausen method uses
+</p>
+<p style="text-align: center;"><i>
+    r_k = sum(i = 1, &hellip;, n) I(t_i &lt;= t_(k)) - 1.
+  </i></p>
+
+<p>The scores assigned to right-censored and uncensored observations at the
+<i>k</i>th event time are given by
+</p>
+<p style="text-align: center;"><i>
+    C_k = sum(j=1,&hellip;,k) w_j * (d_j / n_j)   and   c_k = C_k - w_k,
+  </i></p>
+
+<p>respectively, where <i>w</i> is the logrank weight.  For the average-scores
+method, used by, e.g., the software package StatXact, the <i>d_k</i> events
+observed at the <i>k</i>th event time are arbitrarily ordered by assigning them
+distinct values <i>t_(k_l)</i>, <i>l = 1, 2, &hellip;, d_k</i>,
+infinitesimally to the left of <i>t_(k)</i>.  Then scores
+<i>C_k_l</i> and <i>c_k_l</i> are computed as indicated above,
+effectively assuming that no event times are tied.  The scores <i>C_k</i> and
+<i>c_k</i> are assigned the average of the scores <i>C_k_l</i> and
+<i>c_k_l</i> respectively.  It then follows that the score for the
+<i>i</i>th subject is
+</p>
+<p style="text-align: center;"><i>
+                           C_k'   if delta_i = 0
+                     a_i =
+                           c_k'   otherwise
+  </i></p>
+
+<p>where <i>k' = max{k : t_i &gt;= t_(k)}</i>.
+</p>
+<p>The <code>type</code> argument allows for a choice between some of the most
+well-known members of the family of weighted logrank tests, each corresponding
+to a particular weight function.  The standard logrank test (<code>"logrank"</code>,
+default) was suggested by Mantel (1966), Peto and Peto (1972) and Cox (1972)
+and has <i>w_k = 1</i>.  The Gehan-Breslow test (<code>"Gehan-Breslow"</code>)
+proposed by Gehan (1965) and later extended to <i>K</i> samples by Breslow
+(1970) is a generalization of the Wilcoxon rank-sum test, where <i>w_k =
+    n_k</i>.  The Tarone-Ware class of tests (<code>"Tarone-Ware"</code>) discussed by
+Tarone and Ware (1977) has <i>w_k = n_k^&rho;</i>, where <i>&rho;</i> is a
+constant; <i>&rho; = 0.5</i> (default) was suggested by Tarone and Ware (1977),
+but note that <i>&rho; = 0</i> and <i>&rho; = 1</i> lead to the the standard
+logrank test and Gehan-Breslow test respectively.  The Peto-Peto test
+(<code>"Peto-Peto"</code>) suggested by Peto and Peto (1972) is another
+generalization of the Wilcoxon rank-sum test, where
+</p>
+<p style="text-align: center;"><i>
+    w_k = Shat_k = prod(j = 0, &hellip;, k - 1) (n_j - d_j) / n_j
+  </i></p>
+
+<p>is the <em>left-continuous</em> Kaplan-Meier estimator of the survival function,
+<i>n_0 := n</i> and <i>d_0 := 0</i>.  The Prentice
+test (<code>"Prentice"</code>) is also a generalization of the Wilcoxon rank-sum
+test proposed by Prentice (1978), where
+</p>
+<p style="text-align: center;"><i>
+    w_k = prod(j = 1, &hellip;, k) n_j / (n_j + d_j).
+  </i></p>
+
+<p>The Prentice-Marek test (<code>"Prentice-Marek"</code>) is yet another
+generalization of the Wilcoxon rank-sum test discussed by Prentice and Marek
+(1979), with
+</p>
+<p style="text-align: center;"><i>
+    w_k = Stilde_k = prod(j = 1, &hellip;, k) (n_j + 1 - d_j) / (n_j + 1).
+  </i></p>
+
+<p>The Andersen-Borgan-Gill-Keiding test (<code>"Andersen-Borgan-Gill-Keiding"</code>)
+suggested by Andersen <em>et al.</em> (1982) is a modified version of the
+Prentice-Marek test using
+</p>
+<p style="text-align: center;"><i>
+    w_k = (n_k / (n_k + 1)) prod(j = 0, &hellip;, k - 1) (n_j + 1 - d_j) / (n_j + 1),
+  </i></p>
+
+<p>where, again, <i>n_0 := n</i> and <i>d_0 := 0</i>.
+The Fleming-Harrington class of tests (<code>"Fleming-Harrington"</code>) proposed
+by Fleming and Harrington (1991) uses <i>w_k = Shat_k^rho * (1 - Shat_k)^gamma</i>, where <i>&rho;</i>
+and <i>&gamma;</i> are constants; <i>&rho; = 0</i> and <i>&gamma; = 0</i> lead to
+the standard logrank test, while <i>&rho; = 1</i> and <i>&gamma; = 0</i> result in
+the Peto-Peto test.  The Gaugler-Kim-Liao class of tests
+(<code>"Gaugler-Kim-Liao"</code>) discussed by Gaugler <em>et al.</em> (2007) is a
+modified version of the Fleming-Harrington class of tests, replacing
+<i>Shat_k</i> with <i>Stilde_k</i> so that <i>w_k = Stilde_k^rho * (1 -
+    Stilde_k)^gamma</i>, where <i>&rho;</i> and <i>&gamma;</i> are constants; <i>&rho;
+    = 0</i> and <i>&gamma; = 0</i> lead to the standard logrank test, whereas
+<i>&rho; = 1</i> and <i>&gamma; = 0</i> result in the Prentice-Marek test.  The
+Self class of tests (<code>"Self"</code>) suggested by Self (1991) has <i>w_k = v_k^rho * (1 - v_k)^gamma</i>, where
+</p>
+<p style="text-align: center;"><i>
+    v_k = 1 / 2 * (t_(k - 1) + t_(k)) / t_(m),   t_(0) := 0
+  </i></p>
+
+<p>is the standardized mid-point between the <i>(k - 1)</i>th and the <i>k</i>th
+event time.  (This is a slight generalization of Self's original proposal in
+order to allow for non-integer follow-up times.)  Again, <i>&rho;</i> and
+<i>&gamma;</i> are constants and <i>&rho; = 0</i> and <i>&gamma; = 0</i> lead to
+the standard logrank test.
+</p>
+<p>The conditional null distribution of the test statistic is used to obtain
+<i>p</i>-values and an asymptotic approximation of the exact distribution is
+used by default (<code>distribution = "asymptotic"</code>).  Alternatively, the
+distribution can be approximated via Monte Carlo resampling or computed
+exactly for univariate two-sample problems by setting <code>distribution</code> to
+<code>"approximate"</code> or <code>"exact"</code> respectively.  See
+<code><a href="NullDistribution.html">asymptotic</a></code>, <code><a href="NullDistribution.html">approximate</a></code> and <code><a href="NullDistribution.html">exact</a></code>
+for details.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object inheriting from class <code>"<a href="IndependenceTest-class.html">IndependenceTest</a>"</code>.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Peto and Peto (1972) proposed the test statistic implemented in
+<code>logrank_test</code> and named it the <em>logrank test</em>.  However, the
+Mantel-Cox test (Mantel, 1966; Cox, 1972), as implemented in
+<code><a href="../../survival/html/survdiff.html">survdiff</a></code> (in package <span class="pkg">survival</span>), is also known as
+the logrank test.  These tests are similar, but differ in the choice of
+probability model: the (Peto-Peto) logrank test uses the permutational
+variance, whereas the Mantel-Cox test is based on the hypergeometric variance.
+</p>
+<p>Combining <code><a href="IndependenceTest.html">independence_test</a></code> or <code><a href="SymmetryTest.html">symmetry_test</a></code> with
+<code><a href="Transformations.html">logrank_trafo</a></code> offers more flexibility than <code>logrank_test</code>
+and allows for, among other things, maximum-type versatile test procedures
+(e.g., Lee, 1996; see &lsquo;Examples&rsquo;) and user-supplied logrank weights
+(see <code><a href="GTSG.html">GTSG</a></code> for tests against Weibull-type or crossing-curve
+alternatives).
+</p>
+<p>Starting with version 1.1-0, <code>logrank_test</code> replaced <code>surv_test</code>
+which was made <strong>defunct</strong> in version 1.2-0.  Furthermore,
+<code>logrank_trafo</code> is now an increasing function for all choices of
+<code>ties.method</code>, implying that the test statistic has the same sign
+irrespective of the ties handling method.  Consequently, the sign of the test
+statistic will now be the opposite of what it was in earlier versions unless
+<code>ties.method = "average-scores"</code>.  (In versions of <span class="pkg">coin</span> prior to
+1.1-0, <code>logrank_trafo</code> was a decreasing function when <code>ties.method</code>
+was other than <code>"average-scores"</code>.)
+</p>
+<p>Starting with version 1.2-0, mid-ranks and the Hothorn-Lausen method can no
+longer be specified with <code>ties.method = "logrank"</code> and
+<code>ties-method = "HL"</code> respectively.
+</p>
+
+
+<h3>References</h3>
+
+<p>Andersen, P. K., Borgan, Ø., Gill, R. and Keiding, N.  (1982).
+Linear nonparametric tests for comparison of counting processes, with
+applications to censored survival data (with discussion).  <em>International
+Statistical Review</em> <b>50</b>(3), 219&ndash;258.  doi: <a href="https://doi.org/10.2307/1402489">10.2307/1402489</a>
+</p>
+<p>Breslow, N.  (1970).  A generalized Kruskal-Wallis test for comparing <i>K</i>
+samples subject to unequal patterns of censorship.  <em>Biometrika</em>
+<b>57</b>(3), 579&ndash;594.  doi: <a href="https://doi.org/10.1093/biomet/57.3.579">10.1093/biomet/57.3.579</a>
+</p>
+<p>Callaert, H.  (2003).  Comparing statistical software packages: The case of
+the logrank test in StatXact.  <em>The American Statistician</em> <b>57</b>(3),
+214&ndash;217.  doi: <a href="https://doi.org/10.1198/0003130031900">10.1198/0003130031900</a>
+</p>
+<p>Cox, D. R. (1972).  Regression models and life-tables (with discussion).
+<em>Journal of the Royal Statistical Society</em> B <b>34</b>(2), 187&ndash;220.
+doi: <a href="https://doi.org/10.1111/j.2517-6161.1972.tb00899.x">10.1111/j.2517-6161.1972.tb00899.x</a>
+</p>
+<p>Fleming, T. R. and Harrington, D. P.  (1991).  <em>Counting Processes and
+Survival Analysis</em>.  New York: John Wiley &amp; Sons.
+</p>
+<p>Gaugler, T., Kim, D. and Liao, S.  (2007).  Comparing two survival time
+distributions: An investigation of several weight functions for the weighted
+logrank statistic.  <em>Communications in Statistics &ndash; Simulation and
+Computation</em> <b>36</b>(2), 423&ndash;435.  doi: <a href="https://doi.org/10.1080/03610910601161272">10.1080/03610910601161272</a>
+</p>
+<p>Gehan, E. A.  (1965).  A generalized Wilcoxon test for comparing arbitrarily
+single-censored samples.  <em>Biometrika</em> <b>52</b>(1&ndash;2), 203&ndash;223.
+doi: <a href="https://doi.org/10.1093/biomet/52.1-2.203">10.1093/biomet/52.1-2.203</a>
+</p>
+<p>Hothorn, T. and Lausen, B.  (2003).  On the exact distribution of maximally
+selected rank statistics.  <em>Computational Statistics &amp; Data Analysis</em>
+<b>43</b>(2), 121&ndash;137.  doi: <a href="https://doi.org/10.1016/S0167-9473(02)00225-6">10.1016/S0167-9473(02)00225-6</a>
+</p>
+<p>Klein, J. P. and Moeschberger, M. L.  (2003).  <em>Survival Analysis:
+Techniques for Censored and Truncated Data</em>, Second Edition.  New York:
+Springer.
+</p>
+<p>Lee, J. W.  (1996).  Some versatile tests based on the simultaneous use of
+weighted log-rank statistics.  <em>Biometrics</em> <b>52</b>(2), 721&ndash;725.
+doi: <a href="https://doi.org/10.2307/2532911">10.2307/2532911</a>
+</p>
+<p>Letón, E. and Zuluaga, P.  (2001).  Equivalence between score
+and weighted tests for survival curves.  <em>Communications in Statistics &ndash;
+Theory and Methods</em> <b>30</b>(4), 591&ndash;608.  doi: <a href="https://doi.org/10.1081/STA-100002138">10.1081/STA-100002138</a>
+</p>
+<p>Mantel, N.  (1966).  Evaluation of survival data and two new rank order
+statistics arising in its consideration.  <em>Cancer Chemotherapy Reports</em>
+<b>50</b>(3), 163&ndash;170.
+</p>
+<p>Peto, R. and Peto, J.  (1972).  Asymptotic efficient rank invariant test
+procedures (with discussion).  <em>Journal of the Royal Statistical Society</em>
+A <b>135</b>(2), 185&ndash;207.  doi: <a href="https://doi.org/10.2307/2344317">10.2307/2344317</a>
+</p>
+<p>Prentice, R. L.  (1978).  Linear rank tests with right censored data.
+<em>Biometrika</em> <b>65</b>(1), 167&ndash;179.  doi: <a href="https://doi.org/10.1093/biomet/65.1.167">10.1093/biomet/65.1.167</a>
+</p>
+<p>Prentice, R. L. and Marek, P.  (1979).  A qualitative discrepancy between
+censored data rank tests.  <em>Biometrics</em> <b>35</b>(4), 861&ndash;867.
+doi: <a href="https://doi.org/10.2307/2530120">10.2307/2530120</a>
+</p>
+<p>Self, S. G.  (1991).  An adaptive weighted log-rank test with application to
+cancer prevention and screening trials.  <em>Biometrics</em> <b>47</b>(3),
+975&ndash;986.  doi: <a href="https://doi.org/10.2307/2532653">10.2307/2532653</a>
+</p>
+<p>Tarone, R. E.  (1975).  Tests for trend in life table analysis.
+<em>Biometrika</em> <b>62</b>(3), 679&ndash;682.  doi: <a href="https://doi.org/10.1093/biomet/62.3.679">10.1093/biomet/62.3.679</a>
+</p>
+<p>Tarone, R. E. and Ware, J.  (1977).  On distribution-free tests for equality
+of survival distributions.  <em>Biometrika</em> <b>64</b>(1), 156&ndash;160.
+doi: <a href="https://doi.org/10.1093/biomet/64.1.156">10.1093/biomet/64.1.156</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Example data (Callaert, 2003, Tab. 1)
+callaert &lt;- data.frame(
+    time = c(1, 1, 5, 6, 6, 6, 6, 2, 2, 2, 3, 4, 4, 5, 5),
+    group = factor(rep(0:1, c(7, 8)))
+)
+
+## Logrank scores using mid-ranks (Callaert, 2003, Tab. 2)
+with(callaert,
+     logrank_trafo(Surv(time)))
+
+## Asymptotic Mantel-Cox test (p = 0.0523)
+survdiff(Surv(time) ~ group, data = callaert)
+
+## Exact logrank test using mid-ranks (p = 0.0505)
+logrank_test(Surv(time) ~ group, data = callaert, distribution = "exact")
+
+## Exact logrank test using average-scores (p = 0.0468)
+logrank_test(Surv(time) ~ group, data = callaert, distribution = "exact",
+             ties.method = "average-scores")
+
+
+## Lung cancer data (StatXact 9 manual, p. 213, Tab. 7.19)
+lungcancer &lt;- data.frame(
+    time = c(257, 476, 355, 1779, 355,
+             191, 563, 242, 285, 16, 16, 16, 257, 16),
+    event = c(0, 0, 1, 1, 0,
+              1, 1, 1, 1, 1, 1, 1, 1, 1),
+    group = factor(rep(1:2, c(5, 9)),
+                   labels = c("newdrug", "control"))
+)
+
+## Logrank scores using average-scores (StatXact 9 manual, p. 214)
+with(lungcancer,
+     logrank_trafo(Surv(time, event), ties.method = "average-scores"))
+
+## Exact logrank test using average-scores (StatXact 9 manual, p. 215)
+logrank_test(Surv(time, event) ~ group, data = lungcancer,
+             distribution = "exact", ties.method = "average-scores")
+
+## Exact Prentice test using average-scores (StatXact 9 manual, p. 222)
+logrank_test(Surv(time, event) ~ group, data = lungcancer,
+             distribution = "exact", ties.method = "average-scores",
+             type = "Prentice")
+
+
+## Approximative (Monte Carlo) versatile test (Lee, 1996)
+rho.gamma &lt;- expand.grid(rho = seq(0, 2, 1), gamma = seq(0, 2, 1))
+lee_trafo &lt;- function(y)
+    logrank_trafo(y, ties.method = "average-scores",
+                  type = "Fleming-Harrington",
+                  rho = rho.gamma["rho"], gamma = rho.gamma["gamma"])
+
+it &lt;- independence_test(Surv(time, event) ~ group, data = lungcancer,
+                        distribution = approximate(nresample = 10000),
+                        ytrafo = function(data)
+                            trafo(data, surv_trafo = lee_trafo))
+pvalue(it, method = "step-down")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>coin</em> version 1.4-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

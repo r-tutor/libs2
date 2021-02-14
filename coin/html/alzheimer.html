@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Smoking and Alzheimer's Disease</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for alzheimer {coin}"><tr><td>alzheimer {coin}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Smoking and Alzheimer's Disease</h2>
+
+<h3>Description</h3>
+
+<p>A case-control study of smoking and Alzheimer's disease.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>alzheimer</pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 538 observations on 3 variables.
+</p>
+
+<dl>
+<dt><code>smoking</code></dt><dd>
+<p>a factor with levels <code>"None"</code>, <code>"&lt;10"</code>, <code>"10-20"</code> and
+<code>"&gt;20"</code> (cigarettes per day).
+</p>
+</dd>
+<dt><code>disease</code></dt><dd>
+<p>a factor with levels <code>"Alzheimer"</code>, <code>"Other dementias"</code> and
+<code>"Other diagnoses"</code>.
+</p>
+</dd>
+<dt><code>gender</code></dt><dd>
+<p>a factor with levels <code>"Female"</code> and <code>"Male"</code>.
+</p>
+</dd>
+</dl>
+
+
+
+<h3>Details</h3>
+
+<p>Subjects with Alzheimer's disease are compared to two different control groups
+with respect to smoking history.  The data are given in Salib and Hillier
+(1997, Tab. 4).
+</p>
+
+
+<h3>Source</h3>
+
+<p>Salib, E. and Hillier, V.  (1997).  A case-control study of smoking and
+Alzheimer's disease.  <em>International Journal of Geriatric Psychiatry</em>
+<b>12</b>(3), 295&ndash;300.
+doi: <a href="https://doi.org/10.1002/(SICI)1099-1166(199703)12:3%3C295::AID-GPS476%3E3.0.CO;2-3">10.1002/(SICI)1099-1166(199703)12:3&lt;295::AID-GPS476&gt;3.0.CO;2-3</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Hothorn, T., Hornik, K., van de Wiel, M. A. and Zeileis, A.  (2006).  A Lego
+system for conditional inference.  <em>The American Statistician</em>
+<b>60</b>(3), 257&ndash;263.  doi: <a href="https://doi.org/10.1198/000313006X118430">10.1198/000313006X118430</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Spineplots
+op &lt;- par(no.readonly = TRUE) # save current settings
+layout(matrix(1:2, ncol = 2))
+spineplot(disease ~ smoking, data = alzheimer,
+          subset = gender == "Male", main = "Male")
+spineplot(disease ~ smoking, data = alzheimer,
+          subset = gender == "Female", main = "Female")
+par(op) # reset
+
+## Asymptotic Cochran-Mantel-Haenszel test
+cmh_test(disease ~ smoking | gender, data = alzheimer)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>coin</em> version 1.4-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Symmetry Tests</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for SymmetryTests {coin}"><tr><td>SymmetryTests {coin}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Symmetry Tests</h2>
+
+<h3>Description</h3>
+
+<p>Testing the symmetry of a numeric repeated measurements variable in a complete
+block design.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'formula'
+sign_test(formula, data, subset = NULL, ...)
+## S3 method for class 'SymmetryProblem'
+sign_test(object, ...)
+
+## S3 method for class 'formula'
+wilcoxsign_test(formula, data, subset = NULL, ...)
+## S3 method for class 'SymmetryProblem'
+wilcoxsign_test(object, zero.method = c("Pratt", "Wilcoxon"), ...)
+
+## S3 method for class 'formula'
+friedman_test(formula, data, subset = NULL, ...)
+## S3 method for class 'SymmetryProblem'
+friedman_test(object, ...)
+
+## S3 method for class 'formula'
+quade_test(formula, data, subset = NULL, ...)
+## S3 method for class 'SymmetryProblem'
+quade_test(object, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>formula</code></td>
+<td>
+
+<p>a formula of the form <code>y ~ x | block</code> where <code>y</code> is a numeric
+variable, <code>x</code> is a factor with two (<code>sign_test</code> and
+<code>wilcoxsign_test</code>) or more levels and <code>block</code> is an optional
+factor (which is generated automatically if omitted).
+</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+
+<p>an optional data frame containing the variables in the model formula.
+</p>
+</td></tr>
+<tr valign="top"><td><code>subset</code></td>
+<td>
+
+<p>an optional vector specifying a subset of observations to be used.  Defaults
+to <code>NULL</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>object</code></td>
+<td>
+
+<p>an object inheriting from class <code>"<a href="SymmetryProblem-class.html">SymmetryProblem</a>"</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>zero.method</code></td>
+<td>
+
+<p>a character, the method used to handle zeros: either <code>"Pratt"</code>
+(default) or <code>"Wilcoxon"</code>; see &lsquo;Details&rsquo;.
+</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+
+<p>further arguments to be passed to <code><a href="SymmetryTest.html">symmetry_test</a></code>.
+</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>sign_test</code>, <code>wilcoxsign_test</code>, <code>friedman_test</code> and
+<code>quade_test</code> provide the sign test, the Wilcoxon signed-rank test, the
+Friedman test, the Page test and the Quade test.  A general description of
+these methods is given by Hollander and Wolfe (1999).
+</p>
+<p>The null hypothesis of symmetry is tested.  The response variable and the
+measurement conditions are given by <code>y</code> and <code>x</code>, respectively, and
+<code>block</code> is a factor where each level corresponds to exactly one subject
+with repeated measurements.  For <code>sign_test</code> and <code>wilcoxsign_test</code>,
+formulae of the form <code>y ~ x | block</code> and <code>y ~ x</code> are allowed.  The
+latter form is interpreted as <code>y</code> is the first and <code>x</code> the second
+measurement on the same subject.
+</p>
+<p>If <code>x</code> is an ordered factor, the default scores, <code>1:nlevels(x)</code>, can
+be altered using the <code>scores</code> argument (see <code><a href="SymmetryTest.html">symmetry_test</a></code>);
+this argument can also be used to coerce nominal factors to class
+<code>"ordered"</code>.  In this case, a linear-by-linear association test is
+computed and the direction of the alternative hypothesis can be specified
+using the <code>alternative</code> argument.  For the Friedman test, this extension
+was given by Page (1963) and is known as the Page test.
+</p>
+<p>For <code>wilcoxsign_test</code>, the default method of handling zeros
+(<code>zero.method = "Pratt"</code>), due to Pratt (1959), first rank-transforms the
+absolute differences (including zeros) and then discards the ranks
+corresponding to the zero-differences.  The proposal by Wilcoxon (1949, p. 6)
+first discards the zero-differences and then rank-transforms the remaining
+absolute differences (<code>zero.method = "Wilcoxon"</code>).
+</p>
+<p>The conditional null distribution of the test statistic is used to obtain
+<i>p</i>-values and an asymptotic approximation of the exact distribution is
+used by default (<code>distribution = "asymptotic"</code>).  Alternatively, the
+distribution can be approximated via Monte Carlo resampling or computed
+exactly for univariate two-sample problems by setting <code>distribution</code> to
+<code>"approximate"</code> or <code>"exact"</code> respectively.  See
+<code><a href="NullDistribution.html">asymptotic</a></code>, <code><a href="NullDistribution.html">approximate</a></code> and <code><a href="NullDistribution.html">exact</a></code>
+for details.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object inheriting from class <code>"<a href="IndependenceTest-class.html">IndependenceTest</a>"</code>.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Starting with <span class="pkg">coin</span> version 1.0-16, the <code>zero.method</code> argument
+replaced the (now removed) <code>ties.method</code> argument.  The current default
+is <code>zero.method = "Pratt"</code> whereas earlier versions had
+<code>ties.method = "HollanderWolfe"</code>, which is equivalent to
+<code>zero.method = "Wilcoxon"</code>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Hollander, M. and Wolfe, D. A.  (1999).  <em>Nonparametric Statistical
+Methods</em>, Second Edition.  New York: John Wiley &amp; Sons.
+</p>
+<p>Page, E. B.  (1963).  Ordered hypotheses for multiple treatments: a
+significance test for linear ranks.  <em>Journal of the American Statistical
+Association</em> <b>58</b>(301), 216&ndash;230.  doi: <a href="https://doi.org/10.1080/01621459.1963.10500843">10.1080/01621459.1963.10500843</a>
+</p>
+<p>Pratt, J. W.  (1959).  Remarks on zeros and ties in the Wilcoxon signed rank
+procedures.  <em>Journal of the American Statistical Association</em>
+<b>54</b>(287), 655&ndash;667.  doi: <a href="https://doi.org/10.1080/01621459.1959.10501526">10.1080/01621459.1959.10501526</a>
+</p>
+<p>Quade, D.  (1979).  Using weighted rankings in the analysis of complete blocks
+with additive block effects.  <em>Journal of the American Statistical
+Association</em> <b>74</b>(367), 680&ndash;683.  doi: <a href="https://doi.org/10.1080/01621459.1979.10481670">10.1080/01621459.1979.10481670</a>
+</p>
+<p>Wilcoxon, F.  (1949).  <em>Some Rapid Approximate Statistical Procedures</em>.
+New York: American Cyanamid Company.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Example data from ?wilcox.test
+y1 &lt;- c(1.83,  0.50,  1.62,  2.48, 1.68, 1.88, 1.55, 3.06, 1.30)
+y2 &lt;- c(0.878, 0.647, 0.598, 2.05, 1.06, 1.29, 1.06, 3.14, 1.29)
+
+## One-sided exact sign test
+(st &lt;- sign_test(y1 ~ y2, distribution = "exact",
+                 alternative = "greater"))
+midpvalue(st) # mid-p-value
+
+## One-sided exact Wilcoxon signed-rank test
+(wt &lt;- wilcoxsign_test(y1 ~ y2, distribution = "exact",
+                       alternative = "greater"))
+statistic(wt, type = "linear")
+midpvalue(wt) # mid-p-value
+
+## Comparison with R's wilcox.test() function
+wilcox.test(y1, y2, paired = TRUE, alternative = "greater")
+
+
+## Data with explicit group and block information
+dta &lt;- data.frame(y = c(y1, y2), x = gl(2, length(y1)),
+                  block = factor(rep(seq_along(y1), 2)))
+
+## For two samples, the sign test is equivalent to the Friedman test...
+sign_test(y ~ x | block, data = dta, distribution = "exact")
+friedman_test(y ~ x | block, data = dta, distribution = "exact")
+
+## ...and the signed-rank test is equivalent to the Quade test
+wilcoxsign_test(y ~ x | block, data = dta, distribution = "exact")
+quade_test(y ~ x | block, data = dta, distribution = "exact")
+
+
+## Comparison of three methods ("round out", "narrow angle", and "wide angle")
+## for rounding first base.
+## Hollander and Wolfe (1999, p. 274, Tab. 7.1)
+rounding &lt;- data.frame(
+    times = c(5.40, 5.50, 5.55,
+              5.85, 5.70, 5.75,
+              5.20, 5.60, 5.50,
+              5.55, 5.50, 5.40,
+              5.90, 5.85, 5.70,
+              5.45, 5.55, 5.60,
+              5.40, 5.40, 5.35,
+              5.45, 5.50, 5.35,
+              5.25, 5.15, 5.00,
+              5.85, 5.80, 5.70,
+              5.25, 5.20, 5.10,
+              5.65, 5.55, 5.45,
+              5.60, 5.35, 5.45,
+              5.05, 5.00, 4.95,
+              5.50, 5.50, 5.40,
+              5.45, 5.55, 5.50,
+              5.55, 5.55, 5.35,
+              5.45, 5.50, 5.55,
+              5.50, 5.45, 5.25,
+              5.65, 5.60, 5.40,
+              5.70, 5.65, 5.55,
+              6.30, 6.30, 6.25),
+    methods = factor(rep(1:3, 22),
+                     labels = c("Round Out", "Narrow Angle", "Wide Angle")),
+    block = gl(22, 3)
+)
+
+## Asymptotic Friedman test
+friedman_test(times ~ methods | block, data = rounding)
+
+## Parallel coordinates plot
+with(rounding, {
+    matplot(t(matrix(times, ncol = 3, byrow = TRUE)),
+            type = "l", lty = 1, col = 1, ylab = "Time", xlim = c(0.5, 3.5),
+            axes = FALSE)
+    axis(1, at = 1:3, labels = levels(methods))
+    axis(2)
+})
+
+## Where do the differences come from?
+## Wilcoxon-Nemenyi-McDonald-Thompson test (Hollander and Wolfe, 1999, p. 295)
+## Note: all pairwise comparisons
+(st &lt;- symmetry_test(times ~ methods | block, data = rounding,
+                     ytrafo = function(data)
+                         trafo(data, numeric_trafo = rank_trafo,
+                               block = rounding$block),
+                     xtrafo = mcp_trafo(methods = "Tukey")))
+
+## Simultaneous test of all pairwise comparisons
+## Wide Angle vs. Round Out differ (Hollander and Wolfe, 1999, p. 296)
+pvalue(st, method = "single-step") # subset pivotality is violated
+
+
+## Strength Index of Cotton
+## Hollander and Wolfe (1999, p. 286, Tab. 7.5)
+cotton &lt;- data.frame(
+    strength = c(7.46, 7.17, 7.76, 8.14, 7.63,
+                 7.68, 7.57, 7.73, 8.15, 8.00,
+                 7.21, 7.80, 7.74, 7.87, 7.93),
+    potash = ordered(rep(c(144, 108, 72, 54, 36), 3),
+                     levels = c(144, 108, 72, 54, 36)),
+    block = gl(3, 5)
+)
+
+## One-sided asymptotic Page test
+friedman_test(strength ~ potash | block, data = cotton, alternative = "greater")
+
+## One-sided approximative (Monte Carlo) Page test
+friedman_test(strength ~ potash | block, data = cotton, alternative = "greater",
+              distribution = approximate(nresample = 10000))
+
+
+## Data from Quade (1979, p. 683)
+dta &lt;- data.frame(
+    y = c(52, 45, 38,
+          63, 79, 50,
+          45, 57, 39,
+          53, 51, 43,
+          47, 50, 56,
+          62, 72, 49,
+          49, 52, 40),
+     x = factor(rep(LETTERS[1:3], 7)),
+     b = factor(rep(1:7, each = 3))
+)
+
+## Approximative (Monte Carlo) Friedman test
+## Quade (1979, p. 683)
+friedman_test(y ~ x | b, data = dta,
+              distribution = approximate(nresample = 10000)) # chi^2 = 6.000
+
+## Approximative (Monte Carlo) Quade test
+## Quade (1979, p. 683)
+(qt &lt;- quade_test(y ~ x | b, data = dta,
+                  distribution = approximate(nresample = 10000))) # W = 8.157
+
+## Comparison with R's quade.test() function
+quade.test(y ~ x | b, data = dta)
+
+## quade.test() uses an F-statistic
+b &lt;- nlevels(qt@statistic@block)
+A &lt;- sum(qt@statistic@y^2)
+B &lt;- sum(statistic(qt, type = "linear")^2) / b
+(b - 1) * B / (A - B) # F = 8.3765
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>coin</em> version 1.4-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

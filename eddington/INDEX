@@ -1,0 +1,10 @@
+E_cum                   Calculate the cumulative Eddington number
+E_next                  Get the number of rides required to increment
+                        to the next Eddington number
+E_num                   Get the Eddington number for cycling
+E_req                   Determine the number of additional rides
+                        required to achieve a specified Eddington
+                        number
+E_sat                   Determine if a dataset satisfies a specified
+                        Eddington number
+rides                   A year of simulated bicycle ride mileages

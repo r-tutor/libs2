@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Number of partitions of an integer</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for P {partitions}"><tr><td>P {partitions}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Number of partitions of an integer</h2>
+
+<h3>Description</h3>
+
+<p>Given an integer, <code>P()</code> returns the number of additive
+partitions, <code>Q()</code> returns the  number of unequal
+partitions, and <code>R()</code> returns the number of
+restricted partitions.  Function <code>S()</code> returns the number of
+block partitions.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+P(n, give = FALSE)
+Q(n, give = FALSE)
+R(m, n, include.zero = FALSE)
+S(f, n = NULL, include.fewer = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>Integer whose partition number is desired.  In function
+<code>S()</code>, the default of <code>NULL</code> means to return the number of
+partitions of any size</p>
+</td></tr>
+<tr valign="top"><td><code>m</code></td>
+<td>
+<p>In function <code>R()</code>, the order of the
+decomposition</p>
+</td></tr>
+<tr valign="top"><td><code>give</code></td>
+<td>
+<p>Boolean, with default <code>FALSE</code> meaning to return just
+<code>P(n)</code> or <code>Q(n)</code> and <code>TRUE</code> meaning to return
+<code>P(1:n)</code> or <code>Q(1:n)</code> (this option takes no extra
+computation)</p>
+</td></tr>
+<tr valign="top"><td><code>include.zero</code></td>
+<td>
+<p>In <code>restrictedparts()</code>, Boolean with
+default <code>FALSE</code> meaning to count only partitions of <i>n</i>
+into <em>exactly</em> <i>m</i> parts; and <code>TRUE</code> meaning to
+include partitions of <i>n</i> into <em>at most</em> <i>m</i> parts
+(because parts of zero are included)</p>
+</td></tr>
+<tr valign="top"><td><code>include.fewer</code></td>
+<td>
+<p>In function <code>blockparts()</code>, Boolean
+with default <code>FALSE</code> meaning to return partitions into
+<em>exactly</em> <code>n</code> and <code>TRUE</code> meaning to return partitions
+into <em>at most</em> <code>n</code></p>
+</td></tr>
+<tr valign="top"><td><code>f</code></td>
+<td>
+<p>In function <code>S()</code>, the stack vector</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Functions <code>P()</code> and <code>Q()</code> use Euler's
+recursion formula.  Function <code>R()</code> enumerates the partitions 
+using Hindenburg's method (see Andrews) and counts them until the
+recursion bottoms out.
+</p>
+<p>Function <code>S()</code> finds the coefficient of <i>x^n</i> in the
+generating function <i>prod_{i=1}^{L}(1+x+x^2+...+x^(f[i]))</i>, where <i>L</i> is the
+length of <code>f</code>, using the <span class="pkg">polynom</span> package.
+</p>
+<p>All these functions return a double.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Functions <code>P()</code> and <code>Q()</code> use <code>unsigned long long</code>
+integers, a type which is system-dependent.  For me, <code>P()</code> works
+for <i>n</i> equal to or less than 416, and <code>Q()</code> works for
+<i>n</i> less than or equal to 792.  <acronym><span class="acronym">YMMV</span></acronym>; none of the
+methods test for overflow, so use with care!
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Robin K. S. Hankin; <code>S()</code> is due to an anonymous JSS referee</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+P(10,give=TRUE)
+Q(10,give=TRUE)
+R(10,20,include.zero=FALSE)
+R(10,20,include.zero=TRUE)
+
+S(1:4,5)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>partitions</em> version 1.10-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

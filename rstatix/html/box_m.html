@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Box's M-test for Homogeneity of Covariance Matrices</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for box_m {rstatix}"><tr><td>box_m {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Box's M-test for Homogeneity of Covariance Matrices</h2>
+
+<h3>Description</h3>
+
+<p>Performs the Box's M-test for homogeneity of covariance matrices
+obtained from multivariate normal data according to one grouping variable.
+The test is based on the chi-square approximation.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+box_m(data, group)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a numeric data.frame or matrix containing n observations of p
+variables; it is expected that n &gt; p.</p>
+</td></tr>
+<tr valign="top"><td><code>group</code></td>
+<td>
+<p>a vector of length n containing the class of each
+observation; it is usually a factor.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A data frame containing the following components:
+</p>
+
+<ul>
+<li><p>statistic an approximated value of the chi-square distribution.
+</p>
+</li>
+<li><p>parameter the degrees of freedom related of the test statistic in this case that it follows a Chi-square distribution.
+</p>
+</li>
+<li><p>p.value the p-value of the test.
+</p>
+</li>
+<li><p>method the character string &quot;Box's M-test for Homogeneity of Covariance Matrices&quot;.
+</p>
+</li></ul>
+
+
+
+<h3>Examples</h3>
+
+<pre>
+data(iris)
+box_m(iris[, -5], iris[, 5])
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -62,7 +62,7 @@ cur_data_all	context
 cur_group	context
 cur_group_id	context
 cur_group_rows	context
-c_across	across
+c_across	c_across
 data_frame	reexports
 data_frame_	reexports
 db_analyze	backend_dbplyr
@@ -153,6 +153,8 @@ group_vars	group_data
 group_walk	group_map
 id	defunct
 ident	ident
+if_all	across
+if_any	across
 if_else	if_else
 inner_join	mutate-joins
 inner_join.data.frame	mutate-joins

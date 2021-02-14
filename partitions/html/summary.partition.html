@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Provides a summary of a partition</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for summary.partition {partitions}"><tr><td>summary.partition {partitions}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Provides a summary of a partition</h2>
+
+<h3>Description</h3>
+
+<p>Provides a summary of an object of class <code>partition</code>: usually  the
+first and last few partitions (columns)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'partition'
+summary(object, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>Partition</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Further arguments; see details section below</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The ellipsis arguments are used to pass how many columns at the start
+and the end of the matrix are selected; this defaults to 10.
+</p>
+<p>The function is designed to behave as expected: if there is an
+argument named &ldquo;<code>n</code>&rdquo;, then this is used.  If there is no
+such argument, the first one is used.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A summary object is a list, comprising three elements:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>shortened</code></td>
+<td>
+<p>Boolean, with <code>TRUE</code> meaning that the middle
+section of the matrix is ommitted, and <code>FALSE</code> meaning that the
+entire matrix is returned because <code>n</code> is too big</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>Number of columns to return at the start and the end of the matrix</p>
+</td></tr>
+<tr valign="top"><td><code>out</code></td>
+<td>
+<p>Matrix returned: just the first and last <code>n</code> columns
+(if <code>shortened</code> is <code>TRUE</code>), or the whole matrix if not</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Robin K. S. Hankin</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+summary(parts(7))
+
+summary(parts(11),3)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>partitions</em> version 1.10-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

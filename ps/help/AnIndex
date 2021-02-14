@@ -12,6 +12,7 @@ ps_cpu_count	ps_cpu_count
 ps_cpu_times	ps_cpu_times
 ps_create_time	ps_create_time
 ps_cwd	ps_cwd
+ps_descent	ps_descent
 ps_disk_partitions	ps_disk_partitions
 ps_disk_usage	ps_disk_usage
 ps_environ	ps_environ
@@ -40,6 +41,8 @@ ps_ppid	ps_ppid
 ps_resume	ps_resume
 ps_send_signal	ps_send_signal
 ps_set_nice	ps_get_nice
+ps_shared_libs	ps_shared_libs
+ps_shared_lib_users	ps_shared_lib_users
 ps_status	ps_status
 ps_suspend	ps_suspend
 ps_system_memory	ps_system_memory

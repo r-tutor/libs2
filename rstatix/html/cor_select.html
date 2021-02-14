@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Subset Correlation Matrix</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for cor_select {rstatix}"><tr><td>cor_select {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Subset Correlation Matrix</h2>
+
+<h3>Description</h3>
+
+<p>Subset Correlation Matrix
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+cor_select(x, ..., vars = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a correlation matrix. Particularly, an object of class <code>cor_mat</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>One or more unquoted expressions (or variable names) separated by
+commas. Used to select variables of interest.</p>
+</td></tr>
+<tr valign="top"><td><code>vars</code></td>
+<td>
+<p>a character vector containing the variable names of interest.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a data frame
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="cor_mat.html">cor_mat</a>()</code>, <code><a href="pull_triangle.html">pull_triangle</a>()</code>, <code><a href="replace_triangle.html">replace_triangle</a>()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Compute correlation matrix
+#::::::::::::::::::::::::::::::::::::::::::
+cor.mat &lt;- mtcars %&gt;%
+  select(mpg, disp, hp, drat, wt, qsec) %&gt;%
+  cor_mat()
+
+# Subsetting correlation matrix
+#::::::::::::::::::::::::::::::::::::::::::
+
+# Select some variables of interest
+cor.mat %&gt;%
+  cor_select(mpg, drat, wt)
+
+# Remove variables
+cor.mat %&gt;%
+  cor_select(-mpg, -wt)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

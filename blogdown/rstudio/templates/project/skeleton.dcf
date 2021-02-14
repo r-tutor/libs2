@@ -3,7 +3,6 @@ Binding: blogdown_skeleton
 Subtitle: Create a new website using Hugo and blogdown
 Caption: Create a new website using Hugo and blogdown
 Icon: hugo-logo.png
-OpenFiles: config.toml
 
 Parameter: install_hugo
 Widget: CheckboxInput
@@ -34,5 +33,17 @@ Position: right
 Parameter: to_yaml
 Widget: CheckboxInput
 Label: Convert all metadata to YAML
+Default: On
+Position: right
+
+Parameter: netlify
+Widget: CheckboxInput
+Label: Create netlify.toml
+Default: On
+Position: right
+
+Parameter: .Rprofile
+Widget: CheckboxInput
+Label: Create .Rprofile
 Default: On
 Position: right

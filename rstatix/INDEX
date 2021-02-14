@@ -65,6 +65,7 @@ prop_test               Proportion Test
 prop_trend_test         Test for Trend in Proportions
 pull_triangle           Pull Lower and Upper Triangular Part of a
                         Matrix
+remove_ns               Remove Non-Significant from Statistical Tests
 replace_triangle        Replace Lower and Upper Triangular Part of a
                         Matrix
 sample_n_by             Sample n Rows By Group From a Table

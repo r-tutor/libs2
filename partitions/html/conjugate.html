@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Conjugate partitions and Durfee squares</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for conjugate {partitions}"><tr><td>conjugate {partitions}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Conjugate partitions and Durfee squares</h2>
+
+<h3>Description</h3>
+
+<p>Given a partition, provide its conjugate or Durfee square
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+conjugate(x, sorted = TRUE)
+durfee(x, sorted = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>Either a vector describing a partition or a matrix whose
+columns are partitions.</p>
+</td></tr>
+<tr valign="top"><td><code>sorted</code></td>
+<td>
+<p>A logical indicating whether the data is already in standard
+form. That is to say, are the data within each colum sorted in decreasing
+order?</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Conjugation is described in Andrews, and (eg) Hardy and Wright.
+</p>
+<p>The <dfn>conjugate</dfn> of a partition may be calculated by taking its
+Ferrers diagram and considering the partition defined by columns
+instead of rows.  This may be visualised by flipping the Ferrers
+diagram about the leading diagonal.
+</p>
+<p>Essentially, <code>conjugate()</code> carries out <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> idiom
+<code>rev(cumsum(table(factor(a[a&gt;0],levels=max(a):1))))</code>, but faster.
+</p>
+<p>The &ldquo;Durfee square&rdquo; of a partition is defined on page 281 of
+Hardy and Wright.  It is the largest square of nodes contained in the
+partition's Ferrers graph.  Function <code>durfee()</code> returns the
+length of the side
+of the Durfee square, which Andrews denotes
+<i>d(lambda)</i>.  It is equivalent to <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> idiom
+<code>function(a){sum(a&gt;=1:length(a))}</code>, but faster.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Returns either a partition in standard form, or a matrix whose
+columns are partitions in standard form.
+</p>
+
+
+<h3>Note</h3>
+
+<p>If argument <code>x</code> is not non-increasing, you must use the
+<code>sorted = FALSE</code> flag. Otherwise, these functions will not work and will
+silently return garbage.  Caveat emptor!  (output from <code>blockparts()</code>
+is not necessarily non-increasing)
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Robin K. S. Hankin</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+parts(5)
+conjugate(parts(5))
+
+restrictedparts(6,4)
+conjugate(restrictedparts(6,4))
+
+durfee(10:1)
+
+# A parition in nonstandard form --- use `sorted = FALSE`
+x &lt;- parts(5)[sample(5),]
+durfee(x, sorted = FALSE)
+conjugate(x, sorted = FALSE)
+
+# Suppose one wanted partitions of 8 with no part larger than 3:
+
+conjugate(restrictedparts(8,3))
+
+# (restrictedparts(8,3) splits 8 into at most 3 parts;
+# so no part of the conjugate partition is larger than 3).
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>partitions</em> version 1.10-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Adjust P-values for Multiple Comparisons</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for adjust_pvalue {rstatix}"><tr><td>adjust_pvalue {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Adjust P-values for Multiple Comparisons</h2>
+
+<h3>Description</h3>
+
+<p>A pipe-friendly function to add an adjusted p-value column into
+a data frame. Supports grouped data.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+adjust_pvalue(data, p.col = NULL, output.col = NULL, method = "holm")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a data frame containing a p-value column</p>
+</td></tr>
+<tr valign="top"><td><code>p.col</code></td>
+<td>
+<p>column name containing p-values</p>
+</td></tr>
+<tr valign="top"><td><code>output.col</code></td>
+<td>
+<p>the output column name to hold the adjusted p-values</p>
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+<p>method for adjusting p values (see
+<code><a href="../../stats/html/p.adjust.html">p.adjust</a></code>). Allowed values include &quot;holm&quot;, &quot;hochberg&quot;,
+&quot;hommel&quot;, &quot;bonferroni&quot;, &quot;BH&quot;, &quot;BY&quot;, &quot;fdr&quot;, &quot;none&quot;. If you don't want to
+adjust the p value (not recommended), use p.adjust.method = &quot;none&quot;.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a data frame
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Perform pairwise comparisons and adjust p-values
+ToothGrowth %&gt;%
+ t_test(len ~ dose) %&gt;%
+ adjust_pvalue()
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Wilcoxon Effect Size</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for wilcox_effsize {rstatix}"><tr><td>wilcox_effsize {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Wilcoxon Effect Size</h2>
+
+<h3>Description</h3>
+
+<p>Compute Wilcoxon effect size (<code>r</code>) for: </p>
+ <ul>
+<li>
+<p>one-sample test (Wilcoxon one-sample signed-rank test); </p>
+</li>
+<li><p> paired
+two-samples test (Wilcoxon two-sample paired signed-rank test) and </p>
+</li>
+<li>
+<p>independent two-samples test ( Mann-Whitney, two-sample rank-sum test). </p>
+</li></ul>
+
+<p>It can also returns confidence intervals by bootstap.
+</p>
+<p>The effect size <code>r</code> is calculated as <code>Z</code> statistic divided by
+square root of the sample size (N) (<i>Z/&radic;{N}</i>). The <code>Z</code> value is
+extracted from either <code>coin::wilcoxsign_test()</code> (case of one- or
+paired-samples test) or <code>coin::wilcox_test()</code> (case of independent
+two-samples test).
+</p>
+<p>Note that <code>N</code> corresponds to total sample size for independent samples
+test and to total number of pairs for paired samples test.
+</p>
+<p>The <code>r</code> value varies from 0 to close to 1. The interpretation values
+for r commonly in published litterature and on the internet are: <code>0.10
+ - &lt; 0.3</code> (small effect), <code>0.30 - &lt; 0.5</code> (moderate effect) and <code>&gt;=
+ 0.5</code> (large effect).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+wilcox_effsize(
+  data,
+  formula,
+  comparisons = NULL,
+  ref.group = NULL,
+  paired = FALSE,
+  alternative = "two.sided",
+  mu = 0,
+  ci = FALSE,
+  conf.level = 0.95,
+  ci.type = "perc",
+  nboot = 1000,
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a data.frame containing the variables in the formula.</p>
+</td></tr>
+<tr valign="top"><td><code>formula</code></td>
+<td>
+<p>a formula of the form <code>x ~ group</code> where <code>x</code> is a
+numeric variable giving the data values and <code>group</code> is a factor with
+one or multiple levels giving the corresponding groups. For example,
+<code>formula = TP53 ~ cancer_group</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>comparisons</code></td>
+<td>
+<p>A list of length-2 vectors specifying the groups of
+interest to be compared. For example to compare groups &quot;A&quot; vs &quot;B&quot; and &quot;B&quot; vs
+&quot;C&quot;, the argument is as follow: <code>comparisons = list(c("A", "B"), c("B",
+"C"))</code></p>
+</td></tr>
+<tr valign="top"><td><code>ref.group</code></td>
+<td>
+<p>a character string specifying the reference group. If
+specified, for a given grouping variable, each of the group levels will be
+compared to the reference group (i.e. control group).
+</p>
+<p>If <code>ref.group = "all"</code>, pairwise two sample tests are performed for
+comparing each grouping variable levels against all (i.e. basemean).</p>
+</td></tr>
+<tr valign="top"><td><code>paired</code></td>
+<td>
+<p>a logical indicating whether you want a paired test.</p>
+</td></tr>
+<tr valign="top"><td><code>alternative</code></td>
+<td>
+<p>a character string specifying the alternative
+hypothesis, must be one of <code>"two.sided"</code> (default),
+<code>"greater"</code> or <code>"less"</code>.  You can specify just the initial
+letter.</p>
+</td></tr>
+<tr valign="top"><td><code>mu</code></td>
+<td>
+<p>a number specifying an optional parameter used to form the null
+hypothesis.</p>
+</td></tr>
+<tr valign="top"><td><code>ci</code></td>
+<td>
+<p>If TRUE, returns confidence intervals by bootstrap. May be slow.</p>
+</td></tr>
+<tr valign="top"><td><code>conf.level</code></td>
+<td>
+<p>The level for the confidence interval.</p>
+</td></tr>
+<tr valign="top"><td><code>ci.type</code></td>
+<td>
+<p>The type of confidence interval to use. Can be any of &quot;norm&quot;,
+&quot;basic&quot;, &quot;perc&quot;, or &quot;bca&quot;. Passed to <code>boot::boot.ci</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>nboot</code></td>
+<td>
+<p>The number of replications to use for bootstrap.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments passed to the functions
+<code>coin::wilcoxsign_test()</code> (case of one- or paired-samples test) or
+<code>coin::wilcox_test()</code> (case of independent two-samples test).</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>return a data frame with some of the following columns: </p>
+
+<ul>
+<li> <p><code>.y.</code>: the y variable used in the test. </p>
+</li>
+<li>
+<p><code>group1,group2</code>: the compared groups in the pairwise tests. </p>
+</li>
+<li>
+<p><code>n,n1,n2</code>: Sample counts. </p>
+</li>
+<li> <p><code>effsize</code>: estimate of the effect
+size (<code>r</code> value). </p>
+</li>
+<li> <p><code>magnitude</code>: magnitude of effect size.
+</p>
+</li>
+<li> <p><code>conf.low,conf.high</code>: lower and upper bound of the effect size
+confidence interval.</p>
+</li></ul>
+
+
+
+<h3>References</h3>
+
+<p>Maciej Tomczak and Ewa Tomczak. The need to report effect size
+estimates revisited. An overview of some recommended measures of effect
+size. Trends in Sport Sciences. 2014; 1(21):19-25.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+if(require("coin")){
+
+# One-sample Wilcoxon test effect size
+ToothGrowth %&gt;% wilcox_effsize(len ~ 1, mu = 0)
+
+# Independent two-samples wilcoxon effect size
+ToothGrowth %&gt;% wilcox_effsize(len ~ supp)
+
+
+# Paired-samples wilcoxon effect size
+ToothGrowth %&gt;% wilcox_effsize(len ~ supp, paired = TRUE)
+
+# Pairwise comparisons
+ToothGrowth %&gt;% wilcox_effsize(len ~ dose)
+
+# Grouped data
+ToothGrowth %&gt;%
+  group_by(supp) %&gt;%
+  wilcox_effsize(len ~ dose)
+
+}
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

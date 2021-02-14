@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Levene's Test</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for levene_test {rstatix}"><tr><td>levene_test {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Levene's Test</h2>
+
+<h3>Description</h3>
+
+<p>Provide a pipe-friendly framework to easily compute Levene's
+test for homogeneity of variance across groups.
+</p>
+<p>Wrapper around the function <code><a href="../../car/html/leveneTest.html">leveneTest</a>()</code>, which can
+additionally handles a grouped data.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+levene_test(data, formula, center = median)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a data frame for evaluating the formula or a model</p>
+</td></tr>
+<tr valign="top"><td><code>formula</code></td>
+<td>
+<p>a formula</p>
+</td></tr>
+<tr valign="top"><td><code>center</code></td>
+<td>
+<p>The name of a function to compute the center of each group;
+mean gives the original Levene's test; the default, median, provides a more
+robust test.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a data frame with the following columns: df1, df2
+(df.residual), statistic and p.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Prepare the data
+data("ToothGrowth")
+df &lt;- ToothGrowth
+df$dose &lt;- as.factor(df$dose)
+# Compute Levene's Test
+df %&gt;% levene_test(len ~ dose)
+
+# Grouped data
+df %&gt;%
+  group_by(supp) %&gt;%
+  levene_test(len ~ dose)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

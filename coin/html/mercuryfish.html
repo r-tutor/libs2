@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Chromosomal Effects of Mercury-Contaminated Fish Consumption</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for mercuryfish {coin}"><tr><td>mercuryfish {coin}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Chromosomal Effects of Mercury-Contaminated Fish Consumption</h2>
+
+<h3>Description</h3>
+
+<p>The mercury level in blood, the proportion of cells with abnormalities, and
+the proportion of cells with chromosome aberrations in consumers of
+mercury-contaminated fish and a control group.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>mercuryfish</pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 39 observations on 4 variables.
+</p>
+
+<dl>
+<dt><code>group</code></dt><dd>
+<p>a factor with levels <code>"control"</code> and <code>"exposed"</code>.
+</p>
+</dd>
+<dt><code>mercury</code></dt><dd>
+<p>mercury level in blood.
+</p>
+</dd>
+<dt><code>abnormal</code></dt><dd>
+<p>the proportion of cells with structural abnormalities.
+</p>
+</dd>
+<dt><code>ccells</code></dt><dd>
+<p>the proportion of <i>C_u</i> cells, i.e., cells with asymmetrical or
+incomplete-symmetrical chromosome aberrations.
+</p>
+</dd>
+</dl>
+
+
+
+<h3>Details</h3>
+
+<p>Control subjects (<code>"control"</code>) and subjects who ate contaminated fish for
+more than three years (<code>"exposed"</code>) are under study.
+</p>
+<p>Rosenbaum (1994) proposed a coherence criterion defining a partial ordering,
+i.e., an observation is smaller than another when all responses are smaller,
+and a score reflecting the &ldquo;ranking&rdquo; is attached to each observation.
+The corresponding partially ordered set (POSET) test can be used to test if
+the distribution of the scores differ between the groups.  Alternatively, a
+multivariate test can be applied.
+</p>
+
+
+<h3>Source</h3>
+
+<p>Skerfving, S., Hansson, K., Mangs, C., Lindsten, J. and Ryman, N.  (1974).
+Methylmercury-induced chromosome damage in men.  <em>Environmental Research</em>
+<b>7</b>(1), 83&ndash;98.  doi: <a href="https://doi.org/10.1016/0013-9351(74)90078-4">10.1016/0013-9351(74)90078-4</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Hothorn, T., Hornik, K., van de Wiel, M. A. and Zeileis, A.  (2006).  A Lego
+system for conditional inference.  <em>The American Statistician</em>
+<b>60</b>(3), 257&ndash;263.  doi: <a href="https://doi.org/10.1198/000313006X118430">10.1198/000313006X118430</a>
+</p>
+<p>Rosenbaum, P. R. (1994).  Coherence in observational studies.
+<em>Biometrics</em> <b>50</b>(2), 368&ndash;374.  doi: <a href="https://doi.org/10.2307/2533380">10.2307/2533380</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Coherence criterion
+coherence &lt;- function(data) {
+    x &lt;- as.matrix(data)
+    matrix(apply(x, 1, function(y)
+        sum(colSums(t(x) &lt; y) == ncol(x)) -
+            sum(colSums(t(x) &gt; y) == ncol(x))), ncol = 1)
+}
+
+## Asymptotic POSET test
+poset &lt;- independence_test(mercury + abnormal + ccells ~ group,
+                           data = mercuryfish, ytrafo = coherence)
+
+## Linear statistic (T in the notation of Rosenbaum, 1994)
+statistic(poset, type = "linear")
+
+## Expectation
+expectation(poset)
+
+## Variance
+## Note: typo in Rosenbaum (1994, p. 371, Sec. 2, last paragraph)
+variance(poset)
+
+## Standardized statistic
+statistic(poset)
+
+## P-value
+pvalue(poset)
+
+## Exact POSET test
+independence_test(mercury + abnormal + ccells ~ group,
+                  data = mercuryfish, ytrafo = coherence,
+                  distribution = "exact")
+
+## Asymptotic multivariate test
+mvtest &lt;- independence_test(mercury + abnormal + ccells ~ group,
+                            data = mercuryfish)
+
+## Global p-value
+pvalue(mvtest)
+
+## Single-step adjusted p-values
+pvalue(mvtest, method = "single-step")
+
+## Step-down adjusted p-values
+pvalue(mvtest, method = "step-down")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>coin</em> version 1.4-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,5 +1,63 @@
+# dbplyr 2.1.0
+
+## New features
+
+* Thanks to @mgirlich, dbplyr gains support for key verbs from tidyr:
+  `pivot_longer()` (#532), `pivot_wider()` (#543), `expand()` (#538), 
+  `complete()` (#538), `replace_na()` (#538), `fill()` (#566).
+
+* @mgirlich is now a dbplyr author in recognition of his significant and
+  sustained contributions.
+
+* `across()` implementation has been rewritten to support more inputs:
+  it now translates formulas (#525), works with SQL functions that don't have
+  R translations (#534), and work with `NULL` (#554)
+
+* `summarise()` now supports argument `.groups` (@mgirlich, #584).
+
+## SQL translation
+
+* All backends: `str_sub()`, `substr()` and `substring()` get better 
+  translations (#577). Most importantly, the results of using negative 
+    locations should match the underlying R implementations more closely.
+
+* MS SQL:
+
+  * `as.integer()` and `as.integer64()` translations cast first to `NUMERIC` 
+     to avoid CASTing weirdness (@DavidPatShuiFong, #496).
+     
+  * Assumes a boolean context inside of `[` (#546)
+  
+  * `str_sub()` with `end = -1` now works (#577).
+
+* Redshift: `lag()` and `lead()` lose the `default` parameter  since it's 
+  not supported (@hdplsa, #548).
+
+* SQLite: custom translation of `full_join()` and `right_join()` 
+  (@mgirlich, #536).
+  
+
+## Minor improvements and bug fixes
+
+* RPostgreSQL backend warns if `temporary = TRUE` since temporary tables are 
+  not supported by `RPostgres::dbWriteTable()` (#574).
+
+* `count()` method provides closer match to dplyr semantics (#347).
+
+* `distinct()` now respects grouping (@mgirlich, #535).
+
+* `db_connection_describe()` no longer uses partial matching (@mgirlich, #564).
+
+* `pull()` no longer `select()`s the result when there's already only 
+  one variable (#562).
+
+* `select()` no longer relocates grouping variables to the front 
+  (@mgirlich, #568). and informs when adding missing grouping variables 
+  (@mgirlich, #559).
+
+* `tbl.src_dbi(...)` now passed on to `tbl_sql()` (#530).
+
 # dbplyr 2.0.0
-(To become dbplyr 2.0.0)
 
 ## dplyr 1.0.0 compatibility
 

@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Replace Correlation Coefficients by Symbols</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for cor_as_symbols {rstatix}"><tr><td>cor_as_symbols {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Replace Correlation Coefficients by Symbols</h2>
+
+<h3>Description</h3>
+
+<p>Take a correlation matrix and replace the correlation coefficients by symbols according to the
+level of the correlation.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+cor_as_symbols(
+  x,
+  cutpoints = c(0, 0.25, 0.5, 0.75, 1),
+  symbols = c(" ", ".", "+", "*")
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a correlation matrix. Particularly, an object of class <code>cor_mat</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>cutpoints</code></td>
+<td>
+<p>numeric vector used for intervals. Default values are
+<code>c(0, 0.25, 0.5, 0.75, 1)</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>symbols</code></td>
+<td>
+<p>character vector, one shorter than cutpoints, used as
+correlation coefficient symbols. Default values are <code>c(" ", ".",  "+",
+"*")</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="cor_mat.html">cor_mat</a>()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Compute correlation matrix
+#::::::::::::::::::::::::::::::::::::::::::
+cor.mat &lt;- mtcars %&gt;%
+  select(mpg, disp, hp, drat, wt, qsec) %&gt;%
+  cor_mat()
+
+# Replace correlation coefficient by symbols
+#::::::::::::::::::::::::::::::::::::::::::
+cor.mat %&gt;%
+  cor_as_symbols() %&gt;%
+  pull_lower_triangle()
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Integer partitions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for partitions-package {partitions}"><tr><td>partitions-package {partitions}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+Integer partitions
+</h2>
+
+<h3>Description</h3>
+
+<p>Routines to enumerate all partitions of an integer; includes restricted
+and unequal partitions.
+</p>
+
+
+<h3>Details</h3>
+
+<p>This package comprises eight functions: <code>P()</code>, <code>Q()</code>,
+<code>R()</code>, and <code>S()</code> give the number of partitions, unequal
+partitions, restricted partitions, and block partitions of an integer.
+</p>
+<p>Functions <code>parts()</code>, <code>diffparts()</code>, <code>restrictedparts()</code>,
+and <code>blockparts()</code> enumerate these partitions.
+</p>
+<p>Function <code>conjugate()</code> gives the conjugate of a partition and
+function <code>durfee()</code> gives the size of the Durfee square.  
+</p>
+<p><strong>NB</strong> the emphasis in this package is terse, efficient C code.
+This means that there is a minimum of argument checking.  For example,
+function <code>conjugate()</code> assumes that the partition is in standard
+form (ie nonincreasing); supplying a vector in nonstandard form will
+result in garbage being returned silently.  Note that a block partition
+is not necessarily in standard form.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Robin K. S. Hankin</p>
+
+
+<h3>References</h3>
+
+
+<ul>
+<li><p> G. E. Andrews 1998 <em>The Theory of Partitions</em>,
+Cambridge University Press
+</p>
+</li>
+<li><p> M. Abramowitz and I. A. Stegun 1965.  <em>Handbook of
+Mathematical Functions</em>, New York: Dover
+</p>
+</li>
+<li><p> G. H. Hardy and E. M. Wright 1985 <em>An introduction to
+the theory of numbers</em>, Clarendon Press: Oxford (fifth edition)
+</p>
+</li>
+<li><p> R. K. S. Hankin 2006.  &ldquo;Additive integer partitions in
+<span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>&rdquo;. <em>Journal of Statistical Software</em>, Volume 16, code
+snippet 1 
+</p>
+</li>
+<li><p> R. K. S. Hankin 2007.  &ldquo;Urn sampling without
+replacement: enumerative combinatorics in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>&rdquo;. <em>Journal of
+Statistical Software</em>, Volume 17, code snippet 1
+</p>
+</li>
+<li><p> R. K. S. Hankin 2007.  &ldquo;Set partitions in
+<span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>&rdquo;. <em>Journal of Statistical Software</em>, Volume
+23, code snippet 2
+</p>
+</li></ul>
+
+
+
+<h3>Examples</h3>
+
+<pre>
+ parts(5)
+ diffparts(9)
+ restrictedparts(15,10)
+ P(10,give=TRUE)
+ Q(10,give=TRUE)
+ R(5,10)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>partitions</em> version 1.10-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -14,13 +14,16 @@ base_win	sql_variant
 build_sql	build_sql
 collapse.tbl_sql	collapse.tbl_sql
 collect.tbl_sql	collapse.tbl_sql
+complete.tbl_lazy	complete.tbl_lazy
 compute.tbl_sql	collapse.tbl_sql
 copy_lahman	lahman
 copy_nycflights13	nycflights13
 copy_to.src_sql	copy_to.src_sql
+count.tbl_lazy	count.tbl_lazy
 db-sql	db-sql
 dbplyr	dbplyr-package
 dbplyr_edition	db-misc
+dbplyr_uncount	dbplyr_uncount
 db_collect	db-io
 db_compute	db-io
 db_connection_describe	db-misc
@@ -31,6 +34,8 @@ distinct.tbl_lazy	distinct.tbl_lazy
 do.tbl_sql	do.tbl_sql
 escape	escape
 escape_ansi	escape
+expand.tbl_lazy	expand.tbl_lazy
+fill.tbl_lazy	fill.tbl_lazy
 filter.tbl_lazy	filter.tbl_lazy
 full_join.tbl_lazy	join.tbl_sql
 group_by.tbl_lazy	group_by.tbl_lazy
@@ -68,6 +73,8 @@ op_single	lazy_ops
 op_sort	lazy_ops
 op_vars	lazy_ops
 partial_eval	partial_eval
+pivot_longer.tbl_lazy	pivot_longer.tbl_lazy
+pivot_wider.tbl_lazy	pivot_wider.tbl_lazy
 pull.tbl_sql	pull.tbl_sql
 reexports	reexports
 relocate.tbl_lazy	select.tbl_lazy
@@ -78,6 +85,7 @@ remote_query_plan	remote_name
 remote_src	remote_name
 rename.tbl_lazy	select.tbl_lazy
 rename_with.tbl_lazy	select.tbl_lazy
+replace_na.tbl_lazy	replace_na.tbl_lazy
 right_join.tbl_lazy	join.tbl_sql
 select.tbl_lazy	select.tbl_lazy
 select_query	sql_build
@@ -148,6 +156,7 @@ src_memdb	memdb_frame
 src_sql	src_sql
 src_test	testing
 summarise.tbl_lazy	summarise.tbl_lazy
+tally.tbl_lazy	count.tbl_lazy
 tbl.src_dbi	tbl.src_dbi
 tbl_dbi	tbl.src_dbi
 tbl_lazy	tbl_lazy

@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Computation of the Permutation Distribution</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for PermutationDistribution-methods {coin}"><tr><td>PermutationDistribution-methods {coin}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Computation of the Permutation Distribution</h2>
+
+<h3>Description</h3>
+
+<p>Methods for computation of the density function, distribution function,
+quantile function, random numbers and support of the permutation distribution.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S4 method for signature 'NullDistribution'
+dperm(object, x, ...)
+## S4 method for signature 'IndependenceTest'
+dperm(object, x, ...)
+
+## S4 method for signature 'NullDistribution'
+pperm(object, q, ...)
+## S4 method for signature 'IndependenceTest'
+pperm(object, q, ...)
+
+## S4 method for signature 'NullDistribution'
+qperm(object, p, ...)
+## S4 method for signature 'IndependenceTest'
+qperm(object, p, ...)
+
+## S4 method for signature 'NullDistribution'
+rperm(object, n, ...)
+## S4 method for signature 'IndependenceTest'
+rperm(object, n, ...)
+
+## S4 method for signature 'NullDistribution'
+support(object, ...)
+## S4 method for signature 'IndependenceTest'
+support(object, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+
+<p>an object from which the density function, distribution function, quantile
+function, random numbers or support of the permutation distribution can be
+computed.
+</p>
+</td></tr>
+<tr valign="top"><td><code>x, q</code></td>
+<td>
+
+<p>a numeric vector, the quantiles for which the density function or
+distribution function is computed.
+</p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+
+<p>a numeric vector, the probabilities for which the quantile function is
+computed.
+</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+
+<p>a numeric vector, the number of observations.  If <code>length(n) &gt; 1</code>, the
+length is taken to be the number required.
+</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+
+<p>further arguments to be passed to methods.
+</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The methods <code>dperm</code>, <code>pperm</code>, <code>qperm</code>, <code>rperm</code> and
+<code>support</code> compute the density function, distribution function, quantile
+function, random deviates and support, respectively, of the permutation
+distribution.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The density function, distribution function, quantile function, random
+deviates or support of the permutation distribution computed from
+<code>object</code>.  A numeric vector.
+</p>
+
+
+<h3>Note</h3>
+
+<p>The density of asymptotic permutation distributions for maximum-type tests or
+exact permutation distributions obtained by the split-up algoritm is reported
+as <code>NA</code>.  The quantile function of asymptotic permutation distributions
+for maximum-type tests cannot be computed for <code>p</code> less than 0.5, due to
+limitations in the <span class="pkg">mvtnorm</span> package.  The support of exact permutation
+distributions obtained by the split-up algorithm is reported as <code>NA</code>.
+</p>
+<p>In versions of <span class="pkg">coin</span> prior to 1.1-0, the support of asymptotic
+permutation distributions was given as an interval containing 99.999 % of the
+probability mass.  It is now reported as <code>NA</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Two-sample problem
+dta &lt;- data.frame(
+    y = rnorm(20),
+    x = gl(2, 10)
+)
+
+## Exact Ansari-Bradley test
+at &lt;- ansari_test(y ~ x, data = dta, distribution = "exact")
+
+## Support of the exact distribution of the Ansari-Bradley statistic
+supp &lt;- support(at)
+
+## Density of the exact distribution of the Ansari-Bradley statistic
+dens &lt;- dperm(at, x = supp)
+
+## Plotting the density
+plot(supp, dens, type = "s")
+
+## 95% quantile
+qperm(at, p = 0.95)
+
+## One-sided p-value
+pperm(at, q = statistic(at))
+
+## Random number generation
+rperm(at, n = 5)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>coin</em> version 1.4-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Build Factorial Designs for ANOVA</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for factorial_design {rstatix}"><tr><td>factorial_design {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Build Factorial Designs for ANOVA</h2>
+
+<h3>Description</h3>
+
+<p>Provides helper functions to build factorial design for easily
+computing ANOVA using the <code><a href="../../car/html/Anova.html">Anova</a>()</code> function. This might be
+very useful for repeated measures ANOVA, which is hard to set up with the
+<code>car</code> package.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+factorial_design(data, dv, wid, between, within, covariate)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a data frame containing the variables</p>
+</td></tr>
+<tr valign="top"><td><code>dv</code></td>
+<td>
+<p>(numeric) dependent variable name.</p>
+</td></tr>
+<tr valign="top"><td><code>wid</code></td>
+<td>
+<p>(factor) column name containing individuals/subjects identifier.
+Should be unique per individual.</p>
+</td></tr>
+<tr valign="top"><td><code>between</code></td>
+<td>
+<p>(optional) between-subject factor variables.</p>
+</td></tr>
+<tr valign="top"><td><code>within</code></td>
+<td>
+<p>(optional) within-subjects factor variables</p>
+</td></tr>
+<tr valign="top"><td><code>covariate</code></td>
+<td>
+<p>(optional) covariate names (for ANCOVA)</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a list with the following components: </p>
+ <ul>
+<li> <p><strong>the
+specified arguments</strong>: <code>dv, wid, between, within</code> </p>
+</li>
+<li> <p><strong>data</strong>:
+the original data (long format) or independent ANOVA. The wide format is
+returned for repeated measures ANOVA. </p>
+</li>
+<li> <p><strong>idata</strong>: an optional data
+frame giving the levels of factors defining the intra-subject model for
+multivariate repeated-measures data. </p>
+</li>
+<li> <p><strong>idesign</strong>: a one-sided
+model formula using the “data” in idata and specifying the intra-subject
+design. </p>
+</li>
+<li> <p><strong>repeated</strong>: logical. Value is TRUE when the data is a
+repeated design. </p>
+</li>
+<li> <p><strong>lm_formula</strong>: the formula used to build the
+<code>lm</code> model. </p>
+</li>
+<li> <p><strong>lm_data</strong>: the data used to build the <code>lm</code>
+model. Can be either in a long format (i.e., the original data for
+independent measures ANOVA) or in a wide format (case of repeated measures ANOVA). </p>
+</li>
+<li> <p><strong>model</strong>: the <code>lm</code> model </p>
+</li></ul>
+
+
+
+<h3>Author(s)</h3>
+
+<p>Alboukadel Kassambara, <a href="mailto:alboukadel.kassambara@gmail.com">alboukadel.kassambara@gmail.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="anova_test.html">anova_test</a>()</code>, <code><a href="anova_summary.html">anova_summary</a>()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Load data
+#:::::::::::::::::::::::::::::::::::::::
+data("ToothGrowth")
+df &lt;- ToothGrowth
+head(df)
+
+# Repeated measures designs
+#:::::::::::::::::::::::::::::::::::::::::
+# Prepare the data
+df$id &lt;- rep(1:10, 6) # Add individuals id
+head(df)
+# Build factorial designs
+design &lt;- factorial_design(df, dv = len, wid = id, within = c(supp, dose))
+design
+# Easily perform repeated measures ANOVA using the car package
+res.anova &lt;- Anova(design$model, idata = design$idata, idesign = design$idesign, type = 3)
+summary(res.anova, multivariate = FALSE)
+
+# Independent measures designs
+#:::::::::::::::::::::::::::::::::::::::::
+# Build factorial designs
+df$id &lt;- 1:nrow(df)
+design &lt;- factorial_design(df, dv = len, wid = id, between = c(supp, dose))
+design
+# Perform ANOVA
+Anova(design$model, type = 3)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

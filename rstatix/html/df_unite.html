@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Unite Multiple Columns into One</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for df_unite {rstatix}"><tr><td>df_unite {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Unite Multiple Columns into One</h2>
+
+<h3>Description</h3>
+
+<p>Paste together multiple columns into one. Wrapper arround
+<code><a href="../../tidyr/html/unite.html">unite</a>()</code> that supports standard and non standard
+evaluation.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+df_unite(data, col, ..., vars = NULL, sep = "_", remove = TRUE, na.rm = FALSE)
+
+df_unite_factors(
+  data,
+  col,
+  ...,
+  vars = NULL,
+  sep = "_",
+  remove = TRUE,
+  na.rm = FALSE
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a data frame</p>
+</td></tr>
+<tr valign="top"><td><code>col</code></td>
+<td>
+<p>the name of the new column as a string or a symbol.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>a selection of columns. One or more unquoted expressions (or variable names) separated by
+commas.</p>
+</td></tr>
+<tr valign="top"><td><code>vars</code></td>
+<td>
+<p>a character vector containing the column names of interest.</p>
+</td></tr>
+<tr valign="top"><td><code>sep</code></td>
+<td>
+<p>Separator to use between values.</p>
+</td></tr>
+<tr valign="top"><td><code>remove</code></td>
+<td>
+<p>If <code>TRUE</code>, remove input columns from output data frame.</p>
+</td></tr>
+<tr valign="top"><td><code>na.rm</code></td>
+<td>
+<p>If <code>TRUE</code>, missing values will be remove prior to uniting
+each value.</p>
+</td></tr>
+</table>
+
+
+<h3>Functions</h3>
+
+
+<ul>
+<li> <p><code>df_unite</code>: Unite multiple columns into one.
+</p>
+</li>
+<li> <p><code>df_unite_factors</code>: Unite factor columns. First, order factors levels then
+merge them into one column. The output column is a factor.
+</p>
+</li></ul>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Non standard evaluation
+head(ToothGrowth) %&gt;%
+ df_unite(col = "dose_supp", dose, supp)
+
+# Standard evaluation
+head(ToothGrowth) %&gt;%
+ df_unite(col = "dose_supp", vars = c("dose", "supp"))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

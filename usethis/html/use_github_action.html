@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Use a specific GitHub Actions workflow</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for use_github_action {usethis}"><tr><td>use_github_action {usethis}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Use a specific GitHub Actions workflow</h2>
+
+<h3>Description</h3>
+
+<p>Configure an individual, specific <a href="https://github.com/features/actions">GitHub Actions</a> workflow, either one of the
+examples from
+<a href="https://github.com/r-lib/actions/tree/master/examples">r-lib/actions/examples</a>
+or a custom workflow given by the <code>url</code> parameter.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+use_github_action(
+  name,
+  url = NULL,
+  save_as = NULL,
+  ignore = TRUE,
+  open = FALSE
+)
+
+use_github_action_check_release(
+  save_as = "R-CMD-check.yaml",
+  ignore = TRUE,
+  open = FALSE
+)
+
+use_github_action_check_standard(
+  save_as = "R-CMD-check.yaml",
+  ignore = TRUE,
+  open = FALSE
+)
+
+use_github_action_check_full(
+  save_as = "R-CMD-check.yaml",
+  ignore = TRUE,
+  open = FALSE,
+  repo_spec = NULL
+)
+
+use_github_action_pr_commands(
+  save_as = "pr-commands.yaml",
+  ignore = TRUE,
+  open = FALSE
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>name</code></td>
+<td>
+<p>Name of the workflow file, with or without a <code>.yaml</code> extension.</p>
+</td></tr>
+<tr valign="top"><td><code>url</code></td>
+<td>
+<p>The full URL to the <code>.yaml</code> file. By default, the corresponding
+workflow in <a href="https://github.com/r-lib/actions">https://github.com/r-lib/actions</a> will be used.</p>
+</td></tr>
+<tr valign="top"><td><code>save_as</code></td>
+<td>
+<p>Name of the workflow file. Defaults to <code>fs::path_file(url)</code>
+for <code>use_github_action()</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>ignore</code></td>
+<td>
+<p>Should the newly created file be added to <code>.Rbuildignore</code>?</p>
+</td></tr>
+<tr valign="top"><td><code>open</code></td>
+<td>
+<p>Open the newly created file for editing? Happens in RStudio, if
+applicable, or via <code><a href="../../utils/html/file.edit.html">utils::file.edit()</a></code> otherwise.</p>
+</td></tr>
+<tr valign="top"><td><code>repo_spec</code></td>
+<td>
+<p>Optional GitHub repo specification in this form: <code>owner/repo</code>. This can usually be inferred from the GitHub remotes of active project.</p>
+</td></tr>
+</table>
+
+
+<h3><code>use_github_action_check_release()</code></h3>
+
+<p>This workflow installs the latest release of R on macOS and runs <code style="white-space: pre;">R CMD check</code> via the <a href="https://github.com/r-lib/rcmdcheck">rcmdcheck</a> package.
+</p>
+
+
+<h3><code>use_github_action_check_standard()</code></h3>
+
+<p>This workflow runs <code style="white-space: pre;">R CMD check</code> via the
+<a href="https://github.com/r-lib/rcmdcheck">rcmdcheck</a> package on the three major
+operating systems (linux, macOS, and Windows) on the latest release of R and
+on R-devel. This workflow is appropriate for a package that is (or will
+hopefully be) on CRAN or Bioconductor.
+</p>
+
+
+<h3><code>use_github_action_check_full()</code></h3>
+
+<p>This workflow runs <code style="white-space: pre;">R CMD check</code> at least once on each of the three major
+operating systems (linux, macOS, and Windows) and on the current release,
+devel, and four previous versions of R. This is how the tidyverse team checks
+its packages, but it may be overkill for less widely used packages. Consider
+using the more streamlined workflows set up by <code><a href="github_actions.html">use_github_actions()</a></code> or
+<code>use_github_action_check_standard()</code>.
+</p>
+
+
+<h3><code>use_github_action_pr_commands()</code></h3>
+
+<p>This workflow enables the use of two R-specific commands in pull request
+issue comments:
+</p>
+
+<ul>
+<li> <p><code style="white-space: pre;">/document</code> to run <code>roxygen2::roxygenise()</code> and update the PR
+</p>
+</li>
+<li> <p><code style="white-space: pre;">/style</code> to run <code>styler::style_pkg()</code> and update the PR
+</p>
+</li></ul>
+
+
+
+<h3>See Also</h3>
+
+<p><a href="github_actions.html">github_actions</a> for generic workflows and badge generation.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>usethis</em> version 2.0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

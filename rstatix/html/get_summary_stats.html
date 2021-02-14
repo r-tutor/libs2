@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Compute Summary Statistics</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for get_summary_stats {rstatix}"><tr><td>get_summary_stats {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Compute Summary Statistics</h2>
+
+<h3>Description</h3>
+
+<p>Compute summary statistics for one or multiple numeric variables.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+get_summary_stats(
+  data,
+  ...,
+  type = c("full", "common", "robust", "five_number", "mean_sd", "mean_se", "mean_ci",
+    "median_iqr", "median_mad", "quantile", "mean", "median", "min", "max"),
+  show = NULL,
+  probs = seq(0, 1, 0.25)
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a data frame</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>(optional) One or more unquoted expressions (or variable names)
+separated by commas. Used to select a variable of interest. If no variable
+is specified, then the summary statistics of all numeric variables in the
+data frame is computed.</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>type of summary statistics. Possible values include: <code>"full",
+"common", "robust",  "five_number", "mean_sd", "mean_se", "mean_ci",
+"median_iqr", "median_mad", "quantile", "mean", "median",  "min", "max"</code></p>
+</td></tr>
+<tr valign="top"><td><code>show</code></td>
+<td>
+<p>a character vector specifying the summary statistics you want to
+show. Example: <code>show = c("n", "mean", "sd")</code>. This is used to filter
+the output after computation.</p>
+</td></tr>
+<tr valign="top"><td><code>probs</code></td>
+<td>
+<p>numeric vector of probabilities with values in [0,1]. Used only when type = &quot;quantile&quot;.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A data frame containing descriptive statistics, such as: </p>
+
+<ul>
+<li> <p><strong>n</strong>: the number of individuals </p>
+</li>
+<li> <p><strong>min</strong>: minimum
+</p>
+</li>
+<li> <p><strong>max</strong>: maximum </p>
+</li>
+<li> <p><strong>median</strong>: median </p>
+</li>
+<li>
+<p><strong>mean</strong>: mean </p>
+</li>
+<li> <p><strong>q1, q3</strong>: the first and the third quartile,
+respectively. </p>
+</li>
+<li> <p><strong>iqr</strong>: interquartile range </p>
+</li>
+<li> <p><strong>mad</strong>:
+median absolute deviation (see ?MAD) </p>
+</li>
+<li> <p><strong>sd</strong>: standard deviation
+of the mean </p>
+</li>
+<li> <p><strong>se</strong>: standard error of the mean </p>
+</li>
+<li> <p><strong>ci</strong>: 95 percent confidence interval of the mean </p>
+</li></ul>
+
+
+
+<h3>Examples</h3>
+
+<pre>
+# Full summary statistics
+data("ToothGrowth")
+ToothGrowth %&gt;% get_summary_stats(len)
+
+# Summary statistics of grouped data
+# Show only common summary
+ToothGrowth %&gt;%
+  group_by(dose, supp) %&gt;%
+  get_summary_stats(len, type = "common")
+
+# Robust summary statistics
+ToothGrowth %&gt;% get_summary_stats(len, type = "robust")
+
+# Five number summary statistics
+ToothGrowth %&gt;% get_summary_stats(len, type = "five_number")
+
+# Compute only mean and sd
+ToothGrowth %&gt;% get_summary_stats(len, type = "mean_sd")
+
+# Compute full summary statistics but show only mean, sd, median, iqr
+ToothGrowth %&gt;%
+    get_summary_stats(len, show = c("mean", "sd", "median", "iqr"))
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

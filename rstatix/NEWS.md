@@ -1,3 +1,30 @@
+# rstatix 0.7.0
+
+## New features
+
+- New function to extract information from rstatix statistical tests:
+      - `get_n()` to extract sample count (n) from statistical test results.
+      - `get_description` to extract stat test description or name
+      - `remove_ns()` to remove non-significant rows.
+
+## Major changes
+
+- Rewritting `add_x_position()` to better support different situations (#73).
+- Now, the output of the function `dunn_test()` include `estimate1` and `estimate2` when the argument `detailed = TRUE` is specified. The `estimate1` and `estimate2` values represent the mean rank values of the two groups being compared, respectively (#59).
+
+## Minor changes
+
+- `cor_spread()` doc updated, error is explicitly shown if the input data doesn't contain the columns "var1", "var2" and "cor" (#95)
+- Maintenance updates of the functions `emmeans_test()` and `levene_test()` to adapt to broom release 0.7.4 (#89)
+- The documentation of the function `anova_test()` is updated to explain the internal contrast setting (#74).
+- Now, `p_mark_significance()` works when all p-values are NA. Empty character ("") is returned for NA (#64).
+- Classes (`rstatix` and `grouped_anova_test`) added to grouped ANOVA test (#61)
+- New argument `scales` added in the function `get_y_position()`. If the specified value is "free" or "free_y", then the step increase of y positions will be calculated by plot panels. Note that, using "free" or "free_y" gives the same result. A global step increase is computed when scales = "fixed" (#56).
+
+## Bug fixes
+   
+- The function `anova_test()` computes now repeated measures ANOVA without error when unused columns are present in the input data frame (#55)
+
 # rstatix 0.6.0
    
 ## Minor changes

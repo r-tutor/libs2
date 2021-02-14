@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Pull Lower and Upper Triangular Part of a Matrix</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for pull_triangle {rstatix}"><tr><td>pull_triangle {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Pull Lower and Upper Triangular Part of a Matrix</h2>
+
+<h3>Description</h3>
+
+<p>Returns the lower or the upper triangular part of a
+(correlation) matrix.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+pull_triangle(x, triangle = c("lower", "upper"), diagonal = FALSE)
+
+pull_upper_triangle(x, diagonal = FALSE)
+
+pull_lower_triangle(x, diagonal = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a (correlation) matrix</p>
+</td></tr>
+<tr valign="top"><td><code>triangle</code></td>
+<td>
+<p>the triangle to pull. Allowed values are one of
+&quot;upper&quot; and &quot;lower&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>diagonal</code></td>
+<td>
+<p>logical. Default is FALSE. If TRUE, the matrix diagonal is
+included.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>an object of class <code>cor_mat_tri</code>, which is a data frame
+</p>
+
+
+<h3>Functions</h3>
+
+
+<ul>
+<li> <p><code>pull_triangle</code>: returns either the lower or upper triangular part of a matrix.
+</p>
+</li>
+<li> <p><code>pull_upper_triangle</code>: returns an object of class <code>upper_tri</code>, which
+is a data frame containing the upper triangular part of a matrix.
+</p>
+</li>
+<li> <p><code>pull_lower_triangle</code>: returns an object of class <code>lower_tri</code>, which
+is a data frame containing the lower triangular part of a matrix.
+</p>
+</li></ul>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="replace_triangle.html">replace_triangle</a>()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+# Data preparation
+#::::::::::::::::::::::::::::::::::::::::::
+mydata &lt;- mtcars %&gt;%
+  select(mpg, disp, hp, drat, wt, qsec)
+head(mydata, 3)
+
+# Compute correlation matrix and pull triangles
+#::::::::::::::::::::::::::::::::::::::::::
+# Correlation matrix
+cor.mat &lt;- cor_mat(mydata)
+cor.mat
+
+# Pull lower triangular part
+cor.mat %&gt;% pull_lower_triangle()
+
+# Pull upper triangular part
+cor.mat %&gt;% pull_upper_triangle()
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

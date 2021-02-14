@@ -1,0 +1,346 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Tests of Independence in Two- or Three-Way Contingency Tables</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for ContingencyTests {coin}"><tr><td>ContingencyTests {coin}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Tests of Independence in Two- or Three-Way Contingency Tables</h2>
+
+<h3>Description</h3>
+
+<p>Testing the independence of two nominal or ordered factors.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'formula'
+chisq_test(formula, data, subset = NULL, weights = NULL, ...)
+## S3 method for class 'table'
+chisq_test(object, ...)
+## S3 method for class 'IndependenceProblem'
+chisq_test(object, ...)
+
+## S3 method for class 'formula'
+cmh_test(formula, data, subset = NULL, weights = NULL, ...)
+## S3 method for class 'table'
+cmh_test(object, ...)
+## S3 method for class 'IndependenceProblem'
+cmh_test(object, ...)
+
+## S3 method for class 'formula'
+lbl_test(formula, data, subset = NULL, weights = NULL, ...)
+## S3 method for class 'table'
+lbl_test(object, ...)
+## S3 method for class 'IndependenceProblem'
+lbl_test(object, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>formula</code></td>
+<td>
+
+<p>a formula of the form <code>y ~ x | block</code> where <code>y</code> and <code>x</code> are
+factors and <code>block</code> is an optional factor for stratification.
+</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+
+<p>an optional data frame containing the variables in the model formula.
+</p>
+</td></tr>
+<tr valign="top"><td><code>subset</code></td>
+<td>
+
+<p>an optional vector specifying a subset of observations to be used.  Defaults
+to <code>NULL</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>weights</code></td>
+<td>
+
+<p>an optional formula of the form <code>~ w</code> defining integer valued case
+weights for each observation.  Defaults to <code>NULL</code>, implying equal
+weight for all observations.
+</p>
+</td></tr>
+<tr valign="top"><td><code>object</code></td>
+<td>
+
+<p>an object inheriting from classes <code>"table"</code> or
+<code>"<a href="IndependenceProblem-class.html">IndependenceProblem</a>"</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+
+<p>further arguments to be passed to <code><a href="IndependenceTest.html">independence_test</a></code>.
+</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>chisq_test</code>, <code>cmh_test</code> and <code>lbl_test</code> provide the Pearson
+chi-squared test, the generalized Cochran-Mantel-Haenszel test and the
+linear-by-linear association test.  A general description of these methods is
+given by Agresti (2002).
+</p>
+<p>The null hypothesis of independence, or conditional independence given
+<code>block</code>, between <code>y</code> and <code>x</code> is tested.
+</p>
+<p>If <code>y</code> and/or <code>x</code> are ordered factors, the default scores,
+<code>1:nlevels(y)</code> and <code>1:nlevels(x)</code> respectively, can be altered using
+the <code>scores</code> argument (see <code><a href="IndependenceTest.html">independence_test</a></code>); this
+argument can also be used to coerce nominal factors to class <code>"ordered"</code>.
+(<code>lbl_test</code> coerces to class <code>"ordered"</code> under any circumstances.)
+If both <code>y</code> and <code>x</code> are ordered factors, a linear-by-linear
+association test is computed and the direction of the alternative hypothesis
+can be specified using the <code>alternative</code> argument.  For the Pearson
+chi-squared test, this extension was given by Yates (1948) who also discussed
+the situation when either the response or the covariate is an ordered factor;
+see also Cochran (1954) and Armitage (1955) for the particular case when
+<code>y</code> is a binary factor and <code>x</code> is ordered.  The Mantel-Haenszel
+statistic (Mantel and Haenszel, 1959) was similarly extended by Mantel (1963)
+and Landis, Heyman and Koch (1978).
+</p>
+<p>The conditional null distribution of the test statistic is used to obtain
+<i>p</i>-values and an asymptotic approximation of the exact distribution is
+used by default (<code>distribution = "asymptotic"</code>).  Alternatively, the
+distribution can be approximated via Monte Carlo resampling or computed
+exactly for univariate two-sample problems by setting <code>distribution</code> to
+<code>"approximate"</code> or <code>"exact"</code> respectively.  See
+<code><a href="NullDistribution.html">asymptotic</a></code>, <code><a href="NullDistribution.html">approximate</a></code> and <code><a href="NullDistribution.html">exact</a></code>
+for details.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object inheriting from class <code>"<a href="IndependenceTest-class.html">IndependenceTest</a>"</code>.
+</p>
+
+
+<h3>Note</h3>
+
+<p>The exact versions of the Pearson chi-squared test and the generalized
+Cochran-Mantel-Haenszel test do not necessarily result in the same
+<i>p</i>-value as Fisher's exact test (Davis, 1986).
+</p>
+
+
+<h3>References</h3>
+
+<p>Agresti, A.  (2002).  <em>Categorical Data Analysis</em>, Second Edition.
+Hoboken, New Jersey: John Wiley &amp; Sons.
+</p>
+<p>Armitage, P.  (1955).  Tests for linear trends in proportions and frequencies.
+<em>Biometrics</em> <b>11</b>(3), 375&ndash;386.  doi: <a href="https://doi.org/10.2307/3001775">10.2307/3001775</a>
+</p>
+<p>Cochran, W.G.  (1954). Some methods for strengthening the common <i>&chi;^2</i>
+tests.  <em>Biometrics</em> <b>10</b>(4), 417&ndash;451.  doi: <a href="https://doi.org/10.2307/3001616">10.2307/3001616</a>
+</p>
+<p>Davis, L. J.  (1986).  Exact tests for <i>2 x 2</i> contingency
+tables.  <em>The American Statistician</em> <b>40</b>(2), 139&ndash;141.
+doi: <a href="https://doi.org/10.1080/00031305.1986.10475377">10.1080/00031305.1986.10475377</a>
+</p>
+<p>Landis, J. R., Heyman, E. R. and Koch, G. G.  (1978).  Average partial
+association in three-way contingency tables: a review and discussion of
+alternative tests.  <em>International Statistical Review</em> <b>46</b>(3),
+237&ndash;254.  doi: <a href="https://doi.org/10.2307/1402373">10.2307/1402373</a>
+</p>
+<p>Mantel, N. and Haenszel, W.  (1959).  Statistical aspects of the analysis of
+data from retrospective studies of disease.  <em>Journal of the National
+Cancer Institute</em> <b>22</b>(4), 719&ndash;748.  doi: <a href="https://doi.org/10.1093/jnci/22.4.719">10.1093/jnci/22.4.719</a>
+</p>
+<p>Mantel, N.  (1963).  Chi-square tests with one degree of freedom: extensions
+of the Mantel-Haenszel procedure.  <em>Journal of the American Statistical
+Association</em> <b>58</b>(303), 690&ndash;700.  doi: <a href="https://doi.org/10.1080/01621459.1963.10500879">10.1080/01621459.1963.10500879</a>
+</p>
+<p>Yates, F.  (1948).  The analysis of contingency tables with groupings based on
+quantitative characters.  <em>Biometrika</em> <b>35</b>(1/2), 176&ndash;181.
+doi: <a href="https://doi.org/10.1093/biomet/35.1-2.176">10.1093/biomet/35.1-2.176</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Example data
+## Davis (1986, p. 140)
+davis &lt;- matrix(
+    c(3,  6,
+      2, 19),
+    nrow = 2, byrow = TRUE
+)
+davis &lt;- as.table(davis)
+
+## Asymptotic Pearson chi-squared test
+chisq_test(davis)
+chisq.test(davis, correct = FALSE) # same as above
+
+## Approximative (Monte Carlo) Pearson chi-squared test
+ct &lt;- chisq_test(davis,
+                 distribution = approximate(nresample = 10000))
+pvalue(ct)             # standard p-value
+midpvalue(ct)          # mid-p-value
+pvalue_interval(ct)    # p-value interval
+size(ct, alpha = 0.05) # test size at alpha = 0.05 using the p-value
+
+## Exact Pearson chi-squared test (Davis, 1986)
+## Note: disagrees with Fisher's exact test
+ct &lt;- chisq_test(davis,
+                 distribution = "exact")
+pvalue(ct)             # standard p-value
+midpvalue(ct)          # mid-p-value
+pvalue_interval(ct)    # p-value interval
+size(ct, alpha = 0.05) # test size at alpha = 0.05 using the p-value
+fisher.test(davis)
+
+
+## Laryngeal cancer data
+## Agresti (2002, p. 107, Tab. 3.13)
+cancer &lt;- matrix(
+    c(21, 2,
+      15, 3),
+    nrow = 2, byrow = TRUE,
+    dimnames = list(
+        "Treatment" = c("Surgery", "Radiation"),
+           "Cancer" = c("Controlled", "Not Controlled")
+    )
+)
+cancer &lt;- as.table(cancer)
+
+## Exact Pearson chi-squared test (Agresti, 2002, p. 108, Tab. 3.14)
+## Note: agrees with Fishers's exact test
+(ct &lt;- chisq_test(cancer,
+                  distribution = "exact"))
+midpvalue(ct)          # mid-p-value
+pvalue_interval(ct)    # p-value interval
+size(ct, alpha = 0.05) # test size at alpha = 0.05 using the p-value
+fisher.test(cancer)
+
+
+## Homework conditions and teacher's rating
+## Yates (1948, Tab. 1)
+yates &lt;- matrix(
+    c(141, 67, 114, 79, 39,
+      131, 66, 143, 72, 35,
+       36, 14,  38, 28, 16),
+    byrow = TRUE, ncol = 5,
+    dimnames = list(
+           "Rating" = c("A", "B", "C"),
+        "Condition" = c("A", "B", "C", "D", "E")
+    )
+)
+yates &lt;- as.table(yates)
+
+## Asymptotic Pearson chi-squared test (Yates, 1948, p. 176)
+chisq_test(yates)
+
+## Asymptotic Pearson-Yates chi-squared test (Yates, 1948, pp. 180-181)
+## Note: 'Rating' and 'Condition' as ordinal
+(ct &lt;- chisq_test(yates,
+                  alternative = "less",
+                  scores = list("Rating" = c(-1, 0, 1),
+                                "Condition" = c(2, 1, 0, -1, -2))))
+statistic(ct)^2 # chi^2 = 2.332
+
+## Asymptotic Pearson-Yates chi-squared test (Yates, 1948, p. 181)
+## Note: 'Rating' as ordinal
+chisq_test(yates,
+           scores = list("Rating" = c(-1, 0, 1))) # Q = 3.825
+
+
+## Change in clinical condition and degree of infiltration
+## Cochran (1954, Tab. 6)
+cochran &lt;- matrix(
+    c(11,  7,
+      27, 15,
+      42, 16,
+      53, 13,
+      11,  1),
+    byrow = TRUE, ncol = 2,
+    dimnames = list(
+              "Change" = c("Marked", "Moderate", "Slight",
+                           "Stationary", "Worse"),
+        "Infiltration" = c("0-7", "8-15")
+    )
+)
+cochran &lt;- as.table(cochran)
+
+## Asymptotic Pearson chi-squared test (Cochran, 1954, p. 435)
+chisq_test(cochran) # X^2 = 6.88
+
+## Asymptotic Cochran-Armitage test (Cochran, 1954, p. 436)
+## Note: 'Change' as ordinal
+(ct &lt;- chisq_test(cochran,
+                  scores = list("Change" = c(3, 2, 1, 0, -1))))
+statistic(ct)^2 # X^2 = 6.66
+
+
+## Change in size of ulcer crater for two treatment groups
+## Armitage (1955, Tab. 2)
+armitage &lt;- matrix(
+    c( 6, 4, 10, 12,
+      11, 8,  8,  5),
+    byrow = TRUE, ncol = 4,
+    dimnames = list(
+        "Treatment" = c("A", "B"),
+           "Crater" = c("Larger", "&lt; 2/3 healed",
+                        "&gt;= 2/3 healed", "Healed")
+    )
+)
+armitage &lt;- as.table(armitage)
+
+## Approximative (Monte Carlo) Pearson chi-squared test (Armitage, 1955, p. 379)
+chisq_test(armitage,
+           distribution = approximate(nresample = 10000)) # chi^2 = 5.91
+
+## Approximative (Monte Carlo) Cochran-Armitage test (Armitage, 1955, p. 379)
+(ct &lt;- chisq_test(armitage,
+                  distribution = approximate(nresample = 10000),
+                  scores = list("Crater" = c(-1.5, -0.5, 0.5, 1.5))))
+statistic(ct)^2 # chi_0^2 = 5.26
+
+
+## Relationship between job satisfaction and income stratified by gender
+## Agresti (2002, p. 288, Tab. 7.8)
+
+## Asymptotic generalized Cochran-Mantel-Haenszel test (Agresti, p. 297)
+(ct &lt;- cmh_test(jobsatisfaction)) # CMH = 10.2001
+
+## The standardized linear statistic
+statistic(ct, type = "standardized")
+
+## The standardized linear statistic for each block
+statistic(ct, type = "standardized", partial = TRUE)
+
+## Asymptotic generalized Cochran-Mantel-Haenszel test (Agresti, p. 297)
+## Note: 'Job.Satisfaction' as ordinal
+cmh_test(jobsatisfaction,
+         scores = list("Job.Satisfaction" = c(1, 3, 4, 5))) # L^2 = 9.0342
+
+## Asymptotic linear-by-linear association test (Agresti, p. 297)
+## Note: 'Job.Satisfaction' and 'Income' as ordinal
+(lt &lt;- lbl_test(jobsatisfaction,
+                scores = list("Job.Satisfaction" = c(1, 3, 4, 5),
+                              "Income" = c(3, 10, 20, 35))))
+statistic(lt)^2 # M^2 = 6.1563
+
+## The standardized linear statistic
+statistic(lt, type = "standardized")
+
+## The standardized linear statistic for each block
+statistic(lt, type = "standardized", partial = TRUE)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>coin</em> version 1.4-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

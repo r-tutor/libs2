@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Compute Frequency Table</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for freq_table {rstatix}"><tr><td>freq_table {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Compute Frequency Table</h2>
+
+<h3>Description</h3>
+
+<p>compute frequency table.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+freq_table(data, ..., vars = NULL, na.rm = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a data frame</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>One or more unquoted expressions (or variable names) separated by
+commas. Used to specify variables of interest.</p>
+</td></tr>
+<tr valign="top"><td><code>vars</code></td>
+<td>
+<p>optional character vector containing variable names.</p>
+</td></tr>
+<tr valign="top"><td><code>na.rm</code></td>
+<td>
+<p>logical value. If TRUE (default), remove missing values in the
+variables used to create the frequency table.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a data frame
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+data("ToothGrowth")
+ToothGrowth %&gt;% freq_table(supp, dose)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

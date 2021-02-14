@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Friedman Rank Sum Test</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for friedman_test {rstatix}"><tr><td>friedman_test {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Friedman Rank Sum Test</h2>
+
+<h3>Description</h3>
+
+<p>Provides a pipe-friendly framework to perform a Friedman rank sum
+test, which is the non-parametric alternative to the one-way repeated
+measures ANOVA test. Wrapper around the function
+<code><a href="../../stats/html/friedman.test.html">friedman.test</a>()</code>. Read more:
+<a href="https://www.datanovia.com/en/lessons/friedman-test-in-r/">Friedman
+test in R</a>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+friedman_test(data, formula, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a data.frame containing the variables in the formula.</p>
+</td></tr>
+<tr valign="top"><td><code>formula</code></td>
+<td>
+<p>a formula of the form <code>a ~ b | c</code>, where <code>a</code>
+(numeric) is the dependent variable name; <code>b</code> is the within-subjects
+factor variables; and <code>c</code> (factor) is the column name containing
+individuals/subjects identifier. Should be unique per individual.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>other arguments to be passed to the function
+<code><a href="../../stats/html/friedman.test.html">friedman.test</a></code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>return a data frame with the following columns: </p>
+ <ul>
+<li>
+<p><code>.y.</code>: the y (dependent) variable used in the test. </p>
+</li>
+<li> <p><code>n</code>:
+sample count. </p>
+</li>
+<li> <p><code>statistic</code>: the value of Friedman's chi-squared
+statistic, used to compute the p-value. </p>
+</li>
+<li> <p><code>p</code>: p-value. </p>
+</li>
+<li>
+<p><code>method</code>: the statistical test used to compare groups.</p>
+</li></ul>
+
+
+
+<h3>Examples</h3>
+
+<pre>
+# Load data
+#:::::::::::::::::::::::::::::::::::::::
+data("ToothGrowth")
+df &lt;- ToothGrowth %&gt;%
+    filter(supp == "VC") %&gt;%
+    mutate(id = rep(1:10, 3))
+head(df)
+
+# Friedman rank sum test
+#:::::::::::::::::::::::::::::::::::::::::
+df %&gt;% friedman_test(len ~ dose | id)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

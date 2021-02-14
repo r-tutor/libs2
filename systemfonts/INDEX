@@ -1,3 +1,4 @@
+font_fallback           Get the fallback font for a given string
 font_feature            Define OpenType font feature settings
 font_info               Query font-specific information
 glyph_info              Query glyph-specific information from fonts

@@ -1,8 +1,8 @@
 Package: actuar
 Type: Package
 Title: Actuarial Functions and Heavy Tailed Distributions
-Version: 3.0-0
-Date: 2020-06-04
+Version: 3.1-1
+Date: 2021-02-02
 Authors@R: c(person("Vincent", "Goulet", role = c("cre", "aut"),
  	            email = "vincent.goulet@act.ulaval.ca"),
 	     person("Sébastien", "Auclair", role = "ctb"),
@@ -42,12 +42,12 @@ LinkingTo: expint
 Suggests: MASS
 License: GPL (>= 2)
 URL: https://gitlab.com/vigou3/actuar
-BugReports: https://gitlab.com/vigou3/actuar/issues
+BugReports: https://gitlab.com/vigou3/actuar/-/issues
 Encoding: UTF-8
 LazyData: yes
 Classification/MSC-2010: 62P05, 91B30, 62G32
 NeedsCompilation: yes
-Packaged: 2020-06-05 03:29:47 UTC; vincent
+Packaged: 2021-02-03 02:46:34 UTC; vincent
 Author: Vincent Goulet [cre, aut],
   Sébastien Auclair [ctb],
   Christophe Dutang [aut],
@@ -64,6 +64,6 @@ Author: Vincent Goulet [cre, aut],
   R Foundation [aut] (Parts of the R to C interface)
 Maintainer: Vincent Goulet <vincent.goulet@act.ulaval.ca>
 Repository: CRAN
-Date/Publication: 2020-06-05 05:20:06 UTC
-Built: R 4.0.2; x86_64-w64-mingw32; 2020-07-09 21:16:14 UTC; windows
+Date/Publication: 2021-02-03 05:50:02 UTC
+Built: R 4.0.3; x86_64-w64-mingw32; 2021-02-08 02:04:32 UTC; windows
 Archs: i386, x64

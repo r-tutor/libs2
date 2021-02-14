@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Exact Multinomial Test</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for multinom_test {rstatix}"><tr><td>multinom_test {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Exact Multinomial Test</h2>
+
+<h3>Description</h3>
+
+<p>Performs an exact multinomial test. Alternative to the chi-square test of goodness-of-fit-test when the sample
+size is small.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+multinom_test(x, p = rep(1/length(x), length(x)), detailed = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>numeric vector containing the counts.</p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>a vector of probabilities of success. The length of p must be the
+same as the number of groups specified by x, and its elements must be
+greater than 0 and less than 1.</p>
+</td></tr>
+<tr valign="top"><td><code>detailed</code></td>
+<td>
+<p>logical value. Default is FALSE. If TRUE, a detailed result is
+shown.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>return a data frame containing the p-value and its significance.
+</p>
+<p>The <strong>returned object has an attribute called args</strong>, which is a list
+holding the test arguments.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><a href="binom_test.html">binom_test</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Data
+tulip &lt;- c(red = 81, yellow = 50, white = 27)
+
+# Question 1: are the color equally common ?
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# this is a test of homogeneity
+res &lt;- multinom_test(tulip)
+res
+
+attr(res, "descriptives")
+
+# Pairwise comparisons between groups
+pairwise_binom_test(tulip, p.adjust.method = "bonferroni")
+
+
+# Question 2: comparing observed to expected proportions
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# this is a goodness-of-fit test
+expected.p &lt;- c(red = 0.5, yellow = 0.33, white = 0.17)
+res &lt;- multinom_test(tulip, expected.p)
+res
+attr(res, "descriptives")
+
+# Pairwise comparisons against a given probabilities
+pairwise_binom_test_against_p(tulip, expected.p)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

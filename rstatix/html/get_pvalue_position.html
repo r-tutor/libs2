@@ -1,0 +1,231 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Autocompute P-value Positions For Plotting Significance</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for get_y_position {rstatix}"><tr><td>get_y_position {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Autocompute P-value Positions For Plotting Significance</h2>
+
+<h3>Description</h3>
+
+<p>Compute p-value x and y positions for plotting significance
+levels. Many examples are provided at : </p>
+ <ul>
+<li>
+<p><a href="https://www.datanovia.com/en/blog/how-to-add-p-values-onto-a-grouped-ggplot-using-the-ggpubr-r-package/">How
+to Add P-Values onto a Grouped GGPLOT using the GGPUBR R Package</a> </p>
+</li>
+<li>
+<p><a href="https://www.datanovia.com/en/blog/ggpubr-how-to-add-adjusted-p-values-to-a-multi-panel-ggplot/">How
+to Add Adjusted P-values to a Multi-Panel GGPlot</a> </p>
+</li>
+<li>
+<p><a href="https://www.datanovia.com/en/blog/ggpubr-how-to-add-p-values-generated-elsewhere-to-a-ggplot/">How
+to Add P-Values Generated Elsewhere to a GGPLOT</a> </p>
+</li></ul>
+
+
+
+<h3>Usage</h3>
+
+<pre>
+get_y_position(
+  data,
+  formula,
+  fun = "max",
+  ref.group = NULL,
+  comparisons = NULL,
+  step.increase = 0.12,
+  y.trans = NULL,
+  stack = FALSE,
+  scales = c("fixed", "free", "free_y")
+)
+
+add_y_position(
+  test,
+  fun = "max",
+  step.increase = 0.12,
+  data = NULL,
+  formula = NULL,
+  ref.group = NULL,
+  comparisons = NULL,
+  y.trans = NULL,
+  stack = FALSE,
+  scales = c("fixed", "free", "free_y")
+)
+
+add_x_position(test, x = NULL, group = NULL, dodge = 0.8)
+
+add_xy_position(
+  test,
+  x = NULL,
+  group = NULL,
+  dodge = 0.8,
+  stack = FALSE,
+  fun = "max",
+  step.increase = 0.12,
+  scales = c("fixed", "free", "free_y"),
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a data.frame containing the variables in the formula.</p>
+</td></tr>
+<tr valign="top"><td><code>formula</code></td>
+<td>
+<p>a formula of the form <code>x ~ group</code> where <code>x</code> is a
+numeric variable giving the data values and <code>group</code> is a factor with
+one or multiple levels giving the corresponding groups. For example,
+<code>formula = TP53 ~ cancer_group</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>fun</code></td>
+<td>
+<p>summary statistics functions used to compute automatically suitable
+y positions of p-value labels and brackets. Possible values include:
+<code>"max", "mean", "mean_sd", "mean_se", "mean_ci", "median",
+ "median_iqr", "median_mad"</code>.
+</p>
+<p>For example, if <code>fun = "max"</code>, the y positions are guessed as follow:
+</p>
+ <ul>
+<li><p> 1. Compute the maximum of each group (groups.maximum) </p>
+</li>
+<li>
+<p>2. Use the highest groups maximum as the first bracket y position </p>
+</li>
+<li><p> 3.
+Add successively a step increase for remaining bracket y positions. </p>
+</li></ul>
+
+<p>When the main plot is a boxplot, you need the option <code>fun = "max"</code>, to
+have the p-value bracket displayed at the maximum point of the group.
+</p>
+<p>In some situations the main plot is a line plot or a barplot showing the
+<code>mean+/-error bars</code> of the groups, where error can be SE (standard
+error), SD (standard deviation) or CI (confidence interval). In this case,
+to correctly compute the bracket y position you need the option <code>fun =
+ "mean_se"</code>, etc.</p>
+</td></tr>
+<tr valign="top"><td><code>ref.group</code></td>
+<td>
+<p>a character string specifying the reference group. If
+specified, for a given grouping variable, each of the group levels will be
+compared to the reference group (i.e. control group).</p>
+</td></tr>
+<tr valign="top"><td><code>comparisons</code></td>
+<td>
+<p>A list of length-2 vectors specifying the groups of
+interest to be compared. For example to compare groups &quot;A&quot; vs &quot;B&quot; and &quot;B&quot; vs
+&quot;C&quot;, the argument is as follow: <code>comparisons = list(c("A", "B"), c("B",
+"C"))</code></p>
+</td></tr>
+<tr valign="top"><td><code>step.increase</code></td>
+<td>
+<p>numeric vector with the increase in fraction of total
+height for every additional comparison to minimize overlap.</p>
+</td></tr>
+<tr valign="top"><td><code>y.trans</code></td>
+<td>
+<p>a function for transforming y axis scale. Value can be
+<code>log2</code>, <code>log10</code> and <code>sqrt</code>. Can be also any custom function
+that can take a numeric vector as input and returns a numeric vector,
+example: <code>y.trans = function(x){log2(x+1)}</code></p>
+</td></tr>
+<tr valign="top"><td><code>stack</code></td>
+<td>
+<p>logical. If TRUE, computes y position for a stacked plot. Useful
+when dealing with stacked bar plots.</p>
+</td></tr>
+<tr valign="top"><td><code>scales</code></td>
+<td>
+<p>Should scales be fixed (<code>"fixed"</code>, the default), free
+(<code>"free"</code>), or free in one dimension (<code>"free_y"</code>)?. This option is
+considered only when determining the y position. If the specified value is
+<code>"free"</code> or <code>"free_y"</code>, then the step increase of y positions will
+be calculated by plot panels. Note that, using <code>"free"</code> or
+<code>"free_y"</code> gives the same result. A global step increase is computed
+when <code>scales = "fixed"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>test</code></td>
+<td>
+<p>an object of class <code>rstatix_test</code> as returned by
+<code><a href="t_test.html">t_test</a>()</code>, <code><a href="wilcox_test.html">wilcox_test</a>()</code>,
+<code><a href="sign_test.html">sign_test</a>()</code>, <code><a href="tukey_hsd.html">tukey_hsd</a>()</code>,
+<code><a href="dunn_test.html">dunn_test</a>()</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>variable on x axis.</p>
+</td></tr>
+<tr valign="top"><td><code>group</code></td>
+<td>
+<p>group variable (legend variable).</p>
+</td></tr>
+<tr valign="top"><td><code>dodge</code></td>
+<td>
+<p>dodge width for grouped ggplot/test. Default is 0.8. Used only
+when <code>x</code> specified.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>other arguments to be passed to the function
+<code><a href="../../stats/html/t.test.html">t.test</a></code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Functions</h3>
+
+
+<ul>
+<li> <p><code>get_y_position</code>: compute the p-value y positions
+</p>
+</li>
+<li> <p><code>add_y_position</code>: add p-value y positions to an object of class <code>rstatix_test</code>
+</p>
+</li>
+<li> <p><code>add_x_position</code>: compute and add p-value x positions.
+</p>
+</li>
+<li> <p><code>add_xy_position</code>: compute and add both x and y positions.
+</p>
+</li></ul>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Data preparation
+#::::::::::::::::::::::::::::::::::::
+df &lt;- ToothGrowth
+df$dose &lt;- as.factor(df$dose)
+df$group &lt;- factor(rep(c(1, 2), 30))
+head(df)
+
+# Stat tests
+#::::::::::::::::::::::::::::::::::::
+stat.test &lt;- df %&gt;%
+  t_test(len ~ dose)
+stat.test
+
+# Add the test into box plots
+#::::::::::::::::::::::::::::::::::::
+stat.test &lt;- stat.test %&gt;%
+  add_y_position()
+
+ if(require("ggpubr")){
+   ggboxplot(df, x = "dose", y = "len") +
+     stat_pvalue_manual(stat.test, label = "p.adj.signif", tip.length = 0.01)
+  }
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Anova Test</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for anova_test {rstatix}"><tr><td>anova_test {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Anova Test</h2>
+
+<h3>Description</h3>
+
+<p>Provides a pipe-friendly framework to perform different types of
+ANOVA tests, including: </p>
+ <ul>
+<li>
+<p><strong><a href="https://www.datanovia.com/en/lessons/anova-in-r/">Independent
+measures ANOVA</a></strong>: between-Subjects designs, </p>
+</li>
+<li>
+<p><strong><a href="https://www.datanovia.com/en/lessons/repeated-measures-anova-in-r/">Repeated
+measures ANOVA</a></strong>: within-Subjects designs </p>
+</li>
+<li>
+<p><strong><a href="https://www.datanovia.com/en/lessons/mixed-anova-in-r/">Mixed
+ANOVA</a></strong>: Mixed within within- and between-Subjects designs, also known as
+split-plot ANOVA and </p>
+</li>
+<li>
+<p><strong><a href="https://www.datanovia.com/en/lessons/ancova-in-r/">ANCOVA:
+Analysis of Covariance</a></strong>. </p>
+</li></ul>
+
+<p>The function is an easy to use wrapper around <code><a href="../../car/html/Anova.html">Anova</a>()</code> and
+<code><a href="../../stats/html/aov.html">aov</a>()</code>. It makes ANOVA computation handy in R and It's
+highly flexible: can support model and formula as input. Variables can be
+also specified as character vector using the arguments <code>dv, wid,
+ between, within, covariate</code>.
+</p>
+<p>The results include ANOVA table, generalized effect size and some assumption
+checks.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+anova_test(
+  data,
+  formula,
+  dv,
+  wid,
+  between,
+  within,
+  covariate,
+  type = NULL,
+  effect.size = "ges",
+  error = NULL,
+  white.adjust = FALSE,
+  observed = NULL,
+  detailed = FALSE
+)
+
+get_anova_table(x, correction = c("auto", "GG", "HF", "none"))
+
+## S3 method for class 'anova_test'
+print(x, ...)
+
+## S3 method for class 'anova_test'
+plot(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a data.frame or a model to be analyzed.</p>
+</td></tr>
+<tr valign="top"><td><code>formula</code></td>
+<td>
+<p>a formula specifying the ANOVA model similar to
+<a href="../../stats/html/aov.html">aov</a>. Can be of the form <code>y ~ group</code> where <code>y</code> is a
+numeric variable giving the data values and <code>group</code> is a factor with
+one or multiple levels giving the corresponding groups. For example,
+<code>formula = TP53 ~ cancer_group</code>.
+</p>
+<p>Examples of supported formula include: </p>
+ <ul>
+<li><p> Between-Ss ANOVA
+(independent measures ANOVA): <code>y ~ b1*b2</code> </p>
+</li>
+<li><p> Within-Ss ANOVA
+(repeated measures ANOVA): <code>y ~ w1*w2 + Error(id/(w1*w2))</code> </p>
+</li>
+<li><p> Mixed
+ANOVA: <code>y ~ b1*b2*w1 + Error(id/w1)</code> </p>
+</li></ul>
+
+<p>If the formula doesn't contain any within vars, a linear model is directly
+fitted and  passed to the ANOVA function. For repeated designs, the ANOVA
+variables are parsed from the formula.</p>
+</td></tr>
+<tr valign="top"><td><code>dv</code></td>
+<td>
+<p>(numeric) dependent variable name.</p>
+</td></tr>
+<tr valign="top"><td><code>wid</code></td>
+<td>
+<p>(factor) column name containing individuals/subjects identifier.
+Should be unique per individual.</p>
+</td></tr>
+<tr valign="top"><td><code>between</code></td>
+<td>
+<p>(optional) between-subject factor variables.</p>
+</td></tr>
+<tr valign="top"><td><code>within</code></td>
+<td>
+<p>(optional) within-subjects factor variables</p>
+</td></tr>
+<tr valign="top"><td><code>covariate</code></td>
+<td>
+<p>(optional) covariate names (for ANCOVA)</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>the type of sums of squares for ANOVA. Allowed values are either
+1, 2 or 3. <code>type = 2</code> is the default because this will yield identical
+ANOVA results as type = 1 when data are balanced but type = 2 will
+additionally yield various assumption tests where appropriate. When the data
+are unbalanced the <code>type = 3</code> is used by popular commercial softwares
+including SPSS.</p>
+</td></tr>
+<tr valign="top"><td><code>effect.size</code></td>
+<td>
+<p>the effect size to compute and to show in the ANOVA
+results. Allowed values can be either &quot;ges&quot; (generalized eta squared) or
+&quot;pes&quot; (partial eta squared) or both. Default is &quot;ges&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>error</code></td>
+<td>
+<p>(optional) for a linear model, an lm model object from which the
+overall error sum of squares and degrees of freedom are to be calculated.
+Read more in <code><a href="../../car/html/Anova.html">Anova</a>()</code> documentation.</p>
+</td></tr>
+<tr valign="top"><td><code>white.adjust</code></td>
+<td>
+<p>Default is FALSE. If TRUE, heteroscedasticity correction
+is applied to the coefficient of covariance matrix. Used only for
+independent measures ANOVA.</p>
+</td></tr>
+<tr valign="top"><td><code>observed</code></td>
+<td>
+<p>Variables that are observed (i.e, measured) as compared to
+experimentally manipulated. The default effect size reported (generalized
+eta-squared) requires correct specification of the observed variables.</p>
+</td></tr>
+<tr valign="top"><td><code>detailed</code></td>
+<td>
+<p>If TRUE, returns extra information (sums of squares columns,
+intercept row, etc.) in the ANOVA table.</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>an object of class <code>anova_test</code></p>
+</td></tr>
+<tr valign="top"><td><code>correction</code></td>
+<td>
+<p>character. Used only in repeated measures ANOVA test to
+specify which correction of the degrees of freedom should be reported for
+the within-subject factors. Possible values are: </p>
+ <ul>
+<li><p>&quot;GG&quot;:
+applies Greenhouse-Geisser correction to all within-subjects factors even if
+the assumption of sphericity is met (i.e., Mauchly's test is not
+significant, p &gt; 0.05). </p>
+</li>
+<li><p>&quot;HF&quot;: applies Hyunh-Feldt correction to all
+within-subjects factors even if the assumption of sphericity is met,
+</p>
+</li>
+<li><p>&quot;none&quot;: returns the ANOVA table without any correction and
+</p>
+</li>
+<li><p>&quot;auto&quot;: apply automatically GG correction to only within-subjects
+factors violating the sphericity assumption (i.e., Mauchly's test p-value is
+significant, p &lt;= 0.05). </p>
+</li></ul>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>additional arguments</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The setting in <code>anova_test()</code> is done in such a way that it
+gives the same results as SPSS, one of the most used commercial software. By
+default, R uses treatment contrasts, where each of the levels is compared to
+the first level used as baseline. The default contrast can be checked using
+<code>options('contrasts')</code>. In the function <code>anova_test()</code>, the
+following setting is used
+<code>options(contrasts=c('contr.sum','contr.poly'))</code>, which gives
+orthogonal contrasts where you compare every level to the overall mean. This
+setting gives the same output as the most commonly used commercial
+softwares, like SPSS. If you want to obtain the same result with the
+function <code>car::Anova()</code> as the one obtained with
+<code>rstatix::anova_test()</code>, then don't forget to set
+<code>options(contrasts=c('contr.sum','contr.poly'))</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>return an object of class <code>anova_test</code> a data frame containing
+the ANOVA table for independent measures ANOVA.
+</p>
+<p>However, for repeated/mixed measures ANOVA, a list containing the following
+components are returned: ANOVA table, Mauchly's Test for Sphericity,
+Sphericity Corrections. These table are described more in the documentation
+of the function <code><a href="anova_summary.html">anova_summary</a>()</code>.
+</p>
+<p>The <strong>returned object has an attribute</strong> called <code>args</code>, which is a
+list holding the arguments used to fit the ANOVA model, including: data, dv,
+within, between, type, model, etc.
+</p>
+
+
+<h3>Functions</h3>
+
+
+<ul>
+<li> <p><code>anova_test</code>: perform anova test
+</p>
+</li>
+<li> <p><code>get_anova_table</code>: extract anova table from an object of class
+<code>anova_test</code>. When within-subject factors are present, either
+sphericity corrected or uncorrected degrees of freedom can be reported.
+</p>
+</li></ul>
+
+
+<h3>Author(s)</h3>
+
+<p>Alboukadel Kassambara, <a href="mailto:alboukadel.kassambara@gmail.com">alboukadel.kassambara@gmail.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="anova_summary.html">anova_summary</a>()</code>, <code><a href="factorial_design.html">factorial_design</a>()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Load data
+#:::::::::::::::::::::::::::::::::::::::
+data("ToothGrowth")
+df &lt;- ToothGrowth
+
+# One-way ANOVA test
+#:::::::::::::::::::::::::::::::::::::::::
+df %&gt;% anova_test(len ~ dose)
+
+# Grouped One-way ANOVA test
+#:::::::::::::::::::::::::::::::::::::::::
+df %&gt;%
+  group_by(supp) %&gt;%
+  anova_test(len ~ dose)
+
+# Two-way ANOVA test
+#:::::::::::::::::::::::::::::::::::::::::
+df %&gt;% anova_test(len ~ supp*dose)
+
+# Two-way repeated measures ANOVA
+#:::::::::::::::::::::::::::::::::::::::::
+df$id &lt;- rep(1:10, 6) # Add individuals id
+# Use formula
+
+df %&gt;% anova_test(len ~ supp*dose + Error(id/(supp*dose)))
+
+
+
+# or use character vector
+df %&gt;% anova_test(dv = len, wid = id, within = c(supp, dose))
+
+# Extract ANOVA table and apply correction
+#:::::::::::::::::::::::::::::::::::::::::
+res.aov &lt;- df %&gt;% anova_test(dv = len, wid = id, within = c(supp, dose))
+get_anova_table(res.aov, correction = "GG")
+
+
+# Use model as arguments
+#:::::::::::::::::::::::::::::::::::::::::
+.my.model &lt;- lm(yield ~ block + N*P*K, npk)
+anova_test(.my.model)
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

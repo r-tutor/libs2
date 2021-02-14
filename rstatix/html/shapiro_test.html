@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Shapiro-Wilk Normality Test</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for shapiro_test {rstatix}"><tr><td>shapiro_test {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Shapiro-Wilk Normality Test</h2>
+
+<h3>Description</h3>
+
+<p>Provides a pipe-friendly framework to performs Shapiro-Wilk test
+of normality. Support grouped data and multiple variables for multivariate
+normality tests. Wrapper around the R base function
+<code><a href="../../stats/html/shapiro.test.html">shapiro.test</a>()</code>. Can handle grouped data. Read more:
+<a href="https://www.datanovia.com/en/lessons/normality-test-in-r/">Normality
+Test in R</a>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+shapiro_test(data, ..., vars = NULL)
+
+mshapiro_test(data)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a data frame. Columns are variables.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>One or more unquoted expressions (or variable names) separated by
+commas. Used to select a variable of interest.</p>
+</td></tr>
+<tr valign="top"><td><code>vars</code></td>
+<td>
+<p>optional character vector containing variable names. Ignored when
+dot vars are specified.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a data frame containing the value of the Shapiro-Wilk statistic and
+the corresponding p.value.
+</p>
+
+
+<h3>Functions</h3>
+
+
+<ul>
+<li> <p><code>shapiro_test</code>: univariate Shapiro-Wilk normality test
+</p>
+</li>
+<li> <p><code>mshapiro_test</code>: multivariate Shapiro-Wilk normality test. This is a
+modified copy of the <code>mshapiro.test()</code> function of the package
+mvnormtest, for internal convenience.
+</p>
+</li></ul>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+# Shapiro Wilk normality test for one variable
+iris %&gt;% shapiro_test(Sepal.Length)
+
+# Shapiro Wilk normality test for two variables
+iris %&gt;% shapiro_test(Sepal.Length, Petal.Width)
+
+# Multivariate normality test
+mshapiro_test(iris[, 1:3])
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

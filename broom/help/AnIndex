@@ -12,7 +12,9 @@ augment.data.frame	data.frame_tidiers
 augment.decomposed.ts	augment.decomposed.ts
 augment.drc	augment.drc
 augment.factanal	augment.factanal
+augment.felm	augment.felm
 augment.fixest	augment.fixest
+augment.gam	augment.gam
 augment.glm	augment.glm
 augment.glmRob	augment.glmRob
 augment.glmrob	augment.robustbase.glmrob
@@ -60,6 +62,7 @@ btergm_tidiers	tidy.btergm
 caret_tidiers	tidy.confusionMatrix
 cch_tidiers	tidy.cch
 cfa_tidiers	tidy.lavaan
+cmprsk_tidiers	tidy.crr
 coeftest_tidiers	tidy.coeftest
 confint_tidy	confint_tidy
 confusionMatrix_tidiers	tidy.confusionMatrix
@@ -72,6 +75,7 @@ emmeans_tidiers	tidy.lsmobj
 epiR_tidiers	tidy.epi.2by2
 ergm_tidiers	tidy.ergm
 factanal_tidiers	tidy.factanal
+felm_tidiers	tidy.felm
 finish_glance	finish_glance
 fitdistr_tidiers	tidy.fitdistr
 fix_data_frame	fix_data_frame
@@ -92,12 +96,14 @@ glance.clm	glance.clm
 glance.clmm	glance.clmm
 glance.coeftest	glance.coeftest
 glance.coxph	glance.coxph
+glance.crr	glance.crr
 glance.cv.glmnet	glance.cv.glmnet
 glance.data.frame	data.frame_tidiers
 glance.drc	glance.drc
 glance.durbinWatsonTest	durbinWatsonTest_tidiers
 glance.ergm	glance.ergm
 glance.factanal	glance.factanal
+glance.felm	glance.felm
 glance.fitdistr	glance.fitdistr
 glance.fixest	glance.fixest
 glance.gam	glance.gam
@@ -137,6 +143,7 @@ glance.poLCA	glance.poLCA
 glance.polr	glance.polr
 glance.probitmfx	glance.mfx
 glance.pyears	glance.pyears
+glance.Rchoice	glance.Rchoice
 glance.ridgelm	glance.ridgelm
 glance.rlm	glance.rlm
 glance.rma	glance.rma
@@ -153,6 +160,7 @@ glance.survfit	glance.survfit
 glance.survreg	glance.survreg
 glance.svyglm	glance.svyglm
 glance.svyolr	glance.svyolr
+glance.varest	glance.varest
 glance_optim	glance_optim
 glmnet_tidiers	tidy.glmnet
 gmm_tidiers	tidy.gmm
@@ -169,6 +177,8 @@ kmeans_tidiers	tidy.kmeans
 ks_tidiers	tidy.kde
 lavaan_tidiers	tidy.lavaan
 leaps_tidiers	tidy.regsubsets
+leveneTest_tidiers	leveneTest_tidiers
+lfe_tidiers	tidy.felm
 list_tidiers	list_tidiers
 lmodel2_tidiers	tidy.lmodel2
 lmtest_tidiers	tidy.coeftest
@@ -200,6 +210,7 @@ prcomp_tidiers	tidy.prcomp
 psych_tidiers	tidy.kappa
 pyears_tidiers	tidy.pyears
 quantreg_tidiers	tidy.rq
+rchoice_tidiers	tidy.Rchoice
 rcorr_tidiers	tidy.rcorr
 reexports	reexports
 ridgelm_tidiers	tidy.ridgelm
@@ -248,6 +259,7 @@ tidy.coeftest	tidy.coeftest
 tidy.confint.glht	tidy.confint.glht
 tidy.confusionMatrix	tidy.confusionMatrix
 tidy.coxph	tidy.coxph
+tidy.crr	tidy.crr
 tidy.cv.glmnet	tidy.cv.glmnet
 tidy.data.frame	data.frame_tidiers
 tidy.density	tidy.density
@@ -260,6 +272,7 @@ tidy.emmGrid	tidy.emmGrid
 tidy.epi.2by2	tidy.epi.2by2
 tidy.ergm	tidy.ergm
 tidy.factanal	tidy.factanal
+tidy.felm	tidy.felm
 tidy.fitdistr	tidy.fitdistr
 tidy.fixest	tidy.fixest
 tidy.ftable	tidy.ftable
@@ -281,6 +294,7 @@ tidy.kde	tidy.kde
 tidy.Kendall	tidy.Kendall
 tidy.kmeans	tidy.kmeans
 tidy.lavaan	tidy.lavaan
+tidy.leveneTest	leveneTest_tidiers
 tidy.Line	sp_tidiers
 tidy.Lines	sp_tidiers
 tidy.list	list_tidiers
@@ -323,6 +337,7 @@ tidy.power.htest	tidy.power.htest
 tidy.prcomp	tidy.prcomp
 tidy.probitmfx	tidy.mfx
 tidy.pyears	tidy.pyears
+tidy.Rchoice	tidy.Rchoice
 tidy.rcorr	tidy.rcorr
 tidy.ref.grid	tidy.ref.grid
 tidy.regsubsets	tidy.regsubsets
@@ -354,11 +369,13 @@ tidy.systemfit	tidy.systemfit
 tidy.table	tidy.table
 tidy.ts	tidy.ts
 tidy.TukeyHSD	tidy.TukeyHSD
+tidy.varest	tidy.varest
 tidy.zoo	tidy.zoo
 tidy_irlba	tidy_irlba
 tidy_optim	tidy_optim
 tidy_svd	tidy_svd
 tidy_xyz	tidy_xyz
+vars_tidiers	tidy.varest
 xyz_tidiers	tidy_xyz
 zoo_tidiers	tidy.zoo
 _PACKAGE	broom

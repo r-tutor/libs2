@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Identify Univariate Outliers Using Boxplot Methods</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for identify_outliers {rstatix}"><tr><td>identify_outliers {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Identify Univariate Outliers Using Boxplot Methods</h2>
+
+<h3>Description</h3>
+
+<p>Detect outliers using boxplot methods. Boxplots are a popular and
+an easy method for identifying outliers. There are two categories of
+outlier: (1) outliers and (2) extreme points.
+</p>
+<p>Values above <code>Q3 + 1.5xIQR</code> or below <code>Q1 - 1.5xIQR</code> are considered
+as outliers. Values above <code>Q3 + 3xIQR</code> or below <code>Q1 - 3xIQR</code> are
+considered as extreme points (or extreme outliers).
+</p>
+<p>Q1 and Q3 are the first and third quartile, respectively. IQR is the
+interquartile range (IQR = Q3 - Q1).
+</p>
+<p>Generally speaking, data points that are labelled outliers in boxplots are
+not considered as troublesome as those considered extreme points and might
+even be ignored. Note that, any <code>NA</code> and <code>NaN</code> are automatically removed
+before the quantiles are computed.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+identify_outliers(data, ..., variable = NULL)
+
+is_outlier(x, coef = 1.5)
+
+is_extreme(x)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a data frame</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>One unquoted expressions (or variable name). Used to select a
+variable of interest. Alternative to the argument <code>variable</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>variable</code></td>
+<td>
+<p>variable name for detecting outliers</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a numeric vector</p>
+</td></tr>
+<tr valign="top"><td><code>coef</code></td>
+<td>
+<p>coefficient specifying how far the outlier should be from the edge
+of their box. Possible values are 1.5 (for outlier) and 3 (for extreme
+points only). Default is 1.5</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+ <ul>
+<li> <p><code>identify_outliers()</code>. Returns the input data
+frame with two additional columns: &quot;is.outlier&quot; and &quot;is.extreme&quot;, which hold
+logical values. </p>
+</li>
+<li> <p><code>is_outlier() and is_extreme()</code>. Returns logical
+vectors. </p>
+</li></ul>
+
+
+
+<h3>Functions</h3>
+
+
+<ul>
+<li> <p><code>identify_outliers</code>: takes a data frame and extract rows suspected as outliers
+according to a numeric column. The following columns are added &quot;is.outlier&quot;
+and &quot;is.extreme&quot;.
+</p>
+</li>
+<li> <p><code>is_outlier</code>: detect outliers in a numeric vector. Returns logical vector.
+</p>
+</li>
+<li> <p><code>is_extreme</code>: detect extreme points in a numeric vector. An alias of
+<code>is_outlier()</code>, where coef = 3. Returns logical vector.
+</p>
+</li></ul>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Generate a demo data
+set.seed(123)
+demo.data &lt;- data.frame(
+  sample = 1:20,
+  score = c(rnorm(19, mean = 5, sd = 2), 50),
+  gender = rep(c("Male", "Female"), each = 10)
+)
+
+# Identify outliers according to the variable score
+demo.data %&gt;%
+  identify_outliers(score)
+
+# Identify outliers by groups
+demo.data %&gt;%
+  group_by(gender) %&gt;%
+  identify_outliers("score")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

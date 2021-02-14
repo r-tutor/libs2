@@ -1,14 +1,16 @@
 Package: dotCall64
 Type: Package
 Title: Enhanced Foreign Function Interface Supporting Long Vectors
-Version: 1.0-0
-Date: 2018-07-30
+Version: 1.0-1
+Date: 2021-02-10
 Authors@R: c(person("Kaspar", "Moesinger", role = c("aut"),
-    email = "kaspar.moesinger@gmail.com"),
-    person("Florian", "Gerber", role = c("cre", "ctb"),
-    email = "florian.gerber@math.uzh.ch"),
-    person("Reinhard", "Furrer", role = "ctb",
-    email = "reinhard.furrer@math.uzh.ch"))
+    email = "kaspar.moesinger@gmail.com"), 
+    person("Florian", "Gerber", role = c("aut"),
+    email = "flora.fauna.gerber@gmail.com",
+    comment = c(ORCID = "0000-0001-8545-5263")),
+    person("Reinhard", "Furrer", role = c("cre", "ctb"),
+    email = "reinhard.furrer@math.uzh.ch",
+    comment = c(ORCID = "0000-0002-6319-2332")))
 Description: Provides .C64(), which is an enhanced version of .C()
     and .Fortran() from the foreign function interface. .C64() supports long
     vectors, arguments of type 64-bit integer, and provides a mechanism to
@@ -21,14 +23,14 @@ Depends: R (>= 3.1)
 Suggests: microbenchmark, OpenMPController, RColorBrewer, roxygen2,
         spam, testthat,
 Collate: 'vector_dc.R' 'dotCall64.R' 'zzz.R'
-RoxygenNote: 6.0.1
+RoxygenNote: 7.1.1
 NeedsCompilation: yes
-Packaged: 2018-07-30 17:08:56 UTC; floger
+Packaged: 2021-02-10 22:18:20 UTC; fl
 Author: Kaspar Moesinger [aut],
-  Florian Gerber [cre, ctb],
-  Reinhard Furrer [ctb]
-Maintainer: Florian Gerber <florian.gerber@math.uzh.ch>
+  Florian Gerber [aut] (<https://orcid.org/0000-0001-8545-5263>),
+  Reinhard Furrer [cre, ctb] (<https://orcid.org/0000-0002-6319-2332>)
+Maintainer: Reinhard Furrer <reinhard.furrer@math.uzh.ch>
 Repository: CRAN
-Date/Publication: 2018-07-30 17:30:14 UTC
-Built: R 4.0.0; x86_64-w64-mingw32; 2020-05-02 18:54:19 UTC; windows
+Date/Publication: 2021-02-11 16:10:05 UTC
+Built: R 4.0.3; x86_64-w64-mingw32; 2021-02-14 21:34:09 UTC; windows
 Archs: i386, x64

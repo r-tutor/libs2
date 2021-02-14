@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Multiple Dosing Photococarcinogenicity Experiment</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for photocar {coin}"><tr><td>photocar {coin}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Multiple Dosing Photococarcinogenicity Experiment</h2>
+
+<h3>Description</h3>
+
+<p>Survival time, time to first tumor, and total number of tumors in three groups
+of animals in a photococarcinogenicity study.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>photocar</pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 108 observations on 6 variables.
+</p>
+
+<dl>
+<dt><code>group</code></dt><dd>
+<p>a factor with levels <code>"A"</code>, <code>"B"</code>, and <code>"C"</code>.
+</p>
+</dd>
+<dt><code>ntumor</code></dt><dd>
+<p>total number of tumors.
+</p>
+</dd>
+<dt><code>time</code></dt><dd>
+<p>survival time.
+</p>
+</dd>
+<dt><code>event</code></dt><dd>
+<p>status indicator for <code>time</code>: <code>FALSE</code> for right-censored
+observations and <code>TRUE</code> otherwise.
+</p>
+</dd>
+<dt><code>dmin</code></dt><dd>
+<p>time to first tumor.
+</p>
+</dd>
+<dt><code>tumor</code></dt><dd>
+<p>status indicator for <code>dmin</code>: <code>FALSE</code> when no tumor was observed
+and <code>TRUE</code> otherwise.
+</p>
+</dd>
+</dl>
+
+
+
+<h3>Details</h3>
+
+<p>The animals were exposed to different levels of ultraviolet radiation (UVR)
+exposure (group A: topical vehicle and 600 Robertson&ndash;Berger units of UVR,
+group B: no topical vehicle and 600 Robertson&ndash;Berger units of UVR and group
+C: no topical vehicle and 1200 Robertson&ndash;Berger units of UVR).  The data are
+taken from Tables 1 to 3 in Molefe <em>et al.</em> (2005).
+</p>
+<p>The main interest is testing the global null hypothesis of no treatment effect
+with respect to survival time, time to first tumor and number of tumors.
+(Molefe <em>et al.</em>, 2005, also analysed the detection time of tumors, but
+that data is not given here.)  In case the global null hypothesis can be
+rejected, the deviations from the partial null hypotheses are of special
+interest.
+</p>
+
+
+<h3>Source</h3>
+
+<p>Molefe, D. F., Chen, J. J., Howard, P. C., Miller, B. J., Sambuco, C. P.,
+Forbes, P. D. and Kodell, R. L.  (2005).  Tests for effects on tumor frequency
+and latency in multiple dosing photococarcinogenicity experiments.
+<em>Journal of Statistical Planning and Inference</em> <b>129</b>(1&ndash;2), 39&ndash;58.
+doi: <a href="https://doi.org/10.1016/j.jspi.2004.06.038">10.1016/j.jspi.2004.06.038</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Hothorn, T., Hornik, K., van de Wiel, M. A. and Zeileis, A.  (2006).  A Lego
+system for conditional inference.  <em>The American Statistician</em>
+<b>60</b>(3), 257&ndash;263.  doi: <a href="https://doi.org/10.1198/000313006X118430">10.1198/000313006X118430</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Plotting data
+op &lt;- par(no.readonly = TRUE) # save current settings
+layout(matrix(1:3, ncol = 3))
+with(photocar, {
+    plot(survfit(Surv(time, event) ~ group),
+         lty =  1:3, xmax = 50, main = "Survival Time")
+    legend("bottomleft", lty = 1:3, levels(group), bty = "n")
+    plot(survfit(Surv(dmin, tumor) ~ group),
+         lty = 1:3, xmax = 50, main = "Time to First Tumor")
+    legend("bottomleft", lty = 1:3, levels(group), bty = "n")
+    boxplot(ntumor ~ group, main = "Number of Tumors")
+})
+par(op) # reset
+
+## Approximative multivariate (all three responses) test
+it &lt;- independence_test(Surv(time, event) + Surv(dmin, tumor) + ntumor ~ group,
+                        data = photocar,
+                        distribution = approximate(nresample = 10000))
+
+## Global p-value
+pvalue(it)
+
+## Why was the global null hypothesis rejected?
+statistic(it, type = "standardized")
+pvalue(it, method = "single-step")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>coin</em> version 1.4-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

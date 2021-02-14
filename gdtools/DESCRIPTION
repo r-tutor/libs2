@@ -1,5 +1,5 @@
 Package: gdtools
-Version: 0.2.2
+Version: 0.2.3
 License: GPL-3 | file LICENSE
 Title: Utilities for Graphical Rendering
 Description: Useful tools for writing vector graphics devices.
@@ -18,11 +18,11 @@ Imports: Rcpp (>= 0.12.12), systemfonts (>= 0.1.1)
 Suggests: htmltools, testthat, fontquiver (>= 0.2.0), curl
 Encoding: UTF-8
 LinkingTo: Rcpp
-SystemRequirements: cairo, freetype2
+SystemRequirements: cairo, freetype2, fontconfig
 BugReports: https://github.com/davidgohel/gdtools/issues
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1
 NeedsCompilation: yes
-Packaged: 2020-04-03 12:08:20 UTC; jeroen
+Packaged: 2021-01-06 15:26:40 UTC; davidgohel
 Author: David Gohel [aut, cre],
   Hadley Wickham [aut],
   Lionel Henry [aut],
@@ -32,6 +32,6 @@ Author: David Gohel [aut, cre],
   RStudio [cph]
 Maintainer: David Gohel <david.gohel@ardata.fr>
 Repository: CRAN
-Date/Publication: 2020-04-03 12:40:02 UTC
-Built: R 4.0.0; x86_64-w64-mingw32; 2020-05-02 18:51:19 UTC; windows
+Date/Publication: 2021-01-06 18:20:05 UTC
+Built: R 4.0.3; x86_64-w64-mingw32; 2021-01-31 21:48:10 UTC; windows
 Archs: i386, x64

@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Visualize Correlation Matrix Using Base Plot</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for cor_plot {rstatix}"><tr><td>cor_plot {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Visualize Correlation Matrix Using Base Plot</h2>
+
+<h3>Description</h3>
+
+<p>Provide a tibble-friendly framework to visualize a correlation
+matrix. Wrapper around the R base function
+<code><a href="../../corrplot/html/corrplot.html">corrplot</a>()</code>. Compared to
+<code><a href="../../corrplot/html/corrplot.html">corrplot</a>()</code>, it can handle directly the output of the
+functions <code><a href="cor_mat.html">cor_mat</a>() (in rstatix)</code>, <code>rcorr() (in Hmisc)</code>,
+<code>correlate() (in corrr)</code> and <code>cor() (in stats)</code>.
+</p>
+<p>The p-values contained in the outputs of the functions
+<code><a href="cor_mat.html">cor_mat</a>()</code> and <code>rcorr()</code> are automatically detected and
+used in the visualization.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+cor_plot(
+  cor.mat,
+  method = "circle",
+  type = "full",
+  palette = NULL,
+  p.mat = NULL,
+  significant.level = 0.05,
+  insignificant = c("cross", "blank"),
+  label = FALSE,
+  font.label = list()
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>cor.mat</code></td>
+<td>
+<p>the correlation matrix to visualize</p>
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+<p>Character, the visualization method of correlation matrix to be
+used. Currently, it supports seven methods, named <code>"circle"</code>
+(default), <code>"square"</code>, <code>"ellipse"</code>, <code>"number"</code>,
+<code>"pie"</code>, <code>"shade"</code> and <code>"color"</code>. See examples for details.
+</p>
+<p>The areas of circles or squares show the absolute value of corresponding
+correlation coefficients. Method <code>"pie"</code> and <code>"shade"</code> came from
+Michael Friendly's job (with some adjustment about the shade added on), and
+<code>"ellipse"</code> came from D.J. Murdoch and E.D. Chow's job, see in section
+References.</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>Character, <code>"full"</code> (default), <code>"upper"</code> or
+<code>"lower"</code>, display full matrix, lower triangular or upper triangular
+matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>palette</code></td>
+<td>
+<p>character vector containing the color palette.</p>
+</td></tr>
+<tr valign="top"><td><code>p.mat</code></td>
+<td>
+<p>matrix of p-value corresponding to the correlation matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>significant.level</code></td>
+<td>
+<p>significant level, if the p-value is bigger than
+<code>significant.level</code>, then the corresponding correlation coefficient is
+regarded as insignificant.</p>
+</td></tr>
+<tr valign="top"><td><code>insignificant</code></td>
+<td>
+<p>character, specialized insignificant correlation
+coefficients, &quot;cross&quot; (default), &quot;blank&quot;. If &quot;blank&quot;, wipe away the
+corresponding glyphs; if &quot;cross&quot;, add crosses (X) on corresponding glyphs.</p>
+</td></tr>
+<tr valign="top"><td><code>label</code></td>
+<td>
+<p>logical value. If TRUE, shows the correlation coefficient
+labels.</p>
+</td></tr>
+<tr valign="top"><td><code>font.label</code></td>
+<td>
+<p>a list with one or more of the following elements: size
+(e.g., 1), color (e.g., &quot;black&quot;) and style (e.g., &quot;bold&quot;). Used to
+customize the correlation coefficient labels. For example <code>font.label
+= list(size = 1, color = "black", style = "bold")</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="cor_as_symbols.html">cor_as_symbols</a>()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Compute correlation matrix
+#::::::::::::::::::::::::::::::::::::::::::
+cor.mat &lt;- mtcars %&gt;%
+  select(mpg, disp, hp, drat, wt, qsec) %&gt;%
+  cor_mat()
+
+# Visualize correlation matrix
+#::::::::::::::::::::::::::::::::::::::::::
+# Full correlation matrix,
+# insignificant correlations are marked by crosses
+cor.mat %&gt;% cor_plot()
+
+# Reorder by correlation coefficient
+# pull lower triangle and visualize
+cor.lower.tri &lt;- cor.mat %&gt;%
+  cor_reorder() %&gt;%
+  pull_lower_triangle()
+cor.lower.tri %&gt;% cor_plot()
+
+# Change visualization methods
+#::::::::::::::::::::::::::::::::::::::::::
+cor.lower.tri %&gt;%
+  cor_plot(method = "pie")
+
+cor.lower.tri %&gt;%
+  cor_plot(method = "color")
+
+cor.lower.tri %&gt;%
+  cor_plot(method = "number")
+
+# Show the correlation coefficient: label = TRUE
+# Blank the insignificant correlation
+#::::::::::::::::::::::::::::::::::::::::::
+cor.lower.tri %&gt;%
+  cor_plot(
+    method = "color",
+    label = TRUE,
+    insignificant = "blank"
+  )
+
+# Change the color palettes
+#::::::::::::::::::::::::::::::::::::::::::
+
+# Using custom color palette
+# Require ggpubr: install.packages("ggpubr")
+if(require("ggpubr")){
+  my.palette &lt;- get_palette(c("red", "white", "blue"), 200)
+  cor.lower.tri %&gt;%
+   cor_plot(palette = my.palette)
+}
+
+# Using RcolorBrewer color palette
+if(require("ggpubr")){
+  my.palette &lt;- get_palette("PuOr", 200)
+  cor.lower.tri %&gt;%
+   cor_plot(palette = my.palette)
+}
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

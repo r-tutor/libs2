@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Malignant Glioma Pilot Study</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for glioma {coin}"><tr><td>glioma {coin}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Malignant Glioma Pilot Study</h2>
+
+<h3>Description</h3>
+
+<p>A non-randomized pilot study on malignant glioma patients with pretargeted
+adjuvant radioimmunotherapy using yttrium-90-biotin.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>glioma</pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 37 observations on 7 variables.
+</p>
+
+<dl>
+<dt><code>no.</code></dt><dd>
+<p>patient number.
+</p>
+</dd>
+<dt><code>age</code></dt><dd>
+<p>patient age (years).
+</p>
+</dd>
+<dt><code>sex</code></dt><dd>
+<p>a factor with levels <code>"F"</code> (Female) and <code>"M"</code> (Male).
+</p>
+</dd>
+<dt><code>histology</code></dt><dd>
+<p>a factor with levels <code>"GBM"</code> (grade IV) and <code>"Grade3"</code> (grade
+III).
+</p>
+</dd>
+<dt><code>group</code></dt><dd>
+<p>a factor with levels <code>"Control"</code> and <code>"RIT"</code>.
+</p>
+</dd>
+<dt><code>event</code></dt><dd>
+<p>status indicator for <code>time</code>: <code>FALSE</code> for right-censored
+observations and <code>TRUE</code> otherwise.
+</p>
+</dd>
+<dt><code>time</code></dt><dd>
+<p>survival time (months).
+</p>
+</dd>
+</dl>
+
+
+
+<h3>Details</h3>
+
+<p>The primary endpoint of this small pilot study is survival.  Since the
+survival times are tied, the classical asymptotic logrank test may be
+inadequate in this setup.  Therefore, a permutation test using Monte Carlo
+resampling was computed in the original paper.  The data are taken from Tables
+1 and 2 of Grana <em>et al.</em> (2002).
+</p>
+
+
+<h3>Source</h3>
+
+<p>Grana, C., Chinol, M., Robertson, C., Mazzetta, C., Bartolomei, M., De Cicco,
+C., Fiorenza, M., Gatti, M., Caliceti, P. and Paganelli, G.  (2002).
+Pretargeted adjuvant radioimmunotherapy with Yttrium-90-biotin in malignant
+glioma patients: A pilot study.  <em>British Journal of Cancer</em>
+<b>86</b>(2), 207&ndash;212.  doi: <a href="https://doi.org/10.1038/sj.bjc.6600047">10.1038/sj.bjc.6600047</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Grade III glioma
+g3 &lt;- subset(glioma, histology == "Grade3")
+
+## Plot Kaplan-Meier estimates
+op &lt;- par(no.readonly = TRUE) # save current settings
+layout(matrix(1:2, ncol = 2))
+plot(survfit(Surv(time, event) ~ group, data = g3),
+     main = "Grade III Glioma", lty = 2:1,
+     ylab = "Probability", xlab = "Survival Time in Month",
+     xlim = c(-2, 72))
+legend("bottomleft", lty = 2:1, c("Control", "Treated"), bty = "n")
+
+## Exact logrank test
+logrank_test(Surv(time, event) ~ group, data = g3,
+             distribution = "exact")
+
+
+## Grade IV glioma
+gbm &lt;- subset(glioma, histology == "GBM")
+
+## Plot Kaplan-Meier estimates
+plot(survfit(Surv(time, event) ~ group, data = gbm),
+     main = "Grade IV Glioma", lty = 2:1,
+     ylab = "Probability", xlab = "Survival Time in Month",
+     xlim = c(-2, 72))
+legend("topright", lty = 2:1, c("Control", "Treated"), bty = "n")
+par(op) # reset
+
+## Exact logrank test
+logrank_test(Surv(time, event) ~ group, data = gbm,
+             distribution = "exact")
+
+
+## Stratified approximative (Monte Carlo) logrank test
+logrank_test(Surv(time, event) ~ group | histology, data = glioma,
+             distribution = approximate(nresample = 10000))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>coin</em> version 1.4-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

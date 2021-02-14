@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Add P-value Significance Symbols</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for add_significance {rstatix}"><tr><td>add_significance {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Add P-value Significance Symbols</h2>
+
+<h3>Description</h3>
+
+<p>Add p-value significance symbols into a data frame.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+add_significance(
+  data,
+  p.col = NULL,
+  output.col = NULL,
+  cutpoints = c(0, 1e-04, 0.001, 0.01, 0.05, 1),
+  symbols = c("****", "***", "**", "*", "ns")
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a data frame containing a p-value column.</p>
+</td></tr>
+<tr valign="top"><td><code>p.col</code></td>
+<td>
+<p>column name containing p-values.</p>
+</td></tr>
+<tr valign="top"><td><code>output.col</code></td>
+<td>
+<p>the output column name to hold the adjusted p-values.</p>
+</td></tr>
+<tr valign="top"><td><code>cutpoints</code></td>
+<td>
+<p>numeric vector used for intervals.</p>
+</td></tr>
+<tr valign="top"><td><code>symbols</code></td>
+<td>
+<p>character vector, one shorter than cutpoints, used as
+significance symbols.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a data frame
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Perform pairwise comparisons and adjust p-values
+ToothGrowth %&gt;%
+ t_test(len ~ dose) %&gt;%
+ adjust_pvalue() %&gt;%
+ add_significance("p.adj")
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

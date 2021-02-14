@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Functions to Label Data Frames by Grouping Variables</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for df_label_both {rstatix}"><tr><td>df_label_both {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Functions to Label Data Frames by Grouping Variables</h2>
+
+<h3>Description</h3>
+
+<p>Functions to label data frame rows by one or multiple grouping
+variables.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+df_label_both(data, ..., vars = NULL, label_col = "label", sep = c(", ", ":"))
+
+df_label_value(data, ..., vars = NULL, label_col = "label", sep = ", ")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a data frame</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>One or more unquoted expressions (or variable names) separated by
+commas. Used as grouping variables.</p>
+</td></tr>
+<tr valign="top"><td><code>vars</code></td>
+<td>
+<p>a character vector containing the grouping variables of interest.</p>
+</td></tr>
+<tr valign="top"><td><code>label_col</code></td>
+<td>
+<p>column to hold the label of the data subsets. Default column
+name is &quot;label&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>sep</code></td>
+<td>
+<p>String separating labelling variables and values. Should be of
+length 2 in the function <code>df_label_both()</code>. 1) One sep is used to
+separate groups, for example ','; 2) The other sep between group name and
+levels; for example ':'.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a modified data frame with a column containing row labels.
+</p>
+
+
+<h3>Functions</h3>
+
+
+<ul>
+<li> <p><code>df_label_both</code>: Displays both the variable name and the factor value.
+</p>
+</li>
+<li> <p><code>df_label_value</code>: Displays only the value of a factor.
+</p>
+</li></ul>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Data preparation
+df &lt;- head(ToothGrowth)
+
+# Labelling: Non standard evaluation
+df %&gt;%
+  df_label_both(dose, supp)
+
+# Standard evaluation
+df %&gt;%
+  df_label_both(dose, supp)
+
+# Nesting the data then label each subset by groups
+ToothGrowth %&gt;%
+  df_nest_by(dose, supp) %&gt;%
+  df_label_both(supp, dose)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

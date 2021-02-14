@@ -1,0 +1,262 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Class '&quot;IndependenceTestStatistic&quot;' and its subclasses</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for IndependenceTestStatistic-class {coin}"><tr><td>IndependenceTestStatistic-class {coin}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Class <code>"IndependenceTestStatistic"</code> and its subclasses</h2>
+
+<h3>Description</h3>
+
+<p>Objects of class <code>"IndependenceTestStatistic"</code> and its subclasses
+<code>"MaxTypeIndependenceTestStatistic"</code>,
+<code>"QuadTypeIndependenceTestStatistic"</code> and
+<code>"ScalarIndependenceTestStatistic"</code> represent the test statistic, the
+linear statistic, and the transformed and original data structures
+corresponding to an independence problem.
+</p>
+
+
+<h3>Objects from the Class</h3>
+
+<p>Class <code>"IndependenceTestStatistic"</code> is a <em>virtual</em> class, so objects
+cannot be created from it directly.
+</p>
+<p>Objects can be created by calls of the form </p>
+<pre>     new("MaxTypeIndependenceTestStatistic", object,
+         alternative = c("two.sided", "less", "greater"), \dots),
+
+     new("QuadTypeIndependenceTestStatistic", object, paired = FALSE, \dots)</pre>
+<p>and </p>
+<pre>     new("ScalarIndependenceTestStatistic", object,
+         alternative = c("two.sided", "less", "greater"), paired = FALSE, \dots)</pre>
+<p>where <code>object</code> is an object of class
+<code>"IndependenceLinearStatistic"</code>, <code>alternative</code> is a character
+specifying the direction of the alternative hypothesis and <code>paired</code> is a
+logical indicating that paired data have been transformed in such a way that
+the (unstandardized) linear statistic is the sum of the absolute values of the
+positive differences between the paired observations.
+</p>
+
+
+<h3>Slots</h3>
+
+<p>For objects of classes <code>"IndependenceTestStatistic"</code>,
+<code>"MaxTypeIndependenceTestStatistic"</code>,
+<code>"QuadTypeIndependenceTestStatistic"</code> or
+<code>"ScalarIndependenceTestStatistic"</code>:
+</p>
+
+<dl>
+<dt><code>teststatistic</code>:</dt><dd>
+<p>Object of class <code>"numeric"</code>.  The test statistic.
+</p>
+</dd>
+<dt><code>standardizedlinearstatistic</code>:</dt><dd>
+<p>Object of class <code>"numeric"</code>.  The standardized linear statistic.
+</p>
+</dd>
+<dt><code>linearstatistic</code>:</dt><dd>
+<p>Object of class <code>"matrix"</code>.  The linear statistic for each block.
+</p>
+</dd>
+<dt><code>expectation</code>:</dt><dd>
+<p>Object of class <code>"matrix"</code>.  The expectation of the linear statistic
+for each block.
+</p>
+</dd>
+<dt><code>covariance</code>:</dt><dd>
+<p>Object of class <code>"matrix"</code>.  The lower triangular elements of the
+covariance of the linear statistic for each block.
+</p>
+</dd>
+<dt><code>xtrans</code>:</dt><dd>
+<p>Object of class <code>"matrix"</code>.  The transformed <code>x</code>.
+</p>
+</dd>
+<dt><code>ytrans</code>:</dt><dd>
+<p>Object of class <code>"matrix"</code>.  The transformed <code>y</code>.
+</p>
+</dd>
+<dt><code>xtrafo</code>:</dt><dd>
+<p>Object of class <code>"function"</code>.  The regression function for <code>x</code>.
+</p>
+</dd>
+<dt><code>ytrafo</code>:</dt><dd>
+<p>Object of class <code>"function"</code>.  The influence function for <code>y</code>.
+</p>
+</dd>
+<dt><code>x</code>:</dt><dd>
+<p>Object of class <code>"data.frame"</code>.  The variables <code>x</code>.
+</p>
+</dd>
+<dt><code>y</code>:</dt><dd>
+<p>Object of class <code>"data.frame"</code>.  The variables <code>y</code>.
+</p>
+</dd>
+<dt><code>block</code>:</dt><dd>
+<p>Object of class <code>"factor"</code>.  The block structure.
+</p>
+</dd>
+<dt><code>weights</code>:</dt><dd>
+<p>Object of class <code>"numeric"</code>.  The case weights.
+</p>
+</dd>
+</dl>
+
+<p>Additionally, for objects of classes <code>"MaxTypeIndependenceTest"</code> or
+<code>"ScalarIndependenceTest"</code>:
+</p>
+
+<dl>
+<dt><code>alternative</code>:</dt><dd>
+<p>Object of class <code>"character"</code>.  The direction of the alternative
+hypothesis.
+</p>
+</dd>
+</dl>
+
+<p>Additionally, for objects of class <code>"QuadTypeIndependenceTest"</code>:
+</p>
+
+<dl>
+<dt><code>covarianceplus</code>:</dt><dd>
+<p>Object of class <code>"numeric"</code>.  The lower triangular elements of the
+Moore-Penrose inverse of the covariance of the linear statistic.
+</p>
+</dd>
+<dt><code>df</code>:</dt><dd>
+<p>Object of class <code>"numeric"</code>.  The rank of the covariance matrix.
+</p>
+</dd>
+</dl>
+
+<p>Additionally, for objects of classes <code>"QuadTypeIndependenceTest"</code> or
+<code>"ScalarIndependenceTest"</code>:
+</p>
+
+<dl>
+<dt><code>paired</code>:</dt><dd>
+<p>Object of class <code>"logical"</code>.  The indicator for paired test
+statistics.
+</p>
+</dd>
+</dl>
+
+
+
+<h3>Extends</h3>
+
+<p>For objects of class <code>"IndependenceTestStatistic"</code>: <br />
+Class <code>"<a href="IndependenceLinearStatistic-class.html">IndependenceLinearStatistic</a>"</code>, directly. <br />
+Class <code>"<a href="IndependenceTestProblem-class.html">IndependenceTestProblem</a>"</code>, by class
+<code>"<a href="IndependenceLinearStatistic-class.html">IndependenceLinearStatistic</a>"</code>, distance 2. <br />
+Class <code>"<a href="IndependenceProblem-class.html">IndependenceProblem</a>"</code>, by class
+<code>"<a href="IndependenceLinearStatistic-class.html">IndependenceLinearStatistic</a>"</code>, distance 3.
+</p>
+<p>For objects of classes <code>"MaxTypeIndependenceTestStatistic"</code>,
+<code>"QuadTypeIndependenceTestStatistic"</code> or
+<code>"ScalarIndependenceTestStatistic"</code>: <br />
+Class <code>"<a href="IndependenceTestStatistic-class.html">IndependenceTestStatistic</a>"</code>, directly. <br />
+Class <code>"<a href="IndependenceLinearStatistic-class.html">IndependenceLinearStatistic</a>"</code>, by class
+<code>"<a href="IndependenceTestStatistic-class.html">IndependenceTestStatistic</a>"</code>, distance 2. <br />
+Class <code>"<a href="IndependenceTestProblem-class.html">IndependenceTestProblem</a>"</code>, by class
+<code>"<a href="IndependenceTestStatistic-class.html">IndependenceTestStatistic</a>"</code>, distance 3. <br />
+Class <code>"<a href="IndependenceProblem-class.html">IndependenceProblem</a>"</code>, by class
+<code>"<a href="IndependenceTestStatistic-class.html">IndependenceTestStatistic</a>"</code>, distance 4.
+</p>
+
+
+<h3>Known Subclasses</h3>
+
+<p>For objects of class <code>"IndependenceTestStatistic"</code>: <br />
+Class <code>"MaxTypeIndependenceTestStatistic"</code>, directly. <br />
+Class <code>"QuadTypeIndependenceTestStatistic"</code>, directly. <br />
+Class <code>"ScalarIndependenceTestStatistic"</code>, directly.
+</p>
+
+
+<h3>Methods</h3>
+
+
+<dl>
+<dt>ApproxNullDistribution</dt><dd>
+<p><code>signature(object = "MaxTypeIndependenceTestStatistic")</code>: See the
+documentation for <code><a href="NullDistribution-methods.html">ApproxNullDistribution</a></code> for details.
+</p>
+</dd>
+<dt>ApproxNullDistribution</dt><dd>
+<p><code>signature(object = "QuadTypeIndependenceTestStatistic")</code>: See the
+documentation for <code><a href="NullDistribution-methods.html">ApproxNullDistribution</a></code> for details.
+</p>
+</dd>
+<dt>ApproxNullDistribution</dt><dd>
+<p><code>signature(object = "ScalarIndependenceTestStatistic")</code>: See the
+documentation for <code><a href="NullDistribution-methods.html">ApproxNullDistribution</a></code> for details.
+</p>
+</dd>
+<dt>AsymptNullDistribution</dt><dd>
+<p><code>signature(object = "MaxTypeIndependenceTestStatistic")</code>: See the
+documentation for <code><a href="NullDistribution-methods.html">AsymptNullDistribution</a></code> for details.
+</p>
+</dd>
+<dt>AsymptNullDistribution</dt><dd>
+<p><code>signature(object = "QuadTypeIndependenceTestStatistic")</code>: See the
+documentation for <code><a href="NullDistribution-methods.html">AsymptNullDistribution</a></code> for details.
+</p>
+</dd>
+<dt>AsymptNullDistribution</dt><dd>
+<p><code>signature(object = "ScalarIndependenceTestStatistic")</code>: See the
+documentation for <code><a href="NullDistribution-methods.html">AsymptNullDistribution</a></code> for details.
+</p>
+</dd>
+<dt>ExactNullDistribution</dt><dd>
+<p><code>signature(object = "QuadTypeIndependenceTestStatistic")</code>: See the
+documentation for <code><a href="NullDistribution-methods.html">ExactNullDistribution</a></code> for details.
+</p>
+</dd>
+<dt>ExactNullDistribution</dt><dd>
+<p><code>signature(object = "ScalarIndependenceTestStatistic")</code>: See the
+documentation for <code><a href="NullDistribution-methods.html">ExactNullDistribution</a></code> for details.
+</p>
+</dd>
+<dt>covariance</dt><dd>
+<p><code>signature(object = "QuadTypeIndependenceTestStatistic")</code>: See the
+documentation for <code><a href="expectation-methods.html">covariance</a></code> for details.
+</p>
+</dd>
+<dt>initialize</dt><dd>
+<p><code>signature(.Object = "IndependenceTestStatistic")</code>: See the
+documentation for <code><a href="../../methods/html/new.html">initialize</a></code> (in package
+<span class="pkg">methods</span>) for details.
+</p>
+</dd>
+<dt>initialize</dt><dd>
+<p><code>signature(.Object = "MaxTypeIndependenceTestStatistic")</code>: See the
+documentation for <code><a href="../../methods/html/new.html">initialize</a></code> (in package
+<span class="pkg">methods</span>) for details.
+</p>
+</dd>
+<dt>initialize</dt><dd>
+<p><code>signature(.Object = "QuadTypeIndependenceTestStatistic")</code>: See the
+documentation for <code><a href="../../methods/html/new.html">initialize</a></code> (in package
+<span class="pkg">methods</span>) for details.
+</p>
+</dd>
+<dt>initialize</dt><dd>
+<p><code>signature(.Object = "ScalarIndependenceTestStatistic")</code>: See the
+documentation for <code><a href="../../methods/html/new.html">initialize</a></code> (in package
+<span class="pkg">methods</span>) for details.
+</p>
+</dd>
+<dt>statistic</dt><dd>
+<p><code>signature(object = "IndependenceTestStatistic")</code>: See the
+documentation for <code><a href="statistic-methods.html">statistic</a></code> for details.
+</p>
+</dd>
+</dl>
+
+
+<hr /><div style="text-align: center;">[Package <em>coin</em> version 1.4-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

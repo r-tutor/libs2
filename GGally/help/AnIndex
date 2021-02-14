@@ -1,4 +1,5 @@
 GGally-package	GGally-package
+%>%	pipe
 +.gg	gg-add
 add_and_overwrite_aes	add_and_overwrite_aes
 add_ref_boxes	add_ref_boxes
@@ -13,6 +14,8 @@ eval_data_col	eval_data_col
 find_plot_type	find_plot_type
 flea	flea
 fn_switch	fn_switch
+geom_stripped_cols	geom_stripped_rows
+geom_stripped_rows	geom_stripped_rows
 getPlot	getPlot
 get_x_axis_labels	get_x_axis_labels
 GGally	GGally-package
@@ -64,6 +67,10 @@ ggally_text	ggally_text
 ggally_trends	ggally_trends
 ggbivariate	ggbivariate
 ggcoef	ggcoef
+ggcoef_compare	ggcoef_model
+ggcoef_model	ggcoef_model
+ggcoef_multinom	ggcoef_model
+ggcoef_plot	ggcoef_model
 ggcorr	ggcorr
 ggduo	ggduo
 ggfacet	ggfacet

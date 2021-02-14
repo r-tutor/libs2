@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Alternative to dplyr::do for Doing Anything</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for doo {rstatix}"><tr><td>doo {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Alternative to dplyr::do for Doing Anything</h2>
+
+<h3>Description</h3>
+
+<p>Provides a flexible alternative to the <code>dplyr:do()</code> function.
+Technically it uses <code>nest() + mutate() + map()</code> to apply arbitrary
+computation to a grouped data frame.
+</p>
+<p>The output is a data frame. If the applied function returns a data frame,
+then the output will be automatically unnested. Otherwise, the output includes the grouping
+variables and a column named &quot;.results.&quot; (by default), which is a &quot;list-columns&quot;
+containing the results for group combinations.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+doo(data, .f, ..., result = ".results.")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a (grouped) data frame</p>
+</td></tr>
+<tr valign="top"><td><code>.f</code></td>
+<td>
+<p>A function, formula, or atomic vector. For example
+<code>~t.test(len ~ supp, data = .)</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments passed on to .f</p>
+</td></tr>
+<tr valign="top"><td><code>result</code></td>
+<td>
+<p>the column name to hold the results. Default is &quot;.results.&quot;.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a data frame
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Custom function
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+stat_test &lt;- function(data, formula){
+  t.test(formula, data) %&gt;%
+    tidy()
+}
+# Example 1: pipe-friendly stat_test().
+# Two possibilities of usage are available
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# Use this
+ToothGrowth %&gt;%
+  group_by(dose) %&gt;%
+  doo(~stat_test(data =., len ~ supp))
+
+# Or this
+ToothGrowth %&gt;%
+  group_by(dose) %&gt;%
+  doo(stat_test, len ~ supp)
+
+# Example 2: R base function t.test() (not pipe friendly)
+# One possibility of usage
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+comparisons &lt;- ToothGrowth %&gt;%
+   group_by(dose) %&gt;%
+   doo(~t.test(len ~ supp, data =.))
+comparisons
+comparisons$.results.
+
+# Example 3: R base function combined with tidy()
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ToothGrowth %&gt;%
+   group_by(dose) %&gt;%
+   doo(~t.test(len ~ supp, data =.) %&gt;% tidy())
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

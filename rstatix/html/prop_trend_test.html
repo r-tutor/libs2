@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Test for Trend in Proportions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for prop_trend_test {rstatix}"><tr><td>prop_trend_test {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Test for Trend in Proportions</h2>
+
+<h3>Description</h3>
+
+<p>Performs chi-squared test for trend in proportion. This test is
+also known as Cochran-Armitage trend test.
+</p>
+<p>Wrappers around the R base function <code><a href="../../stats/html/prop.trend.test.html">prop.trend.test</a>()</code> but
+returns a data frame for easy data visualization.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+prop_trend_test(xtab, score = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>xtab</code></td>
+<td>
+<p>a cross-tabulation (or contingency table) with two columns and
+multiple rows (rx2 design). The columns give the counts of successes and
+failures respectively.</p>
+</td></tr>
+<tr valign="top"><td><code>score</code></td>
+<td>
+<p>group score. If <code>NULL</code>, the default is group number.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>return a data frame with some the following columns: </p>
+ <ul>
+<li>
+<p><code>n</code>: the number of participants.  </p>
+</li>
+<li> <p><code>statistic</code>: the value of
+Chi-squared trend test statistic. </p>
+</li>
+<li> <p><code>df</code>: the degrees of
+freedom.
+</p>
+</li>
+<li> <p><code>p</code>: p-value. </p>
+</li>
+<li>
+<p><code>method</code>: the used statistical test. </p>
+</li>
+<li> <p><code>p.signif</code>: the significance level of p-values and adjusted p-values,
+respectively.</p>
+</li></ul>
+
+<p>The <strong>returned object has an attribute called args</strong>, which is a list
+holding the test arguments.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Proportion of renal stone (calculi) across age
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# Data
+xtab &lt;- as.table(rbind(
+  c(384, 536, 335),
+  c(951, 869, 438)
+))
+dimnames(xtab) &lt;- list(
+  stone = c("yes", "no"),
+  age = c("30-39", "40-49", "50-59")
+)
+xtab
+# Compare the proportion of survived between groups
+prop_trend_test(xtab)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

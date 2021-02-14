@@ -11,6 +11,7 @@ MCMC-recover            Compare MCMC estimates to "true" parameter
                         values
 MCMC-scatterplots       Scatterplots of MCMC draws
 MCMC-traces             Trace plots of MCMC draws
+PPC-censoring           PPC censoring
 PPC-discrete            PPCs for discrete outcomes
 PPC-distributions       PPC distributions
 PPC-errors              PPC errors

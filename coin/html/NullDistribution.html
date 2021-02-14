@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Specification of the Reference Distribution</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for NullDistribution {coin}"><tr><td>NullDistribution {coin}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Specification of the Reference Distribution</h2>
+
+<h3>Description</h3>
+
+<p>Specification of the asymptotic, approximative (Monte Carlo) and exact
+reference distribution.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+asymptotic(maxpts = 25000, abseps = 0.001, releps = 0)
+approximate(nresample = 10000L, parallel = c("no", "multicore", "snow"),
+            ncpus = 1L, cl = NULL, B)
+exact(algorithm = c("auto", "shift", "split-up"), fact = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>maxpts</code></td>
+<td>
+
+<p>an integer, the maximum number of function values.  Defaults to
+<code>25000</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>abseps</code></td>
+<td>
+
+<p>a numeric, the absolute error tolerance.  Defaults to <code>0.001</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>releps</code></td>
+<td>
+
+<p>a numeric, the relative error tolerance.  Defaults to <code>0</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>nresample</code></td>
+<td>
+
+<p>a positive integer, the number of Monte Carlo replicates used for the
+computation of the approximative reference distribution.  Defaults to
+<code>10000L</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>parallel</code></td>
+<td>
+
+<p>a character, the type of parallel operation: either <code>"no"</code> (default),
+<code>"multicore"</code> or <code>"snow"</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>ncpus</code></td>
+<td>
+
+<p>an integer, the number of processes to be used in parallel operation.
+Defaults to <code>1L</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>cl</code></td>
+<td>
+
+<p>an object inheriting from class <code>"cluster"</code>, specifying an optional
+<span class="pkg">parallel</span> or <span class="pkg">snow</span> cluster if <code>parallel = "snow"</code>.  Defaults
+to <code>NULL</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>B</code></td>
+<td>
+
+<p>deprecated, use <code>nresample</code> instead.
+</p>
+</td></tr>
+<tr valign="top"><td><code>algorithm</code></td>
+<td>
+
+<p>a character, the algorithm used for the computation of the exact reference
+distribution: either <code>"auto"</code> (default), <code>"shift"</code> or
+<code>"split-up"</code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>fact</code></td>
+<td>
+
+<p>an integer to multiply the response values with.  Defaults to <code>NULL</code>.
+</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>asymptotic</code>, <code>approximate</code> and <code>exact</code> can be supplied to the
+<code>distribution</code> argument of, e.g., <code><a href="IndependenceTest.html">independence_test</a></code> to
+provide control of the specification of the asymptotic, approximative (Monte
+Carlo) and exact reference distribution respectively.
+</p>
+<p>The asymptotic reference distribution is computed using a randomised
+quasi-Monte Carlo method (Genz and Bretz, 2009) and is applicable to arbitrary
+covariance structures with dimensions up to 1000.  See
+<code><a href="../../mvtnorm/html/algorithms.html">GenzBretz</a></code> in package <span class="pkg">mvtnorm</span> for
+details on <code>maxpts</code>, <code>abseps</code> and <code>releps</code>.
+</p>
+<p>The approximative (Monte Carlo) reference distribution is obtained by a
+conditional Monte Carlo procedure, i.e., by computing the test statistic for
+<code>nresample</code> random samples from all admissible permutations of the
+response <i>Y</i> within each block (Hothorn <em>et al.</em>, 2008).  By
+default, the distribution is computed using serial operation
+(<code>parallel = "no"</code>).  The use of parallel operation is specified by
+setting <code>parallel</code> to either <code>"multicore"</code> (not available for MS
+Windows) or <code>"snow"</code>.  In the latter case, if <code>cl = NULL</code> (default)
+a cluster with <code>ncpus</code> processes is created on the local machine unless a
+default cluster has been registered (see
+<code><a href="../../parallel/html/makeCluster.html">setDefaultCluster</a></code> in package
+<span class="pkg">parallel</span>) in which case that gets used instead.  Alternatively, the use
+of an optional <span class="pkg">parallel</span> or <span class="pkg">snow</span> cluster can be specified by
+<code>cl</code>.  See &lsquo;Examples&rsquo; and package <span class="pkg">parallel</span> for details on
+parallel operation.
+</p>
+<p>The exact reference distribution, currently available for univariate
+two-sample problems only, is computed using either the shift algorithm
+(Streitberg and Röhmel, 1984, 1986, 1987) or the split-up
+algorithm (van de Wiel, 2001).  The shift algorithm handles blocks pertaining
+to, e.g., pre- and post-stratification, but can only be used with positive
+integer-valued scores <i>h(Y)</i>.  The split-up algorithm can be
+used with non-integer scores, but does not handle blocks.  By default, an
+automatic choice is made (<code>algorithm = "auto"</code>) but the shift and
+split-up algorithms can be selected by setting <code>algorithm</code> to either
+<code>"shift"</code> or <code>"split-up"</code> respectively.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Starting with <span class="pkg">coin</span> version 1.1-0, the default for <code>algorithm</code> is
+<code>"auto"</code>, having identical behaviour to <code>"shift"</code> in previous
+versions.  In earlier versions of the package, <code>algorithm = "shift"</code>
+silently switched to the split-up algorithm if non-integer scores were
+detected, whereas the current version exits with a warning.
+</p>
+<p>In versions of <span class="pkg">coin</span> prior to 1.3-0, the number of Monte Carlo replicates
+in <code>approximate()</code> was specified using the now deprecated <code>B</code>
+argument.  <strong>This will be made defunct and removed in a future release.</strong>
+It has been replaced by the <code>nresample</code> argument (for conformity with the
+<span class="pkg">libcoin</span>, <span class="pkg">party</span> and <span class="pkg">partykit</span> packages).
+</p>
+
+
+<h3>References</h3>
+
+<p>Genz, A. and Bretz, F.  (2009).  <em>Computation of Multivariate Normal and
+t Probabilities</em>.  Heidelberg: Springer-Verlag.
+</p>
+<p>Hothorn, T., Hornik, K., van de Wiel, M. A. and Zeileis, A.  (2008).
+Implementing a class of permutation tests: The coin package.  <em>Journal of
+Statistical Software</em> <b>28</b>(8), 1&ndash;23.  doi: <a href="https://doi.org/10.18637/jss.v028.i08">10.18637/jss.v028.i08</a>
+</p>
+<p>Streitberg, B. and Röhmel, J.  (1984).  Exact nonparametrics
+in APL.  <em>APL Quote Quad</em> <b>14</b>(4), 313&ndash;325.
+doi: <a href="https://doi.org/10.1145/384283.801115">10.1145/384283.801115</a>
+</p>
+<p>Streitberg, B. and Röhmel, J.  (1986).  Exact distributions
+for permutations and rank tests: an introduction to some recently published
+algorithms.  <em>Statistical Software Newsletter</em> <b>12</b>(1), 10&ndash;17.
+</p>
+<p>Streitberg, B. and Röhmel, J.  (1987).  Exakte verteilungen
+für rang- und randomisierungstests im allgemeinen
+c-stichprobenfall.  <em>EDV in Medizin und Biologie</em> <b>18</b>(1), 12&ndash;19.
+</p>
+<p>van de Wiel, M. A.  (2001).  The split-up algorithm: a fast symbolic method
+for computing p-values of distribution-free statistics.  <em>Computational
+Statistics</em> <b>16</b>(4), 519&ndash;538.  doi: <a href="https://doi.org/10.1007/s180-001-8328-6">10.1007/s180-001-8328-6</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Approximative (Monte Carlo) Cochran-Mantel-Haenszel test
+
+## Serial operation
+set.seed(123)
+cmh_test(disease ~ smoking | gender, data = alzheimer,
+         distribution = approximate(nresample = 100000))
+
+## Not run: 
+## Multicore with 8 processes (not for MS Windows)
+set.seed(123, kind = "L'Ecuyer-CMRG")
+cmh_test(disease ~ smoking | gender, data = alzheimer,
+         distribution = approximate(nresample = 100000,
+                                    parallel = "multicore", ncpus = 8))
+
+## Automatic PSOCK cluster with 4 processes
+set.seed(123, kind = "L'Ecuyer-CMRG")
+cmh_test(disease ~ smoking | gender, data = alzheimer,
+         distribution = approximate(nresample = 100000,
+                                    parallel = "snow", ncpus = 4))
+
+## Registered FORK cluster with 12 processes (not for MS Windows)
+fork12 &lt;- parallel::makeCluster(12, "FORK") # set-up cluster
+parallel::setDefaultCluster(fork12) # register default cluster
+set.seed(123, kind = "L'Ecuyer-CMRG")
+cmh_test(disease ~ smoking | gender, data = alzheimer,
+         distribution = approximate(nresample = 100000,
+                                    parallel = "snow"))
+parallel::stopCluster(fork12) # clean-up
+
+## User-specified PSOCK cluster with 8 processes
+psock8 &lt;- parallel::makeCluster(8, "PSOCK") # set-up cluster
+set.seed(123, kind = "L'Ecuyer-CMRG")
+cmh_test(disease ~ smoking | gender, data = alzheimer,
+         distribution = approximate(nresample = 100000,
+                                    parallel = "snow", cl = psock8))
+parallel::stopCluster(psock8) # clean-up
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>coin</em> version 1.4-1 <a href="00Index.html">Index</a>]</div>
+</body></html>

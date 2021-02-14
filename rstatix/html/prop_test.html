@@ -1,0 +1,255 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Proportion Test</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for prop_test {rstatix}"><tr><td>prop_test {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Proportion Test</h2>
+
+<h3>Description</h3>
+
+<p>Performs proportion tests to either evaluate the homogeneity of
+proportions (probabilities of success) in several groups or to test that the
+proportions are equal to certain given values.
+</p>
+<p>Wrappers around the R base function <code><a href="../../stats/html/prop.test.html">prop.test</a>()</code> but have
+the advantage of performing pairwise and row-wise z-test of two proportions,
+the post-hoc tests following a significant chi-square test of homogeneity
+for 2xc and rx2 contingency tables.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+prop_test(
+  x,
+  n,
+  p = NULL,
+  alternative = c("two.sided", "less", "greater"),
+  correct = TRUE,
+  conf.level = 0.95,
+  detailed = FALSE
+)
+
+pairwise_prop_test(xtab, p.adjust.method = "holm", ...)
+
+row_wise_prop_test(xtab, p.adjust.method = "holm", detailed = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a vector of counts of successes, a one-dimensional table with
+two entries, or a two-dimensional table (or matrix) with 2 columns,
+giving the counts of successes and failures, respectively.</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>a vector of counts of trials; ignored if <code>x</code> is a
+matrix or a table.</p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>a vector of probabilities of success.  The length of
+<code>p</code> must be the same as the number of groups specified by
+<code>x</code>, and its elements must be greater than 0 and less than 1.</p>
+</td></tr>
+<tr valign="top"><td><code>alternative</code></td>
+<td>
+<p>a character string specifying the alternative
+hypothesis, must be one of <code>"two.sided"</code> (default),
+<code>"greater"</code> or <code>"less"</code>.  You can specify just the initial
+letter.  Only used for testing the null that a single proportion
+equals a given value, or that two proportions are equal; ignored
+otherwise.</p>
+</td></tr>
+<tr valign="top"><td><code>correct</code></td>
+<td>
+<p>a logical indicating whether Yates' continuity
+correction should be applied where possible.</p>
+</td></tr>
+<tr valign="top"><td><code>conf.level</code></td>
+<td>
+<p>confidence level of the returned confidence
+interval.  Must be a single number between 0 and 1.  Only used
+when testing the null that a single proportion equals a given
+value, or that two proportions are equal; ignored otherwise.</p>
+</td></tr>
+<tr valign="top"><td><code>detailed</code></td>
+<td>
+<p>logical value. Default is FALSE. If TRUE, a detailed result is
+shown.</p>
+</td></tr>
+<tr valign="top"><td><code>xtab</code></td>
+<td>
+<p>a cross-tabulation (or contingency table) with two columns and
+multiple rows (rx2 design). The columns give the counts of successes and
+failures respectively.</p>
+</td></tr>
+<tr valign="top"><td><code>p.adjust.method</code></td>
+<td>
+<p>method to adjust p values for multiple comparisons.
+Used when pairwise comparisons are performed. Allowed values include &quot;holm&quot;,
+&quot;hochberg&quot;, &quot;hommel&quot;, &quot;bonferroni&quot;, &quot;BH&quot;, &quot;BY&quot;, &quot;fdr&quot;, &quot;none&quot;. If you don't
+want to adjust the p value (not recommended), use p.adjust.method = &quot;none&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Other arguments passed to the function <code>prop_test()</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>return a data frame with some the following columns: </p>
+
+<ul>
+<li> <p><code>n</code>: the number of participants.
+</p>
+</li>
+<li> <p><code>group</code>: the categories in the row-wise proportion tests. </p>
+</li>
+<li>
+<p><code>statistic</code>: the value of Pearson's chi-squared test statistic. </p>
+</li>
+<li>
+<p><code>df</code>: the degrees of freedom of the approximate chi-squared
+distribution of the test statistic. </p>
+</li>
+<li> <p><code>p</code>: p-value. </p>
+</li>
+<li>
+<p><code>p.adj</code>: the adjusted p-value. </p>
+</li>
+<li> <p><code>method</code>: the used
+statistical test. </p>
+</li>
+<li> <p><code>p.signif, p.adj.signif</code>: the significance
+level of p-values and adjusted p-values, respectively. </p>
+</li>
+<li>
+<p><code>estimate</code>: a vector with the sample proportions x/n. </p>
+</li>
+<li>
+<p><code>estimate1, estimate2</code>: the proportion in each of the two populations.
+</p>
+</li>
+<li> <p><code>alternative</code>: a character string describing the alternative
+hypothesis. </p>
+</li>
+<li> <p><code>conf.low,conf.high</code>: Lower and upper bound on a
+confidence interval. a confidence interval for the true proportion if there
+is one group, or for the difference in proportions if there are 2 groups and
+p is not given, or NULL otherwise. In the cases where it is not NULL, the
+returned confidence interval has an asymptotic confidence level as specified
+by conf.level, and is appropriate to the specified alternative hypothesis.</p>
+</li></ul>
+
+<p>The <strong>returned object has an attribute called args</strong>, which is a list
+holding the test arguments.
+</p>
+
+
+<h3>Functions</h3>
+
+
+<ul>
+<li> <p><code>prop_test</code>: performs one-sample and two-samples z-test of
+proportions. Wrapper around the function <code><a href="../../stats/html/prop.test.html">prop.test</a>()</code>.
+</p>
+</li>
+<li> <p><code>pairwise_prop_test</code>: pairwise comparisons between proportions, a post-hoc
+tests following a significant chi-square test of homogeneity for 2xc
+design. Wrapper around <code><a href="../../stats/html/pairwise.prop.test.html">pairwise.prop.test</a>()</code>
+</p>
+</li>
+<li> <p><code>row_wise_prop_test</code>: performs row-wise z-test of two proportions, a post-hoc tests following a significant chi-square test
+of homogeneity for rx2 contingency table. The z-test of two proportions is calculated for each category (row).
+</p>
+</li></ul>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Comparing an observed proportion to an expected proportion
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+prop_test(x = 95, n = 160, p = 0.5, detailed = TRUE)
+
+# Comparing two proportions
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# Data: frequencies of smokers between two groups
+xtab &lt;- as.table(rbind(c(490, 10), c(400, 100)))
+dimnames(xtab) &lt;- list(
+  group = c("grp1", "grp2"),
+  smoker = c("yes", "no")
+)
+xtab
+# compare the proportion of smokers
+prop_test(xtab, detailed = TRUE)
+
+# Homogeneity of proportions between groups
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# H0: the proportion of smokers is similar in the four groups
+# Ha:  this proportion is different in at least one of the populations.
+#
+# Data preparation
+grp.size &lt;- c( 106, 113, 156, 102 )
+smokers  &lt;- c( 50, 100, 139, 80 )
+no.smokers &lt;- grp.size - smokers
+xtab &lt;- as.table(rbind(
+  smokers,
+  no.smokers
+))
+dimnames(xtab) &lt;- list(
+  Smokers = c("Yes", "No"),
+  Groups = c("grp1", "grp2", "grp3", "grp4")
+)
+xtab
+
+# Compare the proportions of smokers between groups
+prop_test(xtab, detailed = TRUE)
+
+# Pairwise comparison between groups
+pairwise_prop_test(xtab)
+
+
+# Pairwise proportion tests
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# Data: Titanic
+xtab &lt;- as.table(rbind(
+  c(122, 167, 528, 673),
+  c(203, 118, 178, 212)
+))
+dimnames(xtab) &lt;- list(
+  Survived = c("No", "Yes"),
+  Class = c("1st", "2nd", "3rd", "Crew")
+)
+xtab
+# Compare the proportion of survived between groups
+pairwise_prop_test(xtab)
+
+# Row-wise proportion tests
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# Data: Titanic
+xtab &lt;- as.table(rbind(
+  c(180, 145), c(179, 106),
+  c(510, 196), c(862, 23)
+))
+dimnames(xtab) &lt;- list(
+  Class = c("1st", "2nd", "3rd", "Crew"),
+  Gender = c("Male", "Female")
+)
+xtab
+# Compare the proportion of males and females in each category
+row_wise_prop_test(xtab)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.0 <a href="00Index.html">Index</a>]</div>
+</body></html>
