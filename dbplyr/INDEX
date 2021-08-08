@@ -39,6 +39,7 @@ simulate_odbc           Backend: ODBC
 simulate_oracle         Backend: Oracle
 simulate_postgres       Backend: PostgreSQL
 simulate_redshift       Backend: Redshift
+simulate_snowflake      Backend: Snowflake
 simulate_sqlite         Backend: SQLite
 simulate_teradata       Backend: Teradata
 slice_min.tbl_lazy      Subset rows using their positions

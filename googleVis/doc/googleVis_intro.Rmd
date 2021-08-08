@@ -6,6 +6,7 @@ abstract: "The googleVis package provides an interface between R and the Google 
 date: "`r Sys.Date()`"
 output:
   rmarkdown::html_vignette:
+    css: mystyles.css
     toc: true
     toc_depth: 2
     number_sections: true
@@ -35,7 +36,6 @@ options(prompt = "R> ", digits = 4,
         show.signif.stars = FALSE,
         gvis.plot.tag='chart')
 ```
-
 
 # Introduction
 
@@ -782,6 +782,12 @@ can be achieved with intervals.
 For more details visit the Google [documentation](https://developers.google.com/chart/interactive/docs/gallery/intervals).
 
 ```{r Interval, results='asis', tidy=FALSE}
+```
+
+The tool tips in geo charts need a little work around, a `Tooltip.header` 
+variable has to be set to an empty string:
+
+```{r GeoChartTooltip, results='asis', tidy=FALSE}
 ```
 
 

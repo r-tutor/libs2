@@ -7,14 +7,6 @@ slrout <- lm(y~x,data=df)
 ivrout <- lm(y~x*f,data=df)
 aov1 <- lm(y~f,data=df)
 
-## test of car functions (and thigmophobe in plotrix)
-residPlot(slrout)
-residPlot(ivrout,legend="topleft")
-residPlot(aov1)
-
-## test of dplyr functions
-tmp <- filterD(df,y<10)
-
 ## test of dunn.test functions
 dunnTest(y~f,data=df)
 
@@ -35,12 +27,6 @@ alkPlot(WR.key,"area")
 data(ChinookArg)
 lm1 <- lm(w~tl*loc,data=ChinookArg)
 lwCompPreds(lm1,xlab="Location")
-
-## Test of plyr functions
-mapvalues(df$f,from=c("A","B","C"),to=c("a","b","c"))
-  
-## Test of sciplot functions
-fitPlot(aov1)
 
 
 ## Make sure all dependent and imported packages would load

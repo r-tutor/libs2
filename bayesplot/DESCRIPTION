@@ -1,8 +1,8 @@
 Package: bayesplot
 Type: Package
 Title: Plotting for Bayesian Models
-Version: 1.8.0
-Date: 2021-01-07
+Version: 1.8.1
+Date: 2021-06-13
 Authors@R: c(person("Jonah", "Gabry", role = c("aut", "cre"), email = "jsg2201@columbia.edu"),
              person("Tristan", "Mahr", role = "aut"),
              person("Paul-Christian", "Bürkner", role = "ctb"),
@@ -21,7 +21,6 @@ Description: Plotting functions for posterior analysis, MCMC diagnostics,
     developers working on a variety of R packages for Bayesian modeling, 
     particularly (but not exclusively) packages interfacing with 'Stan'.
 License: GPL (>= 3)
-LazyData: TRUE
 URL: https://mc-stan.org/bayesplot/
 BugReports: https://github.com/stan-dev/bayesplot/issues/
 SystemRequirements: pandoc (>= 1.12.3), pandoc-citeproc
@@ -36,7 +35,7 @@ RoxygenNote: 7.1.1
 VignetteBuilder: knitr
 Encoding: UTF-8
 NeedsCompilation: no
-Packaged: 2021-01-07 23:15:29 UTC; jgabry
+Packaged: 2021-06-13 21:49:23 UTC; ben
 Author: Jonah Gabry [aut, cre],
   Tristan Mahr [aut],
   Paul-Christian Bürkner [ctb],
@@ -46,5 +45,5 @@ Author: Jonah Gabry [aut, cre],
   Eduardo Coronado Sroka [ctb],
   Aki Vehtari [ctb]
 Repository: CRAN
-Date/Publication: 2021-01-10 17:10:30 UTC
-Built: R 4.0.3; ; 2021-02-08 11:06:18 UTC; windows
+Date/Publication: 2021-06-14 19:10:02 UTC
+Built: R 4.1.0; ; 2021-07-26 23:34:17 UTC; windows

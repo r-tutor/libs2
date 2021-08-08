@@ -1,3 +1,40 @@
+# broom 0.7.9
+
+* Fixes confidence intervals in `tidy.crr()`, which were previously exponentiated when `exponentiate = FALSE` (`#1023` by `@leejasme`)
+* Deprecates `Rchoice` tidiers, as the newest 0.3-3 release requires R 4.0+ and does not re-export needed generics.
+* Updates to `ergm` tidiers in anticipation of changes in later releases. (`#1034` by `@krivit`)
+
+# broom 0.7.8
+
+* Fixed bug in `glance.ergm` related to handling of MCMC details.
+* Address breakages in unit tests for {fixest} tidiers.
+
+# broom 0.7.7
+
+* Fixed bug in `tidy.epi.2by2` that resulted in errors with new version of `epiR` (`#1028` by `@nt-williams`)
+* Added `exponentiate` argument to `tidy.gam()` tidier applicable for parametric terms (`#1013` by `@ddsjoberg`)
+* Added `exponentiate` argument to `tidy.negbin()` tidier (`#1011` by `@ddsjoberg`)
+* Fixed failures in `spdep` tidiers following breaking changes in the most recent release
+* Various bug fixes and improvements to documentation
+
+# broom 0.7.6
+
+* Fixed bug in `augment` tidiers resulting in `.fitted` and `.se.fit` array columns.
+* Fixed bug that made column `y` non-numeric after `tidy_xyz` (`#973` by `@jiho`)
+* Added tidiers for `MASS:glm.nb` (`#998` by `@joshyam-k`)
+* Fixed bug in `tidy.fixest` that sometimes prevented arguments like `se` from being used (`#1001` by `@karldw`)
+* Fixed bug in `tidy.fixest` that resulted in errors when columns with name
+`x` are present (`#1007` by `@grantmcdermott`)
+* Moved forward with planned deprecation of `gamlss` tidiers in favor of
+those provided in `broom.mixed`
+* Various bug fixes and improvements to documentation
+
+# broom 0.7.5
+
+* Fixed bug in the `nnet::multinom` tidier in the case that the response
+variable has only two levels (`#993` by `@vincentarelbundock` and `@hughjonesd`)
+* Various bug fixes and improvements to documentation
+
 # broom 0.7.4
 
 broom 0.7.4 introduces tidier support for a number of new model objects and 
@@ -29,7 +66,7 @@ This release also restores tidiers for `felm` objects from the `lfe` package, wh
 In broom `0.7.0`, we introduced an error for model objects that subclassed
 `lm` and relied on `tidy.lm()`, or similarly for `tidy.glm()`. Tidiers for
 these objects were supported unintentionally, and we worried that tidiers for
-these objects would silently report innaccurate results.
+these objects would silently report inaccurate results.
 
 In hindsight, this change was unnecessarily abrupt. We've decided to roll back 
 this change, instead providing the following warning before allowing such 

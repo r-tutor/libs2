@@ -11,7 +11,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;car&rsquo; version 3.0-10</h2>
+</div><h2>Documentation for package &lsquo;car&rsquo; version 3.0-11</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
@@ -208,6 +208,8 @@
 <td>Print Abbreviated Ouput</td></tr>
 <tr><td style="width: 25%;"><a href="brief.html">brief.polr</a></td>
 <td>Print Abbreviated Ouput</td></tr>
+<tr><td style="width: 25%;"><a href="brief.html">brief.tbl</a></td>
+<td>Print Abbreviated Ouput</td></tr>
 </table>
 
 <h2><a name="C">-- C --</a></h2>
@@ -285,8 +287,6 @@
 <td>Defunct Functions in the car Package</td></tr>
 <tr><td style="width: 25%;"><a href="influence-mixed-models.html">cooks.distance.influence.lme</a></td>
 <td>Influence Diagnostics for Mixed-Effects Models</td></tr>
-<tr><td style="width: 25%;"><a href="influence-mixed-models.html">cooks.distance.influence.merMod</a></td>
-<td>Influence Diagnostics for Mixed-Effects Models</td></tr>
 <tr><td style="width: 25%;"><a href="car-defunct.html">cr.plot</a></td>
 <td>Defunct Functions in the car Package</td></tr>
 <tr><td style="width: 25%;"><a href="car-defunct.html">cr.plots</a></td>
@@ -346,15 +346,11 @@
 <td>Nonparametric Density Estimates</td></tr>
 <tr><td style="width: 25%;"><a href="influence-mixed-models.html">dfbeta.influence.lme</a></td>
 <td>Influence Diagnostics for Mixed-Effects Models</td></tr>
-<tr><td style="width: 25%;"><a href="influence-mixed-models.html">dfbeta.influence.merMod</a></td>
-<td>Influence Diagnostics for Mixed-Effects Models</td></tr>
 <tr><td style="width: 25%;"><a href="dfbetaPlots.html">dfbetaPlots</a></td>
 <td>dfbeta and dfbetas Index Plots</td></tr>
 <tr><td style="width: 25%;"><a href="dfbetaPlots.html">dfbetaPlots.lm</a></td>
 <td>dfbeta and dfbetas Index Plots</td></tr>
 <tr><td style="width: 25%;"><a href="influence-mixed-models.html">dfbetas.influence.lme</a></td>
-<td>Influence Diagnostics for Mixed-Effects Models</td></tr>
-<tr><td style="width: 25%;"><a href="influence-mixed-models.html">dfbetas.influence.merMod</a></td>
 <td>Influence Diagnostics for Mixed-Effects Models</td></tr>
 <tr><td style="width: 25%;"><a href="dfbetaPlots.html">dfbetasPlots</a></td>
 <td>dfbeta and dfbetas Index Plots</td></tr>
@@ -419,8 +415,6 @@
 <tr><td style="width: 25%;"><a href="infIndexPlot.html">infIndexPlot.lmerMod</a></td>
 <td>Influence Index Plot</td></tr>
 <tr><td style="width: 25%;"><a href="influence-mixed-models.html">influence.lme</a></td>
-<td>Influence Diagnostics for Mixed-Effects Models</td></tr>
-<tr><td style="width: 25%;"><a href="influence-mixed-models.html">influence.merMod</a></td>
 <td>Influence Diagnostics for Mixed-Effects Models</td></tr>
 <tr><td style="width: 25%;"><a href="influence-mixed-models.html">influence.mixed.models</a></td>
 <td>Influence Diagnostics for Mixed-Effects Models</td></tr>
@@ -489,6 +483,8 @@
 <td>Test Linear Hypothesis</td></tr>
 <tr><td style="width: 25%;"><a href="linearHypothesis.html">linearHypothesis.lme</a></td>
 <td>Test Linear Hypothesis</td></tr>
+<tr><td style="width: 25%;"><a href="linearHypothesis.html">linearHypothesis.lmList</a></td>
+<td>Test Linear Hypothesis</td></tr>
 <tr><td style="width: 25%;"><a href="linearHypothesis.html">linearHypothesis.mer</a></td>
 <td>Test Linear Hypothesis</td></tr>
 <tr><td style="width: 25%;"><a href="linearHypothesis.html">linearHypothesis.merMod</a></td>
@@ -530,6 +526,8 @@
 <td>Test Linear Hypothesis</td></tr>
 <tr><td style="width: 25%;"><a href="linearHypothesis.html">matchCoefs.lme</a></td>
 <td>Test Linear Hypothesis</td></tr>
+<tr><td style="width: 25%;"><a href="linearHypothesis.html">matchCoefs.lmList</a></td>
+<td>Test Linear Hypothesis</td></tr>
 <tr><td style="width: 25%;"><a href="linearHypothesis.html">matchCoefs.mer</a></td>
 <td>Test Linear Hypothesis</td></tr>
 <tr><td style="width: 25%;"><a href="linearHypothesis.html">matchCoefs.merMod</a></td>
@@ -537,6 +535,8 @@
 <tr><td style="width: 25%;"><a href="linearHypothesis.html">matchCoefs.mlm</a></td>
 <td>Test Linear Hypothesis</td></tr>
 <tr><td style="width: 25%;"><a href="mcPlots.html">mcPlot</a></td>
+<td>Draw Linear Model Marginal and Conditional Plots in Parallel or Overlaid</td></tr>
+<tr><td style="width: 25%;"><a href="mcPlots.html">mcPlot.glm</a></td>
 <td>Draw Linear Model Marginal and Conditional Plots in Parallel or Overlaid</td></tr>
 <tr><td style="width: 25%;"><a href="mcPlots.html">mcPlot.lm</a></td>
 <td>Draw Linear Model Marginal and Conditional Plots in Parallel or Overlaid</td></tr>
@@ -802,6 +802,8 @@
 <td>Boxplots for transformations to symmetry</td></tr>
 <tr><td style="width: 25%;"><a href="symbox.html">symbox.formula</a></td>
 <td>Boxplots for transformations to symmetry</td></tr>
+<tr><td style="width: 25%;"><a href="symbox.html">symbox.lm</a></td>
+<td>Boxplots for transformations to symmetry</td></tr>
 </table>
 
 <h2><a name="T">-- T --</a></h2>
@@ -831,6 +833,10 @@
 <tr><td style="width: 25%;"><a href="vif.html">vif.default</a></td>
 <td>Variance Inflation Factors</td></tr>
 <tr><td style="width: 25%;"><a href="vif.html">vif.merMod</a></td>
+<td>Variance Inflation Factors</td></tr>
+<tr><td style="width: 25%;"><a href="vif.html">vif.polr</a></td>
+<td>Variance Inflation Factors</td></tr>
+<tr><td style="width: 25%;"><a href="vif.html">vif.svyolr</a></td>
 <td>Variance Inflation Factors</td></tr>
 </table>
 

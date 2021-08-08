@@ -43,7 +43,7 @@ plotdistcens            Plot of empirical and theoretical distributions
 prefit                  Pre-fitting procedure
 qmedist                 Quantile matching fit of univariate
                         distributions
-quantiles               Quantile estimation from a fitted distribution
+quantile                Quantile estimation from a fitted distribution
 salinity                Species-Sensitivity Distribution (SSD) for
                         salinity tolerance
 smokedfish              Contamination data of Listeria monocytogenes in

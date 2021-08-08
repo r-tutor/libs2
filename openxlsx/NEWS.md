@@ -1,4 +1,37 @@
+# development
+
+## Fixes
+
+* `write.xlsx()` now successfully passes `withFilter` ([#151](https://github.com/ycphs/openxlsx/issues/151))
+* code clean up PR [#168](https://github.com/ycphs/openxlsx/pull/168)
+* removal of unused variables PR [#168](https://github.com/ycphs/openxlsx/pull/168)
+
+## New features
+
+* adds `buildWorkbook()` to generate a `Workbook` object from a (named) list or a data.frame ([#192](https://github.com/ycphs/openxlsx/issues/192), [#187](https://github.com/ycphs/openxlsx/issues/187))
+  * this is now recommended rather than the `write.xlsx(x, file) ; wb <- read.xlsx(file)` functionality before
+  * `write.xlsx()` is now a wrapper for `wb <- buildWorkbook(x); saveWorkbook(x, file)`
+  * parameter checking from `write.xlsx()` >> `buildWorkbook()` are now held off until passed to `writeData()`, `writeDataTable()`, etc
+  * `row.names` is now deprecated for `writeData()` and `writeDataTable()`; please use `rowNames` instead
+* `read.xlsx()` now checks for the file extension `.xlsx`; previously it would throw an error when the file was `.xls` or `.xlm` files
+* memory allocation improvements
+* global options added for `minWidth` and `maxWidth`
+* `write.xlsx()` >> `buildWorkbook()` can now handle `colWidths` passed as either a single element or a `list()`
+* Added ability to change positioning of summary columns and rows.
+  * These can be set with the `summaryCol` and `summaryRow` arguments in `pageSetup()`.
+* `activeSheet` allows to set and get the active (displayed) sheet of a worbook.
+* Adds new global options for workbook formatting ([#165](https://github.com/ycphs/openxlsx/issues/165); see `?op.openxlsx`)
+
+
+
+
 # openxlsx 4.2.3
+ 
+## New Features
+
+* Most of functions in openxlsx now support non-ASCII arguments better. More specifically, we can use non-ASCII strings as names or contents for `createNamedRegion()` ([#103](https://github.com/ycphs/openxlsx/issues/103)), `writeComment()`, `writeData()`, `writeDataTable()` and `writeFormula()`. In addition, openxlsx now reads comments and region names that contain non-ASCII strings correctly on Windows. Thanks to @shrektan for the PR [#118](https://github.com/ycphs/openxlsx/pull/118).
+
+* `setColWidths()` now supports zero-length `cols`, which is convinient when `cols` is dynamically provided [#128](https://github.com/ycphs/openxlsx/issues/128). Thanks to @shrektan for the feature request and the PR.
  
 ## Fixes for Check issues
  

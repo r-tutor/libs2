@@ -1,3 +1,35 @@
+# remotes 2.4.0
+
+* Re-license as MIT. (#551)
+
+* skip tests for `download.file(method = "internal")`, on R > 4.1, since that method is now defunct on those versions.
+
+* `system_requirements()` now works as intended if only the `os` argument is used (@mdneuzerling, #609)
+
+* `remote_package_name.git2r_remote` and `remote_package_name.xgit_remote` now get correct package name from HTTP(S) git repo's `DESCRIPTION` file, and thus package's `DESCRIPTION` file's `Remotes` field could have `git::http(s)://<host>/<username>/<repo>[.git][@ref]` items that install remote packages using git via HTTP(S) protocal (@niheaven, #603).
+
+# remotes 2.3.0
+
+## Major changes
+
+* `install_*()` functions will no longer fail by default if there warnings from `install.packages()`. Concretely the default value of `R_REMOTES_NO_ERRORS_FROM_WARNINGS` has changed to `true` from the previous value of `false`. (#403)
+
+## Minor improvements and fixes
+
+* `install_bioc()` now respects the environment variable R_BIOC_VERSION, and will use the git branch corresponding to this Bioconductor version (@bbimber, #580).
+
+* remotes without package names are now unconditionally installed (#532, @jakubkovac)
+
+* It is now possible to specify a custom host for dependencies listed in the `DESCRIPTION` file with `Remotes: <type>[@host]::<username>/<repo>[@ref]`. The `ref` now supports `/` in it for `GitLab` repositories as it did for `GitHub`repositories. (@dagola, #448)
+
+* Internal `package2remote()` function now supports local remotes created by pak.
+
+* `github_pat()` will now check if `GITHUB_TOKEN` is set if it cannot find `GITHUB_PAT`. (@coatless)
+
+* `system_requirements()` now supports querying released packages as well as development dependencies (#545)
+
+* `system_requirements()` now supports OS name + version in the `os` argument (#549, @krlmlr).
+
 # remotes 2.2.0
 
 ##  New functions and features
@@ -49,8 +81,8 @@
   field. In such a case, the values for `getOption("repos")` and
   `getOption("pkgType")` will be used (respectively).
 
-* `install_gitlab()` now installs from repositories in subgroups and with dots 
-  in their name. `subdir` is now an explicit argument instead of implicit in 
+* `install_gitlab()` now installs from repositories in subgroups and with dots
+  in their name. `subdir` is now an explicit argument instead of implicit in
   `repo` (@robertdj, #259, #420).
 
 * `install()` now passes the ellipsis `...` to `install_deps()` (@Neil-Schneider, #411)

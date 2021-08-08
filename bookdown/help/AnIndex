@@ -2,6 +2,8 @@ bookdown-package	bookdown-package
 beamer_presentation2	html_document2
 bookdown	bookdown-package
 bookdown_site	bookdown_site
+bs4_book	bs4_book
+bs4_book_theme	bs4_book
 build_chapter	build_chapter
 calibre	calibre
 clean_book	clean_book

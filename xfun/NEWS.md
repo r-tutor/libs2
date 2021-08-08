@@ -1,3 +1,95 @@
+# CHANGES IN xfun VERSION 0.25
+
+- Fixed a bug in `broken_packages()` (thanks, @PythonCoderUnicorn, rstudio/rmarkdown#1990).
+
+- Added a `files` argument to `optipng()` so that users can specify the list of PNG files instead of running `optipng` on a whole directory.
+
+# CHANGES IN xfun VERSION 0.24
+
+- Exported the internal function `broken_packages()` to reinstall broken R packages.
+
+- Fixed the bug in `proj_root()` #54 (thanks, @clarkliming).
+
+# CHANGES IN xfun VERSION 0.23
+
+## NEW FEATURES
+
+- Added a `tinify()` function to compress PNG/JPEG images via [the Tinify API](https://tinypng.com/developers).
+
+- Added a `news2md()` function to convert package news to the Markdown format. This is mainly for converting the plain-text `NEWS` file and the `NEWS.Rd` file to `NEWS.md`.
+
+- Added a `format_bytes()` function to format numbers of bytes using a specified unit, e.g., `1024` can be formatted as `1 Kb`.
+
+- When using `pkg_load2()` in an **renv** project, it will use `renv::install()` to install missing packages by default to take advantage of **renv**'s caching feature (thanks, @chunyunma @cderv, #52).
+
+- `upload_win_builder()` no longer requires the system command `curl` to be available; if `curl` is not available, the R package **curl** will be used instead, which means this R package must be installed. In addition to uploading to the `ftp` server of win-builder, it's also possible to upload to <https://win-builder.r-project.org/upload.aspx>: call `upload_win_builder(..., server = 'https')`. This change was made so that it would be possible to continue to upload to win-builder in case it should stop supporting `ftp` (CRAN has discouraged package authors from using `ftp://`).
+
+## BUG FIXES
+
+- Backticks are added to math environments by mistake when `\begin{}` and `\end{}` do not match (thanks, @oliviergimenez, #51).
+
+## MINOR CHANGES
+
+- The argument `src` was renamed to `pkg` in `install_dir()`.
+
+- The argument `file` of `upload_win_builder()` defaults to `pkg_build()` now, i.e., by default, it will build a source package and upload it, so you do not need to build the package separately.
+
+# CHANGES IN xfun VERSION 0.22
+
+## NEW FEATURES
+
+- `relative_path()` is vectorized now.
+
+- Added a new function `retry()` to retry calling a function for a number of times in case of errors.
+
+- Added a new function `sort_file()`, which is a shorthand for `process_file(fun = sort)` to sort the lines in a text file.
+
+## MAJOR CHANGES
+
+- The argument `FUN` was renamed to `fun` in `process_file()`.
+
+## MINOR CHANGES
+
+- Inside `download_file()`, the `timeout` option in `options()` is set to 3600 seconds when it takes the default value of 60 seconds, which may not be enough for downloading large files (thanks, @matthewgson, yihui/tinytex#286).
+
+# CHANGES IN xfun VERSION 0.21
+
+## NEW FEATURES
+
+- Added a new function `pkg_available()` to test if a package with a minimal version is available (thanks, @cderv, #45).
+
+- Added a new function `set_envvar()` to set environment variables and return their old values, so they could be restored later.
+
+- Added a new function `exit_call()` to call a function when a parent function exits.
+
+- Exported the internal function `read_bin()`.
+
+- Added an argument `verbose` to `bg_process()`.
+
+- `Rscript_call()` gains an `options` argument to pass command-line options to `Rscript` (thanks, @cderv, #48).
+
+# CHANGES IN xfun VERSION 0.20
+
+## NEW FEATURES
+
+- Added a function `msg_cat()` to generate a message with `cat()`. See the help page `?xfun::msg_cat` for more information.
+
+- Added a function `mark_dirs()` to mark directories with a trailing slash in a vector of paths to differentiate them from normal filenames (#44).
+
+## BUG FIXES
+
+- `xfun::proc_kill()` failed to work on *nix.
+
+- `xfun::del_empty_dir()` failed to delete empty dirs.
+
+- `xfun::file_string()` preserves emptiness (thanks, @MichaelChirico, #38).
+
+- `xfun::raw_string()` preserves the class(es) of the input now (thanks, @MichaelChirico, #40).
+
+## MINOR CHANGES
+
+- Exported the function `dir_create()`.
+
 # CHANGES IN xfun VERSION 0.19
 
 ## NEW FEATURES

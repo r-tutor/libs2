@@ -1,0 +1,25 @@
+as_pkg_dependencies     Shorthands for dependency specifications
+current_r_platform      The current R platform for packages
+install_package_plan    Perform a package installation plan
+install_plans           Installation plans
+is_valid_package_name   Check whether a package name is valid
+lib_status              Status of packages in a library
+new_pkg_deps            R6 class for package dependency lookup
+new_pkg_download_proposal
+                        R6 class for package downloads
+new_pkg_installation_plan
+                        R6 class for installation from a lock file
+new_pkg_installation_proposal
+                        R6 class for package download and installation.
+parse_pkg_refs          Parse package location references
+pkg_config              Configuration
+pkg_dep_types_hard      Possible package dependency types
+pkg_downloads           Package downloads
+pkg_name_check          Check if an R package name is available.
+pkg_refs                Package references
+pkg_resolution          Dependency resolution
+pkg_rx                  A set of handy regular expressions related to R
+                        packages
+pkg_solution            The dependency solver
+pkgdepends-package      pkgdepends: Package Dependency Resolution and
+                        Downloads

@@ -11,7 +11,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;fields&rsquo; version 11.6</h2>
+</div><h2>Documentation for package &lsquo;fields&rsquo; version 12.5</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 </ul>
@@ -58,6 +58,10 @@
 <table width="100%">
 <tr><td style="width: 25%;"><a href="add.image.html">add.image</a></td>
 <td>Adds an image to an existing plot.</td></tr>
+<tr><td style="width: 25%;"><a href="imagePlot.html">addColorBarTriangle</a></td>
+<td>Draws an image plot with a legend strip for the color scale based on either a regular grid or a grid of quadrilaterals.</td></tr>
+<tr><td style="width: 25%;"><a href="imagePlot.html">addLegend</a></td>
+<td>Draws an image plot with a legend strip for the color scale based on either a regular grid or a grid of quadrilaterals.</td></tr>
 <tr><td style="width: 25%;"><a href="registeredC.html">addToDiagC</a></td>
 <td>Information objects that register C and FORTRAN functions.</td></tr>
 <tr><td style="width: 25%;"><a href="arrow.plot.html">arrow.plot</a></td>
@@ -81,6 +85,8 @@
 <td>boxplot</td></tr>
 <tr><td style="width: 25%;"><a href="bplot.xy.html">bplot.xy</a></td>
 <td>Boxplots for conditional distribution</td></tr>
+<tr><td style="width: 25%;"><a href="quilt.plot.html">bubblePlot</a></td>
+<td>Useful plots for visualizing irregular spatial data.</td></tr>
 </table>
 
 <h2><a name="C">-- C --</a></h2>
@@ -134,6 +140,8 @@
 <td>Kriging surface estimate</td></tr>
 <tr><td style="width: 25%;"><a href="tim.colors.html">color.scale</a></td>
 <td>Some useful color tables for images and tools to handle them.</td></tr>
+<tr><td style="width: 25%;"><a href="imagePlot.html">colorBar</a></td>
+<td>Draws an image plot with a legend strip for the color scale based on either a regular grid or a grid of quadrilaterals.</td></tr>
 <tr><td style="width: 25%;"><a href="colorbar.plot.html">colorbar.plot</a></td>
 <td>Adds color scale strips to an existing plot.</td></tr>
 <tr><td style="width: 25%;"><a href="CO.html">COmonthlyMet</a></td>
@@ -142,6 +150,8 @@
 <td>Convert Matrix from Compact Vector to Standard Form</td></tr>
 <tr><td style="width: 25%;"><a href="registeredC.html">compactToMatC</a></td>
 <td>Information objects that register C and FORTRAN functions.</td></tr>
+<tr><td style="width: 25%;"><a href="spatialProcess.html">confidenceIntervalMLE</a></td>
+<td>Estimates a spatial process model.</td></tr>
 <tr><td style="width: 25%;"><a href="cover.design.html">cover.design</a></td>
 <td>Computes Space-Filling "Coverage" designs using Swapping Algorithm</td></tr>
 <tr><td style="width: 25%;"><a href="image2lz.html">crop.image</a></td>
@@ -193,10 +203,6 @@
 <table width="100%">
 <tr><td style="width: 25%;"><a href="Tps.html">fastTps</a></td>
 <td>Thin plate spline regression</td></tr>
-<tr><td style="width: 25%;"><a href="mKrig.MLE.html">fastTps.MLE</a></td>
-<td>Maximizes likelihood for the process marginal variance (rho) and nugget standard deviation (sigma) parameters (e.g. lambda) over a many covariance models or covariance parameter values.</td></tr>
-<tr><td style="width: 25%;"><a href="mKrigMLE.html">fastTpsMLE</a></td>
-<td>Maximizes likelihood for the process marginal variance (rho) and nugget standard deviation (sigma) parameters (e.g. lambda) over a many covariance models or covariance parameter values.</td></tr>
 <tr><td style="width: 25%;"><a href="fields.html">fields</a></td>
 <td>fields - tools for spatial data</td></tr>
 <tr><td style="width: 25%;"><a href="fields.hints.html">fields.color.picker</a></td>
@@ -206,10 +212,6 @@
 <tr><td style="width: 25%;"><a href="Wendland.html">fields.D</a></td>
 <td>Wendland family of covariance functions and supporting numerical functions</td></tr>
 <tr><td style="width: 25%;"><a href="fields-stuff.html">fields.derivative.poly</a></td>
-<td>Fields supporting functions</td></tr>
-<tr><td style="width: 25%;"><a href="fields-stuff.html">fields.diagonalize</a></td>
-<td>Fields supporting functions</td></tr>
-<tr><td style="width: 25%;"><a href="fields-stuff.html">fields.diagonalize2</a></td>
 <td>Fields supporting functions</td></tr>
 <tr><td style="width: 25%;"><a href="fields-stuff.html">fields.duplicated.matrix</a></td>
 <td>Fields supporting functions</td></tr>
@@ -244,9 +246,7 @@
 <h2><a name="G">-- G --</a></h2>
 
 <table width="100%">
-<tr><td style="width: 25%;"><a href="gcv.Krig.html">gcv.Krig</a></td>
-<td>Finds profile likelihood and GCV estimates of smoothing parameters for splines and Kriging.</td></tr>
-<tr><td style="width: 25%;"><a href="gcv.Krig.html">gcv.sreg</a></td>
+<tr><td style="width: 25%;"><a href="KrigFindLambda.html">gcv.sreg</a></td>
 <td>Finds profile likelihood and GCV estimates of smoothing parameters for splines and Kriging.</td></tr>
 <tr><td style="width: 25%;"><a href="image2lz.html">get.rectangle</a></td>
 <td>Some simple functions for subsetting images</td></tr>
@@ -274,6 +274,8 @@
 <td>Kernel smoother for irregular 2-d data</td></tr>
 <tr><td style="width: 25%;"><a href="image2lz.html">image2lz</a></td>
 <td>Some simple functions for subsetting images</td></tr>
+<tr><td style="width: 25%;"><a href="imagePlot.html">imagePlot</a></td>
+<td>Draws an image plot with a legend strip for the color scale based on either a regular grid or a grid of quadrilaterals.</td></tr>
 <tr><td style="width: 25%;"><a href="world.html">in.land.grid</a></td>
 <td>Plot of the world</td></tr>
 <tr><td style="width: 25%;"><a href="image2lz.html">in.poly</a></td>
@@ -297,13 +299,9 @@
 <td>Basic linear algebra utilities and other computations supporting the Krig function.</td></tr>
 <tr><td style="width: 25%;"><a href="Krig.engine.default.html">Krig.coef</a></td>
 <td>Basic linear algebra utilities and other computations supporting the Krig function.</td></tr>
-<tr><td style="width: 25%;"><a href="Krig.engine.default.html">Krig.cor.Y</a></td>
-<td>Basic linear algebra utilities and other computations supporting the Krig function.</td></tr>
 <tr><td style="width: 25%;"><a href="Krig.engine.default.html">Krig.engine.default</a></td>
 <td>Basic linear algebra utilities and other computations supporting the Krig function.</td></tr>
 <tr><td style="width: 25%;"><a href="Krig.engine.default.html">Krig.engine.fixed</a></td>
-<td>Basic linear algebra utilities and other computations supporting the Krig function.</td></tr>
-<tr><td style="width: 25%;"><a href="Krig.engine.default.html">Krig.engine.knots</a></td>
 <td>Basic linear algebra utilities and other computations supporting the Krig function.</td></tr>
 <tr><td style="width: 25%;"><a href="Krig.engine.default.html">Krig.make.u</a></td>
 <td>Basic linear algebra utilities and other computations supporting the Krig function.</td></tr>
@@ -317,6 +315,8 @@
 <td>Collapse repeated spatial locations into unique locations</td></tr>
 <tr><td style="width: 25%;"><a href="Krig.engine.default.html">Krig.transform.xY</a></td>
 <td>Basic linear algebra utilities and other computations supporting the Krig function.</td></tr>
+<tr><td style="width: 25%;"><a href="KrigFindLambda.html">KrigFindLambda</a></td>
+<td>Finds profile likelihood and GCV estimates of smoothing parameters for splines and Kriging.</td></tr>
 </table>
 
 <h2><a name="L">-- L --</a></h2>
@@ -341,14 +341,6 @@
 <td>Covariance functions</td></tr>
 <tr><td style="width: 25%;"><a href="image.cov.html">matern.image.cov</a></td>
 <td>Exponential, Matern and general covariance functions for 2-d gridded locations.</td></tr>
-<tr><td style="width: 25%;"><a href="REML.test.html">MaternGLS.test</a></td>
-<td>Maximum Likelihood estimates for some Matern covariance parameters.</td></tr>
-<tr><td style="width: 25%;"><a href="REML.test.html">MaternGLSProfile.test</a></td>
-<td>Maximum Likelihood estimates for some Matern covariance parameters.</td></tr>
-<tr><td style="width: 25%;"><a href="REML.test.html">MaternQR.test</a></td>
-<td>Maximum Likelihood estimates for some Matern covariance parameters.</td></tr>
-<tr><td style="width: 25%;"><a href="REML.test.html">MaternQRProfile.test</a></td>
-<td>Maximum Likelihood estimates for some Matern covariance parameters.</td></tr>
 <tr><td style="width: 25%;"><a href="minitri.html">minitri</a></td>
 <td>Mini triathlon results</td></tr>
 <tr><td style="width: 25%;"><a href="mKrig.html">mKrig</a></td>
@@ -357,28 +349,16 @@
 <td>"micro Krig" Spatial process estimate of a curve or surface, "kriging" with a known covariance function.</td></tr>
 <tr><td style="width: 25%;"><a href="fields.grid.html">mKrig.grid</a></td>
 <td>Using MKrig for predicting on a grid.</td></tr>
-<tr><td style="width: 25%;"><a href="mKrig.MLE.html">mKrig.MLE</a></td>
-<td>Maximizes likelihood for the process marginal variance (rho) and nugget standard deviation (sigma) parameters (e.g. lambda) over a many covariance models or covariance parameter values.</td></tr>
-<tr><td style="width: 25%;"><a href="mKrig.MLE.html">mKrig.MLE.joint</a></td>
-<td>Maximizes likelihood for the process marginal variance (rho) and nugget standard deviation (sigma) parameters (e.g. lambda) over a many covariance models or covariance parameter values.</td></tr>
 <tr><td style="width: 25%;"><a href="mKrig.html">mKrig.trace</a></td>
 <td>"micro Krig" Spatial process estimate of a curve or surface, "kriging" with a known covariance function.</td></tr>
 <tr><td style="width: 25%;"><a href="mKrig.html">mKrigCheckXY</a></td>
 <td>"micro Krig" Spatial process estimate of a curve or surface, "kriging" with a known covariance function.</td></tr>
 <tr><td style="width: 25%;"><a href="mKrigMLE.html">mKrigJointTemp.fn</a></td>
-<td>Maximizes likelihood for the process marginal variance (rho) and nugget standard deviation (sigma) parameters (e.g. lambda) over a many covariance models or covariance parameter values.</td></tr>
+<td>Maximizes likelihood for the process marginal variance (sigma) and nugget standard deviation (tau) parameters (e.g. lambda) over a many covariance models or covariance parameter values.</td></tr>
 <tr><td style="width: 25%;"><a href="mKrigMLE.html">mKrigMLEGrid</a></td>
-<td>Maximizes likelihood for the process marginal variance (rho) and nugget standard deviation (sigma) parameters (e.g. lambda) over a many covariance models or covariance parameter values.</td></tr>
+<td>Maximizes likelihood for the process marginal variance (sigma) and nugget standard deviation (tau) parameters (e.g. lambda) over a many covariance models or covariance parameter values.</td></tr>
 <tr><td style="width: 25%;"><a href="mKrigMLE.html">mKrigMLEJoint</a></td>
-<td>Maximizes likelihood for the process marginal variance (rho) and nugget standard deviation (sigma) parameters (e.g. lambda) over a many covariance models or covariance parameter values.</td></tr>
-<tr><td style="width: 25%;"><a href="REML.test.html">MLE.Matern</a></td>
-<td>Maximum Likelihood estimates for some Matern covariance parameters.</td></tr>
-<tr><td style="width: 25%;"><a href="REML.test.html">MLE.Matern.fast</a></td>
-<td>Maximum Likelihood estimates for some Matern covariance parameters.</td></tr>
-<tr><td style="width: 25%;"><a href="REML.test.html">MLE.objective.fn</a></td>
-<td>Maximum Likelihood estimates for some Matern covariance parameters.</td></tr>
-<tr><td style="width: 25%;"><a href="MLESpatialProcess.html">MLESpatialProcess</a></td>
-<td>Estimates key covariance parameters for a spatial process.</td></tr>
+<td>Maximizes likelihood for the process marginal variance (sigma) and nugget standard deviation (tau) parameters (e.g. lambda) over a many covariance models or covariance parameter values.</td></tr>
 <tr><td style="width: 25%;"><a href="registeredC.html">mltdrb</a></td>
 <td>Information objects that register C and FORTRAN functions.</td></tr>
 <tr><td style="width: 25%;"><a href="registeredC.html">multebC</a></td>
@@ -472,6 +452,10 @@
 <td>Estimates a spatial process model.</td></tr>
 <tr><td style="width: 25%;"><a href="RMprecip.html">PRISMelevation</a></td>
 <td>Monthly total precipitation (mm) for August 1997 in the Rocky Mountain Region and some gridded 4km elevation data sets (m).</td></tr>
+<tr><td style="width: 25%;"><a href="mKrigMLE.html">profileCI</a></td>
+<td>Maximizes likelihood for the process marginal variance (sigma) and nugget standard deviation (tau) parameters (e.g. lambda) over a many covariance models or covariance parameter values.</td></tr>
+<tr><td style="width: 25%;"><a href="spatialProcess.html">profileMLE</a></td>
+<td>Estimates a spatial process model.</td></tr>
 <tr><td style="width: 25%;"><a href="pushpin.html">pushpin</a></td>
 <td>Adds a "push pin" to an existing 3-d plot</td></tr>
 </table>
@@ -486,7 +470,7 @@
 <tr><td style="width: 25%;"><a href="QTps.html">QTps</a></td>
 <td>Robust and Quantile smoothing using a thin-plate spline</td></tr>
 <tr><td style="width: 25%;"><a href="quilt.plot.html">quilt.plot</a></td>
-<td>Image plot for irregular spatial data.</td></tr>
+<td>Useful plots for visualizing irregular spatial data.</td></tr>
 </table>
 
 <h2><a name="R">-- R --</a></h2>
@@ -516,8 +500,6 @@
 <td>Information objects that register C and FORTRAN functions.</td></tr>
 <tr><td style="width: 25%;"><a href="rdist.earth.html">RdistEarth</a></td>
 <td>Great circle distance matrix or vector</td></tr>
-<tr><td style="width: 25%;"><a href="REML.test.html">REML.test</a></td>
-<td>Maximum Likelihood estimates for some Matern covariance parameters.</td></tr>
 <tr><td style="width: 25%;"><a href="Krig.html">resid.Krig</a></td>
 <td>Kriging surface estimate</td></tr>
 <tr><td style="width: 25%;"><a href="ribbon.plot.html">ribbon.plot</a></td>
@@ -535,8 +517,8 @@
 <td>Specify a panel of plots</td></tr>
 <tr><td style="width: 25%;"><a href="image.smooth.html">setup.image.smooth</a></td>
 <td>Kernel smoother for irregular 2-d data</td></tr>
-<tr><td style="width: 25%;"><a href="sim.Krig.html">sim.fastTps.approx</a></td>
-<td>Conditional simulation of a spatial process</td></tr>
+<tr><td style="width: 25%;"><a href="imagePlot.html">setupLegend</a></td>
+<td>Draws an image plot with a legend strip for the color scale based on either a regular grid or a grid of quadrilaterals.</td></tr>
 <tr><td style="width: 25%;"><a href="sim.Krig.html">sim.Krig</a></td>
 <td>Conditional simulation of a spatial process</td></tr>
 <tr><td style="width: 25%;"><a href="sim.Krig.html">sim.Krig.approx</a></td>
@@ -558,6 +540,8 @@
 <tr><td style="width: 25%;"><a href="spam2lz.html">spam2spind</a></td>
 <td>Conversion of formats for sparse matrices</td></tr>
 <tr><td style="width: 25%;"><a href="spatialProcess.html">spatialProcess</a></td>
+<td>Estimates a spatial process model.</td></tr>
+<tr><td style="width: 25%;"><a href="spatialProcess.html">spatialProcessSetDefaults</a></td>
 <td>Estimates a spatial process model.</td></tr>
 <tr><td style="width: 25%;"><a href="spam2lz.html">spind2full</a></td>
 <td>Conversion of formats for sparse matrices</td></tr>

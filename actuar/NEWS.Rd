@@ -2,6 +2,51 @@
 \title{\pkg{actuar} News}
 \encoding{UTF-8}
 
+\section{CHANGES IN \pkg{actuar} VERSION 3.1-4}{
+  \subsection{BUG FIXES}{
+    \itemize{
+      \item{Due to its use of \code{log1mexp} since the previous
+	release, the package depends on R >= 4.1.0.}
+    }
+  }
+}
+
+\section{CHANGES IN \pkg{actuar} VERSION 3.1-3}{
+  \subsection{BUG FIXES}{
+    \itemize{
+      \item{Carry over the new implementation of the Cornish-Fisher
+	Expansion of base R used by \code{qlogarithmic} and
+	\code{qpoisinvgauss}.}
+      \item{Fix computation of \code{[pq]zmpois}, \code{[pq]zmbinom} and
+	\code{[pq]zmnbinom} following fixes to the underlying base R
+	functions introduced in r80271 of R sources. With thanks to
+	B.D. Ripley and Martin Maechler.}
+    }
+  }
+}
+
+\section{CHANGES IN \pkg{actuar} VERSION 3.1-2}{
+  \subsection{BUG FIXES}{
+    \itemize{
+      \item{\code{qinvgauss} now returns a finite value when
+	\eqn{\code{1.5/shape} > 1000}. Thanks to Bettina Grün
+	\email{bettina.gruen@wu.ac.at} for the fix.}
+      \item{A protection against rounding errors now ensures that
+	\code{qzmlogarithmic(1 - pzmlogarithmic(x), lower.tail = FALSE)
+	== x} is always \code{TRUE}.}
+      \item{In \code{?dburr}, the scale parameter appeared in the
+	denominator of the density instead of \eqn{x}. Thanks to Etienne
+	Guy for the heads up.}
+      \item{The package tests now correctly use \code{stopifnot} with
+	argument \code{exprs} explicitly named.}
+      \item{The formula for the moment of order \eqn{k} for grouped data
+	in \code{?emm} fixed in version 2.3-3 for the LaTeX version is
+	now also fixed for the text version. Thanks (again) to Walter
+	Garcia-Fontes.}
+    }
+  }
+}
+
 \section{CHANGES IN \pkg{actuar} VERSION 3.1-1}{
   \subsection{BUG FIXES}{
     \itemize{

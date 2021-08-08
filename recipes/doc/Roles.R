@@ -55,7 +55,7 @@ multi_role %>%
   add_role(HHV, new_role = "nocenter") %>% 
   step_center(all_predictors(), -has_role("nocenter")) %>% 
   prep(training = biomass, retain = TRUE) %>% 
-  juice() %>% 
+  bake(new_data = NULL) %>% 
   head()
 
 ## ----x-none-------------------------------------------------------------------
@@ -72,7 +72,7 @@ recipe(biomass) %>%
 recipe( ~ ., data = iris) %>% 
   step_dummy(Species) %>% 
   prep() %>% 
-  juice(all_predictors()) %>% 
+  bake(new_data = NULL, all_predictors()) %>% 
   dplyr::select(starts_with("Species")) %>% 
   names()
 
@@ -80,6 +80,6 @@ recipe( ~ ., data = iris) %>%
 recipe( ~ ., data = iris) %>% 
   step_dummy(Species, role = "trousers") %>% 
   prep() %>% 
-  juice(has_role("trousers")) %>% 
+  bake(new_data = NULL, has_role("trousers")) %>% 
   names()
 

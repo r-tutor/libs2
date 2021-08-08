@@ -416,6 +416,18 @@ plot(
   )
 )
 
+## ----GeoChartTooltip, results='asis', tidy=FALSE------------------------------
+Exports$Profit.tooltip <- paste("<b>Test</b>", Exports$Profit)
+Exports$Tooltip.header <- ""
+GeoTooltip <- gvisGeoChart(
+  Exports, 
+  locationvar = "Country", 
+  colorvar = "Profit",
+  hovervar = "Tooltip.header",
+  options = list(tooltip = "{isHtml: true}")
+)
+plot(GeoTooltip)
+
 ## ----listener, results="asis"-------------------------------------------------
 jscode <- "window.open('https://en.wikipedia.org/wiki/' 
                   + data.getValue(chart.getSelection()[0].row,0)); "

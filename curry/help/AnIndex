@@ -1,0 +1,6 @@
+%-<%	tail_curry
+%<%	curry
+%><%	partial
+curry	curry
+partial	partial
+tail_curry	tail_curry

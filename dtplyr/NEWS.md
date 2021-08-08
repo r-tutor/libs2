@@ -1,3 +1,74 @@
+# dtplyr 1.1.0
+
+## New features
+
+* All verbs now have (very basic) documentation pointing back to the
+  dplyr generic, and providing a (very rough) description of the translation
+  accompanied with a few examples.
+
+* Passing a data.table to a dplyr generic now converts it to a `lazy_dt()`,
+  making it a little easier to move between data.table and dplyr syntax.
+
+* dtplyr has been bought up to compatibility with dplyr 1.0.0. This includes
+  new translations for:
+
+  * `across()`, `if_any()`, `if_all()` (#154).
+
+  * `count()` (#159).
+
+  * `relocate()` (@smingerson, #162).
+
+  * `rename_with()` (#160)
+
+  * `slice_min()`, `slice_max()`, `slice_head()`, `slice_tail()`, and
+    `slice_sample()` (#174).
+
+  And `rename()` and `select()` now support dplyr 1.0.0 tidyselect syntax 
+  (apart from predicate functions which can't easily work on lazily evaluated
+  data tables).
+
+* We have begun the process of add translations for tidyr verbs beginning
+  with `pivot_wider()` (@markfairbanks, #189).
+
+## Translation improvements
+
+* `compute()` now creates an intermediate assignment within the translation. 
+  This will generally have little impact on performance but it allows you to 
+  use intermediate variables to simplify complex translations.
+
+* `case_when()` is now translated to `fcase()` (#190).
+
+* `cur_data()` (`.SD`), `cur_group()` (`.BY`), `cur_group_id()` (`.GRP`), 
+   and `cur_group_rows() (`.I`) are now tranlsated to their data.table 
+   equivalents (#166).
+
+* `filter()` on grouped data nows use a much faster translation using on `.I`
+  rather than `.SD` (and requiring an intermediate assignment) (#176). Thanks 
+  to suggestion from @myoung3 and @ColeMiller1.
+
+* Translation of individual expressions:
+
+  * `x[[1]]` is now translated correctly.
+  
+  * Anonymous functions are now preserved (@smingerson, #155)
+  
+  * Environment variables used in the `i` argument of `[.data.table` are
+    now correctly inlined when not in the global environment (#164).
+
+  * `T` and `F` are correctly translated to `TRUE` and `FALSE` (#140).
+
+## Minor improvements and bug fixes
+
+* Grouped filter, mutate, and slice no longer affect ordering of output (#178).
+
+* `as_tibble()` gains a `.name_repair` argument (@markfairbanks).
+
+* `as.data.table()` always calls `[]` so that the result will print (#146). 
+
+* `print.lazy_dt()` shows total rows, and grouping, if present.
+
+* `group_map()` and `group_walk()` are now translated (#108).
+
 # dtplyr 1.0.1
 
 * Better handling for `.data` and `.env` pronouns (#138).
@@ -15,6 +86,8 @@
 
 * `rename()` now works without `data.table` attached, as intended 
   (@michaelchirico, #123).
+
+* dtplyr has been re-licensed as MIT (#165).  
 
 # dtplyr 1.0.0
 

@@ -38,7 +38,7 @@ mutate                  Create, modify, and delete columns
 mutate-joins            Mutating joins
 mutate_all              Mutate multiple columns
 n_distinct              Efficiently count the number of unique values
-                        in a set of vector
+                        in a set of vectors
 na_if                   Convert values to NA
 near                    Compare two numeric vectors
 nest_join               Nest join

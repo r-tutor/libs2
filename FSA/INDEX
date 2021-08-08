@@ -10,8 +10,7 @@ CutthroatAL             Capture histories (9 samples) of Cutthroat
                         Trout from Auke Lake.
 Ecoli                   Population growth of Escherichia coli.
 FSA                     Fisheries stock assessment methods and data.
-FSAUtils                Capitalizes the first letter of first or all
-                        words in a string.
+FSA-defunct             DEFUNCT functions.
 Mirex                   Mirex concentration, weight, capture year, and
                         species of Lake Ontario salmon.
 Mmethods                Estimate natural mortality from a variety of
@@ -32,8 +31,6 @@ Schnute                 The four-parameter growth function from Schnute
 SchnuteRichards         The five-parameter growth function from Schnute
                         and Richards (1990).
 SpotVA1                 Age and length of spot.
-Subset                  Subsets/filters a data frame and drops the
-                        unused levels.
 Summarize               Summary statistics for a numeric variable.
 WR79                    Ages and lengths for a hypothetical sample from
                         Westerheim and Ricker (1979).
@@ -54,7 +51,8 @@ alkMeanVar              Mean Values-at-age from an age-length key
 alkPlot                 Plots to visualize age-length keys.
 binCI                   Confidence intervals for binomial probability
                         of success.
-bootstrap               Case bootstrapping and associated S3 methods.
+capFirst                Capitalizes the first letter of first or all
+                        words in a string.
 capHistConvert          Convert between capture history data.frame
                         formats.
 capHistSum              Summarize capture histories in individual fish
@@ -62,21 +60,12 @@ capHistSum              Summarize capture histories in individual fish
 catchCurve              Mortality estimates from the descending limb of
                         a catch curve.
 chapmanRobson           Computes Chapman-Robson estimates of S and Z.
-chooseColors            Create a list of colors from among a variety of
-                        color palettes.
 col2rgbt                Converts an R color to RGB (red/green/blue)
                         including a transparency (alpha channel).
-compIntercepts          Tests for significant differences among all
-                        pairs of intercepts in a dummy variable
-                        regression.
-compSlopes              Tests for significant differences among all
-                        pairs of slopes in a dummy variable regression
-                        (DVR).
-confint.nlsBoot         Associated S3 methods for nlsBoot from
-                        nlstools.
+confint.boot            Associated S3 methods for bootstrap results
+                        from car::Boot.
 depletion               Computes the Leslie or DeLury population
                         estimate from catch and effort data.
-diags                   Extract diagonals from a matrix.
 dunnTest                Dunn's Kruskal-Wallis Multiple Comparisons.
 expandCounts            Repeat individual fish data (including lengths)
                         from tallied counts.
@@ -86,10 +75,12 @@ extraTests              Likelihood ratio and extra sum-of-squares
                         tests.
 fact2num                Converts "numeric" factor levels to numeric
                         values.
+filterD-deprecated      DEPRECATED - Subsets/filters a data frame and
+                        drops the unused levels.
 fishR                   Opens web pages associated with the fishR
                         website.
-fitPlot                 Fitted model plot for an lm, glm, or nls
-                        object.
+fitPlot                 DEPRECATED - Fitted model plot for an lm, glm,
+                        or nls object.
 fsaNews                 Read news and changes for the 'FSA' package.
 geomean                 Calculates the geometric mean or geometric
                         standard deviation.
@@ -101,10 +92,9 @@ headtail                Shows rows from the head and tail of a data
                         frame or matrix.
 hist.formula            Creates separate histograms by levels.
 histFromSum             Create a histogram from a frequency table.
-hoCoef                  Performs a hypothesis test that a linear model
-                        parameter is equal to a specific value.
 hyperCI                 Confidence interval for population size (N) in
                         hypergeometric distribution.
+is.odd                  Determine if a number is odd or even.
 jolly                   Jolly-Seber analysis from multiple
                         mark-recapture events from an open population.
 kCounts                 Specific utilities for use in a knitr document.
@@ -115,13 +105,12 @@ logbtcf                 Constructs the correction-factor used when
                         back-transforming log-transformed values.
 lwCompPreds             Constructs plots of predicted weights at given
                         lengths among different groups.
-mapvalues               Replace specified values in a vector or factor
-                        with new values.
 mrClosed                Estimate initial population size for single or
                         multiple census mark-recapture data.
+nlsBoot                 Associated S3 methods for nlsBoot from
+                        nlstools.
 nlsTracePlot            Adds model fits from nls iterations to active
                         plot.
-oddeven                 Determine if a number is odd or even.
 peek                    Peek into (show a subset of) a data frame or
                         matrix.
 perc                    Computes the percentage of values in a vector
@@ -129,8 +118,6 @@ perc                    Computes the percentage of values in a vector
                         value.
 plotAB                  Construct traditional (Campana-like) age-bias
                         plots.
-plotBinResp             Plots a binary response variable versus a
-                        quantitative explanatory variable.
 poiCI                   Confidence interval for Poisson counts.
 psdAdd                  Creates a vector of Gabelhouse lengths for each
                         species in an entire data frame.
@@ -150,15 +137,15 @@ removal                 Population estimates for k-, 3-, or 2-pass
                         removal data.
 repeatedRows2Keep       Find non-repeated consecutive rows in a
                         data.frame.
-residPlot               Construct a residual plot from lm or nls
-                        objects.
+residPlot               DEPRECATED - Construct a residual plot from lm
+                        or nls objects.
 se                      Computes standard error of the mean.
+srFuns                  Creates a function for a specific
+                        parameterization of a common stock-recruitment
+                        function .
 srStarts                Finds reasonable starting values for parameters
                         in specific parameterizations of common
                         stock-recruitment models.
-stockRecruitment        Creates a function for a specific
-                        parameterization of a common stock-recruitment
-                        function .
 sumTable                Creates a one- or two-way table of summary
                         statistics.
 tictactoe               Construct a base tic-tac-toe plot for

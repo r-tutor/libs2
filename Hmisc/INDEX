@@ -57,6 +57,7 @@ equalBins               Multicolumn Formating
 errbar                  Plot Error Bars
 escapeRegex             Escapes any characters that would have special
                         meaning in a reqular expression.
+estSeqMarkovOrd         estSeqMarkovOrd
 estSeqSim               estSeqSim
 event.chart             Flexible Event Chart for Time-to-Event Data
 event.convert           Event Conversion for Time-to-Event Data
@@ -83,6 +84,8 @@ histboxp                Use plotly to Draw Stratified Spike Histogram
 hoeffd                  Matrix of Hoeffding's D Statistics
 html                    Convert an S object to HTML
 impute                  Generic Functions and Methods for Imputation
+intMarkovOrd            Compute Parameters for Proportional Odds Markov
+                        Model
 knitrSet                knitr Setup and plotly Service Function
 labcurve                Label Curves, Make Keys, and Interactively Draw
                         Points and Curves
@@ -157,12 +160,14 @@ sedit                   Character String Editing and Miscellaneous
 show.pch                Display Colors, Plotting Symbols, and Symbol
                         Numeric Equivalents
 showPsfrag              Display image from psfrag LaTeX strings
+simMarkovOrd            simMarkovOrd
 simRegOrd               Simulate Power for Adjusted Ordinal Regression
                         Two-Sample Test
 simplifyDims            List Simplification
 smean.sd                Compute Summary Statistics on a Vector
 solvet                  solve Function with tol argument
 somers2                 Somers' Dxy Rank Correlation
+soprobMarkovOrd         soprobMarkovOrd
 spower                  Simulate Power of 2-Sample Test for Survival
                         under Complex Conditions
 spss.get                Enhanced Importing of SPSS Files

@@ -66,6 +66,7 @@ git_stash_list	git_stash
 git_stash_pop	git_stash
 git_stash_save	git_stash
 git_status	git_commit
+git_stat_files	git_commit
 git_submodule_add	git_submodule
 git_submodule_fetch	git_submodule
 git_submodule_info	git_submodule

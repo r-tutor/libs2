@@ -84,6 +84,9 @@ coerce,transactions,data.frame-method	transactions-class
 coerce,transactions,list-method	transactions-class
 coerce,transactions,matrix-method	transactions-class
 coerce,transactions,tidLists-method	tidLists-class
+compatible	itemCoding
+compatible,associations-method	itemCoding
+compatible,itemMatrix-method	itemCoding
 coverage	coverage
 coverage,rules-method	coverage
 crossTable	crossTable
@@ -279,6 +282,8 @@ read.PMML	pmml
 read.transactions	read.transactions
 recode	itemCoding
 recode,itemMatrix-method	itemCoding
+recode,itemsets-method	itemCoding
+recode,rules-method	itemCoding
 redundant	is.redundant
 rhs	rules-class
 rhs,rules-method	rules-class

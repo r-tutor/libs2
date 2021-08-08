@@ -1,7 +1,7 @@
 Package: ipred
 Title: Improved Predictors
-Version: 0.9-9
-Date: 2019-04-29
+Version: 0.9-11
+Date: 2021-03-12
 Authors@R: c(person("Andrea", "Peters", role = "aut"),
              person("Torsten", "Hothorn", role = c("aut", "cre"),
                     email = "Torsten.Hothorn@R-project.org"),
@@ -13,10 +13,10 @@ Description: Improved predictive models by indirect classification and
   as well as resampling based estimators of prediction error. 
 Depends: R (>= 2.10)
 Imports: rpart (>= 3.1-8), MASS, survival, nnet, class, prodlim
-Suggests: mvtnorm, mlbench, TH.data
+Suggests: mvtnorm, mlbench, TH.data, randomForest, party
 License: GPL (>= 2)
 NeedsCompilation: yes
-Packaged: 2019-04-28 16:17:41 UTC; hothorn
+Packaged: 2021-03-12 13:27:00 UTC; hothorn
 Author: Andrea Peters [aut],
   Torsten Hothorn [aut, cre],
   Brian D. Ripley [ctb],
@@ -24,6 +24,6 @@ Author: Andrea Peters [aut],
   Beth Atkinson [ctb]
 Maintainer: Torsten Hothorn <Torsten.Hothorn@R-project.org>
 Repository: CRAN
-Date/Publication: 2019-04-28 17:40:12 UTC
-Built: R 4.0.0; x86_64-w64-mingw32; 2020-05-02 23:04:25 UTC; windows
+Date/Publication: 2021-03-12 14:00:06 UTC
+Built: R 4.1.0; x86_64-w64-mingw32; 2021-07-26 22:03:28 UTC; windows
 Archs: i386, x64

@@ -1,8 +1,10 @@
+haven-package	haven-package
 as_factor	as_factor
 as_factor.data.frame	as_factor
 as_factor.haven_labelled	as_factor
 as_factor.labelled	as_factor
 format_tagged_na	tagged_na
+haven	haven-package
 is.labelled	labelled
 is_tagged_na	tagged_na
 labelled	labelled

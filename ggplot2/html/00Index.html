@@ -11,7 +11,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;ggplot2&rsquo; version 3.3.3</h2>
+</div><h2>Documentation for package &lsquo;ggplot2&rsquo; version 3.3.5</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
@@ -69,6 +69,8 @@
 <td>Control aesthetic evaluation</td></tr>
 <tr><td style="width: 25%;"><a href="aes_eval.html">after_stat</a></td>
 <td>Control aesthetic evaluation</td></tr>
+<tr><td style="width: 25%;"><a href="get_alt_text.html">alt_text</a></td>
+<td>Extract alt text from a plot</td></tr>
 <tr><td style="width: 25%;"><a href="annotate.html">annotate</a></td>
 <td>Create an annotation layer</td></tr>
 <tr><td style="width: 25%;"><a href="annotation_custom.html">annotation_custom</a></td>
@@ -76,7 +78,7 @@
 <tr><td style="width: 25%;"><a href="annotation_logticks.html">annotation_logticks</a></td>
 <td>Annotation: log tick marks</td></tr>
 <tr><td style="width: 25%;"><a href="annotation_map.html">annotation_map</a></td>
-<td>Annotation: a maps</td></tr>
+<td>Annotation: a map</td></tr>
 <tr><td style="width: 25%;"><a href="annotation_raster.html">annotation_raster</a></td>
 <td>Annotation: high-performance rectangular tiling</td></tr>
 <tr><td style="width: 25%;"><a href="autolayer.html">autolayer</a></td>
@@ -223,7 +225,9 @@
 <td>Ribbons and area plots</td></tr>
 <tr><td style="width: 25%;"><a href="geom_bar.html">geom_bar</a></td>
 <td>Bar charts</td></tr>
-<tr><td style="width: 25%;"><a href="geom_bin2d.html">geom_bin2d</a></td>
+<tr><td style="width: 25%;"><a href="geom_bin_2d.html">geom_bin2d</a></td>
+<td>Heatmap of 2d bin counts</td></tr>
+<tr><td style="width: 25%;"><a href="geom_bin_2d.html">geom_bin_2d</a></td>
 <td>Heatmap of 2d bin counts</td></tr>
 <tr><td style="width: 25%;"><a href="geom_blank.html">geom_blank</a></td>
 <td>Draw nothing</td></tr>
@@ -321,6 +325,8 @@
 <td>Violin plot</td></tr>
 <tr><td style="width: 25%;"><a href="geom_abline.html">geom_vline</a></td>
 <td>Reference lines: horizontal, vertical, and diagonal</td></tr>
+<tr><td style="width: 25%;"><a href="get_alt_text.html">get_alt_text</a></td>
+<td>Extract alt text from a plot</td></tr>
 <tr><td style="width: 25%;"><a href="ggplot.html">ggplot</a></td>
 <td>Create a new ggplot</td></tr>
 <tr><td style="width: 25%;"><a href="ggproto.html">ggproto</a></td>
@@ -410,7 +416,7 @@
 <tr><td style="width: 25%;"><a href="hmisc.html">mean_sdl</a></td>
 <td>A selection of summary functions from Hmisc</td></tr>
 <tr><td style="width: 25%;"><a href="mean_se.html">mean_se</a></td>
-<td>Calculate mean and standard error</td></tr>
+<td>Calculate mean and standard error of the mean</td></tr>
 <tr><td style="width: 25%;"><a href="hmisc.html">median_hilow</a></td>
 <td>A selection of summary functions from Hmisc</td></tr>
 <tr><td style="width: 25%;"><a href="midwest.html">midwest</a></td>
@@ -492,19 +498,19 @@
 <tr><td style="width: 25%;"><a href="scale_colour_continuous.html">scale_color_binned</a></td>
 <td>Continuous and binned colour scales</td></tr>
 <tr><td style="width: 25%;"><a href="scale_brewer.html">scale_color_brewer</a></td>
-<td>Sequential, diverging and qualitative colour scales from colorbrewer.org</td></tr>
+<td>Sequential, diverging and qualitative colour scales from ColorBrewer</td></tr>
 <tr><td style="width: 25%;"><a href="scale_colour_continuous.html">scale_color_continuous</a></td>
 <td>Continuous and binned colour scales</td></tr>
 <tr><td style="width: 25%;"><a href="scale_gradient.html">scale_color_date</a></td>
 <td>Gradient colour scales</td></tr>
 <tr><td style="width: 25%;"><a href="scale_gradient.html">scale_color_datetime</a></td>
 <td>Gradient colour scales</td></tr>
-<tr><td style="width: 25%;"><a href="scale_hue.html">scale_color_discrete</a></td>
-<td>Evenly spaced colours for discrete data</td></tr>
+<tr><td style="width: 25%;"><a href="scale_colour_discrete.html">scale_color_discrete</a></td>
+<td>Discrete colour scales</td></tr>
 <tr><td style="width: 25%;"><a href="scale_brewer.html">scale_color_distiller</a></td>
-<td>Sequential, diverging and qualitative colour scales from colorbrewer.org</td></tr>
+<td>Sequential, diverging and qualitative colour scales from ColorBrewer</td></tr>
 <tr><td style="width: 25%;"><a href="scale_brewer.html">scale_color_fermenter</a></td>
-<td>Sequential, diverging and qualitative colour scales from colorbrewer.org</td></tr>
+<td>Sequential, diverging and qualitative colour scales from ColorBrewer</td></tr>
 <tr><td style="width: 25%;"><a href="scale_gradient.html">scale_color_gradient</a></td>
 <td>Gradient colour scales</td></tr>
 <tr><td style="width: 25%;"><a href="scale_gradient.html">scale_color_gradient2</a></td>
@@ -527,6 +533,8 @@
 <td>Binned gradient colour scales</td></tr>
 <tr><td style="width: 25%;"><a href="scale_steps.html">scale_color_stepsn</a></td>
 <td>Binned gradient colour scales</td></tr>
+<tr><td style="width: 25%;"><a href="scale_viridis.html">scale_color_viridis_b</a></td>
+<td>Viridis colour scales from viridisLite</td></tr>
 <tr><td style="width: 25%;"><a href="scale_viridis.html">scale_color_viridis_c</a></td>
 <td>Viridis colour scales from viridisLite</td></tr>
 <tr><td style="width: 25%;"><a href="scale_viridis.html">scale_color_viridis_d</a></td>
@@ -534,7 +542,7 @@
 <tr><td style="width: 25%;"><a href="scale_colour_continuous.html">scale_colour_binned</a></td>
 <td>Continuous and binned colour scales</td></tr>
 <tr><td style="width: 25%;"><a href="scale_brewer.html">scale_colour_brewer</a></td>
-<td>Sequential, diverging and qualitative colour scales from colorbrewer.org</td></tr>
+<td>Sequential, diverging and qualitative colour scales from ColorBrewer</td></tr>
 <tr><td style="width: 25%;"><a href="scale_colour_continuous.html">scale_colour_continuous</a></td>
 <td>Continuous and binned colour scales</td></tr>
 <tr><td style="width: 25%;"><a href="scale_gradient.html">scale_colour_date</a></td>
@@ -544,9 +552,9 @@
 <tr><td style="width: 25%;"><a href="scale_colour_discrete.html">scale_colour_discrete</a></td>
 <td>Discrete colour scales</td></tr>
 <tr><td style="width: 25%;"><a href="scale_brewer.html">scale_colour_distiller</a></td>
-<td>Sequential, diverging and qualitative colour scales from colorbrewer.org</td></tr>
+<td>Sequential, diverging and qualitative colour scales from ColorBrewer</td></tr>
 <tr><td style="width: 25%;"><a href="scale_brewer.html">scale_colour_fermenter</a></td>
-<td>Sequential, diverging and qualitative colour scales from colorbrewer.org</td></tr>
+<td>Sequential, diverging and qualitative colour scales from ColorBrewer</td></tr>
 <tr><td style="width: 25%;"><a href="scale_gradient.html">scale_colour_gradient</a></td>
 <td>Gradient colour scales</td></tr>
 <tr><td style="width: 25%;"><a href="scale_gradient.html">scale_colour_gradient2</a></td>
@@ -584,7 +592,7 @@
 <tr><td style="width: 25%;"><a href="scale_colour_continuous.html">scale_fill_binned</a></td>
 <td>Continuous and binned colour scales</td></tr>
 <tr><td style="width: 25%;"><a href="scale_brewer.html">scale_fill_brewer</a></td>
-<td>Sequential, diverging and qualitative colour scales from colorbrewer.org</td></tr>
+<td>Sequential, diverging and qualitative colour scales from ColorBrewer</td></tr>
 <tr><td style="width: 25%;"><a href="scale_colour_continuous.html">scale_fill_continuous</a></td>
 <td>Continuous and binned colour scales</td></tr>
 <tr><td style="width: 25%;"><a href="scale_gradient.html">scale_fill_date</a></td>
@@ -594,9 +602,9 @@
 <tr><td style="width: 25%;"><a href="scale_colour_discrete.html">scale_fill_discrete</a></td>
 <td>Discrete colour scales</td></tr>
 <tr><td style="width: 25%;"><a href="scale_brewer.html">scale_fill_distiller</a></td>
-<td>Sequential, diverging and qualitative colour scales from colorbrewer.org</td></tr>
+<td>Sequential, diverging and qualitative colour scales from ColorBrewer</td></tr>
 <tr><td style="width: 25%;"><a href="scale_brewer.html">scale_fill_fermenter</a></td>
-<td>Sequential, diverging and qualitative colour scales from colorbrewer.org</td></tr>
+<td>Sequential, diverging and qualitative colour scales from ColorBrewer</td></tr>
 <tr><td style="width: 25%;"><a href="scale_gradient.html">scale_fill_gradient</a></td>
 <td>Gradient colour scales</td></tr>
 <tr><td style="width: 25%;"><a href="scale_gradient.html">scale_fill_gradient2</a></td>
@@ -729,11 +737,11 @@
 <td>Extract coordinates from 'sf' objects</td></tr>
 <tr><td style="width: 25%;"><a href="geom_histogram.html">stat_bin</a></td>
 <td>Histograms and frequency polygons</td></tr>
-<tr><td style="width: 25%;"><a href="geom_bin2d.html">stat_bin2d</a></td>
+<tr><td style="width: 25%;"><a href="geom_bin_2d.html">stat_bin2d</a></td>
 <td>Heatmap of 2d bin counts</td></tr>
 <tr><td style="width: 25%;"><a href="geom_hex.html">stat_binhex</a></td>
 <td>Hexagonal heatmap of 2d bin counts</td></tr>
-<tr><td style="width: 25%;"><a href="geom_bin2d.html">stat_bin_2d</a></td>
+<tr><td style="width: 25%;"><a href="geom_bin_2d.html">stat_bin_2d</a></td>
 <td>Heatmap of 2d bin counts</td></tr>
 <tr><td style="width: 25%;"><a href="geom_hex.html">stat_bin_hex</a></td>
 <td>Hexagonal heatmap of 2d bin counts</td></tr>

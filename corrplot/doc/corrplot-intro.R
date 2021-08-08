@@ -1,204 +1,181 @@
-## ----setup, include=FALSE------------------------------------------------
-set.seed(0) # we need reproducible results
+## ----setup, include=FALSE-----------------------------------------------------
 knitr::opts_chunk$set(
-  out.extra = 'style="display:block; margin: auto"',
-  fig.align = "center",
-  fig.path = "webimg/",
-  dev = "png")
+  fig.align = 'center',
+  fig.path = 'webimg/',
+  fig.width = 6,
+  fig.height = 6,
+  dev = 'png')
 
-## ----methods-------------------------------------------------------------
-library(corrplot)
-M <- cor(mtcars)
-corrplot(M, method = "circle")
-corrplot(M, method = "square")
-corrplot(M, method = "ellipse")
-corrplot(M, method = "number") # Display the correlation coefficient
-corrplot(M, method = "shade")
-corrplot(M, method = "color")
-corrplot(M, method = "pie")
-
-## ----layout--------------------------------------------------------------
-corrplot(M, type = "upper")
-corrplot(M, type = "upper")
-
-## ----mixed---------------------------------------------------------------
-corrplot.mixed(M)
-corrplot.mixed(M, lower.col = "black", number.cex = .7)
-corrplot.mixed(M, lower = "ellipse", upper = "circle")
-corrplot.mixed(M, lower = "square", upper = "circle", tl.col = "black")
-
-## ----order---------------------------------------------------------------
-corrplot(M, order = "AOE")
-corrplot(M, order = "hclust")
-corrplot(M, order = "FPC")
-corrplot(M, order = "alphabet")
-
-## ----rectangles----------------------------------------------------------
-corrplot(M, order = "hclust", addrect = 2)
-corrplot(M, order = "hclust", addrect = 3)
-
-## ----hclust-lightblue----------------------------------------------------
-# Change background color to lightblue
-corrplot(M, type = "upper", order = "hclust",
-         col = c("black", "white"), bg = "lightblue")
-
-## ----color---------------------------------------------------------------
-col1 <- colorRampPalette(c("#7F0000", "red", "#FF7F00", "yellow", "white",
-                           "cyan", "#007FFF", "blue", "#00007F"))
-col2 <- colorRampPalette(c("#67001F", "#B2182B", "#D6604D", "#F4A582",
-                           "#FDDBC7", "#FFFFFF", "#D1E5F0", "#92C5DE",
-                           "#4393C3", "#2166AC", "#053061"))
-col3 <- colorRampPalette(c("red", "white", "blue"))	
-col4 <- colorRampPalette(c("#7F0000", "red", "#FF7F00", "yellow", "#7FFF7F",
-                           "cyan", "#007FFF", "blue", "#00007F"))
-whiteblack <- c("white", "black")
-
-## using these color spectra
-corrplot(M, order = "hclust", addrect = 2, col = col1(100))
-corrplot(M, order = "hclust", addrect = 2, col = col2(50))
-corrplot(M, order = "hclust", addrect = 2, col = col3(20))
-corrplot(M, order = "hclust", addrect = 2, col = col4(10))
-corrplot(M, order = "hclust", addrect = 2, col = whiteblack, bg = "gold2")
-
-## ----hclust-stdcolors----------------------------------------------------
-corrplot(M, order = "hclust", addrect = 2, col = heat.colors(100))
-corrplot(M, order = "hclust", addrect = 2, col = terrain.colors(100))
-corrplot(M, order = "hclust", addrect = 2, col = cm.colors(100))
-corrplot(M, order = "hclust", addrect = 2, col = gray.colors(100))
-
-## ----hclust-rcolorbrewer-------------------------------------------------
-library(RColorBrewer)
-
-corrplot(M, type = "upper", order = "hclust",
-         col = brewer.pal(n = 8, name = "RdBu"))
-corrplot(M, type = "upper", order = "hclust",
-         col = brewer.pal(n = 8, name = "RdYlBu"))
-corrplot(M, type = "upper", order = "hclust",
-         col = brewer.pal(n = 8, name = "PuOr"))
-
-## ----color-label---------------------------------------------------------
-## remove color legend and text legend 
-corrplot(M, order = "AOE", cl.pos = "n", tl.pos = "n")  
-
-## bottom  color legend, diagonal text legend, rotate text label
-corrplot(M, order = "AOE", cl.pos = "b", tl.pos = "d", tl.srt = 60)
-
-## a wider color legend with numbers right aligned
-corrplot(M, order = "AOE", cl.ratio = 0.2, cl.align = "r")
-
-## text labels rotated 45 degrees
-corrplot(M, type = "lower", order = "hclust", tl.col = "black", tl.srt = 45)
-
-## ----non-corr------------------------------------------------------------
-corrplot(abs(M),order = "AOE", col = col3(200), cl.lim = c(0, 1))
-## visualize a  matrix in [-100, 100]
-ran <- round(matrix(runif(225, -100,100), 15))
-corrplot(ran, is.corr = FALSE, method = "square")
-## a beautiful color legend 
-corrplot(ran, is.corr = FALSE, method = "ellipse", cl.lim = c(-100, 100))
-
-## ----non-corr-asp--------------------------------------------------------
-ran <- matrix(rnorm(70), ncol = 7)
-corrplot(ran, is.corr = FALSE, win.asp = .7, method = "circle")
-
-## ----NAs-----------------------------------------------------------------
-M2 <- M
-diag(M2) = NA
-corrplot(M2)
-corrplot(M2, na.label = "o")
-corrplot(M2, na.label = "NA")
-
-## ----plotmath------------------------------------------------------------
-M2 <- M[1:5,1:5]
-colnames(M2) <- c("alpha", "beta", ":alpha+beta", ":a[0]", "=a[beta]")
-rownames(M2) <- c("alpha", "beta", NA, "$a[0]", "$ a[beta]")
-corrplot(M2)
-
-## ----test----------------------------------------------------------------
-res1 <- cor.mtest(mtcars, conf.level = .95)
-res2 <- cor.mtest(mtcars, conf.level = .99)
-
-## specialized the insignificant value according to the significant level
-corrplot(M, p.mat = res1$p, sig.level = .2)
-corrplot(M, p.mat = res1$p, sig.level = .05)
-corrplot(M, p.mat = res1$p, sig.level = .01)
-
-## leave blank on no significant coefficient
-corrplot(M, p.mat = res1$p, insig = "blank")
-
-## add p-values on no significant coefficient
-corrplot(M, p.mat = res1$p, insig = "p-value")
-
-## add all p-values
-corrplot(M, p.mat = res1$p, insig = "p-value", sig.level = -1)
-
-## add cross on no significant coefficient 
-corrplot(M, p.mat = res1$p, order = "hclust", insig = "pch", addrect = 3)
-
-## ----ci------------------------------------------------------------------
-corrplot(M, low = res1$lowCI, upp = res1$uppCI, order = "hclust",
-         rect.col = "navy", plotC = "rect", cl.pos = "n")
-corrplot(M, p.mat = res1$p, low = res1$lowCI, upp = res1$uppCI,
-         order = "hclust", pch.col = "red", sig.level = 0.01,
-         addrect = 3, rect.col = "navy", plotC = "rect", cl.pos = "n")
-
-## ----ci_with_label-------------------------------------------------------
-res1 <- cor.mtest(mtcars, conf.level = .95)
-
-corrplot(M, p.mat = res1$p, insig = "label_sig",
-         sig.level = c(.001, .01, .05), pch.cex = .9, pch.col = "white")
-corrplot(M, p.mat = res1$p, method = "color",
-         insig = "label_sig", pch.col = "white")
-corrplot(M, p.mat = res1$p, method = "color", type = "upper",
-         sig.level = c(.001, .01, .05), pch.cex = .9,
-         insig = "label_sig", pch.col = "white", order = "AOE")
-corrplot(M, p.mat = res1$p, insig = "label_sig", pch.col = "white",
-         pch = "p<.05", pch.cex = .5, order = "AOE")
-
-## ----pmat----------------------------------------------------------------
-# matrix of the p-value of the correlation
-p.mat <- cor.mtest(mtcars)$p
-head(p.mat[, 1:5])
-
-# Specialized the insignificant value according to the significant level
-corrplot(M, type = "upper", order = "hclust", 
-         p.mat = p.mat, sig.level = 0.01)
-
-# Leave blank on no significant coefficient
-corrplot(M, type = "upper", order = "hclust", 
-         p.mat = p.mat, sig.level = 0.01, insig = "blank")
-
-## ----customized----------------------------------------------------------
-col <- colorRampPalette(c("#BB4444", "#EE9988", "#FFFFFF", "#77AADD", "#4477AA"))
-corrplot(M, method = "color", col = col(200),
-         type = "upper", order = "hclust", number.cex = .7,
-         addCoef.col = "black", # Add coefficient of correlation
-         tl.col = "black", tl.srt = 90, # Text label color and rotation
-         # Combine with significance
-         p.mat = p.mat, sig.level = 0.01, insig = "blank", 
-         # hide correlation coefficient on the principal diagonal
-         diag = FALSE)
-
-## ----large_matrix--------------------------------------------------------
-
-# generating large feature matrix (cols=features, rows=samples)
-num_features <- 60 # how many features
-num_samples <- 300 # how many samples
-DATASET <- matrix(runif(num_features * num_samples),
-               nrow = num_samples, ncol = num_features)
-
-# setting some dummy names for the features e.g. f23
-colnames(DATASET) <- paste0("f", 1:ncol(DATASET))
-
-# let's make 30% of all features to be correlated with feature "f1"
-num_feat_corr <- num_features * .3
-idx_correlated_features <- as.integer(seq(from = 1,
-                                          to = num_features,
-                                          length.out = num_feat_corr))[-1]
-for (i in idx_correlated_features) {
-  DATASET[,i] <- DATASET[,1] + runif(num_samples) # adding some noise
+get_os = function(){
+  sysinf = Sys.info()
+  if (!is.null(sysinf)){
+    os = sysinf['sysname']
+    if (os == 'Darwin')
+      os = 'osx'
+  } else { ## mystery machine
+    os = .Platform$OS.type
+    if (grepl('^darwin', R.version$os))
+      os = 'osx'
+    if (grepl('linux-gnu', R.version$os))
+      os = 'linux'
+  }
+  tolower(os)
+}
+if(get_os() =='windows' & capabilities('cairo') | all(capabilities(c('cairo', 'X11')))){
+  knitr::opts_chunk$set(dev.args = list(type='cairo'))
 }
 
-corrplot(cor(DATASET), diag = FALSE, order = "FPC",
-         tl.pos = "td", tl.cex = 0.5, method = "color", type = "upper")
+## ----intro--------------------------------------------------------------------
+library(corrplot)
+M = cor(mtcars)
+corrplot(M, method = 'number') # colorful number
+corrplot(M, method = 'color', order = 'alphabet') 
+corrplot(M) # by default, method = 'circle'
+corrplot(M, order = 'AOE') # after 'AOE' reorder
+corrplot(M, method = 'shade', order = 'AOE', diag = FALSE) 
+corrplot(M, method = 'square', order = 'FPC', type = 'lower', diag = FALSE)
+corrplot(M, method = 'ellipse', order = 'AOE', type = 'upper')
+corrplot.mixed(M, order = 'AOE')
+corrplot.mixed(M, lower = 'shade', upper = 'pie', order = 'hclust')
+
+## ----hclust-------------------------------------------------------------------
+corrplot(M, order = 'hclust', addrect = 2)
+corrplot(M, method = 'square', diag = FALSE, order = 'hclust', 
+         addrect = 3, rect.col = 'blue', rect.lwd = 3, tl.pos = 'd')
+
+## ----seriation----------------------------------------------------------------
+library(seriation)
+list_seriation_methods('matrix')
+list_seriation_methods('dist')
+
+data(Zoo)
+Z = cor(Zoo[,-c(15, 17)])
+
+dist2Order = function(corr, method, ...) {
+  d_corr = as.dist(1 - corr)
+  s = seriate(d_corr, method = method, ...)
+  i = get_order(s)
+  return(i)
+}
+
+
+# PCA_angle, same as 'AOE' in corrplot() and corrMatOrder()
+i = get_order(seriate(Z, 'PCA_angle'))
+corrplot(Z[i, i], cl.pos = 'n')
+
+# Hierarchical clustering
+i = dist2Order(Z, 'HC')
+corrplot(Z[i, i], cl.pos = 'n')
+
+# Rank-two ellipse seriation
+i = dist2Order(Z, 'R2E')
+corrplot(Z[i, i], cl.pos = 'n')
+
+# Spectral seriation 
+i = dist2Order(Z, 'Spectral')
+corrplot(Z[i, i], cl.pos = 'n')
+
+# TSP solver 
+i = dist2Order(Z, 'TSP')
+corrplot(Z[i, i], cl.pos = 'n')
+
+## ----rectangles---------------------------------------------------------------
+library(magrittr)
+
+# use index parameter
+i = get_order(seriate(Z, 'PCA_angle'))
+corrplot(Z[i, i], cl.pos = 'n') %>% corrRect(c(1, 9, 15))
+
+# use name parameter
+# Since R 4.1.0, the following one line code works: 
+# corrplot(M, order = 'AOE') |> corrRect(name = c('gear', 'wt', 'carb'))
+corrplot(Z, order = 'AOE') %>% 
+  corrRect(name = c('tail', 'airborne', 'venomous', 'predator'))
+
+
+# use namesMat parameter
+r = rbind(c('eggs', 'catsize', 'airborne', 'milk'),
+          c('catsize', 'eggs', 'milk', 'airborne'))
+corrplot(Z, order = 'hclust') %>% corrRect(namesMat = r)
+
+## ----color--------------------------------------------------------------------
+## diverging color example, suitable for matrix in [-N, N]
+col1 = colorRampPalette(c('#7F0000', 'red', '#FF7F00', 'yellow', 'white',
+                           'cyan', '#007FFF', 'blue', '#00007F'))
+col2 = colorRampPalette(c('red', 'white', 'blue'))	
+
+library(RColorBrewer)
+# use RcolorBrewer color
+corrplot(M, order = 'AOE', addCoef.col = 'black', tl.pos = 'd',  
+         cl.pos = 'n', col = brewer.pal(n = 10, name = 'PRGn'))
+
+## bottom color legend, diagonal text legend, rotate text label
+corrplot(M, order = 'AOE', cl.pos = 'b', tl.pos = 'd', 
+         col = col1(10), diag = FALSE)
+
+## text labels rotated 45 degrees and  wider color legend with numbers right aligned
+corrplot(M, type = 'lower', order = 'hclust', tl.col = 'black', 
+         cl.ratio = 0.2, tl.srt = 45, col = col2(10))
+
+## remove color legend, text legend and principal diagonal glyph
+corrplot(M, order = 'AOE', cl.pos = 'n', tl.pos = 'n', 
+         col = c('white', 'black'), bg = 'gold2')  
+
+## ----non-corr-----------------------------------------------------------------
+## color example, suitable for matrix in [-N, 0] or [0, N]
+col3 = hcl.colors(10, "YlOrRd", rev = TRUE)
+
+N = matrix(runif(80, 20, 30), 8)
+corrplot(N, is.corr = FALSE, col.lim = c(20, 30), 
+         col = col3, cl.pos = 'b', win.asp = 0.8)
+
+## ----col-lim------------------------------------------------------------------
+# when is.corr=TRUE, col.lim only affect the color legend display
+corrplot(M/2)
+corrplot(M/2, col.lim=c(-0.5, 0.5))
+
+## ----NA-math------------------------------------------------------------------
+M2 = M
+diag(M2) = NA
+colnames(M2) = rep(c('$alpha+beta', '$alpha[0]', '$alpha[beta]'), 
+                   c(4, 4, 3))
+rownames(M2) = rep(c('$Sigma[i]^n', '$sigma',  '$alpha[0]^100', '$alpha[beta]'), 
+                   c(2, 4, 2, 3))
+corrplot(10*abs(M2), col = col3, is.corr = FALSE, 
+         col.lim = c(0, 10), tl.cex = 1.5)
+
+## ----test---------------------------------------------------------------------
+testRes = cor.mtest(mtcars, conf.level = 0.95)
+
+## specialized the insignificant value according to the significant level
+corrplot(M, p.mat = testRes$p, sig.level = 0.10, order = 'hclust', addrect = 2) 
+
+## leave blank on no significant coefficient
+corrplot(M, p.mat = testRes$p, method = 'circle', type = 'lower', insig='blank',
+         addCoef.col ='black', number.cex = 0.8, order = 'AOE', diag=FALSE)
+
+## add p-values on no significant coefficients
+corrplot(M, p.mat = testRes$p, insig = 'p-value')
+
+## add all p-values
+corrplot(M, p.mat = testRes$p, insig = 'p-value', sig.level = -1)
+
+## add significant level stars
+corrplot(M, p.mat = testRes$p, method = 'color', diag = FALSE, type = 'upper',
+         sig.level = c(0.001, 0.01, 0.05), pch.cex = 0.9, 
+         insig = 'label_sig', pch.col = 'grey20', order = 'AOE')
+
+## add significant level stars and cluster rectangles
+corrplot(M, p.mat = testRes$p, tl.pos = 'd', order = 'hclust', addrect = 2,
+         insig = 'label_sig', sig.level = c(0.001, 0.01, 0.05), 
+         pch.cex = 0.9, pch.col = 'grey20')
+
+## ----confidence-interval------------------------------------------------------
+# Visualize confidence interval
+corrplot(M, lowCI = testRes$lowCI, uppCI = testRes$uppCI, order = 'hclust',
+         tl.pos = 'd', rect.col = 'navy', plotC = 'rect', cl.pos = 'n')
+
+# Visualize confidence interval and cross the significant coefficients
+corrplot(M, p.mat = testRes$p, lowCI = testRes$lowCI, uppCI = testRes$uppCI,
+         addrect = 3, rect.col = 'navy', plotC = 'rect', cl.pos = 'n')
 

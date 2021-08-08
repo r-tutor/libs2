@@ -45,8 +45,10 @@ parseGroupFormula       Extract components from a formula with
 potatoes                Weight and size of 20 potatoes
 recodeVar               Recode values of a vector
 renameCol               Rename columns in a matrix or a dataframe.
+restrict_fun            restrict
 sub_seq                 Find sub-sequences of identical elements in a
                         vector.
+summary_mb              Fast summary of microbenchmark object
 taylor                  Taylor expansion (one dimension)
 tidy-esticon            Tidy an esticon object
 tidy-linest             Tidy a linest object

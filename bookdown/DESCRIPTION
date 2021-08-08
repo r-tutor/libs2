@@ -1,7 +1,7 @@
 Package: bookdown
 Type: Package
 Title: Authoring Books and Technical Documents with R Markdown
-Version: 0.21
+Version: 0.22
 Authors@R: c(
     person("Yihui", "Xie", role = c("aut", "cre"), email = "xie@yihui.name", comment = c(ORCID = "0000-0003-0645-5666")),
     person("JJ", "Allaire", role = "ctb"),
@@ -40,8 +40,10 @@ Authors@R: c(
     person("Nathan", "Werth", role = "ctb"),
     person("Noam", "Ross", role = "ctb"),
     person("Peter", "Hickey", role = "ctb"),
+    person("Pedro Rafael D.", "Marinho", role="ctb", comment = c(ORCID = "0000-0003-1591-8300")),
     person("Romain", "Lesur", role = "ctb", comment = c(ORCID = "0000-0002-0721-5595")),
     person("Sahir", "Bhatnagar", role = "ctb"),
+    person("Shir", "Dekel", role = "ctb", comment = c(ORCID = "0000-0003-1773-2446")),
     person("Steve", "Simpson", role = "ctb"),
     person("Thierry", "Onkelinx", role = "ctb", comment = c(ORCID = "0000-0001-8804-4216")),
     person("Vincent", "Fulco", role = "ctb"),
@@ -58,18 +60,20 @@ Authors@R: c(
 Maintainer: Yihui Xie <xie@yihui.name>
 Description: Output formats and utilities for authoring books and technical documents with R Markdown.
 License: GPL-3
-Imports: htmltools (>= 0.3.6), knitr (>= 1.22), rmarkdown (>= 2.4),
-        xfun (>= 0.13), tinytex (>= 0.12), yaml (>= 2.1.19)
-Suggests: htmlwidgets, rstudioapi, miniUI, rsconnect (>= 0.4.3), servr
-        (>= 0.13), shiny, testit (>= 0.9), tufte, webshot
-URL: https://github.com/rstudio/bookdown
+Imports: htmltools (>= 0.3.6), knitr (>= 1.22), rmarkdown (>= 2.6),
+        xfun (>= 0.22), tinytex (>= 0.12), yaml (>= 2.1.19)
+Suggests: bslib (>= 0.2.4), downlit (>= 0.2.1), htmlwidgets, jsonlite,
+        rstudioapi, miniUI, rsconnect (>= 0.4.3), servr (>= 0.13),
+        shiny, tibble, testit (>= 0.9), tufte, xml2, webshot
+URL: https://github.com/rstudio/bookdown,
+        https://pkgs.rstudio.com/bookdown/
 BugReports: https://github.com/rstudio/bookdown/issues
 SystemRequirements: Pandoc (>= 1.17.2)
-LazyData: TRUE
 RoxygenNote: 7.1.1
 Encoding: UTF-8
+VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2020-10-13 02:36:15 UTC; yihui
+Packaged: 2021-04-22 13:04:35 UTC; yihui
 Author: Yihui Xie [aut, cre] (<https://orcid.org/0000-0003-0645-5666>),
   JJ Allaire [ctb],
   Albert Kim [ctb],
@@ -107,8 +111,10 @@ Author: Yihui Xie [aut, cre] (<https://orcid.org/0000-0003-0645-5666>),
   Nathan Werth [ctb],
   Noam Ross [ctb],
   Peter Hickey [ctb],
+  Pedro Rafael D. Marinho [ctb] (<https://orcid.org/0000-0003-1591-8300>),
   Romain Lesur [ctb] (<https://orcid.org/0000-0002-0721-5595>),
   Sahir Bhatnagar [ctb],
+  Shir Dekel [ctb] (<https://orcid.org/0000-0003-1773-2446>),
   Steve Simpson [ctb],
   Thierry Onkelinx [ctb] (<https://orcid.org/0000-0001-8804-4216>),
   Vincent Fulco [ctb],
@@ -124,5 +130,5 @@ Author: Yihui Xie [aut, cre] (<https://orcid.org/0000-0003-0645-5666>),
     inst/resources/AUTHORS),
   FriendCode Inc [cph, ctb] (The gitbook style, with modifications)
 Repository: CRAN
-Date/Publication: 2020-10-13 05:00:06 UTC
-Built: R 4.0.3; ; 2020-11-09 07:36:50 UTC; windows
+Date/Publication: 2021-04-22 13:50:02 UTC
+Built: R 4.1.0; ; 2021-07-26 20:38:16 UTC; windows

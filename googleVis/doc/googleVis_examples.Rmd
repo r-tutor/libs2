@@ -4,6 +4,7 @@ date: "`r Sys.Date()`"
 output:
   html_document:
     self_contained: false
+    css: mystyles.css
 ---
 
 <!--

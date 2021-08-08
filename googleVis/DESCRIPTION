@@ -1,15 +1,16 @@
 Package: googleVis
 Type: Package
 Title: R Interface to Google Charts
-Version: 0.6.9
-Date: 2020-11-05
+Version: 0.6.10
+Date: 2021-02-19
 Authors@R: c(person("Markus", "Gesmann", role = c("aut", "cre"),
     email = "markus.gesmann@googlemail.com"),
     person("Diego", "de Castillo", role = "aut",
     email = "decastillo@gmail.com"),
     person("Joe", "Cheng", role = "ctb",
     email = "joe@rstudio.com"),
-    person("Ashley", "Baldry", role = "ctb"))
+    person("Ashley", "Baldry", role = "ctb"),
+    person("Durey", "Ingeniería", role = "ctb"))
 Description: R interface to Google's chart tools, allowing users
     to create interactive charts based on data frames. Charts
     are displayed locally via the R HTTP help server. A modern
@@ -27,13 +28,15 @@ LazyLoad: yes
 LazyData: yes
 VignetteBuilder: knitr, rmarkdown
 RoxygenNote: 7.1.1
+Encoding: UTF-8
 NeedsCompilation: no
-Packaged: 2020-11-05 16:28:09 UTC; mages
+Packaged: 2021-02-19 18:55:50 UTC; mages
 Author: Markus Gesmann [aut, cre],
   Diego de Castillo [aut],
   Joe Cheng [ctb],
-  Ashley Baldry [ctb]
+  Ashley Baldry [ctb],
+  Durey Ingeniería [ctb]
 Maintainer: Markus Gesmann <markus.gesmann@googlemail.com>
 Repository: CRAN
-Date/Publication: 2020-11-05 17:00:03 UTC
-Built: R 4.0.3; ; 2020-11-09 01:22:24 UTC; windows
+Date/Publication: 2021-02-19 19:20:02 UTC
+Built: R 4.1.0; ; 2021-07-26 14:28:53 UTC; windows

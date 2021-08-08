@@ -1,0 +1,3 @@
+curry                   Curry a function from the start
+partial                 Apply arguments partially to a function
+tail_curry              Curry a function from the end

@@ -23,6 +23,9 @@ e1071-deprecated	e1071-deprecated
 element	element
 extractPath	shortestPaths
 fclustIndex	fclustIndex
+gknn	gknn
+gknn.default	gknn
+gknn.formula	gknn
 hamming.distance	hamming.distance
 hamming.window	hamming.window
 hanning.window	hanning.window
@@ -47,11 +50,13 @@ plot.ica	ica
 plot.stft	plot.stft
 plot.svm	plot.svm
 plot.tune	plot.tune
+predict.gknn	gknn
 predict.lca	lca
 predict.naiveBayes	naiveBayes
 predict.svm	predict.svm
 print.bootstrap.lca	bootstrap.lca
 print.fclust	cmeans
+print.gknn	gknn
 print.ica	ica
 print.lca	lca
 print.naiveBayes	naiveBayes
@@ -67,6 +72,7 @@ rdiscrete	Discrete
 read.matrix.csr	read.matrix.csr
 rectangle.window	rectangle.window
 rwiener	rwiener
+scale_data_frame	scale_data_frame
 sigmoid	sigmoid
 skewness	skewness
 stft	stft

@@ -61,12 +61,10 @@ mcmc_areas(
 color_scheme_set("green")
 mcmc_hist(posterior, pars = c("wt", "sigma"))
 
-## ----mcmc_hist-transform, message=FALSE, eval=FALSE---------------------------
-#  # not evaluated to reduce vignette size for CRAN
-#  # full version available at mc-stan.org/bayesplot/articles
-#  color_scheme_set("blue")
-#  mcmc_hist(posterior, pars = c("wt", "sigma"),
-#            transformations = list("sigma" = "log"))
+## ----mcmc_hist-transform, message=FALSE---------------------------------------
+color_scheme_set("blue")
+mcmc_hist(posterior, pars = c("wt", "sigma"),
+          transformations = list("sigma" = "log"))
 
 ## ----mcmc_hist_by_chain, message=FALSE----------------------------------------
 color_scheme_set("brightblue")
@@ -94,12 +92,10 @@ if (requireNamespace("hexbin", quietly = TRUE)) {
   mcmc_hex(posterior, pars = c("(Intercept)", "wt"))
 }
 
-## ----mcmc_pairs, message=FALSE, eval=FALSE------------------------------------
-#  # not evaluated to reduce vignette size for CRAN
-#  # full version available at mc-stan.org/bayesplot/articles
-#  color_scheme_set("pink")
-#  mcmc_pairs(posterior, pars = c("(Intercept)", "wt", "sigma"),
-#             off_diag_args = list(size = 1.5))
+## ----mcmc_pairs, message=FALSE------------------------------------------------
+color_scheme_set("pink")
+mcmc_pairs(posterior, pars = c("(Intercept)", "wt", "sigma"),
+           off_diag_args = list(size = 1.5))
 
 ## ----mcmc_trace---------------------------------------------------------------
 color_scheme_set("blue")
@@ -111,8 +107,6 @@ mcmc_trace(posterior, pars = c("wt", "sigma"),
            facet_args = list(ncol = 1, strip.position = "left"))
 
 ## ----viridis-scheme, eval=FALSE-----------------------------------------------
-#  # not evaluated to reduce vignette size for CRAN
-#  # full version available at mc-stan.org/bayesplot/articles
 #  color_scheme_set("viridis")
 #  mcmc_trace(posterior, pars = "(Intercept)")
 

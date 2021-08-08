@@ -104,6 +104,7 @@ simulate_odbc	backend-odbc
 simulate_oracle	backend-oracle
 simulate_postgres	backend-postgres
 simulate_redshift	backend-redshift
+simulate_snowflake	backend-snowflake
 simulate_sqlite	backend-sqlite
 simulate_teradata	backend-teradata
 slice_max.tbl_lazy	dbplyr-slice

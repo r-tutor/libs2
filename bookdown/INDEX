@@ -1,4 +1,5 @@
 bookdown_site           R Markdown site generator for bookdown
+bs4_book                HTML book built with bootstrap4
 calibre                 A wrapper function to convert e-books using
                         Calibre
 clean_book              Clean up the output files and directories from

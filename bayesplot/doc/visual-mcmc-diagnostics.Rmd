@@ -165,7 +165,7 @@ posterior_ncp <- as.array(fit_ncp)
 ```
 
 You may have noticed the warnings about divergent transitions for the centered
-parametrization fit. Those are serious business and in most cases indicate that
+parameterization fit. Those are serious business and in most cases indicate that
 something is wrong with the model and the results should not be trusted. 
 For an explanation of these warnings see 
 [Divergent transitions after warmup](https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup).
@@ -260,18 +260,18 @@ This function works in general without including information about the
 divergences, but if the optional `np` argument is used to pass NUTS parameter
 information, then divergences will be colored in the plot (by default in red).
 
-<!-- ```{r mcmc_parcoord-1} -->
-<!-- color_scheme_set("darkgray") -->
-<!-- mcmc_parcoord(posterior_cp, np = np_cp) -->
-<!-- ``` -->
-
-
-```{r mcmc_parcoord-1, eval=FALSE}
-# not evaluated to reduce vignette size for CRAN
-# full version available at mc-stan.org/bayesplot/articles
+```{r mcmc_parcoord-1}
 color_scheme_set("darkgray")
 mcmc_parcoord(posterior_cp, np = np_cp)
 ```
+
+
+<!-- ```{r mcmc_parcoord-1, eval=FALSE} -->
+<!-- # not evaluated to reduce vignette size for CRAN -->
+<!-- # full version available at mc-stan.org/bayesplot/articles -->
+<!-- color_scheme_set("darkgray") -->
+<!-- mcmc_parcoord(posterior_cp, np = np_cp) -->
+<!-- ``` -->
 
 Here, you may notice that divergences in the centered
 parameterization happen exclusively when  `tau`, the hierarchical standard
@@ -294,17 +294,17 @@ multiplicative non-identifiabilities (banana-like shapes).
 Let's look at how `tau` interacts with other variables, using only one of the
 `theta`s to keep the plot readable:
 
-<!-- ```{r mcmc_pairs} -->
-<!-- mcmc_pairs(posterior_cp, np = np_cp, pars = c("mu","tau","theta[1]"), -->
-<!--            off_diag_args = list(size = 0.75)) -->
-<!-- ``` -->
-
-```{r mcmc_pairs, eval=FALSE}
-# not evaluated to reduce vignette size for CRAN
-# full version available at mc-stan.org/bayesplot/articles
+```{r mcmc_pairs}
 mcmc_pairs(posterior_cp, np = np_cp, pars = c("mu","tau","theta[1]"),
            off_diag_args = list(size = 0.75))
 ```
+
+<!-- ```{r mcmc_pairs, eval=FALSE} -->
+<!-- # not evaluated to reduce vignette size for CRAN -->
+<!-- # full version available at mc-stan.org/bayesplot/articles -->
+<!-- mcmc_pairs(posterior_cp, np = np_cp, pars = c("mu","tau","theta[1]"),  -->
+<!--            off_diag_args = list(size = 0.75)) -->
+<!-- ``` -->
 
 Note that each bivariate plot is present twice -- by default each of those
 contain half of the chains, so you also get to see if the chains produced

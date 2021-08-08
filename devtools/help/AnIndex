@@ -10,7 +10,6 @@ build_vignettes	build_vignettes
 check	check
 check_built	check
 check_dep_version	reexports
-check_failures	check_failures
 check_man	check_man
 check_rhub	check_rhub
 check_win	check_win
@@ -20,7 +19,6 @@ check_win_release	check_win
 clean_dll	reexports
 clean_vignettes	clean_vignettes
 create	create
-devtest	devtest
 devtools	devtools
 devtools-deprecated	devtools-deprecated
 dev_mode	dev_mode
@@ -35,7 +33,6 @@ github_release	reexports
 git_checks	git_checks
 has_devel	reexports
 has_tests	has_tests
-inst	reexports
 install	install
 install_bioc	remote-reexports
 install_bitbucket	remote-reexports
@@ -75,12 +72,14 @@ source_url	source_url
 spell_check	spell_check
 submit_cran	submit_cran
 test	test
+test_active_file	test
 test_coverage	test
-test_coverage_file	test
-test_file	test
+test_coverage_active_file	test
+test_coverage_file	devtools-deprecated
+test_file	devtools-deprecated
 uninstall	uninstall
 unload	reexports
 update_packages	remote-reexports
-uses_testthat	test
+uses_testthat	uses_testthat
 wd	wd
 with_debug	reexports

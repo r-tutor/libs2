@@ -79,6 +79,7 @@ felm_tidiers	tidy.felm
 finish_glance	finish_glance
 fitdistr_tidiers	tidy.fitdistr
 fix_data_frame	fix_data_frame
+Gam_tidiers	tidy_gam_hastie
 gam_tidiers	tidy.gam
 garch_tidiers	tidy.garch
 geeglm_tidiers	tidy.geeglm
@@ -106,6 +107,7 @@ glance.factanal	glance.factanal
 glance.felm	glance.felm
 glance.fitdistr	glance.fitdistr
 glance.fixest	glance.fixest
+glance.Gam	glance_gam_hastie
 glance.gam	glance.gam
 glance.garch	glance.garch
 glance.geeglm	glance.geeglm
@@ -130,6 +132,7 @@ glance.mjoint	glance.mjoint
 glance.mlogit	glance.mlogit
 glance.muhaz	glance.muhaz
 glance.multinom	glance.multinom
+glance.negbin	glance.negbin
 glance.negbinmfx	glance.mfx
 glance.nlrq	glance.nlrq
 glance.nls	glance.nls
@@ -143,7 +146,6 @@ glance.poLCA	glance.poLCA
 glance.polr	glance.polr
 glance.probitmfx	glance.mfx
 glance.pyears	glance.pyears
-glance.Rchoice	glance.Rchoice
 glance.ridgelm	glance.ridgelm
 glance.rlm	glance.rlm
 glance.rma	glance.rma
@@ -162,6 +164,7 @@ glance.svyglm	glance.svyglm
 glance.svyolr	glance.svyolr
 glance.varest	glance.varest
 glance_optim	glance_optim
+glm.nb_tidiers	glance.negbin
 glmnet_tidiers	tidy.glmnet
 gmm_tidiers	tidy.gmm
 Hmisc_tidiers	tidy.rcorr
@@ -210,7 +213,6 @@ prcomp_tidiers	tidy.prcomp
 psych_tidiers	tidy.kappa
 pyears_tidiers	tidy.pyears
 quantreg_tidiers	tidy.rq
-rchoice_tidiers	tidy.Rchoice
 rcorr_tidiers	tidy.rcorr
 reexports	reexports
 ridgelm_tidiers	tidy.ridgelm
@@ -276,8 +278,8 @@ tidy.felm	tidy.felm
 tidy.fitdistr	tidy.fitdistr
 tidy.fixest	tidy.fixest
 tidy.ftable	tidy.ftable
+tidy.Gam	tidy_gam_hastie
 tidy.gam	tidy.gam
-tidy.gamlss	tidy.gamlss
 tidy.garch	tidy.garch
 tidy.geeglm	tidy.geeglm
 tidy.glht	tidy.glht
@@ -318,6 +320,7 @@ tidy.mlm	tidy.mlm
 tidy.mlogit	tidy.mlogit
 tidy.muhaz	tidy.muhaz
 tidy.multinom	tidy.multinom
+tidy.negbin	tidy.negbin
 tidy.negbinmfx	tidy.mfx
 tidy.nlrq	tidy.nlrq
 tidy.nls	tidy.nls
@@ -337,7 +340,6 @@ tidy.power.htest	tidy.power.htest
 tidy.prcomp	tidy.prcomp
 tidy.probitmfx	tidy.mfx
 tidy.pyears	tidy.pyears
-tidy.Rchoice	tidy.Rchoice
 tidy.rcorr	tidy.rcorr
 tidy.ref.grid	tidy.ref.grid
 tidy.regsubsets	tidy.regsubsets

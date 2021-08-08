@@ -23,16 +23,14 @@ Krig.null.function      Default function to create fixed matrix part of
                         spatial process model.
 Krig.replicates         Collapse repeated spatial locations into unique
                         locations
-MLESpatialProcess       Estimates key covariance parameters for a
-                        spatial process.
+KrigFindLambda          Finds profile likelihood and GCV estimates of
+                        smoothing parameters for splines and Kriging.
 NorthAmericanRainfall   Observed North American summer precipitation
                         from the historical climate network.
 QTps                    Robust and Quantile smoothing using a
                         thin-plate spline
 RCMexample              3-hour precipitation fields from a regional
                         climate model
-REML.test               Maximum Likelihood estimates for some Matern
-                        covariance parameters.
 RMprecip                Monthly total precipitation (mm) for August
                         1997 in the Rocky Mountain Region and some
                         gridded 4km elevation data sets (m).
@@ -63,12 +61,11 @@ drape.plot              Perspective plot draped with colors in the
 envelopePlot            Add a shaded the region between two functions
                         to an existing plot
 fields                  fields - tools for spatial data
-fields.diagonalize2     Fields supporting functions
+fields.duplicated.matrix
+                        Fields supporting functions
 fields.hints            fields - graphics hints
 fields.tests            Testing fields functions
 flame                   Response surface experiment ionizing a reagent
-gcv.Krig                Finds profile likelihood and GCV estimates of
-                        smoothing parameters for splines and Kriging.
 grid list               Some simple functions for working with gridded
                         data and the grid format (grid.list) used in
                         fields.
@@ -77,20 +74,18 @@ image.plot              Draws an image plot with a legend strip for the
                         grid of quadrilaterals.
 image.smooth            Kernel smoother for irregular 2-d data
 image2lz                Some simple functions for subsetting images
+imagePlot               Draws an image plot with a legend strip for the
+                        color scale based on either a regular grid or a
+                        grid of quadrilaterals.
 interp.surface          Fast bilinear interpolator from a grid.
 lennon                  Gray image of John Lennon.
 mKrig                   "micro Krig" Spatial process estimate of a
                         curve or surface, "kriging" with a known
                         covariance function.
-mKrig.MLE               Maximizes likelihood for the process marginal
-                        variance (rho) and nugget standard deviation
-                        (sigma) parameters (e.g. lambda) over a many
-                        covariance models or covariance parameter
-                        values.
 mKrig.grid              Using MKrig for predicting on a grid.
 mKrigMLEJoint           Maximizes likelihood for the process marginal
-                        variance (rho) and nugget standard deviation
-                        (sigma) parameters (e.g. lambda) over a many
+                        variance (sigma) and nugget standard deviation
+                        (tau) parameters (e.g. lambda) over a many
                         covariance models or covariance parameter
                         values.
 minitri                 Mini triathlon results
@@ -111,7 +106,8 @@ predictSurface          Evaluates a fitted function or the prediction
 print.Krig              Print kriging fit results.
 pushpin                 Adds a "push pin" to an existing 3-d plot
 qsreg                   Quantile or Robust spline regression
-quilt.plot              Image plot for irregular spatial data.
+quilt.plot              Useful plots for visualizing irregular spatial
+                        data.
 rat.diet                Experiment studying an appetite supressant in
                         rats.
 rdist                   Euclidean distance matrix or vector

@@ -13,6 +13,8 @@ e1071-deprecated        Deprecated Functions in Package e1071
 element                 Extract Elements of an Array
 fclustIndex             Fuzzy Cluster Indexes (Validity/Performance
                         Measures)
+gknn                    Generalized k-Nearest Neighbors Classification
+                        or Regression
 hamming.distance        Hamming Distances of Vectors
 hamming.window          Computes the Coefficients of a Hamming Window.
 hanning.window          Computes the Coefficients of a Hanning Window.
@@ -38,6 +40,7 @@ read.matrix.csr         Read/Write Sparse Data
 rectangle.window        Computes the Coefficients of a Rectangle
                         Window.
 rwiener                 Simulation of Wiener Process
+scale_data_frame        Scaling and Centering of Data Frames
 sigmoid                 The Logistic Function and Derivatives
 skewness                Skewness
 stft                    Computes the Short Time Fourier Transform of a

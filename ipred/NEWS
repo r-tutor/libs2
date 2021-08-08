@@ -1,5 +1,15 @@
 # $Id: CHANGES,v 1.48 2009/09/09 15:40:28 hothorn Exp $
 
+	0.9-11 (12.03.2021)
+
+        suggest party
+
+	0.9-10 (03.03.2021)
+
+        suggest randomForest
+
+        RNGversion("3.5.3")
+
 	0.9-9 (29.04.2019)
 
         RNGversion("3.5.3")

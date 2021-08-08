@@ -29,6 +29,7 @@ c_wrap	parts
 diffparts	parts
 Durfee	conjugate
 durfee	conjugate
+durfee_sorted	conjugate
 firstblockpart	nextpart
 firstcomposition	nextpart
 firstdiffpart	nextpart

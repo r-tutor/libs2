@@ -111,6 +111,7 @@ equalBins	equalBins
 errbar	errbar
 escapeBS	escapeRegex
 escapeRegex	escapeRegex
+estSeqMarkovOrd	estSeqMarkovOrd
 estSeqSim	estSeqSim
 event.chart	event.chart
 event.convert	event.convert
@@ -199,6 +200,7 @@ impute	impute
 impute.default	impute
 impute.transcan	transcan
 inmChoice	mChoice
+intMarkovOrd	intMarkovOrd
 inverseFunction	Misc
 invertTabulated	transcan
 is.discrete	discrete
@@ -476,6 +478,7 @@ show.dvi	latex
 show.latex	latex
 show.pch	show.pch
 showPsfrag	showPsfrag
+simMarkovOrd	simMarkovOrd
 simplifyDims	simplifyDims
 simRegOrd	simRegOrd
 sKey	legendfunctions
@@ -487,6 +490,7 @@ smearingEst	transace
 smedian.hilow	smean.sd
 solvet	solvet
 somers2	somers2
+soprobMarkovOrd	soprobMarkovOrd
 spearman	biVar
 spearman.test	biVar
 spearman2	biVar

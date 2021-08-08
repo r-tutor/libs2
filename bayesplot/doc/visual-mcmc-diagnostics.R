@@ -75,17 +75,13 @@ if(n_divergent_ncp > 0) {
 }
 
 
-## ----mcmc_parcoord-1, eval=FALSE----------------------------------------------
-#  # not evaluated to reduce vignette size for CRAN
-#  # full version available at mc-stan.org/bayesplot/articles
-#  color_scheme_set("darkgray")
-#  mcmc_parcoord(posterior_cp, np = np_cp)
+## ----mcmc_parcoord-1----------------------------------------------------------
+color_scheme_set("darkgray")
+mcmc_parcoord(posterior_cp, np = np_cp)
 
-## ----mcmc_pairs, eval=FALSE---------------------------------------------------
-#  # not evaluated to reduce vignette size for CRAN
-#  # full version available at mc-stan.org/bayesplot/articles
-#  mcmc_pairs(posterior_cp, np = np_cp, pars = c("mu","tau","theta[1]"),
-#             off_diag_args = list(size = 0.75))
+## ----mcmc_pairs---------------------------------------------------------------
+mcmc_pairs(posterior_cp, np = np_cp, pars = c("mu","tau","theta[1]"),
+           off_diag_args = list(size = 0.75))
 
 ## ----mcmc_scatter-1-----------------------------------------------------------
 # assign to an object so we can reuse later

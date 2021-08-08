@@ -41,13 +41,13 @@ imputed
 
 ## ----imputing-----------------------------------------------------------------
 ind_vars <- imputed %>%
-  step_dummy(all_predictors(), -all_numeric()) 
+  step_dummy(all_nominal_predictors()) 
 ind_vars
 
 ## ----center_scale-------------------------------------------------------------
 standardized <- ind_vars %>%
-  step_center(all_predictors())  %>%
-  step_scale(all_predictors()) 
+  step_center(all_numeric_predictors())  %>%
+  step_scale(all_numeric_predictors()) 
 standardized
 
 ## ----trained------------------------------------------------------------------

@@ -1,8 +1,8 @@
 Type: Package
 Package: openxlsx
 Title: Read, Write and Edit xlsx Files
-Version: 4.2.3
-Date: 2020-10-26
+Version: 4.2.4
+Date: 2021-06-08
 Language: en-US
 Authors@R: 
     c(person(given = "Philipp",
@@ -18,7 +18,16 @@ Authors@R:
              role = "ctb"),
       person(given = "Joshua",
              family = "Sturm",
-             role = "ctb"))
+             role = "ctb"),
+      person(given = "Jan Marvin",
+             family = "Garbuszus",
+             email = "jan.garbuszus@ruhr-uni-bochum.de",
+             role = "ctb"),
+      person(given = "Jordan Mark",
+             family = "Barbone",
+             role = "ctb",
+             email = "jmbarbone@gmail.com",
+             comment = c(ORCID = "0000-0001-9788-3628")))
 Description: Simplifies the creation of Excel .xlsx files by
     providing a high level interface to writing, styling and editing
     worksheets. Through the use of 'Rcpp', read/write times are comparable
@@ -37,21 +46,25 @@ Encoding: UTF-8
 RoxygenNote: 7.1.1
 Collate: 'CommentClass.R' 'HyperlinkClass.R' 'RcppExports.R'
         'class_definitions.R' 'StyleClass.R' 'WorkbookClass.R'
-        'baseXML.R' 'borderFunctions.R' 'chartsheet_class.R'
-        'conditional_formatting.R' 'helperFunctions.R' 'loadWorkbook.R'
-        'onUnload.R' 'openXL.R' 'openxlsx-package.R' 'openxlsx.R'
-        'openxlsxCoerce.R' 'readWorkbook.R' 'sheet_data_class.R'
-        'workbook_column_widths.R' 'workbook_read_workbook.R'
-        'workbook_write_data.R' 'worksheet_class.R' 'wrappers.R'
-        'writeData.R' 'writeDataTable.R' 'writexlsx.R'
+        'asserts.R' 'baseXML.R' 'borderFunctions.R' 'build_workbook.R'
+        'chartsheet_class.R' 'conditional_formatting.R'
+        'data-fontSizeLookupTables.R' 'helperFunctions.R'
+        'loadWorkbook.R' 'onUnload.R' 'openXL.R' 'openxlsx-package.R'
+        'openxlsx.R' 'openxlsxCoerce.R' 'readWorkbook.R'
+        'sheet_data_class.R' 'utils.R' 'workbook_column_widths.R'
+        'workbook_read_workbook.R' 'workbook_write_data.R'
+        'worksheet_class.R' 'wrappers.R' 'writeData.R'
+        'writeDataTable.R' 'writexlsx.R' 'zzz.R'
 NeedsCompilation: yes
-Packaged: 2020-10-27 09:11:13 UTC; philipp
+Packaged: 2021-06-15 11:54:54 UTC; philipp
 Author: Philipp Schauberger [aut, cre],
   Alexander Walker [aut],
   Luca Braglia [ctb],
-  Joshua Sturm [ctb]
+  Joshua Sturm [ctb],
+  Jan Marvin Garbuszus [ctb],
+  Jordan Mark Barbone [ctb] (<https://orcid.org/0000-0001-9788-3628>)
 Maintainer: Philipp Schauberger <philipp@schauberger.co.at>
 Repository: CRAN
-Date/Publication: 2020-10-27 14:20:02 UTC
-Built: R 4.0.3; x86_64-w64-mingw32; 2020-11-09 06:06:32 UTC; windows
+Date/Publication: 2021-06-16 04:20:03 UTC
+Built: R 4.1.0; x86_64-w64-mingw32; 2021-07-26 17:31:12 UTC; windows
 Archs: i386, x64

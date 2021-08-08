@@ -25,7 +25,7 @@ ref_cell <-
 summary(ref_cell)
 
 # Get a row for each factor level
-juice(ref_cell, original, starts_with("Species")) %>% distinct()
+bake(ref_cell, new_data = NULL, original, starts_with("Species")) %>% distinct()
 
 ## ----defaults-----------------------------------------------------------------
 param <- getOption("contrasts")
@@ -44,7 +44,7 @@ helmert <-
   prep(training = iris)
 summary(helmert)
 
-juice(helmert, original, starts_with("Species")) %>% distinct()
+bake(helmert, new_data = NULL, original, starts_with("Species")) %>% distinct()
 
 # Yuk; go back to the original method
 options(contrasts = param)
@@ -97,7 +97,7 @@ summary(iris_int)
 iris_rec %>% 
   step_dummy(Species, one_hot = TRUE) %>%
   prep(training = iris) %>%
-  juice(original, starts_with("Species")) %>%
+  bake(original, new_data = NULL, starts_with("Species")) %>%
   distinct()
 
 ## ----one-hot-two--------------------------------------------------------------
@@ -105,7 +105,7 @@ hot_reference <-
   iris_rec %>% 
   step_dummy(Species, one_hot = TRUE) %>%
   prep(training = iris) %>%
-  juice(original, starts_with("Species")) %>%
+  bake(original, new_data = NULL, starts_with("Species")) %>%
   distinct()
 
 hot_reference
@@ -117,7 +117,7 @@ hot_helmert <-
   iris_rec %>% 
   step_dummy(Species, one_hot = TRUE) %>%
   prep(training = iris) %>%
-  juice(original, starts_with("Species")) %>%
+  bake(original, new_data = NULL, starts_with("Species")) %>%
   distinct()
 
 hot_helmert

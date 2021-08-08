@@ -1,6 +1,25 @@
 beeswarm NEWS
 
 
+Changes in version 0.4.0 (2021-05-07)
+
+- Thanks to James Trimble (now a package author) for the following:
+- The "method" argument has a new option "compactswarm", which gives a swarm with a more dense point layout.
+- New argument "fast" (default: TRUE) does point layout with faster C code.
+- Thus, the package now requires compilation.
+
+
+Changes in version 0.3.1 (2021-03-06)
+
+- Fixed bug where non-varying input (a single value, or a single value repeated) in non-swarm methods would yield NAs (thanks raredd). (GitHub Issue #8) 
+- Updated email and URL in DESCRIPTION.
+
+
+Changes in version 0.3.0 (2017-05-30)
+
+- Added new argument "pwcex" for adjusting plotting character size of individual points. (GitHub request #3 by alexpreynolds)
+
+
 Changes in version 0.2.3 (2016-04-25)
 
 - Fixed a bug in which specifying non-default "corral" and "side" arguments would result in unexpected results. (Issue #2)

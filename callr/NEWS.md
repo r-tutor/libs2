@@ -1,4 +1,25 @@
 
+# callr 3.7.0
+
+* Reporting errors is much faster now (#185).
+
+* The `user_profile` option of `r_vanilla()` defaults to `FALSE` now (#194).
+
+* It is now possible to set R environment variables (`R_ENVIRON_USER`,
+  `R_PROFILE_USER`, etc.) via the `env` argument (#193).
+
+# callr 3.6.0
+
+* callr now supports starting an R process with a different architecture,
+  so on Windows 64-bit R can start a 32-bit R background process, and
+  vice-versa (#95).
+
+* callr now handles symbolic arguments properly, and does not evaluate them.
+  E.g. `callr::r(function(x) x, list(quote(foobar)))` works now (#175).
+
+* `callr::r_session` does not leak file descriptors now in the sub-process
+  (#184).
+
 # callr 3.5.1
 
 * `callr::r_session` now handles large messages from the subprocess

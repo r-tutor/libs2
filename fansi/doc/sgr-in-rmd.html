@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <meta name="author" content="Brodie Gaslam" />
 
@@ -16,8 +16,24 @@
 <title>ANSI CSI SGR Sequences in Rmarkdown</title>
 
 
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
-<style type="text/css">code{white-space: pre;}</style>
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
 <style type="text/css" data-origin="pandoc">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
@@ -97,7 +113,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -105,6 +121,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   }
 })();
 </script>
+
 
 
 
@@ -375,9 +392,9 @@ PRE.fansi SPAN {padding-top: .25em; padding-bottom: .25em};
 </STYLE>
 <p>We run this function for its side effects, which cause the output to be displayed as intended:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">writeLines</span>(sgr.string)</a></code></pre></div>
-<PRE class="fansi fansi-output"><CODE>## <span style="color: #0000BB;background-color: #BBBB00;">day &gt; night</span><span>
-## </span><span style="color: #BBBB00;background-color: #0000BB;">dawn &lt; dusk</span><span>
-</span></CODE></PRE>
+<PRE class="fansi fansi-output"><CODE>## <span style="color: #0000BB; background-color: #BBBB00;">day &gt; night</span>
+## <span style="color: #BBBB00; background-color: #0000BB;">dawn &lt; dusk</span>
+</CODE></PRE>
 <p>If you are seeing extra line breaks in your output you may need to use:</p>
 <pre><code>```{r, comment=&quot;&quot;, results=&quot;asis&quot;}
 old.hooks &lt;- fansi::set_knit_hooks(knitr::knit_hooks, split.nl=TRUE)
@@ -407,19 +424,19 @@ PRE.fansi-warning {background-color: #DDDDAA;}
 PRE.fansi-message {background-color: #AAAADD;}
 </STYLE>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">message</span>(<span class="kw">paste0</span>(sgr.string, <span class="dt">collapse=</span><span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>))</a></code></pre></div>
-<PRE class="fansi fansi-message"><CODE>## <span style="color: #0000BB;background-color: #BBBB00;">day &gt; night</span><span>
-## </span><span style="color: #BBBB00;background-color: #0000BB;">dawn &lt; dusk</span><span>
-</span></CODE></PRE>
+<PRE class="fansi fansi-message"><CODE>## <span style="color: #0000BB; background-color: #BBBB00;">day &gt; night</span>
+## <span style="color: #BBBB00; background-color: #0000BB;">dawn &lt; dusk</span>
+</CODE></PRE>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">warning</span>(<span class="kw">paste0</span>(<span class="kw">c</span>(<span class="st">&quot;&quot;</span>, sgr.string), <span class="dt">collapse=</span><span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>))</a></code></pre></div>
 <PRE class="fansi fansi-warning"><CODE>## Warning: 
-## <span style="color: #0000BB;background-color: #BBBB00;">day &gt; night</span><span>
-## </span><span style="color: #BBBB00;background-color: #0000BB;">dawn &lt; dusk</span><span>
-</span></CODE></PRE>
+## <span style="color: #0000BB; background-color: #BBBB00;">day &gt; night</span>
+## <span style="color: #BBBB00; background-color: #0000BB;">dawn &lt; dusk</span>
+</CODE></PRE>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">stop</span>(<span class="kw">paste0</span>(<span class="kw">c</span>(<span class="st">&quot;&quot;</span>, sgr.string), <span class="dt">collapse=</span><span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>))</a></code></pre></div>
 <PRE class="fansi fansi-error"><CODE>## Error in eval(expr, envir, enclos): 
-## <span style="color: #0000BB;background-color: #BBBB00;">day &gt; night</span><span>
-## </span><span style="color: #BBBB00;background-color: #0000BB;">dawn &lt; dusk</span><span>
-</span></CODE></PRE>
+## <span style="color: #0000BB; background-color: #BBBB00;">day &gt; night</span>
+## <span style="color: #BBBB00; background-color: #0000BB;">dawn &lt; dusk</span>
+</CODE></PRE>
 <p>You can restore the old hooks at any time in your document with:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">do.call</span>(knitr<span class="op">::</span>knit_hooks<span class="op">$</span>set, old.hooks)</a>
 <a class="sourceLine" id="cb10-2" data-line-number="2"><span class="kw">writeLines</span>(sgr.string)</a></code></pre></div>
@@ -430,6 +447,9 @@ PRE.fansi-message {background-color: #AAAADD;}
 <p><a name="f1"></a><sup>1</sup>For illustrative purposes we output raw ANSI CSI SGR sequences in this document. However, because the ESC control character causes problems with some HTML rendering services we replace it with the � symbol. Depending on the browser and process it would normally not be visible at all, or substituted with some other symbol.</p>
 </div>
 
+
+
+<!-- code folding -->
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

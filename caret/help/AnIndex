@@ -46,6 +46,7 @@ cluster.resamples	prcomp.resamples
 compare_models	diff.resamples
 confusionMatrix	confusionMatrix
 confusionMatrix.default	confusionMatrix
+confusionMatrix.matrix	confusionMatrix
 confusionMatrix.rfe	confusionMatrix.train
 confusionMatrix.sbf	confusionMatrix.train
 confusionMatrix.table	confusionMatrix

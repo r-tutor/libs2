@@ -3,6 +3,8 @@ Primes                  Prime Numbers
 Sigma                   Divisor Functions
 agm                     Arithmetic-geometric Mean
 bell                    Bell Numbers
+bernoulli_numbers       Bernoulli Numbers
+carmichael              Carmichael Numbers
 catalan                 Catalan Numbers
 cf2num                  Generalized Continous Fractions
 chinese                 Chinese Remainder Theorem
@@ -37,12 +39,14 @@ nextPrime               Next Prime
 numbers-package         Number-Theoretic Functions
 omega                   Number of Prime Factors
 ordpn                   Order in Faculty
+pascal_triangle         Pascal Triangle
 previousPrime           Previous Prime
 primeFactors            Prime Factors
 primroot                Primitive Root
 pythagorean_triples     Pythagorean Triples
 quadratic_residues      Quadratic Residues
-ratFarey                Farey Approximation
+ratFarey                Farey Approximation and Series
 rem                     Integer Remainder
+stern_brocot_seq        Stern-Brocot Sequence
 twinPrimes              Twin Primes
 zeck                    Zeckendorf Representation

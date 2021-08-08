@@ -21,6 +21,7 @@ aes_string	aes_
 after_scale	aes_eval
 after_stat	aes_eval
 alpha	reexports
+alt_text	get_alt_text
 annotate	annotate
 annotation_custom	annotation_custom
 annotation_logticks	annotation_logticks
@@ -28,6 +29,7 @@ annotation_map	annotation_map
 annotation_raster	annotation_raster
 arrow	reexports
 as.list.ggproto	as.list.ggproto
+as_label	tidyeval
 as_labeller	as_labeller
 autolayer	autolayer
 autoplot	autoplot
@@ -103,7 +105,6 @@ expand_limits	expand_limits
 expand_scale	expansion
 expansion	expansion
 expr	tidyeval
-exprs	tidyeval
 Facet	ggplot2-ggproto
 FacetGrid	ggplot2-ggproto
 FacetNull	ggplot2-ggproto
@@ -182,7 +183,8 @@ GeomVline	ggplot2-ggproto
 geom_abline	geom_abline
 geom_area	geom_ribbon
 geom_bar	geom_bar
-geom_bin2d	geom_bin2d
+geom_bin2d	geom_bin_2d
+geom_bin_2d	geom_bin_2d
 geom_blank	geom_blank
 geom_boxplot	geom_boxplot
 geom_col	geom_bar
@@ -231,6 +233,7 @@ geom_text	geom_text
 geom_tile	geom_tile
 geom_violin	geom_violin
 geom_vline	geom_abline
+get_alt_text	get_alt_text
 get_element_tree	register_theme_elements
 ggplot	ggplot
 ggplot2	ggplot2-package
@@ -366,7 +369,7 @@ scale_color_brewer	scale_brewer
 scale_color_continuous	scale_colour_continuous
 scale_color_date	scale_gradient
 scale_color_datetime	scale_gradient
-scale_color_discrete	scale_hue
+scale_color_discrete	scale_colour_discrete
 scale_color_distiller	scale_brewer
 scale_color_fermenter	scale_brewer
 scale_color_gradient	scale_gradient
@@ -380,6 +383,7 @@ scale_color_ordinal	scale_viridis
 scale_color_steps	scale_steps
 scale_color_steps2	scale_steps
 scale_color_stepsn	scale_steps
+scale_color_viridis_b	scale_viridis
 scale_color_viridis_c	scale_viridis
 scale_color_viridis_d	scale_viridis
 scale_colour_binned	scale_colour_continuous
@@ -476,6 +480,7 @@ scale_y_time	scale_date
 seals	seals
 sec_axis	sec_axis
 set_last_plot	set_last_plot
+sf_transform_xy	sf_transform_xy
 shape	aes_linetype_size_shape
 should_stop	should_stop
 size	aes_linetype_size_shape
@@ -512,9 +517,9 @@ StatSummaryHex	ggplot2-ggproto
 StatUnique	ggplot2-ggproto
 StatYdensity	ggplot2-ggproto
 stat_bin	geom_histogram
-stat_bin2d	geom_bin2d
+stat_bin2d	geom_bin_2d
 stat_binhex	geom_hex
-stat_bin_2d	geom_bin2d
+stat_bin_2d	geom_bin_2d
 stat_bin_hex	geom_hex
 stat_boxplot	geom_boxplot
 stat_contour	geom_contour

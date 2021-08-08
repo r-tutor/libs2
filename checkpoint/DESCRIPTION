@@ -15,26 +15,31 @@ Description: The goal of checkpoint is to solve the problem of package
     server (<https://mran.microsoft.com/>). Immediately after completion
     of the rsync mirror process, the process takes a snapshot, thus creating the
     archive. Snapshot archives exist starting from 2014-09-17.
-Version: 0.4.10
+Version: 1.0.0
 Authors@R: c(
-    person("Hong", "Ooi", , "hongooi73@gmail.com", role="cre"),
+    person("James", "Rowland-Jones", role="cre", email="jrj@microsoft.com"),
+    person("Hong", "Ooi", role="aut"),
     person("Andrie", "de Vries", role="aut"),
+    person("Gábor", "Csárdi", role="ctb", comment="Assistance with pkgdepends"),
     person("Microsoft", role=c("aut", "cph"))
     )
 License: GPL-2
 URL: https://github.com/RevolutionAnalytics/checkpoint
 BugReports: https://github.com/RevolutionAnalytics/checkpoint/issues
-Imports: utils
-Depends: R(>= 3.0.0)
-Suggests: knitr, rmarkdown, testthat(>= 0.9), MASS, darts, mockery, cli
+Imports: utils, tools, jsonlite, yaml, withr, pkgdepends
+Depends: R (>= 3.3.0)
+Suggests: pkgcache, knitr, rmarkdown, testthat, darts
 VignetteBuilder: knitr
-RoxygenNote: 7.1.1
+Encoding: UTF-8
+RoxygenNote: 7.1.0
 NeedsCompilation: no
-Packaged: 2020-10-29 09:12:33 UTC; hongo
-Author: Hong Ooi [cre],
+Packaged: 2021-05-27 15:37:03 UTC; hongo
+Author: James Rowland-Jones [cre],
+  Hong Ooi [aut],
   Andrie de Vries [aut],
+  Gábor Csárdi [ctb] (Assistance with pkgdepends),
   Microsoft [aut, cph]
-Maintainer: Hong Ooi <hongooi73@gmail.com>
+Maintainer: James Rowland-Jones <jrj@microsoft.com>
 Repository: CRAN
-Date/Publication: 2020-10-29 17:50:02 UTC
-Built: R 4.0.3; ; 2020-11-09 05:08:28 UTC; windows
+Date/Publication: 2021-06-14 07:10:02 UTC
+Built: R 4.1.0; ; 2021-07-26 23:49:23 UTC; windows

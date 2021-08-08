@@ -14,35 +14,7 @@
 
 <title>Basic Recipes</title>
 
-<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
-// be compatible with the behavior of Pandoc < 2.8).
-document.addEventListener('DOMContentLoaded', function(e) {
-  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
-  var i, h, a;
-  for (i = 0; i < hs.length; i++) {
-    h = hs[i];
-    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
-    a = h.attributes;
-    while (a.length > 0) h.removeAttribute(a[0].name);
-  }
-});
-</script>
-<script>// Hide empty <a> tag within highlighted CodeBlock for screen reader accessibility (see https://github.com/jgm/pandoc/issues/6352#issuecomment-626106786) -->
-// v0.0.1
-// Written by JooYoung Seo (jooyoung@psu.edu) and Atsushi Yasumoto on June 1st, 2020.
-
-document.addEventListener('DOMContentLoaded', function() {
-  const codeList = document.getElementsByClassName("sourceCode");
-  for (var i = 0; i < codeList.length; i++) {
-    var linkList = codeList[i].getElementsByTagName('a');
-    for (var j = 0; j < linkList.length; j++) {
-      if (linkList[j].innerHTML === "") {
-        linkList[j].setAttribute('aria-hidden', 'true');
-      }
-    }
-  }
-});
-</script>
+<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -51,76 +23,22 @@ document.addEventListener('DOMContentLoaded', function() {
   div.column{display: inline-block; vertical-align: top; width: 50%;}
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   ul.task-list{list-style: none;}
-      pre > code.sourceCode { white-space: pre; position: relative; }
-      pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-      pre > code.sourceCode > span:empty { height: 1.2em; }
-      code.sourceCode > span { color: inherit; text-decoration: inherit; }
-      div.sourceCode { margin: 1em 0; }
-      pre.sourceCode { margin: 0; }
-      @media screen {
-      div.sourceCode { overflow: auto; }
-      }
-      @media print {
-      pre > code.sourceCode { white-space: pre-wrap; }
-      pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-      }
-      pre.numberSource code
-        { counter-reset: source-line 0; }
-      pre.numberSource code > span
-        { position: relative; left: -4em; counter-increment: source-line; }
-      pre.numberSource code > span > a:first-child::before
-        { content: counter(source-line);
-          position: relative; left: -1em; text-align: right; vertical-align: baseline;
-          border: none; display: inline-block;
-          -webkit-touch-callout: none; -webkit-user-select: none;
-          -khtml-user-select: none; -moz-user-select: none;
-          -ms-user-select: none; user-select: none;
-          padding: 0 4px; width: 4em;
-          color: #aaaaaa;
-        }
-      pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-      div.sourceCode
-        {   }
-      @media screen {
-      pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-      }
-      code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-      code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-      code span.at { color: #7d9029; } /* Attribute */
-      code span.bn { color: #40a070; } /* BaseN */
-      code span.bu { } /* BuiltIn */
-      code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-      code span.ch { color: #4070a0; } /* Char */
-      code span.cn { color: #880000; } /* Constant */
-      code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-      code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-      code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-      code span.dt { color: #902000; } /* DataType */
-      code span.dv { color: #40a070; } /* DecVal */
-      code span.er { color: #ff0000; font-weight: bold; } /* Error */
-      code span.ex { } /* Extension */
-      code span.fl { color: #40a070; } /* Float */
-      code span.fu { color: #06287e; } /* Function */
-      code span.im { } /* Import */
-      code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-      code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-      code span.op { color: #666666; } /* Operator */
-      code span.ot { color: #007020; } /* Other */
-      code span.pp { color: #bc7a00; } /* Preprocessor */
-      code span.sc { color: #4070a0; } /* SpecialChar */
-      code span.ss { color: #bb6688; } /* SpecialString */
-      code span.st { color: #4070a0; } /* String */
-      code span.va { color: #19177c; } /* Variable */
-      code span.vs { color: #4070a0; } /* VerbatimString */
-      code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
     </style>
 
 
-<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -206,225 +124,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<style type="text/css">body {
-background-color: #fff;
-margin: 1em auto;
-max-width: 800px;
-overflow: visible;
-padding-left: 2em;
-padding-right: 2em;
-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-font-size: 14px;
-line-height: 20px;
-}
-#header {
-text-align: center;
-}
-#TOC {
-clear: both;
-margin: 0 0 10px 0;
-padding: 4px;
-border: 1px solid #CCCCCC;
-border-radius: 5px;
-background-color: #f6f6f6;
-font-size: 13px;
-line-height: 1.3;
-}
-#TOC .toctitle {
-font-weight: bold;
-font-size: 15px;
-margin-left: 5px;
-}
-#TOC ul {
-padding-left: 40px;
-margin-left: -1.5em;
-margin-top: 5px;
-margin-bottom: 5px;
-}
-#TOC ul ul {
-margin-left: -2em;
-}
-#TOC li {
-line-height: 16px;
-}
-table:not([class]) {
-margin: auto;
-min-width: 40%;
-border-width: 1px;
-border-color: #DDDDDD;
-border-style: outset;
-border-collapse: collapse;
-}
-table[summary="R argblock"] {
-width: 100%;
-border: none;
-}
-table:not([class]) th {
-border-width: 2px;
-padding: 5px;
-border-style: inset;
-}
-table:not([class]) td {
-border-width: 1px;
-border-style: inset;
-line-height: 18px;
-padding: 5px 5px;
-}
-table:not([class]), table:not([class]) th, table:not([class]) td {
-border-left-style: none;
-border-right-style: none;
-}
-table:not([class]) tr.odd {
-background-color: #f7f7f7;
-}
-p {
-margin: 0.5em 0;
-}
-blockquote {
-background-color: #f6f6f6;
-padding: 13px;
-padding-bottom: 1px;
-}
-hr {
-border-style: solid;
-border: none;
-border-top: 1px solid #777;
-margin: 28px 0;
-}
-dl {
-margin-left: 0;
-}
-dl dd {
-margin-bottom: 13px;
-margin-left: 13px;
-}
-dl dt {
-font-weight: bold;
-}
-ul {
-margin-top: 0;
-}
-ul li {
-list-style: circle outside;
-}
-ul ul {
-margin-bottom: 0;
-}
-pre, code {
-background-color: #f5f5f5;
-border-radius: 3px;
-color: #333;
-}
-pre {
-overflow-x: auto;
-border-radius: 3px;
-margin: 5px 0 10px 0;
-padding: 10px;
-}
-pre:not([class]) {
-background-color: white;
-border: #f5f5f5 1px solid;
-}
-pre:not([class]) code {
-color: #444;
-background-color: white;
-}
-code {
-font-family: monospace;
-font-size: 90%;
-}
-p > code, li > code {
-padding: 2px 4px;
-color: #d14;
-border: 1px solid #e1e1e8;
-white-space: inherit;
-}
-div.figure {
-text-align: center;
-}
-table > caption, div.figure p.caption {
-font-style: italic;
-}
-table > caption span, div.figure p.caption span {
-font-style: normal;
-font-weight: bold;
-}
-p {
-margin: 0 0 10px;
-}
-table:not([class]) {
-margin: auto auto 10px auto;
-}
-img:not([class]) {
-background-color: #FFFFFF;
-padding: 2px;
-border-radius: 3px;
-border: 1px solid #CCCCCC;
-margin: 0 5px;
-max-width: 100%;
-}
-h1 {
-margin-top: 0;
-font-size: 35px;
-line-height: 40px;
-}
-h2 {
-border-bottom: 4px solid #f5f5f5;
-padding-top: 10px;
-padding-bottom: 2px;
-font-size: 145%;
-}
-h3 {
-border-bottom: 2px solid #f5f5f5;
-padding-top: 10px;
-font-size: 120%;
-}
-h4 {
-border-bottom: 1px solid #f5f5f5;
-margin-left: 8px;
-font-size: 105%;
-}
-h5, h6 {
-border-bottom: 1px solid #ccc;
-font-size: 105%;
-}
-a {
-color: #0033dd;
-text-decoration: none;
-}
-a:hover {
-color: #6666ff; }
-a:visited {
-color: #800080; }
-a:visited:hover {
-color: #BB00BB; }
-a[href^="http:"] {
-text-decoration: underline; }
-a[href^="https:"] {
-text-decoration: underline; }
-div.r-help-page {
-background-color: #f9f9f9;
-border-bottom: #ddd 1px solid;
-margin-bottom: 10px;
-padding: 10px;
-}
-div.r-help-page:hover {
-background-color: #f4f4f4;
-}
 
-code > span.kw { color: #555; font-weight: bold; } 
-code > span.dt { color: #902000; } 
-code > span.dv { color: #40a070; } 
-code > span.bn { color: #d14; } 
-code > span.fl { color: #d14; } 
-code > span.ch { color: #d14; } 
-code > span.st { color: #d14; } 
-code > span.co { color: #888888; font-style: italic; } 
-code > span.ot { color: #007020; } 
-code > span.al { color: #ff0000; font-weight: bold; } 
-code > span.fu { color: #900; font-weight: bold; } 
-code > span.er { color: #a61717; background-color: #e3d2d2; } 
-</style>
+<link rel="stylesheet" href="data:text/css,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20800px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%2020px%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%200%3B%0Apadding%3A%204px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%3Anot%28%5Bclass%5D%29%20%7B%0Amargin%3A%20auto%3B%0Amin%2Dwidth%3A%2040%25%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%5Bsummary%3D%22R%20argblock%22%5D%20%7B%0Awidth%3A%20100%25%3B%0Aborder%3A%20none%3B%0A%7D%0Atable%3Anot%28%5Bclass%5D%29%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%3Anot%28%5Bclass%5D%29%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%3Anot%28%5Bclass%5D%29%2C%20table%3Anot%28%5Bclass%5D%29%20th%2C%20table%3Anot%28%5Bclass%5D%29%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%3Anot%28%5Bclass%5D%29%20tr%2Eodd%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%2013px%3B%0Apadding%2Dbottom%3A%201px%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f5f5f5%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0A%7D%0Apre%20%7B%0Aoverflow%2Dx%3A%20auto%3B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200%2010px%200%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20white%3B%0Aborder%3A%20%23f5f5f5%201px%20solid%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20code%20%7B%0Acolor%3A%20%23444%3B%0Abackground%2Dcolor%3A%20white%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20monospace%3B%0Afont%2Dsize%3A%2090%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%204px%3B%0Acolor%3A%20%23d14%3B%0Aborder%3A%201px%20solid%20%23e1e1e8%3B%0Awhite%2Dspace%3A%20inherit%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Atable%20%3E%20caption%2C%20div%2Efigure%20p%2Ecaption%20%7B%0Afont%2Dstyle%3A%20italic%3B%0A%7D%0Atable%20%3E%20caption%20span%2C%20div%2Efigure%20p%2Ecaption%20span%20%7B%0Afont%2Dstyle%3A%20normal%3B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%200%2010px%3B%0A%7D%0Atable%3Anot%28%5Bclass%5D%29%20%7B%0Amargin%3A%20auto%20auto%2010px%20auto%3B%0A%7D%0Aimg%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0Amax%2Dwidth%3A%20100%25%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f5f5f5%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f5f5f5%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f5f5f5%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Adiv%2Er%2Dhelp%2Dpage%20%7B%0Abackground%2Dcolor%3A%20%23f9f9f9%3B%0Aborder%2Dbottom%3A%20%23ddd%201px%20solid%3B%0Amargin%2Dbottom%3A%2010px%3B%0Apadding%3A%2010px%3B%0A%7D%0Adiv%2Er%2Dhelp%2Dpage%3Ahover%20%7B%0Abackground%2Dcolor%3A%20%23f4f4f4%3B%0A%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" type="text/css" />
 
 
 
@@ -457,23 +158,23 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <div id="an-example" class="section level2">
 <h2>An Example</h2>
 <p>The packages contains a data set used to predict whether a person will pay back a bank loan. It has 13 predictor columns and a factor variable <code>Status</code> (the outcome). We will first separate the data into a training and test set:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(recipes)</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(rsample)</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">library</span>(modeldata)</span>
-<span id="cb1-4"><a href="#cb1-4"></a></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">data</span>(<span class="st">&quot;credit_data&quot;</span>)</span>
-<span id="cb1-6"><a href="#cb1-6"></a></span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="kw">set.seed</span>(<span class="dv">55</span>)</span>
-<span id="cb1-8"><a href="#cb1-8"></a>train_test_split &lt;-<span class="st"> </span><span class="kw">initial_split</span>(credit_data)</span>
-<span id="cb1-9"><a href="#cb1-9"></a></span>
-<span id="cb1-10"><a href="#cb1-10"></a>credit_train &lt;-<span class="st"> </span><span class="kw">training</span>(train_test_split)</span>
-<span id="cb1-11"><a href="#cb1-11"></a>credit_test &lt;-<span class="st"> </span><span class="kw">testing</span>(train_test_split)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(recipes)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rsample)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(modeldata)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;credit_data&quot;</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">55</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>train_test_split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(credit_data)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>credit_train <span class="ot">&lt;-</span> <span class="fu">training</span>(train_test_split)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>credit_test <span class="ot">&lt;-</span> <span class="fu">testing</span>(train_test_split)</span></code></pre></div>
 <p>Note that there are some missing values in these data:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">vapply</span>(credit_train, <span class="cf">function</span>(x) <span class="kw">mean</span>(<span class="op">!</span><span class="kw">is.na</span>(x)), <span class="kw">numeric</span>(<span class="dv">1</span>))</span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="co">#&gt;    Status Seniority      Home      Time       Age   Marital   Records       Job </span></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="co">#&gt;     1.000     1.000     0.999     1.000     1.000     1.000     1.000     1.000 </span></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="co">#&gt;  Expenses    Income    Assets      Debt    Amount     Price </span></span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="co">#&gt;     1.000     0.919     0.988     0.996     1.000     1.000</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vapply</span>(credit_train, <span class="cf">function</span>(x) <span class="fu">mean</span>(<span class="sc">!</span><span class="fu">is.na</span>(x)), <span class="fu">numeric</span>(<span class="dv">1</span>))</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    Status Seniority      Home      Time       Age   Marital   Records       Job </span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     1.000     1.000     0.999     1.000     1.000     1.000     1.000     1.000 </span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Expenses    Income    Assets      Debt    Amount     Price </span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     1.000     0.919     0.988     0.996     1.000     1.000</span></span></code></pre></div>
 <p>Rather than remove these, their values will be imputed.</p>
 <p>The idea is that the preprocessing operations will all be created using the training set and then these steps will be applied to both the training and test set.</p>
 </div>
@@ -482,141 +183,145 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <p>First, we will create a recipe object from the original data and then specify the processing steps.</p>
 <p>Recipes can be created manually by sequentially adding roles to variables in a data set.</p>
 <p>If the analysis only requires <strong>outcomes</strong> and <strong>predictors</strong>, the easiest way to create the initial recipe is to use the standard formula method:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>rec_obj &lt;-<span class="st"> </span><span class="kw">recipe</span>(Status <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> credit_train)</span>
-<span id="cb3-2"><a href="#cb3-2"></a>rec_obj</span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="co">#&gt; Data Recipe</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="co">#&gt; </span></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="co">#&gt; Inputs:</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="co">#&gt; </span></span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="co">#&gt;       role #variables</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="co">#&gt;    outcome          1</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a><span class="co">#&gt;  predictor         13</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>rec_obj <span class="ot">&lt;-</span> <span class="fu">recipe</span>(Status <span class="sc">~</span> ., <span class="at">data =</span> credit_train)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>rec_obj</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Data Recipe</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Inputs:</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       role #variables</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    outcome          1</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  predictor         13</span></span></code></pre></div>
 <p>The data contained in the <code>data</code> argument need not be the training set; this data is only used to catalog the names of the variables and their types (e.g. numeric, etc.).</p>
 <p>(Note that the formula method is used here to declare the variables, their roles and nothing else. If you use inline functions (e.g. <code>log</code>) it will complain. These types of operations can be added later.)</p>
 </div>
 <div id="preprocessing-steps" class="section level2">
 <h2>Preprocessing Steps</h2>
 <p>From here, preprocessing steps for some step <em>X</em> can be added sequentially in one of two ways:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>rec_obj &lt;-<span class="st"> </span>step_{X}(rec_obj, arguments)    <span class="co">## or</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a>rec_obj &lt;-<span class="st"> </span>rec_obj <span class="op">%&gt;%</span><span class="st"> </span>step_{X}(arguments)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>rec_obj <span class="ot">&lt;-</span> step_{X}(rec_obj, arguments)    <span class="do">## or</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>rec_obj <span class="ot">&lt;-</span> rec_obj <span class="sc">%&gt;%</span> step_{X}(arguments)</span></code></pre></div>
 <p><code>step_dummy</code> and the other functions will always return updated recipes.</p>
 <p>One other important facet of the code is the method for specifying which variables should be used in different steps. The manual page <code>?selections</code> has more details but <a href="https://cran.r-project.org/package=dplyr"><code>dplyr</code></a>-like selector functions can be used:</p>
 <ul>
 <li>use basic variable names (e.g. <code>x1, x2</code>),</li>
-<li><a href="https://cran.r-project.org/package=dplyr"><code>dplyr</code></a> functions for selecting variables: <code>contains</code>, <code>ends_with</code>, <code>everything</code>, <code>matches</code>, <code>num_range</code>, and <code>starts_with</code>,</li>
-<li>functions that subset on the role of the variables that have been specified so far: <code>all_outcomes</code>, <code>all_predictors</code>, <code>has_role</code>, or</li>
-<li>similar functions for the type of data: <code>all_nominal</code>, <code>all_numeric</code>, and <code>has_type</code>.</li>
+<li><a href="https://cran.r-project.org/package=dplyr"><code>dplyr</code></a> functions for selecting variables: <code>contains()</code>, <code>ends_with()</code>, <code>everything()</code>, <code>matches()</code>, <code>num_range()</code>, and <code>starts_with()</code>,</li>
+<li>functions that subset on the role of the variables that have been specified so far: <code>all_outcomes()</code>, <code>all_predictors()</code>, <code>has_role()</code>,<br />
+</li>
+<li>similar functions for the type of data: <code>all_nominal()</code>, <code>all_numeric()</code>, and <code>has_type()</code>, or</li>
+<li>compound selectors such as <code>all_nominal_predictors()</code> or <code>all_numeric_predictors()</code>.</li>
 </ul>
 <p>Note that the methods listed above are the only ones that can be used to select variables inside the steps. Also, minus signs can be used to deselect variables.</p>
 <p>For our data, we can add an operation to impute the predictors. There are many ways to do this and <code>recipes</code> includes a few steps for this purpose:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">grep</span>(<span class="st">&quot;impute$&quot;</span>, <span class="kw">ls</span>(<span class="st">&quot;package:recipes&quot;</span>), <span class="dt">value =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="co">#&gt; [1] &quot;step_bagimpute&quot;    &quot;step_knnimpute&quot;    &quot;step_lowerimpute&quot; </span></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="co">#&gt; [4] &quot;step_meanimpute&quot;   &quot;step_medianimpute&quot; &quot;step_modeimpute&quot;  </span></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="co">#&gt; [7] &quot;step_rollimpute&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;impute$&quot;</span>, <span class="fu">ls</span>(<span class="st">&quot;package:recipes&quot;</span>), <span class="at">value =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;step_bagimpute&quot;    &quot;step_knnimpute&quot;    &quot;step_lowerimpute&quot; </span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [4] &quot;step_meanimpute&quot;   &quot;step_medianimpute&quot; &quot;step_modeimpute&quot;  </span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [7] &quot;step_rollimpute&quot;</span></span></code></pre></div>
 <p>Here, <em>K</em>-nearest neighbor imputation will be used. This works for both numeric and non-numeric predictors and defaults <em>K</em> to five To do this, it selects all predictors and then removes those that are numeric:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>imputed &lt;-<span class="st"> </span>rec_obj <span class="op">%&gt;%</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="st">  </span><span class="kw">step_knnimpute</span>(<span class="kw">all_predictors</span>()) </span>
-<span id="cb6-3"><a href="#cb6-3"></a>imputed</span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt; Data Recipe</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="co">#&gt; </span></span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="co">#&gt; Inputs:</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt; </span></span>
-<span id="cb6-8"><a href="#cb6-8"></a><span class="co">#&gt;       role #variables</span></span>
-<span id="cb6-9"><a href="#cb6-9"></a><span class="co">#&gt;    outcome          1</span></span>
-<span id="cb6-10"><a href="#cb6-10"></a><span class="co">#&gt;  predictor         13</span></span>
-<span id="cb6-11"><a href="#cb6-11"></a><span class="co">#&gt; </span></span>
-<span id="cb6-12"><a href="#cb6-12"></a><span class="co">#&gt; Operations:</span></span>
-<span id="cb6-13"><a href="#cb6-13"></a><span class="co">#&gt; </span></span>
-<span id="cb6-14"><a href="#cb6-14"></a><span class="co">#&gt; K-nearest neighbor imputation for all_predictors()</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>imputed <span class="ot">&lt;-</span> rec_obj <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_knnimpute</span>(<span class="fu">all_predictors</span>()) </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: `step_knnimpute()` was deprecated in recipes 0.1.16.</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Please use `step_impute_knn()` instead.</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>imputed</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Data Recipe</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Inputs:</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       role #variables</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    outcome          1</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  predictor         13</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Operations:</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; K-nearest neighbor imputation for all_predictors()</span></span></code></pre></div>
 <p>It is important to realize that the <em>specific</em> variables have not been declared yet (as shown when the recipe is printed above). In some preprocessing steps, variables will be added or removed from the current list of possible variables.</p>
-<p>Since some predictors are categorical in nature (i.e. nominal), it would make sense to convert these factor predictors into numeric dummy variables (aka indicator variables) using <code>step_dummy</code>. To do this, the step selects all predictors then removes those that are numeric:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>ind_vars &lt;-<span class="st"> </span>imputed <span class="op">%&gt;%</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="st">  </span><span class="kw">step_dummy</span>(<span class="kw">all_predictors</span>(), <span class="op">-</span><span class="kw">all_numeric</span>()) </span>
-<span id="cb7-3"><a href="#cb7-3"></a>ind_vars</span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="co">#&gt; Data Recipe</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="co">#&gt; </span></span>
-<span id="cb7-6"><a href="#cb7-6"></a><span class="co">#&gt; Inputs:</span></span>
-<span id="cb7-7"><a href="#cb7-7"></a><span class="co">#&gt; </span></span>
-<span id="cb7-8"><a href="#cb7-8"></a><span class="co">#&gt;       role #variables</span></span>
-<span id="cb7-9"><a href="#cb7-9"></a><span class="co">#&gt;    outcome          1</span></span>
-<span id="cb7-10"><a href="#cb7-10"></a><span class="co">#&gt;  predictor         13</span></span>
-<span id="cb7-11"><a href="#cb7-11"></a><span class="co">#&gt; </span></span>
-<span id="cb7-12"><a href="#cb7-12"></a><span class="co">#&gt; Operations:</span></span>
-<span id="cb7-13"><a href="#cb7-13"></a><span class="co">#&gt; </span></span>
-<span id="cb7-14"><a href="#cb7-14"></a><span class="co">#&gt; K-nearest neighbor imputation for all_predictors()</span></span>
-<span id="cb7-15"><a href="#cb7-15"></a><span class="co">#&gt; Dummy variables from all_predictors(), -all_numeric()</span></span></code></pre></div>
+<p>Since some predictors are categorical in nature (i.e. nominal), it would make sense to convert these factor predictors into numeric dummy variables (aka indicator variables) using <code>step_dummy()</code>. To do this, the step selects all non-numeric predictors:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ind_vars <span class="ot">&lt;-</span> imputed <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_dummy</span>(<span class="fu">all_nominal_predictors</span>()) </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>ind_vars</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Data Recipe</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Inputs:</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       role #variables</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    outcome          1</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  predictor         13</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Operations:</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; K-nearest neighbor imputation for all_predictors()</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Dummy variables from all_nominal_predictors()</span></span></code></pre></div>
 <p>At this point in the recipe, all of the predictor should be encoded as numeric, we can further add more steps to center and scale them:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>standardized &lt;-<span class="st"> </span>ind_vars <span class="op">%&gt;%</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="st">  </span><span class="kw">step_center</span>(<span class="kw">all_predictors</span>())  <span class="op">%&gt;%</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="st">  </span><span class="kw">step_scale</span>(<span class="kw">all_predictors</span>()) </span>
-<span id="cb8-4"><a href="#cb8-4"></a>standardized</span>
-<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#&gt; Data Recipe</span></span>
-<span id="cb8-6"><a href="#cb8-6"></a><span class="co">#&gt; </span></span>
-<span id="cb8-7"><a href="#cb8-7"></a><span class="co">#&gt; Inputs:</span></span>
-<span id="cb8-8"><a href="#cb8-8"></a><span class="co">#&gt; </span></span>
-<span id="cb8-9"><a href="#cb8-9"></a><span class="co">#&gt;       role #variables</span></span>
-<span id="cb8-10"><a href="#cb8-10"></a><span class="co">#&gt;    outcome          1</span></span>
-<span id="cb8-11"><a href="#cb8-11"></a><span class="co">#&gt;  predictor         13</span></span>
-<span id="cb8-12"><a href="#cb8-12"></a><span class="co">#&gt; </span></span>
-<span id="cb8-13"><a href="#cb8-13"></a><span class="co">#&gt; Operations:</span></span>
-<span id="cb8-14"><a href="#cb8-14"></a><span class="co">#&gt; </span></span>
-<span id="cb8-15"><a href="#cb8-15"></a><span class="co">#&gt; K-nearest neighbor imputation for all_predictors()</span></span>
-<span id="cb8-16"><a href="#cb8-16"></a><span class="co">#&gt; Dummy variables from all_predictors(), -all_numeric()</span></span>
-<span id="cb8-17"><a href="#cb8-17"></a><span class="co">#&gt; Centering for all_predictors()</span></span>
-<span id="cb8-18"><a href="#cb8-18"></a><span class="co">#&gt; Scaling for all_predictors()</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>standardized <span class="ot">&lt;-</span> ind_vars <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_center</span>(<span class="fu">all_numeric_predictors</span>())  <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_scale</span>(<span class="fu">all_numeric_predictors</span>()) </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>standardized</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Data Recipe</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Inputs:</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       role #variables</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    outcome          1</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  predictor         13</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Operations:</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; K-nearest neighbor imputation for all_predictors()</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Dummy variables from all_nominal_predictors()</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Centering for all_numeric_predictors()</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Scaling for all_numeric_predictors()</span></span></code></pre></div>
 <p>If these are the only preprocessing steps for the predictors, we can now estimate the means and standard deviations from the training set. The <code>prep</code> function is used with a recipe and a data set:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>trained_rec &lt;-<span class="st"> </span><span class="kw">prep</span>(standardized, <span class="dt">training =</span> credit_train)</span>
-<span id="cb9-2"><a href="#cb9-2"></a>trained_rec</span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="co">#&gt; Data Recipe</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a><span class="co">#&gt; </span></span>
-<span id="cb9-5"><a href="#cb9-5"></a><span class="co">#&gt; Inputs:</span></span>
-<span id="cb9-6"><a href="#cb9-6"></a><span class="co">#&gt; </span></span>
-<span id="cb9-7"><a href="#cb9-7"></a><span class="co">#&gt;       role #variables</span></span>
-<span id="cb9-8"><a href="#cb9-8"></a><span class="co">#&gt;    outcome          1</span></span>
-<span id="cb9-9"><a href="#cb9-9"></a><span class="co">#&gt;  predictor         13</span></span>
-<span id="cb9-10"><a href="#cb9-10"></a><span class="co">#&gt; </span></span>
-<span id="cb9-11"><a href="#cb9-11"></a><span class="co">#&gt; Training data contained 3341 data points and 303 incomplete rows. </span></span>
-<span id="cb9-12"><a href="#cb9-12"></a><span class="co">#&gt; </span></span>
-<span id="cb9-13"><a href="#cb9-13"></a><span class="co">#&gt; Operations:</span></span>
-<span id="cb9-14"><a href="#cb9-14"></a><span class="co">#&gt; </span></span>
-<span id="cb9-15"><a href="#cb9-15"></a><span class="co">#&gt; K-nearest neighbor imputation for Home, Time, Age, Marital, Records, ... [trained]</span></span>
-<span id="cb9-16"><a href="#cb9-16"></a><span class="co">#&gt; Dummy variables from Home, Marital, Records, Job [trained]</span></span>
-<span id="cb9-17"><a href="#cb9-17"></a><span class="co">#&gt; Centering for Seniority, Time, Age, Expenses, Income, ... [trained]</span></span>
-<span id="cb9-18"><a href="#cb9-18"></a><span class="co">#&gt; Scaling for Seniority, Time, Age, Expenses, Income, ... [trained]</span></span></code></pre></div>
-<p>Note that the real variables are listed (e.g. <code>Home</code> etc.) instead of the selectors (<code>all_predictors()</code>).</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>trained_rec <span class="ot">&lt;-</span> <span class="fu">prep</span>(standardized, <span class="at">training =</span> credit_train)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>trained_rec</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Data Recipe</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Inputs:</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       role #variables</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    outcome          1</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  predictor         13</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Training data contained 3341 data points and 303 incomplete rows. </span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Operations:</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; K-nearest neighbor imputation for Home, Time, Age, Marital, Records, ... [trained]</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Dummy variables from Home, Marital, Records, Job [trained]</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Centering for Seniority, Time, Age, Expenses, Income, ... [trained]</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Scaling for Seniority, Time, Age, Expenses, Income, ... [trained]</span></span></code></pre></div>
+<p>Note that the real variables are listed (e.g. <code>Home</code> etc.) instead of the selectors (<code>all_numeric_predictors()</code>).</p>
 <p>Now that the statistics have been estimated, the preprocessing can be <em>applied</em> to the training and test set:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>train_data &lt;-<span class="st"> </span><span class="kw">bake</span>(trained_rec, <span class="dt">new_data =</span> credit_train)</span>
-<span id="cb10-2"><a href="#cb10-2"></a>test_data  &lt;-<span class="st"> </span><span class="kw">bake</span>(trained_rec, <span class="dt">new_data =</span> credit_test)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>train_data <span class="ot">&lt;-</span> <span class="fu">bake</span>(trained_rec, <span class="at">new_data =</span> credit_train)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>test_data  <span class="ot">&lt;-</span> <span class="fu">bake</span>(trained_rec, <span class="at">new_data =</span> credit_test)</span></code></pre></div>
 <p><code>bake</code> returns a tibble that, by default, includes all of the variables:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">class</span>(test_data)</span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="co">#&gt; [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</span></span>
-<span id="cb11-3"><a href="#cb11-3"></a>test_data</span>
-<span id="cb11-4"><a href="#cb11-4"></a><span class="co">#&gt; # A tibble: 1,113 x 23</span></span>
-<span id="cb11-5"><a href="#cb11-5"></a><span class="co">#&gt;    Seniority   Time      Age Expenses   Income  Assets   Debt Amount  Price</span></span>
-<span id="cb11-6"><a href="#cb11-6"></a><span class="co">#&gt;        &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;</span></span>
-<span id="cb11-7"><a href="#cb11-7"></a><span class="co">#&gt;  1   0.257   -0.706  0.826      1.75   0.718   -0.199  -0.273  2.05   2.53 </span></span>
-<span id="cb11-8"><a href="#cb11-8"></a><span class="co">#&gt;  2   2.61     0.921  0.643      0.987 -0.221    0.386  -0.273  1.21   0.577</span></span>
-<span id="cb11-9"><a href="#cb11-9"></a><span class="co">#&gt;  3   0.133   -2.33  -0.909     -1.05  -0.784   -0.449  -0.273 -1.76  -0.589</span></span>
-<span id="cb11-10"><a href="#cb11-10"></a><span class="co">#&gt;  4   0.00966  0.921 -0.635      0.987  0.705   -0.0316  1.86   0.995  0.330</span></span>
-<span id="cb11-11"><a href="#cb11-11"></a><span class="co">#&gt;  5   0.875   -1.52   1.37      -1.05   2.34     0.929  -0.273  0.995  1.24 </span></span>
-<span id="cb11-12"><a href="#cb11-12"></a><span class="co">#&gt;  6   3.10    -1.52   2.84       0.479  0.718   -0.0316  1.43  -0.912 -0.165</span></span>
-<span id="cb11-13"><a href="#cb11-13"></a><span class="co">#&gt;  7   2.24     0.921  1.28      -0.539  0.00434 -0.157  -0.273  0.677 -0.153</span></span>
-<span id="cb11-14"><a href="#cb11-14"></a><span class="co">#&gt;  8  -0.979    0.108  0.00402   -1.05  -0.371   -0.265  -0.273  0.995  0.660</span></span>
-<span id="cb11-15"><a href="#cb11-15"></a><span class="co">#&gt;  9   1.99     0.921  0.461      0.987 -0.0707  -0.115  -0.273 -0.276 -0.467</span></span>
-<span id="cb11-16"><a href="#cb11-16"></a><span class="co">#&gt; 10  -0.979    0.921 -0.453     -0.539 -0.00817  0.136   2.28   0.465  0.192</span></span>
-<span id="cb11-17"><a href="#cb11-17"></a><span class="co">#&gt; # … with 1,103 more rows, and 14 more variables: Status &lt;fct&gt;, Home_X1 &lt;dbl&gt;,</span></span>
-<span id="cb11-18"><a href="#cb11-18"></a><span class="co">#&gt; #   Home_X2 &lt;dbl&gt;, Home_X3 &lt;dbl&gt;, Home_X4 &lt;dbl&gt;, Home_X5 &lt;dbl&gt;,</span></span>
-<span id="cb11-19"><a href="#cb11-19"></a><span class="co">#&gt; #   Marital_X1 &lt;dbl&gt;, Marital_X2 &lt;dbl&gt;, Marital_X3 &lt;dbl&gt;, Marital_X4 &lt;dbl&gt;,</span></span>
-<span id="cb11-20"><a href="#cb11-20"></a><span class="co">#&gt; #   Records_X1 &lt;dbl&gt;, Job_X1 &lt;dbl&gt;, Job_X2 &lt;dbl&gt;, Job_X3 &lt;dbl&gt;</span></span>
-<span id="cb11-21"><a href="#cb11-21"></a><span class="kw">vapply</span>(test_data, <span class="cf">function</span>(x) <span class="kw">mean</span>(<span class="op">!</span><span class="kw">is.na</span>(x)), <span class="kw">numeric</span>(<span class="dv">1</span>))</span>
-<span id="cb11-22"><a href="#cb11-22"></a><span class="co">#&gt;  Seniority       Time        Age   Expenses     Income     Assets       Debt </span></span>
-<span id="cb11-23"><a href="#cb11-23"></a><span class="co">#&gt;          1          1          1          1          1          1          1 </span></span>
-<span id="cb11-24"><a href="#cb11-24"></a><span class="co">#&gt;     Amount      Price     Status    Home_X1    Home_X2    Home_X3    Home_X4 </span></span>
-<span id="cb11-25"><a href="#cb11-25"></a><span class="co">#&gt;          1          1          1          1          1          1          1 </span></span>
-<span id="cb11-26"><a href="#cb11-26"></a><span class="co">#&gt;    Home_X5 Marital_X1 Marital_X2 Marital_X3 Marital_X4 Records_X1     Job_X1 </span></span>
-<span id="cb11-27"><a href="#cb11-27"></a><span class="co">#&gt;          1          1          1          1          1          1          1 </span></span>
-<span id="cb11-28"><a href="#cb11-28"></a><span class="co">#&gt;     Job_X2     Job_X3 </span></span>
-<span id="cb11-29"><a href="#cb11-29"></a><span class="co">#&gt;          1          1</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(test_data)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>test_data</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1,113 x 23</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    Seniority   Time      Age Expenses   Income  Assets   Debt Amount  Price</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1   0.257   -0.706  0.826      1.75   0.718   -0.199  -0.273  2.05   2.53 </span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2   2.61     0.921  0.643      0.987 -0.221    0.386  -0.273  1.21   0.577</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3   0.133   -2.33  -0.909     -1.05  -0.784   -0.449  -0.273 -1.76  -0.589</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4   0.00966  0.921 -0.635      0.987  0.705   -0.0316  1.86   0.995  0.330</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5   0.875   -1.52   1.37      -1.05   2.34     0.929  -0.273  0.995  1.24 </span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6   3.10    -1.52   2.84       0.479  0.718   -0.0316  1.43  -0.912 -0.165</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7   2.24     0.921  1.28      -0.539  0.00434 -0.157  -0.273  0.677 -0.153</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8  -0.979    0.108  0.00402   -1.05  -0.371   -0.265  -0.273  0.995  0.660</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9   1.99     0.921  0.461      0.987 -0.0707  -0.115  -0.273 -0.276 -0.467</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10  -0.979    0.921 -0.453     -0.539 -0.00817  0.136   2.28   0.465  0.192</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 1,103 more rows, and 14 more variables: Status &lt;fct&gt;, Home_X1 &lt;dbl&gt;,</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   Home_X2 &lt;dbl&gt;, Home_X3 &lt;dbl&gt;, Home_X4 &lt;dbl&gt;, Home_X5 &lt;dbl&gt;,</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   Marital_X1 &lt;dbl&gt;, Marital_X2 &lt;dbl&gt;, Marital_X3 &lt;dbl&gt;, Marital_X4 &lt;dbl&gt;,</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   Records_X1 &lt;dbl&gt;, Job_X1 &lt;dbl&gt;, Job_X2 &lt;dbl&gt;, Job_X3 &lt;dbl&gt;</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="fu">vapply</span>(test_data, <span class="cf">function</span>(x) <span class="fu">mean</span>(<span class="sc">!</span><span class="fu">is.na</span>(x)), <span class="fu">numeric</span>(<span class="dv">1</span>))</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Seniority       Time        Age   Expenses     Income     Assets       Debt </span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          1          1          1          1          1          1          1 </span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     Amount      Price     Status    Home_X1    Home_X2    Home_X3    Home_X4 </span></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          1          1          1          1          1          1          1 </span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    Home_X5 Marital_X1 Marital_X2 Marital_X3 Marital_X4 Records_X1     Job_X1 </span></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          1          1          1          1          1          1          1 </span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     Job_X2     Job_X3 </span></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          1          1</span></span></code></pre></div>
 <p>Selectors can also be used. For example, if only the predictors are needed, you can use <code>bake(object, new_data, all_predictors())</code>.</p>
 <p>There are a number of other steps included in the package:</p>
 <pre><code>#&gt;  [1] &quot;step_BoxCox&quot;        &quot;step_YeoJohnson&quot;    &quot;step_arrange&quot;      
@@ -626,32 +331,35 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 #&gt; [13] &quot;step_depth&quot;         &quot;step_discretize&quot;    &quot;step_downsample&quot;   
 #&gt; [16] &quot;step_dummy&quot;         &quot;step_factor2string&quot; &quot;step_filter&quot;       
 #&gt; [19] &quot;step_geodist&quot;       &quot;step_holiday&quot;       &quot;step_hyperbolic&quot;   
-#&gt; [22] &quot;step_ica&quot;           &quot;step_impute_linear&quot; &quot;step_integer&quot;      
-#&gt; [25] &quot;step_interact&quot;      &quot;step_intercept&quot;     &quot;step_inverse&quot;      
-#&gt; [28] &quot;step_invlogit&quot;      &quot;step_isomap&quot;        &quot;step_knnimpute&quot;    
-#&gt; [31] &quot;step_kpca&quot;          &quot;step_kpca_poly&quot;     &quot;step_kpca_rbf&quot;     
-#&gt; [34] &quot;step_lag&quot;           &quot;step_lincomb&quot;       &quot;step_log&quot;          
-#&gt; [37] &quot;step_logit&quot;         &quot;step_lowerimpute&quot;   &quot;step_meanimpute&quot;   
-#&gt; [40] &quot;step_medianimpute&quot;  &quot;step_modeimpute&quot;    &quot;step_mutate&quot;       
-#&gt; [43] &quot;step_mutate_at&quot;     &quot;step_naomit&quot;        &quot;step_nnmf&quot;         
-#&gt; [46] &quot;step_normalize&quot;     &quot;step_novel&quot;         &quot;step_ns&quot;           
-#&gt; [49] &quot;step_num2factor&quot;    &quot;step_nzv&quot;           &quot;step_ordinalscore&quot; 
-#&gt; [52] &quot;step_other&quot;         &quot;step_pca&quot;           &quot;step_pls&quot;          
-#&gt; [55] &quot;step_poly&quot;          &quot;step_profile&quot;       &quot;step_range&quot;        
-#&gt; [58] &quot;step_ratio&quot;         &quot;step_regex&quot;         &quot;step_relevel&quot;      
-#&gt; [61] &quot;step_relu&quot;          &quot;step_rename&quot;        &quot;step_rename_at&quot;    
-#&gt; [64] &quot;step_rm&quot;            &quot;step_rollimpute&quot;    &quot;step_sample&quot;       
-#&gt; [67] &quot;step_scale&quot;         &quot;step_shuffle&quot;       &quot;step_slice&quot;        
-#&gt; [70] &quot;step_spatialsign&quot;   &quot;step_sqrt&quot;          &quot;step_string2factor&quot;
-#&gt; [73] &quot;step_unknown&quot;       &quot;step_unorder&quot;       &quot;step_upsample&quot;     
-#&gt; [76] &quot;step_window&quot;        &quot;step_zv&quot;</code></pre>
+#&gt; [22] &quot;step_ica&quot;           &quot;step_impute_bag&quot;    &quot;step_impute_knn&quot;   
+#&gt; [25] &quot;step_impute_linear&quot; &quot;step_impute_lower&quot;  &quot;step_impute_mean&quot;  
+#&gt; [28] &quot;step_impute_median&quot; &quot;step_impute_mode&quot;   &quot;step_impute_roll&quot;  
+#&gt; [31] &quot;step_indicate_na&quot;   &quot;step_integer&quot;       &quot;step_interact&quot;     
+#&gt; [34] &quot;step_intercept&quot;     &quot;step_inverse&quot;       &quot;step_invlogit&quot;     
+#&gt; [37] &quot;step_isomap&quot;        &quot;step_knnimpute&quot;     &quot;step_kpca&quot;         
+#&gt; [40] &quot;step_kpca_poly&quot;     &quot;step_kpca_rbf&quot;      &quot;step_lag&quot;          
+#&gt; [43] &quot;step_lincomb&quot;       &quot;step_log&quot;           &quot;step_logit&quot;        
+#&gt; [46] &quot;step_lowerimpute&quot;   &quot;step_meanimpute&quot;    &quot;step_medianimpute&quot; 
+#&gt; [49] &quot;step_modeimpute&quot;    &quot;step_mutate&quot;        &quot;step_mutate_at&quot;    
+#&gt; [52] &quot;step_naomit&quot;        &quot;step_nnmf&quot;          &quot;step_normalize&quot;    
+#&gt; [55] &quot;step_novel&quot;         &quot;step_ns&quot;            &quot;step_num2factor&quot;   
+#&gt; [58] &quot;step_nzv&quot;           &quot;step_ordinalscore&quot;  &quot;step_other&quot;        
+#&gt; [61] &quot;step_pca&quot;           &quot;step_pls&quot;           &quot;step_poly&quot;         
+#&gt; [64] &quot;step_profile&quot;       &quot;step_range&quot;         &quot;step_ratio&quot;        
+#&gt; [67] &quot;step_regex&quot;         &quot;step_relevel&quot;       &quot;step_relu&quot;         
+#&gt; [70] &quot;step_rename&quot;        &quot;step_rename_at&quot;     &quot;step_rm&quot;           
+#&gt; [73] &quot;step_rollimpute&quot;    &quot;step_sample&quot;        &quot;step_scale&quot;        
+#&gt; [76] &quot;step_select&quot;        &quot;step_shuffle&quot;       &quot;step_slice&quot;        
+#&gt; [79] &quot;step_spatialsign&quot;   &quot;step_sqrt&quot;          &quot;step_string2factor&quot;
+#&gt; [82] &quot;step_unknown&quot;       &quot;step_unorder&quot;       &quot;step_upsample&quot;     
+#&gt; [85] &quot;step_window&quot;        &quot;step_zv&quot;</code></pre>
 </div>
 <div id="checks" class="section level2">
 <h2>Checks</h2>
 <p>Another type of operation that can be added to a recipes is a <em>check</em>. Checks conduct some sort of data validation and, if no issue is found, returns the data as-is; otherwise, an error is thrown.</p>
 <p>For example, <code>check_missing</code> will fail if any of the variables selected for validation have missing values. This check is done when the recipe is prepared as well as when any data are baked. Checks are added in the same way as steps:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>trained_rec &lt;-<span class="st"> </span>trained_rec <span class="op">%&gt;%</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a><span class="st">  </span><span class="kw">check_missing</span>(<span class="kw">contains</span>(<span class="st">&quot;Marital&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>trained_rec <span class="ot">&lt;-</span> trained_rec <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">check_missing</span>(<span class="fu">contains</span>(<span class="st">&quot;Marital&quot;</span>))</span></code></pre></div>
 <p>Currently, <code>recipes</code> includes:</p>
 <pre><code>#&gt; [1] &quot;check_class&quot;      &quot;check_cols&quot;       &quot;check_missing&quot;    &quot;check_name&quot;      
 #&gt; [5] &quot;check_new_values&quot; &quot;check_range&quot;      &quot;check_type&quot;</code></pre>

@@ -76,6 +76,7 @@ brief.matrix	brief
 brief.multinom	brief
 brief.numeric	brief
 brief.polr	brief
+brief.tbl	brief
 car-defunct	car-defunct
 car-deprecated	car-deprecated
 car-internal.Rd	car-internal
@@ -112,7 +113,6 @@ contr.Treatment	Contrasts
 Contrasts	Contrasts
 cookd	car-defunct
 cooks.distance.influence.lme	influence-mixed-models
-cooks.distance.influence.merMod	influence-mixed-models
 cr.plot	car-defunct
 cr.plots	car-defunct
 crp	crPlots
@@ -140,11 +140,9 @@ densityPlot.default	densityPlot
 densityPlot.formula	densityPlot
 depan	densityPlot
 dfbeta.influence.lme	influence-mixed-models
-dfbeta.influence.merMod	influence-mixed-models
 dfbetaPlots	dfbetaPlots
 dfbetaPlots.lm	dfbetaPlots
 dfbetas.influence.lme	influence-mixed-models
-dfbetas.influence.merMod	influence-mixed-models
 dfbetasPlots	dfbetaPlots
 dfbetasPlots.lm	dfbetaPlots
 durbin.watson	car-defunct
@@ -167,7 +165,6 @@ infIndexPlot.influence.merMod	infIndexPlot
 infIndexPlot.lm	infIndexPlot
 infIndexPlot.lmerMod	infIndexPlot
 influence.lme	influence-mixed-models
-influence.merMod	influence-mixed-models
 influence.mixed.models	influence-mixed-models
 influence.plot	influencePlot
 influenceIndexPlot	infIndexPlot
@@ -199,6 +196,7 @@ linearHypothesis.default	linearHypothesis
 linearHypothesis.glm	linearHypothesis
 linearHypothesis.lm	linearHypothesis
 linearHypothesis.lme	linearHypothesis
+linearHypothesis.lmList	linearHypothesis
 linearHypothesis.mer	linearHypothesis
 linearHypothesis.merMod	linearHypothesis
 linearHypothesis.mlm	linearHypothesis
@@ -217,10 +215,12 @@ marginalModelPlots	marginalModelPlot
 matchCoefs	linearHypothesis
 matchCoefs.default	linearHypothesis
 matchCoefs.lme	linearHypothesis
+matchCoefs.lmList	linearHypothesis
 matchCoefs.mer	linearHypothesis
 matchCoefs.merMod	linearHypothesis
 matchCoefs.mlm	linearHypothesis
 mcPlot	mcPlots
+mcPlot.glm	mcPlots
 mcPlot.lm	mcPlots
 mcPlots	mcPlots
 mcPlots.default	mcPlots
@@ -338,6 +338,7 @@ summary.boot	hist.boot
 symbox	symbox
 symbox.default	symbox
 symbox.formula	symbox
+symbox.lm	symbox
 Tapply	Tapply
 testTransform	testTransform
 testTransform.bcnPowerTransformlmer	testTransform
@@ -348,6 +349,8 @@ vcov.boot	hist.boot
 vif	vif
 vif.default	vif
 vif.merMod	vif
+vif.polr	vif
+vif.svyolr	vif
 wcrossprod	wcrossprod
 which.names	which.names
 whichNames	which.names

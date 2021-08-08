@@ -10,11 +10,15 @@ get_decennial           Obtain data and feature geometry for the
                         decennial Census
 get_estimates           Get data from the US Census Bureau Population
                         Estimates APIs
+get_flows               Obtain data and feature geometry for American
+                        Community Survey Migration Flows
 get_pums                Load data from the American Community Survey
                         Public Use Microdata Series API
 load_variables          Load variables from a decennial Census or
                         American Community Survey dataset to search in
                         R
+mig_recodes             Dataset with Migration Flows characteristic
+                        recodes
 moe_product             Calculate the margin of error for a derived
                         product
 moe_prop                Calculate the margin of error for a derived

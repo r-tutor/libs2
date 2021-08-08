@@ -14,35 +14,7 @@
 
 <title>Roles in Recipes</title>
 
-<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
-// be compatible with the behavior of Pandoc < 2.8).
-document.addEventListener('DOMContentLoaded', function(e) {
-  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
-  var i, h, a;
-  for (i = 0; i < hs.length; i++) {
-    h = hs[i];
-    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
-    a = h.attributes;
-    while (a.length > 0) h.removeAttribute(a[0].name);
-  }
-});
-</script>
-<script>// Hide empty <a> tag within highlighted CodeBlock for screen reader accessibility (see https://github.com/jgm/pandoc/issues/6352#issuecomment-626106786) -->
-// v0.0.1
-// Written by JooYoung Seo (jooyoung@psu.edu) and Atsushi Yasumoto on June 1st, 2020.
-
-document.addEventListener('DOMContentLoaded', function() {
-  const codeList = document.getElementsByClassName("sourceCode");
-  for (var i = 0; i < codeList.length; i++) {
-    var linkList = codeList[i].getElementsByTagName('a');
-    for (var j = 0; j < linkList.length; j++) {
-      if (linkList[j].innerHTML === "") {
-        linkList[j].setAttribute('aria-hidden', 'true');
-      }
-    }
-  }
-});
-</script>
+<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -51,76 +23,22 @@ document.addEventListener('DOMContentLoaded', function() {
   div.column{display: inline-block; vertical-align: top; width: 50%;}
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   ul.task-list{list-style: none;}
-      pre > code.sourceCode { white-space: pre; position: relative; }
-      pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-      pre > code.sourceCode > span:empty { height: 1.2em; }
-      code.sourceCode > span { color: inherit; text-decoration: inherit; }
-      div.sourceCode { margin: 1em 0; }
-      pre.sourceCode { margin: 0; }
-      @media screen {
-      div.sourceCode { overflow: auto; }
-      }
-      @media print {
-      pre > code.sourceCode { white-space: pre-wrap; }
-      pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-      }
-      pre.numberSource code
-        { counter-reset: source-line 0; }
-      pre.numberSource code > span
-        { position: relative; left: -4em; counter-increment: source-line; }
-      pre.numberSource code > span > a:first-child::before
-        { content: counter(source-line);
-          position: relative; left: -1em; text-align: right; vertical-align: baseline;
-          border: none; display: inline-block;
-          -webkit-touch-callout: none; -webkit-user-select: none;
-          -khtml-user-select: none; -moz-user-select: none;
-          -ms-user-select: none; user-select: none;
-          padding: 0 4px; width: 4em;
-          color: #aaaaaa;
-        }
-      pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-      div.sourceCode
-        {   }
-      @media screen {
-      pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-      }
-      code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-      code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-      code span.at { color: #7d9029; } /* Attribute */
-      code span.bn { color: #40a070; } /* BaseN */
-      code span.bu { } /* BuiltIn */
-      code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-      code span.ch { color: #4070a0; } /* Char */
-      code span.cn { color: #880000; } /* Constant */
-      code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-      code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-      code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-      code span.dt { color: #902000; } /* DataType */
-      code span.dv { color: #40a070; } /* DecVal */
-      code span.er { color: #ff0000; font-weight: bold; } /* Error */
-      code span.ex { } /* Extension */
-      code span.fl { color: #40a070; } /* Float */
-      code span.fu { color: #06287e; } /* Function */
-      code span.im { } /* Import */
-      code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-      code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-      code span.op { color: #666666; } /* Operator */
-      code span.ot { color: #007020; } /* Other */
-      code span.pp { color: #bc7a00; } /* Preprocessor */
-      code span.sc { color: #4070a0; } /* SpecialChar */
-      code span.ss { color: #bb6688; } /* SpecialString */
-      code span.st { color: #4070a0; } /* String */
-      code span.va { color: #19177c; } /* Variable */
-      code span.vs { color: #4070a0; } /* VerbatimString */
-      code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
     </style>
 
 
-<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -206,225 +124,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<style type="text/css">body {
-background-color: #fff;
-margin: 1em auto;
-max-width: 800px;
-overflow: visible;
-padding-left: 2em;
-padding-right: 2em;
-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-font-size: 14px;
-line-height: 20px;
-}
-#header {
-text-align: center;
-}
-#TOC {
-clear: both;
-margin: 0 0 10px 0;
-padding: 4px;
-border: 1px solid #CCCCCC;
-border-radius: 5px;
-background-color: #f6f6f6;
-font-size: 13px;
-line-height: 1.3;
-}
-#TOC .toctitle {
-font-weight: bold;
-font-size: 15px;
-margin-left: 5px;
-}
-#TOC ul {
-padding-left: 40px;
-margin-left: -1.5em;
-margin-top: 5px;
-margin-bottom: 5px;
-}
-#TOC ul ul {
-margin-left: -2em;
-}
-#TOC li {
-line-height: 16px;
-}
-table:not([class]) {
-margin: auto;
-min-width: 40%;
-border-width: 1px;
-border-color: #DDDDDD;
-border-style: outset;
-border-collapse: collapse;
-}
-table[summary="R argblock"] {
-width: 100%;
-border: none;
-}
-table:not([class]) th {
-border-width: 2px;
-padding: 5px;
-border-style: inset;
-}
-table:not([class]) td {
-border-width: 1px;
-border-style: inset;
-line-height: 18px;
-padding: 5px 5px;
-}
-table:not([class]), table:not([class]) th, table:not([class]) td {
-border-left-style: none;
-border-right-style: none;
-}
-table:not([class]) tr.odd {
-background-color: #f7f7f7;
-}
-p {
-margin: 0.5em 0;
-}
-blockquote {
-background-color: #f6f6f6;
-padding: 13px;
-padding-bottom: 1px;
-}
-hr {
-border-style: solid;
-border: none;
-border-top: 1px solid #777;
-margin: 28px 0;
-}
-dl {
-margin-left: 0;
-}
-dl dd {
-margin-bottom: 13px;
-margin-left: 13px;
-}
-dl dt {
-font-weight: bold;
-}
-ul {
-margin-top: 0;
-}
-ul li {
-list-style: circle outside;
-}
-ul ul {
-margin-bottom: 0;
-}
-pre, code {
-background-color: #f5f5f5;
-border-radius: 3px;
-color: #333;
-}
-pre {
-overflow-x: auto;
-border-radius: 3px;
-margin: 5px 0 10px 0;
-padding: 10px;
-}
-pre:not([class]) {
-background-color: white;
-border: #f5f5f5 1px solid;
-}
-pre:not([class]) code {
-color: #444;
-background-color: white;
-}
-code {
-font-family: monospace;
-font-size: 90%;
-}
-p > code, li > code {
-padding: 2px 4px;
-color: #d14;
-border: 1px solid #e1e1e8;
-white-space: inherit;
-}
-div.figure {
-text-align: center;
-}
-table > caption, div.figure p.caption {
-font-style: italic;
-}
-table > caption span, div.figure p.caption span {
-font-style: normal;
-font-weight: bold;
-}
-p {
-margin: 0 0 10px;
-}
-table:not([class]) {
-margin: auto auto 10px auto;
-}
-img:not([class]) {
-background-color: #FFFFFF;
-padding: 2px;
-border-radius: 3px;
-border: 1px solid #CCCCCC;
-margin: 0 5px;
-max-width: 100%;
-}
-h1 {
-margin-top: 0;
-font-size: 35px;
-line-height: 40px;
-}
-h2 {
-border-bottom: 4px solid #f5f5f5;
-padding-top: 10px;
-padding-bottom: 2px;
-font-size: 145%;
-}
-h3 {
-border-bottom: 2px solid #f5f5f5;
-padding-top: 10px;
-font-size: 120%;
-}
-h4 {
-border-bottom: 1px solid #f5f5f5;
-margin-left: 8px;
-font-size: 105%;
-}
-h5, h6 {
-border-bottom: 1px solid #ccc;
-font-size: 105%;
-}
-a {
-color: #0033dd;
-text-decoration: none;
-}
-a:hover {
-color: #6666ff; }
-a:visited {
-color: #800080; }
-a:visited:hover {
-color: #BB00BB; }
-a[href^="http:"] {
-text-decoration: underline; }
-a[href^="https:"] {
-text-decoration: underline; }
-div.r-help-page {
-background-color: #f9f9f9;
-border-bottom: #ddd 1px solid;
-margin-bottom: 10px;
-padding: 10px;
-}
-div.r-help-page:hover {
-background-color: #f4f4f4;
-}
 
-code > span.kw { color: #555; font-weight: bold; } 
-code > span.dt { color: #902000; } 
-code > span.dv { color: #40a070; } 
-code > span.bn { color: #d14; } 
-code > span.fl { color: #d14; } 
-code > span.ch { color: #d14; } 
-code > span.st { color: #d14; } 
-code > span.co { color: #888888; font-style: italic; } 
-code > span.ot { color: #007020; } 
-code > span.al { color: #ff0000; font-weight: bold; } 
-code > span.fu { color: #900; font-weight: bold; } 
-code > span.er { color: #a61717; background-color: #e3d2d2; } 
-</style>
+<link rel="stylesheet" href="data:text/css,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20800px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%2020px%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%200%3B%0Apadding%3A%204px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%3Anot%28%5Bclass%5D%29%20%7B%0Amargin%3A%20auto%3B%0Amin%2Dwidth%3A%2040%25%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%5Bsummary%3D%22R%20argblock%22%5D%20%7B%0Awidth%3A%20100%25%3B%0Aborder%3A%20none%3B%0A%7D%0Atable%3Anot%28%5Bclass%5D%29%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%3Anot%28%5Bclass%5D%29%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%3Anot%28%5Bclass%5D%29%2C%20table%3Anot%28%5Bclass%5D%29%20th%2C%20table%3Anot%28%5Bclass%5D%29%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%3Anot%28%5Bclass%5D%29%20tr%2Eodd%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%2013px%3B%0Apadding%2Dbottom%3A%201px%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f5f5f5%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0A%7D%0Apre%20%7B%0Aoverflow%2Dx%3A%20auto%3B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200%2010px%200%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20white%3B%0Aborder%3A%20%23f5f5f5%201px%20solid%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20code%20%7B%0Acolor%3A%20%23444%3B%0Abackground%2Dcolor%3A%20white%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20monospace%3B%0Afont%2Dsize%3A%2090%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%204px%3B%0Acolor%3A%20%23d14%3B%0Aborder%3A%201px%20solid%20%23e1e1e8%3B%0Awhite%2Dspace%3A%20inherit%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Atable%20%3E%20caption%2C%20div%2Efigure%20p%2Ecaption%20%7B%0Afont%2Dstyle%3A%20italic%3B%0A%7D%0Atable%20%3E%20caption%20span%2C%20div%2Efigure%20p%2Ecaption%20span%20%7B%0Afont%2Dstyle%3A%20normal%3B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%200%2010px%3B%0A%7D%0Atable%3Anot%28%5Bclass%5D%29%20%7B%0Amargin%3A%20auto%20auto%2010px%20auto%3B%0A%7D%0Aimg%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0Amax%2Dwidth%3A%20100%25%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f5f5f5%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f5f5f5%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f5f5f5%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Adiv%2Er%2Dhelp%2Dpage%20%7B%0Abackground%2Dcolor%3A%20%23f9f9f9%3B%0Aborder%2Dbottom%3A%20%23ddd%201px%20solid%3B%0Amargin%2Dbottom%3A%2010px%3B%0Apadding%3A%2010px%3B%0A%7D%0Adiv%2Er%2Dhelp%2Dpage%3Ahover%20%7B%0Abackground%2Dcolor%3A%20%23f4f4f4%3B%0A%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" type="text/css" />
 
 
 
@@ -451,159 +152,160 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <div id="the-formula-method" class="section level2">
 <h2>The Formula Method</h2>
 <p>When a recipe is created using the formula interface, this defines the roles for all columns of the data set. <code>summary()</code> can be used to view a tibble containing information regarding the roles.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(recipes)</span>
-<span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">recipe</span>(Species <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> iris) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summary</span>()</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="co">#&gt; # A tibble: 6 x 4</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="co">#&gt;   variable     type    role      source  </span></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;   </span></span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="co">#&gt; 1 Sepal.Length numeric predictor original</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="co">#&gt; 2 Sepal.Width  numeric predictor original</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="co">#&gt; 3 Petal.Length numeric predictor original</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="co">#&gt; 4 Petal.Width  numeric predictor original</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="co">#&gt; 5 original     nominal predictor original</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="co">#&gt; 6 Species      nominal outcome   original</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a></span>
-<span id="cb1-14"><a href="#cb1-14"></a><span class="kw">recipe</span>( <span class="op">~</span><span class="st"> </span>Species, <span class="dt">data =</span> iris) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summary</span>()</span>
-<span id="cb1-15"><a href="#cb1-15"></a><span class="co">#&gt; # A tibble: 1 x 4</span></span>
-<span id="cb1-16"><a href="#cb1-16"></a><span class="co">#&gt;   variable type    role      source  </span></span>
-<span id="cb1-17"><a href="#cb1-17"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;   </span></span>
-<span id="cb1-18"><a href="#cb1-18"></a><span class="co">#&gt; 1 Species  nominal predictor original</span></span>
-<span id="cb1-19"><a href="#cb1-19"></a></span>
-<span id="cb1-20"><a href="#cb1-20"></a><span class="kw">recipe</span>(Sepal.Length <span class="op">+</span><span class="st"> </span>Sepal.Width <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> iris) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summary</span>()</span>
-<span id="cb1-21"><a href="#cb1-21"></a><span class="co">#&gt; # A tibble: 6 x 4</span></span>
-<span id="cb1-22"><a href="#cb1-22"></a><span class="co">#&gt;   variable     type    role      source  </span></span>
-<span id="cb1-23"><a href="#cb1-23"></a><span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;   </span></span>
-<span id="cb1-24"><a href="#cb1-24"></a><span class="co">#&gt; 1 Petal.Length numeric predictor original</span></span>
-<span id="cb1-25"><a href="#cb1-25"></a><span class="co">#&gt; 2 Petal.Width  numeric predictor original</span></span>
-<span id="cb1-26"><a href="#cb1-26"></a><span class="co">#&gt; 3 Species      nominal predictor original</span></span>
-<span id="cb1-27"><a href="#cb1-27"></a><span class="co">#&gt; 4 original     nominal predictor original</span></span>
-<span id="cb1-28"><a href="#cb1-28"></a><span class="co">#&gt; 5 Sepal.Length numeric outcome   original</span></span>
-<span id="cb1-29"><a href="#cb1-29"></a><span class="co">#&gt; 6 Sepal.Width  numeric outcome   original</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(recipes)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">recipe</span>(Species <span class="sc">~</span> ., <span class="at">data =</span> iris) <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 x 4</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   variable     type    role      source  </span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;   </span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 Sepal.Length numeric predictor original</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 Sepal.Width  numeric predictor original</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Petal.Length numeric predictor original</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 Petal.Width  numeric predictor original</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 original     nominal predictor original</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 Species      nominal outcome   original</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">recipe</span>( <span class="sc">~</span> Species, <span class="at">data =</span> iris) <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 x 4</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   variable type    role      source  </span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;   </span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 Species  nominal predictor original</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="fu">recipe</span>(Sepal.Length <span class="sc">+</span> Sepal.Width <span class="sc">~</span> ., <span class="at">data =</span> iris) <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 x 4</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   variable     type    role      source  </span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;   </span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 Petal.Length numeric predictor original</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 Petal.Width  numeric predictor original</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Species      nominal predictor original</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 original     nominal predictor original</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 Sepal.Length numeric outcome   original</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 Sepal.Width  numeric outcome   original</span></span></code></pre></div>
 <p>These roles can be updated despite this initial assignment. <code>update_role()</code> can modify a single existing role:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">library</span>(modeldata)</span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">data</span>(biomass)</span>
-<span id="cb2-3"><a href="#cb2-3"></a></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="kw">recipe</span>(HHV <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> biomass) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="st">  </span><span class="kw">update_role</span>(dataset, <span class="dt">new_role =</span> <span class="st">&quot;dataset split variable&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb2-6"><a href="#cb2-6"></a><span class="st">  </span><span class="kw">update_role</span>(sample, <span class="dt">new_role =</span> <span class="st">&quot;sample ID&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb2-7"><a href="#cb2-7"></a><span class="st">  </span><span class="kw">summary</span>()</span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="co">#&gt; # A tibble: 8 x 4</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a><span class="co">#&gt;   variable type    role                   source  </span></span>
-<span id="cb2-10"><a href="#cb2-10"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;                  &lt;chr&gt;   </span></span>
-<span id="cb2-11"><a href="#cb2-11"></a><span class="co">#&gt; 1 sample   nominal sample ID              original</span></span>
-<span id="cb2-12"><a href="#cb2-12"></a><span class="co">#&gt; 2 dataset  nominal dataset split variable original</span></span>
-<span id="cb2-13"><a href="#cb2-13"></a><span class="co">#&gt; 3 carbon   numeric predictor              original</span></span>
-<span id="cb2-14"><a href="#cb2-14"></a><span class="co">#&gt; 4 hydrogen numeric predictor              original</span></span>
-<span id="cb2-15"><a href="#cb2-15"></a><span class="co">#&gt; 5 oxygen   numeric predictor              original</span></span>
-<span id="cb2-16"><a href="#cb2-16"></a><span class="co">#&gt; 6 nitrogen numeric predictor              original</span></span>
-<span id="cb2-17"><a href="#cb2-17"></a><span class="co">#&gt; 7 sulfur   numeric predictor              original</span></span>
-<span id="cb2-18"><a href="#cb2-18"></a><span class="co">#&gt; 8 HHV      numeric outcome                original</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(modeldata)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(biomass)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">recipe</span>(HHV <span class="sc">~</span> ., <span class="at">data =</span> biomass) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">update_role</span>(dataset, <span class="at">new_role =</span> <span class="st">&quot;dataset split variable&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">update_role</span>(sample, <span class="at">new_role =</span> <span class="st">&quot;sample ID&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 8 x 4</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   variable type    role                   source  </span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;                  &lt;chr&gt;   </span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 sample   nominal sample ID              original</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 dataset  nominal dataset split variable original</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 carbon   numeric predictor              original</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 hydrogen numeric predictor              original</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 oxygen   numeric predictor              original</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 nitrogen numeric predictor              original</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7 sulfur   numeric predictor              original</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8 HHV      numeric outcome                original</span></span></code></pre></div>
 <p>When you want to get rid of a role for a column, use <code>remove_role()</code>.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">recipe</span>(HHV <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> biomass) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="st">  </span><span class="kw">remove_role</span>(sample, <span class="dt">old_role =</span> <span class="st">&quot;predictor&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="st">  </span><span class="kw">summary</span>()</span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="co">#&gt; # A tibble: 8 x 4</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="co">#&gt;   variable type    role      source  </span></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;   </span></span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="co">#&gt; 1 sample   nominal &lt;NA&gt;      original</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="co">#&gt; 2 dataset  nominal predictor original</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a><span class="co">#&gt; 3 carbon   numeric predictor original</span></span>
-<span id="cb3-10"><a href="#cb3-10"></a><span class="co">#&gt; 4 hydrogen numeric predictor original</span></span>
-<span id="cb3-11"><a href="#cb3-11"></a><span class="co">#&gt; 5 oxygen   numeric predictor original</span></span>
-<span id="cb3-12"><a href="#cb3-12"></a><span class="co">#&gt; 6 nitrogen numeric predictor original</span></span>
-<span id="cb3-13"><a href="#cb3-13"></a><span class="co">#&gt; 7 sulfur   numeric predictor original</span></span>
-<span id="cb3-14"><a href="#cb3-14"></a><span class="co">#&gt; 8 HHV      numeric outcome   original</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">recipe</span>(HHV <span class="sc">~</span> ., <span class="at">data =</span> biomass) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">remove_role</span>(sample, <span class="at">old_role =</span> <span class="st">&quot;predictor&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 8 x 4</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   variable type    role      source  </span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;   </span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 sample   nominal &lt;NA&gt;      original</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 dataset  nominal predictor original</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 carbon   numeric predictor original</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 hydrogen numeric predictor original</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 oxygen   numeric predictor original</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 nitrogen numeric predictor original</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7 sulfur   numeric predictor original</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8 HHV      numeric outcome   original</span></span></code></pre></div>
 <p>It represents the lack of a role as <code>NA</code>, which means that the variable is used in the recipe, but does not yet have a declared role. Setting the role manually to <code>NA</code> is not allowed:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">recipe</span>(HHV <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> biomass) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="st">  </span><span class="kw">update_role</span>(sample, <span class="dt">new_role =</span> <span class="ot">NA_character_</span>)</span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt; Error: `new_role` must not be `NA`.</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">recipe</span>(HHV <span class="sc">~</span> ., <span class="at">data =</span> biomass) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">update_role</span>(sample, <span class="at">new_role =</span> <span class="cn">NA_character_</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error: `new_role` must not be `NA`.</span></span></code></pre></div>
 <p>When there are cases when a column will be used in more than one context, <code>add_role()</code> can create additional roles:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>multi_role &lt;-<span class="st"> </span><span class="kw">recipe</span>(HHV <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> biomass) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="st">  </span><span class="kw">update_role</span>(dataset, <span class="dt">new_role =</span> <span class="st">&quot;dataset split variable&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="st">  </span><span class="kw">update_role</span>(sample, <span class="dt">new_role =</span> <span class="st">&quot;sample ID&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="st">  </span><span class="co"># Roles below from https://wordcounter.net/random-word-generator</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="st">  </span><span class="kw">add_role</span>(sample, <span class="dt">new_role =</span> <span class="st">&quot;jellyfish&quot;</span>) </span>
-<span id="cb5-6"><a href="#cb5-6"></a></span>
-<span id="cb5-7"><a href="#cb5-7"></a>multi_role <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="st">  </span><span class="kw">summary</span>()</span>
-<span id="cb5-9"><a href="#cb5-9"></a><span class="co">#&gt; # A tibble: 9 x 4</span></span>
-<span id="cb5-10"><a href="#cb5-10"></a><span class="co">#&gt;   variable type    role                   source  </span></span>
-<span id="cb5-11"><a href="#cb5-11"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;                  &lt;chr&gt;   </span></span>
-<span id="cb5-12"><a href="#cb5-12"></a><span class="co">#&gt; 1 sample   nominal sample ID              original</span></span>
-<span id="cb5-13"><a href="#cb5-13"></a><span class="co">#&gt; 2 sample   nominal jellyfish              original</span></span>
-<span id="cb5-14"><a href="#cb5-14"></a><span class="co">#&gt; 3 dataset  nominal dataset split variable original</span></span>
-<span id="cb5-15"><a href="#cb5-15"></a><span class="co">#&gt; 4 carbon   numeric predictor              original</span></span>
-<span id="cb5-16"><a href="#cb5-16"></a><span class="co">#&gt; 5 hydrogen numeric predictor              original</span></span>
-<span id="cb5-17"><a href="#cb5-17"></a><span class="co">#&gt; 6 oxygen   numeric predictor              original</span></span>
-<span id="cb5-18"><a href="#cb5-18"></a><span class="co">#&gt; 7 nitrogen numeric predictor              original</span></span>
-<span id="cb5-19"><a href="#cb5-19"></a><span class="co">#&gt; 8 sulfur   numeric predictor              original</span></span>
-<span id="cb5-20"><a href="#cb5-20"></a><span class="co">#&gt; 9 HHV      numeric outcome                original</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>multi_role <span class="ot">&lt;-</span> <span class="fu">recipe</span>(HHV <span class="sc">~</span> ., <span class="at">data =</span> biomass) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">update_role</span>(dataset, <span class="at">new_role =</span> <span class="st">&quot;dataset split variable&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">update_role</span>(sample, <span class="at">new_role =</span> <span class="st">&quot;sample ID&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Roles below from https://wordcounter.net/random-word-generator</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_role</span>(sample, <span class="at">new_role =</span> <span class="st">&quot;jellyfish&quot;</span>) </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>multi_role <span class="sc">%&gt;%</span> </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 9 x 4</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   variable type    role                   source  </span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;                  &lt;chr&gt;   </span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 sample   nominal sample ID              original</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 sample   nominal jellyfish              original</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 dataset  nominal dataset split variable original</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 carbon   numeric predictor              original</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 hydrogen numeric predictor              original</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 oxygen   numeric predictor              original</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7 nitrogen numeric predictor              original</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8 sulfur   numeric predictor              original</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9 HHV      numeric outcome                original</span></span></code></pre></div>
 <p>If a variable has multiple existing roles and you want to update one of them, the additional <code>old_role</code> argument to <code>update_role()</code> must be used to resolve any ambiguity.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>multi_role <span class="op">%&gt;%</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="st">  </span><span class="kw">update_role</span>(sample, <span class="dt">new_role =</span> <span class="st">&quot;flounder&quot;</span>, <span class="dt">old_role =</span> <span class="st">&quot;jellyfish&quot;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="st">  </span><span class="kw">summary</span>()</span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt; # A tibble: 9 x 4</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="co">#&gt;   variable type    role                   source  </span></span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;                  &lt;chr&gt;   </span></span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt; 1 sample   nominal sample ID              original</span></span>
-<span id="cb6-8"><a href="#cb6-8"></a><span class="co">#&gt; 2 sample   nominal flounder               original</span></span>
-<span id="cb6-9"><a href="#cb6-9"></a><span class="co">#&gt; 3 dataset  nominal dataset split variable original</span></span>
-<span id="cb6-10"><a href="#cb6-10"></a><span class="co">#&gt; 4 carbon   numeric predictor              original</span></span>
-<span id="cb6-11"><a href="#cb6-11"></a><span class="co">#&gt; 5 hydrogen numeric predictor              original</span></span>
-<span id="cb6-12"><a href="#cb6-12"></a><span class="co">#&gt; 6 oxygen   numeric predictor              original</span></span>
-<span id="cb6-13"><a href="#cb6-13"></a><span class="co">#&gt; 7 nitrogen numeric predictor              original</span></span>
-<span id="cb6-14"><a href="#cb6-14"></a><span class="co">#&gt; 8 sulfur   numeric predictor              original</span></span>
-<span id="cb6-15"><a href="#cb6-15"></a><span class="co">#&gt; 9 HHV      numeric outcome                original</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>multi_role <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">update_role</span>(sample, <span class="at">new_role =</span> <span class="st">&quot;flounder&quot;</span>, <span class="at">old_role =</span> <span class="st">&quot;jellyfish&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 9 x 4</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   variable type    role                   source  </span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;                  &lt;chr&gt;   </span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 sample   nominal sample ID              original</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 sample   nominal flounder               original</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 dataset  nominal dataset split variable original</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 carbon   numeric predictor              original</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 hydrogen numeric predictor              original</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 oxygen   numeric predictor              original</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7 nitrogen numeric predictor              original</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8 sulfur   numeric predictor              original</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9 HHV      numeric outcome                original</span></span></code></pre></div>
 <p>Additional variable roles allow you to use <code>has_role()</code> in combination with other selection methods (see <code>?selections</code>) to target specific variables in subsequent processing steps. For example, in the following recipe, by adding the role <code>&quot;nocenter&quot;</code> to the <code>HHV</code> predictor, you can use <code>-has_role(&quot;nocenter&quot;)</code> to exclude <code>HHV</code> when centering <code>all_predictors()</code>.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>multi_role <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="st">  </span><span class="kw">add_role</span>(HHV, <span class="dt">new_role =</span> <span class="st">&quot;nocenter&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="st">  </span><span class="kw">step_center</span>(<span class="kw">all_predictors</span>(), <span class="op">-</span><span class="kw">has_role</span>(<span class="st">&quot;nocenter&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="st">  </span><span class="kw">prep</span>(<span class="dt">training =</span> biomass, <span class="dt">retain =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="st">  </span><span class="kw">juice</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb7-6"><a href="#cb7-6"></a><span class="st">  </span><span class="kw">head</span>()</span>
-<span id="cb7-7"><a href="#cb7-7"></a><span class="co">#&gt; # A tibble: 6 x 8</span></span>
-<span id="cb7-8"><a href="#cb7-8"></a><span class="co">#&gt;   sample                 dataset  carbon hydrogen oxygen nitrogen  sulfur   HHV</span></span>
-<span id="cb7-9"><a href="#cb7-9"></a><span class="co">#&gt;   &lt;fct&gt;                  &lt;fct&gt;     &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span id="cb7-10"><a href="#cb7-10"></a><span class="co">#&gt; 1 Akhrot Shell           Training  1.52    0.181    4.37  -0.667  -0.234   20.0</span></span>
-<span id="cb7-11"><a href="#cb7-11"></a><span class="co">#&gt; 2 Alabama Oak Wood Waste Training  1.21    0.241    2.73  -0.877  -0.234   19.2</span></span>
-<span id="cb7-12"><a href="#cb7-12"></a><span class="co">#&gt; 3 Alder                  Training -0.475   0.341    7.68  -0.967  -0.214   18.3</span></span>
-<span id="cb7-13"><a href="#cb7-13"></a><span class="co">#&gt; 4 Alfalfa                Training -3.19   -0.489   -2.97   2.22   -0.0736  18.2</span></span>
-<span id="cb7-14"><a href="#cb7-14"></a><span class="co">#&gt; 5 Alfalfa Seed Straw     Training -1.53   -0.0586   2.15  -0.0772 -0.214   18.4</span></span>
-<span id="cb7-15"><a href="#cb7-15"></a><span class="co">#&gt; 6 Alfalfa Stalks         Training -2.89    0.291    1.63   0.963  -0.134   18.5</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>multi_role <span class="sc">%&gt;%</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_role</span>(HHV, <span class="at">new_role =</span> <span class="st">&quot;nocenter&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_center</span>(<span class="fu">all_predictors</span>(), <span class="sc">-</span><span class="fu">has_role</span>(<span class="st">&quot;nocenter&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">prep</span>(<span class="at">training =</span> biomass, <span class="at">retain =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bake</span>(<span class="at">new_data =</span> <span class="cn">NULL</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 x 8</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   sample                 dataset  carbon hydrogen oxygen nitrogen  sulfur   HHV</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;fct&gt;                  &lt;fct&gt;     &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 Akhrot Shell           Training  1.52    0.181    4.37  -0.667  -0.234   20.0</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 Alabama Oak Wood Waste Training  1.21    0.241    2.73  -0.877  -0.234   19.2</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Alder                  Training -0.475   0.341    7.68  -0.967  -0.214   18.3</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 Alfalfa                Training -3.19   -0.489   -2.97   2.22   -0.0736  18.2</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 Alfalfa Seed Straw     Training -1.53   -0.0586   2.15  -0.0772 -0.214   18.4</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 Alfalfa Stalks         Training -2.89    0.291    1.63   0.963  -0.134   18.5</span></span></code></pre></div>
+<p>The selector <code>all_numeric_predictors()</code> can also be used in place of the compound specification above.</p>
 </div>
 <div id="the-non-formula-interface" class="section level2">
 <h2>The Non-Formula Interface</h2>
 <p>You can start a recipe without any roles:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">recipe</span>(biomass) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="st">  </span><span class="kw">summary</span>()</span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="co">#&gt; # A tibble: 8 x 4</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="co">#&gt;   variable type    role  source  </span></span>
-<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;lgl&gt; &lt;chr&gt;   </span></span>
-<span id="cb8-6"><a href="#cb8-6"></a><span class="co">#&gt; 1 sample   nominal NA    original</span></span>
-<span id="cb8-7"><a href="#cb8-7"></a><span class="co">#&gt; 2 dataset  nominal NA    original</span></span>
-<span id="cb8-8"><a href="#cb8-8"></a><span class="co">#&gt; 3 carbon   numeric NA    original</span></span>
-<span id="cb8-9"><a href="#cb8-9"></a><span class="co">#&gt; 4 hydrogen numeric NA    original</span></span>
-<span id="cb8-10"><a href="#cb8-10"></a><span class="co">#&gt; 5 oxygen   numeric NA    original</span></span>
-<span id="cb8-11"><a href="#cb8-11"></a><span class="co">#&gt; 6 nitrogen numeric NA    original</span></span>
-<span id="cb8-12"><a href="#cb8-12"></a><span class="co">#&gt; 7 sulfur   numeric NA    original</span></span>
-<span id="cb8-13"><a href="#cb8-13"></a><span class="co">#&gt; 8 HHV      numeric NA    original</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">recipe</span>(biomass) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 8 x 4</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   variable type    role  source  </span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;lgl&gt; &lt;chr&gt;   </span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 sample   nominal NA    original</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 dataset  nominal NA    original</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 carbon   numeric NA    original</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 hydrogen numeric NA    original</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 oxygen   numeric NA    original</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 nitrogen numeric NA    original</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7 sulfur   numeric NA    original</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8 HHV      numeric NA    original</span></span></code></pre></div>
 <p>and roles can be added in bulk as needed:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">recipe</span>(biomass) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="st">  </span><span class="kw">update_role</span>(<span class="kw">contains</span>(<span class="st">&quot;gen&quot;</span>), <span class="dt">new_role =</span> <span class="st">&quot;lunchroom&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="st">  </span><span class="kw">update_role</span>(sample, HHV, <span class="dt">new_role =</span> <span class="st">&quot;snail&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb9-4"><a href="#cb9-4"></a><span class="st">  </span><span class="kw">summary</span>()</span>
-<span id="cb9-5"><a href="#cb9-5"></a><span class="co">#&gt; # A tibble: 8 x 4</span></span>
-<span id="cb9-6"><a href="#cb9-6"></a><span class="co">#&gt;   variable type    role      source  </span></span>
-<span id="cb9-7"><a href="#cb9-7"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;   </span></span>
-<span id="cb9-8"><a href="#cb9-8"></a><span class="co">#&gt; 1 sample   nominal snail     original</span></span>
-<span id="cb9-9"><a href="#cb9-9"></a><span class="co">#&gt; 2 dataset  nominal &lt;NA&gt;      original</span></span>
-<span id="cb9-10"><a href="#cb9-10"></a><span class="co">#&gt; 3 carbon   numeric &lt;NA&gt;      original</span></span>
-<span id="cb9-11"><a href="#cb9-11"></a><span class="co">#&gt; 4 hydrogen numeric lunchroom original</span></span>
-<span id="cb9-12"><a href="#cb9-12"></a><span class="co">#&gt; 5 oxygen   numeric lunchroom original</span></span>
-<span id="cb9-13"><a href="#cb9-13"></a><span class="co">#&gt; 6 nitrogen numeric lunchroom original</span></span>
-<span id="cb9-14"><a href="#cb9-14"></a><span class="co">#&gt; 7 sulfur   numeric &lt;NA&gt;      original</span></span>
-<span id="cb9-15"><a href="#cb9-15"></a><span class="co">#&gt; 8 HHV      numeric snail     original</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">recipe</span>(biomass) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">update_role</span>(<span class="fu">contains</span>(<span class="st">&quot;gen&quot;</span>), <span class="at">new_role =</span> <span class="st">&quot;lunchroom&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">update_role</span>(sample, HHV, <span class="at">new_role =</span> <span class="st">&quot;snail&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 8 x 4</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   variable type    role      source  </span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;   </span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 sample   nominal snail     original</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 dataset  nominal &lt;NA&gt;      original</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 carbon   numeric &lt;NA&gt;      original</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 hydrogen numeric lunchroom original</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 oxygen   numeric lunchroom original</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 nitrogen numeric lunchroom original</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7 sulfur   numeric &lt;NA&gt;      original</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8 HHV      numeric snail     original</span></span></code></pre></div>
 </div>
 <div id="role-inheritance" class="section level2">
 <h2>Role Inheritance</h2>
@@ -616,21 +318,21 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <p><code>role</code>: For model terms created by this step, what analysis role should they be assigned?. By default, the function assumes that the binary dummy variable columns created by the original variables will be used as predictors in a model.</p>
 </blockquote>
 <p>So, by default, they are predictors but don’t have to be:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">recipe</span>( <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> iris) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="st">  </span><span class="kw">step_dummy</span>(Species) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="st">  </span><span class="kw">prep</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb10-4"><a href="#cb10-4"></a><span class="st">  </span><span class="kw">juice</span>(<span class="kw">all_predictors</span>()) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb10-5"><a href="#cb10-5"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(<span class="kw">starts_with</span>(<span class="st">&quot;Species&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb10-6"><a href="#cb10-6"></a><span class="st">  </span><span class="kw">names</span>()</span>
-<span id="cb10-7"><a href="#cb10-7"></a><span class="co">#&gt; [1] &quot;Species_X1&quot; &quot;Species_X2&quot;</span></span>
-<span id="cb10-8"><a href="#cb10-8"></a></span>
-<span id="cb10-9"><a href="#cb10-9"></a><span class="co"># or something else</span></span>
-<span id="cb10-10"><a href="#cb10-10"></a><span class="kw">recipe</span>( <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> iris) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb10-11"><a href="#cb10-11"></a><span class="st">  </span><span class="kw">step_dummy</span>(Species, <span class="dt">role =</span> <span class="st">&quot;trousers&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb10-12"><a href="#cb10-12"></a><span class="st">  </span><span class="kw">prep</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb10-13"><a href="#cb10-13"></a><span class="st">  </span><span class="kw">juice</span>(<span class="kw">has_role</span>(<span class="st">&quot;trousers&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb10-14"><a href="#cb10-14"></a><span class="st">  </span><span class="kw">names</span>()</span>
-<span id="cb10-15"><a href="#cb10-15"></a><span class="co">#&gt; [1] &quot;Species_X1&quot; &quot;Species_X2&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">recipe</span>( <span class="sc">~</span> ., <span class="at">data =</span> iris) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_dummy</span>(Species) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">prep</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bake</span>(<span class="at">new_data =</span> <span class="cn">NULL</span>, <span class="fu">all_predictors</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&quot;Species&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>()</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Species_X1&quot; &quot;Species_X2&quot;</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># or something else</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="fu">recipe</span>( <span class="sc">~</span> ., <span class="at">data =</span> iris) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_dummy</span>(Species, <span class="at">role =</span> <span class="st">&quot;trousers&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">prep</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bake</span>(<span class="at">new_data =</span> <span class="cn">NULL</span>, <span class="fu">has_role</span>(<span class="st">&quot;trousers&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>()</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Species_X1&quot; &quot;Species_X2&quot;</span></span></code></pre></div>
 </div>
 
 <script type="text/javascript">

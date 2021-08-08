@@ -40,7 +40,9 @@ getBy	by-lmby
 get_contrasts	linest-get
 get_contrasts.default	linest-get
 get_contrasts.merMod	linest-get
+get_fun	restrict_fun
 get_linest_list	linest-matrix
+get_restrictions	restrict_fun
 get_vartypes	linest-get
 get_X	linest-get
 get_X.default	linest-get
@@ -106,6 +108,9 @@ print.summary_lmBy	doBy-internal
 recodeVar	recodeVar
 renameCol	renameCol
 residuals.lmBy	by-lmby
+restrict_fun	restrict_fun
+restrict_fun_env	restrict_fun
+restrict_fun_sub	restrict_fun
 rle2	sub_seq
 sampleBy	by-sample
 sample_by	by-sample
@@ -113,7 +118,6 @@ sapplyBy	by-lapply
 sapply_by	by-lapply
 set_covariate_val	linest-get
 set_xlevels	linest-get
-specialize	doBy-internal
 splitBy	by-split
 splitByOLD	doBy-internal
 split_by	by-split
@@ -129,6 +133,7 @@ summary.lmBy	by-lmby
 summaryBy	by-summary
 summaryByOLD	doBy-internal
 summary_by	by-summary
+summary_mb	summary_mb
 tail.splitByData	by-split
 taylor	taylor
 tidy-esticon	tidy-esticon

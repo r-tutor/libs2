@@ -89,8 +89,8 @@ finish_glance           (Deprecated) Add logLik, AIC, BIC, and other
 fix_data_frame          Ensure an object is a data frame, with rownames
                         moved into a column
 glance.Arima            Glance at a(n) Arima object
+glance.Gam              Glance at a(n) Gam object
 glance.Mclust           Glance at a(n) Mclust object
-glance.Rchoice          Glance at a(n) Rchoice object
 glance.aareg            Glance at a(n) aareg object
 glance.aov              Glance at a(n) lm object
 glance.betamfx          Glance at a(n) betamfx object
@@ -130,6 +130,7 @@ glance.mjoint           Glance at a(n) mjoint object
 glance.mlogit           Glance at a(n) mlogit object
 glance.muhaz            Glance at a(n) muhaz object
 glance.multinom         Glance at a(n) multinom object
+glance.negbin           Glance at a(n) negbin object
 glance.nlrq             Glance at a(n) nlrq object
 glance.nls              Glance at a(n) nls object
 glance.orcutt           Glance at a(n) orcutt object
@@ -164,9 +165,9 @@ sparse_tidiers          Tidy a sparseMatrix object from the Matrix
                         package
 summary_tidiers         (Deprecated) Tidy summaryDefault objects
 tidy.Arima              Tidy a(n) Arima object
+tidy.Gam                Tidy a(n) Gam object
 tidy.Kendall            Tidy a(n) Kendall object
 tidy.Mclust             Tidy a(n) Mclust object
-tidy.Rchoice            Tidy a(n) Rchoice object
 tidy.TukeyHSD           Tidy a(n) TukeyHSD object
 tidy.aareg              Tidy a(n) aareg object
 tidy.acf                Tidy a(n) acf object
@@ -202,7 +203,6 @@ tidy.fitdistr           Tidy a(n) fitdistr object
 tidy.fixest             Tidy a(n) fixest object
 tidy.ftable             (Deprecated) Tidy ftable objects
 tidy.gam                Tidy a(n) gam object
-tidy.gamlss             Tidy a(n) gamlss object
 tidy.garch              Tidy a(n) garch object
 tidy.geeglm             Tidy a(n) geeglm object
 tidy.glht               Tidy a(n) glht object
@@ -235,6 +235,7 @@ tidy.mlogit             Tidying methods for logit models
 tidy.muhaz              Tidy a(n) muhaz object
 tidy.multinom           Tidying methods for multinomial logistic
                         regression models
+tidy.negbin             Tidy a(n) negbin object
 tidy.nlrq               Tidy a(n) nlrq object
 tidy.nls                Tidy a(n) nls object
 tidy.numeric            Tidy atomic vectors

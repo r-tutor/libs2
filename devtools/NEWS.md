@@ -1,8 +1,70 @@
+# devtools 2.4.2
+
+* `check_man()` now works with R versions 4.1+ (#2354)
+
+* `test_active_file()` now again works on windows projects stored under the user's home directory (`~`) (#2355)
+
+* `document(quiet = TRUE)` now works without failure on windows (#2351)
+
+* Minor test failure on R 4.2 has been fixed.
+
+# devtools 2.4.1
+
+* `build_readme()` now uses the `path` argument, as designed (#2344)
+
+* `create()` no longer opens projects by default to avoid duplicate projects opened by the RStudio IDE project template (#2347, @malcolmbarrett)
+
+* The RStudio addins now use `test_active_file()` and `test_coverage_active_file()` instead of the deprecated `test_file()` and `test_coverage_file()` (#2339)
+
+* RStudio addins now run in interactive mode, rather than background mode (@jennybc, #2350)
+
+* `install(upgrade)` now defaults to 'default' rather than 'ask'. This allows you to control the default asking behavior with the `R_REMOTES_UPGRADE` environment variable (#2345)
+
+# devtools 2.4.0
+
+## Breaking changes and deprecated functions
+
+* The `check_results()` function has been removed.
+  It was not used by any CRAN package, and much better alternatives are available in the [rcmdcheck](https://github.com/r-lib/rcmdcheck) package.
+
+* `pkgload::inst()` is no longer re-exported (#2218).
+
+* `test_file()` has been renamed to  `test_active_file()` and `test_coverage_file()` has been renamed to `test_coverage_active_file()` to avoid a name collision with `testthat::test_file()`.
+  The previous names have been soft deprecated in this release, they will be hard deprecated in the next release and eventually removed. (#2125)
+
+## Re-licensing
+
+* devtools is now released under a MIT license (#2326)
+
+## Minor improvements and fixes
+
+* `build_readme()` now supports readme files located in `inst/README.Rmd`, as intended (#2333)
+
+* `build_vignettes()` now creates more specific `.gitignore` entries (@klmr, #2317)
+
+* `check()` now only re-documents if you have a matching version of roxygen2 (#2263).
+
+* `change_maintainer_email()` now has a check to assess whether the email is actually changed.
+  If the email is not changed, the code now stops such that an email is not accidentally sent to the wrong recipient. (@emilsjoerup, #2073)
+
+* `run_examples(fresh = TRUE)` again works without error (#2264)
+
+* The covr and DT packages have been moved from Imports to Suggests.
+  They are only needed when running `test_coverage()` and `test_coverage_active_file()` so now you'll be prompted to install them when needed.
+
+* Switched to fs for all file system functions (#2331, @malcolmbarrett)
+
+* Now uses testthat 3.0.0 to power `test()`, `test_active_file()`, `test_coverage()`, and `test_coverage_active_file()`.
+  The major difference is that `test_active_file()` now generates a compact summary that takes up less space on the console.
+
 # devtools 2.3.2
 
 * Fix for compatibility with withr 2.3.0
 
 # devtools 2.3.1
+
+* `check_win_*()` function now resets the email to the original email after
+  execution, this bug was fixed and crept back in (@muschellij2, #2152).
 
 * `run_examples()` arguments `run` and `test` are deprecated in favor of the (hopefully) more clear `run_dontrun` and `run_donttest` (pkgload/#107).
 
