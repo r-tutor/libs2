@@ -7,6 +7,8 @@
 as.promise	is.promise
 catch	then
 finally	then
+future_promise	future_promise
+future_promise_queue	future_promise
 is.promise	is.promise
 is.promising	is.promise
 new_promise_domain	with_promise_domain
@@ -23,3 +25,4 @@ reject	resolve
 resolve	resolve
 then	then
 with_promise_domain	with_promise_domain
+WorkQueue	WorkQueue

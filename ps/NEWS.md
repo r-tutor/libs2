@@ -1,4 +1,10 @@
 
+# ps 1.6.0
+
+* New function `ps_system_cpu_times()` to calculate system CPU times.
+
+* New function `ps_loadavg()` to show the Unix style load average.
+
 # ps 1.5.0
 
 * New function `ps_shared_libs()` to list the loaded shared libraries

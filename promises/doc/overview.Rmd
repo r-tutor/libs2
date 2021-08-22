@@ -1,5 +1,5 @@
 ---
-title: "Working with promises in R"
+title: "Working with `promises` in R"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
@@ -11,7 +11,7 @@ One persistent challenge with developing Shiny apps for live deployment is the R
 
 For many Shiny apps, this isn’t a big problem; because no one processing step takes very long, no client has to wait an undue amount of time before they start seeing results. But for apps that perform long-running operations — either expensive computations that take a while to complete, or waiting on slow network operations like database or web API queries — your users’ experience can suffer dramatically as traffic ramps up.
 
-The traditional approach to scaling web applications is to launch multiple processes and balance traffic between them, and indeed, Shiny Server Pro and RStudio Connect both implement a variant of this strategy. You do some load testing to determine how many concurrent users a single process can support, then [configure Shiny Server Pro](http://docs.rstudio.com/shiny-server/#utilization-scheduler) to launch new processes as those limits are approached.
+The traditional approach to scaling web applications is to launch multiple processes and balance traffic between them, and indeed, Shiny Server Pro and RStudio Connect both implement a variant of this strategy. You do some load testing to determine how many concurrent users a single process can support, then [configure Shiny Server Pro](https://docs.rstudio.com/shiny-server/) to launch new processes as those limits are approached.
 
 But there are some applications that perform truly expensive operations, like simulations, training neural networks, or complex per-row processing, that take *minutes* to complete. Again, while this is happening, any other users that are unfortunate enough to be assigned to the same process are completely blocked from proceeding in any way — even loading static JavaScript/CSS assets must wait until the blocking operation is complete.
 
@@ -54,10 +54,10 @@ So if a regular, synchronous function call generally looks like this:
 value <- read.csv("http://example.com/data/data.csv")
 ```
 
-An asynchronous function call (using [the future package](futures.html)) will look instead like:
+An asynchronous function call (which uses [the future package](futures.html) via [`future_promise()`](future_promise.html)) will look instead like:
 
 ```r
-promise <- future(read.csv("http://example.com/data/data.csv"))
+promise <- future_promise(read.csv("http://example.com/data/data.csv"))
 ```
 
 While the regular function call returns a data frame, the async call returns a promise, which is most definitely not a data frame. You cannot ask the promise how many rows it has, or the names of its columns. You cannot run dplyr operations on it, or turn it into a data.table.
@@ -88,7 +88,7 @@ then(promise,
   })
 ```
 
-If this code looks ugly to you, don’t worry — you’ll rarely write promise code that looks like this. As we go, we’ll introduce several types of syntactic sugar to make working with promises more pleasant. To start with, we can use the [magrittr pipe operator](http://r4ds.had.co.nz/pipes.html), which gives us a pretty marginal benefit right now but will pay dividends shortly:
+If this code looks ugly to you, don’t worry — you’ll rarely write promise code that looks like this. As we go, we’ll introduce several types of syntactic sugar to make working with promises more pleasant. To start with, we can use the [magrittr pipe operator](https://r4ds.had.co.nz/pipes.html), which gives us a pretty marginal benefit right now but will pay dividends shortly:
 
 ```r
 promise %>%
@@ -104,7 +104,7 @@ Note that the call to `then()` always returns immediately, without invoking the 
 
 You don’t have to use anonymous functions as callbacks; you can use named functions as well. So `promise %>% then(print)` works, if you just want to print a value.
 
-If you don’t have a named function that does what you want, though, you still have an alternative to using anonymous functions, which can be a little verbose: you can use formulas to save a few keystrokes. These use [purrr's "lambda formula" style](http://r4ds.had.co.nz/iteration.html#shortcuts); if you’re not familiar with purrr, for now just know that you can access the value (or error) using `.` as a variable name.
+If you don’t have a named function that does what you want, though, you still have an alternative to using anonymous functions, which can be a little verbose: you can use formulas to save a few keystrokes. These use [purrr's "lambda formula" style](https://r4ds.had.co.nz/iteration.html); if you’re not familiar with purrr, for now just know that you can access the value (or error) using `.` as a variable name.
 
 ```r
 promise %>%
@@ -273,7 +273,7 @@ value <- tryCatch(
 would be this, when the operation is performed asynchronously:
 
 ```r
-promise <- future(operation()) %>%
+promise <- future_promise(operation()) %>%
   then(onRejected = function(err) {
     warning("An error occurred: ", err)
     warning("Using default value of 0 instead")
@@ -302,21 +302,21 @@ Well, `then` has its own default version of `onRejected`. It’s *not* an empty 
 The same syntactic sugar that is offered for non-error cases, is available for error handling code as well. You can use formulas in `onRejected`:
 
 ```r
-future(operation()) %>%
+future_promise(operation()) %>%
   then(onRejected = ~warning(.))
 ```
 
 There’s an error handling pipe operator `%...!%`, that works similar to `%...>%` but it binds to `then(onRejected)` instead of `then(onFulfilled)`:
 
 ```r
-future(operation()) %...!%
+future_promise(operation()) %...!%
   warning()
 ```
 
 There’s also a `catch()` function that is just a shorthand for `then(onRejected)`. It saves a little typing, but more importantly, is easier to read:
 
 ```r
-future(operation()) %>%
+future_promise(operation()) %>%
   catch(warning)
 ```
 
@@ -352,7 +352,7 @@ In synchronous programming, you use either`tryCatch(expr, finally = ...)` or `on
 ```r
 file_path <- tempfile(fileext = ".png")
 png_bytes <-
-  future({
+  future_promise({
     png(file_path)
     plot(cars)
     dev.off()

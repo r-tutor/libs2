@@ -1,3 +1,4 @@
+future_promise_queue    'future' promise
 is.promise              Coerce to a promise
 pipes                   Promise pipe operators
 promise                 Create a new promise object

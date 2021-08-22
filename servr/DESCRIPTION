@@ -1,7 +1,7 @@
 Package: servr
 Type: Package
 Title: A Simple HTTP Server to Serve Static Files or Dynamic Documents
-Version: 0.22
+Version: 0.23
 Authors@R: c(
   person("Yihui", "Xie", role = c("aut", "cre"), email = "xie@yihui.name", comment = c(ORCID = "0000-0003-0645-5666")),
   person("Carson", "Sievert", role = "ctb"),
@@ -21,12 +21,12 @@ BugReports: https://github.com/yihui/servr/issues
 Encoding: UTF-8
 RoxygenNote: 7.1.1
 NeedsCompilation: no
-Packaged: 2021-04-14 13:35:33 UTC; yihui
+Packaged: 2021-08-11 15:56:42 UTC; yihui
 Author: Yihui Xie [aut, cre] (<https://orcid.org/0000-0003-0645-5666>),
   Carson Sievert [ctb],
   Jesse Anderson [ctb],
   Ramnath Vaidyanathan [ctb]
 Maintainer: Yihui Xie <xie@yihui.name>
 Repository: CRAN
-Date/Publication: 2021-04-14 14:40:05 UTC
-Built: R 4.1.0; ; 2021-07-26 20:38:31 UTC; windows
+Date/Publication: 2021-08-11 16:40:02 UTC
+Built: R 4.1.1; ; 2021-08-18 15:52:09 UTC; windows

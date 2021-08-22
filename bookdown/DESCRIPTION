@@ -1,7 +1,7 @@
 Package: bookdown
 Type: Package
 Title: Authoring Books and Technical Documents with R Markdown
-Version: 0.22
+Version: 0.23
 Authors@R: c(
     person("Yihui", "Xie", role = c("aut", "cre"), email = "xie@yihui.name", comment = c(ORCID = "0000-0003-0645-5666")),
     person("JJ", "Allaire", role = "ctb"),
@@ -52,28 +52,28 @@ Authors@R: c(
     person(family = "RStudio, PBC", role = "cph"),
     person("Bartek", "Szopka", role = "ctb", comment = "The jQuery Highlight plugin"),
     person("Zeno", "Rocha", role = "cph", comment = "clipboard.js library"),
-    person(family = "jQuery Foundation", role = "cph", comment = "jQuery library"),
-    person(family = "jQuery contributors", role = c("ctb", "cph"), comment = "jQuery library; authors listed in inst/resources/AUTHORS"),
     person(family = "MathQuill contributors", role = "ctb", comment = "The MathQuill library; authors listed in inst/resources/AUTHORS"),
     person(family = "FriendCode Inc", role = c("cph", "ctb"), comment = "The gitbook style, with modifications")
     )
 Maintainer: Yihui Xie <xie@yihui.name>
 Description: Output formats and utilities for authoring books and technical documents with R Markdown.
 License: GPL-3
-Imports: htmltools (>= 0.3.6), knitr (>= 1.22), rmarkdown (>= 2.6),
-        xfun (>= 0.22), tinytex (>= 0.12), yaml (>= 2.1.19)
+Imports: htmltools (>= 0.3.6), knitr (>= 1.31), rmarkdown (>= 2.9),
+        jquerylib, xfun (>= 0.22), tinytex (>= 0.12), yaml (>= 2.1.19)
 Suggests: bslib (>= 0.2.4), downlit (>= 0.2.1), htmlwidgets, jsonlite,
         rstudioapi, miniUI, rsconnect (>= 0.4.3), servr (>= 0.13),
-        shiny, tibble, testit (>= 0.9), tufte, xml2, webshot
+        shiny, tibble, testit (>= 0.9), tufte, xml2, webshot, testthat
+        (>= 3.0.0), withr (>= 2.3.0)
 URL: https://github.com/rstudio/bookdown,
         https://pkgs.rstudio.com/bookdown/
 BugReports: https://github.com/rstudio/bookdown/issues
 SystemRequirements: Pandoc (>= 1.17.2)
 RoxygenNote: 7.1.1
 Encoding: UTF-8
+Config/testthat/edition: 3
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2021-04-22 13:04:35 UTC; yihui
+Packaged: 2021-08-13 02:33:03 UTC; yihui
 Author: Yihui Xie [aut, cre] (<https://orcid.org/0000-0003-0645-5666>),
   JJ Allaire [ctb],
   Albert Kim [ctb],
@@ -123,12 +123,9 @@ Author: Yihui Xie [aut, cre] (<https://orcid.org/0000-0003-0645-5666>),
   RStudio, PBC [cph],
   Bartek Szopka [ctb] (The jQuery Highlight plugin),
   Zeno Rocha [cph] (clipboard.js library),
-  jQuery Foundation [cph] (jQuery library),
-  jQuery contributors [ctb, cph] (jQuery library; authors listed in
-    inst/resources/AUTHORS),
   MathQuill contributors [ctb] (The MathQuill library; authors listed in
     inst/resources/AUTHORS),
   FriendCode Inc [cph, ctb] (The gitbook style, with modifications)
 Repository: CRAN
-Date/Publication: 2021-04-22 13:50:02 UTC
-Built: R 4.1.0; ; 2021-07-26 20:38:16 UTC; windows
+Date/Publication: 2021-08-13 04:40:05 UTC
+Built: R 4.1.1; ; 2021-08-18 15:44:38 UTC; windows

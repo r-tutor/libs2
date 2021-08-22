@@ -4,6 +4,7 @@ calibre                 A wrapper function to convert e-books using
                         Calibre
 clean_book              Clean up the output files and directories from
                         the book
+create_book             Create a bookdown project
 epub_book               The EPUB e-book format
 fence_theorems          Convert the syntax of theorem and proof
                         environments from code blocks to fenced Divs

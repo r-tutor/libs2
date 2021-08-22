@@ -8,6 +8,9 @@ build_chapter	build_chapter
 calibre	calibre
 clean_book	clean_book
 context_document2	html_document2
+create_book	create_book
+create_bs4_book	create_book
+create_gitbook	create_book
 epub_book	epub_book
 fence_theorems	fence_theorems
 gitbook	gitbook
