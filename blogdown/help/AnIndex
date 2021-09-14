@@ -9,9 +9,11 @@ check_gitignore	check_site
 check_hugo	check_site
 check_netlify	check_site
 check_site	check_site
+check_vercel	check_site
 clean_duplicates	clean_duplicates
 config_netlify	config_netlify
 config_Rprofile	config_Rprofile
+config_vercel	config_vercel
 count_yaml	find_yaml
 dep_path	dep_path
 edit_draft	edit_draft

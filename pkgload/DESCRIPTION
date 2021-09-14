@@ -1,6 +1,6 @@
 Package: pkgload
 Title: Simulate Package Installation and Attach
-Version: 1.2.1
+Version: 1.2.2
 Authors@R: c(
     person("Hadley", "Wickham", role = "aut"),
     person("Jim", "Hester", , "jim.hester@rstudio.com", role = c("aut", "cre")),
@@ -20,8 +20,8 @@ Imports: cli, crayon, desc, methods, rlang, rprojroot, rstudioapi,
 Suggests: bitops, covr, pkgbuild, Rcpp, testthat
 Encoding: UTF-8
 RoxygenNote: 7.1.1
-NeedsCompilation: yes
-Packaged: 2021-04-06 14:02:11 UTC; jhester
+NeedsCompilation: no
+Packaged: 2021-09-10 18:50:44 UTC; jhester
 Author: Hadley Wickham [aut],
   Jim Hester [aut, cre],
   Winston Chang [aut],
@@ -30,5 +30,5 @@ Author: Hadley Wickham [aut],
     R)
 Maintainer: Jim Hester <jim.hester@rstudio.com>
 Repository: CRAN
-Date/Publication: 2021-04-06 15:10:02 UTC
-Built: R 4.1.0; ; 2021-08-05 06:55:47 UTC; windows
+Date/Publication: 2021-09-11 23:40:06 UTC
+Built: R 4.1.1; ; 2021-09-14 16:55:36 UTC; windows

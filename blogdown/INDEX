@@ -7,6 +7,7 @@ clean_duplicates        Clean duplicated output files
 config_Rprofile         Create or modify the '.Rprofile' file for a
                         website project
 config_netlify          Create the configuration (file) for Netlify
+config_vercel           Create the configuration file for Vercel
 dep_path                A helper function to return a dependency path
                         name
 filter_newfile          Look for files that have been possibly modified

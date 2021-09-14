@@ -49,6 +49,7 @@ confband	confband
 confint.lvmfit	confint.lvmfit
 confint.multigroupfit	confint.lvmfit
 confpred	confpred
+constant.lvm	sim
 constrain	constrain-set
 constrain.default	constrain-set
 constrain<-	constrain-set
@@ -142,6 +143,7 @@ heavytail	sim
 heavytail<-	sim
 hubble	hubble
 hubble2	hubble2
+id.lvm	sim
 Identical	internal
 idplot	click
 igraph.lvm	internal
@@ -159,6 +161,10 @@ intercept	intercept
 intercept.lvm	intercept
 intercept<-	intercept
 intercept<-.lvm	intercept
+intervention	intervention.lvm
+intervention.lvm	intervention.lvm
+intervention<-	intervention.lvm
+intervention<-.lvm	intervention.lvm
 intfix	intercept
 intfix.lvm	intercept
 intfix<-	intercept
@@ -225,6 +231,7 @@ nldata	nldata
 nodecolor	labels-set
 nodecolor<-	labels-set
 nodecolor<-.default	labels-set
+none.lvm	sim
 nonlinear	twostage.lvmfit
 nonlinear<-	twostage.lvmfit
 normal.lvm	sim
@@ -264,6 +271,7 @@ plot.lvm	plot.lvm
 plot.lvmfit	plot.lvm
 plot.sim	plot.sim
 plotConf	plotConf
+plot_region	confband
 poisson.lvm	sim
 predict.lvm	predict.lvm
 predict.lvmfit	predict.lvm

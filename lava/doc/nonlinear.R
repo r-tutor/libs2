@@ -18,7 +18,7 @@ functional(m, eta2~eta1) <- f
 d <- sim(m, n=200, seed=42) # Default is all parameters are 1
 
 ## -----------------------------------------------------------------------------
-plot(m)
+plot(m, plot.engine="visNetwork")
 
 ## ----specifymodels------------------------------------------------------------
 m1 <- lvm(x1+x2+x3 ~ eta1, eta1 ~ z, latent=~eta1)

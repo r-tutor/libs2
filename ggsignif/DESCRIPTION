@@ -1,7 +1,7 @@
 Type: Package
 Package: ggsignif
 Title: Significance Brackets for 'ggplot2'
-Version: 0.6.2
+Version: 0.6.3
 Authors@R: 
   c(
     person(given = "Constantin",
@@ -29,18 +29,18 @@ URL: https://const-ae.github.io/ggsignif/,
 VignetteBuilder: knitr
 Encoding: UTF-8
 Language: en-US
-Imports: ggplot2 (>= 3.3.3)
-Suggests: knitr, rmarkdown, spelling, testthat, vdiffr (>= 1.0.0)
-RoxygenNote: 7.1.1.9001
+Imports: ggplot2 (>= 3.3.5)
+Suggests: knitr, rmarkdown, spelling, testthat, vdiffr (>= 1.0.2)
+RoxygenNote: 7.1.2
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 NeedsCompilation: no
-Packaged: 2021-06-14 08:10:52 UTC; ahlmanne
+Packaged: 2021-09-09 14:54:42 UTC; ahlmanne
 Author: Constantin Ahlmann-Eltze [aut, cre, ctb]
     (<https://orcid.org/0000-0002-3762-068X>, @const_ae),
   Indrajeet Patil [aut, ctb] (<https://orcid.org/0000-0003-1995-6531>,
     @patilindrajeets)
 Maintainer: Constantin Ahlmann-Eltze <artjom31415@googlemail.com>
 Repository: CRAN
-Date/Publication: 2021-06-14 09:10:05 UTC
-Built: R 4.1.0; ; 2021-07-26 23:29:13 UTC; windows
+Date/Publication: 2021-09-09 15:20:02 UTC
+Built: R 4.1.1; ; 2021-09-14 16:55:28 UTC; windows
