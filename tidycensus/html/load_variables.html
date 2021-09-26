@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Load variables from a decennial Census or American Community...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for load_variables {tidycensus}"><tr><td>load_variables {tidycensus}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Load variables from a decennial Census or American Community Survey dataset to search in R</h2>
+
+<h3>Description</h3>
+
+<p>Load variables from a decennial Census or American Community Survey dataset to search in R
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+load_variables(year, dataset, cache = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>year</code></td>
+<td>
+<p>The year for which you are requesting variables. Either the year
+or endyear of the decennial Census or ACS sample. 5-year ACS data is
+available from 2009 through 2018. 1-year ACS data is available from 2005
+through 2019.</p>
+</td></tr>
+<tr valign="top"><td><code>dataset</code></td>
+<td>
+<p>One of &quot;sf1&quot;, &quot;sf3&quot;, &quot;acs1&quot;, &quot;acs3&quot;, &quot;acs5&quot;, &quot;acs1/profile&quot;,
+&quot;acs3/profile, &quot;acs5/profile&quot;, &quot;acs1/subject&quot;, &quot;acs3/subject&quot;, or
+&quot;acs5/subject&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>cache</code></td>
+<td>
+<p>Whether you would like to cache the dataset for future access,
+or load the dataset from an existing cache. Defaults to FALSE.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A tibble of variables from the requested dataset.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+v15 &lt;- load_variables(2015, "acs5", cache = TRUE)
+View(v15)
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>tidycensus</em> version 1.1 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

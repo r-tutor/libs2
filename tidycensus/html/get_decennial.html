@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Obtain data and feature geometry for the decennial Census</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for get_decennial {tidycensus}"><tr><td>get_decennial {tidycensus}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Obtain data and feature geometry for the decennial Census</h2>
+
+<h3>Description</h3>
+
+<p>Obtain data and feature geometry for the decennial Census
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+get_decennial(
+  geography,
+  variables = NULL,
+  table = NULL,
+  cache_table = FALSE,
+  year = 2010,
+  sumfile = "sf1",
+  state = NULL,
+  county = NULL,
+  geometry = FALSE,
+  output = "tidy",
+  keep_geo_vars = FALSE,
+  shift_geo = FALSE,
+  summary_var = NULL,
+  key = NULL,
+  show_call = FALSE,
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>geography</code></td>
+<td>
+<p>The geography of your data.</p>
+</td></tr>
+<tr valign="top"><td><code>variables</code></td>
+<td>
+<p>Character string or vector of character strings of variable
+IDs.</p>
+</td></tr>
+<tr valign="top"><td><code>table</code></td>
+<td>
+<p>The Census table for which you would like to request all variables. Uses
+lookup tables to identify the variables; performs faster when variable
+table already exists through <code>load_variables(cache = TRUE)</code>.
+Only one table may be requested per call.</p>
+</td></tr>
+<tr valign="top"><td><code>cache_table</code></td>
+<td>
+<p>Whether or not to cache table names for faster future access.
+Defaults to FALSE; if TRUE, only needs to be called once per
+dataset.  If variables dataset is already cached via the
+<code>load_variables</code> function, this can be bypassed.</p>
+</td></tr>
+<tr valign="top"><td><code>year</code></td>
+<td>
+<p>The year for which you are requesting data.   are available.</p>
+</td></tr>
+<tr valign="top"><td><code>sumfile</code></td>
+<td>
+<p>The Census summary file.  Defaults to sf1; the function will look in sf3 if it
+cannot find a variable in sf1.</p>
+</td></tr>
+<tr valign="top"><td><code>state</code></td>
+<td>
+<p>The state for which you are requesting data. State
+names, postal codes, and FIPS codes are accepted.
+Defaults to NULL.</p>
+</td></tr>
+<tr valign="top"><td><code>county</code></td>
+<td>
+<p>The county for which you are requesting data. County names and
+FIPS codes are accepted. Must be combined with a value supplied
+to 'state'.  Defaults to NULL.</p>
+</td></tr>
+<tr valign="top"><td><code>geometry</code></td>
+<td>
+<p>if FALSE (the default), return a regular tibble of ACS data.
+if TRUE, uses the tigris package to return an sf tibble
+with simple feature geometry in the 'geometry' column.  state, county, tract, and block group are
+supported for 2000 through 2020; block and ZCTA geometry are supported for 2000 and 2010.</p>
+</td></tr>
+<tr valign="top"><td><code>output</code></td>
+<td>
+<p>One of &quot;tidy&quot; (the default) in which each row represents an
+enumeration unit-variable combination, or &quot;wide&quot; in which each
+row represents an enumeration unit and the variables are in the
+columns.</p>
+</td></tr>
+<tr valign="top"><td><code>keep_geo_vars</code></td>
+<td>
+<p>if TRUE, keeps all the variables from the Census
+shapefile obtained by tigris.  Defaults to FALSE.</p>
+</td></tr>
+<tr valign="top"><td><code>shift_geo</code></td>
+<td>
+<p>(deprecated) if TRUE, returns geometry with Alaska and Hawaii
+shifted for thematic mapping of the entire US.
+Geometry was originally obtained from the albersusa R package.  As of May 2021,
+we recommend using <code>tigris::shift_geometry()</code> instead.</p>
+</td></tr>
+<tr valign="top"><td><code>summary_var</code></td>
+<td>
+<p>Character string of a &quot;summary variable&quot; from the decennial Census
+to be included in your output. Usually a variable (e.g. total population)
+that you'll want to use as a denominator or comparison.</p>
+</td></tr>
+<tr valign="top"><td><code>key</code></td>
+<td>
+<p>Your Census API key.
+Obtain one at <a href="https://api.census.gov/data/key_signup.html">https://api.census.gov/data/key_signup.html</a></p>
+</td></tr>
+<tr valign="top"><td><code>show_call</code></td>
+<td>
+<p>if TRUE, display call made to Census API. This can be very useful
+in debugging and determining if error messages returned are
+due to tidycensus or the Census API. Copy to the API call into
+a browser and see what is returned by the API directly. Defaults to FALSE.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Other keyword arguments</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a tibble or sf tibble of decennial Census data
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+# Plot of race/ethnicity by county in Illinois for 2010
+library(tidycensus)
+library(tidyverse)
+library(viridis)
+census_api_key("YOUR KEY GOES HERE")
+vars10 &lt;- c("P005003", "P005004", "P005006", "P004003")
+
+il &lt;- get_decennial(geography = "county", variables = vars10, year = 2010,
+                    summary_var = "P001001", state = "IL", geometry = TRUE) %&gt;%
+  mutate(pct = 100 * (value / summary_value))
+
+ggplot(il, aes(fill = pct, color = pct)) +
+  geom_sf() +
+  facet_wrap(~variable)
+
+
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>tidycensus</em> version 1.1 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

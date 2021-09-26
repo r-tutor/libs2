@@ -1,7 +1,7 @@
 Package: ipred
 Title: Improved Predictors
-Version: 0.9-11
-Date: 2021-03-12
+Version: 0.9-12
+Date: 2021-09-15
 Authors@R: c(person("Andrea", "Peters", role = "aut"),
              person("Torsten", "Hothorn", role = c("aut", "cre"),
                     email = "Torsten.Hothorn@R-project.org"),
@@ -16,7 +16,7 @@ Imports: rpart (>= 3.1-8), MASS, survival, nnet, class, prodlim
 Suggests: mvtnorm, mlbench, TH.data, randomForest, party
 License: GPL (>= 2)
 NeedsCompilation: yes
-Packaged: 2021-03-12 13:27:00 UTC; hothorn
+Packaged: 2021-09-15 09:22:36 UTC; hothorn
 Author: Andrea Peters [aut],
   Torsten Hothorn [aut, cre],
   Brian D. Ripley [ctb],
@@ -24,6 +24,6 @@ Author: Andrea Peters [aut],
   Beth Atkinson [ctb]
 Maintainer: Torsten Hothorn <Torsten.Hothorn@R-project.org>
 Repository: CRAN
-Date/Publication: 2021-03-12 14:00:06 UTC
-Built: R 4.1.0; x86_64-w64-mingw32; 2021-07-26 22:03:28 UTC; windows
+Date/Publication: 2021-09-15 09:50:01 UTC
+Built: R 4.1.1; x86_64-w64-mingw32; 2021-09-17 08:23:02 UTC; windows
 Archs: i386, x64

@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Evaluate whether the difference in two estimates is...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for significance {tidycensus}"><tr><td>significance {tidycensus}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Evaluate whether the difference in two estimates is statistically significant.</h2>
+
+<h3>Description</h3>
+
+<p>Evaluate whether the difference in two estimates is statistically significant.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+significance(est1, est2, moe1, moe2, clevel = 0.9)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>est1</code></td>
+<td>
+<p>The first estimate.</p>
+</td></tr>
+<tr valign="top"><td><code>est2</code></td>
+<td>
+<p>The second estimate</p>
+</td></tr>
+<tr valign="top"><td><code>moe1</code></td>
+<td>
+<p>The margin of error of the first estimate</p>
+</td></tr>
+<tr valign="top"><td><code>moe2</code></td>
+<td>
+<p>The margin of error of the second estimate</p>
+</td></tr>
+<tr valign="top"><td><code>clevel</code></td>
+<td>
+<p>The confidence level. May by 0.9, 0.95, or 0.99</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>TRUE if the difference is statistically signifiant, FALSE otherwise.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>https://www.census.gov/content/dam/Census/library/publications/2018/acs/acs_general_handbook_2018_ch07.pdf
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>tidycensus</em> version 1.1 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

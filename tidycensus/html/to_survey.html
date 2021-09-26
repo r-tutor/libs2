@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Convert a data frame returned by get_pums() to a survey...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for to_survey {tidycensus}"><tr><td>to_survey {tidycensus}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Convert a data frame returned by get_pums() to a survey object</h2>
+
+<h3>Description</h3>
+
+<p>This helper function takes a data frame returned by
+<code><a href="../../tidycensus/help/get_pums.html">get_pums</a></code> and converts it to a tbl_svy from the srvyr
+<code><a href="../../srvyr/help/as_survey.html">as_survey</a></code> package or a svyrep.design object from the
+<code><a href="../../survey/help/svrepdesign.html">svrepdesign</a></code> package. You can then use functions from
+the srvyr or survey to calculate weighted estimates with replicate weights
+included to provide accurate standard errors.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+to_survey(
+  df,
+  type = c("person", "housing"),
+  class = c("srvyr", "survey"),
+  design = "rep_weights"
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>df</code></td>
+<td>
+<p>A data frame with PUMS person or housing weight variables, most
+likely returned by <code><a href="../../tidycensus/help/get_pums.html">get_pums</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>Whether to use person or housing-level weights; either
+<code>"housing"</code> or <code>"person"</code> (the default).</p>
+</td></tr>
+<tr valign="top"><td><code>class</code></td>
+<td>
+<p>Whether to convert to a srvyr or survey object; either
+<code>"survey"</code> or <code>"srvyr"</code> (the default).</p>
+</td></tr>
+<tr valign="top"><td><code>design</code></td>
+<td>
+<p>The survey design to use when creating a survey object.
+Currently the only option is code&quot;rep_weights&quot;/.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A tbl_svy or svyrep.design object.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+pums &lt;- get_pums(variables = "AGEP", state = "VT", rep_weights = "person")
+pums_design &lt;- to_survey(pums, type = "person", class = "srvyr")
+survey::svymean(~AGEP, pums_design)
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>tidycensus</em> version 1.1 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

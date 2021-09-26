@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Slowly Calculate Sum of Elements</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for slow_sum {progressr}"><tr><td>slow_sum {progressr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Slowly Calculate Sum of Elements</h2>
+
+<h3>Description</h3>
+
+<p>Slowly Calculate Sum of Elements
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+slow_sum(
+  x,
+  delay = getOption("progressr.demo.delay", 1),
+  stdout = FALSE,
+  message = TRUE
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>Numeric vector to sum</p>
+</td></tr>
+<tr valign="top"><td><code>delay</code></td>
+<td>
+<p>Delay in seconds after each addition.</p>
+</td></tr>
+<tr valign="top"><td><code>stdout</code></td>
+<td>
+<p>If TRUE, then a text is outputted to the standard output
+per element.</p>
+</td></tr>
+<tr valign="top"><td><code>message</code></td>
+<td>
+<p>If TRUE, then a message is outputted per element.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>The sum of all elements in <code>x</code>.
+</p>
+
+
+<h3>Progress updates</h3>
+
+<p>This function signals <a href="../../progressr/help/progression.html">progression</a> conditions as it progresses.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>progressr</em> version 0.9.0 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

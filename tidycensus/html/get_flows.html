@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Obtain data and feature geometry for American Community...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for get_flows {tidycensus}"><tr><td>get_flows {tidycensus}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Obtain data and feature geometry for American Community Survey Migration
+Flows</h2>
+
+<h3>Description</h3>
+
+<p>Obtain data and feature geometry for American Community Survey Migration
+Flows
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+get_flows(
+  geography,
+  variables = NULL,
+  breakdown = NULL,
+  breakdown_labels = FALSE,
+  year = 2018,
+  output = "tidy",
+  state = NULL,
+  county = NULL,
+  msa = NULL,
+  geometry = FALSE,
+  key = NULL,
+  moe_level = 90,
+  show_call = FALSE
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>geography</code></td>
+<td>
+<p>The geography of your requested data. Possible values are
+<code>"county"</code>, <code>"county subdivision"</code>, and <code>"metropolitan statistical area"</code>.
+MSA data is only available beginning with the 2009-2013 5-year ACS.</p>
+</td></tr>
+<tr valign="top"><td><code>variables</code></td>
+<td>
+<p>Character string or vector of character strings of variable
+names. By default, <code>get_flows()</code> returns the GEOID and names of the
+geographies as well as the number of people who moved in, out, and net
+movers of each geography (<code>"MOVEDIN"</code>, <code>"MOVEDOUT"</code>, <code>"MOVEDNET"</code>). If additional
+variables are specified, they are pulled in addition to the default
+variables. The names of additional variables can be found in the Census
+Migration Flows API
+documentation at <a href="https://api.census.gov/data/2018/acs/flows/variables.html">https://api.census.gov/data/2018/acs/flows/variables.html</a>.</p>
+</td></tr>
+<tr valign="top"><td><code>breakdown</code></td>
+<td>
+<p>A character vector of the population breakdown
+characteristics to be crossed with migration flows data. For datasets
+between 2006-2010 and 2011-2015, selected demographic characteristics such
+as age, race, employment status, etc. are available. Possible values are
+&quot;AGE&quot;, &quot;SEX&quot;, &quot;RACE&quot;, &quot;HSGP&quot;, &quot;REL&quot;, &quot;HHT&quot;, &quot;TEN&quot;, &quot;ENG&quot;,
+&quot;POB&quot;, &quot;YEARS&quot;, &quot;ESR&quot;, &quot;OCC&quot;, &quot;WKS&quot;, &quot;SCHL&quot;, &quot;AHINC&quot;,
+&quot;APINC&quot;, and &quot;HISP_ORIGIN&quot;. For more information and to see which
+characteristics are available in each year, visit the Census Migration
+Flows
+documentation at <a href="https://www.census.gov/data/developers/data-sets/acs-migration-flows.html">https://www.census.gov/data/developers/data-sets/acs-migration-flows.html</a>.
+Note: not all characteristics are available in all years.</p>
+</td></tr>
+<tr valign="top"><td><code>breakdown_labels</code></td>
+<td>
+<p>Whether or not to add columns with labels for the
+breakdown characteristic codes. Defaults to <code>FALSE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>year</code></td>
+<td>
+<p>The year, or endyear, of the ACS sample. The Migration Flows API
+is available for 5-year ACS samples from 2010 to 2018. Defaults to 2018.</p>
+</td></tr>
+<tr valign="top"><td><code>output</code></td>
+<td>
+<p>One of &quot;tidy&quot; (the default) in which each row represents an
+enumeration unit-variable combination, or &quot;wide&quot; in which each row
+represents an enumeration unit and the variables are in the columns.</p>
+</td></tr>
+<tr valign="top"><td><code>state</code></td>
+<td>
+<p>An optional vector of states for which you are requesting data.
+State names, postal codes, and FIPS codes are accepted. When requesting
+county subdivision data, you must specify at least one state.</p>
+</td></tr>
+<tr valign="top"><td><code>county</code></td>
+<td>
+<p>The county for which you are requesting data. County names and
+FIPS codes are accepted. Must be combined with a value supplied to 'state'.</p>
+</td></tr>
+<tr valign="top"><td><code>msa</code></td>
+<td>
+<p>The metropolitan statistical area for which you are requesting
+data. Specify a single value or a vector of values to get data for more
+than one MSA. Numeric or character MSA GEOIDs are accepted. When specifying
+MSAs, geography must be set to <code>"metropolitan statistical area"</code> and
+<code>state</code> and <code>county</code> must be <code>NULL</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>geometry</code></td>
+<td>
+<p>if FALSE (the default), return a tibble of ACS Migration
+Flows data. If TRUE, return an sf object with the centroids of both origin
+and destination as <code>sfc_POINT</code> columns. The origin point feature is
+returned in a column named <code>centroid1</code> and is the active geometry column in
+the sf object. The destination point feature is returned in the <code>centroid2</code>
+column.</p>
+</td></tr>
+<tr valign="top"><td><code>key</code></td>
+<td>
+<p>Your Census API key. Obtain one at
+<a href="https://api.census.gov/data/key_signup.html">https://api.census.gov/data/key_signup.html</a></p>
+</td></tr>
+<tr valign="top"><td><code>moe_level</code></td>
+<td>
+<p>The confidence level of the returned margin of error.  One
+of 90 (the default), 95, or 99.</p>
+</td></tr>
+<tr valign="top"><td><code>show_call</code></td>
+<td>
+<p>if TRUE, display call made to Census API. This can be very
+useful in debugging and determining if error messages returned are due to
+tidycensus or the Census API. Copy to the API call into a browser and see
+what is returned by the API directly. Defaults to FALSE.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A tibble or sf tibble of ACS Migration Flows data
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+get_flows(
+  geography = "county",
+  state = "VT",
+  county = c("Washington", "Chittenden")
+  )
+
+get_flows(
+  geography = "county subdivision",
+  breakdown = "RACE",
+  breakdown_labels = TRUE,
+  state = "NY",
+  county = "Westchester",
+  output = "wide",
+  year = 2015
+  )
+
+get_flows(
+   geography = "metropolitan statistical area",
+   variables = c("POP1YR", "POP1YRAGO"),
+   geometry = TRUE,
+   output = "wide",
+   show_call = TRUE
+  )
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>tidycensus</em> version 1.1 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

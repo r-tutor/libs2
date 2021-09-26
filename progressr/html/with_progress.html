@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Report on Progress while Evaluating an R Expression</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for with_progress {progressr}"><tr><td>with_progress {progressr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Report on Progress while Evaluating an R Expression</h2>
+
+<h3>Description</h3>
+
+<p>Report on Progress while Evaluating an R Expression
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+with_progress(
+  expr,
+  handlers = progressr::handlers(),
+  cleanup = TRUE,
+  delay_terminal = NULL,
+  delay_stdout = NULL,
+  delay_conditions = NULL,
+  interval = NULL,
+  enable = NULL
+)
+
+without_progress(expr)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>expr</code></td>
+<td>
+<p>An <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> expression to evaluate.</p>
+</td></tr>
+<tr valign="top"><td><code>handlers</code></td>
+<td>
+<p>A progression handler or a list of them.
+If NULL or an empty list, progress updates are ignored.</p>
+</td></tr>
+<tr valign="top"><td><code>cleanup</code></td>
+<td>
+<p>If TRUE, all progression handlers will be shutdown
+at the end regardless of the progression is complete or not.</p>
+</td></tr>
+<tr valign="top"><td><code>delay_terminal</code></td>
+<td>
+<p>If TRUE, output and conditions that may end up in
+the terminal will delayed.</p>
+</td></tr>
+<tr valign="top"><td><code>delay_stdout</code></td>
+<td>
+<p>If TRUE, standard output is captured and relayed
+at the end just before any captured conditions are relayed.</p>
+</td></tr>
+<tr valign="top"><td><code>delay_conditions</code></td>
+<td>
+<p>A character vector specifying <a href="../../base/help/conditions.html">base::condition</a>
+classes to be captured and relayed at the end after any captured
+standard output is relayed.</p>
+</td></tr>
+<tr valign="top"><td><code>interval</code></td>
+<td>
+<p>(numeric) The minimum time (in seconds) between
+successive progression updates from handlers.</p>
+</td></tr>
+<tr valign="top"><td><code>enable</code></td>
+<td>
+<p>(logical) If FALSE, then progress is not reported.  The
+default is to report progress in interactive mode but not batch mode.
+See below for more details.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><em>IMPORTANT: This function is meant for end users only.  It should not
+be used by R packages, which only task is to <em>signal</em> progress updates,
+not to decide if, when, and how progress should be reported.</em>
+</p>
+<p><code>without_progress()</code> evaluates an expression while ignoring all
+progress updates.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Returns the value of the expression.
+</p>
+
+
+<h3>Progression handler functions</h3>
+
+<p>Formally, progression handlers are calling handlers that are called
+when a <a href="../../progressr/help/progression.html">progression</a> condition is signaled.  These handlers are functions
+that takes one argument which is the <a href="../../progressr/help/progression.html">progression</a> condition.
+</p>
+
+
+<h3>Progress updates in batch mode</h3>
+
+<p>When running R from the command line, R runs in a non-interactive mode
+(<code>interactive()</code> returns <code>FALSE</code>).  The default behavior of
+<code>with_progress()</code> is to <em>not</em> report on progress in non-interactive mode.
+To have progress being reported on also then, set R options
+<span class="option">progressr.enable</span> or environment variable <span class="env">R_PROGRESSR_ENABLE</span>
+to <code>TRUE</code>.  Alternatively, one can set argument <code>enable=TRUE</code> when calling
+<code>with_progress()</code>.  For example,<div class="sourceCode sh"></p>
+<pre>$ Rscript -e "library(progressr)" -e "with_progress(slow_sum(1:5))"
+</pre></div>
+<p>will <em>not</em> report on progress, whereas:<div class="sourceCode sh"></p>
+<pre>$ export R_PROGRESSR_ENABLE=TRUE
+$ Rscript -e "library(progressr)" -e "with_progress(slow_sum(1:5))"
+</pre></div>
+<p>will.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../base/help/conditions.html">base::withCallingHandlers()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## The slow_sum() example function
+slow_sum &lt;- progressr::slow_sum
+print(slow_sum)
+
+x &lt;- 1:10
+
+## Without progress updates
+y &lt;- slow_sum(x)
+
+
+## Progress reported via txtProgressBar (default)
+handlers("txtprogressbar")  ## default
+with_progress({
+  y &lt;- slow_sum(x)
+})
+
+## Progress reported via tcltk::tkProgressBar
+if (capabilities("tcltk") &amp;&amp; requireNamespace("tcltk", quietly = TRUE)) {
+  handlers("tkprogressbar")
+  with_progress({
+    y &lt;- slow_sum(x)
+  })
+}
+
+## Progress reported via progress::progress_bar)
+if (requireNamespace("progress", quietly = TRUE)) {
+  handlers("progress")
+  with_progress({
+    y &lt;- slow_sum(x)
+  })
+}
+
+## Progress reported via txtProgressBar and beepr::beep
+if (requireNamespace("beepr", quietly = TRUE)) {
+  handlers("beepr", "txtprogressbar")
+  with_progress({
+    y &lt;- slow_sum(x)
+  })
+}
+
+## Progress reported via customized utils::txtProgressBar and beepr::beep,
+## if available.
+handlers(handler_txtprogressbar(style = 3L))
+if (requireNamespace("beepr", quietly = TRUE)) {
+  handlers("beepr", append = TRUE)
+}
+
+with_progress({
+  y &lt;- slow_sum(1:30)
+})
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>progressr</em> version 0.9.0 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

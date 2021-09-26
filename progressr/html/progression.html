@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: A Progression Condition</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for progression {progressr}"><tr><td>progression {progressr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>A Progression Condition</h2>
+
+<h3>Description</h3>
+
+<p>A progression condition represents a progress in an <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> program.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+progression(
+  message = character(0L),
+  amount = 1,
+  step = NULL,
+  time = progression_time,
+  ...,
+  type = "update",
+  class = NULL,
+  progressor_uuid = NULL,
+  progression_index = NULL,
+  progression_time = Sys.time(),
+  call = NULL,
+  calls = sys.calls(),
+  owner_session_uuid = NULL
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>message</code></td>
+<td>
+<p>(character vector or a function) If a character vector, then
+it is pasted together into a single string using an empty separator.
+If a function, then the message is constructed by <code>conditionMessage(p)</code>
+calling this function with the progression condition <code>p</code> itself as the
+first argument.</p>
+</td></tr>
+<tr valign="top"><td><code>amount</code></td>
+<td>
+<p>(numeric) The total amount of progress made.</p>
+</td></tr>
+<tr valign="top"><td><code>step</code></td>
+<td>
+<p>(numeric) The step completed. If specified, <code>amount</code> is ignored.
+<em>WARNING: Argument <code>step</code> should only be used when in full control of the
+order when this progression condition is signaled.</em> For example, it must not
+be signaled as one of many parallel progress updates signaled concurrently,
+because then we cannot guarantee the order these progressions arrive.</p>
+</td></tr>
+<tr valign="top"><td><code>time</code></td>
+<td>
+<p>(POSIXct) A timestamp.</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>Type of progression made.</p>
+</td></tr>
+<tr valign="top"><td><code>class</code></td>
+<td>
+<p>(character) Zero or more class names to prepend.</p>
+</td></tr>
+<tr valign="top"><td><code>progressor_uuid</code></td>
+<td>
+<p>(character string) A character string that is unique
+for the current progressor and the current <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> session.</p>
+</td></tr>
+<tr valign="top"><td><code>progression_index</code></td>
+<td>
+<p>(integer) A non-negative integer that is
+incremented by one for each progression condition created.</p>
+</td></tr>
+<tr valign="top"><td><code>progression_time</code></td>
+<td>
+<p>(POSIXct or character string) A timestamp specifying
+when the progression condition was created.</p>
+</td></tr>
+<tr valign="top"><td><code>call</code></td>
+<td>
+<p>(expression) A call expression.</p>
+</td></tr>
+<tr valign="top"><td><code>calls</code></td>
+<td>
+<p>(pairlist) The calls that lead up to this progression update.</p>
+</td></tr>
+<tr valign="top"><td><code>owner_session_uuid</code></td>
+<td>
+<p>(character string) A character string that is
+unique for the <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> session where the progressor was created.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional named elements.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A <a href="../../base/help/conditions.html">base::condition</a> of class <code>progression</code>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>To signal a progression condition, use <code><a href="../../base/help/conditions.html">base::signalCondition()</a></code>.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>progressr</em> version 0.9.0 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

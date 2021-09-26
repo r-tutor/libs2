@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Dataset with FIPS codes for US states and counties</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for fips_codes {tidycensus}"><tr><td>fips_codes {tidycensus}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Dataset with FIPS codes for US states and counties</h2>
+
+<h3>Description</h3>
+
+<p>Built-in dataset for smart state and county lookup.
+To access the data directly, issue the command <code>data(fips_codes)</code>.
+</p>
+
+<ul>
+<li> <p><code>county</code>: County name, title-case
+</p>
+</li>
+<li> <p><code>county_code</code>: County code. (3-digit, 0-padded, character)
+</p>
+</li>
+<li> <p><code>state</code>: Upper-case abbreviation of state
+</p>
+</li>
+<li> <p><code>state_code</code>: State FIPS code (2-digit, 0-padded, character)
+</p>
+</li>
+<li> <p><code>state_name</code>: Title-case name of state
+</p>
+</li></ul>
+
+
+
+<h3>Usage</h3>
+
+<pre>
+data(fips_codes)
+</pre>
+
+
+<h3>Format</h3>
+
+<p>An object of class <code>data.frame</code> with 3237 rows and 5 columns.
+</p>
+
+
+<h3>Details</h3>
+
+<p>Dataset with FIPS codes for US states and counties
+</p>
+<p>Built-in dataset for use with the <code>lookup_code</code> function.
+To access the data directly, issue the command <code>data(fips_codes)</code>.
+</p>
+<p>Note: this dataset includes FIPS codes for all counties that have appeared in
+the decennial Census or American Community Survey from 2010 to the present.
+This means that counties that have been renamed or absorbed into other
+geographic entities since 2010 remain in this dataset along with newly added
+or renamed counties.
+</p>
+<p>If you need the FIPS codes and names for counties for a particular Census
+year, you can use the <a href="../../tigris/help/counties.html">counties</a> function from the tigris
+package and set the year parameter as required.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>tidycensus</em> version 1.1 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

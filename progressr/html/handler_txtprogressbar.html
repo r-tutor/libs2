@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Progression Handler: Progress Reported as Plain Progress Bars...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for handler_txtprogressbar {progressr}"><tr><td>handler_txtprogressbar {progressr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Progression Handler: Progress Reported as Plain Progress Bars (Text) in the Terminal</h2>
+
+<h3>Description</h3>
+
+<p>A progression handler for <code><a href="../../utils/help/txtProgressBar.html">utils::txtProgressBar()</a></code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+handler_txtprogressbar(
+  style = 3L,
+  file = stderr(),
+  intrusiveness = getOption("progressr.intrusiveness.terminal", 1),
+  target = "terminal",
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>style</code></td>
+<td>
+<p>(integer) The progress-bar style according to
+<code><a href="../../utils/help/txtProgressBar.html">utils::txtProgressBar()</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>file</code></td>
+<td>
+<p>(connection) A <a href="../../base/help/connections.html">base::connection</a> to where output should be sent.</p>
+</td></tr>
+<tr valign="top"><td><code>intrusiveness</code></td>
+<td>
+<p>(numeric) A non-negative scalar on how intrusive
+(disruptive) the reporter to the user.</p>
+</td></tr>
+<tr valign="top"><td><code>target</code></td>
+<td>
+<p>(character vector) Specifies where progression updates are
+rendered.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments passed to <code><a href="../../progressr/help/make_progression_handler.html">make_progression_handler()</a></code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Appearance</h3>
+
+<p>Below is how this progress handler renders at 0%, 30% and 99% progress
+for the three different <code>style</code> values that <code><a href="../../utils/help/txtProgressBar.html">utils::txtProgressBar()</a></code>
+supports.
+</p>
+<p>With <code>handlers(handler_txtprogressbar(style = 1L))</code>:<div class="sourceCode r"></p>
+<pre>
+====================================
+==========================================================
+</pre></div>
+<p>With <code>handlers(handler_txtprogressbar(style = 2L))</code>:<div class="sourceCode r"></p>
+<pre>
+====================================
+==========================================================
+</pre></div>
+<p>With <code>handlers(handler_txtprogressbar(style = 3L))</code>:<div class="sourceCode r"></p>
+<pre>  |                                                 |   0%
+  |===============                                  |  30%
+  |=================================================|  99%
+</pre></div>
+
+
+<h3>Examples</h3>
+
+<pre>
+handlers("txtprogressbar")
+
+with_progress({ y &lt;- slow_sum(1:10) })
+print(y)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>progressr</em> version 0.9.0 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

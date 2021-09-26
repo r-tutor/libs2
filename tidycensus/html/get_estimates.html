@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Get data from the US Census Bureau Population Estimates APIs</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for get_estimates {tidycensus}"><tr><td>get_estimates {tidycensus}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Get data from the US Census Bureau Population Estimates APIs</h2>
+
+<h3>Description</h3>
+
+<p>Get data from the US Census Bureau Population Estimates APIs
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+get_estimates(
+  geography,
+  product = NULL,
+  variables = NULL,
+  breakdown = NULL,
+  breakdown_labels = FALSE,
+  year = 2019,
+  state = NULL,
+  county = NULL,
+  time_series = FALSE,
+  output = "tidy",
+  geometry = FALSE,
+  keep_geo_vars = FALSE,
+  shift_geo = FALSE,
+  key = NULL,
+  show_call = FALSE,
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>geography</code></td>
+<td>
+<p>The geography of your data.</p>
+</td></tr>
+<tr valign="top"><td><code>product</code></td>
+<td>
+<p>The data product (optional). <code>"population"</code>, <code>"components"</code>
+<code>"housing"</code>, and <code>"characteristics"</code> are supported.</p>
+</td></tr>
+<tr valign="top"><td><code>variables</code></td>
+<td>
+<p>A character string or vector of character strings of requested variables
+to get from either the population, components, or housing API.</p>
+</td></tr>
+<tr valign="top"><td><code>breakdown</code></td>
+<td>
+<p>The population breakdown used when <code>product = "characteristics"</code>.
+Acceptable values are <code>"AGEGROUP"</code>, <code>"RACE"</code>, <code>"SEX"</code>, and
+<code>"HISP"</code>, for Hispanic/Not Hispanic.  These values can be combined in
+a vector, returning population estimates in the <code>value</code> column for all
+combinations of these breakdowns.</p>
+</td></tr>
+<tr valign="top"><td><code>breakdown_labels</code></td>
+<td>
+<p>Whether or not to label breakdown elements returned when
+<code>product = "characteristics"</code>. Defaults to FALSE.</p>
+</td></tr>
+<tr valign="top"><td><code>year</code></td>
+<td>
+<p>The data year (defaults to 2019)</p>
+</td></tr>
+<tr valign="top"><td><code>state</code></td>
+<td>
+<p>The state for which you are requesting data. State
+names, postal codes, and FIPS codes are accepted.
+Defaults to NULL.</p>
+</td></tr>
+<tr valign="top"><td><code>county</code></td>
+<td>
+<p>The county for which you are requesting data. County names and
+FIPS codes are accepted. Must be combined with a value supplied
+to 'state'.  Defaults to NULL.</p>
+</td></tr>
+<tr valign="top"><td><code>time_series</code></td>
+<td>
+<p>If <code>TRUE</code>, the function will return a time series of observations back to the decennial Census
+of 2010. The returned column is either &quot;DATE&quot;, representing a particular estimate date, or &quot;PERIOD&quot;,
+representing a time period (e.g. births between 2016 and 2017), and contains integers representing
+those values.  Integer to date or period mapping is available at
+<a href="https://www.census.gov/data/developers/data-sets/popest-popproj/popest/popest-vars/2019.html">https://www.census.gov/data/developers/data-sets/popest-popproj/popest/popest-vars/2019.html</a>.</p>
+</td></tr>
+<tr valign="top"><td><code>output</code></td>
+<td>
+<p>One of &quot;tidy&quot; (the default) in which each row represents an
+enumeration unit-variable combination, or &quot;wide&quot; in which each
+row represents an enumeration unit and the variables are in the
+columns.</p>
+</td></tr>
+<tr valign="top"><td><code>geometry</code></td>
+<td>
+<p>if FALSE (the default), return a regular tibble of ACS data.
+if TRUE, uses the tigris package to return an sf tibble
+with simple feature geometry in the 'geometry' column.</p>
+</td></tr>
+<tr valign="top"><td><code>keep_geo_vars</code></td>
+<td>
+<p>if TRUE, keeps all the variables from the Census
+shapefile obtained by tigris.  Defaults to FALSE.</p>
+</td></tr>
+<tr valign="top"><td><code>shift_geo</code></td>
+<td>
+<p>(deprecated) if TRUE, returns geometry with Alaska and Hawaii shifted for thematic
+mapping of the entire US.  As of May 2021, we recommend using <code>tigris::shift_geometry()</code>
+instead.</p>
+</td></tr>
+<tr valign="top"><td><code>key</code></td>
+<td>
+<p>Your Census API key.
+Obtain one at <a href="https://api.census.gov/data/key_signup.html">https://api.census.gov/data/key_signup.html</a>.  Can be stored
+in your .Renviron with <code>census_api_key("YOUR KEY", install = TRUE)</code></p>
+</td></tr>
+<tr valign="top"><td><code>show_call</code></td>
+<td>
+<p>if TRUE, display call made to Census API. This can be very useful
+in debugging and determining if error messages returned are
+due to tidycensus or the Census API. Copy to the API call into
+a browser and see what is returned by the API directly. Defaults to FALSE.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>other keyword arguments</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A tibble, or sf tibble, of population estimates data
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>tidycensus</em> version 1.1 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

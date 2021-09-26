@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Creates a Progression Calling Handler</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for make_progression_handler {progressr}"><tr><td>make_progression_handler {progressr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Creates a Progression Calling Handler</h2>
+
+<h3>Description</h3>
+
+<p>A progression calling handler is a function that takes a <a href="../../base/help/conditions.html">base::condition</a>
+as its first argument and that can be use together with
+<code><a href="../../base/help/conditions.html">base::withCallingHandlers()</a></code>.  This function helps creating such
+progression calling handler functions.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+make_progression_handler(
+  name,
+  reporter = list(),
+  handler = NULL,
+  enable = getOption("progressr.enable", interactive()),
+  enable_after = getOption("progressr.enable_after", 0),
+  times = getOption("progressr.times", +Inf),
+  interval = getOption("progressr.interval", 0),
+  intrusiveness = 1,
+  clear = getOption("progressr.clear", TRUE),
+  target = "terminal",
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>name</code></td>
+<td>
+<p>(character) Name of progression handler.</p>
+</td></tr>
+<tr valign="top"><td><code>reporter</code></td>
+<td>
+<p>(environment) A reporter environment.</p>
+</td></tr>
+<tr valign="top"><td><code>handler</code></td>
+<td>
+<p>(function) Function take a <a href="../../progressr/help/progression.html">progression</a> condition
+as the first argument.</p>
+</td></tr>
+<tr valign="top"><td><code>enable</code></td>
+<td>
+<p>(logical) If FALSE, then progress is not reported.</p>
+</td></tr>
+<tr valign="top"><td><code>enable_after</code></td>
+<td>
+<p>(numeric) Delay (in seconds) before progression
+updates are reported.</p>
+</td></tr>
+<tr valign="top"><td><code>times</code></td>
+<td>
+<p>(numeric) The maximum number of times this handler
+should report progression updates.
+If zero, then progress is not reported.</p>
+</td></tr>
+<tr valign="top"><td><code>interval</code></td>
+<td>
+<p>(numeric) The minimum time (in seconds) between
+successive progression updates from this handler.</p>
+</td></tr>
+<tr valign="top"><td><code>intrusiveness</code></td>
+<td>
+<p>(numeric) A non-negative scalar on how intrusive
+(disruptive) the reporter to the user.</p>
+</td></tr>
+<tr valign="top"><td><code>clear</code></td>
+<td>
+<p>(logical) If TRUE, any output, typically visual, produced
+by a reporter will be cleared/removed upon completion, if possible.</p>
+</td></tr>
+<tr valign="top"><td><code>target</code></td>
+<td>
+<p>(character vector) Specifies where progression updates are
+rendered.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments passed to <code><a href="../../progressr/help/make_progression_handler.html">make_progression_handler()</a></code>
+or not used.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The inner details of progression handlers and how to use this function
+are still to be documented.  Until then, see the source code of existing
+handlers for how it is used, e.g. <code>progressr::handler_txtprogressbar</code>.
+Please use with care as things might change.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A function of class <code>progression_handler</code> that takes a
+<a href="../../progressr/help/progression.html">progression</a> condition as its first and only argument.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../base/help/conditions.html">base::withCallingHandlers()</a></code>.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>progressr</em> version 0.9.0 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

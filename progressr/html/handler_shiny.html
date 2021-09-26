@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Progression Handler: Progress Reported via 'shiny' Widgets...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for handler_shiny {progressr}"><tr><td>handler_shiny {progressr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Progression Handler: Progress Reported via 'shiny' Widgets (GUI) in the HTML Browser</h2>
+
+<h3>Description</h3>
+
+<p>A progression handler for <span class="pkg">shiny</span> and <code><a href="../../shiny/help/withProgress.html">shiny::withProgress()</a></code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+handler_shiny(
+  intrusiveness = getOption("progressr.intrusiveness.gui", 1),
+  target = "gui",
+  inputs = list(message = NULL, detail = "message"),
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>intrusiveness</code></td>
+<td>
+<p>(numeric) A non-negative scalar on how intrusive
+(disruptive) the reporter to the user.</p>
+</td></tr>
+<tr valign="top"><td><code>target</code></td>
+<td>
+<p>(character vector) Specifies where progression updates are
+rendered.</p>
+</td></tr>
+<tr valign="top"><td><code>inputs</code></td>
+<td>
+<p>(named list) Specifies from what sources the Shiny progress
+elements 'message' and 'detail' should be updated.  Valid sources are
+<code>"message"</code>, <code>"sticky_message"</code> and <code>"non_sticky_message"</code>, where
+<code>"message"</code> is short for <code>c("non_sticky_message", "sticky_message")</code>. For
+example, <code>inputs = list(message = "sticky-message", detail = "message")</code>
+will update the Shiny 'message' component from sticky messages only,
+whereas the 'detail' component is updated using any message.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments passed to <code><a href="../../progressr/help/make_progression_handler.html">make_progression_handler()</a></code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>For most Shiny application there is little need to use this Shiny handler
+directly.  Instead, it is sufficient to use <code><a href="../../progressr/help/withProgressShiny.html">withProgressShiny()</a></code>.
+</p>
+
+
+<h3>Requirements</h3>
+
+<p>This progression handler requires the <span class="pkg">shiny</span> package.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+handlers(handler_shiny())
+with_progress(y &lt;- slow_sum(1:100))
+
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>progressr</em> version 0.9.0 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

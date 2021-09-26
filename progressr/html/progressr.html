@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: progressr: A Unifying API for Progress Updates</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for progressr {progressr}"><tr><td>progressr {progressr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>progressr: A Unifying API for Progress Updates</h2>
+
+<h3>Description</h3>
+
+<p>The <span class="pkg">progressr</span> package provides a minimal, unifying API for scripts
+and packages to report progress updates from anywhere including when
+using parallel processing.
+</p>
+
+
+<h3>Details</h3>
+
+<p>The package is designed such that <em>the developer</em> can to focus on <em>what</em>
+progress should be reported on without having to worry about <em>how</em> to
+present it.
+</p>
+<p>The <em>end user</em> has full control of <em>how</em>, <em>where</em>, and <em>when</em> to render
+these progress updates.  For instance, they can chose to report progress
+in the terminal using <code><a href="../../utils/help/txtProgressBar.html">utils::txtProgressBar()</a></code> or
+<code><a href="../../progress/help/progress_bar.html">progress::progress_bar()</a></code> or via the graphical user interface (GUI)
+using <code>utils::winProgressBar()</code> or <code><a href="../../tcltk/help/tkProgressBar.html">tcltk::tkProgressBar()</a></code>.
+An alternative to above visual rendering of progress, is to report it
+using <code><a href="../../beepr/help/beep.html">beepr::beep()</a></code> sounds.
+It is possible to use a combination of above progression handlers, e.g.
+a progress bar in the terminal together with audio updates.
+Besides the existing handlers, it is possible to develop custom
+progression handlers.
+</p>
+<p>The <span class="pkg">progressr</span> package uses R's condition framework for signaling
+progress updated. Because of this, progress can be reported from almost
+anywhere in R, e.g. from classical for and while loops, from map-reduce
+APIs like the <code><a href="../../base/html/lapply.html">lapply()</a></code> family of functions, <span class="pkg">purrr</span>, <span class="pkg">plyr</span>, and
+<span class="pkg">foreach</span>.
+The <span class="pkg">progressr</span> package will also work with parallel processing via
+the <span class="pkg">future</span> framework, e.g. <code><a href="../../future.apply/help/future_lapply.html">future.apply::future_lapply()</a></code>,
+<code><a href="../../furrr/help/future_map.html">furrr::future_map()</a></code>, and <code><a href="../../foreach/help/foreach.html">foreach::foreach()</a></code> with <span class="pkg">doFuture</span>.
+</p>
+<p>The <span class="pkg">progressr</span> package is compatible with Shiny applications.
+</p>
+
+
+<h3>Progression Handlers</h3>
+
+<p>In the terminal:
+</p>
+
+<ul>
+<li> <p><a href="../../progressr/help/handler_txtprogressbar.html">handler_txtprogressbar</a> (default)
+</p>
+</li>
+<li> <p><a href="../../progressr/help/handler_pbcol.html">handler_pbcol</a>
+</p>
+</li>
+<li> <p><a href="../../progressr/help/handler_pbmcapply.html">handler_pbmcapply</a>
+</p>
+</li>
+<li> <p><a href="../../progressr/help/handler_progress.html">handler_progress</a>
+</p>
+</li>
+<li> <p><a href="../../progressr/help/handler_ascii_alert.html">handler_ascii_alert</a>
+</p>
+</li>
+<li> <p><a href="../../progressr/help/handler_debug.html">handler_debug</a>
+</p>
+</li></ul>
+
+<p>In a graphical user interface (GUI):
+</p>
+
+<ul>
+<li> <p><a href="../../progressr/help/handler_rstudio.html">handler_rstudio</a>
+</p>
+</li>
+<li> <p><a href="../../progressr/help/handler_tkprogressbar.html">handler_tkprogressbar</a>
+</p>
+</li>
+<li> <p><a href="../../progressr/help/handler_winprogressbar.html">handler_winprogressbar</a>
+</p>
+</li></ul>
+
+<p>As sound:
+</p>
+
+<ul>
+<li> <p><a href="../../progressr/help/handler_beepr.html">handler_beepr</a>
+</p>
+</li>
+<li> <p><a href="../../progressr/help/handler_ascii_alert.html">handler_ascii_alert</a>
+</p>
+</li></ul>
+
+<p>Via the file system:
+</p>
+
+<ul>
+<li> <p><a href="../../progressr/help/handler_filesize.html">handler_filesize</a>
+</p>
+</li></ul>
+
+<p>In Shiny:
+</p>
+
+<ul>
+<li> <p><a href="../../progressr/help/withProgressShiny.html">withProgressShiny</a>
+</p>
+</li></ul>
+
+
+
+<h3>Examples</h3>
+
+<pre>
+library(progressr)
+
+xs &lt;- 1:5
+
+with_progress({
+  p &lt;- progressor(along = xs)
+  y &lt;- lapply(xs, function(x) {
+    Sys.sleep(0.1)
+    p(sprintf("x=%g", x))
+    sqrt(x)
+  })
+})
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>progressr</em> version 0.9.0 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

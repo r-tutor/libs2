@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Progression Handler: Progress Reported as Debug Information...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for handler_debug {progressr}"><tr><td>handler_debug {progressr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Progression Handler: Progress Reported as Debug Information (Text) in the Terminal</h2>
+
+<h3>Description</h3>
+
+<p>Progression Handler: Progress Reported as Debug Information (Text) in the Terminal
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+handler_debug(
+  interval = getOption("progressr.interval", 0),
+  intrusiveness = getOption("progressr.intrusiveness.debug", 0),
+  target = "terminal",
+  uuid = FALSE,
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>interval</code></td>
+<td>
+<p>(numeric) The minimum time (in seconds) between
+successive progression updates from this handler.</p>
+</td></tr>
+<tr valign="top"><td><code>intrusiveness</code></td>
+<td>
+<p>(numeric) A non-negative scalar on how intrusive
+(disruptive) the reporter to the user.</p>
+</td></tr>
+<tr valign="top"><td><code>target</code></td>
+<td>
+<p>(character vector) Specifies where progression updates are
+rendered.</p>
+</td></tr>
+<tr valign="top"><td><code>uuid</code></td>
+<td>
+<p>If TRUE, then the progressor UUID and the owner UUID are shown,
+otherwise not (default).</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments passed to <code><a href="../../progressr/help/make_progression_handler.html">make_progression_handler()</a></code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Appearance</h3>
+
+<p>Below is how this progress handler renders by default at 0%, 30% and 99%
+progress:
+</p>
+<p>With <code>handlers(handler_debug())</code>:<div class="sourceCode r"></p>
+<pre>[21:27:11.236] (0.000s =&gt; +0.001s) initiate: 0/100 (+0) '' {clear=TRUE, enabled=TRUE, status=}
+[21:27:11.237] (0.001s =&gt; +0.000s) update: 0/100 (+0) 'Starting' {clear=TRUE, enabled=TRUE, status=}
+[21:27:14.240] (3.004s =&gt; +0.002s) update: 30/100 (+30) 'Importing' {clear=TRUE, enabled=TRUE, status=}
+[21:27:16.245] (5.009s =&gt; +0.001s) update: 100/100 (+70) 'Summarizing' {clear=TRUE, enabled=TRUE, status=}
+[21:27:16.246] (5.010s =&gt; +0.003s) update: 100/100 (+0) 'Summarizing' {clear=TRIE, enabled=TRUE, status=}
+</pre></div>
+
+
+<h3>Examples</h3>
+
+<pre>
+handlers("debug")
+with_progress({ y &lt;- slow_sum(1:10) })
+print(y)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>progressr</em> version 0.9.0 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

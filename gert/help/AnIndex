@@ -9,6 +9,7 @@ git_branch_delete	git_branch
 git_branch_exists	git_branch
 git_branch_fast_forward	git_branch
 git_branch_list	git_branch
+git_branch_move	git_branch
 git_branch_set_upstream	git_branch
 git_checkout_pull_request	github
 git_cherry_pick	git_rebase

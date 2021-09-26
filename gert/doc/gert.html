@@ -174,25 +174,25 @@ git config --global --list</code></pre>
 <h2>Local repository basics</h2>
 <p><code>gert::git_init()</code> is essentially <code>git init</code>; it’s how we create a new local repository. You provide the path to the repository you want to create.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>(path <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&quot;aaa&quot;</span>, <span class="st">&quot;bbb&quot;</span>, <span class="st">&quot;repo_ccc&quot;</span>))</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;/var/folders/gz/rwkfg8wx1wqgcr0ccpz42dyc0000gn/T//RtmpzfdnWk/aaa/bbb/repo_ccc&quot;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;/var/folders/gz/rwkfg8wx1wqgcr0ccpz42dyc0000gn/T//RtmpWcIjUW/aaa/bbb/repo_ccc&quot;</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.exists</span>(path)</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] FALSE</span></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>(r <span class="ot">&lt;-</span> <span class="fu">git_init</span>(path))</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;/private/var/folders/gz/rwkfg8wx1wqgcr0ccpz42dyc0000gn/T/RtmpzfdnWk/aaa/bbb/repo_ccc/&quot;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;/private/var/folders/gz/rwkfg8wx1wqgcr0ccpz42dyc0000gn/T/RtmpWcIjUW/aaa/bbb/repo_ccc/&quot;</span></span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.exists</span>(path)</span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
 <p>Note that all non-existing parts of the path are created: <code>aaa</code>, <code>bbb</code>, and <code>repo_ccc</code> (the actual git repository).</p>
 <p><code>git_find()</code> finds a git repository at or above the path you provide and errors otherwise.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git_find</span>(r)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;/private/var/folders/gz/rwkfg8wx1wqgcr0ccpz42dyc0000gn/T/RtmpzfdnWk/aaa/bbb/repo_ccc&quot;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;/private/var/folders/gz/rwkfg8wx1wqgcr0ccpz42dyc0000gn/T/RtmpWcIjUW/aaa/bbb/repo_ccc&quot;</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="fu">file.path</span>(r, <span class="st">&quot;child_dir&quot;</span>))</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git_find</span>(<span class="fu">file.path</span>(r, <span class="st">&quot;child_dir&quot;</span>))</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;/private/var/folders/gz/rwkfg8wx1wqgcr0ccpz42dyc0000gn/T/RtmpzfdnWk/aaa/bbb/repo_ccc&quot;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;/private/var/folders/gz/rwkfg8wx1wqgcr0ccpz42dyc0000gn/T/RtmpWcIjUW/aaa/bbb/repo_ccc&quot;</span></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">git_find</span>(<span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&quot;aaa&quot;</span>, <span class="st">&quot;bbb&quot;</span>))</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in libgit2::git_repository_discover: could not find repository from &#39;/private/var/folders/gz/rwkfg8wx1wqgcr0ccpz42dyc0000gn/T/RtmpzfdnWk/aaa/bbb&#39;</span></span></code></pre></div>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in libgit2::git_repository_discover: could not find repository from &#39;/private/var/folders/gz/rwkfg8wx1wqgcr0ccpz42dyc0000gn/T/RtmpWcIjUW/aaa/bbb&#39;</span></span></code></pre></div>
 <p><code>git_init()</code> can also create a repository in a pre-existing directory, as long as it is empty.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>r2 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&quot;repo_ddd&quot;</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(r2)</span>

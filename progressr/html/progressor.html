@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create a Progressor Function that Signals Progress Updates</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for progressor {progressr}"><tr><td>progressor {progressr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create a Progressor Function that Signals Progress Updates</h2>
+
+<h3>Description</h3>
+
+<p>Create a Progressor Function that Signals Progress Updates
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+progressor(
+  steps = length(along),
+  along = NULL,
+  offset = 0L,
+  scale = 1L,
+  transform = function(steps) scale * steps + offset,
+  message = character(0L),
+  label = NA_character_,
+  trace = FALSE,
+  initiate = TRUE,
+  auto_finish = TRUE,
+  on_exit = !identical(envir, globalenv()),
+  enable = getOption("progressr.enable", TRUE),
+  envir = parent.frame()
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>steps</code></td>
+<td>
+<p>(integer) Number of progressing steps.</p>
+</td></tr>
+<tr valign="top"><td><code>along</code></td>
+<td>
+<p>(vector; alternative) Alternative that sets
+<code>steps = length(along)</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>offset, scale</code></td>
+<td>
+<p>(integer; optional) scale and offset applying transform
+<code>steps &lt;- scale * steps + offset</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>transform</code></td>
+<td>
+<p>(function; optional) A function that takes the effective
+number of <code>steps</code> as input and returns another finite and non-negative
+number of steps.</p>
+</td></tr>
+<tr valign="top"><td><code>message</code></td>
+<td>
+<p>(character vector or a function) If a character vector, then
+it is pasted together into a single string using an empty separator.
+If a function, then the message is constructed by <code>conditionMessage(p)</code>
+calling this function with the progression condition <code>p</code> itself as the
+first argument.</p>
+</td></tr>
+<tr valign="top"><td><code>label</code></td>
+<td>
+<p>(character) A label.</p>
+</td></tr>
+<tr valign="top"><td><code>trace</code></td>
+<td>
+<p>(logical) If TRUE, then the call stack is recorded, otherwise
+not.</p>
+</td></tr>
+<tr valign="top"><td><code>initiate</code></td>
+<td>
+<p>(logical) If TRUE, the progressor will signal a
+<a href="../../progressr/help/progression.html">progression</a> 'initiate' condition when created.</p>
+</td></tr>
+<tr valign="top"><td><code>auto_finish</code></td>
+<td>
+<p>(logical) If TRUE, then the progressor will signal a
+<a href="../../progressr/help/progression.html">progression</a> 'finish' condition as soon as the last step has been reached.</p>
+</td></tr>
+<tr valign="top"><td><code>on_exit, envir</code></td>
+<td>
+<p>(logical) If TRUE, then the created progressor will
+signal a <a href="../../progressr/help/progression.html">progression</a> 'finish' condition when the calling frame exits.
+This is ignored if the calling frame (<code>envir</code>) is the global environment.</p>
+</td></tr>
+<tr valign="top"><td><code>enable</code></td>
+<td>
+<p>(logical) If TRUE, <a href="../../progressr/help/progression.html">progression</a> conditions are signaled when
+calling the progressor function created by this function.
+If FALSE, no <a href="../../progressr/help/progression.html">progression</a> conditions is signaled because the progressor
+function is an empty function that does nothing.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A function of class <code>progressor</code>.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>progressr</em> version 0.9.0 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

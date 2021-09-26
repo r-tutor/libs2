@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Load data from the American Community Survey Public Use...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for get_pums {tidycensus}"><tr><td>get_pums {tidycensus}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Load data from the American Community Survey Public Use Microdata Series API</h2>
+
+<h3>Description</h3>
+
+<p>Load data from the American Community Survey Public Use Microdata Series API
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+get_pums(
+  variables = NULL,
+  state = NULL,
+  puma = NULL,
+  year = 2019,
+  survey = "acs5",
+  variables_filter = NULL,
+  rep_weights = NULL,
+  recode = FALSE,
+  show_call = FALSE,
+  key = NULL
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>variables</code></td>
+<td>
+<p>A vector of variables from the PUMS API.
+Use <code>View(pums_variables)</code> to browse variable options.</p>
+</td></tr>
+<tr valign="top"><td><code>state</code></td>
+<td>
+<p>A state, or vector of states, for which you would like to
+request data.  The entire US can be requested with <code>state = "all"</code> - though be patient with the data download!</p>
+</td></tr>
+<tr valign="top"><td><code>puma</code></td>
+<td>
+<p>A vector of PUMAs from a single state, for which you would like
+to request data. To get data from PUMAs in more than one state, specify a
+named vector of state/PUMA pairs and set <code>state = "multiple"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>year</code></td>
+<td>
+<p>The data year of the 1-year ACS sample or the endyear of the
+5-year sample. Defaults to 2019.</p>
+</td></tr>
+<tr valign="top"><td><code>survey</code></td>
+<td>
+<p>The ACS survey; one of either <code>"acs1"</code> or <code>"acs5"</code>
+(the default).</p>
+</td></tr>
+<tr valign="top"><td><code>variables_filter</code></td>
+<td>
+<p>A named list of filters you'd like to return from the
+PUMS API.  For example, passing <code>list(AGE = 25:50, SEX = 1)</code> will return
+only males aged 25 to 50 in your output dataset.  Defaults to <code>NULL</code>,
+which returns all records. If a housing-only dataset is required,
+use <code>list(SPORDER = 1)</code> to only return householder records (taking care
+in your analysis to use the household weight <code>WGTP</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>rep_weights</code></td>
+<td>
+<p>Whether or not to return housing unit, person, or both
+housing and person-level replicate weights for calculation of standard
+errors; one of <code>"person"</code>, <code>"housing"</code>, or <code>"both"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>recode</code></td>
+<td>
+<p>If TRUE, recodes variable values using Census data dictionary
+and creates a new <code>*_label</code> column for each variable that is recoded.
+Available for 2017 - 2019 data. Defaults to FALSE.</p>
+</td></tr>
+<tr valign="top"><td><code>show_call</code></td>
+<td>
+<p>If TRUE, display call made to Census API. This can be very
+useful in debugging and determining if error messages returned are due to
+tidycensus or the Census API. Copy to the API call into a browser and see
+what is returned by the API directly. Defaults to FALSE.</p>
+</td></tr>
+<tr valign="top"><td><code>key</code></td>
+<td>
+<p>Your Census API key. Obtain one at
+<a href="https://api.census.gov/data/key_signup.html">https://api.census.gov/data/key_signup.html</a></p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A tibble of microdata from the ACS PUMS API.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+get_pums(variables = "AGEP", state = "VT")
+get_pums(variables = "AGEP", state = "multiple", puma = c("UT" = 35008, "NV" = 00403))
+get_pums(variables = c("AGEP", "ANC1P"), state = "VT", recode = TRUE)
+get_pums(variables = "AGEP", state = "VT", survey = "acs1", rep_weights = "person")
+
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>tidycensus</em> version 1.1 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

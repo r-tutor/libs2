@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Dataset with PUMS variables and codes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for pums_variables {tidycensus}"><tr><td>pums_variables {tidycensus}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Dataset with PUMS variables and codes</h2>
+
+<h3>Description</h3>
+
+<p>Built-in dataset for variable name and code label lookup.
+To access the data directly, issue the command <code>data(pums_variables)</code>.
+</p>
+
+<ul>
+<li> <p><code>survey</code>: acs1 or acs5
+</p>
+</li>
+<li> <p><code>year</code>: Year of data. For 5-year data, last year in range.
+</p>
+</li>
+<li> <p><code>var_code</code>: Variable name
+</p>
+</li>
+<li> <p><code>var_label</code>: Variable label
+</p>
+</li>
+<li> <p><code>data_type</code>: chr or num
+</p>
+</li>
+<li> <p><code>level</code>: housing or person
+</p>
+</li>
+<li> <p><code>val_min</code>: For numeric variables, the minimum value
+</p>
+</li>
+<li> <p><code>val_max</code>: For numeric variables, the maximum value
+</p>
+</li>
+<li> <p><code>val_label</code>: Value label
+</p>
+</li>
+<li> <p><code>recode</code>: Use labels to recode values
+</p>
+</li>
+<li> <p><code>val_length</code>: Length of value returned
+</p>
+</li>
+<li> <p><code>val_na</code>: Value of NA value returned by API (if known)
+</p>
+</li></ul>
+
+
+
+<h3>Usage</h3>
+
+<pre>
+data(pums_variables)
+</pre>
+
+
+<h3>Format</h3>
+
+<p>An object of class <code>tbl_df</code> (inherits from <code>tbl</code>, <code>data.frame</code>) with 31759 rows and 12 columns.
+</p>
+
+
+<h3>Details</h3>
+
+<p>Dataset with PUMS variables and codes
+</p>
+<p>Built-in dataset that is created from the
+<a href="https://www.census.gov/programs-surveys/acs/microdata/documentation.html">Census
+PUMS data dictionaries</a>. Use this dataset to lookup the names of variables to
+use in <code><a href="../../tidycensus/help/get_pums.html">get_pums</a></code>. This dataset also contains labels for the
+coded values returned by the Census API and is used when <code>recode = TRUE</code>
+in <code><a href="../../tidycensus/help/get_pums.html">get_pums</a></code>.
+</p>
+<p>Because variable names and codes change from year to year, you should filter
+this dataset for the survey and year of interest. NOTE: 2017 - 2019 (acs1 and
+acs5) variables are available.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>tidycensus</em> version 1.1 <a href="00Index.html">Index</a>]</div>
+</div></body></html>
